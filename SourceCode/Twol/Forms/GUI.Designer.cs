@@ -54,7 +54,7 @@ namespace Twol
         private int oneSecondCounter = 0;
         private int oneHalfSecondCounter = 0;
 
-        //Timer triggers at 125 msec
+        //Timer triggers at 250 msec
         private void tmrWatchdog_tick(object sender, EventArgs e)
         {
             if (sentenceCounter == 19)

@@ -213,6 +213,7 @@ namespace Twol
             this.lblSerialPorts = new System.Windows.Forms.Label();
             this.btnSlide = new System.Windows.Forms.Button();
             this.btnExtSim = new System.Windows.Forms.Button();
+            this.tmrNTRIP = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
             this.contextMenuStripFlag.SuspendLayout();
             this.statusStripLeft.SuspendLayout();
@@ -3080,6 +3081,10 @@ namespace Twol
             this.btnExtSim.UseVisualStyleBackColor = false;
             this.btnExtSim.Click += new System.EventHandler(this.btnExtSim_Click);
             // 
+            // tmrNTRIP
+            // 
+            this.tmrNTRIP.Interval = 1000;
+            // 
             // FormGPS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -3323,6 +3328,7 @@ namespace Twol
         private System.Windows.Forms.Label lblMount;
         private System.Windows.Forms.Label lblNTRIP_IP;
         private System.Windows.Forms.Label lblToGPS;
+        private System.Windows.Forms.Timer tmrNTRIP;
     }
 }
 
