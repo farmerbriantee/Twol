@@ -204,12 +204,16 @@ namespace Twol
             this.btnProfiles = new System.Windows.Forms.Button();
             this.lbl_IO_Profile = new System.Windows.Forms.Label();
             this.panel_IO = new System.Windows.Forms.Panel();
+            this.lblCount = new System.Windows.Forms.Label();
+            this.lblMount = new System.Windows.Forms.Label();
+            this.lblNTRIP_IP = new System.Windows.Forms.Label();
+            this.btnUDPMonitor = new System.Windows.Forms.Button();
+            this.btnNtrip = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.lblSerialPorts = new System.Windows.Forms.Label();
             this.btnSlide = new System.Windows.Forms.Button();
             this.btnExtSim = new System.Windows.Forms.Button();
-            this.btnNtrip = new System.Windows.Forms.Button();
-            this.btnUDPMonitor = new System.Windows.Forms.Button();
+            this.lblToGPS = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStripFlag.SuspendLayout();
             this.statusStripLeft.SuspendLayout();
@@ -2743,7 +2747,7 @@ namespace Twol
             this.btnNMEA_Data.ForeColor = System.Drawing.Color.Black;
             this.btnNMEA_Data.Image = global::Twol.Properties.Resources.Nmea;
             this.btnNMEA_Data.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnNMEA_Data.Location = new System.Drawing.Point(300, 14);
+            this.btnNMEA_Data.Location = new System.Drawing.Point(300, 215);
             this.btnNMEA_Data.Margin = new System.Windows.Forms.Padding(4);
             this.btnNMEA_Data.Name = "btnNMEA_Data";
             this.btnNMEA_Data.Size = new System.Drawing.Size(92, 64);
@@ -2875,7 +2879,7 @@ namespace Twol
             this.btnProfiles.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnProfiles.ForeColor = System.Drawing.Color.White;
             this.btnProfiles.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnProfiles.Location = new System.Drawing.Point(300, 93);
+            this.btnProfiles.Location = new System.Drawing.Point(300, 305);
             this.btnProfiles.Margin = new System.Windows.Forms.Padding(4);
             this.btnProfiles.Name = "btnProfiles";
             this.btnProfiles.Size = new System.Drawing.Size(92, 64);
@@ -2900,6 +2904,10 @@ namespace Twol
             // panel_IO
             // 
             this.panel_IO.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel_IO.Controls.Add(this.lblToGPS);
+            this.panel_IO.Controls.Add(this.lblCount);
+            this.panel_IO.Controls.Add(this.lblMount);
+            this.panel_IO.Controls.Add(this.lblNTRIP_IP);
             this.panel_IO.Controls.Add(this.btnUDPMonitor);
             this.panel_IO.Controls.Add(this.btnNtrip);
             this.panel_IO.Controls.Add(this.label1);
@@ -2923,6 +2931,82 @@ namespace Twol
             this.panel_IO.Name = "panel_IO";
             this.panel_IO.Size = new System.Drawing.Size(396, 554);
             this.panel_IO.TabIndex = 547;
+            // 
+            // lblCount
+            // 
+            this.lblCount.BackColor = System.Drawing.Color.Transparent;
+            this.lblCount.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCount.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblCount.Location = new System.Drawing.Point(292, 59);
+            this.lblCount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblCount.Name = "lblCount";
+            this.lblCount.Size = new System.Drawing.Size(69, 18);
+            this.lblCount.TabIndex = 541;
+            this.lblCount.Text = "-";
+            this.lblCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblMount
+            // 
+            this.lblMount.BackColor = System.Drawing.Color.Transparent;
+            this.lblMount.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMount.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblMount.Location = new System.Drawing.Point(259, 35);
+            this.lblMount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblMount.Name = "lblMount";
+            this.lblMount.Size = new System.Drawing.Size(133, 18);
+            this.lblMount.TabIndex = 539;
+            this.lblMount.Text = "--";
+            this.lblMount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblNTRIP_IP
+            // 
+            this.lblNTRIP_IP.BackColor = System.Drawing.Color.Transparent;
+            this.lblNTRIP_IP.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNTRIP_IP.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblNTRIP_IP.Location = new System.Drawing.Point(259, 14);
+            this.lblNTRIP_IP.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblNTRIP_IP.Name = "lblNTRIP_IP";
+            this.lblNTRIP_IP.Size = new System.Drawing.Size(133, 18);
+            this.lblNTRIP_IP.TabIndex = 540;
+            this.lblNTRIP_IP.Text = "--";
+            this.lblNTRIP_IP.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnUDPMonitor
+            // 
+            this.btnUDPMonitor.BackColor = System.Drawing.Color.Gainsboro;
+            this.btnUDPMonitor.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnUDPMonitor.FlatAppearance.BorderColor = System.Drawing.SystemColors.HotTrack;
+            this.btnUDPMonitor.FlatAppearance.BorderSize = 0;
+            this.btnUDPMonitor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUDPMonitor.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUDPMonitor.ForeColor = System.Drawing.Color.White;
+            this.btnUDPMonitor.Image = global::Twol.Properties.Resources.ScanNetwork;
+            this.btnUDPMonitor.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnUDPMonitor.Location = new System.Drawing.Point(300, 395);
+            this.btnUDPMonitor.Margin = new System.Windows.Forms.Padding(4);
+            this.btnUDPMonitor.Name = "btnUDPMonitor";
+            this.btnUDPMonitor.Size = new System.Drawing.Size(92, 64);
+            this.btnUDPMonitor.TabIndex = 538;
+            this.btnUDPMonitor.UseVisualStyleBackColor = false;
+            this.btnUDPMonitor.Click += new System.EventHandler(this.btnUDPMonitor_Click);
+            // 
+            // btnNtrip
+            // 
+            this.btnNtrip.BackColor = System.Drawing.Color.Gainsboro;
+            this.btnNtrip.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnNtrip.FlatAppearance.BorderColor = System.Drawing.SystemColors.HotTrack;
+            this.btnNtrip.FlatAppearance.BorderSize = 0;
+            this.btnNtrip.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNtrip.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNtrip.ForeColor = System.Drawing.Color.White;
+            this.btnNtrip.Image = global::Twol.Properties.Resources.NtripSettings;
+            this.btnNtrip.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnNtrip.Location = new System.Drawing.Point(300, 485);
+            this.btnNtrip.Margin = new System.Windows.Forms.Padding(4);
+            this.btnNtrip.Name = "btnNtrip";
+            this.btnNtrip.Size = new System.Drawing.Size(92, 64);
+            this.btnNtrip.TabIndex = 537;
+            this.btnNtrip.UseVisualStyleBackColor = false;
             // 
             // label1
             // 
@@ -2988,42 +3072,19 @@ namespace Twol
             this.btnExtSim.UseVisualStyleBackColor = false;
             this.btnExtSim.Click += new System.EventHandler(this.btnExtSim_Click);
             // 
-            // btnNtrip
+            // lblToGPS
             // 
-            this.btnNtrip.BackColor = System.Drawing.Color.Gainsboro;
-            this.btnNtrip.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnNtrip.FlatAppearance.BorderColor = System.Drawing.SystemColors.HotTrack;
-            this.btnNtrip.FlatAppearance.BorderSize = 0;
-            this.btnNtrip.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNtrip.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNtrip.ForeColor = System.Drawing.Color.White;
-            this.btnNtrip.Image = global::Twol.Properties.Resources.NtripSettings;
-            this.btnNtrip.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnNtrip.Location = new System.Drawing.Point(300, 388);
-            this.btnNtrip.Margin = new System.Windows.Forms.Padding(4);
-            this.btnNtrip.Name = "btnNtrip";
-            this.btnNtrip.Size = new System.Drawing.Size(92, 64);
-            this.btnNtrip.TabIndex = 537;
-            this.btnNtrip.UseVisualStyleBackColor = false;
-            // 
-            // btnUDPMonitor
-            // 
-            this.btnUDPMonitor.BackColor = System.Drawing.Color.Gainsboro;
-            this.btnUDPMonitor.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnUDPMonitor.FlatAppearance.BorderColor = System.Drawing.SystemColors.HotTrack;
-            this.btnUDPMonitor.FlatAppearance.BorderSize = 0;
-            this.btnUDPMonitor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUDPMonitor.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUDPMonitor.ForeColor = System.Drawing.Color.White;
-            this.btnUDPMonitor.Image = global::Twol.Properties.Resources.ScanNetwork;
-            this.btnUDPMonitor.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnUDPMonitor.Location = new System.Drawing.Point(300, 283);
-            this.btnUDPMonitor.Margin = new System.Windows.Forms.Padding(4);
-            this.btnUDPMonitor.Name = "btnUDPMonitor";
-            this.btnUDPMonitor.Size = new System.Drawing.Size(92, 64);
-            this.btnUDPMonitor.TabIndex = 538;
-            this.btnUDPMonitor.UseVisualStyleBackColor = false;
-            this.btnUDPMonitor.Click += new System.EventHandler(this.btnUDPMonitor_Click);
+            this.lblToGPS.AutoSize = true;
+            this.lblToGPS.BackColor = System.Drawing.Color.Transparent;
+            this.lblToGPS.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblToGPS.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblToGPS.Location = new System.Drawing.Point(115, 275);
+            this.lblToGPS.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblToGPS.Name = "lblToGPS";
+            this.lblToGPS.Size = new System.Drawing.Size(26, 18);
+            this.lblToGPS.TabIndex = 542;
+            this.lblToGPS.Text = "---";
+            this.lblToGPS.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // FormGPS
             // 
@@ -3265,6 +3326,10 @@ namespace Twol
         private System.Windows.Forms.Label lblSerialPorts;
         private System.Windows.Forms.Button btnNtrip;
         private System.Windows.Forms.Button btnUDPMonitor;
+        private System.Windows.Forms.Label lblCount;
+        private System.Windows.Forms.Label lblMount;
+        private System.Windows.Forms.Label lblNTRIP_IP;
+        private System.Windows.Forms.Label lblToGPS;
     }
 }
 

@@ -372,7 +372,7 @@ namespace Twol
             deleteContourPathsToolStripMenuItem.Visible = Settings.User.setFeatures.isHideContourOn;
 
             //left side
-            btnStart_IO.Visible = Settings.User.setFeatures.isAgIOOn;
+            btnStart_IO.Visible = true;
         }
 
         public void SetNozzleSettings()

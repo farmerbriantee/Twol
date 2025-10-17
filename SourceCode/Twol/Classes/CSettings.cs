@@ -17,7 +17,6 @@
         public bool isHideContourOn = false;
         public bool isWebCamOn = false;
         public bool isOffsetFixOn = false;
-        public bool isAgIOOn = true;
 
         public bool isContourOn = true;
         public bool isYouTurnOn = true;
@@ -45,7 +44,6 @@
             isHideContourOn = _feature.isHideContourOn;
             isWebCamOn = _feature.isWebCamOn;
             isOffsetFixOn = _feature.isOffsetFixOn;
-            isAgIOOn = _feature.isAgIOOn;
 
             isContourOn = _feature.isContourOn;
             isYouTurnOn = _feature.isYouTurnOn;

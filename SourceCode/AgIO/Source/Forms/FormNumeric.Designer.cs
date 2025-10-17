@@ -32,8 +32,8 @@
             this.lblMax = new System.Windows.Forms.Label();
             this.lblMin = new System.Windows.Forms.Label();
             this.keypad1 = new Keypad.NumKeypad();
-            this.btnDistanceUp = new ProXoft.WinForms.RepeatButton();
-            this.btnDistanceDn = new ProXoft.WinForms.RepeatButton();
+            this.btnDistanceUp = new System.Windows.Forms.Button();
+            this.btnDistanceDn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // tboxNumber
@@ -141,7 +141,7 @@
         private Keypad.NumKeypad keypad1;
         private System.Windows.Forms.Label lblMax;
         private System.Windows.Forms.Label lblMin;
-        private ProXoft.WinForms.RepeatButton btnDistanceUp;
-        private ProXoft.WinForms.RepeatButton btnDistanceDn;
+        private System.Windows.Forms.Button btnDistanceUp;
+        private System.Windows.Forms.Button btnDistanceDn;
     }
 }
