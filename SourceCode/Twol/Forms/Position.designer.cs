@@ -117,33 +117,6 @@ namespace Twol
             }
         }
 
-        private void timerInterpolateGPS_Tick(object sender, EventArgs e)
-        {
-            timerGPS.Stop();
-            //timerGPS.Start();
-            double dist = pn.vtgSpeed * .0135;
-
-            double dHeading = (fixHeading - prevHeadingFix);
-            if (dHeading > 1) 
-                dHeading -= glm.twoPI;
-            if (dHeading < -1) 
-                dHeading += glm.twoPI;
-
-            dHeading += fixHeading;
-
-            if (dHeading > glm.twoPI) dHeading -= glm.twoPI;
-            if (dHeading < 0) dHeading += glm.twoPI;
-
-            pn.fix.easting += (Math.Sin(dHeading) * dist);
-            pn.fix.northing += (Math.Cos(dHeading) * dist);
-
-            UpdateFixPosition();
-        }
-
-        public bool isGPSFrame = false;
-
-        public double prevHeadingFix = 0;
-
         public void UpdateFixPosition()
         {
             //if (isGPSFrame && !timerSim.Enabled)

@@ -35,11 +35,6 @@ namespace Twol
         public bool isNTRIP_Sending = false;
         public bool isRunGGAInterval = false;
 
-        internal SerialPort spRadio = new SerialPort("Radio", 9600, Parity.None, 8, StopBits.One);
-
-        //NTRIP metering
-        Queue<byte> rawTrip = new Queue<byte>();
-
         //set up connection to Caster
         private void DoNTRIPSecondRoutine()
         {
@@ -235,34 +230,10 @@ namespace Twol
                 if (!string.IsNullOrEmpty(Settings.IO.setPort_portNameRadio))
                 {
                     // Disconnect when already connected
-                    if (spRadio != null)
-                    {
-                        spRadio.Close();
-                        spRadio.Dispose();
-                    }
 
-                    // Setup and open serial port
-                    spRadio = new SerialPort(Settings.IO.setPort_portNameRadio);
-                    spRadio.BaudRate = int.Parse(Settings.IO.setPort_baudRateRadio);
-                    spRadio.DataReceived += NtripPort_DataReceived;
                     isNTRIP_Connecting = false;
                     isNTRIP_Connected = true;
                     lblWatch.Text = "RTCM Serial";
-
-
-                    try
-                    {
-                        spRadio.Open();
-                    }
-                    catch (Exception ex)
-                    {
-                        isNTRIP_Connecting = false;
-                        isNTRIP_Connected = false;
-                        Settings.IO.setPass_isOn = false;
-                        Log.EventWriter("Catch - > Serial Pass Radio: " + ex.ToString());
-
-                        TimedMessageBox(2000, "Error connecting to Serial Pass", $"{ex.Message}");
-                    }
                 }
             }
         }
@@ -511,14 +482,6 @@ namespace Twol
                 clientSocket.Shutdown(SocketShutdown.Both);
                 clientSocket.Close();
                 System.Threading.Thread.Sleep(500);
-                ReconnectRequest();
-            }
-
-            if (spRadio != null && spRadio.IsOpen)
-            {
-                spRadio.Close();
-                spRadio.Dispose();
-                spRadio = null;
                 ReconnectRequest();
             }
         }

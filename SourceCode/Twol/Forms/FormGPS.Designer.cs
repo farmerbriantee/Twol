@@ -189,7 +189,6 @@ namespace Twol
             this.btnSprayGalPerMinActual = new System.Windows.Forms.Button();
             this.lblPWM_Nozz = new System.Windows.Forms.Label();
             this.lblFlowHz_Nozz = new System.Windows.Forms.Label();
-            this.timerGPS = new System.Windows.Forms.Timer(this.components);
             this.btnStartStopNtrip = new System.Windows.Forms.Button();
             this.lblWatch = new System.Windows.Forms.Label();
             this.lblNTRIPBytes = new System.Windows.Forms.Label();
@@ -204,6 +203,7 @@ namespace Twol
             this.btnProfiles = new System.Windows.Forms.Button();
             this.lbl_IO_Profile = new System.Windows.Forms.Label();
             this.panel_IO = new System.Windows.Forms.Panel();
+            this.lblToGPS = new System.Windows.Forms.Label();
             this.lblCount = new System.Windows.Forms.Label();
             this.lblMount = new System.Windows.Forms.Label();
             this.lblNTRIP_IP = new System.Windows.Forms.Label();
@@ -213,7 +213,6 @@ namespace Twol
             this.lblSerialPorts = new System.Windows.Forms.Label();
             this.btnSlide = new System.Windows.Forms.Button();
             this.btnExtSim = new System.Windows.Forms.Button();
-            this.lblToGPS = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStripFlag.SuspendLayout();
             this.statusStripLeft.SuspendLayout();
@@ -2676,11 +2675,6 @@ namespace Twol
             this.lblFlowHz_Nozz.Text = "Hz";
             this.lblFlowHz_Nozz.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // timerGPS
-            // 
-            this.timerGPS.Interval = 50;
-            this.timerGPS.Tick += new System.EventHandler(this.timerInterpolateGPS_Tick);
-            // 
             // btnStartStopNtrip
             // 
             this.btnStartStopNtrip.BackColor = System.Drawing.Color.LightGray;
@@ -2932,6 +2926,20 @@ namespace Twol
             this.panel_IO.Size = new System.Drawing.Size(396, 554);
             this.panel_IO.TabIndex = 547;
             // 
+            // lblToGPS
+            // 
+            this.lblToGPS.AutoSize = true;
+            this.lblToGPS.BackColor = System.Drawing.Color.Transparent;
+            this.lblToGPS.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblToGPS.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblToGPS.Location = new System.Drawing.Point(115, 275);
+            this.lblToGPS.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblToGPS.Name = "lblToGPS";
+            this.lblToGPS.Size = new System.Drawing.Size(26, 18);
+            this.lblToGPS.TabIndex = 542;
+            this.lblToGPS.Text = "---";
+            this.lblToGPS.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // lblCount
             // 
             this.lblCount.BackColor = System.Drawing.Color.Transparent;
@@ -3071,20 +3079,6 @@ namespace Twol
             this.btnExtSim.Text = "Sim";
             this.btnExtSim.UseVisualStyleBackColor = false;
             this.btnExtSim.Click += new System.EventHandler(this.btnExtSim_Click);
-            // 
-            // lblToGPS
-            // 
-            this.lblToGPS.AutoSize = true;
-            this.lblToGPS.BackColor = System.Drawing.Color.Transparent;
-            this.lblToGPS.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblToGPS.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblToGPS.Location = new System.Drawing.Point(115, 275);
-            this.lblToGPS.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblToGPS.Name = "lblToGPS";
-            this.lblToGPS.Size = new System.Drawing.Size(26, 18);
-            this.lblToGPS.TabIndex = 542;
-            this.lblToGPS.Text = "---";
-            this.lblToGPS.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // FormGPS
             // 
@@ -3303,7 +3297,6 @@ namespace Twol
         private System.Windows.Forms.Label lblFlowHz_Nozz;
         private System.Windows.Forms.ToolStripMenuItem toolSteerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem layersToolStripMenuItem;
-        private System.Windows.Forms.Timer timerGPS;
         private System.Windows.Forms.Button btnUDP;
         private System.Windows.Forms.Button btnStartStopNtrip;
         private System.Windows.Forms.Label lblNTRIPBytes;

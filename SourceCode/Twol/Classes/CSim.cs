@@ -120,8 +120,6 @@ namespace Twol
                 mf.pnTool.ConvertLocalToWGS84(mf.pnTool.fix.northing, mf.pnTool.fix.easting, out mf.pnTool.latitude, out mf.pnTool.longitude);
             }
 
-            mf.isGPSFrame = true;
-
             mf.UpdateFixPosition();
 
             if (isAccelForward)
