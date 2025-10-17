@@ -164,8 +164,6 @@ namespace Twol.Classes
         public static string gsArea = "gsArea";
         public static string gsAttachmentStyle = "gsAttachmentStyle";
         public static string gsAuto = "gsAuto";
-        public static string gsAutoOffAgIO = "gsAutoOffAgIO";
-        public static string gsAutoStartAgIO = "gsAutoStartAgIO";
         public static string gsAutoSteer = "gsAutoSteer";
         public static string gsAutoSteerConfiguration = "gsAutoSteerConfiguration";
         public static string gsAutoSteerPort = "gsAutoSteerPort";
