@@ -691,7 +691,7 @@ namespace Twol
                         GL.Color3(0.98f, 0.98f, 0.70f);
 
                         int edge = -oglMain.Width / 2 + 10;
-                        font.DrawText(edge, oglMain.Height - 120, "<-- AgIO ?");
+                        font.DrawText(edge, oglMain.Height - 120, "<-- GPS On ?");
 
                         lblSpeed.Text = "???";
                         lblHz.Text = " ???? \r\n Not Connected";
