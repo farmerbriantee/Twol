@@ -35,20 +35,20 @@ namespace Twol
             lblCurrentBaud.Text = Settings.IO.setPort_baudRateRadio;
             cboxBaud.Text = Settings.IO.setPort_baudRateRadio;
 
-            if (mf.spRadio != null && mf.spRadio.IsOpen)
-            {
-                btnOpenSerial.Enabled = false;
-                btnCloseSerial.Enabled = true;
-                cboxRadioPort.Enabled = false;
-                cboxBaud.Enabled = false;
-            }
-            else
-            {
-                btnOpenSerial.Enabled = true;
-                btnCloseSerial.Enabled = false;
-                cboxRadioPort.Enabled = true;
-                cboxBaud.Enabled = true;
-            }
+            //if (mf.spRadio != null && mf.spRadio.IsOpen)
+            //{
+            //    btnOpenSerial.Enabled = false;
+            //    btnCloseSerial.Enabled = true;
+            //    cboxRadioPort.Enabled = false;
+            //    cboxBaud.Enabled = false;
+            //}
+            //else
+            //{
+            //    btnOpenSerial.Enabled = true;
+            //    btnCloseSerial.Enabled = false;
+            //    cboxRadioPort.Enabled = true;
+            //    cboxBaud.Enabled = true;
+            //}
         }
 
         private void btnSerialOK_Click(object sender, EventArgs e)
@@ -84,22 +84,22 @@ namespace Twol
 
         private void btnOpenSerial_Click(object sender, EventArgs e)
         {
-            if (mf.spRadio != null && mf.spRadio.IsOpen)
-            {
-                mf.spRadio.Close();
-                mf.spRadio.Dispose();
-                mf.spRadio = null;
-            }
+            //if (mf.spRadio != null && mf.spRadio.IsOpen)
+            //{
+            //    mf.spRadio.Close();
+            //    mf.spRadio.Dispose();
+            //    mf.spRadio = null;
+            //}
 
             // Setup and open serial port
-            mf.spRadio = new SerialPort(cboxRadioPort.Text, int.Parse(cboxBaud.Text));
+            //mf.spRadio = new SerialPort(cboxRadioPort.Text, int.Parse(cboxBaud.Text));
 
             btnOpenSerial.Enabled = false;
             btnCloseSerial.Enabled = true;
 
             try
             {
-                mf.spRadio.Open();
+                //mf.spRadio.Open();
 
                 lblCurrentPort.Text = Settings.IO.setPort_portNameRadio;
                 lblCurrentBaud.Text = Settings.IO.setPort_baudRateRadio;
@@ -116,18 +116,18 @@ namespace Twol
 
         private void btnCloseSerial_Click(object sender, EventArgs e)
         {
-            if (mf.spRadio != null && mf.spRadio.IsOpen)
-            {
-                mf.spRadio.Close();
-                mf.spRadio.Dispose();
-                mf.spRadio = null;
+            //if (mf.spRadio != null && mf.spRadio.IsOpen)
+            //{
+            //    mf.spRadio.Close();
+            //    mf.spRadio.Dispose();
+            //    mf.spRadio = null;
 
-                btnOpenSerial.Enabled = true;
-                btnCloseSerial.Enabled = false;
+            //    btnOpenSerial.Enabled = true;
+            //    btnCloseSerial.Enabled = false;
 
-                cboxRadioPort.Enabled = true;
-                cboxBaud.Enabled = true;
-            }
+            //    cboxRadioPort.Enabled = true;
+            //    cboxBaud.Enabled = true;
+            //}
         }
 
         private void btnRescan_Click(object sender, EventArgs e)

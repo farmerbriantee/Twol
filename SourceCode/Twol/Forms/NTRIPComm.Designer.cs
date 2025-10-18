@@ -7,6 +7,8 @@ using System.Globalization;
 using System.IO.Ports;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Threading;
 
 // Declare the delegate prototype to send data back to the form
 delegate void UpdateRTCM_Data(byte[] data);
@@ -21,8 +23,8 @@ namespace Twol
         private Socket clientSocket;                      // Server connection
         private byte[] casterRecBuffer = new byte[2800];    // Recieved data buffer
 
-        //Send GGA back timer
-        Timer tmr;
+        //Send GGA back timer - use threaded timer to avoid UI thread dependency
+        private System.Threading.Timer tmr;
 
         private string GGASentence;
 
@@ -49,7 +51,8 @@ namespace Twol
             {
                 if (!isNTRIP_Starting && ntripCounter > 20)
                 {
-                    StartNTRIP();
+                    // fire-and-forget async connect
+                    _ = StartNTRIPAsync();
                 }
             }
 
@@ -57,7 +60,8 @@ namespace Twol
             {
                 if (!isNTRIP_Starting)
                 {
-                    StartNTRIP();
+                    // fire-and-forget async connect
+                    _ = StartNTRIPAsync();
                 }
             }
 
@@ -165,7 +169,7 @@ namespace Twol
             btnStartStopNtrip.Text = "Off";
         }
 
-        public void StartNTRIP()
+        public async Task StartNTRIPAsync()
         {
             if (Settings.IO.setNTRIP_isOn)
             {
@@ -173,14 +177,14 @@ namespace Twol
                 if (tmr != null)
                 {
                     tmr.Dispose();
+                    tmr = null;
                 }
 
-                //create new timer at fast rate to start
+                //create new threaded timer at fast rate to start
                 if (Settings.IO.setNTRIP_sendGGAInterval > 0)
                 {
-                    this.tmr = new System.Windows.Forms.Timer();
-                    this.tmr.Interval = 5000;
-                    this.tmr.Tick += new EventHandler(NTRIPtick);
+                    // dueTime = 5000ms to start fast, period = Timeout.Infinite until we set the regular interval
+                    tmr = new System.Threading.Timer(NTRIPTimerCallback, null, 5000, Timeout.Infinite);
                 }
 
                 try
@@ -212,7 +216,7 @@ namespace Twol
                 {
                     ReconnectRequest();
                     Log.EventWriter("Catch - > NTRIP Reconnect Request: " + ex.ToString());
-
+            
                     return;
                 }
 
@@ -236,6 +240,8 @@ namespace Twol
                     lblWatch.Text = "RTCM Serial";
                 }
             }
+
+            await Task.CompletedTask;
         }
 
         private void ReconnectRequest()
@@ -250,6 +256,7 @@ namespace Twol
             if (tmr != null)
             {
                 tmr.Dispose();
+                tmr = null;
             }
         }
 
@@ -263,7 +270,16 @@ namespace Twol
                 ReconnectRequest();
 
             //Once all connected set the timer GGA to NTRIP Settings
-            if (Settings.IO.setNTRIP_sendGGAInterval > 0 && ntripCounter == 40) tmr.Interval = Settings.IO.setNTRIP_sendGGAInterval * 1000;
+            if (Settings.IO.setNTRIP_sendGGAInterval > 0 && ntripCounter == 40)
+            {
+                // set timer to repeat at configured interval
+                try
+                {
+                    int period = Settings.IO.setNTRIP_sendGGAInterval * 1000;
+                    tmr?.Change(period, period);
+                }
+                catch (Exception) { }
+            }
         }
 
         private void SendAuthorization()
@@ -305,7 +321,11 @@ namespace Twol
                     clientSocket.Send(byteDateLine, byteDateLine.Length, 0);
 
                     //enable to periodically send GGA sentence to server.
-                    if (Settings.IO.setNTRIP_sendGGAInterval > 0) tmr.Enabled = true;
+                    if (Settings.IO.setNTRIP_sendGGAInterval > 0)
+                    {
+                        int period = Settings.IO.setNTRIP_sendGGAInterval * 1000;
+                        try { tmr?.Change(period, period); } catch (Exception) { }
+                    }
                 }
                 //say its connected
                 isNTRIP_Connected = true;
@@ -376,6 +396,21 @@ namespace Twol
                 ReconnectRequest();
             }
         }
+
+        // Timer callback runs on ThreadPool thread
+        private void NTRIPTimerCallback(object state)
+        {
+            try
+            {
+                SendGGA();
+            }
+            catch (Exception ex)
+            {
+                // swallow to avoid unhandled exceptions from timer
+                Log.EventWriter("NTRIP timer callback error: " + ex.ToString());
+            }
+        }
+
         private void NTRIPtick(object o, EventArgs e)
         {
             SendGGA();
