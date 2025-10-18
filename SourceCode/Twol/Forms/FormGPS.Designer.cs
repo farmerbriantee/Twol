@@ -637,7 +637,7 @@ namespace Twol
             // 
             // timerSim
             // 
-            this.timerSim.Interval = 47;
+            this.timerSim.Interval = 90;
             this.timerSim.Tick += new System.EventHandler(this.timerSim_Tick);
             // 
             // toolStripMenuItem2
