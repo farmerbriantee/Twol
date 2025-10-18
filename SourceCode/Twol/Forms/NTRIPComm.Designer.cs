@@ -367,11 +367,12 @@ namespace Twol
             }
         }
 
-        public void SendGGA()
+        public async Task SendGGAAsync()
         {
             //timer may have brought us here so return if not connected
             if (!isNTRIP_Connected)
                 return;
+
             // Check we are connected
             if (clientSocket == null || !clientSocket.Connected)
             {
@@ -379,15 +380,16 @@ namespace Twol
                 return;
             }
 
-            // Read the message from the text box and send it
             try
             {
                 isNTRIP_Sending = true;
                 BuildGGA();
                 string str = sbGGA.ToString();
 
-                Byte[] byteDateLine = Encoding.ASCII.GetBytes(str.ToCharArray());
-                clientSocket.Send(byteDateLine, byteDateLine.Length, 0);
+                Byte[] byteDateLine = Encoding.ASCII.GetBytes(str);
+
+                // Send on a background thread to avoid blocking the caller's thread
+                await Task.Run(() => clientSocket.Send(byteDateLine, byteDateLine.Length, 0)).ConfigureAwait(false);
             }
             catch (Exception ex)
             {
@@ -402,7 +404,8 @@ namespace Twol
         {
             try
             {
-                SendGGA();
+                // fire-and-forget async send
+                _ = SendGGAAsync();
             }
             catch (Exception ex)
             {
@@ -413,7 +416,8 @@ namespace Twol
 
         private void NTRIPtick(object o, EventArgs e)
         {
-            SendGGA();
+            // If the legacy WinForms timer ever gets used, call the async method
+            _ = SendGGAAsync();
         }
 
         public void OnConnect(IAsyncResult ar)
