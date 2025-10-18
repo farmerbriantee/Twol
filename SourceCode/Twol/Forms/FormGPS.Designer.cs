@@ -123,7 +123,7 @@ namespace Twol
             this.toolStripHotkeys = new System.Windows.Forms.ToolStripMenuItem();
             this.btnNavigationSettings = new System.Windows.Forms.Button();
             this.btnAutoSteerConfig = new System.Windows.Forms.Button();
-            this.btnStart_IO = new System.Windows.Forms.Button();
+            this.btnShowHide_IO = new System.Windows.Forms.Button();
             this.btnFieldMenu = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripBtnFieldTools = new System.Windows.Forms.ToolStripDropDownButton();
@@ -501,7 +501,7 @@ namespace Twol
             // 
             // tmrWatchdog
             // 
-            this.tmrWatchdog.Interval = 250;
+            this.tmrWatchdog.Interval = 333;
             this.tmrWatchdog.Tick += new System.EventHandler(this.tmrWatchdog_tick);
             // 
             // contextMenuStripFlag
@@ -564,7 +564,7 @@ namespace Twol
             this.toolStripMenuFlagForm.Image = global::Twol.Properties.Resources.FileEditName;
             this.toolStripMenuFlagForm.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripMenuFlagForm.Name = "toolStripMenuFlagForm";
-            this.toolStripMenuFlagForm.Size = new System.Drawing.Size(259, 70);
+            this.toolStripMenuFlagForm.Size = new System.Drawing.Size(267, 70);
             this.toolStripMenuFlagForm.Text = "toolStripMenuItem3";
             this.toolStripMenuFlagForm.Click += new System.EventHandler(this.toolStripMenuFlagForm_Click);
             // 
@@ -1199,7 +1199,7 @@ namespace Twol
             this.panelLeft.Controls.Add(this.statusStrip2, 0, 3);
             this.panelLeft.Controls.Add(this.btnNavigationSettings, 0, 1);
             this.panelLeft.Controls.Add(this.btnAutoSteerConfig, 0, 6);
-            this.panelLeft.Controls.Add(this.btnStart_IO, 0, 7);
+            this.panelLeft.Controls.Add(this.btnShowHide_IO, 0, 7);
             this.panelLeft.Controls.Add(this.btnFieldMenu, 0, 4);
             this.panelLeft.Controls.Add(this.statusStripLeft, 0, 2);
             this.panelLeft.Controls.Add(this.statusStrip1, 0, 5);
@@ -1374,32 +1374,32 @@ namespace Twol
             this.btnAutoSteerConfig.UseVisualStyleBackColor = false;
             this.btnAutoSteerConfig.Click += new System.EventHandler(this.btnAutoSteerConfig_Click);
             // 
-            // btnStart_IO
+            // btnShowHide_IO
             // 
-            this.btnStart_IO.BackColor = System.Drawing.Color.Transparent;
-            this.btnStart_IO.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnStart_IO.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnStart_IO.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
-            this.btnStart_IO.FlatAppearance.BorderSize = 0;
-            this.btnStart_IO.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.btnStart_IO.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnStart_IO.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnStart_IO.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnStart_IO.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStart_IO.ForeColor = System.Drawing.Color.Black;
-            this.btnStart_IO.Image = global::Twol.Properties.Resources.IO;
-            this.btnStart_IO.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnStart_IO.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnStart_IO.Location = new System.Drawing.Point(0, 518);
-            this.btnStart_IO.Margin = new System.Windows.Forms.Padding(0);
-            this.btnStart_IO.Name = "btnStart_IO";
-            this.btnStart_IO.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnStart_IO.Size = new System.Drawing.Size(70, 82);
-            this.btnStart_IO.TabIndex = 467;
-            this.btnStart_IO.Text = "12.3";
-            this.btnStart_IO.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnStart_IO.UseVisualStyleBackColor = false;
-            this.btnStart_IO.Click += new System.EventHandler(this.btnStart_IO_Click);
+            this.btnShowHide_IO.BackColor = System.Drawing.Color.Transparent;
+            this.btnShowHide_IO.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnShowHide_IO.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnShowHide_IO.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
+            this.btnShowHide_IO.FlatAppearance.BorderSize = 0;
+            this.btnShowHide_IO.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.btnShowHide_IO.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnShowHide_IO.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnShowHide_IO.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnShowHide_IO.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnShowHide_IO.ForeColor = System.Drawing.Color.Black;
+            this.btnShowHide_IO.Image = global::Twol.Properties.Resources.IO;
+            this.btnShowHide_IO.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnShowHide_IO.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnShowHide_IO.Location = new System.Drawing.Point(0, 518);
+            this.btnShowHide_IO.Margin = new System.Windows.Forms.Padding(0);
+            this.btnShowHide_IO.Name = "btnStart_IO";
+            this.btnShowHide_IO.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnShowHide_IO.Size = new System.Drawing.Size(70, 82);
+            this.btnShowHide_IO.TabIndex = 467;
+            this.btnShowHide_IO.Text = "12.3";
+            this.btnShowHide_IO.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnShowHide_IO.UseVisualStyleBackColor = false;
+            this.btnShowHide_IO.Click += new System.EventHandler(this.btnShowHide_IO_Click);
             // 
             // btnFieldMenu
             // 
@@ -2887,7 +2887,7 @@ namespace Twol
             // 
             this.lbl_IO_Profile.BackColor = System.Drawing.Color.Transparent;
             this.lbl_IO_Profile.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lbl_IO_Profile.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_IO_Profile.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_IO_Profile.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.lbl_IO_Profile.Location = new System.Drawing.Point(0, 0);
             this.lbl_IO_Profile.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -2967,7 +2967,7 @@ namespace Twol
             this.lblCount.BackColor = System.Drawing.Color.Transparent;
             this.lblCount.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCount.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblCount.Location = new System.Drawing.Point(292, 59);
+            this.lblCount.Location = new System.Drawing.Point(292, 74);
             this.lblCount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCount.Name = "lblCount";
             this.lblCount.Size = new System.Drawing.Size(69, 18);
@@ -2980,7 +2980,7 @@ namespace Twol
             this.lblMount.BackColor = System.Drawing.Color.Transparent;
             this.lblMount.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMount.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblMount.Location = new System.Drawing.Point(259, 35);
+            this.lblMount.Location = new System.Drawing.Point(259, 52);
             this.lblMount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblMount.Name = "lblMount";
             this.lblMount.Size = new System.Drawing.Size(133, 18);
@@ -2993,7 +2993,7 @@ namespace Twol
             this.lblNTRIP_IP.BackColor = System.Drawing.Color.Transparent;
             this.lblNTRIP_IP.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNTRIP_IP.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblNTRIP_IP.Location = new System.Drawing.Point(259, 14);
+            this.lblNTRIP_IP.Location = new System.Drawing.Point(259, 30);
             this.lblNTRIP_IP.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNTRIP_IP.Name = "lblNTRIP_IP";
             this.lblNTRIP_IP.Size = new System.Drawing.Size(133, 18);
@@ -3221,7 +3221,7 @@ namespace Twol
         private System.Windows.Forms.ToolStripMenuItem menuLanguagePolish;
         private System.Windows.Forms.ToolStripDropDownButton distanceToolBtn;
         public System.Windows.Forms.Button btnDayNightMode;
-        public System.Windows.Forms.Button btnStart_IO;
+        public System.Windows.Forms.Button btnShowHide_IO;
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton4;
         public System.Windows.Forms.ToolStripMenuItem steerChartStripMenu;
         private System.Windows.Forms.TableLayoutPanel panelNavigation;

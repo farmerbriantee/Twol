@@ -57,7 +57,6 @@ namespace Twol
                     }
                 }
             }
-
         }
 
         private void btnNTRIPSerial_Click(object sender, EventArgs e)
@@ -901,7 +900,7 @@ namespace Twol
 
         }
 
-        private void btnStart_IO_Click(object sender, EventArgs e)
+        private void btnShowHide_IO_Click(object sender, EventArgs e)
         {
             if (panel_IO.Visible)
             {

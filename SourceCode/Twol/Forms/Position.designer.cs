@@ -119,15 +119,6 @@ namespace Twol
 
         public void UpdateFixPosition()
         {
-            //if (isGPSFrame && !timerSim.Enabled)
-            //{
-            //    prevHeadingFix = fixHeading;
-
-            //   timerGPS.Start();
-            //    isGPSFrame = false;
-            //}
-
-            //swFrame.Stop();
             //Measure the frequency of the GPS updates
             timeSliceOfLastFix = (double)(swFrame.ElapsedTicks) / (double)System.Diagnostics.Stopwatch.Frequency;
             swFrame.Restart();
@@ -644,6 +635,7 @@ namespace Twol
             oglMain.Refresh();
 
             //end of UppdateFixPosition
+
         }
 
         private void AddRoll()

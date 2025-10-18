@@ -57,13 +57,12 @@ namespace Twol
         //Timer triggers at 250 msec
         private void tmrWatchdog_tick(object sender, EventArgs e)
         {
-            if (sentenceCounter == 19)
+            if (sentenceCounter == 10)
             {
                 Log.EventWriter("No GPS Warning - Lost GPS");
             }
 
-            //Check for a newline char, if none then just return
-            if (++sentenceCounter > 20)
+            if (++sentenceCounter > 11)
             {
                 ShowNoGPSWarning();
                 return;
@@ -197,7 +196,7 @@ namespace Twol
             }//end every 2 seconds
 
             //every second update all status ///////////////////////////   1 1 1 1 1 1 ////////////////////////////
-            if (oneSecondCounter >= 4)
+            if (oneSecondCounter >= 3)
             {
                 //reset the counter
                 oneSecondCounter = 0;
@@ -258,6 +257,7 @@ namespace Twol
                 //the main formgps window
                 //status strip values
                 distanceToolBtn.Text = fd.DistanceUser + "\r\n" + fd.WorkedUserArea;
+                btnAutoSteerConfig.Text = SetSteerAngle + "\r\n" + ActualSteerAngle;
 
                 lblSpeed.Text = Speed;
 
@@ -320,7 +320,7 @@ namespace Twol
 
                 if (mc.actualToolAngleDegrees != double.MaxValue)
                 {
-                    btnStart_IO.Text = mc.actualToolAngleDegrees.ToString("N1") + "°";
+                    btnShowHide_IO.Text = mc.actualToolAngleDegrees.ToString("N1") + "°";
                 }
 
                 for (int j = 0; j < controlLbls.Count; j++)
@@ -346,14 +346,12 @@ namespace Twol
 
             } //end every 1/2 second
 
-            //every fourth second update  ///////////////////////////   Fourth  ////////////////////////////
+            //every 1/3 second update  ///////////////////////////   One Third Second ////////////////////////////
             {
                 //reset the counter
                 oneHalfSecondCounter++;
                 oneSecondCounter++;
                 makeUTurnCounter++;
-
-                btnAutoSteerConfig.Text = SetSteerAngle + "\r\n" + ActualSteerAngle;
 
                 secondsSinceStart = (DateTime.Now - Process.GetCurrentProcess().StartTime).TotalSeconds;
             }
@@ -374,7 +372,7 @@ namespace Twol
             deleteContourPathsToolStripMenuItem.Visible = Settings.User.setFeatures.isHideContourOn;
 
             //left side
-            btnStart_IO.Visible = true;
+            btnShowHide_IO.Visible = true;
         }
 
         public void SetNozzleSettings()
