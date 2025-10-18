@@ -60,6 +60,29 @@ namespace Twol
 
         }
 
+        private void btnNTRIPSerial_Click(object sender, EventArgs e)
+        {
+            if (RegistrySettings.IOFileName == "Default Profile")
+            {
+                TimedMessageBox(3000, "Using Default Profile", "Choose Existing or Create New Profile");
+                return;
+            }
+
+            if (Settings.IO.setNTRIP_isOn)
+            {
+                TimedMessageBox(2000, "Air NTRIP ON", "Turn it off before using Serial Pass Thru");
+                return;
+            }
+
+            using (var form = new FormSerialPass(this))
+            {
+                if (form.ShowDialog(this) == DialogResult.OK)
+                {
+                    ////Clicked Save
+                    //Program.Restart();
+                }
+            }
+        }
         private void btnUDPMonitor_Click(object sender, EventArgs e)
         {
             var form = new FormUDPMonitor(this);

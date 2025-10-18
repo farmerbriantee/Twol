@@ -428,13 +428,11 @@ namespace Twol
         private void cboxToUDP_Click(object sender, EventArgs e)
         {
             ntripStatusChanged = true;
-            //if (cboxToSerial.Checked) cboxToSerial.Checked = false;
         }
 
         private void cboxToSerial_Click(object sender, EventArgs e)
         {
             ntripStatusChanged = true;
-            //if (cboxToUDP.Checked) cboxToUDP.Checked = false;
         }
 
         private void btnHelp_Click(object sender, EventArgs e)

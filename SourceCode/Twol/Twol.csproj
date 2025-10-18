@@ -198,6 +198,12 @@
     <Compile Include="Forms\IO\FormProfiles.designer.cs">
       <DependentUpon>FormProfiles.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\IO\FormSerialPass.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IO\FormSerialPass.designer.cs">
+      <DependentUpon>FormSerialPass.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\IO\FormSource.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -637,6 +643,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\IO\FormProfiles.resx">
       <DependentUpon>FormProfiles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IO\FormSerialPass.resx">
+      <DependentUpon>FormSerialPass.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\IO\FormSource.resx">
       <DependentUpon>FormSource.cs</DependentUpon>

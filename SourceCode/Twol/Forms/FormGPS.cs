@@ -785,6 +785,7 @@ namespace Twol
 
         }
 
+
         public void FieldClose()
         {
             Settings.Vehicle.setF_CurrentFieldDir = currentFieldDirectory;

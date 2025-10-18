@@ -203,6 +203,7 @@ namespace Twol
             this.btnProfiles = new System.Windows.Forms.Button();
             this.lbl_IO_Profile = new System.Windows.Forms.Label();
             this.panel_IO = new System.Windows.Forms.Panel();
+            this.btnNTRIPSerial = new System.Windows.Forms.Button();
             this.lblToGPS = new System.Windows.Forms.Label();
             this.lblCount = new System.Windows.Forms.Label();
             this.lblMount = new System.Windows.Forms.Label();
@@ -2899,6 +2900,7 @@ namespace Twol
             // panel_IO
             // 
             this.panel_IO.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel_IO.Controls.Add(this.btnNTRIPSerial);
             this.panel_IO.Controls.Add(this.lblToGPS);
             this.panel_IO.Controls.Add(this.lblCount);
             this.panel_IO.Controls.Add(this.lblMount);
@@ -2926,6 +2928,25 @@ namespace Twol
             this.panel_IO.Name = "panel_IO";
             this.panel_IO.Size = new System.Drawing.Size(396, 554);
             this.panel_IO.TabIndex = 547;
+            // 
+            // btnNTRIPSerial
+            // 
+            this.btnNTRIPSerial.BackColor = System.Drawing.Color.Gainsboro;
+            this.btnNTRIPSerial.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnNTRIPSerial.FlatAppearance.BorderColor = System.Drawing.SystemColors.HotTrack;
+            this.btnNTRIPSerial.FlatAppearance.BorderSize = 0;
+            this.btnNTRIPSerial.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNTRIPSerial.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNTRIPSerial.ForeColor = System.Drawing.Color.White;
+            this.btnNTRIPSerial.Image = global::Twol.Properties.Resources.NTRIP_Serial;
+            this.btnNTRIPSerial.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnNTRIPSerial.Location = new System.Drawing.Point(300, 404);
+            this.btnNTRIPSerial.Margin = new System.Windows.Forms.Padding(4);
+            this.btnNTRIPSerial.Name = "btnNTRIPSerial";
+            this.btnNTRIPSerial.Size = new System.Drawing.Size(92, 64);
+            this.btnNTRIPSerial.TabIndex = 543;
+            this.btnNTRIPSerial.UseVisualStyleBackColor = false;
+            this.btnNTRIPSerial.Click += new System.EventHandler(this.btnNTRIPSerial_Click);
             // 
             // lblToGPS
             // 
@@ -3330,6 +3351,7 @@ namespace Twol
         private System.Windows.Forms.Label lblNTRIP_IP;
         private System.Windows.Forms.Label lblToGPS;
         private System.Windows.Forms.Timer tmrNTRIP;
+        private System.Windows.Forms.Button btnNTRIPSerial;
     }
 }
 
