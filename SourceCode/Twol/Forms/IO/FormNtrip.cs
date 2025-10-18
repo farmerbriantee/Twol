@@ -108,11 +108,11 @@ namespace Twol
                 Log.EventWriter("NTRIP Turned off");
             }
 
-            mf.YesMessageBox("Restart of Twol is Required - Restarting");
+            //mf.YesMessageBox("Restart of Twol is Required - Restarting");
             Log.EventWriter("Program Reset: Selecting NTRIP Feature");
 
             Settings.IO.Save();
-            Program.Restart();
+            //Program.Restart();
         }
 
         //get the ipv4 address only

@@ -563,7 +563,7 @@ namespace Twol
             this.toolStripMenuFlagForm.Image = global::Twol.Properties.Resources.FileEditName;
             this.toolStripMenuFlagForm.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripMenuFlagForm.Name = "toolStripMenuFlagForm";
-            this.toolStripMenuFlagForm.Size = new System.Drawing.Size(267, 70);
+            this.toolStripMenuFlagForm.Size = new System.Drawing.Size(259, 70);
             this.toolStripMenuFlagForm.Text = "toolStripMenuItem3";
             this.toolStripMenuFlagForm.Click += new System.EventHandler(this.toolStripMenuFlagForm_Click);
             // 
@@ -2742,7 +2742,7 @@ namespace Twol
             this.btnNMEA_Data.ForeColor = System.Drawing.Color.Black;
             this.btnNMEA_Data.Image = global::Twol.Properties.Resources.Nmea;
             this.btnNMEA_Data.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnNMEA_Data.Location = new System.Drawing.Point(300, 215);
+            this.btnNMEA_Data.Location = new System.Drawing.Point(300, 126);
             this.btnNMEA_Data.Margin = new System.Windows.Forms.Padding(4);
             this.btnNMEA_Data.Name = "btnNMEA_Data";
             this.btnNMEA_Data.Size = new System.Drawing.Size(92, 64);
@@ -2798,7 +2798,7 @@ namespace Twol
             this.btnSteer.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSteer.ForeColor = System.Drawing.Color.White;
             this.btnSteer.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSteer.Location = new System.Drawing.Point(155, 266);
+            this.btnSteer.Location = new System.Drawing.Point(163, 266);
             this.btnSteer.Margin = new System.Windows.Forms.Padding(4);
             this.btnSteer.Name = "btnSteer";
             this.btnSteer.Size = new System.Drawing.Size(92, 64);
@@ -2817,7 +2817,7 @@ namespace Twol
             this.btnMachine.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMachine.ForeColor = System.Drawing.Color.White;
             this.btnMachine.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnMachine.Location = new System.Drawing.Point(153, 361);
+            this.btnMachine.Location = new System.Drawing.Point(163, 361);
             this.btnMachine.Margin = new System.Windows.Forms.Padding(4);
             this.btnMachine.Name = "btnMachine";
             this.btnMachine.Size = new System.Drawing.Size(92, 64);
@@ -2836,7 +2836,7 @@ namespace Twol
             this.btnIMU.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnIMU.ForeColor = System.Drawing.Color.White;
             this.btnIMU.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnIMU.Location = new System.Drawing.Point(153, 167);
+            this.btnIMU.Location = new System.Drawing.Point(163, 167);
             this.btnIMU.Margin = new System.Windows.Forms.Padding(4);
             this.btnIMU.Name = "btnIMU";
             this.btnIMU.Size = new System.Drawing.Size(92, 64);
@@ -2855,7 +2855,7 @@ namespace Twol
             this.btnUDP.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUDP.ForeColor = System.Drawing.Color.White;
             this.btnUDP.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnUDP.Location = new System.Drawing.Point(157, 47);
+            this.btnUDP.Location = new System.Drawing.Point(163, 47);
             this.btnUDP.Margin = new System.Windows.Forms.Padding(4);
             this.btnUDP.Name = "btnUDP";
             this.btnUDP.Size = new System.Drawing.Size(92, 64);
@@ -2874,7 +2874,7 @@ namespace Twol
             this.btnProfiles.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnProfiles.ForeColor = System.Drawing.Color.White;
             this.btnProfiles.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnProfiles.Location = new System.Drawing.Point(300, 305);
+            this.btnProfiles.Location = new System.Drawing.Point(300, 216);
             this.btnProfiles.Margin = new System.Windows.Forms.Padding(4);
             this.btnProfiles.Name = "btnProfiles";
             this.btnProfiles.Size = new System.Drawing.Size(92, 64);
@@ -2933,7 +2933,7 @@ namespace Twol
             this.lblToGPS.BackColor = System.Drawing.Color.Transparent;
             this.lblToGPS.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblToGPS.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblToGPS.Location = new System.Drawing.Point(115, 275);
+            this.lblToGPS.Location = new System.Drawing.Point(105, 275);
             this.lblToGPS.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblToGPS.Name = "lblToGPS";
             this.lblToGPS.Size = new System.Drawing.Size(26, 18);
@@ -2991,7 +2991,7 @@ namespace Twol
             this.btnUDPMonitor.ForeColor = System.Drawing.Color.White;
             this.btnUDPMonitor.Image = global::Twol.Properties.Resources.ScanNetwork;
             this.btnUDPMonitor.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnUDPMonitor.Location = new System.Drawing.Point(300, 395);
+            this.btnUDPMonitor.Location = new System.Drawing.Point(300, 306);
             this.btnUDPMonitor.Margin = new System.Windows.Forms.Padding(4);
             this.btnUDPMonitor.Name = "btnUDPMonitor";
             this.btnUDPMonitor.Size = new System.Drawing.Size(92, 64);
@@ -3016,6 +3016,7 @@ namespace Twol
             this.btnNtrip.Size = new System.Drawing.Size(92, 64);
             this.btnNtrip.TabIndex = 537;
             this.btnNtrip.UseVisualStyleBackColor = false;
+            this.btnNtrip.Click += new System.EventHandler(this.btnNtrip_Click);
             // 
             // label1
             // 
@@ -3037,7 +3038,7 @@ namespace Twol
             this.lblSerialPorts.BackColor = System.Drawing.Color.Transparent;
             this.lblSerialPorts.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSerialPorts.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblSerialPorts.Location = new System.Drawing.Point(80, 451);
+            this.lblSerialPorts.Location = new System.Drawing.Point(86, 451);
             this.lblSerialPorts.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblSerialPorts.Name = "lblSerialPorts";
             this.lblSerialPorts.Size = new System.Drawing.Size(169, 36);

@@ -243,6 +243,8 @@ namespace Twol
                     lblFlowHz_Nozz.Text = nozz.frequency.ToString() + " Hz";
                 }
 
+                DoNTRIPSecondRoutine();
+
             }
 
             //every half of a second update all status  ////////////////    0.5  0.5   0.5    0.5    /////////////////

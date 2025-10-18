@@ -321,11 +321,14 @@ namespace Twol
 
         public void OnAddMessage(byte[] data)
         {
+            //reset watchdog since we have updated data
+            NTRIP_Watchdog = 0;
+
             lblToGPS.Text = data.Length.ToString();
             //send it
             SendNTRIP(data);
 
-            lblToGPS.Text = traffic.cntrGPSInBytes == 0 ? "---" : (traffic.cntrGPSInBytes).ToString();
+            //lblToGPS.Text = traffic.cntrGPSInBytes == 0 ? "---" : (traffic.cntrGPSInBytes).ToString();
             traffic.cntrGPSInBytes = 0;
         }
 

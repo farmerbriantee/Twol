@@ -1,5 +1,3 @@
-using Twol.Classes;
-using Twol.Properties;
 using OpenTK.Graphics.OpenGL;
 using System;
 using System.Collections.Generic;
@@ -9,9 +7,12 @@ using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Sockets;
-using System.Windows.Forms;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using Twol.Classes;
+using Twol.Properties;
 
 namespace Twol
 {
@@ -349,6 +350,57 @@ namespace Twol
             //start udp server if required
             if (Settings.IO.setUDP_isOn)
                 LoadUDPNetwork();
+
+            ConfigureNTRIP();
+
+            //update Caster IP from URL, just use the old one if can't find
+            if (Settings.IO.setNTRIP_isOn)
+            {
+                //broadCasterIP = Settings.IO.setNTRIP_casterIP; //Select correct Address
+                Settings.IO.setNTRIP_casterIP = null;
+                string actualIP = Settings.IO.setNTRIP_casterURL.Trim();
+
+                try
+                {
+                    IPAddress[] addresslist = Dns.GetHostAddresses(actualIP);
+                    foreach (IPAddress address in addresslist)
+                    {
+                        if (address.AddressFamily == AddressFamily.InterNetwork)
+                        {
+                            Settings.IO.setNTRIP_casterIP = address.ToString().Trim();
+
+                            break;
+                        }
+                    }
+
+                    if (Settings.IO.setNTRIP_casterIP == null) throw new NullReferenceException();
+                }
+                catch (Exception ex)
+                {
+                    Log.EventWriter(ex.ToString());
+                    TimedMessageBox(1500, "URL Not Located, Network Down?", "Cannot Find: " + Settings.IO.setNTRIP_casterURL);
+                    //if we had a timer already, kill it
+                    tmr?.Dispose();
+
+                    //use last known TODO
+                    Settings.IO.setNTRIP_casterIP = Settings.IO.setNTRIP_casterIP; //Select correct Address
+
+                    // Close the socket if it is still open
+                    if (clientSocket != null && clientSocket.Connected)
+                    {
+                        clientSocket.Shutdown(SocketShutdown.Both);
+                        System.Threading.Thread.Sleep(100);
+                        clientSocket.Close();
+                    }
+
+                    //TimedMessageBox(2000, "NTRIP Not Connected", " Reconnect Request");
+                    ntripCounter = 15;
+                    isNTRIP_Connected = false;
+                    isNTRIP_Starting = false;
+                    isNTRIP_Connecting = false;
+                    return;
+                }
+            }
 
             //boundaryToolStripBtn.Enabled = false;
             FieldMenuButtonEnableDisable(false);

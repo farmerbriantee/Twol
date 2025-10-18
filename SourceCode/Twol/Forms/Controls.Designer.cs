@@ -38,6 +38,28 @@ namespace Twol
             form.Show(this);
         }
 
+        private void btnNtrip_Click(object sender, EventArgs e)
+        {
+            if (Settings.IO.setPass_isOn)
+            {
+                TimedMessageBox(2000, "Serial NTRIP ON", "Turn it off before using NTRIP");
+                return;
+            }
+
+
+            using (var form = new FormNtrip(this))
+            {
+                if (form.ShowDialog(this) == DialogResult.OK)
+                {
+                    if (isNTRIP_Connected)
+                    {
+                        SettingsShutDownNTRIP();
+                    }
+                }
+            }
+
+        }
+
         private void btnUDPMonitor_Click(object sender, EventArgs e)
         {
             var form = new FormUDPMonitor(this);
