@@ -222,7 +222,6 @@
     <Compile Include="Forms\Settings\FormToolSteer.Designer.cs">
       <DependentUpon>FormToolSteer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\NTRIPComm.Designer.cs" />
     <Compile Include="Properties\CRegistrySettings.cs" />
     <Compile Include="Classes\CSettings.cs" />
     <Compile Include="Classes\CSound.cs" />
