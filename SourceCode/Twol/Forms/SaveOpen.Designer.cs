@@ -1232,38 +1232,95 @@ namespace Twol
             //64.697,0.168,-21.654,0 - east, heading, north, altitude
 
             //make sure there is something to save
-            if (contourSaveList.Count() > 0)
+            if (contourSaveList == null) return;
+
+            // Quick-copy and clear the buffer on the caller (UI) thread, then write to disk on a background task.
+            List<List<vec3>> toSave;
+            lock (contourSaveList)
             {
-                //Append the current list to the bndPts file
-                using (StreamWriter writer = new StreamWriter(Path.Combine(RegistrySettings.fieldsDirectory, currentFieldDirectory, currentJobDirectory, "Contour.txt"), true))
+                if (contourSaveList.Count == 0) return;
+
+                toSave = new List<List<vec3>>(contourSaveList.Count);
+                foreach (var triList in contourSaveList)
                 {
+                    // copy inner lists to avoid concurrent modification while writing
+                    toSave.Add(new List<vec3>(triList));
+                }
 
-                    //for every new chunk of patch in the whole section
-                    foreach (var triList in contourSaveList)
+                // Clear immediately so new data can be collected without waiting for IO
+                contourSaveList.Clear();
+            }
+
+            System.Threading.Tasks.Task.Run(() =>
+            {
+                try
+                {
+                    string directory = Path.Combine(RegistrySettings.fieldsDirectory, currentFieldDirectory, currentJobDirectory);
+                    if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
+                        Directory.CreateDirectory(directory);
+
+                    string filePath = Path.Combine(directory, "Contour.txt");
+                    using (StreamWriter writer = new StreamWriter(filePath, true))
                     {
-                        writer.WriteLine(triList.Count.ToString(CultureInfo.InvariantCulture));
-
-                        for (int i = 0; i < triList.Count; i++)
+                        foreach (var triList in toSave)
                         {
-                            writer.WriteLine(Math.Round((triList[i].easting), 3).ToString(CultureInfo.InvariantCulture) + "," +
-                                Math.Round(triList[i].northing, 3).ToString(CultureInfo.InvariantCulture) + "," +
-                                Math.Round(triList[i].heading, 3).ToString(CultureInfo.InvariantCulture));
+                            int count2 = triList.Count;
+                            writer.WriteLine(count2.ToString(CultureInfo.InvariantCulture));
+
+                            for (int i = 0; i < count2; i++)
+                            {
+                                writer.WriteLine(
+                                    Math.Round(triList[i].easting, 3).ToString(CultureInfo.InvariantCulture) + "," +
+                                    Math.Round(triList[i].northing, 3).ToString(CultureInfo.InvariantCulture) + "," +
+                                    Math.Round(triList[i].heading, 3).ToString(CultureInfo.InvariantCulture));
+                            }
                         }
                     }
                 }
-
-                contourSaveList.Clear();
-            }
+                catch (Exception ex)
+                {
+                    // Log exception from background thread; don't throw.
+                    Log.EventWriter("FileSaveContour (async): " + ex.ToString());
+                }
+            });
         }
 
         //save nmea sentences
         public void FileSaveElevation()
         {
-            using (StreamWriter writer = new StreamWriter(Path.Combine(RegistrySettings.fieldsDirectory, currentFieldDirectory, currentJobDirectory, "Elevation.txt"), true))
+            if (sbElevationString == null) return;
+
+            string toWrite;
+
+            // Copy and clear buffer on UI thread quickly
+            lock (sbElevationString)
             {
-                writer.Write(sbElevationString.ToString());
+                if (sbElevationString.Length == 0) return;
+                toWrite = sbElevationString.ToString();
+                sbElevationString.Clear();
             }
-            sbElevationString.Clear();
+
+            System.Threading.Tasks.Task.Run(() =>
+            {
+                try
+                {
+                    string directory = Path.Combine(RegistrySettings.fieldsDirectory, currentFieldDirectory, currentJobDirectory);
+                    if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
+                        Directory.CreateDirectory(directory);
+
+                    string filePath = Path.Combine(directory, "Elevation.txt");
+
+                    using (var writer = new StreamWriter(filePath, true, Encoding.UTF8))
+                    {
+                        writer.Write(toWrite);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Log exception from background thread; don't throw.
+                    Log.EventWriter("FileSaveElevation (async): " + ex.ToString());
+                }
+            });
         }
 
         //save all the flag markers
@@ -1391,28 +1448,57 @@ namespace Twol
 
         public void FileSaveSections()
         {
-            //make sure there is something to save
-            if (patchSaveList.Count() > 0)
-            {
-                //Append the current list to the bndPts file
-                using (StreamWriter writer = new StreamWriter(Path.Combine(RegistrySettings.fieldsDirectory, currentFieldDirectory, currentJobDirectory, "Sections.txt"), true))
-                {
-                    //for each patch, write out the list of triangles to the file
-                    foreach (var triList in patchSaveList)
-                    {
-                        int count2 = triList.Count();
-                        writer.WriteLine(count2.ToString(CultureInfo.InvariantCulture));
+            // Quick-copy and clear the buffer on the caller (UI) thread, then write to disk on a background task.
+            if (patchSaveList == null) return;
 
-                        for (int i = 0; i < count2; i++)
-                            writer.WriteLine((Math.Round(triList[i].easting, 3)).ToString(CultureInfo.InvariantCulture) +
-                                "," + (Math.Round(triList[i].northing, 3)).ToString(CultureInfo.InvariantCulture) +
-                                 "," + (Math.Round(triList[i].heading, 3)).ToString(CultureInfo.InvariantCulture));
-                    }
+            List<List<vec3>> toSave;
+            lock (patchSaveList)
+            {
+                if (patchSaveList.Count == 0) return;
+
+                toSave = new List<List<vec3>>(patchSaveList.Count);
+                foreach (var triList in patchSaveList)
+                {
+                    // copy inner lists to avoid concurrent modification while writing
+                    toSave.Add(new List<vec3>(triList));
                 }
 
-                //clear out that patchList and begin adding new ones for next save
+                // Clear immediately so new data can be collected without waiting for IO
                 patchSaveList.Clear();
             }
+
+            System.Threading.Tasks.Task.Run(() =>
+            {
+                try
+                {
+                    string directory = Path.Combine(RegistrySettings.fieldsDirectory, currentFieldDirectory, currentJobDirectory);
+                    if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
+                        Directory.CreateDirectory(directory);
+
+                    string filePath = Path.Combine(directory, "Sections.txt");
+                    using (StreamWriter writer = new StreamWriter(filePath, true))
+                    {
+                        foreach (var triList in toSave)
+                        {
+                            int count2 = triList.Count;
+                            writer.WriteLine(count2.ToString(CultureInfo.InvariantCulture));
+
+                            for (int i = 0; i < count2; i++)
+                            {
+                                writer.WriteLine(
+                                    Math.Round(triList[i].easting, 3).ToString(CultureInfo.InvariantCulture) + "," +
+                                    Math.Round(triList[i].northing, 3).ToString(CultureInfo.InvariantCulture) + "," +
+                                    Math.Round(triList[i].heading, 3).ToString(CultureInfo.InvariantCulture));
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Log exception from background thread; don't throw.
+                    Log.EventWriter("FileSaveSections (async): " + ex.ToString());
+                }
+            });
         }
 
         public void FileSaveSystemEvents()
@@ -1546,7 +1632,7 @@ namespace Twol
 
         #region KML
 
-  
+
         //generate KML file from flag
         public void FileMakeKMLFromCurrentPosition(double lat, double lon)
         {
