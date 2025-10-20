@@ -884,7 +884,7 @@
     <None Include="btnImages\IO\WindowsShutDown.png" />
     <None Include="btnImages\IO\www.png" />
     <None Include="btnImages\IO.png" />
-    <Content Include="btnImages\Shift.png" />
+    <None Include="btnImages\Shift.png" />
     <None Include="btnImages\ToolSteer.png" />
     <None Include="btnImages\UploadOff.png" />
     <None Include="btnImages\UploadOn.png" />
@@ -908,7 +908,7 @@
     <None Include="btnImages\ChargingNo.png" />
     <None Include="btnImages\ChargeIndicator.png" />
     <None Include="btnImages\HardwareMessage.png" />
-    <Content Include="Resources\TF012.WAV" />
+    <None Include="Resources\TF012.WAV" />
     <None Include="Resources\SectionOn.wav" />
     <None Include="Resources\SectionOff.wav" />
     <None Include="btnImages\bing.png" />
@@ -999,7 +999,7 @@
     <None Include="btnImages\Images\z_RateMap1.png" />
     <None Include="btnImages\Images\z_RateMap2.png" />
     <None Include="btnImages\Images\z_RateMap3.png" />
-    <Content Include="Resources\rtk_lost.wav" />
+    <None Include="Resources\rtk_lost.wav" />
     <None Include="btnImages\BrightnessDn.png" />
     <None Include="btnImages\BrightnessUp.png" />
     <None Include="btnImages\Config\ConU_UturnRadius.png" />
@@ -1009,7 +1009,7 @@
     <None Include="btnImages\Config\Con_SourcesGPSSingle.png" />
     <None Include="btnImages\Config\Con_SourcesRTKAlarm.png" />
     <None Include="btnImages\Config\Con_SourcesHead.png" />
-    <Content Include="btnImages\Images\z_NoGPS.png" />
+    <None Include="btnImages\Images\z_NoGPS.png" />
     <None Include="btnImages\Reset_Default.png" />
     <None Include="btnImages\WizardWand.png" />
     <None Include="btnImages\WizWasZeroReset.png" />
