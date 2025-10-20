@@ -501,7 +501,7 @@ namespace Twol
             // 
             // tmrWatchdog
             // 
-            this.tmrWatchdog.Interval = 333;
+            this.tmrWatchdog.Interval = 250;
             this.tmrWatchdog.Tick += new System.EventHandler(this.tmrWatchdog_tick);
             // 
             // contextMenuStripFlag
@@ -564,7 +564,7 @@ namespace Twol
             this.toolStripMenuFlagForm.Image = global::Twol.Properties.Resources.FileEditName;
             this.toolStripMenuFlagForm.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripMenuFlagForm.Name = "toolStripMenuFlagForm";
-            this.toolStripMenuFlagForm.Size = new System.Drawing.Size(267, 70);
+            this.toolStripMenuFlagForm.Size = new System.Drawing.Size(259, 70);
             this.toolStripMenuFlagForm.Text = "toolStripMenuItem3";
             this.toolStripMenuFlagForm.Click += new System.EventHandler(this.toolStripMenuFlagForm_Click);
             // 
@@ -1392,7 +1392,7 @@ namespace Twol
             this.btnShowHide_IO.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.btnShowHide_IO.Location = new System.Drawing.Point(0, 518);
             this.btnShowHide_IO.Margin = new System.Windows.Forms.Padding(0);
-            this.btnShowHide_IO.Name = "btnStart_IO";
+            this.btnShowHide_IO.Name = "btnShowHide_IO";
             this.btnShowHide_IO.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnShowHide_IO.Size = new System.Drawing.Size(70, 82);
             this.btnShowHide_IO.TabIndex = 467;
@@ -2718,6 +2718,7 @@ namespace Twol
             this.lblNTRIPBytes.TabIndex = 187;
             this.lblNTRIPBytes.Text = "999,999,999";
             this.lblNTRIPBytes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblNTRIPBytes.Click += new System.EventHandler(this.lblNTRIPBytes_Click);
             // 
             // lblIP
             // 
@@ -2743,7 +2744,7 @@ namespace Twol
             this.btnNMEA_Data.ForeColor = System.Drawing.Color.Black;
             this.btnNMEA_Data.Image = global::Twol.Properties.Resources.Nmea;
             this.btnNMEA_Data.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnNMEA_Data.Location = new System.Drawing.Point(300, 126);
+            this.btnNMEA_Data.Location = new System.Drawing.Point(300, 90);
             this.btnNMEA_Data.Margin = new System.Windows.Forms.Padding(4);
             this.btnNMEA_Data.Name = "btnNMEA_Data";
             this.btnNMEA_Data.Size = new System.Drawing.Size(92, 64);
@@ -2799,7 +2800,7 @@ namespace Twol
             this.btnSteer.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSteer.ForeColor = System.Drawing.Color.White;
             this.btnSteer.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSteer.Location = new System.Drawing.Point(163, 266);
+            this.btnSteer.Location = new System.Drawing.Point(171, 266);
             this.btnSteer.Margin = new System.Windows.Forms.Padding(4);
             this.btnSteer.Name = "btnSteer";
             this.btnSteer.Size = new System.Drawing.Size(92, 64);
@@ -2818,7 +2819,7 @@ namespace Twol
             this.btnMachine.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMachine.ForeColor = System.Drawing.Color.White;
             this.btnMachine.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnMachine.Location = new System.Drawing.Point(163, 361);
+            this.btnMachine.Location = new System.Drawing.Point(171, 361);
             this.btnMachine.Margin = new System.Windows.Forms.Padding(4);
             this.btnMachine.Name = "btnMachine";
             this.btnMachine.Size = new System.Drawing.Size(92, 64);
@@ -2837,7 +2838,7 @@ namespace Twol
             this.btnIMU.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnIMU.ForeColor = System.Drawing.Color.White;
             this.btnIMU.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnIMU.Location = new System.Drawing.Point(163, 167);
+            this.btnIMU.Location = new System.Drawing.Point(171, 167);
             this.btnIMU.Margin = new System.Windows.Forms.Padding(4);
             this.btnIMU.Name = "btnIMU";
             this.btnIMU.Size = new System.Drawing.Size(92, 64);
@@ -2856,7 +2857,7 @@ namespace Twol
             this.btnUDP.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUDP.ForeColor = System.Drawing.Color.White;
             this.btnUDP.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnUDP.Location = new System.Drawing.Point(163, 47);
+            this.btnUDP.Location = new System.Drawing.Point(171, 47);
             this.btnUDP.Margin = new System.Windows.Forms.Padding(4);
             this.btnUDP.Name = "btnUDP";
             this.btnUDP.Size = new System.Drawing.Size(92, 64);
@@ -2875,7 +2876,7 @@ namespace Twol
             this.btnProfiles.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnProfiles.ForeColor = System.Drawing.Color.White;
             this.btnProfiles.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnProfiles.Location = new System.Drawing.Point(300, 216);
+            this.btnProfiles.Location = new System.Drawing.Point(300, 173);
             this.btnProfiles.Margin = new System.Windows.Forms.Padding(4);
             this.btnProfiles.Name = "btnProfiles";
             this.btnProfiles.Size = new System.Drawing.Size(92, 64);
@@ -2892,7 +2893,7 @@ namespace Twol
             this.lbl_IO_Profile.Location = new System.Drawing.Point(0, 0);
             this.lbl_IO_Profile.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_IO_Profile.Name = "lbl_IO_Profile";
-            this.lbl_IO_Profile.Size = new System.Drawing.Size(396, 25);
+            this.lbl_IO_Profile.Size = new System.Drawing.Size(270, 25);
             this.lbl_IO_Profile.TabIndex = 533;
             this.lbl_IO_Profile.Text = "Profile";
             this.lbl_IO_Profile.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2926,7 +2927,7 @@ namespace Twol
             this.panel_IO.Controls.Add(this.btnGPS);
             this.panel_IO.Location = new System.Drawing.Point(255, 46);
             this.panel_IO.Name = "panel_IO";
-            this.panel_IO.Size = new System.Drawing.Size(396, 554);
+            this.panel_IO.Size = new System.Drawing.Size(270, 554);
             this.panel_IO.TabIndex = 547;
             // 
             // btnNTRIPSerial
@@ -2940,7 +2941,7 @@ namespace Twol
             this.btnNTRIPSerial.ForeColor = System.Drawing.Color.White;
             this.btnNTRIPSerial.Image = global::Twol.Properties.Resources.NTRIP_Serial;
             this.btnNTRIPSerial.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnNTRIPSerial.Location = new System.Drawing.Point(300, 404);
+            this.btnNTRIPSerial.Location = new System.Drawing.Point(300, 339);
             this.btnNTRIPSerial.Margin = new System.Windows.Forms.Padding(4);
             this.btnNTRIPSerial.Name = "btnNTRIPSerial";
             this.btnNTRIPSerial.Size = new System.Drawing.Size(92, 64);
@@ -3012,7 +3013,7 @@ namespace Twol
             this.btnUDPMonitor.ForeColor = System.Drawing.Color.White;
             this.btnUDPMonitor.Image = global::Twol.Properties.Resources.ScanNetwork;
             this.btnUDPMonitor.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnUDPMonitor.Location = new System.Drawing.Point(300, 306);
+            this.btnUDPMonitor.Location = new System.Drawing.Point(300, 256);
             this.btnUDPMonitor.Margin = new System.Windows.Forms.Padding(4);
             this.btnUDPMonitor.Name = "btnUDPMonitor";
             this.btnUDPMonitor.Size = new System.Drawing.Size(92, 64);
@@ -3031,7 +3032,7 @@ namespace Twol
             this.btnNtrip.ForeColor = System.Drawing.Color.White;
             this.btnNtrip.Image = global::Twol.Properties.Resources.NtripSettings;
             this.btnNtrip.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnNtrip.Location = new System.Drawing.Point(300, 485);
+            this.btnNtrip.Location = new System.Drawing.Point(300, 422);
             this.btnNtrip.Margin = new System.Windows.Forms.Padding(4);
             this.btnNtrip.Name = "btnNtrip";
             this.btnNtrip.Size = new System.Drawing.Size(92, 64);
@@ -3077,10 +3078,10 @@ namespace Twol
             this.btnSlide.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSlide.ForeColor = System.Drawing.Color.White;
             this.btnSlide.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSlide.Location = new System.Drawing.Point(176, 491);
+            this.btnSlide.Location = new System.Drawing.Point(192, 500);
             this.btnSlide.Margin = new System.Windows.Forms.Padding(4);
             this.btnSlide.Name = "btnSlide";
-            this.btnSlide.Size = new System.Drawing.Size(73, 54);
+            this.btnSlide.Size = new System.Drawing.Size(73, 47);
             this.btnSlide.TabIndex = 534;
             this.btnSlide.UseVisualStyleBackColor = false;
             this.btnSlide.Click += new System.EventHandler(this.btnSlide_Click);

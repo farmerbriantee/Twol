@@ -18,7 +18,7 @@ namespace Twol
     public partial class FormGPS
     {
         //for the NTRIP CLient counting
-        private int ntripCounter = 10;
+        private int ntripCounter = 15;
 
         private Socket clientSocket;                      // Server connection
         private byte[] casterRecBuffer = new byte[2800];    // Recieved data buffer
@@ -77,59 +77,6 @@ namespace Twol
                     SendAuthorization();
                 }
             }
-
-            if (Settings.IO.setNTRIP_isOn)
-            {
-                //pbarNtripMenu.Value = unchecked((byte)(tripBytes * 0.02));
-                lblNTRIPBytes.Text = ((tripBytes >> 10)).ToString("###,###,### kb");
-
-                //Bypass if sleeping
-                //if (focusSkipCounter != 0)
-                {
-                    //update byte counter and up counter
-                    if (ntripCounter > 59) btnStartStopNtrip.Text = (ntripCounter >> 6) + " Min";
-                    else if (ntripCounter < 60 && ntripCounter > 25) btnStartStopNtrip.Text = ntripCounter + " Secs";
-                    else btnStartStopNtrip.Text = "In " + (Math.Abs(ntripCounter - 25)) + " secs";
-
-                    //watchdog for Ntrip
-                    if (isNTRIP_Connecting)
-                    {
-                        lblWatch.Text = "Authourizing";
-                    }
-                    else
-                    {
-                        if (Settings.IO.setNTRIP_isOn && NTRIP_Watchdog > 10)
-                        {
-                            lblWatch.Text = "Waiting";
-                        }
-                        else
-                        {
-                            lblWatch.Text = "Listening";
-
-                            if (Settings.IO.setNTRIP_isOn)
-                            {
-                                lblWatch.Text += " NTRIP";
-                            }
-                        }
-                    }
-
-                    if (Settings.IO.setNTRIP_sendGGAInterval > 0 && isNTRIP_Sending)
-                    {
-                        lblWatch.Text = "Send GGA";
-                        isNTRIP_Sending = false;
-                    }
-                }
-            }
-            else if (Settings.IO.setPass_isOn)
-            {
-                //pbarNtripMenu.Value = unchecked((byte)(tripBytes * 0.02));
-                lblNTRIPBytes.Text = ((tripBytes >> 10)).ToString("###,###,### kb");
-
-                //update byte counter and up counter
-                if (ntripCounter > 59) btnStartStopNtrip.Text = (ntripCounter >> 6) + " Min";
-                else if (ntripCounter < 60 && ntripCounter > 22) btnStartStopNtrip.Text = ntripCounter + " Secs";
-                else btnStartStopNtrip.Text = "In " + (Math.Abs(ntripCounter - 22)) + " secs";
-            }
         }
 
         public void ConfigureNTRIP()
@@ -167,6 +114,55 @@ namespace Twol
             }
 
             btnStartStopNtrip.Text = "Off";
+
+            //update Caster IP from URL, just use the old one if can't find
+            if (Settings.IO.setNTRIP_isOn)
+            {
+                //broadCasterIP = Settings.IO.setNTRIP_casterIP; //Select correct Address
+                Settings.IO.setNTRIP_casterIP = null;
+                string actualIP = Settings.IO.setNTRIP_casterURL.Trim();
+
+                try
+                {
+                    IPAddress[] addresslist = Dns.GetHostAddresses(actualIP);
+                    foreach (IPAddress address in addresslist)
+                    {
+                        if (address.AddressFamily == AddressFamily.InterNetwork)
+                        {
+                            Settings.IO.setNTRIP_casterIP = address.ToString().Trim();
+
+                            break;
+                        }
+                    }
+
+                    if (Settings.IO.setNTRIP_casterIP == null) throw new NullReferenceException();
+                }
+                catch (Exception ex)
+                {
+                    Log.EventWriter(ex.ToString());
+                    TimedMessageBox(1500, "URL Not Located, Network Down?", "Cannot Find: " + Settings.IO.setNTRIP_casterURL);
+                    //if we had a timer already, kill it
+                    tmr?.Dispose();
+
+                    //use last known TODO
+                    Settings.IO.setNTRIP_casterIP = Settings.IO.setNTRIP_casterIP; //Select correct Address
+
+                    // Close the socket if it is still open
+                    if (clientSocket != null && clientSocket.Connected)
+                    {
+                        clientSocket.Shutdown(SocketShutdown.Both);
+                        System.Threading.Thread.Sleep(100);
+                        clientSocket.Close();
+                    }
+
+                    //TimedMessageBox(2000, "NTRIP Not Connected", " Reconnect Request");
+                    ntripCounter = 15;
+                    isNTRIP_Connected = false;
+                    isNTRIP_Starting = false;
+                    isNTRIP_Connecting = false;
+                    return;
+                }
+            }
         }
 
         public async Task StartNTRIPAsync()
@@ -350,6 +346,7 @@ namespace Twol
 
             //lblToGPS.Text = traffic.cntrGPSInBytes == 0 ? "---" : (traffic.cntrGPSInBytes).ToString();
             traffic.cntrGPSInBytes = 0;
+            tripBytes += (uint)data.Length;
         }
 
         public void SendNTRIP(byte[] data)

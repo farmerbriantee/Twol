@@ -1142,6 +1142,7 @@ namespace Twol
                 }
             }
         }
+
         #endregion SerialPortGPS
 
         #region GPS2 SerialPort //--------------------------------------------------------

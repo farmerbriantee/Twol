@@ -20,6 +20,11 @@ namespace Twol
 {
     public partial class FormGPS
     {
+        private void lblNTRIPBytes_Click(object sender, EventArgs e)
+        {
+            tripBytes = 0;
+        }
+
         #region IO
         private void btnNMEA_Data_Click(object sender, EventArgs e)
         {
@@ -1177,11 +1182,11 @@ namespace Twol
             if (isPauseFieldTextCounter)
             {
                 //lblCurrentField.Text = "\u23F8";
-                fourSecondCounter = 4;
+                threeSecondCounter = 3;
             }
             else
             {
-                fourSecondCounter = 4;
+                threeSecondCounter = 3;
             }
         }
 
