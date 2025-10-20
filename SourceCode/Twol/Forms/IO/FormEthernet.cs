@@ -14,10 +14,6 @@ namespace Twol
             //get copy of the calling main form
             mf = callingForm as FormGPS;
             InitializeComponent();
-
-            nudFirstIP.Controls[0].Enabled = false;
-            nudSecndIP.Controls[0].Enabled = false;
-            nudThirdIP.Controls[0].Enabled = false;
         }
 
         private void FormUDp_Load(object sender, EventArgs e)
@@ -32,7 +28,7 @@ namespace Twol
             //nudSub3.Value = Settings.IO.etIP_SubnetThree;
 
             nudFirstIP.Value = Settings.IO.eth_loopOne;
-            nudSecndIP.Value = Settings.IO.eth_loopTwo;
+            nudSecondIP.Value = Settings.IO.eth_loopTwo;
             nudThirdIP.Value = Settings.IO.eth_loopThree;
             nudFourthIP.Value = Settings.IO.eth_loopFour;
 
@@ -51,7 +47,7 @@ namespace Twol
             //Settings.IO.etIP_SubnetThree = (byte)nudSub3.Value;
 
             Settings.IO.eth_loopOne = (byte)nudFirstIP.Value;
-            Settings.IO.eth_loopTwo = (byte)nudSecndIP.Value;
+            Settings.IO.eth_loopTwo = (byte)nudSecondIP.Value;
             Settings.IO.eth_loopThree = (byte)nudThirdIP.Value;
             Settings.IO.eth_loopFour = (byte)nudFourthIP.Value;
 

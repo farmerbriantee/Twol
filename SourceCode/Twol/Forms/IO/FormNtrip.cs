@@ -45,11 +45,6 @@ namespace Twol
             //this.Text = gStr.gsNTRIPClientSettings;
 
             //turn off the little arrows
-            nudCasterPort.Controls[0].Enabled = false;
-            nudGGAInterval.Controls[0].Enabled = false;
-            nudLatitude.Controls[0].Enabled = false;
-            nudLongitude.Controls[0].Enabled = false;
-            nudSendToUDPPort.Controls[0].Enabled = false;
         }
 
         private void FormNtrip_Load(object sender, EventArgs e)
@@ -78,8 +73,8 @@ namespace Twol
 
             nudGGAInterval.Value = Settings.IO.setNTRIP_sendGGAInterval;
 
-            nudLatitude.Value = (decimal)Settings.IO.setNTRIP_manualLat;
-            nudLongitude.Value = (decimal)Settings.IO.setNTRIP_manualLon;
+            nudLatitude.Value = Settings.IO.setNTRIP_manualLat;
+            nudLongitude.Value = Settings.IO.setNTRIP_manualLon;
             tboxCurrentLat.Text = Settings.IO.setNTRIP_manualLat.ToString();
             tboxCurrentLon.Text = Settings.IO.setNTRIP_manualLon.ToString();
 
@@ -239,24 +234,27 @@ namespace Twol
 
             Settings.IO.setNTRIP_packetSize = Convert.ToInt32(comboboxPacketSize.Text);
 
-            if (!ntripStatusChanged)
-            {
-                Close();
-                mf.ConfigureNTRIP();
-            }
-            else
-            {
-                Log.EventWriter("Program Reset: Button Ok on Ntrip Form");
+            //if (!ntripStatusChanged)
+            //{
+            //    Close();
+            //    mf.ConfigureNTRIP();
+            //}
+            //else
+            //{
+            //    Log.EventWriter("Program Reset: Button Ok on Ntrip Form");
 
-                Settings.IO.Save();
-                Program.Restart();
-            }
+            //    Program.Restart();
+            //}
+
+            Settings.IO.Save();
+            Close();
+            mf.ConfigureNTRIP();
         }
 
         private void btnSetManualPosition_Click(object sender, EventArgs e)
         {
-            nudLatitude.Value = (decimal)mf.pn.latitude;
-            nudLongitude.Value = (decimal)mf.pn.longitude;
+            nudLatitude.Value = mf.pn.latitude;
+            nudLongitude.Value = mf.pn.longitude;
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -351,31 +349,6 @@ namespace Twol
 
             // Console.WriteLine(page);
             // Process.Start(syte);
-        }
-
-        private void NudCasterPort_Enter(object sender, EventArgs e)
-        {
-            btnSerialCancel.Focus();
-        }
-
-        private void NudGGAInterval_Enter(object sender, EventArgs e)
-        {
-            btnSerialCancel.Focus();
-        }
-
-        private void NudLatitude_Enter(object sender, EventArgs e)
-        {
-            btnSerialCancel.Focus();
-        }
-
-        private void NudLongitude_Enter(object sender, EventArgs e)
-        {
-            btnSerialCancel.Focus();
-        }
-
-        private void NudSendToUDPPort_Enter(object sender, EventArgs e)
-        {
-            btnSerialCancel.Focus();
         }
 
         private void tboxEnterURL_Click(object sender, EventArgs e)

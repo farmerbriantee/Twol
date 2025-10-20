@@ -30,12 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             this.tboxCasterIP = new System.Windows.Forms.TextBox();
-            this.nudCasterPort = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.tboxHostName = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.nudSendToUDPPort = new System.Windows.Forms.NumericUpDown();
             this.label10 = new System.Windows.Forms.Label();
             this.tboxUserName = new System.Windows.Forms.TextBox();
             this.tboxUserPassword = new System.Windows.Forms.TextBox();
@@ -43,14 +41,11 @@
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.tboxMount = new System.Windows.Forms.TextBox();
-            this.nudGGAInterval = new System.Windows.Forms.NumericUpDown();
             this.label15 = new System.Windows.Forms.Label();
             this.tboxEnterURL = new System.Windows.Forms.TextBox();
             this.btnGetIP = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.nudLatitude = new System.Windows.Forms.NumericUpDown();
-            this.nudLongitude = new System.Windows.Forms.NumericUpDown();
             this.tboxCurrentLat = new System.Windows.Forms.TextBox();
             this.tboxCurrentLon = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -83,11 +78,11 @@
             this.btnSerialOK = new System.Windows.Forms.Button();
             this.btnSerialCancel = new System.Windows.Forms.Button();
             this.btnHelp = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.nudCasterPort)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudSendToUDPPort)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudGGAInterval)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudLatitude)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudLongitude)).BeginInit();
+            this.nudCasterPort = new Twol.NudlessNumericUpDown();
+            this.nudSendToUDPPort = new Twol.NudlessNumericUpDown();
+            this.nudGGAInterval = new Twol.NudlessNumericUpDown();
+            this.nudLongitude = new Twol.NudlessNumericUpDown();
+            this.nudLatitude = new Twol.NudlessNumericUpDown();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -105,32 +100,6 @@
             this.tboxCasterIP.Text = "192.168.188.255";
             this.tboxCasterIP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tboxCasterIP.Validating += new System.ComponentModel.CancelEventHandler(this.tboxCasterIP_Validating);
-            // 
-            // nudCasterPort
-            // 
-            this.nudCasterPort.BackColor = System.Drawing.Color.AliceBlue;
-            this.nudCasterPort.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudCasterPort.Location = new System.Drawing.Point(494, 411);
-            this.nudCasterPort.Maximum = new decimal(new int[] {
-            65535,
-            0,
-            0,
-            0});
-            this.nudCasterPort.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nudCasterPort.Name = "nudCasterPort";
-            this.nudCasterPort.Size = new System.Drawing.Size(119, 40);
-            this.nudCasterPort.TabIndex = 80;
-            this.nudCasterPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.nudCasterPort.Value = new decimal(new int[] {
-            8888,
-            0,
-            0,
-            0});
-            this.nudCasterPort.Enter += new System.EventHandler(this.NudCasterPort_Enter);
             // 
             // label5
             // 
@@ -173,27 +142,6 @@
             this.label14.Size = new System.Drawing.Size(47, 23);
             this.label14.TabIndex = 85;
             this.label14.Text = "Host";
-            // 
-            // nudSendToUDPPort
-            // 
-            this.nudSendToUDPPort.BackColor = System.Drawing.Color.White;
-            this.nudSendToUDPPort.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudSendToUDPPort.Location = new System.Drawing.Point(569, 200);
-            this.nudSendToUDPPort.Maximum = new decimal(new int[] {
-            65535,
-            0,
-            0,
-            0});
-            this.nudSendToUDPPort.Name = "nudSendToUDPPort";
-            this.nudSendToUDPPort.Size = new System.Drawing.Size(141, 46);
-            this.nudSendToUDPPort.TabIndex = 74;
-            this.nudSendToUDPPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.nudSendToUDPPort.Value = new decimal(new int[] {
-            36666,
-            0,
-            0,
-            0});
-            this.nudSendToUDPPort.Enter += new System.EventHandler(this.NudSendToUDPPort_Enter);
             // 
             // label10
             // 
@@ -267,27 +215,6 @@
             this.tboxMount.TabIndex = 104;
             this.tboxMount.Click += new System.EventHandler(this.tboxMount_Click);
             // 
-            // nudGGAInterval
-            // 
-            this.nudGGAInterval.BackColor = System.Drawing.Color.White;
-            this.nudGGAInterval.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudGGAInterval.Location = new System.Drawing.Point(445, 373);
-            this.nudGGAInterval.Maximum = new decimal(new int[] {
-            600,
-            0,
-            0,
-            0});
-            this.nudGGAInterval.Name = "nudGGAInterval";
-            this.nudGGAInterval.Size = new System.Drawing.Size(113, 40);
-            this.nudGGAInterval.TabIndex = 106;
-            this.nudGGAInterval.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.nudGGAInterval.Value = new decimal(new int[] {
-            20,
-            0,
-            0,
-            0});
-            this.nudGGAInterval.Enter += new System.EventHandler(this.NudGGAInterval_Enter);
-            // 
             // label15
             // 
             this.label15.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -325,7 +252,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(23, 82);
+            this.label2.Location = new System.Drawing.Point(28, 82);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(42, 23);
             this.label2.TabIndex = 115;
@@ -335,93 +262,31 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(18, 137);
+            this.label8.Location = new System.Drawing.Point(23, 137);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(47, 23);
             this.label8.TabIndex = 116;
             this.label8.Text = "Lon:";
             // 
-            // nudLatitude
-            // 
-            this.nudLatitude.BackColor = System.Drawing.Color.White;
-            this.nudLatitude.DecimalPlaces = 7;
-            this.nudLatitude.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudLatitude.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
-            this.nudLatitude.Location = new System.Drawing.Point(76, 82);
-            this.nudLatitude.Maximum = new decimal(new int[] {
-            90,
-            0,
-            0,
-            0});
-            this.nudLatitude.Minimum = new decimal(new int[] {
-            90,
-            0,
-            0,
-            -2147483648});
-            this.nudLatitude.Name = "nudLatitude";
-            this.nudLatitude.Size = new System.Drawing.Size(224, 33);
-            this.nudLatitude.TabIndex = 118;
-            this.nudLatitude.Value = new decimal(new int[] {
-            881234567,
-            0,
-            0,
-            -2147024896});
-            this.nudLatitude.Enter += new System.EventHandler(this.NudLatitude_Enter);
-            // 
-            // nudLongitude
-            // 
-            this.nudLongitude.BackColor = System.Drawing.Color.White;
-            this.nudLongitude.DecimalPlaces = 7;
-            this.nudLongitude.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudLongitude.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
-            this.nudLongitude.Location = new System.Drawing.Point(76, 137);
-            this.nudLongitude.Maximum = new decimal(new int[] {
-            180,
-            0,
-            0,
-            0});
-            this.nudLongitude.Minimum = new decimal(new int[] {
-            180,
-            0,
-            0,
-            -2147483648});
-            this.nudLongitude.Name = "nudLongitude";
-            this.nudLongitude.Size = new System.Drawing.Size(224, 33);
-            this.nudLongitude.TabIndex = 117;
-            this.nudLongitude.Value = new decimal(new int[] {
-            1781234567,
-            0,
-            0,
-            -2147024896});
-            this.nudLongitude.Enter += new System.EventHandler(this.NudLongitude_Enter);
-            // 
             // tboxCurrentLat
             // 
             this.tboxCurrentLat.BackColor = System.Drawing.Color.White;
-            this.tboxCurrentLat.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tboxCurrentLat.Location = new System.Drawing.Point(75, 310);
+            this.tboxCurrentLat.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tboxCurrentLat.Location = new System.Drawing.Point(79, 310);
             this.tboxCurrentLat.Name = "tboxCurrentLat";
             this.tboxCurrentLat.ReadOnly = true;
-            this.tboxCurrentLat.Size = new System.Drawing.Size(224, 33);
+            this.tboxCurrentLat.Size = new System.Drawing.Size(224, 36);
             this.tboxCurrentLat.TabIndex = 119;
             this.tboxCurrentLat.Text = "53.2398652";
             // 
             // tboxCurrentLon
             // 
             this.tboxCurrentLon.BackColor = System.Drawing.Color.White;
-            this.tboxCurrentLon.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tboxCurrentLon.Location = new System.Drawing.Point(75, 369);
+            this.tboxCurrentLon.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tboxCurrentLon.Location = new System.Drawing.Point(79, 369);
             this.tboxCurrentLon.Name = "tboxCurrentLon";
             this.tboxCurrentLon.ReadOnly = true;
-            this.tboxCurrentLon.Size = new System.Drawing.Size(224, 33);
+            this.tboxCurrentLon.Size = new System.Drawing.Size(224, 36);
             this.tboxCurrentLon.TabIndex = 120;
             this.tboxCurrentLon.Text = "-111.1234567";
             // 
@@ -445,7 +310,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(27, 314);
+            this.label11.Location = new System.Drawing.Point(28, 314);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(42, 23);
             this.label11.TabIndex = 123;
@@ -487,9 +352,9 @@
             // 
             this.btnSetManualPosition.BackColor = System.Drawing.Color.White;
             this.btnSetManualPosition.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSetManualPosition.Location = new System.Drawing.Point(75, 430);
+            this.btnSetManualPosition.Location = new System.Drawing.Point(79, 430);
             this.btnSetManualPosition.Name = "btnSetManualPosition";
-            this.btnSetManualPosition.Size = new System.Drawing.Size(224, 33);
+            this.btnSetManualPosition.Size = new System.Drawing.Size(224, 38);
             this.btnSetManualPosition.TabIndex = 121;
             this.btnSetManualPosition.Text = "Send To Manual Fix";
             this.btnSetManualPosition.UseVisualStyleBackColor = false;
@@ -504,7 +369,7 @@
             this.cboxGGAManual.Items.AddRange(new object[] {
             "Use Manual Fix",
             "Use GPS Fix"});
-            this.cboxGGAManual.Location = new System.Drawing.Point(76, 190);
+            this.cboxGGAManual.Location = new System.Drawing.Point(79, 190);
             this.cboxGGAManual.Name = "cboxGGAManual";
             this.cboxGGAManual.Size = new System.Drawing.Size(192, 33);
             this.cboxGGAManual.TabIndex = 128;
@@ -596,6 +461,7 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.Gainsboro;
+            this.tabPage1.Controls.Add(this.nudCasterPort);
             this.tabPage1.Controls.Add(this.label6);
             this.tabPage1.Controls.Add(this.label7);
             this.tabPage1.Controls.Add(this.listboxIP);
@@ -611,7 +477,6 @@
             this.tabPage1.Controls.Add(this.btnGetIP);
             this.tabPage1.Controls.Add(this.tboxCasterIP);
             this.tabPage1.Controls.Add(this.tboxEnterURL);
-            this.tabPage1.Controls.Add(this.nudCasterPort);
             this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.label5);
             this.tabPage1.Controls.Add(this.label10);
@@ -628,7 +493,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(489, 454);
+            this.label6.Location = new System.Drawing.Point(494, 454);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(123, 23);
             this.label6.TabIndex = 146;
@@ -663,20 +528,20 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.Gainsboro;
+            this.tabPage2.Controls.Add(this.nudSendToUDPPort);
+            this.tabPage2.Controls.Add(this.nudGGAInterval);
+            this.tabPage2.Controls.Add(this.nudLongitude);
+            this.tabPage2.Controls.Add(this.nudLatitude);
             this.tabPage2.Controls.Add(this.label1);
             this.tabPage2.Controls.Add(this.cboxToSerial);
             this.tabPage2.Controls.Add(this.cboxToUDP);
-            this.tabPage2.Controls.Add(this.nudSendToUDPPort);
             this.tabPage2.Controls.Add(this.label19);
             this.tabPage2.Controls.Add(this.label9);
             this.tabPage2.Controls.Add(this.label15);
             this.tabPage2.Controls.Add(this.label2);
-            this.tabPage2.Controls.Add(this.nudGGAInterval);
             this.tabPage2.Controls.Add(this.cboxGGAManual);
             this.tabPage2.Controls.Add(this.label8);
-            this.tabPage2.Controls.Add(this.nudLongitude);
             this.tabPage2.Controls.Add(this.label17);
-            this.tabPage2.Controls.Add(this.nudLatitude);
             this.tabPage2.Controls.Add(this.label16);
             this.tabPage2.Controls.Add(this.tboxCurrentLat);
             this.tabPage2.Controls.Add(this.label11);
@@ -841,6 +706,56 @@
             this.btnHelp.UseVisualStyleBackColor = true;
             this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
             // 
+            // nudCasterPort
+            // 
+            this.nudCasterPort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudCasterPort.Location = new System.Drawing.Point(487, 407);
+            this.nudCasterPort.Maximum = 65535D;
+            this.nudCasterPort.Name = "nudCasterPort";
+            this.nudCasterPort.Size = new System.Drawing.Size(136, 44);
+            this.nudCasterPort.TabIndex = 535;
+            // 
+            // nudSendToUDPPort
+            // 
+            this.nudSendToUDPPort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudSendToUDPPort.Location = new System.Drawing.Point(570, 201);
+            this.nudSendToUDPPort.Maximum = 65535D;
+            this.nudSendToUDPPort.Minimum = 1000D;
+            this.nudSendToUDPPort.Name = "nudSendToUDPPort";
+            this.nudSendToUDPPort.Size = new System.Drawing.Size(133, 46);
+            this.nudSendToUDPPort.TabIndex = 537;
+            // 
+            // nudGGAInterval
+            // 
+            this.nudGGAInterval.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudGGAInterval.Location = new System.Drawing.Point(435, 373);
+            this.nudGGAInterval.Maximum = 600D;
+            this.nudGGAInterval.Name = "nudGGAInterval";
+            this.nudGGAInterval.Size = new System.Drawing.Size(110, 46);
+            this.nudGGAInterval.TabIndex = 537;
+            // 
+            // nudLongitude
+            // 
+            this.nudLongitude.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudLongitude.DecimalPlaces = 7;
+            this.nudLongitude.Location = new System.Drawing.Point(79, 137);
+            this.nudLongitude.Maximum = 180D;
+            this.nudLongitude.Minimum = -180D;
+            this.nudLongitude.Name = "nudLongitude";
+            this.nudLongitude.Size = new System.Drawing.Size(192, 35);
+            this.nudLongitude.TabIndex = 537;
+            // 
+            // nudLatitude
+            // 
+            this.nudLatitude.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudLatitude.DecimalPlaces = 7;
+            this.nudLatitude.Location = new System.Drawing.Point(79, 79);
+            this.nudLatitude.Maximum = 90D;
+            this.nudLatitude.Minimum = -90D;
+            this.nudLatitude.Name = "nudLatitude";
+            this.nudLatitude.Size = new System.Drawing.Size(192, 35);
+            this.nudLatitude.TabIndex = 536;
+            // 
             // FormNtrip
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -861,11 +776,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "NTRIP Client Settings";
             this.Load += new System.EventHandler(this.FormNtrip_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.nudCasterPort)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudSendToUDPPort)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudGGAInterval)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudLatitude)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudLongitude)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -880,12 +790,10 @@
         #endregion
         private System.Windows.Forms.CheckBox cboxIsNTRIPOn;
         private System.Windows.Forms.TextBox tboxCasterIP;
-        private System.Windows.Forms.NumericUpDown nudCasterPort;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox tboxHostName;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.NumericUpDown nudSendToUDPPort;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button btnSerialOK;
         private System.Windows.Forms.TextBox tboxUserName;
@@ -893,14 +801,11 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.NumericUpDown nudGGAInterval;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox tboxEnterURL;
         private System.Windows.Forms.Button btnGetIP;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.NumericUpDown nudLatitude;
-        private System.Windows.Forms.NumericUpDown nudLongitude;
         private System.Windows.Forms.TextBox tboxCurrentLat;
         private System.Windows.Forms.TextBox tboxCurrentLon;
         private System.Windows.Forms.Timer timer1;
@@ -932,5 +837,10 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button btnSerialCancel;
         private System.Windows.Forms.Button btnHelp;
+        private NudlessNumericUpDown nudCasterPort;
+        private NudlessNumericUpDown nudLongitude;
+        private NudlessNumericUpDown nudLatitude;
+        private NudlessNumericUpDown nudGGAInterval;
+        private NudlessNumericUpDown nudSendToUDPPort;
     }
 }

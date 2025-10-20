@@ -29,127 +29,41 @@
         private void InitializeComponent()
         {
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.nudFourthIP = new System.Windows.Forms.NumericUpDown();
-            this.nudThirdIP = new System.Windows.Forms.NumericUpDown();
-            this.nudFirstIP = new System.Windows.Forms.NumericUpDown();
-            this.nudSecndIP = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.cboxIsUDPOn = new System.Windows.Forms.CheckBox();
             this.btnOK = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
+            this.nudThirdIP = new Twol.NudlessNumericUpDown();
+            this.nudSecondIP = new Twol.NudlessNumericUpDown();
+            this.nudFirstIP = new Twol.NudlessNumericUpDown();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.nudFourthIP = new Twol.NudlessNumericUpDown();
+            this.label7 = new System.Windows.Forms.Label();
             this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudFourthIP)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudThirdIP)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudFirstIP)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudSecndIP)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.label7);
             this.groupBox3.Controls.Add(this.nudFourthIP);
             this.groupBox3.Controls.Add(this.nudThirdIP);
+            this.groupBox3.Controls.Add(this.nudSecondIP);
             this.groupBox3.Controls.Add(this.nudFirstIP);
-            this.groupBox3.Controls.Add(this.nudSecndIP);
+            this.groupBox3.Controls.Add(this.label5);
+            this.groupBox3.Controls.Add(this.label6);
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.label3);
             this.groupBox3.Controls.Add(this.label2);
             this.groupBox3.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.Location = new System.Drawing.Point(12, 54);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(401, 119);
+            this.groupBox3.Size = new System.Drawing.Size(479, 119);
             this.groupBox3.TabIndex = 94;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Linux Only !";
-            // 
-            // nudFourthIP
-            // 
-            this.nudFourthIP.BackColor = System.Drawing.Color.AliceBlue;
-            this.nudFourthIP.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudFourthIP.Location = new System.Drawing.Point(303, 53);
-            this.nudFourthIP.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.nudFourthIP.Name = "nudFourthIP";
-            this.nudFourthIP.Size = new System.Drawing.Size(77, 33);
-            this.nudFourthIP.TabIndex = 530;
-            this.nudFourthIP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.nudFourthIP.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
-            this.nudFourthIP.Value = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.nudFourthIP.Click += new System.EventHandler(this.nudFirstIP_Click);
-            // 
-            // nudThirdIP
-            // 
-            this.nudThirdIP.BackColor = System.Drawing.Color.AliceBlue;
-            this.nudThirdIP.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudThirdIP.Location = new System.Drawing.Point(215, 53);
-            this.nudThirdIP.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.nudThirdIP.Name = "nudThirdIP";
-            this.nudThirdIP.Size = new System.Drawing.Size(77, 33);
-            this.nudThirdIP.TabIndex = 527;
-            this.nudThirdIP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.nudThirdIP.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
-            this.nudThirdIP.Value = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.nudThirdIP.Click += new System.EventHandler(this.nudFirstIP_Click);
-            // 
-            // nudFirstIP
-            // 
-            this.nudFirstIP.BackColor = System.Drawing.Color.AliceBlue;
-            this.nudFirstIP.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudFirstIP.Location = new System.Drawing.Point(30, 53);
-            this.nudFirstIP.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.nudFirstIP.Name = "nudFirstIP";
-            this.nudFirstIP.Size = new System.Drawing.Size(77, 33);
-            this.nudFirstIP.TabIndex = 525;
-            this.nudFirstIP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.nudFirstIP.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
-            this.nudFirstIP.Value = new decimal(new int[] {
-            127,
-            0,
-            0,
-            0});
-            this.nudFirstIP.Click += new System.EventHandler(this.nudFirstIP_Click);
-            // 
-            // nudSecndIP
-            // 
-            this.nudSecndIP.BackColor = System.Drawing.Color.AliceBlue;
-            this.nudSecndIP.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudSecndIP.Location = new System.Drawing.Point(122, 53);
-            this.nudSecndIP.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.nudSecndIP.Name = "nudSecndIP";
-            this.nudSecndIP.Size = new System.Drawing.Size(77, 33);
-            this.nudSecndIP.TabIndex = 526;
-            this.nudSecndIP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.nudSecndIP.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
-            this.nudSecndIP.Value = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.nudSecndIP.Click += new System.EventHandler(this.nudFirstIP_Click);
             // 
             // label1
             // 
@@ -228,6 +142,75 @@
             this.label4.Text = "Turn UDP On And Hit OK";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // nudThirdIP
+            // 
+            this.nudThirdIP.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudThirdIP.Location = new System.Drawing.Point(269, 41);
+            this.nudThirdIP.Maximum = 255D;
+            this.nudThirdIP.Name = "nudThirdIP";
+            this.nudThirdIP.Size = new System.Drawing.Size(90, 40);
+            this.nudThirdIP.TabIndex = 536;
+            // 
+            // nudSecondIP
+            // 
+            this.nudSecondIP.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudSecondIP.Location = new System.Drawing.Point(155, 41);
+            this.nudSecondIP.Maximum = 255D;
+            this.nudSecondIP.Name = "nudSecondIP";
+            this.nudSecondIP.Size = new System.Drawing.Size(90, 40);
+            this.nudSecondIP.TabIndex = 535;
+            // 
+            // nudFirstIP
+            // 
+            this.nudFirstIP.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudFirstIP.Location = new System.Drawing.Point(41, 41);
+            this.nudFirstIP.Maximum = 255D;
+            this.nudFirstIP.Name = "nudFirstIP";
+            this.nudFirstIP.Size = new System.Drawing.Size(90, 40);
+            this.nudFirstIP.TabIndex = 534;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(131, 33);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(24, 35);
+            this.label5.TabIndex = 532;
+            this.label5.Text = ".";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(245, 33);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(24, 35);
+            this.label6.TabIndex = 533;
+            this.label6.Text = ".";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // nudFourthIP
+            // 
+            this.nudFourthIP.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudFourthIP.Location = new System.Drawing.Point(383, 41);
+            this.nudFourthIP.Maximum = 255D;
+            this.nudFourthIP.Name = "nudFourthIP";
+            this.nudFourthIP.Size = new System.Drawing.Size(90, 40);
+            this.nudFourthIP.TabIndex = 536;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(359, 33);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(24, 35);
+            this.label7.TabIndex = 537;
+            this.label7.Text = ".";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // FormEthernet
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
@@ -251,10 +234,6 @@
             this.Load += new System.EventHandler(this.FormUDp_Load);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudFourthIP)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudThirdIP)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudFirstIP)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudSecndIP)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -263,13 +242,16 @@
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.CheckBox cboxIsUDPOn;
-        private System.Windows.Forms.NumericUpDown nudThirdIP;
-        private System.Windows.Forms.NumericUpDown nudSecndIP;
-        private System.Windows.Forms.NumericUpDown nudFirstIP;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.NumericUpDown nudFourthIP;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label7;
+        private NudlessNumericUpDown nudFourthIP;
+        private NudlessNumericUpDown nudThirdIP;
+        private NudlessNumericUpDown nudSecondIP;
+        private NudlessNumericUpDown nudFirstIP;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
     }
 }
