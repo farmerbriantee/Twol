@@ -239,6 +239,7 @@ namespace Twol
             SettingsCommunicationGPS();
             RescanPorts();
         }
+
         #region IMUSerialPort //--------------------------------------------------------------------
         private void ReceiveIMUPort(byte[] data)
         {

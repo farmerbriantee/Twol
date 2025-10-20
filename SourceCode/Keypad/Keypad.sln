@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36518.9 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Keypad", "Keypad.csproj", "{F1053BAC-22C7-4E6F-A3EA-CC1E1FBA9CB0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F1053BAC-22C7-4E6F-A3EA-CC1E1FBA9CB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1053BAC-22C7-4E6F-A3EA-CC1E1FBA9CB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1053BAC-22C7-4E6F-A3EA-CC1E1FBA9CB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1053BAC-22C7-4E6F-A3EA-CC1E1FBA9CB0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0551FAB1-D971-47EB-B3E7-669AE75E1457}
+	EndGlobalSection
+EndGlobal
