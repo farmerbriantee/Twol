@@ -580,7 +580,6 @@
             this.cboxToSerial.TabIndex = 140;
             this.cboxToSerial.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.cboxToSerial.UseVisualStyleBackColor = false;
-            this.cboxToSerial.Click += new System.EventHandler(this.cboxToSerial_Click);
             // 
             // cboxToUDP
             // 
@@ -598,7 +597,6 @@
             this.cboxToUDP.TabIndex = 141;
             this.cboxToUDP.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.cboxToUDP.UseVisualStyleBackColor = false;
-            this.cboxToUDP.Click += new System.EventHandler(this.cboxToUDP_Click);
             // 
             // tabPage3
             // 
@@ -704,7 +702,6 @@
             this.btnHelp.TabIndex = 533;
             this.btnHelp.TextAlign = System.Drawing.ContentAlignment.TopLeft;
             this.btnHelp.UseVisualStyleBackColor = true;
-            this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
             // 
             // nudCasterPort
             // 

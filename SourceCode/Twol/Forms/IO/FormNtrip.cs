@@ -14,8 +14,6 @@ namespace Twol
         //class variables
         private readonly FormGPS mf;
 
-        private bool ntripStatusChanged = false;
-
         public FormNtrip(Form callingForm)
         {
             mf = callingForm as FormGPS;
@@ -398,19 +396,5 @@ namespace Twol
             tboxUserPassword.Invalidate();
         }
 
-        private void cboxToUDP_Click(object sender, EventArgs e)
-        {
-            ntripStatusChanged = true;
-        }
-
-        private void cboxToSerial_Click(object sender, EventArgs e)
-        {
-            ntripStatusChanged = true;
-        }
-
-        private void btnHelp_Click(object sender, EventArgs e)
-        {
-            //System.Diagnostics.Process.Start(gStr.gsNTRIP_Help);
-        }
     }
 }
