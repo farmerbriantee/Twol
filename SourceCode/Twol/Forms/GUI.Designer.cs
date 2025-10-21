@@ -66,10 +66,79 @@ namespace Twol
             if (++sentenceCounter > 11)
             {
                 ShowNoGPSWarning();
+
+                oneSecondCounter++;
+
+                if (oneSecondCounter >= 4)
+                {
+                    //reset the counter
+                    oneSecondCounter = 0;
+
+                    if (Settings.IO.setNTRIP_isOn || Settings.IO.setPass_isOn)
+                    {
+                        DoNTRIPSecondRoutine();
+
+                        if (panel_IO.Visible)
+                        {
+                            if (Settings.IO.setNTRIP_isOn)
+                            {
+                                lblNTRIPBytes.Text = ((tripBytes >> 10)).ToString("###,###,### kb");
+
+                                //Bypass if sleeping
+                                //if (focusSkipCounter != 0)
+                                {
+                                    //update byte counter and up counter
+                                    if (ntripCounter > 59) btnStartStopNtrip.Text = (ntripCounter >> 6) + " Min";
+                                    else if (ntripCounter < 60 && ntripCounter > 25) btnStartStopNtrip.Text = ntripCounter + " Secs";
+                                    else btnStartStopNtrip.Text = "In " + (Math.Abs(ntripCounter - 25)) + " secs";
+
+                                    //watchdog for Ntrip
+                                    if (isNTRIP_Connecting)
+                                    {
+                                        lblWatch.Text = "Authourizing";
+                                    }
+                                    else
+                                    {
+                                        if (Settings.IO.setNTRIP_isOn && NTRIP_Watchdog > 10)
+                                        {
+                                            lblWatch.Text = "Waiting";
+                                        }
+                                        else
+                                        {
+                                            lblWatch.Text = "Listening";
+
+                                            if (Settings.IO.setNTRIP_isOn)
+                                            {
+                                                lblWatch.Text += " NTRIP";
+                                            }
+                                        }
+                                    }
+
+                                    if (Settings.IO.setNTRIP_sendGGAInterval > 0 && isNTRIP_Sending)
+                                    {
+                                        lblWatch.Text = "Send GGA";
+                                        isNTRIP_Sending = false;
+                                    }
+                                }
+                            }
+                            else if (Settings.IO.setPass_isOn)
+                            {
+                                //pbarNtripMenu.Value = unchecked((byte)(tripBytes * 0.02));
+                                lblNTRIPBytes.Text = ((tripBytes >> 10)).ToString("###,###,### kb");
+
+                                //update byte counter and up counter
+                                if (ntripCounter > 59) btnStartStopNtrip.Text = (ntripCounter >> 6) + " Min";
+                                else if (ntripCounter < 60 && ntripCounter > 22) btnStartStopNtrip.Text = ntripCounter + " Secs";
+                                else btnStartStopNtrip.Text = "In " + (Math.Abs(ntripCounter - 22)) + " secs";
+                            }
+                        }
+                    }
+                }
+
                 return;
             }
 
-            ////////////////////////////////////////////// 10 second ///////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////
             //every 3 second update status
             if (threeSecondCounter >= 3)
             {
@@ -168,7 +237,7 @@ namespace Twol
                 fileSaveAlwaysCounter += 3;
             }
 
-            /////////////////////////////////////////////////////////   2 second  ////////////////////////////////////////
+            /////////////////////////////   2 second  ////////////////////////////////////////
             //every 2 second update status
             if (twoSecondCounter >= 2)
             {
@@ -196,8 +265,8 @@ namespace Twol
 
             }//end every 2 seconds
 
-            //every second update all status ///////////////////////////   1 1 1 1 1 1 ////////////////////////////
-            if (oneSecondCounter >= 3)
+            //every second update all status //////   1 Second ////////////////////////////
+            if (oneSecondCounter >= 4)
             {
                 //reset the counter
                 oneSecondCounter = 0;
@@ -244,60 +313,63 @@ namespace Twol
                     lblFlowHz_Nozz.Text = nozz.frequency.ToString() + " Hz";
                 }
 
-                if (Settings.IO.setNTRIP_isOn || Settings.IO.setPass_isOn) DoNTRIPSecondRoutine();
-
-                if (panel_IO.Visible)
+                if (Settings.IO.setNTRIP_isOn || Settings.IO.setPass_isOn)
                 {
-                    if (Settings.IO.setNTRIP_isOn)
+                    DoNTRIPSecondRoutine();
+
+                    if (panel_IO.Visible)
                     {
-                        lblNTRIPBytes.Text = ((tripBytes >> 10)).ToString("###,###,### kb");
-
-                        //Bypass if sleeping
-                        //if (focusSkipCounter != 0)
+                        if (Settings.IO.setNTRIP_isOn)
                         {
-                            //update byte counter and up counter
-                            if (ntripCounter > 59) btnStartStopNtrip.Text = (ntripCounter >> 6) + " Min";
-                            else if (ntripCounter < 60 && ntripCounter > 25) btnStartStopNtrip.Text = ntripCounter + " Secs";
-                            else btnStartStopNtrip.Text = "In " + (Math.Abs(ntripCounter - 25)) + " secs";
+                            lblNTRIPBytes.Text = ((tripBytes >> 10)).ToString("###,###,### kb");
 
-                            //watchdog for Ntrip
-                            if (isNTRIP_Connecting)
+                            //Bypass if sleeping
+                            //if (focusSkipCounter != 0)
                             {
-                                lblWatch.Text = "Authourizing";
-                            }
-                            else
-                            {
-                                if (Settings.IO.setNTRIP_isOn && NTRIP_Watchdog > 10)
+                                //update byte counter and up counter
+                                if (ntripCounter > 59) btnStartStopNtrip.Text = (ntripCounter >> 6) + " Min";
+                                else if (ntripCounter < 60 && ntripCounter > 25) btnStartStopNtrip.Text = ntripCounter + " Secs";
+                                else btnStartStopNtrip.Text = "In " + (Math.Abs(ntripCounter - 25)) + " secs";
+
+                                //watchdog for Ntrip
+                                if (isNTRIP_Connecting)
                                 {
-                                    lblWatch.Text = "Waiting";
+                                    lblWatch.Text = "Authourizing";
                                 }
                                 else
                                 {
-                                    lblWatch.Text = "Listening";
-
-                                    if (Settings.IO.setNTRIP_isOn)
+                                    if (Settings.IO.setNTRIP_isOn && NTRIP_Watchdog > 10)
                                     {
-                                        lblWatch.Text += " NTRIP";
+                                        lblWatch.Text = "Waiting";
+                                    }
+                                    else
+                                    {
+                                        lblWatch.Text = "Listening";
+
+                                        if (Settings.IO.setNTRIP_isOn)
+                                        {
+                                            lblWatch.Text += " NTRIP";
+                                        }
                                     }
                                 }
-                            }
 
-                            if (Settings.IO.setNTRIP_sendGGAInterval > 0 && isNTRIP_Sending)
-                            {
-                                lblWatch.Text = "Send GGA";
-                                isNTRIP_Sending = false;
+                                if (Settings.IO.setNTRIP_sendGGAInterval > 0 && isNTRIP_Sending)
+                                {
+                                    lblWatch.Text = "Send GGA";
+                                    isNTRIP_Sending = false;
+                                }
                             }
                         }
-                    }
-                    else if (Settings.IO.setPass_isOn)
-                    {
-                        //pbarNtripMenu.Value = unchecked((byte)(tripBytes * 0.02));
-                        lblNTRIPBytes.Text = ((tripBytes >> 10)).ToString("###,###,### kb");
+                        else if (Settings.IO.setPass_isOn)
+                        {
+                            //pbarNtripMenu.Value = unchecked((byte)(tripBytes * 0.02));
+                            lblNTRIPBytes.Text = ((tripBytes >> 10)).ToString("###,###,### kb");
 
-                        //update byte counter and up counter
-                        if (ntripCounter > 59) btnStartStopNtrip.Text = (ntripCounter >> 6) + " Min";
-                        else if (ntripCounter < 60 && ntripCounter > 22) btnStartStopNtrip.Text = ntripCounter + " Secs";
-                        else btnStartStopNtrip.Text = "In " + (Math.Abs(ntripCounter - 22)) + " secs";
+                            //update byte counter and up counter
+                            if (ntripCounter > 59) btnStartStopNtrip.Text = (ntripCounter >> 6) + " Min";
+                            else if (ntripCounter < 60 && ntripCounter > 22) btnStartStopNtrip.Text = ntripCounter + " Secs";
+                            else btnStartStopNtrip.Text = "In " + (Math.Abs(ntripCounter - 22)) + " secs";
+                        }
                     }
                 }
             }
@@ -627,8 +699,6 @@ namespace Twol
 
             resetEverythingToolStripMenuItem.Text = gStr.Get(gs.gsResetAllForSure);
 
-            steerChartStripMenu.Text = gStr.Get(gs.gsCharts);
-
             //Tools Menu
             SmoothABtoolStripMenu.Text = gStr.Get(gs.gsSmoothABCurve);
             boundariesToolStripMenuItem.Text = gStr.Get(gs.gsBoundary);
@@ -641,10 +711,6 @@ namespace Twol
             recordedPathStripMenu.Text = gStr.Get(gs.gsRecordedPathMenu);
             flagByLatLonToolStripMenuItem.Text = gStr.Get(gs.gsFlagByLatLon);
             boundaryToolToolStripMenu.Text = gStr.Get(gs.gsBoundary) + " Tool";
-
-            steerChartToolStripMenuItem.Text = gStr.Get(gs.gsSteerChart);
-            headingChartToolStripMenuItem.Text = gStr.Get(gs.gsHeadingChart);
-            xTEChartToolStripMenuItem.Text = gStr.Get(gs.gsXTEChart);
         }
 
         public void ChangeMetricImperial()

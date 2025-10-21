@@ -391,27 +391,11 @@ namespace Twol
             isClosing = true;
         }
 
-        private void btnBndLines_Click(object sender, EventArgs e)
-        {
-            panelMain.Visible = false;
-            panelChoose.Visible = false;
-            panelKML.Visible = false;
-            isClosing = true;
-        }
-
         private void btnGetKML_Click(object sender, EventArgs e)
         {
             panelMain.Visible = false;
             panelChoose.Visible = false;
             panelKML.Visible = true;
-        }
-
-        private void btnBingMaps_Click(object sender, EventArgs e)
-        {
-            panelMain.Visible = false;
-            panelChoose.Visible = false;
-            panelKML.Visible = false;
-            isClosing = true;
         }
 
         private void FormBoundary_ResizeEnd(object sender, EventArgs e)

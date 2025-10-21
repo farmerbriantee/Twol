@@ -42,7 +42,6 @@ namespace Twol
 
         public const double GridSize = 6000;
         public double Count = 40;
-        public bool isGeoMap = false;
 
         public double gridRotation = 0.0;
 
@@ -90,21 +89,6 @@ namespace Twol
             GL.Vertex3(eastingMax, northingMin, -0.10);
             GL.End();
 
-            if (isGeoMap)
-            {
-                GL.BindTexture(TextureTarget.Texture2D, mf.texture[(int)FormGPS.textures.bingGrid]);
-                GL.Begin(PrimitiveType.TriangleStrip);
-                GL.Color4(0.6f, 0.6f, 0.6f, 0.5f);
-                GL.TexCoord2(0, 0);
-                GL.Vertex3(eastingMinGeo, northingMaxGeo, -0.05);
-                GL.TexCoord2(1, 0.0);
-                GL.Vertex3(eastingMaxGeo, northingMaxGeo, -0.05);
-                GL.TexCoord2(0.0, 1);
-                GL.Vertex3(eastingMinGeo, northingMinGeo, -0.05);
-                GL.TexCoord2(1, 1);
-                GL.Vertex3(eastingMaxGeo, northingMinGeo, -0.05);
-                GL.End();
-            }
             GL.Disable(EnableCap.Texture2D);
         }
 

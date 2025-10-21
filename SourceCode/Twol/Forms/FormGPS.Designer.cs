@@ -82,11 +82,6 @@ namespace Twol
             this.statusStripLeft = new System.Windows.Forms.StatusStrip();
             this.distanceToolBtn = new System.Windows.Forms.ToolStripDropDownButton();
             this.toolStripDropDownButton4 = new System.Windows.Forms.ToolStripDropDownButton();
-            this.steerChartStripMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.steerChartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.headingChartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.xTEChartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rollCheckToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.boundaryToolToolStripMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.layersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eventViewerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -564,7 +559,7 @@ namespace Twol
             this.toolStripMenuFlagForm.Image = global::Twol.Properties.Resources.FileEditName;
             this.toolStripMenuFlagForm.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripMenuFlagForm.Name = "toolStripMenuFlagForm";
-            this.toolStripMenuFlagForm.Size = new System.Drawing.Size(259, 70);
+            this.toolStripMenuFlagForm.Size = new System.Drawing.Size(267, 70);
             this.toolStripMenuFlagForm.Text = "toolStripMenuItem3";
             this.toolStripMenuFlagForm.Click += new System.EventHandler(this.toolStripMenuFlagForm_Click);
             // 
@@ -743,7 +738,6 @@ namespace Twol
             this.toolStripDropDownButton4.AutoSize = false;
             this.toolStripDropDownButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolStripDropDownButton4.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.steerChartStripMenu,
             this.boundaryToolToolStripMenu,
             this.layersToolStripMenuItem,
             this.eventViewerToolStripMenuItem,
@@ -759,49 +753,6 @@ namespace Twol
             this.toolStripDropDownButton4.ShowDropDownArrow = false;
             this.toolStripDropDownButton4.Size = new System.Drawing.Size(66, 80);
             this.toolStripDropDownButton4.Text = "toolStripDropDownButton3";
-            // 
-            // steerChartStripMenu
-            // 
-            this.steerChartStripMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.steerChartToolStripMenuItem,
-            this.headingChartToolStripMenuItem,
-            this.xTEChartToolStripMenuItem,
-            this.rollCheckToolStripMenuItem});
-            this.steerChartStripMenu.Image = global::Twol.Properties.Resources.Chart;
-            this.steerChartStripMenu.Name = "steerChartStripMenu";
-            this.steerChartStripMenu.Size = new System.Drawing.Size(450, 70);
-            this.steerChartStripMenu.Text = "Charts";
-            // 
-            // steerChartToolStripMenuItem
-            // 
-            this.steerChartToolStripMenuItem.Image = global::Twol.Properties.Resources.AutoSteerOn;
-            this.steerChartToolStripMenuItem.Name = "steerChartToolStripMenuItem";
-            this.steerChartToolStripMenuItem.Size = new System.Drawing.Size(322, 44);
-            this.steerChartToolStripMenuItem.Text = "Steer Chart";
-            this.steerChartToolStripMenuItem.Click += new System.EventHandler(this.toolStripAutoSteerChart_Click);
-            // 
-            // headingChartToolStripMenuItem
-            // 
-            this.headingChartToolStripMenuItem.Image = global::Twol.Properties.Resources.ConS_SourcesHeading;
-            this.headingChartToolStripMenuItem.Name = "headingChartToolStripMenuItem";
-            this.headingChartToolStripMenuItem.Size = new System.Drawing.Size(322, 44);
-            this.headingChartToolStripMenuItem.Text = "Heading Chart";
-            this.headingChartToolStripMenuItem.Click += new System.EventHandler(this.headingChartToolStripMenuItem_Click);
-            // 
-            // xTEChartToolStripMenuItem
-            // 
-            this.xTEChartToolStripMenuItem.Image = global::Twol.Properties.Resources.AutoManualIsAuto;
-            this.xTEChartToolStripMenuItem.Name = "xTEChartToolStripMenuItem";
-            this.xTEChartToolStripMenuItem.Size = new System.Drawing.Size(322, 44);
-            this.xTEChartToolStripMenuItem.Text = "XTE Chart";
-            this.xTEChartToolStripMenuItem.Click += new System.EventHandler(this.xTEChartToolStripMenuItem_Click);
-            // 
-            // rollCheckToolStripMenuItem
-            // 
-            this.rollCheckToolStripMenuItem.Name = "rollCheckToolStripMenuItem";
-            this.rollCheckToolStripMenuItem.Size = new System.Drawing.Size(322, 44);
-            this.rollCheckToolStripMenuItem.Text = "Roll Check";
-            this.rollCheckToolStripMenuItem.Click += new System.EventHandler(this.correctionToolStriPGN_Click);
             // 
             // boundaryToolToolStripMenu
             // 
@@ -2692,6 +2643,7 @@ namespace Twol
             this.btnStartStopNtrip.TabIndex = 186;
             this.btnStartStopNtrip.Text = "StartStop";
             this.btnStartStopNtrip.UseVisualStyleBackColor = false;
+            this.btnStartStopNtrip.Click += new System.EventHandler(this.btnStartStopNtrip_Click);
             // 
             // lblWatch
             // 
@@ -3224,7 +3176,6 @@ namespace Twol
         public System.Windows.Forms.Button btnDayNightMode;
         public System.Windows.Forms.Button btnShowHide_IO;
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton4;
-        public System.Windows.Forms.ToolStripMenuItem steerChartStripMenu;
         private System.Windows.Forms.TableLayoutPanel panelNavigation;
         public System.Windows.Forms.Button btn2D;
         public System.Windows.Forms.Button btn3D;
@@ -3251,7 +3202,6 @@ namespace Twol
         private System.Windows.Forms.ToolStripMenuItem menuLanguageFinnish;
         private System.Windows.Forms.ToolStripMenuItem menuLanguageLatvian;
         private System.Windows.Forms.ToolStripMenuItem menuLanguageLithuanian;
-        private System.Windows.Forms.ToolStripMenuItem rollCheckToolStripMenuItem;
         public System.Windows.Forms.Button btnCycleLinesBk;
         private System.Windows.Forms.TableLayoutPanel panelLeft;
         private System.Windows.Forms.Label lblCurrentField;

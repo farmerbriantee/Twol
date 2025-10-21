@@ -278,12 +278,6 @@
     <Compile Include="Forms\Field\FormFieldData.Designer.cs">
       <DependentUpon>FormFieldData.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormMap.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FormMap.Designer.cs">
-      <DependentUpon>FormMap.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\FormEventViewer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -374,12 +368,6 @@
     <Compile Include="Forms\Inputs\FormNumeric.Designer.cs">
       <DependentUpon>FormNumeric.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Settings\FormCorrection.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Settings\FormCorrection.Designer.cs">
-      <DependentUpon>FormCorrection.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Settings\FormColorSection.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -433,24 +421,6 @@
     </Compile>
     <Compile Include="Forms\Field\FormFlags.Designer.cs">
       <DependentUpon>FormFlags.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Settings\FormGraphHeading.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Settings\FormGraphHeading.Designer.cs">
-      <DependentUpon>FormGraphHeading.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Settings\FormGraphXTE.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Settings\FormGraphXTE.Designer.cs">
-      <DependentUpon>FormGraphXTE.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Settings\FormGraphSteer.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Settings\FormGraphSteer.Designer.cs">
-      <DependentUpon>FormGraphSteer.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Guidance\FormSmoothAB.cs">
       <SubType>Form</SubType>
@@ -607,9 +577,6 @@
       <DependentUpon>FormFieldData.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormMap.resx">
-      <DependentUpon>FormMap.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormEventViewer.resx">
       <DependentUpon>FormEventViewer.cs</DependentUpon>
     </EmbeddedResource>
@@ -691,10 +658,6 @@
     <EmbeddedResource Include="Forms\Inputs\FormNumeric.resx">
       <DependentUpon>FormNumeric.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Settings\FormCorrection.resx">
-      <DependentUpon>FormCorrection.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Settings\FormColorSection.resx">
       <DependentUpon>FormColorSection.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -754,15 +717,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Guidance\FormSmoothAB.resx">
       <DependentUpon>FormSmoothAB.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Settings\FormGraphHeading.resx">
-      <DependentUpon>FormGraphHeading.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Settings\FormGraphXTE.resx">
-      <DependentUpon>FormGraphXTE.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Settings\FormGraphSteer.resx">
-      <DependentUpon>FormGraphSteer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormtimedMessage.resx">
       <DependentUpon>FormTimedMessage.cs</DependentUpon>

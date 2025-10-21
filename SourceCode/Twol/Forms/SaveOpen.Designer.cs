@@ -334,20 +334,17 @@ namespace Twol
             //// Contour points ----------------------------------------------------------------------------
             //FileLoadContour();
 
-            // Flags -------------------------------------------------------------------------------------------------
+            // Flags ------------------------------------------------------------------------------
             FileLoadFlags();
 
             //Boundaries
             FileLoadBoundaries();
 
-            // Headland  -------------------------------------------------------------------------------------------------
+            // Headland  --------------------------------------------------------------------------------------
             FileLoadHeadlands();
 
             //trams ---------------------------------------------------------------------------------
             FileLoadTrams();
-
-            //backgound grid image
-            FileLoadBackground();
 
             PanelsAndOGLSize();
 
@@ -551,59 +548,6 @@ namespace Twol
                 }
             }
 
-        }
-
-        public void FileLoadBackground()
-        {
-            worldGrid.isGeoMap = false;
-
-            //Back Image
-            string fileAndDirectory = Path.Combine(RegistrySettings.fieldsDirectory, currentFieldDirectory, "BackPic.txt");
-            if (File.Exists(fileAndDirectory))
-            {
-                using (StreamReader reader = new StreamReader(fileAndDirectory))
-                {
-                    try
-                    {
-                        //read header
-                        string line = reader.ReadLine();
-
-                        line = reader.ReadLine();
-                        worldGrid.isGeoMap = bool.Parse(line);
-
-                        line = reader.ReadLine();
-                        worldGrid.eastingMaxGeo = double.Parse(line, CultureInfo.InvariantCulture);
-                        line = reader.ReadLine();
-                        worldGrid.eastingMinGeo = double.Parse(line, CultureInfo.InvariantCulture);
-                        line = reader.ReadLine();
-                        worldGrid.northingMaxGeo = double.Parse(line, CultureInfo.InvariantCulture);
-                        line = reader.ReadLine();
-                        worldGrid.northingMinGeo = double.Parse(line, CultureInfo.InvariantCulture);
-                    }
-                    catch (Exception)
-                    {
-                        worldGrid.isGeoMap = false;
-                    }
-
-                    if (worldGrid.isGeoMap)
-                    {
-                        fileAndDirectory = Path.Combine(RegistrySettings.fieldsDirectory, currentFieldDirectory, "BackPic.png");
-                        if (File.Exists(fileAndDirectory))
-                        {
-                            var bitmap = new Bitmap(Image.FromFile(fileAndDirectory));
-
-                            GL.BindTexture(TextureTarget.Texture2D, texture[(int)textures.bingGrid]);
-                            BitmapData bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-                            GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, bitmapData.Width, bitmapData.Height, 0, OpenTK.Graphics.OpenGL.PixelFormat.Bgra, PixelType.UnsignedByte, bitmapData.Scan0);
-                            bitmap.UnlockBits(bitmapData);
-                        }
-                        else
-                        {
-                            worldGrid.isGeoMap = false;
-                        }
-                    }
-                }
-            }
         }
 
         public void FileLoadFlags()

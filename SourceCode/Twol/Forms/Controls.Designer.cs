@@ -64,6 +64,13 @@ namespace Twol
             }
         }
 
+        private void btnStartStopNtrip_Click(object sender, EventArgs e)
+        {
+            ReconnectRequest();
+            btnStartStopNtrip.Text = "Reset";
+        }
+
+
         private void btnNTRIPSerial_Click(object sender, EventArgs e)
         {
             if (RegistrySettings.IOFileName == "Default Profile")
@@ -834,6 +841,7 @@ namespace Twol
 
             PanelUpdateRightAndBottom();
         }
+
         private void boundariesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (isFieldStarted)
@@ -848,11 +856,6 @@ namespace Twol
                         form2.Show(this);
                     }
                     diaRes = form.DialogResult;
-                }
-                if (diaRes == DialogResult.Yes)
-                {
-                    var form3 = new FormMap(this);
-                    form3.Show(this);
                 }
             }
 
@@ -1782,71 +1785,12 @@ namespace Twol
                 }
             }
         }
-        private void headingChartToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //check if window already exists
-            Form fh = Application.OpenForms["FormHeadingGraph"];
 
-            if (fh != null)
-            {
-                fh.Focus();
-                return;
-            }
-
-            //
-            Form formH = new FormGraphHeading(this);
-            formH.Show(this);
-        }
-        private void toolStripAutoSteerChart_Click(object sender, EventArgs e)
-        {
-            //check if window already exists
-            Form fcg = Application.OpenForms["FormSteerGraph"];
-
-            if (fcg != null)
-            {
-                fcg.Focus();
-                return;
-            }
-
-            //
-            Form formG = new FormGraphSteer(this);
-            formG.Show(this);
-        }               
-        private void xTEChartToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //check if window already exists
-            Form fx = Application.OpenForms["FormXTEGraph"];
-
-            if (fx != null)
-            {
-                fx.Focus();
-                return;
-            }
-
-            //
-            Form formX = new FormGraphXTE(this);
-            formX.Show(this);
-        }
         private void eventViewerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form form = new FormEventViewer(Path.Combine(RegistrySettings.logsDirectory, "TWOL_Events_Log.txt"));
             form.Show(this);
             this.Activate();
-        }
-        private void correctionToolStriPGN_Click(object sender, EventArgs e)
-        {
-            //check if window already exists
-            Form fcc = Application.OpenForms["FormCorrection"];
-
-            if (fcc != null)
-            {
-                fcc.Focus();
-                return;
-            }
-
-            //
-            Form formC = new FormCorrection(this);
-            formC.Show(this);
         }
 
         #endregion
@@ -2059,10 +2003,6 @@ namespace Twol
                     break;
             }
         }
-
-        private ToolStripMenuItem steerChartToolStripMenuItem;
-        private ToolStripMenuItem headingChartToolStripMenuItem;
-        private ToolStripMenuItem xTEChartToolStripMenuItem;
     }//end class
 
 }//end namespace
