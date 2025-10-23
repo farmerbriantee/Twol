@@ -1,9 +1,9 @@
-﻿using Twol.Classes;
-using OpenTK.Graphics.OpenGL;
+﻿using OpenTK.Graphics.OpenGL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Twol.Classes;
 
 namespace Twol
 {
@@ -199,8 +199,8 @@ namespace Twol
                         distanceFromRefLine = mf.gyd.FindDistanceToSegment(mf.guidanceLookPos, track.curvePts[rA], track.curvePts[rB], out vec3 point, out _, true, false, false);
 
                         //same way as line creation or not
-                        isHeadingSameWay = Math.PI - Math.Abs(Math.Abs(pivot.heading 
-                            + glm.toRadians(mf.mc.actualSteerAngleDegrees) - track.curvePts[rA].heading) 
+                        isHeadingSameWay = Math.PI - Math.Abs(Math.Abs(pivot.heading
+                            + glm.toRadians(mf.mc.actualSteerAngleDegrees) - track.curvePts[rA].heading)
                             - Math.PI) < glm.PIBy2;
                     }
                 }
@@ -391,7 +391,7 @@ namespace Twol
                     newGuideLL.Add(newGuideList);
 
                     double nextGuideDist = (Settings.Tool.toolWidth - Settings.Tool.overlap) * numGuides +
-                        (isHeadingSameWay ? -Settings.Tool.offset : Settings.Tool.offset) ;
+                        (isHeadingSameWay ? -Settings.Tool.offset : Settings.Tool.offset);
 
                     //nextGuideDist += (0.5 * (Settings.Tool.toolWidth - Settings.Tool.overlap));
 
@@ -479,7 +479,6 @@ namespace Twol
 
                 //ablines and curves are a line - the rest a loop
                 currentGuidanceTrack.DrawPolygon(currTrk.mode <= TrackMode.Curve ? PrimitiveType.LineStrip : PrimitiveType.LineLoop);
-
 
                 GL.LineWidth(Settings.User.setDisplay_lineWidth);
                 GL.Color3(0.95f, 0.2f, 0.95f);
@@ -816,7 +815,6 @@ namespace Twol
                         minDist = dist;
                     }
                 }
-
 
                 track.ptA.easting = (track.curvePts[aClose].easting);
                 track.ptA.northing = (track.curvePts[aClose].northing);

@@ -61,7 +61,6 @@ namespace Twol
             maxAngularVelocity = Settings.Vehicle.setVehicle_maxAngularVelocity;
             maxSteerAngle = Settings.Vehicle.setVehicle_maxSteerAngle;
 
-
             trackWidth = Settings.Vehicle.setVehicle_trackWidth;
 
             stanleyIntegralGainAB = Settings.Vehicle.stanleyIntegralGainAB;
@@ -69,7 +68,6 @@ namespace Twol
 
             purePursuitIntegralGain = Settings.Vehicle.setAS_purePursuitIntegralGain;
             vehicleType = Settings.Vehicle.setVehicle_vehicleType;
-
 
             deadZoneHeading = Settings.Vehicle.setAS_deadZoneHeading * 0.01;
             deadZoneDelay = Settings.Vehicle.setAS_deadZoneDelay;
@@ -318,12 +316,10 @@ namespace Twol
                 else if (vehicleType == 2) //4WD - Image Text # Front is 16 Rear is 17
                 {
 
-
                     double modelSteerAngle = 0.25 * mf.mc.actualSteerAngleDegrees;
 
                     GL.Enable(EnableCap.Texture2D);
                     GL.Color4(mf.vehicleColor.R, mf.vehicleColor.G, mf.vehicleColor.B, mf.vehicleOpacityByte);
-
 
                     GL.BindTexture(TextureTarget.Texture2D, mf.texture[(int)FormGPS.textures.FourWDFront]);        // Select Our Texture
 
@@ -345,13 +341,13 @@ namespace Twol
                     //modelSteerAngle *= 2;
                     GL.Rotate(modelSteerAngle, 0, 0, 1);
                     GL.Translate(0, -wheelbase * 1.0, 0);
-                    GL.Rotate(modelSteerAngle*1.5, 0, 0, 1);
+                    GL.Rotate(modelSteerAngle * 1.5, 0, 0, 1);
 
                     GL.Begin(PrimitiveType.TriangleStrip);              // Build Quad From A Triangle Strip
-                    GL.TexCoord2(1, 0); GL.Vertex2(trackWidth, wheelbase *  0.5); // Top Right
+                    GL.TexCoord2(1, 0); GL.Vertex2(trackWidth, wheelbase * 0.5); // Top Right
                     GL.TexCoord2(0, 0); GL.Vertex2(-trackWidth, wheelbase * 0.5); // Top Left
                     GL.TexCoord2(1, 1); GL.Vertex2(trackWidth, -wheelbase * 0.5); // Bottom Right
-                    GL.TexCoord2(0, 1); GL.Vertex2(-trackWidth, -wheelbase *0.5); // Bottom Left
+                    GL.TexCoord2(0, 1); GL.Vertex2(-trackWidth, -wheelbase * 0.5); // Bottom Left
                     GL.End();                       // Done Building Triangle Strip
 
                     GL.PopMatrix();

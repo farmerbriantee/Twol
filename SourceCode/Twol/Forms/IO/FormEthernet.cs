@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Twol
@@ -19,52 +18,33 @@ namespace Twol
         private void FormUDp_Load(object sender, EventArgs e)
         {
             cboxIsUDPOn.Checked = Settings.IO.setUDP_isOn;
-            cboxIsUDPOn.Text = cboxIsUDPOn.Checked ? "UDP On" : "UDP Off";
-
-            //cboxIsSendNMEAToUDP.Checked = Settings.IO.setUDP_isSendNMEAToUDP;
-
-            //nudSub1.Value = Settings.IO.etIP_SubnetOne;
-            //nudSub2.Value = Settings.IO.etIP_SubnetTwo;
-            //nudSub3.Value = Settings.IO.etIP_SubnetThree;
-
-            nudFirstIP.Value = Settings.IO.eth_loopOne;
-            nudSecondIP.Value = Settings.IO.eth_loopTwo;
-            nudThirdIP.Value = Settings.IO.eth_loopThree;
-            nudFourthIP.Value = Settings.IO.eth_loopFour;
+            cboxIsUDPOn.Text = "Tap To Enable Ethernet";
 
             if (!cboxIsUDPOn.Checked) cboxIsUDPOn.BackColor = System.Drawing.Color.Salmon;
         }
 
-        private void nudFirstIP_Click(object sender, EventArgs e)
-        {
-            //mf.KeypadToNUD((NumericUpDown)sender, this);
-        }
-
         private void btnOK_Click(object sender, EventArgs e)
         {
-            //Settings.IO.etIP_SubnetOne = (byte)nudSub1.Value;
-            //Settings.IO.etIP_SubnetTwo = (byte)nudSub2.Value;
-            //Settings.IO.etIP_SubnetThree = (byte)nudSub3.Value;
+            if (cboxIsUDPOn.Checked)
+            {
+                Settings.IO.setUDP_isOn = true;
 
-            Settings.IO.eth_loopOne = (byte)nudFirstIP.Value;
-            Settings.IO.eth_loopTwo = (byte)nudSecondIP.Value;
-            Settings.IO.eth_loopThree = (byte)nudThirdIP.Value;
-            Settings.IO.eth_loopFour = (byte)nudFourthIP.Value;
+                Log.EventWriter("Program Reset: Start Ethernet Selected");
 
-            Settings.IO.setUDP_isOn = cboxIsUDPOn.Checked;
-            //Settings.IO.setUDP_isSendNMEAToUDP = cboxIsSendNMEAToUDP.Checked;
-
-            Log.EventWriter("Program Reset: Start Ethernet Selected");
-
-            Settings.IO.Save();
-            Close();
-            mf.YesMessageBox("Restart to Enable UDP Networking Features");
-            mf.ExitShutdown();
+                Settings.IO.Save();
+                Close();
+                mf.YesMessageBox("Restart Twol to Enable UDP Networking Features");
+                mf.ExitShutdown();
+            }
+            else
+            {
+                Close();
+            }
         }
 
         private void cboxIsUDPOn_Click(object sender, EventArgs e)
         {
-            cboxIsUDPOn.Text = cboxIsUDPOn.Checked ? "UDP Is On" : "UDP Is Off";
+            cboxIsUDPOn.Text = cboxIsUDPOn.Checked ? "Ethernet On - Tap Ok" : "Ethernet Remains Off";
             Log.EventWriter("UDP Turned on, Etherent Form");
         }
     }
