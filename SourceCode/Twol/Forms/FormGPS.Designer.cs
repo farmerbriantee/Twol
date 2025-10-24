@@ -210,6 +210,7 @@ namespace Twol
             this.btnSlide = new System.Windows.Forms.Button();
             this.btnExtSim = new System.Windows.Forms.Button();
             this.tmrNTRIP = new System.Windows.Forms.Timer(this.components);
+            this.btnExtSimTool = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStripFlag.SuspendLayout();
             this.statusStripLeft.SuspendLayout();
@@ -2853,6 +2854,7 @@ namespace Twol
             // panel_IO
             // 
             this.panel_IO.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel_IO.Controls.Add(this.btnExtSimTool);
             this.panel_IO.Controls.Add(this.btnNTRIPSerial);
             this.panel_IO.Controls.Add(this.lblToGPS);
             this.panel_IO.Controls.Add(this.lblCount);
@@ -3059,6 +3061,24 @@ namespace Twol
             // tmrNTRIP
             // 
             this.tmrNTRIP.Interval = 1000;
+            // 
+            // btnExtSimTool
+            // 
+            this.btnExtSimTool.BackColor = System.Drawing.Color.Transparent;
+            this.btnExtSimTool.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnExtSimTool.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlText;
+            this.btnExtSimTool.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExtSimTool.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExtSimTool.ForeColor = System.Drawing.Color.Black;
+            this.btnExtSimTool.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnExtSimTool.Location = new System.Drawing.Point(100, 492);
+            this.btnExtSimTool.Margin = new System.Windows.Forms.Padding(4);
+            this.btnExtSimTool.Name = "btnExtSimTool";
+            this.btnExtSimTool.Size = new System.Drawing.Size(77, 55);
+            this.btnExtSimTool.TabIndex = 544;
+            this.btnExtSimTool.Text = "Sim Tool";
+            this.btnExtSimTool.UseVisualStyleBackColor = false;
+            this.btnExtSimTool.Click += new System.EventHandler(this.btnExtSimTool_Click);
             // 
             // FormGPS
             // 
@@ -3303,6 +3323,7 @@ namespace Twol
         private System.Windows.Forms.Label lblToGPS;
         private System.Windows.Forms.Timer tmrNTRIP;
         private System.Windows.Forms.Button btnNTRIPSerial;
+        private System.Windows.Forms.Button btnExtSimTool;
     }
 }
 

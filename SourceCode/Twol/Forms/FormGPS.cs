@@ -7,9 +7,7 @@ using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Net.Sockets;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Twol.Classes;
 using Twol.Properties;
@@ -315,7 +313,7 @@ namespace Twol
 
             //Application rate controller
             nozz = new CNozzle(this);
-            vec2 b = new vec2(0,0);
+            vec2 b = new vec2(0, 0);
             gpsPtsCorr.Add(b);
             gpsPts.Add(b);
         }
@@ -341,7 +339,7 @@ namespace Twol
                 }
 
             }
-            
+
             this.MouseWheel += ZoomByMouseWheel;
 
             //System Event to check when Power Mode has changed.
@@ -434,7 +432,7 @@ namespace Twol
 
             tool.LoadSettings();
             vehicle.LoadSettings();
-            
+
             //nmea limiter
             //udpWatch.Start();
 
@@ -597,7 +595,7 @@ namespace Twol
         private void FormGPS_ResizeEnd(object sender, EventArgs e)
         {
             PanelsAndOGLSize();
-            
+
             Form f = Application.OpenForms["FormGPSData"];
             if (f != null)
             {

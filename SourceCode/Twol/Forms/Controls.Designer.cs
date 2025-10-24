@@ -145,6 +145,35 @@ namespace Twol
             }
         }
 
+        private void btnExtSimTool_Click(object sender, EventArgs e)
+        {
+            Process[] processName = Process.GetProcessesByName("ModSimTool");
+            if (processName.Length == 0)
+            {
+                //Start application here
+                string strPath = Path.Combine(Application.StartupPath, "ModSimTool.exe");
+
+                try
+                {
+                    ProcessStartInfo processInfo = new ProcessStartInfo();
+                    processInfo.FileName = strPath;
+                    processInfo.WorkingDirectory = Path.GetDirectoryName(strPath);
+                    Process proc = Process.Start(processInfo);
+                }
+                catch
+                {
+                    TimedMessageBox(2000, "No File Found", "Can't Find ModsimTool");
+                    Log.EventWriter("Can't Find ModsimTool - File Not Found");
+                }
+            }
+            else
+            {
+                //Set foreground window
+                ShowWindow(processName[0].MainWindowHandle, 9);
+                SetForegroundWindow(processName[0].MainWindowHandle);
+            }
+        }
+
         private void btnUDP_Click(object sender, EventArgs e)
         {
             if (RegistrySettings.IOFileName == "Default Profile")
