@@ -337,7 +337,6 @@ namespace Twol
                         Log.EventWriter("Terms Accepted");
                     }
                 }
-
             }
 
             this.MouseWheel += ZoomByMouseWheel;
@@ -348,6 +347,9 @@ namespace Twol
             //start udp server if required
             if (Settings.IO.setUDP_isOn)
                 LoadUDPNetwork();
+
+            if (Settings.IO.setUDP_isLoopBack)
+                StartLoopbackServer();
 
             ConfigureNTRIP();
 

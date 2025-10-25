@@ -509,6 +509,7 @@ namespace Twol
             public bool setPass_isOn = false;
 
             public bool setUDP_isOn = false;
+            public bool setUDP_isLoopBack = false;
             public byte etIP_SubnetOne = 192;
             public byte etIP_SubnetTwo = 168;
             public byte etIP_SubnetThree = 1;

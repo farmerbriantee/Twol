@@ -66,10 +66,21 @@ namespace Twol
 
         public IPEndPoint epModuleSet = new IPEndPoint(IPAddress.Parse("255.255.255.255"), 8888);
         public IPEndPoint epModuleSetTool = new IPEndPoint(IPAddress.Parse("255.255.255.255"), 18888);
+        private EndPoint epAgIO = new IPEndPoint(IPAddress.Parse("127.255.255.255"), 17777);
 
         private IPEndPoint epNtrip;
 
         public byte[] ipAutoSet = { 192, 168, 5 };
+
+        // - App Sockets  -----------------------------------------------------
+        private Socket loopBackSocket;
+
+        //endpoints of modules
+        private EndPoint endPointLoopBack = new IPEndPoint(IPAddress.Loopback, 0);
+
+        // Data stream
+        private byte[] loopBuffer = new byte[1024];
+
 
         //class for counting bytes
         public CTraffic traffic = new CTraffic();
@@ -100,6 +111,26 @@ namespace Twol
 
             return;
         }
+
+        public void StartLoopbackServer()
+        {
+            try
+            {
+                // Initialise the socket
+                loopBackSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+                loopBackSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast, true);
+                loopBackSocket.Bind(new IPEndPoint(IPAddress.Loopback, 15555));
+                loopBackSocket.BeginReceiveFrom(loopBuffer, 0, loopBuffer.Length, SocketFlags.None,
+                    ref endPointLoopBack, new AsyncCallback(ReceiveAppData), null);
+                Log.EventWriter("UDP Loopback network started: " + IPAddress.Loopback.ToString() + ":" + "15555");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Load Error: " + ex.Message, "UDP Server", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Log.EventWriter("Catch -> Load UDP Loopback Error: " + ex.ToString());
+            }
+        }
+
 
         //initialize loopback and udp network
         public void LoadUDPNetwork()
@@ -717,6 +748,118 @@ namespace Twol
         }
 
         #endregion
+
+        #region Loopback to plugins
+        private void ReceiveFromAgIO(byte[] data)
+        {
+            try
+            {
+                if (data.Length > 4 && data[0] == 0x80 && data[1] == 0x81)
+                {
+                    int Length = Math.Max((data[4]) + 5, 5);
+                    if (data.Length > Length)
+                    {
+                        byte CK_A = 0;
+                        for (int j = 2; j < Length; j++)
+                        {
+                            CK_A += data[j];
+                        }
+
+                        if (data[Length] != (byte)CK_A)
+                        {
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        return;
+                    }
+
+                    switch (data[3])
+                    {
+                        #region Remote Switches
+                        case 234://MTZ8302 Feb 2020
+                            {
+                                //Steer angle actual
+                                if (data.Length != 14)
+                                    break;
+
+                                Buffer.BlockCopy(data, 5, mc.ss, 1, 8);
+
+                                DoRemoteSwitches();
+
+                                break;
+                            }
+                            #endregion
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.EventWriter($"Catch ReceiveFromAgIO error: {ex.Message}");
+            }
+        }
+
+        private void ReceiveAppData(IAsyncResult asyncResult)
+        {
+            try
+            {
+                // Receive all data
+                int msgLen = loopBackSocket.EndReceiveFrom(asyncResult, ref endPointLoopBack);
+
+                byte[] localMsg = new byte[msgLen];
+                Array.Copy(loopBuffer, localMsg, msgLen);
+
+                // Listen for more connections again...
+                loopBackSocket.BeginReceiveFrom(loopBuffer, 0, loopBuffer.Length, SocketFlags.None,
+                    ref endPointLoopBack, new AsyncCallback(ReceiveAppData), null);
+
+                BeginInvoke((MethodInvoker)(() => ReceiveFromAgIO(localMsg)));
+            }
+            catch (Exception)
+            {
+                // MessageBox.Show("ReceiveData Error: " + ex.Message, "UDP Server", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public void SendPgnToLoop(byte[] byteData)
+        {
+            if (loopBackSocket != null && byteData.Length > 2)
+            {
+                try
+                {
+                    int crc = 0;
+                    for (int i = 2; i + 1 < byteData.Length; i++)
+                    {
+                        crc += byteData[i];
+                    }
+                    byteData[byteData.Length - 1] = (byte)crc;
+
+                    loopBackSocket.BeginSendTo(byteData, 0, byteData.Length, SocketFlags.None,
+                        epAgIO, new AsyncCallback(SendAsyncLoopData), null);
+                }
+                catch (Exception)
+                {
+                    //Log.EventWriter("Sending UDP Message" + e.ToString());
+                    //MessageBox.Show("Send Error: " + e.Message, "UDP Client", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        public void SendAsyncLoopData(IAsyncResult asyncResult)
+        {
+            try
+            {
+                loopBackSocket.EndSend(asyncResult);
+            }
+            catch (Exception)
+            {
+                //MessageBox.Show("SendData Error: " + ex.Message, "UDP Server", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        #endregion
+
 
         //for moving and sizing borderless window
         protected override void WndProc(ref Message m)
