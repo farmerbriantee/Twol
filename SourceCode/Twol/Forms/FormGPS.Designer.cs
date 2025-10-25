@@ -198,6 +198,7 @@ namespace Twol
             this.btnProfiles = new System.Windows.Forms.Button();
             this.lbl_IO_Profile = new System.Windows.Forms.Label();
             this.panel_IO = new System.Windows.Forms.Panel();
+            this.btnExtSimTool = new System.Windows.Forms.Button();
             this.btnNTRIPSerial = new System.Windows.Forms.Button();
             this.lblToGPS = new System.Windows.Forms.Label();
             this.lblCount = new System.Windows.Forms.Label();
@@ -210,7 +211,6 @@ namespace Twol
             this.btnSlide = new System.Windows.Forms.Button();
             this.btnExtSim = new System.Windows.Forms.Button();
             this.tmrNTRIP = new System.Windows.Forms.Timer(this.components);
-            this.btnExtSimTool = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStripFlag.SuspendLayout();
             this.statusStripLeft.SuspendLayout();
@@ -1522,7 +1522,7 @@ namespace Twol
             this.flp1.Controls.Add(this.btnTracksOff);
             this.flp1.Controls.Add(this.btnRefNudge);
             this.flp1.FlowDirection = System.Windows.Forms.FlowDirection.BottomUp;
-            this.flp1.Location = new System.Drawing.Point(800, 48);
+            this.flp1.Location = new System.Drawing.Point(640, 63);
             this.flp1.Name = "flp1";
             this.flp1.Size = new System.Drawing.Size(86, 488);
             this.flp1.TabIndex = 539;
@@ -2884,6 +2884,24 @@ namespace Twol
             this.panel_IO.Size = new System.Drawing.Size(270, 554);
             this.panel_IO.TabIndex = 547;
             // 
+            // btnExtSimTool
+            // 
+            this.btnExtSimTool.BackColor = System.Drawing.Color.Transparent;
+            this.btnExtSimTool.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnExtSimTool.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlText;
+            this.btnExtSimTool.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExtSimTool.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExtSimTool.ForeColor = System.Drawing.Color.Black;
+            this.btnExtSimTool.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnExtSimTool.Location = new System.Drawing.Point(100, 492);
+            this.btnExtSimTool.Margin = new System.Windows.Forms.Padding(4);
+            this.btnExtSimTool.Name = "btnExtSimTool";
+            this.btnExtSimTool.Size = new System.Drawing.Size(77, 55);
+            this.btnExtSimTool.TabIndex = 544;
+            this.btnExtSimTool.Text = "Sim Tool";
+            this.btnExtSimTool.UseVisualStyleBackColor = false;
+            this.btnExtSimTool.Click += new System.EventHandler(this.btnExtSimTool_Click);
+            // 
             // btnNTRIPSerial
             // 
             this.btnNTRIPSerial.BackColor = System.Drawing.Color.Gainsboro;
@@ -3062,30 +3080,13 @@ namespace Twol
             // 
             this.tmrNTRIP.Interval = 1000;
             // 
-            // btnExtSimTool
-            // 
-            this.btnExtSimTool.BackColor = System.Drawing.Color.Transparent;
-            this.btnExtSimTool.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnExtSimTool.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlText;
-            this.btnExtSimTool.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExtSimTool.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExtSimTool.ForeColor = System.Drawing.Color.Black;
-            this.btnExtSimTool.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnExtSimTool.Location = new System.Drawing.Point(100, 492);
-            this.btnExtSimTool.Margin = new System.Windows.Forms.Padding(4);
-            this.btnExtSimTool.Name = "btnExtSimTool";
-            this.btnExtSimTool.Size = new System.Drawing.Size(77, 55);
-            this.btnExtSimTool.TabIndex = 544;
-            this.btnExtSimTool.Text = "Sim Tool";
-            this.btnExtSimTool.UseVisualStyleBackColor = false;
-            this.btnExtSimTool.Click += new System.EventHandler(this.btnExtSimTool_Click);
-            // 
             // FormGPS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(1000, 720);
+            this.Controls.Add(this.flp1);
             this.Controls.Add(this.panelNavigation);
             this.Controls.Add(this.panelSim);
             this.Controls.Add(this.panel_IO);
@@ -3101,7 +3102,6 @@ namespace Twol
             this.Controls.Add(this.lblCurrentField);
             this.Controls.Add(this.lblGuidanceLine);
             this.Controls.Add(this.oglBack);
-            this.Controls.Add(this.flp1);
             this.Controls.Add(this.lblHardwareMessage);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Tahoma", 12F);

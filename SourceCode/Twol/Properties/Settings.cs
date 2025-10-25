@@ -1,15 +1,15 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Xml;
-using System.Diagnostics;
-using System.Reflection;
-using System.Globalization;
 using System.Xml.Serialization;
-using System.Collections;
 
 namespace Twol
 {
@@ -223,7 +223,7 @@ namespace Twol
             public int setAS_deadZoneDelay = 5;
             public int setAS_deadZoneDistance = 1;
             public int setAS_deadZoneHeading = 10;
-            public int setAS_numGuideLines = 10;
+            public int setAS_numGuideLines = 5;
             public int setAS_wasOffset = 3;
 
             public bool setBnd_isDrawPivot = true;

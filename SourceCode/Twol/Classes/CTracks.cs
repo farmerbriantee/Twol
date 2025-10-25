@@ -388,8 +388,6 @@ namespace Twol
                         Capacity = 128
                     };
 
-                    newGuideLL.Add(newGuideList);
-
                     double nextGuideDist = (Settings.Tool.toolWidth - Settings.Tool.overlap) * numGuides +
                         (isHeadingSameWay ? -Settings.Tool.offset : Settings.Tool.offset);
 
@@ -413,6 +411,9 @@ namespace Twol
                             }
                         }
                     }
+
+                    if (newGuideList.Count > 5) newGuideLL.Add(newGuideList);
+
                 }
             }
             catch (Exception e)
