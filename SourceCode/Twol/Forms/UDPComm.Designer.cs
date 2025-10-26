@@ -66,7 +66,7 @@ namespace Twol
 
         public IPEndPoint epModuleSet = new IPEndPoint(IPAddress.Parse("255.255.255.255"), 8888);
         public IPEndPoint epModuleSetTool = new IPEndPoint(IPAddress.Parse("255.255.255.255"), 18888);
-        private EndPoint epAgIO = new IPEndPoint(IPAddress.Parse("127.255.255.255"), 17777);
+        private EndPoint epPlugins = new IPEndPoint(IPAddress.Parse("127.255.255.255"), 17777);
 
         private IPEndPoint epNtrip;
 
@@ -80,7 +80,6 @@ namespace Twol
 
         // Data stream
         private byte[] loopBuffer = new byte[1024];
-
 
         //class for counting bytes
         public CTraffic traffic = new CTraffic();
@@ -130,7 +129,6 @@ namespace Twol
                 Log.EventWriter("Catch -> Load UDP Loopback Error: " + ex.ToString());
             }
         }
-
 
         //initialize loopback and udp network
         public void LoadUDPNetwork()
@@ -201,30 +199,47 @@ namespace Twol
 
         public void SendUDPMessage(byte[] byteData, IPEndPoint endPoint)
         {
-            // Validate network and data
-            if (!isUDPNetworkConnected || byteData == null || byteData.Length == 0 || endPoint == null)
+            if (!isUDPNetworkConnected || UDPSocket == null || byteData == null || byteData.Length == 0 || endPoint == null)
                 return;
 
             try
             {
-                // Cache endpoint string for logging (avoid indexing into byteData before checking length)
-                string epStr = endPoint.ToString();
-
-                // Begin asynchronous send
-                UDPSocket.BeginSendTo(byteData, 0, byteData.Length, SocketFlags.None,
-                   endPoint, new AsyncCallback(SendDataUDPAsync), null);
-
                 // Monitoring/logging - safe index check
                 if (isUDPMonitorOn)
                 {
+                    string epStr = endPoint.ToString();
                     string code = byteData.Length > 3 ? byteData[3].ToString() : "N/A";
                     logUDPSentence.Append(DateTime.Now.ToString("ss.fff\t") + epStr + "\t" + " > " + code + "\r\n");
                 }
+
+                // Fire-and-forget: queue background send using Task.Run with synchronous SendTo.
+                int length = byteData.Length;
+                byte[] copy = System.Buffers.ArrayPool<byte>.Shared.Rent(length);
+                Buffer.BlockCopy(byteData, 0, copy, 0, length);
+
+                System.Threading.Tasks.Task.Run(() =>
+                {
+                    try
+                    {
+                        var socket = UDPSocket;
+                        if (socket != null)
+                        {
+                            socket.SendTo(copy, 0, length, SocketFlags.None, endPoint);
+                        }
+                    }
+                    catch
+                    {
+                        // swallow exceptions - non-blocking fire-and-forget
+                    }
+                    finally
+                    {
+                        System.Buffers.ArrayPool<byte>.Shared.Return(copy);
+                    }
+                });
             }
-            catch (Exception)
+            catch
             {
-                // Log any exceptions to help diagnose network issues
-                //try { Log.EventWriter("SendUDPMessage error: " + ex.ToString()); } catch { }
+                // Intentionally ignore errors from logging/queuing to keep fire-and-forget semantics
             }
 
             // Module Apps required?
@@ -821,44 +836,56 @@ namespace Twol
             }
         }
 
+        // - Fire-and-forget: queue background send using Task.Run with synchronous SendTo.
         public void SendPgnToLoop(byte[] byteData)
         {
-            if (loopBackSocket != null && byteData.Length > 2)
+            if (loopBackSocket == null || byteData == null || byteData.Length <= 2) return;
+
+            int length = byteData.Length;
+
+            // Work on a copy to avoid mutating the caller's buffer
+            byte[] copy = ArrayPool<byte>.Shared.Rent(length);
+            Buffer.BlockCopy(byteData, 0, copy, 0, length);
+
+            // Compute CRC: sum of bytes [2 .. length-2], store in last byte
+            int crc = 0;
+            for (int i = 2; i + 1 < length; i++)
             {
-                try
-                {
-                    int crc = 0;
-                    for (int i = 2; i + 1 < byteData.Length; i++)
-                    {
-                        crc += byteData[i];
-                    }
-                    byteData[byteData.Length - 1] = (byte)crc;
-
-                    loopBackSocket.BeginSendTo(byteData, 0, byteData.Length, SocketFlags.None,
-                        epAgIO, new AsyncCallback(SendAsyncLoopData), null);
-                }
-                catch (Exception)
-                {
-                    //Log.EventWriter("Sending UDP Message" + e.ToString());
-                    //MessageBox.Show("Send Error: " + e.Message, "UDP Client", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                crc += copy[i];
             }
-        }
+            copy[length - 1] = (byte)crc;
 
-        public void SendAsyncLoopData(IAsyncResult asyncResult)
-        {
+            // Fire-and-forget the send
             try
             {
-                loopBackSocket.EndSend(asyncResult);
+                System.Threading.Tasks.Task.Run(() =>
+                {
+                    try
+                    {
+                        var socket = loopBackSocket;
+                        if (socket != null)
+                        {
+                            socket.SendTo(copy, 0, length, SocketFlags.None, epPlugins);
+                        }
+                    }
+                    catch
+                    {
+                        // Intentionally swallow exceptions for fire-and-forget
+                    }
+                    finally
+                    {
+                        ArrayPool<byte>.Shared.Return(copy);
+                    }
+                });
             }
-            catch (Exception)
+            catch
             {
-                //MessageBox.Show("SendData Error: " + ex.Message, "UDP Server", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // In case queuing the task fails, return the buffer
+                ArrayPool<byte>.Shared.Return(copy);
             }
         }
 
         #endregion
-
 
         //for moving and sizing borderless window
         protected override void WndProc(ref Message m)
@@ -1049,7 +1076,6 @@ namespace Twol
                 btnMaximizeMainForm.PerformClick();
                 return true;    // indicate that you handled this keystroke
             }
-
 
             //reset Sim
             if (keyData == Keys.R)
