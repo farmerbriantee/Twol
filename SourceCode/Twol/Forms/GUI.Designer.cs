@@ -133,6 +133,10 @@ namespace Twol
                             }
                         }
                     }
+
+                    //Hello Alarm logic
+                    DoHelloAlarmLogic();
+                    DoTraffic();
                 }
 
                 return;
@@ -184,7 +188,6 @@ namespace Twol
                         case 3:
                             lblCurrentField.Text = "";
                             break;
-
 
                         default:
                             break;
@@ -261,7 +264,6 @@ namespace Twol
                 DoHelloAlarmLogic();
 
                 DoTraffic();
-
 
             }//end every 2 seconds
 
@@ -533,7 +535,6 @@ namespace Twol
                 else
                     PGN_226.pgn[PGN_226.isBypass] = 0;
 
-
                 //manual rate setting
                 PGN_225.pgn[PGN_225.rate] = Settings.Tool.setNozz.manualRate;
 
@@ -753,7 +754,6 @@ namespace Twol
                 //cm to inch
                 glm.cm2CmOrIn = 0.3937;
 
-
                 glm.kmhToMphOrKmh = 0.621371;//Km/H to mph
                 glm.mphOrKmhToKmh = 1.60934;//mph to Km/H
 
@@ -926,11 +926,9 @@ namespace Twol
             tlpNozzle.Left = (isPanelBottomHidden ? 5 : 80);
             tlpNozzle.Height = oglMain.Height;
 
-
             panelSim.Top = Height - (!isJobStarted || isPanelBottomHidden ? 60 : 130);
             panelSim.Left = Width / 2 - 330;
             panelSim.Width = 700;
-
 
             panelRight.Visible = isJobStarted;
             panelBottom.Visible = isJobStarted && !isPanelBottomHidden;

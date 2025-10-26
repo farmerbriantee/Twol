@@ -285,8 +285,8 @@ namespace Twol
             PGN_236.pgn[PGN_236.pin21] = (byte)int.Parse(words[21]);
             PGN_236.pgn[PGN_236.pin22] = (byte)int.Parse(words[22]);
             PGN_236.pgn[PGN_236.pin23] = (byte)int.Parse(words[23]);
-            mf.SendUDPMessage(PGN_236.pgn, mf.epModule);
 
+            mf.SendUDPMessage(PGN_236.pgn, mf.epModule);
 
             for (int i = 0; i < 16; i++)
             {
@@ -372,7 +372,6 @@ namespace Twol
         }
 
         #endregion
-
 
         #region Uturn Enter-Leave
 

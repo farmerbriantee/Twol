@@ -82,7 +82,7 @@ namespace Twol
         public void ConfigureNTRIP()
         {
             lblWatch.Text = "Wait GPS";
-            lblNTRIP_IP.Text = "";
+            //lblNTRIP_IP.Text = "";
             lblMount.Text = "";
 
             //start NTRIP if required
@@ -100,7 +100,7 @@ namespace Twol
                 lblNTRIPBytes.Visible = true;
                 lblToGPS.Visible = true;
                 lblMount.Visible = true;
-                lblNTRIP_IP.Visible = true;
+                //lblNTRIP_IP.Visible = true;
             }
             else
             {
@@ -110,7 +110,7 @@ namespace Twol
                 lblNTRIPBytes.Visible = false;
                 lblToGPS.Visible = false;
                 lblMount.Visible = false;
-                lblNTRIP_IP.Visible = false;
+                //lblNTRIP_IP.Visible = false;
             }
 
             btnStartStopNtrip.Text = "Off";
@@ -217,7 +217,7 @@ namespace Twol
                 }
 
                 isNTRIP_Connecting = true;
-                lblNTRIP_IP.Text = Settings.IO.setNTRIP_casterIP;
+                //lblNTRIP_IP.Text = Settings.IO.setNTRIP_casterIP;
                 lblMount.Text = Settings.IO.setNTRIP_mount;
             }
             else if (Settings.IO.setPass_isOn)

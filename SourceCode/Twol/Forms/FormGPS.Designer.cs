@@ -198,12 +198,13 @@ namespace Twol
             this.btnProfiles = new System.Windows.Forms.Button();
             this.lbl_IO_Profile = new System.Windows.Forms.Label();
             this.panel_IO = new System.Windows.Forms.Panel();
+            this.lblFromGPSTool = new System.Windows.Forms.Label();
+            this.lblFromGPS = new System.Windows.Forms.Label();
             this.btnExtSimTool = new System.Windows.Forms.Button();
             this.btnNTRIPSerial = new System.Windows.Forms.Button();
             this.lblToGPS = new System.Windows.Forms.Label();
             this.lblCount = new System.Windows.Forms.Label();
             this.lblMount = new System.Windows.Forms.Label();
-            this.lblNTRIP_IP = new System.Windows.Forms.Label();
             this.btnUDPMonitor = new System.Windows.Forms.Button();
             this.btnNtrip = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -1522,7 +1523,7 @@ namespace Twol
             this.flp1.Controls.Add(this.btnTracksOff);
             this.flp1.Controls.Add(this.btnRefNudge);
             this.flp1.FlowDirection = System.Windows.Forms.FlowDirection.BottomUp;
-            this.flp1.Location = new System.Drawing.Point(640, 63);
+            this.flp1.Location = new System.Drawing.Point(698, 63);
             this.flp1.Name = "flp1";
             this.flp1.Size = new System.Drawing.Size(86, 488);
             this.flp1.TabIndex = 539;
@@ -2846,7 +2847,7 @@ namespace Twol
             this.lbl_IO_Profile.Location = new System.Drawing.Point(0, 0);
             this.lbl_IO_Profile.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_IO_Profile.Name = "lbl_IO_Profile";
-            this.lbl_IO_Profile.Size = new System.Drawing.Size(270, 25);
+            this.lbl_IO_Profile.Size = new System.Drawing.Size(417, 25);
             this.lbl_IO_Profile.TabIndex = 533;
             this.lbl_IO_Profile.Text = "Profile";
             this.lbl_IO_Profile.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2854,12 +2855,13 @@ namespace Twol
             // panel_IO
             // 
             this.panel_IO.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel_IO.Controls.Add(this.lblFromGPSTool);
+            this.panel_IO.Controls.Add(this.lblFromGPS);
             this.panel_IO.Controls.Add(this.btnExtSimTool);
             this.panel_IO.Controls.Add(this.btnNTRIPSerial);
             this.panel_IO.Controls.Add(this.lblToGPS);
             this.panel_IO.Controls.Add(this.lblCount);
             this.panel_IO.Controls.Add(this.lblMount);
-            this.panel_IO.Controls.Add(this.lblNTRIP_IP);
             this.panel_IO.Controls.Add(this.btnUDPMonitor);
             this.panel_IO.Controls.Add(this.btnNtrip);
             this.panel_IO.Controls.Add(this.label1);
@@ -2881,8 +2883,36 @@ namespace Twol
             this.panel_IO.Controls.Add(this.btnGPS);
             this.panel_IO.Location = new System.Drawing.Point(255, 46);
             this.panel_IO.Name = "panel_IO";
-            this.panel_IO.Size = new System.Drawing.Size(270, 554);
+            this.panel_IO.Size = new System.Drawing.Size(417, 554);
             this.panel_IO.TabIndex = 547;
+            // 
+            // lblFromGPSTool
+            // 
+            this.lblFromGPSTool.AutoSize = true;
+            this.lblFromGPSTool.BackColor = System.Drawing.Color.Transparent;
+            this.lblFromGPSTool.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFromGPSTool.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblFromGPSTool.Location = new System.Drawing.Point(105, 401);
+            this.lblFromGPSTool.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblFromGPSTool.Name = "lblFromGPSTool";
+            this.lblFromGPSTool.Size = new System.Drawing.Size(26, 18);
+            this.lblFromGPSTool.TabIndex = 546;
+            this.lblFromGPSTool.Text = "---";
+            this.lblFromGPSTool.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblFromGPS
+            // 
+            this.lblFromGPS.AutoSize = true;
+            this.lblFromGPS.BackColor = System.Drawing.Color.Transparent;
+            this.lblFromGPS.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFromGPS.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblFromGPS.Location = new System.Drawing.Point(104, 305);
+            this.lblFromGPS.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblFromGPS.Name = "lblFromGPS";
+            this.lblFromGPS.Size = new System.Drawing.Size(26, 18);
+            this.lblFromGPS.TabIndex = 545;
+            this.lblFromGPS.Text = "---";
+            this.lblFromGPS.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnExtSimTool
             // 
@@ -2940,7 +2970,7 @@ namespace Twol
             this.lblCount.BackColor = System.Drawing.Color.Transparent;
             this.lblCount.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCount.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblCount.Location = new System.Drawing.Point(292, 74);
+            this.lblCount.Location = new System.Drawing.Point(312, 64);
             this.lblCount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCount.Name = "lblCount";
             this.lblCount.Size = new System.Drawing.Size(69, 18);
@@ -2953,26 +2983,13 @@ namespace Twol
             this.lblMount.BackColor = System.Drawing.Color.Transparent;
             this.lblMount.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMount.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblMount.Location = new System.Drawing.Point(259, 52);
+            this.lblMount.Location = new System.Drawing.Point(278, 42);
             this.lblMount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblMount.Name = "lblMount";
-            this.lblMount.Size = new System.Drawing.Size(133, 18);
+            this.lblMount.Size = new System.Drawing.Size(136, 18);
             this.lblMount.TabIndex = 539;
             this.lblMount.Text = "--";
             this.lblMount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblNTRIP_IP
-            // 
-            this.lblNTRIP_IP.BackColor = System.Drawing.Color.Transparent;
-            this.lblNTRIP_IP.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNTRIP_IP.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblNTRIP_IP.Location = new System.Drawing.Point(259, 30);
-            this.lblNTRIP_IP.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblNTRIP_IP.Name = "lblNTRIP_IP";
-            this.lblNTRIP_IP.Size = new System.Drawing.Size(133, 18);
-            this.lblNTRIP_IP.TabIndex = 540;
-            this.lblNTRIP_IP.Text = "--";
-            this.lblNTRIP_IP.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnUDPMonitor
             // 
@@ -3319,11 +3336,12 @@ namespace Twol
         private System.Windows.Forms.Button btnUDPMonitor;
         private System.Windows.Forms.Label lblCount;
         private System.Windows.Forms.Label lblMount;
-        private System.Windows.Forms.Label lblNTRIP_IP;
         private System.Windows.Forms.Label lblToGPS;
         private System.Windows.Forms.Timer tmrNTRIP;
         private System.Windows.Forms.Button btnNTRIPSerial;
         private System.Windows.Forms.Button btnExtSimTool;
+        private System.Windows.Forms.Label lblFromGPS;
+        private System.Windows.Forms.Label lblFromGPSTool;
     }
 }
 

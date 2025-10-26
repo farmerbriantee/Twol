@@ -221,11 +221,15 @@ namespace Twol
                     logUDPSentence.Append(DateTime.Now.ToString("ss.fff\t") + epStr + "\t" + " > " + code + "\r\n");
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // Log any exceptions to help diagnose network issues
-                try { Log.EventWriter("SendUDPMessage error: " + ex.ToString()); } catch { }
+                //try { Log.EventWriter("SendUDPMessage error: " + ex.ToString()); } catch { }
             }
+
+            // Module Apps required?
+            if (Settings.IO.setUDP_isLoopBack)
+                SendPgnToLoop(byteData);
         }
 
         private void SendDataUDPAsync(IAsyncResult asyncResult)
@@ -501,11 +505,6 @@ namespace Twol
 
                     pn.rawBuffer += Encoding.ASCII.GetString(data, 0, msgLen);
                     pn.ParseNMEA(ref pn.rawBuffer);
-
-                    //if (isUDPMonitorOn && isGPSLogOn)
-                    //{
-                    //    logUDPSentence.Append(DateTime.Now.ToString("ss.fff\t") + System.Text.Encoding.ASCII.GetString(data));
-                    //}
 
                     if (pn.isNMEAToSend)
                     {

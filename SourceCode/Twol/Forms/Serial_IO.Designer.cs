@@ -104,22 +104,22 @@ namespace Twol
             traffic.helloFromAutoSteer++;
             traffic.helloFromIMU++;
 
+            if (panel_IO.Visible)
+            {
+                lblFromGPS.Text = traffic.cntrGPSOut == 0 ? "---" : ((traffic.cntrGPSOut >> 1)).ToString();
+                lblFromGPSTool.Text = traffic.cntrGPSOutTool == 0 ? "---" : ((traffic.cntrGPSOutTool >> 1)).ToString();
+                //lblGPSOutSerial.Text = traffic.cntrGPS_OutSerial == 0 ? "---" : ((traffic.cntrGPS_OutSerial)).ToString();
+
+                //lblSlowGPSOut.Text = "";
+
+                //lblCurentLon.Text = pnGPS.longitude.ToString("N7");
+                //lblCurrentLat.Text = pnGPS.latitude.ToString("N7");
+            }
+
             //reset all counters
             traffic.cntrGPSOut = 0;
             traffic.cntrGPSOutTool = 0;
             traffic.cntrGPS_OutSerial = 0;
-
-            //if (focusSkipCounter != 0)
-            //{
-            //    lblFromGPS.Text = traffic.cntrGPSOut == 0 ? "---" : ((traffic.cntrGPSOut >> 1)).ToString();
-            //    lblFromGPSTool.Text = traffic.cntrGPSOutTool == 0 ? "---" : ((traffic.cntrGPSOutTool >> 1)).ToString();
-            //    lblGPSOutSerial.Text = traffic.cntrGPS_OutSerial == 0 ? "---" : ((traffic.cntrGPS_OutSerial)).ToString();
-
-            //lblSlowGPSOut.Text = "";
-
-            //lblCurentLon.Text = pnGPS.longitude.ToString("N7");
-            //lblCurrentLat.Text = pnGPS.latitude.ToString("N7");
-            //}
         }
 
 

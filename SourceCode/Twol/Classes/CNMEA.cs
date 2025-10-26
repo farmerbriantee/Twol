@@ -5,7 +5,7 @@ namespace Twol
 {
     public class CNMEA
     {
-        
+
         //local plane geometry
         public static double latStart, lonStart;
 
@@ -20,7 +20,7 @@ namespace Twol
         //other GIS Info
         public double vtgSpeed = 0;
 
-        public double  age;
+        public double age;
 
 
         public string rawBuffer = "";
@@ -36,7 +36,7 @@ namespace Twol
             headingTrueDual = float.MaxValue, roll = float.MaxValue;
 
         public double hdop, latitude, longitude;
-            public int satellitesTracked;
+        public int satellitesTracked;
 
         //imu data
         public ushort imuHeading = ushort.MaxValue;
@@ -74,7 +74,7 @@ namespace Twol
 
             Settings.Vehicle.setGPS_SimLatitude = lat;//this is actuallly the last field position
             Settings.Vehicle.setGPS_SimLongitude = lon;
-            
+
             mPerDegreeLat = 111132.92 - 559.82 * Math.Cos(2.0 * latStart * 0.01745329251994329576923690766743) + 1.175
             * Math.Cos(4.0 * latStart * 0.01745329251994329576923690766743) - 0.0023
             * Math.Cos(6.0 * latStart * 0.01745329251994329576923690766743);
@@ -204,23 +204,9 @@ namespace Twol
 
             if (rawBuffer.Length > 301)
             {
-                //if (isLogNMEA)
-                //{
-                //    logNMEASentence.Append("\r\n" +
-                //        DateTime.UtcNow.ToString(" ->>  mm:ss.fff ", CultureInfo.InvariantCulture)
-                //        + "\r\n" + rawBuffer + "\r\n");
-                //}
-
                 rawBuffer = "";
                 return;
             }
-
-            //if (mf.isLogMonitorOn)
-            //{
-            //    mf.logMonitorSentence.Append(DateTime.UtcNow
-            //        .ToString("mm:ss.fff ", CultureInfo.InvariantCulture) + rawBuffer);
-            //}
-
 
             //now we have a complete sentence or more somewhere in the portData
             while (true)
@@ -230,12 +216,6 @@ namespace Twol
                 if (nextNMEASentence == null) break;
 
                 words = nextNMEASentence.Split(',');
-
-                //if (isLogNMEA)
-                //{
-                //    logNMEASentence.Append(DateTime.UtcNow.ToString("HHmmss.fff ", CultureInfo.InvariantCulture)
-                //    + " " + nextNMEASentence + "\r\n");
-                //}
 
                 //parse them accordingly
                 if (words.Length < 3) break;
@@ -250,6 +230,12 @@ namespace Twol
                 {
                     ParseVTG();
                     if (mf.isGPSSentencesOn) vtgSentence = nextNMEASentence;
+                }
+
+                else if (words[0] == "$PAOGI" && words.Length > 14)
+                {
+                    ParseOGI();
+                    if (mf.isGPSSentencesOn) paogiSentence = nextNMEASentence;
                 }
 
                 //else if (words[0] == "$GPRMC" || words[0] == "$GNRMC")

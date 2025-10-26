@@ -44,6 +44,10 @@ namespace Twol
             nudThirdIP.Value = ipNew[2] = ipCurrent[2] = Settings.IO.etIP_SubnetThree;
 
             ScanNetwork();
+
+            cboxIsLoopbackOn.Checked = Settings.IO.setUDP_isLoopBack;
+            if (!cboxIsLoopbackOn.Checked) cboxIsLoopbackOn.BackColor = System.Drawing.Color.Salmon;
+            else cboxIsLoopbackOn.BackColor = System.Drawing.Color.LightGreen;
         }
 
         private int tickCounter = 0;
@@ -331,11 +335,6 @@ namespace Twol
             Process.Start("ncpa.cpl");
         }
 
-        private void btnHelp_Click(object sender, EventArgs e)
-        {
-            //System.Diagnostics.Process.Start(gStr.gsEthernetHelp);
-        }
-
         private void btnSerialCancel_Click(object sender, EventArgs e)
         {
             Close();
@@ -368,6 +367,15 @@ namespace Twol
             ipNew[2] = mf.scanReply.subnet[2];
             btnSerialCancel.Image = Properties.Resources.Cancel64;
             pboxSendSteer.Visible = true;
+        }
+
+        private void cboxIsLoopbackOn_Click(object sender, EventArgs e)
+        {
+            Settings.IO.setUDP_isLoopBack = cboxIsLoopbackOn.Checked;
+            if (!cboxIsLoopbackOn.Checked) cboxIsLoopbackOn.BackColor = System.Drawing.Color.Salmon;
+            else cboxIsLoopbackOn.BackColor = System.Drawing.Color.LightGreen;
+
+            mf.YesMessageBox("Restart Twol to Configure Loopback Communication for Plugin Apps");
         }
 
         ////get the ipv4 address only
