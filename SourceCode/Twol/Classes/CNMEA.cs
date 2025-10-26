@@ -294,26 +294,34 @@ namespace Twol
 
             if (isNMEAToSend)
             {
-
                 if (mf.timerSim.Enabled)
                     mf.DisableSim();
 
-                //int CK_A = 0;
-                //for (int j = 2; j < nmeaPGN.Length; j++)
-                //{
-                //    CK_A += nmeaPGN[j];
-                //}
+                if (Settings.IO.setUDP_isLoopBack)
+                {
+                    byte[] nmeaPGN = new byte[30];
 
-                ////checksum
-                //nmeaPGN[56] = (byte)CK_A;
+                    nmeaPGN[0] = 128;
+                    nmeaPGN[1] = 129;
+                    nmeaPGN[2] = 124;
+                    nmeaPGN[3] = 208; //pgn number aka D0
+                    nmeaPGN[4] = 20; // nmea total array count minus 6
 
-                //Send nmea to TWOL
-                //mf.SendToLoopBackMessageTWOL(nmeaPGN);
+                    //longitude
+                    Buffer.BlockCopy(BitConverter.GetBytes(longitude), 0, nmeaPGN, 5, 8);
 
-                //nmeaPGN.CopyTo(GPSOut.nmeaPGN, 0);
+                    //latitude
+                    Buffer.BlockCopy(BitConverter.GetBytes(latitude), 0, nmeaPGN, 13, 8);
 
-                //if (FormLoop.spGPSOut.IsOpen)
-                //    mf.StartBgGPSOutWorker();
+                    //speed converted to kmh from knots
+                    Buffer.BlockCopy(BitConverter.GetBytes(vtgSpeed), 0, nmeaPGN, 21, 8);
+
+                    //checksum
+                    nmeaPGN[29] = 0;
+
+                    //Send nmea to AgOpenGPS
+                    mf.SendPgnToLoop(nmeaPGN);
+                }
             }
         }
 

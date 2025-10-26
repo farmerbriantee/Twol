@@ -1056,7 +1056,7 @@ namespace ModSim
             this.tbarSteerAngleWAS.Maximum = 6000;
             this.tbarSteerAngleWAS.Minimum = -6000;
             this.tbarSteerAngleWAS.Name = "tbarSteerAngleWAS";
-            this.tbarSteerAngleWAS.Size = new System.Drawing.Size(190, 64);
+            this.tbarSteerAngleWAS.Size = new System.Drawing.Size(190, 45);
             this.tbarSteerAngleWAS.TabIndex = 534;
             this.tbarSteerAngleWAS.TickFrequency = 500;
             this.tbarSteerAngleWAS.Scroll += new System.EventHandler(this.tbarSteerAngleWAS_Scroll);
@@ -1141,7 +1141,7 @@ namespace ModSim
             this.tbarSpeed.Maximum = 500;
             this.tbarSpeed.Minimum = -200;
             this.tbarSpeed.Name = "tbarSpeed";
-            this.tbarSpeed.Size = new System.Drawing.Size(190, 64);
+            this.tbarSpeed.Size = new System.Drawing.Size(190, 45);
             this.tbarSpeed.TabIndex = 519;
             this.tbarSpeed.TickFrequency = 50;
             this.tbarSpeed.Scroll += new System.EventHandler(this.tbarSpeed_Scroll);
@@ -1176,7 +1176,7 @@ namespace ModSim
             this.tbarRoll.Maximum = 200;
             this.tbarRoll.Minimum = -200;
             this.tbarRoll.Name = "tbarRoll";
-            this.tbarRoll.Size = new System.Drawing.Size(190, 64);
+            this.tbarRoll.Size = new System.Drawing.Size(190, 45);
             this.tbarRoll.TabIndex = 558;
             this.tbarRoll.TickFrequency = 50;
             this.tbarRoll.Scroll += new System.EventHandler(this.tbarRoll_Scroll);
@@ -1829,7 +1829,7 @@ namespace ModSim
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ClientSize = new System.Drawing.Size(702, 500);
+            this.ClientSize = new System.Drawing.Size(386, 500);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btn10Hz);
             this.Controls.Add(this.lblBypassPercent);

@@ -508,7 +508,7 @@ namespace Twol
 
                     if (pn.isNMEAToSend)
                     {
-                        pnTool.isNMEAToSend = false;
+                        pn.isNMEAToSend = false;
 
                         if (!isGPSPositionInitialized) pn.SetLocalMetersPerDegree(pn.latitude, pn.longitude);
 

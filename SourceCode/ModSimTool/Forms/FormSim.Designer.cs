@@ -529,7 +529,7 @@ namespace ModSimTool
             this.tbarSteerAngleWAS.Maximum = 6000;
             this.tbarSteerAngleWAS.Minimum = -6000;
             this.tbarSteerAngleWAS.Name = "tbarSteerAngleWAS";
-            this.tbarSteerAngleWAS.Size = new System.Drawing.Size(241, 64);
+            this.tbarSteerAngleWAS.Size = new System.Drawing.Size(241, 45);
             this.tbarSteerAngleWAS.TabIndex = 534;
             this.tbarSteerAngleWAS.TickFrequency = 500;
             this.tbarSteerAngleWAS.Scroll += new System.EventHandler(this.tbarSteerAngleWAS_Scroll);
@@ -614,7 +614,7 @@ namespace ModSimTool
             this.tbarSpeed.Maximum = 500;
             this.tbarSpeed.Minimum = -200;
             this.tbarSpeed.Name = "tbarSpeed";
-            this.tbarSpeed.Size = new System.Drawing.Size(241, 64);
+            this.tbarSpeed.Size = new System.Drawing.Size(241, 45);
             this.tbarSpeed.TabIndex = 519;
             this.tbarSpeed.TickFrequency = 50;
             this.tbarSpeed.Scroll += new System.EventHandler(this.tbarSpeed_Scroll);
@@ -649,7 +649,7 @@ namespace ModSimTool
             this.tbarRoll.Maximum = 200;
             this.tbarRoll.Minimum = -200;
             this.tbarRoll.Name = "tbarRoll";
-            this.tbarRoll.Size = new System.Drawing.Size(241, 64);
+            this.tbarRoll.Size = new System.Drawing.Size(241, 45);
             this.tbarRoll.TabIndex = 558;
             this.tbarRoll.TickFrequency = 50;
             this.tbarRoll.Scroll += new System.EventHandler(this.tbarRoll_Scroll);
@@ -871,7 +871,7 @@ namespace ModSimTool
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Azure;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ClientSize = new System.Drawing.Size(607, 352);
+            this.ClientSize = new System.Drawing.Size(447, 352);
             this.Controls.Add(this.btn10Hz);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.lblXTE);
