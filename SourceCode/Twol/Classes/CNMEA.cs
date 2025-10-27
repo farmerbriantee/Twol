@@ -305,7 +305,7 @@ namespace Twol
                     nmeaPGN[1] = 129;
                     nmeaPGN[2] = 124;
                     nmeaPGN[3] = 208; //pgn number aka D0
-                    nmeaPGN[4] = 20; // nmea total array count minus 6
+                    nmeaPGN[4] = 24; // nmea total array count minus 6
 
                     //longitude
                     Buffer.BlockCopy(BitConverter.GetBytes(longitude), 0, nmeaPGN, 5, 8);
