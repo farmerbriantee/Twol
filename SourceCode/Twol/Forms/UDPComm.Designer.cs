@@ -41,9 +41,7 @@ namespace Twol
 
     public partial class FormGPS
     {
-        private readonly Stopwatch swIOFrame = new Stopwatch();
-        public static double gps_IO_Hz = 10;
-        public double now_IO_Hz = 0;
+        //private readonly Stopwatch swIOFrame = new Stopwatch();
 
         // UDP Socket
         public Socket UDPSocket, UDPSocketTool;
@@ -315,7 +313,62 @@ namespace Twol
             {
                 if (msgLen < 2) return;
 
-                if (data[0] == 0x80 && data[1] == 0x81)
+                if (data[0] == 36 && (data[1] == 71 || data[1] == 80 || data[1] == 75))
+                {
+                    traffic.cntrGPSOut += msgLen;
+
+                    pn.rawBuffer += Encoding.ASCII.GetString(data, 0, msgLen);
+                    pn.ParseNMEA(ref pn.rawBuffer);
+
+                    if (pn.isNMEAToSend)
+                    {
+                        pn.isNMEAToSend = false;
+
+                        if (!isGPSPositionInitialized) pn.SetLocalMetersPerDegree(pn.latitude, pn.longitude);
+
+                        pn.ConvertWGS84ToLocal(pn.latitude, pn.longitude, out pn.fix.northing, out pn.fix.easting);
+
+                        if (pn.headingTrueDual != float.MaxValue)
+                        {
+                            pn.headingTrueDual += Settings.Vehicle.setGPS_dualHeadingOffset;
+                            if (pn.headingTrueDual >= 360) pn.headingTrueDual -= 360;
+                            else if (pn.headingTrueDual < 0) pn.headingTrueDual += 360;
+                        }
+
+                        if (pn.imuHeading != ushort.MaxValue)
+                        {
+                            ahrs.imuHeading = pn.imuHeading;
+                            ahrs.imuHeading *= 0.1;
+                        }
+
+                        if (pn.imuRoll != short.MaxValue)
+                        {
+                            double rollK = pn.imuRoll;
+                            if (Settings.Vehicle.setIMU_invertRoll) rollK *= -0.1;
+                            else rollK *= 0.1;
+                            rollK -= Settings.Vehicle.setIMU_rollZero;
+                            ahrs.imuRoll = ahrs.imuRoll * Settings.Vehicle.setIMU_rollFilter + rollK * (1 - Settings.Vehicle.setIMU_rollFilter);
+                        }
+
+                        if (pn.imuPitch != short.MaxValue)
+                        {
+                            ahrs.imuPitch = pn.imuPitch;
+                        }
+
+                        if (pn.imuYawRate != short.MaxValue)
+                        {
+                            ahrs.imuYawRate = pn.imuYawRate;
+                        }
+
+                        sentenceCounter = 0;
+
+                        //swIOFrame.Restart();
+                        UpdateFixPosition();
+
+                        //double timeSliceOfLastFix = (double)(swIOFrame.ElapsedTicks) / Stopwatch.Frequency;
+                    }
+                }
+                else if (data[0] == 0x80 && data[1] == 0x81)
                 {
                     int length = msgLen;
 
@@ -504,65 +557,6 @@ namespace Twol
                     if (isUDPMonitorOn)
                     {
                         logUDPSentence.Append(DateTime.Now.ToString("ss.fff\t") + endPointUDP.ToString() + "\t" + " < " + data[3].ToString() + "\r\n");
-                    }
-                }
-                else if (data[0] == 36 && (data[1] == 71 || data[1] == 80 || data[1] == 75))
-                {
-                    double timeSliceOfLastFix = (double)(swIOFrame.ElapsedTicks) / Stopwatch.Frequency;
-                    swIOFrame.Restart();
-
-                    now_IO_Hz = 1 / timeSliceOfLastFix;
-                    if (now_IO_Hz > 35) now_IO_Hz = 35;
-                    if (now_IO_Hz < 5) now_IO_Hz = 5;
-
-                    gps_IO_Hz = 0.98 * gps_IO_Hz + 0.02 * now_IO_Hz;
-                    traffic.cntrGPSOut += msgLen;
-
-                    pn.rawBuffer += Encoding.ASCII.GetString(data, 0, msgLen);
-                    pn.ParseNMEA(ref pn.rawBuffer);
-
-                    if (pn.isNMEAToSend)
-                    {
-                        pn.isNMEAToSend = false;
-
-                        if (!isGPSPositionInitialized) pn.SetLocalMetersPerDegree(pn.latitude, pn.longitude);
-
-                        pn.ConvertWGS84ToLocal(pn.latitude, pn.longitude, out pn.fix.northing, out pn.fix.easting);
-
-                        if (pn.headingTrueDual != float.MaxValue)
-                        {
-                            pn.headingTrueDual += Settings.Vehicle.setGPS_dualHeadingOffset;
-                            if (pn.headingTrueDual >= 360) pn.headingTrueDual -= 360;
-                            else if (pn.headingTrueDual < 0) pn.headingTrueDual += 360;
-                        }
-
-                        if (pn.imuHeading != ushort.MaxValue)
-                        {
-                            ahrs.imuHeading = pn.imuHeading;
-                            ahrs.imuHeading *= 0.1;
-                        }
-
-                        if (pn.imuRoll != short.MaxValue)
-                        {
-                            double rollK = pn.imuRoll;
-                            if (Settings.Vehicle.setIMU_invertRoll) rollK *= -0.1;
-                            else rollK *= 0.1;
-                            rollK -= Settings.Vehicle.setIMU_rollZero;
-                            ahrs.imuRoll = ahrs.imuRoll * Settings.Vehicle.setIMU_rollFilter + rollK * (1 - Settings.Vehicle.setIMU_rollFilter);
-                        }
-
-                        if (pn.imuPitch != short.MaxValue)
-                        {
-                            ahrs.imuPitch = pn.imuPitch;
-                        }
-
-                        if (pn.imuYawRate != short.MaxValue)
-                        {
-                            ahrs.imuYawRate = pn.imuYawRate;
-                        }
-
-                        sentenceCounter = 0;
-                        UpdateFixPosition();
                     }
                 }
             }

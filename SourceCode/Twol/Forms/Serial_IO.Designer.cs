@@ -122,7 +122,6 @@ namespace Twol
             traffic.cntrGPS_OutSerial = 0;
         }
 
-
         private int totalHeaderByteCount = 5;
 
         public static int baudRateIMU = 115200;
@@ -356,7 +355,6 @@ namespace Twol
 
                 Settings.IO.setPort_wasIMUConnected = false;
 
-
                 spIMU.Dispose();
             }
 
@@ -531,7 +529,6 @@ namespace Twol
                                 break;
                             }
 
-
                         case 126:
                             {
                                 if (length == 11) traffic.helloFromAutoSteer = 0;
@@ -591,7 +588,6 @@ namespace Twol
 
                 MessageBox.Show(e.Message + "\n\r" + "\n\r" + "Go to Settings -> COM Ports to Fix", "No Arduino Port Active");
 
-
                 Settings.IO.setPort_wasSteerModuleConnected = false;
 
             }
@@ -620,7 +616,6 @@ namespace Twol
                 }
 
                 Settings.IO.setPort_wasSteerModuleConnected = false;
-
 
                 spSteerModule.Dispose();
             }
@@ -855,7 +850,6 @@ namespace Twol
 
                 Settings.IO.setPort_wasMachineModuleConnected = false;
 
-
                 spMachineModule.Dispose();
             }
 
@@ -1011,7 +1005,6 @@ namespace Twol
                 CloseGPSPort();
             }
 
-
             if (!spGPS.IsOpen)
             {
                 spGPS.PortName = Settings.IO.setPort_portNameGPS;
@@ -1058,7 +1051,6 @@ namespace Twol
             }
             //lblGPS1Comm.Text = "---";
             Settings.IO.setPort_wasGPSConnected = false;
-
         }
 
         //called by the GPS delegate every time a chunk is rec'd
@@ -1066,16 +1058,6 @@ namespace Twol
         {
             try
             {
-
-
-                double timeSliceOfLastFix = (double)(swIOFrame.ElapsedTicks) / Stopwatch.Frequency;
-                swIOFrame.Restart();
-
-                now_IO_Hz = 1 / timeSliceOfLastFix;
-                if (now_IO_Hz > 35) now_IO_Hz = 35;
-                if (now_IO_Hz < 5) now_IO_Hz = 5;
-
-                gps_IO_Hz = 0.98 * gps_IO_Hz + 0.02 * now_IO_Hz;
                 traffic.cntrGPSOut += sentence.Length;
 
                 pn.rawBuffer += sentence;
@@ -1083,7 +1065,7 @@ namespace Twol
 
                 if (pn.isNMEAToSend)
                 {
-                    pnTool.isNMEAToSend = false;
+                    pn.isNMEAToSend = false;
 
                     if (!isGPSPositionInitialized) pn.SetLocalMetersPerDegree(pn.latitude, pn.longitude);
 
@@ -1183,7 +1165,6 @@ namespace Twol
             //    //Settings.IO.setMenu_isSimulatorOn = simulatorOnToolStripMenuItem.Checked;
             //    //
             //}
-
 
             if (!spGPS2.IsOpen)
             {
@@ -1302,7 +1283,6 @@ namespace Twol
                 //close it first
                 CloseGPSOutPort();
             }
-
 
             if (!spGPSOut.IsOpen)
             {
