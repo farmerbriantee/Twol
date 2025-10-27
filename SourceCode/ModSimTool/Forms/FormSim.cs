@@ -1,12 +1,7 @@
 ﻿using ModSimTool.Properties;
 using System;
-using System.Diagnostics;
-using System.Drawing;
-using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using System.Windows.Forms;
 
 namespace ModSimTool
@@ -78,7 +73,7 @@ namespace ModSimTool
 
         private void btnRelayTest_Click(object sender, EventArgs e)
         {
-                helloFromAgIO[7] = 1;
+            helloFromAgIO[7] = 1;
         }
 
         private void lblIP_Click(object sender, EventArgs e)
@@ -98,7 +93,7 @@ namespace ModSimTool
         {
             if (timer.Interval == 45)
             {
-                timer.Interval = 92;
+                timer.Interval = 94;
                 btn10Hz.Text = "10 Hz";
             }
             else

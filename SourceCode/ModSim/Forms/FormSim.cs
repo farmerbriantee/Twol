@@ -3,7 +3,6 @@ using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Windows.Forms;
-using System.Timers;
 
 namespace ModSim
 {
@@ -18,7 +17,7 @@ namespace ModSim
         //First run
         private void FormSim_Load(object sender, EventArgs e)
         {
-            timer = new System.Timers.Timer(94); 
+            timer = new System.Timers.Timer(94);
             timer.Elapsed += simTimer_Tick;
             timer.AutoReset = true;
             timer.Enabled = true;
@@ -74,7 +73,7 @@ namespace ModSim
 
         private void btnRelayTest_Click(object sender, EventArgs e)
         {
-                helloFromAgIO[7] = 1;
+            helloFromAgIO[7] = 1;
         }
 
         private void lblIP_Click(object sender, EventArgs e)
@@ -94,7 +93,7 @@ namespace ModSim
         {
             if (timer.Interval == 45)
             {
-                timer.Interval = 92;
+                timer.Interval = 94;
                 btn10Hz.Text = "10 Hz";
             }
             else

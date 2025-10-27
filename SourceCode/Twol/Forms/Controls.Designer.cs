@@ -143,34 +143,35 @@ namespace Twol
                 ShowWindow(processName[0].MainWindowHandle, 9);
                 SetForegroundWindow(processName[0].MainWindowHandle);
             }
-        }
 
-        private void btnExtSimTool_Click(object sender, EventArgs e)
-        {
-            Process[] processName = Process.GetProcessesByName("ModSimTool");
-            if (processName.Length == 0)
+            if (Settings.Tool.setToolSteer.isGPSToolActive)
             {
-                //Start application here
-                string strPath = Path.Combine(Application.StartupPath, "ModSimTool.exe");
 
-                try
+                processName = Process.GetProcessesByName("ModSimTool");
+                if (processName.Length == 0)
                 {
-                    ProcessStartInfo processInfo = new ProcessStartInfo();
-                    processInfo.FileName = strPath;
-                    processInfo.WorkingDirectory = Path.GetDirectoryName(strPath);
-                    Process proc = Process.Start(processInfo);
+                    //Start application here
+                    string strPath = Path.Combine(Application.StartupPath, "ModSimTool.exe");
+
+                    try
+                    {
+                        ProcessStartInfo processInfo = new ProcessStartInfo();
+                        processInfo.FileName = strPath;
+                        processInfo.WorkingDirectory = Path.GetDirectoryName(strPath);
+                        Process proc = Process.Start(processInfo);
+                    }
+                    catch
+                    {
+                        TimedMessageBox(2000, "No File Found", "Can't Find ModsimTool");
+                        Log.EventWriter("Can't Find ModsimTool - File Not Found");
+                    }
                 }
-                catch
+                else
                 {
-                    TimedMessageBox(2000, "No File Found", "Can't Find ModsimTool");
-                    Log.EventWriter("Can't Find ModsimTool - File Not Found");
+                    //Set foreground window
+                    ShowWindow(processName[0].MainWindowHandle, 9);
+                    SetForegroundWindow(processName[0].MainWindowHandle);
                 }
-            }
-            else
-            {
-                //Set foreground window
-                ShowWindow(processName[0].MainWindowHandle, 9);
-                SetForegroundWindow(processName[0].MainWindowHandle);
             }
         }
 
