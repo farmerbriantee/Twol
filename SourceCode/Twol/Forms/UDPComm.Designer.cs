@@ -13,32 +13,6 @@ using Twol.Classes;
 
 namespace Twol
 {
-    public class CTraffic
-    {
-        public int cntrGPSIn = 0;
-        public int cntrGPSInBytes = 0;
-        public int cntrGPSOut = 0;
-        public int cntrGPSOutTool = 0;
-        public int cntrGPS_OutSerial = 0;
-
-        public uint helloFromMachine = 99, helloFromAutoSteer = 99, helloFromIMU = 99;
-    }
-
-    public class CScanReply
-    {
-        public string steerIP = "";
-        public string machineIP = "";
-        public string GPS_IP = "";
-        public string IMU_IP = "";
-        public string subnetStr = "";
-
-        public byte[] subnet = { 0, 0, 0 };
-
-        public bool isNewSteer, isNewMachine, isNewGPS, isNewIMU, isNewGPSTool;
-
-        public bool isNewData = false;
-    }
-
     public partial class FormGPS
     {
         //private readonly Stopwatch swIOFrame = new Stopwatch();
@@ -205,9 +179,8 @@ namespace Twol
                 // Monitoring/logging - safe index check
                 if (isUDPMonitorOn)
                 {
-                    string epStr = endPoint.ToString();
                     string code = byteData.Length > 3 ? byteData[3].ToString() : "N/A";
-                    logUDPSentence.Append(DateTime.Now.ToString("ss.fff\t") + epStr + "\t" + " > " + code + "\r\n");
+                    logUDPSentence.Append(DateTime.Now.ToString("ss.fff\t > ") + " Out " + code + " \t" + endPoint + "\r\n");
                 }
 
                 // Fire-and-forget: queue background send using Task.Run with synchronous SendTo.
@@ -536,7 +509,7 @@ namespace Twol
 
                     if (isUDPMonitorOn)
                     {
-                        logUDPSentence.Append(DateTime.Now.ToString("ss.fff\t") + endPointUDP.ToString() + "\t" + " < " + data[3].ToString() + "\r\n");
+                        logUDPSentence.Append(DateTime.Now.ToString("ss.fff\t < ") + " In - " + data[3] + "\t" + endPointUDP + "\r\n");
                     }
                 }
             }
