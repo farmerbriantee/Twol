@@ -26,14 +26,14 @@ namespace ModSimTool
         private byte[] buffer = new byte[1024];
 
         //used to send communication check pgn= C8 or 200
-        private byte[] helloFromAgIO = { 0x80, 0x81, 0x7F, 200, 3, 56, 0, 0, 0x47 };
+        private byte[] helloFromModule = { 0x80, 0x81, 0x7F, 200, 3, 56, 0, 0, 0x47 };
 
         public IPAddress ipCurrent;
 
         //initialize udp network
         public void LoadUDPNetwork()
         {
-            helloFromAgIO[5] = 56;
+            helloFromModule[5] = 56;
 
             lblIP.Text = "";
             try //udp network

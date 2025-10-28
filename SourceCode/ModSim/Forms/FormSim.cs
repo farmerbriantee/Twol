@@ -75,7 +75,7 @@ namespace ModSim
 
         private void btnRelayTest_Click(object sender, EventArgs e)
         {
-            helloFromAgIO[7] = 1;
+            helloFromModule[7] = 1;
         }
 
         private void lblIP_Click(object sender, EventArgs e)

@@ -721,7 +721,7 @@ namespace Twol
         #endregion
 
         #region Loopback to plugins
-        private void ReceiveFromAgIO(byte[] data)
+        private void ReceiveFromPlugins(byte[] data)
         {
             try
             {
@@ -767,7 +767,7 @@ namespace Twol
             }
             catch (Exception ex)
             {
-                Log.EventWriter($"Catch ReceiveFromAgIO error: {ex.Message}");
+                Log.EventWriter($"Catch ReceiveFromPlugins error: {ex.Message}");
             }
         }
 
@@ -785,7 +785,7 @@ namespace Twol
                 loopBackSocket.BeginReceiveFrom(loopBuffer, 0, loopBuffer.Length, SocketFlags.None,
                     ref endPointLoopBack, new AsyncCallback(ReceiveAppData), null);
 
-                BeginInvoke((MethodInvoker)(() => ReceiveFromAgIO(localMsg)));
+                BeginInvoke((MethodInvoker)(() => ReceiveFromPlugins(localMsg)));
             }
             catch (Exception)
             {

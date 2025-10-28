@@ -17,7 +17,7 @@ namespace ModSim
         public bool isUDPNetworkConnected;
 
         //UDP Endpoints
-        public IPEndPoint epAgIO = new IPEndPoint(IPAddress.Parse(
+        public IPEndPoint epModules = new IPEndPoint(IPAddress.Parse(
                 Properties.Settings.Default.etIP_SubnetOne.ToString() + "." +
                 Properties.Settings.Default.etIP_SubnetTwo.ToString() + "." +
                 Properties.Settings.Default.etIP_SubnetThree.ToString() + ".255"), 9999);
@@ -26,14 +26,14 @@ namespace ModSim
         private byte[] buffer = new byte[1024];
 
         //used to send communication check pgn= C8 or 200
-        private byte[] helloFromAgIO = { 0x80, 0x81, 0x7F, 200, 3, 56, 0, 0, 0x47 };
+        private byte[] helloFromModule = { 0x80, 0x81, 0x7F, 200, 3, 56, 0, 0, 0x47 };
 
         public IPAddress ipCurrent;
 
         //initialize udp network
         public void LoadUDPNetwork()
         {
-            helloFromAgIO[5] = 56;
+            helloFromModule[5] = 56;
 
             lblIP.Text = "";
             try //udp network
@@ -87,7 +87,7 @@ namespace ModSim
                     if (byteData.Length != 0)
                     {
                         UDPSocket.BeginSendTo(byteData, 0, byteData.Length, SocketFlags.None,
-                           epAgIO, new AsyncCallback(SendDataUDPAsync), null);
+                           epModules, new AsyncCallback(SendDataUDPAsync), null);
                     }
                 }
                 catch (Exception)
@@ -109,7 +109,7 @@ namespace ModSim
                     byte[] byteData = Encoding.ASCII.GetBytes(message);
                     if (byteData.Length != 0)
                         UDPSocket.BeginSendTo(byteData, 0, byteData.Length, SocketFlags.None,
-                            epAgIO, new AsyncCallback(SendDataUDPAsync), null);
+                            epModules, new AsyncCallback(SendDataUDPAsync), null);
                 }
                 catch (Exception)
                 {
@@ -165,13 +165,13 @@ namespace ModSim
         static byte [] PGN_253 = { 128, 129, 126, 253, 8, 0, 0, 0, 0, 0, 0, 0, 0, 12 };
         int PGN_253_Size = PGN_253.Length - 1;
 
-        //Heart beat hello AgIO
+        //Heart beat hello
         static byte [] helloFromAutoSteer = { 128, 129, 126, 126, 5, 0, 0, 0, 0, 0, 71 };
 
-        //hello from AgIO
+        //hello from Modules
         static byte[] helloFromMachine = { 128, 129, 123, 123, 5, 0, 0, 0, 0, 0, 71 };
 
-        //hello from AgIO
+        //hello from Modules
         static byte[] helloFromIMU = { 128, 129, 121, 121, 5, 0, 0, 0, 0, 0, 71 };
 
         //settings pgn
@@ -434,7 +434,7 @@ namespace ModSim
                                 break;
                             }
 
-                        case 200: // Hello from AgIO
+                        case 200: // Hello from Modules
                             {
                                 int sa = (int)(steerAngleActual * 100);
 
