@@ -575,34 +575,34 @@ namespace ModSim
                                 break;
                             }
 
-                        case 229:
-                            {
-                                byte swap = swapBits[data[5]];
-                                lblZone1.Text = Convert.ToString(swap, 2).PadLeft(8, '0');
+                        //case 229:
+                        //    {
+                        //        byte swap = swapBits[data[5]];
+                        //        lblZone1.Text = Convert.ToString(swap, 2).PadLeft(8, '0');
 
-                                swap = swapBits[data[6]];
-                                lblZone2.Text = Convert.ToString(swap, 2).PadLeft(8, '0');
+                        //        swap = swapBits[data[6]];
+                        //        lblZone2.Text = Convert.ToString(swap, 2).PadLeft(8, '0');
 
-                                swap = swapBits[data[7]];
-                                lblZone3.Text = Convert.ToString(swap, 2).PadLeft(8, '0');
+                        //        swap = swapBits[data[7]];
+                        //        lblZone3.Text = Convert.ToString(swap, 2).PadLeft(8, '0');
 
-                                swap = swapBits[data[8]];
-                                lblZone4.Text = Convert.ToString(swap, 2).PadLeft(8, '0');
+                        //        swap = swapBits[data[8]];
+                        //        lblZone4.Text = Convert.ToString(swap, 2).PadLeft(8, '0');
 
-                                swap = swapBits[data[9]];
-                                lblZone5.Text = Convert.ToString(swap, 2).PadLeft(8, '0');
+                        //        swap = swapBits[data[9]];
+                        //        lblZone5.Text = Convert.ToString(swap, 2).PadLeft(8, '0');
 
-                                swap = swapBits[data[10]];
-                                lblZone6.Text = Convert.ToString(swap, 2).PadLeft(8, '0');
+                        //        swap = swapBits[data[10]];
+                        //        lblZone6.Text = Convert.ToString(swap, 2).PadLeft(8, '0');
 
-                                swap = swapBits[data[11]];
-                                lblZone7.Text = Convert.ToString(swap, 2).PadLeft(8, '0');
+                        //        swap = swapBits[data[11]];
+                        //        lblZone7.Text = Convert.ToString(swap, 2).PadLeft(8, '0');
 
-                                swap = swapBits[data[12]];
-                                lblZone8.Text = Convert.ToString(swap, 2).PadLeft(8, '0');
+                        //        swap = swapBits[data[12]];
+                        //        lblZone8.Text = Convert.ToString(swap, 2).PadLeft(8, '0');
 
-                                break;
-                            }
+                        //        break;
+                        //    }
 
                         case 238:
                             {
@@ -648,6 +648,11 @@ namespace ModSim
                             }
                     }
                 } // end of pgns
+                else
+                {
+                    rtbNtrip.Clear();
+                    rtbNtrip.AppendText(BitConverter.ToString(data));
+                }
             }
             catch
             {

@@ -144,15 +144,8 @@ namespace ModSim
             this.label17 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.lblZone1 = new System.Windows.Forms.Label();
-            this.lblZone2 = new System.Windows.Forms.Label();
-            this.lblZone3 = new System.Windows.Forms.Label();
-            this.lblZone4 = new System.Windows.Forms.Label();
-            this.lblZone5 = new System.Windows.Forms.Label();
-            this.lblZone6 = new System.Windows.Forms.Label();
-            this.lblZone7 = new System.Windows.Forms.Label();
-            this.lblZone8 = new System.Windows.Forms.Label();
             this.btn10Hz = new System.Windows.Forms.Button();
+            this.rtbNtrip = new System.Windows.Forms.RichTextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbarSteerAngleWAS)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbarSpeed)).BeginInit();
@@ -942,7 +935,7 @@ namespace ModSim
             this.lblBypassPercent.BackColor = System.Drawing.Color.SeaShell;
             this.lblBypassPercent.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBypassPercent.ForeColor = System.Drawing.Color.Black;
-            this.lblBypassPercent.Location = new System.Drawing.Point(358, 451);
+            this.lblBypassPercent.Location = new System.Drawing.Point(356, 339);
             this.lblBypassPercent.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblBypassPercent.Name = "lblBypassPercent";
             this.lblBypassPercent.Size = new System.Drawing.Size(14, 19);
@@ -955,7 +948,7 @@ namespace ModSim
             this.label12.BackColor = System.Drawing.Color.Transparent;
             this.label12.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.Color.Black;
-            this.label12.Location = new System.Drawing.Point(280, 451);
+            this.label12.Location = new System.Drawing.Point(278, 339);
             this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(78, 19);
@@ -968,7 +961,7 @@ namespace ModSim
             this.lblTotalVolume.BackColor = System.Drawing.Color.SeaShell;
             this.lblTotalVolume.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalVolume.ForeColor = System.Drawing.Color.Black;
-            this.lblTotalVolume.Location = new System.Drawing.Point(199, 451);
+            this.lblTotalVolume.Location = new System.Drawing.Point(197, 339);
             this.lblTotalVolume.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTotalVolume.Name = "lblTotalVolume";
             this.lblTotalVolume.Size = new System.Drawing.Size(14, 19);
@@ -981,7 +974,7 @@ namespace ModSim
             this.label10.BackColor = System.Drawing.Color.Transparent;
             this.label10.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.Black;
-            this.label10.Location = new System.Drawing.Point(137, 451);
+            this.label10.Location = new System.Drawing.Point(135, 339);
             this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(63, 19);
@@ -994,7 +987,7 @@ namespace ModSim
             this.lblSetGPM.BackColor = System.Drawing.Color.SeaShell;
             this.lblSetGPM.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSetGPM.ForeColor = System.Drawing.Color.Black;
-            this.lblSetGPM.Location = new System.Drawing.Point(74, 451);
+            this.lblSetGPM.Location = new System.Drawing.Point(72, 339);
             this.lblSetGPM.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSetGPM.Name = "lblSetGPM";
             this.lblSetGPM.Size = new System.Drawing.Size(14, 19);
@@ -1007,7 +1000,7 @@ namespace ModSim
             this.label8.BackColor = System.Drawing.Color.Transparent;
             this.label8.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.Black;
-            this.label8.Location = new System.Drawing.Point(6, 451);
+            this.label8.Location = new System.Drawing.Point(4, 339);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(69, 19);
@@ -1694,124 +1687,12 @@ namespace ModSim
             this.groupBox2.Controls.Add(this.lblRaiseTime);
             this.groupBox2.Controls.Add(this.lblLiftEnable);
             this.groupBox2.Controls.Add(this.lblRelayActiveHigh);
-            this.groupBox2.Location = new System.Drawing.Point(18, 332);
+            this.groupBox2.Location = new System.Drawing.Point(384, 483);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(354, 116);
             this.groupBox2.TabIndex = 596;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Machine Module";
-            // 
-            // lblZone1
-            // 
-            this.lblZone1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblZone1.AutoSize = true;
-            this.lblZone1.BackColor = System.Drawing.Color.Transparent;
-            this.lblZone1.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblZone1.ForeColor = System.Drawing.Color.Black;
-            this.lblZone1.Location = new System.Drawing.Point(-1, 478);
-            this.lblZone1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblZone1.Name = "lblZone1";
-            this.lblZone1.Size = new System.Drawing.Size(88, 18);
-            this.lblZone1.TabIndex = 597;
-            this.lblZone1.Text = "00000000";
-            // 
-            // lblZone2
-            // 
-            this.lblZone2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblZone2.AutoSize = true;
-            this.lblZone2.BackColor = System.Drawing.Color.Transparent;
-            this.lblZone2.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblZone2.ForeColor = System.Drawing.Color.Black;
-            this.lblZone2.Location = new System.Drawing.Point(87, 478);
-            this.lblZone2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblZone2.Name = "lblZone2";
-            this.lblZone2.Size = new System.Drawing.Size(88, 18);
-            this.lblZone2.TabIndex = 597;
-            this.lblZone2.Text = "00000000";
-            // 
-            // lblZone3
-            // 
-            this.lblZone3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblZone3.AutoSize = true;
-            this.lblZone3.BackColor = System.Drawing.Color.Transparent;
-            this.lblZone3.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblZone3.ForeColor = System.Drawing.Color.Black;
-            this.lblZone3.Location = new System.Drawing.Point(175, 478);
-            this.lblZone3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblZone3.Name = "lblZone3";
-            this.lblZone3.Size = new System.Drawing.Size(88, 18);
-            this.lblZone3.TabIndex = 597;
-            this.lblZone3.Text = "00000000";
-            // 
-            // lblZone4
-            // 
-            this.lblZone4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblZone4.AutoSize = true;
-            this.lblZone4.BackColor = System.Drawing.Color.Transparent;
-            this.lblZone4.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblZone4.ForeColor = System.Drawing.Color.Black;
-            this.lblZone4.Location = new System.Drawing.Point(263, 478);
-            this.lblZone4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblZone4.Name = "lblZone4";
-            this.lblZone4.Size = new System.Drawing.Size(88, 18);
-            this.lblZone4.TabIndex = 597;
-            this.lblZone4.Text = "00000000";
-            // 
-            // lblZone5
-            // 
-            this.lblZone5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblZone5.AutoSize = true;
-            this.lblZone5.BackColor = System.Drawing.Color.Transparent;
-            this.lblZone5.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblZone5.ForeColor = System.Drawing.Color.Black;
-            this.lblZone5.Location = new System.Drawing.Point(351, 478);
-            this.lblZone5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblZone5.Name = "lblZone5";
-            this.lblZone5.Size = new System.Drawing.Size(88, 18);
-            this.lblZone5.TabIndex = 597;
-            this.lblZone5.Text = "00000000";
-            // 
-            // lblZone6
-            // 
-            this.lblZone6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblZone6.AutoSize = true;
-            this.lblZone6.BackColor = System.Drawing.Color.Transparent;
-            this.lblZone6.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblZone6.ForeColor = System.Drawing.Color.Black;
-            this.lblZone6.Location = new System.Drawing.Point(439, 478);
-            this.lblZone6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblZone6.Name = "lblZone6";
-            this.lblZone6.Size = new System.Drawing.Size(88, 18);
-            this.lblZone6.TabIndex = 597;
-            this.lblZone6.Text = "00000000";
-            // 
-            // lblZone7
-            // 
-            this.lblZone7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblZone7.AutoSize = true;
-            this.lblZone7.BackColor = System.Drawing.Color.Transparent;
-            this.lblZone7.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblZone7.ForeColor = System.Drawing.Color.Black;
-            this.lblZone7.Location = new System.Drawing.Point(527, 478);
-            this.lblZone7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblZone7.Name = "lblZone7";
-            this.lblZone7.Size = new System.Drawing.Size(88, 18);
-            this.lblZone7.TabIndex = 597;
-            this.lblZone7.Text = "00000000";
-            // 
-            // lblZone8
-            // 
-            this.lblZone8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblZone8.AutoSize = true;
-            this.lblZone8.BackColor = System.Drawing.Color.Transparent;
-            this.lblZone8.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblZone8.ForeColor = System.Drawing.Color.Black;
-            this.lblZone8.Location = new System.Drawing.Point(615, 478);
-            this.lblZone8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblZone8.Name = "lblZone8";
-            this.lblZone8.Size = new System.Drawing.Size(88, 18);
-            this.lblZone8.TabIndex = 597;
-            this.lblZone8.Text = "00000000";
             // 
             // btn10Hz
             // 
@@ -1823,29 +1704,32 @@ namespace ModSim
             this.btn10Hz.UseVisualStyleBackColor = true;
             this.btn10Hz.Click += new System.EventHandler(this.btn10Hz_Click);
             // 
+            // rtbNtrip
+            // 
+            this.rtbNtrip.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.rtbNtrip.Location = new System.Drawing.Point(5, 366);
+            this.rtbNtrip.Name = "rtbNtrip";
+            this.rtbNtrip.Size = new System.Drawing.Size(367, 132);
+            this.rtbNtrip.TabIndex = 599;
+            this.rtbNtrip.Text = "";
+            // 
             // FormSim
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ClientSize = new System.Drawing.Size(386, 500);
+            this.ClientSize = new System.Drawing.Size(387, 505);
+            this.Controls.Add(this.rtbNtrip);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btn10Hz);
             this.Controls.Add(this.lblBypassPercent);
-            this.Controls.Add(this.lblZone8);
             this.Controls.Add(this.label12);
-            this.Controls.Add(this.lblZone7);
             this.Controls.Add(this.lblTotalVolume);
-            this.Controls.Add(this.lblZone6);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.lblZone5);
             this.Controls.Add(this.lblSetGPM);
-            this.Controls.Add(this.lblZone4);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.lblZone3);
-            this.Controls.Add(this.lblZone2);
-            this.Controls.Add(this.lblZone1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.label21);
             this.Controls.Add(this.label17);
@@ -2009,14 +1893,6 @@ namespace ModSim
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Label lblZone1;
-        private System.Windows.Forms.Label lblZone2;
-        private System.Windows.Forms.Label lblZone3;
-        private System.Windows.Forms.Label lblZone4;
-        private System.Windows.Forms.Label lblZone5;
-        private System.Windows.Forms.Label lblZone6;
-        private System.Windows.Forms.Label lblZone7;
-        private System.Windows.Forms.Label lblZone8;
         private System.Windows.Forms.Label lblSetGPM;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label lblTotalVolume;
@@ -2026,6 +1902,7 @@ namespace ModSim
         private System.Windows.Forms.Label lblScanReply;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btn10Hz;
+        private System.Windows.Forms.RichTextBox rtbNtrip;
     }
 }
 

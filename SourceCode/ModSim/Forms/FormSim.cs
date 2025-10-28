@@ -45,6 +45,8 @@ namespace ModSim
 
             LoadUDPNetwork();
             timer.Start();
+
+            rtbNtrip.AppendText("NTRIP Data");
         }
 
         private void FormSim_FormClosing(object sender, FormClosingEventArgs e)
