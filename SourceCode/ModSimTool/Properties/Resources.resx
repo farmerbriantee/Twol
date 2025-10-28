@@ -157,9 +157,6 @@
   <data name="Trash" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\btnimages\trash.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="AgIOBtn" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\btnImages\AgIOBtn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="B_IMU" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\btnImages\B_IMU.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -222,9 +219,6 @@
   </data>
   <data name="LogNMEA" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\btnImages\LogNMEA.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="AgIO_First" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\btnImages\AgIO_First.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="PGN" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\btnImages\PGN.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

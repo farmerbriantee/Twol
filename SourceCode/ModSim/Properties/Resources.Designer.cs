@@ -73,26 +73,6 @@ namespace ModSim.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap AgIO_First {
-            get {
-                object obj = ResourceManager.GetObject("AgIO_First", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap AgIOBtn {
-            get {
-                object obj = ResourceManager.GetObject("AgIOBtn", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap ArrowGrnLeft {
             get {
                 object obj = ResourceManager.GetObject("ArrowGrnLeft", resourceCulture);

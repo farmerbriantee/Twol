@@ -118,8 +118,6 @@ namespace Twol
 
             public Color colorVehicle = Color.White;
 
-            public bool isAutoOffAgIO = true;
-            public bool isAutoStartAgIO = true;
             public bool isTermsAccepted = false;
             public bool isLogElevation = false;
             public bool isDirectionMarkers = true;

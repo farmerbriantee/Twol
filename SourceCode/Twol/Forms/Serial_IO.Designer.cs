@@ -93,7 +93,6 @@ namespace Twol
             //    if (currentHello) btnGPS_Out.BackColor = Color.LimeGreen;
             //    else btnGPS_Out.BackColor = Color.Red;
             //    lastHelloGPSOutSerial = currentHello;
-            //    ShowAgIO();
             //}
 
         }

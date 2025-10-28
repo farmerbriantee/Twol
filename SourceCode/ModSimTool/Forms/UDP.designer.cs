@@ -17,7 +17,7 @@ namespace ModSimTool
         public bool isUDPNetworkConnected;
 
         //UDP Endpoints
-        public IPEndPoint epAgIO = new IPEndPoint(IPAddress.Parse(
+        public IPEndPoint epModule = new IPEndPoint(IPAddress.Parse(
                 Properties.Settings.Default.etIP_SubnetOne.ToString() + "." +
                 Properties.Settings.Default.etIP_SubnetTwo.ToString() + "." +
                 Properties.Settings.Default.etIP_SubnetThree.ToString() + ".255"), 19999);
@@ -87,7 +87,7 @@ namespace ModSimTool
                     if (byteData.Length != 0)
                     {
                         UDPSocket.BeginSendTo(byteData, 0, byteData.Length, SocketFlags.None,
-                           epAgIO, new AsyncCallback(SendDataUDPAsync), null);
+                           epModule, new AsyncCallback(SendDataUDPAsync), null);
                     }
                 }
                 catch (Exception)
@@ -109,7 +109,7 @@ namespace ModSimTool
                     byte[] byteData = Encoding.ASCII.GetBytes(message);
                     if (byteData.Length != 0)
                         UDPSocket.BeginSendTo(byteData, 0, byteData.Length, SocketFlags.None,
-                            epAgIO, new AsyncCallback(SendDataUDPAsync), null);
+                            epModule, new AsyncCallback(SendDataUDPAsync), null);
                 }
                 catch (Exception)
                 {
@@ -165,13 +165,13 @@ namespace ModSimTool
         static byte [] PGN_253 = { 128, 129, 126, 253, 8, 0, 0, 0, 0, 0, 0, 0, 0, 12 };
         int PGN_253_Size = PGN_253.Length - 1;
 
-        //Heart beat hello AgIO
+        //Heart beat hello
         static byte [] helloFromAutoSteer = { 128, 129, 226, 226, 5, 0, 0, 0, 0, 0, 71 };
 
-        ////hello from AgIO
+        ////hello from Modules
         //static byte[] helloFromMachine = { 128, 129, 123, 123, 5, 0, 0, 0, 0, 0, 71 };
 
-        ////hello from AgIO
+        ////hello from Modules
         //static byte[] helloFromIMU = { 128, 129, 121, 121, 5, 0, 0, 0, 0, 0, 71 };
 
         //steer reply pgn
@@ -294,7 +294,7 @@ namespace ModSimTool
                                 break;
                             }
 
-                        case 200: // Hello from AgIO
+                        case 200: // Hello from Modules
                             {
                                 int sa = (int)(steerAngleActual * 100);
 
