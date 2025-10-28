@@ -245,26 +245,6 @@ namespace Twol
                 SendPgnToLoop(byteData);
         }
 
-        private void SendDataUDPAsync(IAsyncResult asyncResult)
-        {
-            try
-            {
-                UDPSocket.EndSend(asyncResult);
-            }
-            catch (ObjectDisposedException)
-            {
-                // Socket disposed while sending - ignore
-            }
-            catch (SocketException sex)
-            {
-                try { Log.EventWriter("SendDataUDPAsync SocketException: " + sex.ToString()); } catch { }
-            }
-            catch (Exception ex)
-            {
-                try { Log.EventWriter("SendDataUDPAsync error: " + ex.ToString()); } catch { }
-            }
-        }
-
         #endregion
 
         #region Recv_UDP
@@ -571,28 +551,38 @@ namespace Twol
 
         public void SendUDPMessageTool(byte[] byteData, IPEndPoint endPoint)
         {
-            if (isUDPNetworkConnectedTool)
-            {
-                //if (isUDPMonitorOn)
-                //{
-                //    logUDPSentence.Append(DateTime.Now.ToString("ss.fff\t") + endPoint.ToString() + "\t" + " > " + byteData[3].ToString() + "\r\n");
-                //}
+            if (!isUDPNetworkConnectedTool || UDPSocketTool == null || byteData == null || byteData.Length == 0 || endPoint == null)
+                return;
 
-                try
+            try
+            {
+                int length = byteData.Length;
+                byte[] copy = System.Buffers.ArrayPool<byte>.Shared.Rent(length);
+                Buffer.BlockCopy(byteData, 0, copy, 0, length);
+
+                System.Threading.Tasks.Task.Run(() =>
                 {
-                    // Send packet to the zero
-                    if (byteData.Length != 0)
+                    try
                     {
-                        UDPSocketTool.BeginSendTo(byteData, 0, byteData.Length, SocketFlags.None,
-                           endPoint, new AsyncCallback(SendDataUDPAsyncTool), null);
+                        var socket = UDPSocketTool;
+                        if (socket != null)
+                        {
+                            socket.SendTo(copy, 0, length, SocketFlags.None, endPoint);
+                        }
                     }
-                }
-                catch (Exception)
-                {
-                    //WriteErrorLog("Sending UDP Message" + e.ToString());
-                    //MessageBox.Show("Send Error: " + e.Message, "UDP Client", MessageBoxButtons.OK,
-                    //MessageBoxIcon.Error);
-                }
+                    catch
+                    {
+                        // Intentionally swallow to keep fire-and-forget semantics
+                    }
+                    finally
+                    {
+                        System.Buffers.ArrayPool<byte>.Shared.Return(copy);
+                    }
+                });
+            }
+            catch
+            {
+                // Intentionally ignore queuing/logging errors
             }
         }
 
