@@ -169,96 +169,95 @@ namespace Twol
 
         #region Send UDP
 
+
         public void SendUDPMessage(byte[] byteData, IPEndPoint endPoint)
         {
-            if (!isUDPNetworkConnected || UDPSocket == null || byteData == null || byteData.Length == 0 || endPoint == null)
-                return;
-
-            try
+            if (isUDPNetworkConnected)
             {
-                // Monitoring/logging - safe index check
-                if (isUDPMonitorOn)
+                try
                 {
-                    string code = byteData.Length > 3 ? byteData[3].ToString() : "N/A";
-                    logUDPSentence.Append(DateTime.Now.ToString("ss.fff\t > ") + " Out " + code + " \t" + endPoint + "\r\n");
+                    // Send packet to the zero
+                    if (byteData.Length != 0)
+                    {
+                        UDPSocket.BeginSendTo(byteData, 0, byteData.Length, SocketFlags.None,
+                           endPoint, new AsyncCallback(SendDataUDPAsync), null);
+                    }
+                }
+                catch (Exception)
+                {
                 }
 
-                // Fire-and-forget: queue background send using Task.Run with synchronous SendTo.
-                int length = byteData.Length;
-                byte[] copy = System.Buffers.ArrayPool<byte>.Shared.Rent(length);
-                Buffer.BlockCopy(byteData, 0, copy, 0, length);
-
-                System.Threading.Tasks.Task.Run(() =>
+                if (isUDPMonitorOn)
                 {
-                    try
-                    {
-                        var socket = UDPSocket;
-                        if (socket != null)
-                        {
-                            socket.SendTo(copy, 0, length, SocketFlags.None, endPoint);
-                        }
-                    }
-                    catch
-                    {
-                        // swallow exceptions - non-blocking fire-and-forget
-                    }
-                    finally
-                    {
-                        System.Buffers.ArrayPool<byte>.Shared.Return(copy);
-                    }
-                });
+                    logUDPSentence.Append(DateTime.Now.ToString("ss.fff\t") + endPoint.ToString() + "\t" + " > " + byteData[3].ToString() + "\r\n");
+                }
+            }
+        }
+
+        private void SendDataUDPAsync(IAsyncResult asyncResult)
+        {
+            try
+            {
+                UDPSocket.EndSend(asyncResult);
             }
             catch
             {
-                // Intentionally ignore errors from logging/queuing to keep fire-and-forget semantics
             }
-
-            // Module Apps required?
-            if (Settings.IO.setUDP_isLoopBack)
-                SendPgnToLoop(byteData);
         }
+
+
+        //public void SendUDPMessage(byte[] byteData, IPEndPoint endPoint)
+        //{
+        //    if (!isUDPNetworkConnected || UDPSocket == null || byteData == null || byteData.Length == 0 || endPoint == null)
+        //        return;
+
+        //    try
+        //    {
+        //        // Monitoring/logging - safe index check
+        //        if (isUDPMonitorOn)
+        //        {
+        //            string code = byteData.Length > 3 ? byteData[3].ToString() : "N/A";
+        //            logUDPSentence.Append(DateTime.Now.ToString("ss.fff\t > ") + " Out " + code + " \t" + endPoint + "\r\n");
+        //        }
+
+        //        // Fire-and-forget: queue background send using Task.Run with synchronous SendTo.
+        //        int length = byteData.Length;
+        //        byte[] copy = System.Buffers.ArrayPool<byte>.Shared.Rent(length);
+        //        Buffer.BlockCopy(byteData, 0, copy, 0, length);
+
+        //        System.Threading.Tasks.Task.Run(() =>
+        //        {
+        //            try
+        //            {
+        //                var socket = UDPSocket;
+        //                if (socket != null)
+        //                {
+        //                    socket.SendTo(copy, 0, length, SocketFlags.None, endPoint);
+        //                }
+        //            }
+        //            catch
+        //            {
+        //                // swallow exceptions - non-blocking fire-and-forget
+        //            }
+        //            finally
+        //            {
+        //                System.Buffers.ArrayPool<byte>.Shared.Return(copy);
+        //            }
+        //        });
+        //    }
+        //    catch
+        //    {
+        //        // Intentionally ignore errors from logging/queuing to keep fire-and-forget semantics
+        //    }
+
+        //    // Module Apps required?
+        //    if (Settings.IO.setUDP_isLoopBack)
+        //        SendPgnToLoop(byteData);
+        //}
 
         #endregion
 
         #region Recv_UDP
-        private void ReceiveDataUDPAsync(IAsyncResult asyncResult)
-        {
-            try
-            {
-                // Receive all data
-                int msgLen = UDPSocket.EndReceiveFrom(asyncResult, ref endPointUDP);
-                if (msgLen <= 0)
-                {
-                    UDPSocket.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref endPointUDP,
-                        new AsyncCallback(ReceiveDataUDPAsync), null);
-                    return;
-                }
-
-                // Rent a buffer sized to the message to avoid allocating every packet
-                byte[] rented = ArrayPool<byte>.Shared.Rent(msgLen);
-                Buffer.BlockCopy(buffer, 0, rented, 0, msgLen);
-
-                // Listen for more connections again...
-                UDPSocket.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref endPointUDP,
-                    new AsyncCallback(ReceiveDataUDPAsync), null);
-
-                // Marshal to UI thread. Ensure rented buffer is returned after processing.
-                BeginInvoke((MethodInvoker)(() =>
-                {
-                    try
-                    {
-                        ReceiveFromUDP(rented, msgLen);
-                    }
-                    finally
-                    {
-                        ArrayPool<byte>.Shared.Return(rented);
-                    }
-                }));
-            }
-            catch
-            {
-            }
-        }
 
         private void ReceiveFromUDP(byte[] data, int msgLen)
         {
@@ -512,6 +511,45 @@ namespace Twol
                         logUDPSentence.Append(DateTime.Now.ToString("ss.fff\t < ") + " In - " + data[3] + "\t" + endPointUDP + "\r\n");
                     }
                 }
+            }
+            catch
+            {
+            }
+        }
+
+        private void ReceiveDataUDPAsync(IAsyncResult asyncResult)
+        {
+            try
+            {
+                // Receive all data
+                int msgLen = UDPSocket.EndReceiveFrom(asyncResult, ref endPointUDP);
+                if (msgLen <= 0)
+                {
+                    UDPSocket.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref endPointUDP,
+                        new AsyncCallback(ReceiveDataUDPAsync), null);
+                    return;
+                }
+
+                // Rent a buffer sized to the message to avoid allocating every packet
+                byte[] rented = ArrayPool<byte>.Shared.Rent(msgLen);
+                Buffer.BlockCopy(buffer, 0, rented, 0, msgLen);
+
+                // Listen for more connections again...
+                UDPSocket.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref endPointUDP,
+                    new AsyncCallback(ReceiveDataUDPAsync), null);
+
+                // Marshal to UI thread. Ensure rented buffer is returned after processing.
+                BeginInvoke((MethodInvoker)(() =>
+                {
+                    try
+                    {
+                        ReceiveFromUDP(rented, msgLen);
+                    }
+                    finally
+                    {
+                        ArrayPool<byte>.Shared.Return(rented);
+                    }
+                }));
             }
             catch
             {
