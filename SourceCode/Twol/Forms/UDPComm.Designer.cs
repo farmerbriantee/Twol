@@ -169,7 +169,6 @@ namespace Twol
 
         #region Send UDP
 
-
         public void SendUDPMessage(byte[] byteData, IPEndPoint endPoint)
         {
             if (isUDPNetworkConnected)
