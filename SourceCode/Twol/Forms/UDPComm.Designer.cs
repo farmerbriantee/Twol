@@ -523,33 +523,16 @@ namespace Twol
             {
                 // Receive all data
                 int msgLen = UDPSocket.EndReceiveFrom(asyncResult, ref endPointUDP);
-                if (msgLen <= 0)
-                {
-                    UDPSocket.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref endPointUDP,
-                        new AsyncCallback(ReceiveDataUDPAsync), null);
-                    return;
-                }
 
-                // Rent a buffer sized to the message to avoid allocating every packet
-                byte[] rented = ArrayPool<byte>.Shared.Rent(msgLen);
-                Buffer.BlockCopy(buffer, 0, rented, 0, msgLen);
+                byte[] localMsg = new byte[msgLen];
+                Array.Copy(buffer, localMsg, msgLen);
 
                 // Listen for more connections again...
                 UDPSocket.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref endPointUDP,
                     new AsyncCallback(ReceiveDataUDPAsync), null);
 
-                // Marshal to UI thread. Ensure rented buffer is returned after processing.
-                BeginInvoke((MethodInvoker)(() =>
-                {
-                    try
-                    {
-                        ReceiveFromUDP(rented, msgLen);
-                    }
-                    finally
-                    {
-                        ArrayPool<byte>.Shared.Return(rented);
-                    }
-                }));
+                BeginInvoke((MethodInvoker)(() => ReceiveFromUDP(localMsg, localMsg.Length)));
+
             }
             catch
             {
@@ -562,38 +545,28 @@ namespace Twol
 
         public void SendUDPMessageTool(byte[] byteData, IPEndPoint endPoint)
         {
-            if (!isUDPNetworkConnectedTool || UDPSocketTool == null || byteData == null || byteData.Length == 0 || endPoint == null)
-                return;
-
-            try
+            if (isUDPNetworkConnectedTool)
             {
-                int length = byteData.Length;
-                byte[] copy = System.Buffers.ArrayPool<byte>.Shared.Rent(length);
-                Buffer.BlockCopy(byteData, 0, copy, 0, length);
-
-                System.Threading.Tasks.Task.Run(() =>
+                if (isUDPMonitorOn)
                 {
-                    try
+                    logUDPSentence.Append(DateTime.Now.ToString("ss.fff\t") + endPoint.ToString() + "\t" + " > " + byteData[3].ToString() + "\r\n");
+                }
+
+                try
+                {
+                    // Send packet to the zero
+                    if (byteData.Length != 0)
                     {
-                        var socket = UDPSocketTool;
-                        if (socket != null)
-                        {
-                            socket.SendTo(copy, 0, length, SocketFlags.None, endPoint);
-                        }
+                        UDPSocketTool.BeginSendTo(byteData, 0, byteData.Length, SocketFlags.None,
+                           endPoint, new AsyncCallback(SendDataUDPAsyncTool), null);
                     }
-                    catch
-                    {
-                        // Intentionally swallow to keep fire-and-forget semantics
-                    }
-                    finally
-                    {
-                        System.Buffers.ArrayPool<byte>.Shared.Return(copy);
-                    }
-                });
-            }
-            catch
-            {
-                // Intentionally ignore queuing/logging errors
+                }
+                catch (Exception)
+                {
+                    //WriteErrorLog("Sending UDP Message" + e.ToString());
+                    //MessageBox.Show("Send Error: " + e.Message, "UDP Client", MessageBoxButtons.OK,
+                    //MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -611,41 +584,6 @@ namespace Twol
         #endregion
 
         #region Recv_UDP_Tool
-
-        private void ReceiveDataUDPAsyncTool(IAsyncResult asyncResult)
-        {
-            try
-            {
-                int msgLen = UDPSocketTool.EndReceiveFrom(asyncResult, ref endPointUDPTool);
-                if (msgLen <= 0)
-                {
-                    UDPSocketTool.BeginReceiveFrom(bufferTool, 0, bufferTool.Length, SocketFlags.None, ref endPointUDPTool,
-                        new AsyncCallback(ReceiveDataUDPAsyncTool), null);
-                    return;
-                }
-
-                byte[] rented = ArrayPool<byte>.Shared.Rent(msgLen);
-                Buffer.BlockCopy(bufferTool, 0, rented, 0, msgLen);
-
-                UDPSocketTool.BeginReceiveFrom(bufferTool, 0, bufferTool.Length, SocketFlags.None, ref endPointUDPTool,
-                    new AsyncCallback(ReceiveDataUDPAsyncTool), null);
-
-                BeginInvoke((MethodInvoker)(() =>
-                {
-                    try
-                    {
-                        ReceiveFromUDPTool(rented, msgLen);
-                    }
-                    finally
-                    {
-                        ArrayPool<byte>.Shared.Return(rented);
-                    }
-                }));
-            }
-            catch
-            {
-            }
-        }
 
         private void ReceiveFromUDPTool(byte[] data, int msgLen)
         {
@@ -756,6 +694,27 @@ namespace Twol
             }
         }
 
+        private void ReceiveDataUDPAsyncTool(IAsyncResult asyncResult)
+        {
+            try
+            {
+                // Receive all data
+                int msgLen = UDPSocketTool.EndReceiveFrom(asyncResult, ref endPointUDPTool);
+
+                byte[] localMsg = new byte[msgLen];
+                Array.Copy(bufferTool, localMsg, msgLen);
+
+                // Listen for more connections again...
+                UDPSocketTool.BeginReceiveFrom(bufferTool, 0, bufferTool.Length, SocketFlags.None, ref endPointUDPTool,
+                    new AsyncCallback(ReceiveDataUDPAsyncTool), null);
+
+                BeginInvoke((MethodInvoker)(() => ReceiveFromUDPTool(localMsg, localMsg.Length)));
+
+            }
+            catch
+            {
+            }
+        }
         #endregion
 
         #region Loopback to plugins
