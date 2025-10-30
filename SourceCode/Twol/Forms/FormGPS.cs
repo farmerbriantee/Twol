@@ -244,6 +244,8 @@ namespace Twol
             //winform initialization
             InitializeComponent();
 
+            ControlExtension.Draggable(panel_IO, true);
+
             //time keeper
             secondsSinceStart = (DateTime.Now - Process.GetCurrentProcess().StartTime).TotalSeconds;
 
@@ -444,7 +446,7 @@ namespace Twol
 
             hotkeys = Settings.User.hotkeys.ToCharArray();
 
-            lbl_IO_Profile.Text = "Using Profile: " + RegistrySettings.IOFileName;
+            lbl_IO_Profile.Text = "Profile: " + RegistrySettings.IOFileName;
 
             Log.EventWriter("Terms Accepted");
 

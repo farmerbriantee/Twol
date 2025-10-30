@@ -998,6 +998,8 @@ namespace Twol
             {
                 form.ShowDialog(this);
             }
+
+            lbl_IO_Profile.Text = "Profile: " + RegistrySettings.IOFileName;
         }
 
         #endregion

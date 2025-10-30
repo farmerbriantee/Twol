@@ -133,14 +133,8 @@ namespace Twol
 
         private void FormConfig_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //since we reset, save current state
-            //mf.SaveFormGPSWindowSettings();
-
             tab1.SelectedTab = null;// make sure tabPage_Leave is called!
             SelectedTabChanged();
-
-            //reload all the settings from default and user.config
-            //mf.LoadSettings();
 
             //save current vehicle
             Settings.Vehicle.Save();

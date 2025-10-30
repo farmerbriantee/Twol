@@ -560,7 +560,7 @@ namespace Twol
             this.toolStripMenuFlagForm.Image = global::Twol.Properties.Resources.FileEditName;
             this.toolStripMenuFlagForm.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripMenuFlagForm.Name = "toolStripMenuFlagForm";
-            this.toolStripMenuFlagForm.Size = new System.Drawing.Size(267, 70);
+            this.toolStripMenuFlagForm.Size = new System.Drawing.Size(259, 70);
             this.toolStripMenuFlagForm.Text = "toolStripMenuItem3";
             this.toolStripMenuFlagForm.Click += new System.EventHandler(this.toolStripMenuFlagForm_Click);
             // 
@@ -2840,16 +2840,15 @@ namespace Twol
             // lbl_IO_Profile
             // 
             this.lbl_IO_Profile.BackColor = System.Drawing.Color.Transparent;
-            this.lbl_IO_Profile.Dock = System.Windows.Forms.DockStyle.Top;
             this.lbl_IO_Profile.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_IO_Profile.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.lbl_IO_Profile.Location = new System.Drawing.Point(0, 0);
             this.lbl_IO_Profile.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_IO_Profile.Name = "lbl_IO_Profile";
-            this.lbl_IO_Profile.Size = new System.Drawing.Size(417, 25);
+            this.lbl_IO_Profile.Size = new System.Drawing.Size(222, 25);
             this.lbl_IO_Profile.TabIndex = 533;
             this.lbl_IO_Profile.Text = "Profile";
-            this.lbl_IO_Profile.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_IO_Profile.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // panel_IO
             // 
