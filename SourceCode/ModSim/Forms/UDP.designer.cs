@@ -12,7 +12,9 @@ namespace ModSim
     {
         // UDP Sockets
         public Socket UDPSocket;
+        public Socket NtripSocket;
         private EndPoint endPointUDP = new IPEndPoint(IPAddress.Any, 0);
+        private EndPoint endPointNTRIP = new IPEndPoint(IPAddress.Any, 0);
 
         public bool isUDPNetworkConnected;
 
@@ -21,9 +23,10 @@ namespace ModSim
                 Properties.Settings.Default.etIP_SubnetOne.ToString() + "." +
                 Properties.Settings.Default.etIP_SubnetTwo.ToString() + "." +
                 Properties.Settings.Default.etIP_SubnetThree.ToString() + ".255"), 9999);
-        
+
         // Data stream
         private byte[] buffer = new byte[1024];
+        private byte[] bufN = new byte[1024];
 
         //used to send communication check pgn= C8 or 200
         private byte[] helloFromModule = { 0x80, 0x81, 0x7F, 200, 3, 56, 0, 0, 0x47 };
@@ -55,6 +58,13 @@ namespace ModSim
                 UDPSocket.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref endPointUDP,
                     new AsyncCallback(ReceiveDataUDPAsync), null);
 
+                // Initialise the socket
+                NtripSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+                NtripSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast, true);
+                NtripSocket.Bind(new IPEndPoint(IPAddress.Any, 2233));
+                NtripSocket.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref endPointUDP,
+                    new AsyncCallback(ReceiveDataNTRIPAsync), null);
+
                 isUDPNetworkConnected = true;
 
                 //if (!isFound)
@@ -74,6 +84,47 @@ namespace ModSim
                 lblIP.Text = "Error";
             }
         }
+
+        private void ReceiveDataNTRIPAsync(IAsyncResult asyncResult)
+        {
+            try
+            {
+                // Receive all data
+                int msgLen = NtripSocket.EndReceiveFrom(asyncResult, ref endPointNTRIP);
+
+                byte[] localMsg = new byte[msgLen];
+                Array.Copy(bufN, localMsg, msgLen);
+
+                // Listen for more connections again...
+                NtripSocket.BeginReceiveFrom(bufN, 0, bufN.Length, SocketFlags.None, ref endPointNTRIP,
+                    new AsyncCallback(ReceiveDataNTRIPAsync), null);
+
+                BeginInvoke((MethodInvoker)(() => ReceiveFromNTRIP(localMsg)));
+
+            }
+            catch (Exception)
+            {
+                //WriteErrorLog("UDP Recv data " + e.ToString());
+                //MessageBox.Show("ReceiveData Error: " + e.Message, "UDP Server", MessageBoxButtons.OK,
+                //MessageBoxIcon.Error);
+            }
+        }
+
+        private void ReceiveFromNTRIP(byte[] data)
+        {
+            try
+            { 
+                {
+                    rtbNtrip.Clear();
+                    rtbNtrip.AppendText(BitConverter.ToString(data));
+                }
+            }
+            catch
+            {
+
+            }
+        }
+
 
         #region Send UDP
 
@@ -147,7 +198,7 @@ namespace ModSim
                 Array.Copy(buffer, localMsg, msgLen);
 
                 // Listen for more connections again...
-                UDPSocket.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref endPointUDP, 
+                UDPSocket.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref endPointUDP,
                     new AsyncCallback(ReceiveDataUDPAsync), null);
 
                 BeginInvoke((MethodInvoker)(() => ReceiveFromUDP(localMsg)));
@@ -160,7 +211,6 @@ namespace ModSim
                 //MessageBoxIcon.Error);
             }
         }
-
 
         static byte [] PGN_253 = { 128, 129, 126, 253, 8, 0, 0, 0, 0, 0, 0, 0, 0, 12 };
         int PGN_253_Size = PGN_253.Length - 1;
@@ -648,11 +698,6 @@ namespace ModSim
                             }
                     }
                 } // end of pgns
-                else
-                {
-                    rtbNtrip.Clear();
-                    rtbNtrip.AppendText(BitConverter.ToString(data));
-                }
             }
             catch
             {
