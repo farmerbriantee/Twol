@@ -114,6 +114,7 @@ namespace Twol
             {
                 btnSlide.BackgroundImage = Properties.Resources.ArrowGrnRight;
                 btnSlide.Left = panel_IO.Width - btnSlide.Width - 1;
+                if ((panel_IO.Left + 270) > this.Width) panel_IO.Left = this.Width - 340;
             }
         }
 
