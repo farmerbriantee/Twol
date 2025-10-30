@@ -598,7 +598,7 @@ namespace Twol
             panelSim.Visible = timerSim.Enabled = simulatorOnToolStripMenuItem.Checked = Settings.User.isSimulatorOn;
 
             //panel IO settings
-            panel_IO.Location = new Point(100,90);
+            panel_IO.Location = new Point(100,100);
             panel_IO.Width = 270;
 
             if (Settings.Tool.setToolSteer.isGPSToolActive) btnGPSTool.Enabled = true;

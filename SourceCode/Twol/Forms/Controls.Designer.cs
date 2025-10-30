@@ -108,6 +108,7 @@ namespace Twol
             {
                 btnSlide.BackgroundImage = Properties.Resources.ArrowGrnLeft;
                 btnSlide.Left = panel_IO.Width - btnSlide.Width - 1;
+                if ((panel_IO.Left + 400) > this.Width) panel_IO.Left = this.Width - 470;
             }
             else
             {
@@ -949,6 +950,12 @@ namespace Twol
             {
                 panel_IO.Visible = true;
                 panel_IO.BringToFront();
+                panel_IO.Location = new Point(this.Width - 350, 100);
+
+                panel_IO.Width = 270;
+
+                btnSlide.BackgroundImage = Properties.Resources.ArrowGrnRight;
+                btnSlide.Left = panel_IO.Width - btnSlide.Width - 1;
             }
         }
 
