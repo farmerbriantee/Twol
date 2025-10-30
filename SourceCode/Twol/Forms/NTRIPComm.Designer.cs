@@ -51,8 +51,7 @@ namespace Twol
             {
                 if (!isNTRIP_Starting && ntripCounter > 20)
                 {
-                    // fire-and-forget async connect
-                    _ = StartNTRIPAsync();
+                    StartNTRIP();
                 }
             }
 
@@ -60,8 +59,7 @@ namespace Twol
             {
                 if (!isNTRIP_Starting)
                 {
-                    // fire-and-forget async connect
-                    _ = StartNTRIPAsync();
+                    StartNTRIP();
                 }
             }
 
@@ -165,7 +163,7 @@ namespace Twol
             }
         }
 
-        public async Task StartNTRIPAsync()
+        public void StartNTRIP()
         {
             if (Settings.IO.setNTRIP_isOn)
             {
@@ -236,8 +234,6 @@ namespace Twol
                     lblWatch.Text = "RTCM Serial";
                 }
             }
-
-            await Task.CompletedTask;
         }
 
         private void ReconnectRequest()
