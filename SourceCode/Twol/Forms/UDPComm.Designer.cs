@@ -18,9 +18,10 @@ namespace Twol
         //private readonly Stopwatch swIOFrame = new Stopwatch();
 
         // UDP Socket
-        public Socket UDPSocket, UDPSocketTool;
+        public Socket UDPSocket, UDPSocketTool, NTRIPSocket;
         private EndPoint endPointUDP = new IPEndPoint(IPAddress.Any, 0);
         private EndPoint endPointUDPTool = new IPEndPoint(IPAddress.Any, 0);
+        private EndPoint endPointNTRIP = new IPEndPoint(IPAddress.Any, 0);
 
         public bool isUDPNetworkConnected, isUDPNetworkConnectedTool, isUDPMonitorOn;
 
@@ -36,11 +37,15 @@ namespace Twol
             Settings.IO.etIP_SubnetTwo.ToString() + "." +
             Settings.IO.etIP_SubnetThree.ToString() + ".255"), 18888);
 
+        public IPEndPoint epNtrip = new IPEndPoint(IPAddress.Parse(
+            Settings.IO.etIP_SubnetOne.ToString() + "." +
+            Settings.IO.etIP_SubnetTwo.ToString() + "." +
+            Settings.IO.etIP_SubnetThree.ToString() + ".255"), Settings.IO.setNTRIP_sendToUDPPort);
+
         public IPEndPoint epModuleSet = new IPEndPoint(IPAddress.Parse("255.255.255.255"), 8888);
         public IPEndPoint epModuleSetTool = new IPEndPoint(IPAddress.Parse("255.255.255.255"), 18888);
         private EndPoint epPlugins = new IPEndPoint(IPAddress.Parse("127.255.255.255"), 17777);
 
-        private IPEndPoint epNtrip;
 
         public byte[] ipAutoSet = { 192, 168, 5 };
 
@@ -135,6 +140,13 @@ namespace Twol
                 UDPSocketTool.BeginReceiveFrom(bufferTool, 0, bufferTool.Length, SocketFlags.None, ref endPointUDPTool,
                     new AsyncCallback(ReceiveDataUDPAsyncTool), null);
 
+                // Initialise the Tool socket
+                NTRIPSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+                NTRIPSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast, true);
+                NTRIPSocket.Bind(new IPEndPoint(IPAddress.Any, 19998));
+                //NTRIPSocket.BeginReceiveFrom(bufferTool, 0, bufferTool.Length, SocketFlags.None, ref endPointUDPTool,
+                //    new AsyncCallback(ReceiveDataUDPAsyncTool), null);
+
                 isUDPNetworkConnectedTool = true;
 
                 if (isUDPNetworkConnected)
@@ -166,6 +178,47 @@ namespace Twol
                 lblIP.Text = "Error";
             }
         }
+
+
+        #region Send NTRIP
+
+        public void SendNTRIPMessage(byte[] byteData)
+        {
+            if (isUDPNetworkConnected)
+            {
+                try
+                {
+                    // Send packet to the zero
+                    if (byteData.Length != 0)
+                    {
+                        NTRIPSocket.BeginSendTo(byteData, 0, byteData.Length, SocketFlags.None,
+                           epNtrip, new AsyncCallback(SendDataNTRIPAsync), null);
+                    }
+                }
+                catch (Exception)
+                {
+                }
+
+                if (isUDPMonitorOn)
+                {
+                    string code = byteData.Length > 3 ? byteData[3].ToString() : "N/A";
+                    logUDPSentence.Append(DateTime.Now.ToString("ss.fff\t >  ") + (byteData.Length > 3 ? byteData[3].ToString() : "N/A") + " \t" + epNtrip + "\r\n");
+                }
+            }
+        }
+
+        private void SendDataNTRIPAsync(IAsyncResult asyncResult)
+        {
+            try
+            {
+                NTRIPSocket.EndSend(asyncResult);
+            }
+            catch
+            {
+            }
+        }
+
+        #endregion
 
         #region Send UDP
 

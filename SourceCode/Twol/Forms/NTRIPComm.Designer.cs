@@ -10,9 +10,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Threading;
 
-// Declare the delegate prototype to send data back to the form
-delegate void UpdateRTCM_Data(byte[] data);
-
 namespace Twol
 {
     public partial class FormGPS
@@ -21,7 +18,7 @@ namespace Twol
         private int ntripCounter = 15;
 
         private Socket clientSocket;                      // Server connection
-        private byte[] casterRecBuffer = new byte[2800];    // Recieved data buffer
+        private byte[] casterRecBuffer = new byte[8192];    // Recieved data buffer
 
         //Send GGA back timer - use threaded timer to avoid UI thread dependency
         private System.Threading.Timer tmr;
@@ -338,26 +335,32 @@ namespace Twol
 
             lblToGPS.Text = data.Length.ToString();
             //send it
-            SendNTRIP(data);
+            SendNTRIPMessage(data);
 
             //lblToGPS.Text = traffic.cntrGPSInBytes == 0 ? "---" : (traffic.cntrGPSInBytes).ToString();
             traffic.cntrGPSInBytes = 0;
             tripBytes += (uint)data.Length;
+
+            if (isUDPMonitorOn)
+            {
+                logUDPSentence.Append(DateTime.Now.ToString("ss.fff\t >  ") + " \tNTRIP" + "\r\n");
+            }
         }
 
         public void SendNTRIP(byte[] data)
         {
+            //send out UDP Port
+            if (Settings.IO.setNTRIP_isOn && Settings.IO.setNTRIP_sendToUDP)
+            {
+                SendUDPMessage(data, epNtrip);
+            }
+
             //serial send out GPS port
             if (Settings.IO.setNTRIP_sendToSerial)
             {
                 SendGPSPort(data);
             }
 
-            //send out UDP Port
-            if (Settings.IO.setNTRIP_sendToUDP)
-            {
-                SendUDPMessage(data, epNtrip);
-            }
         }
 
         public async Task SendGGAAsync()

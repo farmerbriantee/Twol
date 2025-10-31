@@ -26,7 +26,7 @@ namespace ModSim
 
         // Data stream
         private byte[] buffer = new byte[1024];
-        private byte[] bufN = new byte[1024];
+        private byte[] bufN = new byte[4096];
 
         //used to send communication check pgn= C8 or 200
         private byte[] helloFromModule = { 0x80, 0x81, 0x7F, 200, 3, 56, 0, 0, 0x47 };
@@ -116,11 +116,6 @@ namespace ModSim
         0x17, 0x97, 0x57, 0xd7, 0x37, 0xb7, 0x77, 0xf7,
         0x0f, 0x8f, 0x4f, 0xcf, 0x2f, 0xaf, 0x6f, 0xef,
         0x1f, 0x9f, 0x5f, 0xdf, 0x3f, 0xbf, 0x7f, 0xff,  };
-
-
-
-
-
 
         //initialize udp network
         public void LoadUDPNetwork()
