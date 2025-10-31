@@ -209,7 +209,7 @@ namespace Twol
             this.lblSerialPorts = new System.Windows.Forms.Label();
             this.btnSlide = new System.Windows.Forms.Button();
             this.btnExtSim = new System.Windows.Forms.Button();
-            this.tmrNTRIP = new System.Windows.Forms.Timer(this.components);
+            this.lblRem = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStripFlag.SuspendLayout();
             this.statusStripLeft.SuspendLayout();
@@ -2852,6 +2852,7 @@ namespace Twol
             // panel_IO
             // 
             this.panel_IO.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel_IO.Controls.Add(this.lblRem);
             this.panel_IO.Controls.Add(this.lblFromGPSTool);
             this.panel_IO.Controls.Add(this.lblFromGPS);
             this.panel_IO.Controls.Add(this.btnNTRIPSerial);
@@ -3057,9 +3058,19 @@ namespace Twol
             this.btnExtSim.UseVisualStyleBackColor = false;
             this.btnExtSim.Click += new System.EventHandler(this.btnExtSim_Click);
             // 
-            // tmrNTRIP
+            // lblRem
             // 
-            this.tmrNTRIP.Interval = 1000;
+            this.lblRem.AutoSize = true;
+            this.lblRem.BackColor = System.Drawing.Color.Transparent;
+            this.lblRem.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRem.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblRem.Location = new System.Drawing.Point(104, 340);
+            this.lblRem.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblRem.Name = "lblRem";
+            this.lblRem.Size = new System.Drawing.Size(26, 18);
+            this.lblRem.TabIndex = 547;
+            this.lblRem.Text = "---";
+            this.lblRem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // FormGPS
             // 
@@ -3300,10 +3311,10 @@ namespace Twol
         private System.Windows.Forms.Button btnUDPMonitor;
         private System.Windows.Forms.Label lblMount;
         private System.Windows.Forms.Label lblToGPS;
-        private System.Windows.Forms.Timer tmrNTRIP;
         private System.Windows.Forms.Button btnNTRIPSerial;
         private System.Windows.Forms.Label lblFromGPS;
         private System.Windows.Forms.Label lblFromGPSTool;
+        private System.Windows.Forms.Label lblRem;
     }
 }
 

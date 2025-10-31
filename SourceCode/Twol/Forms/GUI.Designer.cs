@@ -484,6 +484,9 @@ namespace Twol
                 makeUTurnCounter++;
 
                 secondsSinceStart = (DateTime.Now - Process.GetCurrentProcess().StartTime).TotalSeconds;
+
+                lblRem.Text = rawTrip.Count.ToString();
+
             }
 
         }//wait till timer fires again.

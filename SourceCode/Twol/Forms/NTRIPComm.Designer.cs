@@ -22,6 +22,11 @@ namespace Twol
 
         //Send GGA back timer - use threaded timer to avoid UI thread dependency
         private System.Threading.Timer tmr;
+        
+        //NTRIP metering
+        private System.Threading.Timer qTmr;
+        Queue<byte> rawTrip = new Queue<byte>();
+        private int packetSizeNTRIP = 256;
 
         private string GGASentence;
 
@@ -178,6 +183,17 @@ namespace Twol
                     tmr = new System.Threading.Timer(NTRIPTimerCallback, null, 5000, Timeout.Infinite);
                 }
 
+                //if we had a timer already, kill it
+                if (qTmr != null)
+                {
+                    qTmr.Dispose();
+                    qTmr = null;
+                }
+
+                // dueTime = 5000ms to start fast, period = Timeout.Infinite until we set the regular interval
+                qTmr = new System.Threading.Timer(NTRIPQueueCallback, null, 200, Timeout.Infinite);
+                qTmr.Change(100, 100);
+
                 try
                 {
                     // Close the socket if it is still open
@@ -246,6 +262,13 @@ namespace Twol
             {
                 tmr.Dispose();
                 tmr = null;
+            }
+
+            //if we had a timer already, kill it
+            if (qTmr != null)
+            {
+                qTmr.Dispose();
+                qTmr = null;
             }
         }
 
@@ -331,11 +354,19 @@ namespace Twol
         public void OnAddMessage(byte[] data)
         {
             //reset watchdog since we have updated data
+
             NTRIP_Watchdog = 0;
 
+            if (Settings.IO.setNTRIP_isOn)
+            {
+                //move the ntrip stream to queue
+                for (int i = 0; i < data.Length; i++)
+                {
+                    rawTrip.Enqueue(data[i]);
+                }
+            }
+
             lblToGPS.Text = data.Length.ToString();
-            //send it
-            SendNTRIPMessage(data);
 
             //lblToGPS.Text = traffic.cntrGPSInBytes == 0 ? "---" : (traffic.cntrGPSInBytes).ToString();
             traffic.cntrGPSInBytes = 0;
@@ -352,7 +383,8 @@ namespace Twol
             //send out UDP Port
             if (Settings.IO.setNTRIP_isOn && Settings.IO.setNTRIP_sendToUDP)
             {
-                SendUDPMessage(data, epNtrip);
+                //send it
+                SendNTRIPMessage(data);
             }
 
             //serial send out GPS port
@@ -380,9 +412,8 @@ namespace Twol
             {
                 isNTRIP_Sending = true;
                 BuildGGA();
-                string str = sbGGA.ToString();
 
-                Byte[] byteDateLine = Encoding.ASCII.GetBytes(str);
+                Byte[] byteDateLine = Encoding.ASCII.GetBytes(sbGGA.ToString());
 
                 // Send on a background thread to avoid blocking the caller's thread
                 await Task.Run(() => clientSocket.Send(byteDateLine, byteDateLine.Length, 0)).ConfigureAwait(false);
@@ -410,10 +441,44 @@ namespace Twol
             }
         }
 
-        private void NTRIPtick(object o, EventArgs e)
+        private void NTRIPQueueCallback(object state)
         {
-            // If the legacy WinForms timer ever gets used, call the async method
-            _ = SendGGAAsync();
+            try
+            {
+                if (rawTrip.Count == 0) return;
+
+                //how many bytes in the Queue
+                int cnt = rawTrip.Count;
+
+                //how many sends have occured
+                traffic.cntrGPSIn++;
+
+                //256 bytes chunks max
+                if (cnt > packetSizeNTRIP) cnt = packetSizeNTRIP;
+
+                //new data array to send
+                byte[] trip = new byte[cnt];
+
+                traffic.cntrGPSInBytes += cnt;
+
+                //dequeue into the array
+                for (int i = 0; i < cnt; i++) trip[i] = rawTrip.Dequeue();
+
+                //send it
+                SendNTRIP(trip);
+
+                //Can't keep up as internet dumped a shit load so clear
+                if (rawTrip.Count > 10000) rawTrip.Clear();
+
+                ////show how many bytes left in the queue
+                //if (isViewAdvanced)
+                //    lblCount.Text = rawTrip.Count.ToString();
+            }
+            catch (Exception ex)
+            {
+                // swallow to avoid unhandled exceptions from timer
+                Log.EventWriter("NTRIP queue timer callback error: " + ex.ToString());
+            }
         }
 
         public void OnConnect(IAsyncResult ar)
