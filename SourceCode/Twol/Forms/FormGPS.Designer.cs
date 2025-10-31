@@ -202,7 +202,6 @@ namespace Twol
             this.lblFromGPS = new System.Windows.Forms.Label();
             this.btnNTRIPSerial = new System.Windows.Forms.Button();
             this.lblToGPS = new System.Windows.Forms.Label();
-            this.lblCount = new System.Windows.Forms.Label();
             this.lblMount = new System.Windows.Forms.Label();
             this.btnUDPMonitor = new System.Windows.Forms.Button();
             this.btnNtrip = new System.Windows.Forms.Button();
@@ -2637,7 +2636,7 @@ namespace Twol
             this.btnStartStopNtrip.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStartStopNtrip.ForeColor = System.Drawing.Color.Black;
             this.btnStartStopNtrip.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnStartStopNtrip.Location = new System.Drawing.Point(19, 93);
+            this.btnStartStopNtrip.Location = new System.Drawing.Point(28, 117);
             this.btnStartStopNtrip.Margin = new System.Windows.Forms.Padding(4);
             this.btnStartStopNtrip.Name = "btnStartStopNtrip";
             this.btnStartStopNtrip.Size = new System.Drawing.Size(80, 27);
@@ -2651,7 +2650,7 @@ namespace Twol
             this.lblWatch.BackColor = System.Drawing.Color.Transparent;
             this.lblWatch.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblWatch.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblWatch.Location = new System.Drawing.Point(5, 60);
+            this.lblWatch.Location = new System.Drawing.Point(16, 92);
             this.lblWatch.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblWatch.Name = "lblWatch";
             this.lblWatch.Size = new System.Drawing.Size(105, 18);
@@ -2664,10 +2663,10 @@ namespace Twol
             this.lblNTRIPBytes.BackColor = System.Drawing.Color.Transparent;
             this.lblNTRIPBytes.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNTRIPBytes.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblNTRIPBytes.Location = new System.Drawing.Point(5, 38);
+            this.lblNTRIPBytes.Location = new System.Drawing.Point(11, 67);
             this.lblNTRIPBytes.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNTRIPBytes.Name = "lblNTRIPBytes";
-            this.lblNTRIPBytes.Size = new System.Drawing.Size(105, 18);
+            this.lblNTRIPBytes.Size = new System.Drawing.Size(115, 18);
             this.lblNTRIPBytes.TabIndex = 187;
             this.lblNTRIPBytes.Text = "999,999,999";
             this.lblNTRIPBytes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2678,7 +2677,7 @@ namespace Twol
             this.lblIP.BackColor = System.Drawing.Color.Transparent;
             this.lblIP.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblIP.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblIP.Location = new System.Drawing.Point(3, 126);
+            this.lblIP.Location = new System.Drawing.Point(9, 156);
             this.lblIP.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblIP.Name = "lblIP";
             this.lblIP.Size = new System.Drawing.Size(119, 93);
@@ -2810,7 +2809,7 @@ namespace Twol
             this.btnUDP.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUDP.ForeColor = System.Drawing.Color.White;
             this.btnUDP.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnUDP.Location = new System.Drawing.Point(171, 47);
+            this.btnUDP.Location = new System.Drawing.Point(171, 65);
             this.btnUDP.Margin = new System.Windows.Forms.Padding(4);
             this.btnUDP.Name = "btnUDP";
             this.btnUDP.Size = new System.Drawing.Size(92, 64);
@@ -2842,10 +2841,10 @@ namespace Twol
             this.lbl_IO_Profile.BackColor = System.Drawing.Color.Transparent;
             this.lbl_IO_Profile.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_IO_Profile.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lbl_IO_Profile.Location = new System.Drawing.Point(0, 0);
+            this.lbl_IO_Profile.Location = new System.Drawing.Point(0, 2);
             this.lbl_IO_Profile.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_IO_Profile.Name = "lbl_IO_Profile";
-            this.lbl_IO_Profile.Size = new System.Drawing.Size(222, 25);
+            this.lbl_IO_Profile.Size = new System.Drawing.Size(193, 25);
             this.lbl_IO_Profile.TabIndex = 533;
             this.lbl_IO_Profile.Text = "Profile";
             this.lbl_IO_Profile.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -2857,7 +2856,6 @@ namespace Twol
             this.panel_IO.Controls.Add(this.lblFromGPS);
             this.panel_IO.Controls.Add(this.btnNTRIPSerial);
             this.panel_IO.Controls.Add(this.lblToGPS);
-            this.panel_IO.Controls.Add(this.lblCount);
             this.panel_IO.Controls.Add(this.lblMount);
             this.panel_IO.Controls.Add(this.btnUDPMonitor);
             this.panel_IO.Controls.Add(this.btnNtrip);
@@ -2944,28 +2942,15 @@ namespace Twol
             this.lblToGPS.Text = "---";
             this.lblToGPS.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // lblCount
-            // 
-            this.lblCount.BackColor = System.Drawing.Color.Transparent;
-            this.lblCount.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCount.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblCount.Location = new System.Drawing.Point(312, 64);
-            this.lblCount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblCount.Name = "lblCount";
-            this.lblCount.Size = new System.Drawing.Size(69, 18);
-            this.lblCount.TabIndex = 541;
-            this.lblCount.Text = "-";
-            this.lblCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // lblMount
             // 
             this.lblMount.BackColor = System.Drawing.Color.Transparent;
             this.lblMount.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMount.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblMount.Location = new System.Drawing.Point(278, 42);
+            this.lblMount.Location = new System.Drawing.Point(-2, 42);
             this.lblMount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblMount.Name = "lblMount";
-            this.lblMount.Size = new System.Drawing.Size(136, 18);
+            this.lblMount.Size = new System.Drawing.Size(140, 18);
             this.lblMount.TabIndex = 539;
             this.lblMount.Text = "--";
             this.lblMount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3313,7 +3298,6 @@ namespace Twol
         private System.Windows.Forms.Label lblSerialPorts;
         private System.Windows.Forms.Button btnNtrip;
         private System.Windows.Forms.Button btnUDPMonitor;
-        private System.Windows.Forms.Label lblCount;
         private System.Windows.Forms.Label lblMount;
         private System.Windows.Forms.Label lblToGPS;
         private System.Windows.Forms.Timer tmrNTRIP;

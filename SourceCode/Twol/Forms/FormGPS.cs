@@ -446,7 +446,7 @@ namespace Twol
 
             hotkeys = Settings.User.hotkeys.ToCharArray();
 
-            lbl_IO_Profile.Text = "Profile: " + RegistrySettings.IOFileName;
+            lbl_IO_Profile.Text = RegistrySettings.IOFileName;
 
             Log.EventWriter("Terms Accepted");
 
@@ -743,7 +743,7 @@ namespace Twol
                 }
             }
 
-            lbl_IO_Profile.Text = "Using Profile: " + RegistrySettings.IOFileName;
+            lbl_IO_Profile.Text = RegistrySettings.IOFileName;
 
         }
 
