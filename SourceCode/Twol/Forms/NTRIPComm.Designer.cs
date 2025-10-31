@@ -341,10 +341,10 @@ namespace Twol
             traffic.cntrGPSInBytes = 0;
             tripBytes += (uint)data.Length;
 
-            if (isUDPMonitorOn)
-            {
-                logUDPSentence.Append(DateTime.Now.ToString("ss.fff\t >  ") + " \tNTRIP" + "\r\n");
-            }
+            //if (isUDPMonitorOn)
+            //{
+            //    logUDPSentence.Append(DateTime.Now.ToString("ss.fff\t >  ") + " \tNTRIP" + "\r\n");
+            //}
         }
 
         public void SendNTRIP(byte[] data)

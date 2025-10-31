@@ -202,7 +202,7 @@ namespace Twol
                 if (isUDPMonitorOn)
                 {
                     string code = byteData.Length > 3 ? byteData[3].ToString() : "N/A";
-                    logUDPSentence.Append(DateTime.Now.ToString("ss.fff\t >  ") + (byteData.Length > 3 ? byteData[3].ToString() : "N/A") + " \t" + epNtrip + "\r\n");
+                    logUDPSentence.Append(DateTime.Now.ToString("ss.fff\t >  ") + byteData.Length + " \t" + epNtrip + "\r\n");
                 }
             }
         }
