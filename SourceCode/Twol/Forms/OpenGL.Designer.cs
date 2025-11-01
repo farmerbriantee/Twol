@@ -164,7 +164,6 @@ namespace Twol
 
                     #region Draw Boundary and Headland highlight areas
 
-
                     if (!isFieldStarted)
                     {
 
@@ -294,7 +293,6 @@ namespace Twol
                                 if (Settings.User.setDisplay_isDayMode) GL.Color4((byte)triList[0].easting, (byte)triList[0].northing, (byte)triList[0].heading, (byte)70);
                                 else GL.Color4((byte)triList[0].easting, (byte)triList[0].northing, (byte)triList[0].heading, (byte)(35));
 
-
                                 triList.DrawPolygon(mipmap, 1, PrimitiveType.TriangleStrip);
 
                                 if (Settings.User.setDisplay_isSectionLinesOn)
@@ -345,7 +343,6 @@ namespace Twol
                             if (Settings.User.setDisplay_isDayMode) GL.Color4((byte)triList[0].easting, (byte)triList[0].northing, (byte)triList[0].heading, (byte)152);
                             else GL.Color4((byte)triList[0].easting, (byte)triList[0].northing, (byte)triList[0].heading, (byte)(152 * 0.5));
 
-
                             triList.DrawPolygon(mipmap, 1, PrimitiveType.TriangleStrip);
 
                             if (Settings.User.setDisplay_isSectionLinesOn)
@@ -356,7 +353,6 @@ namespace Twol
                                 triList.DrawPolygon(mipmap, 1, PrimitiveType.LineStrip);
                                 triList.DrawPolygon(mipmap, 2, PrimitiveType.LineStrip);
                             }
-
 
                             if (Settings.User.isDirectionMarkers)
                             {
@@ -433,10 +429,6 @@ namespace Twol
                             }
                         }
                     }
-
-
-
-
 
                    if (tram.displayMode != 0) tram.DrawTram();
 
@@ -616,7 +608,6 @@ namespace Twol
 
                     if (!ct.isContourBtnOn && trk.currTrk != null) DrawTrackInfo();
 
-
                     if (bnd.bndList.Count > 0 && yt.isYouTurnBtnOn && !ct.isContourBtnOn) DrawUTurnBtn();
 
                     if ((isBtnAutoSteerOn || yt.isYouTurnBtnOn) && !ct.isContourBtnOn) DrawManUTurnBtn();
@@ -692,9 +683,6 @@ namespace Twol
 
                         int edge = -oglMain.Width / 2 + 10;
                         font.DrawText(edge, oglMain.Height - 120, "<-- GPS On ?");
-
-                        lblSpeed.Text = "???";
-                        lblHz.Text = " ???? \r\n Not Connected";
                     }
                     else if (!isFirstHeadingSet)
                     {
@@ -861,9 +849,6 @@ namespace Twol
 
                 GL.Flush();
                 oglMain.SwapBuffers();
-
-                lblSpeed.Text = "???";
-                lblHz.Text = " ???? \r\n Not Connected";
             }
 
             #endregion
@@ -949,7 +934,6 @@ namespace Twol
             //patch color
             GL.ColorMask(false, true, false, false); //Draw only in green
             GL.Color3((byte)0, (byte)bbColors.section, (byte)0);
-
 
             double pivEplus = toolPos.easting + 50;
             double pivEminus = toolPos.easting - 50;
@@ -1090,7 +1074,6 @@ namespace Twol
                 redPixels[j] = rgbPixels[i];
                 grnPixels[j] = rgbPixels[i + 1];
             }
-
 
             //Paint to context for troubleshooting qqq
             //oglBack.BringToFront();
@@ -1258,7 +1241,6 @@ namespace Twol
                         section[j].mappingOffTimer = 0;
                     }
                 
-
                 //MAPPING - Not the making of triangle patches - only status - on or off
                 if (section[j].sectionOnRequest)
                 {
@@ -2135,7 +2117,6 @@ namespace Twol
                 double avgPivotDistance = avgPivDistance * glm.m2InchOrCm;
                 double err = mc.actualSteerAngleDegrees - guidanceLineSteerAngle;
 
-
                 if (isBtnAutoSteerOn)
                 {
                     if (Math.Abs(err) < 0.5) err = 0;
@@ -2170,7 +2151,6 @@ namespace Twol
                     GL.Vertex2(0, down);
                     GL.Vertex2(errLine, down);
                     GL.End();
-
 
                     if ((err) > 0.0)
                     {
@@ -2233,7 +2213,6 @@ namespace Twol
                 {
                     center = (int)(-40 * (textSize));
                 }
-
 
                 int wide = (int)((double)oglMain.Width / 18);
                 if (wide < 64) wide = 64;
@@ -2434,6 +2413,9 @@ namespace Twol
             GL.Color3(0.9852f, 0.982f, 0.983f);
             font.DrawText(oglMain.Width / 2 - lenth, 10, strHeading, 1);
 
+            //speedo text
+            if (!Settings.User.isSpeedoOn) font.DrawText(oglMain.Width / 2 - 250, 10, Speed, 1);
+
             //angular velocity
             strHeading = ahrs.angVel.ToString();
             font.DrawText(center, 80, strHeading, 1);
@@ -2460,7 +2442,6 @@ namespace Twol
 
             GL.BindTexture(TextureTarget.Texture2D, texture[(int)FormGPS.textures.Compass]);        // Select Our Texture
             GL.Color4(0.952f, 0.870f, 0.73f, 0.8);
-
 
             GL.Translate(center, 140, 0);
 
@@ -2626,7 +2607,6 @@ namespace Twol
             clip[14] = modl[12] * proj[2] + modl[13] * proj[6] + modl[14] * proj[10] + modl[15] * proj[14];
             clip[15] = modl[12] * proj[3] + modl[13] * proj[7] + modl[14] * proj[11] + modl[15] * proj[15];
 
-
             // Extract the RIGHT clipping plane
             frustum[0] = clip[3] - clip[0];
             frustum[1] = clip[7] - clip[4];
@@ -2644,7 +2624,6 @@ namespace Twol
             frustum[9] = clip[7] - clip[6];
             frustum[10] = clip[11] - clip[10];
             frustum[11] = clip[15] - clip[14];
-
 
             // Extract the NEAR clipping plane.  This is last on purpose (see pointinfrustum() for reason)
             frustum[12] = clip[3] + clip[2];
@@ -2673,7 +2652,6 @@ namespace Twol
 
             minFieldX = 9999999; minFieldY = 9999999;
             maxFieldX = -9999999; maxFieldY = -9999999;
-
 
             //min max of the boundary
             //min max of the boundary

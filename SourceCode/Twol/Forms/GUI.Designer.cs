@@ -389,8 +389,6 @@ namespace Twol
                 distanceToolBtn.Text = fd.DistanceUser + "\r\n" + fd.WorkedUserArea;
                 btnAutoSteerConfig.Text = SetSteerAngle + "\r\n" + ActualSteerAngle;
 
-                lblSpeed.Text = Speed;
-
                 //Nozzz
                 if (Settings.Vehicle.setApp_isNozzleApp)
                 {
@@ -679,10 +677,6 @@ namespace Twol
 
             SetText();
 
-            //panel IO settings
-            panel_IO.Width = 200;
-            panel_IO.Height = 320;
-
             Panel_IO_Location();
         }
 
@@ -943,22 +937,7 @@ namespace Twol
 
         private void Panel_IO_Location()
         {
-
-            btnSlide.Left = panel_IO.Width - btnSlide.Width - 1;
-
-            if (panel_IO.Width == 430)
-            {
-                btnSlide.BackgroundImage = Properties.Resources.ArrowGrnLeft;
-                panel_IO.Location = new Point(oglMain.Width - 380, oglMain.Height / 2 - 80);
-            }
-            else
-            {
-                panel_IO.Location = new Point(oglMain.Width - 130, oglMain.Height / 2 - 80);
-                btnSlide.BackgroundImage = Properties.Resources.ArrowGrnRight;
-                btnSlide.Left = panel_IO.Width - btnSlide.Width - 1;
-                panel_IO.Width = 200;
-
-            }
+                panel_IO.Location = new Point(oglMain.Width - 230, oglMain.Height / 2 - 140);            
         }
 
         private void ZoomByMouseWheel(object sender, MouseEventArgs e)
