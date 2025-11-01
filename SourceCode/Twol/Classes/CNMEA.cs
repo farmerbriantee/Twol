@@ -320,7 +320,7 @@ namespace Twol
                     nmeaPGN[29] = 0;
 
                     //Send nmea to AgOpenGPS
-                    mf.SendPgnToLoop(nmeaPGN);
+                    mf.SendToPlugins(nmeaPGN);
                 }
             }
         }

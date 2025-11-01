@@ -50,13 +50,13 @@ namespace Twol
         public byte[] ipAutoSet = { 192, 168, 5 };
 
         // - App Sockets  -----------------------------------------------------
-        private Socket loopBackSocket;
+        private Socket pluginsSocket;
 
         //endpoints of modules
-        private EndPoint endPointLoopBack = new IPEndPoint(IPAddress.Loopback, 0);
+        private EndPoint endPointPlugins = new IPEndPoint(IPAddress.Loopback, 0);
 
         // Data stream
-        private byte[] loopBuffer = new byte[1024];
+        private byte[] pluginBuffer = new byte[1024];
 
         //class for counting bytes
         public CTraffic traffic = new CTraffic();
@@ -88,16 +88,16 @@ namespace Twol
             return;
         }
 
-        public void StartLoopbackServer()
+        public void StartPluginsServer()
         {
             try
             {
                 // Initialise the socket
-                loopBackSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-                loopBackSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast, true);
-                loopBackSocket.Bind(new IPEndPoint(IPAddress.Loopback, 15555));
-                loopBackSocket.BeginReceiveFrom(loopBuffer, 0, loopBuffer.Length, SocketFlags.None,
-                    ref endPointLoopBack, new AsyncCallback(ReceiveAppData), null);
+                pluginsSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+                pluginsSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast, true);
+                pluginsSocket.Bind(new IPEndPoint(IPAddress.Loopback, 15555));
+                pluginsSocket.BeginReceiveFrom(pluginBuffer, 0, pluginBuffer.Length, SocketFlags.None,
+                    ref endPointPlugins, new AsyncCallback(ReceiveAsyncPluginsData), null);
                 Log.EventWriter("UDP Loopback network started: " + IPAddress.Loopback.ToString() + ":" + "15555");
             }
             catch (Exception ex)
@@ -108,7 +108,7 @@ namespace Twol
         }
 
         //initialize loopback and udp network
-        public void LoadUDPNetwork()
+        public void LoadUDPServer()
         {
             helloFromTwol[5] = 56;
 
@@ -544,7 +544,7 @@ namespace Twol
 
         #endregion
 
-        #region Send_Tool_UDP
+        #region Send_UDP_Tool
 
         public void SendUDPMessageTool(byte[] byteData, IPEndPoint endPoint)
         {
@@ -721,6 +721,7 @@ namespace Twol
         #endregion
 
         #region Loopback to plugins
+
         private void ReceiveFromPlugins(byte[] data)
         {
             try
@@ -771,19 +772,19 @@ namespace Twol
             }
         }
 
-        private void ReceiveAppData(IAsyncResult asyncResult)
+        private void ReceiveAsyncPluginsData(IAsyncResult asyncResult)
         {
             try
             {
                 // Receive all data
-                int msgLen = loopBackSocket.EndReceiveFrom(asyncResult, ref endPointLoopBack);
+                int msgLen = pluginsSocket.EndReceiveFrom(asyncResult, ref endPointPlugins);
 
                 byte[] localMsg = new byte[msgLen];
-                Array.Copy(loopBuffer, localMsg, msgLen);
+                Array.Copy(pluginBuffer, localMsg, msgLen);
 
                 // Listen for more connections again...
-                loopBackSocket.BeginReceiveFrom(loopBuffer, 0, loopBuffer.Length, SocketFlags.None,
-                    ref endPointLoopBack, new AsyncCallback(ReceiveAppData), null);
+                pluginsSocket.BeginReceiveFrom(pluginBuffer, 0, pluginBuffer.Length, SocketFlags.None,
+                    ref endPointPlugins, new AsyncCallback(ReceiveAsyncPluginsData), null);
 
                 BeginInvoke((MethodInvoker)(() => ReceiveFromPlugins(localMsg)));
             }
@@ -793,9 +794,9 @@ namespace Twol
             }
         }
 
-        public void SendPgnToLoop(byte[] byteData)
+        public void SendToPlugins(byte[] byteData)
         {
-            if (loopBackSocket != null && byteData.Length > 2)
+            if (pluginsSocket != null && byteData.Length > 2)
             {
                 try
                 {
@@ -806,8 +807,8 @@ namespace Twol
                     }
                     byteData[byteData.Length - 1] = (byte)crc;
 
-                    loopBackSocket.BeginSendTo(byteData, 0, byteData.Length, SocketFlags.None,
-                        epModule, new AsyncCallback(SendAsyncLoopData), null);
+                    pluginsSocket.BeginSendTo(byteData, 0, byteData.Length, SocketFlags.None,
+                        epPlugins, new AsyncCallback(SendAsyncPluginsData), null);
                 }
                 catch (Exception)
                 {
@@ -817,19 +818,17 @@ namespace Twol
             }
         }
 
-        public void SendAsyncLoopData(IAsyncResult asyncResult)
+        public void SendAsyncPluginsData(IAsyncResult asyncResult)
         {
             try
             {
-                loopBackSocket.EndSend(asyncResult);
+                pluginsSocket.EndSend(asyncResult);
             }
             catch (Exception)
             {
                 //MessageBox.Show("SendData Error: " + ex.Message, "UDP Server", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-
 
         #endregion
 

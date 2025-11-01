@@ -27,7 +27,6 @@ namespace Twol
         private System.Threading.Timer qTmr;
         Queue<byte> rawTrip = new Queue<byte>();
         private static int packetSizeNTRIP = 500;        
-        byte[] trip = new byte[packetSizeNTRIP]; //500 bytes to send or remaining packet
 
         private string GGASentence;
 
@@ -326,6 +325,7 @@ namespace Twol
         #endregion
 
         #region TCP NTRIP Data Queue and Send
+
         public void OnAddMessage(byte[] data)
         {
             //reset watchdog since we have updated data
@@ -389,6 +389,8 @@ namespace Twol
 
                 //256 bytes chunks max
                 if (cnt > packetSizeNTRIP) cnt = packetSizeNTRIP;
+
+                byte[] trip = new byte[cnt]; //500 bytes to send or remaining packet
 
                 traffic.cntrGPSInBytes += cnt;
 
