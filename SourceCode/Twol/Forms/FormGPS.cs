@@ -348,10 +348,10 @@ namespace Twol
 
             //start udp server if required
             if (Settings.IO.setUDP_isOn)
-                LoadUDPNetwork();
+                LoadUDPServer();
 
             if (Settings.IO.setUDP_isLoopBack)
-                StartLoopbackServer();
+                StartPluginsServer();
 
             ConfigureNTRIP();
 
