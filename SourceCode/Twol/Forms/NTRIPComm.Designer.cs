@@ -26,7 +26,8 @@ namespace Twol
         //NTRIP metering
         private System.Threading.Timer qTmr;
         Queue<byte> rawTrip = new Queue<byte>();
-        private int packetSizeNTRIP = 256;
+        private static int packetSizeNTRIP = 500;
+        byte[] trip = new byte[packetSizeNTRIP];
 
         private string GGASentence;
 
@@ -356,6 +357,11 @@ namespace Twol
             //reset watchdog since we have updated data
 
             NTRIP_Watchdog = 0;
+            if (rawTrip.Count > 15000)
+            {
+                //we are falling behind so clear out old data
+                rawTrip.Clear();
+            }
 
             if (Settings.IO.setNTRIP_isOn)
             {
@@ -456,9 +462,6 @@ namespace Twol
                 //256 bytes chunks max
                 if (cnt > packetSizeNTRIP) cnt = packetSizeNTRIP;
 
-                //new data array to send
-                byte[] trip = new byte[cnt];
-
                 traffic.cntrGPSInBytes += cnt;
 
                 //dequeue into the array
@@ -468,11 +471,7 @@ namespace Twol
                 SendNTRIP(trip);
 
                 //Can't keep up as internet dumped a shit load so clear
-                if (rawTrip.Count > 10000) rawTrip.Clear();
-
-                ////show how many bytes left in the queue
-                //if (isViewAdvanced)
-                //    lblCount.Text = rawTrip.Count.ToString();
+                if (rawTrip.Count > 16000) rawTrip.Clear();
             }
             catch (Exception ex)
             {
