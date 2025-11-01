@@ -218,18 +218,18 @@ namespace Twol
         {
             string[] ports = System.IO.Ports.SerialPort.GetPortNames();
 
-            if (ports.Length == 0)
-            {
-                lblSerialPorts.Text = "None";
-            }
-            else
-            {
-                lblSerialPorts.Text = "";
-                for (int i = 0; i < ports.Length; i++)
-                {
-                    lblSerialPorts.Text += ports[i] + " ";
-                }
-            }
+            //if (ports.Length == 0)
+            //{
+            //    lblSerialPorts.Text = "None";
+            //}
+            //else
+            //{
+            //    lblSerialPorts.Text = "";
+            //    for (int i = 0; i < ports.Length; i++)
+            //    {
+            //        lblSerialPorts.Text += ports[i] + " ";
+            //    }
+            //}
         }
 
         private void btnBringUpCommSettings_Click(object sender, EventArgs e)

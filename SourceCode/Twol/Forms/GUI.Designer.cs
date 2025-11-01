@@ -484,9 +484,6 @@ namespace Twol
                 makeUTurnCounter++;
 
                 secondsSinceStart = (DateTime.Now - Process.GetCurrentProcess().StartTime).TotalSeconds;
-
-                lblRem.Text = rawTrip.Count.ToString();
-
             }
 
         }//wait till timer fires again.
@@ -600,10 +597,6 @@ namespace Twol
 
             panelSim.Visible = timerSim.Enabled = simulatorOnToolStripMenuItem.Checked = Settings.User.isSimulatorOn;
 
-            //panel IO settings
-            panel_IO.Location = new Point(100,100);
-            panel_IO.Width = 270;
-
             if (Settings.Tool.setToolSteer.isGPSToolActive) btnGPSTool.Enabled = true;
             else btnGPSTool.Enabled = false;
 
@@ -685,6 +678,12 @@ namespace Twol
             }
 
             SetText();
+
+            //panel IO settings
+            panel_IO.Width = 200;
+            panel_IO.Height = 320;
+
+            Panel_IO_Location();
         }
 
         public void SetText()
@@ -938,6 +937,28 @@ namespace Twol
             panelLeft.Visible = !isPanelBottomHidden;
 
             PanelSizeRightAndBottom();
+
+            Panel_IO_Location();
+        }
+
+        private void Panel_IO_Location()
+        {
+
+            btnSlide.Left = panel_IO.Width - btnSlide.Width - 1;
+
+            if (panel_IO.Width == 430)
+            {
+                btnSlide.BackgroundImage = Properties.Resources.ArrowGrnLeft;
+                panel_IO.Location = new Point(oglMain.Width - 380, oglMain.Height / 2 - 80);
+            }
+            else
+            {
+                panel_IO.Location = new Point(oglMain.Width - 130, oglMain.Height / 2 - 80);
+                btnSlide.BackgroundImage = Properties.Resources.ArrowGrnRight;
+                btnSlide.Left = panel_IO.Width - btnSlide.Width - 1;
+                panel_IO.Width = 200;
+
+            }
         }
 
         private void ZoomByMouseWheel(object sender, MouseEventArgs e)

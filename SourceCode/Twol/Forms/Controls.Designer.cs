@@ -102,20 +102,21 @@ namespace Twol
 
         private void btnSlide_Click(object sender, EventArgs e)
         {
-            panel_IO.Width = panel_IO.Width == 270 ? 400 : 270;
+            panel_IO.Width = panel_IO.Width == 200 ? 430 : 200;
 
-            if (panel_IO.Width == 400)
+            if (panel_IO.Width == 430)
             {
                 btnSlide.BackgroundImage = Properties.Resources.ArrowGrnLeft;
                 btnSlide.Left = panel_IO.Width - btnSlide.Width - 1;
-                if ((panel_IO.Left + 400) > this.Width) panel_IO.Left = this.Width - 470;
             }
             else
             {
                 btnSlide.BackgroundImage = Properties.Resources.ArrowGrnRight;
                 btnSlide.Left = panel_IO.Width - btnSlide.Width - 1;
-                if ((panel_IO.Left + 270) > this.Width) panel_IO.Left = this.Width - 340;
+                panel_IO.Width = 200;
+
             }
+            Panel_IO_Location();
         }
 
         private void btnExtSim_Click(object sender, EventArgs e)
@@ -951,9 +952,8 @@ namespace Twol
             {
                 panel_IO.Visible = true;
                 panel_IO.BringToFront();
-                panel_IO.Location = new Point(this.Width - 350, 100);
-
-                panel_IO.Width = 270;
+                panel_IO.Width = 200;
+                Panel_IO_Location();
 
                 btnSlide.BackgroundImage = Properties.Resources.ArrowGrnRight;
                 btnSlide.Left = panel_IO.Width - btnSlide.Width - 1;

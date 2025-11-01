@@ -621,12 +621,7 @@ namespace Twol
                 f.Left = this.Width - 400 + this.Left;
             }
 
-            panel_IO.Location = new Point(this.Width - 350, 100);
-
-            panel_IO.Width = 270;
-
-            btnSlide.BackgroundImage = Properties.Resources.ArrowGrnRight;
-            btnSlide.Left = panel_IO.Width - btnSlide.Width - 1;
+            Panel_IO_Location();
         }
 
         public void FileSaveEverythingBeforeClosingField()

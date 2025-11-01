@@ -112,17 +112,16 @@ namespace Twol
         {
             helloFromTwol[5] = 56;
 
-            lblIP.Text = "";
             try //udp network
             {
-                foreach (IPAddress IPA in Dns.GetHostAddresses(Dns.GetHostName()))
-                {
-                    if (IPA.AddressFamily == AddressFamily.InterNetwork)
-                    {
-                        string data = IPA.ToString();
-                        lblIP.Text += IPA.ToString().Trim() + "\r\n";
-                    }
-                }
+                //foreach (IPAddress IPA in Dns.GetHostAddresses(Dns.GetHostName()))
+                //{
+                //    if (IPA.AddressFamily == AddressFamily.InterNetwork)
+                //    {
+                //        string data = IPA.ToString();
+                //        lblIP.Text += IPA.ToString().Trim() + "\r\n";
+                //    }
+                //}
 
                 // Initialise the socket
                 UDPSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
@@ -175,7 +174,6 @@ namespace Twol
                 MessageBox.Show(e.Message, "Serious Network Connection Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 btnUDP.BackColor = Color.Red;
-                lblIP.Text = "Error";
             }
         }
 
