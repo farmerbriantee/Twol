@@ -122,6 +122,33 @@ namespace Twol
 
             mf.UpdateFixPosition();
 
+            if (Settings.IO.setUDP_isLoopBack)
+            {
+                byte[] nmeaPGN = new byte[30];
+
+                nmeaPGN[0] = 128;
+                nmeaPGN[1] = 129;
+                nmeaPGN[2] = 124;
+                nmeaPGN[3] = 208; //pgn number aka D0
+                nmeaPGN[4] = 24; // nmea total array count minus 6
+
+                //longitude
+                Buffer.BlockCopy(BitConverter.GetBytes(mf.pn.longitude), 0, nmeaPGN, 5, 8);
+
+                //latitude
+                Buffer.BlockCopy(BitConverter.GetBytes(mf.pn.latitude), 0, nmeaPGN, 13, 8);
+
+                //speed converted to kmh from knots
+                Buffer.BlockCopy(BitConverter.GetBytes(mf.pn.vtgSpeed), 0, nmeaPGN, 21, 8);
+
+                //checksum
+                nmeaPGN[29] = 0;
+
+                //Send nmea to AgOpenGPS
+                mf.SendToPlugins(nmeaPGN);
+            }
+
+
             if (isAccelForward)
             {
                 if (stepDistance < -0.06) stepDistance = -0.06;
@@ -138,6 +165,33 @@ namespace Twol
                 stepDistance -= 0.01;
                 if (stepDistance < -0.06) isAccelBack = false;
             }
+
+            if (Settings.IO.setUDP_isLoopBack)
+            {
+                byte[] nmeaPGN = new byte[30];
+
+                nmeaPGN[0] = 128;
+                nmeaPGN[1] = 129;
+                nmeaPGN[2] = 124;
+                nmeaPGN[3] = 208; //pgn number aka D0
+                nmeaPGN[4] = 24; // nmea total array count minus 6
+
+                //longitude
+                Buffer.BlockCopy(BitConverter.GetBytes(mf.pn.longitude), 0, nmeaPGN, 5, 8);
+
+                //latitude
+                Buffer.BlockCopy(BitConverter.GetBytes(mf.pn.latitude), 0, nmeaPGN, 13, 8);
+
+                //speed converted to kmh from knots
+                Buffer.BlockCopy(BitConverter.GetBytes(mf.pn.vtgSpeed), 0, nmeaPGN, 21, 8);
+
+                //checksum
+                nmeaPGN[29] = 0;
+
+                //Send nmea to AgOpenGPS
+                mf.SendToPlugins(nmeaPGN);
+            }
+
         }
 
         public void Reset()
