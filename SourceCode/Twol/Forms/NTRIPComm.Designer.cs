@@ -26,8 +26,8 @@ namespace Twol
         //NTRIP metering
         private System.Threading.Timer qTmr;
         Queue<byte> rawTrip = new Queue<byte>();
-        private static int packetSizeNTRIP = 500;
-        byte[] trip = new byte[packetSizeNTRIP];
+        private static int packetSizeNTRIP = 500;        
+        byte[] trip = new byte[packetSizeNTRIP]; //500 bytes to send or remaining packet
 
         private string GGASentence;
 
@@ -40,7 +40,7 @@ namespace Twol
         public bool isNTRIP_Sending = false;
         public bool isRunGGAInterval = false;
 
-        //set up connection to Caster
+        #region NTRIP StartStop
         private void DoNTRIPSecondRoutine()
         {
             //count up the ntrip clock only if everything is alive
@@ -181,7 +181,7 @@ namespace Twol
                 if (Settings.IO.setNTRIP_sendGGAInterval > 0)
                 {
                     // dueTime = 5000ms to start fast, period = Timeout.Infinite until we set the regular interval
-                    tmr = new System.Threading.Timer(NTRIPTimerCallback, null, 5000, Timeout.Infinite);
+                    tmr = new System.Threading.Timer(NTRIPTimerSendGGACallback, null, 5000, Timeout.Infinite);
                 }
 
                 //if we had a timer already, kill it
@@ -295,63 +295,37 @@ namespace Twol
             }
         }
 
-        private void SendAuthorization()
+        private void ShutDownNTRIP()
         {
-            // Check we are connected
-            if (clientSocket == null || !clientSocket.Connected)
+            if (clientSocket != null && clientSocket.Connected)
             {
-                //TimedMessageBox(2000, gStr.gsNTRIPNotConnected, " At the StartNTRIP() ");
+                //shut it down
+                clientSocket.Shutdown(SocketShutdown.Both);
+                clientSocket.Close();
+                System.Threading.Thread.Sleep(500);
+
+                //start it up again
                 ReconnectRequest();
-                return;
-            }
 
-            // Read the message from settings and send it
-            try
-            {
-                if (!Settings.IO.setNTRIP_isTCP)
-                {
-                    //encode user and password
-                    string auth = ToBase64(Settings.IO.setNTRIP_userName + ":" + Settings.IO.setNTRIP_userPassword);
-
-                    //grab location sentence
-                    BuildGGA();
-                    GGASentence = sbGGA.ToString();
-
-                    string htt;
-                    if (Settings.IO.setNTRIP_isHTTP10) htt = "1.0";
-                    else htt = "1.1";
-
-                    //Build authorization string
-                    string str = "GET /" + Settings.IO.setNTRIP_mount + " HTTP/" + htt + "\r\n";
-                    str += "User-Agent: NTRIP AgOpenGPSClient/6.4\r\n";
-                    str += "Authorization: Basic " + auth + "\r\n"; //This line can be removed if no authorization is needed
-                                                                    //str += GGASentence; //this line can be removed if no position feedback is needed
-                    str += "Accept: */*\r\nConnection: close\r\n";
-                    str += "\r\n";
-
-                    // Convert to byte array and send.
-                    Byte[] byteDateLine = Encoding.ASCII.GetBytes(str.ToCharArray());
-                    clientSocket.Send(byteDateLine, byteDateLine.Length, 0);
-
-                    //enable to periodically send GGA sentence to server.
-                    if (Settings.IO.setNTRIP_sendGGAInterval > 0)
-                    {
-                        int period = Settings.IO.setNTRIP_sendGGAInterval * 1000;
-                        try { tmr?.Change(period, period); } catch (Exception) { }
-                    }
-                }
-                //say its connected
-                isNTRIP_Connected = true;
-                isNTRIP_Starting = false;
-                isNTRIP_Connecting = false;
-            }
-            catch (Exception ex)
-            {
-                ReconnectRequest();
-                Log.EventWriter("Catch - > NTRIP Send Authourization: " + ex.ToString());
+                //Also stop the requests now
+                Settings.IO.setNTRIP_isOn = false;
             }
         }
 
+        private void SettingsShutDownNTRIP()
+        {
+            if (clientSocket != null && clientSocket.Connected)
+            {
+                clientSocket.Shutdown(SocketShutdown.Both);
+                clientSocket.Close();
+                System.Threading.Thread.Sleep(500);
+                ReconnectRequest();
+            }
+        }
+
+        #endregion
+
+        #region TCP NTRIP Data Queue and Send
         public void OnAddMessage(byte[] data)
         {
             //reset watchdog since we have updated data
@@ -401,52 +375,6 @@ namespace Twol
 
         }
 
-        public async Task SendGGAAsync()
-        {
-            //timer may have brought us here so return if not connected
-            if (!isNTRIP_Connected)
-                return;
-
-            // Check we are connected
-            if (clientSocket == null || !clientSocket.Connected)
-            {
-                ReconnectRequest();
-                return;
-            }
-
-            try
-            {
-                isNTRIP_Sending = true;
-                BuildGGA();
-
-                Byte[] byteDateLine = Encoding.ASCII.GetBytes(sbGGA.ToString());
-
-                // Send on a background thread to avoid blocking the caller's thread
-                await Task.Run(() => clientSocket.Send(byteDateLine, byteDateLine.Length, 0)).ConfigureAwait(false);
-            }
-            catch (Exception ex)
-            {
-                Log.EventWriter("Catch - > Send GGA" + ex.ToString());
-
-                ReconnectRequest();
-            }
-        }
-
-        // Timer callback runs on ThreadPool thread
-        private void NTRIPTimerCallback(object state)
-        {
-            try
-            {
-                // fire-and-forget async send
-                _ = SendGGAAsync();
-            }
-            catch (Exception ex)
-            {
-                // swallow to avoid unhandled exceptions from timer
-                Log.EventWriter("NTRIP timer callback error: " + ex.ToString());
-            }
-        }
-
         private void NTRIPQueueCallback(object state)
         {
             try
@@ -480,20 +408,6 @@ namespace Twol
             }
         }
 
-        public void OnConnect(IAsyncResult ar)
-        {
-            // Check if we were sucessfull
-            try
-            {
-                if (clientSocket.Connected)
-                    clientSocket.BeginReceive(casterRecBuffer, 0, casterRecBuffer.Length, SocketFlags.None, new AsyncCallback(OnRecievedData), null);
-            }
-            catch (Exception)
-            {
-                //MessageBox.Show(ex.Message, "Unusual error during Connect!");
-            }
-        }
-
         public void OnRecievedData(IAsyncResult ar)
         {
             // Check if we got any data
@@ -522,7 +436,21 @@ namespace Twol
             }
         }
 
-        private void NtripPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        public void OnConnect(IAsyncResult ar)
+        {
+            // Check if we were sucessfull
+            try
+            {
+                if (clientSocket.Connected)
+                    clientSocket.BeginReceive(casterRecBuffer, 0, casterRecBuffer.Length, SocketFlags.None, new AsyncCallback(OnRecievedData), null);
+            }
+            catch (Exception)
+            {
+                //MessageBox.Show(ex.Message, "Unusual error during Connect!");
+            }
+        }
+
+        private void NtripSerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             // Check if we got any data
             try
@@ -552,64 +480,9 @@ namespace Twol
             }
         }
 
-        private string ToBase64(string str)
-        {
-            Encoding asciiEncoding = Encoding.ASCII;
-            byte[] byteArray = new byte[asciiEncoding.GetByteCount(str)];
-            byteArray = asciiEncoding.GetBytes(str);
-            return Convert.ToBase64String(byteArray, 0, byteArray.Length);
-        }
+        #endregion
 
-        private void ShutDownNTRIP()
-        {
-            if (clientSocket != null && clientSocket.Connected)
-            {
-                //shut it down
-                clientSocket.Shutdown(SocketShutdown.Both);
-                clientSocket.Close();
-                System.Threading.Thread.Sleep(500);
-
-                //start it up again
-                ReconnectRequest();
-
-                //Also stop the requests now
-                Settings.IO.setNTRIP_isOn = false;
-            }
-        }
-
-        private void SettingsShutDownNTRIP()
-        {
-            if (clientSocket != null && clientSocket.Connected)
-            {
-                clientSocket.Shutdown(SocketShutdown.Both);
-                clientSocket.Close();
-                System.Threading.Thread.Sleep(500);
-                ReconnectRequest();
-            }
-        }
-
-        //calculate the NMEA checksum to stuff at the end
-        public string CalculateChecksum(string Sentence)
-        {
-            int sum = 0, inx;
-            char[] sentence_chars = Sentence.ToCharArray();
-            char tmp;
-
-            // All character xor:ed results in the trailing hex checksum
-            // The checksum calc starts after '$' and ends before '*'
-            for (inx = 1; ; inx++)
-            {
-                tmp = sentence_chars[inx];
-
-                // Indicates end of data and start of checksum
-                if (tmp == '*')
-                    break;
-                sum ^= tmp;    // Build checksum
-            }
-
-            // Calculated checksum converted to a 2 digit hex string
-            return String.Format("{0:X2}", sum);
-        }
+        #region Send GGA Authorization
 
         private readonly StringBuilder sbGGA = new StringBuilder();
 
@@ -680,5 +553,142 @@ namespace Twol
            0     1      2      3    4      5 6  7  8   9    10 11  12 13  14
                 Time      Lat       Lon     FixSatsOP Alt */
         }
+
+        private void NTRIPTimerSendGGACallback(object state)
+        {
+            try
+            {
+                // fire-and-forget async send
+                _ = SendGGAAsync();
+            }
+            catch (Exception ex)
+            {
+                // swallow to avoid unhandled exceptions from timer
+                Log.EventWriter("NTRIP timer callback error: " + ex.ToString());
+            }
+        }
+
+        private void SendAuthorization()
+        {
+            // Check we are connected
+            if (clientSocket == null || !clientSocket.Connected)
+            {
+                //TimedMessageBox(2000, gStr.gsNTRIPNotConnected, " At the StartNTRIP() ");
+                ReconnectRequest();
+                return;
+            }
+
+            // Read the message from settings and send it
+            try
+            {
+                if (!Settings.IO.setNTRIP_isTCP)
+                {
+                    //encode user and password
+                    string auth = ToBase64(Settings.IO.setNTRIP_userName + ":" + Settings.IO.setNTRIP_userPassword);
+
+                    //grab location sentence
+                    BuildGGA();
+                    GGASentence = sbGGA.ToString();
+
+                    string htt;
+                    if (Settings.IO.setNTRIP_isHTTP10) htt = "1.0";
+                    else htt = "1.1";
+
+                    //Build authorization string
+                    string str = "GET /" + Settings.IO.setNTRIP_mount + " HTTP/" + htt + "\r\n";
+                    str += "User-Agent: NTRIP AgOpenGPSClient/6.4\r\n";
+                    str += "Authorization: Basic " + auth + "\r\n"; //This line can be removed if no authorization is needed
+                                                                    //str += GGASentence; //this line can be removed if no position feedback is needed
+                    str += "Accept: */*\r\nConnection: close\r\n";
+                    str += "\r\n";
+
+                    // Convert to byte array and send.
+                    Byte[] byteDateLine = Encoding.ASCII.GetBytes(str.ToCharArray());
+                    clientSocket.Send(byteDateLine, byteDateLine.Length, 0);
+
+                    //enable to periodically send GGA sentence to server.
+                    if (Settings.IO.setNTRIP_sendGGAInterval > 0)
+                    {
+                        int period = Settings.IO.setNTRIP_sendGGAInterval * 1000;
+                        try { tmr?.Change(period, period); } catch (Exception) { }
+                    }
+                }
+                //say its connected
+                isNTRIP_Connected = true;
+                isNTRIP_Starting = false;
+                isNTRIP_Connecting = false;
+            }
+            catch (Exception ex)
+            {
+                ReconnectRequest();
+                Log.EventWriter("Catch - > NTRIP Send Authourization: " + ex.ToString());
+            }
+        }
+
+        public async Task SendGGAAsync()
+        {
+            //timer may have brought us here so return if not connected
+            if (!isNTRIP_Connected)
+                return;
+
+            // Check we are connected
+            if (clientSocket == null || !clientSocket.Connected)
+            {
+                ReconnectRequest();
+                return;
+            }
+
+            try
+            {
+                isNTRIP_Sending = true;
+                BuildGGA();
+
+                Byte[] byteDateLine = Encoding.ASCII.GetBytes(sbGGA.ToString());
+
+                // Send on a background thread to avoid blocking the caller's thread
+                await Task.Run(() => clientSocket.Send(byteDateLine, byteDateLine.Length, 0)).ConfigureAwait(false);
+            }
+            catch (Exception ex)
+            {
+                Log.EventWriter("Catch - > Send GGA" + ex.ToString());
+
+                ReconnectRequest();
+            }
+        }
+
+        #endregion
+
+
+        //calculate the NMEA checksum to stuff at the end
+        private string ToBase64(string str)
+        {
+            Encoding asciiEncoding = Encoding.ASCII;
+            byte[] byteArray = new byte[asciiEncoding.GetByteCount(str)];
+            byteArray = asciiEncoding.GetBytes(str);
+            return Convert.ToBase64String(byteArray, 0, byteArray.Length);
+        }
+
+        public string CalculateChecksum(string Sentence)
+        {
+            int sum = 0, inx;
+            char[] sentence_chars = Sentence.ToCharArray();
+            char tmp;
+
+            // All character xor:ed results in the trailing hex checksum
+            // The checksum calc starts after '$' and ends before '*'
+            for (inx = 1; ; inx++)
+            {
+                tmp = sentence_chars[inx];
+
+                // Indicates end of data and start of checksum
+                if (tmp == '*')
+                    break;
+                sum ^= tmp;    // Build checksum
+            }
+
+            // Calculated checksum converted to a 2 digit hex string
+            return String.Format("{0:X2}", sum);
+        }
+
     }
 }
