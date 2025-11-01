@@ -658,7 +658,6 @@ namespace Twol
 
         #endregion
 
-
         //calculate the NMEA checksum to stuff at the end
         private string ToBase64(string str)
         {
