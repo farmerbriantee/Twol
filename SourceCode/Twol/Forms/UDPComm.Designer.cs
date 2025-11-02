@@ -315,15 +315,12 @@ namespace Twol
 
         #region Recv_UDP
 
-        private void ReceiveFromUDP(byte[] data)
+        private void ReceiveFromUDP(byte[] data, int msgLen)
         {
-            if (data == null || data.Length < 3) return;
-
-            int msgLen = data.Length;
-
             try
             {
-                // $ and P or G or K
+                if (msgLen < 2) return;
+
                 if (data[0] == 36 && (data[1] == 71 || data[1] == 80 || data[1] == 75))
                 {
                     traffic.cntrGPSOut += msgLen;
@@ -590,10 +587,7 @@ namespace Twol
                 UDPSocket.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref endPointUDP,
                     new AsyncCallback(ReceiveDataUDPAsync), null);
 
-                if (localMsg == null || localMsg.Length < 3) 
-                    return;
-
-                BeginInvoke((MethodInvoker)(() => ReceiveFromUDP(localMsg)));
+                BeginInvoke((MethodInvoker)(() => ReceiveFromUDP(localMsg, localMsg.Length)));
 
             }
             catch
@@ -741,7 +735,8 @@ namespace Twol
                         if (pnTool.imuRoll != short.MaxValue)
                         {
                             double rollK = pnTool.imuRoll;
-                            rollK = Settings.Vehicle.setIMU_invertRoll? rollK *= -0.1: rollK *= 0.1;
+                            if (Settings.Vehicle.setIMU_invertRoll) rollK *= -0.1;
+                            else rollK *= 0.1;
                             rollK -= Settings.Vehicle.setIMU_rollZero;
                             ahrsTool.imuRoll = ahrsTool.imuRoll * Settings.Vehicle.setIMU_rollFilter + rollK * (1 - Settings.Vehicle.setIMU_rollFilter);
                         }
