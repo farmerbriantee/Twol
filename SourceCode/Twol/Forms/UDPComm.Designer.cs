@@ -1129,6 +1129,12 @@ namespace Twol
                 return true;    // indicate that you handled this keystroke
             }
 
+            if (keyData == Keys.X)
+            {
+                externalModuleSimToolStripMenuItem.PerformClick();
+                return true;
+            }
+
             //reset Sim
             if (keyData == Keys.R)
             {

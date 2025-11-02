@@ -169,7 +169,7 @@ namespace Twol
             form.Show(this);
         }
 
-        private void btnExtSim_Click(object sender, EventArgs e)
+        private void externalModuleSimToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Process[] processName = Process.GetProcessesByName("Modsim");
             if (processName.Length == 0)
@@ -237,6 +237,7 @@ namespace Twol
             }
             if (!Settings.IO.setUDP_isOn) SettingsEthernet();
             else SettingsUDP();
+
         }
 
         private void SettingsEthernet()
