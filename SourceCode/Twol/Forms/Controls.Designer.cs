@@ -922,21 +922,6 @@ namespace Twol
 
         }
 
-        private void btnShowHide_IO_Click(object sender, EventArgs e)
-        {
-            if (panel_IO.Visible)
-            {
-                panel_IO.Visible = false;
-                panel_IO.SendToBack();
-            }
-            else
-            {
-                panel_IO.Visible = true;
-                panel_IO.BringToFront();
-                Panel_IO_Location();
-            }
-        }
-
         private void btnAutoSteerConfig_Click(object sender, EventArgs e)
         {
             //check if window already exists
@@ -1064,6 +1049,42 @@ namespace Twol
         #endregion
 
         #region Top Panel
+        private void btnRTCM_Top_Click(object sender, EventArgs e)
+        {
+            if (Settings.IO.setPass_isOn)
+            {
+                TimedMessageBox(2000, "Serial NTRIP ON", "Turn it off before using NTRIP");
+                return;
+            }
+
+
+            using (var form = new FormNtrip(this))
+            {
+                if (form.ShowDialog(this) == DialogResult.OK)
+                {
+                    if (isNTRIP_Connected)
+                    {
+                        SettingsShutDownNTRIP();
+                    }
+                }
+            }
+        }
+
+        private void btnShowHide_IO_Click(object sender, EventArgs e)
+        {
+            if (panel_IO.Visible)
+            {
+                panel_IO.Visible = false;
+                panel_IO.SendToBack();
+            }
+            else
+            {
+                panel_IO.Visible = true;
+                panel_IO.BringToFront();
+                Panel_IO_Location();
+            }
+        }
+
         private void btnFieldStats_Click(object sender, EventArgs e)
         {
             Form f = Application.OpenForms["FormGPSData"];
