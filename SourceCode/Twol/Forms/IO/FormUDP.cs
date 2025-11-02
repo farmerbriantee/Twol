@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Drawing;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
@@ -59,46 +58,46 @@ namespace Twol
                 mf.ipAutoSet[0] = 99;
                 mf.ipAutoSet[1] = 99;
                 mf.ipAutoSet[2] = 99;
-                btnAutoSet.Enabled = false;
+                //btnAutoSet.Enabled = false;
             }
             else
             {
-                btnAutoSet.Enabled = true;
+                //btnAutoSet.Enabled = true;
             }
 
             if (mf.scanReply.isNewSteer)
             {
-                lblSteerIP.Text = mf.scanReply.steerIP;
+                //lblSteerIP.Text = mf.scanReply.steerIP;
                 mf.scanReply.isNewSteer = false;
-                lblNewSubnet.Text = mf.scanReply.subnetStr;
+                //lblNewSubnet.Text = mf.scanReply.subnetStr;
             }
 
             if (mf.scanReply.isNewMachine)
             {
-                lblMachineIP.Text = mf.scanReply.machineIP;
+                //lblMachineIP.Text = mf.scanReply.machineIP;
                 mf.scanReply.isNewMachine = false;
-                lblNewSubnet.Text = mf.scanReply.subnetStr;
+                //lblNewSubnet.Text = mf.scanReply.subnetStr;
             }
 
             if (mf.scanReply.isNewIMU)
             {
-                lblIMU_IP.Text = mf.scanReply.IMU_IP;
+                //lblIMU_IP.Text = mf.scanReply.IMU_IP;
                 mf.scanReply.isNewIMU = false;
-                lblNewSubnet.Text = mf.scanReply.subnetStr;
+                //lblNewSubnet.Text = mf.scanReply.subnetStr;
             }
 
             if (mf.scanReply.isNewGPS)
             {
-                lblGPSIP.Text = mf.scanReply.GPS_IP;
+                //lblGPSIP.Text = mf.scanReply.GPS_IP;
                 mf.scanReply.isNewGPS = false;
-                lblNewSubnet.Text = mf.scanReply.subnetStr;
+                //lblNewSubnet.Text = mf.scanReply.subnetStr;
             }
 
             if (mf.scanReplyTool.isNewGPS)
             {
                 //lblGPSIP.Text = mf.scanReply.GPS_IP;
                 mf.scanReplyTool.isNewGPS = false;
-                lblNewSubnetTool.Text = $"Tool IP: {mf.scanReplyTool.subnetStr}";
+                //lblNewSubnetTool.Text = $"Tool IP: {mf.scanReplyTool.subnetStr}";
             }
 
             //if (mf.scanReplyTool.isNewSteer)
@@ -108,23 +107,23 @@ namespace Twol
             //    lblNewSubnetTool.Text = mf.scanReplyTool.subnetStr;
             //}
 
-            if (tickCounter == 4)
-            {
-                if (mf.btnSteer.BackColor == Color.LimeGreen) lblBtnSteer.BackColor = Color.LimeGreen;
-                else lblBtnSteer.BackColor = Color.Red;
+            //if (tickCounter == 4)
+            //{
+            //    if (mf.btnSteer.BackColor == Color.LimeGreen) lblBtnSteer.BackColor = Color.LimeGreen;
+            //    else lblBtnSteer.BackColor = Color.Red;
 
-                if (mf.btnMachine.BackColor == Color.LimeGreen) lblBtnMachine.BackColor = Color.LimeGreen;
-                else lblBtnMachine.BackColor = Color.Red;
+            //    if (mf.btnMachine.BackColor == Color.LimeGreen) lblBtnMachine.BackColor = Color.LimeGreen;
+            //    else lblBtnMachine.BackColor = Color.Red;
 
-                if (mf.btnGPS.BackColor == Color.LimeGreen) lblBtnGPS.BackColor = Color.LimeGreen;
-                else lblBtnGPS.BackColor = Color.Red;
+            //    if (mf.btnGPS.BackColor == Color.LimeGreen) lblBtnGPS.BackColor = Color.LimeGreen;
+            //    else lblBtnGPS.BackColor = Color.Red;
 
-                if (mf.btnIMU.BackColor == Color.LimeGreen) lblBtnIMU.BackColor = Color.LimeGreen;
-                else lblBtnIMU.BackColor = Color.Red;
+            //    if (mf.btnIMU.BackColor == Color.LimeGreen) lblBtnIMU.BackColor = Color.LimeGreen;
+            //    else lblBtnIMU.BackColor = Color.Red;
 
-                if (mf.btnGPSTool.BackColor == Color.LimeGreen) lblBtnGPSTool.BackColor = Color.LimeGreen;
-                else lblBtnGPSTool.BackColor = Color.Red;
-            }
+            //    if (mf.btnGPSTool.BackColor == Color.LimeGreen) lblBtnGPSTool.BackColor = Color.LimeGreen;
+            //    else lblBtnGPSTool.BackColor = Color.Red;
+            //}
 
             if (tickCounter > 5)
             {
@@ -144,7 +143,7 @@ namespace Twol
         {
             tboxNets.Text = "";
 
-            lblSteerIP.Text = lblMachineIP.Text = lblGPSIP.Text = lblIMU_IP.Text = lblNewSubnet.Text = "";
+            //lblSteerIP.Text = lblMachineIP.Text = lblGPSIP.Text = lblIMU_IP.Text = lblNewSubnet.Text = "";
             mf.scanReply.isNewData = false;
 
             bool isSubnetMatchCard = false;

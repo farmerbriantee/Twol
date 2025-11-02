@@ -847,6 +847,7 @@
     <None Include="btnImages\UploadOff.png" />
     <None Include="btnImages\UploadOn.png" />
     <None Include="btnImages\IO\NTRIP_Top.png" />
+    <None Include="btnImages\IO\Plugin.png" />
     <Content Include="btnImages\ZoomOut.png" />
     <Content Include="License.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
