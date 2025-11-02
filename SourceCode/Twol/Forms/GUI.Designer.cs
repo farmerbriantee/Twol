@@ -460,7 +460,7 @@ namespace Twol
 
                 if (mc.actualToolAngleDegrees != double.MaxValue)
                 {
-                    btnShowHide_IO.Text = mc.actualToolAngleDegrees.ToString("N1") + "°";
+                    btnToolSteerConfig.Text = mc.actualToolAngleDegrees.ToString("N1") + "°";
                 }
 
                 for (int j = 0; j < controlLbls.Count; j++)
@@ -512,7 +512,7 @@ namespace Twol
             deleteContourPathsToolStripMenuItem.Visible = Settings.User.setFeatures.isHideContourOn;
 
             //left side
-            btnShowHide_IO.Visible = true;
+            btnToolSteerConfig.Visible = true;
         }
 
         public void SetNozzleSettings()

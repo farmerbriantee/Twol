@@ -118,7 +118,7 @@ namespace Twol
             this.toolStripHotkeys = new System.Windows.Forms.ToolStripMenuItem();
             this.btnNavigationSettings = new System.Windows.Forms.Button();
             this.btnAutoSteerConfig = new System.Windows.Forms.Button();
-            this.btnShowHide_IO = new System.Windows.Forms.Button();
+            this.btnToolSteerConfig = new System.Windows.Forms.Button();
             this.btnFieldMenu = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripBtnFieldTools = new System.Windows.Forms.ToolStripDropDownButton();
@@ -1150,7 +1150,7 @@ namespace Twol
             this.panelLeft.Controls.Add(this.statusStrip2, 0, 3);
             this.panelLeft.Controls.Add(this.btnNavigationSettings, 0, 1);
             this.panelLeft.Controls.Add(this.btnAutoSteerConfig, 0, 6);
-            this.panelLeft.Controls.Add(this.btnShowHide_IO, 0, 7);
+            this.panelLeft.Controls.Add(this.btnToolSteerConfig, 0, 7);
             this.panelLeft.Controls.Add(this.btnFieldMenu, 0, 4);
             this.panelLeft.Controls.Add(this.statusStripLeft, 0, 2);
             this.panelLeft.Controls.Add(this.statusStrip1, 0, 5);
@@ -1325,30 +1325,31 @@ namespace Twol
             this.btnAutoSteerConfig.UseVisualStyleBackColor = false;
             this.btnAutoSteerConfig.Click += new System.EventHandler(this.btnAutoSteerConfig_Click);
             // 
-            // btnShowHide_IO
+            // btnToolSteerConfig
             // 
-            this.btnShowHide_IO.BackColor = System.Drawing.Color.Transparent;
-            this.btnShowHide_IO.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnShowHide_IO.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnShowHide_IO.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
-            this.btnShowHide_IO.FlatAppearance.BorderSize = 0;
-            this.btnShowHide_IO.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.btnShowHide_IO.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnShowHide_IO.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnShowHide_IO.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnShowHide_IO.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnShowHide_IO.ForeColor = System.Drawing.Color.Black;
-            this.btnShowHide_IO.Image = global::Twol.Properties.Resources.AutoSteerConf;
-            this.btnShowHide_IO.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnShowHide_IO.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnShowHide_IO.Location = new System.Drawing.Point(0, 518);
-            this.btnShowHide_IO.Margin = new System.Windows.Forms.Padding(0);
-            this.btnShowHide_IO.Name = "btnShowHide_IO";
-            this.btnShowHide_IO.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnShowHide_IO.Size = new System.Drawing.Size(70, 82);
-            this.btnShowHide_IO.TabIndex = 467;
-            this.btnShowHide_IO.Text = "12.3";
-            this.btnShowHide_IO.UseVisualStyleBackColor = false;
+            this.btnToolSteerConfig.BackColor = System.Drawing.Color.Transparent;
+            this.btnToolSteerConfig.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnToolSteerConfig.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnToolSteerConfig.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
+            this.btnToolSteerConfig.FlatAppearance.BorderSize = 0;
+            this.btnToolSteerConfig.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.btnToolSteerConfig.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnToolSteerConfig.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnToolSteerConfig.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnToolSteerConfig.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnToolSteerConfig.ForeColor = System.Drawing.Color.Black;
+            this.btnToolSteerConfig.Image = global::Twol.Properties.Resources.AutoSteerConf;
+            this.btnToolSteerConfig.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnToolSteerConfig.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnToolSteerConfig.Location = new System.Drawing.Point(0, 518);
+            this.btnToolSteerConfig.Margin = new System.Windows.Forms.Padding(0);
+            this.btnToolSteerConfig.Name = "btnToolSteerConfig";
+            this.btnToolSteerConfig.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnToolSteerConfig.Size = new System.Drawing.Size(70, 82);
+            this.btnToolSteerConfig.TabIndex = 467;
+            this.btnToolSteerConfig.Text = "12.3";
+            this.btnToolSteerConfig.UseVisualStyleBackColor = false;
+            this.btnToolSteerConfig.Click += new System.EventHandler(this.btnToolSteerConfig_Click);
             // 
             // btnFieldMenu
             // 
@@ -2293,7 +2294,7 @@ namespace Twol
             this.btnIMU.Size = new System.Drawing.Size(48, 38);
             this.btnIMU.TabIndex = 515;
             this.btnIMU.UseVisualStyleBackColor = false;
-            this.btnIMU.Click += new System.EventHandler(this.btnShowHide_IO_Click);
+            this.btnIMU.Click += new System.EventHandler(this.ShowHide_Panel_IO_Click);
             // 
             // btnSteer
             // 
@@ -2313,7 +2314,7 @@ namespace Twol
             this.btnSteer.Size = new System.Drawing.Size(48, 38);
             this.btnSteer.TabIndex = 518;
             this.btnSteer.UseVisualStyleBackColor = false;
-            this.btnSteer.Click += new System.EventHandler(this.btnShowHide_IO_Click);
+            this.btnSteer.Click += new System.EventHandler(this.ShowHide_Panel_IO_Click);
             // 
             // btnMachine
             // 
@@ -2333,7 +2334,7 @@ namespace Twol
             this.btnMachine.Size = new System.Drawing.Size(48, 38);
             this.btnMachine.TabIndex = 517;
             this.btnMachine.UseVisualStyleBackColor = false;
-            this.btnMachine.Click += new System.EventHandler(this.btnShowHide_IO_Click);
+            this.btnMachine.Click += new System.EventHandler(this.ShowHide_Panel_IO_Click);
             // 
             // btnGPS
             // 
@@ -2353,7 +2354,7 @@ namespace Twol
             this.btnGPS.Size = new System.Drawing.Size(48, 38);
             this.btnGPS.TabIndex = 516;
             this.btnGPS.UseVisualStyleBackColor = false;
-            this.btnGPS.Click += new System.EventHandler(this.btnShowHide_IO_Click);
+            this.btnGPS.Click += new System.EventHandler(this.ShowHide_Panel_IO_Click);
             // 
             // btnGPSTool
             // 
@@ -2373,7 +2374,7 @@ namespace Twol
             this.btnGPSTool.Size = new System.Drawing.Size(52, 38);
             this.btnGPSTool.TabIndex = 531;
             this.btnGPSTool.UseVisualStyleBackColor = false;
-            this.btnGPSTool.Click += new System.EventHandler(this.btnShowHide_IO_Click);
+            this.btnGPSTool.Click += new System.EventHandler(this.ShowHide_Panel_IO_Click);
             // 
             // lblHardwareMessage
             // 
@@ -3072,7 +3073,7 @@ namespace Twol
             this.btnShowHideIO.Size = new System.Drawing.Size(52, 38);
             this.btnShowHideIO.TabIndex = 547;
             this.btnShowHideIO.UseVisualStyleBackColor = false;
-            this.btnShowHideIO.Click += new System.EventHandler(this.btnShowHide_IO_Click);
+            this.btnShowHideIO.Click += new System.EventHandler(this.ShowHide_Panel_IO_Click);
             // 
             // btnNTRIPSerial
             // 
@@ -3324,7 +3325,7 @@ namespace Twol
         private System.Windows.Forms.ToolStripMenuItem menuLanguagePolish;
         private System.Windows.Forms.ToolStripDropDownButton distanceToolBtn;
         public System.Windows.Forms.Button btnDayNightMode;
-        public System.Windows.Forms.Button btnShowHide_IO;
+        public System.Windows.Forms.Button btnToolSteerConfig;
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton4;
         private System.Windows.Forms.TableLayoutPanel panelNavigation;
         public System.Windows.Forms.Button btn2D;

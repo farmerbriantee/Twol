@@ -992,6 +992,24 @@ namespace Twol
 
         }
 
+        private void btnToolSteerConfig_Click(object sender, EventArgs e)
+        {
+            //check if window already exists
+            Form fc = Application.OpenForms["FormToolSteer"];
+
+            if (fc != null)
+            {
+                fc.Focus();
+                fc.Close();
+                return;
+            }
+
+            Form form = new FormToolSteer(this);
+            form.Show(this);
+            this.Activate();
+
+        }
+
         private void btnAutoSteerConfig_Click(object sender, EventArgs e)
         {
             //check if window already exists
@@ -1140,7 +1158,7 @@ namespace Twol
             }
         }
 
-        private void btnShowHide_IO_Click(object sender, EventArgs e)
+        private void ShowHide_Panel_IO_Click(object sender, EventArgs e)
         {
             if (panel_IO.Visible)
             {
