@@ -182,60 +182,37 @@ namespace Twol
 
         public void SendNTRIPMessage(byte[] byteData)
         {
-            // Use the actual socket state instead of the general UDP flag.
-            if (NTRIPSocket == null || !NTRIPSocket.IsBound) return;
-            if (byteData == null || byteData.Length == 0) return;
-            if (epNtrip == null || epNtrip.Port == 0) return;
+            if (isUDPNetworkConnected)
+            {
+                try
+                {
+                    // Send packet to the zero
+                    if (byteData.Length != 0)
+                    {
+                        NTRIPSocket.BeginSendTo(byteData, 0, byteData.Length, SocketFlags.None,
+                           epNtrip, new AsyncCallback(SendDataNTRIPAsync), null);
+                    }
+                }
+                catch (Exception)
+                {
+                }
 
-            byte[] sendBuffer = null;
-            try
-            {
-                sendBuffer = ArrayPool<byte>.Shared.Rent(byteData.Length);
-                Buffer.BlockCopy(byteData, 0, sendBuffer, 0, byteData.Length);
-
-                // Pass buffer via AsyncState so we can return it in the callback.
-                NTRIPSocket.BeginSendTo(
-                    sendBuffer, 0, byteData.Length, SocketFlags.None,
-                    epNtrip, new AsyncCallback(SendDataNTRIPAsync), sendBuffer);
-            }
-            catch (ObjectDisposedException)
-            {
-                // Likely shutting down.
-            }
-            catch (SocketException ex)
-            {
-                Log.EventWriter("NTRIP UDP Send error: " + ex.SocketErrorCode + " - " + ex.Message);
-                if (sendBuffer != null) ArrayPool<byte>.Shared.Return(sendBuffer);
-            }
-            catch (Exception ex)
-            {
-                Log.EventWriter("NTRIP UDP Send error: " + ex.ToString());
-                if (sendBuffer != null) ArrayPool<byte>.Shared.Return(sendBuffer);
-            }
-
-            if (isUDPMonitorOn)
-            {
-                logUDPSentence.Append($"{DateTime.Now:ss.fff}\t >  {byteData.Length} \t{epNtrip}\r\n");
+                if (isUDPMonitorOn)
+                {
+                    string code = byteData.Length > 3 ? byteData[3].ToString() : "N/A";
+                    logUDPSentence.Append(DateTime.Now.ToString("ss.fff\t >  ") + byteData.Length + " \t" + epNtrip + "\r\n");
+                }
             }
         }
 
         private void SendDataNTRIPAsync(IAsyncResult asyncResult)
         {
-            var rentedBuffer = asyncResult.AsyncState as byte[];
             try
             {
-                NTRIPSocket?.EndSend(asyncResult);
+                NTRIPSocket.EndSend(asyncResult);
             }
             catch
             {
-                // Swallow; call site logs.
-            }
-            finally
-            {
-                if (rentedBuffer != null)
-                {
-                    ArrayPool<byte>.Shared.Return(rentedBuffer);
-                }
             }
         }
 
@@ -245,69 +222,42 @@ namespace Twol
 
         public void SendUDPMessage(byte[] byteData, IPEndPoint endPoint)
         {
-            if (!isUDPNetworkConnected || UDPSocket == null) return;
-            if (byteData == null || byteData.Length == 0) return;
-            if (endPoint == null) return;
+            if (isUDPNetworkConnected)
+            {
+                try
+                {
+                    // Send packet to the zero
+                    if (byteData.Length != 0)
+                    {
+                        UDPSocket.BeginSendTo(byteData, 0, byteData.Length, SocketFlags.None,
+                           endPoint, new AsyncCallback(SendDataUDPAsync), null);
+                    }
+                }
+                catch (Exception)
+                {
+                }
 
-            // Rent a buffer for the UDP send to avoid corrupting the in-flight buffer.
-            byte[] sendBuffer = null;
-            try
-            {
-                sendBuffer = ArrayPool<byte>.Shared.Rent(byteData.Length);
-                Buffer.BlockCopy(byteData, 0, sendBuffer, 0, byteData.Length);
+                if (Settings.IO.setUDP_isLoopBack)
+                {
+                    SendToPlugins(byteData);
+                }
 
-                // Keep the rented buffer alive via AsyncState so we can return it in the callback.
-                UDPSocket.BeginSendTo(
-                    sendBuffer, 0, byteData.Length, SocketFlags.None,
-                    endPoint, new AsyncCallback(SendDataUDPAsync), sendBuffer);
-            }
-            catch (ObjectDisposedException)
-            {
-                // Likely shutting down; ignore.
-            }
-            catch (SocketException ex)
-            {
-                Log.EventWriter("UDP Send error: " + ex.SocketErrorCode + " - " + ex.Message);
-                if (sendBuffer != null) ArrayPool<byte>.Shared.Return(sendBuffer);
-            }
-            catch (Exception ex)
-            {
-                Log.EventWriter("UDP Send error: " + ex.ToString());
-                if (sendBuffer != null) ArrayPool<byte>.Shared.Return(sendBuffer);
-            }
-
-            if (Settings.IO.setUDP_isLoopBack)
-            {
-                // Send to plugins on a separate copy because SendToPlugins mutates last byte (CRC).
-                var loopbackCopy = new byte[byteData.Length];
-                Buffer.BlockCopy(byteData, 0, loopbackCopy, 0, byteData.Length);
-                SendToPlugins(loopbackCopy);
-            }
-
-            if (isUDPMonitorOn)
-            {
-                logUDPSentence.Append(
-                    $"{DateTime.Now:ss.fff}\t >  {(byteData.Length > 3 ? byteData[3].ToString() : "N/A")} \t{endPoint}\r\n");
+                    if (isUDPMonitorOn)
+                {
+                    string code = byteData.Length > 3 ? byteData[3].ToString() : "N/A";
+                    logUDPSentence.Append(DateTime.Now.ToString("ss.fff\t >  ") + (byteData.Length > 3 ? byteData[3].ToString() : "N/A") + " \t" + endPoint + "\r\n");
+                }
             }
         }
 
         private void SendDataUDPAsync(IAsyncResult asyncResult)
         {
-            var rentedBuffer = asyncResult.AsyncState as byte[];
             try
             {
-                UDPSocket?.EndSend(asyncResult);
+                UDPSocket.EndSend(asyncResult);
             }
             catch
             {
-                // Intentionally swallow; logging is done at call site.
-            }
-            finally
-            {
-                if (rentedBuffer != null)
-                {
-                    ArrayPool<byte>.Shared.Return(rentedBuffer);
-                }
             }
         }
 
@@ -601,60 +551,39 @@ namespace Twol
 
         public void SendUDPMessageTool(byte[] byteData, IPEndPoint endPoint)
         {
-            if (UDPSocketTool == null || !UDPSocketTool.IsBound) return;
-            if (byteData == null || byteData.Length == 0) return;
-            if (endPoint == null) return;
+            if (isUDPNetworkConnectedTool)
+            {
+                if (isUDPMonitorOn)
+                {
+                    logUDPSentence.Append(DateTime.Now.ToString("ss.fff\t") + endPoint.ToString() + "\t" + " > " + byteData[3].ToString() + "\r\n");
+                }
 
-            if (isUDPMonitorOn)
-            {
-                var code = (byteData.Length > 3 ? byteData[3].ToString() : "N/A");
-                logUDPSentence.Append($"{DateTime.Now:ss.fff}\t >  {code} \t{endPoint}\r\n");
-            }
-
-            byte[] sendBuffer = null;
-            try
-            {
-                sendBuffer = ArrayPool<byte>.Shared.Rent(byteData.Length);
-                Buffer.BlockCopy(byteData, 0, sendBuffer, 0, byteData.Length);
-
-                UDPSocketTool.BeginSendTo(
-                    sendBuffer, 0, byteData.Length, SocketFlags.None,
-                    endPoint, new AsyncCallback(SendDataUDPAsyncTool), sendBuffer);
-            }
-            catch (ObjectDisposedException)
-            {
-                // Socket is shutting down.
-                if (sendBuffer != null) ArrayPool<byte>.Shared.Return(sendBuffer);
-            }
-            catch (SocketException ex)
-            {
-                Log.EventWriter("UDP Tool Send error: " + ex.SocketErrorCode + " - " + ex.Message);
-                if (sendBuffer != null) ArrayPool<byte>.Shared.Return(sendBuffer);
-            }
-            catch (Exception ex)
-            {
-                Log.EventWriter("UDP Tool Send error: " + ex.ToString());
-                if (sendBuffer != null) ArrayPool<byte>.Shared.Return(sendBuffer);
+                try
+                {
+                    // Send packet to the zero
+                    if (byteData.Length != 0)
+                    {
+                        UDPSocketTool.BeginSendTo(byteData, 0, byteData.Length, SocketFlags.None,
+                           endPoint, new AsyncCallback(SendDataUDPAsyncTool), null);
+                    }
+                }
+                catch (Exception)
+                {
+                    //WriteErrorLog("Sending UDP Message" + e.ToString());
+                    //MessageBox.Show("Send Error: " + e.Message, "UDP Client", MessageBoxButtons.OK,
+                    //MessageBoxIcon.Error);
+                }
             }
         }
 
         private void SendDataUDPAsyncTool(IAsyncResult asyncResult)
         {
-            var rentedBuffer = asyncResult.AsyncState as byte[];
             try
             {
-                UDPSocketTool?.EndSend(asyncResult);
+                UDPSocketTool.EndSend(asyncResult);
             }
             catch
             {
-                // Swallow; errors logged at call site.
-            }
-            finally
-            {
-                if (rentedBuffer != null)
-                {
-                    ArrayPool<byte>.Shared.Return(rentedBuffer);
-                }
             }
         }
 
@@ -870,65 +799,37 @@ namespace Twol
 
         public void SendToPlugins(byte[] byteData)
         {
-            if (pluginsSocket == null || !pluginsSocket.IsBound) return;
-            if (byteData == null || byteData.Length <= 2) return;
-            if (epPlugins == null) return;
-
-            byte[] sendBuffer = null;
-            try
+            if (pluginsSocket != null && byteData.Length > 2)
             {
-                // Copy to a rented buffer so we don't mutate the caller's array.
-                sendBuffer = ArrayPool<byte>.Shared.Rent(byteData.Length);
-                Buffer.BlockCopy(byteData, 0, sendBuffer, 0, byteData.Length);
-
-                // Compute CRC over bytes [2..Length-2] and write into last byte.
-                unchecked
+                try
                 {
                     int crc = 0;
                     for (int i = 2; i + 1 < byteData.Length; i++)
                     {
-                        crc += sendBuffer[i];
+                        crc += byteData[i];
                     }
-                    sendBuffer[byteData.Length - 1] = (byte)crc;
-                }
+                    byteData[byteData.Length - 1] = (byte)crc;
 
-                pluginsSocket.BeginSendTo(
-                    sendBuffer, 0, byteData.Length, SocketFlags.None,
-                    epPlugins, new AsyncCallback(SendAsyncPluginsData), sendBuffer);
-            }
-            catch (ObjectDisposedException)
-            {
-                if (sendBuffer != null) ArrayPool<byte>.Shared.Return(sendBuffer);
-            }
-            catch (SocketException ex)
-            {
-                Log.EventWriter("Plugins UDP Send error: " + ex.SocketErrorCode + " - " + ex.Message);
-                if (sendBuffer != null) ArrayPool<byte>.Shared.Return(sendBuffer);
-            }
-            catch (Exception ex)
-            {
-                Log.EventWriter("Plugins UDP Send error: " + ex.ToString());
-                if (sendBuffer != null) ArrayPool<byte>.Shared.Return(sendBuffer);
+                    pluginsSocket.BeginSendTo(byteData, 0, byteData.Length, SocketFlags.None,
+                        epPlugins, new AsyncCallback(SendAsyncPluginsData), null);
+                }
+                catch (Exception)
+                {
+                    //Log.EventWriter("Sending UDP Message" + e.ToString());
+                    //MessageBox.Show("Send Error: " + e.Message, "UDP Client", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
         public void SendAsyncPluginsData(IAsyncResult asyncResult)
         {
-            var rentedBuffer = asyncResult.AsyncState as byte[];
             try
             {
-                pluginsSocket?.EndSend(asyncResult);
+                pluginsSocket.EndSend(asyncResult);
             }
-            catch
+            catch (Exception)
             {
-                // Errors are logged at the call site.
-            }
-            finally
-            {
-                if (rentedBuffer != null)
-                {
-                    ArrayPool<byte>.Shared.Return(rentedBuffer);
-                }
+                //MessageBox.Show("SendData Error: " + ex.Message, "UDP Server", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
