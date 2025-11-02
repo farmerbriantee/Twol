@@ -20,12 +20,81 @@ namespace Twol
 {
     public partial class FormGPS
     {
+        #region IO
+
         private void lblNTRIPBytes_Click(object sender, EventArgs e)
         {
             tripBytes = 0;
         }
 
-        #region IO
+        private void cboxIsIMUModule_Click(object sender, EventArgs e)
+        {
+            Settings.IO.setMod_isIMUConnected = cboxIsIMUModule.Checked;
+            SetModulesOnOff();
+        }
+
+        private void cboxIsMachineModule_CheckedChanged(object sender, EventArgs e)
+        {
+            Settings.IO.setMod_isMachineConnected = cboxIsMachineModule.Checked;
+            SetModulesOnOff();
+        }
+
+        private void cboxIsSteerModule_CheckedChanged(object sender, EventArgs e)
+        {
+            Settings.IO.setMod_isSteerConnected = cboxIsSteerModule.Checked;
+            SetModulesOnOff();
+        }
+
+        public void SetModulesOnOff()
+        {
+            if (Settings.IO.setMod_isIMUConnected)
+            {
+                btnIMU.Visible = true;
+                lblIMUComm.Visible = true;
+                cboxIsIMUModule.BackgroundImage = Properties.Resources.SwitchOn;
+            }
+            else
+            {
+                btnIMU.Visible = false;
+                lblIMUComm.Visible = false;
+                cboxIsIMUModule.BackgroundImage = Properties.Resources.SwitchOff;
+            }
+
+            if (Settings.IO.setMod_isMachineConnected)
+            {
+                btnMachine.Visible = true;
+                lblMachineComm.Visible = true;
+                cboxIsMachineModule.BackgroundImage = Properties.Resources.SwitchOn;
+            }
+            else
+            {
+                btnMachine.Visible = false;
+                lblMachineComm.Visible = false;
+                cboxIsMachineModule.BackgroundImage = Properties.Resources.SwitchOff;
+            }
+
+            if (Settings.IO.setMod_isSteerConnected)
+            {
+                btnSteer.Visible = true;
+                lblSteerComm.Visible = true;
+                cboxIsSteerModule.BackgroundImage = Properties.Resources.SwitchOn;
+            }
+            else
+            {
+                btnSteer.Visible = false;
+                lblSteerComm.Visible = false;
+                cboxIsSteerModule.BackgroundImage = Properties.Resources.SwitchOff;
+            }
+
+            btnGPSTool.Visible = Settings.Tool.setToolSteer.isGPSToolActive;
+        }
+
+        private void btnBringUpSerialComm(object sender, EventArgs e)
+        {
+            SettingsCommunicationGPS();
+            RescanPorts();
+        }
+
         private void btnNMEA_Data_Click(object sender, EventArgs e)
         {
             var existing = Application.OpenForms.OfType<FormNMEA_Data>().FirstOrDefault();
@@ -70,7 +139,6 @@ namespace Twol
             btnStartStopNtrip.Text = "Reset";
         }
 
-
         private void btnNTRIPSerial_Click(object sender, EventArgs e)
         {
             if (RegistrySettings.IOFileName == "Default Profile")
@@ -94,6 +162,7 @@ namespace Twol
                 }
             }
         }
+
         private void btnUDPMonitor_Click(object sender, EventArgs e)
         {
             var form = new FormUDPMonitor(this);

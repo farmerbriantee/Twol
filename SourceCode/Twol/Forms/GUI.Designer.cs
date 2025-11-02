@@ -265,6 +265,18 @@ namespace Twol
 
                 DoTraffic();
 
+                if (ntripCounter > 30)
+                {
+                    isNTRIPToggle = !isNTRIPToggle;
+                    if (isNTRIPToggle) btnRTCM_Top.BackColor = Color.LightYellow;
+                    else btnRTCM_Top.BackColor = Color.PaleGreen;
+                }
+                else
+                {
+                    btnRTCM_Top.BackColor = Color.Transparent;
+                }
+
+
             }//end every 2 seconds
 
             //every second update all status //////   1 Second ////////////////////////////
@@ -678,6 +690,12 @@ namespace Twol
             SetText();
 
             Panel_IO_Location();
+
+            cboxIsIMUModule.Checked = Settings.IO.setMod_isIMUConnected;
+            cboxIsSteerModule.Checked = Settings.IO.setMod_isSteerConnected;
+            cboxIsMachineModule.Checked = Settings.IO.setMod_isMachineConnected;
+
+            SetModulesOnOff();
         }
 
         public void SetText()
@@ -937,7 +955,7 @@ namespace Twol
 
         private void Panel_IO_Location()
         {
-                panel_IO.Location = new Point(oglMain.Width - 230, oglMain.Height / 2 - 140);            
+                panel_IO.Location = new Point(oglMain.Width - 270, oglMain.Height / 2 - 140);            
         }
 
         private void ZoomByMouseWheel(object sender, MouseEventArgs e)
@@ -980,7 +998,15 @@ namespace Twol
                     c.ForeColor = foreColor;
                 }
             }
-            foreach (Control c in panelControlBox.Controls)
+            foreach (Control c in flowLayoutPanelTop.Controls)
+            {
+                //if (c is Label || c is Button)
+                {
+                    c.ForeColor = foreColor;
+                }
+            }
+
+            foreach (Control c in panel_IO.Controls)
             {
                 //if (c is Label || c is Button)
                 {

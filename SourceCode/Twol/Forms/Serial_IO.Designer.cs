@@ -25,7 +25,7 @@ namespace Twol
 
                 if (currentHello != lastHelloMachine)
                 {
-                    if (currentHello) btnMachine.BackColor = Color.LimeGreen;
+                    if (currentHello) btnMachine.BackColor = Color.PaleGreen;
                     else btnMachine.BackColor = Color.Red;
                     lastHelloMachine = currentHello;
                     panel_IO.Visible = true;
@@ -39,7 +39,7 @@ namespace Twol
 
                 if (currentHello != lastHelloAutoSteer)
                 {
-                    if (currentHello) btnSteer.BackColor = Color.LimeGreen;
+                    if (currentHello) btnSteer.BackColor = Color.PaleGreen;
                     else btnSteer.BackColor = Color.Red;
                     lastHelloAutoSteer = currentHello;
                     panel_IO.Visible = true;
@@ -53,7 +53,7 @@ namespace Twol
 
                 if (currentHello != lastHelloIMU)
                 {
-                    if (currentHello) btnIMU.BackColor = Color.LimeGreen;
+                    if (currentHello) btnIMU.BackColor = Color.PaleGreen;
                     else btnIMU.BackColor = Color.Red;
                     lastHelloIMU = currentHello;
                     panel_IO.Visible = true;
@@ -66,7 +66,7 @@ namespace Twol
             if (currentHello != lastHelloGPS)
             {
                 if (currentHello)
-                    btnGPS.BackColor = Color.LimeGreen;
+                    btnGPS.BackColor = Color.PaleGreen;
                 else
                     btnGPS.BackColor = Color.Red;
 
@@ -79,7 +79,7 @@ namespace Twol
 
             if (currentHello != lastHelloGPSTool)
             {
-                if (currentHello) btnGPSTool.BackColor = Color.LimeGreen;
+                if (currentHello) btnGPSTool.BackColor = Color.PaleGreen;
                 else btnGPSTool.BackColor = Color.Red;
                 lastHelloGPSTool = currentHello;
                 panel_IO.Visible = true;

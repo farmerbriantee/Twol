@@ -39,6 +39,8 @@ namespace Twol
         public bool isNTRIP_Sending = false;
         public bool isRunGGAInterval = false;
 
+        public bool isNTRIPToggle;
+
         #region NTRIP StartStop
         private void DoNTRIPSecondRoutine()
         {
