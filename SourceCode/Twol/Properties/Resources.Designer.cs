@@ -2740,6 +2740,16 @@ namespace Twol.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Plugin {
+            get {
+                object obj = ResourceManager.GetObject("Plugin", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap PointAdd {
             get {
                 object obj = ResourceManager.GetObject("PointAdd", resourceCulture);
