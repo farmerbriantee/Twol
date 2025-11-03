@@ -23,6 +23,9 @@ namespace Twol
         private EndPoint endPointUDPTool = new IPEndPoint(IPAddress.Any, 0);
         private EndPoint endPointNTRIP = new IPEndPoint(IPAddress.Any, 0);
 
+        private CRateControlData[] rateControlData;
+        private CRateControl_Config rateControlConfig;
+
         public bool isUDPNetworkConnected, isUDPNetworkConnectedTool, isUDPMonitorOn;
 
         public bool isGPSToolActive = false;
@@ -752,6 +755,69 @@ namespace Twol
 
                     switch (data[3])
                     {
+                        case 101:
+                            {
+                                // 0 to 4 is packet header
+                                //public int rateActual = 0;        5 to 8
+                                //public int rateSet = 0;           9 to 13
+                                //public int volumeApplied = 0;     14 to 17
+                                //public int volumeRemain = 0;      18 to 21
+                                //public int coveragePossible = 0;  22 to 25
+                                //public ushort fanspeed = 0;       26 to 27
+                                //public ushort pressure = 0;       28 to 29
+                                //public byte isAlarming = 0;       30
+                                //public byte channel = 0;          31
+
+                                int channel = (int)((data[31]));
+
+                                if (channel > 3) return;
+
+                                rateControlData[channel].rateActual = BitConverter.ToInt32(data, 5);
+                                rateControlData[channel].rateSet = BitConverter.ToInt32(data, 9);
+                                rateControlData[channel].volumeApplied = BitConverter.ToInt32(data, 14);
+                                rateControlData[channel].volumeRemain = BitConverter.ToInt32(data, 18);
+                                rateControlData[channel].coveragePossible = BitConverter.ToInt32(data, 22);
+                                rateControlData[channel].fanspeed = BitConverter.ToUInt16(data, 26);
+                                rateControlData[channel].pressure = BitConverter.ToUInt16(data, 28);
+                                rateControlData[channel].isAlarming = data[30];
+                                rateControlData[channel].channel = data[31];
+                            }
+                            break;
+
+                        case 102:
+                            {
+                                //public string productName0 = string.Empty;         5 to 19
+                                //public string productName1 = string.Empty;         20 to 34
+                                //public string productName2 = string.Empty;         35 to 49
+                                //public string productName3 = string.Empty;         50 to 64
+
+                                //public string units0 = string.Empty; //gal/ac etc     65 to 72
+                                //public string units1 = string.Empty; //gal/ac etc     73 to 80
+                                //public string units2 = string.Empty; //gal/ac etc     81 to 88
+                                //public string units3 = string.Empty; //gal/ac etc     89 to 96
+
+                                //public byte rateAlarmPercent0 = 0;    97 
+                                //public byte rateAlarmPercent1 = 0;    98
+                                //public byte rateAlarmPercent2 = 0;    99
+                                //public byte rateAlarmPercent3 = 0;    100
+
+                                rateControlConfig.productName0 = Encoding.UTF8.GetString(data, 5, 15);
+                                rateControlConfig.productName1 = Encoding.UTF8.GetString(data, 20, 15);
+                                rateControlConfig.productName2 = Encoding.UTF8.GetString(data, 35, 15);
+                                rateControlConfig.productName3 = Encoding.UTF8.GetString(data, 50, 15);
+
+                                rateControlConfig.units0 = Encoding.UTF8.GetString(data, 65, 15);
+                                rateControlConfig.units1 = Encoding.UTF8.GetString(data, 75, 15);
+                                rateControlConfig.units2 = Encoding.UTF8.GetString(data, 85, 15);
+                                rateControlConfig.units3 = Encoding.UTF8.GetString(data, 95, 15);
+
+                                rateControlConfig.rateAlarmPercent0 = (int)data[105];
+                                rateControlConfig.rateAlarmPercent1 = (int)data[106];
+                                rateControlConfig.rateAlarmPercent2 = (int)data[107];
+                                rateControlConfig.rateAlarmPercent3 = (int)data[108];
+                            }
+                            break;
+
                         #region Remote Switches
                         case 234://MTZ8302 Feb 2020
                             {

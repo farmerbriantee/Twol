@@ -961,7 +961,7 @@ namespace Twol
             tlpRateControl.Height = oglMain.Height;
 
             panelSim.Top = Height - (!isJobStarted || isPanelBottomHidden ? 60 : 130);
-            panelSim.Left = Width / 2 - 330;
+            panelSim.Left = this.Width - (oglMain.Width / 2 +430);
             panelSim.Width = 700;
 
             panelRight.Visible = isJobStarted;

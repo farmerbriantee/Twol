@@ -318,6 +318,12 @@ namespace Twol
             vec2 b = new vec2(0, 0);
             gpsPtsCorr.Add(b);
             gpsPts.Add(b);
+
+            if (Settings.Vehicle.setApp_isRateControlApp)
+            {
+                rateControlData = new CRateControlData[4];
+                rateControlConfig = new CRateControl_Config();
+            }
         }
 
         private void FormGPS_Load(object sender, EventArgs e)
@@ -466,6 +472,7 @@ namespace Twol
             RescanPorts();
 
             if (!Settings.IO.setUDP_isOn) ReconnectSerialPorts();
+
         }
 
         #region Shutdown Handling
