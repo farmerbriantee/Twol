@@ -955,7 +955,7 @@ namespace Twol
 
         private void Panel_IO_Location()
         {
-                panel_IO.Location = new Point(oglMain.Width - 180, oglMain.Height / 2 - 230);            
+                panel_IO.Location = new Point(this.Width - panel_IO.Width - (isJobStarted?90:80), oglMain.Height / 2 - 230);            
         }
 
         private void ZoomByMouseWheel(object sender, MouseEventArgs e)

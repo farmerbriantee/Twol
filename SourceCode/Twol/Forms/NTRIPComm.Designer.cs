@@ -120,8 +120,7 @@ namespace Twol
             //update Caster IP from URL, just use the old one if can't find
             if (Settings.IO.setNTRIP_isOn)
             {
-                //broadCasterIP = Settings.IO.setNTRIP_casterIP; //Select correct Address
-                Settings.IO.setNTRIP_casterIP = null;
+                string casterIP = null;
                 string actualIP = Settings.IO.setNTRIP_casterURL.Trim();
 
                 try
@@ -131,13 +130,12 @@ namespace Twol
                     {
                         if (address.AddressFamily == AddressFamily.InterNetwork)
                         {
-                            Settings.IO.setNTRIP_casterIP = address.ToString().Trim();
-
+                            casterIP = Settings.IO.setNTRIP_casterIP = address.ToString().Trim();
                             break;
                         }
                     }
 
-                    if (Settings.IO.setNTRIP_casterIP == null) throw new NullReferenceException();
+                    if (casterIP == null) throw new NullReferenceException();
                 }
                 catch (Exception ex)
                 {
@@ -147,7 +145,6 @@ namespace Twol
                     tmr?.Dispose();
 
                     //use last known TODO
-                    Settings.IO.setNTRIP_casterIP = Settings.IO.setNTRIP_casterIP; //Select correct Address
 
                     // Close the socket if it is still open
                     if (clientSocket != null && clientSocket.Connected)
