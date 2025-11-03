@@ -1375,12 +1375,8 @@ namespace Twol
 
         private void nozzleAppToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (isFieldStarted)
-            {
-                //TimedMessageBox(2000, gStr.Get(gs.gsFieldIsOpen), gStr.Get(gs.gsCloseFieldFirst));
-                //Log.EventWriter("Turning Nozzle on or off while open field");
-                //return;
-            }
+            Settings.Vehicle.setApp_isRateControlApp = false;
+            rateControlAppToolStripMenuItem.Checked = false;
 
             Settings.Vehicle.setApp_isNozzleApp = !Settings.Vehicle.setApp_isNozzleApp;
 
@@ -1396,6 +1392,29 @@ namespace Twol
             }
 
             nozzleAppToolStripMenuItem.Checked = Settings.Vehicle.setApp_isNozzleApp;
+
+            PanelsAndOGLSize();
+        }
+
+        private void rateControlAppToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Settings.Vehicle.setApp_isNozzleApp = false;
+            nozzleAppToolStripMenuItem.Checked = false;
+
+            Settings.Vehicle.setApp_isRateControlApp = !Settings.Vehicle.setApp_isRateControlApp;
+
+            if (Settings.Vehicle.setApp_isRateControlApp)
+            {
+                TimedMessageBox(2000, "", "Rate Control App On");
+                Log.EventWriter("Turning Rate Control App On");
+            }
+            else
+            {
+                TimedMessageBox(2000, "", "Rate Control App Off");
+                Log.EventWriter("Turning Rate Control App Off");
+            }
+
+            rateControlAppToolStripMenuItem.Checked = Settings.Vehicle.setApp_isRateControlApp;
 
             PanelsAndOGLSize();
         }

@@ -515,6 +515,11 @@ namespace Twol
             btnToolSteerConfig.Visible = true;
         }
 
+        public void SetRateControlSettings()
+        {
+            rateControlAppToolStripMenuItem.Checked = Settings.Vehicle.setApp_isRateControlApp;
+        }
+
         public void SetNozzleSettings()
         {
             //Nozzle Spray Controller
@@ -601,6 +606,7 @@ namespace Twol
             ChangeMetricImperial();
 
             SetNozzleSettings();
+            SetRateControlSettings();
 
             vehicleOpacity = ((double)(Settings.Vehicle.vehicleOpacity) * 0.01);
             vehicleOpacityByte = (byte)(255 * ((double)(Settings.Vehicle.vehicleOpacity) * 0.01));
@@ -927,18 +933,32 @@ namespace Twol
 
         private void PanelsAndOGLSize()
         {
-            bool visible = isJobStarted && Settings.Vehicle.setApp_isNozzleApp;
+            tlpNozzle.Visible = false;
+            tlpRateControl.Visible = false;
+            int tlpWidth = 0;
 
-            tlpNozzle.Visible = visible;
+            if (Settings.Vehicle.setApp_isNozzleApp && isJobStarted)
+            {
+                tlpNozzle.Visible = isJobStarted && Settings.Vehicle.setApp_isNozzleApp;
+                tlpWidth = tlpNozzle.Width;
+            }
+            else if (Settings.Vehicle.setApp_isRateControlApp && isJobStarted)
+            {
+                tlpRateControl.Visible = isJobStarted && Settings.Vehicle.setApp_isRateControlApp;
+                tlpWidth = tlpRateControl.Width;
+            }
 
-            GPSDataWindowLeft = (isPanelBottomHidden ? 10 : 85) + (visible ? tlpNozzle.Width : 0);
+            GPSDataWindowLeft = (isPanelBottomHidden ? 10 : 85) + tlpWidth;
 
-            oglMain.Left = (isPanelBottomHidden ? 5 : 80) + (visible ? tlpNozzle.Width : 0);
+            oglMain.Left = (isPanelBottomHidden ? 5 : 80) + tlpWidth;
             oglMain.Width = this.Width - (oglMain.Left + (isJobStarted ? 75 : 5));
             oglMain.Height = this.Height - (55 + (!isJobStarted || isPanelBottomHidden ? 0 : 70));
 
             tlpNozzle.Left = (isPanelBottomHidden ? 5 : 80);
             tlpNozzle.Height = oglMain.Height;
+
+            tlpRateControl.Left = (isPanelBottomHidden ? 5 : 80);
+            tlpRateControl.Height = oglMain.Height;
 
             panelSim.Top = Height - (!isJobStarted || isPanelBottomHidden ? 60 : 130);
             panelSim.Left = Width / 2 - 330;

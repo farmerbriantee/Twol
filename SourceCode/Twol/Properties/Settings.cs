@@ -178,6 +178,7 @@ namespace Twol
             public bool setAutoSwitchDualFixOn = false;
 
             public bool setApp_isNozzleApp = false;
+            public bool setApp_isRateControlApp = false;
 
             public bool setArdMac_isDanfoss = false;
 
