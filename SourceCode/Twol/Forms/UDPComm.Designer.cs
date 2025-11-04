@@ -758,29 +758,29 @@ namespace Twol
                         case 101:
                             {
                                 // 0 to 4 is packet header
-                                //public int rateActual = 0;        5 to 8
-                                //public int rateSet = 0;           9 to 13
-                                //public int volumeApplied = 0;     14 to 17
-                                //public int volumeRemain = 0;      18 to 21
-                                //public int coveragePossible = 0;  22 to 25
-                                //public ushort fanspeed = 0;       26 to 27
-                                //public ushort pressure = 0;       28 to 29
-                                //public byte isAlarming = 0;       30
-                                //public byte channel = 0;          31
+                                //public uint16 rateActualx10 = 0;          5 to 6      x10
+                                //public uint16 rateSetx10 = 0;             7 to 8      x10
+                                //public uint volumeApplied = 0;            9 to 12   
+                                //public int volumeRemain = 0;              13 to 16
+                                //public int coveragePossiblex10 = 0;       17 to 20    x10
+                                //public uint16 fanspeed = 0;               21 to 22
+                                //public uint32 pressure = 0;               23 to 26
+                                //public byte isAlarming = 0;               27
+                                //public byte channel = 0;                  28
 
                                 int channel = (int)((data[31]));
 
                                 if (channel > 3) return;
 
-                                rateControlData[channel].rateActual = BitConverter.ToInt32(data, 5);
-                                rateControlData[channel].rateSet = BitConverter.ToInt32(data, 9);
-                                rateControlData[channel].volumeApplied = BitConverter.ToInt32(data, 14);
-                                rateControlData[channel].volumeRemain = BitConverter.ToInt32(data, 18);
-                                rateControlData[channel].coveragePossible = BitConverter.ToInt32(data, 22);
-                                rateControlData[channel].fanspeed = BitConverter.ToUInt16(data, 26);
-                                rateControlData[channel].pressure = BitConverter.ToUInt16(data, 28);
-                                rateControlData[channel].isAlarming = data[30];
-                                rateControlData[channel].channel = data[31];
+                                rateControlData[channel].rateActualx10 = BitConverter.ToUInt16(data, 5);
+                                rateControlData[channel].rateSetx10 = BitConverter.ToUInt16(data, 7);
+                                rateControlData[channel].volumeApplied = BitConverter.ToUInt32(data, 9);
+                                rateControlData[channel].volumeRemain = BitConverter.ToInt32(data, 13);
+                                rateControlData[channel].coveragePossiblex10 = BitConverter.ToInt32(data, 17);
+                                rateControlData[channel].fanspeed = BitConverter.ToUInt16(data, 21);
+                                rateControlData[channel].pressure = BitConverter.ToUInt32(data, 23);
+                                rateControlData[channel].isAlarming = data[27];
+                                rateControlData[channel].channel = data[28];
                             }
                             break;
 

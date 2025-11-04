@@ -21,6 +21,7 @@ namespace Twol
         //ABLines directory
         public string ablinesDirectory;
         public string fieldData, guidanceLineText;
+        private int _iPrevMoveX, _iPrevMoveY;
 
         //colors for sections and field background
         public byte flagColor = 0;
@@ -696,6 +697,7 @@ namespace Twol
             SetText();
 
             Panel_IO_Location();
+            panel_IO.Visible = false;
 
             cboxIsIMUModule.Checked = Settings.IO.setMod_isIMUConnected;
             cboxIsSteerModule.Checked = Settings.IO.setMod_isSteerConnected;
@@ -1314,7 +1316,6 @@ namespace Twol
             }
         }
 
-        private int _iPrevMoveX, _iPrevMoveY;
         private void OglMain_MouseMove(object sender, MouseEventArgs e)
         {
             if (rightMouseDown)
