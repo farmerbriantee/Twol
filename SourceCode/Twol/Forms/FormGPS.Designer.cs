@@ -3370,13 +3370,13 @@ namespace Twol
             // 
             this.label5.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label5.BackColor = System.Drawing.Color.Transparent;
-            this.tlpRateControl.SetColumnSpan(this.label5, 2);
+            this.tlpRateControl.SetColumnSpan(this.label5, 4);
             this.label5.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.White;
+            this.label5.ForeColor = System.Drawing.Color.Silver;
             this.label5.Location = new System.Drawing.Point(0, 27);
             this.label5.Margin = new System.Windows.Forms.Padding(0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(139, 30);
+            this.label5.Size = new System.Drawing.Size(258, 30);
             this.label5.TabIndex = 665;
             this.label5.Text = "Product 1";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -3393,8 +3393,8 @@ namespace Twol
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(139, 35);
             this.label4.TabIndex = 620;
-            this.label4.Text = "Gal/Ac";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label4.Text = "gal/ac";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label17
             // 
@@ -3475,13 +3475,13 @@ namespace Twol
             // 
             this.label8.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label8.BackColor = System.Drawing.Color.Transparent;
-            this.tlpRateControl.SetColumnSpan(this.label8, 2);
+            this.tlpRateControl.SetColumnSpan(this.label8, 4);
             this.label8.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.Color.White;
+            this.label8.ForeColor = System.Drawing.Color.Silver;
             this.label8.Location = new System.Drawing.Point(0, 396);
             this.label8.Margin = new System.Windows.Forms.Padding(0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(139, 30);
+            this.label8.Size = new System.Drawing.Size(258, 30);
             this.label8.TabIndex = 666;
             this.label8.Text = "Product 2";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -3499,7 +3499,7 @@ namespace Twol
             this.label7.Size = new System.Drawing.Size(139, 35);
             this.label7.TabIndex = 622;
             this.label7.Text = "kg/ha";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label12
             // 
