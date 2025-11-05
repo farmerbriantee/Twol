@@ -277,7 +277,6 @@ namespace Twol
                     btnRTCM_Top.BackColor = Color.Transparent;
                 }
 
-
             }//end every 2 seconds
 
             //every second update all status //////   1 Second ////////////////////////////
@@ -328,23 +327,23 @@ namespace Twol
                     lblFlowHz_Nozz.Text = nozz.frequency.ToString() + " Hz";
                 }
 
-                if(isRateControlConfigDataNew)
-                {
-                    //config the rate control panel
-                    isRateControlConfigDataNew = false;
-
-                }
-
                 if (Settings.Vehicle.setApp_isRateControlApp)
                 {
+                    if (isRateControlConfigDataNew)
+                    {
+                        //config the rate control panel
+                        isRateControlConfigDataNew = false;
+
+                    }
+
                     for (int chNum = 0; chNum < 4; chNum++)
                     {
-                        if (!rateControlConfig.isActive[chNum]) continue;                      
+                        if (!rateControlConfig.isActive[chNum]) continue;
 
                     }
                 }
 
-                    if (Settings.IO.setNTRIP_isOn || Settings.IO.setPass_isOn)
+                if (Settings.IO.setNTRIP_isOn || Settings.IO.setPass_isOn)
                 {
                     DoNTRIPSecondRoutine();
 
