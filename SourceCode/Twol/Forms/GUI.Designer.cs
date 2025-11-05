@@ -328,7 +328,17 @@ namespace Twol
                     lblFlowHz_Nozz.Text = nozz.frequency.ToString() + " Hz";
                 }
 
-                if (Settings.IO.setNTRIP_isOn || Settings.IO.setPass_isOn)
+                if (Settings.Vehicle.setApp_isRateControlApp)
+                {
+                    for (int chNum = 0; chNum < 4; chNum++)
+                    {
+                        if (rateControlData[chNum].pressure == 2000) continue;
+
+
+                    }
+                }
+
+                    if (Settings.IO.setNTRIP_isOn || Settings.IO.setPass_isOn)
                 {
                     DoNTRIPSecondRoutine();
 

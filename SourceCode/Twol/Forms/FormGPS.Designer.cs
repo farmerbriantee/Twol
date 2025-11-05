@@ -220,34 +220,34 @@ namespace Twol
             this.btnProfiles = new System.Windows.Forms.Button();
             this.flowLayoutPanelTop = new System.Windows.Forms.FlowLayoutPanel();
             this.tlpRateControl = new System.Windows.Forms.TableLayoutPanel();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.button7 = new System.Windows.Forms.Button();
-            this.label8 = new System.Windows.Forms.Label();
-            this.button8 = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.button27 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button28 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
-            this.button14 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
+            this.lblProduct_0 = new System.Windows.Forms.Label();
+            this.lblProduct_1 = new System.Windows.Forms.Label();
+            this.lblUPM_1 = new System.Windows.Forms.Label();
+            this.lblUPM_0 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.cboxTankAppRem_0 = new System.Windows.Forms.CheckBox();
+            this.cboxTankAppRem_1 = new System.Windows.Forms.CheckBox();
+            this.cboxAreaAppRem_0 = new System.Windows.Forms.CheckBox();
+            this.cboxAreaAppRem_1 = new System.Windows.Forms.CheckBox();
             this.button15 = new System.Windows.Forms.Button();
             this.button17 = new System.Windows.Forms.Button();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.checkBox5 = new System.Windows.Forms.CheckBox();
+            this.lblRateSet_0 = new System.Windows.Forms.Label();
+            this.lblRateSet_1 = new System.Windows.Forms.Label();
+            this.lblArea_0 = new System.Windows.Forms.Label();
+            this.lblArea_1 = new System.Windows.Forms.Label();
+            this.lblPressRPM_1 = new System.Windows.Forms.Label();
+            this.lblRateActual_0 = new System.Windows.Forms.Label();
+            this.lblRateActual_1 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.lblTank_0 = new System.Windows.Forms.Label();
+            this.lblTank_1 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStripFlag.SuspendLayout();
             this.statusStripLeft.SuspendLayout();
@@ -3261,32 +3261,32 @@ namespace Twol
             this.tlpRateControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpRateControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 89F));
             this.tlpRateControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 57F));
-            this.tlpRateControl.Controls.Add(this.button5, 1, 4);
-            this.tlpRateControl.Controls.Add(this.button1, 2, 2);
-            this.tlpRateControl.Controls.Add(this.label5, 0, 1);
-            this.tlpRateControl.Controls.Add(this.button7, 1, 11);
-            this.tlpRateControl.Controls.Add(this.label8, 0, 8);
-            this.tlpRateControl.Controls.Add(this.button8, 2, 9);
-            this.tlpRateControl.Controls.Add(this.label7, 0, 9);
-            this.tlpRateControl.Controls.Add(this.label4, 0, 2);
-            this.tlpRateControl.Controls.Add(this.button27, 0, 3);
-            this.tlpRateControl.Controls.Add(this.button3, 1, 3);
-            this.tlpRateControl.Controls.Add(this.button28, 0, 10);
-            this.tlpRateControl.Controls.Add(this.button9, 1, 10);
-            this.tlpRateControl.Controls.Add(this.button14, 1, 6);
-            this.tlpRateControl.Controls.Add(this.button4, 1, 13);
-            this.tlpRateControl.Controls.Add(this.button2, 1, 5);
-            this.tlpRateControl.Controls.Add(this.button6, 1, 12);
+            this.tlpRateControl.Controls.Add(this.lblProduct_0, 0, 1);
+            this.tlpRateControl.Controls.Add(this.lblProduct_1, 0, 8);
+            this.tlpRateControl.Controls.Add(this.lblUPM_1, 0, 9);
+            this.tlpRateControl.Controls.Add(this.lblUPM_0, 0, 2);
             this.tlpRateControl.Controls.Add(this.label10, 0, 6);
             this.tlpRateControl.Controls.Add(this.label13, 0, 5);
             this.tlpRateControl.Controls.Add(this.label11, 0, 4);
             this.tlpRateControl.Controls.Add(this.label14, 0, 11);
             this.tlpRateControl.Controls.Add(this.label15, 0, 12);
             this.tlpRateControl.Controls.Add(this.label16, 0, 13);
-            this.tlpRateControl.Controls.Add(this.checkBox1, 3, 4);
-            this.tlpRateControl.Controls.Add(this.checkBox2, 3, 11);
-            this.tlpRateControl.Controls.Add(this.checkBox4, 3, 5);
-            this.tlpRateControl.Controls.Add(this.checkBox5, 3, 12);
+            this.tlpRateControl.Controls.Add(this.cboxTankAppRem_0, 3, 4);
+            this.tlpRateControl.Controls.Add(this.cboxTankAppRem_1, 3, 11);
+            this.tlpRateControl.Controls.Add(this.cboxAreaAppRem_0, 3, 5);
+            this.tlpRateControl.Controls.Add(this.cboxAreaAppRem_1, 3, 12);
+            this.tlpRateControl.Controls.Add(this.lblArea_0, 1, 5);
+            this.tlpRateControl.Controls.Add(this.lblArea_1, 1, 12);
+            this.tlpRateControl.Controls.Add(this.lblPressRPM_1, 1, 13);
+            this.tlpRateControl.Controls.Add(this.lblRateActual_0, 2, 2);
+            this.tlpRateControl.Controls.Add(this.lblRateActual_1, 2, 9);
+            this.tlpRateControl.Controls.Add(this.lblRateSet_1, 1, 10);
+            this.tlpRateControl.Controls.Add(this.lblRateSet_0, 1, 3);
+            this.tlpRateControl.Controls.Add(this.label21, 1, 6);
+            this.tlpRateControl.Controls.Add(this.lblTank_0, 1, 4);
+            this.tlpRateControl.Controls.Add(this.lblTank_1, 1, 11);
+            this.tlpRateControl.Controls.Add(this.label24, 0, 3);
+            this.tlpRateControl.Controls.Add(this.label25, 0, 10);
             this.tlpRateControl.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tlpRateControl.Location = new System.Drawing.Point(841, 50);
             this.tlpRateControl.Name = "tlpRateControl";
@@ -3309,339 +3309,65 @@ namespace Twol
             this.tlpRateControl.Size = new System.Drawing.Size(273, 764);
             this.tlpRateControl.TabIndex = 620;
             // 
-            // button5
+            // lblProduct_0
             // 
-            this.button5.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button5.BackColor = System.Drawing.Color.Transparent;
-            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.tlpRateControl.SetColumnSpan(this.button5, 2);
-            this.button5.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
-            this.button5.FlatAppearance.BorderSize = 0;
-            this.button5.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.button5.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.button5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.ForeColor = System.Drawing.Color.Yellow;
-            this.button5.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.button5.Location = new System.Drawing.Point(115, 199);
-            this.button5.Margin = new System.Windows.Forms.Padding(0);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 35);
-            this.button5.TabIndex = 637;
-            this.button5.Text = "450";
-            this.button5.UseVisualStyleBackColor = false;
+            this.lblProduct_0.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblProduct_0.BackColor = System.Drawing.Color.Transparent;
+            this.tlpRateControl.SetColumnSpan(this.lblProduct_0, 3);
+            this.lblProduct_0.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblProduct_0.ForeColor = System.Drawing.Color.Silver;
+            this.lblProduct_0.Location = new System.Drawing.Point(7, 27);
+            this.lblProduct_0.Margin = new System.Windows.Forms.Padding(0);
+            this.lblProduct_0.Name = "lblProduct_0";
+            this.lblProduct_0.Size = new System.Drawing.Size(201, 30);
+            this.lblProduct_0.TabIndex = 665;
+            this.lblProduct_0.Text = "Product 1";
+            this.lblProduct_0.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // button1
+            // lblProduct_1
             // 
-            this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button1.BackColor = System.Drawing.Color.Transparent;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.tlpRateControl.SetColumnSpan(this.button1, 2);
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.SystemColors.Control;
-            this.button1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.button1.Location = new System.Drawing.Point(140, 65);
-            this.button1.Margin = new System.Windows.Forms.Padding(0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(119, 58);
-            this.button1.TabIndex = 631;
-            this.button1.Text = "1200";
-            this.button1.UseVisualStyleBackColor = false;
+            this.lblProduct_1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblProduct_1.BackColor = System.Drawing.Color.Transparent;
+            this.tlpRateControl.SetColumnSpan(this.lblProduct_1, 4);
+            this.lblProduct_1.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblProduct_1.ForeColor = System.Drawing.Color.Silver;
+            this.lblProduct_1.Location = new System.Drawing.Point(7, 396);
+            this.lblProduct_1.Margin = new System.Windows.Forms.Padding(0);
+            this.lblProduct_1.Name = "lblProduct_1";
+            this.lblProduct_1.Size = new System.Drawing.Size(258, 30);
+            this.lblProduct_1.TabIndex = 666;
+            this.lblProduct_1.Text = "Product 2";
+            this.lblProduct_1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label5
+            // lblUPM_1
             // 
-            this.label5.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label5.BackColor = System.Drawing.Color.Transparent;
-            this.tlpRateControl.SetColumnSpan(this.label5, 3);
-            this.label5.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.Silver;
-            this.label5.Location = new System.Drawing.Point(7, 27);
-            this.label5.Margin = new System.Windows.Forms.Padding(0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(201, 30);
-            this.label5.TabIndex = 665;
-            this.label5.Text = "Product 1";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblUPM_1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblUPM_1.BackColor = System.Drawing.Color.Transparent;
+            this.tlpRateControl.SetColumnSpan(this.lblUPM_1, 2);
+            this.lblUPM_1.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUPM_1.ForeColor = System.Drawing.Color.White;
+            this.lblUPM_1.Location = new System.Drawing.Point(3, 446);
+            this.lblUPM_1.Margin = new System.Windows.Forms.Padding(0);
+            this.lblUPM_1.Name = "lblUPM_1";
+            this.lblUPM_1.Size = new System.Drawing.Size(120, 35);
+            this.lblUPM_1.TabIndex = 622;
+            this.lblUPM_1.Text = "kg/ha";
+            this.lblUPM_1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // button7
+            // lblUPM_0
             // 
-            this.button7.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button7.BackColor = System.Drawing.Color.Transparent;
-            this.button7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.tlpRateControl.SetColumnSpan(this.button7, 2);
-            this.button7.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
-            this.button7.FlatAppearance.BorderSize = 0;
-            this.button7.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.button7.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.button7.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button7.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button7.ForeColor = System.Drawing.Color.Yellow;
-            this.button7.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.button7.Location = new System.Drawing.Point(115, 568);
-            this.button7.Margin = new System.Windows.Forms.Padding(0);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(75, 35);
-            this.button7.TabIndex = 639;
-            this.button7.Text = "450";
-            this.button7.UseVisualStyleBackColor = false;
-            // 
-            // label8
-            // 
-            this.label8.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label8.BackColor = System.Drawing.Color.Transparent;
-            this.tlpRateControl.SetColumnSpan(this.label8, 4);
-            this.label8.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.Color.Silver;
-            this.label8.Location = new System.Drawing.Point(7, 396);
-            this.label8.Margin = new System.Windows.Forms.Padding(0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(258, 30);
-            this.label8.TabIndex = 666;
-            this.label8.Text = "Product 2";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // button8
-            // 
-            this.button8.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button8.BackColor = System.Drawing.Color.Transparent;
-            this.button8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.tlpRateControl.SetColumnSpan(this.button8, 2);
-            this.button8.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
-            this.button8.FlatAppearance.BorderSize = 0;
-            this.button8.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.button8.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.button8.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button8.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button8.ForeColor = System.Drawing.SystemColors.Control;
-            this.button8.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.button8.Location = new System.Drawing.Point(140, 434);
-            this.button8.Margin = new System.Windows.Forms.Padding(0);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(119, 58);
-            this.button8.TabIndex = 640;
-            this.button8.Text = "130.6";
-            this.button8.UseVisualStyleBackColor = false;
-            // 
-            // label7
-            // 
-            this.label7.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label7.BackColor = System.Drawing.Color.Transparent;
-            this.tlpRateControl.SetColumnSpan(this.label7, 2);
-            this.label7.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(3, 446);
-            this.label7.Margin = new System.Windows.Forms.Padding(0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(120, 35);
-            this.label7.TabIndex = 622;
-            this.label7.Text = "kg/ha";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label4
-            // 
-            this.label4.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.tlpRateControl.SetColumnSpan(this.label4, 2);
-            this.label4.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(3, 77);
-            this.label4.Margin = new System.Windows.Forms.Padding(0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(120, 35);
-            this.label4.TabIndex = 620;
-            this.label4.Text = "gal/ac";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // button27
-            // 
-            this.button27.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button27.BackColor = System.Drawing.Color.Transparent;
-            this.button27.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button27.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
-            this.button27.FlatAppearance.BorderSize = 0;
-            this.button27.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.button27.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.button27.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button27.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button27.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button27.ForeColor = System.Drawing.SystemColors.Control;
-            this.button27.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.button27.Location = new System.Drawing.Point(7, 138);
-            this.button27.Margin = new System.Windows.Forms.Padding(0);
-            this.button27.Name = "button27";
-            this.button27.Size = new System.Drawing.Size(75, 35);
-            this.button27.TabIndex = 631;
-            this.button27.Text = "4%";
-            this.button27.UseVisualStyleBackColor = false;
-            // 
-            // button3
-            // 
-            this.button3.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button3.BackColor = System.Drawing.Color.Transparent;
-            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.tlpRateControl.SetColumnSpan(this.button3, 2);
-            this.button3.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.button3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.ForeColor = System.Drawing.Color.Cyan;
-            this.button3.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.button3.Location = new System.Drawing.Point(94, 138);
-            this.button3.Margin = new System.Windows.Forms.Padding(0);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(117, 35);
-            this.button3.TabIndex = 635;
-            this.button3.Text = "10.0";
-            this.button3.UseVisualStyleBackColor = false;
-            // 
-            // button28
-            // 
-            this.button28.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button28.BackColor = System.Drawing.Color.Transparent;
-            this.button28.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button28.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
-            this.button28.FlatAppearance.BorderSize = 0;
-            this.button28.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.button28.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.button28.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button28.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button28.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button28.ForeColor = System.Drawing.SystemColors.Control;
-            this.button28.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.button28.Location = new System.Drawing.Point(7, 507);
-            this.button28.Margin = new System.Windows.Forms.Padding(0);
-            this.button28.Name = "button28";
-            this.button28.Size = new System.Drawing.Size(75, 35);
-            this.button28.TabIndex = 640;
-            this.button28.Text = "2%";
-            this.button28.UseVisualStyleBackColor = false;
-            // 
-            // button9
-            // 
-            this.button9.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button9.BackColor = System.Drawing.Color.Transparent;
-            this.button9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.tlpRateControl.SetColumnSpan(this.button9, 2);
-            this.button9.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
-            this.button9.FlatAppearance.BorderSize = 0;
-            this.button9.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.button9.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.button9.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button9.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button9.ForeColor = System.Drawing.Color.Cyan;
-            this.button9.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.button9.Location = new System.Drawing.Point(115, 507);
-            this.button9.Margin = new System.Windows.Forms.Padding(0);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(75, 35);
-            this.button9.TabIndex = 641;
-            this.button9.Text = "126";
-            this.button9.UseVisualStyleBackColor = false;
-            // 
-            // button14
-            // 
-            this.button14.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button14.BackColor = System.Drawing.Color.Transparent;
-            this.button14.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.tlpRateControl.SetColumnSpan(this.button14, 2);
-            this.button14.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
-            this.button14.FlatAppearance.BorderSize = 0;
-            this.button14.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.button14.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.button14.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button14.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button14.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button14.ForeColor = System.Drawing.Color.Yellow;
-            this.button14.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.button14.Location = new System.Drawing.Point(115, 321);
-            this.button14.Margin = new System.Windows.Forms.Padding(0);
-            this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(75, 35);
-            this.button14.TabIndex = 649;
-            this.button14.Text = "40 PSI";
-            this.button14.UseVisualStyleBackColor = false;
-            // 
-            // button4
-            // 
-            this.button4.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button4.BackColor = System.Drawing.Color.Transparent;
-            this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.tlpRateControl.SetColumnSpan(this.button4, 2);
-            this.button4.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
-            this.button4.FlatAppearance.BorderSize = 0;
-            this.button4.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.button4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.button4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.ForeColor = System.Drawing.Color.Yellow;
-            this.button4.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.button4.Location = new System.Drawing.Point(115, 690);
-            this.button4.Margin = new System.Windows.Forms.Padding(0);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 35);
-            this.button4.TabIndex = 672;
-            this.button4.Text = "3900";
-            this.button4.UseVisualStyleBackColor = false;
-            // 
-            // button2
-            // 
-            this.button2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button2.BackColor = System.Drawing.Color.Transparent;
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.tlpRateControl.SetColumnSpan(this.button2, 2);
-            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.Yellow;
-            this.button2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.button2.Location = new System.Drawing.Point(115, 260);
-            this.button2.Margin = new System.Windows.Forms.Padding(0);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 35);
-            this.button2.TabIndex = 676;
-            this.button2.Text = "40 PSI";
-            this.button2.UseVisualStyleBackColor = false;
-            // 
-            // button6
-            // 
-            this.button6.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button6.BackColor = System.Drawing.Color.Transparent;
-            this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.tlpRateControl.SetColumnSpan(this.button6, 2);
-            this.button6.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
-            this.button6.FlatAppearance.BorderSize = 0;
-            this.button6.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.button6.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.button6.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button6.ForeColor = System.Drawing.Color.Yellow;
-            this.button6.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.button6.Location = new System.Drawing.Point(115, 629);
-            this.button6.Margin = new System.Windows.Forms.Padding(0);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 35);
-            this.button6.TabIndex = 677;
-            this.button6.Text = "12";
-            this.button6.UseVisualStyleBackColor = false;
+            this.lblUPM_0.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblUPM_0.BackColor = System.Drawing.Color.Transparent;
+            this.tlpRateControl.SetColumnSpan(this.lblUPM_0, 2);
+            this.lblUPM_0.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUPM_0.ForeColor = System.Drawing.Color.White;
+            this.lblUPM_0.Location = new System.Drawing.Point(3, 77);
+            this.lblUPM_0.Margin = new System.Windows.Forms.Padding(0);
+            this.lblUPM_0.Name = "lblUPM_0";
+            this.lblUPM_0.Size = new System.Drawing.Size(120, 35);
+            this.lblUPM_0.TabIndex = 620;
+            this.lblUPM_0.Text = "gal/ac";
+            this.lblUPM_0.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label10
             // 
@@ -3654,7 +3380,7 @@ namespace Twol
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(74, 35);
             this.label10.TabIndex = 682;
-            this.label10.Text = "PSI";
+            this.label10.Text = "Sensor";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label13
@@ -3668,7 +3394,7 @@ namespace Twol
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(74, 35);
             this.label13.TabIndex = 679;
-            this.label13.Text = "Ac";
+            this.label13.Text = "Area";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label11
@@ -3682,7 +3408,7 @@ namespace Twol
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(74, 35);
             this.label11.TabIndex = 678;
-            this.label11.Text = "Gal";
+            this.label11.Text = "Tank";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label14
@@ -3696,7 +3422,7 @@ namespace Twol
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(74, 35);
             this.label14.TabIndex = 680;
-            this.label14.Text = "Lbs";
+            this.label14.Text = "Tank";
             this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label15
@@ -3710,7 +3436,7 @@ namespace Twol
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(74, 35);
             this.label15.TabIndex = 681;
-            this.label15.Text = "Ac";
+            this.label15.Text = "Area";
             this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label16
@@ -3724,42 +3450,76 @@ namespace Twol
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(74, 35);
             this.label16.TabIndex = 683;
-            this.label16.Text = "RPM";
+            this.label16.Text = "Sensor";
             this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // checkBox1
+            // cboxTankAppRem_0
             // 
-            this.checkBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.checkBox1.Appearance = System.Windows.Forms.Appearance.Button;
-            this.checkBox1.BackColor = System.Drawing.Color.Transparent;
-            this.checkBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.checkBox1.FlatAppearance.BorderSize = 0;
-            this.checkBox1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.checkBox1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.checkBox1.Location = new System.Drawing.Point(219, 189);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(51, 55);
-            this.checkBox1.TabIndex = 684;
-            this.checkBox1.Text = "A";
-            this.checkBox1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.checkBox1.UseVisualStyleBackColor = false;
+            this.cboxTankAppRem_0.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cboxTankAppRem_0.Appearance = System.Windows.Forms.Appearance.Button;
+            this.cboxTankAppRem_0.BackColor = System.Drawing.Color.Transparent;
+            this.cboxTankAppRem_0.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.cboxTankAppRem_0.FlatAppearance.BorderSize = 0;
+            this.cboxTankAppRem_0.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cboxTankAppRem_0.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.cboxTankAppRem_0.Location = new System.Drawing.Point(219, 189);
+            this.cboxTankAppRem_0.Name = "cboxTankAppRem_0";
+            this.cboxTankAppRem_0.Size = new System.Drawing.Size(51, 55);
+            this.cboxTankAppRem_0.TabIndex = 684;
+            this.cboxTankAppRem_0.Text = "A";
+            this.cboxTankAppRem_0.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.cboxTankAppRem_0.UseVisualStyleBackColor = false;
             // 
-            // checkBox2
+            // cboxTankAppRem_1
             // 
-            this.checkBox2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.checkBox2.Appearance = System.Windows.Forms.Appearance.Button;
-            this.checkBox2.BackColor = System.Drawing.Color.Transparent;
-            this.checkBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.checkBox2.FlatAppearance.BorderSize = 0;
-            this.checkBox2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.checkBox2.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.checkBox2.Location = new System.Drawing.Point(219, 558);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(51, 55);
-            this.checkBox2.TabIndex = 685;
-            this.checkBox2.Text = "A";
-            this.checkBox2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.checkBox2.UseVisualStyleBackColor = false;
+            this.cboxTankAppRem_1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cboxTankAppRem_1.Appearance = System.Windows.Forms.Appearance.Button;
+            this.cboxTankAppRem_1.BackColor = System.Drawing.Color.Transparent;
+            this.cboxTankAppRem_1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.cboxTankAppRem_1.FlatAppearance.BorderSize = 0;
+            this.cboxTankAppRem_1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cboxTankAppRem_1.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.cboxTankAppRem_1.Location = new System.Drawing.Point(219, 558);
+            this.cboxTankAppRem_1.Name = "cboxTankAppRem_1";
+            this.cboxTankAppRem_1.Size = new System.Drawing.Size(51, 55);
+            this.cboxTankAppRem_1.TabIndex = 685;
+            this.cboxTankAppRem_1.Text = "A";
+            this.cboxTankAppRem_1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.cboxTankAppRem_1.UseVisualStyleBackColor = false;
+            // 
+            // cboxAreaAppRem_0
+            // 
+            this.cboxAreaAppRem_0.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cboxAreaAppRem_0.Appearance = System.Windows.Forms.Appearance.Button;
+            this.cboxAreaAppRem_0.BackColor = System.Drawing.Color.Transparent;
+            this.cboxAreaAppRem_0.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.cboxAreaAppRem_0.FlatAppearance.BorderSize = 0;
+            this.cboxAreaAppRem_0.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cboxAreaAppRem_0.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.cboxAreaAppRem_0.Location = new System.Drawing.Point(219, 250);
+            this.cboxAreaAppRem_0.Name = "cboxAreaAppRem_0";
+            this.cboxAreaAppRem_0.Size = new System.Drawing.Size(51, 55);
+            this.cboxAreaAppRem_0.TabIndex = 687;
+            this.cboxAreaAppRem_0.Text = "R";
+            this.cboxAreaAppRem_0.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.cboxAreaAppRem_0.UseVisualStyleBackColor = false;
+            // 
+            // cboxAreaAppRem_1
+            // 
+            this.cboxAreaAppRem_1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cboxAreaAppRem_1.Appearance = System.Windows.Forms.Appearance.Button;
+            this.cboxAreaAppRem_1.BackColor = System.Drawing.Color.Transparent;
+            this.cboxAreaAppRem_1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.cboxAreaAppRem_1.FlatAppearance.BorderSize = 0;
+            this.cboxAreaAppRem_1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cboxAreaAppRem_1.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.cboxAreaAppRem_1.Location = new System.Drawing.Point(219, 619);
+            this.cboxAreaAppRem_1.Name = "cboxAreaAppRem_1";
+            this.cboxAreaAppRem_1.Size = new System.Drawing.Size(51, 55);
+            this.cboxAreaAppRem_1.TabIndex = 688;
+            this.cboxAreaAppRem_1.Text = "A";
+            this.cboxAreaAppRem_1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.cboxAreaAppRem_1.UseVisualStyleBackColor = false;
             // 
             // button15
             // 
@@ -3801,39 +3561,185 @@ namespace Twol
             this.button17.TabIndex = 652;
             this.button17.UseVisualStyleBackColor = false;
             // 
-            // checkBox4
+            // lblRateSet_0
             // 
-            this.checkBox4.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.checkBox4.Appearance = System.Windows.Forms.Appearance.Button;
-            this.checkBox4.BackColor = System.Drawing.Color.Transparent;
-            this.checkBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.checkBox4.FlatAppearance.BorderSize = 0;
-            this.checkBox4.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.checkBox4.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.checkBox4.Location = new System.Drawing.Point(219, 250);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(51, 55);
-            this.checkBox4.TabIndex = 687;
-            this.checkBox4.Text = "R";
-            this.checkBox4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.checkBox4.UseVisualStyleBackColor = false;
+            this.lblRateSet_0.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblRateSet_0.BackColor = System.Drawing.Color.Transparent;
+            this.tlpRateControl.SetColumnSpan(this.lblRateSet_0, 2);
+            this.lblRateSet_0.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRateSet_0.ForeColor = System.Drawing.Color.Cyan;
+            this.lblRateSet_0.Location = new System.Drawing.Point(140, 138);
+            this.lblRateSet_0.Margin = new System.Windows.Forms.Padding(0);
+            this.lblRateSet_0.Name = "lblRateSet_0";
+            this.lblRateSet_0.Size = new System.Drawing.Size(120, 35);
+            this.lblRateSet_0.TabIndex = 689;
+            this.lblRateSet_0.Text = "10.1";
+            this.lblRateSet_0.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // checkBox5
+            // lblRateSet_1
             // 
-            this.checkBox5.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.checkBox5.Appearance = System.Windows.Forms.Appearance.Button;
-            this.checkBox5.BackColor = System.Drawing.Color.Transparent;
-            this.checkBox5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.checkBox5.FlatAppearance.BorderSize = 0;
-            this.checkBox5.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.checkBox5.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.checkBox5.Location = new System.Drawing.Point(219, 619);
-            this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(51, 55);
-            this.checkBox5.TabIndex = 688;
-            this.checkBox5.Text = "A";
-            this.checkBox5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.checkBox5.UseVisualStyleBackColor = false;
+            this.lblRateSet_1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblRateSet_1.BackColor = System.Drawing.Color.Transparent;
+            this.tlpRateControl.SetColumnSpan(this.lblRateSet_1, 2);
+            this.lblRateSet_1.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRateSet_1.ForeColor = System.Drawing.Color.Cyan;
+            this.lblRateSet_1.Location = new System.Drawing.Point(140, 507);
+            this.lblRateSet_1.Margin = new System.Windows.Forms.Padding(0);
+            this.lblRateSet_1.Name = "lblRateSet_1";
+            this.lblRateSet_1.Size = new System.Drawing.Size(120, 35);
+            this.lblRateSet_1.TabIndex = 690;
+            this.lblRateSet_1.Text = "210";
+            this.lblRateSet_1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblArea_0
+            // 
+            this.lblArea_0.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblArea_0.BackColor = System.Drawing.Color.Transparent;
+            this.tlpRateControl.SetColumnSpan(this.lblArea_0, 2);
+            this.lblArea_0.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblArea_0.ForeColor = System.Drawing.Color.White;
+            this.lblArea_0.Location = new System.Drawing.Point(93, 260);
+            this.lblArea_0.Margin = new System.Windows.Forms.Padding(0);
+            this.lblArea_0.Name = "lblArea_0";
+            this.lblArea_0.Size = new System.Drawing.Size(120, 35);
+            this.lblArea_0.TabIndex = 691;
+            this.lblArea_0.Text = "47";
+            this.lblArea_0.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblArea_1
+            // 
+            this.lblArea_1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblArea_1.BackColor = System.Drawing.Color.Transparent;
+            this.tlpRateControl.SetColumnSpan(this.lblArea_1, 2);
+            this.lblArea_1.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblArea_1.ForeColor = System.Drawing.Color.White;
+            this.lblArea_1.Location = new System.Drawing.Point(93, 629);
+            this.lblArea_1.Margin = new System.Windows.Forms.Padding(0);
+            this.lblArea_1.Name = "lblArea_1";
+            this.lblArea_1.Size = new System.Drawing.Size(120, 35);
+            this.lblArea_1.TabIndex = 692;
+            this.lblArea_1.Text = "48";
+            this.lblArea_1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblPressRPM_1
+            // 
+            this.lblPressRPM_1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblPressRPM_1.BackColor = System.Drawing.Color.Transparent;
+            this.tlpRateControl.SetColumnSpan(this.lblPressRPM_1, 2);
+            this.lblPressRPM_1.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPressRPM_1.ForeColor = System.Drawing.Color.White;
+            this.lblPressRPM_1.Location = new System.Drawing.Point(93, 690);
+            this.lblPressRPM_1.Margin = new System.Windows.Forms.Padding(0);
+            this.lblPressRPM_1.Name = "lblPressRPM_1";
+            this.lblPressRPM_1.Size = new System.Drawing.Size(120, 35);
+            this.lblPressRPM_1.TabIndex = 693;
+            this.lblPressRPM_1.Text = "4500";
+            this.lblPressRPM_1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblRateActual_0
+            // 
+            this.lblRateActual_0.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblRateActual_0.BackColor = System.Drawing.Color.Transparent;
+            this.tlpRateControl.SetColumnSpan(this.lblRateActual_0, 2);
+            this.lblRateActual_0.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRateActual_0.ForeColor = System.Drawing.Color.White;
+            this.lblRateActual_0.Location = new System.Drawing.Point(140, 77);
+            this.lblRateActual_0.Margin = new System.Windows.Forms.Padding(0);
+            this.lblRateActual_0.Name = "lblRateActual_0";
+            this.lblRateActual_0.Size = new System.Drawing.Size(120, 35);
+            this.lblRateActual_0.TabIndex = 694;
+            this.lblRateActual_0.Text = "10.2";
+            this.lblRateActual_0.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblRateActual_1
+            // 
+            this.lblRateActual_1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblRateActual_1.BackColor = System.Drawing.Color.Transparent;
+            this.tlpRateControl.SetColumnSpan(this.lblRateActual_1, 2);
+            this.lblRateActual_1.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRateActual_1.ForeColor = System.Drawing.Color.White;
+            this.lblRateActual_1.Location = new System.Drawing.Point(140, 446);
+            this.lblRateActual_1.Margin = new System.Windows.Forms.Padding(0);
+            this.lblRateActual_1.Name = "lblRateActual_1";
+            this.lblRateActual_1.Size = new System.Drawing.Size(120, 35);
+            this.lblRateActual_1.TabIndex = 695;
+            this.lblRateActual_1.Text = "220";
+            this.lblRateActual_1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label21
+            // 
+            this.label21.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label21.BackColor = System.Drawing.Color.Transparent;
+            this.tlpRateControl.SetColumnSpan(this.label21, 2);
+            this.label21.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.ForeColor = System.Drawing.Color.White;
+            this.label21.Location = new System.Drawing.Point(93, 321);
+            this.label21.Margin = new System.Windows.Forms.Padding(0);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(120, 35);
+            this.label21.TabIndex = 696;
+            this.label21.Text = "50";
+            this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblTank_0
+            // 
+            this.lblTank_0.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblTank_0.BackColor = System.Drawing.Color.Transparent;
+            this.tlpRateControl.SetColumnSpan(this.lblTank_0, 2);
+            this.lblTank_0.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTank_0.ForeColor = System.Drawing.Color.White;
+            this.lblTank_0.Location = new System.Drawing.Point(93, 199);
+            this.lblTank_0.Margin = new System.Windows.Forms.Padding(0);
+            this.lblTank_0.Name = "lblTank_0";
+            this.lblTank_0.Size = new System.Drawing.Size(120, 35);
+            this.lblTank_0.TabIndex = 697;
+            this.lblTank_0.Text = "1650";
+            this.lblTank_0.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblTank_1
+            // 
+            this.lblTank_1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblTank_1.BackColor = System.Drawing.Color.Transparent;
+            this.tlpRateControl.SetColumnSpan(this.lblTank_1, 2);
+            this.lblTank_1.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTank_1.ForeColor = System.Drawing.Color.White;
+            this.lblTank_1.Location = new System.Drawing.Point(93, 568);
+            this.lblTank_1.Margin = new System.Windows.Forms.Padding(0);
+            this.lblTank_1.Name = "lblTank_1";
+            this.lblTank_1.Size = new System.Drawing.Size(120, 35);
+            this.lblTank_1.TabIndex = 698;
+            this.lblTank_1.Text = "22300";
+            this.lblTank_1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label24
+            // 
+            this.label24.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label24.BackColor = System.Drawing.Color.Transparent;
+            this.tlpRateControl.SetColumnSpan(this.label24, 2);
+            this.label24.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.ForeColor = System.Drawing.Color.White;
+            this.label24.Location = new System.Drawing.Point(3, 138);
+            this.label24.Margin = new System.Windows.Forms.Padding(0);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(120, 35);
+            this.label24.TabIndex = 699;
+            this.label24.Text = "1.2%";
+            this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label25
+            // 
+            this.label25.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label25.BackColor = System.Drawing.Color.Transparent;
+            this.tlpRateControl.SetColumnSpan(this.label25, 2);
+            this.label25.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label25.ForeColor = System.Drawing.Color.White;
+            this.label25.Location = new System.Drawing.Point(3, 507);
+            this.label25.Margin = new System.Windows.Forms.Padding(0);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(120, 35);
+            this.label25.TabIndex = 700;
+            this.label25.Text = "5.1%";
+            this.label25.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // FormGPS
             // 
@@ -4091,35 +3997,35 @@ namespace Twol
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ToolStripMenuItem externalModuleSimToolStripMenuItem;
         private System.Windows.Forms.TableLayoutPanel tlpRateControl;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label7;
-        public System.Windows.Forms.Button button9;
-        public System.Windows.Forms.Button button8;
-        public System.Windows.Forms.Button button5;
-        public System.Windows.Forms.Button button3;
-        public System.Windows.Forms.Button button1;
-        public System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Label lblUPM_0;
+        private System.Windows.Forms.Label lblUPM_1;
         private System.Windows.Forms.ToolStripMenuItem rateControlAppToolStripMenuItem;
-        public System.Windows.Forms.Button button14;
         public System.Windows.Forms.Button button15;
         public System.Windows.Forms.Button button17;
-        public System.Windows.Forms.Button button27;
-        public System.Windows.Forms.Button button28;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label8;
-        public System.Windows.Forms.Button button4;
-        public System.Windows.Forms.Button button2;
-        public System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Label lblProduct_0;
+        private System.Windows.Forms.Label lblProduct_1;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.CheckBox checkBox4;
-        private System.Windows.Forms.CheckBox checkBox5;
+        private System.Windows.Forms.CheckBox cboxTankAppRem_0;
+        private System.Windows.Forms.CheckBox cboxTankAppRem_1;
+        private System.Windows.Forms.CheckBox cboxAreaAppRem_0;
+        private System.Windows.Forms.CheckBox cboxAreaAppRem_1;
+        private System.Windows.Forms.Label lblRateSet_1;
+        private System.Windows.Forms.Label lblRateSet_0;
+        private System.Windows.Forms.Label lblArea_0;
+        private System.Windows.Forms.Label lblArea_1;
+        private System.Windows.Forms.Label lblPressRPM_1;
+        private System.Windows.Forms.Label lblRateActual_0;
+        private System.Windows.Forms.Label lblRateActual_1;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label lblTank_0;
+        private System.Windows.Forms.Label lblTank_1;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label label25;
     }
 }
 

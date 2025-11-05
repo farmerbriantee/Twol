@@ -39,6 +39,5 @@
         public byte isPressure1 = 0;
         public byte isPressure2 = 0;
         public byte isPressure3 = 0;
-
     }
 }
