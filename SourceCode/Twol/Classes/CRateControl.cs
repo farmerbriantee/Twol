@@ -1,4 +1,6 @@
-﻿namespace Twol
+﻿using OpenTK.Graphics.OpenGL;
+
+namespace Twol
 {
     public class CRateControlData
     {
@@ -14,14 +16,15 @@
 
         public CRateControlData()
         {
-            rateActualx10 = 0;
-            rateSetx10 = 0;
-            volumeApplied = 0;
-            volumeRemain = 0;
-            coveragePossiblex10 = 0;
-            sensor = 0;
-            isAlarming = false;
+            rateActualx10 = 88;
+            rateSetx10 = 99;
+            volumeApplied = 600;
+            volumeRemain = 300;
+            coveragePossiblex10 = 325;
+            sensor = 500;
             channel = 0;
+            isAlarming = false;
+            isChannelActive = false;
         }
     }
 
@@ -46,22 +49,22 @@
 
         public CRateControlConfig()
         {
-            productName0 = string.Empty;
+            productName0 = "One";
             productName1 = string.Empty;
             productName2 = string.Empty;
             productName3 = string.Empty;
 
-            units0 = string.Empty;
+            units0 = "lb/ac";
             units1 = string.Empty;
             units2 = string.Empty;
             units3 = string.Empty;
 
-            isFanPressure0 = 0; //0 neither - Fan=1 Pressure=2
+            isFanPressure0 = 1; //0 neither - Fan=1 Pressure=2
             isFanPressure1 = 0; //0 neither - Fan=1 Pressure=2
             isFanPressure2 = 0; //0 neither - Fan=1 Pressure=2
             isFanPressure3 = 0; //0 neither - Fan=1 Pressure=2
 
-            isActive = new bool[4] { true, true, true, true };
+            isActive = new bool[4] { false, false, false, false };
         }
     }
 }

@@ -149,6 +149,7 @@ namespace Twol
             this.cboxIsSectionControlled = new System.Windows.Forms.CheckBox();
             this.btnTramDisplayMode = new System.Windows.Forms.Button();
             this.btnResetToolHeading = new System.Windows.Forms.Button();
+            this.button17 = new System.Windows.Forms.Button();
             this.btnChangeMappingColor = new System.Windows.Forms.Button();
             this.btnYouSkipEnable = new System.Windows.Forms.Button();
             this.panelRight = new System.Windows.Forms.FlowLayoutPanel();
@@ -224,16 +225,14 @@ namespace Twol
             this.lblrcProduct_1 = new System.Windows.Forms.Label();
             this.lblrcUPM_1 = new System.Windows.Forms.Label();
             this.lblrcUPM_0 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
+            this.lblrcSensorType_0 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
+            this.lblrcSensorType_1 = new System.Windows.Forms.Label();
             this.cboxrcTankAppRem_0 = new System.Windows.Forms.CheckBox();
             this.cboxrcTankAppRem_1 = new System.Windows.Forms.CheckBox();
-            this.cboxrcAreaAppRem_0 = new System.Windows.Forms.CheckBox();
-            this.cboxrcAreaAppRem_1 = new System.Windows.Forms.CheckBox();
             this.lblrcArea_0 = new System.Windows.Forms.Label();
             this.lblrcArea_1 = new System.Windows.Forms.Label();
             this.lblrcSensor_1 = new System.Windows.Forms.Label();
@@ -242,12 +241,11 @@ namespace Twol
             this.lblrcRateSet_1 = new System.Windows.Forms.Label();
             this.lblrcRateSet_0 = new System.Windows.Forms.Label();
             this.lblrcSensor_0 = new System.Windows.Forms.Label();
-            this.lbrclTank_0 = new System.Windows.Forms.Label();
+            this.lblrcTank_0 = new System.Windows.Forms.Label();
             this.lblrcTank_1 = new System.Windows.Forms.Label();
             this.lblrcError_0 = new System.Windows.Forms.Label();
             this.lblrcError_1 = new System.Windows.Forms.Label();
             this.button15 = new System.Windows.Forms.Button();
-            this.button17 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStripFlag.SuspendLayout();
             this.statusStripLeft.SuspendLayout();
@@ -614,7 +612,7 @@ namespace Twol
             this.toolStripMenuFlagForm.Image = global::Twol.Properties.Resources.FileEditName;
             this.toolStripMenuFlagForm.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripMenuFlagForm.Name = "toolStripMenuFlagForm";
-            this.toolStripMenuFlagForm.Size = new System.Drawing.Size(267, 70);
+            this.toolStripMenuFlagForm.Size = new System.Drawing.Size(259, 70);
             this.toolStripMenuFlagForm.Text = "toolStripMenuItem3";
             this.toolStripMenuFlagForm.Click += new System.EventHandler(this.toolStripMenuFlagForm_Click);
             // 
@@ -1710,13 +1708,14 @@ namespace Twol
             this.panelBottom.Controls.Add(this.cboxIsSectionControlled);
             this.panelBottom.Controls.Add(this.btnTramDisplayMode);
             this.panelBottom.Controls.Add(this.btnResetToolHeading);
+            this.panelBottom.Controls.Add(this.button17);
             this.panelBottom.Controls.Add(this.btnChangeMappingColor);
             this.panelBottom.Controls.Add(this.btnYouSkipEnable);
             this.panelBottom.Controls.Add(this.cboxpRowWidth);
             this.panelBottom.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.panelBottom.Location = new System.Drawing.Point(327, 819);
+            this.panelBottom.Location = new System.Drawing.Point(14, 819);
             this.panelBottom.Name = "panelBottom";
-            this.panelBottom.Size = new System.Drawing.Size(896, 62);
+            this.panelBottom.Size = new System.Drawing.Size(1209, 62);
             this.panelBottom.TabIndex = 540;
             // 
             // btnTrack
@@ -1732,7 +1731,7 @@ namespace Twol
             this.btnTrack.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTrack.Image = global::Twol.Properties.Resources.TrackOn;
             this.btnTrack.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnTrack.Location = new System.Drawing.Point(824, 3);
+            this.btnTrack.Location = new System.Drawing.Point(1137, 3);
             this.btnTrack.Margin = new System.Windows.Forms.Padding(0);
             this.btnTrack.Name = "btnTrack";
             this.btnTrack.Size = new System.Drawing.Size(72, 56);
@@ -1755,7 +1754,7 @@ namespace Twol
             this.btnSnapToPivot.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnSnapToPivot.Image = global::Twol.Properties.Resources.SnapToPivot;
             this.btnSnapToPivot.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSnapToPivot.Location = new System.Drawing.Point(749, 3);
+            this.btnSnapToPivot.Location = new System.Drawing.Point(1062, 3);
             this.btnSnapToPivot.Name = "btnSnapToPivot";
             this.btnSnapToPivot.Size = new System.Drawing.Size(72, 56);
             this.btnSnapToPivot.TabIndex = 544;
@@ -1776,7 +1775,7 @@ namespace Twol
             this.btnAdjRight.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnAdjRight.Image = global::Twol.Properties.Resources.SnapRight;
             this.btnAdjRight.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnAdjRight.Location = new System.Drawing.Point(671, 3);
+            this.btnAdjRight.Location = new System.Drawing.Point(984, 3);
             this.btnAdjRight.Name = "btnAdjRight";
             this.btnAdjRight.Size = new System.Drawing.Size(72, 56);
             this.btnAdjRight.TabIndex = 546;
@@ -1796,7 +1795,7 @@ namespace Twol
             this.btnAdjLeft.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnAdjLeft.Image = global::Twol.Properties.Resources.SnapLeft;
             this.btnAdjLeft.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnAdjLeft.Location = new System.Drawing.Point(593, 3);
+            this.btnAdjLeft.Location = new System.Drawing.Point(906, 3);
             this.btnAdjLeft.Name = "btnAdjLeft";
             this.btnAdjLeft.Size = new System.Drawing.Size(72, 56);
             this.btnAdjLeft.TabIndex = 545;
@@ -1817,7 +1816,7 @@ namespace Twol
             this.btnFlag.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFlag.Image = global::Twol.Properties.Resources.FlagRed;
             this.btnFlag.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnFlag.Location = new System.Drawing.Point(515, 3);
+            this.btnFlag.Location = new System.Drawing.Point(828, 3);
             this.btnFlag.Name = "btnFlag";
             this.btnFlag.Size = new System.Drawing.Size(72, 56);
             this.btnFlag.TabIndex = 121;
@@ -1839,7 +1838,7 @@ namespace Twol
             this.btnHeadlandOnOff.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnHeadlandOnOff.Image = global::Twol.Properties.Resources.HeadlandOff;
             this.btnHeadlandOnOff.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnHeadlandOnOff.Location = new System.Drawing.Point(437, 3);
+            this.btnHeadlandOnOff.Location = new System.Drawing.Point(750, 3);
             this.btnHeadlandOnOff.Name = "btnHeadlandOnOff";
             this.btnHeadlandOnOff.Size = new System.Drawing.Size(72, 56);
             this.btnHeadlandOnOff.TabIndex = 447;
@@ -1864,7 +1863,7 @@ namespace Twol
             this.cboxIsSectionControlled.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxIsSectionControlled.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.cboxIsSectionControlled.Image = global::Twol.Properties.Resources.HeadlandSectionOn;
-            this.cboxIsSectionControlled.Location = new System.Drawing.Point(359, 3);
+            this.cboxIsSectionControlled.Location = new System.Drawing.Point(672, 3);
             this.cboxIsSectionControlled.Name = "cboxIsSectionControlled";
             this.cboxIsSectionControlled.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.cboxIsSectionControlled.Size = new System.Drawing.Size(72, 56);
@@ -1886,7 +1885,7 @@ namespace Twol
             this.btnTramDisplayMode.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTramDisplayMode.Image = global::Twol.Properties.Resources.TramOff;
             this.btnTramDisplayMode.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnTramDisplayMode.Location = new System.Drawing.Point(281, 3);
+            this.btnTramDisplayMode.Location = new System.Drawing.Point(594, 3);
             this.btnTramDisplayMode.Name = "btnTramDisplayMode";
             this.btnTramDisplayMode.Size = new System.Drawing.Size(72, 56);
             this.btnTramDisplayMode.TabIndex = 480;
@@ -1909,7 +1908,7 @@ namespace Twol
             this.btnResetToolHeading.ForeColor = System.Drawing.Color.Black;
             this.btnResetToolHeading.Image = global::Twol.Properties.Resources.ResetTool;
             this.btnResetToolHeading.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnResetToolHeading.Location = new System.Drawing.Point(206, 3);
+            this.btnResetToolHeading.Location = new System.Drawing.Point(519, 3);
             this.btnResetToolHeading.Margin = new System.Windows.Forms.Padding(0);
             this.btnResetToolHeading.Name = "btnResetToolHeading";
             this.btnResetToolHeading.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -1917,6 +1916,26 @@ namespace Twol
             this.btnResetToolHeading.TabIndex = 491;
             this.btnResetToolHeading.UseVisualStyleBackColor = false;
             this.btnResetToolHeading.Click += new System.EventHandler(this.btnResetToolHeading_Click);
+            // 
+            // button17
+            // 
+            this.button17.BackColor = System.Drawing.Color.DarkGray;
+            this.button17.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button17.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
+            this.button17.FlatAppearance.BorderSize = 0;
+            this.button17.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.button17.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.button17.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.button17.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button17.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button17.ForeColor = System.Drawing.SystemColors.Control;
+            this.button17.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.button17.Location = new System.Drawing.Point(206, 0);
+            this.button17.Margin = new System.Windows.Forms.Padding(0);
+            this.button17.Name = "button17";
+            this.button17.Size = new System.Drawing.Size(313, 14);
+            this.button17.TabIndex = 652;
+            this.button17.UseVisualStyleBackColor = false;
             // 
             // btnChangeMappingColor
             // 
@@ -3265,16 +3284,14 @@ namespace Twol
             this.tlpRateControl.Controls.Add(this.lblrcProduct_1, 0, 8);
             this.tlpRateControl.Controls.Add(this.lblrcUPM_1, 0, 9);
             this.tlpRateControl.Controls.Add(this.lblrcUPM_0, 0, 2);
-            this.tlpRateControl.Controls.Add(this.label10, 0, 6);
+            this.tlpRateControl.Controls.Add(this.lblrcSensorType_0, 0, 6);
             this.tlpRateControl.Controls.Add(this.label13, 0, 5);
             this.tlpRateControl.Controls.Add(this.label11, 0, 4);
             this.tlpRateControl.Controls.Add(this.label14, 0, 11);
             this.tlpRateControl.Controls.Add(this.label15, 0, 12);
-            this.tlpRateControl.Controls.Add(this.label16, 0, 13);
+            this.tlpRateControl.Controls.Add(this.lblrcSensorType_1, 0, 13);
             this.tlpRateControl.Controls.Add(this.cboxrcTankAppRem_0, 3, 4);
             this.tlpRateControl.Controls.Add(this.cboxrcTankAppRem_1, 3, 11);
-            this.tlpRateControl.Controls.Add(this.cboxrcAreaAppRem_0, 3, 5);
-            this.tlpRateControl.Controls.Add(this.cboxrcAreaAppRem_1, 3, 12);
             this.tlpRateControl.Controls.Add(this.lblrcArea_0, 1, 5);
             this.tlpRateControl.Controls.Add(this.lblrcArea_1, 1, 12);
             this.tlpRateControl.Controls.Add(this.lblrcSensor_1, 1, 13);
@@ -3283,7 +3300,7 @@ namespace Twol
             this.tlpRateControl.Controls.Add(this.lblrcRateSet_1, 1, 10);
             this.tlpRateControl.Controls.Add(this.lblrcRateSet_0, 1, 3);
             this.tlpRateControl.Controls.Add(this.lblrcSensor_0, 1, 6);
-            this.tlpRateControl.Controls.Add(this.lbrclTank_0, 1, 4);
+            this.tlpRateControl.Controls.Add(this.lblrcTank_0, 1, 4);
             this.tlpRateControl.Controls.Add(this.lblrcTank_1, 1, 11);
             this.tlpRateControl.Controls.Add(this.lblrcError_0, 0, 3);
             this.tlpRateControl.Controls.Add(this.lblrcError_1, 0, 10);
@@ -3369,19 +3386,19 @@ namespace Twol
             this.lblrcUPM_0.Text = "gal/ac";
             this.lblrcUPM_0.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label10
+            // lblrcSensorType_0
             // 
-            this.label10.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label10.BackColor = System.Drawing.Color.Transparent;
-            this.label10.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.ForeColor = System.Drawing.Color.White;
-            this.label10.Location = new System.Drawing.Point(8, 321);
-            this.label10.Margin = new System.Windows.Forms.Padding(0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(74, 35);
-            this.label10.TabIndex = 682;
-            this.label10.Text = "Sensor";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblrcSensorType_0.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblrcSensorType_0.BackColor = System.Drawing.Color.Transparent;
+            this.lblrcSensorType_0.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblrcSensorType_0.ForeColor = System.Drawing.Color.White;
+            this.lblrcSensorType_0.Location = new System.Drawing.Point(8, 321);
+            this.lblrcSensorType_0.Margin = new System.Windows.Forms.Padding(0);
+            this.lblrcSensorType_0.Name = "lblrcSensorType_0";
+            this.lblrcSensorType_0.Size = new System.Drawing.Size(74, 35);
+            this.lblrcSensorType_0.TabIndex = 682;
+            this.lblrcSensorType_0.Text = "Sensor";
+            this.lblrcSensorType_0.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label13
             // 
@@ -3439,19 +3456,19 @@ namespace Twol
             this.label15.Text = "Area";
             this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label16
+            // lblrcSensorType_1
             // 
-            this.label16.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label16.BackColor = System.Drawing.Color.Transparent;
-            this.label16.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.ForeColor = System.Drawing.Color.White;
-            this.label16.Location = new System.Drawing.Point(8, 690);
-            this.label16.Margin = new System.Windows.Forms.Padding(0);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(74, 35);
-            this.label16.TabIndex = 683;
-            this.label16.Text = "Sensor";
-            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblrcSensorType_1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblrcSensorType_1.BackColor = System.Drawing.Color.Transparent;
+            this.lblrcSensorType_1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblrcSensorType_1.ForeColor = System.Drawing.Color.White;
+            this.lblrcSensorType_1.Location = new System.Drawing.Point(8, 690);
+            this.lblrcSensorType_1.Margin = new System.Windows.Forms.Padding(0);
+            this.lblrcSensorType_1.Name = "lblrcSensorType_1";
+            this.lblrcSensorType_1.Size = new System.Drawing.Size(74, 35);
+            this.lblrcSensorType_1.TabIndex = 683;
+            this.lblrcSensorType_1.Text = "Sensor";
+            this.lblrcSensorType_1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // cboxrcTankAppRem_0
             // 
@@ -3459,8 +3476,9 @@ namespace Twol
             this.cboxrcTankAppRem_0.Appearance = System.Windows.Forms.Appearance.Button;
             this.cboxrcTankAppRem_0.BackColor = System.Drawing.Color.Transparent;
             this.cboxrcTankAppRem_0.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.cboxrcTankAppRem_0.FlatAppearance.BorderSize = 0;
-            this.cboxrcTankAppRem_0.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cboxrcTankAppRem_0.FlatAppearance.BorderColor = System.Drawing.SystemColors.Window;
+            this.cboxrcTankAppRem_0.FlatAppearance.BorderSize = 2;
+            this.cboxrcTankAppRem_0.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboxrcTankAppRem_0.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.cboxrcTankAppRem_0.Location = new System.Drawing.Point(219, 189);
             this.cboxrcTankAppRem_0.Name = "cboxrcTankAppRem_0";
@@ -3469,6 +3487,7 @@ namespace Twol
             this.cboxrcTankAppRem_0.Text = "A";
             this.cboxrcTankAppRem_0.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.cboxrcTankAppRem_0.UseVisualStyleBackColor = false;
+            this.cboxrcTankAppRem_0.Click += new System.EventHandler(this.cboxrcTankAppRem_0_Click);
             // 
             // cboxrcTankAppRem_1
             // 
@@ -3476,8 +3495,9 @@ namespace Twol
             this.cboxrcTankAppRem_1.Appearance = System.Windows.Forms.Appearance.Button;
             this.cboxrcTankAppRem_1.BackColor = System.Drawing.Color.Transparent;
             this.cboxrcTankAppRem_1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.cboxrcTankAppRem_1.FlatAppearance.BorderSize = 0;
-            this.cboxrcTankAppRem_1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cboxrcTankAppRem_1.FlatAppearance.BorderColor = System.Drawing.SystemColors.Window;
+            this.cboxrcTankAppRem_1.FlatAppearance.BorderSize = 2;
+            this.cboxrcTankAppRem_1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboxrcTankAppRem_1.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.cboxrcTankAppRem_1.Location = new System.Drawing.Point(219, 558);
             this.cboxrcTankAppRem_1.Name = "cboxrcTankAppRem_1";
@@ -3486,40 +3506,7 @@ namespace Twol
             this.cboxrcTankAppRem_1.Text = "A";
             this.cboxrcTankAppRem_1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.cboxrcTankAppRem_1.UseVisualStyleBackColor = false;
-            // 
-            // cboxrcAreaAppRem_0
-            // 
-            this.cboxrcAreaAppRem_0.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.cboxrcAreaAppRem_0.Appearance = System.Windows.Forms.Appearance.Button;
-            this.cboxrcAreaAppRem_0.BackColor = System.Drawing.Color.Transparent;
-            this.cboxrcAreaAppRem_0.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.cboxrcAreaAppRem_0.FlatAppearance.BorderSize = 0;
-            this.cboxrcAreaAppRem_0.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cboxrcAreaAppRem_0.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.cboxrcAreaAppRem_0.Location = new System.Drawing.Point(219, 250);
-            this.cboxrcAreaAppRem_0.Name = "cboxrcAreaAppRem_0";
-            this.cboxrcAreaAppRem_0.Size = new System.Drawing.Size(51, 55);
-            this.cboxrcAreaAppRem_0.TabIndex = 687;
-            this.cboxrcAreaAppRem_0.Text = "R";
-            this.cboxrcAreaAppRem_0.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.cboxrcAreaAppRem_0.UseVisualStyleBackColor = false;
-            // 
-            // cboxrcAreaAppRem_1
-            // 
-            this.cboxrcAreaAppRem_1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.cboxrcAreaAppRem_1.Appearance = System.Windows.Forms.Appearance.Button;
-            this.cboxrcAreaAppRem_1.BackColor = System.Drawing.Color.Transparent;
-            this.cboxrcAreaAppRem_1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.cboxrcAreaAppRem_1.FlatAppearance.BorderSize = 0;
-            this.cboxrcAreaAppRem_1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cboxrcAreaAppRem_1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.cboxrcAreaAppRem_1.Location = new System.Drawing.Point(219, 619);
-            this.cboxrcAreaAppRem_1.Name = "cboxrcAreaAppRem_1";
-            this.cboxrcAreaAppRem_1.Size = new System.Drawing.Size(51, 55);
-            this.cboxrcAreaAppRem_1.TabIndex = 688;
-            this.cboxrcAreaAppRem_1.Text = "A";
-            this.cboxrcAreaAppRem_1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.cboxrcAreaAppRem_1.UseVisualStyleBackColor = false;
+            this.cboxrcTankAppRem_1.Click += new System.EventHandler(this.cboxrcTankAppRem_1_Click);
             // 
             // lblrcArea_0
             // 
@@ -3641,20 +3628,20 @@ namespace Twol
             this.lblrcSensor_0.Text = "50";
             this.lblrcSensor_0.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lbrclTank_0
+            // lblrcTank_0
             // 
-            this.lbrclTank_0.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lbrclTank_0.BackColor = System.Drawing.Color.Transparent;
-            this.tlpRateControl.SetColumnSpan(this.lbrclTank_0, 2);
-            this.lbrclTank_0.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbrclTank_0.ForeColor = System.Drawing.Color.White;
-            this.lbrclTank_0.Location = new System.Drawing.Point(93, 199);
-            this.lbrclTank_0.Margin = new System.Windows.Forms.Padding(0);
-            this.lbrclTank_0.Name = "lbrclTank_0";
-            this.lbrclTank_0.Size = new System.Drawing.Size(120, 35);
-            this.lbrclTank_0.TabIndex = 697;
-            this.lbrclTank_0.Text = "1650";
-            this.lbrclTank_0.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblrcTank_0.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblrcTank_0.BackColor = System.Drawing.Color.Transparent;
+            this.tlpRateControl.SetColumnSpan(this.lblrcTank_0, 2);
+            this.lblrcTank_0.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblrcTank_0.ForeColor = System.Drawing.Color.White;
+            this.lblrcTank_0.Location = new System.Drawing.Point(93, 199);
+            this.lblrcTank_0.Margin = new System.Windows.Forms.Padding(0);
+            this.lblrcTank_0.Name = "lblrcTank_0";
+            this.lblrcTank_0.Size = new System.Drawing.Size(120, 35);
+            this.lblrcTank_0.TabIndex = 697;
+            this.lblrcTank_0.Text = "1650";
+            this.lblrcTank_0.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblrcTank_1
             // 
@@ -3721,26 +3708,6 @@ namespace Twol
             this.button15.TabIndex = 650;
             this.button15.UseVisualStyleBackColor = false;
             // 
-            // button17
-            // 
-            this.button17.BackColor = System.Drawing.Color.DarkGray;
-            this.button17.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button17.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
-            this.button17.FlatAppearance.BorderSize = 0;
-            this.button17.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.button17.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.button17.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button17.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button17.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button17.ForeColor = System.Drawing.SystemColors.Control;
-            this.button17.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.button17.Location = new System.Drawing.Point(6, 819);
-            this.button17.Margin = new System.Windows.Forms.Padding(0);
-            this.button17.Name = "button17";
-            this.button17.Size = new System.Drawing.Size(313, 14);
-            this.button17.TabIndex = 652;
-            this.button17.UseVisualStyleBackColor = false;
-            // 
             // FormGPS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -3762,7 +3729,6 @@ namespace Twol
             this.Controls.Add(this.oglMain);
             this.Controls.Add(this.oglZoom);
             this.Controls.Add(this.lblCurrentField);
-            this.Controls.Add(this.button17);
             this.Controls.Add(this.button15);
             this.Controls.Add(this.lblGuidanceLine);
             this.Controls.Add(this.oglBack);
@@ -4008,12 +3974,10 @@ namespace Twol
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label lblrcSensorType_0;
+        private System.Windows.Forms.Label lblrcSensorType_1;
         private System.Windows.Forms.CheckBox cboxrcTankAppRem_0;
         private System.Windows.Forms.CheckBox cboxrcTankAppRem_1;
-        private System.Windows.Forms.CheckBox cboxrcAreaAppRem_0;
-        private System.Windows.Forms.CheckBox cboxrcAreaAppRem_1;
         private System.Windows.Forms.Label lblrcRateSet_1;
         private System.Windows.Forms.Label lblrcRateSet_0;
         private System.Windows.Forms.Label lblrcArea_0;
@@ -4022,7 +3986,7 @@ namespace Twol
         private System.Windows.Forms.Label lblrcRateActual_0;
         private System.Windows.Forms.Label lblrcRateActual_1;
         private System.Windows.Forms.Label lblrcSensor_0;
-        private System.Windows.Forms.Label lbrclTank_0;
+        private System.Windows.Forms.Label lblrcTank_0;
         private System.Windows.Forms.Label lblrcTank_1;
         private System.Windows.Forms.Label lblrcError_0;
         private System.Windows.Forms.Label lblrcError_1;

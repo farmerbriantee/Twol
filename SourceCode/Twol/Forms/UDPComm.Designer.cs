@@ -26,7 +26,7 @@ namespace Twol
         private CRateControlData[] rateControlData = new CRateControlData[4];
         private CRateControlConfig rateControlConfig;
         private byte[] rateControlByteData = new byte[100];
-        private bool isRateControlConfigDataNew = false;
+        private bool isRateControlConfigDataNew = true;
 
         public bool isUDPNetworkConnected, isUDPNetworkConnectedTool, isUDPMonitorOn;
 

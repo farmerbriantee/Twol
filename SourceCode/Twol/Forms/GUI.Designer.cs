@@ -318,7 +318,7 @@ namespace Twol
                     if (trackMethodPanelCounter-- < 1) flp1.Visible = false;
                 }
 
-                if (Settings.Vehicle.setApp_isNozzleApp)
+                if (isJobStarted && Settings.Vehicle.setApp_isNozzleApp)
                 {
                     if (nozz.isFlowingFlag) lblIsFlowing.BackColor = Color.LightGreen;
                     else lblIsFlowing.BackColor = Color.Orange;
@@ -327,19 +327,135 @@ namespace Twol
                     lblFlowHz_Nozz.Text = nozz.frequency.ToString() + " Hz";
                 }
 
-                if (Settings.Vehicle.setApp_isRateControlApp)
+                if (isJobStarted && Settings.Vehicle.setApp_isRateControlApp)
                 {
                     if (isRateControlConfigDataNew)
                     {
                         //config the rate control panel
                         isRateControlConfigDataNew = false;
 
+                        //rateControlConfig.productName0 = Encoding.UTF8.GetString(rateControlByteData, 5, 15);  //5 to 19
+                        //rateControlConfig.productName1 = Encoding.UTF8.GetString(rateControlByteData, 20, 15); //20 to 34
+                        //rateControlConfig.productName2 = Encoding.UTF8.GetString(rateControlByteData, 35, 15); //35 to 49
+                        //rateControlConfig.productName3 = Encoding.UTF8.GetString(rateControlByteData, 50, 15); //50 to 64
+
+                        //rateControlConfig.units0 = Encoding.UTF8.GetString(rateControlByteData, 65, 8);        //65 to 72
+                        //rateControlConfig.units1 = Encoding.UTF8.GetString(rateControlByteData, 73, 8);        //73 to 80
+                        //rateControlConfig.units2 = Encoding.UTF8.GetString(rateControlByteData, 81, 8);        //81 to 88
+                        //rateControlConfig.units3 = Encoding.UTF8.GetString(rateControlByteData, 89, 8);        //89 to 96
+
+                        ////0 none - 1 is fan - 2 is Pressure
+                        //rateControlConfig.isFanPressure0 = (int)rateControlByteData[97];     //97 
+                        //rateControlConfig.isFanPressure1 = (int)rateControlByteData[98];     //98
+                        //rateControlConfig.isFanPressure2 = (int)rateControlByteData[99];     //99
+                        //rateControlConfig.isFanPressure3 = (int)rateControlByteData[100];    //100
+
+                        //rateControlConfig.isActive[0] = Convert.ToBoolean(rateControlByteData[101]);        //101
+                        //rateControlConfig.isActive[1] = Convert.ToBoolean(rateControlByteData[102]);        //102
+                        //rateControlConfig.isActive[2] = Convert.ToBoolean(rateControlByteData[103]);        //103
+                        //rateControlConfig.isActive[3] = Convert.ToBoolean(rateControlByteData[104]);        //104
+
+                        cboxrcTankAppRem_0.Checked = false;
+                        cboxrcTankAppRem_0.Text = "A";
+                        cboxrcTankAppRem_1.Checked = false;
+                        cboxrcTankAppRem_1.Text = "A";
+
+                        //config
+                        lblrcProduct_0.Text = "-";
+                        lblrcProduct_1.Text = "-";
+                        lblrcUPM_0.Text = "-";
+                        lblrcUPM_1.Text = "-";
+                        lblrcSensorType_0.Text = "";
+                        lblrcSensorType_1.Text = "";
+
+                        //data
+                        lblrcRateActual_0.Text = "-";
+                        lblrcRateActual_1.Text = "-";
+                        lblrcRateSet_0.Text = "-";
+                        lblrcRateSet_1.Text = "-";
+                        lblrcTank_0.Text = "-";
+                        lblrcTank_1.Text = "-";
+                        lblrcArea_0.Text = "-";
+                        lblrcArea_1.Text = "-";
+                        lblrcError_0.Text = "-";
+                        lblrcError_1.Text = "-";
+                        lblrcSensor_0.Text = "-";
+                        lblrcSensor_1.Text = "-";
+
+                        for (int i = 0; i < 2; i++)
+                        {
+                            if (rateControlConfig.isActive[i])
+                            {
+                                switch (i)
+                                {
+                                    case 0:
+                                        lblrcProduct_0.Text = rateControlConfig.productName0;
+                                        lblrcUPM_0.Text = rateControlConfig.units0;
+
+                                        if (rateControlConfig.isFanPressure0 != 0)
+                                        {
+                                            if (rateControlConfig.isFanPressure0 == 1) lblrcSensorType_0.Text = "Fan";
+                                            else lblrcSensorType_0.Text = "Pressure";
+                                        }
+                                        else
+                                            lblrcSensorType_0.Text = "";
+                                        break;
+
+                                    case 1:
+                                        lblrcProduct_1.Text = rateControlConfig.productName1;
+                                        lblrcUPM_1.Text = rateControlConfig.units1;
+
+                                        if (rateControlConfig.isFanPressure1 != 0)
+                                        {
+                                            if (rateControlConfig.isFanPressure1 == 1) lblrcSensorType_1.Text = "Fan";
+                                            else lblrcSensorType_1.Text = "Pressure";
+                                        }
+                                        else
+                                            lblrcSensorType_1.Text = "";
+
+                                        break;
+
+                                    default:
+                                        break;
+                                }
+                            }
+                        }
                     }
 
-                    for (int chNum = 0; chNum < 4; chNum++)
+                    for (int chNum = 0; chNum < 2; chNum++)
                     {
                         if (!rateControlConfig.isActive[chNum]) continue;
 
+                        switch (chNum)
+                        {
+                            case 0:
+                                lblrcRateActual_0.Text = (rateControlData[chNum].rateActualx10 * 0.1).ToString("N1");
+                                lblrcRateSet_0.Text = (rateControlData[chNum].rateSetx10 * 0.1).ToString("N1");
+                                lblrcError_0.Text = (((double)rateControlData[chNum].rateActualx10 / (double)rateControlData[chNum].rateSetx10) * 100.0 - 100.0).ToString("N1") + " %";
+                                if (cboxrcTankAppRem_0.Checked) lblrcTank_0.Text = (rateControlData[chNum].volumeRemain).ToString("N0");
+                                else lblrcTank_0.Text = (rateControlData[chNum].volumeApplied).ToString("N0");
+
+                                lblrcArea_0.Text = (rateControlData[chNum].coveragePossiblex10 * 0.1).ToString("N1");
+                                if (rateControlConfig.isFanPressure0 > 0) lblrcSensor_0.Text = (rateControlData[chNum].sensor).ToString("N0");
+
+                                break;
+
+                            case 1:
+                                lblrcRateActual_1.Text = (rateControlData[chNum].rateActualx10 * 0.1).ToString("N1");
+                                lblrcRateSet_1.Text = (rateControlData[chNum].rateSetx10 * 0.1).ToString("N1");
+                                lblrcError_1.Text = (((double)rateControlData[chNum].rateActualx10 / (double)rateControlData[chNum].rateSetx10) * 100.0 - 100.0).ToString("N1") + " %";
+                                if (cboxrcTankAppRem_1.Checked) lblrcTank_1.Text = (rateControlData[chNum].volumeRemain).ToString("N0");
+                                else lblrcTank_1.Text = (rateControlData[chNum].volumeApplied).ToString("N0");
+
+                                lblrcArea_1.Text = (rateControlData[chNum].coveragePossiblex10 * 0.1).ToString("N1");
+                                if (rateControlConfig.isFanPressure0 > 0) lblrcSensor_1.Text = (rateControlData[chNum].sensor).ToString("N0");
+
+                                break;
+
+                            default:
+                                break;
+
+                        }
                     }
                 }
 
