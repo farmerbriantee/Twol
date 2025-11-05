@@ -319,10 +319,14 @@ namespace Twol
             gpsPtsCorr.Add(b);
             gpsPts.Add(b);
 
-            if (Settings.Vehicle.setApp_isRateControlApp)
+            //if (Settings.Vehicle.setApp_isRateControlApp)
             {
-                rateControlData = new CRateControlData[4];
-                rateControlConfig = new CRateControl_Config();
+                for (int i = 0; i < 4; i++)
+                {
+                    rateControlData[i] = new CRateControlData();
+                    rateControlData[i].channel = (byte)i;
+                }
+                rateControlConfig = new CRateControlConfig();
             }
         }
 

@@ -328,12 +328,18 @@ namespace Twol
                     lblFlowHz_Nozz.Text = nozz.frequency.ToString() + " Hz";
                 }
 
+                if(isRateControlConfigDataNew)
+                {
+                    //config the rate control panel
+                    isRateControlConfigDataNew = false;
+
+                }
+
                 if (Settings.Vehicle.setApp_isRateControlApp)
                 {
                     for (int chNum = 0; chNum < 4; chNum++)
                     {
-                        if (rateControlData[chNum].pressure == 2000) continue;
-
+                        if (!rateControlConfig.isActive[chNum]) continue;                      
 
                     }
                 }

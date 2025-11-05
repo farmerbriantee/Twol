@@ -23,8 +23,10 @@ namespace Twol
         private EndPoint endPointUDPTool = new IPEndPoint(IPAddress.Any, 0);
         private EndPoint endPointNTRIP = new IPEndPoint(IPAddress.Any, 0);
 
-        private CRateControlData[] rateControlData;
-        private CRateControl_Config rateControlConfig;
+        private CRateControlData[] rateControlData = new CRateControlData[4];
+        private CRateControlConfig rateControlConfig;
+        private byte[] rateControlByteData = new byte[100];
+        private bool isRateControlConfigDataNew = false;
 
         public bool isUDPNetworkConnected, isUDPNetworkConnectedTool, isUDPMonitorOn;
 
@@ -763,7 +765,7 @@ namespace Twol
                                 //public uint volumeApplied = 0;            9 to 12   
                                 //public int volumeRemain = 0;              13 to 16
                                 //public int coveragePossiblex10 = 0;       17 to 20    x10
-                                //public uint16 fanspeed = 0;               21 to 22
+                                //public uint16 sensor = 0;               21 to 22
                                 //public uint32 pressure = 0;               23 to 26
                                 //public byte isAlarming = 0;               27
                                 //public byte channel = 0;                  28
@@ -777,44 +779,37 @@ namespace Twol
                                 rateControlData[channel].volumeApplied = BitConverter.ToUInt32(data, 9);
                                 rateControlData[channel].volumeRemain = BitConverter.ToInt32(data, 13);
                                 rateControlData[channel].coveragePossiblex10 = BitConverter.ToInt32(data, 17);
-                                rateControlData[channel].fanspeed = BitConverter.ToUInt16(data, 21);
-                                rateControlData[channel].pressure = BitConverter.ToUInt32(data, 23);
-                                rateControlData[channel].isAlarming = data[27];
-                                rateControlData[channel].channel = data[28];
+                                rateControlData[channel].sensor = BitConverter.ToUInt32(data, 21);
+                                rateControlData[channel].isAlarming = Convert.ToBoolean(data[25]);
+                                rateControlData[channel].channel = data[26];
                             }
                             break;
 
                         case 102:
                             {
-                                //public string productName0 = string.Empty;         5 to 19
-                                //public string productName1 = string.Empty;         20 to 34
-                                //public string productName2 = string.Empty;         35 to 49
-                                //public string productName3 = string.Empty;         50 to 64
+                                Array.Copy(data, 5, rateControlByteData, 0, 100);
+                                isRateControlConfigDataNew = true;
 
-                                //public string units0 = string.Empty; //gal/ac etc     65 to 72
-                                //public string units1 = string.Empty; //gal/ac etc     73 to 80
-                                //public string units2 = string.Empty; //gal/ac etc     81 to 88
-                                //public string units3 = string.Empty; //gal/ac etc     89 to 96
+                                //rateControlConfig.productName0 = Encoding.UTF8.GetString(data, 5, 15);  //5 to 19
+                                //rateControlConfig.productName1 = Encoding.UTF8.GetString(data, 20, 15); //20 to 34
+                                //rateControlConfig.productName2 = Encoding.UTF8.GetString(data, 35, 15); //35 to 49
+                                //rateControlConfig.productName3 = Encoding.UTF8.GetString(data, 50, 15); //50 to 64
 
-                                //public byte rateAlarmPercent0 = 0;    97 
-                                //public byte rateAlarmPercent1 = 0;    98
-                                //public byte rateAlarmPercent2 = 0;    99
-                                //public byte rateAlarmPercent3 = 0;    100
+                                //rateControlConfig.units0 = Encoding.UTF8.GetString(data, 65, 8);        //65 to 72
+                                //rateControlConfig.units1 = Encoding.UTF8.GetString(data, 73, 8);        //73 to 80
+                                //rateControlConfig.units2 = Encoding.UTF8.GetString(data, 81, 8);        //81 to 88
+                                //rateControlConfig.units3 = Encoding.UTF8.GetString(data, 89, 8);        //89 to 96
 
-                                rateControlConfig.productName0 = Encoding.UTF8.GetString(data, 5, 15);
-                                rateControlConfig.productName1 = Encoding.UTF8.GetString(data, 20, 15);
-                                rateControlConfig.productName2 = Encoding.UTF8.GetString(data, 35, 15);
-                                rateControlConfig.productName3 = Encoding.UTF8.GetString(data, 50, 15);
+                                ////0 none - 1 is fan - 2 is Pressure
+                                //rateControlConfig.isFanPressure0 = (int)data[97];     //97 
+                                //rateControlConfig.isFanPressure1 = (int)data[98];     //98
+                                //rateControlConfig.isFanPressure2 = (int)data[99];     //99
+                                //rateControlConfig.isFanPressure3 = (int)data[100];    //100
 
-                                rateControlConfig.units0 = Encoding.UTF8.GetString(data, 65, 15);
-                                rateControlConfig.units1 = Encoding.UTF8.GetString(data, 75, 15);
-                                rateControlConfig.units2 = Encoding.UTF8.GetString(data, 85, 15);
-                                rateControlConfig.units3 = Encoding.UTF8.GetString(data, 95, 15);
-
-                                rateControlConfig.rateAlarmPercent0 = (int)data[105];
-                                rateControlConfig.rateAlarmPercent1 = (int)data[106];
-                                rateControlConfig.rateAlarmPercent2 = (int)data[107];
-                                rateControlConfig.rateAlarmPercent3 = (int)data[108];
+                                //rateControlConfig.isActive0 =  (int)data[101];        //101
+                                //rateControlConfig.isActive1 =  (int)data[102];        //102
+                                //rateControlConfig.isActive2 =  (int)data[103];        //103
+                                //rateControlConfig.isActive3 =  (int)data[104];        //104
                             }
                             break;
 
