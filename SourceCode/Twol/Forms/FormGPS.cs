@@ -753,16 +753,6 @@ namespace Twol
 
         }
 
-        private void cboxrcTankAppRem_0_Click(object sender, EventArgs e)
-        {
-            cboxrcTankAppRem_0.Text = cboxrcTankAppRem_0.Checked ? "R" : "A";
-        }
-
-        private void cboxrcTankAppRem_1_Click(object sender, EventArgs e)
-        {
-            cboxrcTankAppRem_1.Text = cboxrcTankAppRem_1.Checked ? "R" : "A";
-        }
-
         public void FieldClose()
         {
             Settings.Vehicle.setF_CurrentFieldDir = currentFieldDirectory;
