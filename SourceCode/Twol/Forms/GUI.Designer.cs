@@ -355,11 +355,6 @@ namespace Twol
                         //rateControlConfig.isActive[2] = Convert.ToBoolean(rateControlByteData[103]);        //103
                         //rateControlConfig.isActive[3] = Convert.ToBoolean(rateControlByteData[104]);        //104
 
-                        cboxrcTankAppRem_0.Checked = false;
-                        cboxrcTankAppRem_0.Text = "A";
-                        cboxrcTankAppRem_1.Checked = false;
-                        cboxrcTankAppRem_1.Text = "A";
-
                         //config
                         lblrcProduct_0.Text = "-";
                         lblrcProduct_1.Text = "-";
@@ -373,8 +368,8 @@ namespace Twol
                         lblrcRateActual_1.Text = "-";
                         lblrcRateSet_0.Text = "-";
                         lblrcRateSet_1.Text = "-";
-                        lblrcTank_0.Text = "-";
-                        lblrcTank_1.Text = "-";
+                        lblrcTankApp_0.Text = "-";
+                        lblrcTankApp_1.Text = "-";
                         lblrcArea_0.Text = "-";
                         lblrcArea_1.Text = "-";
                         //lblrcError_0.Text = "-";
@@ -432,8 +427,8 @@ namespace Twol
                                 lblrcRateActual_0.Text = (rateControlData[chNum].rateActualx10 * 0.1).ToString("N1");
                                 lblrcRateSet_0.Text = (rateControlData[chNum].rateSetx10 * 0.1).ToString("N1");
                                 //lblrcError_0.Text = (((double)rateControlData[chNum].rateActualx10 / (double)rateControlData[chNum].rateSetx10) * 100.0 - 100.0).ToString("N1") + " %";
-                                if (cboxrcTankAppRem_0.Checked) lblrcTank_0.Text = (rateControlData[chNum].volumeRemain).ToString("N0");
-                                else lblrcTank_0.Text = (rateControlData[chNum].volumeApplied).ToString("N0");
+                                lblrcTankRem_0.Text = (rateControlData[chNum].volumeRemain).ToString("N0");
+                                lblrcTankApp_0.Text = (rateControlData[chNum].volumeApplied).ToString("N0");
 
                                 lblrcArea_0.Text = (rateControlData[chNum].coveragePossiblex10 * 0.1).ToString("N1");
                                 if (rateControlConfig.isFanPressure0 > 0) lblrcSensor_0.Text = (rateControlData[chNum].sensor).ToString("N0");
@@ -444,8 +439,32 @@ namespace Twol
                                 lblrcRateActual_1.Text = (rateControlData[chNum].rateActualx10 * 0.1).ToString("N1");
                                 lblrcRateSet_1.Text = (rateControlData[chNum].rateSetx10 * 0.1).ToString("N1");
                                 //lblrcError_1.Text = (((double)rateControlData[chNum].rateActualx10 / (double)rateControlData[chNum].rateSetx10) * 100.0 - 100.0).ToString("N1") + " %";
-                                if (cboxrcTankAppRem_1.Checked) lblrcTank_1.Text = (rateControlData[chNum].volumeRemain).ToString("N0");
-                                else lblrcTank_1.Text = (rateControlData[chNum].volumeApplied).ToString("N0");
+                                lblrcTankRem_1.Text = (rateControlData[chNum].volumeRemain).ToString("N0");
+                                lblrcTankApp_1.Text = (rateControlData[chNum].volumeApplied).ToString("N0");
+
+                                lblrcArea_1.Text = (rateControlData[chNum].coveragePossiblex10 * 0.1).ToString("N1");
+                                if (rateControlConfig.isFanPressure0 > 0) lblrcSensor_1.Text = (rateControlData[chNum].sensor).ToString("N0");
+
+                                break;
+
+                            case 2:
+                                lblrcRateActual_2.Text = (rateControlData[chNum].rateActualx10 * 0.1).ToString("N1");
+                                lblrcRateSet_2.Text = (rateControlData[chNum].rateSetx10 * 0.1).ToString("N1");
+                                //lblrcError_2.Text = (((double)rateControlData[chNum].rateActualx10 / (double)rateControlData[chNum].rateSetx10) * 100.0 - 100.0).ToString("N1") + " %";
+                                lblrcTankRem_2.Text = (rateControlData[chNum].volumeRemain).ToString("N0");
+                                lblrcTankApp_2.Text = (rateControlData[chNum].volumeApplied).ToString("N0");
+
+                                lblrcArea_2.Text = (rateControlData[chNum].coveragePossiblex10 * 0.1).ToString("N1");
+                                if (rateControlConfig.isFanPressure0 > 0) lblrcSensor_2.Text = (rateControlData[chNum].sensor).ToString("N0");
+
+                                break;
+
+                            case 3:
+                                lblrcRateActual_1.Text = (rateControlData[chNum].rateActualx10 * 0.1).ToString("N1");
+                                lblrcRateSet_1.Text = (rateControlData[chNum].rateSetx10 * 0.1).ToString("N1");
+                                //lblrcError_1.Text = (((double)rateControlData[chNum].rateActualx10 / (double)rateControlData[chNum].rateSetx10) * 100.0 - 100.0).ToString("N1") + " %";
+                                lblrcTankRem_1.Text = (rateControlData[chNum].volumeRemain).ToString("N0");
+                                lblrcTankApp_1.Text = (rateControlData[chNum].volumeApplied).ToString("N0");
 
                                 lblrcArea_1.Text = (rateControlData[chNum].coveragePossiblex10 * 0.1).ToString("N1");
                                 if (rateControlConfig.isFanPressure0 > 0) lblrcSensor_1.Text = (rateControlData[chNum].sensor).ToString("N0");
