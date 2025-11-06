@@ -736,7 +736,7 @@ namespace Twol
             this.oglMain.Location = new System.Drawing.Point(236, 50);
             this.oglMain.Margin = new System.Windows.Forms.Padding(0);
             this.oglMain.Name = "oglMain";
-            this.oglMain.Size = new System.Drawing.Size(1464, 779);
+            this.oglMain.Size = new System.Drawing.Size(927, 679);
             this.oglMain.TabIndex = 180;
             this.oglMain.VSync = false;
             this.oglMain.Load += new System.EventHandler(this.oglMain_Load);
@@ -788,7 +788,7 @@ namespace Twol
             this.distanceToolBtn,
             this.toolStripDropDownButton4});
             this.statusStripLeft.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
-            this.statusStripLeft.Location = new System.Drawing.Point(1, 102);
+            this.statusStripLeft.Location = new System.Drawing.Point(1, 82);
             this.statusStripLeft.Name = "statusStripLeft";
             this.statusStripLeft.Size = new System.Drawing.Size(67, 109);
             this.statusStripLeft.SizingGrip = false;
@@ -897,7 +897,7 @@ namespace Twol
             this.panelSim.Controls.Add(this.btnResetSim, 0, 0);
             this.panelSim.Controls.Add(this.hsbarSteerAngle, 3, 0);
             this.panelSim.Controls.Add(this.btnSpeedUp, 5, 0);
-            this.panelSim.Location = new System.Drawing.Point(646, 780);
+            this.panelSim.Location = new System.Drawing.Point(377, 680);
             this.panelSim.Name = "panelSim";
             this.panelSim.RowCount = 1;
             this.panelSim.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -1222,7 +1222,7 @@ namespace Twol
             this.panelLeft.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.10068F));
             this.panelLeft.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.75167F));
             this.panelLeft.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.25503F));
-            this.panelLeft.Size = new System.Drawing.Size(70, 778);
+            this.panelLeft.Size = new System.Drawing.Size(70, 678);
             this.panelLeft.TabIndex = 529;
             // 
             // statusStrip2
@@ -1239,7 +1239,7 @@ namespace Twol
             this.statusStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripDropDownButton1});
             this.statusStrip2.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
-            this.statusStrip2.Location = new System.Drawing.Point(1, 246);
+            this.statusStrip2.Location = new System.Drawing.Point(1, 209);
             this.statusStrip2.Name = "statusStrip2";
             this.statusStrip2.Size = new System.Drawing.Size(67, 74);
             this.statusStrip2.SizingGrip = false;
@@ -1352,7 +1352,7 @@ namespace Twol
             this.btnNavigationSettings.Margin = new System.Windows.Forms.Padding(0);
             this.btnNavigationSettings.Name = "btnNavigationSettings";
             this.btnNavigationSettings.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnNavigationSettings.Size = new System.Drawing.Size(70, 80);
+            this.btnNavigationSettings.Size = new System.Drawing.Size(70, 70);
             this.btnNavigationSettings.TabIndex = 542;
             this.btnNavigationSettings.UseVisualStyleBackColor = false;
             this.btnNavigationSettings.Click += new System.EventHandler(this.btnNavigationSettings_Click);
@@ -1371,12 +1371,12 @@ namespace Twol
             this.btnAutoSteerConfig.ForeColor = System.Drawing.Color.Black;
             this.btnAutoSteerConfig.Image = global::Twol.Properties.Resources.AutoSteerConf;
             this.btnAutoSteerConfig.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnAutoSteerConfig.Location = new System.Drawing.Point(0, 573);
+            this.btnAutoSteerConfig.Location = new System.Drawing.Point(0, 499);
             this.btnAutoSteerConfig.Margin = new System.Windows.Forms.Padding(0);
             this.btnAutoSteerConfig.Name = "btnAutoSteerConfig";
             this.btnAutoSteerConfig.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
             this.btnAutoSteerConfig.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnAutoSteerConfig.Size = new System.Drawing.Size(70, 99);
+            this.btnAutoSteerConfig.Size = new System.Drawing.Size(70, 86);
             this.btnAutoSteerConfig.TabIndex = 475;
             this.btnAutoSteerConfig.Text = "-38.8.";
             this.btnAutoSteerConfig.UseVisualStyleBackColor = false;
@@ -1398,11 +1398,11 @@ namespace Twol
             this.btnToolSteerConfig.Image = global::Twol.Properties.Resources.AutoSteerConf;
             this.btnToolSteerConfig.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnToolSteerConfig.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnToolSteerConfig.Location = new System.Drawing.Point(0, 672);
+            this.btnToolSteerConfig.Location = new System.Drawing.Point(0, 585);
             this.btnToolSteerConfig.Margin = new System.Windows.Forms.Padding(0);
             this.btnToolSteerConfig.Name = "btnToolSteerConfig";
             this.btnToolSteerConfig.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnToolSteerConfig.Size = new System.Drawing.Size(70, 106);
+            this.btnToolSteerConfig.Size = new System.Drawing.Size(70, 93);
             this.btnToolSteerConfig.TabIndex = 467;
             this.btnToolSteerConfig.Text = "12.3";
             this.btnToolSteerConfig.UseVisualStyleBackColor = false;
@@ -1423,11 +1423,11 @@ namespace Twol
             this.btnFieldMenu.ForeColor = System.Drawing.Color.DarkGray;
             this.btnFieldMenu.Image = global::Twol.Properties.Resources.JobActive;
             this.btnFieldMenu.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnFieldMenu.Location = new System.Drawing.Point(0, 333);
+            this.btnFieldMenu.Location = new System.Drawing.Point(0, 290);
             this.btnFieldMenu.Margin = new System.Windows.Forms.Padding(0);
             this.btnFieldMenu.Name = "btnFieldMenu";
             this.btnFieldMenu.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnFieldMenu.Size = new System.Drawing.Size(70, 123);
+            this.btnFieldMenu.Size = new System.Drawing.Size(70, 107);
             this.btnFieldMenu.TabIndex = 536;
             this.btnFieldMenu.UseVisualStyleBackColor = false;
             this.btnFieldMenu.Click += new System.EventHandler(this.btnFieldMenu_Click);
@@ -1446,7 +1446,7 @@ namespace Twol
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripBtnFieldTools});
             this.statusStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
-            this.statusStrip1.Location = new System.Drawing.Point(1, 472);
+            this.statusStrip1.Location = new System.Drawing.Point(1, 406);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(67, 84);
             this.statusStrip1.SizingGrip = false;
@@ -1558,7 +1558,7 @@ namespace Twol
             this.lblGuidanceLine.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblGuidanceLine.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblGuidanceLine.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblGuidanceLine.Location = new System.Drawing.Point(598, 66);
+            this.lblGuidanceLine.Location = new System.Drawing.Point(329, 66);
             this.lblGuidanceLine.Name = "lblGuidanceLine";
             this.lblGuidanceLine.Size = new System.Drawing.Size(583, 83);
             this.lblGuidanceLine.TabIndex = 538;
@@ -1733,7 +1733,7 @@ namespace Twol
             this.panelBottom.Controls.Add(this.btnYouSkipEnable);
             this.panelBottom.Controls.Add(this.cboxpRowWidth);
             this.panelBottom.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.panelBottom.Location = new System.Drawing.Point(490, 831);
+            this.panelBottom.Location = new System.Drawing.Point(-47, 731);
             this.panelBottom.Name = "panelBottom";
             this.panelBottom.Size = new System.Drawing.Size(1209, 62);
             this.panelBottom.TabIndex = 540;
@@ -2019,7 +2019,7 @@ namespace Twol
             this.panelRight.Controls.Add(this.btnContourLock);
             this.panelRight.Controls.Add(this.lblNumCu);
             this.panelRight.FlowDirection = System.Windows.Forms.FlowDirection.BottomUp;
-            this.panelRight.Location = new System.Drawing.Point(1699, 319);
+            this.panelRight.Location = new System.Drawing.Point(1162, 219);
             this.panelRight.Name = "panelRight";
             this.panelRight.Size = new System.Drawing.Size(70, 574);
             this.panelRight.TabIndex = 541;
@@ -2461,7 +2461,7 @@ namespace Twol
             this.lblHardwareMessage.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblHardwareMessage.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHardwareMessage.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
-            this.lblHardwareMessage.Location = new System.Drawing.Point(449, 87);
+            this.lblHardwareMessage.Location = new System.Drawing.Point(180, 87);
             this.lblHardwareMessage.Name = "lblHardwareMessage";
             this.lblHardwareMessage.Size = new System.Drawing.Size(888, 43);
             this.lblHardwareMessage.TabIndex = 543;
@@ -2508,7 +2508,7 @@ namespace Twol
             this.tlpNozzle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 18.76445F));
             this.tlpNozzle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.36207F));
             this.tlpNozzle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.36207F));
-            this.tlpNozzle.Size = new System.Drawing.Size(209, 776);
+            this.tlpNozzle.Size = new System.Drawing.Size(209, 676);
             this.tlpNozzle.TabIndex = 545;
             this.tlpNozzle.Visible = false;
             // 
@@ -2528,7 +2528,7 @@ namespace Twol
             this.btnSprayPSI.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSprayPSI.ForeColor = System.Drawing.Color.Yellow;
             this.btnSprayPSI.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSprayPSI.Location = new System.Drawing.Point(66, 45);
+            this.btnSprayPSI.Location = new System.Drawing.Point(66, 35);
             this.btnSprayPSI.Name = "btnSprayPSI";
             this.btnSprayPSI.Size = new System.Drawing.Size(92, 55);
             this.btnSprayPSI.TabIndex = 554;
@@ -2543,7 +2543,7 @@ namespace Twol
             this.tlpNozzle.SetColumnSpan(this.lblPressure, 2);
             this.lblPressure.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPressure.ForeColor = System.Drawing.Color.White;
-            this.lblPressure.Location = new System.Drawing.Point(49, 108);
+            this.lblPressure.Location = new System.Drawing.Point(49, 93);
             this.lblPressure.Name = "lblPressure";
             this.lblPressure.Size = new System.Drawing.Size(126, 19);
             this.lblPressure.TabIndex = 553;
@@ -2565,7 +2565,7 @@ namespace Twol
             this.btnSprayVolumeTotal.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSprayVolumeTotal.ForeColor = System.Drawing.Color.Aqua;
             this.btnSprayVolumeTotal.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSprayVolumeTotal.Location = new System.Drawing.Point(16, 167);
+            this.btnSprayVolumeTotal.Location = new System.Drawing.Point(16, 137);
             this.btnSprayVolumeTotal.Margin = new System.Windows.Forms.Padding(0);
             this.btnSprayVolumeTotal.Name = "btnSprayVolumeTotal";
             this.btnSprayVolumeTotal.Size = new System.Drawing.Size(193, 51);
@@ -2582,7 +2582,7 @@ namespace Twol
             this.tlpNozzle.SetColumnSpan(this.lbl_Volume, 2);
             this.lbl_Volume.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_Volume.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(240)))), ((int)(((byte)(255)))));
-            this.lbl_Volume.Location = new System.Drawing.Point(49, 218);
+            this.lbl_Volume.Location = new System.Drawing.Point(49, 188);
             this.lbl_Volume.Name = "lbl_Volume";
             this.lbl_Volume.Size = new System.Drawing.Size(126, 24);
             this.lbl_Volume.TabIndex = 551;
@@ -2604,7 +2604,7 @@ namespace Twol
             this.btnSprayGalPerAcre.Font = new System.Drawing.Font("Tahoma", 32F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSprayGalPerAcre.ForeColor = System.Drawing.Color.White;
             this.btnSprayGalPerAcre.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSprayGalPerAcre.Location = new System.Drawing.Point(16, 274);
+            this.btnSprayGalPerAcre.Location = new System.Drawing.Point(16, 229);
             this.btnSprayGalPerAcre.Margin = new System.Windows.Forms.Padding(0);
             this.btnSprayGalPerAcre.Name = "btnSprayGalPerAcre";
             this.btnSprayGalPerAcre.Size = new System.Drawing.Size(193, 54);
@@ -2627,7 +2627,7 @@ namespace Twol
             this.cboxSprayAutoManual.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboxSprayAutoManual.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxSprayAutoManual.ForeColor = System.Drawing.Color.White;
-            this.cboxSprayAutoManual.Location = new System.Drawing.Point(49, 608);
+            this.cboxSprayAutoManual.Location = new System.Drawing.Point(49, 528);
             this.cboxSprayAutoManual.Name = "cboxSprayAutoManual";
             this.cboxSprayAutoManual.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.cboxSprayAutoManual.Size = new System.Drawing.Size(126, 55);
@@ -2651,7 +2651,7 @@ namespace Twol
             this.cboxRate1Rate2Select.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboxRate1Rate2Select.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxRate1Rate2Select.ForeColor = System.Drawing.Color.White;
-            this.cboxRate1Rate2Select.Location = new System.Drawing.Point(16, 406);
+            this.cboxRate1Rate2Select.Location = new System.Drawing.Point(16, 350);
             this.cboxRate1Rate2Select.Margin = new System.Windows.Forms.Padding(0);
             this.cboxRate1Rate2Select.Name = "cboxRate1Rate2Select";
             this.cboxRate1Rate2Select.Size = new System.Drawing.Size(193, 49);
@@ -2675,7 +2675,7 @@ namespace Twol
             this.btnSprayRateUp.ForeColor = System.Drawing.Color.Black;
             this.btnSprayRateUp.Image = global::Twol.Properties.Resources.UpArrow64;
             this.btnSprayRateUp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSprayRateUp.Location = new System.Drawing.Point(130, 492);
+            this.btnSprayRateUp.Location = new System.Drawing.Point(130, 427);
             this.btnSprayRateUp.Margin = new System.Windows.Forms.Padding(0);
             this.btnSprayRateUp.Name = "btnSprayRateUp";
             this.btnSprayRateUp.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -2699,7 +2699,7 @@ namespace Twol
             this.btnSprayRateDn.ForeColor = System.Drawing.Color.Black;
             this.btnSprayRateDn.Image = global::Twol.Properties.Resources.DnArrow64;
             this.btnSprayRateDn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSprayRateDn.Location = new System.Drawing.Point(33, 492);
+            this.btnSprayRateDn.Location = new System.Drawing.Point(33, 427);
             this.btnSprayRateDn.Margin = new System.Windows.Forms.Padding(0);
             this.btnSprayRateDn.Name = "btnSprayRateDn";
             this.btnSprayRateDn.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -2724,7 +2724,7 @@ namespace Twol
             this.btnNozConfig.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNozConfig.ForeColor = System.Drawing.Color.Aqua;
             this.btnNozConfig.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnNozConfig.Location = new System.Drawing.Point(70, 704);
+            this.btnNozConfig.Location = new System.Drawing.Point(70, 611);
             this.btnNozConfig.Name = "btnNozConfig";
             this.btnNozConfig.Size = new System.Drawing.Size(84, 48);
             this.btnNozConfig.TabIndex = 553;
@@ -2738,10 +2738,10 @@ namespace Twol
             this.lblIsFlowing.BackColor = System.Drawing.Color.Orange;
             this.lblIsFlowing.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblIsFlowing.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblIsFlowing.Location = new System.Drawing.Point(3, 150);
+            this.lblIsFlowing.Location = new System.Drawing.Point(3, 129);
             this.lblIsFlowing.Name = "lblIsFlowing";
             this.tlpNozzle.SetRowSpan(this.lblIsFlowing, 5);
-            this.lblIsFlowing.Size = new System.Drawing.Size(10, 305);
+            this.lblIsFlowing.Size = new System.Drawing.Size(10, 270);
             this.lblIsFlowing.TabIndex = 617;
             this.lblIsFlowing.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -2751,7 +2751,7 @@ namespace Twol
             this.lblGPM_Set.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblGPM_Set.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblGPM_Set.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(220)))), ((int)(((byte)(70)))));
-            this.lblGPM_Set.Location = new System.Drawing.Point(16, 328);
+            this.lblGPM_Set.Location = new System.Drawing.Point(16, 283);
             this.lblGPM_Set.Margin = new System.Windows.Forms.Padding(0);
             this.lblGPM_Set.Name = "lblGPM_Set";
             this.lblGPM_Set.Size = new System.Drawing.Size(97, 47);
@@ -2773,7 +2773,7 @@ namespace Twol
             this.btnSprayGalPerMinActual.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSprayGalPerMinActual.ForeColor = System.Drawing.Color.Yellow;
             this.btnSprayGalPerMinActual.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSprayGalPerMinActual.Location = new System.Drawing.Point(113, 328);
+            this.btnSprayGalPerMinActual.Location = new System.Drawing.Point(113, 283);
             this.btnSprayGalPerMinActual.Margin = new System.Windows.Forms.Padding(0);
             this.btnSprayGalPerMinActual.Name = "btnSprayGalPerMinActual";
             this.btnSprayGalPerMinActual.Size = new System.Drawing.Size(96, 47);
@@ -2790,7 +2790,7 @@ namespace Twol
             this.lblPWM_Nozz.Location = new System.Drawing.Point(16, 0);
             this.lblPWM_Nozz.Margin = new System.Windows.Forms.Padding(0);
             this.lblPWM_Nozz.Name = "lblPWM_Nozz";
-            this.lblPWM_Nozz.Size = new System.Drawing.Size(97, 37);
+            this.lblPWM_Nozz.Size = new System.Drawing.Size(97, 32);
             this.lblPWM_Nozz.TabIndex = 618;
             this.lblPWM_Nozz.Text = "PWM";
             this.lblPWM_Nozz.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2804,7 +2804,7 @@ namespace Twol
             this.lblFlowHz_Nozz.Location = new System.Drawing.Point(113, 0);
             this.lblFlowHz_Nozz.Margin = new System.Windows.Forms.Padding(0);
             this.lblFlowHz_Nozz.Name = "lblFlowHz_Nozz";
-            this.lblFlowHz_Nozz.Size = new System.Drawing.Size(96, 37);
+            this.lblFlowHz_Nozz.Size = new System.Drawing.Size(96, 32);
             this.lblFlowHz_Nozz.TabIndex = 619;
             this.lblFlowHz_Nozz.Text = "Hz";
             this.lblFlowHz_Nozz.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3285,7 +3285,7 @@ namespace Twol
             this.flowLayoutPanelTop.Controls.Add(this.btnRTCM_Top);
             this.flowLayoutPanelTop.Controls.Add(this.btnFieldStats);
             this.flowLayoutPanelTop.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanelTop.Location = new System.Drawing.Point(1060, 3);
+            this.flowLayoutPanelTop.Location = new System.Drawing.Point(523, 3);
             this.flowLayoutPanelTop.Name = "flowLayoutPanelTop";
             this.flowLayoutPanelTop.Size = new System.Drawing.Size(706, 46);
             this.flowLayoutPanelTop.TabIndex = 548;
@@ -3347,7 +3347,7 @@ namespace Twol
             this.tlpRateControl.Controls.Add(this.lblrcTankApp_3, 4, 13);
             this.tlpRateControl.Controls.Add(this.lblrcArea_3, 4, 12);
             this.tlpRateControl.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tlpRateControl.Location = new System.Drawing.Point(961, 50);
+            this.tlpRateControl.Location = new System.Drawing.Point(828, 50);
             this.tlpRateControl.Name = "tlpRateControl";
             this.tlpRateControl.RowCount = 16;
             this.tlpRateControl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
@@ -3366,7 +3366,7 @@ namespace Twol
             this.tlpRateControl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
             this.tlpRateControl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
             this.tlpRateControl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
-            this.tlpRateControl.Size = new System.Drawing.Size(321, 776);
+            this.tlpRateControl.Size = new System.Drawing.Size(305, 678);
             this.tlpRateControl.TabIndex = 620;
             // 
             // lblrcSensorType_0
@@ -3376,10 +3376,10 @@ namespace Twol
             this.lblrcSensorType_0.BackColor = System.Drawing.Color.Transparent;
             this.lblrcSensorType_0.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblrcSensorType_0.ForeColor = System.Drawing.Color.White;
-            this.lblrcSensorType_0.Location = new System.Drawing.Point(0, 336);
+            this.lblrcSensorType_0.Location = new System.Drawing.Point(0, 294);
             this.lblrcSensorType_0.Margin = new System.Windows.Forms.Padding(0);
             this.lblrcSensorType_0.Name = "lblrcSensorType_0";
-            this.lblrcSensorType_0.Size = new System.Drawing.Size(4, 48);
+            this.lblrcSensorType_0.Size = new System.Drawing.Size(4, 42);
             this.lblrcSensorType_0.TabIndex = 682;
             this.lblrcSensorType_0.Text = "Sensor";
             this.lblrcSensorType_0.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3391,7 +3391,7 @@ namespace Twol
             this.tlpRateControl.SetColumnSpan(this.lblrcArea_2, 2);
             this.lblrcArea_2.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblrcArea_2.ForeColor = System.Drawing.Color.White;
-            this.lblrcArea_2.Location = new System.Drawing.Point(181, 198);
+            this.lblrcArea_2.Location = new System.Drawing.Point(181, 171);
             this.lblrcArea_2.Margin = new System.Windows.Forms.Padding(0);
             this.lblrcArea_2.Name = "lblrcArea_2";
             this.lblrcArea_2.Size = new System.Drawing.Size(118, 35);
@@ -3406,7 +3406,7 @@ namespace Twol
             this.tlpRateControl.SetColumnSpan(this.lblrcRateActual_2, 2);
             this.lblrcRateActual_2.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblrcRateActual_2.ForeColor = System.Drawing.Color.White;
-            this.lblrcRateActual_2.Location = new System.Drawing.Point(181, 102);
+            this.lblrcRateActual_2.Location = new System.Drawing.Point(181, 87);
             this.lblrcRateActual_2.Margin = new System.Windows.Forms.Padding(0);
             this.lblrcRateActual_2.Name = "lblrcRateActual_2";
             this.lblrcRateActual_2.Size = new System.Drawing.Size(118, 35);
@@ -3421,7 +3421,7 @@ namespace Twol
             this.tlpRateControl.SetColumnSpan(this.lblrcUPM_2, 2);
             this.lblrcUPM_2.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblrcUPM_2.ForeColor = System.Drawing.Color.White;
-            this.lblrcUPM_2.Location = new System.Drawing.Point(181, 54);
+            this.lblrcUPM_2.Location = new System.Drawing.Point(181, 45);
             this.lblrcUPM_2.Margin = new System.Windows.Forms.Padding(0);
             this.lblrcUPM_2.Name = "lblrcUPM_2";
             this.lblrcUPM_2.Size = new System.Drawing.Size(118, 35);
@@ -3436,7 +3436,7 @@ namespace Twol
             this.tlpRateControl.SetColumnSpan(this.label7, 2);
             this.label7.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.Silver;
-            this.label7.Location = new System.Drawing.Point(181, 9);
+            this.label7.Location = new System.Drawing.Point(181, 6);
             this.label7.Margin = new System.Windows.Forms.Padding(0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(118, 30);
@@ -3451,7 +3451,7 @@ namespace Twol
             this.tlpRateControl.SetColumnSpan(this.lblrcRateSet_2, 2);
             this.lblrcRateSet_2.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblrcRateSet_2.ForeColor = System.Drawing.Color.Cyan;
-            this.lblrcRateSet_2.Location = new System.Drawing.Point(181, 150);
+            this.lblrcRateSet_2.Location = new System.Drawing.Point(181, 129);
             this.lblrcRateSet_2.Margin = new System.Windows.Forms.Padding(0);
             this.lblrcRateSet_2.Name = "lblrcRateSet_2";
             this.lblrcRateSet_2.Size = new System.Drawing.Size(118, 35);
@@ -3466,7 +3466,7 @@ namespace Twol
             this.tlpRateControl.SetColumnSpan(this.label17, 2);
             this.label17.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label17.ForeColor = System.Drawing.Color.Silver;
-            this.label17.Location = new System.Drawing.Point(177, 393);
+            this.label17.Location = new System.Drawing.Point(177, 342);
             this.label17.Margin = new System.Windows.Forms.Padding(0);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(126, 30);
@@ -3481,7 +3481,7 @@ namespace Twol
             this.tlpRateControl.SetColumnSpan(this.lblrcProduct_1, 2);
             this.lblrcProduct_1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblrcProduct_1.ForeColor = System.Drawing.Color.Silver;
-            this.lblrcProduct_1.Location = new System.Drawing.Point(9, 393);
+            this.lblrcProduct_1.Location = new System.Drawing.Point(9, 342);
             this.lblrcProduct_1.Margin = new System.Windows.Forms.Padding(0);
             this.lblrcProduct_1.Name = "lblrcProduct_1";
             this.lblrcProduct_1.Size = new System.Drawing.Size(120, 30);
@@ -3496,7 +3496,7 @@ namespace Twol
             this.tlpRateControl.SetColumnSpan(this.lblrcSensor_0, 2);
             this.lblrcSensor_0.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblrcSensor_0.ForeColor = System.Drawing.Color.White;
-            this.lblrcSensor_0.Location = new System.Drawing.Point(9, 342);
+            this.lblrcSensor_0.Location = new System.Drawing.Point(9, 297);
             this.lblrcSensor_0.Margin = new System.Windows.Forms.Padding(0);
             this.lblrcSensor_0.Name = "lblrcSensor_0";
             this.lblrcSensor_0.Size = new System.Drawing.Size(120, 35);
@@ -3510,7 +3510,7 @@ namespace Twol
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(0, 294);
+            this.label4.Location = new System.Drawing.Point(0, 255);
             this.label4.Margin = new System.Windows.Forms.Padding(0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(4, 35);
@@ -3525,7 +3525,7 @@ namespace Twol
             this.tlpRateControl.SetColumnSpan(this.lblrcTankRem_0, 2);
             this.lblrcTankRem_0.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblrcTankRem_0.ForeColor = System.Drawing.Color.White;
-            this.lblrcTankRem_0.Location = new System.Drawing.Point(27, 294);
+            this.lblrcTankRem_0.Location = new System.Drawing.Point(27, 255);
             this.lblrcTankRem_0.Margin = new System.Windows.Forms.Padding(0);
             this.lblrcTankRem_0.Name = "lblrcTankRem_0";
             this.lblrcTankRem_0.Size = new System.Drawing.Size(84, 35);
@@ -3539,7 +3539,7 @@ namespace Twol
             this.label11.BackColor = System.Drawing.Color.Transparent;
             this.label11.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.Color.White;
-            this.label11.Location = new System.Drawing.Point(0, 246);
+            this.label11.Location = new System.Drawing.Point(0, 213);
             this.label11.Margin = new System.Windows.Forms.Padding(0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(4, 35);
@@ -3554,7 +3554,7 @@ namespace Twol
             this.tlpRateControl.SetColumnSpan(this.lblrcTankApp_0, 2);
             this.lblrcTankApp_0.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblrcTankApp_0.ForeColor = System.Drawing.Color.White;
-            this.lblrcTankApp_0.Location = new System.Drawing.Point(9, 246);
+            this.lblrcTankApp_0.Location = new System.Drawing.Point(9, 213);
             this.lblrcTankApp_0.Margin = new System.Windows.Forms.Padding(0);
             this.lblrcTankApp_0.Name = "lblrcTankApp_0";
             this.lblrcTankApp_0.Size = new System.Drawing.Size(120, 35);
@@ -3569,7 +3569,7 @@ namespace Twol
             this.tlpRateControl.SetColumnSpan(this.lblrcArea_0, 2);
             this.lblrcArea_0.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblrcArea_0.ForeColor = System.Drawing.Color.White;
-            this.lblrcArea_0.Location = new System.Drawing.Point(9, 198);
+            this.lblrcArea_0.Location = new System.Drawing.Point(9, 171);
             this.lblrcArea_0.Margin = new System.Windows.Forms.Padding(0);
             this.lblrcArea_0.Name = "lblrcArea_0";
             this.lblrcArea_0.Size = new System.Drawing.Size(120, 35);
@@ -3583,7 +3583,7 @@ namespace Twol
             this.label13.BackColor = System.Drawing.Color.Transparent;
             this.label13.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.ForeColor = System.Drawing.Color.White;
-            this.label13.Location = new System.Drawing.Point(0, 198);
+            this.label13.Location = new System.Drawing.Point(0, 171);
             this.label13.Margin = new System.Windows.Forms.Padding(0);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(4, 35);
@@ -3598,7 +3598,7 @@ namespace Twol
             this.tlpRateControl.SetColumnSpan(this.lblrcSensor_1, 2);
             this.lblrcSensor_1.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblrcSensor_1.ForeColor = System.Drawing.Color.White;
-            this.lblrcSensor_1.Location = new System.Drawing.Point(9, 730);
+            this.lblrcSensor_1.Location = new System.Drawing.Point(9, 636);
             this.lblrcSensor_1.Margin = new System.Windows.Forms.Padding(0);
             this.lblrcSensor_1.Name = "lblrcSensor_1";
             this.lblrcSensor_1.Size = new System.Drawing.Size(120, 35);
@@ -3612,7 +3612,7 @@ namespace Twol
             this.lblrcSensorType_1.BackColor = System.Drawing.Color.Transparent;
             this.lblrcSensorType_1.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblrcSensorType_1.ForeColor = System.Drawing.Color.White;
-            this.lblrcSensorType_1.Location = new System.Drawing.Point(0, 730);
+            this.lblrcSensorType_1.Location = new System.Drawing.Point(0, 636);
             this.lblrcSensorType_1.Margin = new System.Windows.Forms.Padding(0);
             this.lblrcSensorType_1.Name = "lblrcSensorType_1";
             this.lblrcSensorType_1.Size = new System.Drawing.Size(4, 35);
@@ -3627,7 +3627,7 @@ namespace Twol
             this.tlpRateControl.SetColumnSpan(this.lblrcRateActual_0, 2);
             this.lblrcRateActual_0.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblrcRateActual_0.ForeColor = System.Drawing.Color.White;
-            this.lblrcRateActual_0.Location = new System.Drawing.Point(9, 102);
+            this.lblrcRateActual_0.Location = new System.Drawing.Point(9, 87);
             this.lblrcRateActual_0.Margin = new System.Windows.Forms.Padding(0);
             this.lblrcRateActual_0.Name = "lblrcRateActual_0";
             this.lblrcRateActual_0.Size = new System.Drawing.Size(120, 35);
@@ -3641,7 +3641,7 @@ namespace Twol
             this.label23.BackColor = System.Drawing.Color.Transparent;
             this.label23.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label23.ForeColor = System.Drawing.Color.White;
-            this.label23.Location = new System.Drawing.Point(0, 534);
+            this.label23.Location = new System.Drawing.Point(0, 465);
             this.label23.Margin = new System.Windows.Forms.Padding(0);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(4, 35);
@@ -3656,7 +3656,7 @@ namespace Twol
             this.tlpRateControl.SetColumnSpan(this.lblrcRateActual_1, 2);
             this.lblrcRateActual_1.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblrcRateActual_1.ForeColor = System.Drawing.Color.White;
-            this.lblrcRateActual_1.Location = new System.Drawing.Point(9, 486);
+            this.lblrcRateActual_1.Location = new System.Drawing.Point(9, 423);
             this.lblrcRateActual_1.Margin = new System.Windows.Forms.Padding(0);
             this.lblrcRateActual_1.Name = "lblrcRateActual_1";
             this.lblrcRateActual_1.Size = new System.Drawing.Size(120, 35);
@@ -3671,7 +3671,7 @@ namespace Twol
             this.tlpRateControl.SetColumnSpan(this.lblrcUPM_1, 2);
             this.lblrcUPM_1.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblrcUPM_1.ForeColor = System.Drawing.Color.White;
-            this.lblrcUPM_1.Location = new System.Drawing.Point(10, 438);
+            this.lblrcUPM_1.Location = new System.Drawing.Point(10, 381);
             this.lblrcUPM_1.Margin = new System.Windows.Forms.Padding(0);
             this.lblrcUPM_1.Name = "lblrcUPM_1";
             this.lblrcUPM_1.Size = new System.Drawing.Size(117, 35);
@@ -3686,7 +3686,7 @@ namespace Twol
             this.tlpRateControl.SetColumnSpan(this.lblrcUPM_0, 2);
             this.lblrcUPM_0.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblrcUPM_0.ForeColor = System.Drawing.Color.White;
-            this.lblrcUPM_0.Location = new System.Drawing.Point(9, 54);
+            this.lblrcUPM_0.Location = new System.Drawing.Point(9, 45);
             this.lblrcUPM_0.Margin = new System.Windows.Forms.Padding(0);
             this.lblrcUPM_0.Name = "lblrcUPM_0";
             this.lblrcUPM_0.Size = new System.Drawing.Size(120, 35);
@@ -3700,7 +3700,7 @@ namespace Twol
             this.label25.BackColor = System.Drawing.Color.Transparent;
             this.label25.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label25.ForeColor = System.Drawing.Color.White;
-            this.label25.Location = new System.Drawing.Point(0, 150);
+            this.label25.Location = new System.Drawing.Point(0, 129);
             this.label25.Margin = new System.Windows.Forms.Padding(0);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(4, 35);
@@ -3715,7 +3715,7 @@ namespace Twol
             this.tlpRateControl.SetColumnSpan(this.lblrcRateSet_0, 2);
             this.lblrcRateSet_0.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblrcRateSet_0.ForeColor = System.Drawing.Color.Cyan;
-            this.lblrcRateSet_0.Location = new System.Drawing.Point(9, 150);
+            this.lblrcRateSet_0.Location = new System.Drawing.Point(9, 129);
             this.lblrcRateSet_0.Margin = new System.Windows.Forms.Padding(0);
             this.lblrcRateSet_0.Name = "lblrcRateSet_0";
             this.lblrcRateSet_0.Size = new System.Drawing.Size(120, 35);
@@ -3730,7 +3730,7 @@ namespace Twol
             this.tlpRateControl.SetColumnSpan(this.lblrcRateSet_1, 2);
             this.lblrcRateSet_1.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblrcRateSet_1.ForeColor = System.Drawing.Color.Cyan;
-            this.lblrcRateSet_1.Location = new System.Drawing.Point(9, 534);
+            this.lblrcRateSet_1.Location = new System.Drawing.Point(9, 465);
             this.lblrcRateSet_1.Margin = new System.Windows.Forms.Padding(0);
             this.lblrcRateSet_1.Name = "lblrcRateSet_1";
             this.lblrcRateSet_1.Size = new System.Drawing.Size(120, 35);
@@ -3745,7 +3745,7 @@ namespace Twol
             this.tlpRateControl.SetColumnSpan(this.lblrcSensor_3, 2);
             this.lblrcSensor_3.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblrcSensor_3.ForeColor = System.Drawing.Color.White;
-            this.lblrcSensor_3.Location = new System.Drawing.Point(180, 730);
+            this.lblrcSensor_3.Location = new System.Drawing.Point(180, 636);
             this.lblrcSensor_3.Margin = new System.Windows.Forms.Padding(0);
             this.lblrcSensor_3.Name = "lblrcSensor_3";
             this.lblrcSensor_3.Size = new System.Drawing.Size(120, 35);
@@ -3760,7 +3760,7 @@ namespace Twol
             this.tlpRateControl.SetColumnSpan(this.lblrcTankApp_2, 2);
             this.lblrcTankApp_2.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblrcTankApp_2.ForeColor = System.Drawing.Color.White;
-            this.lblrcTankApp_2.Location = new System.Drawing.Point(180, 246);
+            this.lblrcTankApp_2.Location = new System.Drawing.Point(180, 213);
             this.lblrcTankApp_2.Margin = new System.Windows.Forms.Padding(0);
             this.lblrcTankApp_2.Name = "lblrcTankApp_2";
             this.lblrcTankApp_2.Size = new System.Drawing.Size(120, 35);
@@ -3775,7 +3775,7 @@ namespace Twol
             this.tlpRateControl.SetColumnSpan(this.lblrcTankRem_2, 2);
             this.lblrcTankRem_2.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblrcTankRem_2.ForeColor = System.Drawing.Color.White;
-            this.lblrcTankRem_2.Location = new System.Drawing.Point(198, 294);
+            this.lblrcTankRem_2.Location = new System.Drawing.Point(198, 255);
             this.lblrcTankRem_2.Margin = new System.Windows.Forms.Padding(0);
             this.lblrcTankRem_2.Name = "lblrcTankRem_2";
             this.lblrcTankRem_2.Size = new System.Drawing.Size(84, 35);
@@ -3790,7 +3790,7 @@ namespace Twol
             this.tlpRateControl.SetColumnSpan(this.lblrcSensor_2, 2);
             this.lblrcSensor_2.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblrcSensor_2.ForeColor = System.Drawing.Color.White;
-            this.lblrcSensor_2.Location = new System.Drawing.Point(180, 342);
+            this.lblrcSensor_2.Location = new System.Drawing.Point(180, 297);
             this.lblrcSensor_2.Margin = new System.Windows.Forms.Padding(0);
             this.lblrcSensor_2.Name = "lblrcSensor_2";
             this.lblrcSensor_2.Size = new System.Drawing.Size(120, 35);
@@ -3805,7 +3805,7 @@ namespace Twol
             this.tlpRateControl.SetColumnSpan(this.lblrcRateSet_3, 2);
             this.lblrcRateSet_3.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblrcRateSet_3.ForeColor = System.Drawing.Color.Cyan;
-            this.lblrcRateSet_3.Location = new System.Drawing.Point(180, 534);
+            this.lblrcRateSet_3.Location = new System.Drawing.Point(180, 465);
             this.lblrcRateSet_3.Margin = new System.Windows.Forms.Padding(0);
             this.lblrcRateSet_3.Name = "lblrcRateSet_3";
             this.lblrcRateSet_3.Size = new System.Drawing.Size(120, 35);
@@ -3820,7 +3820,7 @@ namespace Twol
             this.tlpRateControl.SetColumnSpan(this.lblrcRateActual_3, 2);
             this.lblrcRateActual_3.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblrcRateActual_3.ForeColor = System.Drawing.Color.White;
-            this.lblrcRateActual_3.Location = new System.Drawing.Point(180, 486);
+            this.lblrcRateActual_3.Location = new System.Drawing.Point(180, 423);
             this.lblrcRateActual_3.Margin = new System.Windows.Forms.Padding(0);
             this.lblrcRateActual_3.Name = "lblrcRateActual_3";
             this.lblrcRateActual_3.Size = new System.Drawing.Size(120, 35);
@@ -3835,7 +3835,7 @@ namespace Twol
             this.tlpRateControl.SetColumnSpan(this.lblrcUPM_3, 2);
             this.lblrcUPM_3.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblrcUPM_3.ForeColor = System.Drawing.Color.White;
-            this.lblrcUPM_3.Location = new System.Drawing.Point(195, 438);
+            this.lblrcUPM_3.Location = new System.Drawing.Point(195, 381);
             this.lblrcUPM_3.Margin = new System.Windows.Forms.Padding(0);
             this.lblrcUPM_3.Name = "lblrcUPM_3";
             this.lblrcUPM_3.Size = new System.Drawing.Size(90, 35);
@@ -3850,7 +3850,7 @@ namespace Twol
             this.tlpRateControl.SetColumnSpan(this.lblrcProduct_0, 2);
             this.lblrcProduct_0.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblrcProduct_0.ForeColor = System.Drawing.Color.Silver;
-            this.lblrcProduct_0.Location = new System.Drawing.Point(9, 9);
+            this.lblrcProduct_0.Location = new System.Drawing.Point(9, 6);
             this.lblrcProduct_0.Margin = new System.Windows.Forms.Padding(0);
             this.lblrcProduct_0.Name = "lblrcProduct_0";
             this.lblrcProduct_0.Size = new System.Drawing.Size(120, 30);
@@ -3864,7 +3864,7 @@ namespace Twol
             this.label30.BackColor = System.Drawing.Color.Transparent;
             this.label30.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label30.ForeColor = System.Drawing.Color.White;
-            this.label30.Location = new System.Drawing.Point(0, 486);
+            this.label30.Location = new System.Drawing.Point(0, 423);
             this.label30.Margin = new System.Windows.Forms.Padding(0);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(4, 35);
@@ -3878,7 +3878,7 @@ namespace Twol
             this.label31.BackColor = System.Drawing.Color.Transparent;
             this.label31.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label31.ForeColor = System.Drawing.Color.White;
-            this.label31.Location = new System.Drawing.Point(0, 102);
+            this.label31.Location = new System.Drawing.Point(0, 87);
             this.label31.Margin = new System.Windows.Forms.Padding(0);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(4, 35);
@@ -3893,7 +3893,7 @@ namespace Twol
             this.tlpRateControl.SetColumnSpan(this.lblrcTankApp_1, 2);
             this.lblrcTankApp_1.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblrcTankApp_1.ForeColor = System.Drawing.Color.White;
-            this.lblrcTankApp_1.Location = new System.Drawing.Point(9, 630);
+            this.lblrcTankApp_1.Location = new System.Drawing.Point(9, 549);
             this.lblrcTankApp_1.Margin = new System.Windows.Forms.Padding(0);
             this.lblrcTankApp_1.Name = "lblrcTankApp_1";
             this.lblrcTankApp_1.Size = new System.Drawing.Size(120, 35);
@@ -3908,7 +3908,7 @@ namespace Twol
             this.tlpRateControl.SetColumnSpan(this.lblrcTankRem_1, 2);
             this.lblrcTankRem_1.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblrcTankRem_1.ForeColor = System.Drawing.Color.White;
-            this.lblrcTankRem_1.Location = new System.Drawing.Point(9, 678);
+            this.lblrcTankRem_1.Location = new System.Drawing.Point(9, 591);
             this.lblrcTankRem_1.Margin = new System.Windows.Forms.Padding(0);
             this.lblrcTankRem_1.Name = "lblrcTankRem_1";
             this.lblrcTankRem_1.Size = new System.Drawing.Size(120, 35);
@@ -3923,7 +3923,7 @@ namespace Twol
             this.tlpRateControl.SetColumnSpan(this.lblrcArea_1, 2);
             this.lblrcArea_1.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblrcArea_1.ForeColor = System.Drawing.Color.White;
-            this.lblrcArea_1.Location = new System.Drawing.Point(9, 582);
+            this.lblrcArea_1.Location = new System.Drawing.Point(9, 507);
             this.lblrcArea_1.Margin = new System.Windows.Forms.Padding(0);
             this.lblrcArea_1.Name = "lblrcArea_1";
             this.lblrcArea_1.Size = new System.Drawing.Size(120, 35);
@@ -3937,7 +3937,7 @@ namespace Twol
             this.label14.BackColor = System.Drawing.Color.Transparent;
             this.label14.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label14.ForeColor = System.Drawing.Color.White;
-            this.label14.Location = new System.Drawing.Point(0, 678);
+            this.label14.Location = new System.Drawing.Point(0, 591);
             this.label14.Margin = new System.Windows.Forms.Padding(0);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(4, 35);
@@ -3951,7 +3951,7 @@ namespace Twol
             this.label18.BackColor = System.Drawing.Color.Transparent;
             this.label18.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label18.ForeColor = System.Drawing.Color.White;
-            this.label18.Location = new System.Drawing.Point(0, 630);
+            this.label18.Location = new System.Drawing.Point(0, 549);
             this.label18.Margin = new System.Windows.Forms.Padding(0);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(4, 35);
@@ -3965,7 +3965,7 @@ namespace Twol
             this.label15.BackColor = System.Drawing.Color.Transparent;
             this.label15.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.ForeColor = System.Drawing.Color.White;
-            this.label15.Location = new System.Drawing.Point(0, 582);
+            this.label15.Location = new System.Drawing.Point(0, 507);
             this.label15.Margin = new System.Windows.Forms.Padding(0);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(4, 35);
@@ -3980,7 +3980,7 @@ namespace Twol
             this.tlpRateControl.SetColumnSpan(this.lblrcTankRem_3, 2);
             this.lblrcTankRem_3.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblrcTankRem_3.ForeColor = System.Drawing.Color.White;
-            this.lblrcTankRem_3.Location = new System.Drawing.Point(180, 678);
+            this.lblrcTankRem_3.Location = new System.Drawing.Point(180, 591);
             this.lblrcTankRem_3.Margin = new System.Windows.Forms.Padding(0);
             this.lblrcTankRem_3.Name = "lblrcTankRem_3";
             this.lblrcTankRem_3.Size = new System.Drawing.Size(120, 35);
@@ -3995,7 +3995,7 @@ namespace Twol
             this.tlpRateControl.SetColumnSpan(this.lblrcTankApp_3, 2);
             this.lblrcTankApp_3.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblrcTankApp_3.ForeColor = System.Drawing.Color.White;
-            this.lblrcTankApp_3.Location = new System.Drawing.Point(180, 630);
+            this.lblrcTankApp_3.Location = new System.Drawing.Point(180, 549);
             this.lblrcTankApp_3.Margin = new System.Windows.Forms.Padding(0);
             this.lblrcTankApp_3.Name = "lblrcTankApp_3";
             this.lblrcTankApp_3.Size = new System.Drawing.Size(120, 35);
@@ -4010,7 +4010,7 @@ namespace Twol
             this.tlpRateControl.SetColumnSpan(this.lblrcArea_3, 2);
             this.lblrcArea_3.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblrcArea_3.ForeColor = System.Drawing.Color.White;
-            this.lblrcArea_3.Location = new System.Drawing.Point(180, 582);
+            this.lblrcArea_3.Location = new System.Drawing.Point(180, 507);
             this.lblrcArea_3.Margin = new System.Windows.Forms.Padding(0);
             this.lblrcArea_3.Name = "lblrcArea_3";
             this.lblrcArea_3.Size = new System.Drawing.Size(120, 35);
@@ -4043,7 +4043,7 @@ namespace Twol
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(1774, 898);
+            this.ClientSize = new System.Drawing.Size(1237, 798);
             this.Controls.Add(this.flowLayoutPanelTop);
             this.Controls.Add(this.flp1);
             this.Controls.Add(this.panelNavigation);
