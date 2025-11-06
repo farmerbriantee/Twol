@@ -1,6 +1,4 @@
-﻿using OpenTK.Graphics.OpenGL;
-
-namespace Twol
+﻿namespace Twol
 {
     public class CRateControlData
     {
@@ -64,7 +62,7 @@ namespace Twol
             isFanPressure2 = 0; //0 neither - Fan=1 Pressure=2
             isFanPressure3 = 0; //0 neither - Fan=1 Pressure=2
 
-            isActive = new bool[4] { false, false, false, false };
+            isActive = new bool[4] { true, false, false, false };
         }
     }
 }

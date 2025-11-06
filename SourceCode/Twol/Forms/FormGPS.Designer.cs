@@ -225,9 +225,9 @@ namespace Twol
             this.lblrcArea_2 = new System.Windows.Forms.Label();
             this.lblrcRateActual_2 = new System.Windows.Forms.Label();
             this.lblrcUPM_2 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.lblrcProduct_2 = new System.Windows.Forms.Label();
             this.lblrcRateSet_2 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
+            this.lblrcProduct_3 = new System.Windows.Forms.Label();
             this.lblrcProduct_1 = new System.Windows.Forms.Label();
             this.lblrcSensor_0 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -632,7 +632,7 @@ namespace Twol
             this.toolStripMenuFlagForm.Image = global::Twol.Properties.Resources.FileEditName;
             this.toolStripMenuFlagForm.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripMenuFlagForm.Name = "toolStripMenuFlagForm";
-            this.toolStripMenuFlagForm.Size = new System.Drawing.Size(259, 70);
+            this.toolStripMenuFlagForm.Size = new System.Drawing.Size(267, 70);
             this.toolStripMenuFlagForm.Text = "toolStripMenuItem3";
             this.toolStripMenuFlagForm.Click += new System.EventHandler(this.toolStripMenuFlagForm_Click);
             // 
@@ -3294,7 +3294,7 @@ namespace Twol
             // 
             this.tlpRateControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.tlpRateControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(50)))));
+            this.tlpRateControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(60)))));
             this.tlpRateControl.ColumnCount = 6;
             this.tlpRateControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 4F));
             this.tlpRateControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 65F));
@@ -3306,9 +3306,9 @@ namespace Twol
             this.tlpRateControl.Controls.Add(this.lblrcArea_2, 4, 4);
             this.tlpRateControl.Controls.Add(this.lblrcRateActual_2, 4, 2);
             this.tlpRateControl.Controls.Add(this.lblrcUPM_2, 4, 1);
-            this.tlpRateControl.Controls.Add(this.label7, 4, 0);
+            this.tlpRateControl.Controls.Add(this.lblrcProduct_2, 4, 0);
             this.tlpRateControl.Controls.Add(this.lblrcRateSet_2, 4, 3);
-            this.tlpRateControl.Controls.Add(this.label17, 4, 8);
+            this.tlpRateControl.Controls.Add(this.lblrcProduct_3, 4, 8);
             this.tlpRateControl.Controls.Add(this.lblrcProduct_1, 1, 8);
             this.tlpRateControl.Controls.Add(this.lblrcSensor_0, 1, 7);
             this.tlpRateControl.Controls.Add(this.label4, 0, 6);
@@ -3429,20 +3429,20 @@ namespace Twol
             this.lblrcUPM_2.Text = "l/ha";
             this.lblrcUPM_2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label7
+            // lblrcProduct_2
             // 
-            this.label7.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label7.BackColor = System.Drawing.Color.Transparent;
-            this.tlpRateControl.SetColumnSpan(this.label7, 2);
-            this.label7.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.Silver;
-            this.label7.Location = new System.Drawing.Point(181, 6);
-            this.label7.Margin = new System.Windows.Forms.Padding(0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(118, 30);
-            this.label7.TabIndex = 703;
-            this.label7.Text = "Product 3";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblrcProduct_2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblrcProduct_2.BackColor = System.Drawing.Color.Transparent;
+            this.tlpRateControl.SetColumnSpan(this.lblrcProduct_2, 2);
+            this.lblrcProduct_2.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblrcProduct_2.ForeColor = System.Drawing.Color.Silver;
+            this.lblrcProduct_2.Location = new System.Drawing.Point(181, 6);
+            this.lblrcProduct_2.Margin = new System.Windows.Forms.Padding(0);
+            this.lblrcProduct_2.Name = "lblrcProduct_2";
+            this.lblrcProduct_2.Size = new System.Drawing.Size(118, 30);
+            this.lblrcProduct_2.TabIndex = 703;
+            this.lblrcProduct_2.Text = "Product 3";
+            this.lblrcProduct_2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblrcRateSet_2
             // 
@@ -3459,20 +3459,20 @@ namespace Twol
             this.lblrcRateSet_2.Text = "120.0";
             this.lblrcRateSet_2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label17
+            // lblrcProduct_3
             // 
-            this.label17.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label17.BackColor = System.Drawing.Color.Transparent;
-            this.tlpRateControl.SetColumnSpan(this.label17, 2);
-            this.label17.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.ForeColor = System.Drawing.Color.Silver;
-            this.label17.Location = new System.Drawing.Point(177, 342);
-            this.label17.Margin = new System.Windows.Forms.Padding(0);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(126, 30);
-            this.label17.TabIndex = 666;
-            this.label17.Text = "Product 4";
-            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblrcProduct_3.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblrcProduct_3.BackColor = System.Drawing.Color.Transparent;
+            this.tlpRateControl.SetColumnSpan(this.lblrcProduct_3, 2);
+            this.lblrcProduct_3.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblrcProduct_3.ForeColor = System.Drawing.Color.Silver;
+            this.lblrcProduct_3.Location = new System.Drawing.Point(177, 342);
+            this.lblrcProduct_3.Margin = new System.Windows.Forms.Padding(0);
+            this.lblrcProduct_3.Name = "lblrcProduct_3";
+            this.lblrcProduct_3.Size = new System.Drawing.Size(126, 30);
+            this.lblrcProduct_3.TabIndex = 666;
+            this.lblrcProduct_3.Text = "Product 4";
+            this.lblrcProduct_3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblrcProduct_1
             // 
@@ -4320,12 +4320,12 @@ namespace Twol
         private System.Windows.Forms.Label lblrcArea_2;
         private System.Windows.Forms.Label lblrcRateActual_2;
         private System.Windows.Forms.Label lblrcUPM_2;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lblrcProduct_2;
         private System.Windows.Forms.Label lblrcRateSet_2;
         private System.Windows.Forms.Label lblrcSensor_3;
         private System.Windows.Forms.Label lblrcRateSet_3;
         private System.Windows.Forms.Label lblrcRateActual_3;
-        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label lblrcProduct_3;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label lblrcTankRem_1;
