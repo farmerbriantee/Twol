@@ -211,7 +211,7 @@ namespace Twol
                 if (ntripCounter > 30)
                 {
                     isNTRIPToggle = !isNTRIPToggle;
-                    if (isNTRIPToggle) btnRTCM_Top.BackColor = Color.LightYellow;
+                    if (isNTRIPToggle) btnRTCM_Top.BackColor = Color.LightGray;
                     else btnRTCM_Top.BackColor = Color.PaleGreen;
                 }
                 else
@@ -1112,7 +1112,7 @@ namespace Twol
 
         private void Panel_IO_Location()
         {
-                panel_IO.Location = new Point(this.Width - panel_IO.Width - (isJobStarted?90:80), oglMain.Height / 2 - 230);            
+                panel_IO.Location = new Point(this.Width - panel_IO.Width - (isJobStarted?90:40), oglMain.Height / 2 - 230);            
         }
 
         private void ZoomByMouseWheel(object sender, MouseEventArgs e)
