@@ -1414,6 +1414,17 @@ namespace Twol
                         SetZoom();
                         return;
                     }
+
+                    if (point.Y < 420 && point.Y > 320)
+                    {
+                        camera.movePan -= 1;
+                    }
+
+                    if (point.Y < 480 && point.Y > 400)
+                    {
+                        camera.movePan += 1;
+                    }
+
                 }
 
                 //vehicle direcvtion reset

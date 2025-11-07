@@ -948,7 +948,7 @@ namespace Twol
             NoGPS, ZoomIn48, ZoomOut48,
             Pan, MenuHideShow,
             ToolWheels, Tire, TramDot,
-            YouTurnU, YouTurnH, CrossTrackBkgrnd
+            YouTurnU, YouTurnH, CrossTrackBkgrnd, PanUp, PanDn
         }
 
         public void LoadGLTextures()
@@ -974,7 +974,8 @@ namespace Twol
                 Resources.z_NoGPS, Resources.ZoomIn48, Resources.ZoomOut48,
                 Resources.Pan, Resources.MenuHideShow,
                 Resources.z_Tool, Resources.z_Tire, Resources.z_TramOnOff,
-                Resources.YouTurnU, Resources.YouTurnH, Resources.z_crossTrackBkgnd
+                Resources.YouTurnU, Resources.YouTurnH, Resources.z_crossTrackBkgnd,
+                Resources.PanUp, Resources.PanDn
             };
 
             texture = new uint[oglTextures.Length];

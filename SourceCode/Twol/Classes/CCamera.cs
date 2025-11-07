@@ -12,6 +12,7 @@ namespace Twol
         private double camYaw;
 
         public double panX = 0, panY = 0;
+        public double movePan = 0;
         public double camSetDistance = -75;
 
         public double gridZoom;
@@ -46,7 +47,9 @@ namespace Twol
 
             //pan if set
             //GL.Translate(0, camSetDistance * -0.04, 0);
+
             GL.Translate(panX, panY, 0);
+            GL.Translate(0, (movePan * camSetDistance / 25), 0);
 
             ////draw the guide
             //GL.Begin(PrimitiveType.Triangles);

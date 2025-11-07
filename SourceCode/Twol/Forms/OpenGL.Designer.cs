@@ -2370,6 +2370,26 @@ namespace Twol
             }
             GL.End();
 
+            GL.BindTexture(TextureTarget.Texture2D, texture[(int)FormGPS.textures.PanUp]);        // Select Our Texture
+            GL.Begin(PrimitiveType.TriangleStrip);             // Build Quad From A Triangle Strip
+            {
+                GL.TexCoord2(1, 0); GL.Vertex2(center + 40, 350); // 
+                GL.TexCoord2(0, 0); GL.Vertex2(center, 350); // 
+                GL.TexCoord2(1, 1); GL.Vertex2(center + 40, 390); // 
+                GL.TexCoord2(0, 1); GL.Vertex2(center, 390); //
+            }
+            GL.End();
+
+            GL.BindTexture(TextureTarget.Texture2D, texture[(int)FormGPS.textures.PanDn]);        // Select Our Texture
+            GL.Begin(PrimitiveType.TriangleStrip);             // Build Quad From A Triangle Strip
+            {
+                GL.TexCoord2(1, 0); GL.Vertex2(center + 40, 420); // 
+                GL.TexCoord2(0, 0); GL.Vertex2(center, 420); // 
+                GL.TexCoord2(1, 1); GL.Vertex2(center + 40, 460); // 
+                GL.TexCoord2(0, 1); GL.Vertex2(center, 460); //
+            }
+            GL.End();
+
             //Pan
             if (isFieldStarted)
             {
