@@ -175,11 +175,11 @@ namespace Twol
             this.btnGPSTool = new System.Windows.Forms.Button();
             this.lblHardwareMessage = new System.Windows.Forms.Label();
             this.tlpNozzle = new System.Windows.Forms.TableLayoutPanel();
+            this.label5 = new System.Windows.Forms.Label();
             this.btnSprayPSI = new System.Windows.Forms.Button();
             this.lblPressure = new System.Windows.Forms.Label();
             this.btnSprayVolumeTotal = new System.Windows.Forms.Button();
             this.lbl_Volume = new System.Windows.Forms.Label();
-            this.btnSprayGalPerAcre = new System.Windows.Forms.Button();
             this.cboxSprayAutoManual = new System.Windows.Forms.CheckBox();
             this.cboxRate1Rate2Select = new System.Windows.Forms.CheckBox();
             this.btnSprayRateUp = new System.Windows.Forms.Button();
@@ -188,6 +188,8 @@ namespace Twol
             this.lblIsFlowing = new System.Windows.Forms.Label();
             this.lblGPM_Set = new System.Windows.Forms.Label();
             this.btnSprayGalPerMinActual = new System.Windows.Forms.Button();
+            this.btnSprayGalPerAcre = new System.Windows.Forms.Button();
+            this.lblAreaPossible = new System.Windows.Forms.Label();
             this.lbl_IO_Profile = new System.Windows.Forms.Label();
             this.btnStartStopNtrip = new System.Windows.Forms.Button();
             this.lblWatch = new System.Windows.Forms.Label();
@@ -263,8 +265,6 @@ namespace Twol
             this.lblrcTankApp_3 = new System.Windows.Forms.Label();
             this.lblrcArea_3 = new System.Windows.Forms.Label();
             this.button15 = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.lblAreaPossible = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStripFlag.SuspendLayout();
             this.statusStripLeft.SuspendLayout();
@@ -2491,6 +2491,18 @@ namespace Twol
             this.tlpNozzle.TabIndex = 545;
             this.tlpNozzle.Visible = false;
             // 
+            // label5
+            // 
+            this.label5.BackColor = System.Drawing.Color.Transparent;
+            this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label5.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(240)))), ((int)(((byte)(255)))));
+            this.label5.Location = new System.Drawing.Point(102, 197);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(76, 25);
+            this.label5.TabIndex = 561;
+            this.label5.Text = "Ha";
+            // 
             // btnSprayPSI
             // 
             this.btnSprayPSI.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -2567,31 +2579,6 @@ namespace Twol
             this.lbl_Volume.TabIndex = 551;
             this.lbl_Volume.Text = "Tank Gallons";
             this.lbl_Volume.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // btnSprayGalPerAcre
-            // 
-            this.btnSprayGalPerAcre.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSprayGalPerAcre.BackColor = System.Drawing.Color.Transparent;
-            this.btnSprayGalPerAcre.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.tlpNozzle.SetColumnSpan(this.btnSprayGalPerAcre, 2);
-            this.btnSprayGalPerAcre.FlatAppearance.BorderColor = System.Drawing.Color.Olive;
-            this.btnSprayGalPerAcre.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.btnSprayGalPerAcre.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnSprayGalPerAcre.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnSprayGalPerAcre.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSprayGalPerAcre.Font = new System.Drawing.Font("Tahoma", 32F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSprayGalPerAcre.ForeColor = System.Drawing.Color.White;
-            this.btnSprayGalPerAcre.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSprayGalPerAcre.Location = new System.Drawing.Point(16, 230);
-            this.btnSprayGalPerAcre.Margin = new System.Windows.Forms.Padding(0);
-            this.btnSprayGalPerAcre.Name = "btnSprayGalPerAcre";
-            this.btnSprayGalPerAcre.Size = new System.Drawing.Size(165, 55);
-            this.btnSprayGalPerAcre.TabIndex = 546;
-            this.btnSprayGalPerAcre.Text = "999.9";
-            this.btnSprayGalPerAcre.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnSprayGalPerAcre.UseVisualStyleBackColor = false;
-            this.btnSprayGalPerAcre.Click += new System.EventHandler(this.btnSprayRate_Click);
             // 
             // cboxSprayAutoManual
             // 
@@ -2759,6 +2746,43 @@ namespace Twol
             this.btnSprayGalPerMinActual.TabIndex = 613;
             this.btnSprayGalPerMinActual.Text = "10.9";
             this.btnSprayGalPerMinActual.UseVisualStyleBackColor = false;
+            // 
+            // btnSprayGalPerAcre
+            // 
+            this.btnSprayGalPerAcre.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSprayGalPerAcre.BackColor = System.Drawing.Color.Transparent;
+            this.btnSprayGalPerAcre.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.tlpNozzle.SetColumnSpan(this.btnSprayGalPerAcre, 2);
+            this.btnSprayGalPerAcre.FlatAppearance.BorderColor = System.Drawing.Color.Olive;
+            this.btnSprayGalPerAcre.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.btnSprayGalPerAcre.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnSprayGalPerAcre.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnSprayGalPerAcre.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSprayGalPerAcre.Font = new System.Drawing.Font("Tahoma", 32F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSprayGalPerAcre.ForeColor = System.Drawing.Color.White;
+            this.btnSprayGalPerAcre.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnSprayGalPerAcre.Location = new System.Drawing.Point(16, 222);
+            this.btnSprayGalPerAcre.Margin = new System.Windows.Forms.Padding(0);
+            this.btnSprayGalPerAcre.Name = "btnSprayGalPerAcre";
+            this.btnSprayGalPerAcre.Size = new System.Drawing.Size(165, 63);
+            this.btnSprayGalPerAcre.TabIndex = 546;
+            this.btnSprayGalPerAcre.Text = "999.9";
+            this.btnSprayGalPerAcre.UseVisualStyleBackColor = false;
+            this.btnSprayGalPerAcre.Click += new System.EventHandler(this.btnSprayRate_Click);
+            // 
+            // lblAreaPossible
+            // 
+            this.lblAreaPossible.BackColor = System.Drawing.Color.Transparent;
+            this.lblAreaPossible.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblAreaPossible.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAreaPossible.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(240)))), ((int)(((byte)(255)))));
+            this.lblAreaPossible.Location = new System.Drawing.Point(19, 197);
+            this.lblAreaPossible.Name = "lblAreaPossible";
+            this.lblAreaPossible.Size = new System.Drawing.Size(77, 25);
+            this.lblAreaPossible.TabIndex = 618;
+            this.lblAreaPossible.Text = "10.9";
+            this.lblAreaPossible.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // lbl_IO_Profile
             // 
@@ -3997,31 +4021,6 @@ namespace Twol
             this.button15.Size = new System.Drawing.Size(313, 14);
             this.button15.TabIndex = 650;
             this.button15.UseVisualStyleBackColor = false;
-            // 
-            // label5
-            // 
-            this.label5.BackColor = System.Drawing.Color.Transparent;
-            this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label5.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(240)))), ((int)(((byte)(255)))));
-            this.label5.Location = new System.Drawing.Point(102, 197);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(76, 25);
-            this.label5.TabIndex = 561;
-            this.label5.Text = "Ha";
-            // 
-            // lblAreaPossible
-            // 
-            this.lblAreaPossible.BackColor = System.Drawing.Color.Transparent;
-            this.lblAreaPossible.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblAreaPossible.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAreaPossible.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(240)))), ((int)(((byte)(255)))));
-            this.lblAreaPossible.Location = new System.Drawing.Point(19, 197);
-            this.lblAreaPossible.Name = "lblAreaPossible";
-            this.lblAreaPossible.Size = new System.Drawing.Size(77, 25);
-            this.lblAreaPossible.TabIndex = 618;
-            this.lblAreaPossible.Text = "10.9";
-            this.lblAreaPossible.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // FormGPS
             // 

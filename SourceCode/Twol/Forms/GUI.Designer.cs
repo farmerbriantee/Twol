@@ -237,6 +237,10 @@ namespace Twol
                 //wait to engage deadzone before time is up
                 vehicle.deadZoneDelayCounter++;
 
+                //used for alarm flashing
+                isFlashOnOff = !isFlashOnOff;
+
+
                 lblFix.Text = FixQuality + "Age: " + pn.age.ToString("N1");
 
                 switch (pn.fixQuality)
@@ -264,12 +268,6 @@ namespace Twol
                 if (isJobStarted && Settings.Vehicle.setApp_isNozzleApp)
                 {
                     UpdateNozzleMainPanel();
-
-                    if (nozz.isFlowingFlag) lblIsFlowing.BackColor = Color.LightGreen;
-                    else lblIsFlowing.BackColor = Color.OrangeRed;
-
-                    //lblPWM_Nozz.Text = nozz.pwmDriveActual.ToString();
-                    //lblFlowHz_Nozz.Text = nozz.frequency.ToString() + " Hz";
                 }
 
                 if (isJobStarted && Settings.Vehicle.setApp_isRateControlApp)
@@ -285,8 +283,6 @@ namespace Twol
             {
                 //reset the counter
                 oneHalfSecondCounter = 0;
-
-                isFlashOnOff = !isFlashOnOff;
 
                 //the main formgps window
                 //status strip values
@@ -695,6 +691,13 @@ namespace Twol
                 {
                     btnSprayGalPerAcre.BackColor = Color.DarkGreen;
                 }
+
+                if (nozz.isFlowingFlag) lblIsFlowing.BackColor = Color.LightGreen;
+                else lblIsFlowing.BackColor = Color.OrangeRed;
+
+                //lblPWM_Nozz.Text = nozz.pwmDriveActual.ToString();
+                //lblFlowHz_Nozz.Text = nozz.frequency.ToString() + " Hz";
+
             }
         }
 
