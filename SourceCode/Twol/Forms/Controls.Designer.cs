@@ -276,7 +276,7 @@ namespace Twol
                 nozz.volumePerAreaSetSelected = Settings.Tool.setNozz.volumePerAreaSet1;
             }
 
-            cboxRate1Rate2Select.Text = nozz.volumePerAreaSetSelected + Settings.Tool.setNozz.unitsPerArea;
+            cboxRate1Rate2Select.Text = nozz.volumePerAreaSetSelected + (Settings.User.isMetric ? " L/Ha" : " GPA");
         }
 
         private void cboxSprayAutoManual_Click(object sender, EventArgs e)
@@ -304,9 +304,9 @@ namespace Twol
         {
             Settings.Tool.setNozz.isAppliedUnitsNotTankDisplayed = !Settings.Tool.setNozz.isAppliedUnitsNotTankDisplayed;
             if (!Settings.Tool.setNozz.isAppliedUnitsNotTankDisplayed)
-                lbl_Volume.Text = "Tank " + Settings.Tool.setNozz.unitsApplied;
+                lbl_Volume.Text = "Tank " + (Settings.User.isMetric ? " Liters" : " Gallons");
             else
-                lbl_Volume.Text = "App " + Settings.Tool.setNozz.unitsApplied;
+                lbl_Volume.Text = "App " + (Settings.User.isMetric ? " Liters" : " Gallons");
         }
 
         private void btnSprayRate_Click(object sender, EventArgs e)
@@ -325,25 +325,10 @@ namespace Twol
                 nozz.volumePerAreaSetSelected = Settings.Tool.setNozz.volumePerAreaSet1;
             }
 
-            cboxRate1Rate2Select.Text = nozz.volumePerAreaSetSelected + Settings.Tool.setNozz.unitsPerArea;
+            cboxRate1Rate2Select.Text = nozz.volumePerAreaSetSelected + (Settings.User.isMetric ? " L/Ha" : " GPA");
         }
 
         private void btnNozConfig_Click(object sender, EventArgs e)
-        {
-            Form f = Application.OpenForms["FormNozConfig"];
-
-            if (f != null)
-            {
-                f.Focus();
-                return;
-            }
-
-            Form form = new FormNozConfig(this);
-            form.Show(this);
-        }
-
-
-        private void btnSprayFlyout_Click(object sender, EventArgs e)
         {
             Form f = Application.OpenForms["FormNozConfig"];
 
@@ -371,7 +356,7 @@ namespace Twol
             {
                 nozz.volumePerAreaSetSelected -= Settings.Tool.setNozz.rateNudge;
                 if (nozz.volumePerAreaSetSelected < 2) nozz.volumePerAreaSetSelected = 2;
-                cboxRate1Rate2Select.Text = nozz.volumePerAreaSetSelected.ToString("N1") + Settings.Tool.setNozz.unitsPerArea;
+                cboxRate1Rate2Select.Text = nozz.volumePerAreaSetSelected.ToString("N1") + (Settings.User.isMetric ? " L/Ha" : " GPA");
             }
         }
 
@@ -388,7 +373,7 @@ namespace Twol
             else
             {
                 nozz.volumePerAreaSetSelected += Settings.Tool.setNozz.rateNudge;
-                cboxRate1Rate2Select.Text = nozz.volumePerAreaSetSelected.ToString("N1") + Settings.Tool.setNozz.unitsPerArea;
+                cboxRate1Rate2Select.Text = nozz.volumePerAreaSetSelected.ToString("N1") + (Settings.User.isMetric ? " L/Ha" : " GPA");
             }
         }
 

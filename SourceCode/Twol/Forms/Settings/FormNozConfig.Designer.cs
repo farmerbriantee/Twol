@@ -44,10 +44,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnPWM = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.tboxUnitsPerArea = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.tboxUnitsApplied = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.cboxSectionValve3Wire = new System.Windows.Forms.CheckBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -183,7 +179,7 @@
             this.cboxBypass.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboxBypass.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxBypass.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.cboxBypass.Location = new System.Drawing.Point(240, 94);
+            this.cboxBypass.Location = new System.Drawing.Point(240, 139);
             this.cboxBypass.Name = "cboxBypass";
             this.cboxBypass.Size = new System.Drawing.Size(154, 46);
             this.cboxBypass.TabIndex = 601;
@@ -198,7 +194,7 @@
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(249, 139);
+            this.label2.Location = new System.Drawing.Point(249, 184);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(137, 30);
             this.label2.TabIndex = 602;
@@ -241,65 +237,13 @@
             this.label12.Text = "PWM";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label5
-            // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label5.BackColor = System.Drawing.Color.Transparent;
-            this.label5.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(249, 227);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(137, 29);
-            this.label5.TabIndex = 616;
-            this.label5.Text = "Units";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tboxUnitsPerArea
-            // 
-            this.tboxUnitsPerArea.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.tboxUnitsPerArea.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tboxUnitsPerArea.Location = new System.Drawing.Point(240, 270);
-            this.tboxUnitsPerArea.MaxLength = 5;
-            this.tboxUnitsPerArea.Name = "tboxUnitsPerArea";
-            this.tboxUnitsPerArea.Size = new System.Drawing.Size(154, 46);
-            this.tboxUnitsPerArea.TabIndex = 617;
-            this.tboxUnitsPerArea.Text = "L/Ha";
-            this.tboxUnitsPerArea.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.tboxUnitsPerArea.TextChanged += new System.EventHandler(this.tboxUnitsPerArea_TextChanged);
-            // 
-            // label7
-            // 
-            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label7.BackColor = System.Drawing.Color.Transparent;
-            this.label7.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(249, 316);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(137, 29);
-            this.label7.TabIndex = 618;
-            this.label7.Text = "Rate Units";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tboxUnitsApplied
-            // 
-            this.tboxUnitsApplied.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.tboxUnitsApplied.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tboxUnitsApplied.Location = new System.Drawing.Point(240, 182);
-            this.tboxUnitsApplied.MaxLength = 10;
-            this.tboxUnitsApplied.Name = "tboxUnitsApplied";
-            this.tboxUnitsApplied.Size = new System.Drawing.Size(154, 46);
-            this.tboxUnitsApplied.TabIndex = 619;
-            this.tboxUnitsApplied.Text = "Gallons";
-            this.tboxUnitsApplied.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.tboxUnitsApplied.TextChanged += new System.EventHandler(this.tboxUnitsApplied_TextChanged);
-            // 
             // label10
             // 
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label10.BackColor = System.Drawing.Color.Transparent;
             this.label10.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.White;
-            this.label10.Location = new System.Drawing.Point(257, 50);
+            this.label10.Location = new System.Drawing.Point(257, 78);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(133, 29);
             this.label10.TabIndex = 621;
@@ -318,7 +262,7 @@
             this.cboxSectionValve3Wire.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboxSectionValve3Wire.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxSectionValve3Wire.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.cboxSectionValve3Wire.Location = new System.Drawing.Point(240, 6);
+            this.cboxSectionValve3Wire.Location = new System.Drawing.Point(240, 34);
             this.cboxSectionValve3Wire.Name = "cboxSectionValve3Wire";
             this.cboxSectionValve3Wire.Size = new System.Drawing.Size(154, 46);
             this.cboxSectionValve3Wire.TabIndex = 620;
@@ -512,12 +456,8 @@
             this.tabUnits.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.tabUnits.Controls.Add(this.cboxMeteringOrFlow);
             this.tabUnits.Controls.Add(this.label13);
-            this.tabUnits.Controls.Add(this.tboxUnitsPerArea);
             this.tabUnits.Controls.Add(this.cboxBypass);
             this.tabUnits.Controls.Add(this.cboxSectionValve3Wire);
-            this.tabUnits.Controls.Add(this.tboxUnitsApplied);
-            this.tabUnits.Controls.Add(this.label5);
-            this.tabUnits.Controls.Add(this.label7);
             this.tabUnits.Controls.Add(this.label10);
             this.tabUnits.Controls.Add(this.label8);
             this.tabUnits.Controls.Add(this.label2);
@@ -527,7 +467,7 @@
             this.tabUnits.ImageIndex = 2;
             this.tabUnits.Location = new System.Drawing.Point(4, 44);
             this.tabUnits.Name = "tabUnits";
-            this.tabUnits.Size = new System.Drawing.Size(406, 344);
+            this.tabUnits.Size = new System.Drawing.Size(427, 344);
             this.tabUnits.TabIndex = 15;
             this.tabUnits.Text = "Config";
             // 
@@ -740,7 +680,6 @@
             this.tabControl1.ResumeLayout(false);
             this.tabFlow.ResumeLayout(false);
             this.tabUnits.ResumeLayout(false);
-            this.tabUnits.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.unoChart)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -767,10 +706,6 @@
         private System.Windows.Forms.Label label2;
         public System.Windows.Forms.Button btnPWM;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox tboxUnitsPerArea;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox tboxUnitsApplied;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.CheckBox cboxSectionValve3Wire;
         private System.Windows.Forms.TabControl tabControl1;

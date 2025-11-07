@@ -45,18 +45,18 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnZeroVolume = new System.Windows.Forms.Button();
-            this.lblRateSet = new System.Windows.Forms.Label();
+            this.lblAppliedVolume = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.nudRateAlarmPercent = new Twol.NudlessNumericUpDown();
+            this.nudNudge = new Twol.NudlessNumericUpDown();
             this.nudTankVolume = new Twol.NudlessNumericUpDown();
             this.nudZeroVolume = new Twol.NudlessNumericUpDown();
             this.nudSprayRateSet2 = new Twol.NudlessNumericUpDown();
             this.nudSprayMinPressure = new Twol.NudlessNumericUpDown();
             this.nudSprayRateSet1 = new Twol.NudlessNumericUpDown();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.nudNudge = new Twol.NudlessNumericUpDown();
-            this.label5 = new System.Windows.Forms.Label();
-            this.nudRateAlarmPercent = new Twol.NudlessNumericUpDown();
-            this.label6 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // bntOK
@@ -260,17 +260,17 @@
             this.btnZeroVolume.UseVisualStyleBackColor = false;
             this.btnZeroVolume.Click += new System.EventHandler(this.btnZeroVolume_Click);
             // 
-            // lblRateSet
+            // lblAppliedVolume
             // 
-            this.lblRateSet.BackColor = System.Drawing.Color.Transparent;
-            this.lblRateSet.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRateSet.ForeColor = System.Drawing.Color.White;
-            this.lblRateSet.Location = new System.Drawing.Point(276, 290);
-            this.lblRateSet.Name = "lblRateSet";
-            this.lblRateSet.Size = new System.Drawing.Size(166, 28);
-            this.lblRateSet.TabIndex = 616;
-            this.lblRateSet.Text = "Applied";
-            this.lblRateSet.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblAppliedVolume.BackColor = System.Drawing.Color.Transparent;
+            this.lblAppliedVolume.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAppliedVolume.ForeColor = System.Drawing.Color.White;
+            this.lblAppliedVolume.Location = new System.Drawing.Point(276, 290);
+            this.lblAppliedVolume.Name = "lblAppliedVolume";
+            this.lblAppliedVolume.Size = new System.Drawing.Size(166, 28);
+            this.lblAppliedVolume.TabIndex = 616;
+            this.lblAppliedVolume.Text = "Applied";
+            this.lblAppliedVolume.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label4
             // 
@@ -283,6 +283,56 @@
             this.label4.TabIndex = 620;
             this.label4.Text = "Tank Volume";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // label5
+            // 
+            this.label5.BackColor = System.Drawing.Color.Transparent;
+            this.label5.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.White;
+            this.label5.Location = new System.Drawing.Point(29, 435);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(166, 28);
+            this.label5.TabIndex = 622;
+            this.label5.Text = "Rate Nudge";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label6
+            // 
+            this.label6.BackColor = System.Drawing.Color.Transparent;
+            this.label6.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.White;
+            this.label6.Location = new System.Drawing.Point(29, 288);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(166, 28);
+            this.label6.TabIndex = 624;
+            this.label6.Text = "Rate Alarm %";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // nudRateAlarmPercent
+            // 
+            this.nudRateAlarmPercent.Location = new System.Drawing.Point(37, 222);
+            this.nudRateAlarmPercent.Minimum = 1D;
+            this.nudRateAlarmPercent.Name = "nudRateAlarmPercent";
+            this.nudRateAlarmPercent.Size = new System.Drawing.Size(150, 65);
+            this.nudRateAlarmPercent.TabIndex = 625;
+            this.nudRateAlarmPercent.ValueChanged += new System.EventHandler(this.nudRateAlarmPercent_ValueChanged);
+            // 
+            // nudNudge
+            // 
+            this.nudNudge.DecimalPlaces = 1;
+            this.nudNudge.Location = new System.Drawing.Point(37, 366);
+            this.nudNudge.Maximum = 30D;
+            this.nudNudge.Minimum = 0.1D;
+            this.nudNudge.Name = "nudNudge";
+            this.nudNudge.Size = new System.Drawing.Size(150, 65);
+            this.nudNudge.TabIndex = 623;
+            this.nudNudge.ValueChanged += new System.EventHandler(this.nudNudge_ValueChanged);
             // 
             // nudTankVolume
             // 
@@ -333,56 +383,6 @@
             this.nudSprayRateSet1.TabIndex = 577;
             this.nudSprayRateSet1.ValueChanged += new System.EventHandler(this.nudSprayRateSet1_ValueChanged);
             // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // nudNudge
-            // 
-            this.nudNudge.DecimalPlaces = 1;
-            this.nudNudge.Location = new System.Drawing.Point(37, 366);
-            this.nudNudge.Maximum = 30D;
-            this.nudNudge.Minimum = 0.1D;
-            this.nudNudge.Name = "nudNudge";
-            this.nudNudge.Size = new System.Drawing.Size(150, 65);
-            this.nudNudge.TabIndex = 623;
-            this.nudNudge.ValueChanged += new System.EventHandler(this.nudNudge_ValueChanged);
-            // 
-            // label5
-            // 
-            this.label5.BackColor = System.Drawing.Color.Transparent;
-            this.label5.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(29, 435);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(166, 28);
-            this.label5.TabIndex = 622;
-            this.label5.Text = "Rate Nudge";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // nudRateAlarmPercent
-            // 
-            this.nudRateAlarmPercent.Location = new System.Drawing.Point(37, 222);
-            this.nudRateAlarmPercent.Minimum = 1D;
-            this.nudRateAlarmPercent.Name = "nudRateAlarmPercent";
-            this.nudRateAlarmPercent.Size = new System.Drawing.Size(150, 65);
-            this.nudRateAlarmPercent.TabIndex = 625;
-            this.nudRateAlarmPercent.ValueChanged += new System.EventHandler(this.nudRateAlarmPercent_ValueChanged);
-            // 
-            // label6
-            // 
-            this.label6.BackColor = System.Drawing.Color.Transparent;
-            this.label6.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(29, 288);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(166, 28);
-            this.label6.TabIndex = 624;
-            this.label6.Text = "Rate Alarm %";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // FormNozSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -401,7 +401,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnZeroVolume);
             this.Controls.Add(this.nudZeroVolume);
-            this.Controls.Add(this.lblRateSet);
+            this.Controls.Add(this.lblAppliedVolume);
             this.Controls.Add(this.nudSprayRateSet2);
             this.Controls.Add(this.lblRateSet2);
             this.Controls.Add(this.lblAcresAvailable);
@@ -454,7 +454,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnZeroVolume;
         private NudlessNumericUpDown nudZeroVolume;
-        private System.Windows.Forms.Label lblRateSet;
+        private System.Windows.Forms.Label lblAppliedVolume;
         private NudlessNumericUpDown nudTankVolume;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Timer timer1;

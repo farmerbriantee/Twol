@@ -61,9 +61,6 @@ namespace Twol
                 cboxMeteringOrFlow.Text = "Flow";
             }
 
-            tboxUnitsApplied.Text = Settings.Tool.setNozz.unitsApplied.Trim();
-            tboxUnitsPerArea.Text = Settings.Tool.setNozz.unitsPerArea.Trim();
-
             cboxSectionValve3Wire.Checked = Settings.Tool.setNozz.isSectionValve3Wire;
             if (cboxSectionValve3Wire.Checked)
             {
@@ -314,22 +311,12 @@ namespace Twol
             unoChart.ChartAreas[0].RecalculateAxesScale();
         }
 
-        private void tboxUnitsApplied_TextChanged(object sender, EventArgs e)
-        {
-            Settings.Tool.setNozz.unitsApplied = " " + tboxUnitsApplied.Text.Trim();
-        }
-
-        private void tboxUnitsPerArea_TextChanged(object sender, EventArgs e)
-        {
-            Settings.Tool.setNozz.unitsPerArea = " " + tboxUnitsPerArea.Text.Trim();
-        }
-
         private void FormNozConfig_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (!Settings.Tool.setNozz.isAppliedUnitsNotTankDisplayed)
-                mf.lbl_Volume.Text = "Tank " + Settings.Tool.setNozz.unitsApplied;
+                mf.lbl_Volume.Text = "Tank " + (Settings.User.isMetric ? " Liters" : " Gallons");
             else
-                mf.lbl_Volume.Text = "App " + Settings.Tool.setNozz.unitsApplied;
+                mf.lbl_Volume.Text = "App " + (Settings.User.isMetric ? " Liters" : " Gallons");
         }
 
     }

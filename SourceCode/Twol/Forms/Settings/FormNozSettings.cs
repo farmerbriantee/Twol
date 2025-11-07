@@ -29,8 +29,8 @@ namespace Twol
 
             if (Settings.User.isMetric)
             {
-                lblRateSet1.Text = Settings.Tool.setNozz.unitsPerArea;
-                lblRateSet2.Text = Settings.Tool.setNozz.unitsPerArea;
+                lblRateSet1.Text = (Settings.User.isMetric ? " L/Ha" : " GPA");
+                lblRateSet2.Text = (Settings.User.isMetric ? " L/Ha" : " GPA");
                 nudSprayRateSet1.Maximum = 999;
                 nudSprayRateSet1.Minimum = 5;
                 nudSprayRateSet1.DecimalPlaces = 0;
@@ -40,20 +40,20 @@ namespace Twol
 
                 lblVolumeTank.Text = Settings.Tool.setNozz.volumeTankStart.ToString();
                 lblVolumeApplied.Text = Settings.Tool.setNozz.volumeApplied.ToString();
-                lblRateSet.Text = Settings.Tool.setNozz.unitsApplied + " Applied";
+                lblAppliedVolume.Text = (Settings.User.isMetric ? "Liters" : "Gallons") + " Applied";
                 lblStatArea.Text = "Ha";
             }
             else
             {
-                lblRateSet1.Text = Settings.Tool.setNozz.unitsPerArea;
-                lblRateSet2.Text = Settings.Tool.setNozz.unitsPerArea;
+                lblRateSet1.Text = (Settings.User.isMetric ? " L/Ha" : " GPA");
+                lblRateSet2.Text = (Settings.User.isMetric ? " L/Ha" : " GPA");
                 nudSprayRateSet1.Maximum = 99.9;
                 nudSprayRateSet1.Minimum = 1;
                 nudSprayRateSet1.DecimalPlaces = 1;
                 nudSprayRateSet2.Maximum = 99.9;
                 nudSprayRateSet2.Minimum = 1;
                 nudSprayRateSet2.DecimalPlaces = 1;
-                lblRateSet.Text = Settings.Tool.setNozz.unitsApplied + "Applied";
+                lblAppliedVolume.Text = (Settings.User.isMetric ? "Liters" : "Gallons") + "Applied";
                 lblStatArea.Text = "Acre";
             }
 

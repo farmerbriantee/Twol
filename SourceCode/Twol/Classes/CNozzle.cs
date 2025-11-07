@@ -40,7 +40,6 @@
 
             for (int i = 0; i < mf.section.Count; i++)
             {
-                //calculate gallons per minute - GPM = GPA X MPH X Width (in inches)/ 5,940
                 if (mf.section[i].isSectionOn)
                 {
                     mf.nozz.currentSectionsWidthMeters += mf.section[i].sectionWidth;
@@ -58,12 +57,13 @@
             {
                 if (Settings.User.isMetric)
                 {
-                    //Liters * 0.00167 𝑥 𝑠𝑤𝑎𝑡ℎ 𝑤𝑖𝑑𝑡ℎ 𝑥 𝐾mh * ( to send as integer 100)
+                    //Liters * 0.00167 𝑥 𝑠𝑤𝑎𝑡ℎ 𝑤𝑖𝑑𝑡ℎ 𝑥 𝐾mh * ( to send as integer x100)
                     mf.nozz.volumePerMinuteSet =
                         (int)(mf.nozz.volumePerAreaSetSelected * 0.167 * mf.nozz.currentSectionsWidthMeters * mf.avgSpeed);
                 }
                 else
                 {
+                    //calculate gallons per minute - GPM = GPA X MPH X Width (in inches)/ 5,940
                     mf.nozz.volumePerMinuteSet = (int)(mf.nozz.volumePerAreaSetSelected *
                                                     (mf.avgSpeed * glm.kmhToMphOrKmh) * mf.nozz.currentSectionsWidthMeters * glm.m2InchOrCm / 5940 * 100);
                 }
@@ -127,10 +127,6 @@
         public double volumeApplied = 0;
         public int volumeTankStart = 0;
         
-
-        public string unitsApplied = "Gallons";
-        public string unitsPerArea = "GPA";
-
         public bool isAppliedUnitsNotTankDisplayed = true;
 
         public double rateNudge = 1;

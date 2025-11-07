@@ -260,13 +260,16 @@ namespace Twol
                     if (trackMethodPanelCounter-- < 1) flp1.Visible = false;
                 }
 
+
                 if (isJobStarted && Settings.Vehicle.setApp_isNozzleApp)
                 {
-                    if (nozz.isFlowingFlag) lblIsFlowing.BackColor = Color.LightGreen;
-                    else lblIsFlowing.BackColor = Color.Orange;
+                    UpdateNozzleMainPanel();
 
-                    lblPWM_Nozz.Text = nozz.pwmDriveActual.ToString();
-                    lblFlowHz_Nozz.Text = nozz.frequency.ToString() + " Hz";
+                    if (nozz.isFlowingFlag) lblIsFlowing.BackColor = Color.LightGreen;
+                    else lblIsFlowing.BackColor = Color.OrangeRed;
+
+                    //lblPWM_Nozz.Text = nozz.pwmDriveActual.ToString();
+                    //lblFlowHz_Nozz.Text = nozz.frequency.ToString() + " Hz";
                 }
 
                 if (isJobStarted && Settings.Vehicle.setApp_isRateControlApp)
@@ -291,61 +294,6 @@ namespace Twol
                 btnAutoSteerConfig.Text = SetSteerAngle + "\r\n" + ActualSteerAngle;
 
                 //Nozzz
-                if (Settings.Vehicle.setApp_isNozzleApp)
-                {
-                    //nozz.tankVolumeTotal += 1;
-                    if (Settings.Tool.setNozz.isAppliedUnitsNotTankDisplayed)
-                        btnSprayVolumeTotal.Text = Settings.Tool.setNozz.volumeApplied.ToString("#0.0");
-                    else
-                        btnSprayVolumeTotal.Text = (Settings.Tool.setNozz.volumeTankStart - Settings.Tool.setNozz.volumeApplied).ToString("#0.0");
-
-                    //pressure reading
-                    btnSprayPSI.Text = nozz.pressureActual.ToString();
-
-                    //volume per minute displays at top of panel
-                    lblGPM_Set.Text = ((double)(nozz.volumePerMinuteSet) * 0.01).ToString("N1");
-                    btnSprayGalPerMinActual.Text = (((double)(nozz.volumePerMinuteActual)) * 0.01).ToString("N2");
-
-                    //the main GPA display and button
-                    if (nozz.currentSectionsWidthMeters < 0.2)
-                    {
-                        btnSprayGalPerAcre.Text = "Off";
-                        btnSprayGalPerAcre.BackColor = Color.Transparent;
-                    }
-                    else
-                    {
-                        //volume per area calcs - GPM and L/Ha
-                        if (Settings.User.isMetric)
-                        {
-                            //Liters * 0.00167 𝑥 𝑠𝑤𝑎𝑡ℎ 𝑤𝑖𝑑𝑡ℎ 𝑥 𝐾mh
-                            nozz.volumePerAreaActualFiltered = (nozz.volumePerAreaActualFiltered * 0.6) +
-                                (nozz.volumePerMinuteActual * 6) / (nozz.currentSectionsWidthMeters * avgSpeed + 0.01) * 0.6;
-                        }
-                        else
-                        {
-                            //(GPM x 5,940) / (MPH x Width in inches)
-                            nozz.volumePerAreaActualFiltered = (nozz.volumePerAreaActualFiltered * 0.6)
-                                + ((nozz.volumePerMinuteActual * 59.4) / (nozz.currentSectionsWidthMeters * glm.m2InchOrCm * avgSpeed * glm.kmhToMphOrKmh + 0.01) * 0.4);
-                        }
-
-                        //display actual rate
-                        if (nozz.volumePerAreaActualFiltered < 100)
-                            btnSprayGalPerAcre.Text = (nozz.volumePerAreaActualFiltered).ToString("N1");
-                        else
-                            btnSprayGalPerAcre.Text = (nozz.volumePerAreaActualFiltered).ToString("N0");
-
-                        //flow error alarm
-                        if ((Math.Abs(nozz.volumePerAreaSetSelected - nozz.volumePerAreaActualFiltered)) > (nozz.volumePerAreaSetSelected * Settings.Tool.setNozz.rateAlarmPercent))
-                        {
-                            if (isFlashOnOff) btnSprayGalPerAcre.BackColor = Color.DarkRed;
-                            else btnSprayGalPerAcre.BackColor = Color.Transparent;
-                        }
-                        else
-                        {
-                            btnSprayGalPerAcre.BackColor = Color.DarkGreen;
-                        }
-                    }
-                }
 
                 if (mc.actualToolAngleDegrees != double.MaxValue)
                 {
@@ -553,21 +501,22 @@ namespace Twol
                 //units
                 if (cboxRate1Rate2Select.Checked)
                 {
-                    cboxRate1Rate2Select.Text = Settings.Tool.setNozz.volumePerAreaSet2 + Settings.Tool.setNozz.unitsPerArea;
+                    cboxRate1Rate2Select.Text = Settings.Tool.setNozz.volumePerAreaSet2 + (Settings.User.isMetric ? " L/Ha" : " GPA");
                     nozz.volumePerAreaSetSelected = Settings.Tool.setNozz.volumePerAreaSet2;
                 }
                 else
                 {
-                    cboxRate1Rate2Select.Text = Settings.Tool.setNozz.volumePerAreaSet1 + Settings.Tool.setNozz.unitsPerArea;
+                    cboxRate1Rate2Select.Text = Settings.Tool.setNozz.volumePerAreaSet1 + (Settings.User.isMetric ? " L/Ha" : " GPA");
                     nozz.volumePerAreaSetSelected = Settings.Tool.setNozz.volumePerAreaSet1;
                 }
 
                 btnSprayVolumeTotal.Text = Settings.Tool.setNozz.volumeApplied.ToString("#0.0");
+                lblAreaPossible.Text = "0.0";
 
                 if (!Settings.Tool.setNozz.isAppliedUnitsNotTankDisplayed)
-                    lbl_Volume.Text = "Tank " + Settings.Tool.setNozz.unitsApplied;
+                    lbl_Volume.Text = "Tank " + (Settings.User.isMetric ? " Liters" : " Gallons");
                 else
-                    lbl_Volume.Text = "App " + Settings.Tool.setNozz.unitsApplied;
+                    lbl_Volume.Text = "App " + (Settings.User.isMetric ? " Liters" : " Gallons");
             }
 
             //Tool GPS on
@@ -682,6 +631,71 @@ namespace Twol
                 }
             }
 
+        }
+
+        public void UpdateNozzleMainPanel()
+        {
+            if (Settings.Tool.setNozz.isAppliedUnitsNotTankDisplayed)
+                btnSprayVolumeTotal.Text = Settings.Tool.setNozz.volumeApplied.ToString("#0.0");
+            else
+                btnSprayVolumeTotal.Text = (Settings.Tool.setNozz.volumeTankStart - Settings.Tool.setNozz.volumeApplied).ToString("#0.0");
+
+            if (Settings.User.isMetric)
+            {
+                lblAreaPossible.Text = ((Settings.Tool.setNozz.volumeTankStart - Settings.Tool.setNozz.volumeApplied) / nozz.volumePerAreaSetSelected).ToString("N1");
+            }
+            else
+            {
+                lblAreaPossible.Text = ((Settings.Tool.setNozz.volumeTankStart - Settings.Tool.setNozz.volumeApplied) * 264.172
+                    / (nozz.volumePerAreaSetSelected + 0.01)).ToString("N1") + " Acre";
+            }
+
+            //pressure reading
+            btnSprayPSI.Text = nozz.pressureActual.ToString();
+
+            //volume per minute displays at top of panel
+            lblGPM_Set.Text = ((double)(nozz.volumePerMinuteSet) * 0.01).ToString("N1");
+            btnSprayGalPerMinActual.Text = (((double)(nozz.volumePerMinuteActual)) * 0.01).ToString("N2");
+
+            //the main GPA display and button
+            if (nozz.currentSectionsWidthMeters < 0.2)
+            {
+                btnSprayGalPerAcre.Text = "Off";
+                btnSprayGalPerAcre.BackColor = Color.Transparent;
+            }
+            else
+            {
+                //volume per area calcs - GPM and L/Ha
+                if (Settings.User.isMetric)
+                {
+                    //(Liters per minute * 600) / (𝑠𝑤𝑎𝑡ℎ 𝑤𝑖𝑑𝑡ℎ in meter 𝑥 𝐾mh)
+                    nozz.volumePerAreaActualFiltered = (nozz.volumePerAreaActualFiltered * 0.6)
+                        + (nozz.volumePerMinuteActual * 6 / (nozz.currentSectionsWidthMeters * avgSpeed + 0.01)) * 0.4;
+                }
+                else
+                {
+                    //(GPM x 5,940) / (MPH x Width in inches)
+                    nozz.volumePerAreaActualFiltered = (nozz.volumePerAreaActualFiltered * 0.6)
+                        + ((nozz.volumePerMinuteActual * 59.4) / (nozz.currentSectionsWidthMeters * glm.m2InchOrCm * avgSpeed * glm.kmhToMphOrKmh + 0.01) * 0.4);
+                }
+
+                //display actual rate
+                if (nozz.volumePerAreaActualFiltered < 100)
+                    btnSprayGalPerAcre.Text = (nozz.volumePerAreaActualFiltered).ToString("N1");
+                else
+                    btnSprayGalPerAcre.Text = (nozz.volumePerAreaActualFiltered).ToString("N0");
+
+                //flow error alarm
+                if ((Math.Abs(nozz.volumePerAreaSetSelected - nozz.volumePerAreaActualFiltered)) > (nozz.volumePerAreaSetSelected * Settings.Tool.setNozz.rateAlarmPercent))
+                {
+                    if (isFlashOnOff) btnSprayGalPerAcre.BackColor = Color.DarkRed;
+                    else btnSprayGalPerAcre.BackColor = Color.Transparent;
+                }
+                else
+                {
+                    btnSprayGalPerAcre.BackColor = Color.DarkGreen;
+                }
+            }
         }
 
         public void DisplayRateControlPanel()
