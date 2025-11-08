@@ -37,7 +37,7 @@ namespace Twol
             nudSlowPWM.Value = Settings.Tool.setNozz.slowPWM;
             nudDeadbandError.Value = Settings.Tool.setNozz.deadbandError;
             nudSwitchAtFlowError.Value = Settings.Tool.setNozz.switchAtFlowError;
-            
+
             nudKp.Value = Settings.Tool.setNozz.Kp;
             //nudKi.Value = Settings.Tool.setNozz.Ki;
 
@@ -71,7 +71,7 @@ namespace Twol
                 cboxSectionValve3Wire.Text = "Reverse";
             }
 
-            if(Settings.Tool.setNozz.isMeter)
+            if (Settings.Tool.setNozz.isMeter)
             {
                 nudFastPWM.Enabled = false;
                 nudSlowPWM.Enabled = false;
@@ -85,6 +85,8 @@ namespace Twol
                 nudSwitchAtFlowError.Enabled = true;
                 nudKp.Enabled = false;
             }
+
+           comboUnits.SelectedIndex = Settings.Tool.setNozz.unitVolumeWeightRateIdx;
         }
 
         private void nudSprayFlowCal_ValueChanged(object sender, EventArgs e)
@@ -314,10 +316,14 @@ namespace Twol
         private void FormNozConfig_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (!Settings.Tool.setNozz.isAppliedUnitsNotTankDisplayed)
-                mf.lbl_Volume.Text = "Tank " + (Settings.User.isMetric ? " Liters" : " Gallons");
+                mf.lbl_Volume.Text = "Tank " + (mf.nozz.unitVolumeWeight[Settings.Tool.setNozz.unitVolumeWeightRateIdx]);
             else
-                mf.lbl_Volume.Text = "App " + (Settings.User.isMetric ? " Liters" : " Gallons");
+                mf.lbl_Volume.Text = "App " + (mf.nozz.unitVolumeWeight[Settings.Tool.setNozz.unitVolumeWeightRateIdx]);
         }
 
+        private void comboUnits_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Settings.Tool.setNozz.unitVolumeWeightRateIdx = comboUnits.SelectedIndex;
+        }
     }
 }

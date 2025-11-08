@@ -568,7 +568,7 @@ namespace Twol
             // 
             // tmrWatchdog
             // 
-            this.tmrWatchdog.Interval = 250;
+            this.tmrWatchdog.Interval = 125;
             this.tmrWatchdog.Tick += new System.EventHandler(this.tmrWatchdog_tick);
             // 
             // contextMenuStripFlag
@@ -631,7 +631,7 @@ namespace Twol
             this.toolStripMenuFlagForm.Image = global::Twol.Properties.Resources.FileEditName;
             this.toolStripMenuFlagForm.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripMenuFlagForm.Name = "toolStripMenuFlagForm";
-            this.toolStripMenuFlagForm.Size = new System.Drawing.Size(267, 70);
+            this.toolStripMenuFlagForm.Size = new System.Drawing.Size(259, 70);
             this.toolStripMenuFlagForm.Text = "toolStripMenuItem3";
             this.toolStripMenuFlagForm.Click += new System.EventHandler(this.toolStripMenuFlagForm_Click);
             // 

@@ -276,7 +276,7 @@ namespace Twol
                 nozz.volumePerAreaSetSelected = Settings.Tool.setNozz.volumePerAreaSet1;
             }
 
-            cboxRate1Rate2Select.Text = nozz.volumePerAreaSetSelected + (Settings.User.isMetric ? " L/Ha" : " GPA");
+            cboxRate1Rate2Select.Text = nozz.volumePerAreaSetSelected + nozz.unitVolumeWeightRate[Settings.Tool.setNozz.unitVolumeWeightRateIdx];
         }
 
         private void cboxSprayAutoManual_Click(object sender, EventArgs e)
@@ -304,9 +304,9 @@ namespace Twol
         {
             Settings.Tool.setNozz.isAppliedUnitsNotTankDisplayed = !Settings.Tool.setNozz.isAppliedUnitsNotTankDisplayed;
             if (!Settings.Tool.setNozz.isAppliedUnitsNotTankDisplayed)
-                lbl_Volume.Text = "Tank " + (Settings.User.isMetric ? " Liters" : " Gallons");
+                lbl_Volume.Text = "Tank " + (nozz.unitVolumeWeight[Settings.Tool.setNozz.unitVolumeWeightRateIdx]);
             else
-                lbl_Volume.Text = "App " + (Settings.User.isMetric ? " Liters" : " Gallons");
+                lbl_Volume.Text = "App " + (nozz.unitVolumeWeight[Settings.Tool.setNozz.unitVolumeWeightRateIdx]);
         }
 
         private void btnSprayRate_Click(object sender, EventArgs e)
@@ -325,7 +325,8 @@ namespace Twol
                 nozz.volumePerAreaSetSelected = Settings.Tool.setNozz.volumePerAreaSet1;
             }
 
-            cboxRate1Rate2Select.Text = nozz.volumePerAreaSetSelected + (Settings.User.isMetric ? " L/Ha" : " GPA");
+            cboxRate1Rate2Select.Text = nozz.volumePerAreaSetSelected + (nozz.unitVolumeWeightRate[Settings.Tool.setNozz.unitVolumeWeightRateIdx]);
+
         }
 
         private void btnNozConfig_Click(object sender, EventArgs e)
@@ -356,7 +357,7 @@ namespace Twol
             {
                 nozz.volumePerAreaSetSelected -= Settings.Tool.setNozz.rateNudge;
                 if (nozz.volumePerAreaSetSelected < 2) nozz.volumePerAreaSetSelected = 2;
-                cboxRate1Rate2Select.Text = nozz.volumePerAreaSetSelected.ToString("N1") + (Settings.User.isMetric ? " L/Ha" : " GPA");
+                cboxRate1Rate2Select.Text = nozz.volumePerAreaSetSelected.ToString("N1") + (nozz.unitVolumeWeightRate[Settings.Tool.setNozz.unitVolumeWeightRateIdx]);
             }
         }
 
@@ -373,7 +374,7 @@ namespace Twol
             else
             {
                 nozz.volumePerAreaSetSelected += Settings.Tool.setNozz.rateNudge;
-                cboxRate1Rate2Select.Text = nozz.volumePerAreaSetSelected.ToString("N1") + (Settings.User.isMetric ? " L/Ha" : " GPA");
+                cboxRate1Rate2Select.Text = nozz.volumePerAreaSetSelected.ToString("N1") + (nozz.unitVolumeWeightRate[Settings.Tool.setNozz.unitVolumeWeightRateIdx]);
             }
         }
 

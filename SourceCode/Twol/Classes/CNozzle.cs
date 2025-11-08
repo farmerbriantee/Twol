@@ -11,6 +11,9 @@
 
         public double volumePerAreaActualFiltered = 0;
 
+        public string[] unitVolumeWeightRate = new string[4] { " L/ha", " GPA", " Kg/ha", " lb/ac" };
+        public string[] unitVolumeWeight = new string[4] { " Liters", " Gallons", " Kgs", " Pounds" };
+
         public int volumePerMinuteSet = 0;
         public int volumePerMinuteActual = 0;
         public double frequency = 0;
@@ -99,6 +102,8 @@
 
         public double volumePerAreaSet1 = 6;
         public double volumePerAreaSet2 = 12;
+
+        public int unitVolumeWeightRateIdx = 0;
 
         public int pressureMax = 100;
         public int pressureMin = 10;

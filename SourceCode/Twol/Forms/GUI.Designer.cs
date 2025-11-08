@@ -222,7 +222,7 @@ namespace Twol
             }//end every 2 seconds
 
             //every second update all status //////   1 Second ////////////////////////////
-            if (oneSecondCounter >= 4)
+            if (oneSecondCounter >= 8)
             {
                 //reset the counter
                 oneSecondCounter = 0;
@@ -277,7 +277,7 @@ namespace Twol
             }
 
             //every half of a second update all status  ////////////////    0.5  0.5   0.5    0.5    /////////////////
-            if (oneHalfSecondCounter >= 2)
+            if (oneHalfSecondCounter >= 4)
             {
                 //reset the counter
                 oneHalfSecondCounter = 0;
@@ -317,7 +317,7 @@ namespace Twol
 
             } //end every 1/2 second
 
-            //every 1/3 second update  ///////////////////////////   One Third Second ////////////////////////////
+            //every 1/8 second update  ///////////////////////////   One Eighth Second ////////////////////////////
             {
                 //reset the counter
                 oneHalfSecondCounter++;
@@ -325,6 +325,8 @@ namespace Twol
                 makeUTurnCounter++;
 
                 secondsSinceStart = (DateTime.Now - Process.GetCurrentProcess().StartTime).TotalSeconds;
+
+                oglMain.Refresh();
             }
 
         }//wait till timer fires again.
@@ -495,12 +497,12 @@ namespace Twol
                 //units
                 if (cboxRate1Rate2Select.Checked)
                 {
-                    cboxRate1Rate2Select.Text = Settings.Tool.setNozz.volumePerAreaSet2 + (Settings.User.isMetric ? " L/Ha" : " GPA");
+                    cboxRate1Rate2Select.Text = Settings.Tool.setNozz.volumePerAreaSet2 + (nozz.unitVolumeWeightRate[Settings.Tool.setNozz.unitVolumeWeightRateIdx]);
                     nozz.volumePerAreaSetSelected = Settings.Tool.setNozz.volumePerAreaSet2;
                 }
                 else
                 {
-                    cboxRate1Rate2Select.Text = Settings.Tool.setNozz.volumePerAreaSet1 + (Settings.User.isMetric ? " L/Ha" : " GPA");
+                    cboxRate1Rate2Select.Text = Settings.Tool.setNozz.volumePerAreaSet1 + (nozz.unitVolumeWeightRate[Settings.Tool.setNozz.unitVolumeWeightRateIdx]);
                     nozz.volumePerAreaSetSelected = Settings.Tool.setNozz.volumePerAreaSet1;
                 }
 
@@ -508,9 +510,9 @@ namespace Twol
                 lblAreaPossible.Text = "0.0";
 
                 if (!Settings.Tool.setNozz.isAppliedUnitsNotTankDisplayed)
-                    lbl_Volume.Text = "Tank " + (Settings.User.isMetric ? " Liters" : " Gallons");
+                    lbl_Volume.Text = "Tank" + (nozz.unitVolumeWeight[Settings.Tool.setNozz.unitVolumeWeightRateIdx]);
                 else
-                    lbl_Volume.Text = "App " + (Settings.User.isMetric ? " Liters" : " Gallons");
+                    lbl_Volume.Text = "App" + (nozz.unitVolumeWeight[Settings.Tool.setNozz.unitVolumeWeightRateIdx]);
             }
 
             //Tool GPS on
