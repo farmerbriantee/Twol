@@ -28,18 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.bntOK = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.lblRateSet1 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.lblVolumeTank = new System.Windows.Forms.Label();
-            this.lblVolumeApplied = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.lblTankRemain = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.lblAcresAvailable = new System.Windows.Forms.Label();
-            this.lblStatArea = new System.Windows.Forms.Label();
             this.lblRateSet2 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -47,7 +38,6 @@
             this.btnZeroVolume = new System.Windows.Forms.Button();
             this.lblAppliedVolume = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.nudRateAlarmPercent = new Twol.NudlessNumericUpDown();
@@ -68,7 +58,7 @@
             this.bntOK.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.bntOK.Image = global::Twol.Properties.Resources.OK64;
             this.bntOK.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.bntOK.Location = new System.Drawing.Point(576, 420);
+            this.bntOK.Location = new System.Drawing.Point(574, 347);
             this.bntOK.Name = "bntOK";
             this.bntOK.Size = new System.Drawing.Size(166, 65);
             this.bntOK.TabIndex = 0;
@@ -81,7 +71,7 @@
             this.label10.BackColor = System.Drawing.Color.Transparent;
             this.label10.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.White;
-            this.label10.Location = new System.Drawing.Point(29, 150);
+            this.label10.Location = new System.Drawing.Point(29, 97);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(166, 28);
             this.label10.TabIndex = 590;
@@ -93,115 +83,19 @@
             this.lblRateSet1.BackColor = System.Drawing.Color.Transparent;
             this.lblRateSet1.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRateSet1.ForeColor = System.Drawing.Color.White;
-            this.lblRateSet1.Location = new System.Drawing.Point(551, 143);
+            this.lblRateSet1.Location = new System.Drawing.Point(551, 90);
             this.lblRateSet1.Name = "lblRateSet1";
             this.lblRateSet1.Size = new System.Drawing.Size(166, 28);
             this.lblRateSet1.TabIndex = 578;
             this.lblRateSet1.Text = " Gal / Acre";
             this.lblRateSet1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label7
-            // 
-            this.label7.BackColor = System.Drawing.Color.Transparent;
-            this.label7.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(32, 12);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(77, 19);
-            this.label7.TabIndex = 603;
-            this.label7.Text = "Tank";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblVolumeTank
-            // 
-            this.lblVolumeTank.BackColor = System.Drawing.Color.Transparent;
-            this.lblVolumeTank.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblVolumeTank.ForeColor = System.Drawing.Color.White;
-            this.lblVolumeTank.Location = new System.Drawing.Point(20, 31);
-            this.lblVolumeTank.Name = "lblVolumeTank";
-            this.lblVolumeTank.Size = new System.Drawing.Size(101, 38);
-            this.lblVolumeTank.TabIndex = 604;
-            this.lblVolumeTank.Text = "1200";
-            this.lblVolumeTank.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblVolumeApplied
-            // 
-            this.lblVolumeApplied.BackColor = System.Drawing.Color.Transparent;
-            this.lblVolumeApplied.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblVolumeApplied.ForeColor = System.Drawing.Color.White;
-            this.lblVolumeApplied.Location = new System.Drawing.Point(121, 31);
-            this.lblVolumeApplied.Name = "lblVolumeApplied";
-            this.lblVolumeApplied.Size = new System.Drawing.Size(101, 38);
-            this.lblVolumeApplied.TabIndex = 606;
-            this.lblVolumeApplied.Text = "200";
-            this.lblVolumeApplied.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label14
-            // 
-            this.label14.BackColor = System.Drawing.Color.Transparent;
-            this.label14.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.ForeColor = System.Drawing.Color.White;
-            this.label14.Location = new System.Drawing.Point(133, 12);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(77, 19);
-            this.label14.TabIndex = 605;
-            this.label14.Text = "Applied";
-            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblTankRemain
-            // 
-            this.lblTankRemain.BackColor = System.Drawing.Color.Transparent;
-            this.lblTankRemain.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTankRemain.ForeColor = System.Drawing.Color.White;
-            this.lblTankRemain.Location = new System.Drawing.Point(222, 31);
-            this.lblTankRemain.Name = "lblTankRemain";
-            this.lblTankRemain.Size = new System.Drawing.Size(101, 38);
-            this.lblTankRemain.TabIndex = 608;
-            this.lblTankRemain.Text = "1000";
-            this.lblTankRemain.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label16
-            // 
-            this.label16.BackColor = System.Drawing.Color.Transparent;
-            this.label16.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.ForeColor = System.Drawing.Color.White;
-            this.label16.Location = new System.Drawing.Point(234, 12);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(77, 19);
-            this.label16.TabIndex = 607;
-            this.label16.Text = "Remain";
-            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblAcresAvailable
-            // 
-            this.lblAcresAvailable.BackColor = System.Drawing.Color.Transparent;
-            this.lblAcresAvailable.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAcresAvailable.ForeColor = System.Drawing.Color.White;
-            this.lblAcresAvailable.Location = new System.Drawing.Point(323, 31);
-            this.lblAcresAvailable.Name = "lblAcresAvailable";
-            this.lblAcresAvailable.Size = new System.Drawing.Size(101, 38);
-            this.lblAcresAvailable.TabIndex = 610;
-            this.lblAcresAvailable.Text = "85.2";
-            this.lblAcresAvailable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblStatArea
-            // 
-            this.lblStatArea.BackColor = System.Drawing.Color.Transparent;
-            this.lblStatArea.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStatArea.ForeColor = System.Drawing.Color.White;
-            this.lblStatArea.Location = new System.Drawing.Point(335, 12);
-            this.lblStatArea.Name = "lblStatArea";
-            this.lblStatArea.Size = new System.Drawing.Size(77, 19);
-            this.lblStatArea.TabIndex = 609;
-            this.lblStatArea.Text = "Ac";
-            this.lblStatArea.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // lblRateSet2
             // 
             this.lblRateSet2.BackColor = System.Drawing.Color.Transparent;
             this.lblRateSet2.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRateSet2.ForeColor = System.Drawing.Color.White;
-            this.lblRateSet2.Location = new System.Drawing.Point(551, 283);
+            this.lblRateSet2.Location = new System.Drawing.Point(551, 230);
             this.lblRateSet2.Name = "lblRateSet2";
             this.lblRateSet2.Size = new System.Drawing.Size(166, 28);
             this.lblRateSet2.TabIndex = 612;
@@ -213,7 +107,7 @@
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Arial", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(497, 96);
+            this.label2.Location = new System.Drawing.Point(497, 43);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(57, 33);
             this.label2.TabIndex = 613;
@@ -225,7 +119,7 @@
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Arial", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(497, 236);
+            this.label3.Location = new System.Drawing.Point(497, 183);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(57, 33);
             this.label3.TabIndex = 614;
@@ -237,7 +131,7 @@
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(276, 433);
+            this.label1.Location = new System.Drawing.Point(276, 380);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(166, 28);
             this.label1.TabIndex = 618;
@@ -253,7 +147,7 @@
             this.btnZeroVolume.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnZeroVolume.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnZeroVolume.ForeColor = System.Drawing.Color.White;
-            this.btnZeroVolume.Location = new System.Drawing.Point(285, 366);
+            this.btnZeroVolume.Location = new System.Drawing.Point(285, 313);
             this.btnZeroVolume.Name = "btnZeroVolume";
             this.btnZeroVolume.Size = new System.Drawing.Size(149, 65);
             this.btnZeroVolume.TabIndex = 617;
@@ -265,7 +159,7 @@
             this.lblAppliedVolume.BackColor = System.Drawing.Color.Transparent;
             this.lblAppliedVolume.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAppliedVolume.ForeColor = System.Drawing.Color.White;
-            this.lblAppliedVolume.Location = new System.Drawing.Point(276, 290);
+            this.lblAppliedVolume.Location = new System.Drawing.Point(276, 237);
             this.lblAppliedVolume.Name = "lblAppliedVolume";
             this.lblAppliedVolume.Size = new System.Drawing.Size(166, 28);
             this.lblAppliedVolume.TabIndex = 616;
@@ -277,25 +171,19 @@
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(276, 149);
+            this.label4.Location = new System.Drawing.Point(276, 96);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(166, 28);
             this.label4.TabIndex = 620;
             this.label4.Text = "Tank Volume";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
             // label5
             // 
             this.label5.BackColor = System.Drawing.Color.Transparent;
             this.label5.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(29, 435);
+            this.label5.Location = new System.Drawing.Point(29, 382);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(166, 28);
             this.label5.TabIndex = 622;
@@ -307,7 +195,7 @@
             this.label6.BackColor = System.Drawing.Color.Transparent;
             this.label6.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(29, 288);
+            this.label6.Location = new System.Drawing.Point(29, 235);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(166, 28);
             this.label6.TabIndex = 624;
@@ -316,7 +204,7 @@
             // 
             // nudRateAlarmPercent
             // 
-            this.nudRateAlarmPercent.Location = new System.Drawing.Point(37, 222);
+            this.nudRateAlarmPercent.Location = new System.Drawing.Point(37, 169);
             this.nudRateAlarmPercent.Minimum = 1D;
             this.nudRateAlarmPercent.Name = "nudRateAlarmPercent";
             this.nudRateAlarmPercent.Size = new System.Drawing.Size(150, 65);
@@ -326,7 +214,7 @@
             // nudNudge
             // 
             this.nudNudge.DecimalPlaces = 1;
-            this.nudNudge.Location = new System.Drawing.Point(37, 366);
+            this.nudNudge.Location = new System.Drawing.Point(37, 313);
             this.nudNudge.Maximum = 30D;
             this.nudNudge.Minimum = 0.1D;
             this.nudNudge.Name = "nudNudge";
@@ -336,8 +224,8 @@
             // 
             // nudTankVolume
             // 
-            this.nudTankVolume.Location = new System.Drawing.Point(259, 84);
-            this.nudTankVolume.Maximum = 10000D;
+            this.nudTankVolume.Location = new System.Drawing.Point(259, 31);
+            this.nudTankVolume.Maximum = 100000D;
             this.nudTankVolume.Name = "nudTankVolume";
             this.nudTankVolume.Size = new System.Drawing.Size(201, 65);
             this.nudTankVolume.TabIndex = 619;
@@ -345,8 +233,8 @@
             // 
             // nudZeroVolume
             // 
-            this.nudZeroVolume.Location = new System.Drawing.Point(259, 225);
-            this.nudZeroVolume.Maximum = 10000D;
+            this.nudZeroVolume.Location = new System.Drawing.Point(259, 172);
+            this.nudZeroVolume.Maximum = 100000D;
             this.nudZeroVolume.Name = "nudZeroVolume";
             this.nudZeroVolume.Size = new System.Drawing.Size(201, 65);
             this.nudZeroVolume.TabIndex = 615;
@@ -355,7 +243,7 @@
             // nudSprayRateSet2
             // 
             this.nudSprayRateSet2.DecimalPlaces = 1;
-            this.nudSprayRateSet2.Location = new System.Drawing.Point(541, 222);
+            this.nudSprayRateSet2.Location = new System.Drawing.Point(541, 169);
             this.nudSprayRateSet2.Maximum = 2000D;
             this.nudSprayRateSet2.Minimum = 3D;
             this.nudSprayRateSet2.Name = "nudSprayRateSet2";
@@ -365,7 +253,7 @@
             // 
             // nudSprayMinPressure
             // 
-            this.nudSprayMinPressure.Location = new System.Drawing.Point(37, 84);
+            this.nudSprayMinPressure.Location = new System.Drawing.Point(37, 31);
             this.nudSprayMinPressure.Minimum = 1D;
             this.nudSprayMinPressure.Name = "nudSprayMinPressure";
             this.nudSprayMinPressure.Size = new System.Drawing.Size(150, 65);
@@ -375,7 +263,7 @@
             // nudSprayRateSet1
             // 
             this.nudSprayRateSet1.DecimalPlaces = 1;
-            this.nudSprayRateSet1.Location = new System.Drawing.Point(541, 82);
+            this.nudSprayRateSet1.Location = new System.Drawing.Point(541, 29);
             this.nudSprayRateSet1.Maximum = 2000D;
             this.nudSprayRateSet1.Minimum = 3D;
             this.nudSprayRateSet1.Name = "nudSprayRateSet1";
@@ -390,7 +278,7 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(45)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(752, 498);
+            this.ClientSize = new System.Drawing.Size(752, 424);
             this.ControlBox = false;
             this.Controls.Add(this.nudRateAlarmPercent);
             this.Controls.Add(this.label6);
@@ -404,14 +292,6 @@
             this.Controls.Add(this.lblAppliedVolume);
             this.Controls.Add(this.nudSprayRateSet2);
             this.Controls.Add(this.lblRateSet2);
-            this.Controls.Add(this.lblAcresAvailable);
-            this.Controls.Add(this.lblStatArea);
-            this.Controls.Add(this.lblTankRemain);
-            this.Controls.Add(this.label16);
-            this.Controls.Add(this.lblVolumeApplied);
-            this.Controls.Add(this.label14);
-            this.Controls.Add(this.lblVolumeTank);
-            this.Controls.Add(this.label7);
             this.Controls.Add(this.nudSprayMinPressure);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.nudSprayRateSet1);
@@ -439,14 +319,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label lblRateSet1;
         private NudlessNumericUpDown nudSprayRateSet1;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label lblVolumeTank;
-        private System.Windows.Forms.Label lblVolumeApplied;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label lblTankRemain;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Label lblAcresAvailable;
-        private System.Windows.Forms.Label lblStatArea;
         private NudlessNumericUpDown nudSprayRateSet2;
         private System.Windows.Forms.Label lblRateSet2;
         private System.Windows.Forms.Label label2;
@@ -457,7 +329,6 @@
         private System.Windows.Forms.Label lblAppliedVolume;
         private NudlessNumericUpDown nudTankVolume;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Timer timer1;
         private NudlessNumericUpDown nudNudge;
         private System.Windows.Forms.Label label5;
         private NudlessNumericUpDown nudRateAlarmPercent;

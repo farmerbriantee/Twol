@@ -30,8 +30,6 @@ namespace Twol
 
         public bool isUDPNetworkConnected, isUDPNetworkConnectedTool, isUDPMonitorOn;
 
-        public bool isGPSToolActive = false;
-
         public IPEndPoint epModule = new IPEndPoint(IPAddress.Parse(
             Settings.IO.etIP_SubnetOne.ToString() + "." +
             Settings.IO.etIP_SubnetTwo.ToString() + "." +

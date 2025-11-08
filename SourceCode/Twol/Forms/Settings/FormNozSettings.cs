@@ -23,47 +23,31 @@ namespace Twol
 
         private void FormDisplaySettings_Load(object sender, EventArgs e)
         {
+            if (Settings.User.isMetric)
+            {
+                nudSprayRateSet1.DecimalPlaces = 0;
+                nudSprayRateSet2.DecimalPlaces = 0;
+            }
+            else
+            {
+                nudSprayRateSet1.DecimalPlaces = 1;
+                nudSprayRateSet2.Maximum = 99.9;
+            }
+
+            nudSprayRateSet1.Maximum = 999;
+            nudSprayRateSet1.Minimum = 1;
+            nudSprayRateSet2.Maximum = 999;
+            nudSprayRateSet2.Minimum = 1;
             nudSprayRateSet1.Value = Settings.Tool.setNozz.volumePerAreaSet1;
             nudSprayRateSet2.Value = Settings.Tool.setNozz.volumePerAreaSet2;
             nudSprayMinPressure.Value = Settings.Tool.setNozz.pressureMin;
 
-            if (Settings.User.isMetric)
-            {
-                lblRateSet1.Text = (Settings.User.isMetric ? " L/Ha" : " GPA");
-                lblRateSet2.Text = (Settings.User.isMetric ? " L/Ha" : " GPA");
-                nudSprayRateSet1.Maximum = 999;
-                nudSprayRateSet1.Minimum = 5;
-                nudSprayRateSet1.DecimalPlaces = 0;
-                nudSprayRateSet2.Maximum = 999;
-                nudSprayRateSet2.Minimum = 5;
-                nudSprayRateSet2.DecimalPlaces = 0;
-
-                lblVolumeTank.Text = Settings.Tool.setNozz.volumeTankStart.ToString();
-                lblVolumeApplied.Text = Settings.Tool.setNozz.volumeApplied.ToString();
-                lblAppliedVolume.Text = (Settings.User.isMetric ? "Liters" : "Gallons") + " Applied";
-                lblStatArea.Text = "Ha";
-            }
-            else
-            {
-                lblRateSet1.Text = (Settings.User.isMetric ? " L/Ha" : " GPA");
-                lblRateSet2.Text = (Settings.User.isMetric ? " L/Ha" : " GPA");
-                nudSprayRateSet1.Maximum = 99.9;
-                nudSprayRateSet1.Minimum = 1;
-                nudSprayRateSet1.DecimalPlaces = 1;
-                nudSprayRateSet2.Maximum = 99.9;
-                nudSprayRateSet2.Minimum = 1;
-                nudSprayRateSet2.DecimalPlaces = 1;
-                lblAppliedVolume.Text = (Settings.User.isMetric ? "Liters" : "Gallons") + "Applied";
-                lblStatArea.Text = "Acre";
-            }
+            lblRateSet1.Text = (mf.nozz.unitVolumeWeightRate[Settings.Tool.setNozz.unitVolumeWeightRateIdx]);
+            lblRateSet2.Text = (mf.nozz.unitVolumeWeightRate[Settings.Tool.setNozz.unitVolumeWeightRateIdx]);
+            lblAppliedVolume.Text = (mf.nozz.unitVolumeWeight[Settings.Tool.setNozz.unitVolumeWeightRateIdx]) + " Applied";
 
             nudTankVolume.Value = Settings.Tool.setNozz.volumeTankStart;
             nudZeroVolume.Value = Settings.Tool.setNozz.volumeApplied;
-
-            lblVolumeTank.Text = Settings.Tool.setNozz.volumeTankStart.ToString();
-            lblVolumeApplied.Text = Settings.Tool.setNozz.volumeApplied.ToString("N1");
-            lblTankRemain.Text = (Settings.Tool.setNozz.volumeTankStart - Settings.Tool.setNozz.volumeApplied).ToString("N1");
-            lblAcresAvailable.Text = ((Settings.Tool.setNozz.volumeTankStart - Settings.Tool.setNozz.volumeApplied) / mf.nozz.volumePerAreaSetSelected).ToString("N1");
 
             nudNudge.Value = Settings.Tool.setNozz.rateNudge;
             nudRateAlarmPercent.Value = Settings.Tool.setNozz.rateAlarmPercent * 100;
@@ -143,14 +127,6 @@ namespace Twol
 
             PGN_225.pgn[PGN_225.zeroTankVolumeLo] = 0;
             PGN_225.pgn[PGN_225.zeroTankVolumeHi] = 0;
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            lblVolumeTank.Text = Settings.Tool.setNozz.volumeTankStart.ToString();
-            lblVolumeApplied.Text = Settings.Tool.setNozz.volumeApplied.ToString("N1");
-            lblTankRemain.Text = (Settings.Tool.setNozz.volumeTankStart - Settings.Tool.setNozz.volumeApplied).ToString("N1");
-            lblAcresAvailable.Text = ((Settings.Tool.setNozz.volumeTankStart - Settings.Tool.setNozz.volumeApplied) / mf.nozz.volumePerAreaSetSelected).ToString("N1");
         }
 
         private void nudNudge_ValueChanged(object sender, EventArgs e)

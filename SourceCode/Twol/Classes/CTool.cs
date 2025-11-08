@@ -69,7 +69,7 @@ namespace Twol
 
         public void DrawTool()
         {
-            if (!mf.isGPSToolActive)
+            if (!Settings.Tool.setToolSteer.isGPSToolActive)
             {
                 GL.Translate(mf.pivotAxlePos.easting, mf.pivotAxlePos.northing, 0);
 
@@ -90,7 +90,7 @@ namespace Twol
 
                     GL.Translate(
                         Math.Sin(mf.fixHeading - modelAngle) * (-mf.vehicle.wheelbase + Settings.Tool.hitchLength),
-                        Math.Cos(mf.fixHeading - modelAngle) * (-mf.vehicle.wheelbase + Settings.Tool.hitchLength), 
+                        Math.Cos(mf.fixHeading - modelAngle) * (-mf.vehicle.wheelbase + Settings.Tool.hitchLength),
                         0);
                 }
 
@@ -200,22 +200,22 @@ namespace Twol
                     trailingTool -= Settings.Tool.trailingToolToPivotLength;
                 }
 
-                    //look ahead lines
-                    GL.LineWidth(3);
-                    GL.Begin(PrimitiveType.Lines);
+                //look ahead lines
+                GL.LineWidth(3);
+                GL.Begin(PrimitiveType.Lines);
 
-                    //lookahead section on
-                    GL.Color3(0.20f, 0.7f, 0.2f);
-                    GL.Vertex3(mf.tool.farLeftPosition, (mf.tool.lookAheadDistanceOnPixelsLeft) * 0.1 + trailingTool, 0);
-                    GL.Vertex3(mf.tool.farRightPosition, (mf.tool.lookAheadDistanceOnPixelsRight) * 0.1 + trailingTool, 0);
+                //lookahead section on
+                GL.Color3(0.20f, 0.7f, 0.2f);
+                GL.Vertex3(mf.tool.farLeftPosition, (mf.tool.lookAheadDistanceOnPixelsLeft) * 0.1 + trailingTool, 0);
+                GL.Vertex3(mf.tool.farRightPosition, (mf.tool.lookAheadDistanceOnPixelsRight) * 0.1 + trailingTool, 0);
 
-                    //lookahead section off
-                    GL.Color3(0.70f, 0.2f, 0.2f);
-                    GL.Vertex3(mf.tool.farLeftPosition, (mf.tool.lookAheadDistanceOffPixelsLeft) * 0.1 + trailingTool, 0);
-                    GL.Vertex3(mf.tool.farRightPosition, (mf.tool.lookAheadDistanceOffPixelsRight) * 0.1 + trailingTool, 0);
+                //lookahead section off
+                GL.Color3(0.70f, 0.2f, 0.2f);
+                GL.Vertex3(mf.tool.farLeftPosition, (mf.tool.lookAheadDistanceOffPixelsLeft) * 0.1 + trailingTool, 0);
+                GL.Vertex3(mf.tool.farRightPosition, (mf.tool.lookAheadDistanceOffPixelsRight) * 0.1 + trailingTool, 0);
 
-                    GL.End();
-                
+                GL.End();
+
                 //draw the sections
                 GL.LineWidth(2);
 
@@ -224,7 +224,7 @@ namespace Twol
                 if (hite < 0.5) hite = 0.5;
 
                 //TooDoo
-                hite = 0.2;
+                //hite = 0.2;
 
                 for (int j = 0; j < mf.section.Count; j++)
                 {
@@ -376,7 +376,7 @@ namespace Twol
                 if (hite < 0.5) hite = 0.5;
 
                 //TooDoo
-                hite = 0.2;
+                //hite = 0.2;
 
                 for (int j = 0; j < mf.section.Count; j++)
                 {

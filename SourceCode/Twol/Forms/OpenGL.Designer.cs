@@ -503,7 +503,7 @@ namespace Twol
                     {
 
                         //Draw Tool antenna
-                        if (isGPSToolActive)
+                        if (Settings.Tool.setToolSteer.isGPSToolActive)
                         {
                             GL.PointSize(16);
                             GL.Begin(PrimitiveType.Points);
@@ -2244,7 +2244,7 @@ namespace Twol
 
                 font.DrawText(center, 2, hede, textSize);
 
-                if (isGPSToolActive && !double.IsNaN(gyd.distanceFromCurrentLineTool))
+                if (Settings.Tool.setToolSteer.isGPSToolActive && !double.IsNaN(gyd.distanceFromCurrentLineTool))
                 {
                     //tool xte
                     avgPivDistanceTool = avgPivDistanceTool * 0.5 + gyd.distanceFromCurrentLineTool * 0.5;

@@ -144,7 +144,7 @@ namespace Twol
                     else steerAngle *= (1 - Math.Abs(distanceFromCurrentLine));
 
                     //Tool GPS
-                    if (mf.isGPSToolActive && mf.gyd.FindClosestSegment(curList, false, mf.pnTool.fix, out A, out B))
+                    if (Settings.Tool.setToolSteer.isGPSToolActive && mf.gyd.FindClosestSegment(curList, false, mf.pnTool.fix, out A, out B))
                     {
                         distanceFromCurrentLineTool = FindDistanceToSegment(mf.pnTool.fix, curList[A], curList[B], out _, out _, true, false, false);
 
@@ -258,7 +258,7 @@ namespace Twol
 
                                     //goalPointDistance is longer than remaining u-turn
                                     completeUturn = true;
-                                    
+
                                     break;
                                 }
                                 else
@@ -296,7 +296,7 @@ namespace Twol
                     mf.vehicle.modeActualHeadingError = glm.toDegrees(steerHeadingError);
 
                     //Tool GPS
-                    if (mf.isGPSToolActive && FindClosestSegment(curList, false, mf.pnTool.fix, out A, out B))
+                    if (Settings.Tool.setToolSteer.isGPSToolActive && FindClosestSegment(curList, false, mf.pnTool.fix, out A, out B))
                     {
                         distanceFromCurrentLineTool = FindDistanceToSegment(mf.pnTool.fix, curList[A], curList[B], out _, out _, true, false, false);
 

@@ -112,7 +112,7 @@ namespace Twol
 
             mf.sentenceCounter = 0;
 
-            if (mf.isGPSToolActive)
+            if (Settings.Tool.setToolSteer.isGPSToolActive)
             {
                 mf.pnTool.fix.easting = mf.toolPivotPos.easting;
                 mf.pnTool.fix.northing = mf.toolPivotPos.northing;

@@ -477,7 +477,7 @@ namespace Twol
                     PGN_254.pgn[PGN_254.steerAngleLo] = unchecked((byte)(angleX100));
                 }
 
-                if (isGPSToolActive)
+                if (Settings.Tool.setToolSteer.isGPSToolActive)
                 {
                     PGN_233.pgn[PGN_233.speed10] = unchecked((byte)((int)(Math.Abs(avgSpeed) * 10.0)));
 
@@ -824,7 +824,7 @@ namespace Twol
             }
 
             //tool attached via a trailing hitch
-            if (isGPSToolActive && Settings.Tool.isToolTrailing && !Settings.Tool.isToolTBT && !timerSim.Enabled)
+            if (Settings.Tool.setToolSteer.isGPSToolActive && Settings.Tool.isToolTrailing && !Settings.Tool.isToolTBT && !timerSim.Enabled)
             {
                 tankPos.heading = fixHeading;
                 tankPos.easting = hitchPos.easting;

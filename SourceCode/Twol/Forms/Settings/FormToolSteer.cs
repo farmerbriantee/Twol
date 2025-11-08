@@ -1,9 +1,6 @@
-﻿using Twol.Classes;
-
-using Twol.Properties;
-using System;
-using System.Drawing;
+﻿using System;
 using System.Windows.Forms;
+using Twol.Classes;
 
 namespace Twol
 {
@@ -52,7 +49,7 @@ namespace Twol
                 Left = 0;
             }
 
-            cboxGPSTool.Checked = mf.isGPSToolActive;
+            cboxGPSTool.Checked = Settings.Tool.setToolSteer.isGPSToolActive;
 
             //settings
             hsbarPGain_Tool.Value = Settings.Tool.setToolSteer.gainP;
@@ -149,7 +146,7 @@ namespace Twol
                 PGN_232.pgn[PGN_232.minPWM] = (byte)hsbarMinPWM_Tool.Value;
                 PGN_232.pgn[PGN_232.highPWM] = (byte)hsbarHighPWM_Tool.Value;
                 PGN_232.pgn[PGN_232.countsPerDegree] = (byte)hsbarCPD_Tool.Value;
-                PGN_232.pgn[PGN_232.ackerman] = (byte) hsbarAckermann_Tool.Value;
+                PGN_232.pgn[PGN_232.ackerman] = (byte)hsbarAckermann_Tool.Value;
 
                 PGN_232.pgn[PGN_232.wasOffsetHi] = unchecked((byte)(hsbarZeroWAS_Tool.Value >> 8));
                 PGN_232.pgn[PGN_232.wasOffsetLo] = unchecked((byte)(hsbarZeroWAS_Tool.Value));
@@ -203,15 +200,15 @@ namespace Twol
         }
 
         private void tabTool_Leave(object sender, EventArgs e)
-        { 
+        {
         }
 
         private void cboxGPSTool_Click(object sender, EventArgs e)
         {
-            mf.isGPSToolActive = cboxGPSTool.Checked;
+            Settings.Tool.setToolSteer.isGPSToolActive = cboxGPSTool.Checked;
             mf.YesMessageBox("You must restart TWOL to make changes to the networking");
             Log.EventWriter("GPS Tool set to: " + cboxGPSTool.Checked.ToString());
-            Settings.Tool.setToolSteer.isGPSToolActive = mf.isGPSToolActive;
+            Settings.Tool.setToolSteer.isGPSToolActive = Settings.Tool.setToolSteer.isGPSToolActive;
         }
 
         //config tool 
@@ -333,7 +330,7 @@ namespace Twol
             if (windowSizeState++ > 0) windowSizeState = 0;
             if (windowSizeState == 1)
             {
-                this.Size = new System.Drawing.Size(910,550);
+                this.Size = new System.Drawing.Size(910, 550);
                 btnExpand.Image = Properties.Resources.ArrowLeft;
             }
             else if (windowSizeState == 0)

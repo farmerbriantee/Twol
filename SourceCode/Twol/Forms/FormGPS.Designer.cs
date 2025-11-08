@@ -175,7 +175,7 @@ namespace Twol
             this.btnGPSTool = new System.Windows.Forms.Button();
             this.lblHardwareMessage = new System.Windows.Forms.Label();
             this.tlpNozzle = new System.Windows.Forms.TableLayoutPanel();
-            this.label5 = new System.Windows.Forms.Label();
+            this.lblTankArea = new System.Windows.Forms.Label();
             this.btnSprayPSI = new System.Windows.Forms.Button();
             this.lblPressure = new System.Windows.Forms.Label();
             this.btnSprayVolumeTotal = new System.Windows.Forms.Button();
@@ -631,7 +631,7 @@ namespace Twol
             this.toolStripMenuFlagForm.Image = global::Twol.Properties.Resources.FileEditName;
             this.toolStripMenuFlagForm.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripMenuFlagForm.Name = "toolStripMenuFlagForm";
-            this.toolStripMenuFlagForm.Size = new System.Drawing.Size(259, 70);
+            this.toolStripMenuFlagForm.Size = new System.Drawing.Size(267, 70);
             this.toolStripMenuFlagForm.Text = "toolStripMenuItem3";
             this.toolStripMenuFlagForm.Click += new System.EventHandler(this.toolStripMenuFlagForm_Click);
             // 
@@ -983,7 +983,7 @@ namespace Twol
             this.panelNavigation.Controls.Add(this.btn2D, 0, 1);
             this.panelNavigation.Controls.Add(this.btnGrid, 1, 2);
             this.panelNavigation.Controls.Add(this.btnN2D, 0, 2);
-            this.panelNavigation.Location = new System.Drawing.Point(639, 92);
+            this.panelNavigation.Location = new System.Drawing.Point(685, 92);
             this.panelNavigation.Name = "panelNavigation";
             this.panelNavigation.RowCount = 5;
             this.panelNavigation.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
@@ -1576,7 +1576,7 @@ namespace Twol
             this.flp1.Controls.Add(this.btnTracksOff);
             this.flp1.Controls.Add(this.btnRefNudge);
             this.flp1.FlowDirection = System.Windows.Forms.FlowDirection.BottomUp;
-            this.flp1.Location = new System.Drawing.Point(546, 80);
+            this.flp1.Location = new System.Drawing.Point(578, 80);
             this.flp1.Name = "flp1";
             this.flp1.Size = new System.Drawing.Size(86, 488);
             this.flp1.TabIndex = 539;
@@ -2457,7 +2457,7 @@ namespace Twol
             this.tlpNozzle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 16F));
             this.tlpNozzle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.625F));
             this.tlpNozzle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.375F));
-            this.tlpNozzle.Controls.Add(this.label5, 2, 5);
+            this.tlpNozzle.Controls.Add(this.lblTankArea, 2, 5);
             this.tlpNozzle.Controls.Add(this.btnSprayPSI, 1, 1);
             this.tlpNozzle.Controls.Add(this.lblPressure, 1, 2);
             this.tlpNozzle.Controls.Add(this.btnSprayVolumeTotal, 1, 3);
@@ -2487,21 +2487,21 @@ namespace Twol
             this.tlpNozzle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.37793F));
             this.tlpNozzle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.25506F));
             this.tlpNozzle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpNozzle.Size = new System.Drawing.Size(181, 598);
+            this.tlpNozzle.Size = new System.Drawing.Size(223, 598);
             this.tlpNozzle.TabIndex = 545;
             this.tlpNozzle.Visible = false;
             // 
-            // label5
+            // lblTankArea
             // 
-            this.label5.BackColor = System.Drawing.Color.Transparent;
-            this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label5.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(240)))), ((int)(((byte)(255)))));
-            this.label5.Location = new System.Drawing.Point(102, 197);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(76, 25);
-            this.label5.TabIndex = 561;
-            this.label5.Text = "Ha";
+            this.lblTankArea.BackColor = System.Drawing.Color.Transparent;
+            this.lblTankArea.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblTankArea.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTankArea.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(240)))), ((int)(((byte)(255)))));
+            this.lblTankArea.Location = new System.Drawing.Point(123, 197);
+            this.lblTankArea.Name = "lblTankArea";
+            this.lblTankArea.Size = new System.Drawing.Size(97, 25);
+            this.lblTankArea.TabIndex = 561;
+            this.lblTankArea.Text = "Ha";
             // 
             // btnSprayPSI
             // 
@@ -2519,7 +2519,7 @@ namespace Twol
             this.btnSprayPSI.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSprayPSI.ForeColor = System.Drawing.Color.Yellow;
             this.btnSprayPSI.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSprayPSI.Location = new System.Drawing.Point(52, 34);
+            this.btnSprayPSI.Location = new System.Drawing.Point(73, 34);
             this.btnSprayPSI.Name = "btnSprayPSI";
             this.btnSprayPSI.Size = new System.Drawing.Size(92, 48);
             this.btnSprayPSI.TabIndex = 554;
@@ -2534,7 +2534,7 @@ namespace Twol
             this.tlpNozzle.SetColumnSpan(this.lblPressure, 2);
             this.lblPressure.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPressure.ForeColor = System.Drawing.Color.White;
-            this.lblPressure.Location = new System.Drawing.Point(35, 85);
+            this.lblPressure.Location = new System.Drawing.Point(56, 85);
             this.lblPressure.Name = "lblPressure";
             this.lblPressure.Size = new System.Drawing.Size(126, 19);
             this.lblPressure.TabIndex = 553;
@@ -2559,7 +2559,7 @@ namespace Twol
             this.btnSprayVolumeTotal.Location = new System.Drawing.Point(16, 117);
             this.btnSprayVolumeTotal.Margin = new System.Windows.Forms.Padding(0);
             this.btnSprayVolumeTotal.Name = "btnSprayVolumeTotal";
-            this.btnSprayVolumeTotal.Size = new System.Drawing.Size(165, 51);
+            this.btnSprayVolumeTotal.Size = new System.Drawing.Size(207, 51);
             this.btnSprayVolumeTotal.TabIndex = 552;
             this.btnSprayVolumeTotal.Text = "9999.9";
             this.btnSprayVolumeTotal.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -2568,14 +2568,14 @@ namespace Twol
             // 
             // lbl_Volume
             // 
-            this.lbl_Volume.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lbl_Volume.BackColor = System.Drawing.Color.Transparent;
             this.tlpNozzle.SetColumnSpan(this.lbl_Volume, 2);
+            this.lbl_Volume.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbl_Volume.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_Volume.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(240)))), ((int)(((byte)(255)))));
-            this.lbl_Volume.Location = new System.Drawing.Point(35, 168);
+            this.lbl_Volume.Location = new System.Drawing.Point(19, 168);
             this.lbl_Volume.Name = "lbl_Volume";
-            this.lbl_Volume.Size = new System.Drawing.Size(126, 24);
+            this.lbl_Volume.Size = new System.Drawing.Size(201, 29);
             this.lbl_Volume.TabIndex = 551;
             this.lbl_Volume.Text = "Tank Gallons";
             this.lbl_Volume.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -2593,7 +2593,7 @@ namespace Twol
             this.cboxSprayAutoManual.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboxSprayAutoManual.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxSprayAutoManual.ForeColor = System.Drawing.Color.White;
-            this.cboxSprayAutoManual.Location = new System.Drawing.Point(35, 460);
+            this.cboxSprayAutoManual.Location = new System.Drawing.Point(56, 460);
             this.cboxSprayAutoManual.Name = "cboxSprayAutoManual";
             this.cboxSprayAutoManual.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.cboxSprayAutoManual.Size = new System.Drawing.Size(126, 55);
@@ -2620,7 +2620,7 @@ namespace Twol
             this.cboxRate1Rate2Select.Location = new System.Drawing.Point(16, 299);
             this.cboxRate1Rate2Select.Margin = new System.Windows.Forms.Padding(0);
             this.cboxRate1Rate2Select.Name = "cboxRate1Rate2Select";
-            this.cboxRate1Rate2Select.Size = new System.Drawing.Size(165, 49);
+            this.cboxRate1Rate2Select.Size = new System.Drawing.Size(207, 49);
             this.cboxRate1Rate2Select.TabIndex = 602;
             this.cboxRate1Rate2Select.Text = "Rate: 1";
             this.cboxRate1Rate2Select.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2641,7 +2641,7 @@ namespace Twol
             this.btnSprayRateUp.ForeColor = System.Drawing.Color.Black;
             this.btnSprayRateUp.Image = global::Twol.Properties.Resources.UpArrow64;
             this.btnSprayRateUp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSprayRateUp.Location = new System.Drawing.Point(109, 367);
+            this.btnSprayRateUp.Location = new System.Drawing.Point(140, 367);
             this.btnSprayRateUp.Margin = new System.Windows.Forms.Padding(0);
             this.btnSprayRateUp.Name = "btnSprayRateUp";
             this.btnSprayRateUp.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -2665,7 +2665,7 @@ namespace Twol
             this.btnSprayRateDn.ForeColor = System.Drawing.Color.Black;
             this.btnSprayRateDn.Image = global::Twol.Properties.Resources.DnArrow64;
             this.btnSprayRateDn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSprayRateDn.Location = new System.Drawing.Point(26, 367);
+            this.btnSprayRateDn.Location = new System.Drawing.Point(37, 367);
             this.btnSprayRateDn.Margin = new System.Windows.Forms.Padding(0);
             this.btnSprayRateDn.Name = "btnSprayRateDn";
             this.btnSprayRateDn.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -2690,7 +2690,7 @@ namespace Twol
             this.btnNozConfig.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNozConfig.ForeColor = System.Drawing.Color.Aqua;
             this.btnNozConfig.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnNozConfig.Location = new System.Drawing.Point(56, 539);
+            this.btnNozConfig.Location = new System.Drawing.Point(77, 539);
             this.btnNozConfig.Name = "btnNozConfig";
             this.btnNozConfig.Size = new System.Drawing.Size(84, 48);
             this.btnNozConfig.TabIndex = 553;
@@ -2720,7 +2720,7 @@ namespace Twol
             this.lblGPM_Set.Location = new System.Drawing.Point(16, 0);
             this.lblGPM_Set.Margin = new System.Windows.Forms.Padding(0);
             this.lblGPM_Set.Name = "lblGPM_Set";
-            this.lblGPM_Set.Size = new System.Drawing.Size(83, 31);
+            this.lblGPM_Set.Size = new System.Drawing.Size(104, 31);
             this.lblGPM_Set.TabIndex = 612;
             this.lblGPM_Set.Text = "Flow";
             this.lblGPM_Set.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2739,10 +2739,10 @@ namespace Twol
             this.btnSprayGalPerMinActual.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSprayGalPerMinActual.ForeColor = System.Drawing.Color.Yellow;
             this.btnSprayGalPerMinActual.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSprayGalPerMinActual.Location = new System.Drawing.Point(99, 0);
+            this.btnSprayGalPerMinActual.Location = new System.Drawing.Point(120, 0);
             this.btnSprayGalPerMinActual.Margin = new System.Windows.Forms.Padding(0);
             this.btnSprayGalPerMinActual.Name = "btnSprayGalPerMinActual";
-            this.btnSprayGalPerMinActual.Size = new System.Drawing.Size(82, 31);
+            this.btnSprayGalPerMinActual.Size = new System.Drawing.Size(103, 31);
             this.btnSprayGalPerMinActual.TabIndex = 613;
             this.btnSprayGalPerMinActual.Text = "10.9";
             this.btnSprayGalPerMinActual.UseVisualStyleBackColor = false;
@@ -2765,7 +2765,7 @@ namespace Twol
             this.btnSprayGalPerAcre.Location = new System.Drawing.Point(16, 222);
             this.btnSprayGalPerAcre.Margin = new System.Windows.Forms.Padding(0);
             this.btnSprayGalPerAcre.Name = "btnSprayGalPerAcre";
-            this.btnSprayGalPerAcre.Size = new System.Drawing.Size(165, 63);
+            this.btnSprayGalPerAcre.Size = new System.Drawing.Size(207, 63);
             this.btnSprayGalPerAcre.TabIndex = 546;
             this.btnSprayGalPerAcre.Text = "999.9";
             this.btnSprayGalPerAcre.UseVisualStyleBackColor = false;
@@ -2779,7 +2779,7 @@ namespace Twol
             this.lblAreaPossible.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(240)))), ((int)(((byte)(255)))));
             this.lblAreaPossible.Location = new System.Drawing.Point(19, 197);
             this.lblAreaPossible.Name = "lblAreaPossible";
-            this.lblAreaPossible.Size = new System.Drawing.Size(77, 25);
+            this.lblAreaPossible.Size = new System.Drawing.Size(98, 25);
             this.lblAreaPossible.TabIndex = 618;
             this.lblAreaPossible.Text = "10.9";
             this.lblAreaPossible.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -2924,7 +2924,7 @@ namespace Twol
             this.panel_IO.Controls.Add(this.lblFromGPSTool);
             this.panel_IO.Controls.Add(this.lblFromGPS);
             this.panel_IO.Controls.Add(this.lblToGPS);
-            this.panel_IO.Location = new System.Drawing.Point(292, 61);
+            this.panel_IO.Location = new System.Drawing.Point(315, 61);
             this.panel_IO.Name = "panel_IO";
             this.panel_IO.Size = new System.Drawing.Size(245, 544);
             this.panel_IO.TabIndex = 547;
@@ -4322,7 +4322,7 @@ namespace Twol
         private System.Windows.Forms.Label lblrcUPM_3;
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.Label label31;
-        public System.Windows.Forms.Label label5;
+        public System.Windows.Forms.Label lblTankArea;
         public System.Windows.Forms.Label lblAreaPossible;
     }
 }
