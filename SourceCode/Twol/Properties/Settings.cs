@@ -58,6 +58,7 @@ namespace Twol
 
             public double setDisplay_camPitch = -62;
             public double setDisplay_camZoom = 9.0;
+            public int setDisplay_panMove = 0;
             public bool setDisplay_isBrightnessOn = false;
             public bool setDisplay_isDayMode = true;
             public bool setDisplay_isHardwareMessages = false;

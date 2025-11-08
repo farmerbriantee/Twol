@@ -240,7 +240,6 @@ namespace Twol
                 //used for alarm flashing
                 isFlashOnOff = !isFlashOnOff;
 
-
                 lblFix.Text = FixQuality + "Age: " + pn.age.ToString("N1");
 
                 switch (pn.fixQuality)
@@ -263,7 +262,6 @@ namespace Twol
                 {
                     if (trackMethodPanelCounter-- < 1) flp1.Visible = false;
                 }
-
 
                 if (isJobStarted && Settings.Vehicle.setApp_isNozzleApp)
                 {
@@ -755,7 +753,6 @@ namespace Twol
                 lblrcUPM_1.Text = "-";
                 lblrcUPM_2.Text = "-";
                 lblrcUPM_3.Text = "-";
-
 
                 //data
                 lblrcRateActual_0.Text = "-";
@@ -1417,14 +1414,14 @@ namespace Twol
 
                     if (point.Y < 420 && point.Y > 320)
                     {
-                        camera.movePan -= 1;
+                        Settings.User.setDisplay_panMove -= 1;
+                        if (Settings.User.setDisplay_panMove < -4) Settings.User.setDisplay_panMove = -4;
                     }
 
                     if (point.Y < 480 && point.Y > 400)
                     {
-                        camera.movePan += 1;
-                    }
-
+                        Settings.User.setDisplay_panMove += 1;
+                        if (Settings.User.setDisplay_panMove > 4) Settings.User.setDisplay_panMove = 4;                   }
                 }
 
                 //vehicle direcvtion reset
