@@ -45,7 +45,7 @@
             this.nudTankVolume = new Twol.NudlessNumericUpDown();
             this.nudZeroVolume = new Twol.NudlessNumericUpDown();
             this.nudRateSet2 = new Twol.NudlessNumericUpDown();
-            this.nudSprayMinPressure = new Twol.NudlessNumericUpDown();
+            this.nudMinPressure = new Twol.NudlessNumericUpDown();
             this.nudRateSet1 = new Twol.NudlessNumericUpDown();
             this.SuspendLayout();
             // 
@@ -246,19 +246,19 @@
             this.nudRateSet2.Location = new System.Drawing.Point(541, 169);
             this.nudRateSet2.Maximum = 2000D;
             this.nudRateSet2.Minimum = 3D;
-            this.nudRateSet2.Name = "nudSprayRateSet2";
+            this.nudRateSet2.Name = "nudRateSet2";
             this.nudRateSet2.Size = new System.Drawing.Size(186, 65);
             this.nudRateSet2.TabIndex = 611;
-            this.nudRateSet2.ValueChanged += new System.EventHandler(this.nudSprayRateSet2_ValueChanged);
+            this.nudRateSet2.ValueChanged += new System.EventHandler(this.nudRateSet2_ValueChanged);
             // 
-            // nudSprayMinPressure
+            // nudMinPressure
             // 
-            this.nudSprayMinPressure.Location = new System.Drawing.Point(37, 31);
-            this.nudSprayMinPressure.Minimum = 1D;
-            this.nudSprayMinPressure.Name = "nudSprayMinPressure";
-            this.nudSprayMinPressure.Size = new System.Drawing.Size(150, 65);
-            this.nudSprayMinPressure.TabIndex = 591;
-            this.nudSprayMinPressure.ValueChanged += new System.EventHandler(this.nudSprayMinPressure_ValueChanged);
+            this.nudMinPressure.Location = new System.Drawing.Point(37, 31);
+            this.nudMinPressure.Minimum = 1D;
+            this.nudMinPressure.Name = "nudMinPressure";
+            this.nudMinPressure.Size = new System.Drawing.Size(150, 65);
+            this.nudMinPressure.TabIndex = 591;
+            this.nudMinPressure.ValueChanged += new System.EventHandler(this.nudMinPressure_ValueChanged);
             // 
             // nudRateSet1
             // 
@@ -266,10 +266,10 @@
             this.nudRateSet1.Location = new System.Drawing.Point(541, 29);
             this.nudRateSet1.Maximum = 2000D;
             this.nudRateSet1.Minimum = 3D;
-            this.nudRateSet1.Name = "nudSprayRateSet1";
+            this.nudRateSet1.Name = "nudRateSet1";
             this.nudRateSet1.Size = new System.Drawing.Size(186, 65);
             this.nudRateSet1.TabIndex = 577;
-            this.nudRateSet1.ValueChanged += new System.EventHandler(this.nudSprayRateSet1_ValueChanged);
+            this.nudRateSet1.ValueChanged += new System.EventHandler(this.nudRateSet1_ValueChanged);
             // 
             // FormNozSettings
             // 
@@ -292,7 +292,7 @@
             this.Controls.Add(this.lblAppliedVolume);
             this.Controls.Add(this.nudRateSet2);
             this.Controls.Add(this.lblRateSet2);
-            this.Controls.Add(this.nudSprayMinPressure);
+            this.Controls.Add(this.nudMinPressure);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.nudRateSet1);
             this.Controls.Add(this.bntOK);
@@ -315,7 +315,7 @@
 
         #endregion
         private System.Windows.Forms.Button bntOK;
-        private NudlessNumericUpDown nudSprayMinPressure;
+        private NudlessNumericUpDown nudMinPressure;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label lblRateSet1;
         private NudlessNumericUpDown nudRateSet1;

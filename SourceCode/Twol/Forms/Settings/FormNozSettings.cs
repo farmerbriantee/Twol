@@ -41,7 +41,7 @@ namespace Twol
             nudRateSet2.Minimum = 1;
             nudRateSet1.Value = Settings.Tool.setNozz.rateSet1;
             nudRateSet2.Value = Settings.Tool.setNozz.rateSet2;
-            nudSprayMinPressure.Value = Settings.Tool.setNozz.pressureMin;
+            nudMinPressure.Value = Settings.Tool.setNozz.pressureMin;
 
             lblRateSet1.Text = (mf.nozz.rateTextArr[Settings.Tool.setNozz.unitsIdx]);
             lblRateSet2.Text = (mf.nozz.rateTextArr[Settings.Tool.setNozz.unitsIdx]);
@@ -54,19 +54,19 @@ namespace Twol
             nudRateAlarmPercent.Value = Settings.Tool.setNozz.rateAlarmPercent * 100;
         }
 
-        private void nudSprayRateSet1_ValueChanged(object sender, EventArgs e)
+        private void nudRateSet1_ValueChanged(object sender, EventArgs e)
         {
             Settings.Tool.setNozz.rateSet1 = nudRateSet1.Value;
         }
 
-        private void nudSprayRateSet2_ValueChanged(object sender, EventArgs e)
+        private void nudRateSet2_ValueChanged(object sender, EventArgs e)
         {
             Settings.Tool.setNozz.rateSet2 = nudRateSet2.Value;
         }
 
-        private void nudSprayMinPressure_ValueChanged(object sender, EventArgs e)
+        private void nudMinPressure_ValueChanged(object sender, EventArgs e)
         {
-            Settings.Tool.setNozz.pressureMin = (int)nudSprayMinPressure.Value;
+            Settings.Tool.setNozz.pressureMin = (int)nudMinPressure.Value;
 
             PGN_226.pgn[PGN_226.minPressure] = unchecked((byte)(Settings.Tool.setNozz.pressureMin));
 
