@@ -309,8 +309,8 @@ namespace Twol
     public static class PGN_226
     {
         public static byte[] pgn = new byte[] { 0x80, 0x81, 0x7f, 226, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0xCC };
-        public static int flowCalLo = 5;
-        public static int flowCalHi = 6;
+        public static int calNumLo = 5;
+        public static int calNumHi = 6;
         public static int pressureCalLo = 7;
         public static int pressureCalHi = 8;
         public static int Kp = 9;

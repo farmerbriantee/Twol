@@ -44,9 +44,9 @@
             this.nudNudge = new Twol.NudlessNumericUpDown();
             this.nudTankVolume = new Twol.NudlessNumericUpDown();
             this.nudZeroVolume = new Twol.NudlessNumericUpDown();
-            this.nudSprayRateSet2 = new Twol.NudlessNumericUpDown();
+            this.nudRateSet2 = new Twol.NudlessNumericUpDown();
             this.nudSprayMinPressure = new Twol.NudlessNumericUpDown();
-            this.nudSprayRateSet1 = new Twol.NudlessNumericUpDown();
+            this.nudRateSet1 = new Twol.NudlessNumericUpDown();
             this.SuspendLayout();
             // 
             // bntOK
@@ -240,16 +240,16 @@
             this.nudZeroVolume.TabIndex = 615;
             this.nudZeroVolume.ValueChanged += new System.EventHandler(this.nudZeroVolume_ValueChanged);
             // 
-            // nudSprayRateSet2
+            // nudRateSet2
             // 
-            this.nudSprayRateSet2.DecimalPlaces = 1;
-            this.nudSprayRateSet2.Location = new System.Drawing.Point(541, 169);
-            this.nudSprayRateSet2.Maximum = 2000D;
-            this.nudSprayRateSet2.Minimum = 3D;
-            this.nudSprayRateSet2.Name = "nudSprayRateSet2";
-            this.nudSprayRateSet2.Size = new System.Drawing.Size(186, 65);
-            this.nudSprayRateSet2.TabIndex = 611;
-            this.nudSprayRateSet2.ValueChanged += new System.EventHandler(this.nudSprayRateSet2_ValueChanged);
+            this.nudRateSet2.DecimalPlaces = 1;
+            this.nudRateSet2.Location = new System.Drawing.Point(541, 169);
+            this.nudRateSet2.Maximum = 2000D;
+            this.nudRateSet2.Minimum = 3D;
+            this.nudRateSet2.Name = "nudSprayRateSet2";
+            this.nudRateSet2.Size = new System.Drawing.Size(186, 65);
+            this.nudRateSet2.TabIndex = 611;
+            this.nudRateSet2.ValueChanged += new System.EventHandler(this.nudSprayRateSet2_ValueChanged);
             // 
             // nudSprayMinPressure
             // 
@@ -260,16 +260,16 @@
             this.nudSprayMinPressure.TabIndex = 591;
             this.nudSprayMinPressure.ValueChanged += new System.EventHandler(this.nudSprayMinPressure_ValueChanged);
             // 
-            // nudSprayRateSet1
+            // nudRateSet1
             // 
-            this.nudSprayRateSet1.DecimalPlaces = 1;
-            this.nudSprayRateSet1.Location = new System.Drawing.Point(541, 29);
-            this.nudSprayRateSet1.Maximum = 2000D;
-            this.nudSprayRateSet1.Minimum = 3D;
-            this.nudSprayRateSet1.Name = "nudSprayRateSet1";
-            this.nudSprayRateSet1.Size = new System.Drawing.Size(186, 65);
-            this.nudSprayRateSet1.TabIndex = 577;
-            this.nudSprayRateSet1.ValueChanged += new System.EventHandler(this.nudSprayRateSet1_ValueChanged);
+            this.nudRateSet1.DecimalPlaces = 1;
+            this.nudRateSet1.Location = new System.Drawing.Point(541, 29);
+            this.nudRateSet1.Maximum = 2000D;
+            this.nudRateSet1.Minimum = 3D;
+            this.nudRateSet1.Name = "nudSprayRateSet1";
+            this.nudRateSet1.Size = new System.Drawing.Size(186, 65);
+            this.nudRateSet1.TabIndex = 577;
+            this.nudRateSet1.ValueChanged += new System.EventHandler(this.nudSprayRateSet1_ValueChanged);
             // 
             // FormNozSettings
             // 
@@ -290,11 +290,11 @@
             this.Controls.Add(this.btnZeroVolume);
             this.Controls.Add(this.nudZeroVolume);
             this.Controls.Add(this.lblAppliedVolume);
-            this.Controls.Add(this.nudSprayRateSet2);
+            this.Controls.Add(this.nudRateSet2);
             this.Controls.Add(this.lblRateSet2);
             this.Controls.Add(this.nudSprayMinPressure);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.nudSprayRateSet1);
+            this.Controls.Add(this.nudRateSet1);
             this.Controls.Add(this.bntOK);
             this.Controls.Add(this.lblRateSet1);
             this.Controls.Add(this.label2);
@@ -318,8 +318,8 @@
         private NudlessNumericUpDown nudSprayMinPressure;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label lblRateSet1;
-        private NudlessNumericUpDown nudSprayRateSet1;
-        private NudlessNumericUpDown nudSprayRateSet2;
+        private NudlessNumericUpDown nudRateSet1;
+        private NudlessNumericUpDown nudRateSet2;
         private System.Windows.Forms.Label lblRateSet2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;

@@ -754,8 +754,8 @@ namespace Twol
                     {
                         case 224:
                             {
-                                Settings.Tool.setNozz.volumeApplied = (Int16)((data[6] << 8) + data[5]) * 0.1;
-                                nozz.volumePerMinuteActual = (Int16)((data[8] << 8) + data[7]);
+                                Settings.Tool.setNozz.unitsApplied = (Int16)((data[6] << 8) + data[5]) * 0.1;
+                                nozz.rateActual = (Int16)((data[8] << 8) + data[7]);
                                 nozz.pressureActual = data[9];
                                 nozz.isFlowingFlag = data[10] != 0;
                                 nozz.pwmDriveActual = data[11];

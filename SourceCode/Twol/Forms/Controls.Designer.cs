@@ -269,14 +269,14 @@ namespace Twol
         {
             if (cboxRate1Rate2Select.Checked)
             {
-                nozz.volumePerAreaSetSelected = Settings.Tool.setNozz.volumePerAreaSet2;
+                nozz.rateSetSelected = Settings.Tool.setNozz.rateSet2;
             }
             else
             {
-                nozz.volumePerAreaSetSelected = Settings.Tool.setNozz.volumePerAreaSet1;
+                nozz.rateSetSelected = Settings.Tool.setNozz.rateSet1;
             }
 
-            cboxRate1Rate2Select.Text = nozz.volumePerAreaSetSelected + nozz.unitVolumeWeightRate[Settings.Tool.setNozz.unitVolumeWeightRateIdx];
+            cboxRate1Rate2Select.Text = nozz.rateSetSelected + nozz.rateTextArr[Settings.Tool.setNozz.unitsIdx];
         }
 
         private void cboxSprayAutoManual_Click(object sender, EventArgs e)
@@ -284,14 +284,14 @@ namespace Twol
             if (cboxSprayAutoManual.Checked)
             {
                 cboxSprayAutoManual.Text = "Auto";
-                nozz.isSprayAutoMode = true;
+                nozz.isAutoMode = true;
 
                 PGN_225.pgn[PGN_225.auto] = 1;
             }
             else
             {
                 cboxSprayAutoManual.Text = "Manual";
-                nozz.isSprayAutoMode = false;
+                nozz.isAutoMode = false;
 
                 //manual mode 
                 PGN_225.pgn[PGN_225.auto] = 0;
@@ -304,9 +304,9 @@ namespace Twol
         {
             Settings.Tool.setNozz.isAppliedUnitsNotTankDisplayed = !Settings.Tool.setNozz.isAppliedUnitsNotTankDisplayed;
             if (!Settings.Tool.setNozz.isAppliedUnitsNotTankDisplayed)
-                lbl_Volume.Text = "Tank " + (nozz.unitVolumeWeight[Settings.Tool.setNozz.unitVolumeWeightRateIdx]);
+                lbl_Volume.Text = "Tank " + (nozz.unitsTextArr[Settings.Tool.setNozz.unitsIdx]);
             else
-                lbl_Volume.Text = "App " + (nozz.unitVolumeWeight[Settings.Tool.setNozz.unitVolumeWeightRateIdx]);
+                lbl_Volume.Text = "App " + (nozz.unitsTextArr[Settings.Tool.setNozz.unitsIdx]);
         }
 
         private void btnSprayRate_Click(object sender, EventArgs e)
@@ -318,14 +318,14 @@ namespace Twol
 
             if (cboxRate1Rate2Select.Checked)
             {
-                nozz.volumePerAreaSetSelected = Settings.Tool.setNozz.volumePerAreaSet2;
+                nozz.rateSetSelected = Settings.Tool.setNozz.rateSet2;
             }
             else
             {
-                nozz.volumePerAreaSetSelected = Settings.Tool.setNozz.volumePerAreaSet1;
+                nozz.rateSetSelected = Settings.Tool.setNozz.rateSet1;
             }
 
-            cboxRate1Rate2Select.Text = nozz.volumePerAreaSetSelected + (nozz.unitVolumeWeightRate[Settings.Tool.setNozz.unitVolumeWeightRateIdx]);
+            cboxRate1Rate2Select.Text = nozz.rateSetSelected + (nozz.rateTextArr[Settings.Tool.setNozz.unitsIdx]);
 
         }
 
@@ -345,7 +345,7 @@ namespace Twol
 
         private void btnSprayRateDn_Click(object sender, EventArgs e)
         {
-            if (!nozz.isSprayAutoMode)
+            if (!nozz.isAutoMode)
             {
                 PGN_225.pgn[PGN_225.dn] = 1;
 
@@ -355,15 +355,15 @@ namespace Twol
             }
             else
             {
-                nozz.volumePerAreaSetSelected -= Settings.Tool.setNozz.rateNudge;
-                if (nozz.volumePerAreaSetSelected < 2) nozz.volumePerAreaSetSelected = 2;
-                cboxRate1Rate2Select.Text = nozz.volumePerAreaSetSelected.ToString("N1") + (nozz.unitVolumeWeightRate[Settings.Tool.setNozz.unitVolumeWeightRateIdx]);
+                nozz.rateSetSelected -= Settings.Tool.setNozz.rateNudge;
+                if (nozz.rateSetSelected < 2) nozz.rateSetSelected = 2;
+                cboxRate1Rate2Select.Text = nozz.rateSetSelected.ToString("N1") + (nozz.rateTextArr[Settings.Tool.setNozz.unitsIdx]);
             }
         }
 
         private void btnSprayRateUPGN_Click(object sender, EventArgs e)
         {
-            if (!nozz.isSprayAutoMode)
+            if (!nozz.isAutoMode)
             {
                 PGN_225.pgn[PGN_225.up] = 1;
 
@@ -373,8 +373,8 @@ namespace Twol
             }
             else
             {
-                nozz.volumePerAreaSetSelected += Settings.Tool.setNozz.rateNudge;
-                cboxRate1Rate2Select.Text = nozz.volumePerAreaSetSelected.ToString("N1") + (nozz.unitVolumeWeightRate[Settings.Tool.setNozz.unitVolumeWeightRateIdx]);
+                nozz.rateSetSelected += Settings.Tool.setNozz.rateNudge;
+                cboxRate1Rate2Select.Text = nozz.rateSetSelected.ToString("N1") + (nozz.rateTextArr[Settings.Tool.setNozz.unitsIdx]);
             }
         }
 

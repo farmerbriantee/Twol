@@ -396,8 +396,8 @@ namespace Twol
 
                         case 224:
                             {
-                                Settings.Tool.setNozz.volumeApplied = (Int16)((data[6] << 8) + data[5]) * 0.1;
-                                nozz.volumePerMinuteActual = (Int16)((data[8] << 8) + data[7]);
+                                Settings.Tool.setNozz.unitsApplied = (Int16)((data[6] << 8) + data[5]) * 0.1;
+                                nozz.rateActual = (Int16)((data[8] << 8) + data[7]);
                                 nozz.pressureActual = data[9];
                                 nozz.isFlowingFlag = data[10] != 0;
                                 nozz.pwmDriveActual = data[11];
@@ -760,7 +760,7 @@ namespace Twol
                                 // 0 to 4 is packet header
                                 //public uint16 rateActualx10 = 0;          5 to 6      x10
                                 //public uint16 rateSetx10 = 0;             7 to 8      x10
-                                //public uint volumeApplied = 0;            9 to 12   
+                                //public uint unitsApplied = 0;            9 to 12   
                                 //public int volumeRemain = 0;              13 to 16
                                 //public int coveragePossiblex10 = 0;       17 to 20    x10
                                 //public uint16 sensor = 0;               21 to 22

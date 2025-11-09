@@ -60,11 +60,12 @@
             this.nudManualPWM = new Twol.NudlessNumericUpDown();
             this.nudDeadbandError = new Twol.NudlessNumericUpDown();
             this.tabUnits = new System.Windows.Forms.TabPage();
+            this.comboUnits = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.cboxMeteringOrFlow = new System.Windows.Forms.CheckBox();
             this.label13 = new System.Windows.Forms.Label();
             this.nudSprayPressureCal = new Twol.NudlessNumericUpDown();
-            this.nudSprayFlowCal = new Twol.NudlessNumericUpDown();
+            this.nudCalNumber = new Twol.NudlessNumericUpDown();
             this.unoChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.lblUnitsActual = new System.Windows.Forms.Label();
             this.lblUnitsSet = new System.Windows.Forms.Label();
@@ -72,7 +73,6 @@
             this.label16 = new System.Windows.Forms.Label();
             this.lblFlowError = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
-            this.comboUnits = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabFlow.SuspendLayout();
             this.tabUnits.SuspendLayout();
@@ -467,13 +467,29 @@
             this.tabUnits.Controls.Add(this.label2);
             this.tabUnits.Controls.Add(this.label1);
             this.tabUnits.Controls.Add(this.nudSprayPressureCal);
-            this.tabUnits.Controls.Add(this.nudSprayFlowCal);
+            this.tabUnits.Controls.Add(this.nudCalNumber);
             this.tabUnits.ImageIndex = 2;
             this.tabUnits.Location = new System.Drawing.Point(4, 44);
             this.tabUnits.Name = "tabUnits";
             this.tabUnits.Size = new System.Drawing.Size(427, 344);
             this.tabUnits.TabIndex = 15;
             this.tabUnits.Text = "Config";
+            // 
+            // comboUnits
+            // 
+            this.comboUnits.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboUnits.FormattingEnabled = true;
+            this.comboUnits.Items.AddRange(new object[] {
+            "Liters",
+            "Gallons",
+            "Kgs",
+            "Pounds"});
+            this.comboUnits.Location = new System.Drawing.Point(18, 37);
+            this.comboUnits.Name = "comboUnits";
+            this.comboUnits.Size = new System.Drawing.Size(154, 43);
+            this.comboUnits.TabIndex = 626;
+            this.comboUnits.Text = "Liters";
+            this.comboUnits.SelectedIndexChanged += new System.EventHandler(this.comboUnits_SelectedIndexChanged);
             // 
             // label5
             // 
@@ -529,15 +545,15 @@
             this.nudSprayPressureCal.TabIndex = 584;
             this.nudSprayPressureCal.ValueChanged += new System.EventHandler(this.nudSprayPressureCal_ValueChanged);
             // 
-            // nudSprayFlowCal
+            // nudCalNumber
             // 
-            this.nudSprayFlowCal.Location = new System.Drawing.Point(18, 245);
-            this.nudSprayFlowCal.Maximum = 20000D;
-            this.nudSprayFlowCal.Minimum = 100D;
-            this.nudSprayFlowCal.Name = "nudSprayFlowCal";
-            this.nudSprayFlowCal.Size = new System.Drawing.Size(154, 46);
-            this.nudSprayFlowCal.TabIndex = 579;
-            this.nudSprayFlowCal.ValueChanged += new System.EventHandler(this.nudSprayFlowCal_ValueChanged);
+            this.nudCalNumber.Location = new System.Drawing.Point(18, 245);
+            this.nudCalNumber.Maximum = 20000D;
+            this.nudCalNumber.Minimum = 100D;
+            this.nudCalNumber.Name = "nudCalNumber";
+            this.nudCalNumber.Size = new System.Drawing.Size(154, 46);
+            this.nudCalNumber.TabIndex = 579;
+            this.nudCalNumber.ValueChanged += new System.EventHandler(this.nudCalNumber_ValueChanged);
             // 
             // unoChart
             // 
@@ -664,22 +680,6 @@
             this.label19.Text = "Error:";
             this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // comboUnits
-            // 
-            this.comboUnits.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboUnits.FormattingEnabled = true;
-            this.comboUnits.Items.AddRange(new object[] {
-            "Liters",
-            "Gallons",
-            "Kgs",
-            "Pounds"});
-            this.comboUnits.Location = new System.Drawing.Point(18, 34);
-            this.comboUnits.Name = "comboUnits";
-            this.comboUnits.Size = new System.Drawing.Size(154, 41);
-            this.comboUnits.TabIndex = 626;
-            this.comboUnits.Text = "Liters";
-            this.comboUnits.SelectedIndexChanged += new System.EventHandler(this.comboUnits_SelectedIndexChanged);
-            // 
             // FormNozConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -725,7 +725,7 @@
         private System.Windows.Forms.Label label8;
         private NudlessNumericUpDown nudSprayPressureCal;
         private System.Windows.Forms.Label label1;
-        private NudlessNumericUpDown nudSprayFlowCal;
+        private NudlessNumericUpDown nudCalNumber;
         private NudlessNumericUpDown nudFastPWM;
         private System.Windows.Forms.Label label3;
         private NudlessNumericUpDown nudSlowPWM;

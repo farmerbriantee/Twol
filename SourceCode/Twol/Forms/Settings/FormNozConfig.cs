@@ -27,7 +27,7 @@ namespace Twol
 
         private void FormDisplaySettings_Load(object sender, EventArgs e)
         {
-            nudSprayFlowCal.Value = Settings.Tool.setNozz.flowCal;
+            nudCalNumber.Value = Settings.Tool.setNozz.calNumber;
             nudSprayPressureCal.Value = Settings.Tool.setNozz.pressureCal;
 
             nudManualPWM.Value = Settings.Tool.setNozz.Kp;
@@ -36,7 +36,7 @@ namespace Twol
             nudFastPWM.Value = Settings.Tool.setNozz.fastPWM;
             nudSlowPWM.Value = Settings.Tool.setNozz.slowPWM;
             nudDeadbandError.Value = Settings.Tool.setNozz.deadbandError;
-            nudSwitchAtFlowError.Value = Settings.Tool.setNozz.switchAtFlowError;
+            nudSwitchAtFlowError.Value = Settings.Tool.setNozz.switchAtRateError;
 
             nudKp.Value = Settings.Tool.setNozz.Kp;
             //nudKi.Value = Settings.Tool.setNozz.Ki;
@@ -86,15 +86,29 @@ namespace Twol
                 nudKp.Enabled = false;
             }
 
-           comboUnits.SelectedIndex = Settings.Tool.setNozz.unitVolumeWeightRateIdx;
+            comboUnits.Items.Clear();
+            if (Settings.User.isMetric)
+            {
+                comboUnits.Items.Add("Liters");
+                comboUnits.Items.Add("Kgs");
+                if (Settings.Tool.setNozz.unitsIdx > 1) Settings.Tool.setNozz.unitsIdx = 0;
+                comboUnits.SelectedIndex = Settings.Tool.setNozz.unitsIdx;
+            }
+            else
+            {
+                comboUnits.Items.Add("Gallons");
+                comboUnits.Items.Add("Pounds");
+                if (Settings.Tool.setNozz.unitsIdx > 3 || Settings.Tool.setNozz.unitsIdx < 2) Settings.Tool.setNozz.unitsIdx = 2;
+                comboUnits.SelectedIndex = Settings.Tool.setNozz.unitsIdx - 2;
+            }
         }
 
-        private void nudSprayFlowCal_ValueChanged(object sender, EventArgs e)
+        private void nudCalNumber_ValueChanged(object sender, EventArgs e)
         {
-            Settings.Tool.setNozz.flowCal = (int)nudSprayFlowCal.Value;
+            Settings.Tool.setNozz.calNumber = (int)nudCalNumber.Value;
 
-            PGN_226.pgn[PGN_226.flowCalHi] = unchecked((byte)(Settings.Tool.setNozz.flowCal >> 8));
-            PGN_226.pgn[PGN_226.flowCalLo] = unchecked((byte)(Settings.Tool.setNozz.flowCal));
+            PGN_226.pgn[PGN_226.calNumHi] = unchecked((byte)(Settings.Tool.setNozz.calNumber >> 8));
+            PGN_226.pgn[PGN_226.calNumLo] = unchecked((byte)(Settings.Tool.setNozz.calNumber));
 
             mf.SendUDPMessage(PGN_226.pgn, mf.epModule);
         }
@@ -138,9 +152,9 @@ namespace Twol
 
         private void nudSwitchAtFlowError_ValueChanged(object sender, EventArgs e)
         {
-            Settings.Tool.setNozz.switchAtFlowError = (byte)(nudSwitchAtFlowError.Value);
+            Settings.Tool.setNozz.switchAtRateError = (byte)(nudSwitchAtFlowError.Value);
 
-            PGN_226.pgn[PGN_226.switchAtFlowError] = unchecked((byte)(Settings.Tool.setNozz.switchAtFlowError));
+            PGN_226.pgn[PGN_226.switchAtFlowError] = unchecked((byte)(Settings.Tool.setNozz.switchAtRateError));
 
             mf.SendUDPMessage(PGN_226.pgn, mf.epModule);
         }
@@ -280,11 +294,11 @@ namespace Twol
 
         private void DrawChart()
         {
-            unitsSet = lblUnitsSet.Text = mf.nozz.volumePerMinuteSet.ToString();
-            unitsActual = lblUnitsActual.Text = mf.nozz.volumePerMinuteActual.ToString();
+            unitsSet = lblUnitsSet.Text = mf.nozz.rateSet.ToString();
+            unitsActual = lblUnitsActual.Text = mf.nozz.rateActual.ToString();
 
-            double errorText = (((double)(mf.nozz.volumePerMinuteSet - mf.nozz.volumePerMinuteActual) / (double)mf.nozz.volumePerMinuteSet) * -100);
-            if (mf.nozz.volumePerMinuteSet > 0.05)
+            double errorText = (((double)(mf.nozz.rateSet - mf.nozz.rateActual) / (double)mf.nozz.rateSet) * -100);
+            if (mf.nozz.rateSet > 0.05)
                 lblFlowError.Text = errorText.ToString("N1") + "%";
             else
                 lblFlowError.Text = "Off";
@@ -316,14 +330,18 @@ namespace Twol
         private void FormNozConfig_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (!Settings.Tool.setNozz.isAppliedUnitsNotTankDisplayed)
-                mf.lbl_Volume.Text = "Tank " + (mf.nozz.unitVolumeWeight[Settings.Tool.setNozz.unitVolumeWeightRateIdx]);
+                mf.lbl_Volume.Text = "Tank " + (mf.nozz.unitsTextArr[Settings.Tool.setNozz.unitsIdx]);
             else
-                mf.lbl_Volume.Text = "App " + (mf.nozz.unitVolumeWeight[Settings.Tool.setNozz.unitVolumeWeightRateIdx]);
+                mf.lbl_Volume.Text = "App " + (mf.nozz.unitsTextArr[Settings.Tool.setNozz.unitsIdx]);
         }
 
         private void comboUnits_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Settings.Tool.setNozz.unitVolumeWeightRateIdx = comboUnits.SelectedIndex;
+            Settings.Tool.setNozz.unitsIdx = comboUnits.SelectedIndex;
+            if (!Settings.User.isMetric)
+            {
+                Settings.Tool.setNozz.unitsIdx += 2;
+            }
         }
     }
 }
