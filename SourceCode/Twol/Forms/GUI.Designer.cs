@@ -325,8 +325,6 @@ namespace Twol
                 makeUTurnCounter++;
 
                 secondsSinceStart = (DateTime.Now - Process.GetCurrentProcess().StartTime).TotalSeconds;
-
-                oglMain.Refresh();
             }
 
         }//wait till timer fires again.

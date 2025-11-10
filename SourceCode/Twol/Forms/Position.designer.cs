@@ -632,9 +632,9 @@ namespace Twol
             frameTime = frameTime * 0.96 + frameTimeRough * 0.04;
 
             //Don't care about time from here on - update main window
+            oglMain.Refresh();
 
             //end of UppdateFixPosition
-
         }
 
         private void AddRoll()
