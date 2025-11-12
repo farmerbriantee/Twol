@@ -63,7 +63,6 @@ namespace Twol
             this.resetALLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetEverythingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nozzleAppToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rateControlAppToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tmrWatchdog = new System.Windows.Forms.Timer(this.components);
             this.contextMenuStripFlag = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItemFlagRed = new System.Windows.Forms.ToolStripMenuItem();
@@ -175,6 +174,7 @@ namespace Twol
             this.btnGPSTool = new System.Windows.Forms.Button();
             this.lblHardwareMessage = new System.Windows.Forms.Label();
             this.tlpNozzle = new System.Windows.Forms.TableLayoutPanel();
+            this.label10 = new System.Windows.Forms.Label();
             this.lblTankArea = new System.Windows.Forms.Label();
             this.btnSprayPSI = new System.Windows.Forms.Button();
             this.lblPressure = new System.Windows.Forms.Label();
@@ -185,11 +185,27 @@ namespace Twol
             this.btnSprayRateUp = new System.Windows.Forms.Button();
             this.btnSprayRateDn = new System.Windows.Forms.Button();
             this.btnNozConfig = new System.Windows.Forms.Button();
-            this.lblIsFlowing = new System.Windows.Forms.Label();
             this.lblGPM_Set = new System.Windows.Forms.Label();
             this.btnSprayGalPerMinActual = new System.Windows.Forms.Button();
             this.btnSprayGalPerAcre = new System.Windows.Forms.Button();
             this.lblAreaPossible = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.button7 = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.lblIsFlowing = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.lbl_IO_Profile = new System.Windows.Forms.Label();
             this.btnStartStopNtrip = new System.Windows.Forms.Button();
             this.lblWatch = new System.Windows.Forms.Label();
@@ -219,51 +235,6 @@ namespace Twol
             this.btnNMEA_Data = new System.Windows.Forms.Button();
             this.btnProfiles = new System.Windows.Forms.Button();
             this.flowLayoutPanelTop = new System.Windows.Forms.FlowLayoutPanel();
-            this.tlpRateControl = new System.Windows.Forms.TableLayoutPanel();
-            this.lblrcSensorType_0 = new System.Windows.Forms.Label();
-            this.lblrcArea_2 = new System.Windows.Forms.Label();
-            this.lblrcRateActual_2 = new System.Windows.Forms.Label();
-            this.lblrcUPM_2 = new System.Windows.Forms.Label();
-            this.lblrcProduct_2 = new System.Windows.Forms.Label();
-            this.lblrcRateSet_2 = new System.Windows.Forms.Label();
-            this.lblrcProduct_3 = new System.Windows.Forms.Label();
-            this.lblrcProduct_1 = new System.Windows.Forms.Label();
-            this.lblrcSensor_0 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.lblrcTankRem_0 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.lblrcTankApp_0 = new System.Windows.Forms.Label();
-            this.lblrcArea_0 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.lblrcSensor_1 = new System.Windows.Forms.Label();
-            this.lblrcSensorType_1 = new System.Windows.Forms.Label();
-            this.lblrcRateActual_0 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.lblrcRateActual_1 = new System.Windows.Forms.Label();
-            this.lblrcUPM_1 = new System.Windows.Forms.Label();
-            this.lblrcUPM_0 = new System.Windows.Forms.Label();
-            this.label25 = new System.Windows.Forms.Label();
-            this.lblrcRateSet_0 = new System.Windows.Forms.Label();
-            this.lblrcRateSet_1 = new System.Windows.Forms.Label();
-            this.lblrcSensor_3 = new System.Windows.Forms.Label();
-            this.lblrcTankApp_2 = new System.Windows.Forms.Label();
-            this.lblrcTankRem_2 = new System.Windows.Forms.Label();
-            this.lblrcSensor_2 = new System.Windows.Forms.Label();
-            this.lblrcRateSet_3 = new System.Windows.Forms.Label();
-            this.lblrcRateActual_3 = new System.Windows.Forms.Label();
-            this.lblrcUPM_3 = new System.Windows.Forms.Label();
-            this.lblrcProduct_0 = new System.Windows.Forms.Label();
-            this.label30 = new System.Windows.Forms.Label();
-            this.label31 = new System.Windows.Forms.Label();
-            this.lblrcTankApp_1 = new System.Windows.Forms.Label();
-            this.lblrcTankRem_1 = new System.Windows.Forms.Label();
-            this.lblrcArea_1 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.lblrcTankRem_3 = new System.Windows.Forms.Label();
-            this.lblrcTankApp_3 = new System.Windows.Forms.Label();
-            this.lblrcArea_3 = new System.Windows.Forms.Label();
             this.button15 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStripFlag.SuspendLayout();
@@ -279,7 +250,6 @@ namespace Twol
             this.tlpNozzle.SuspendLayout();
             this.panel_IO.SuspendLayout();
             this.flowLayoutPanelTop.SuspendLayout();
-            this.tlpRateControl.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -309,8 +279,7 @@ namespace Twol
             this.externalModuleSimToolStripMenuItem,
             this.toolStripSeparator4,
             this.resetALLToolStripMenuItem,
-            this.nozzleAppToolStripMenuItem,
-            this.rateControlAppToolStripMenuItem});
+            this.nozzleAppToolStripMenuItem});
             this.fileToolStripMenuItem.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fileToolStripMenuItem.Image = global::Twol.Properties.Resources.fileMenu;
             this.fileToolStripMenuItem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -559,13 +528,6 @@ namespace Twol
             this.nozzleAppToolStripMenuItem.Text = "Nozzle App";
             this.nozzleAppToolStripMenuItem.Click += new System.EventHandler(this.nozzleAppToolStripMenuItem_Click);
             // 
-            // rateControlAppToolStripMenuItem
-            // 
-            this.rateControlAppToolStripMenuItem.Name = "rateControlAppToolStripMenuItem";
-            this.rateControlAppToolStripMenuItem.Size = new System.Drawing.Size(432, 50);
-            this.rateControlAppToolStripMenuItem.Text = "Rate Control App";
-            this.rateControlAppToolStripMenuItem.Click += new System.EventHandler(this.rateControlAppToolStripMenuItem_Click);
-            // 
             // tmrWatchdog
             // 
             this.tmrWatchdog.Interval = 125;
@@ -735,7 +697,7 @@ namespace Twol
             this.oglMain.Location = new System.Drawing.Point(236, 50);
             this.oglMain.Margin = new System.Windows.Forms.Padding(0);
             this.oglMain.Name = "oglMain";
-            this.oglMain.Size = new System.Drawing.Size(693, 601);
+            this.oglMain.Size = new System.Drawing.Size(854, 728);
             this.oglMain.TabIndex = 180;
             this.oglMain.VSync = false;
             this.oglMain.Load += new System.EventHandler(this.oglMain_Load);
@@ -787,7 +749,7 @@ namespace Twol
             this.distanceToolBtn,
             this.toolStripDropDownButton4});
             this.statusStripLeft.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
-            this.statusStripLeft.Location = new System.Drawing.Point(1, 67);
+            this.statusStripLeft.Location = new System.Drawing.Point(1, 92);
             this.statusStripLeft.Name = "statusStripLeft";
             this.statusStripLeft.Size = new System.Drawing.Size(67, 109);
             this.statusStripLeft.SizingGrip = false;
@@ -896,7 +858,7 @@ namespace Twol
             this.panelSim.Controls.Add(this.btnResetSim, 0, 0);
             this.panelSim.Controls.Add(this.hsbarSteerAngle, 3, 0);
             this.panelSim.Controls.Add(this.btnSpeedUp, 5, 0);
-            this.panelSim.Location = new System.Drawing.Point(260, 602);
+            this.panelSim.Location = new System.Drawing.Point(414, 729);
             this.panelSim.Name = "panelSim";
             this.panelSim.RowCount = 1;
             this.panelSim.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -983,7 +945,7 @@ namespace Twol
             this.panelNavigation.Controls.Add(this.btn2D, 0, 1);
             this.panelNavigation.Controls.Add(this.btnGrid, 1, 2);
             this.panelNavigation.Controls.Add(this.btnN2D, 0, 2);
-            this.panelNavigation.Location = new System.Drawing.Point(685, 92);
+            this.panelNavigation.Location = new System.Drawing.Point(906, 87);
             this.panelNavigation.Name = "panelNavigation";
             this.panelNavigation.RowCount = 5;
             this.panelNavigation.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
@@ -1221,7 +1183,7 @@ namespace Twol
             this.panelLeft.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.10068F));
             this.panelLeft.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.75167F));
             this.panelLeft.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.25503F));
-            this.panelLeft.Size = new System.Drawing.Size(70, 600);
+            this.panelLeft.Size = new System.Drawing.Size(70, 727);
             this.panelLeft.TabIndex = 529;
             // 
             // statusStrip2
@@ -1238,7 +1200,7 @@ namespace Twol
             this.statusStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripDropDownButton1});
             this.statusStrip2.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
-            this.statusStrip2.Location = new System.Drawing.Point(1, 181);
+            this.statusStrip2.Location = new System.Drawing.Point(1, 227);
             this.statusStrip2.Name = "statusStrip2";
             this.statusStrip2.Size = new System.Drawing.Size(67, 74);
             this.statusStrip2.SizingGrip = false;
@@ -1351,7 +1313,7 @@ namespace Twol
             this.btnNavigationSettings.Margin = new System.Windows.Forms.Padding(0);
             this.btnNavigationSettings.Name = "btnNavigationSettings";
             this.btnNavigationSettings.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnNavigationSettings.Size = new System.Drawing.Size(70, 62);
+            this.btnNavigationSettings.Size = new System.Drawing.Size(70, 75);
             this.btnNavigationSettings.TabIndex = 542;
             this.btnNavigationSettings.UseVisualStyleBackColor = false;
             this.btnNavigationSettings.Click += new System.EventHandler(this.btnNavigationSettings_Click);
@@ -1370,12 +1332,12 @@ namespace Twol
             this.btnAutoSteerConfig.ForeColor = System.Drawing.Color.Black;
             this.btnAutoSteerConfig.Image = global::Twol.Properties.Resources.AutoSteerConf;
             this.btnAutoSteerConfig.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnAutoSteerConfig.Location = new System.Drawing.Point(0, 442);
+            this.btnAutoSteerConfig.Location = new System.Drawing.Point(0, 535);
             this.btnAutoSteerConfig.Margin = new System.Windows.Forms.Padding(0);
             this.btnAutoSteerConfig.Name = "btnAutoSteerConfig";
             this.btnAutoSteerConfig.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
             this.btnAutoSteerConfig.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnAutoSteerConfig.Size = new System.Drawing.Size(70, 76);
+            this.btnAutoSteerConfig.Size = new System.Drawing.Size(70, 92);
             this.btnAutoSteerConfig.TabIndex = 475;
             this.btnAutoSteerConfig.Text = "-38.8.";
             this.btnAutoSteerConfig.UseVisualStyleBackColor = false;
@@ -1397,11 +1359,11 @@ namespace Twol
             this.btnToolSteerConfig.Image = global::Twol.Properties.Resources.AutoSteerConf;
             this.btnToolSteerConfig.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnToolSteerConfig.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnToolSteerConfig.Location = new System.Drawing.Point(0, 518);
+            this.btnToolSteerConfig.Location = new System.Drawing.Point(0, 627);
             this.btnToolSteerConfig.Margin = new System.Windows.Forms.Padding(0);
             this.btnToolSteerConfig.Name = "btnToolSteerConfig";
             this.btnToolSteerConfig.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnToolSteerConfig.Size = new System.Drawing.Size(70, 82);
+            this.btnToolSteerConfig.Size = new System.Drawing.Size(70, 100);
             this.btnToolSteerConfig.TabIndex = 467;
             this.btnToolSteerConfig.Text = "12.3";
             this.btnToolSteerConfig.UseVisualStyleBackColor = false;
@@ -1422,11 +1384,11 @@ namespace Twol
             this.btnFieldMenu.ForeColor = System.Drawing.Color.DarkGray;
             this.btnFieldMenu.Image = global::Twol.Properties.Resources.JobActive;
             this.btnFieldMenu.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnFieldMenu.Location = new System.Drawing.Point(0, 257);
+            this.btnFieldMenu.Location = new System.Drawing.Point(0, 311);
             this.btnFieldMenu.Margin = new System.Windows.Forms.Padding(0);
             this.btnFieldMenu.Name = "btnFieldMenu";
             this.btnFieldMenu.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnFieldMenu.Size = new System.Drawing.Size(70, 95);
+            this.btnFieldMenu.Size = new System.Drawing.Size(70, 115);
             this.btnFieldMenu.TabIndex = 536;
             this.btnFieldMenu.UseVisualStyleBackColor = false;
             this.btnFieldMenu.Click += new System.EventHandler(this.btnFieldMenu_Click);
@@ -1445,7 +1407,7 @@ namespace Twol
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripBtnFieldTools});
             this.statusStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
-            this.statusStrip1.Location = new System.Drawing.Point(1, 355);
+            this.statusStrip1.Location = new System.Drawing.Point(1, 438);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(67, 84);
             this.statusStrip1.SizingGrip = false;
@@ -1557,7 +1519,7 @@ namespace Twol
             this.lblGuidanceLine.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblGuidanceLine.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblGuidanceLine.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblGuidanceLine.Location = new System.Drawing.Point(212, 66);
+            this.lblGuidanceLine.Location = new System.Drawing.Point(292, 66);
             this.lblGuidanceLine.Name = "lblGuidanceLine";
             this.lblGuidanceLine.Size = new System.Drawing.Size(583, 83);
             this.lblGuidanceLine.TabIndex = 538;
@@ -1576,7 +1538,7 @@ namespace Twol
             this.flp1.Controls.Add(this.btnTracksOff);
             this.flp1.Controls.Add(this.btnRefNudge);
             this.flp1.FlowDirection = System.Windows.Forms.FlowDirection.BottomUp;
-            this.flp1.Location = new System.Drawing.Point(578, 80);
+            this.flp1.Location = new System.Drawing.Point(798, 77);
             this.flp1.Name = "flp1";
             this.flp1.Size = new System.Drawing.Size(86, 488);
             this.flp1.TabIndex = 539;
@@ -1731,7 +1693,7 @@ namespace Twol
             this.panelBottom.Controls.Add(this.btnYouSkipEnable);
             this.panelBottom.Controls.Add(this.cboxpRowWidth);
             this.panelBottom.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.panelBottom.Location = new System.Drawing.Point(32, 653);
+            this.panelBottom.Location = new System.Drawing.Point(192, 780);
             this.panelBottom.Name = "panelBottom";
             this.panelBottom.Size = new System.Drawing.Size(896, 62);
             this.panelBottom.TabIndex = 540;
@@ -1997,7 +1959,7 @@ namespace Twol
             this.panelRight.Controls.Add(this.btnContourLock);
             this.panelRight.Controls.Add(this.lblNumCu);
             this.panelRight.FlowDirection = System.Windows.Forms.FlowDirection.BottomUp;
-            this.panelRight.Location = new System.Drawing.Point(928, 141);
+            this.panelRight.Location = new System.Drawing.Point(1088, 268);
             this.panelRight.Name = "panelRight";
             this.panelRight.Size = new System.Drawing.Size(70, 574);
             this.panelRight.TabIndex = 541;
@@ -2439,7 +2401,7 @@ namespace Twol
             this.lblHardwareMessage.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblHardwareMessage.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHardwareMessage.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
-            this.lblHardwareMessage.Location = new System.Drawing.Point(63, 87);
+            this.lblHardwareMessage.Location = new System.Drawing.Point(143, 87);
             this.lblHardwareMessage.Name = "lblHardwareMessage";
             this.lblHardwareMessage.Size = new System.Drawing.Size(888, 43);
             this.lblHardwareMessage.TabIndex = 543;
@@ -2453,53 +2415,85 @@ namespace Twol
             this.tlpNozzle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.tlpNozzle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(50)))));
-            this.tlpNozzle.ColumnCount = 3;
-            this.tlpNozzle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 16F));
-            this.tlpNozzle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.625F));
-            this.tlpNozzle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.375F));
+            this.tlpNozzle.ColumnCount = 7;
+            this.tlpNozzle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 15F));
+            this.tlpNozzle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
+            this.tlpNozzle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
+            this.tlpNozzle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 15F));
+            this.tlpNozzle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
+            this.tlpNozzle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
+            this.tlpNozzle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 15F));
+            this.tlpNozzle.Controls.Add(this.label10, 3, 0);
             this.tlpNozzle.Controls.Add(this.lblTankArea, 2, 5);
             this.tlpNozzle.Controls.Add(this.btnSprayPSI, 1, 1);
             this.tlpNozzle.Controls.Add(this.lblPressure, 1, 2);
             this.tlpNozzle.Controls.Add(this.btnSprayVolumeTotal, 1, 3);
             this.tlpNozzle.Controls.Add(this.lbl_Volume, 1, 4);
-            this.tlpNozzle.Controls.Add(this.cboxSprayAutoManual, 1, 9);
-            this.tlpNozzle.Controls.Add(this.cboxRate1Rate2Select, 1, 7);
-            this.tlpNozzle.Controls.Add(this.btnSprayRateUp, 2, 8);
-            this.tlpNozzle.Controls.Add(this.btnSprayRateDn, 1, 8);
-            this.tlpNozzle.Controls.Add(this.btnNozConfig, 1, 10);
-            this.tlpNozzle.Controls.Add(this.lblIsFlowing, 0, 2);
+            this.tlpNozzle.Controls.Add(this.cboxSprayAutoManual, 1, 10);
+            this.tlpNozzle.Controls.Add(this.cboxRate1Rate2Select, 1, 8);
+            this.tlpNozzle.Controls.Add(this.btnSprayRateUp, 2, 9);
+            this.tlpNozzle.Controls.Add(this.btnSprayRateDn, 1, 9);
+            this.tlpNozzle.Controls.Add(this.btnNozConfig, 1, 11);
             this.tlpNozzle.Controls.Add(this.lblGPM_Set, 1, 0);
             this.tlpNozzle.Controls.Add(this.btnSprayGalPerMinActual, 2, 0);
             this.tlpNozzle.Controls.Add(this.btnSprayGalPerAcre, 1, 6);
             this.tlpNozzle.Controls.Add(this.lblAreaPossible, 1, 5);
+            this.tlpNozzle.Controls.Add(this.button1, 4, 6);
+            this.tlpNozzle.Controls.Add(this.label4, 5, 5);
+            this.tlpNozzle.Controls.Add(this.label5, 4, 5);
+            this.tlpNozzle.Controls.Add(this.label6, 4, 4);
+            this.tlpNozzle.Controls.Add(this.button2, 4, 3);
+            this.tlpNozzle.Controls.Add(this.label7, 4, 2);
+            this.tlpNozzle.Controls.Add(this.button3, 4, 1);
+            this.tlpNozzle.Controls.Add(this.button4, 5, 0);
+            this.tlpNozzle.Controls.Add(this.label8, 4, 0);
+            this.tlpNozzle.Controls.Add(this.checkBox1, 4, 8);
+            this.tlpNozzle.Controls.Add(this.button5, 5, 9);
+            this.tlpNozzle.Controls.Add(this.button6, 4, 9);
+            this.tlpNozzle.Controls.Add(this.checkBox2, 4, 10);
+            this.tlpNozzle.Controls.Add(this.button7, 4, 11);
+            this.tlpNozzle.Controls.Add(this.label9, 4, 7);
+            this.tlpNozzle.Controls.Add(this.lblIsFlowing, 1, 7);
+            this.tlpNozzle.Controls.Add(this.label11, 6, 0);
             this.tlpNozzle.Location = new System.Drawing.Point(76, 50);
             this.tlpNozzle.Name = "tlpNozzle";
-            this.tlpNozzle.RowCount = 11;
-            this.tlpNozzle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.287555F));
-            this.tlpNozzle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.104509F));
-            this.tlpNozzle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.339755F));
-            this.tlpNozzle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.57597F));
-            this.tlpNozzle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.854322F));
-            this.tlpNozzle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.180602F));
-            this.tlpNozzle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.53512F));
-            this.tlpNozzle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.53512F));
-            this.tlpNozzle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.72241F));
-            this.tlpNozzle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.37793F));
-            this.tlpNozzle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.25506F));
-            this.tlpNozzle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpNozzle.Size = new System.Drawing.Size(223, 598);
+            this.tlpNozzle.RowCount = 12;
+            this.tlpNozzle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            this.tlpNozzle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.499969F));
+            this.tlpNozzle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.571693F));
+            this.tlpNozzle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.948474F));
+            this.tlpNozzle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.065174F));
+            this.tlpNozzle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.564753F));
+            this.tlpNozzle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.882011F));
+            this.tlpNozzle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 15F));
+            this.tlpNozzle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.41468F));
+            this.tlpNozzle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 17.35031F));
+            this.tlpNozzle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.95901F));
+            this.tlpNozzle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.74393F));
+            this.tlpNozzle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 14F));
+            this.tlpNozzle.Size = new System.Drawing.Size(205, 725);
             this.tlpNozzle.TabIndex = 545;
             this.tlpNozzle.Visible = false;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.label10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label10.Location = new System.Drawing.Point(198, 0);
+            this.label10.Name = "label10";
+            this.tlpNozzle.SetRowSpan(this.label10, 13);
+            this.label10.Size = new System.Drawing.Size(9, 725);
+            this.label10.TabIndex = 561;
             // 
             // lblTankArea
             // 
             this.lblTankArea.BackColor = System.Drawing.Color.Transparent;
-            this.lblTankArea.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblTankArea.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTankArea.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(240)))), ((int)(((byte)(255)))));
-            this.lblTankArea.Location = new System.Drawing.Point(123, 197);
+            this.lblTankArea.Location = new System.Drawing.Point(108, 223);
             this.lblTankArea.Name = "lblTankArea";
-            this.lblTankArea.Size = new System.Drawing.Size(97, 25);
+            this.lblTankArea.Size = new System.Drawing.Size(76, 25);
             this.lblTankArea.TabIndex = 561;
             this.lblTankArea.Text = "Ha";
             // 
@@ -2519,9 +2513,9 @@ namespace Twol
             this.btnSprayPSI.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSprayPSI.ForeColor = System.Drawing.Color.Yellow;
             this.btnSprayPSI.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSprayPSI.Location = new System.Drawing.Point(73, 34);
+            this.btnSprayPSI.Location = new System.Drawing.Point(59, 36);
             this.btnSprayPSI.Name = "btnSprayPSI";
-            this.btnSprayPSI.Size = new System.Drawing.Size(92, 48);
+            this.btnSprayPSI.Size = new System.Drawing.Size(92, 55);
             this.btnSprayPSI.TabIndex = 554;
             this.btnSprayPSI.Text = "10";
             this.btnSprayPSI.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -2534,7 +2528,7 @@ namespace Twol
             this.tlpNozzle.SetColumnSpan(this.lblPressure, 2);
             this.lblPressure.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPressure.ForeColor = System.Drawing.Color.White;
-            this.lblPressure.Location = new System.Drawing.Point(56, 85);
+            this.lblPressure.Location = new System.Drawing.Point(42, 95);
             this.lblPressure.Name = "lblPressure";
             this.lblPressure.Size = new System.Drawing.Size(126, 19);
             this.lblPressure.TabIndex = 553;
@@ -2556,10 +2550,10 @@ namespace Twol
             this.btnSprayVolumeTotal.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSprayVolumeTotal.ForeColor = System.Drawing.Color.Aqua;
             this.btnSprayVolumeTotal.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSprayVolumeTotal.Location = new System.Drawing.Point(16, 117);
+            this.btnSprayVolumeTotal.Location = new System.Drawing.Point(15, 139);
             this.btnSprayVolumeTotal.Margin = new System.Windows.Forms.Padding(0);
             this.btnSprayVolumeTotal.Name = "btnSprayVolumeTotal";
-            this.btnSprayVolumeTotal.Size = new System.Drawing.Size(207, 51);
+            this.btnSprayVolumeTotal.Size = new System.Drawing.Size(180, 51);
             this.btnSprayVolumeTotal.TabIndex = 552;
             this.btnSprayVolumeTotal.Text = "9999.9";
             this.btnSprayVolumeTotal.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -2570,12 +2564,11 @@ namespace Twol
             // 
             this.lbl_Volume.BackColor = System.Drawing.Color.Transparent;
             this.tlpNozzle.SetColumnSpan(this.lbl_Volume, 2);
-            this.lbl_Volume.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbl_Volume.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_Volume.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(240)))), ((int)(((byte)(255)))));
-            this.lbl_Volume.Location = new System.Drawing.Point(19, 168);
+            this.lbl_Volume.Location = new System.Drawing.Point(18, 190);
             this.lbl_Volume.Name = "lbl_Volume";
-            this.lbl_Volume.Size = new System.Drawing.Size(201, 29);
+            this.lbl_Volume.Size = new System.Drawing.Size(158, 29);
             this.lbl_Volume.TabIndex = 551;
             this.lbl_Volume.Text = "Tank Gallons";
             this.lbl_Volume.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -2593,7 +2586,7 @@ namespace Twol
             this.cboxSprayAutoManual.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboxSprayAutoManual.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxSprayAutoManual.ForeColor = System.Drawing.Color.White;
-            this.cboxSprayAutoManual.Location = new System.Drawing.Point(56, 460);
+            this.cboxSprayAutoManual.Location = new System.Drawing.Point(42, 554);
             this.cboxSprayAutoManual.Name = "cboxSprayAutoManual";
             this.cboxSprayAutoManual.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.cboxSprayAutoManual.Size = new System.Drawing.Size(126, 55);
@@ -2617,10 +2610,10 @@ namespace Twol
             this.cboxRate1Rate2Select.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboxRate1Rate2Select.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxRate1Rate2Select.ForeColor = System.Drawing.Color.White;
-            this.cboxRate1Rate2Select.Location = new System.Drawing.Point(16, 299);
+            this.cboxRate1Rate2Select.Location = new System.Drawing.Point(15, 372);
             this.cboxRate1Rate2Select.Margin = new System.Windows.Forms.Padding(0);
             this.cboxRate1Rate2Select.Name = "cboxRate1Rate2Select";
-            this.cboxRate1Rate2Select.Size = new System.Drawing.Size(207, 49);
+            this.cboxRate1Rate2Select.Size = new System.Drawing.Size(180, 49);
             this.cboxRate1Rate2Select.TabIndex = 602;
             this.cboxRate1Rate2Select.Text = "Rate: 1";
             this.cboxRate1Rate2Select.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2641,7 +2634,7 @@ namespace Twol
             this.btnSprayRateUp.ForeColor = System.Drawing.Color.Black;
             this.btnSprayRateUp.Image = global::Twol.Properties.Resources.UpArrow64;
             this.btnSprayRateUp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSprayRateUp.Location = new System.Drawing.Point(140, 367);
+            this.btnSprayRateUp.Location = new System.Drawing.Point(119, 447);
             this.btnSprayRateUp.Margin = new System.Windows.Forms.Padding(0);
             this.btnSprayRateUp.Name = "btnSprayRateUp";
             this.btnSprayRateUp.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -2665,7 +2658,7 @@ namespace Twol
             this.btnSprayRateDn.ForeColor = System.Drawing.Color.Black;
             this.btnSprayRateDn.Image = global::Twol.Properties.Resources.DnArrow64;
             this.btnSprayRateDn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSprayRateDn.Location = new System.Drawing.Point(37, 367);
+            this.btnSprayRateDn.Location = new System.Drawing.Point(29, 447);
             this.btnSprayRateDn.Margin = new System.Windows.Forms.Padding(0);
             this.btnSprayRateDn.Name = "btnSprayRateDn";
             this.btnSprayRateDn.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -2690,7 +2683,7 @@ namespace Twol
             this.btnNozConfig.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNozConfig.ForeColor = System.Drawing.Color.Aqua;
             this.btnNozConfig.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnNozConfig.Location = new System.Drawing.Point(77, 539);
+            this.btnNozConfig.Location = new System.Drawing.Point(63, 642);
             this.btnNozConfig.Name = "btnNozConfig";
             this.btnNozConfig.Size = new System.Drawing.Size(84, 48);
             this.btnNozConfig.TabIndex = 553;
@@ -2698,29 +2691,15 @@ namespace Twol
             this.btnNozConfig.UseVisualStyleBackColor = false;
             this.btnNozConfig.Click += new System.EventHandler(this.btnNozConfig_Click);
             // 
-            // lblIsFlowing
-            // 
-            this.lblIsFlowing.AutoSize = true;
-            this.lblIsFlowing.BackColor = System.Drawing.Color.OrangeRed;
-            this.lblIsFlowing.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblIsFlowing.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblIsFlowing.Location = new System.Drawing.Point(3, 85);
-            this.lblIsFlowing.Name = "lblIsFlowing";
-            this.tlpNozzle.SetRowSpan(this.lblIsFlowing, 8);
-            this.lblIsFlowing.Size = new System.Drawing.Size(10, 443);
-            this.lblIsFlowing.TabIndex = 617;
-            this.lblIsFlowing.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // lblGPM_Set
             // 
             this.lblGPM_Set.BackColor = System.Drawing.Color.Transparent;
-            this.lblGPM_Set.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblGPM_Set.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblGPM_Set.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(220)))), ((int)(((byte)(70)))));
-            this.lblGPM_Set.Location = new System.Drawing.Point(16, 0);
+            this.lblGPM_Set.Location = new System.Drawing.Point(15, 0);
             this.lblGPM_Set.Margin = new System.Windows.Forms.Padding(0);
             this.lblGPM_Set.Name = "lblGPM_Set";
-            this.lblGPM_Set.Size = new System.Drawing.Size(104, 31);
+            this.lblGPM_Set.Size = new System.Drawing.Size(82, 31);
             this.lblGPM_Set.TabIndex = 612;
             this.lblGPM_Set.Text = "Flow";
             this.lblGPM_Set.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2729,7 +2708,6 @@ namespace Twol
             // 
             this.btnSprayGalPerMinActual.BackColor = System.Drawing.Color.Transparent;
             this.btnSprayGalPerMinActual.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnSprayGalPerMinActual.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnSprayGalPerMinActual.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
             this.btnSprayGalPerMinActual.FlatAppearance.BorderSize = 0;
             this.btnSprayGalPerMinActual.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
@@ -2739,10 +2717,10 @@ namespace Twol
             this.btnSprayGalPerMinActual.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSprayGalPerMinActual.ForeColor = System.Drawing.Color.Yellow;
             this.btnSprayGalPerMinActual.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSprayGalPerMinActual.Location = new System.Drawing.Point(120, 0);
+            this.btnSprayGalPerMinActual.Location = new System.Drawing.Point(105, 0);
             this.btnSprayGalPerMinActual.Margin = new System.Windows.Forms.Padding(0);
             this.btnSprayGalPerMinActual.Name = "btnSprayGalPerMinActual";
-            this.btnSprayGalPerMinActual.Size = new System.Drawing.Size(103, 31);
+            this.btnSprayGalPerMinActual.Size = new System.Drawing.Size(82, 31);
             this.btnSprayGalPerMinActual.TabIndex = 613;
             this.btnSprayGalPerMinActual.Text = "10.9";
             this.btnSprayGalPerMinActual.UseVisualStyleBackColor = false;
@@ -2762,10 +2740,10 @@ namespace Twol
             this.btnSprayGalPerAcre.Font = new System.Drawing.Font("Tahoma", 32F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSprayGalPerAcre.ForeColor = System.Drawing.Color.White;
             this.btnSprayGalPerAcre.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSprayGalPerAcre.Location = new System.Drawing.Point(16, 222);
+            this.btnSprayGalPerAcre.Location = new System.Drawing.Point(15, 268);
             this.btnSprayGalPerAcre.Margin = new System.Windows.Forms.Padding(0);
             this.btnSprayGalPerAcre.Name = "btnSprayGalPerAcre";
-            this.btnSprayGalPerAcre.Size = new System.Drawing.Size(207, 63);
+            this.btnSprayGalPerAcre.Size = new System.Drawing.Size(180, 63);
             this.btnSprayGalPerAcre.TabIndex = 546;
             this.btnSprayGalPerAcre.Text = "999.9";
             this.btnSprayGalPerAcre.UseVisualStyleBackColor = false;
@@ -2774,15 +2752,320 @@ namespace Twol
             // lblAreaPossible
             // 
             this.lblAreaPossible.BackColor = System.Drawing.Color.Transparent;
-            this.lblAreaPossible.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblAreaPossible.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAreaPossible.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(240)))), ((int)(((byte)(255)))));
-            this.lblAreaPossible.Location = new System.Drawing.Point(19, 197);
+            this.lblAreaPossible.Location = new System.Drawing.Point(18, 223);
             this.lblAreaPossible.Name = "lblAreaPossible";
-            this.lblAreaPossible.Size = new System.Drawing.Size(98, 25);
+            this.lblAreaPossible.Size = new System.Drawing.Size(76, 25);
             this.lblAreaPossible.TabIndex = 618;
             this.lblAreaPossible.Text = "10.9";
             this.lblAreaPossible.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.BackColor = System.Drawing.Color.Transparent;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.tlpNozzle.SetColumnSpan(this.button1, 2);
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.Olive;
+            this.button1.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Tahoma", 32F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.button1.Location = new System.Drawing.Point(210, 268);
+            this.button1.Margin = new System.Windows.Forms.Padding(0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(180, 63);
+            this.button1.TabIndex = 619;
+            this.button1.Text = "999.9";
+            this.button1.UseVisualStyleBackColor = false;
+            // 
+            // label4
+            // 
+            this.label4.BackColor = System.Drawing.Color.Transparent;
+            this.label4.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(240)))), ((int)(((byte)(255)))));
+            this.label4.Location = new System.Drawing.Point(303, 223);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(76, 25);
+            this.label4.TabIndex = 620;
+            this.label4.Text = "Ha";
+            // 
+            // label5
+            // 
+            this.label5.BackColor = System.Drawing.Color.Transparent;
+            this.label5.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(240)))), ((int)(((byte)(255)))));
+            this.label5.Location = new System.Drawing.Point(213, 223);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(76, 25);
+            this.label5.TabIndex = 621;
+            this.label5.Text = "10.9";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // label6
+            // 
+            this.label6.BackColor = System.Drawing.Color.Transparent;
+            this.tlpNozzle.SetColumnSpan(this.label6, 2);
+            this.label6.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(240)))), ((int)(((byte)(255)))));
+            this.label6.Location = new System.Drawing.Point(213, 190);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(158, 29);
+            this.label6.TabIndex = 622;
+            this.label6.Text = "Tank Gallons";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // button2
+            // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.button2.BackColor = System.Drawing.Color.Transparent;
+            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.tlpNozzle.SetColumnSpan(this.button2, 2);
+            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.Olive;
+            this.button2.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.ForeColor = System.Drawing.Color.Aqua;
+            this.button2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.button2.Location = new System.Drawing.Point(210, 139);
+            this.button2.Margin = new System.Windows.Forms.Padding(0);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(180, 51);
+            this.button2.TabIndex = 623;
+            this.button2.Text = "9999.9";
+            this.button2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.button2.UseVisualStyleBackColor = false;
+            // 
+            // label7
+            // 
+            this.label7.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label7.BackColor = System.Drawing.Color.Transparent;
+            this.tlpNozzle.SetColumnSpan(this.label7, 2);
+            this.label7.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.White;
+            this.label7.Location = new System.Drawing.Point(237, 95);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(126, 19);
+            this.label7.TabIndex = 624;
+            this.label7.Text = "Pressure";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // button3
+            // 
+            this.button3.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.button3.AutoSize = true;
+            this.button3.BackColor = System.Drawing.Color.Transparent;
+            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.tlpNozzle.SetColumnSpan(this.button3, 2);
+            this.button3.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
+            this.button3.FlatAppearance.BorderSize = 0;
+            this.button3.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.button3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button3.ForeColor = System.Drawing.Color.Yellow;
+            this.button3.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.button3.Location = new System.Drawing.Point(254, 36);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(92, 55);
+            this.button3.TabIndex = 625;
+            this.button3.Text = "10";
+            this.button3.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.button3.UseVisualStyleBackColor = false;
+            // 
+            // button4
+            // 
+            this.button4.BackColor = System.Drawing.Color.Transparent;
+            this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button4.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
+            this.button4.FlatAppearance.BorderSize = 0;
+            this.button4.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.button4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.button4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button4.ForeColor = System.Drawing.Color.Yellow;
+            this.button4.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.button4.Location = new System.Drawing.Point(300, 0);
+            this.button4.Margin = new System.Windows.Forms.Padding(0);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(82, 31);
+            this.button4.TabIndex = 626;
+            this.button4.Text = "10.9";
+            this.button4.UseVisualStyleBackColor = false;
+            // 
+            // label8
+            // 
+            this.label8.BackColor = System.Drawing.Color.Transparent;
+            this.label8.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(220)))), ((int)(((byte)(70)))));
+            this.label8.Location = new System.Drawing.Point(210, 0);
+            this.label8.Margin = new System.Windows.Forms.Padding(0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(82, 31);
+            this.label8.TabIndex = 627;
+            this.label8.Text = "Flow";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkBox1.Appearance = System.Windows.Forms.Appearance.Button;
+            this.checkBox1.BackColor = System.Drawing.Color.Transparent;
+            this.tlpNozzle.SetColumnSpan(this.checkBox1, 2);
+            this.checkBox1.FlatAppearance.BorderColor = System.Drawing.Color.Olive;
+            this.checkBox1.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.checkBox1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.checkBox1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.checkBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBox1.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox1.ForeColor = System.Drawing.Color.White;
+            this.checkBox1.Location = new System.Drawing.Point(210, 372);
+            this.checkBox1.Margin = new System.Windows.Forms.Padding(0);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(180, 49);
+            this.checkBox1.TabIndex = 628;
+            this.checkBox1.Text = "Rate: 1";
+            this.checkBox1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.checkBox1.UseVisualStyleBackColor = false;
+            // 
+            // button5
+            // 
+            this.button5.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.button5.BackColor = System.Drawing.Color.Transparent;
+            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button5.FlatAppearance.BorderColor = System.Drawing.Color.Olive;
+            this.button5.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.button5.FlatAppearance.MouseDownBackColor = System.Drawing.Color.PowderBlue;
+            this.button5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button5.Font = new System.Drawing.Font("Tahoma", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button5.ForeColor = System.Drawing.Color.Black;
+            this.button5.Image = global::Twol.Properties.Resources.UpArrow64;
+            this.button5.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.button5.Location = new System.Drawing.Point(314, 447);
+            this.button5.Margin = new System.Windows.Forms.Padding(0);
+            this.button5.Name = "button5";
+            this.button5.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.button5.Size = new System.Drawing.Size(62, 62);
+            this.button5.TabIndex = 629;
+            this.button5.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.button5.UseVisualStyleBackColor = false;
+            // 
+            // button6
+            // 
+            this.button6.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.button6.BackColor = System.Drawing.Color.Transparent;
+            this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button6.FlatAppearance.BorderColor = System.Drawing.Color.Olive;
+            this.button6.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.button6.FlatAppearance.MouseDownBackColor = System.Drawing.Color.PowderBlue;
+            this.button6.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button6.Font = new System.Drawing.Font("Tahoma", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button6.ForeColor = System.Drawing.Color.Black;
+            this.button6.Image = global::Twol.Properties.Resources.DnArrow64;
+            this.button6.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.button6.Location = new System.Drawing.Point(224, 447);
+            this.button6.Margin = new System.Windows.Forms.Padding(0);
+            this.button6.Name = "button6";
+            this.button6.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.button6.Size = new System.Drawing.Size(62, 62);
+            this.button6.TabIndex = 630;
+            this.button6.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.button6.UseVisualStyleBackColor = false;
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.checkBox2.Appearance = System.Windows.Forms.Appearance.Button;
+            this.checkBox2.BackColor = System.Drawing.Color.DarkRed;
+            this.checkBox2.Checked = true;
+            this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.tlpNozzle.SetColumnSpan(this.checkBox2, 2);
+            this.checkBox2.FlatAppearance.BorderColor = System.Drawing.Color.Olive;
+            this.checkBox2.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(50)))), ((int)(((byte)(20)))));
+            this.checkBox2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBox2.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox2.ForeColor = System.Drawing.Color.White;
+            this.checkBox2.Location = new System.Drawing.Point(237, 554);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.checkBox2.Size = new System.Drawing.Size(126, 55);
+            this.checkBox2.TabIndex = 631;
+            this.checkBox2.Text = "Auto";
+            this.checkBox2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.checkBox2.UseVisualStyleBackColor = false;
+            // 
+            // button7
+            // 
+            this.button7.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.button7.BackColor = System.Drawing.Color.Transparent;
+            this.button7.BackgroundImage = global::Twol.Properties.Resources.SpecialFunctions;
+            this.button7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.tlpNozzle.SetColumnSpan(this.button7, 2);
+            this.button7.FlatAppearance.BorderColor = System.Drawing.Color.Olive;
+            this.button7.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.button7.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.button7.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button7.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button7.ForeColor = System.Drawing.Color.Aqua;
+            this.button7.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.button7.Location = new System.Drawing.Point(258, 642);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(84, 48);
+            this.button7.TabIndex = 632;
+            this.button7.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.button7.UseVisualStyleBackColor = false;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.BackColor = System.Drawing.Color.OrangeRed;
+            this.tlpNozzle.SetColumnSpan(this.label9, 2);
+            this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label9.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(213, 331);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(174, 15);
+            this.label9.TabIndex = 651;
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lblIsFlowing
+            // 
+            this.lblIsFlowing.AutoSize = true;
+            this.lblIsFlowing.BackColor = System.Drawing.Color.OrangeRed;
+            this.tlpNozzle.SetColumnSpan(this.lblIsFlowing, 2);
+            this.lblIsFlowing.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblIsFlowing.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblIsFlowing.Location = new System.Drawing.Point(18, 331);
+            this.lblIsFlowing.Name = "lblIsFlowing";
+            this.lblIsFlowing.Size = new System.Drawing.Size(174, 15);
+            this.lblIsFlowing.TabIndex = 617;
+            this.lblIsFlowing.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.BackColor = System.Drawing.Color.Silver;
+            this.label11.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label11.Location = new System.Drawing.Point(393, 0);
+            this.label11.Name = "label11";
+            this.tlpNozzle.SetRowSpan(this.label11, 13);
+            this.label11.Size = new System.Drawing.Size(9, 725);
+            this.label11.TabIndex = 652;
+            this.label11.Text = "label11";
             // 
             // lbl_IO_Profile
             // 
@@ -2790,13 +3073,13 @@ namespace Twol
             this.lbl_IO_Profile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbl_IO_Profile.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_IO_Profile.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lbl_IO_Profile.Location = new System.Drawing.Point(10, 44);
+            this.lbl_IO_Profile.Location = new System.Drawing.Point(9, 458);
             this.lbl_IO_Profile.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_IO_Profile.Name = "lbl_IO_Profile";
             this.lbl_IO_Profile.Size = new System.Drawing.Size(223, 34);
             this.lbl_IO_Profile.TabIndex = 533;
             this.lbl_IO_Profile.Text = "Profile";
-            this.lbl_IO_Profile.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lbl_IO_Profile.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnStartStopNtrip
             // 
@@ -2806,7 +3089,7 @@ namespace Twol
             this.btnStartStopNtrip.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStartStopNtrip.ForeColor = System.Drawing.Color.Black;
             this.btnStartStopNtrip.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnStartStopNtrip.Location = new System.Drawing.Point(20, 135);
+            this.btnStartStopNtrip.Location = new System.Drawing.Point(20, 68);
             this.btnStartStopNtrip.Margin = new System.Windows.Forms.Padding(4);
             this.btnStartStopNtrip.Name = "btnStartStopNtrip";
             this.btnStartStopNtrip.Size = new System.Drawing.Size(80, 27);
@@ -2820,7 +3103,7 @@ namespace Twol
             this.lblWatch.BackColor = System.Drawing.Color.Transparent;
             this.lblWatch.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblWatch.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblWatch.Location = new System.Drawing.Point(8, 112);
+            this.lblWatch.Location = new System.Drawing.Point(8, 45);
             this.lblWatch.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblWatch.Name = "lblWatch";
             this.lblWatch.Size = new System.Drawing.Size(105, 18);
@@ -2833,7 +3116,7 @@ namespace Twol
             this.lblNTRIPBytes.BackColor = System.Drawing.Color.Transparent;
             this.lblNTRIPBytes.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNTRIPBytes.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblNTRIPBytes.Location = new System.Drawing.Point(8, 88);
+            this.lblNTRIPBytes.Location = new System.Drawing.Point(8, 21);
             this.lblNTRIPBytes.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNTRIPBytes.Name = "lblNTRIPBytes";
             this.lblNTRIPBytes.Size = new System.Drawing.Size(105, 18);
@@ -2847,7 +3130,7 @@ namespace Twol
             this.lblMount.BackColor = System.Drawing.Color.Transparent;
             this.lblMount.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMount.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblMount.Location = new System.Drawing.Point(128, 88);
+            this.lblMount.Location = new System.Drawing.Point(128, 37);
             this.lblMount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblMount.Name = "lblMount";
             this.lblMount.Size = new System.Drawing.Size(105, 18);
@@ -2860,7 +3143,7 @@ namespace Twol
             this.lblToGPS.BackColor = System.Drawing.Color.Transparent;
             this.lblToGPS.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblToGPS.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblToGPS.Location = new System.Drawing.Point(183, 114);
+            this.lblToGPS.Location = new System.Drawing.Point(183, 63);
             this.lblToGPS.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblToGPS.Name = "lblToGPS";
             this.lblToGPS.Size = new System.Drawing.Size(40, 16);
@@ -2873,7 +3156,7 @@ namespace Twol
             this.lblFromGPS.BackColor = System.Drawing.Color.Transparent;
             this.lblFromGPS.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFromGPS.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblFromGPS.Location = new System.Drawing.Point(183, 139);
+            this.lblFromGPS.Location = new System.Drawing.Point(183, 88);
             this.lblFromGPS.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblFromGPS.Name = "lblFromGPS";
             this.lblFromGPS.Size = new System.Drawing.Size(40, 16);
@@ -2886,7 +3169,7 @@ namespace Twol
             this.lblFromGPSTool.BackColor = System.Drawing.Color.Transparent;
             this.lblFromGPSTool.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFromGPSTool.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblFromGPSTool.Location = new System.Drawing.Point(183, 163);
+            this.lblFromGPSTool.Location = new System.Drawing.Point(183, 112);
             this.lblFromGPSTool.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblFromGPSTool.Name = "lblFromGPSTool";
             this.lblFromGPSTool.Size = new System.Drawing.Size(40, 16);
@@ -2924,9 +3207,9 @@ namespace Twol
             this.panel_IO.Controls.Add(this.lblFromGPSTool);
             this.panel_IO.Controls.Add(this.lblFromGPS);
             this.panel_IO.Controls.Add(this.lblToGPS);
-            this.panel_IO.Location = new System.Drawing.Point(315, 61);
+            this.panel_IO.Location = new System.Drawing.Point(545, 55);
             this.panel_IO.Name = "panel_IO";
-            this.panel_IO.Size = new System.Drawing.Size(245, 544);
+            this.panel_IO.Size = new System.Drawing.Size(245, 504);
             this.panel_IO.TabIndex = 547;
             // 
             // label3
@@ -2935,7 +3218,7 @@ namespace Twol
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label3.Location = new System.Drawing.Point(142, 163);
+            this.label3.Location = new System.Drawing.Point(142, 112);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(33, 16);
@@ -2949,7 +3232,7 @@ namespace Twol
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label2.Location = new System.Drawing.Point(144, 139);
+            this.label2.Location = new System.Drawing.Point(144, 88);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(31, 16);
@@ -2963,7 +3246,7 @@ namespace Twol
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label1.Location = new System.Drawing.Point(144, 114);
+            this.label1.Location = new System.Drawing.Point(144, 63);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(31, 16);
@@ -3019,7 +3302,7 @@ namespace Twol
             this.btnSteerSet.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSteerSet.ForeColor = System.Drawing.Color.White;
             this.btnSteerSet.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSteerSet.Location = new System.Drawing.Point(14, 477);
+            this.btnSteerSet.Location = new System.Drawing.Point(14, 397);
             this.btnSteerSet.Margin = new System.Windows.Forms.Padding(4);
             this.btnSteerSet.Name = "btnSteerSet";
             this.btnSteerSet.Size = new System.Drawing.Size(52, 52);
@@ -3035,7 +3318,7 @@ namespace Twol
             this.cboxIsIMUModule.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.cboxIsIMUModule.FlatAppearance.BorderSize = 0;
             this.cboxIsIMUModule.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cboxIsIMUModule.Location = new System.Drawing.Point(76, 347);
+            this.cboxIsIMUModule.Location = new System.Drawing.Point(76, 267);
             this.cboxIsIMUModule.Name = "cboxIsIMUModule";
             this.cboxIsIMUModule.Size = new System.Drawing.Size(34, 32);
             this.cboxIsIMUModule.TabIndex = 552;
@@ -3050,7 +3333,7 @@ namespace Twol
             this.cboxIsSteerModule.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.cboxIsSteerModule.FlatAppearance.BorderSize = 0;
             this.cboxIsSteerModule.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cboxIsSteerModule.Location = new System.Drawing.Point(76, 487);
+            this.cboxIsSteerModule.Location = new System.Drawing.Point(76, 407);
             this.cboxIsSteerModule.Name = "cboxIsSteerModule";
             this.cboxIsSteerModule.Size = new System.Drawing.Size(34, 32);
             this.cboxIsSteerModule.TabIndex = 551;
@@ -3065,7 +3348,7 @@ namespace Twol
             this.cboxIsMachineModule.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.cboxIsMachineModule.FlatAppearance.BorderSize = 0;
             this.cboxIsMachineModule.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cboxIsMachineModule.Location = new System.Drawing.Point(76, 417);
+            this.cboxIsMachineModule.Location = new System.Drawing.Point(76, 337);
             this.cboxIsMachineModule.Name = "cboxIsMachineModule";
             this.cboxIsMachineModule.Size = new System.Drawing.Size(34, 32);
             this.cboxIsMachineModule.TabIndex = 550;
@@ -3084,7 +3367,7 @@ namespace Twol
             this.btnMachineSet.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMachineSet.ForeColor = System.Drawing.Color.White;
             this.btnMachineSet.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnMachineSet.Location = new System.Drawing.Point(14, 407);
+            this.btnMachineSet.Location = new System.Drawing.Point(14, 327);
             this.btnMachineSet.Margin = new System.Windows.Forms.Padding(4);
             this.btnMachineSet.Name = "btnMachineSet";
             this.btnMachineSet.Size = new System.Drawing.Size(52, 52);
@@ -3103,7 +3386,7 @@ namespace Twol
             this.btnIMUSet.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnIMUSet.ForeColor = System.Drawing.Color.White;
             this.btnIMUSet.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnIMUSet.Location = new System.Drawing.Point(14, 337);
+            this.btnIMUSet.Location = new System.Drawing.Point(14, 257);
             this.btnIMUSet.Margin = new System.Windows.Forms.Padding(4);
             this.btnIMUSet.Name = "btnIMUSet";
             this.btnIMUSet.Size = new System.Drawing.Size(52, 52);
@@ -3140,7 +3423,7 @@ namespace Twol
             this.btnNTRIPSerial.ForeColor = System.Drawing.Color.White;
             this.btnNTRIPSerial.Image = global::Twol.Properties.Resources.NTRIP_Serial;
             this.btnNTRIPSerial.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnNTRIPSerial.Location = new System.Drawing.Point(155, 283);
+            this.btnNTRIPSerial.Location = new System.Drawing.Point(155, 222);
             this.btnNTRIPSerial.Margin = new System.Windows.Forms.Padding(4);
             this.btnNTRIPSerial.Name = "btnNTRIPSerial";
             this.btnNTRIPSerial.Size = new System.Drawing.Size(77, 65);
@@ -3159,7 +3442,7 @@ namespace Twol
             this.btnUDPMonitor.ForeColor = System.Drawing.Color.White;
             this.btnUDPMonitor.Image = global::Twol.Properties.Resources.ScanNetwork;
             this.btnUDPMonitor.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnUDPMonitor.Location = new System.Drawing.Point(155, 374);
+            this.btnUDPMonitor.Location = new System.Drawing.Point(155, 304);
             this.btnUDPMonitor.Margin = new System.Windows.Forms.Padding(4);
             this.btnUDPMonitor.Name = "btnUDPMonitor";
             this.btnUDPMonitor.Size = new System.Drawing.Size(77, 65);
@@ -3178,7 +3461,7 @@ namespace Twol
             this.btnNtrip.ForeColor = System.Drawing.Color.White;
             this.btnNtrip.Image = global::Twol.Properties.Resources.NtripSettings;
             this.btnNtrip.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnNtrip.Location = new System.Drawing.Point(155, 197);
+            this.btnNtrip.Location = new System.Drawing.Point(155, 140);
             this.btnNtrip.Margin = new System.Windows.Forms.Padding(4);
             this.btnNtrip.Name = "btnNtrip";
             this.btnNtrip.Size = new System.Drawing.Size(77, 65);
@@ -3197,7 +3480,7 @@ namespace Twol
             this.btnUDP.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUDP.ForeColor = System.Drawing.Color.White;
             this.btnUDP.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnUDP.Location = new System.Drawing.Point(22, 173);
+            this.btnUDP.Location = new System.Drawing.Point(22, 106);
             this.btnUDP.Margin = new System.Windows.Forms.Padding(4);
             this.btnUDP.Name = "btnUDP";
             this.btnUDP.Size = new System.Drawing.Size(77, 65);
@@ -3216,7 +3499,7 @@ namespace Twol
             this.btnNMEA_Data.ForeColor = System.Drawing.Color.Black;
             this.btnNMEA_Data.Image = global::Twol.Properties.Resources.Nmea;
             this.btnNMEA_Data.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnNMEA_Data.Location = new System.Drawing.Point(23, 247);
+            this.btnNMEA_Data.Location = new System.Drawing.Point(23, 180);
             this.btnNMEA_Data.Margin = new System.Windows.Forms.Padding(4);
             this.btnNMEA_Data.Name = "btnNMEA_Data";
             this.btnNMEA_Data.Size = new System.Drawing.Size(77, 65);
@@ -3235,7 +3518,7 @@ namespace Twol
             this.btnProfiles.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnProfiles.ForeColor = System.Drawing.Color.White;
             this.btnProfiles.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnProfiles.Location = new System.Drawing.Point(155, 465);
+            this.btnProfiles.Location = new System.Drawing.Point(155, 386);
             this.btnProfiles.Margin = new System.Windows.Forms.Padding(4);
             this.btnProfiles.Name = "btnProfiles";
             this.btnProfiles.Size = new System.Drawing.Size(77, 65);
@@ -3261,746 +3544,10 @@ namespace Twol
             this.flowLayoutPanelTop.Controls.Add(this.btnRTCM_Top);
             this.flowLayoutPanelTop.Controls.Add(this.btnFieldStats);
             this.flowLayoutPanelTop.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanelTop.Location = new System.Drawing.Point(231, 3);
+            this.flowLayoutPanelTop.Location = new System.Drawing.Point(391, 3);
             this.flowLayoutPanelTop.Name = "flowLayoutPanelTop";
             this.flowLayoutPanelTop.Size = new System.Drawing.Size(764, 46);
             this.flowLayoutPanelTop.TabIndex = 548;
-            // 
-            // tlpRateControl
-            // 
-            this.tlpRateControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.tlpRateControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(60)))));
-            this.tlpRateControl.ColumnCount = 6;
-            this.tlpRateControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 4F));
-            this.tlpRateControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 65F));
-            this.tlpRateControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 65F));
-            this.tlpRateControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpRateControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 65F));
-            this.tlpRateControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 107F));
-            this.tlpRateControl.Controls.Add(this.lblrcSensorType_0, 0, 7);
-            this.tlpRateControl.Controls.Add(this.lblrcArea_2, 4, 4);
-            this.tlpRateControl.Controls.Add(this.lblrcRateActual_2, 4, 2);
-            this.tlpRateControl.Controls.Add(this.lblrcUPM_2, 4, 1);
-            this.tlpRateControl.Controls.Add(this.lblrcProduct_2, 4, 0);
-            this.tlpRateControl.Controls.Add(this.lblrcRateSet_2, 4, 3);
-            this.tlpRateControl.Controls.Add(this.lblrcProduct_3, 4, 8);
-            this.tlpRateControl.Controls.Add(this.lblrcProduct_1, 1, 8);
-            this.tlpRateControl.Controls.Add(this.lblrcSensor_0, 1, 7);
-            this.tlpRateControl.Controls.Add(this.label4, 0, 6);
-            this.tlpRateControl.Controls.Add(this.lblrcTankRem_0, 1, 6);
-            this.tlpRateControl.Controls.Add(this.label11, 0, 5);
-            this.tlpRateControl.Controls.Add(this.lblrcTankApp_0, 1, 5);
-            this.tlpRateControl.Controls.Add(this.lblrcArea_0, 1, 4);
-            this.tlpRateControl.Controls.Add(this.label13, 0, 4);
-            this.tlpRateControl.Controls.Add(this.lblrcSensor_1, 1, 15);
-            this.tlpRateControl.Controls.Add(this.lblrcSensorType_1, 0, 15);
-            this.tlpRateControl.Controls.Add(this.lblrcRateActual_0, 1, 2);
-            this.tlpRateControl.Controls.Add(this.label23, 0, 11);
-            this.tlpRateControl.Controls.Add(this.lblrcRateActual_1, 1, 10);
-            this.tlpRateControl.Controls.Add(this.lblrcUPM_1, 1, 9);
-            this.tlpRateControl.Controls.Add(this.lblrcUPM_0, 1, 1);
-            this.tlpRateControl.Controls.Add(this.label25, 0, 3);
-            this.tlpRateControl.Controls.Add(this.lblrcRateSet_0, 1, 3);
-            this.tlpRateControl.Controls.Add(this.lblrcRateSet_1, 1, 11);
-            this.tlpRateControl.Controls.Add(this.lblrcSensor_3, 4, 15);
-            this.tlpRateControl.Controls.Add(this.lblrcTankApp_2, 4, 5);
-            this.tlpRateControl.Controls.Add(this.lblrcTankRem_2, 4, 6);
-            this.tlpRateControl.Controls.Add(this.lblrcSensor_2, 4, 7);
-            this.tlpRateControl.Controls.Add(this.lblrcRateSet_3, 4, 11);
-            this.tlpRateControl.Controls.Add(this.lblrcRateActual_3, 4, 10);
-            this.tlpRateControl.Controls.Add(this.lblrcUPM_3, 4, 9);
-            this.tlpRateControl.Controls.Add(this.lblrcProduct_0, 1, 0);
-            this.tlpRateControl.Controls.Add(this.label30, 0, 10);
-            this.tlpRateControl.Controls.Add(this.label31, 0, 2);
-            this.tlpRateControl.Controls.Add(this.lblrcTankApp_1, 1, 13);
-            this.tlpRateControl.Controls.Add(this.lblrcTankRem_1, 1, 14);
-            this.tlpRateControl.Controls.Add(this.lblrcArea_1, 1, 12);
-            this.tlpRateControl.Controls.Add(this.label14, 0, 14);
-            this.tlpRateControl.Controls.Add(this.label18, 0, 13);
-            this.tlpRateControl.Controls.Add(this.label15, 0, 12);
-            this.tlpRateControl.Controls.Add(this.lblrcTankRem_3, 4, 14);
-            this.tlpRateControl.Controls.Add(this.lblrcTankApp_3, 4, 13);
-            this.tlpRateControl.Controls.Add(this.lblrcArea_3, 4, 12);
-            this.tlpRateControl.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tlpRateControl.Location = new System.Drawing.Point(828, 50);
-            this.tlpRateControl.Name = "tlpRateControl";
-            this.tlpRateControl.RowCount = 16;
-            this.tlpRateControl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.122849F));
-            this.tlpRateControl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 3.901284F));
-            this.tlpRateControl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.2157F));
-            this.tlpRateControl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.122849F));
-            this.tlpRateControl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.122849F));
-            this.tlpRateControl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.122849F));
-            this.tlpRateControl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.122849F));
-            this.tlpRateControl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.122849F));
-            this.tlpRateControl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.122849F));
-            this.tlpRateControl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.190268F));
-            this.tlpRateControl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.218561F));
-            this.tlpRateControl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.122849F));
-            this.tlpRateControl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.122849F));
-            this.tlpRateControl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.122849F));
-            this.tlpRateControl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.122849F));
-            this.tlpRateControl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.122849F));
-            this.tlpRateControl.Size = new System.Drawing.Size(305, 600);
-            this.tlpRateControl.TabIndex = 620;
-            // 
-            // lblrcSensorType_0
-            // 
-            this.lblrcSensorType_0.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblrcSensorType_0.AutoSize = true;
-            this.lblrcSensorType_0.BackColor = System.Drawing.Color.Transparent;
-            this.lblrcSensorType_0.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblrcSensorType_0.ForeColor = System.Drawing.Color.White;
-            this.lblrcSensorType_0.Location = new System.Drawing.Point(0, 258);
-            this.lblrcSensorType_0.Margin = new System.Windows.Forms.Padding(0);
-            this.lblrcSensorType_0.Name = "lblrcSensorType_0";
-            this.lblrcSensorType_0.Size = new System.Drawing.Size(4, 36);
-            this.lblrcSensorType_0.TabIndex = 682;
-            this.lblrcSensorType_0.Text = "Sensor";
-            this.lblrcSensorType_0.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblrcArea_2
-            // 
-            this.lblrcArea_2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblrcArea_2.BackColor = System.Drawing.Color.Transparent;
-            this.tlpRateControl.SetColumnSpan(this.lblrcArea_2, 2);
-            this.lblrcArea_2.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblrcArea_2.ForeColor = System.Drawing.Color.White;
-            this.lblrcArea_2.Location = new System.Drawing.Point(181, 150);
-            this.lblrcArea_2.Margin = new System.Windows.Forms.Padding(0);
-            this.lblrcArea_2.Name = "lblrcArea_2";
-            this.lblrcArea_2.Size = new System.Drawing.Size(118, 35);
-            this.lblrcArea_2.TabIndex = 706;
-            this.lblrcArea_2.Text = "30";
-            this.lblrcArea_2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblrcRateActual_2
-            // 
-            this.lblrcRateActual_2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblrcRateActual_2.BackColor = System.Drawing.Color.Transparent;
-            this.lblrcRateActual_2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.tlpRateControl.SetColumnSpan(this.lblrcRateActual_2, 2);
-            this.lblrcRateActual_2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblrcRateActual_2.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblrcRateActual_2.ForeColor = System.Drawing.Color.Yellow;
-            this.lblrcRateActual_2.Location = new System.Drawing.Point(180, 62);
-            this.lblrcRateActual_2.Margin = new System.Windows.Forms.Padding(0);
-            this.lblrcRateActual_2.Name = "lblrcRateActual_2";
-            this.lblrcRateActual_2.Size = new System.Drawing.Size(120, 49);
-            this.lblrcRateActual_2.TabIndex = 705;
-            this.lblrcRateActual_2.Text = "120.8";
-            this.lblrcRateActual_2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblrcUPM_2
-            // 
-            this.lblrcUPM_2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblrcUPM_2.BackColor = System.Drawing.Color.Transparent;
-            this.tlpRateControl.SetColumnSpan(this.lblrcUPM_2, 2);
-            this.lblrcUPM_2.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblrcUPM_2.ForeColor = System.Drawing.Color.White;
-            this.lblrcUPM_2.Location = new System.Drawing.Point(181, 36);
-            this.lblrcUPM_2.Margin = new System.Windows.Forms.Padding(0);
-            this.lblrcUPM_2.Name = "lblrcUPM_2";
-            this.lblrcUPM_2.Size = new System.Drawing.Size(118, 23);
-            this.lblrcUPM_2.TabIndex = 702;
-            this.lblrcUPM_2.Text = "l/ha";
-            this.lblrcUPM_2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblrcProduct_2
-            // 
-            this.lblrcProduct_2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblrcProduct_2.BackColor = System.Drawing.Color.Transparent;
-            this.tlpRateControl.SetColumnSpan(this.lblrcProduct_2, 2);
-            this.lblrcProduct_2.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblrcProduct_2.ForeColor = System.Drawing.Color.Silver;
-            this.lblrcProduct_2.Location = new System.Drawing.Point(181, 3);
-            this.lblrcProduct_2.Margin = new System.Windows.Forms.Padding(0);
-            this.lblrcProduct_2.Name = "lblrcProduct_2";
-            this.lblrcProduct_2.Size = new System.Drawing.Size(118, 30);
-            this.lblrcProduct_2.TabIndex = 703;
-            this.lblrcProduct_2.Text = "Product 3";
-            this.lblrcProduct_2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblrcRateSet_2
-            // 
-            this.lblrcRateSet_2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblrcRateSet_2.BackColor = System.Drawing.Color.Transparent;
-            this.tlpRateControl.SetColumnSpan(this.lblrcRateSet_2, 2);
-            this.lblrcRateSet_2.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblrcRateSet_2.ForeColor = System.Drawing.Color.Cyan;
-            this.lblrcRateSet_2.Location = new System.Drawing.Point(181, 114);
-            this.lblrcRateSet_2.Margin = new System.Windows.Forms.Padding(0);
-            this.lblrcRateSet_2.Name = "lblrcRateSet_2";
-            this.lblrcRateSet_2.Size = new System.Drawing.Size(118, 35);
-            this.lblrcRateSet_2.TabIndex = 704;
-            this.lblrcRateSet_2.Text = "120.0";
-            this.lblrcRateSet_2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblrcProduct_3
-            // 
-            this.lblrcProduct_3.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblrcProduct_3.BackColor = System.Drawing.Color.Transparent;
-            this.tlpRateControl.SetColumnSpan(this.lblrcProduct_3, 2);
-            this.lblrcProduct_3.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblrcProduct_3.ForeColor = System.Drawing.Color.Silver;
-            this.lblrcProduct_3.Location = new System.Drawing.Point(177, 297);
-            this.lblrcProduct_3.Margin = new System.Windows.Forms.Padding(0);
-            this.lblrcProduct_3.Name = "lblrcProduct_3";
-            this.lblrcProduct_3.Size = new System.Drawing.Size(126, 30);
-            this.lblrcProduct_3.TabIndex = 666;
-            this.lblrcProduct_3.Text = "Product 4";
-            this.lblrcProduct_3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblrcProduct_1
-            // 
-            this.lblrcProduct_1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblrcProduct_1.BackColor = System.Drawing.Color.Transparent;
-            this.tlpRateControl.SetColumnSpan(this.lblrcProduct_1, 2);
-            this.lblrcProduct_1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblrcProduct_1.ForeColor = System.Drawing.Color.Silver;
-            this.lblrcProduct_1.Location = new System.Drawing.Point(9, 297);
-            this.lblrcProduct_1.Margin = new System.Windows.Forms.Padding(0);
-            this.lblrcProduct_1.Name = "lblrcProduct_1";
-            this.lblrcProduct_1.Size = new System.Drawing.Size(120, 30);
-            this.lblrcProduct_1.TabIndex = 666;
-            this.lblrcProduct_1.Text = "Product 2";
-            this.lblrcProduct_1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblrcSensor_0
-            // 
-            this.lblrcSensor_0.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblrcSensor_0.BackColor = System.Drawing.Color.Transparent;
-            this.tlpRateControl.SetColumnSpan(this.lblrcSensor_0, 2);
-            this.lblrcSensor_0.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblrcSensor_0.ForeColor = System.Drawing.Color.White;
-            this.lblrcSensor_0.Location = new System.Drawing.Point(9, 258);
-            this.lblrcSensor_0.Margin = new System.Windows.Forms.Padding(0);
-            this.lblrcSensor_0.Name = "lblrcSensor_0";
-            this.lblrcSensor_0.Size = new System.Drawing.Size(120, 35);
-            this.lblrcSensor_0.TabIndex = 696;
-            this.lblrcSensor_0.Text = "50";
-            this.lblrcSensor_0.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label4
-            // 
-            this.label4.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(0, 222);
-            this.label4.Margin = new System.Windows.Forms.Padding(0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(4, 35);
-            this.label4.TabIndex = 701;
-            this.label4.Text = "Rem";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblrcTankRem_0
-            // 
-            this.lblrcTankRem_0.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblrcTankRem_0.BackColor = System.Drawing.Color.Transparent;
-            this.tlpRateControl.SetColumnSpan(this.lblrcTankRem_0, 2);
-            this.lblrcTankRem_0.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblrcTankRem_0.ForeColor = System.Drawing.Color.White;
-            this.lblrcTankRem_0.Location = new System.Drawing.Point(27, 222);
-            this.lblrcTankRem_0.Margin = new System.Windows.Forms.Padding(0);
-            this.lblrcTankRem_0.Name = "lblrcTankRem_0";
-            this.lblrcTankRem_0.Size = new System.Drawing.Size(84, 35);
-            this.lblrcTankRem_0.TabIndex = 697;
-            this.lblrcTankRem_0.Text = "5";
-            this.lblrcTankRem_0.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label11
-            // 
-            this.label11.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label11.BackColor = System.Drawing.Color.Transparent;
-            this.label11.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.ForeColor = System.Drawing.Color.White;
-            this.label11.Location = new System.Drawing.Point(0, 186);
-            this.label11.Margin = new System.Windows.Forms.Padding(0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(4, 35);
-            this.label11.TabIndex = 678;
-            this.label11.Text = "App";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblrcTankApp_0
-            // 
-            this.lblrcTankApp_0.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblrcTankApp_0.BackColor = System.Drawing.Color.Transparent;
-            this.tlpRateControl.SetColumnSpan(this.lblrcTankApp_0, 2);
-            this.lblrcTankApp_0.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblrcTankApp_0.ForeColor = System.Drawing.Color.White;
-            this.lblrcTankApp_0.Location = new System.Drawing.Point(9, 186);
-            this.lblrcTankApp_0.Margin = new System.Windows.Forms.Padding(0);
-            this.lblrcTankApp_0.Name = "lblrcTankApp_0";
-            this.lblrcTankApp_0.Size = new System.Drawing.Size(120, 35);
-            this.lblrcTankApp_0.TabIndex = 697;
-            this.lblrcTankApp_0.Text = "1650";
-            this.lblrcTankApp_0.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblrcArea_0
-            // 
-            this.lblrcArea_0.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblrcArea_0.BackColor = System.Drawing.Color.Transparent;
-            this.tlpRateControl.SetColumnSpan(this.lblrcArea_0, 2);
-            this.lblrcArea_0.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblrcArea_0.ForeColor = System.Drawing.Color.White;
-            this.lblrcArea_0.Location = new System.Drawing.Point(9, 150);
-            this.lblrcArea_0.Margin = new System.Windows.Forms.Padding(0);
-            this.lblrcArea_0.Name = "lblrcArea_0";
-            this.lblrcArea_0.Size = new System.Drawing.Size(120, 35);
-            this.lblrcArea_0.TabIndex = 691;
-            this.lblrcArea_0.Text = "47";
-            this.lblrcArea_0.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label13
-            // 
-            this.label13.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label13.BackColor = System.Drawing.Color.Transparent;
-            this.label13.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.ForeColor = System.Drawing.Color.White;
-            this.label13.Location = new System.Drawing.Point(0, 150);
-            this.label13.Margin = new System.Windows.Forms.Padding(0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(4, 35);
-            this.label13.TabIndex = 679;
-            this.label13.Text = "Area";
-            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblrcSensor_1
-            // 
-            this.lblrcSensor_1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblrcSensor_1.BackColor = System.Drawing.Color.Transparent;
-            this.tlpRateControl.SetColumnSpan(this.lblrcSensor_1, 2);
-            this.lblrcSensor_1.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblrcSensor_1.ForeColor = System.Drawing.Color.White;
-            this.lblrcSensor_1.Location = new System.Drawing.Point(9, 559);
-            this.lblrcSensor_1.Margin = new System.Windows.Forms.Padding(0);
-            this.lblrcSensor_1.Name = "lblrcSensor_1";
-            this.lblrcSensor_1.Size = new System.Drawing.Size(120, 35);
-            this.lblrcSensor_1.TabIndex = 693;
-            this.lblrcSensor_1.Text = "4500";
-            this.lblrcSensor_1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblrcSensorType_1
-            // 
-            this.lblrcSensorType_1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblrcSensorType_1.BackColor = System.Drawing.Color.Transparent;
-            this.lblrcSensorType_1.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblrcSensorType_1.ForeColor = System.Drawing.Color.White;
-            this.lblrcSensorType_1.Location = new System.Drawing.Point(0, 559);
-            this.lblrcSensorType_1.Margin = new System.Windows.Forms.Padding(0);
-            this.lblrcSensorType_1.Name = "lblrcSensorType_1";
-            this.lblrcSensorType_1.Size = new System.Drawing.Size(4, 35);
-            this.lblrcSensorType_1.TabIndex = 683;
-            this.lblrcSensorType_1.Text = "Sensor";
-            this.lblrcSensorType_1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblrcRateActual_0
-            // 
-            this.lblrcRateActual_0.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblrcRateActual_0.BackColor = System.Drawing.Color.Transparent;
-            this.lblrcRateActual_0.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.tlpRateControl.SetColumnSpan(this.lblrcRateActual_0, 2);
-            this.lblrcRateActual_0.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblrcRateActual_0.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblrcRateActual_0.ForeColor = System.Drawing.Color.Yellow;
-            this.lblrcRateActual_0.Location = new System.Drawing.Point(9, 62);
-            this.lblrcRateActual_0.Margin = new System.Windows.Forms.Padding(0);
-            this.lblrcRateActual_0.Name = "lblrcRateActual_0";
-            this.lblrcRateActual_0.Size = new System.Drawing.Size(120, 49);
-            this.lblrcRateActual_0.TabIndex = 694;
-            this.lblrcRateActual_0.Text = "10.2";
-            this.lblrcRateActual_0.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label23
-            // 
-            this.label23.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label23.BackColor = System.Drawing.Color.Transparent;
-            this.label23.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label23.ForeColor = System.Drawing.Color.White;
-            this.label23.Location = new System.Drawing.Point(0, 410);
-            this.label23.Margin = new System.Windows.Forms.Padding(0);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(4, 35);
-            this.label23.TabIndex = 707;
-            this.label23.Text = "Set";
-            this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblrcRateActual_1
-            // 
-            this.lblrcRateActual_1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblrcRateActual_1.BackColor = System.Drawing.Color.Transparent;
-            this.lblrcRateActual_1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.tlpRateControl.SetColumnSpan(this.lblrcRateActual_1, 2);
-            this.lblrcRateActual_1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblrcRateActual_1.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblrcRateActual_1.ForeColor = System.Drawing.Color.Yellow;
-            this.lblrcRateActual_1.Location = new System.Drawing.Point(9, 358);
-            this.lblrcRateActual_1.Margin = new System.Windows.Forms.Padding(0);
-            this.lblrcRateActual_1.Name = "lblrcRateActual_1";
-            this.lblrcRateActual_1.Size = new System.Drawing.Size(120, 49);
-            this.lblrcRateActual_1.TabIndex = 695;
-            this.lblrcRateActual_1.Text = "220";
-            this.lblrcRateActual_1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblrcUPM_1
-            // 
-            this.lblrcUPM_1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblrcUPM_1.BackColor = System.Drawing.Color.Transparent;
-            this.tlpRateControl.SetColumnSpan(this.lblrcUPM_1, 2);
-            this.lblrcUPM_1.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblrcUPM_1.ForeColor = System.Drawing.Color.White;
-            this.lblrcUPM_1.Location = new System.Drawing.Point(10, 330);
-            this.lblrcUPM_1.Margin = new System.Windows.Forms.Padding(0);
-            this.lblrcUPM_1.Name = "lblrcUPM_1";
-            this.lblrcUPM_1.Size = new System.Drawing.Size(117, 25);
-            this.lblrcUPM_1.TabIndex = 622;
-            this.lblrcUPM_1.Text = "kg/ha";
-            this.lblrcUPM_1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblrcUPM_0
-            // 
-            this.lblrcUPM_0.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblrcUPM_0.BackColor = System.Drawing.Color.Transparent;
-            this.tlpRateControl.SetColumnSpan(this.lblrcUPM_0, 2);
-            this.lblrcUPM_0.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblrcUPM_0.ForeColor = System.Drawing.Color.White;
-            this.lblrcUPM_0.Location = new System.Drawing.Point(9, 36);
-            this.lblrcUPM_0.Margin = new System.Windows.Forms.Padding(0);
-            this.lblrcUPM_0.Name = "lblrcUPM_0";
-            this.lblrcUPM_0.Size = new System.Drawing.Size(120, 23);
-            this.lblrcUPM_0.TabIndex = 620;
-            this.lblrcUPM_0.Text = "gal/ac";
-            this.lblrcUPM_0.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label25
-            // 
-            this.label25.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label25.BackColor = System.Drawing.Color.Transparent;
-            this.label25.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.ForeColor = System.Drawing.Color.White;
-            this.label25.Location = new System.Drawing.Point(0, 114);
-            this.label25.Margin = new System.Windows.Forms.Padding(0);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(4, 35);
-            this.label25.TabIndex = 707;
-            this.label25.Text = "Set";
-            this.label25.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblrcRateSet_0
-            // 
-            this.lblrcRateSet_0.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblrcRateSet_0.BackColor = System.Drawing.Color.Transparent;
-            this.tlpRateControl.SetColumnSpan(this.lblrcRateSet_0, 2);
-            this.lblrcRateSet_0.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblrcRateSet_0.ForeColor = System.Drawing.Color.Cyan;
-            this.lblrcRateSet_0.Location = new System.Drawing.Point(9, 114);
-            this.lblrcRateSet_0.Margin = new System.Windows.Forms.Padding(0);
-            this.lblrcRateSet_0.Name = "lblrcRateSet_0";
-            this.lblrcRateSet_0.Size = new System.Drawing.Size(120, 35);
-            this.lblrcRateSet_0.TabIndex = 689;
-            this.lblrcRateSet_0.Text = "10.1";
-            this.lblrcRateSet_0.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblrcRateSet_1
-            // 
-            this.lblrcRateSet_1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblrcRateSet_1.BackColor = System.Drawing.Color.Transparent;
-            this.tlpRateControl.SetColumnSpan(this.lblrcRateSet_1, 2);
-            this.lblrcRateSet_1.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblrcRateSet_1.ForeColor = System.Drawing.Color.Cyan;
-            this.lblrcRateSet_1.Location = new System.Drawing.Point(9, 410);
-            this.lblrcRateSet_1.Margin = new System.Windows.Forms.Padding(0);
-            this.lblrcRateSet_1.Name = "lblrcRateSet_1";
-            this.lblrcRateSet_1.Size = new System.Drawing.Size(120, 35);
-            this.lblrcRateSet_1.TabIndex = 690;
-            this.lblrcRateSet_1.Text = "210";
-            this.lblrcRateSet_1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblrcSensor_3
-            // 
-            this.lblrcSensor_3.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblrcSensor_3.BackColor = System.Drawing.Color.Transparent;
-            this.tlpRateControl.SetColumnSpan(this.lblrcSensor_3, 2);
-            this.lblrcSensor_3.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblrcSensor_3.ForeColor = System.Drawing.Color.White;
-            this.lblrcSensor_3.Location = new System.Drawing.Point(180, 559);
-            this.lblrcSensor_3.Margin = new System.Windows.Forms.Padding(0);
-            this.lblrcSensor_3.Name = "lblrcSensor_3";
-            this.lblrcSensor_3.Size = new System.Drawing.Size(120, 35);
-            this.lblrcSensor_3.TabIndex = 698;
-            this.lblrcSensor_3.Text = "4400";
-            this.lblrcSensor_3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblrcTankApp_2
-            // 
-            this.lblrcTankApp_2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblrcTankApp_2.BackColor = System.Drawing.Color.Transparent;
-            this.tlpRateControl.SetColumnSpan(this.lblrcTankApp_2, 2);
-            this.lblrcTankApp_2.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblrcTankApp_2.ForeColor = System.Drawing.Color.White;
-            this.lblrcTankApp_2.Location = new System.Drawing.Point(180, 186);
-            this.lblrcTankApp_2.Margin = new System.Windows.Forms.Padding(0);
-            this.lblrcTankApp_2.Name = "lblrcTankApp_2";
-            this.lblrcTankApp_2.Size = new System.Drawing.Size(120, 35);
-            this.lblrcTankApp_2.TabIndex = 697;
-            this.lblrcTankApp_2.Text = "1500";
-            this.lblrcTankApp_2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblrcTankRem_2
-            // 
-            this.lblrcTankRem_2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblrcTankRem_2.BackColor = System.Drawing.Color.Transparent;
-            this.tlpRateControl.SetColumnSpan(this.lblrcTankRem_2, 2);
-            this.lblrcTankRem_2.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblrcTankRem_2.ForeColor = System.Drawing.Color.White;
-            this.lblrcTankRem_2.Location = new System.Drawing.Point(198, 222);
-            this.lblrcTankRem_2.Margin = new System.Windows.Forms.Padding(0);
-            this.lblrcTankRem_2.Name = "lblrcTankRem_2";
-            this.lblrcTankRem_2.Size = new System.Drawing.Size(84, 35);
-            this.lblrcTankRem_2.TabIndex = 697;
-            this.lblrcTankRem_2.Text = "250";
-            this.lblrcTankRem_2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblrcSensor_2
-            // 
-            this.lblrcSensor_2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblrcSensor_2.BackColor = System.Drawing.Color.Transparent;
-            this.tlpRateControl.SetColumnSpan(this.lblrcSensor_2, 2);
-            this.lblrcSensor_2.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblrcSensor_2.ForeColor = System.Drawing.Color.White;
-            this.lblrcSensor_2.Location = new System.Drawing.Point(180, 258);
-            this.lblrcSensor_2.Margin = new System.Windows.Forms.Padding(0);
-            this.lblrcSensor_2.Name = "lblrcSensor_2";
-            this.lblrcSensor_2.Size = new System.Drawing.Size(120, 35);
-            this.lblrcSensor_2.TabIndex = 696;
-            this.lblrcSensor_2.Text = "65";
-            this.lblrcSensor_2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblrcRateSet_3
-            // 
-            this.lblrcRateSet_3.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblrcRateSet_3.BackColor = System.Drawing.Color.Transparent;
-            this.tlpRateControl.SetColumnSpan(this.lblrcRateSet_3, 2);
-            this.lblrcRateSet_3.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblrcRateSet_3.ForeColor = System.Drawing.Color.Cyan;
-            this.lblrcRateSet_3.Location = new System.Drawing.Point(180, 410);
-            this.lblrcRateSet_3.Margin = new System.Windows.Forms.Padding(0);
-            this.lblrcRateSet_3.Name = "lblrcRateSet_3";
-            this.lblrcRateSet_3.Size = new System.Drawing.Size(120, 35);
-            this.lblrcRateSet_3.TabIndex = 690;
-            this.lblrcRateSet_3.Text = "310";
-            this.lblrcRateSet_3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblrcRateActual_3
-            // 
-            this.lblrcRateActual_3.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblrcRateActual_3.BackColor = System.Drawing.Color.Transparent;
-            this.lblrcRateActual_3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.tlpRateControl.SetColumnSpan(this.lblrcRateActual_3, 2);
-            this.lblrcRateActual_3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblrcRateActual_3.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblrcRateActual_3.ForeColor = System.Drawing.Color.Yellow;
-            this.lblrcRateActual_3.Location = new System.Drawing.Point(180, 358);
-            this.lblrcRateActual_3.Margin = new System.Windows.Forms.Padding(0);
-            this.lblrcRateActual_3.Name = "lblrcRateActual_3";
-            this.lblrcRateActual_3.Size = new System.Drawing.Size(120, 49);
-            this.lblrcRateActual_3.TabIndex = 695;
-            this.lblrcRateActual_3.Text = "320";
-            this.lblrcRateActual_3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblrcUPM_3
-            // 
-            this.lblrcUPM_3.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblrcUPM_3.BackColor = System.Drawing.Color.Transparent;
-            this.tlpRateControl.SetColumnSpan(this.lblrcUPM_3, 2);
-            this.lblrcUPM_3.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblrcUPM_3.ForeColor = System.Drawing.Color.White;
-            this.lblrcUPM_3.Location = new System.Drawing.Point(195, 330);
-            this.lblrcUPM_3.Margin = new System.Windows.Forms.Padding(0);
-            this.lblrcUPM_3.Name = "lblrcUPM_3";
-            this.lblrcUPM_3.Size = new System.Drawing.Size(90, 25);
-            this.lblrcUPM_3.TabIndex = 622;
-            this.lblrcUPM_3.Text = "lb/ac";
-            this.lblrcUPM_3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblrcProduct_0
-            // 
-            this.lblrcProduct_0.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblrcProduct_0.BackColor = System.Drawing.Color.Transparent;
-            this.tlpRateControl.SetColumnSpan(this.lblrcProduct_0, 2);
-            this.lblrcProduct_0.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblrcProduct_0.ForeColor = System.Drawing.Color.Silver;
-            this.lblrcProduct_0.Location = new System.Drawing.Point(9, 3);
-            this.lblrcProduct_0.Margin = new System.Windows.Forms.Padding(0);
-            this.lblrcProduct_0.Name = "lblrcProduct_0";
-            this.lblrcProduct_0.Size = new System.Drawing.Size(120, 30);
-            this.lblrcProduct_0.TabIndex = 665;
-            this.lblrcProduct_0.Text = "Product 1";
-            this.lblrcProduct_0.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label30
-            // 
-            this.label30.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label30.BackColor = System.Drawing.Color.Transparent;
-            this.label30.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label30.ForeColor = System.Drawing.Color.White;
-            this.label30.Location = new System.Drawing.Point(0, 365);
-            this.label30.Margin = new System.Windows.Forms.Padding(0);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(4, 35);
-            this.label30.TabIndex = 707;
-            this.label30.Text = "Actual";
-            this.label30.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label31
-            // 
-            this.label31.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label31.BackColor = System.Drawing.Color.Transparent;
-            this.label31.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label31.ForeColor = System.Drawing.Color.White;
-            this.label31.Location = new System.Drawing.Point(0, 69);
-            this.label31.Margin = new System.Windows.Forms.Padding(0);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(4, 35);
-            this.label31.TabIndex = 707;
-            this.label31.Text = "Actual";
-            this.label31.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblrcTankApp_1
-            // 
-            this.lblrcTankApp_1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblrcTankApp_1.BackColor = System.Drawing.Color.Transparent;
-            this.tlpRateControl.SetColumnSpan(this.lblrcTankApp_1, 2);
-            this.lblrcTankApp_1.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblrcTankApp_1.ForeColor = System.Drawing.Color.White;
-            this.lblrcTankApp_1.Location = new System.Drawing.Point(9, 482);
-            this.lblrcTankApp_1.Margin = new System.Windows.Forms.Padding(0);
-            this.lblrcTankApp_1.Name = "lblrcTankApp_1";
-            this.lblrcTankApp_1.Size = new System.Drawing.Size(120, 35);
-            this.lblrcTankApp_1.TabIndex = 698;
-            this.lblrcTankApp_1.Text = "22300";
-            this.lblrcTankApp_1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblrcTankRem_1
-            // 
-            this.lblrcTankRem_1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblrcTankRem_1.BackColor = System.Drawing.Color.Transparent;
-            this.tlpRateControl.SetColumnSpan(this.lblrcTankRem_1, 2);
-            this.lblrcTankRem_1.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblrcTankRem_1.ForeColor = System.Drawing.Color.White;
-            this.lblrcTankRem_1.Location = new System.Drawing.Point(9, 518);
-            this.lblrcTankRem_1.Margin = new System.Windows.Forms.Padding(0);
-            this.lblrcTankRem_1.Name = "lblrcTankRem_1";
-            this.lblrcTankRem_1.Size = new System.Drawing.Size(120, 35);
-            this.lblrcTankRem_1.TabIndex = 698;
-            this.lblrcTankRem_1.Text = "320";
-            this.lblrcTankRem_1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblrcArea_1
-            // 
-            this.lblrcArea_1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblrcArea_1.BackColor = System.Drawing.Color.Transparent;
-            this.tlpRateControl.SetColumnSpan(this.lblrcArea_1, 2);
-            this.lblrcArea_1.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblrcArea_1.ForeColor = System.Drawing.Color.White;
-            this.lblrcArea_1.Location = new System.Drawing.Point(9, 446);
-            this.lblrcArea_1.Margin = new System.Windows.Forms.Padding(0);
-            this.lblrcArea_1.Name = "lblrcArea_1";
-            this.lblrcArea_1.Size = new System.Drawing.Size(120, 35);
-            this.lblrcArea_1.TabIndex = 692;
-            this.lblrcArea_1.Text = "48";
-            this.lblrcArea_1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label14
-            // 
-            this.label14.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label14.BackColor = System.Drawing.Color.Transparent;
-            this.label14.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.ForeColor = System.Drawing.Color.White;
-            this.label14.Location = new System.Drawing.Point(0, 518);
-            this.label14.Margin = new System.Windows.Forms.Padding(0);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(4, 35);
-            this.label14.TabIndex = 701;
-            this.label14.Text = "Rem";
-            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label18
-            // 
-            this.label18.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label18.BackColor = System.Drawing.Color.Transparent;
-            this.label18.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.ForeColor = System.Drawing.Color.White;
-            this.label18.Location = new System.Drawing.Point(0, 482);
-            this.label18.Margin = new System.Windows.Forms.Padding(0);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(4, 35);
-            this.label18.TabIndex = 678;
-            this.label18.Text = "App";
-            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label15
-            // 
-            this.label15.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label15.BackColor = System.Drawing.Color.Transparent;
-            this.label15.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.ForeColor = System.Drawing.Color.White;
-            this.label15.Location = new System.Drawing.Point(0, 446);
-            this.label15.Margin = new System.Windows.Forms.Padding(0);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(4, 35);
-            this.label15.TabIndex = 681;
-            this.label15.Text = "Area";
-            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblrcTankRem_3
-            // 
-            this.lblrcTankRem_3.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblrcTankRem_3.BackColor = System.Drawing.Color.Transparent;
-            this.tlpRateControl.SetColumnSpan(this.lblrcTankRem_3, 2);
-            this.lblrcTankRem_3.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblrcTankRem_3.ForeColor = System.Drawing.Color.White;
-            this.lblrcTankRem_3.Location = new System.Drawing.Point(180, 518);
-            this.lblrcTankRem_3.Margin = new System.Windows.Forms.Padding(0);
-            this.lblrcTankRem_3.Name = "lblrcTankRem_3";
-            this.lblrcTankRem_3.Size = new System.Drawing.Size(120, 35);
-            this.lblrcTankRem_3.TabIndex = 698;
-            this.lblrcTankRem_3.Text = "22300";
-            this.lblrcTankRem_3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblrcTankApp_3
-            // 
-            this.lblrcTankApp_3.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblrcTankApp_3.BackColor = System.Drawing.Color.Transparent;
-            this.tlpRateControl.SetColumnSpan(this.lblrcTankApp_3, 2);
-            this.lblrcTankApp_3.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblrcTankApp_3.ForeColor = System.Drawing.Color.White;
-            this.lblrcTankApp_3.Location = new System.Drawing.Point(180, 482);
-            this.lblrcTankApp_3.Margin = new System.Windows.Forms.Padding(0);
-            this.lblrcTankApp_3.Name = "lblrcTankApp_3";
-            this.lblrcTankApp_3.Size = new System.Drawing.Size(120, 35);
-            this.lblrcTankApp_3.TabIndex = 698;
-            this.lblrcTankApp_3.Text = "22300";
-            this.lblrcTankApp_3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblrcArea_3
-            // 
-            this.lblrcArea_3.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblrcArea_3.BackColor = System.Drawing.Color.Transparent;
-            this.tlpRateControl.SetColumnSpan(this.lblrcArea_3, 2);
-            this.lblrcArea_3.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblrcArea_3.ForeColor = System.Drawing.Color.White;
-            this.lblrcArea_3.Location = new System.Drawing.Point(180, 446);
-            this.lblrcArea_3.Margin = new System.Windows.Forms.Padding(0);
-            this.lblrcArea_3.Name = "lblrcArea_3";
-            this.lblrcArea_3.Size = new System.Drawing.Size(120, 35);
-            this.lblrcArea_3.TabIndex = 698;
-            this.lblrcArea_3.Text = "42";
-            this.lblrcArea_3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // button15
             // 
@@ -4027,7 +3574,7 @@ namespace Twol
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(1003, 720);
+            this.ClientSize = new System.Drawing.Size(1163, 847);
             this.Controls.Add(this.flowLayoutPanelTop);
             this.Controls.Add(this.flp1);
             this.Controls.Add(this.panelNavigation);
@@ -4046,7 +3593,6 @@ namespace Twol
             this.Controls.Add(this.lblGuidanceLine);
             this.Controls.Add(this.oglBack);
             this.Controls.Add(this.lblHardwareMessage);
-            this.Controls.Add(this.tlpRateControl);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Tahoma", 12F);
             this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -4081,8 +3627,6 @@ namespace Twol
             this.panel_IO.ResumeLayout(false);
             this.panel_IO.PerformLayout();
             this.flowLayoutPanelTop.ResumeLayout(false);
-            this.tlpRateControl.ResumeLayout(false);
-            this.tlpRateControl.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -4275,55 +3819,26 @@ namespace Twol
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ToolStripMenuItem externalModuleSimToolStripMenuItem;
-        private System.Windows.Forms.TableLayoutPanel tlpRateControl;
-        private System.Windows.Forms.Label lblrcUPM_0;
-        private System.Windows.Forms.Label lblrcUPM_1;
-        private System.Windows.Forms.ToolStripMenuItem rateControlAppToolStripMenuItem;
         public System.Windows.Forms.Button button15;
-        private System.Windows.Forms.Label lblrcProduct_0;
-        private System.Windows.Forms.Label lblrcProduct_1;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label lblrcSensorType_0;
-        private System.Windows.Forms.Label lblrcSensorType_1;
-        private System.Windows.Forms.Label lblrcRateSet_1;
-        private System.Windows.Forms.Label lblrcRateSet_0;
-        private System.Windows.Forms.Label lblrcArea_0;
-        private System.Windows.Forms.Label lblrcArea_1;
-        private System.Windows.Forms.Label lblrcSensor_1;
-        private System.Windows.Forms.Label lblrcRateActual_0;
-        private System.Windows.Forms.Label lblrcRateActual_1;
-        private System.Windows.Forms.Label lblrcSensor_0;
-        private System.Windows.Forms.Label lblrcTankApp_0;
-        private System.Windows.Forms.Label lblrcTankApp_1;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label lblrcArea_2;
-        private System.Windows.Forms.Label lblrcRateActual_2;
-        private System.Windows.Forms.Label lblrcUPM_2;
-        private System.Windows.Forms.Label lblrcProduct_2;
-        private System.Windows.Forms.Label lblrcRateSet_2;
-        private System.Windows.Forms.Label lblrcSensor_3;
-        private System.Windows.Forms.Label lblrcRateSet_3;
-        private System.Windows.Forms.Label lblrcRateActual_3;
-        private System.Windows.Forms.Label lblrcProduct_3;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Label lblrcTankRem_1;
-        private System.Windows.Forms.Label lblrcTankApp_3;
-        private System.Windows.Forms.Label lblrcTankRem_3;
-        private System.Windows.Forms.Label lblrcArea_3;
-        private System.Windows.Forms.Label lblrcTankRem_0;
-        private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.Label lblrcTankApp_2;
-        private System.Windows.Forms.Label lblrcTankRem_2;
-        private System.Windows.Forms.Label lblrcSensor_2;
-        private System.Windows.Forms.Label lblrcUPM_3;
-        private System.Windows.Forms.Label label30;
-        private System.Windows.Forms.Label label31;
         public System.Windows.Forms.Label lblTankArea;
         public System.Windows.Forms.Label lblAreaPossible;
+        private System.Windows.Forms.CheckBox checkBox2;
+        public System.Windows.Forms.Button button1;
+        public System.Windows.Forms.Label label4;
+        public System.Windows.Forms.Label label5;
+        public System.Windows.Forms.Label label6;
+        public System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label7;
+        public System.Windows.Forms.Button button3;
+        public System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.CheckBox checkBox1;
+        public System.Windows.Forms.Button button5;
+        public System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Label label9;
+        public System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
     }
 }
 

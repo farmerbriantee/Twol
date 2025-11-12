@@ -315,19 +315,10 @@ namespace Twol
 
             //Application rate controller
             nozz = new CNozzle(this);
+
             vec2 b = new vec2(0, 0);
             gpsPtsCorr.Add(b);
             gpsPts.Add(b);
-
-            //if (Settings.Vehicle.setApp_isRateControlApp)
-            {
-                for (int i = 0; i < 4; i++)
-                {
-                    rateControlData[i] = new CRateControlData();
-                    rateControlData[i].channel = (byte)i;
-                }
-                rateControlConfig = new CRateControlConfig();
-            }
         }
 
         private void FormGPS_Load(object sender, EventArgs e)

@@ -23,11 +23,6 @@ namespace Twol
         private EndPoint endPointUDPTool = new IPEndPoint(IPAddress.Any, 0);
         private EndPoint endPointNTRIP = new IPEndPoint(IPAddress.Any, 0);
 
-        private CRateControlData[] rateControlData = new CRateControlData[4];
-        private CRateControlConfig rateControlConfig;
-        private byte[] rateControlByteData = new byte[100];
-        private bool isRateControlConfigDataNew = true;
-
         public bool isUDPNetworkConnected, isUDPNetworkConnectedTool, isUDPMonitorOn;
 
         public IPEndPoint epModule = new IPEndPoint(IPAddress.Parse(
@@ -117,15 +112,6 @@ namespace Twol
 
             try //udp network
             {
-                //foreach (IPAddress IPA in Dns.GetHostAddresses(Dns.GetHostName()))
-                //{
-                //    if (IPA.AddressFamily == AddressFamily.InterNetwork)
-                //    {
-                //        string data = IPA.ToString();
-                //        lblIP.Text += IPA.ToString().Trim() + "\r\n";
-                //    }
-                //}
-
                 // Initialise the socket
                 UDPSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
                 UDPSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast, true);
@@ -755,62 +741,6 @@ namespace Twol
 
                     switch (data[3])
                     {
-                        case 101:
-                            {
-                                // 0 to 4 is packet header
-                                //public uint16 rateActualx10 = 0;          5 to 6      x10
-                                //public uint16 rateSetx10 = 0;             7 to 8      x10
-                                //public uint unitsApplied = 0;            9 to 12   
-                                //public int volumeRemain = 0;              13 to 16
-                                //public int coveragePossiblex10 = 0;       17 to 20    x10
-                                //public uint16 sensor = 0;               21 to 22
-                                //public uint32 pressure = 0;               23 to 26
-                                //public byte isAlarming = 0;               27
-                                //public byte channel = 0;                  28
-
-                                int channel = (int)((data[31]));
-
-                                if (channel > 3) return;
-
-                                rateControlData[channel].rateActualx10 = BitConverter.ToUInt16(data, 5);
-                                rateControlData[channel].rateSetx10 = BitConverter.ToUInt16(data, 7);
-                                rateControlData[channel].volumeApplied = BitConverter.ToUInt32(data, 9);
-                                rateControlData[channel].volumeRemain = BitConverter.ToInt32(data, 13);
-                                rateControlData[channel].coveragePossiblex10 = BitConverter.ToInt32(data, 17);
-                                rateControlData[channel].sensor = BitConverter.ToUInt32(data, 21);
-                                rateControlData[channel].isAlarming = Convert.ToBoolean(data[25]);
-                                rateControlData[channel].channel = data[26];
-                            }
-                            break;
-
-                        case 102:
-                            {
-                                Array.Copy(data, 5, rateControlByteData, 0, 100);
-                                isRateControlConfigDataNew = true;
-
-                                //rateControlConfig.productName0 = Encoding.UTF8.GetString(data, 5, 15);  //5 to 19
-                                //rateControlConfig.productName1 = Encoding.UTF8.GetString(data, 20, 15); //20 to 34
-                                //rateControlConfig.productName2 = Encoding.UTF8.GetString(data, 35, 15); //35 to 49
-                                //rateControlConfig.productName3 = Encoding.UTF8.GetString(data, 50, 15); //50 to 64
-
-                                //rateControlConfig.units0 = Encoding.UTF8.GetString(data, 65, 8);        //65 to 72
-                                //rateControlConfig.units1 = Encoding.UTF8.GetString(data, 73, 8);        //73 to 80
-                                //rateControlConfig.units2 = Encoding.UTF8.GetString(data, 81, 8);        //81 to 88
-                                //rateControlConfig.units3 = Encoding.UTF8.GetString(data, 89, 8);        //89 to 96
-
-                                ////0 none - 1 is fan - 2 is Pressure
-                                //rateControlConfig.isFanPressure0 = (int)data[97];     //97 
-                                //rateControlConfig.isFanPressure1 = (int)data[98];     //98
-                                //rateControlConfig.isFanPressure2 = (int)data[99];     //99
-                                //rateControlConfig.isFanPressure3 = (int)data[100];    //100
-
-                                //rateControlConfig.isActive0 =  (int)data[101];        //101
-                                //rateControlConfig.isActive1 =  (int)data[102];        //102
-                                //rateControlConfig.isActive2 =  (int)data[103];        //103
-                                //rateControlConfig.isActive3 =  (int)data[104];        //104
-                            }
-                            break;
-
                         #region Remote Switches
                         case 234://MTZ8302 Feb 2020
                             {
