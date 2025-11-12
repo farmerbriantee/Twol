@@ -38,46 +38,46 @@
 
         public void BuildRatePGN()
         {
-            mf.nozz.rateSet = 0;
-            mf.nozz.currentWidthMeters = 0;
+            rateSet = 0;
+            currentWidthMeters = 0;
 
             for (int i = 0; i < mf.section.Count; i++)
             {
                 if (mf.section[i].isSectionOn)
                 {
-                    mf.nozz.currentWidthMeters += mf.section[i].sectionWidth;
+                    currentWidthMeters += mf.section[i].sectionWidth;
                 }
             }
 
-            mf.nozz.percentWidthBypass = (int)(mf.nozz.currentWidthMeters / Settings.Tool.toolWidth * 100);
+            percentWidthBypass = (int)(currentWidthMeters / Settings.Tool.toolWidth * 100);
 
             if (Settings.Tool.setNozz.isBypass)
             {
-                mf.nozz.currentWidthMeters = Settings.Tool.toolWidth;
+                currentWidthMeters = Settings.Tool.toolWidth;
             }
 
-            if (mf.nozz.currentWidthMeters != 0)
+            if (currentWidthMeters != 0)
             {
                 if (Settings.User.isMetric)
                 {
                     //Liters * 0.00167 𝑥 𝑠𝑤𝑎𝑡ℎ 𝑤𝑖𝑑𝑡ℎ 𝑥 𝐾mh * ( to send as integer x100)
-                    mf.nozz.rateSet =
-                        (int)(mf.nozz.rateSetSelected * 0.167 * mf.nozz.currentWidthMeters * mf.avgSpeed);
+                    rateSet =
+                        (int)(rateSetSelected * 0.167 * currentWidthMeters * mf.avgSpeed);
                 }
                 else
                 {
                     //calculate gallons per minute - GPM = GPA X MPH X Width (in inches)/ 5,940
-                    mf.nozz.rateSet = (int)(mf.nozz.rateSetSelected *
-                                                    (mf.avgSpeed * glm.kmhToMphOrKmh) * mf.nozz.currentWidthMeters * glm.m2InchOrCm / 5940 * 100);
+                    rateSet = (int)(rateSetSelected *
+                                                    (mf.avgSpeed * glm.kmhToMphOrKmh) * currentWidthMeters * glm.m2InchOrCm / 5940 * 100);
                 }
 
-                PGN_227.pgn[PGN_227.volumePerMinuteSetLo] = (byte)(mf.nozz.rateSet);
-                PGN_227.pgn[PGN_227.volumePerMinuteSetHi] = unchecked((byte)((mf.nozz.rateSet) >> 8));
-                PGN_227.pgn[PGN_227.percentWidthBypass] = (byte)(mf.nozz.percentWidthBypass);
+                PGN_227.pgn[PGN_227.volumePerMinuteSetLo] = (byte)(rateSet);
+                PGN_227.pgn[PGN_227.volumePerMinuteSetHi] = unchecked((byte)((rateSet) >> 8));
+                PGN_227.pgn[PGN_227.percentWidthBypass] = (byte)(percentWidthBypass);
             }
             else
             {
-                mf.nozz.rateSet = 0;
+                rateSet = 0;
 
                 PGN_227.pgn[PGN_227.volumePerMinuteSetLo] = 0;
                 PGN_227.pgn[PGN_227.volumePerMinuteSetHi] = 0;

@@ -112,15 +112,6 @@ namespace Twol
 
             try //udp network
             {
-                //foreach (IPAddress IPA in Dns.GetHostAddresses(Dns.GetHostName()))
-                //{
-                //    if (IPA.AddressFamily == AddressFamily.InterNetwork)
-                //    {
-                //        string data = IPA.ToString();
-                //        lblIP.Text += IPA.ToString().Trim() + "\r\n";
-                //    }
-                //}
-
                 // Initialise the socket
                 UDPSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
                 UDPSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast, true);

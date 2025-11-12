@@ -174,7 +174,7 @@ namespace Twol
             this.btnGPSTool = new System.Windows.Forms.Button();
             this.lblHardwareMessage = new System.Windows.Forms.Label();
             this.tlpNozzle = new System.Windows.Forms.TableLayoutPanel();
-            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.lblTankArea = new System.Windows.Forms.Label();
             this.btnSprayPSI = new System.Windows.Forms.Button();
             this.lblPressure = new System.Windows.Forms.Label();
@@ -203,7 +203,9 @@ namespace Twol
             this.button6 = new System.Windows.Forms.Button();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.button7 = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
             this.lblIsFlowing = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.lbl_IO_Profile = new System.Windows.Forms.Label();
             this.btnStartStopNtrip = new System.Windows.Forms.Button();
             this.lblWatch = new System.Windows.Forms.Label();
@@ -234,8 +236,6 @@ namespace Twol
             this.btnProfiles = new System.Windows.Forms.Button();
             this.flowLayoutPanelTop = new System.Windows.Forms.FlowLayoutPanel();
             this.button15 = new System.Windows.Forms.Button();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStripFlag.SuspendLayout();
             this.statusStripLeft.SuspendLayout();
@@ -697,7 +697,7 @@ namespace Twol
             this.oglMain.Location = new System.Drawing.Point(236, 50);
             this.oglMain.Margin = new System.Windows.Forms.Padding(0);
             this.oglMain.Name = "oglMain";
-            this.oglMain.Size = new System.Drawing.Size(926, 728);
+            this.oglMain.Size = new System.Drawing.Size(854, 728);
             this.oglMain.TabIndex = 180;
             this.oglMain.VSync = false;
             this.oglMain.Load += new System.EventHandler(this.oglMain_Load);
@@ -858,7 +858,7 @@ namespace Twol
             this.panelSim.Controls.Add(this.btnResetSim, 0, 0);
             this.panelSim.Controls.Add(this.hsbarSteerAngle, 3, 0);
             this.panelSim.Controls.Add(this.btnSpeedUp, 5, 0);
-            this.panelSim.Location = new System.Drawing.Point(450, 729);
+            this.panelSim.Location = new System.Drawing.Point(414, 729);
             this.panelSim.Name = "panelSim";
             this.panelSim.RowCount = 1;
             this.panelSim.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -1519,7 +1519,7 @@ namespace Twol
             this.lblGuidanceLine.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblGuidanceLine.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblGuidanceLine.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblGuidanceLine.Location = new System.Drawing.Point(328, 66);
+            this.lblGuidanceLine.Location = new System.Drawing.Point(292, 66);
             this.lblGuidanceLine.Name = "lblGuidanceLine";
             this.lblGuidanceLine.Size = new System.Drawing.Size(583, 83);
             this.lblGuidanceLine.TabIndex = 538;
@@ -1693,7 +1693,7 @@ namespace Twol
             this.panelBottom.Controls.Add(this.btnYouSkipEnable);
             this.panelBottom.Controls.Add(this.cboxpRowWidth);
             this.panelBottom.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.panelBottom.Location = new System.Drawing.Point(264, 780);
+            this.panelBottom.Location = new System.Drawing.Point(192, 780);
             this.panelBottom.Name = "panelBottom";
             this.panelBottom.Size = new System.Drawing.Size(896, 62);
             this.panelBottom.TabIndex = 540;
@@ -1959,7 +1959,7 @@ namespace Twol
             this.panelRight.Controls.Add(this.btnContourLock);
             this.panelRight.Controls.Add(this.lblNumCu);
             this.panelRight.FlowDirection = System.Windows.Forms.FlowDirection.BottomUp;
-            this.panelRight.Location = new System.Drawing.Point(1160, 268);
+            this.panelRight.Location = new System.Drawing.Point(1088, 268);
             this.panelRight.Name = "panelRight";
             this.panelRight.Size = new System.Drawing.Size(70, 574);
             this.panelRight.TabIndex = 541;
@@ -2401,7 +2401,7 @@ namespace Twol
             this.lblHardwareMessage.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblHardwareMessage.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHardwareMessage.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
-            this.lblHardwareMessage.Location = new System.Drawing.Point(179, 87);
+            this.lblHardwareMessage.Location = new System.Drawing.Point(143, 87);
             this.lblHardwareMessage.Name = "lblHardwareMessage";
             this.lblHardwareMessage.Size = new System.Drawing.Size(888, 43);
             this.lblHardwareMessage.TabIndex = 543;
@@ -2471,22 +2471,20 @@ namespace Twol
             this.tlpNozzle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.95901F));
             this.tlpNozzle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.74393F));
             this.tlpNozzle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 14F));
-            this.tlpNozzle.Size = new System.Drawing.Size(400, 725);
+            this.tlpNozzle.Size = new System.Drawing.Size(205, 725);
             this.tlpNozzle.TabIndex = 545;
             this.tlpNozzle.Visible = false;
             // 
-            // label9
+            // label10
             // 
-            this.label9.AutoSize = true;
-            this.label9.BackColor = System.Drawing.Color.OrangeRed;
-            this.tlpNozzle.SetColumnSpan(this.label9, 2);
-            this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label9.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(213, 331);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(174, 15);
-            this.label9.TabIndex = 651;
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label10.AutoSize = true;
+            this.label10.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.label10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label10.Location = new System.Drawing.Point(198, 0);
+            this.label10.Name = "label10";
+            this.tlpNozzle.SetRowSpan(this.label10, 13);
+            this.label10.Size = new System.Drawing.Size(9, 725);
+            this.label10.TabIndex = 561;
             // 
             // lblTankArea
             // 
@@ -3031,6 +3029,19 @@ namespace Twol
             this.button7.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button7.UseVisualStyleBackColor = false;
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.BackColor = System.Drawing.Color.OrangeRed;
+            this.tlpNozzle.SetColumnSpan(this.label9, 2);
+            this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label9.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(213, 331);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(174, 15);
+            this.label9.TabIndex = 651;
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // lblIsFlowing
             // 
             this.lblIsFlowing.AutoSize = true;
@@ -3043,6 +3054,18 @@ namespace Twol
             this.lblIsFlowing.Size = new System.Drawing.Size(174, 15);
             this.lblIsFlowing.TabIndex = 617;
             this.lblIsFlowing.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.BackColor = System.Drawing.Color.Silver;
+            this.label11.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label11.Location = new System.Drawing.Point(393, 0);
+            this.label11.Name = "label11";
+            this.tlpNozzle.SetRowSpan(this.label11, 13);
+            this.label11.Size = new System.Drawing.Size(9, 725);
+            this.label11.TabIndex = 652;
+            this.label11.Text = "label11";
             // 
             // lbl_IO_Profile
             // 
@@ -3521,7 +3544,7 @@ namespace Twol
             this.flowLayoutPanelTop.Controls.Add(this.btnRTCM_Top);
             this.flowLayoutPanelTop.Controls.Add(this.btnFieldStats);
             this.flowLayoutPanelTop.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanelTop.Location = new System.Drawing.Point(463, 3);
+            this.flowLayoutPanelTop.Location = new System.Drawing.Point(391, 3);
             this.flowLayoutPanelTop.Name = "flowLayoutPanelTop";
             this.flowLayoutPanelTop.Size = new System.Drawing.Size(764, 46);
             this.flowLayoutPanelTop.TabIndex = 548;
@@ -3546,35 +3569,12 @@ namespace Twol
             this.button15.TabIndex = 650;
             this.button15.UseVisualStyleBackColor = false;
             // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.BackColor = System.Drawing.Color.Silver;
-            this.label10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label10.Location = new System.Drawing.Point(198, 0);
-            this.label10.Name = "label10";
-            this.tlpNozzle.SetRowSpan(this.label10, 13);
-            this.label10.Size = new System.Drawing.Size(9, 725);
-            this.label10.TabIndex = 561;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.BackColor = System.Drawing.Color.Silver;
-            this.label11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label11.Location = new System.Drawing.Point(393, 0);
-            this.label11.Name = "label11";
-            this.tlpNozzle.SetRowSpan(this.label11, 13);
-            this.label11.Size = new System.Drawing.Size(9, 725);
-            this.label11.TabIndex = 652;
-            this.label11.Text = "label11";
-            // 
             // FormGPS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(1235, 847);
+            this.ClientSize = new System.Drawing.Size(1163, 847);
             this.Controls.Add(this.flowLayoutPanelTop);
             this.Controls.Add(this.flp1);
             this.Controls.Add(this.panelNavigation);
