@@ -2434,7 +2434,7 @@ namespace Twol
             font.DrawText(oglMain.Width / 2 - lenth, 10, strHeading, 1);
 
             //speedo text
-            if (!Settings.User.isSpeedoOn) font.DrawText(oglMain.Width / 2 - 250, 10, Speed, 1);
+            if (!Settings.User.isSpeedoOn) font.DrawText(oglMain.Width / 2 - 250, 10, Speed + " " + glm.unitsKmhMph, 1);
 
             //angular velocity
             strHeading = ahrs.angVel.ToString();
@@ -2465,7 +2465,7 @@ namespace Twol
 
             GL.Translate(center, 140, 0);
 
-            GL.Rotate(camHeading, 0, 0, 1);
+            GL.Rotate(360 - camHeading, 0, 0, 1);
             GL.Begin(PrimitiveType.TriangleStrip);              // Build Quad From A Triangle Strip
             {
                 GL.TexCoord2(1, 0); GL.Vertex2(42, -42.0); // 

@@ -263,14 +263,9 @@ namespace Twol
                     if (trackMethodPanelCounter-- < 1) flp1.Visible = false;
                 }
 
-                if (isJobStarted && Settings.Vehicle.setApp_isNozzleApp)
+                if (isJobStarted && Settings.Tool.setApp_isNozzleApp)
                 {
                     UpdateNozzleMainPanel();
-                }
-
-                if (isJobStarted && Settings.Vehicle.setApp_isRateControlApp)
-                {
-                    DisplayRateControlPanel();
                 }
 
                 UpdateNTRIP();
@@ -333,9 +328,7 @@ namespace Twol
         {
             guidelinesToolStripMenuItem.Checked = Settings.User.isSideGuideLines;
 
-            rateControlAppToolStripMenuItem.Checked = Settings.Vehicle.setApp_isRateControlApp;
-
-            nozzleAppToolStripMenuItem.Checked = Settings.Vehicle.setApp_isNozzleApp;
+            nozzleAppToolStripMenuItem.Checked = Settings.Tool.setApp_isNozzleApp;
 
             panelSim.Visible = timerSim.Enabled = simulatorOnToolStripMenuItem.Checked = Settings.User.isSimulatorOn;
 
@@ -513,6 +506,8 @@ namespace Twol
                 lbl_Volume.Text = "App" + (nozz.unitsTextArr[Settings.Tool.setNozz.unitsIdx]);
 
             lblTankArea.Text = (Settings.User.isMetric ? "Ha" : "Acre");
+
+            
         }
 
         public void SetToolSettings()
@@ -690,192 +685,6 @@ namespace Twol
                 //lblPWM_Nozz.Text = nozz.pwmDriveActual.ToString();
                 //lblFlowHz_Nozz.Text = nozz.frequency.ToString() + " Hz";
 
-            }
-        }
-
-        public void DisplayRateControlPanel()
-        {
-            if (isRateControlConfigDataNew)
-            {
-                //config the rate control panel
-                isRateControlConfigDataNew = false;
-
-                if (!rateControlConfig.isActive[2] && !rateControlConfig.isActive[3])
-                    tlpRateControl.Width = 150;
-                else tlpRateControl.Width = 305;
-
-                PanelsAndOGLSize();
-
-                //rateControlConfig.productName0 = Encoding.UTF8.GetString(rateControlByteData, 5, 15);  //5 to 19
-                //rateControlConfig.productName1 = Encoding.UTF8.GetString(rateControlByteData, 20, 15); //20 to 34
-                //rateControlConfig.productName2 = Encoding.UTF8.GetString(rateControlByteData, 35, 15); //35 to 49
-                //rateControlConfig.productName3 = Encoding.UTF8.GetString(rateControlByteData, 50, 15); //50 to 64
-
-                //rateControlConfig.units0 = Encoding.UTF8.GetString(rateControlByteData, 65, 8);        //65 to 72
-                //rateControlConfig.units1 = Encoding.UTF8.GetString(rateControlByteData, 73, 8);        //73 to 80
-                //rateControlConfig.units2 = Encoding.UTF8.GetString(rateControlByteData, 81, 8);        //81 to 88
-                //rateControlConfig.units3 = Encoding.UTF8.GetString(rateControlByteData, 89, 8);        //89 to 96
-
-                ////0 none - 1 is fan - 2 is Pressure
-                //rateControlConfig.isFanPressure0 = (int)rateControlByteData[97];     //97 
-                //rateControlConfig.isFanPressure1 = (int)rateControlByteData[98];     //98
-                //rateControlConfig.isFanPressure2 = (int)rateControlByteData[99];     //99
-                //rateControlConfig.isFanPressure3 = (int)rateControlByteData[100];    //100
-
-                //rateControlConfig.isActive[0] = Convert.ToBoolean(rateControlByteData[101]);        //101
-                //rateControlConfig.isActive[1] = Convert.ToBoolean(rateControlByteData[102]);        //102
-                //rateControlConfig.isActive[2] = Convert.ToBoolean(rateControlByteData[103]);        //103
-                //rateControlConfig.isActive[3] = Convert.ToBoolean(rateControlByteData[104]);        //104
-
-                //config
-                lblrcProduct_0.Text = "-";
-                lblrcProduct_1.Text = "-";
-                lblrcProduct_2.Text = "-";
-                lblrcProduct_3.Text = "-";
-
-                lblrcUPM_0.Text = "-";
-                lblrcUPM_1.Text = "-";
-                lblrcUPM_2.Text = "-";
-                lblrcUPM_3.Text = "-";
-
-                lblrcSensor_0.Text = "-";
-                lblrcSensor_1.Text = "-";
-                lblrcSensor_2.Text = "-";
-                lblrcSensor_3.Text = "-";
-
-                lblrcUPM_0.Text = "-";
-                lblrcUPM_1.Text = "-";
-                lblrcUPM_2.Text = "-";
-                lblrcUPM_3.Text = "-";
-
-                //data
-                lblrcRateActual_0.Text = "-";
-                lblrcRateActual_1.Text = "-";
-                lblrcRateActual_2.Text = "-";
-                lblrcRateActual_3.Text = "-";
-
-                lblrcRateSet_0.Text = "-";
-                lblrcRateSet_1.Text = "-";
-                lblrcRateSet_2.Text = "-";
-                lblrcRateSet_3.Text = "-";
-
-                lblrcTankApp_0.Text = "-";
-                lblrcTankApp_1.Text = "-";
-                lblrcTankApp_2.Text = "-";
-                lblrcTankApp_3.Text = "-";
-
-                lblrcTankRem_0.Text = "-";
-                lblrcTankRem_1.Text = "-";
-                lblrcTankRem_2.Text = "-";
-                lblrcTankRem_3.Text = "-";
-
-                lblrcArea_0.Text = "-";
-                lblrcArea_1.Text = "-";
-                lblrcArea_2.Text = "-";
-                lblrcArea_3.Text = "-";
-
-                //lblrcError_0.Text = "-";
-                //lblrcError_1.Text = "-";
-                lblrcSensor_0.Text = "-";
-                lblrcSensor_1.Text = "-";
-                lblrcSensor_2.Text = "-";
-                lblrcSensor_3.Text = "-";
-
-                for (int i = 0; i < 2; i++)
-                {
-                    if (rateControlConfig.isActive[i])
-                    {
-                        switch (i)
-                        {
-                            case 0:
-                                lblrcProduct_0.Text = rateControlConfig.productName0;
-                                lblrcUPM_0.Text = rateControlConfig.units0;
-                               
-                                break;
-
-                            case 1:
-                                lblrcProduct_1.Text = rateControlConfig.productName1;
-                                lblrcUPM_1.Text = rateControlConfig.units1;
-
-                                break;
-
-                            case 2:
-                                lblrcProduct_2.Text = rateControlConfig.productName2;
-                                lblrcUPM_2.Text = rateControlConfig.units2;
-
-                                break;
-
-                            case 3:
-                                lblrcProduct_3.Text = rateControlConfig.productName3;
-                                lblrcUPM_3.Text = rateControlConfig.units3;
-
-                                break;
-
-                            default:
-                                break;
-                        }
-                    }
-                }
-            }
-
-            for (int chNum = 0; chNum < 2; chNum++)
-            {
-                if (!rateControlConfig.isActive[chNum]) continue;
-
-                switch (chNum)
-                {
-                    case 0:
-                        lblrcRateActual_0.Text = (rateControlData[chNum].rateActualx10 * 0.1).ToString("N1");
-                        lblrcRateSet_0.Text = (rateControlData[chNum].rateSetx10 * 0.1).ToString("N1");
-                        //lblrcError_0.Text = (((double)rateControlData[chNum].rateActualx10 / (double)rateControlData[chNum].rateSetx10) * 100.0 - 100.0).ToString("N1") + " %";
-                        lblrcTankRem_0.Text = (rateControlData[chNum].volumeRemain).ToString("N0");
-                        lblrcTankApp_0.Text = (rateControlData[chNum].volumeApplied).ToString("N0");
-
-                        lblrcArea_0.Text = (rateControlData[chNum].coveragePossiblex10 * 0.1).ToString("N1");
-                        if (rateControlConfig.isFanPressure0 > 0) lblrcSensor_0.Text = (rateControlData[chNum].sensor).ToString("N0");
-
-                        break;
-
-                    case 1:
-                        lblrcRateActual_1.Text = (rateControlData[chNum].rateActualx10 * 0.1).ToString("N1");
-                        lblrcRateSet_1.Text = (rateControlData[chNum].rateSetx10 * 0.1).ToString("N1");
-                        //lblrcError_1.Text = (((double)rateControlData[chNum].rateActualx10 / (double)rateControlData[chNum].rateSetx10) * 100.0 - 100.0).ToString("N1") + " %";
-                        lblrcTankRem_1.Text = (rateControlData[chNum].volumeRemain).ToString("N0");
-                        lblrcTankApp_1.Text = (rateControlData[chNum].volumeApplied).ToString("N0");
-
-                        lblrcArea_1.Text = (rateControlData[chNum].coveragePossiblex10 * 0.1).ToString("N1");
-                        if (rateControlConfig.isFanPressure0 > 0) lblrcSensor_1.Text = (rateControlData[chNum].sensor).ToString("N0");
-
-                        break;
-
-                    case 2:
-                        lblrcRateActual_2.Text = (rateControlData[chNum].rateActualx10 * 0.1).ToString("N1");
-                        lblrcRateSet_2.Text = (rateControlData[chNum].rateSetx10 * 0.1).ToString("N1");
-                        //lblrcError_2.Text = (((double)rateControlData[chNum].rateActualx10 / (double)rateControlData[chNum].rateSetx10) * 100.0 - 100.0).ToString("N1") + " %";
-                        lblrcTankRem_2.Text = (rateControlData[chNum].volumeRemain).ToString("N0");
-                        lblrcTankApp_2.Text = (rateControlData[chNum].volumeApplied).ToString("N0");
-
-                        lblrcArea_2.Text = (rateControlData[chNum].coveragePossiblex10 * 0.1).ToString("N1");
-                        if (rateControlConfig.isFanPressure0 > 0) lblrcSensor_2.Text = (rateControlData[chNum].sensor).ToString("N0");
-
-                        break;
-
-                    case 3:
-                        lblrcRateActual_3.Text = (rateControlData[chNum].rateActualx10 * 0.1).ToString("N1");
-                        lblrcRateSet_3.Text = (rateControlData[chNum].rateSetx10 * 0.1).ToString("N1");
-                        //lblrcError_3.Text = (((double)rateControlData[chNum].rateActualx10 / (double)rateControlData[chNum].rateSetx10) * 100.0 - 100.0).ToString("N1") + " %";
-                        lblrcTankRem_3.Text = (rateControlData[chNum].volumeRemain).ToString("N0");
-                        lblrcTankApp_3.Text = (rateControlData[chNum].volumeApplied).ToString("N0");
-
-                        lblrcArea_3.Text = (rateControlData[chNum].coveragePossiblex10 * 0.1).ToString("N1");
-                        if (rateControlConfig.isFanPressure0 > 0) lblrcSensor_3.Text = (rateControlData[chNum].sensor).ToString("N0");
-
-                        break;
-
-                    default:
-                        break;
-
-                }
             }
         }
 
@@ -1079,18 +888,12 @@ namespace Twol
         private void PanelsAndOGLSize()
         {
             tlpNozzle.Visible = false;
-            tlpRateControl.Visible = false;
             int tlpWidth = 0;
 
-            if (Settings.Vehicle.setApp_isNozzleApp && isJobStarted)
+            if (Settings.Tool.setApp_isNozzleApp && isJobStarted)
             {
-                tlpNozzle.Visible = isJobStarted && Settings.Vehicle.setApp_isNozzleApp;
+                tlpNozzle.Visible = isJobStarted && Settings.Tool.setApp_isNozzleApp;
                 tlpWidth = tlpNozzle.Width;
-            }
-            else if (Settings.Vehicle.setApp_isRateControlApp && isJobStarted)
-            {
-                tlpRateControl.Visible = isJobStarted && Settings.Vehicle.setApp_isRateControlApp;
-                tlpWidth = tlpRateControl.Width;
             }
 
             GPSDataWindowLeft = (isPanelBottomHidden ? 10 : 85) + tlpWidth;
@@ -1101,9 +904,6 @@ namespace Twol
 
             tlpNozzle.Left = (isPanelBottomHidden ? 5 : 80);
             tlpNozzle.Height = oglMain.Height;
-
-            tlpRateControl.Left = (isPanelBottomHidden ? 5 : 80);
-            tlpRateControl.Height = oglMain.Height;
 
             panelSim.Top = Height - (!isJobStarted || isPanelBottomHidden ? 60 : 130);
             panelSim.Left = this.Width - (oglMain.Width / 2 +430);

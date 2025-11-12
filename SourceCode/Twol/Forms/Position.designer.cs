@@ -620,7 +620,7 @@ namespace Twol
 
             BuildMachineByte();
 
-            if (isJobStarted && Settings.Vehicle.setApp_isNozzleApp)
+            if (isJobStarted && Settings.Tool.setApp_isNozzleApp)
             {
                 nozz.BuildRatePGN();
             }

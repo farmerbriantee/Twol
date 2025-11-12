@@ -1361,12 +1361,9 @@ namespace Twol
 
         private void nozzleAppToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Settings.Vehicle.setApp_isRateControlApp = false;
-            rateControlAppToolStripMenuItem.Checked = false;
+            Settings.Tool.setApp_isNozzleApp = !Settings.Tool.setApp_isNozzleApp;
 
-            Settings.Vehicle.setApp_isNozzleApp = !Settings.Vehicle.setApp_isNozzleApp;
-
-            if (Settings.Vehicle.setApp_isNozzleApp)
+            if (Settings.Tool.setApp_isNozzleApp)
             {
                 TimedMessageBox(2000, "", "Nozzle App On");
                 Log.EventWriter("Turning Nozzle App On");
@@ -1377,30 +1374,7 @@ namespace Twol
                 Log.EventWriter("Turning Nozzle App Off");
             }
 
-            nozzleAppToolStripMenuItem.Checked = Settings.Vehicle.setApp_isNozzleApp;
-
-            PanelsAndOGLSize();
-        }
-
-        private void rateControlAppToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Settings.Vehicle.setApp_isNozzleApp = false;
-            nozzleAppToolStripMenuItem.Checked = false;
-
-            Settings.Vehicle.setApp_isRateControlApp = !Settings.Vehicle.setApp_isRateControlApp;
-
-            if (Settings.Vehicle.setApp_isRateControlApp)
-            {
-                TimedMessageBox(2000, "", "Rate Control App On");
-                Log.EventWriter("Turning Rate Control App On");
-            }
-            else
-            {
-                TimedMessageBox(2000, "", "Rate Control App Off");
-                Log.EventWriter("Turning Rate Control App Off");
-            }
-
-            rateControlAppToolStripMenuItem.Checked = Settings.Vehicle.setApp_isRateControlApp;
+            nozzleAppToolStripMenuItem.Checked = Settings.Tool.setApp_isNozzleApp;
 
             PanelsAndOGLSize();
         }

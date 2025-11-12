@@ -178,9 +178,6 @@ namespace Twol
             public double setAutoSwitchDualFixSpeed = 2.0;
             public bool setAutoSwitchDualFixOn = false;
 
-            public bool setApp_isNozzleApp = false;
-            public bool setApp_isRateControlApp = false;
-
             public bool setArdMac_isDanfoss = false;
 
             public byte setArdMac_hydLowerTime = 4;
@@ -341,6 +338,8 @@ namespace Twol
 
         public sealed class ToolSettings
         {
+            public bool setApp_isNozzleApp = false;
+
             public CNozzleSettings setNozz = new CNozzleSettings();
             public CToolSteerSettings setToolSteer = new CToolSteerSettings();
 
