@@ -44,25 +44,6 @@ namespace Twol
         {
             bool completeUturn = !Uturn;
             var vec2point = new vec2(Settings.Vehicle.setVehicle_isStanleyUsed ? steer : pivot);
-            /*
-            //close call hit
-            int cc = FindGlobalRoughNearest(vec2point, curList, 5, Uturn);
-
-            //long enough line?
-            if (!Uturn && mf.trk.currTrk != null && mf.trk.currTrk.mode <= TrackMode.Curve)//crashed on contour!!
-            {
-                if (cc > curList.Count - 30)
-                {
-                    mf.trk.AddEndPoints(ref curList, 100);
-                }
-
-                if (cc < 30)
-                {
-                    mf.trk.AddStartPoints(ref curList, 100);
-                    cc += 100;
-                }
-            }
-            */
 
             if (mf.gyd.FindClosestSegment(curList, false, vec2point, out A, out B))
             {
@@ -94,6 +75,20 @@ namespace Twol
                 if (!Uturn && !mf.trk.isHeadingSameWay)
                     distanceFromCurrentLine *= -1;
 
+                if (!Settings.Tool.setToolSteer.isActiveSteering && !Uturn)
+                {
+                    mf.trk.currentPassiveTrack?.Clear();
+                    vec3 pointA = new vec3(curList[0]);
+                    vec3 pointB = new vec3(curList[curList.Count - 1]);
+
+                    pointA.easting += (Math.Cos(-mf.fixHeading) * distanceFromCurrentLineTool);
+                    pointA.northing += (Math.Sin(-mf.fixHeading) * distanceFromCurrentLineTool);
+                    pointB.easting += (Math.Cos(-mf.fixHeading) * distanceFromCurrentLineTool);
+                    pointB.northing += (Math.Sin(-mf.fixHeading) * distanceFromCurrentLineTool);
+
+                    mf.trk.currentPassiveTrack.Add(pointA);
+                    mf.trk.currentPassiveTrack.Add(pointB);
+                }
 
                 rEastTrk = point.easting;
                 rNorthTrk = point.northing;

@@ -746,7 +746,7 @@ namespace Twol
 
         private void nudToolOffset_ValueChanged(object sender, EventArgs e)
         {
-            sim.toolOffset = (double)nudToolOffset.Value * 0.01;
+            sim.toolOffset = (double)nudToolOffset.Value * 0.001;
         }
 
         public void FieldClose()

@@ -31,6 +31,7 @@ namespace Twol
 
         //the list of points of curve to drive on
         public List<vec3> currentGuidanceTrack = new List<vec3>();
+        public List<vec3> currentPassiveTrack = new List<vec3>();
 
         //guidelines
         public List<List<vec3>> guideArr = new List<List<vec3>>();
@@ -453,6 +454,12 @@ namespace Twol
                 GL.LineWidth(Settings.User.setDisplay_lineWidth * 2);
                 GL.Color3(0.96, 0.2f, 0.2f);
                 currTrk.curvePts.DrawPolygon(PrimitiveType.Lines);
+
+                if (currentPassiveTrack != null && currentPassiveTrack.Count != 0)
+
+                    GL.LineWidth(Settings.User.setDisplay_lineWidth * 1);
+                GL.Color3(0.46, 0.72f, 0.92f);
+                currentPassiveTrack.DrawPolygon(PrimitiveType.Lines);
 
                 if (mf.font.isFontOn)
                 {

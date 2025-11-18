@@ -82,6 +82,8 @@ namespace Twol
             nudAntennaHeight_Tool.Value = Settings.Tool.setToolSteer.antennaHeight;
             nudAntennaOffset_Tool.Value = Settings.Tool.setToolSteer.antennaOffset;
 
+            cboxIsActiveSteering.Checked = Settings.Tool.setToolSteer.isActiveSteering;
+            cboxIsActiveSteering.Text = cboxIsActiveSteering.Checked ? "Active" : "Passive";
         }
 
         private void FormSteer_FormClosing(object sender, FormClosingEventArgs e)
@@ -313,6 +315,12 @@ namespace Twol
         {
             mf.vehicle.goalPointAcquireFactor = hsbarAcquireFactor.Value * 0.01;
             lblAcquireFactor.Text = mf.vehicle.goalPointAcquireFactor.ToString();
+        }
+
+        private void cboxIsActiveSteering_Click(object sender, EventArgs e)
+        {
+            cboxIsActiveSteering.Text = cboxIsActiveSteering.Checked ? "Active" : "Passive";
+            Settings.Tool.setToolSteer.isActiveSteering = cboxIsActiveSteering.Checked;
         }
 
         private void nudDeadZoneHeading_ValueChanged(object sender, EventArgs e)

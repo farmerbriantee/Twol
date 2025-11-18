@@ -69,19 +69,20 @@
         //public bool ;
         public bool isGPSToolActive = false;
 
-        public byte gainP           = 50;
-        public byte integral        = 0;
-        public byte minPWM          = 30;
-        public byte highPWM         = 200;
+        public byte gainP = 50;
+        public byte integral = 0;
+        public byte minPWM = 30;
+        public byte highPWM = 200;
         public byte countsPerDegree = 100;
 
-        public int wasOffset     = 0;
-        public byte ackermann       = 100;
+        public int wasOffset = 0;
+        public byte ackermann = 100;
         public byte maxSteerAngle = 20;
 
         public byte isInvertWAS = 0;
         public byte isInvertSteer = 0;
         public byte isSteerNotSlide = 1;
+        public bool isActiveSteering = true;
 
         public double antennaHeight = 0;
         public double antennaOffset = 0;
@@ -103,6 +104,7 @@
             isInvertSteer = _setting.isInvertSteer;
             maxSteerAngle = _setting.maxSteerAngle;
             isSteerNotSlide = _setting.isSteerNotSlide;
+            isActiveSteering = _setting.isActiveSteering;
 
             antennaHeight = _setting.antennaHeight;
             antennaOffset = _setting.antennaOffset;
