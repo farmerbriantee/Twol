@@ -45,6 +45,36 @@ namespace Twol
             bool completeUturn = !Uturn;
             var vec2point = new vec2(Settings.Vehicle.setVehicle_isStanleyUsed ? steer : pivot);
 
+            if (Settings.Tool.setToolSteer.isGPSToolActive)
+            {
+                //Tool GPS
+                if (FindClosestSegment(curList, false, mf.pnTool.fix, out A, out B))
+                {
+                    distanceFromCurrentLineTool = FindDistanceToSegment(mf.pnTool.fix, curList[A], curList[B], out _, out _, true, false, false);
+
+                    if (!Uturn && !mf.trk.isHeadingSameWay)
+                        distanceFromCurrentLineTool *= -1.0;
+                }
+                else
+                    distanceFromCurrentLineTool = 0;
+
+                mf.trk.currentPassiveTrack?.Clear();
+
+                //passive guidance line for passive tool steer
+                if (distanceFromCurrentLineTool != 0 && !Settings.Tool.setToolSteer.isActiveSteering && !Uturn)
+                {
+                    vec3 pointA = new vec3(curList[0]);
+
+                    pointA.easting += (Math.Cos(-mf.fixHeading) * -distanceFromCurrentLineTool);
+                    pointA.northing += (Math.Sin(-mf.fixHeading) * -distanceFromCurrentLineTool);
+                    mf.trk.currentPassiveTrack.Add(pointA);
+                    pointA = new vec3(curList[curList.Count - 1]);
+                    pointA.easting += (Math.Cos(-mf.fixHeading) * -distanceFromCurrentLineTool);
+                    pointA.northing += (Math.Sin(-mf.fixHeading) * -distanceFromCurrentLineTool);
+                    mf.trk.currentPassiveTrack.Add(pointA);
+                }
+            }
+
             if (mf.gyd.FindClosestSegment(curList, false, vec2point, out A, out B))
             {
                 distanceFromCurrentLine = FindDistanceToSegment(vec2point, curList[A], curList[B], out vec3 point, out double time, true, false, false);
@@ -74,21 +104,6 @@ namespace Twol
 
                 if (!Uturn && !mf.trk.isHeadingSameWay)
                     distanceFromCurrentLine *= -1;
-
-                if (!Settings.Tool.setToolSteer.isActiveSteering && !Uturn)
-                {
-                    mf.trk.currentPassiveTrack?.Clear();
-                    vec3 pointA = new vec3(curList[0]);
-                    vec3 pointB = new vec3(curList[curList.Count - 1]);
-
-                    pointA.easting += (Math.Cos(-mf.fixHeading) * distanceFromCurrentLineTool);
-                    pointA.northing += (Math.Sin(-mf.fixHeading) * distanceFromCurrentLineTool);
-                    pointB.easting += (Math.Cos(-mf.fixHeading) * distanceFromCurrentLineTool);
-                    pointB.northing += (Math.Sin(-mf.fixHeading) * distanceFromCurrentLineTool);
-
-                    mf.trk.currentPassiveTrack.Add(pointA);
-                    mf.trk.currentPassiveTrack.Add(pointB);
-                }
 
                 rEastTrk = point.easting;
                 rNorthTrk = point.northing;
@@ -290,16 +305,6 @@ namespace Twol
 
                     mf.vehicle.modeActualHeadingError = glm.toDegrees(steerHeadingError);
 
-                    //Tool GPS
-                    if (Settings.Tool.setToolSteer.isGPSToolActive && FindClosestSegment(curList, false, mf.pnTool.fix, out A, out B))
-                    {
-                        distanceFromCurrentLineTool = FindDistanceToSegment(mf.pnTool.fix, curList[A], curList[B], out _, out _, true, false, false);
-
-                        if (!Uturn && !mf.trk.isHeadingSameWay)
-                            distanceFromCurrentLineTool *= -1.0;
-                    }
-                    else
-                        distanceFromCurrentLineTool = 0;
 
                     //angular velocity in rads/sec  = 2PI * m/sec * radians/meters
                     //double angVel = glm.twoPI * 0.277777 * mf.avgSpeed * (Math.Tan(glm.toRadians(steerAngleCT))) / mf.vehicle.wheelbase;
