@@ -236,6 +236,7 @@ namespace Twol
             this.btnProfiles = new System.Windows.Forms.Button();
             this.flowLayoutPanelTop = new System.Windows.Forms.FlowLayoutPanel();
             this.button15 = new System.Windows.Forms.Button();
+            this.nudToolOffset = new System.Windows.Forms.NumericUpDown();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStripFlag.SuspendLayout();
             this.statusStripLeft.SuspendLayout();
@@ -250,6 +251,7 @@ namespace Twol
             this.tlpNozzle.SuspendLayout();
             this.panel_IO.SuspendLayout();
             this.flowLayoutPanelTop.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudToolOffset)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -3569,12 +3571,33 @@ namespace Twol
             this.button15.TabIndex = 650;
             this.button15.UseVisualStyleBackColor = false;
             // 
+            // nudToolOffset
+            // 
+            this.nudToolOffset.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudToolOffset.Location = new System.Drawing.Point(293, 66);
+            this.nudToolOffset.Maximum = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            this.nudToolOffset.Minimum = new decimal(new int[] {
+            30,
+            0,
+            0,
+            -2147483648});
+            this.nudToolOffset.Name = "nudToolOffset";
+            this.nudToolOffset.Size = new System.Drawing.Size(80, 36);
+            this.nudToolOffset.TabIndex = 651;
+            this.nudToolOffset.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nudToolOffset.ValueChanged += new System.EventHandler(this.nudToolOffset_ValueChanged);
+            // 
             // FormGPS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(1163, 847);
+            this.Controls.Add(this.nudToolOffset);
             this.Controls.Add(this.flowLayoutPanelTop);
             this.Controls.Add(this.flp1);
             this.Controls.Add(this.panelNavigation);
@@ -3627,6 +3650,7 @@ namespace Twol
             this.panel_IO.ResumeLayout(false);
             this.panel_IO.PerformLayout();
             this.flowLayoutPanelTop.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nudToolOffset)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3839,6 +3863,7 @@ namespace Twol
         public System.Windows.Forms.Button button7;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.NumericUpDown nudToolOffset;
     }
 }
 
