@@ -59,20 +59,6 @@ namespace Twol
                     distanceFromCurrentLineTool = 0;
 
                 mf.trk.currentPassiveTrack?.Clear();
-
-                //passive guidance line for passive tool steer
-                if (distanceFromCurrentLineTool != 0 && !Settings.Tool.setToolSteer.isActiveSteering && !Uturn)
-                {
-                    vec3 pointA = new vec3(curList[0]);
-
-                    pointA.easting += (Math.Cos(-mf.fixHeading) * -distanceFromCurrentLineTool);
-                    pointA.northing += (Math.Sin(-mf.fixHeading) * -distanceFromCurrentLineTool);
-                    mf.trk.currentPassiveTrack.Add(pointA);
-                    pointA = new vec3(curList[curList.Count - 1]);
-                    pointA.easting += (Math.Cos(-mf.fixHeading) * -distanceFromCurrentLineTool);
-                    pointA.northing += (Math.Sin(-mf.fixHeading) * -distanceFromCurrentLineTool);
-                    mf.trk.currentPassiveTrack.Add(pointA);
-                }
             }
 
             if (mf.gyd.FindClosestSegment(curList, false, vec2point, out A, out B))
@@ -104,6 +90,37 @@ namespace Twol
 
                 if (!Uturn && !mf.trk.isHeadingSameWay)
                     distanceFromCurrentLine *= -1;
+                double bob = 0;
+
+                //passive guidance line for passive tool steer
+                if (distanceFromCurrentLineTool != 0 && !Settings.Tool.setToolSteer.isActiveSteering && !Uturn)
+                {
+                    bob = distanceFromCurrentLine - distanceFromCurrentLineTool;
+
+                    ////opposite sides of the line
+                    //if ((distanceFromCurrentLine > 0 && distanceFromCurrentLineTool < 0) ||
+                    //    (distanceFromCurrentLine < 0 && distanceFromCurrentLineTool > 0))
+                    //{
+                    //    bob = distanceFromCurrentLine - distanceFromCurrentLineTool;
+                    //    //if (!mf.trk.isHeadingSameWay) bob *= -1;
+                    //}
+                    //else //same side of the line
+                    //{
+                    //}
+                    mf.lblToolOffset.Text = (bob * 100).ToString("N1");
+
+                    vec3 pointA = new vec3(curList[0]);
+
+                    pointA.easting += (Math.Cos(-mf.fixHeading) * bob);
+                    pointA.northing += (Math.Sin(-mf.fixHeading) * bob);
+                    mf.trk.currentPassiveTrack.Add(pointA);
+                    pointA = new vec3(curList[curList.Count - 1]);
+                    pointA.easting += (Math.Cos(-mf.fixHeading) * bob);
+                    pointA.northing += (Math.Sin(-mf.fixHeading) * bob);
+                    mf.trk.currentPassiveTrack.Add(pointA);
+
+                    distanceFromCurrentLine = FindDistanceToSegment(vec2point, mf.trk.currentPassiveTrack[0], mf.trk.currentPassiveTrack[1], out point, out time, true, false, false);
+                }
 
                 rEastTrk = point.easting;
                 rNorthTrk = point.northing;
@@ -153,16 +170,16 @@ namespace Twol
                     if (Math.Abs(distanceFromCurrentLine) > 0.5) steerAngle *= 0.5;
                     else steerAngle *= (1 - Math.Abs(distanceFromCurrentLine));
 
-                    //Tool GPS
-                    if (Settings.Tool.setToolSteer.isGPSToolActive && mf.gyd.FindClosestSegment(curList, false, mf.pnTool.fix, out A, out B))
-                    {
-                        distanceFromCurrentLineTool = FindDistanceToSegment(mf.pnTool.fix, curList[A], curList[B], out _, out _, true, false, false);
+                    ////Tool GPS
+                    //if (Settings.Tool.setToolSteer.isGPSToolActive && mf.gyd.FindClosestSegment(curList, false, mf.pnTool.fix, out A, out B))
+                    //{
+                    //    distanceFromCurrentLineTool = FindDistanceToSegment(mf.pnTool.fix, curList[A], curList[B], out _, out _, true, false, false);
 
-                        if (!Uturn && !mf.trk.isHeadingSameWay)
-                            distanceFromCurrentLineTool *= -1.0;
-                    }
-                    else
-                        distanceFromCurrentLineTool = 0;
+                    //    if (!Uturn && !mf.trk.isHeadingSameWay)
+                    //        distanceFromCurrentLineTool *= -1.0;
+                    //}
+                    //else
+                    //    distanceFromCurrentLineTool = 0;
                     #endregion Stanley
                 }
                 else// Pure Pursuit ------------------------------------------
