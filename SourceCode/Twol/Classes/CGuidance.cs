@@ -97,16 +97,6 @@ namespace Twol
                 {
                     bob = distanceFromCurrentLine - distanceFromCurrentLineTool;
 
-                    ////opposite sides of the line
-                    //if ((distanceFromCurrentLine > 0 && distanceFromCurrentLineTool < 0) ||
-                    //    (distanceFromCurrentLine < 0 && distanceFromCurrentLineTool > 0))
-                    //{
-                    //    bob = distanceFromCurrentLine - distanceFromCurrentLineTool;
-                    //    //if (!mf.trk.isHeadingSameWay) bob *= -1;
-                    //}
-                    //else //same side of the line
-                    //{
-                    //}
                     mf.lblToolOffset.Text = (bob * 100).ToString("N1");
 
                     vec3 pointA = new vec3(curList[0]);
@@ -114,12 +104,17 @@ namespace Twol
                     pointA.easting += (Math.Cos(-mf.fixHeading) * bob);
                     pointA.northing += (Math.Sin(-mf.fixHeading) * bob);
                     mf.trk.currentPassiveTrack.Add(pointA);
+
                     pointA = new vec3(curList[curList.Count - 1]);
                     pointA.easting += (Math.Cos(-mf.fixHeading) * bob);
                     pointA.northing += (Math.Sin(-mf.fixHeading) * bob);
                     mf.trk.currentPassiveTrack.Add(pointA);
 
+                    //update the new current line
                     distanceFromCurrentLine = FindDistanceToSegment(vec2point, mf.trk.currentPassiveTrack[0], mf.trk.currentPassiveTrack[1], out point, out time, true, false, false);
+
+                    //take the ends of the ab line.
+                    A = 0; B = curList.Count - 1;
                 }
 
                 rEastTrk = point.easting;
