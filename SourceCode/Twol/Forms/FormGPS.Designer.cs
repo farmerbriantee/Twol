@@ -596,7 +596,7 @@ namespace Twol
             this.toolStripMenuFlagForm.Image = global::Twol.Properties.Resources.FileEditName;
             this.toolStripMenuFlagForm.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripMenuFlagForm.Name = "toolStripMenuFlagForm";
-            this.toolStripMenuFlagForm.Size = new System.Drawing.Size(267, 70);
+            this.toolStripMenuFlagForm.Size = new System.Drawing.Size(259, 70);
             this.toolStripMenuFlagForm.Text = "toolStripMenuItem3";
             this.toolStripMenuFlagForm.Click += new System.EventHandler(this.toolStripMenuFlagForm_Click);
             // 
@@ -3574,7 +3574,13 @@ namespace Twol
             // 
             // nudToolOffset
             // 
+            this.nudToolOffset.DecimalPlaces = 1;
             this.nudToolOffset.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudToolOffset.Increment = new decimal(new int[] {
+            2,
+            0,
+            0,
+            65536});
             this.nudToolOffset.Location = new System.Drawing.Point(293, 66);
             this.nudToolOffset.Maximum = new decimal(new int[] {
             30,
@@ -3598,10 +3604,10 @@ namespace Twol
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblToolOffset.AutoSize = true;
             this.lblToolOffset.BackColor = System.Drawing.Color.Transparent;
-            this.lblToolOffset.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblToolOffset.Location = new System.Drawing.Point(287, 149);
+            this.lblToolOffset.Font = new System.Drawing.Font("Arial", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblToolOffset.Location = new System.Drawing.Point(295, 116);
             this.lblToolOffset.Name = "lblToolOffset";
-            this.lblToolOffset.Size = new System.Drawing.Size(52, 24);
+            this.lblToolOffset.Size = new System.Drawing.Size(67, 32);
             this.lblToolOffset.TabIndex = 652;
             this.lblToolOffset.Text = "15.6";
             this.lblToolOffset.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
