@@ -2097,14 +2097,14 @@ namespace Twol
             {
                 int spacing = oglMain.Width / 50;
                 if (spacing < 28) spacing = 28;
-                int offset = (int)((double)oglMain.Height / 40);
+                int offset = 20;
                 int line = 12;
                 int line2 = 8;
 
                 //int down = (int)((double)oglMain.Height/38);
-                int down = 58 + (int)((double)(oglMain.Height - 600) / 17);
+                int down = 72;
 
-                double textSize = ((100 + (double)(oglMain.Height - 600)) * 0.0012) + 1;
+                double textSize = 1.4;
 
                 int pointy = 24;
 
@@ -2120,7 +2120,7 @@ namespace Twol
                 if (isBtnAutoSteerOn)
                 {
                     if (Math.Abs(err) < 0.5) err = 0;
-                    offset = (int)((double)oglMain.Height / 60);
+                    offset = 15;
                     line /= 2;
                     line2 /= 2;
                 }
@@ -2201,21 +2201,22 @@ namespace Twol
                     if (avgPivotDistance < 0.0)
                     {
                         hede = (Math.Abs(avgPivotDistance)).ToString("N0") + " >";
-                        center = -(int)(((double)(hede.Length) * 0.5) * (18 * (textSize)));
+                        center = -(int)(((double)(hede.Length) * 0.5) * 24);
                     }
                     else
                     {
                         hede = "< " + (Math.Abs(avgPivotDistance)).ToString("N0");
-                        center = -(int)(((double)(hede.Length) * 0.5) * (18 * (textSize)));
+                        center = -(int)(((double)(hede.Length) * 0.5) * 24);
                     }
+
+                    center -= 80;
                 }
                 else
                 {
-                    center = (int)(-40 * (textSize));
+                    center = -140;
                 }
 
-                int wide = (int)((double)oglMain.Width / 18);
-                if (wide < 64) wide = 64;
+                int wide = 75;
 
                 // Select Our Texture
                 GL.Enable(EnableCap.Texture2D);
@@ -2232,17 +2233,17 @@ namespace Twol
                 GL.Color4(red, green, 0.13, 1.0);
 
                 GL.Begin(PrimitiveType.TriangleStrip);              // Build Quad From A Triangle Strip
-                GL.TexCoord2(1, 1); GL.Vertex2(wide, 3); // 
-                GL.TexCoord2(0, 1); GL.Vertex2(-wide, 3); // 
-                GL.TexCoord2(1, 0); GL.Vertex2(wide, 35 * (textSize)); // 
-                GL.TexCoord2(0, 0); GL.Vertex2(-wide, 35 * (textSize)); //
+                GL.TexCoord2(1, 1); GL.Vertex2(-10, 3); // 
+                GL.TexCoord2(0, 1); GL.Vertex2(-160, 3); // 
+                GL.TexCoord2(1, 0); GL.Vertex2(-10, 55); // 
+                GL.TexCoord2(0, 0); GL.Vertex2(-160, 55); //
                 GL.End();
 
                 GL.Disable(EnableCap.Texture2D);
 
                 GL.Color4(0.12f, 0.12770f, 0.120f, 1);
 
-                font.DrawText(center, 2, hede, textSize);
+                font.DrawText(center, 8, hede, textSize);
 
                 if (Settings.Tool.setToolSteer.isGPSToolActive && !double.IsNaN(gyd.distanceFromCurrentLineTool))
                 {
@@ -2259,20 +2260,19 @@ namespace Twol
                         if (avgPivotDistanceTool < 0.0)
                         {
                             hede = (Math.Abs(avgPivotDistanceTool)).ToString("N0") + " >";
-                            center = -(int)(((double)(hede.Length) * 0.5) * (18 * (textSize)) - 0);
+                            center = (int)(((double)(hede.Length) * 0.5) * 24);
                         }
                         else
                         {
                             hede = "< " + (Math.Abs(avgPivotDistanceTool)).ToString("N0");
-                            center = -(int)(((double)(hede.Length) * 0.5) * (18 * (textSize)));
+                            center = (int)(((double)(hede.Length) * 0.5) * 24);
                         }
+                        center = 80 - center;
                     }
                     else
                     {
-                        center = (int)(-40 * (textSize));
+                        center = 30;
                     }
-
-                    center += (int)(120 * (textSize));
 
                     // Select Our Texture
                     GL.Enable(EnableCap.Texture2D);
@@ -2288,31 +2288,40 @@ namespace Twol
 
                     GL.Color4(red, green, 0.3, 1.0);
 
-                    double moveOver = 120 * (textSize);
-
                     GL.Begin(PrimitiveType.TriangleStrip);              // Build Quad From A Triangle Strip
-                    GL.TexCoord2(1, 1); GL.Vertex2(moveOver + wide, 3); // 
-                    GL.TexCoord2(0, 1); GL.Vertex2(moveOver + -wide, 3); // 
-                    GL.TexCoord2(1, 0); GL.Vertex2(moveOver + wide, 35 * (textSize)); // 
-                    GL.TexCoord2(0, 0); GL.Vertex2(moveOver + -wide, 35 * (textSize)); //
+                    GL.TexCoord2(1, 1); GL.Vertex2(10, 3); // 
+                    GL.TexCoord2(0, 1); GL.Vertex2(160, 3); // 
+                    GL.TexCoord2(1, 0); GL.Vertex2(10, 55); // 
+                    GL.TexCoord2(0, 0); GL.Vertex2(160, 55); //
                     GL.End();
 
                     GL.Disable(EnableCap.Texture2D);
 
                     GL.Color4(0.12f, 0.12770f, 0.120f, 1);
 
-                    font.DrawText(center, 2, hede, textSize);
+                    font.DrawText(center, 8, hede, textSize);
+
+                    if (gyd.isPassiveSteering)
+                    {
+                        GL.Color4(0.512f, 0.770f, 0.995120f, 1);
+                        GL.LineWidth(8);
+                        GL.Begin(PrimitiveType.Lines);
+                        GL.Vertex2(20,60);
+                        GL.Vertex2(150,60);
+                        GL.End();
+                    }
                 }
 
                 if (vehicle.isInDeadZone)
                 {
                     GL.Color4(0.512f, 0.9712770f, 0.5120f, 1);
-                    GL.LineWidth(4);
+                    GL.LineWidth(8);
                     GL.Begin(PrimitiveType.Lines);
-                    GL.Vertex2(-wide, 36 * (textSize));
-                    GL.Vertex2(wide, 36 * (textSize));
+                    GL.Vertex2(-150,60);
+                    GL.Vertex2(-20, 60);
                     GL.End();
                 }
+
             }
         }
 

@@ -31,6 +31,9 @@ namespace Twol
         // Should we find the global nearest curve point (instead of local) on the next search.
         public bool isFindGlobalNearestTrackPoint = true;
 
+        //passive tool steer trigger
+        public bool isPassiveTriggered = false, isPassiveSteering = false;
+
         public int currentLocationIndex;
         public double pivotDistanceErrorLast, pivotDerivative;
 
@@ -93,21 +96,22 @@ namespace Twol
                 double bob = 0;
 
                 //passive guidance line for passive tool steer
-                if (distanceFromCurrentLineTool != 0 && !Settings.Tool.setToolSteer.isActiveSteering && !Uturn)
+                if (isPassiveSteering && distanceFromCurrentLineTool != 0 && !Settings.Tool.setToolSteer.isActiveSteering && !Uturn)
                 {
                     bob = distanceFromCurrentLine - distanceFromCurrentLineTool;
+
+                    if (!mf.trk.isHeadingSameWay) bob *= -1.0;
 
                     mf.lblToolOffset.Text = (bob * 100).ToString("N1");
 
                     vec3 pointA = new vec3(curList[0]);
-
-                    pointA.easting += (Math.Cos(-mf.fixHeading) * bob);
-                    pointA.northing += (Math.Sin(-mf.fixHeading) * bob);
+                    pointA.easting += (Math.Cos(-pointA.heading) * bob);
+                    pointA.northing += (Math.Sin(-pointA.heading) * bob);
                     mf.trk.currentPassiveTrack.Add(pointA);
 
                     pointA = new vec3(curList[curList.Count - 1]);
-                    pointA.easting += (Math.Cos(-mf.fixHeading) * bob);
-                    pointA.northing += (Math.Sin(-mf.fixHeading) * bob);
+                    pointA.easting += (Math.Cos(-pointA.heading) * bob);
+                    pointA.northing += (Math.Sin(-pointA.heading) * bob);
                     mf.trk.currentPassiveTrack.Add(pointA);
 
                     //update the new current line
@@ -317,7 +321,12 @@ namespace Twol
 
                     mf.vehicle.modeActualHeadingError = glm.toDegrees(steerHeadingError);
 
-
+                    if (!isPassiveSteering && isPassiveTriggered)
+                    {
+                        if (Math.Abs(mf.vehicle.modeActualHeadingError) < 0.5
+                            && Math.Abs(distanceFromCurrentLine) < 0.06)
+                            isPassiveSteering = true;
+                    }
                     //angular velocity in rads/sec  = 2PI * m/sec * radians/meters
                     //double angVel = glm.twoPI * 0.277777 * mf.avgSpeed * (Math.Tan(glm.toRadians(steerAngleCT))) / mf.vehicle.wheelbase;
 

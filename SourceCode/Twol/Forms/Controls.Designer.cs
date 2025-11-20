@@ -524,6 +524,21 @@ namespace Twol
 
             if (ct.isContourBtnOn)
                 ct.SetLockToLine();
+
+            //PAssive steering hold till on guidance line
+            if (!Settings.Tool.setToolSteer.isActiveSteering)
+            {
+                if (state && !gyd.isPassiveTriggered)
+                {
+                    gyd.isPassiveTriggered = true;
+                    gyd.isPassiveSteering = false;
+                }
+                else
+                {
+                    gyd.isPassiveTriggered = false;
+                    gyd.isPassiveSteering = false;
+                }
+            }
         }
 
         private void btnAutoYouTurn_Click(object sender, EventArgs e)
