@@ -892,6 +892,7 @@ namespace Twol
                 if (distanceCurrentStepFix != 0)
                 {
                     toolPivotPos.heading = Math.Atan2(tankPos.easting - toolPivotPos.easting, tankPos.northing - toolPivotPos.northing);
+                    toolPivotPos.heading += sim.toolOffset;
                     if (toolPivotPos.heading < 0) toolPivotPos.heading += glm.twoPI;
                 }
 
@@ -930,6 +931,10 @@ namespace Twol
                 toolPos.easting = hitchPos.easting;
                 toolPos.northing = hitchPos.northing;
             }
+
+            //toolPos.easting += (Math.Cos(fixHeading - 1.57) * -sim.toolOffset);
+            //toolPos.northing += (Math.Sin(fixHeading - 1.57) * -sim.toolOffset);
+
         }
 
 

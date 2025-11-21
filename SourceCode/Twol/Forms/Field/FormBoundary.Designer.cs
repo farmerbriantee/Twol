@@ -32,7 +32,9 @@
             this.Thru = new System.Windows.Forms.Label();
             this.Area = new System.Windows.Forms.Label();
             this.panelMain = new System.Windows.Forms.Panel();
+            this.btnBndLines = new System.Windows.Forms.Button();
             this.flp1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnBingMaps = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOpenGoogleEarth = new System.Windows.Forms.Button();
@@ -57,7 +59,7 @@
             this.Boundary.BackColor = System.Drawing.Color.Transparent;
             this.Boundary.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Boundary.ForeColor = System.Drawing.Color.Black;
-            this.Boundary.Location = new System.Drawing.Point(33, 85);
+            this.Boundary.Location = new System.Drawing.Point(33, 98);
             this.Boundary.Name = "Boundary";
             this.Boundary.Size = new System.Drawing.Size(177, 32);
             this.Boundary.TabIndex = 203;
@@ -69,7 +71,7 @@
             this.Thru.BackColor = System.Drawing.Color.Transparent;
             this.Thru.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Thru.ForeColor = System.Drawing.Color.Black;
-            this.Thru.Location = new System.Drawing.Point(410, 85);
+            this.Thru.Location = new System.Drawing.Point(465, 98);
             this.Thru.Name = "Thru";
             this.Thru.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.Thru.Size = new System.Drawing.Size(145, 32);
@@ -82,7 +84,7 @@
             this.Area.BackColor = System.Drawing.Color.Transparent;
             this.Area.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Area.ForeColor = System.Drawing.Color.Black;
-            this.Area.Location = new System.Drawing.Point(229, 85);
+            this.Area.Location = new System.Drawing.Point(253, 98);
             this.Area.Name = "Area";
             this.Area.Size = new System.Drawing.Size(177, 32);
             this.Area.TabIndex = 201;
@@ -92,7 +94,9 @@
             // panelMain
             // 
             this.panelMain.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panelMain.Controls.Add(this.btnBndLines);
             this.panelMain.Controls.Add(this.flp1);
+            this.panelMain.Controls.Add(this.btnBingMaps);
             this.panelMain.Controls.Add(this.btnAdd);
             this.panelMain.Controls.Add(this.btnCancel);
             this.panelMain.Controls.Add(this.Area);
@@ -100,20 +104,51 @@
             this.panelMain.Controls.Add(this.Boundary);
             this.panelMain.Controls.Add(this.btnOpenGoogleEarth);
             this.panelMain.Controls.Add(this.btnDelete);
-            this.panelMain.Location = new System.Drawing.Point(4, 6);
+            this.panelMain.Location = new System.Drawing.Point(4, 5);
             this.panelMain.Name = "panelMain";
-            this.panelMain.Size = new System.Drawing.Size(611, 298);
+            this.panelMain.Size = new System.Drawing.Size(745, 450);
             this.panelMain.TabIndex = 417;
+            // 
+            // btnBndLines
+            // 
+            this.btnBndLines.DialogResult = System.Windows.Forms.DialogResult.Ignore;
+            this.btnBndLines.FlatAppearance.BorderSize = 0;
+            this.btnBndLines.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBndLines.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBndLines.Image = global::Twol.Properties.Resources.Headache;
+            this.btnBndLines.Location = new System.Drawing.Point(500, 10);
+            this.btnBndLines.Name = "btnBndLines";
+            this.btnBndLines.Size = new System.Drawing.Size(62, 63);
+            this.btnBndLines.TabIndex = 219;
+            this.btnBndLines.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnBndLines.UseVisualStyleBackColor = true;
+            this.btnBndLines.Click += new System.EventHandler(this.btnBndLines_Click);
             // 
             // flp1
             // 
             this.flp1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.flp1.AutoScroll = true;
-            this.flp1.Location = new System.Drawing.Point(11, 120);
+            this.flp1.BackColor = System.Drawing.Color.Gainsboro;
+            this.flp1.Location = new System.Drawing.Point(11, 138);
             this.flp1.Name = "flp1";
-            this.flp1.Size = new System.Drawing.Size(586, 165);
+            this.flp1.Size = new System.Drawing.Size(620, 299);
             this.flp1.TabIndex = 218;
+            // 
+            // btnBingMaps
+            // 
+            this.btnBingMaps.DialogResult = System.Windows.Forms.DialogResult.Yes;
+            this.btnBingMaps.FlatAppearance.BorderSize = 0;
+            this.btnBingMaps.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBingMaps.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBingMaps.Image = global::Twol.Properties.Resources.bing1;
+            this.btnBingMaps.Location = new System.Drawing.Point(337, 10);
+            this.btnBingMaps.Name = "btnBingMaps";
+            this.btnBingMaps.Size = new System.Drawing.Size(62, 63);
+            this.btnBingMaps.TabIndex = 217;
+            this.btnBingMaps.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnBingMaps.UseVisualStyleBackColor = true;
+            this.btnBingMaps.Click += new System.EventHandler(this.btnBingMaps_Click);
             // 
             // btnAdd
             // 
@@ -121,7 +156,7 @@
             this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAdd.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdd.Image = global::Twol.Properties.Resources.AddNew;
-            this.btnAdd.Location = new System.Drawing.Point(355, 10);
+            this.btnAdd.Location = new System.Drawing.Point(663, 10);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(62, 63);
             this.btnAdd.TabIndex = 214;
@@ -138,7 +173,7 @@
             this.btnCancel.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnCancel.Image = global::Twol.Properties.Resources.OK64;
             this.btnCancel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnCancel.Location = new System.Drawing.Point(518, 10);
+            this.btnCancel.Location = new System.Drawing.Point(665, 303);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(62, 63);
             this.btnCancel.TabIndex = 206;
@@ -323,7 +358,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Cyan;
-            this.ClientSize = new System.Drawing.Size(621, 312);
+            this.ClientSize = new System.Drawing.Size(754, 460);
             this.ControlBox = false;
             this.Controls.Add(this.panelChoose);
             this.Controls.Add(this.panelKML);
@@ -367,6 +402,8 @@
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnBingMaps;
         private System.Windows.Forms.FlowLayoutPanel flp1;
+        private System.Windows.Forms.Button btnBndLines;
     }
 }

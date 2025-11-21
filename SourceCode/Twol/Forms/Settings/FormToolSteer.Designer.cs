@@ -108,6 +108,8 @@
             this.label31 = new System.Windows.Forms.Label();
             this.cboxInvertSteer_Tool = new System.Windows.Forms.CheckBox();
             this.imageList2 = new System.Windows.Forms.ImageList(this.components);
+            this.cboxIsActiveSteering = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabGain.SuspendLayout();
             this.tabSteer.SuspendLayout();
@@ -933,6 +935,8 @@
             // 
             this.tabOnTheLine.BackColor = System.Drawing.Color.Gainsboro;
             this.tabOnTheLine.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.tabOnTheLine.Controls.Add(this.label1);
+            this.tabOnTheLine.Controls.Add(this.cboxIsActiveSteering);
             this.tabOnTheLine.Controls.Add(this.cboxIsSteerNotSlide_Tool);
             this.tabOnTheLine.Controls.Add(this.label4);
             this.tabOnTheLine.Controls.Add(this.nudAntennaHeight_Tool);
@@ -963,7 +967,7 @@
             this.cboxIsSteerNotSlide_Tool.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboxIsSteerNotSlide_Tool.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxIsSteerNotSlide_Tool.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.cboxIsSteerNotSlide_Tool.Location = new System.Drawing.Point(321, 90);
+            this.cboxIsSteerNotSlide_Tool.Location = new System.Drawing.Point(321, 66);
             this.cboxIsSteerNotSlide_Tool.Name = "cboxIsSteerNotSlide_Tool";
             this.cboxIsSteerNotSlide_Tool.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.cboxIsSteerNotSlide_Tool.Size = new System.Drawing.Size(82, 78);
@@ -976,7 +980,7 @@
             // 
             this.label4.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(67, 33);
+            this.label4.Location = new System.Drawing.Point(64, 9);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(120, 51);
             this.label4.TabIndex = 584;
@@ -1019,7 +1023,7 @@
             // 
             this.label74.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label74.ForeColor = System.Drawing.Color.Black;
-            this.label74.Location = new System.Drawing.Point(301, 34);
+            this.label74.Location = new System.Drawing.Point(301, 10);
             this.label74.Name = "label74";
             this.label74.Size = new System.Drawing.Size(116, 51);
             this.label74.TabIndex = 579;
@@ -1047,7 +1051,7 @@
             this.cboxGPSTool.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboxGPSTool.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxGPSTool.ForeColor = System.Drawing.Color.Black;
-            this.cboxGPSTool.Location = new System.Drawing.Point(67, 90);
+            this.cboxGPSTool.Location = new System.Drawing.Point(64, 66);
             this.cboxGPSTool.Name = "cboxGPSTool";
             this.cboxGPSTool.Size = new System.Drawing.Size(120, 47);
             this.cboxGPSTool.TabIndex = 485;
@@ -1144,6 +1148,36 @@
             this.imageList2.Images.SetKeyName(3, "ConS_Pins.png");
             this.imageList2.Images.SetKeyName(4, "Sensors.png");
             this.imageList2.Images.SetKeyName(5, "Con_ImplementMenu.png");
+            // 
+            // cboxIsActiveSteering
+            // 
+            this.cboxIsActiveSteering.Appearance = System.Windows.Forms.Appearance.Button;
+            this.cboxIsActiveSteering.BackColor = System.Drawing.Color.AliceBlue;
+            this.cboxIsActiveSteering.Checked = true;
+            this.cboxIsActiveSteering.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cboxIsActiveSteering.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
+            this.cboxIsActiveSteering.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cboxIsActiveSteering.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboxIsActiveSteering.ForeColor = System.Drawing.Color.Black;
+            this.cboxIsActiveSteering.Location = new System.Drawing.Point(64, 195);
+            this.cboxIsActiveSteering.Name = "cboxIsActiveSteering";
+            this.cboxIsActiveSteering.Size = new System.Drawing.Size(120, 47);
+            this.cboxIsActiveSteering.TabIndex = 585;
+            this.cboxIsActiveSteering.Text = "Active";
+            this.cboxIsActiveSteering.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.cboxIsActiveSteering.UseVisualStyleBackColor = false;
+            this.cboxIsActiveSteering.Click += new System.EventHandler(this.cboxIsActiveSteering_Click);
+            // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.Black;
+            this.label1.Location = new System.Drawing.Point(53, 141);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(143, 51);
+            this.label1.TabIndex = 586;
+            this.label1.Text = "Active/Passive";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // FormToolSteer
             // 
@@ -1258,5 +1292,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lblPWMDisplay;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.CheckBox cboxIsActiveSteering;
+        private System.Windows.Forms.Label label1;
     }
 }

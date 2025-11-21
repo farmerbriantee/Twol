@@ -166,6 +166,12 @@
     <Compile Include="Forms\Field\FormLayer.Designer.cs">
       <DependentUpon>FormLayer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Field\FormMap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Field\FormMap.Designer.cs">
+      <DependentUpon>FormMap.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Guidance\FormABDrawHeading.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -572,6 +578,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Field\FormJobNew.resx">
       <DependentUpon>FormJobNew.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Field\FormMap.resx">
+      <DependentUpon>FormMap.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormPan.resx">
       <DependentUpon>FormPan.cs</DependentUpon>

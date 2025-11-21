@@ -524,6 +524,21 @@ namespace Twol
 
             if (ct.isContourBtnOn)
                 ct.SetLockToLine();
+
+            //PAssive steering hold till on guidance line
+            if (!Settings.Tool.setToolSteer.isActiveSteering)
+            {
+                if (state && !gyd.isPassiveTriggered)
+                {
+                    gyd.isPassiveTriggered = true;
+                    gyd.isPassiveSteering = false;
+                }
+                else
+                {
+                    gyd.isPassiveTriggered = false;
+                    gyd.isPassiveSteering = false;
+                }
+            }
         }
 
         private void btnAutoYouTurn_Click(object sender, EventArgs e)
@@ -927,6 +942,17 @@ namespace Twol
                     }
                     diaRes = form.DialogResult;
                 }
+                if (diaRes == DialogResult.Yes)
+                {
+                    var form3 = new FormMap(this);
+                    form3.Show(this);
+                }
+                //else if (diaRes == DialogResult.Ignore)
+                //{
+                //    var form3 = new FormBoundaryLines(this);
+                //    form3.Show(this);
+                //}
+
             }
 
             PanelUpdateRightAndBottom();
