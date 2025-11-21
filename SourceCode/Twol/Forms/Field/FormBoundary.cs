@@ -1,10 +1,9 @@
-using Twol.Classes;
-
 using System;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
+using Twol.Classes;
 
 namespace Twol
 {
@@ -35,7 +34,7 @@ namespace Twol
 
         private void FormBoundary_Load(object sender, EventArgs e)
         {
-            this.Size = new Size(770, 310);
+            this.Size = new Size(770, 500);
 
             //update the list view with real data
             UpdateChart();
@@ -76,7 +75,7 @@ namespace Twol
                 //outer inner
                 Button a = new Button
                 {
-                    Margin = new Padding(10),
+                    Margin = new Padding(20),
                     Size = new Size(180, 35),
                     Name = i.ToString(),
                     TextAlign = ContentAlignment.MiddleCenter,
@@ -88,7 +87,7 @@ namespace Twol
                 //area
                 Button b = new Button
                 {
-                    Margin = new Padding(10),
+                    Margin = new Padding(20),
                     Size = new System.Drawing.Size(180, 35),
                     Name = i.ToString(),
                     TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
@@ -100,7 +99,7 @@ namespace Twol
                 //drive thru
                 Button d = new Button
                 {
-                    Margin = new Padding(10),
+                    Margin = new Padding(20),
                     Size = new System.Drawing.Size(110, 35),
                     Name = i.ToString(),
                     TextAlign = ContentAlignment.MiddleCenter,
@@ -119,7 +118,7 @@ namespace Twol
                 {
                     //cc.Text = "Outer";
                     mf.bnd.bndList[i].isDriveThru = false;
-                    a.Text = string.Format(gStr.Get(gs.gsOuter));
+                    a.Text = string.Format(gStr.Get(gs.gsOuter) + " 1");
                     //a.Font = backupfont;
                     d.Text = "--";
                     d.Enabled = false;
@@ -142,7 +141,7 @@ namespace Twol
                 int length = (mf.bnd.bndList[i].area * glm.m22HaOrAc).ToString("0").Length;
                 if (length > 10) length = 10;
                 if (length < 3) length = 3;
-                b.Text = (mf.bnd.bndList[i].area * glm.m22HaOrAc).ToString("0.########".Substring(0, 11 - length)) + glm.unitsHaOrAc;
+                b.Text = (mf.bnd.bndList[i].area * glm.m22HaOrAc).ToString("0.### " + glm.unitsHaOrAc);
 
                 if (i == fenceSelected)
                 {
@@ -244,7 +243,7 @@ namespace Twol
             panelChoose.Visible = false;
             panelKML.Visible = false;
 
-            this.Size = new System.Drawing.Size(770, 310);
+            this.Size = new System.Drawing.Size(770, 500);
             isClosing = true;
             UpdateChart();
             Close();
@@ -378,7 +377,7 @@ namespace Twol
             panelChoose.Visible = false;
             panelKML.Visible = false;
 
-            this.Size = new Size(770, 310);
+            this.Size = new Size(770, 500);
 
             UpdateChart();
         }
@@ -391,11 +390,27 @@ namespace Twol
             isClosing = true;
         }
 
+        private void btnBndLines_Click(object sender, EventArgs e)
+        {
+            panelMain.Visible = false;
+            panelChoose.Visible = false;
+            panelKML.Visible = false;
+            isClosing = true;
+        }
+
         private void btnGetKML_Click(object sender, EventArgs e)
         {
             panelMain.Visible = false;
             panelChoose.Visible = false;
             panelKML.Visible = true;
+        }
+
+        private void btnBingMaps_Click(object sender, EventArgs e)
+        {
+            panelMain.Visible = false;
+            panelChoose.Visible = false;
+            panelKML.Visible = false;
+            isClosing = true;
         }
 
         private void FormBoundary_ResizeEnd(object sender, EventArgs e)

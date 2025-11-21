@@ -942,6 +942,17 @@ namespace Twol
                     }
                     diaRes = form.DialogResult;
                 }
+                if (diaRes == DialogResult.Yes)
+                {
+                    var form3 = new FormMap(this);
+                    form3.Show(this);
+                }
+                //else if (diaRes == DialogResult.Ignore)
+                //{
+                //    var form3 = new FormBoundaryLines(this);
+                //    form3.Show(this);
+                //}
+
             }
 
             PanelUpdateRightAndBottom();

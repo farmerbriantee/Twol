@@ -1,13 +1,12 @@
-﻿using AOG.Classes;
-using OpenTK.Graphics.OpenGL;
+﻿using OpenTK.Graphics.OpenGL;
 using System;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
+using Twol.Classes;
 
-namespace AOG
+namespace Twol
 {
     public partial class FormMap : Form
     {
@@ -50,17 +49,17 @@ namespace AOG
 
             mapControl.Invalidate();
 
-            if (mf.worldGrid.isGeoMap)
-            {
-                cboxDrawMap.Checked = true;
-            }
-            else
-            {
-                cboxDrawMap.Checked = false;
-            }
+            //if (mf.worldGrid.isGeoMap)
+            //{
+            //    cboxDrawMap.Checked = true;
+            //}
+            //else
+            //{
+            //    cboxDrawMap.Checked = false;
+            //}
 
-            if (mf.worldGrid.isGeoMap) cboxDrawMap.Image = Properties.Resources.MappingOn;
-            else cboxDrawMap.Image = Properties.Resources.MappingOff;
+            //if (mf.worldGrid.isGeoMap) cboxDrawMap.Image = Properties.Resources.MappingOn;
+            //else cboxDrawMap.Image = Properties.Resources.MappingOff;
 
             if (!mf.IsOnScreen(Location, Size, 1))
             {
@@ -309,123 +308,123 @@ namespace AOG
             }
         }
 
-        private void SaveBackgroundImage()
-        {
-            if (bingLine.Count > 0)
-            {
-                mf.TimedMessageBox(3000, gStr.Get(gs.gsBoundary), "Finish Making Boundary or Delete");
-                return;
-            }
+        //private void SaveBackgroundImage()
+        //{
+        //    if (bingLine.Count > 0)
+        //    {
+        //        mf.TimedMessageBox(3000, gStr.Get(gs.gsBoundary), "Finish Making Boundary or Delete");
+        //        return;
+        //    }
 
-            mf.worldGrid.isGeoMap = true;
+        //    mf.worldGrid.isGeoMap = true;
 
-            CornerPoint geoRef = mapControl.TopLeftCorner;
-            mf.pn.ConvertWGS84ToLocal(geoRef.Latitude, geoRef.Longitude, out double nor, out double eas);
-            if (Math.Abs(nor) > 4000 || Math.Abs(eas) > 4000) mf.worldGrid.isGeoMap = false;
-            mf.worldGrid.northingMaxGeo = nor;
-            mf.worldGrid.eastingMinGeo = eas;
+        //    CornerPoint geoRef = mapControl.TopLeftCorner;
+        //    mf.pn.ConvertWGS84ToLocal(geoRef.Latitude, geoRef.Longitude, out double nor, out double eas);
+        //    if (Math.Abs(nor) > 4000 || Math.Abs(eas) > 4000) mf.worldGrid.isGeoMap = false;
+        //    mf.worldGrid.northingMaxGeo = nor;
+        //    mf.worldGrid.eastingMinGeo = eas;
 
-            geoRef = mapControl.BottomRightCorner;
-            mf.pn.ConvertWGS84ToLocal(geoRef.Latitude, geoRef.Longitude, out nor, out eas);
-            if (Math.Abs(nor) > 4000 || Math.Abs(eas) > 4000) mf.worldGrid.isGeoMap = false;
-            mf.worldGrid.northingMinGeo = nor;
-            mf.worldGrid.eastingMaxGeo = eas;
+        //    geoRef = mapControl.BottomRightCorner;
+        //    mf.pn.ConvertWGS84ToLocal(geoRef.Latitude, geoRef.Longitude, out nor, out eas);
+        //    if (Math.Abs(nor) > 4000 || Math.Abs(eas) > 4000) mf.worldGrid.isGeoMap = false;
+        //    mf.worldGrid.northingMinGeo = nor;
+        //    mf.worldGrid.eastingMaxGeo = eas;
 
-            if (!mf.worldGrid.isGeoMap)
-            {
-                mf.TimedMessageBox(2000, "Map Error", "Map Too Large");
-                Log.EventWriter("GeoMap, Map Too Large");
-                ResetMapGrid();
-                return;
-            }
+        //    if (!mf.worldGrid.isGeoMap)
+        //    {
+        //        mf.TimedMessageBox(2000, "Map Error", "Map Too Large");
+        //        Log.EventWriter("GeoMap, Map Too Large");
+        //        ResetMapGrid();
+        //        return;
+        //    }
 
-            Bitmap bitmap = new Bitmap(mapControl.Width, mapControl.Height);
-            mapControl.DrawToBitmap(bitmap, new Rectangle(0, 0, bitmap.Width, bitmap.Height));
+        //    Bitmap bitmap = new Bitmap(mapControl.Width, mapControl.Height);
+        //    mapControl.DrawToBitmap(bitmap, new Rectangle(0, 0, bitmap.Width, bitmap.Height));
 
-            if (!isColorMap)
-            {
-                bitmap = glm.MakeGrayscale3(bitmap);
-            }
+        //    if (!isColorMap)
+        //    {
+        //        bitmap = glm.MakeGrayscale3(bitmap);
+        //    }
 
-            string fileAndDirectory = Path.Combine(RegistrySettings.fieldsDirectory, mf.currentFieldDirectory, "BackPic.png");
-            try
-            {
-                if (File.Exists(fileAndDirectory))
-                    File.Delete(fileAndDirectory);
-                bitmap.Save(fileAndDirectory, ImageFormat.Png);
+        //    string fileAndDirectory = Path.Combine(RegistrySettings.fieldsDirectory, mf.currentFieldDirectory, "BackPic.png");
+        //    try
+        //    {
+        //        if (File.Exists(fileAndDirectory))
+        //            File.Delete(fileAndDirectory);
+        //        bitmap.Save(fileAndDirectory, ImageFormat.Png);
 
-                GL.BindTexture(TextureTarget.Texture2D, mf.texture[(int)FormGPS.textures.bingGrid]);
-                BitmapData bitmapData = bitmap.LockBits(new
-                    Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly,
-                    System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-                GL.TexImage2D(TextureTarget.Texture2D, 0,
-                    PixelInternalFormat.Rgba, bitmapData.Width, bitmapData.Height, 0,
-                    OpenTK.Graphics.OpenGL.PixelFormat.Bgra, PixelType.UnsignedByte, bitmapData.Scan0);
-                bitmap.UnlockBits(bitmapData);
-            }
-            catch
-            {
-                mf.TimedMessageBox(2000, "File in Use", "Try loading again");
-                Log.EventWriter("GeoMap File in Use, Try Reload");
-                return;
-            }
-            SaveBackgroundGeoFile();
-        }
+        //        GL.BindTexture(TextureTarget.Texture2D, mf.texture[(int)FormGPS.textures.bingGrid]);
+        //        BitmapData bitmapData = bitmap.LockBits(new
+        //            Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly,
+        //            System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+        //        GL.TexImage2D(TextureTarget.Texture2D, 0,
+        //            PixelInternalFormat.Rgba, bitmapData.Width, bitmapData.Height, 0,
+        //            OpenTK.Graphics.OpenGL.PixelFormat.Bgra, PixelType.UnsignedByte, bitmapData.Scan0);
+        //        bitmap.UnlockBits(bitmapData);
+        //    }
+        //    catch
+        //    {
+        //        mf.TimedMessageBox(2000, "File in Use", "Try loading again");
+        //        Log.EventWriter("GeoMap File in Use, Try Reload");
+        //        return;
+        //    }
+        //    SaveBackgroundGeoFile();
+        //}
 
-        private void SaveBackgroundGeoFile()
-        {
-            //get the directory and make sure it exists, create if not
-            string directoryName = Path.Combine(RegistrySettings.fieldsDirectory, mf.currentFieldDirectory);
+        //private void SaveBackgroundGeoFile()
+        //{
+        //    //get the directory and make sure it exists, create if not
+        //    string directoryName = Path.Combine(RegistrySettings.fieldsDirectory, mf.currentFieldDirectory);
 
-            if ((directoryName.Length > 0) && (!Directory.Exists(directoryName)))
-            { Directory.CreateDirectory(directoryName); }
+        //    if ((directoryName.Length > 0) && (!Directory.Exists(directoryName)))
+        //    { Directory.CreateDirectory(directoryName); }
 
-            //write out the file
-            using (StreamWriter writer = new StreamWriter(Path.Combine(directoryName, "BackPic.Txt")))
-            {
-                writer.WriteLine("$BackPic");
-                //outer track of outer boundary tram
-                if (mf.worldGrid.isGeoMap)
-                {
-                    writer.WriteLine(true);
-                    writer.WriteLine(mf.worldGrid.eastingMaxGeo.ToString(CultureInfo.InvariantCulture));
-                    writer.WriteLine(mf.worldGrid.eastingMinGeo.ToString(CultureInfo.InvariantCulture));
-                    writer.WriteLine(mf.worldGrid.northingMaxGeo.ToString(CultureInfo.InvariantCulture));
-                    writer.WriteLine(mf.worldGrid.northingMinGeo.ToString(CultureInfo.InvariantCulture));
-                }
-                else
-                {
-                    writer.WriteLine(false);
-                    writer.WriteLine(300);
-                    writer.WriteLine(-300);
-                    writer.WriteLine(300);
-                    writer.WriteLine(-300);
-                }
-            }
-        }
+        //    //write out the file
+        //    using (StreamWriter writer = new StreamWriter(Path.Combine(directoryName, "BackPic.Txt")))
+        //    {
+        //        writer.WriteLine("$BackPic");
+        //        //outer track of outer boundary tram
+        //        if (mf.worldGrid.isGeoMap)
+        //        {
+        //            writer.WriteLine(true);
+        //            writer.WriteLine(mf.worldGrid.eastingMaxGeo.ToString(CultureInfo.InvariantCulture));
+        //            writer.WriteLine(mf.worldGrid.eastingMinGeo.ToString(CultureInfo.InvariantCulture));
+        //            writer.WriteLine(mf.worldGrid.northingMaxGeo.ToString(CultureInfo.InvariantCulture));
+        //            writer.WriteLine(mf.worldGrid.northingMinGeo.ToString(CultureInfo.InvariantCulture));
+        //        }
+        //        else
+        //        {
+        //            writer.WriteLine(false);
+        //            writer.WriteLine(300);
+        //            writer.WriteLine(-300);
+        //            writer.WriteLine(300);
+        //            writer.WriteLine(-300);
+        //        }
+        //    }
+        //}
 
-        private void cboxDrawMaPGN_Click(object sender, EventArgs e)
-        {
-            if (bingLine.Count > 0)
-            {
-                mf.TimedMessageBox(2000, gStr.Get(gs.gsBoundary), "Finish Making Boundary");
-                cboxDrawMap.Checked = !cboxDrawMap.Checked;
-                return;
-            }
+        //private void cboxDrawMaPGN_Click(object sender, EventArgs e)
+        //{
+        //    if (bingLine.Count > 0)
+        //    {
+        //        mf.TimedMessageBox(2000, gStr.Get(gs.gsBoundary), "Finish Making Boundary");
+        //        cboxDrawMap.Checked = !cboxDrawMap.Checked;
+        //        return;
+        //    }
 
-            if (cboxDrawMap.Checked)
-            {
-                cboxDrawMap.Image = Properties.Resources.MappingOn;
-                SaveBackgroundImage();
-            }
-            else
-            {
-                cboxDrawMap.Image = Properties.Resources.MappingOff;
-                ResetMapGrid();
-                mf.worldGrid.isGeoMap = false;
-                SaveBackgroundGeoFile();
-            }
-        }
+        //    if (cboxDrawMap.Checked)
+        //    {
+        //        cboxDrawMap.Image = Properties.Resources.MappingOn;
+        //        SaveBackgroundImage();
+        //    }
+        //    else
+        //    {
+        //        cboxDrawMap.Image = Properties.Resources.MappingOff;
+        //        ResetMapGrid();
+        //        mf.worldGrid.isGeoMap = false;
+        //        SaveBackgroundGeoFile();
+        //    }
+        //}
 
         private void ResetMapGrid()
         {
@@ -448,7 +447,7 @@ namespace AOG
             }
             catch { }
 
-            mf.worldGrid.isGeoMap = false;
+            //mf.worldGrid.isGeoMap = false;
             bingLine.Clear();
             mapControl.Markers.Clear();
             mapControl.Invalidate();

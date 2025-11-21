@@ -1,4 +1,4 @@
-﻿namespace AOG
+﻿namespace Twol
 {
     partial class FormMap
     {
@@ -42,11 +42,9 @@
             this.btnGo = new System.Windows.Forms.Button();
             this.cboxEnableLineDraw = new System.Windows.Forms.CheckBox();
             this.btnDeleteAll = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.btnAddFence = new System.Windows.Forms.Button();
             this.btnDeletePoint = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.cboxDrawMap = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -103,7 +101,7 @@
             this.tableLayoutPanel1.SetColumnSpan(this.lblPoints, 2);
             this.lblPoints.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPoints.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblPoints.Location = new System.Drawing.Point(108, 170);
+            this.lblPoints.Location = new System.Drawing.Point(3, 167);
             this.lblPoints.Name = "lblPoints";
             this.lblPoints.Size = new System.Drawing.Size(117, 23);
             this.lblPoints.TabIndex = 476;
@@ -112,14 +110,15 @@
             // 
             // lblBnds
             // 
-            this.lblBnds.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblBnds.BackColor = System.Drawing.Color.Transparent;
             this.tableLayoutPanel1.SetColumnSpan(this.lblBnds, 2);
+            this.lblBnds.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblBnds.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBnds.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblBnds.Location = new System.Drawing.Point(108, 274);
+            this.lblBnds.Location = new System.Drawing.Point(3, 261);
             this.lblBnds.Name = "lblBnds";
-            this.lblBnds.Size = new System.Drawing.Size(130, 80);
+            this.tableLayoutPanel1.SetRowSpan(this.lblBnds, 2);
+            this.lblBnds.Size = new System.Drawing.Size(126, 179);
             this.lblBnds.TabIndex = 489;
             this.lblBnds.Text = "2";
             this.lblBnds.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -130,22 +129,20 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 43.57143F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 19.64286F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 36.78571F));
-            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.61826F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 44.81328F));
             this.tableLayoutPanel1.Controls.Add(this.btnZoomIn, 2, 8);
             this.tableLayoutPanel1.Controls.Add(this.btnZoomOut, 0, 8);
             this.tableLayoutPanel1.Controls.Add(this.btnExit, 2, 9);
             this.tableLayoutPanel1.Controls.Add(this.btnGo, 0, 9);
-            this.tableLayoutPanel1.Controls.Add(this.cboxEnableLineDraw, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btnDeleteAll, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 7);
-            this.tableLayoutPanel1.Controls.Add(this.btnAddFence, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.btnDeletePoint, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.label3, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.lblBnds, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.lblPoints, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.cboxDrawMap, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.cboxEnableLineDraw, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label2, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btnDeletePoint, 2, 2);
+            this.tableLayoutPanel1.Controls.Add(this.btnAddFence, 2, 4);
+            this.tableLayoutPanel1.Controls.Add(this.lblPoints, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.label3, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.lblBnds, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.btnDeleteAll, 0, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(886, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 10;
@@ -155,10 +152,10 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 37F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.54257F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.12066F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.12066F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.12066F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.12066F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.12066F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.548038F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 3.788904F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.23139F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.16915F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(241, 776);
             this.tableLayoutPanel1.TabIndex = 491;
@@ -169,7 +166,7 @@
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label2.Location = new System.Drawing.Point(3, 82);
+            this.label2.Location = new System.Drawing.Point(137, 81);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(99, 23);
             this.label2.TabIndex = 491;
@@ -178,30 +175,30 @@
             // 
             // btnZoomIn
             // 
-            this.btnZoomIn.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnZoomIn.BackColor = System.Drawing.Color.Transparent;
             this.btnZoomIn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnZoomIn.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnZoomIn.FlatAppearance.BorderSize = 0;
             this.btnZoomIn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnZoomIn.Image = global::AOG.Properties.Resources.ZoomOGL;
-            this.btnZoomIn.Location = new System.Drawing.Point(162, 623);
+            this.btnZoomIn.Image = global::Twol.Properties.Resources.ZoomOGL;
+            this.btnZoomIn.Location = new System.Drawing.Point(135, 510);
             this.btnZoomIn.Name = "btnZoomIn";
-            this.btnZoomIn.Size = new System.Drawing.Size(69, 56);
+            this.btnZoomIn.Size = new System.Drawing.Size(103, 75);
             this.btnZoomIn.TabIndex = 484;
             this.btnZoomIn.UseVisualStyleBackColor = false;
             this.btnZoomIn.Click += new System.EventHandler(this.btnZoomIn_Click);
             // 
             // btnZoomOut
             // 
-            this.btnZoomOut.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnZoomOut.BackColor = System.Drawing.Color.Transparent;
             this.btnZoomOut.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnZoomOut.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnZoomOut.FlatAppearance.BorderSize = 0;
             this.btnZoomOut.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnZoomOut.Image = global::AOG.Properties.Resources.ZoomOut;
-            this.btnZoomOut.Location = new System.Drawing.Point(20, 619);
+            this.btnZoomOut.Image = global::Twol.Properties.Resources.ZoomOut;
+            this.btnZoomOut.Location = new System.Drawing.Point(3, 510);
             this.btnZoomOut.Name = "btnZoomOut";
-            this.btnZoomOut.Size = new System.Drawing.Size(64, 63);
+            this.btnZoomOut.Size = new System.Drawing.Size(99, 75);
             this.btnZoomOut.TabIndex = 485;
             this.btnZoomOut.UseVisualStyleBackColor = false;
             this.btnZoomOut.Click += new System.EventHandler(this.btnZoomOut_Click);
@@ -215,10 +212,10 @@
             this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExit.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.btnExit.Image = global::AOG.Properties.Resources.OK64;
-            this.btnExit.Location = new System.Drawing.Point(166, 702);
+            this.btnExit.Image = global::Twol.Properties.Resources.OK64;
+            this.btnExit.Location = new System.Drawing.Point(146, 634);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(61, 63);
+            this.btnExit.Size = new System.Drawing.Size(81, 96);
             this.btnExit.TabIndex = 234;
             this.btnExit.UseVisualStyleBackColor = false;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
@@ -229,10 +226,10 @@
             this.btnGo.BackColor = System.Drawing.Color.Transparent;
             this.btnGo.FlatAppearance.BorderSize = 0;
             this.btnGo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGo.Image = global::AOG.Properties.Resources.FlagGrn;
-            this.btnGo.Location = new System.Drawing.Point(21, 705);
+            this.btnGo.Image = global::Twol.Properties.Resources.FlagGrn;
+            this.btnGo.Location = new System.Drawing.Point(12, 634);
             this.btnGo.Name = "btnGo";
-            this.btnGo.Size = new System.Drawing.Size(63, 57);
+            this.btnGo.Size = new System.Drawing.Size(81, 96);
             this.btnGo.TabIndex = 465;
             this.btnGo.UseVisualStyleBackColor = false;
             this.btnGo.Click += new System.EventHandler(this.btnGo_Click);
@@ -247,8 +244,8 @@
             this.cboxEnableLineDraw.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboxEnableLineDraw.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxEnableLineDraw.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.cboxEnableLineDraw.Image = global::AOG.Properties.Resources.BoundaryOuter;
-            this.cboxEnableLineDraw.Location = new System.Drawing.Point(11, 5);
+            this.cboxEnableLineDraw.Image = global::Twol.Properties.Resources.BoundaryOuter;
+            this.cboxEnableLineDraw.Location = new System.Drawing.Point(145, 4);
             this.cboxEnableLineDraw.Name = "cboxEnableLineDraw";
             this.cboxEnableLineDraw.Size = new System.Drawing.Size(83, 72);
             this.cboxEnableLineDraw.TabIndex = 472;
@@ -262,27 +259,13 @@
             this.btnDeleteAll.Enabled = false;
             this.btnDeleteAll.FlatAppearance.BorderSize = 0;
             this.btnDeleteAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDeleteAll.Image = global::AOG.Properties.Resources.Trash;
-            this.btnDeleteAll.Location = new System.Drawing.Point(166, 11);
+            this.btnDeleteAll.Image = global::Twol.Properties.Resources.Trash;
+            this.btnDeleteAll.Location = new System.Drawing.Point(22, 11);
             this.btnDeleteAll.Name = "btnDeleteAll";
             this.btnDeleteAll.Size = new System.Drawing.Size(61, 59);
             this.btnDeleteAll.TabIndex = 471;
             this.btnDeleteAll.UseVisualStyleBackColor = false;
             this.btnDeleteAll.Click += new System.EventHandler(this.btnDeleteAll_Click);
-            // 
-            // label1
-            // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.tableLayoutPanel1.SetColumnSpan(this.label1, 3);
-            this.label1.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label1.Location = new System.Drawing.Point(15, 528);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(210, 31);
-            this.label1.TabIndex = 490;
-            this.label1.Text = "Background ";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnAddFence
             // 
@@ -291,8 +274,8 @@
             this.btnAddFence.Enabled = false;
             this.btnAddFence.FlatAppearance.BorderSize = 0;
             this.btnAddFence.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddFence.Image = global::AOG.Properties.Resources.AddNew;
-            this.btnAddFence.Location = new System.Drawing.Point(22, 283);
+            this.btnAddFence.Image = global::Twol.Properties.Resources.AddNew;
+            this.btnAddFence.Location = new System.Drawing.Point(156, 279);
             this.btnAddFence.Name = "btnAddFence";
             this.btnAddFence.Size = new System.Drawing.Size(61, 61);
             this.btnAddFence.TabIndex = 470;
@@ -306,8 +289,8 @@
             this.btnDeletePoint.Enabled = false;
             this.btnDeletePoint.FlatAppearance.BorderSize = 0;
             this.btnDeletePoint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDeletePoint.Image = global::AOG.Properties.Resources.PointDelete;
-            this.btnDeletePoint.Location = new System.Drawing.Point(9, 142);
+            this.btnDeletePoint.Image = global::Twol.Properties.Resources.PointDelete;
+            this.btnDeletePoint.Location = new System.Drawing.Point(143, 140);
             this.btnDeletePoint.Name = "btnDeletePoint";
             this.btnDeletePoint.Size = new System.Drawing.Size(87, 78);
             this.btnDeletePoint.TabIndex = 468;
@@ -321,31 +304,12 @@
             this.tableLayoutPanel1.SetColumnSpan(this.label3, 2);
             this.label3.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label3.Location = new System.Drawing.Point(108, 234);
+            this.label3.Location = new System.Drawing.Point(3, 231);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(130, 23);
+            this.label3.Size = new System.Drawing.Size(126, 23);
             this.label3.TabIndex = 492;
             this.label3.Text = "Boundary";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // cboxDrawMap
-            // 
-            this.cboxDrawMap.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.cboxDrawMap.Appearance = System.Windows.Forms.Appearance.Button;
-            this.cboxDrawMap.BackColor = System.Drawing.Color.Transparent;
-            this.tableLayoutPanel1.SetColumnSpan(this.cboxDrawMap, 3);
-            this.cboxDrawMap.FlatAppearance.BorderSize = 0;
-            this.cboxDrawMap.FlatAppearance.CheckedBackColor = System.Drawing.Color.MediumAquamarine;
-            this.cboxDrawMap.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cboxDrawMap.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboxDrawMap.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.cboxDrawMap.Image = global::AOG.Properties.Resources.MappingOff;
-            this.cboxDrawMap.Location = new System.Drawing.Point(81, 449);
-            this.cboxDrawMap.Name = "cboxDrawMap";
-            this.cboxDrawMap.Size = new System.Drawing.Size(78, 76);
-            this.cboxDrawMap.TabIndex = 482;
-            this.cboxDrawMap.UseVisualStyleBackColor = false;
-            this.cboxDrawMap.Click += new System.EventHandler(this.cboxDrawMaPGN_Click);
             // 
             // FormMap
             // 
@@ -383,12 +347,10 @@
         private System.Windows.Forms.Button btnDeleteAll;
         private System.Windows.Forms.CheckBox cboxEnableLineDraw;
         private System.Windows.Forms.Label lblPoints;
-        private System.Windows.Forms.CheckBox cboxDrawMap;
         private System.Windows.Forms.Button btnZoomIn;
         private System.Windows.Forms.Button btnZoomOut;
         private System.Windows.Forms.Label lblBnds;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
     }
