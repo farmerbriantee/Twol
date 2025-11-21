@@ -29,10 +29,10 @@ namespace Twol
             ITileServer[] tileServers = new ITileServer[]
             {
                 new BingMapsHybridTileServer(),
-                new BingMapsRoadsTileServer(),
-                new OpenStreetMapTileServer(userAgent: "Map Control AOG"),
+                //new BingMapsRoadsTileServer(),
+                //new OpenStreetMapTileServer(userAgent: "Map Control AOG"),
                 new OfflineTileServer(),
-                new BingMapsAerialTileServer(),
+                //new BingMapsAerialTileServer(),
             };
 
             cmbTileServers.Items.AddRange(tileServers);
