@@ -24,7 +24,7 @@ namespace Twol
 
             InitializeComponent();
 
-            mapControl.CacheFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MapControl");
+            mapControl.CacheFolder = Path.Combine(RegistrySettings.baseDirectory, "MapControl");
 
             ITileServer[] tileServers = new ITileServer[]
             {
