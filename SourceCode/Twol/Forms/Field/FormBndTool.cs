@@ -1,10 +1,10 @@
-﻿using Twol.Classes;
-using OpenTK;
+﻿using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using Twol.Classes;
 
 namespace Twol
 {
@@ -384,6 +384,10 @@ namespace Twol
             secList?.Clear();
             bndList?.Clear();
             smooList?.Clear();
+            tempList?.Clear();
+
+            mf.bnd.bndList.Clear();
+            mf.FileSaveHeadland();
 
             //for every new chunk of patch
             foreach (var triList in mf.patchList)
@@ -741,7 +745,7 @@ namespace Twol
                     continue;
                 }
                 delta += (smList[i - 1].heading - smList[i].heading);
-                if (Math.Abs(delta) > 0.05)
+                if (Math.Abs(delta) > 0.02)
                 {
                     smooList.Add(new vec3(smList[i]));
                     delta = 0;
