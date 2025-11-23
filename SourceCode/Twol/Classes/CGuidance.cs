@@ -68,6 +68,34 @@ namespace Twol
             {
                 distanceFromCurrentLine = FindDistanceToSegment(vec2point, curList[A], curList[B], out vec3 point, out double time, true, false, false);
 
+                //find curvature at pivot \(K=\sqrt{s(s-a)(s-b)(s-c)}\)
+                double segCurv = 0;
+                if (B + 1 < curList.Count)
+                {
+                    vec3 p0 = curList[A];
+                    vec3 p1 = curList[B];
+                    vec3 p2 = curList[B + 1];
+
+                    double a = glm.Distance(p0, p1);
+                    double b = glm.Distance(p1, p2);
+                    double c = glm.Distance(p2, p0);
+
+                    if (a > 0 && b > 0 && c > 0)
+                    {
+                        double s = (a + b + c) * 0.5;
+                        double areaSq = s * (s - a) * (s - b) * (s - c);
+                        if (areaSq > 0)
+                        {
+                            double area = Math.Sqrt(areaSq);
+                            double denom = a * b * c;
+                            if (denom > 0)
+                                segCurv = (4.0 * area) / denom;
+                        }
+                    }
+                }
+                mf.lblToolOffset.Text = (segCurv * 6).ToString("N3");
+
+
                 if (Uturn)
                 {
                     //the number in the cancel uturn button on display
@@ -93,33 +121,32 @@ namespace Twol
 
                 if (!Uturn && !mf.trk.isHeadingSameWay)
                     distanceFromCurrentLine *= -1;
-                double bob = 0;
 
                 //passive guidance line for passive tool steer
-                if (isPassiveSteering && distanceFromCurrentLineTool != 0 && !Settings.Tool.setToolSteer.isActiveSteering && !Uturn)
-                {
-                    bob = distanceFromCurrentLine - distanceFromCurrentLineTool;
+                //if (isPassiveSteering && distanceFromCurrentLineTool != 0 && !Settings.Tool.setToolSteer.isActiveSteering && !Uturn)
+                //{
+                //    bob = distanceFromCurrentLine - distanceFromCurrentLineTool;
 
-                    if (!mf.trk.isHeadingSameWay) bob *= -1.0;
+                //    if (!mf.trk.isHeadingSameWay) bob *= -1.0;
 
-                    mf.lblToolOffset.Text = (bob * 100).ToString("N1");
+                //    mf.lblToolOffset.Text = (bob * 100).ToString("N1");
 
-                    vec3 pointA = new vec3(curList[0]);
-                    pointA.easting += (Math.Cos(-pointA.heading) * bob);
-                    pointA.northing += (Math.Sin(-pointA.heading) * bob);
-                    mf.trk.currentPassiveTrack.Add(pointA);
+                //    vec3 pointA = new vec3(curList[0]);
+                //    pointA.easting += (Math.Cos(-pointA.heading) * bob);
+                //    pointA.northing += (Math.Sin(-pointA.heading) * bob);
+                //    mf.trk.currentPassiveTrack.Add(pointA);
 
-                    pointA = new vec3(curList[curList.Count - 1]);
-                    pointA.easting += (Math.Cos(-pointA.heading) * bob);
-                    pointA.northing += (Math.Sin(-pointA.heading) * bob);
-                    mf.trk.currentPassiveTrack.Add(pointA);
+                //    pointA = new vec3(curList[curList.Count - 1]);
+                //    pointA.easting += (Math.Cos(-pointA.heading) * bob);
+                //    pointA.northing += (Math.Sin(-pointA.heading) * bob);
+                //    mf.trk.currentPassiveTrack.Add(pointA);
 
-                    //update the new current line
-                    distanceFromCurrentLine = FindDistanceToSegment(vec2point, mf.trk.currentPassiveTrack[0], mf.trk.currentPassiveTrack[1], out point, out time, true, false, false);
+                //    //update the new current line
+                //    distanceFromCurrentLine = FindDistanceToSegment(vec2point, mf.trk.currentPassiveTrack[0], mf.trk.currentPassiveTrack[1], out point, out time, true, false, false);
 
-                    //take the ends of the ab line.
-                    A = 0; B = curList.Count - 1;
-                }
+                //    //take the ends of the ab line.
+                //    A = 0; B = curList.Count - 1;
+                //}
 
                 rEastTrk = point.easting;
                 rNorthTrk = point.northing;
