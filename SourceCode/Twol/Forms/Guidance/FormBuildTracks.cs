@@ -511,7 +511,7 @@ namespace Twol
             if (cnt > 3)
             {
                 //make sure point distance isn't too big
-                mf.trk.MakePointMinimumSpacing(ref mf.trk.designPtsList, 1.6);
+                mf.trk.MakePointMinimumSpacing(ref mf.trk.designPtsList, 0.5);
                 mf.trk.designPtsList.CalculateHeadings(false);
 
                 var track = new CTrk(TrackMode.Curve);

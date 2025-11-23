@@ -293,7 +293,7 @@ namespace Twol
                 else
                 {
                     double step = (Settings.Tool.toolWidth - Settings.Tool.overlap) * 0.4;
-                    if (step > 2) step = 2;
+                    if (step > 1) step =1;
                     if (step < 0.5) step = 0.5;
 
                     newCurList = track.curvePts.OffsetLine(distAway, step, loops);

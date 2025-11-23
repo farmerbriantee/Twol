@@ -36,6 +36,7 @@ namespace Twol
 
         public int currentLocationIndex;
         public double pivotDistanceErrorLast, pivotDerivative;
+        private double segK = 0;
 
         public CGuidance(FormGPS _f)
         {
@@ -47,6 +48,7 @@ namespace Twol
         {
             bool completeUturn = !Uturn;
             var vec2point = new vec2(Settings.Vehicle.setVehicle_isStanleyUsed ? steer : pivot);
+            double segCurv = 0;
 
             if (Settings.Tool.setToolSteer.isGPSToolActive)
             {
@@ -69,32 +71,6 @@ namespace Twol
                 distanceFromCurrentLine = FindDistanceToSegment(vec2point, curList[A], curList[B], out vec3 point, out double time, true, false, false);
 
                 //find curvature at pivot \(K=\sqrt{s(s-a)(s-b)(s-c)}\)
-                double segCurv = 0;
-                if (B + 1 < curList.Count)
-                {
-                    vec3 p0 = curList[A];
-                    vec3 p1 = curList[B];
-                    vec3 p2 = curList[B + 1];
-
-                    double a = glm.Distance(p0, p1);
-                    double b = glm.Distance(p1, p2);
-                    double c = glm.Distance(p2, p0);
-
-                    if (a > 0 && b > 0 && c > 0)
-                    {
-                        double s = (a + b + c) * 0.5;
-                        double areaSq = s * (s - a) * (s - b) * (s - c);
-                        if (areaSq > 0)
-                        {
-                            double area = Math.Sqrt(areaSq);
-                            double denom = a * b * c;
-                            if (denom > 0)
-                                segCurv = (4.0 * area) / denom;
-                        }
-                    }
-                }
-                mf.lblToolOffset.Text = (segCurv * 6).ToString("N3");
-
 
                 if (Uturn)
                 {
@@ -120,6 +96,7 @@ namespace Twol
                     currentLocationIndex = A;
 
                 if (!Uturn && !mf.trk.isHeadingSameWay)
+                    //segCurv *= -1;
                     distanceFromCurrentLine *= -1;
 
                 //passive guidance line for passive tool steer
@@ -319,6 +296,39 @@ namespace Twol
                             }
                         }
                     }
+
+                    if (B + 1 < curList.Count)
+                    {
+                        vec3 p0 = curList[A];
+                        vec3 p1 = curList[B];
+                        vec3 p2 = curList[B + 1];
+
+                        double a = glm.Distance(p0, p1);
+                        double b = glm.Distance(p1, p2);
+                        double c = glm.Distance(p2, p0);
+
+                        if (a > 0 && b > 0 && c > 0)
+                        {
+                            double s = (a + b + c) * 0.5;
+                            double areaSq = s * (s - a) * (s - b) * (s - c);
+                            if (areaSq > 0)
+                            {
+                                double area = Math.Sqrt(areaSq);
+                                double denom = a * b * c;
+                                if (denom > 0)
+                                    segCurv = (4.0 * area) / denom;
+                            }
+                        }
+
+                        double signe = p0.easting * (p1.northing - p2.northing) + p1.easting * (p2.northing - p0.northing) + p2.easting * (p0.northing - p1.northing);
+                        if (signe < 0) segCurv *= -1;
+                    }
+
+                    mf.lblToolOffset.Text = (segCurv * 10).ToString("N3");
+                    segK = 0.8 * segK + 0.2 * segCurv;
+
+                    goalPoint.easting += (Math.Sin(curList[B+1].heading + 1.57) * segK *5);
+                    goalPoint.northing += (Math.Cos(curList[B + 1].heading + 1.57) * segK *5);
 
                     //calc "D" the distance from pivot axle to lookahead point
                     double goalPointDistanceSquared = glm.DistanceSquared(goalPoint, pivot);
