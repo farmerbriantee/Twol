@@ -128,7 +128,7 @@ namespace Twol
 
                 else bob = 0;
 
-                    rEastTrk = point.easting;
+                rEastTrk = point.easting;
                 rNorthTrk = point.northing;
                 rTimeTrk = A + time;
 
@@ -302,7 +302,7 @@ namespace Twol
 
                     if (B + 1 < curList.Count)
                     {
-                        vec3 p0 = curList[A-1];
+                        vec3 p0 = curList[A - 1];
                         vec3 p1 = curList[A];
                         vec3 p2 = curList[B];
 
@@ -351,11 +351,11 @@ namespace Twol
 
                     bobAvg = 0.8 * bobAvg + 0.2 * bob;
 
-                    goalPoint.easting += (Math.Sin(curList[B].heading + 1.57) * (segK *13) - bobAvg);
-                    goalPoint.northing += (Math.Cos(curList[B].heading + 1.57) * (segK *13) - bobAvg);
+                    goalPoint.easting += (Math.Sin(curList[B].heading + 1.57) * (segK * 13) - bobAvg);
+                    goalPoint.northing += (Math.Cos(curList[B].heading + 1.57) * (segK * 13) - bobAvg);
 
-                    mf.lblToolOffset.Text = (segCurv * 13 *100).ToString("N3");
-                    mf.lblBobAvg.Text = (bobAvg*100).ToString("N3");
+                    mf.lblToolOffset.Text = (segCurv * 13 * 100).ToString("N3");
+                    mf.lblBobAvg.Text = (bobAvg * 100).ToString("N3");
 
                     //calc "D" the distance from pivot axle to lookahead point
                     double goalPointDistanceSquared = glm.DistanceSquared(goalPoint, pivot);
@@ -524,4 +524,66 @@ namespace Twol
             return currentLocationIndex;
         }
     }
+
+    public static class ChaikinSmoothing
+    {
+        /// <summary>
+        /// Applies Chaikin's corner-cutting algorithm to smooth a polyline.
+        /// </summary>
+        /// <param name="points">The original list of points (polyline).</param>
+        /// <param name="iterations">The number of smoothing iterations to apply.</param>
+        /// <param name="preserveEndPoints">Whether to keep the start and end points in their original positions.</param>
+        /// <returns>A new list of smoothed points.</returns>
+        public static List<vec3> Smooth(List<vec3> points, int iterations, bool preserveEndPoints = true)
+        {
+            List<vec3> currentPoints = new List<vec3>(points);
+
+            for (int iter = 0; iter < iterations; iter++)
+            {
+                List<vec3> nextPoints = new List<vec3>();
+
+                // Optionally preserve the start point for non-closed polylines
+                if (preserveEndPoints && currentPoints.Count > 0)
+                {
+                    nextPoints.Add(currentPoints[0]);
+                }
+
+                for (int i = 0; i < currentPoints.Count - 1; i++)
+                {
+                    vec3 p0 = currentPoints[i];
+                    vec3 p1 = currentPoints[i + 1];
+
+                    // Calculate Q and R points, which are 25% and 75% along the segment
+                    nextPoints.Add(new vec3(0.75f * p0.easting + 0.25f * p1.easting, 0.75f * p0.northing + 0.25f * p1.northing, 0));
+                    nextPoints.Add(new vec3(0.25f * p0.easting + 0.75f * p1.easting, 0.25f * p0.northing + 0.75f * p1.northing, 0));
+                }
+
+                // Optionally preserve the end point for non-closed polylines
+                if (preserveEndPoints && currentPoints.Count > 1)
+                {
+                    nextPoints.Add(currentPoints[currentPoints.Count - 1]);
+                }
+                // If the user wants a closed polygon, the last R point implicitly connects to the first Q point.
+                // A separate implementation is needed for perfect closed-loop handling by wrapping indices (not shown here).
+
+                currentPoints = nextPoints;
+            }
+
+            return currentPoints;
+        }
+    }
+    //Usage Example
+    //csharp
+    //// Example usage:
+    //List<PointF> originalPolyline = new List<PointF>
+    //{
+    //    new PointF(10, 10),
+    //    new PointF(50, 100),
+    //    new PointF(150, 110),
+    //    new PointF(200, 20)
+    //};
+
+    //        // Smooth the polyline with 3 iterations, preserving start/end points
+    //        List<PointF> smoothedPolyline = ChaikinSmoothing.Smooth(originalPolyline, 3, preserveEndPoints: true);
+
 }
