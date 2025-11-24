@@ -36,7 +36,8 @@ namespace Twol
 
         public int currentLocationIndex;
         public double pivotDistanceErrorLast, pivotDerivative;
-        private double segK = 0;
+        private double segK = 0, bob = 0, bobAvg = 0;
+
 
         public CGuidance(FormGPS _f)
         {
@@ -100,32 +101,34 @@ namespace Twol
                     distanceFromCurrentLine *= -1;
 
                 //passive guidance line for passive tool steer
-                //if (isPassiveSteering && distanceFromCurrentLineTool != 0 && !Settings.Tool.setToolSteer.isActiveSteering && !Uturn)
-                //{
-                //    bob = distanceFromCurrentLine - distanceFromCurrentLineTool;
+                if (isPassiveSteering && distanceFromCurrentLineTool != 0 && !Settings.Tool.setToolSteer.isActiveSteering && !Uturn)
+                {
+                    bob = distanceFromCurrentLineTool;
 
-                //    if (!mf.trk.isHeadingSameWay) bob *= -1.0;
+                    if (!mf.trk.isHeadingSameWay) bob *= -1.0;
 
-                //    mf.lblToolOffset.Text = (bob * 100).ToString("N1");
+                    //mf.lblToolOffset.Text = (bob * 100).ToString("N1");
 
-                //    vec3 pointA = new vec3(curList[0]);
-                //    pointA.easting += (Math.Cos(-pointA.heading) * bob);
-                //    pointA.northing += (Math.Sin(-pointA.heading) * bob);
-                //    mf.trk.currentPassiveTrack.Add(pointA);
+                    //vec3 pointA = new vec3(curList[0]);
+                    //pointA.easting += (Math.Cos(-pointA.heading) * bob);
+                    //pointA.northing += (Math.Sin(-pointA.heading) * bob);
+                    //mf.trk.currentPassiveTrack.Add(pointA);
 
-                //    pointA = new vec3(curList[curList.Count - 1]);
-                //    pointA.easting += (Math.Cos(-pointA.heading) * bob);
-                //    pointA.northing += (Math.Sin(-pointA.heading) * bob);
-                //    mf.trk.currentPassiveTrack.Add(pointA);
+                    //pointA = new vec3(curList[curList.Count - 1]);
+                    //pointA.easting += (Math.Cos(-pointA.heading) * bob);
+                    //pointA.northing += (Math.Sin(-pointA.heading) * bob);
+                    //mf.trk.currentPassiveTrack.Add(pointA);
 
-                //    //update the new current line
-                //    distanceFromCurrentLine = FindDistanceToSegment(vec2point, mf.trk.currentPassiveTrack[0], mf.trk.currentPassiveTrack[1], out point, out time, true, false, false);
+                    ////update the new current line
+                    //distanceFromCurrentLine = FindDistanceToSegment(vec2point, mf.trk.currentPassiveTrack[0], mf.trk.currentPassiveTrack[1], out point, out time, true, false, false);
 
-                //    //take the ends of the ab line.
-                //    A = 0; B = curList.Count - 1;
-                //}
+                    ////take the ends of the ab line.
+                    //A = 0; B = curList.Count - 1;
+                }
 
-                rEastTrk = point.easting;
+                else bob = 0;
+
+                    rEastTrk = point.easting;
                 rNorthTrk = point.northing;
                 rTimeTrk = A + time;
 
@@ -299,9 +302,9 @@ namespace Twol
 
                     if (B + 1 < curList.Count)
                     {
-                        vec3 p0 = curList[A];
-                        vec3 p1 = curList[B];
-                        vec3 p2 = curList[B + 1];
+                        vec3 p0 = curList[A-1];
+                        vec3 p1 = curList[A];
+                        vec3 p2 = curList[B];
 
                         double a = glm.Distance(p0, p1);
                         double b = glm.Distance(p1, p2);
@@ -322,13 +325,37 @@ namespace Twol
 
                         double signe = p0.easting * (p1.northing - p2.northing) + p1.easting * (p2.northing - p0.northing) + p2.easting * (p0.northing - p1.northing);
                         if (signe < 0) segCurv *= -1;
+
+                        if (Uturn) segCurv = 0;
                     }
 
-                    mf.lblToolOffset.Text = (segCurv * 10).ToString("N3");
+                    //vec3 p1 = curList[A];
+                    //vec3 p2 = curList[B];
+
+                    //double d = glm.Distance(p1, p2);
+
+                    //double theta = p2.heading - p1.heading;
+                    //if (theta > Math.PI)
+                    //    theta -= Math.PI;
+                    //else if (theta < -Math.PI)
+                    //    theta += Math.PI;
+
+                    //if (theta > glm.PIBy2)
+                    //    theta -= Math.PI;
+                    //else if (theta < -glm.PIBy2)
+                    //    theta += Math.PI;
+
+                    //segCurv = (2 * Math.Sin(theta / 2)) /-d;
+
                     segK = 0.8 * segK + 0.2 * segCurv;
 
-                    goalPoint.easting += (Math.Sin(curList[B+1].heading + 1.57) * segK *5);
-                    goalPoint.northing += (Math.Cos(curList[B + 1].heading + 1.57) * segK *5);
+                    bobAvg = 0.8 * bobAvg + 0.2 * bob;
+
+                    goalPoint.easting += (Math.Sin(curList[B].heading + 1.57) * (segK *13) - bobAvg);
+                    goalPoint.northing += (Math.Cos(curList[B].heading + 1.57) * (segK *13) - bobAvg);
+
+                    mf.lblToolOffset.Text = (segCurv * 13 *100).ToString("N3");
+                    mf.lblBobAvg.Text = (bobAvg*100).ToString("N3");
 
                     //calc "D" the distance from pivot axle to lookahead point
                     double goalPointDistanceSquared = glm.DistanceSquared(goalPoint, pivot);

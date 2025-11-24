@@ -238,6 +238,7 @@ namespace Twol
             this.button15 = new System.Windows.Forms.Button();
             this.nudToolOffset = new System.Windows.Forms.NumericUpDown();
             this.lblToolOffset = new System.Windows.Forms.Label();
+            this.lblBobAvg = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStripFlag.SuspendLayout();
             this.statusStripLeft.SuspendLayout();
@@ -3581,7 +3582,7 @@ namespace Twol
             0,
             0,
             65536});
-            this.nudToolOffset.Location = new System.Drawing.Point(293, 66);
+            this.nudToolOffset.Location = new System.Drawing.Point(187, 68);
             this.nudToolOffset.Maximum = new decimal(new int[] {
             30,
             0,
@@ -3605,12 +3606,26 @@ namespace Twol
             this.lblToolOffset.AutoSize = true;
             this.lblToolOffset.BackColor = System.Drawing.Color.Transparent;
             this.lblToolOffset.Font = new System.Drawing.Font("Arial", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblToolOffset.Location = new System.Drawing.Point(295, 116);
+            this.lblToolOffset.Location = new System.Drawing.Point(189, 118);
             this.lblToolOffset.Name = "lblToolOffset";
             this.lblToolOffset.Size = new System.Drawing.Size(67, 32);
             this.lblToolOffset.TabIndex = 652;
             this.lblToolOffset.Text = "15.6";
             this.lblToolOffset.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            // 
+            // lblBobAvg
+            // 
+            this.lblBobAvg.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblBobAvg.AutoSize = true;
+            this.lblBobAvg.BackColor = System.Drawing.Color.Transparent;
+            this.lblBobAvg.Font = new System.Drawing.Font("Arial", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBobAvg.Location = new System.Drawing.Point(189, 167);
+            this.lblBobAvg.Name = "lblBobAvg";
+            this.lblBobAvg.Size = new System.Drawing.Size(67, 32);
+            this.lblBobAvg.TabIndex = 653;
+            this.lblBobAvg.Text = "15.6";
+            this.lblBobAvg.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
             // FormGPS
             // 
@@ -3618,6 +3633,7 @@ namespace Twol
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(1163, 847);
+            this.Controls.Add(this.lblBobAvg);
             this.Controls.Add(this.lblToolOffset);
             this.Controls.Add(this.nudToolOffset);
             this.Controls.Add(this.flowLayoutPanelTop);
@@ -3625,7 +3641,6 @@ namespace Twol
             this.Controls.Add(this.panelNavigation);
             this.Controls.Add(this.panelSim);
             this.Controls.Add(this.panel_IO);
-            this.Controls.Add(this.tlpNozzle);
             this.Controls.Add(this.panelRight);
             this.Controls.Add(this.panelBottom);
             this.Controls.Add(this.lblFix);
@@ -3638,6 +3653,7 @@ namespace Twol
             this.Controls.Add(this.lblGuidanceLine);
             this.Controls.Add(this.oglBack);
             this.Controls.Add(this.lblHardwareMessage);
+            this.Controls.Add(this.tlpNozzle);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Tahoma", 12F);
             this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -3887,6 +3903,7 @@ namespace Twol
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.NumericUpDown nudToolOffset;
         public System.Windows.Forms.Label lblToolOffset;
+        public System.Windows.Forms.Label lblBobAvg;
     }
 }
 

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Twol.Classes;
 
 namespace Twol
@@ -293,7 +294,7 @@ namespace Twol
                 else
                 {
                     double step = (Settings.Tool.toolWidth - Settings.Tool.overlap) * 0.4;
-                    if (step > 1) step =1;
+                    if (step > 2) step = 2;
                     if (step < 0.5) step = 0.5;
 
                     newCurList = track.curvePts.OffsetLine(distAway, step, loops);
@@ -500,6 +501,16 @@ namespace Twol
                 }
 
                 currentGuidanceTrack.DrawPolygon(currTrk.mode <= TrackMode.Curve ? PrimitiveType.LineStrip : PrimitiveType.LineLoop);
+                
+                GL.PointSize(4);
+                GL.Color3(0.95f, 0.992f, 0.95f);
+                GL.Begin(PrimitiveType.Points);
+
+                for (int i = 0; i < currentGuidanceTrack.Count; i++)
+                {
+                    GL.Vertex3(currentGuidanceTrack[i].easting, currentGuidanceTrack[i].northing, 0);
+                }
+                GL.End();
 
                 mf.yt.DrawYouTurn();
 
