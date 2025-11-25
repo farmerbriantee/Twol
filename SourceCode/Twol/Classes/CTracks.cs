@@ -295,9 +295,7 @@ namespace Twol
                 }
                 else
                 {
-                    double step = (Settings.Tool.toolWidth - Settings.Tool.overlap) * 0.4;
-                    if (step > 2) step = 2;
-                    if (step < 0.5) step = 0.5;
+                    double step = 1;
 
                     newCurList = track.curvePts.OffsetLine(distAway, step, loops);
 
@@ -354,25 +352,30 @@ namespace Twol
 
                     newCurList.CalculateHeadings(loops);
 
-                    double delta = 0;
-                    int cont = newCurList.Count;
-                    vec3[] smList = new vec3[cont];
-                    cont --;
-                    newCurList.CopyTo(smList);
-                    newCurList.Clear();
-
-                    for (int i = 0; i < cont; i++)
+                    //if (track.mode != TrackMode.AB)
                     {
-                        if (i < 5)
+                        double delta = 0;
+                        int cont = newCurList.Count;
+                        vec3[] smList = new vec3[cont];
+                        cont--;
+                        newCurList.CopyTo(smList);
+                        newCurList.Clear();
+                        int counter = 0;
+                        for (int i = 0; i < cont; i++)
                         {
-                            smooList.Add(new vec3(smList[i]));
-                            continue;
-                        }
-                        delta += (smList[i - 1].heading - smList[i].heading);
-                        if (Math.Abs(delta) > 0.005)
-                        {
-                            newCurList.Add(new vec3(smList[i]));
-                            delta = 0;
+                            if (i < 5)
+                            {
+                                smooList.Add(new vec3(smList[i]));
+                                continue;
+                            }
+                            delta += (smList[i - 1].heading - smList[i].heading);
+                            if (Math.Abs(delta) > 0.005 || counter > 30)
+                            {
+                                newCurList.Add(new vec3(smList[i]));
+                                delta = 0;
+                                counter = 0;
+                            }
+                            counter++;
                         }
                     }
 

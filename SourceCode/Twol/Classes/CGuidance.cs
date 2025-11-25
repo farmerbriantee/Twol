@@ -72,8 +72,6 @@ namespace Twol
             {
                 distanceFromCurrentLine = FindDistanceToSegment(vec2point, curList[A], curList[B], out vec3 point, out double time, true, false, false);
 
-                //find curvature at pivot \(K=\sqrt{s(s-a)(s-b)(s-c)}\)
-
                 if (Uturn)
                 {
                     //the number in the cancel uturn button on display
@@ -101,9 +99,6 @@ namespace Twol
                     //segCurv *= -1;
                     distanceFromCurrentLine *= -1;
 
-                //passive guidance line for passive tool steer
-
-
                 rEastTrk = point.easting;
                 rNorthTrk = point.northing;
                 rTimeTrk = A + time;
@@ -114,6 +109,7 @@ namespace Twol
                 manualUturnHeading = abHeading;
 
                 #region Stanley
+
                 if (Settings.Vehicle.setVehicle_isStanleyUsed)//Stanley
                 {
 
@@ -162,8 +158,10 @@ namespace Twol
                     //}
                     //else
                     //    distanceFromCurrentLineTool = 0;
-                    #endregion Stanley
                 }
+
+                #endregion Stanley
+
                 else// Pure Pursuit ------------------------------------------
                 {
                     #region PurePursuit
@@ -277,7 +275,7 @@ namespace Twol
 
                     if (isPassiveSteering && distanceFromCurrentLineTool != 0 && !Settings.Tool.setToolSteer.isActiveSteering && !Uturn)
                     {
-                        bob = distanceFromCurrentLineTool;
+                        bob = distanceFromCurrentLineTool + distanceFromCurrentLine;
 
                         if (!mf.trk.isHeadingSameWay)
                         {
