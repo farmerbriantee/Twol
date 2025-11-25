@@ -396,9 +396,12 @@ namespace Twol
 
                 isOutOfBounds = false;
                 youTurnPhase = 240;
+
+
             }
             else if (youTurnPhase == 240)
             {
+                ytList.CalculateHeadings(false);
                 //if (uTurnSmoothing > 0)
                 //    SmoothYouTurn(6);// uTurnSmoothing????
                 youTurnPhase = 255;

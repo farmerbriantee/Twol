@@ -162,9 +162,11 @@ namespace Twol
 
                 #endregion Stanley
 
+                #region PurePursuit
+
                 else// Pure Pursuit ------------------------------------------
                 {
-                    #region PurePursuit
+                    int curveCenter = B;
                     //integral slider is set to 0
                     if (mf.vehicle.purePursuitIntegralGain != 0 && !mf.isReverse)
                     {
@@ -238,8 +240,9 @@ namespace Twol
                             }
                             else distSoFar += tempDist;
                             start = curList[i];
-
                             i += count;
+                            curveCenter = i;
+
                             if (i < 0)
                             {
                                 if (!loop)
@@ -273,32 +276,14 @@ namespace Twol
                         }
                     }
 
-                    if (isPassiveSteering && distanceFromCurrentLineTool != 0 && !Settings.Tool.setToolSteer.isActiveSteering && !Uturn)
+                    if (isPassiveSteering && distanceFromCurrentLineTool != 0 && !Settings.Tool.setToolSteer.isActiveSteering)
                     {
-                        bob = distanceFromCurrentLineTool + distanceFromCurrentLine;
+                        bob = distanceFromCurrentLineTool;
 
                         if (!mf.trk.isHeadingSameWay)
                         {
                             bob *= -1.0;
                         }
-
-                        //mf.lblToolOffset.Text = (bob * 100).ToString("N1");
-
-                        //vec3 pointA = new vec3(curList[0]);
-                        //pointA.easting += (Math.Cos(-pointA.heading) * bob);
-                        //pointA.northing += (Math.Sin(-pointA.heading) * bob);
-                        //mf.trk.currentPassiveTrack.Add(pointA);
-
-                        //pointA = new vec3(curList[curList.Count - 1]);
-                        //pointA.easting += (Math.Cos(-pointA.heading) * bob);
-                        //pointA.northing += (Math.Sin(-pointA.heading) * bob);
-                        //mf.trk.currentPassiveTrack.Add(pointA);
-
-                        ////update the new current line
-                        //distanceFromCurrentLine = FindDistanceToSegment(vec2point, mf.trk.currentPassiveTrack[0], mf.trk.currentPassiveTrack[1], out point, out time, true, false, false);
-
-                        ////take the ends of the ab line.
-                        //A = 0; B = curList.Count - 1;
                     }
 
                     else
@@ -306,35 +291,6 @@ namespace Twol
                         bob = 0;
                         bobAvg = 0;
                     }
-
-                    //if (B + 1 < curList.Count)
-                    //{
-                    //    vec3 p0 = curList[A - 1];
-                    //    vec3 p1 = curList[A];
-                    //    vec3 p2 = curList[B];
-
-                    //    double a = glm.Distance(p0, p1);
-                    //    double b = glm.Distance(p1, p2);
-                    //    double c = glm.Distance(p2, p0);
-
-                    //    if (a > 0 && b > 0 && c > 0)
-                    //    {
-                    //        double s = (a + b + c) * 0.5;
-                    //        double areaSq = s * (s - a) * (s - b) * (s - c);
-                    //        if (areaSq > 0)
-                    //        {
-                    //            double area = Math.Sqrt(areaSq);
-                    //            double denom = a * b * c;
-                    //            if (denom > 0)
-                    //                segCurv = (4.0 * area) / denom;
-                    //        }
-                    //    }
-
-                    //    double signe = p0.easting * (p1.northing - p2.northing) + p1.easting * (p2.northing - p0.northing) + p2.easting * (p0.northing - p1.northing);
-                    //    if (signe < 0) segCurv *= -1;
-
-                    //    if (Uturn) segCurv = 0;
-                    //}
 
                     vec3 p1 = curList[A];
                     vec3 p2 = curList[B];
@@ -352,27 +308,31 @@ namespace Twol
                     else if (theta < -glm.PIBy2)
                         theta += Math.PI;
 
-                    segCurv = ((2 * Math.Sin(theta / 2)) / -d) *13;
+                    segCurv = ((2 * Math.Sin(theta / 2)) / -d) *15;
 
                     segK = 0.9 * segK + 0.1 * segCurv;
 
-                    bobAvg = 0.9 * bobAvg + 0.1 * bob;
+                    if (bob < 0) bobAvg -= 0.0005;
+                    else bobAvg += 0.0005;
+                        //bobAvg += (0.01 * bob);                    
+
                     if (bobAvg > 0.5)
                         bobAvg = 0.5;
                     if (bobAvg < -0.5)
                         bobAvg = -0.5;
 
-                    double dist = (segK - bobAvg);
-                    if (dist > 3.0) 
-                        dist = 3.0;
-                    if (dist < -3.0) 
-                        dist = -3.0;
+                    double dist = (segK);
+                    if (dist > 2.0) 
+                        dist = 2.0;
+                    if (dist < -2.0) 
+                        dist = -2.0;
 
                     goalPoint.easting += (Math.Sin(curList[B].heading + 1.57) * dist);
                     goalPoint.northing += (Math.Cos(curList[B].heading + 1.57) * dist);
 
-                    mf.lblToolOffset.Text = (segCurv * 100).ToString("N3");
-                    mf.lblBobAvg.Text = (bobAvg * 100).ToString("N3");
+                    mf.lblToolOffset.Text = (segCurv * 100).ToString("N1");
+                    mf.lblBobAvg.Text = (bobAvg * 100).ToString("N1");
+                    mf.lblDistTotal.Text = (dist * 100).ToString("N1");
 
                     //calc "D" the distance from pivot axle to lookahead point
                     double goalPointDistanceSquared = glm.DistanceSquared(goalPoint, pivot);
@@ -405,7 +365,7 @@ namespace Twol
                     if (!isPassiveSteering && isPassiveTriggered)
                     {
                         if (Math.Abs(mf.vehicle.modeActualHeadingError) < 1.5
-                            && Math.Abs(distanceFromCurrentLine) < 0.15)
+                            && Math.Abs(distanceFromCurrentLine) < 0.25 && Math.Abs(distanceFromCurrentLineTool) < 0.25)
                             isPassiveSteering = true;
                     }
                     //angular velocity in rads/sec  = 2PI * m/sec * radians/meters

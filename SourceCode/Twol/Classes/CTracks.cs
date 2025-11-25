@@ -361,6 +361,8 @@ namespace Twol
                         newCurList.CopyTo(smList);
                         newCurList.Clear();
                         int counter = 0;
+                        double check = 0;
+
                         for (int i = 0; i < cont; i++)
                         {
                             if (i < 5)
@@ -368,7 +370,13 @@ namespace Twol
                                 smooList.Add(new vec3(smList[i]));
                                 continue;
                             }
-                            delta += (smList[i - 1].heading - smList[i].heading);
+                            check = (smList[i - 1].heading - smList[i].heading);
+                            if (check > Math.PI || check < -Math.PI)
+                            {
+                                if (check > 0) check -= glm.twoPI;
+                                else check += glm.twoPI;
+                            }
+                            delta += check;
                             if (Math.Abs(delta) > 0.005 || counter > 30)
                             {
                                 newCurList.Add(new vec3(smList[i]));
