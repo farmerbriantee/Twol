@@ -64,11 +64,11 @@ namespace Twol
             panel1.Visible = false;
 
             cboxPointDistance.SelectedIndexChanged -= cboxPointDistance_SelectedIndexChanged;
-            cboxPointDistance.Text = "?";
+            cboxPointDistance.SelectedIndex = Settings.User.bndToolSpacing;
             cboxPointDistance.SelectedIndexChanged += cboxPointDistance_SelectedIndexChanged;
 
             cboxSmooth.SelectedIndexChanged -= cboxSmooth_SelectedIndexChanged;
-            cboxSmooth.Text = "?";
+            cboxSmooth.SelectedIndex = Settings.User.bndToolSmooth;
             cboxSmooth.SelectedIndexChanged += cboxSmooth_SelectedIndexChanged;
             cboxIsZoom.Checked = false;
 
@@ -87,25 +87,13 @@ namespace Twol
                 Left = 0;
             }
 
-            if (mf.bnd.bndList.Count > 0)
+            //load s ections if bnd exists, load bnd if exists
+            if (mf.bnd.bndList.Count == 0)
             {
-                DialogResult result3 = MessageBox.Show(gStr.Get(gs.gsDeleteBoundaryMapping),
-                    gStr.Get(gs.gsDeleteForSure),
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question,
-                    MessageBoxDefaultButton.Button2);
-                if (result3 == DialogResult.Yes)
-                {
-                    mf.bnd.bndList.Clear();
-                    mf.FileSaveHeadland();
-                }
-                else
-                {
-                    Close();
-                }
+                Reset();
             }
 
-            Reset();
+            //Reset();
         }
 
         private void FormBndTool_FormClosing(object sender, FormClosingEventArgs e)
@@ -324,6 +312,8 @@ namespace Twol
 
         private void btnAddPoints_Click(object sender, EventArgs e)
         {
+            if (timer1.Interval == 50) return;
+
             double abHead = Math.Atan2(
                 ptB.easting - ptA.easting,
                 ptB.northing - ptA.northing);
@@ -355,13 +345,16 @@ namespace Twol
 
             btnAddPoints.Enabled = false;
         }
+        private void btnResetReduce_Click(object sender, EventArgs e)
+        {
+            Reset();
+        }
 
         private void Reset()
         {
             cboxIsZoom.Visible = false;
             btnSlice.Visible = false;
             btnCenterOGL.Visible = false;
-            //btnCancelTouch.Visible = false;
             btnZoomIn.Visible = false;
             btnZoomOut.Visible = false;
             btnMoveDn.Visible = false;
@@ -412,15 +405,7 @@ namespace Twol
             cboxSmooth.SelectedIndexChanged -= cboxSmooth_SelectedIndexChanged;
             cboxSmooth.SelectedIndex = Settings.User.bndToolSmooth;
             cboxSmooth.SelectedIndexChanged += cboxSmooth_SelectedIndexChanged;
-
-            btnMakeBoundary.Enabled = false;
         }
-
-        private void btnResetReduce_Click(object sender, EventArgs e)
-        {
-            Reset();
-        }
-
 
         private void Spacing()
         {
@@ -587,7 +572,6 @@ namespace Twol
             }
 
             btnStartStop.Enabled = false;
-            btnMakeBoundary.Enabled = false;
 
             cboxIsZoom.Visible = true;
             btnSlice.Visible = true;
@@ -602,18 +586,18 @@ namespace Twol
             btnMoveRight.Visible = false;
         }
 
-
-        private void btnStartStoPGN_Click(object sender, EventArgs e)
+        private void btnStartStop_Click(object sender, EventArgs e)
         {
             Spacing();
 
             PacMan();
-
-            btnMakeBoundary.Enabled = true;
         }
 
-        private void btnMakeBoundary_Click(object sender, EventArgs e)
+        private void btnAddBoundary_Click(object sender, EventArgs e)
         {
+            if (timer1.Interval == 50) return;
+            if (bndList.Count < 10) return;
+
             Smooth();
 
             BuildBnd();
@@ -772,8 +756,6 @@ namespace Twol
             }
 
             smooList.CalculateHeadings(true);
-
-            btnMakeBoundary.Enabled = true;
         }
 
         private void btnSlice_Click(object sender, EventArgs e)
