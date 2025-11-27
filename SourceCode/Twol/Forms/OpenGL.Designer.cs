@@ -2216,8 +2216,6 @@ namespace Twol
                     center = -140;
                 }
 
-                int wide = 75;
-
                 // Select Our Texture
                 GL.Enable(EnableCap.Texture2D);
                 GL.BindTexture(TextureTarget.Texture2D, texture[(int)FormGPS.textures.CrossTrackBkgrnd]);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace Twol
 {
@@ -36,6 +37,8 @@ namespace Twol
 
         public int currentLocationIndex;
         public double pivotDistanceErrorLast, pivotDerivative;
+        private double segK = 0, bob = 0, bobAvg = 0;
+
 
         public CGuidance(FormGPS _f)
         {
@@ -47,6 +50,7 @@ namespace Twol
         {
             bool completeUturn = !Uturn;
             var vec2point = new vec2(Settings.Vehicle.setVehicle_isStanleyUsed ? steer : pivot);
+            double segCurv = 0;
 
             if (Settings.Tool.setToolSteer.isGPSToolActive)
             {
@@ -92,34 +96,8 @@ namespace Twol
                     currentLocationIndex = A;
 
                 if (!Uturn && !mf.trk.isHeadingSameWay)
+                    //segCurv *= -1;
                     distanceFromCurrentLine *= -1;
-                double bob = 0;
-
-                //passive guidance line for passive tool steer
-                if (isPassiveSteering && distanceFromCurrentLineTool != 0 && !Settings.Tool.setToolSteer.isActiveSteering && !Uturn)
-                {
-                    bob = distanceFromCurrentLine - distanceFromCurrentLineTool;
-
-                    if (!mf.trk.isHeadingSameWay) bob *= -1.0;
-
-                    mf.lblToolOffset.Text = (bob * 100).ToString("N1");
-
-                    vec3 pointA = new vec3(curList[0]);
-                    pointA.easting += (Math.Cos(-pointA.heading) * bob);
-                    pointA.northing += (Math.Sin(-pointA.heading) * bob);
-                    mf.trk.currentPassiveTrack.Add(pointA);
-
-                    pointA = new vec3(curList[curList.Count - 1]);
-                    pointA.easting += (Math.Cos(-pointA.heading) * bob);
-                    pointA.northing += (Math.Sin(-pointA.heading) * bob);
-                    mf.trk.currentPassiveTrack.Add(pointA);
-
-                    //update the new current line
-                    distanceFromCurrentLine = FindDistanceToSegment(vec2point, mf.trk.currentPassiveTrack[0], mf.trk.currentPassiveTrack[1], out point, out time, true, false, false);
-
-                    //take the ends of the ab line.
-                    A = 0; B = curList.Count - 1;
-                }
 
                 rEastTrk = point.easting;
                 rNorthTrk = point.northing;
@@ -130,9 +108,10 @@ namespace Twol
 
                 manualUturnHeading = abHeading;
 
+                #region Stanley
+
                 if (Settings.Vehicle.setVehicle_isStanleyUsed)//Stanley
                 {
-                    #region Stanley
 
                     //distance is negative if on left, positive if on right
                     steerHeadingError = steer.heading - abHeading + (Uturn || mf.trk.isHeadingSameWay ? 0 : Math.PI);
@@ -179,11 +158,15 @@ namespace Twol
                     //}
                     //else
                     //    distanceFromCurrentLineTool = 0;
-                    #endregion Stanley
                 }
+
+                #endregion Stanley
+
+                #region PurePursuit
+
                 else// Pure Pursuit ------------------------------------------
                 {
-                    #region PurePursuit
+                    int curveCenter = B;
                     //integral slider is set to 0
                     if (mf.vehicle.purePursuitIntegralGain != 0 && !mf.isReverse)
                     {
@@ -217,7 +200,6 @@ namespace Twol
                         else inty *= 0.95;
                     }
                     else inty = 0;
-
 
                     double goalPointDistance = mf.vehicle.UpdateGoalPointDistance();
 
@@ -258,8 +240,9 @@ namespace Twol
                             }
                             else distSoFar += tempDist;
                             start = curList[i];
-
                             i += count;
+                            curveCenter = i;
+
                             if (i < 0)
                             {
                                 if (!loop)
@@ -293,6 +276,64 @@ namespace Twol
                         }
                     }
 
+                    if (isPassiveSteering && distanceFromCurrentLineTool != 0 && !Settings.Tool.setToolSteer.isActiveSteering)
+                    {
+                        bob = distanceFromCurrentLineTool;
+
+                        if (!mf.trk.isHeadingSameWay)
+                        {
+                            bob *= -1.0;
+                        }
+                    }
+
+                    else
+                    {
+                        bob = 0;
+                        bobAvg = 0;
+                    }
+
+                    vec3 p1 = curList[A];
+                    vec3 p2 = curList[B];
+
+                    double d = glm.Distance(p1, p2);
+
+                    double theta = p2.heading - p1.heading;
+                    if (theta > Math.PI)
+                        theta -= Math.PI;
+                    else if (theta < -Math.PI)
+                        theta += Math.PI;
+
+                    if (theta > glm.PIBy2)
+                        theta -= Math.PI;
+                    else if (theta < -glm.PIBy2)
+                        theta += Math.PI;
+
+                    segCurv = ((2 * Math.Sin(theta / 2)) / -d) *15;
+
+                    segK = 0.9 * segK + 0.1 * segCurv;
+
+                    if (bob < 0) bobAvg -= 0.0005;
+                    else bobAvg += 0.0005;
+                        //bobAvg += (0.01 * bob);                    
+
+                    if (bobAvg > 0.5)
+                        bobAvg = 0.5;
+                    if (bobAvg < -0.5)
+                        bobAvg = -0.5;
+
+                    double dist = (segK);
+                    if (dist > 2.0) 
+                        dist = 2.0;
+                    if (dist < -2.0) 
+                        dist = -2.0;
+
+                    goalPoint.easting += (Math.Sin(curList[B].heading + 1.57) * dist);
+                    goalPoint.northing += (Math.Cos(curList[B].heading + 1.57) * dist);
+
+                    mf.lblToolOffset.Text = (segCurv * 100).ToString("N1");
+                    mf.lblBobAvg.Text = (bobAvg * 100).ToString("N1");
+                    mf.lblDistTotal.Text = (dist * 100).ToString("N1");
+
                     //calc "D" the distance from pivot axle to lookahead point
                     double goalPointDistanceSquared = glm.DistanceSquared(goalPoint, pivot);
 
@@ -323,8 +364,8 @@ namespace Twol
 
                     if (!isPassiveSteering && isPassiveTriggered)
                     {
-                        if (Math.Abs(mf.vehicle.modeActualHeadingError) < 0.5
-                            && Math.Abs(distanceFromCurrentLine) < 0.06)
+                        if (Math.Abs(mf.vehicle.modeActualHeadingError) < 1.5
+                            && Math.Abs(distanceFromCurrentLine) < 0.25 && Math.Abs(distanceFromCurrentLineTool) < 0.25)
                             isPassiveSteering = true;
                     }
                     //angular velocity in rads/sec  = 2PI * m/sec * radians/meters
@@ -337,8 +378,8 @@ namespace Twol
                     //            (Math.Atan((mf.vehicle.wheelbase * mf.vehicle.maxAngularVelocity) / (glm.twoPI * mf.avgSpeed * 0.277777)))
                     //        : (Math.Atan((mf.vehicle.wheelbase * -mf.vehicle.maxAngularVelocity) / (glm.twoPI * mf.avgSpeed * 0.277777))));
                     //}
-                    #endregion PurePursuit
                 }
+                #endregion PurePursuit
 
                 if (!Uturn && mf.ahrs.imuRoll != 88888)
                     steerAngle += mf.ahrs.imuRoll * -Settings.Vehicle.setAS_sideHillComp;
@@ -458,6 +499,54 @@ namespace Twol
             }
 
             return currentLocationIndex;
+        }
+    }
+
+    public static class ChaikinSmoothing
+    {
+        /// <summary>
+        /// Applies Chaikin's corner-cutting algorithm to smooth a polyline.
+        /// </summary>
+        /// <param name="points">The original list of points (polyline).</param>
+        /// <param name="iterations">The number of smoothing iterations to apply.</param>
+        /// <param name="preserveEndPoints">Whether to keep the start and end points in their original positions.</param>
+        /// <returns>A new list of smoothed points.</returns>
+        public static List<vec3> Smooth(List<vec3> points, int iterations, bool preserveEndPoints = true)
+        {
+            List<vec3> currentPoints = new List<vec3>(points);
+
+            for (int iter = 0; iter < iterations; iter++)
+            {
+                List<vec3> nextPoints = new List<vec3>();
+
+                // Optionally preserve the start point for non-closed polylines
+                if (preserveEndPoints && currentPoints.Count > 0)
+                {
+                    nextPoints.Add(currentPoints[0]);
+                }
+
+                for (int i = 0; i < currentPoints.Count - 1; i++)
+                {
+                    vec3 p0 = currentPoints[i];
+                    vec3 p1 = currentPoints[i + 1];
+
+                    // Calculate Q and R points, which are 25% and 75% along the segment
+                    nextPoints.Add(new vec3(0.75f * p0.easting + 0.25f * p1.easting, 0.75f * p0.northing + 0.25f * p1.northing, 0));
+                    nextPoints.Add(new vec3(0.25f * p0.easting + 0.75f * p1.easting, 0.25f * p0.northing + 0.75f * p1.northing, 0));
+                }
+
+                // Optionally preserve the end point for non-closed polylines
+                if (preserveEndPoints && currentPoints.Count > 1)
+                {
+                    nextPoints.Add(currentPoints[currentPoints.Count - 1]);
+                }
+                // If the user wants a closed polygon, the last R point implicitly connects to the first Q point.
+                // A separate implementation is needed for perfect closed-loop handling by wrapping indices (not shown here).
+
+                currentPoints = nextPoints;
+            }
+
+            return currentPoints;
         }
     }
 }

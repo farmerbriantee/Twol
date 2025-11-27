@@ -1,8 +1,11 @@
 ﻿using OpenTK.Graphics.OpenGL;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Twol.Classes;
 
 namespace Twol
@@ -292,9 +295,7 @@ namespace Twol
                 }
                 else
                 {
-                    double step = (Settings.Tool.toolWidth - Settings.Tool.overlap) * 0.4;
-                    if (step > 2) step = 2;
-                    if (step < 0.5) step = 0.5;
+                    double step = 1;
 
                     newCurList = track.curvePts.OffsetLine(distAway, step, loops);
 
@@ -342,11 +343,49 @@ namespace Twol
 
                             newCurList.Add(arr[cnt - 2]);
                             newCurList.Add(arr[cnt - 1]);
-
                         }
                     }
 
+                    newCurList = ChaikinSmoothing.Smooth(newCurList, 3, preserveEndPoints: true);
+
+                    newCurList = GenerateEquidistantPoints(newCurList, 0.5);
+
                     newCurList.CalculateHeadings(loops);
+
+                    //if (track.mode != TrackMode.AB)
+                    {
+                        double delta = 0;
+                        int cont = newCurList.Count;
+                        vec3[] smList = new vec3[cont];
+                        cont--;
+                        newCurList.CopyTo(smList);
+                        newCurList.Clear();
+                        int counter = 0;
+                        double check = 0;
+
+                        for (int i = 0; i < cont; i++)
+                        {
+                            if (i < 5)
+                            {
+                                smooList.Add(new vec3(smList[i]));
+                                continue;
+                            }
+                            check = (smList[i - 1].heading - smList[i].heading);
+                            if (check > Math.PI || check < -Math.PI)
+                            {
+                                if (check > 0) check -= glm.twoPI;
+                                else check += glm.twoPI;
+                            }
+                            delta += check;
+                            if (Math.Abs(delta) > 0.005 || counter > 30)
+                            {
+                                newCurList.Add(new vec3(smList[i]));
+                                delta = 0;
+                                counter = 0;
+                            }
+                            counter++;
+                        }
+                    }
 
                     if (!loops)
                     {
@@ -500,6 +539,16 @@ namespace Twol
                 }
 
                 currentGuidanceTrack.DrawPolygon(currTrk.mode <= TrackMode.Curve ? PrimitiveType.LineStrip : PrimitiveType.LineLoop);
+
+                GL.PointSize(4);
+                GL.Color3(0.95f, 0.992f, 0.95f);
+                GL.Begin(PrimitiveType.Points);
+
+                for (int i = 0; i < currentGuidanceTrack.Count; i++)
+                {
+                    GL.Vertex3(currentGuidanceTrack[i].easting, currentGuidanceTrack[i].northing, 0);
+                }
+                GL.End();
 
                 mf.yt.DrawYouTurn();
 
@@ -863,6 +912,123 @@ namespace Twol
             miny = Math.Min(pt1.easting, pt2.easting);
             maxy = Math.Max(pt1.easting, pt2.easting);
             return _ = r.northing >= minx && r.northing <= maxx && (r.easting >= miny && r.easting <= maxy);
+        }
+
+        /* PSEUDOCODE (detailed plan)
+- Function: GenerateEquidistantPoints(List<vec3> pts, double spacing)
+- Validate input: if pts null or less than 2, return a shallow copy.
+- If spacing <= 0, return a shallow copy.
+- Determine if the polyline is a closed loop by checking distance between first and last.
+- Build an array of segment lengths and cumulative distances.
+  - For loop: include final segment from last -> first.
+  - For open polyline: include segments from 0..n-2.
+- Compute total path length.
+- If total length is <= spacing: return copy (but ensure we include endpoints).
+- Initialize result list and add the first point (copy).
+- For each target distance t = spacing; t < totalLength; t += spacing:
+  - Find the segment that contains t by walking cumulative distances.
+  - Compute local fraction along that segment.
+  - Interpolate easting/northing to create new vec3 (heading left 0, will be recalculated later).
+  - Add interpolated point to result.
+- For open polyline, ensure last original point is present (avoid tiny-duplicate by epsilon).
+- Return result.
+- Notes: Use glm.Distance for distance computation and simple linear interpolation for positions.
+*/
+
+        private List<vec3> GenerateEquidistantPoints(List<vec3> pts, double spacing)
+        {
+            var result = new List<vec3>();
+            const double eps = 1e-9;
+
+            if (pts == null || pts.Count == 0) return result;
+            if (spacing <= 0) return new List<vec3>(pts);
+            if (pts.Count == 1) return new List<vec3>(pts);
+
+            int n = pts.Count;
+            // detect closed loop (first and last essentially identical)
+            bool isLoop = glm.Distance(pts[0], pts[n - 1]) < 1e-6;
+
+            // build segment lengths and cumulative distances
+            List<double> segLen = new List<double>();
+            List<double> cum = new List<double> { 0.0 };
+
+            double total = 0.0;
+            for (int i = 0; i < n - 1; i++)
+            {
+                double d = glm.Distance(pts[i], pts[i + 1]);
+                segLen.Add(d);
+                total += d;
+                cum.Add(total);
+            }
+
+            if (isLoop)
+            {
+                double d = glm.Distance(pts[n - 1], pts[0]);
+                segLen.Add(d);
+                total += d;
+                cum.Add(total);
+            }
+
+            // nothing to sample if tiny total length
+            if (total < eps)
+            {
+                return new List<vec3>(pts);
+            }
+
+            // Add the first point
+            result.Add(new vec3(pts[0]));
+
+            // sample points at multiples of spacing
+            double tDist = spacing;
+            while (tDist < total - eps)
+            {
+                // find segment index where cum[idx] < tDist <= cum[idx+1]
+                int segIndex = -1;
+                int segCount = segLen.Count;
+                for (int i = 0; i < segCount; i++)
+                {
+                    if (tDist <= cum[i + 1] + eps)
+                    {
+                        segIndex = i;
+                        break;
+                    }
+                }
+                if (segIndex == -1)
+                {
+                    // fallback: place at end
+                    if (!isLoop)
+                    {
+                        result.Add(new vec3(pts[n - 1]));
+                    }
+                    break;
+                }
+
+                double segStartDist = cum[segIndex];
+                double local = tDist - segStartDist;
+                double thisSegLen = segLen[segIndex];
+                double frac = thisSegLen < eps ? 0.0 : (local / thisSegLen);
+
+                // determine segment endpoints (wrap for loop)
+                vec3 a = pts[segIndex];
+                vec3 b = (segIndex + 1 < n) ? pts[segIndex + 1] : pts[0];
+
+                double x = a.easting + (b.easting - a.easting) * frac;
+                double y = a.northing + (b.northing - a.northing) * frac;
+
+                result.Add(new vec3(x, y, 0));
+
+                tDist += spacing;
+            }
+
+            // For open polyline ensure last point present
+            if (!isLoop)
+            {
+                vec3 last = pts[n - 1];
+                if (result.Count == 0 || glm.Distance(result[result.Count - 1], last) > 1e-6)
+                    result.Add(new vec3(last));
+            }
+
+            return result;
         }
     }
 
