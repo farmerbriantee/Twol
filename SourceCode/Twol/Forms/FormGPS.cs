@@ -451,7 +451,7 @@ namespace Twol
 
             Log.EventWriter("Terms Accepted");
 
-            if (RegistrySettings.vehicleFileName == "")
+            if (RegistrySettings.vehicleFileName == "Default" || RegistrySettings.toolFileName == "Default")
             {
                 Log.EventWriter("Using Default Vehicle At Start Warning");
 
@@ -462,6 +462,28 @@ namespace Twol
                 {
                     form.ShowDialog(this);
                 }
+            }
+
+            if (RegistrySettings.IOFileName == "Default")
+            {
+                Log.EventWriter("Using Default IO At Start Warning");
+
+                YesMessageBox("Using Default IO Profile" + "\r\n\r\n" + "Load Existing Profile or Save As a New One !!!"
+                    + "\r\n\r\n" + "Changes will NOT be Saved for Default Profile");
+
+                using (var form = new FormProfiles(this))
+                {
+                    form.ShowDialog(this);
+                    if (form.DialogResult == DialogResult.Yes)
+                    {
+                        Log.EventWriter("Program Reset: Saving or Selecting Profile");
+
+                        Settings.IO.Save();
+                        ExitShutdown();
+                    }
+                }
+
+                lbl_IO_Profile.Text = RegistrySettings.IOFileName;
             }
 
             RescanPorts();

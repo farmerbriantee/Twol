@@ -14,8 +14,7 @@ namespace Twol
         private readonly FormGPS mf = null;
 
         private bool isClosing;
-        private Track bingLine = new Track(new TrackStyle(new Pen(Color.White, 4)));
-        private bool isColorMap = true;
+        private readonly Track bingLine = new Track(new TrackStyle(new Pen(Color.White, 4)));
 
         public FormMap(Form callingForm)
         {

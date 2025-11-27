@@ -28,7 +28,6 @@ namespace Twol
         public List<vec3> secList = new List<vec3>();
         public List<vec3> bndList = new List<vec3>();
         public List<vec3> smooList = new List<vec3>();
-        public List<vec3> tempList = new List<vec3>();
 
         private double minDistSq = 1, minDistDisp = 1;
 
@@ -377,7 +376,6 @@ namespace Twol
             secList?.Clear();
             bndList?.Clear();
             smooList?.Clear();
-            tempList?.Clear();
 
             mf.bnd.bndList.Clear();
             mf.FileSaveHeadland();
