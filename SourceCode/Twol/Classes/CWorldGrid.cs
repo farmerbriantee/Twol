@@ -62,32 +62,81 @@ namespace Twol
         public void DrawFieldSurface()
         {
             Color field = Settings.User.setDisplay_isDayMode ? Settings.User.colorFieldDay : Settings.User.colorFieldNight;
-
+            int bit = 256;
             //adjust bitmap zoom based on cam zoom
-            if (Settings.User.setDisplay_camZoom > 100) Count = 4;
-            else if (Settings.User.setDisplay_camZoom > 80) Count = 8;
-            else if (Settings.User.setDisplay_camZoom > 50) Count = 16;
-            else if (Settings.User.setDisplay_camZoom > 20) Count = 32;
-            else if (Settings.User.setDisplay_camZoom > 10) Count = 64;
-            else Count = 80;
+            if (Settings.User.setDisplay_camZoom > 128)
+            {
+                Count = 4;
+                bit = 512;
+            }
+            else if (Settings.User.setDisplay_camZoom > 64)
+            {
+                Count = 8;
+                bit = 256;
+            }
+            else if (Settings.User.setDisplay_camZoom > 32)
+            {
+                Count = 16;
+                bit = 128;
+            }
+            else if (Settings.User.setDisplay_camZoom > 16)
+            {
+                Count = 32;
+                bit = 64;
+            }
+            else if (Settings.User.setDisplay_camZoom > 8)
+            {
+                Count = 64;
+                bit = 32;
+            }
+            else
+            {
+                Count = 80;
+                bit = 16;
+            }
 
             GL.Color3(field.R, field.G, field.B);
             if (Settings.User.setDisplay_isTextureOn)
             {
                 GL.Enable(EnableCap.Texture2D);
-                GL.BindTexture(TextureTarget.Texture2D, mf.texture[(int)FormGPS.textures.Floor]);
+                GL.BindTexture(TextureTarget.Texture2D, mf.texture[(int)FormGPS.textures.QuestionMark]);
             }
 
-            GL.Begin(PrimitiveType.TriangleStrip);
-            GL.TexCoord2(0, 0);
-            GL.Vertex3(eastingMin, northingMax, -0.10);
-            GL.TexCoord2(Count, 0.0);
-            GL.Vertex3(eastingMax, northingMax, -0.10);
-            GL.TexCoord2(0.0, Count);
-            GL.Vertex3(eastingMin, northingMin, -0.10);
-            GL.TexCoord2(Count, Count);
-            GL.Vertex3(eastingMax, northingMin, -0.10);
-            GL.End();
+            //GL.Vertex3(eastingMin, northingMax, -0.10);
+            //GL.TexCoord2(Count, 0.0);
+            //GL.Vertex3(eastingMax, northingMax, -0.10);
+            //GL.TexCoord2(0.0, Count);
+            //GL.Vertex3(eastingMin, northingMin, -0.10);
+            //GL.TexCoord2(Count, Count);
+            //GL.Vertex3(eastingMax, northingMin, -0.10);
+
+            for (int i = -2; i < 2; i++)
+            {
+                for (int j = 2; j > -2; j--)
+                {
+                    int ii = i * 2* bit + bit;
+                    int jj = j * 2* bit - bit;
+
+                    GL.Begin(PrimitiveType.TriangleStrip);
+                        GL.TexCoord2(0, 0);
+                        GL.Vertex3(ii - bit, jj + bit, -0.10);
+                        GL.TexCoord2(1, 0.0);
+                        GL.Vertex3(ii + bit, jj + bit, -0.10);
+                        GL.TexCoord2(0.0, 1);
+                        GL.Vertex3(ii - bit, jj - bit, -0.10);
+                        GL.TexCoord2(1, 1);
+                        GL.Vertex3(ii + bit, jj - bit, -0.10);
+                    GL.End();
+                }
+            }
+                
+            //GL.Vertex3(eastingMin, northingMax, -0.10);
+            //GL.TexCoord2(Count, 0.0);
+            //GL.Vertex3(eastingMax, northingMax, -0.10);
+            //GL.TexCoord2(0.0, Count);
+            //GL.Vertex3(eastingMin, northingMin, -0.10);
+            //GL.TexCoord2(Count, Count);
+            //GL.Vertex3(eastingMax, northingMin, -0.10);
 
             GL.Disable(EnableCap.Texture2D);
         }
