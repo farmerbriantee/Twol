@@ -13,7 +13,7 @@ namespace Twol
         //Y
         public double northingMax = GridSize;
 
-        public double northingMin  = -GridSize;
+        public double northingMin = -GridSize;
 
         //X
         public double eastingMax = GridSize;
@@ -67,32 +67,32 @@ namespace Twol
             if (Settings.User.setDisplay_camZoom > 128)
             {
                 Count = 4;
-                bit = 512;
+                bit = 1024;
             }
             else if (Settings.User.setDisplay_camZoom > 64)
             {
                 Count = 8;
-                bit = 256;
+                bit = 512;
             }
             else if (Settings.User.setDisplay_camZoom > 32)
             {
                 Count = 16;
-                bit = 128;
+                bit = 256;
             }
             else if (Settings.User.setDisplay_camZoom > 16)
             {
                 Count = 32;
-                bit = 64;
+                bit = 128;
             }
             else if (Settings.User.setDisplay_camZoom > 8)
             {
                 Count = 64;
-                bit = 32;
+                bit = 64;
             }
             else
             {
                 Count = 80;
-                bit = 16;
+                bit = 32;
             }
 
             GL.Color3(field.R, field.G, field.B);
@@ -110,26 +110,26 @@ namespace Twol
             //GL.TexCoord2(Count, Count);
             //GL.Vertex3(eastingMax, northingMin, -0.10);
 
-            for (int i = -2; i < 2; i++)
+            for (int i = -4; i < 4; i++)
             {
-                for (int j = 2; j > -2; j--)
+                for (int j = 4; j > -4; j--)
                 {
-                    int ii = i * 2* bit + bit;
-                    int jj = j * 2* bit - bit;
+                    int ii = i * 2 * bit + bit;
+                    int jj = j * 2 * bit - bit;
 
                     GL.Begin(PrimitiveType.TriangleStrip);
-                        GL.TexCoord2(0, 0);
-                        GL.Vertex3(ii - bit, jj + bit, -0.10);
-                        GL.TexCoord2(1, 0.0);
-                        GL.Vertex3(ii + bit, jj + bit, -0.10);
-                        GL.TexCoord2(0.0, 1);
-                        GL.Vertex3(ii - bit, jj - bit, -0.10);
-                        GL.TexCoord2(1, 1);
-                        GL.Vertex3(ii + bit, jj - bit, -0.10);
+                    GL.TexCoord2(0, 0);
+                    GL.Vertex3(ii - bit, jj + bit, -0.10);
+                    GL.TexCoord2(1, 0.0);
+                    GL.Vertex3(ii + bit, jj + bit, -0.10);
+                    GL.TexCoord2(0.0, 1);
+                    GL.Vertex3(ii - bit, jj - bit, -0.10);
+                    GL.TexCoord2(1, 1);
+                    GL.Vertex3(ii + bit, jj - bit, -0.10);
                     GL.End();
                 }
             }
-                
+
             //GL.Vertex3(eastingMin, northingMax, -0.10);
             //GL.TexCoord2(Count, 0.0);
             //GL.Vertex3(eastingMax, northingMax, -0.10);
