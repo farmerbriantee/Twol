@@ -64,7 +64,7 @@ namespace Twol
         /// <summary>
         /// Backing field for <see cref="CacheFolder"/> property.
         /// </summary>
-        public string CacheFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "TWOL", "AMap");
+        public string CacheFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "TWOL", "GoogleMapsSatelliteTileServer");
 
         /// <summary>
         /// Gets or sets minimal zoom level.
@@ -150,41 +150,39 @@ namespace Twol
         /// <param name="z">Zoom level.</param>
         /// <param name="fromCacheOnly">Flag indicating the tile can be fetched from cache only (server request is not allowed).</param>
         /// <returns><see cref="Tile"/> instance.</returns>
-        private Tile GetTile(Layer layer, int x, int y, int z, bool fromCacheOnly = true)
+        
+        private Tile GetTile(int x, int y, int z, bool fromCacheOnly = true)
         {
             try
             {
                 Tile tile;
 
                 // try to get tile from memory cache
-                tile = _Cache.FirstOrDefault(t => t.TileServer == layer.TileServer.GetType().Name && t.Z == z && t.X == x && t.Y == y);
+                tile = _Cache.FirstOrDefault(t => t.Z == z && t.X == x && t.Y == y);
                 if (tile != null)
                 {
                     return tile;
                 }
 
                 // try to get tile from file system
-                if (layer.TileServer is IFileCacheTileServer fcTileServer)
-                {
-                    string localPath = Path.Combine(CacheFolder, layer.TileServer.GetType().Name, $"{z}", $"{x}", $"{y}.tile");
+                    string localPath = Path.Combine(CacheFolder, $"{z}", $"{x}", $"{y}.tile");
                     if (File.Exists(localPath))
                     {
                         var fileInfo = new FileInfo(localPath);
-                        if (fileInfo.Length > 0 && fileInfo.LastWriteTime + fcTileServer.TileExpirationPeriod >= DateTime.Now)
+                        if (fileInfo.Length > 0)
                         {
                             Image image = Image.FromFile(localPath);
-                            tile = new Tile(image, x, y, z, layer.TileServer.GetType().Name);
+                            tile = new Tile(image, x, y, z);
                             _Cache.Add(tile);
                             return tile;
                         }
                     }
-                }
 
                 // request tile from the server 
-                if (!fromCacheOnly)
-                {
-                    //RequestTile(layer, x, y, z);
-                }
+                //if (!fromCacheOnly)
+                //{
+                //    //RequestTile(layer, x, y, z);
+                //}
 
                 return null;
             }
@@ -210,9 +208,6 @@ namespace Twol
         //        _WorkerWaitHandle.Set();
         //    }
         //}
-
-
-
 
 
         public CMap(FormGPS _f)
@@ -303,12 +298,11 @@ namespace Twol
         /// <param name="y">Y-index of the tile.</param>
         /// <param name="z">Zoom level.</param>
         /// <param name="tileServer">Tile server name.</param>
-        public Tile(int x, int y, int z, string tileServer)
+        public Tile(int x, int y, int z)
         {
             X = x;
             Y = y;
             Z = z;
-            TileServer = tileServer;
         }
 
         /// <summary>
@@ -319,13 +313,12 @@ namespace Twol
         /// <param name="y">Y-index of the tile.</param>
         /// <param name="z">Zoom level.</param>
         /// <param name="tileServer">Tile server name.</param>
-        public Tile(Image image, int x, int y, int z, string tileServer)
+        public Tile(Image image, int x, int y, int z)
         {
             Image = image;
             X = x;
             Y = y;
             Z = z;
-            TileServer = tileServer;
         }
     }
 
