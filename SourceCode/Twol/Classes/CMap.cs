@@ -1,0 +1,333 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Twol
+{
+    public class CMap
+    {
+        //copy of the mainform address
+        private readonly FormGPS mf;
+
+        /// <summary>
+        /// Tile size, in pixels.
+        /// </summary>
+        private const int TILE_SIZE = 256;
+
+        /// <summary>
+        /// Cache used to store tile images in memory.
+        /// </summary>
+        private ConcurrentBag<Tile> _Cache = new ConcurrentBag<Tile>();
+
+        /// <summary>
+        /// Gets size of map in tiles.
+        /// </summary>
+        private int FullMapSizeInTiles => 1 << ZoomLevel;
+
+        /// <summary>
+        /// Gets maps size in pixels.
+        /// </summary>
+        private int FullMapSizeInPixels => FullMapSizeInTiles * TILE_SIZE;
+
+        /// <summary>
+        /// Backing field for <see cref="ZoomLevel"/> property.
+        /// </summary>
+        public int _ZoomLevel = 0;
+
+        /// <summary>
+        /// Map zoom level.
+        /// </summary>
+        [Description("Map zoom level"), Category("Behavior")]
+        public int ZoomLevel
+        {
+            get => _ZoomLevel;
+            set
+            {
+                if (value < 0 || value > 19)
+                    throw new ArgumentException($"{value} is an incorrect value for {nameof(ZoomLevel)} property. Value should be in range from 0 to 19.");
+
+                //SetZoomLevel(value, new Point(Width / 2, Height / 2));
+                //CenterChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+
+        /// <summary>
+        /// Backing field for <see cref="CacheFolder"/> property.
+        /// </summary>
+        public string CacheFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "TWOL", "AMap");
+
+        /// <summary>
+        /// Gets or sets minimal zoom level.
+        /// </summary>
+        public int MinZoomLevel = 12;
+
+        /// <summary>
+        /// Backing field for <see cref="MaxZoomLevel"/> property.
+        /// </summary>
+        public int MaxZoomLevel = 19;
+
+        /// <summary>
+        /// Draws a tile on the map.
+        /// </summary>
+        /// <param name="gr">Graphics instance to draw on.</param>
+        /// <param name="x">X-index of the tile.</param>
+        /// <param name="y">Y-index of the tile.</param>
+        /// <param name="image">Tile image.</param>
+        private void DrawTile(Graphics gr, Layer layer, int x, int y, Image image)
+        {
+            //Point p = new Point();
+            //p.X = layer.Offset.X + x * TILE_SIZE;
+            //p.Y = layer.Offset.Y + y * TILE_SIZE;
+
+            //gr.DrawImage(image, new Rectangle(p, new Drawing.Size(TILE_SIZE, TILE_SIZE)), 0, 0, TILE_SIZE, TILE_SIZE, GraphicsUnit.Pixel, GetImageAttributes(layer.Opacity));
+        }
+
+        /// <summary>
+        /// Does the draw action.
+        /// The method is needed for repeating drawing because map is infinite in longitude.
+        /// </summary>
+        /// <param name="gr">Graphics instance to draw on.</param>
+        /// <param name="draw">Draw action to perform several times for all visible width of the map.</param>
+        //private void Draw(Graphics gr, Action draw)
+        //{
+        //    int count = (int)Math.Ceiling((double)Width / FullMapSizeInPixels) + 1;
+        //    for (int i = -count; i < count; i++)
+        //    {
+        //        var state = gr.Save();
+        //        gr.TranslateTransform(i * FullMapSizeInPixels, 0);
+        //        draw();
+        //        gr.Restore(state);
+        //    }
+        //}
+
+        /// <summary>
+        /// Sets zoom level with specifying central point to zoom in/out.
+        /// </summary>
+        /// <param name="z">Zoom level to be set.</param>
+        /// <param name="p">Central point to zoom in/out.</param>
+        /// 
+        private void SetZoomLevel(int z, Point p)
+        {
+            //int max = Layers.Any() ? Math.Min(MaxZoomLevel, Layers.Min(lay => lay.TileServer.MaxZoomLevel)) : MaxZoomLevel;
+            //int min = Layers.Any() ? Math.Max(MinZoomLevel, Layers.Max(lay => lay.TileServer.MinZoomLevel)) : MinZoomLevel;
+
+            //if (z < min) z = min;
+            //if (z > max) z = max;
+
+            //if (z != _ZoomLevel)
+            //{
+            //    double factor = Math.Pow(2, z - _ZoomLevel);
+            //    _ZoomLevel = z;
+
+            //    foreach (var layer in Layers)
+            //    {
+            //        layer.Offset.X = (int)((layer.Offset.X - p.X) * factor) + p.X;
+            //        layer.Offset.Y = (int)((layer.Offset.Y - p.Y) * factor) + p.Y;
+            //        layer.Offset.X = (int)(layer.Offset.X % FullMapSizeInPixels);
+            //    }
+
+            //    UpdateOffsets();
+
+            //    //ZoomLevelChaged?.Invoke(this, EventArgs.Empty);
+            //}
+        }
+
+        /// <summary>
+        /// Gets tile image by X and Y indices and zoom level.
+        /// </summary>
+        /// <param name="x">X-index of the tile.</param>
+        /// <param name="y">Y-index of the tile.</param>
+        /// <param name="z">Zoom level.</param>
+        /// <param name="fromCacheOnly">Flag indicating the tile can be fetched from cache only (server request is not allowed).</param>
+        /// <returns><see cref="Tile"/> instance.</returns>
+        private Tile GetTile(Layer layer, int x, int y, int z, bool fromCacheOnly = true)
+        {
+            try
+            {
+                Tile tile;
+
+                // try to get tile from memory cache
+                tile = _Cache.FirstOrDefault(t => t.TileServer == layer.TileServer.GetType().Name && t.Z == z && t.X == x && t.Y == y);
+                if (tile != null)
+                {
+                    return tile;
+                }
+
+                // try to get tile from file system
+                if (layer.TileServer is IFileCacheTileServer fcTileServer)
+                {
+                    string localPath = Path.Combine(CacheFolder, layer.TileServer.GetType().Name, $"{z}", $"{x}", $"{y}.tile");
+                    if (File.Exists(localPath))
+                    {
+                        var fileInfo = new FileInfo(localPath);
+                        if (fileInfo.Length > 0 && fileInfo.LastWriteTime + fcTileServer.TileExpirationPeriod >= DateTime.Now)
+                        {
+                            Image image = Image.FromFile(localPath);
+                            tile = new Tile(image, x, y, z, layer.TileServer.GetType().Name);
+                            _Cache.Add(tile);
+                            return tile;
+                        }
+                    }
+                }
+
+                // request tile from the server 
+                if (!fromCacheOnly)
+                {
+                    //RequestTile(layer, x, y, z);
+                }
+
+                return null;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Does a tile request to the tile server
+        /// </summary>
+        /// <param name="x">X-index of the tile to be requested.</param>
+        /// <param name="y">Y-index of the tile to be requested.</param>
+        /// <param name="z">Zoom level</param>
+        //private void RequestTile(Layer layer, int x, int y, int z)
+        //{
+        //    // Check the tile is already requested
+        //    string tileServer = layer.TileServer.GetType().Name;
+        //    if (!_RequestPool.Any(t => t.TileServer == tileServer && t.Z == z && t.X == x && t.Y == y))
+        //    {
+        //        _RequestPool.Add(new Tile(x, y, z, tileServer));
+        //        _WorkerWaitHandle.Set();
+        //    }
+        //}
+
+
+
+
+
+        public CMap(FormGPS _f)
+        {
+            mf = _f;
+        }
+    }
+
+    public class Layer
+    {
+        public ITileServer TileServer { get; set; }
+
+        public uint ZIndex { get; set; }
+
+        internal Point Offset = new Point();
+
+        public float Opacity { get; set; } = 1;
+    }
+
+
+    public struct GeoPnt
+    {
+        public static GeoPnt Empty = new GeoPnt();
+
+        /// <summary>
+        /// Longitude of the point, in degrees, from 0 to ±180, positive East, negative West. 0 is a point on prime meridian.
+        /// </summary>
+        public float Longitude { get; set; }
+
+        /// <summary>
+        /// Latitude of the point, in degrees, from +90 (North pole) to -90 (South Pole). 0 is a point on equator.
+        /// </summary>
+        public float Latitude { get; set; }
+
+        /// <summary>
+        /// Creates new instance of <see cref="GeoPnt"/> and initializes it with longitude and latitude values.
+        /// </summary>
+        /// <param name="longitude">Longitude of the point, in degrees, from 0 to ±180, positive East, negative West. 0 is a point on prime meridian.</param>
+        /// <param name="latitude">Latitude of the point, in degrees, from +90 (North pole) to -90 (South Pole). 0 is a point on equator.</param>
+        public GeoPnt(float longitude, float latitude)
+        {
+            Longitude = longitude;
+            Latitude = latitude;
+        }
+    }
+
+    internal class Tile
+    {
+        /// <summary>
+        /// X-index of the tile image
+        /// </summary>
+        public int X { get; }
+
+        /// <summary>
+        /// Y-index of the tile image
+        /// </summary>
+        public int Y { get; }
+
+        /// <summary>
+        /// Zoom level of the tile image
+        /// </summary>
+        public int Z { get; }
+
+        /// <summary>
+        /// Tile server name
+        /// </summary>
+        public string TileServer { get; }
+
+        /// <summary>
+        /// Tile image
+        /// </summary>
+        public Image Image { get; set; }
+
+        /// <summary>
+        /// Error message that should be displayed if tile does not exist by some reason (incorrect X/Y indices, zoom level, server unavailable etc.).
+        /// </summary>
+        public string ErrorMessage { get; set; }
+
+        /// <summary>
+        /// Flag indicating image recently used (requested to be drawn on the map).
+        /// </summary>
+        public bool Used { get; set; }
+
+        /// <summary>
+        /// Creates new tile with X/Y indices, zoom level, and tileServer name.
+        /// </summary>
+        /// <param name="x">X-index of the tile.</param>
+        /// <param name="y">Y-index of the tile.</param>
+        /// <param name="z">Zoom level.</param>
+        /// <param name="tileServer">Tile server name.</param>
+        public Tile(int x, int y, int z, string tileServer)
+        {
+            X = x;
+            Y = y;
+            Z = z;
+            TileServer = tileServer;
+        }
+
+        /// <summary>
+        /// Creates new tile with image, X/Y indices, zoom level, and tileServer name.
+        /// </summary>
+        /// <param name="image">Tile image</param>
+        /// <param name="x">X-index of the tile.</param>
+        /// <param name="y">Y-index of the tile.</param>
+        /// <param name="z">Zoom level.</param>
+        /// <param name="tileServer">Tile server name.</param>
+        public Tile(Image image, int x, int y, int z, string tileServer)
+        {
+            Image = image;
+            X = x;
+            Y = y;
+            Z = z;
+            TileServer = tileServer;
+        }
+    }
+
+
+}
