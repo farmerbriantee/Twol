@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Twol
@@ -42,7 +36,7 @@ namespace Twol
         /// <summary>
         /// Backing field for <see cref="ZoomLevel"/> property.
         /// </summary>
-        public int _ZoomLevel = 0;
+        public int _ZoomLevel = 19;
 
         /// <summary>
         /// Map zoom level.
@@ -150,7 +144,7 @@ namespace Twol
         /// <param name="z">Zoom level.</param>
         /// <param name="fromCacheOnly">Flag indicating the tile can be fetched from cache only (server request is not allowed).</param>
         /// <returns><see cref="Tile"/> instance.</returns>
-        
+
         private Tile GetTile(int x, int y, int z, bool fromCacheOnly = true)
         {
             try
@@ -165,18 +159,18 @@ namespace Twol
                 }
 
                 // try to get tile from file system
-                    string localPath = Path.Combine(CacheFolder, $"{z}", $"{x}", $"{y}.tile");
-                    if (File.Exists(localPath))
+                string localPath = Path.Combine(CacheFolder, $"{z}", $"{x}", $"{y}.tile");
+                if (File.Exists(localPath))
+                {
+                    var fileInfo = new FileInfo(localPath);
+                    if (fileInfo.Length > 0)
                     {
-                        var fileInfo = new FileInfo(localPath);
-                        if (fileInfo.Length > 0)
-                        {
-                            Image image = Image.FromFile(localPath);
-                            tile = new Tile(image, x, y, z);
-                            _Cache.Add(tile);
-                            return tile;
-                        }
+                        Image image = Image.FromFile(localPath);
+                        tile = new Tile(image, x, y, z);
+                        _Cache.Add(tile);
+                        return tile;
                     }
+                }
 
                 // request tile from the server 
                 //if (!fromCacheOnly)
@@ -209,6 +203,34 @@ namespace Twol
         //    }
         //}
 
+        public GeoPnt TileToWorldPos(double x, double y, int z)
+        {
+            GeoPnt g = new GeoPnt();
+            double z1 = 1 << z;
+            double n = Math.PI - (2 * Math.PI * y / z1);
+            g.Longitude = (float)((x / z1 * 360.0) - 180.0);
+            g.Latitude = (float)(180.0 / Math.PI * Math.Atan(Math.Sinh(n)));
+            return g;
+        }
+
+        /// <inheritdoc />
+        public PointF WorldToTilePos(GeoPnt g, int z)
+        {
+            var p = new PointF();
+            double z1 = 1 << z;
+            p.X = (float)((g.Longitude + 180.0) / 360.0 * z1);
+            p.Y = (float)((1.0 - Math.Log(Math.Tan(g.Latitude * Math.PI / 180.0) + 1.0 / Math.Cos(g.Latitude * Math.PI / 180.0)) / Math.PI) / 2.0 * z1);
+            return p;
+        }
+
+        public PointF ToTilePos(double Longitude, double Latitude, int z)
+        {
+            var p = new PointF();
+            double z1 = 1 << z;
+            p.X = (float)((Longitude + 180.0) / 360.0 * z1);
+            p.Y = (float)((1.0 - Math.Log(Math.Tan(Latitude * Math.PI / 180.0) + 1.0 / Math.Cos(Latitude * Math.PI / 180.0)) / Math.PI) / 2.0 * z1);
+            return p;
+        }
 
         public CMap(FormGPS _f)
         {
@@ -320,7 +342,8 @@ namespace Twol
             Y = y;
             Z = z;
         }
+
+
+
     }
-
-
 }

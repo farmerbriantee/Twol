@@ -148,6 +148,7 @@ namespace Twol
                 lastReverseFix = pn.fix;
             }
 
+
             #region Heading
             switch (Settings.Vehicle.setGPS_headingFromWhichSource)
             {

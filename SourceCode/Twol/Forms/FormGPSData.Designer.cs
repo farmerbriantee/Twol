@@ -58,6 +58,12 @@
             this.lblFuzeHeading = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.lblAngularVelocity = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lblX = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.lblY = new System.Windows.Forms.Label();
+            this.lblZ = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // timer1
@@ -312,7 +318,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(6, 239);
+            this.label5.Location = new System.Drawing.Point(159, 86);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(52, 18);
             this.label5.TabIndex = 519;
@@ -323,7 +329,7 @@
             this.lblFix2FixHeading.AutoSize = true;
             this.lblFix2FixHeading.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFix2FixHeading.ForeColor = System.Drawing.Color.White;
-            this.lblFix2FixHeading.Location = new System.Drawing.Point(57, 239);
+            this.lblFix2FixHeading.Location = new System.Drawing.Point(210, 86);
             this.lblFix2FixHeading.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblFix2FixHeading.Name = "lblFix2FixHeading";
             this.lblFix2FixHeading.Size = new System.Drawing.Size(53, 18);
@@ -336,7 +342,7 @@
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.ForeColor = System.Drawing.Color.White;
-            this.label13.Location = new System.Drawing.Point(22, 260);
+            this.label13.Location = new System.Drawing.Point(175, 107);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(36, 18);
             this.label13.TabIndex = 517;
@@ -347,7 +353,7 @@
             this.lblIMUHeading.AutoSize = true;
             this.lblIMUHeading.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblIMUHeading.ForeColor = System.Drawing.Color.White;
-            this.lblIMUHeading.Location = new System.Drawing.Point(57, 260);
+            this.lblIMUHeading.Location = new System.Drawing.Point(210, 107);
             this.lblIMUHeading.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblIMUHeading.Name = "lblIMUHeading";
             this.lblIMUHeading.Size = new System.Drawing.Size(53, 18);
@@ -360,7 +366,7 @@
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.ForeColor = System.Drawing.Color.White;
-            this.label15.Location = new System.Drawing.Point(-2, 281);
+            this.label15.Location = new System.Drawing.Point(151, 128);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(60, 18);
             this.label15.TabIndex = 521;
@@ -371,7 +377,7 @@
             this.lblFuzeHeading.AutoSize = true;
             this.lblFuzeHeading.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFuzeHeading.ForeColor = System.Drawing.Color.White;
-            this.lblFuzeHeading.Location = new System.Drawing.Point(57, 281);
+            this.lblFuzeHeading.Location = new System.Drawing.Point(210, 128);
             this.lblFuzeHeading.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblFuzeHeading.Name = "lblFuzeHeading";
             this.lblFuzeHeading.Size = new System.Drawing.Size(53, 18);
@@ -384,7 +390,7 @@
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.Color.White;
-            this.label12.Location = new System.Drawing.Point(32, 307);
+            this.label12.Location = new System.Drawing.Point(185, 154);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(26, 18);
             this.label12.TabIndex = 523;
@@ -395,7 +401,7 @@
             this.lblAngularVelocity.AutoSize = true;
             this.lblAngularVelocity.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAngularVelocity.ForeColor = System.Drawing.Color.White;
-            this.lblAngularVelocity.Location = new System.Drawing.Point(57, 307);
+            this.lblAngularVelocity.Location = new System.Drawing.Point(210, 154);
             this.lblAngularVelocity.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblAngularVelocity.Name = "lblAngularVelocity";
             this.lblAngularVelocity.Size = new System.Drawing.Size(43, 18);
@@ -403,12 +409,90 @@
             this.lblAngularVelocity.Text = "3.56";
             this.lblAngularVelocity.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(12, 250);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(17, 18);
+            this.label1.TabIndex = 525;
+            this.label1.Text = "X";
+            // 
+            // lblX
+            // 
+            this.lblX.AutoSize = true;
+            this.lblX.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblX.ForeColor = System.Drawing.Color.White;
+            this.lblX.Location = new System.Drawing.Point(37, 250);
+            this.lblX.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.lblX.Name = "lblX";
+            this.lblX.Size = new System.Drawing.Size(43, 18);
+            this.lblX.TabIndex = 524;
+            this.lblX.Text = "3.56";
+            this.lblX.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.White;
+            this.label7.Location = new System.Drawing.Point(12, 273);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(18, 18);
+            this.label7.TabIndex = 527;
+            this.label7.Text = "Y";
+            // 
+            // lblY
+            // 
+            this.lblY.AutoSize = true;
+            this.lblY.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblY.ForeColor = System.Drawing.Color.White;
+            this.lblY.Location = new System.Drawing.Point(37, 273);
+            this.lblY.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.lblY.Name = "lblY";
+            this.lblY.Size = new System.Drawing.Size(43, 18);
+            this.lblY.TabIndex = 526;
+            this.lblY.Text = "3.56";
+            this.lblY.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblZ
+            // 
+            this.lblZ.AutoSize = true;
+            this.lblZ.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblZ.ForeColor = System.Drawing.Color.White;
+            this.lblZ.Location = new System.Drawing.Point(37, 296);
+            this.lblZ.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.lblZ.Name = "lblZ";
+            this.lblZ.Size = new System.Drawing.Size(43, 18);
+            this.lblZ.TabIndex = 526;
+            this.lblZ.Text = "3.56";
+            this.lblZ.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.ForeColor = System.Drawing.Color.White;
+            this.label17.Location = new System.Drawing.Point(12, 296);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(16, 18);
+            this.label17.TabIndex = 527;
+            this.label17.Text = "Z";
+            // 
             // FormGPSData
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Black;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(120, 330);
+            this.ClientSize = new System.Drawing.Size(315, 333);
+            this.Controls.Add(this.label17);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.lblZ);
+            this.Controls.Add(this.lblY);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblX);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.lblAngularVelocity);
             this.Controls.Add(this.label15);
@@ -483,5 +567,11 @@
         private System.Windows.Forms.Label lblFuzeHeading;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label lblAngularVelocity;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblX;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lblY;
+        private System.Windows.Forms.Label lblZ;
+        private System.Windows.Forms.Label label17;
     }
 }

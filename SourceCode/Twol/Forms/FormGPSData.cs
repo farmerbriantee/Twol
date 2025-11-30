@@ -2,6 +2,7 @@
 //Copyright BrianTee, copy right out of it.
 
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Twol
@@ -47,6 +48,13 @@ namespace Twol
             //lbludpWatchCounts.Text = mf.missedSentenceCount.ToString();
 
             lblAltitude.Text = mf.Altitude;
+
+            PointF tileXY = mf.map.ToTilePos(mf.pn.longitude, mf.pn.latitude, mf.map.ZoomLevel);
+
+            lblZ.Text = mf.map.ZoomLevel.ToString();
+
+            lblX.Text = tileXY.X.ToString();
+            lblY.Text = tileXY.Y.ToString();
         }
 
         private void FormGPSData_Load(object sender, EventArgs e)

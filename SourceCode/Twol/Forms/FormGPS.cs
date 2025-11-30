@@ -202,6 +202,11 @@ namespace Twol
         /// </summary>
         public CNozzle nozz;
 
+        /// <summary>
+        /// Nozzle class
+        /// </summary>
+        public CMap map;
+
         #endregion // Class Props and instances
 
         //The method assigned to the PowerModeChanged event call
@@ -315,6 +320,9 @@ namespace Twol
 
             //Application rate controller
             nozz = new CNozzle(this);
+
+            //map class
+            map = new CMap(this);
 
             vec2 b = new vec2(0, 0);
             gpsPtsCorr.Add(b);
