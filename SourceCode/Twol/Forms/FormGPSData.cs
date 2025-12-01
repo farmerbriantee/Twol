@@ -11,6 +11,8 @@ namespace Twol
     {
         private readonly FormGPS mf = null;
 
+        Tile tile;
+
         public FormGPSData(Form callingForm)
         {
             mf = callingForm as FormGPS;
@@ -55,6 +57,24 @@ namespace Twol
 
             lblX.Text = tileXY.X.ToString();
             lblY.Text = tileXY.Y.ToString();
+
+            if (tile == null)
+            {
+                tile = mf.map.GetTile((int)tileXY.X, (int)tileXY.Y, mf.map.ZoomLevel);
+
+                mf.mapTexture = new uint[1];
+
+                {
+                    //GL.GenTextures(1, out mf.mapTexture[0]);
+                    //GL.BindTexture(TextureTarget.Texture2D, mf.mapTexture[0]);
+                    //BitmapData bitmapData = tile.Image.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+                    //GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, bitmapData.Width, bitmapData.Height, 0, OpenTK.Graphics.OpenGL.PixelFormat.Bgra, PixelType.UnsignedByte, bitmapData.Scan0);
+                    //bitmap.UnlockBits(bitmapData);
+                    //GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, 9729);
+                    //GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, 9729);
+                }
+
+            }
         }
 
         private void FormGPSData_Load(object sender, EventArgs e)

@@ -40,6 +40,7 @@ namespace Twol
 
         //texture holders
         public uint[] texture;
+        public uint[] mapTexture;
 
         //create instance of a stopwatch for timing of frames and NMEA hz determination
         private readonly Stopwatch swFrame = new Stopwatch();

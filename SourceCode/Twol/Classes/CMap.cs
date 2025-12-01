@@ -145,7 +145,7 @@ namespace Twol
         /// <param name="fromCacheOnly">Flag indicating the tile can be fetched from cache only (server request is not allowed).</param>
         /// <returns><see cref="Tile"/> instance.</returns>
 
-        private Tile GetTile(int x, int y, int z, bool fromCacheOnly = true)
+        public Tile GetTile(int x, int y, int z, bool fromCacheOnly = true)
         {
             try
             {
@@ -276,7 +276,7 @@ namespace Twol
         }
     }
 
-    internal class Tile
+    public class Tile
     {
         /// <summary>
         /// X-index of the tile image

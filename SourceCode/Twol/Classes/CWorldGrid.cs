@@ -99,7 +99,7 @@ namespace Twol
             if (Settings.User.setDisplay_isTextureOn)
             {
                 GL.Enable(EnableCap.Texture2D);
-                GL.BindTexture(TextureTarget.Texture2D, mf.texture[(int)FormGPS.textures.QuestionMark]);
+                GL.BindTexture(TextureTarget.Texture2D, mf.texture[(int)FormGPS.textures.Floor]);
             }
 
             //GL.Vertex3(eastingMin, northingMax, -0.10);
@@ -110,12 +110,12 @@ namespace Twol
             //GL.TexCoord2(Count, Count);
             //GL.Vertex3(eastingMax, northingMin, -0.10);
 
-            for (int i = -4; i < 4; i++)
+            for (int i = -1; i < 2; i++)
             {
-                for (int j = 4; j > -4; j--)
+                for (int j = 1; j > -2; j--)
                 {
-                    int ii = i * 2 * bit + bit;
-                    int jj = j * 2 * bit - bit;
+                    int ii = i * 2 * bit;
+                    int jj = j * 2 * bit;
 
                     GL.Begin(PrimitiveType.TriangleStrip);
                     GL.TexCoord2(0, 0);
@@ -130,6 +130,36 @@ namespace Twol
                 }
             }
 
+
+            for (int i = -2; i < 2; i++)
+            {
+                for (int j = 2; j > -2; j--)
+                {
+                    int ii = i * 2 * bit + bit;
+                    int jj = j * 2 * bit - bit;
+
+                    GL.Disable(EnableCap.Texture2D);
+
+                    GL.LineWidth(1);
+                    GL.Begin(PrimitiveType.Lines);
+                    //for (double num = Math.Round(eastingMin / _gridZoom, MidpointRounding.AwayFromZero) * _gridZoom; num < eastingMax; num += _gridZoom)
+                    //{
+                    //    if (num < eastingMin) continue;
+
+                    //    GL.Vertex3(num, northingMax, 0.1);
+                    //    GL.Vertex3(num, northingMin, 0.1);
+                    //}
+                    //for (double num2 = Math.Round(northingMin / _gridZoom, MidpointRounding.AwayFromZero) * _gridZoom; num2 < northingMax; num2 += _gridZoom)
+                    //{
+                    //    if (num2 < northingMin) continue;
+
+                    //    GL.Vertex3(eastingMax, num2, 0.1);
+                    //    GL.Vertex3(eastingMin, num2, 0.1);
+                    //}
+                    GL.End();
+                }
+            }
+
             //GL.Vertex3(eastingMin, northingMax, -0.10);
             //GL.TexCoord2(Count, 0.0);
             //GL.Vertex3(eastingMax, northingMax, -0.10);
@@ -138,7 +168,6 @@ namespace Twol
             //GL.TexCoord2(Count, Count);
             //GL.Vertex3(eastingMax, northingMin, -0.10);
 
-            GL.Disable(EnableCap.Texture2D);
         }
 
         public void DrawWorldGrid(double _gridZoom)
