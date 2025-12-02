@@ -1,17 +1,19 @@
 ﻿//Please, if you use this give me some credit
 //Copyright BrianTee, copy right out of it.
 
+using OpenTK.Graphics.OpenGL;
 using System;
 using System.Drawing;
+using System.Reflection.Emit;
 using System.Windows.Forms;
+using static Twol.FormGPS;
+
 
 namespace Twol
 {
     public partial class FormGPSData : Form
     {
         private readonly FormGPS mf = null;
-
-        Tile tile;
 
         public FormGPSData(Form callingForm)
         {
@@ -57,24 +59,10 @@ namespace Twol
 
             lblX.Text = tileXY.X.ToString();
             lblY.Text = tileXY.Y.ToString();
+            lblZoomZ.Text = Settings.User.setDisplay_camZoom.ToString("N0");
 
-            if (tile == null)
-            {
-                tile = mf.map.GetTile((int)tileXY.X, (int)tileXY.Y, mf.map.ZoomLevel);
-
-                mf.mapTexture = new uint[1];
-
-                {
-                    //GL.GenTextures(1, out mf.mapTexture[0]);
-                    //GL.BindTexture(TextureTarget.Texture2D, mf.mapTexture[0]);
-                    //BitmapData bitmapData = tile.Image.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-                    //GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, bitmapData.Width, bitmapData.Height, 0, OpenTK.Graphics.OpenGL.PixelFormat.Bgra, PixelType.UnsignedByte, bitmapData.Scan0);
-                    //bitmap.UnlockBits(bitmapData);
-                    //GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, 9729);
-                    //GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, 9729);
-                }
-
-            }
+            double mpp = (Math.Cos(mf.pn.latitude * Math.PI / 180) * 2 * Math.PI * 6378137) / (256 * Math.Pow(2, mf.map.ZoomLevel));
+            lblMPPixel.Text = mpp.ToString("N3");
         }
 
         private void FormGPSData_Load(object sender, EventArgs e)

@@ -780,6 +780,13 @@ namespace Twol
             sim.toolOffset = (double)nudToolOffset.Value * 0.001;
         }
 
+        private void button8_Click(object sender, EventArgs e)
+        {
+            worldGrid.isSet = false;
+            if (map.ZoomLevel == 19) map.ZoomLevel = 15;
+            else map.ZoomLevel += 2;
+        }
+
         public void FieldClose()
         {
             Settings.Vehicle.setF_CurrentFieldDir = currentFieldDirectory;

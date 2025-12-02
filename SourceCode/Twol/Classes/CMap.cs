@@ -21,7 +21,7 @@ namespace Twol
         /// <summary>
         /// Cache used to store tile images in memory.
         /// </summary>
-        private ConcurrentBag<Tile> _Cache = new ConcurrentBag<Tile>();
+        public ConcurrentBag<Tile> _Cache = new ConcurrentBag<Tile>();
 
         /// <summary>
         /// Gets size of map in tiles.
@@ -36,7 +36,7 @@ namespace Twol
         /// <summary>
         /// Backing field for <see cref="ZoomLevel"/> property.
         /// </summary>
-        public int _ZoomLevel = 19;
+        public int _ZoomLevel = 15;
 
         /// <summary>
         /// Map zoom level.
@@ -50,6 +50,7 @@ namespace Twol
                 if (value < 0 || value > 19)
                     throw new ArgumentException($"{value} is an incorrect value for {nameof(ZoomLevel)} property. Value should be in range from 0 to 19.");
 
+                _ZoomLevel = value;
                 //SetZoomLevel(value, new Point(Width / 2, Height / 2));
                 //CenterChanged?.Invoke(this, EventArgs.Empty);
             }
