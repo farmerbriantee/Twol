@@ -133,12 +133,12 @@ namespace Twol
             if (!isSet)
             {
                 mf.mapTexture = new uint[25];
-                PointF tileXY = mf.map.ToTilePos(mf.pn.longitude, mf.pn.latitude, mf.map.ZoomLevel);
+                PointF tileXY = mf.map.ToTilePos(CNMEA.lonStart, CNMEA.latStart, mf.map.ZoomLevel);
                 int tileX = (int)Math.Floor(tileXY.X);
                 int tileY = (int)Math.Floor(tileXY.Y);
 
-                //offsetX = (0.5 - (tileXY.X - (int)tileXY.X)) * mpp *256;
-                //offsetY = ((tileXY.Y - (int)tileXY.Y) - 0.5) * mpp *256;
+                offsetX = (0.5 - (tileXY.X - (int)tileXY.X)) * mpp *256;
+                offsetY = ((tileXY.Y - (int)tileXY.Y) - 0.5) * mpp *256;
 
                 //set to top-left tile
                 tileX -= 2;

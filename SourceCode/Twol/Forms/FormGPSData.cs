@@ -57,8 +57,8 @@ namespace Twol
 
             lblZ.Text = mf.map.ZoomLevel.ToString();
 
-            lblX.Text = tileXY.X.ToString();
-            lblY.Text = tileXY.Y.ToString();
+            lblX.Text = tileXY.X.ToString("N2");
+            lblY.Text = tileXY.Y.ToString("N2");
             lblZoomZ.Text = Settings.User.setDisplay_camZoom.ToString("N0");
 
             double mpp = (Math.Cos(mf.pn.latitude * Math.PI / 180) * 2 * Math.PI * 6378137) / (256 * Math.Pow(2, mf.map.ZoomLevel));

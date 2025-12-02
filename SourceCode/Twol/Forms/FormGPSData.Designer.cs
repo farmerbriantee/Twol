@@ -427,12 +427,12 @@
             // lblX
             // 
             this.lblX.AutoSize = true;
-            this.lblX.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblX.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblX.ForeColor = System.Drawing.Color.White;
-            this.lblX.Location = new System.Drawing.Point(21, 91);
+            this.lblX.Location = new System.Drawing.Point(14, 91);
             this.lblX.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblX.Name = "lblX";
-            this.lblX.Size = new System.Drawing.Size(43, 18);
+            this.lblX.Size = new System.Drawing.Size(35, 16);
             this.lblX.TabIndex = 524;
             this.lblX.Text = "3.56";
             this.lblX.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -451,12 +451,12 @@
             // lblY
             // 
             this.lblY.AutoSize = true;
-            this.lblY.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblY.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblY.ForeColor = System.Drawing.Color.White;
-            this.lblY.Location = new System.Drawing.Point(21, 110);
+            this.lblY.Location = new System.Drawing.Point(14, 110);
             this.lblY.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblY.Name = "lblY";
-            this.lblY.Size = new System.Drawing.Size(43, 18);
+            this.lblY.Size = new System.Drawing.Size(35, 16);
             this.lblY.TabIndex = 526;
             this.lblY.Text = "3.56";
             this.lblY.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -464,12 +464,12 @@
             // lblZ
             // 
             this.lblZ.AutoSize = true;
-            this.lblZ.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblZ.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblZ.ForeColor = System.Drawing.Color.White;
-            this.lblZ.Location = new System.Drawing.Point(21, 129);
+            this.lblZ.Location = new System.Drawing.Point(14, 129);
             this.lblZ.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblZ.Name = "lblZ";
-            this.lblZ.Size = new System.Drawing.Size(43, 18);
+            this.lblZ.Size = new System.Drawing.Size(35, 16);
             this.lblZ.TabIndex = 526;
             this.lblZ.Text = "3.56";
             this.lblZ.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;

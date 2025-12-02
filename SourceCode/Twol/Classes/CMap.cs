@@ -233,6 +233,23 @@ namespace Twol
             return p;
         }
 
+        public PointF LatLongToTileXY(double latitude, double longitude, int zoom)
+        {
+            // Clip latitude to the valid range for Mercator projection
+            //latitude = Math.Max(Math.Min(latitude, MaxLatitude), MinLatitude);
+            var p = new PointF();
+
+            // Convert to pixel coordinates (global)
+            double sinLatitude = Math.Sin(latitude * Math.PI / 180.0);
+            double pixelX = ((longitude + 180.0) / 360.0) * 256 * Math.Pow(2, zoom);
+            double pixelY = (0.5 - Math.Log((1 + sinLatitude) / (1 - sinLatitude)) / (4 * Math.PI)) * 256 * Math.Pow(2, zoom);
+
+            // Convert pixel coordinates to tile coordinates by integer division
+            p.X = (float)(pixelX / 256);
+            p.Y = (float)(pixelY / 256);
+            return p;
+        }
+
         public CMap(FormGPS _f)
         {
             mf = _f;
