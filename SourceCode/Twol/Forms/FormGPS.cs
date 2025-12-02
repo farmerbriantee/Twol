@@ -783,8 +783,8 @@ namespace Twol
         private void button8_Click(object sender, EventArgs e)
         {
             worldGrid.isSet = false;
-            if (map.ZoomLevel == 19) map.ZoomLevel = 15;
-            else map.ZoomLevel += 2;
+            //if (map.ZoomLevel == 19) map.ZoomLevel = 15;
+            //else map.ZoomLevel += 2;
         }
 
         public void FieldClose()
@@ -944,8 +944,8 @@ namespace Twol
         //take the distance from object and convert to camera data
         public void SetZoom()
         {
-            if (Settings.User.setDisplay_camZoom < 2.0) Settings.User.setDisplay_camZoom = 2.0;
-            if (Settings.User.setDisplay_camZoom > 120) Settings.User.setDisplay_camZoom = 120;
+            if (Settings.User.setDisplay_camZoom < 5.0) Settings.User.setDisplay_camZoom = 5.0;
+            if (Settings.User.setDisplay_camZoom > 200) Settings.User.setDisplay_camZoom = 200;
             camera.camSetDistance = Settings.User.setDisplay_camZoom * Settings.User.setDisplay_camZoom * -1;
 
             //match grid to cam distance and redo perspective

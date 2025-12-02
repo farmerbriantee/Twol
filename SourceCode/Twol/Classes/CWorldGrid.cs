@@ -128,7 +128,7 @@ namespace Twol
 
             //meters per pixel
             double mpp = (Math.Cos(mf.pn.latitude * Math.PI / 180) * 2 * Math.PI * 6378137) / (256 * Math.Pow(2, mf.map.ZoomLevel));
-            bit = (mpp * 256)+1;
+            bit = (mpp * 256);
 
             if (!isSet)
             {
@@ -137,8 +137,8 @@ namespace Twol
                 int tileX = (int)Math.Floor(tileXY.X);
                 int tileY = (int)Math.Floor(tileXY.Y);
 
-                offsetX = (0.5 - (tileXY.X - (int)tileXY.X)) * mpp *256;
-                offsetY = ((tileXY.Y - (int)tileXY.Y) - 0.5) * mpp *256;
+                //offsetX = (0.5 - (tileXY.X - (int)tileXY.X)) * mpp *256;
+                //offsetY = ((tileXY.Y - (int)tileXY.Y) - 0.5) * mpp *256;
 
                 //set to top-left tile
                 tileX -= 2;
