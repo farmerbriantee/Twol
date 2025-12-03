@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Windows.Forms;
+using Twol.Mapping;
 
 namespace Twol
 {
@@ -71,46 +74,13 @@ namespace Twol
         /// </summary>
         public int MaxZoomLevel = 19;
 
-        /// <summary>
-        /// Draws a tile on the map.
-        /// </summary>
-        /// <param name="gr">Graphics instance to draw on.</param>
-        /// <param name="x">X-index of the tile.</param>
-        /// <param name="y">Y-index of the tile.</param>
-        /// <param name="image">Tile image.</param>
-        private void DrawTile(Graphics gr, Layer layer, int x, int y, Image image)
-        {
-            //Point p = new Point();
-            //p.X = layer.Offset.X + x * TILE_SIZE;
-            //p.Y = layer.Offset.Y + y * TILE_SIZE;
-
-            //gr.DrawImage(image, new Rectangle(p, new Drawing.Size(TILE_SIZE, TILE_SIZE)), 0, 0, TILE_SIZE, TILE_SIZE, GraphicsUnit.Pixel, GetImageAttributes(layer.Opacity));
-        }
-
-        /// <summary>
-        /// Does the draw action.
-        /// The method is needed for repeating drawing because map is infinite in longitude.
-        /// </summary>
-        /// <param name="gr">Graphics instance to draw on.</param>
-        /// <param name="draw">Draw action to perform several times for all visible width of the map.</param>
-        //private void Draw(Graphics gr, Action draw)
-        //{
-        //    int count = (int)Math.Ceiling((double)Width / FullMapSizeInPixels) + 1;
-        //    for (int i = -count; i < count; i++)
-        //    {
-        //        var state = gr.Save();
-        //        gr.TranslateTransform(i * FullMapSizeInPixels, 0);
-        //        draw();
-        //        gr.Restore(state);
-        //    }
-        //}
 
         /// <summary>
         /// Sets zoom level with specifying central point to zoom in/out.
         /// </summary>
         /// <param name="z">Zoom level to be set.</param>
         /// <param name="p">Central point to zoom in/out.</param>
-        /// 
+        
         private void SetZoomLevel(int z, Point p)
         {
             //int max = Layers.Any() ? Math.Min(MaxZoomLevel, Layers.Min(lay => lay.TileServer.MaxZoomLevel)) : MaxZoomLevel;
@@ -145,6 +115,10 @@ namespace Twol
         /// <param name="z">Zoom level.</param>
         /// <param name="fromCacheOnly">Flag indicating the tile can be fetched from cache only (server request is not allowed).</param>
         /// <returns><see cref="Tile"/> instance.</returns>
+        /// 
+
+        
+        TileServer tileServer = new TileServer();
 
         public Tile GetTile(int x, int y, int z, bool fromCacheOnly = true)
         {
@@ -178,6 +152,30 @@ namespace Twol
                 //{
                 //    //RequestTile(layer, x, y, z);
                 //}
+
+                tile = new Tile(tileServer.GetTile(x, y, z), x, y, z);
+                tile.Used = true;
+
+                localPath = Path.Combine(CacheFolder, $"{z}", $"{x}", $"{y}.tile");
+                try
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(localPath));
+
+
+                    tile.Image.Save(localPath);
+                    Debug.WriteLine($"saved {localPath}");
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"Unable to save tile image {localPath}. Reason: {ex.Message}");
+                }
+
+                // add tile to the memory cache
+                if (tile.Image != null || tile.ErrorMessage != null)
+                {
+                    _Cache.Add(tile);
+                    return tile;
+                }
 
                 return null;
             }
@@ -254,6 +252,8 @@ namespace Twol
         {
             mf = _f;
         }
+
+        private ITileServer _webTileServer;
     }
 
     public class Layer

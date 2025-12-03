@@ -157,7 +157,7 @@
     <Compile Include="Classes\CHello.cs" />
     <Compile Include="Classes\CLanguage.cs" />
     <Compile Include="Classes\CLog.cs" />
-    <Compile Include="Classes\CMap.cs" />
+    <Compile Include="Mapping\CMap.cs" />
     <Compile Include="Classes\CNozzle.cs" />
     <Compile Include="Classes\CPolygon.cs" />
     <Compile Include="Classes\CPatches.cs" />
@@ -239,6 +239,7 @@
     <Compile Include="Forms\Settings\FormToolSteer.Designer.cs">
       <DependentUpon>FormToolSteer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Mapping\TileServer.cs" />
     <Compile Include="Properties\CRegistrySettings.cs" />
     <Compile Include="Classes\CSettings.cs" />
     <Compile Include="Classes\CSound.cs" />

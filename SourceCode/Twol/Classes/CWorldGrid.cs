@@ -74,13 +74,24 @@ namespace Twol
 
             double result = Math.Log(Settings.User.setDisplay_camZoom, 2);
 
-            if (Settings.User.setDisplay_camZoom > 64)
+            if (Settings.User.setDisplay_camZoom > 128)
+            {
+                if (lastZoom != 256)
+                {
+                    isSet = false;
+                    lastZoom = 256;
+                    mf.map.ZoomLevel = 11;
+                }
+                Count = 8;
+                Count = 4;
+            }
+            else if (Settings.User.setDisplay_camZoom > 64)
             {
                 if (lastZoom != 128)
                 {
                     isSet = false;
                     lastZoom = 128;
-                    mf.map.ZoomLevel = 14;
+                    mf.map.ZoomLevel = 13;
                 }
                 Count = 8;
                 Count = 4;
@@ -193,7 +204,7 @@ namespace Twol
                 isSet = true;
             }
 
-            GL.Color3(0.42,0.42,0.42);
+            GL.Color3(0.842,0.842,0.842);
             if (Settings.User.setDisplay_isTextureOn && mf.mapTexture != null)
             {
                 GL.Enable(EnableCap.Texture2D);
