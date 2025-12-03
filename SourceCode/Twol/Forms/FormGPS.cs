@@ -775,11 +775,6 @@ namespace Twol
 
         }
 
-        private void nudToolOffset_ValueChanged(object sender, EventArgs e)
-        {
-            sim.toolOffset = (double)nudToolOffset.Value * 0.001;
-        }
-
         private void button8_Click(object sender, EventArgs e)
         {
             worldGrid.isSet = false;

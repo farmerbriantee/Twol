@@ -134,7 +134,7 @@ namespace Twol
                     //  Clear the color and depth buffer.
                     GL.Clear(ClearBufferMask.DepthBufferBit | ClearBufferMask.ColorBufferBit);
 
-                    if (Settings.User.setDisplay_isDayMode) GL.ClearColor(0.27f, 0.4f, 0.7f, 1.0f);
+                    if (Settings.User.setDisplay_isDayMode) GL.ClearColor(0.07f, 0.14f, 0.07f, 1.0f);
                     else GL.ClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
                     GL.LoadIdentity();

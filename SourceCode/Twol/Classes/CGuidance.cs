@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 
 namespace Twol
 {
@@ -37,8 +36,6 @@ namespace Twol
 
         public int currentLocationIndex;
         public double pivotDistanceErrorLast, pivotDerivative;
-        private double segK = 0, bob = 0, bobAvg = 0;
-
 
         public CGuidance(FormGPS _f)
         {
@@ -50,7 +47,6 @@ namespace Twol
         {
             bool completeUturn = !Uturn;
             var vec2point = new vec2(Settings.Vehicle.setVehicle_isStanleyUsed ? steer : pivot);
-            double segCurv = 0;
 
             if (Settings.Tool.setToolSteer.isGPSToolActive)
             {
@@ -275,64 +271,6 @@ namespace Twol
                             }
                         }
                     }
-
-                    if (isPassiveSteering && distanceFromCurrentLineTool != 0 && !Settings.Tool.setToolSteer.isActiveSteering)
-                    {
-                        bob = distanceFromCurrentLineTool;
-
-                        if (!mf.trk.isHeadingSameWay)
-                        {
-                            bob *= -1.0;
-                        }
-                    }
-
-                    else
-                    {
-                        bob = 0;
-                        bobAvg = 0;
-                    }
-
-                    vec3 p1 = curList[A];
-                    vec3 p2 = curList[B];
-
-                    double d = glm.Distance(p1, p2);
-
-                    double theta = p2.heading - p1.heading;
-                    if (theta > Math.PI)
-                        theta -= Math.PI;
-                    else if (theta < -Math.PI)
-                        theta += Math.PI;
-
-                    if (theta > glm.PIBy2)
-                        theta -= Math.PI;
-                    else if (theta < -glm.PIBy2)
-                        theta += Math.PI;
-
-                    segCurv = ((2 * Math.Sin(theta / 2)) / -d) *15;
-
-                    segK = 0.9 * segK + 0.1 * segCurv;
-
-                    if (bob < 0) bobAvg -= 0.0005;
-                    else bobAvg += 0.0005;
-                        //bobAvg += (0.01 * bob);                    
-
-                    if (bobAvg > 0.5)
-                        bobAvg = 0.5;
-                    if (bobAvg < -0.5)
-                        bobAvg = -0.5;
-
-                    double dist = (segK);
-                    if (dist > 2.0) 
-                        dist = 2.0;
-                    if (dist < -2.0) 
-                        dist = -2.0;
-
-                    goalPoint.easting += (Math.Sin(curList[B].heading + 1.57) * dist);
-                    goalPoint.northing += (Math.Cos(curList[B].heading + 1.57) * dist);
-
-                    mf.lblToolOffset.Text = (segCurv * 100).ToString("N1");
-                    mf.lblBobAvg.Text = (bobAvg * 100).ToString("N1");
-                    mf.lblDistTotal.Text = (dist * 100).ToString("N1");
 
                     //calc "D" the distance from pivot axle to lookahead point
                     double goalPointDistanceSquared = glm.DistanceSquared(goalPoint, pivot);

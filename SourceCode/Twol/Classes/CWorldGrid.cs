@@ -3,7 +3,7 @@
 using OpenTK.Graphics.OpenGL;
 using System;
 using System.Drawing;
-
+using Twol.Mapping;
 namespace Twol
 {
     public class CWorldGrid
@@ -20,27 +20,7 @@ namespace Twol
 
         public double eastingMin = -GridSize;
 
-        //Y
-        public double northingMaxGeo;
-
-        public double northingMinGeo;
-
-        //X
-        public double eastingMaxGeo;
-
-        public double eastingMinGeo;
-
-        //Y
-        public double northingMaxRate;
-
-        public double northingMinRate;
-
-        //X
-        public double eastingMaxRate;
-
-        public double eastingMinRate;
-
-        public const double GridSize = 6000;
+        public const double GridSize = 20000;
         public double Count = 40;
 
         public double gridRotation = 0.0;
@@ -55,15 +35,6 @@ namespace Twol
         public CWorldGrid(FormGPS _f)
         {
             mf = _f;
-
-            northingMaxGeo = 300;
-            northingMinGeo = -300;
-            eastingMaxGeo = 300;
-            eastingMinGeo = -300;
-            northingMaxRate = 300;
-            northingMinRate = -300;
-            eastingMaxRate = 300;
-            eastingMinRate = -300;
         }
 
         public void DrawFieldSurface()
@@ -74,76 +45,63 @@ namespace Twol
 
             double result = Math.Log(Settings.User.setDisplay_camZoom, 2);
 
-            if (Settings.User.setDisplay_camZoom > 128)
-            {
-                if (lastZoom != 256)
-                {
-                    isSet = false;
-                    lastZoom = 256;
-                    mf.map.ZoomLevel = 11;
-                }
-                Count = 8;
-                Count = 4;
-            }
-            else if (Settings.User.setDisplay_camZoom > 64)
-            {
-                if (lastZoom != 128)
-                {
-                    isSet = false;
-                    lastZoom = 128;
-                    mf.map.ZoomLevel = 13;
-                }
-                Count = 8;
-                Count = 4;
-            }
-            else if (Settings.User.setDisplay_camZoom > 32)
+            //if (Settings.User.setDisplay_camZoom > 128)
+            //{
+            //    if (lastZoom != 128)
+            //    {
+            //        isSet = false;
+            //        lastZoom = 128;
+            //        mf.map.ZoomLevel = 11;
+            //    }
+            //    Count = 8;
+            //    Count = 4;
+            //}
+            if (Settings.User.setDisplay_camZoom > 64)
             {
                 if (lastZoom != 64)
                 {
                     isSet = false;
                     lastZoom = 64;
-                    mf.map.ZoomLevel = 15;
+                    mf.map.ZoomLevel = 13;
                 }
                 Count = 8;
             }
-            else if (Settings.User.setDisplay_camZoom > 16)
+            else if (Settings.User.setDisplay_camZoom > 32)
             {
                 if (lastZoom != 32)
                 {
                     isSet = false;
                     lastZoom = 32;
-                    mf.map.ZoomLevel = 17;
+                    mf.map.ZoomLevel = 15;
                 }
 
                 Count = 16;
             }
-            else if (Settings.User.setDisplay_camZoom > 8)
+            else if (Settings.User.setDisplay_camZoom > 16)
             {
                 if (lastZoom != 16)
                 {
                     isSet = false;
                     lastZoom = 16;
-                     mf.map.ZoomLevel = 19;
+                     mf.map.ZoomLevel = 17;
                }
                 Count = 32;
-            }
-            else if (Settings.User.setDisplay_camZoom > 2)
-            {
-                Count = 64;
             }
             else
             {
                 Count = 80;
             }
 
-
             //meters per pixel
             double mpp = (Math.Cos(mf.pn.latitude * Math.PI / 180) * 2 * Math.PI * 6378137) / (256 * Math.Pow(2, mf.map.ZoomLevel));
             bit = (mpp * 256);
 
+            double travelX = mf.pn.fix.easting / bit;
+            double travelY = mf.pn.fix.northing / bit;
+
             if (!isSet)
             {
-                mf.mapTexture = new uint[25];
+                mf.mapTexture = new uint[9];
                 PointF tileXY = mf.map.ToTilePos(CNMEA.lonStart, CNMEA.latStart, mf.map.ZoomLevel);
                 int tileX = (int)Math.Floor(tileXY.X);
                 int tileY = (int)Math.Floor(tileXY.Y);
@@ -152,13 +110,13 @@ namespace Twol
                 offsetY = ((tileXY.Y - (int)tileXY.Y) - 0.5) * mpp *256;
 
                 //set to top-left tile
-                tileX -= 2;
-                tileY-=2;
+                tileX = tileX - 1 - (int)travelX;
+                tileY = tileY - 1 - (int)travelY;
 
                 int tex = 0;
-                for (int i = 0; i < 5; i++)
+                for (int i = 0; i < 3; i++)
                 {
-                    for (int j = 0; j < 5; j++) 
+                    for (int j = 0; j < 3; j++) 
                     {
                         //if (tile == null)
                         {
@@ -204,15 +162,15 @@ namespace Twol
                 isSet = true;
             }
 
-            GL.Color3(0.842,0.842,0.842);
+            GL.Color3(0.542,0.542,0.542);
             if (Settings.User.setDisplay_isTextureOn && mf.mapTexture != null)
             {
                 GL.Enable(EnableCap.Texture2D);
 
                 int t = 0;
-                for (double i = -2; i < 3; i += 1)
+                for (double i = -1; i < 2; i += 1)
                 {
-                    for (double j = 2; j > -3; j -= 1)
+                    for (double j = 1; j > -2; j -= 1)
                     {
                         GL.BindTexture(TextureTarget.Texture2D, mf.mapTexture[t]);
 
@@ -232,45 +190,39 @@ namespace Twol
                         t++;
                     }
                 }
-
             }
+            GL.Disable(EnableCap.Texture2D);
 
-                    //GL.Vertex3(eastingMin, northingMax, -0.10);
-                    //GL.TexCoord2(Count, 0.0);
-                    //GL.Vertex3(eastingMax, northingMax, -0.10);
-                    //GL.TexCoord2(0.0, Count);
-                    //GL.Vertex3(eastingMin, northingMin, -0.10);
-                    //GL.TexCoord2(Count, Count);
-                    //GL.Vertex3(eastingMax, northingMin, -0.10);
+            //GL.Vertex3(eastingMin, northingMax, -0.10);
+            //GL.TexCoord2(Count, 0.0);
+            //GL.Vertex3(eastingMax, northingMax, -0.10);
+            //GL.TexCoord2(0.0, Count);
+            //GL.Vertex3(eastingMin, northingMin, -0.10);
+            //GL.TexCoord2(Count, Count);
+            //GL.Vertex3(eastingMax, northingMin, -0.10);
 
-            //for (int i = -2; i < 2; i++)
-            //{
-            //    for (int j = 2; j > -2; j--)
-            //    {
-            //        //int ii = i * 2 * bit + bit;
-            //        //int jj = j * 2 * bit - bit;
+            for (int i = -2; i < 2; i++)
+            {
+                for (int j = 1; j > -3; j--)
+                {
+                    double ii = i * bit;
+                    double jj = j * bit;
+                    double bitt = bit / 2;
 
-            //        GL.Disable(EnableCap.Texture2D);
+                    GL.Disable(EnableCap.Texture2D);
 
-            //        GL.LineWidth(1);
-            //        GL.Begin(PrimitiveType.Lines);
-            //        //for (double num = Math.Round(eastingMin / _gridZoom, MidpointRounding.AwayFromZero) * _gridZoom; num < eastingMax; num += _gridZoom)
-            //        //{
-            //        //    if (num < eastingMin) continue;
+                    GL.LineWidth(1);
+                    GL.Begin(PrimitiveType.Lines);
 
-            //        //    GL.Vertex3(num, northingMax, 0.1);
-            //        //    GL.Vertex3(num, northingMin, 0.1);
-            //        //}
-            //        //for (double num2 = Math.Round(northingMin / _gridZoom, MidpointRounding.AwayFromZero) * _gridZoom; num2 < northingMax; num2 += _gridZoom)
-            //        //{
-            //        //    if (num2 < northingMin) continue;
+                    GL.Vertex3(ii + offsetX + bitt, 3 * mpp * 256, 0.1);
+                    GL.Vertex3(ii + offsetX + bitt, -3 * mpp * 256, 0.1);
 
-            //        //    GL.Vertex3(eastingMax, num2, 0.1);
-            //        //    GL.Vertex3(eastingMin, num2, 0.1);
-            //        //}
-            //        GL.End();
-            //    }
-            //}
+                    GL.Vertex3(3 * mpp * 256, jj + offsetY + bitt, 0.1);
+                    GL.Vertex3(-3 * mpp * 256, jj + offsetY + bitt, 0.1);
+                    //}
+                    GL.End();
+                }
+            }
 
             //GL.Vertex3(eastingMin, northingMax, -0.10);
             //GL.TexCoord2(Count, 0.0);

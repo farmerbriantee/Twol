@@ -62,7 +62,10 @@ namespace Twol
             lblZoomZ.Text = Settings.User.setDisplay_camZoom.ToString("N0");
 
             double mpp = (Math.Cos(mf.pn.latitude * Math.PI / 180) * 2 * Math.PI * 6378137) / (256 * Math.Pow(2, mf.map.ZoomLevel));
-            lblMPPixel.Text = mpp.ToString("N3");
+            lblMPerTile.Text = (mpp *256).ToString("N3");
+
+            lblOriX.Text = (mf.pn.fix.easting / (mpp*256)).ToString("N2");
+            lblOriY.Text = (mf.pn.fix.northing / (mpp*256)).ToString("N2");
         }
 
         private void FormGPSData_Load(object sender, EventArgs e)

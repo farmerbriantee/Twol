@@ -252,21 +252,7 @@ namespace Twol
         {
             mf = _f;
         }
-
-        private ITileServer _webTileServer;
     }
-
-    public class Layer
-    {
-        public ITileServer TileServer { get; set; }
-
-        public uint ZIndex { get; set; }
-
-        internal Point Offset = new Point();
-
-        public float Opacity { get; set; } = 1;
-    }
-
 
     public struct GeoPnt
     {
@@ -292,76 +278,5 @@ namespace Twol
             Longitude = longitude;
             Latitude = latitude;
         }
-    }
-
-    public class Tile
-    {
-        /// <summary>
-        /// X-index of the tile image
-        /// </summary>
-        public int X { get; }
-
-        /// <summary>
-        /// Y-index of the tile image
-        /// </summary>
-        public int Y { get; }
-
-        /// <summary>
-        /// Zoom level of the tile image
-        /// </summary>
-        public int Z { get; }
-
-        /// <summary>
-        /// Tile server name
-        /// </summary>
-        public string TileServer { get; }
-
-        /// <summary>
-        /// Tile image
-        /// </summary>
-        public Image Image { get; set; }
-
-        /// <summary>
-        /// Error message that should be displayed if tile does not exist by some reason (incorrect X/Y indices, zoom level, server unavailable etc.).
-        /// </summary>
-        public string ErrorMessage { get; set; }
-
-        /// <summary>
-        /// Flag indicating image recently used (requested to be drawn on the map).
-        /// </summary>
-        public bool Used { get; set; }
-
-        /// <summary>
-        /// Creates new tile with X/Y indices, zoom level, and tileServer name.
-        /// </summary>
-        /// <param name="x">X-index of the tile.</param>
-        /// <param name="y">Y-index of the tile.</param>
-        /// <param name="z">Zoom level.</param>
-        /// <param name="tileServer">Tile server name.</param>
-        public Tile(int x, int y, int z)
-        {
-            X = x;
-            Y = y;
-            Z = z;
-        }
-
-        /// <summary>
-        /// Creates new tile with image, X/Y indices, zoom level, and tileServer name.
-        /// </summary>
-        /// <param name="image">Tile image</param>
-        /// <param name="x">X-index of the tile.</param>
-        /// <param name="y">Y-index of the tile.</param>
-        /// <param name="z">Zoom level.</param>
-        /// <param name="tileServer">Tile server name.</param>
-        public Tile(Image image, int x, int y, int z)
-        {
-            Image = image;
-            X = x;
-            Y = y;
-            Z = z;
-        }
-
-
-
     }
 }

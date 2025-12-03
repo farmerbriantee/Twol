@@ -236,13 +236,6 @@ namespace Twol
             this.btnProfiles = new System.Windows.Forms.Button();
             this.flowLayoutPanelTop = new System.Windows.Forms.FlowLayoutPanel();
             this.button15 = new System.Windows.Forms.Button();
-            this.nudToolOffset = new System.Windows.Forms.NumericUpDown();
-            this.lblToolOffset = new System.Windows.Forms.Label();
-            this.lblBobAvg = new System.Windows.Forms.Label();
-            this.lblDistTotal = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
             this.button8 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStripFlag.SuspendLayout();
@@ -258,7 +251,6 @@ namespace Twol
             this.tlpNozzle.SuspendLayout();
             this.panel_IO.SuspendLayout();
             this.flowLayoutPanelTop.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudToolOffset)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -3578,135 +3570,21 @@ namespace Twol
             this.button15.TabIndex = 650;
             this.button15.UseVisualStyleBackColor = false;
             // 
-            // nudToolOffset
-            // 
-            this.nudToolOffset.DecimalPlaces = 1;
-            this.nudToolOffset.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudToolOffset.Increment = new decimal(new int[] {
-            2,
-            0,
-            0,
-            65536});
-            this.nudToolOffset.Location = new System.Drawing.Point(197, 68);
-            this.nudToolOffset.Maximum = new decimal(new int[] {
-            30,
-            0,
-            0,
-            0});
-            this.nudToolOffset.Minimum = new decimal(new int[] {
-            30,
-            0,
-            0,
-            -2147483648});
-            this.nudToolOffset.Name = "nudToolOffset";
-            this.nudToolOffset.Size = new System.Drawing.Size(80, 36);
-            this.nudToolOffset.TabIndex = 651;
-            this.nudToolOffset.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.nudToolOffset.ValueChanged += new System.EventHandler(this.nudToolOffset_ValueChanged);
-            // 
-            // lblToolOffset
-            // 
-            this.lblToolOffset.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblToolOffset.AutoSize = true;
-            this.lblToolOffset.BackColor = System.Drawing.Color.Transparent;
-            this.lblToolOffset.Font = new System.Drawing.Font("Arial", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblToolOffset.Location = new System.Drawing.Point(204, 118);
-            this.lblToolOffset.Name = "lblToolOffset";
-            this.lblToolOffset.Size = new System.Drawing.Size(67, 32);
-            this.lblToolOffset.TabIndex = 652;
-            this.lblToolOffset.Text = "15.6";
-            this.lblToolOffset.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
-            // 
-            // lblBobAvg
-            // 
-            this.lblBobAvg.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblBobAvg.AutoSize = true;
-            this.lblBobAvg.BackColor = System.Drawing.Color.Transparent;
-            this.lblBobAvg.Font = new System.Drawing.Font("Arial", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBobAvg.Location = new System.Drawing.Point(204, 167);
-            this.lblBobAvg.Name = "lblBobAvg";
-            this.lblBobAvg.Size = new System.Drawing.Size(67, 32);
-            this.lblBobAvg.TabIndex = 653;
-            this.lblBobAvg.Text = "15.6";
-            this.lblBobAvg.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
-            // 
-            // lblDistTotal
-            // 
-            this.lblDistTotal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblDistTotal.AutoSize = true;
-            this.lblDistTotal.BackColor = System.Drawing.Color.Transparent;
-            this.lblDistTotal.Font = new System.Drawing.Font("Arial", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDistTotal.Location = new System.Drawing.Point(204, 220);
-            this.lblDistTotal.Name = "lblDistTotal";
-            this.lblDistTotal.Size = new System.Drawing.Size(67, 32);
-            this.lblDistTotal.TabIndex = 654;
-            this.lblDistTotal.Text = "15.6";
-            this.lblDistTotal.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.BackColor = System.Drawing.Color.Transparent;
-            this.label12.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label12.Location = new System.Drawing.Point(164, 229);
-            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(32, 16);
-            this.label12.TabIndex = 655;
-            this.label12.Text = "Dist";
-            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.BackColor = System.Drawing.Color.Transparent;
-            this.label13.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label13.Location = new System.Drawing.Point(181, 125);
-            this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(14, 16);
-            this.label13.TabIndex = 656;
-            this.label13.Text = "k";
-            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.BackColor = System.Drawing.Color.Transparent;
-            this.label14.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label14.Location = new System.Drawing.Point(164, 176);
-            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(33, 16);
-            this.label14.TabIndex = 657;
-            this.label14.Text = "Tool";
-            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // button8
             // 
-            this.button8.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.button8.BackColor = System.Drawing.Color.Transparent;
-            this.button8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button8.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
+            this.button8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button8.FlatAppearance.BorderSize = 0;
             this.button8.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
             this.button8.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.button8.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button8.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button8.Image = global::Twol.Properties.Resources.CameraNorth2D;
+            this.button8.Image = global::Twol.Properties.Resources.BrightnessUp;
             this.button8.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.button8.Location = new System.Drawing.Point(308, 87);
+            this.button8.Location = new System.Drawing.Point(289, 94);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(57, 55);
-            this.button8.TabIndex = 658;
-            this.button8.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.button8.Size = new System.Drawing.Size(62, 54);
+            this.button8.TabIndex = 651;
             this.button8.UseVisualStyleBackColor = false;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -3717,13 +3595,6 @@ namespace Twol
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(1163, 847);
             this.Controls.Add(this.button8);
-            this.Controls.Add(this.label14);
-            this.Controls.Add(this.label13);
-            this.Controls.Add(this.label12);
-            this.Controls.Add(this.lblDistTotal);
-            this.Controls.Add(this.lblBobAvg);
-            this.Controls.Add(this.lblToolOffset);
-            this.Controls.Add(this.nudToolOffset);
             this.Controls.Add(this.flowLayoutPanelTop);
             this.Controls.Add(this.flp1);
             this.Controls.Add(this.panelNavigation);
@@ -3776,7 +3647,6 @@ namespace Twol
             this.panel_IO.ResumeLayout(false);
             this.panel_IO.PerformLayout();
             this.flowLayoutPanelTop.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.nudToolOffset)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3989,13 +3859,6 @@ namespace Twol
         public System.Windows.Forms.Button button7;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.NumericUpDown nudToolOffset;
-        public System.Windows.Forms.Label lblToolOffset;
-        public System.Windows.Forms.Label lblBobAvg;
-        public System.Windows.Forms.Label lblDistTotal;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label14;
         public System.Windows.Forms.Button button8;
     }
 }
