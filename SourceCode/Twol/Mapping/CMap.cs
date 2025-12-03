@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection.Emit;
+using System.Threading;
 using System.Windows.Forms;
 using Twol.Mapping;
 
@@ -25,6 +26,22 @@ namespace Twol
         /// Cache used to store tile images in memory.
         /// </summary>
         public ConcurrentBag<Tile> _Cache = new ConcurrentBag<Tile>();
+
+        /// <summary>
+        /// Pool of tiles to be requested from the server.
+        /// </summary>
+        private ConcurrentBag<Tile> _RequestPool = new ConcurrentBag<Tile>();
+
+        /// <summary>
+        /// Worker threads for processing tile requests to the server.
+        /// </summary>
+        private Thread[] _Workers = new Thread[10];
+
+        /// <summary>
+        /// Event handle to stop/resume requests processing.
+        /// </summary>
+        private EventWaitHandle _WorkerWaitHandle = new EventWaitHandle(false, EventResetMode.AutoReset);
+
 
         /// <summary>
         /// Gets size of map in tiles.
@@ -120,7 +137,82 @@ namespace Twol
         
         TileServer tileServer = new TileServer();
 
-        public Tile GetTile(int x, int y, int z, bool fromCacheOnly = true)
+
+        /// <summary>
+        /// Does a tile request to the tile server
+        /// </summary>
+        /// <param name="x">X-index of the tile to be requested.</param>
+        /// <param name="y">Y-index of the tile to be requested.</param>
+        /// <param name="z">Zoom level</param>
+        private void RequestTile(int x, int y, int z)
+        {
+            // Check the tile is already requested
+            if (!_RequestPool.Any(t => t.Z == z && t.X == x && t.Y == y))
+            {
+                _RequestPool.Add(new Tile(x, y, z));
+                _WorkerWaitHandle.Set();
+            }
+        }
+
+        /// <summary>
+        /// Background worker function. 
+        /// Processes tiles requests if requests pool is not empty, 
+        /// than stops execution until the pool gets a new image request.
+        /// Breaks execution on disposing.
+        /// </summary>
+        private void ProcessRequests()
+        {
+            while (!mf.IsDisposed)
+            {
+                // try to process all tile requests till pool is not empty
+                while (_RequestPool.TryTake(out Tile tile))
+                {
+                    Console.WriteLine($"{Thread.CurrentThread.Name} processing...");
+                    try
+                    {
+                        tile.Image = (tileServer.GetTile(tile.X, tile.Y, tile.Z));
+                        tile.Used = true;
+                    }
+                    catch (Exception ex)
+                    {
+                        // keep error text to be displayed instead of the tile
+                        tile.ErrorMessage = ex.Message;
+                    }
+                    finally
+                    {
+                        // if we have obtained image from the server, save it in file system (if server supports file system cache)
+                        if (tile.Image != null)
+                        {
+                            string localPath = Path.Combine(CacheFolder, $"{tile.Z}", $"{tile.X}", $"{tile.Y}.tile");
+                            try
+                            {
+                                Directory.CreateDirectory(Path.GetDirectoryName(localPath));
+
+
+                                tile.Image.Save(localPath);
+                                Debug.WriteLine($"saved {localPath}");
+                            }
+                            catch (Exception ex)
+                            {
+                                Debug.WriteLine($"Unable to save tile image {localPath}. Reason: {ex.Message}");
+                            }
+                        }
+
+                        // add tile to the memory cache
+                        if (tile.Image != null)
+                        {
+                            _Cache.Add(tile);
+                        }
+                    }
+
+                }
+
+                _WorkerWaitHandle.WaitOne();
+            }
+        }
+
+
+        public Tile GetTile(int x, int y, int z, bool fromCacheOnly = false)
         {
             try
             {
@@ -147,35 +239,12 @@ namespace Twol
                     }
                 }
 
-                // request tile from the server 
-                //if (!fromCacheOnly)
-                //{
-                //    //RequestTile(layer, x, y, z);
-                //}
-
-                tile = new Tile(tileServer.GetTile(x, y, z), x, y, z);
-                tile.Used = true;
-
-                localPath = Path.Combine(CacheFolder, $"{z}", $"{x}", $"{y}.tile");
-                try
+                //request tile from the server
+                if (!fromCacheOnly)
                 {
-                    Directory.CreateDirectory(Path.GetDirectoryName(localPath));
-
-
-                    tile.Image.Save(localPath);
-                    Debug.WriteLine($"saved {localPath}");
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine($"Unable to save tile image {localPath}. Reason: {ex.Message}");
+                    RequestTile(x, y, z);
                 }
 
-                // add tile to the memory cache
-                if (tile.Image != null || tile.ErrorMessage != null)
-                {
-                    _Cache.Add(tile);
-                    return tile;
-                }
 
                 return null;
             }
@@ -251,6 +320,17 @@ namespace Twol
         public CMap(FormGPS _f)
         {
             mf = _f;
+
+            // Intialize worker, if not yet initialized
+            for (int w = 0; w < _Workers.Length; w++)
+            {
+                _Workers[w] = new Thread(new ThreadStart(ProcessRequests));
+                _Workers[w].Name = $"Request worker #{w + 1}";
+                _Workers[w].IsBackground = true;
+                _Workers[w].Priority = ThreadPriority.Highest;
+                _Workers[w].Start();
+            }
+
         }
     }
 

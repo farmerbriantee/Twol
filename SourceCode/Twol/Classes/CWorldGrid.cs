@@ -103,6 +103,7 @@ namespace Twol
             {
                 mf.mapTexture = new uint[9];
                 PointF tileXY = mf.map.ToTilePos(CNMEA.lonStart, CNMEA.latStart, mf.map.ZoomLevel);
+
                 int tileX = (int)Math.Floor(tileXY.X);
                 int tileY = (int)Math.Floor(tileXY.Y);
 
