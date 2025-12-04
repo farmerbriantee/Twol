@@ -5,10 +5,14 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.NetworkInformation;
 using System.Reflection.Emit;
 using System.Threading;
 using System.Windows.Forms;
 using Twol.Mapping;
+using static System.Net.WebRequestMethods;
+using File = System.IO.File;
 
 namespace Twol
 {
@@ -16,6 +20,63 @@ namespace Twol
     {
         //copy of the mainform address
         private readonly FormGPS mf;
+
+        bool isInternetConnected = false;
+        public CMap(FormGPS _f)
+        {
+            mf = _f;
+
+            // Intialize worker, if not yet initialized
+            for (int w = 0; w < _Workers.Length; w++)
+            {
+                _Workers[w] = new Thread(new ThreadStart(ProcessRequests));
+                _Workers[w].Name = $"Request worker #{w + 1}";
+                _Workers[w].IsBackground = true;
+                _Workers[w].Priority = ThreadPriority.Highest;
+                _Workers[w].Start();
+            }
+
+            isInternetConnected = IsConnectedToInternet();
+
+        }
+
+        // Replaces the old IsConnectedToInternet() implementation.
+        public bool IsConnectedToInternet()
+        {
+            const string testUrl = "http://clients3.google.com/generate_204";
+            try
+            {
+                // Create a simple request to a known endpoint that returns 204 when online.
+                var request = (HttpWebRequest)WebRequest.Create(testUrl);
+                request.Method = "GET";
+                request.Timeout = 3000; // milliseconds
+                request.AllowAutoRedirect = false; // avoid captive portal redirects being followed
+                                                   // Some environments may require TLS settings; keep default for http endpoint.
+
+                using (var response = (HttpWebResponse)request.GetResponse())
+                {
+                    // 204 (NoContent) is the expected response for connectivity check.
+                    if (response.StatusCode == HttpStatusCode.NoContent || response.StatusCode == HttpStatusCode.OK)
+                        return true;
+                }
+            }
+            catch (WebException wex)
+            {
+                // If the server returned a response (e.g., captive portal), check its status code.
+                if (wex.Response is HttpWebResponse webResponse)
+                {
+                    if (webResponse.StatusCode == HttpStatusCode.NoContent || webResponse.StatusCode == HttpStatusCode.OK)
+                        return true;
+                }
+                // Otherwise fall through and return false.
+            }
+            catch
+            {
+                // Ignore other exceptions and report disconnected.
+            }
+
+            return false;
+        }
 
         /// <summary>
         /// Tile size, in pixels.
@@ -150,7 +211,7 @@ namespace Twol
             }
         }
 
-        public Tile GetTile(int x, int y, int z, bool fromCacheOnly = false)
+        public Tile GetTile(int x, int y, int z)
         {
             try
             {
@@ -178,7 +239,7 @@ namespace Twol
                 }
 
                 //request tile from the server
-                if (!fromCacheOnly)
+                if (!isInternetConnected)
                 {
                     RequestTile(x, y, z);
                 }
@@ -236,22 +297,6 @@ namespace Twol
             p.X = (float)(pixelX / 256);
             p.Y = (float)(pixelY / 256);
             return p;
-        }
-
-        public CMap(FormGPS _f)
-        {
-            mf = _f;
-
-            // Intialize worker, if not yet initialized
-            for (int w = 0; w < _Workers.Length; w++)
-            {
-                _Workers[w] = new Thread(new ThreadStart(ProcessRequests));
-                _Workers[w].Name = $"Request worker #{w + 1}";
-                _Workers[w].IsBackground = true;
-                _Workers[w].Priority = ThreadPriority.Highest;
-                _Workers[w].Start();
-            }
-
         }
     }
 
