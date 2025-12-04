@@ -41,9 +41,7 @@ namespace Twol
         {
             Color field = Settings.User.setDisplay_isDayMode ? Settings.User.colorFieldDay : Settings.User.colorFieldNight;
 
-            double bit = 256;
             //adjust bitmap zoom based on cam zoom
-
             double result = Math.Log(Settings.User.setDisplay_camZoom, 2);
 
             //if (Settings.User.setDisplay_camZoom > 128)
@@ -95,7 +93,7 @@ namespace Twol
 
             //meters per pixel
             double mpp = (Math.Cos(mf.pn.latitude * Math.PI / 180) * 2 * Math.PI * 6378137) / (256 * Math.Pow(2, mf.map.ZoomLevel));
-            bit = (mpp * 256);
+            double bit = (mpp * 256);
 
             double travelX = mf.pn.fix.easting / bit;
             double travelY = mf.pn.fix.northing / bit;

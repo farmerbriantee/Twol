@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -21,8 +20,27 @@ namespace Twol
         /// /checks if internet is connected
         /// If not connected, tiles won't be requested from server
         /// </summary>
-        bool isInternetConnected = false;
+        public readonly bool isInternetConnected = false;
 
+        /// <summary>
+        /// Backing field for <see cref="_CacheFolder"/> property.
+        /// </summary>
+        private readonly string _CacheFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "TWOL", "GoogleMapsSatelliteTileServer");
+
+        /// <summary>
+        /// Represents a private instance of the <see cref="TileServer"/> class.private _TileServer instance
+        /// </summary>
+        /// <remarks>This instance is used internally to manage tile-related operations.  It is
+        /// initialized as a readonly field and cannot be modified after construction.</remarks>
+        private readonly TileServer _TileServer = new TileServer();
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CMap"/> class and starts worker threads to process requests.
+        /// </summary>
+        /// <remarks>This constructor initializes the worker threads used for processing requests and
+        /// starts them immediately. It also checks the current internet connection status and sets the
+        /// <c>isInternetConnected</c> field accordingly.</remarks>
+        /// <param name="_f">The <see cref="FormGPS"/> instance associated with this map.</param>
         public CMap(FormGPS _f)
         {
             mf = _f;
@@ -30,10 +48,12 @@ namespace Twol
             // Intialize worker, if not yet initialized
             for (int w = 0; w < _Workers.Length; w++)
             {
-                _Workers[w] = new Thread(new ThreadStart(ProcessRequests));
-                _Workers[w].Name = $"Request worker #{w + 1}";
-                _Workers[w].IsBackground = true;
-                _Workers[w].Priority = ThreadPriority.Highest;
+                _Workers[w] = new Thread(new ThreadStart(ProcessRequests))
+                {
+                    Name = $"Request worker #{w + 1}",
+                    IsBackground = true,
+                    Priority = ThreadPriority.Highest
+                };
                 _Workers[w].Start();
             }
 
@@ -41,39 +61,24 @@ namespace Twol
         }
 
         /// <summary>
-        /// Tile size, in pixels.
-        /// </summary>
-        private const int TILE_SIZE = 256;
-
-        /// <summary>
         /// Cache used to store tile images in memory.
         /// </summary>
-        public ConcurrentBag<Tile> _Cache = new ConcurrentBag<Tile>();
+        public ConcurrentBag<Tile> tileCache = new ConcurrentBag<Tile>();
 
         /// <summary>
         /// Pool of tiles to be requested from the server.
         /// </summary>
-        private ConcurrentBag<Tile> _RequestPool = new ConcurrentBag<Tile>();
+        private readonly ConcurrentBag<Tile> _RequestPool = new ConcurrentBag<Tile>();
 
         /// <summary>
         /// Worker threads for processing tile requests to the server.
         /// </summary>
-        private Thread[] _Workers = new Thread[3];
+        private readonly Thread[] _Workers = new Thread[5];
 
         /// <summary>
         /// Event handle to stop/resume requests processing.
         /// </summary>
-        private EventWaitHandle _WorkerWaitHandle = new EventWaitHandle(false, EventResetMode.AutoReset);
-
-        /// <summary>
-        /// Gets size of map in tiles.
-        /// </summary>
-        private int FullMapSizeInTiles => 1 << ZoomLevel;
-
-        /// <summary>
-        /// Gets maps size in pixels.
-        /// </summary>
-        private int FullMapSizeInPixels => FullMapSizeInTiles * TILE_SIZE;
+        private readonly EventWaitHandle _WorkerWaitHandle = new EventWaitHandle(false, EventResetMode.AutoReset);
 
         /// <summary>
         /// Backing field for <see cref="ZoomLevel"/> property.
@@ -83,7 +88,6 @@ namespace Twol
         /// <summary>
         /// Map zoom level.
         /// </summary>
-        [Description("Map zoom level"), Category("Behavior")]
         public int ZoomLevel
         {
             get => _ZoomLevel;
@@ -91,26 +95,21 @@ namespace Twol
             {
                 if (value < 13 || value > 17) _ZoomLevel = 15;
                 else _ZoomLevel = value;
-
             }
         }
 
         /// <summary>
-        /// Backing field for <see cref="CacheFolder"/> property.
+        /// Gets the current instance of the tile server.
         /// </summary>
-        public string CacheFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "TWOL", "GoogleMapsSatelliteTileServer");
-
-        //private tileServer instance
-        readonly TileServer tileServer = new TileServer();
-        public TileServer TileServerInstance => tileServer;
+        public TileServer tileServerInstance => _TileServer;
 
         /// <summary>
-        /// Does a tile request to the tile server
+        /// Does a tile request to threaded worker pool.
         /// </summary>
         /// <param name="x">X-index of the tile to be requested.</param>
         /// <param name="y">Y-index of the tile to be requested.</param>
         /// <param name="z">Zoom level</param>
-        private void RequestTile(int x, int y, int z)
+        private void RequestTileFromTileServer(int x, int y, int z)
         {
             var key = $"{z}:{x}:{y}";
             // Ensure only one request per tile at a time
@@ -140,7 +139,7 @@ namespace Twol
                     var key = $"{tile.Z}:{tile.X}:{tile.Y}";
                     try
                     {
-                        tile.Image = TileServerInstance.GetTile(tile.X, tile.Y, tile.Z);
+                        tile.Image = tileServerInstance.GetImageFromTileOnServer(tile.X, tile.Y, tile.Z);
                         tile.Used = tile.Image != null;
                     }
                     catch (Exception ex)
@@ -153,7 +152,7 @@ namespace Twol
                         {
                             if (tile.Image != null)
                             {
-                                string localPath = Path.Combine(CacheFolder, $"{tile.Z}", $"{tile.X}", $"{tile.Y}.tile");
+                                string localPath = Path.Combine(_CacheFolder, $"{tile.Z}", $"{tile.X}", $"{tile.Y}.tile");
                                 var dir = Path.GetDirectoryName(localPath);
                                 if (!string.IsNullOrEmpty(dir))
                                 {
@@ -163,9 +162,10 @@ namespace Twol
                                 // Save image safely
                                 tile.Image.Save(localPath);
                                 Debug.WriteLine($"saved {localPath}");
-
+                                Thread.Sleep(20); // Give some time for file system
+                                Debug.WriteLine($"Thread {Thread.CurrentThread.Name} saved tile Z:{tile.Z} X:{tile.X} Y:{tile.Y}");
                                 // Add to the memory cache
-                                _Cache.Add(tile);
+                                tileCache.Add(tile);
                             }
                         }
                         catch (Exception ex)
@@ -189,6 +189,18 @@ namespace Twol
             }
         }
 
+        /// <summary>
+        /// Retrieves a tile at the specified coordinates and zoom level.
+        /// </summary>
+        /// <remarks>This method attempts to retrieve the tile from multiple sources in the following
+        /// order: memory cache, local file system, and, if online, a remote tile server. If the tile is found  in the
+        /// memory cache or local file system, it is returned immediately. If the tile is retrieved  from the remote
+        /// server, it may be cached for future use.</remarks>
+        /// <param name="x">The X coordinate of the tile.</param>
+        /// <param name="y">The Y coordinate of the tile.</param>
+        /// <param name="z">The zoom level of the tile.</param>
+        /// <returns>A <see cref="Tile"/> object representing the tile at the specified coordinates and zoom level,  or <see
+        /// langword="null"/> if the tile is not found or an error occurs.</returns>
         public Tile GetTile(int x, int y, int z)
         {
             try
@@ -196,11 +208,11 @@ namespace Twol
                 Tile tile;
 
                 // Try memory cache
-                tile = _Cache.FirstOrDefault(t => t.Z == z && t.X == x && t.Y == y);
+                tile = tileCache.FirstOrDefault(t => t.Z == z && t.X == x && t.Y == y);
                 if (tile != null) return tile;
 
                 // Try file system without locking the file
-                string localPath = Path.Combine(CacheFolder, $"{z}", $"{x}", $"{y}.tile");
+                string localPath = Path.Combine(_CacheFolder, $"{z}", $"{x}", $"{y}.tile");
                 if (File.Exists(localPath))
                 {
                     var fileInfo = new FileInfo(localPath);
@@ -212,7 +224,7 @@ namespace Twol
                             // Clone to detach from stream and avoid file lock
                             var cloned = new Bitmap(img);
                             tile = new Tile(cloned, x, y, z);
-                            _Cache.Add(tile);
+                            tileCache.Add(tile);
                             return tile;
                         }
                     }
@@ -221,7 +233,7 @@ namespace Twol
                 // Request from server if online
                 if (isInternetConnected)
                 {
-                    RequestTile(x, y, z);
+                    RequestTileFromTileServer(x, y, z);
                 }
 
                 return null;
@@ -232,6 +244,17 @@ namespace Twol
             }
         }
 
+        /// <summary>
+        /// Converts tile coordinates at a specific zoom level to a geographic position in the WGS84 coordinate system.
+        /// </summary>
+        /// <remarks>The method calculates the geographic position by interpreting the tile coordinates as
+        /// part of a global map grid. The latitude and longitude values are computed based on the Mercator projection
+        /// commonly used in web mapping.</remarks>
+        /// <param name="x">The x-coordinate of the tile.</param>
+        /// <param name="y">The y-coordinate of the tile.</param>
+        /// <param name="z">The zoom level of the tile. Must be a non-negative integer.</param>
+        /// <returns>A <see cref="GeoPnt"/> representing the geographic position, with latitude and longitude in the WGS84
+        /// coordinate system.</returns>
         public GeoPnt TileToWSG84Pos(double x, double y, int z)
         {
             GeoPnt g = new GeoPnt();
@@ -242,6 +265,17 @@ namespace Twol
             return g;
         }
 
+        /// <summary>
+        /// Converts geographic coordinates (longitude and latitude) to a tile position at a specified zoom level.
+        /// </summary>
+        /// <remarks>This method uses the Web Mercator projection (EPSG:3857) to map geographic
+        /// coordinates to a 2D tile grid. The resulting tile position is fractional, meaning the X and Y values may
+        /// include decimal points, which can be used for sub-tile precision.</remarks>
+        /// <param name="Longitude">The longitude of the geographic coordinate, in degrees. Valid values range from -180 to 180.</param>
+        /// <param name="Latitude">The latitude of the geographic coordinate, in degrees. Valid values range from -85.05112878 to 85.05112878.</param>
+        /// <param name="z">The zoom level, which determines the resolution of the tile grid. Must be a non-negative integer.</param>
+        /// <returns>A <see cref="PointF"/> representing the tile position. The X and Y values correspond to the fractional tile
+        /// coordinates at the specified zoom level.</returns>
         public PointF WSG84ToTilePos(double Longitude, double Latitude, int z)
         {
             var p = new PointF();
@@ -251,7 +285,15 @@ namespace Twol
             return p;
         }
 
-        // Replaces the old IsConnectedToInternet() implementation.
+        /// <summary>
+        /// Determines whether the system is connected to the internet by performing a connectivity check.
+        /// </summary>
+        /// <remarks>This method sends a request to a known endpoint and evaluates the response to
+        /// determine internet connectivity. It is designed to handle common scenarios such as captive portals and
+        /// network timeouts. The method returns <see langword="true"/> if the system is connected to the internet and
+        /// the endpoint responds with a status code of <see cref="HttpStatusCode.NoContent"/> or <see
+        /// cref="HttpStatusCode.OK"/>. Otherwise, it returns <see langword="false"/>.</remarks>
+        /// <returns><see langword="true"/> if the system is connected to the internet; otherwise, <see langword="false"/>.</returns>
         public bool IsConnectedToInternet()
         {
             const string testUrl = "http://clients3.google.com/generate_204";
@@ -289,9 +331,19 @@ namespace Twol
             return false;
         }
 
-        //safer concurrency
+        /// <summary>
+        /// Represents a thread-safe collection of in-flight operations, identified by a unique string key.
+        /// </summary>
+        /// <remarks>This dictionary is used to track operations that are currently in progress. The keys
+        /// represent unique identifiers for the operations, and the values are placeholders (of type <see
+        /// cref="byte"/>) that are not used for any specific purpose.</remarks>
         private readonly ConcurrentDictionary<string, byte> _InFlight = new ConcurrentDictionary<string, byte>();
 
-        private volatile bool _Shutdown;
+        /// <summary>
+        /// Indicates whether the system is in a shutdown state.
+        /// </summary>
+        /// <remarks>This field is read-only and is intended to track the shutdown status of the system.
+        /// It is not exposed publicly and should only be used internally within the class.</remarks>
+        private readonly bool _Shutdown;
     }
 }

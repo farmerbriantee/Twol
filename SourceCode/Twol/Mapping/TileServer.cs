@@ -2,12 +2,11 @@
 using System.Drawing;
 using System.IO;
 using System.Net;
-using System.Threading;
 
 namespace Twol.Mapping
 {
     /// <summary>
-    /// Base class for all web tile servers
+    /// Request tiles from Google Maps tile server
     /// </summary>
     public class TileServer
     {
@@ -21,7 +20,7 @@ namespace Twol.Mapping
         /// <param name="y">Y-coordinate of the tile.</param>
         /// <param name="z">Zoom level</param>
         /// <returns></returns>
-        public Image GetTile(int x, int y, int z)
+        public Image GetImageFromTileOnServer(int x, int y, int z)
         {
             try
             {
@@ -42,12 +41,11 @@ namespace Twol.Mapping
             }
         }
 
-        public Uri GetTileUri(int x, int y, int z)
+        private Uri GetTileUri(int x, int y, int z)
         {
             int ind = Random.Next(0, 4);
             return new Uri($"http://mt{ind}.google.com/vt/lyrs=s&hl=en&x={x}&y={y}&z={z}");
         }
-
 
         /// <summary>
         /// Base constructor for initializing <see cref="WebTileServer"/>.

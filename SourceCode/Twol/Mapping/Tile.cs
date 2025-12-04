@@ -46,7 +46,7 @@ namespace Twol.Mapping
         public bool Used { get; set; }
 
         /// <summary>
-        /// Creates new tile with X/Y indices, zoom level, and tileServer name.
+        /// Creates new tile with X/Y indices, zoom level, and _TileServer name.
         /// </summary>
         /// <param name="x">X-index of the tile.</param>
         /// <param name="y">Y-index of the tile.</param>
@@ -60,7 +60,7 @@ namespace Twol.Mapping
         }
 
         /// <summary>
-        /// Creates new tile with image, X/Y indices, zoom level, and tileServer name.
+        /// Creates new tile with image, X/Y indices, zoom level, and _TileServer name.
         /// </summary>
         /// <param name="image">Tile image</param>
         /// <param name="x">X-index of the tile.</param>
