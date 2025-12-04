@@ -17,12 +17,6 @@ namespace Twol
         private readonly FormGPS mf;
 
         /// <summary>
-        /// /checks if internet is connected
-        /// If not connected, tiles won't be requested from server
-        /// </summary>
-        public readonly bool isInternetConnected = false;
-
-        /// <summary>
         /// Backing field for <see cref="_CacheFolder"/> property.
         /// </summary>
         private readonly string _CacheFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "TWOL", "GoogleMapsSatelliteTileServer");
@@ -79,6 +73,21 @@ namespace Twol
         /// Event handle to stop/resume requests processing.
         /// </summary>
         private readonly EventWaitHandle _WorkerWaitHandle = new EventWaitHandle(false, EventResetMode.AutoReset);
+
+        /// <summary>
+        /// Represents a thread-safe collection of in-flight operations, identified by a unique string key.
+        /// </summary>
+        /// <remarks>This dictionary is used to track operations that are currently in progress. The keys
+        /// represent unique identifiers for the operations, and the values are placeholders (of type <see
+        /// cref="byte"/>) that are not used for any specific purpose.</remarks>
+        private readonly ConcurrentDictionary<string, byte> _InFlight = new ConcurrentDictionary<string, byte>();
+
+        /// <summary>
+        /// Indicates whether the system is in a shutdown state.
+        /// </summary>
+        /// <remarks>This field is read-only and is intended to track the shutdown status of the system.
+        /// It is not exposed publicly and should only be used internally within the class.</remarks>
+        private readonly bool _Shutdown;
 
         /// <summary>
         /// Backing field for <see cref="ZoomLevel"/> property.
@@ -287,64 +296,49 @@ namespace Twol
         }
 
         /// <summary>
-        /// Determines whether the system is connected to the internet by performing a connectivity check.
+        /// /checks if internet is connected
+        /// If not connected, tiles won't be requested from server
         /// </summary>
-        /// <remarks>This method sends a request to a known endpoint and evaluates the response to
-        /// determine internet connectivity. It is designed to handle common scenarios such as captive portals and
-        /// network timeouts. The method returns <see langword="true"/> if the system is connected to the internet and
-        /// the endpoint responds with a status code of <see cref="HttpStatusCode.NoContent"/> or <see
-        /// cref="HttpStatusCode.OK"/>. Otherwise, it returns <see langword="false"/>.</remarks>
-        /// <returns><see langword="true"/> if the system is connected to the internet; otherwise, <see langword="false"/>.</returns>
+        public bool isInternetConnected;
+
         public bool IsConnectedToInternet()
         {
-            const string testUrl = "http://clients3.google.com/generate_204";
-            try
+            // Fire-and-forget connectivity probe; returns immediately with last known state.
+            ThreadPool.QueueUserWorkItem(_ =>
             {
-                // Create a simple request to a known endpoint that returns 204 when online.
-                var request = (HttpWebRequest)WebRequest.Create(testUrl);
-                request.Method = "GET";
-                request.Timeout = 3000; // milliseconds
-                request.AllowAutoRedirect = false; // avoid captive portal redirects being followed
-                                                   // Some environments may require TLS settings; keep default for http endpoint.
+                const string testUrl = "http://clients3.google.com/generate_204";
+                bool connected = false;
 
-                using (var response = (HttpWebResponse)request.GetResponse())
+                try
                 {
-                    // 204 (NoContent) is the expected response for connectivity check.
-                    if (response.StatusCode == HttpStatusCode.NoContent || response.StatusCode == HttpStatusCode.OK)
-                        return true;
-                }
-            }
-            catch (WebException wex)
-            {
-                // If the server returned a response (e.g., captive portal), check its status code.
-                if (wex.Response is HttpWebResponse webResponse)
-                {
-                    if (webResponse.StatusCode == HttpStatusCode.NoContent || webResponse.StatusCode == HttpStatusCode.OK)
-                        return true;
-                }
-                // Otherwise fall through and return false.
-            }
-            catch
-            {
-                // Ignore other exceptions and report disconnected.
-            }
+                    var request = (HttpWebRequest)WebRequest.Create(testUrl);
+                    request.Method = "GET";
+                    request.Timeout = 3000;
+                    request.AllowAutoRedirect = false;
 
-            return false;
+                    using (var response = (HttpWebResponse)request.GetResponse())
+                    {
+                        connected = response.StatusCode == HttpStatusCode.NoContent || response.StatusCode == HttpStatusCode.OK;
+                    }
+                }
+                catch (WebException wex)
+                {
+                    if (wex.Response is HttpWebResponse webResponse)
+                    {
+                        connected = webResponse.StatusCode == HttpStatusCode.NoContent || webResponse.StatusCode == HttpStatusCode.OK;
+                    }
+                }
+                catch
+                {
+                    connected = false;
+                }
+
+                // Update cached state without blocking caller.
+                isInternetConnected = connected;
+            });
+
+            // Return the last known connectivity state immediately (non-blocking).
+            return isInternetConnected;
         }
-
-        /// <summary>
-        /// Represents a thread-safe collection of in-flight operations, identified by a unique string key.
-        /// </summary>
-        /// <remarks>This dictionary is used to track operations that are currently in progress. The keys
-        /// represent unique identifiers for the operations, and the values are placeholders (of type <see
-        /// cref="byte"/>) that are not used for any specific purpose.</remarks>
-        private readonly ConcurrentDictionary<string, byte> _InFlight = new ConcurrentDictionary<string, byte>();
-
-        /// <summary>
-        /// Indicates whether the system is in a shutdown state.
-        /// </summary>
-        /// <remarks>This field is read-only and is intended to track the shutdown status of the system.
-        /// It is not exposed publicly and should only be used internally within the class.</remarks>
-        private readonly bool _Shutdown;
     }
 }
