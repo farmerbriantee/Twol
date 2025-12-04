@@ -40,6 +40,7 @@ namespace Twol
         public void DrawFieldSurface()
         {
             Color field = Settings.User.setDisplay_isDayMode ? Settings.User.colorFieldDay : Settings.User.colorFieldNight;
+
             double bit = 256;
             //adjust bitmap zoom based on cam zoom
 
@@ -83,8 +84,8 @@ namespace Twol
                 {
                     isSet = false;
                     lastZoom = 16;
-                     mf.map.ZoomLevel = 17;
-               }
+                    mf.map.ZoomLevel = 17;
+                }
                 Count = 32;
             }
             else
@@ -102,12 +103,12 @@ namespace Twol
             if (!isSet)
             {
                 mf.mapTexture = new uint[9];
-                PointF tileXY = mf.map.ToTilePos(CNMEA.lonStart, CNMEA.latStart, mf.map.ZoomLevel);
+                PointF tileXY = mf.map.WSG84ToTilePos(CNMEA.lonStart, CNMEA.latStart, mf.map.ZoomLevel);
                 int tileX = (int)Math.Floor(tileXY.X);
                 int tileY = (int)Math.Floor(tileXY.Y);
 
-                offsetX = (0.5 - (tileXY.X - (int)tileXY.X)) * mpp *256;
-                offsetY = ((tileXY.Y - (int)tileXY.Y) - 0.5) * mpp *256;
+                offsetX = (0.5 - (tileXY.X - (int)tileXY.X)) * mpp * 256;
+                offsetY = ((tileXY.Y - (int)tileXY.Y) - 0.5) * mpp * 256;
 
                 //set to top-left tile
                 tileX = tileX - 1 - (int)travelX;
@@ -116,14 +117,14 @@ namespace Twol
                 int tex = 0;
                 for (int i = 0; i < 3; i++)
                 {
-                    for (int j = 0; j < 3; j++) 
+                    for (int j = 0; j < 3; j++)
                     {
                         //if (tile == null)
                         {
                             int tx = tileX + i;
                             int ty = tileY + j;
                             tile = mf.map.GetTile(tileX + i, tileY + j, mf.map.ZoomLevel);
-                            
+
                             if (tile != null)
                             {
                                 GL.GenTextures(1, out mf.mapTexture[tex]);
@@ -162,7 +163,7 @@ namespace Twol
                 isSet = true;
             }
 
-            GL.Color3(0.542,0.542,0.542);
+            GL.Color3(0.542, 0.542, 0.542);
             if (Settings.User.setDisplay_isTextureOn && mf.mapTexture != null)
             {
                 GL.Enable(EnableCap.Texture2D);
@@ -179,7 +180,7 @@ namespace Twol
                             GL.BindTexture(TextureTarget.Texture2D, mf.texture[(int)FormGPS.textures.Floor]);
                         }
 
-                            double ii = i * bit;  //x
+                        double ii = i * bit;  //x
                         double jj = j * bit;   //y
                         double bitt = bit / 2;
                         GL.Begin(PrimitiveType.TriangleStrip);

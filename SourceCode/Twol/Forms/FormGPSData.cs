@@ -53,7 +53,7 @@ namespace Twol
 
             lblAltitude.Text = mf.Altitude;
 
-            PointF tileXY = mf.map.ToTilePos(mf.pn.longitude, mf.pn.latitude, mf.map.ZoomLevel);
+            PointF tileXY = mf.map.WSG84ToTilePos(mf.pn.longitude, mf.pn.latitude, mf.map.ZoomLevel);
 
             lblZ.Text = mf.map.ZoomLevel.ToString();
 

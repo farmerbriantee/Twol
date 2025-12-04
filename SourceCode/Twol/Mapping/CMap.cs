@@ -6,12 +6,8 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Net.NetworkInformation;
-using System.Reflection.Emit;
 using System.Threading;
-using System.Windows.Forms;
 using Twol.Mapping;
-using static System.Net.WebRequestMethods;
 using File = System.IO.File;
 
 namespace Twol
@@ -21,7 +17,12 @@ namespace Twol
         //copy of the mainform address
         private readonly FormGPS mf;
 
+        /// <summary>
+        /// /checks if internet is connected
+        /// If not connected, tiles won't be requested from server
+        /// </summary>
         bool isInternetConnected = false;
+
         public CMap(FormGPS _f)
         {
             mf = _f;
@@ -37,45 +38,6 @@ namespace Twol
             }
 
             isInternetConnected = IsConnectedToInternet();
-
-        }
-
-        // Replaces the old IsConnectedToInternet() implementation.
-        public bool IsConnectedToInternet()
-        {
-            const string testUrl = "http://clients3.google.com/generate_204";
-            try
-            {
-                // Create a simple request to a known endpoint that returns 204 when online.
-                var request = (HttpWebRequest)WebRequest.Create(testUrl);
-                request.Method = "GET";
-                request.Timeout = 3000; // milliseconds
-                request.AllowAutoRedirect = false; // avoid captive portal redirects being followed
-                                                   // Some environments may require TLS settings; keep default for http endpoint.
-
-                using (var response = (HttpWebResponse)request.GetResponse())
-                {
-                    // 204 (NoContent) is the expected response for connectivity check.
-                    if (response.StatusCode == HttpStatusCode.NoContent || response.StatusCode == HttpStatusCode.OK)
-                        return true;
-                }
-            }
-            catch (WebException wex)
-            {
-                // If the server returned a response (e.g., captive portal), check its status code.
-                if (wex.Response is HttpWebResponse webResponse)
-                {
-                    if (webResponse.StatusCode == HttpStatusCode.NoContent || webResponse.StatusCode == HttpStatusCode.OK)
-                        return true;
-                }
-                // Otherwise fall through and return false.
-            }
-            catch
-            {
-                // Ignore other exceptions and report disconnected.
-            }
-
-            return false;
         }
 
         /// <summary>
@@ -150,8 +112,9 @@ namespace Twol
         /// <param name="z">Zoom level</param>
         private void RequestTile(int x, int y, int z)
         {
-            // Check the tile is already requested
-            if (!_RequestPool.Any(t => t.Z == z && t.X == x && t.Y == y))
+            var key = $"{z}:{x}:{y}";
+            // Ensure only one request per tile at a time
+            if (_InFlight.TryAdd(key, 0))
             {
                 _RequestPool.Add(new Tile(x, y, z));
                 _WorkerWaitHandle.Set();
@@ -166,48 +129,63 @@ namespace Twol
         /// </summary>
         private void ProcessRequests()
         {
-            while (!mf.IsDisposed)
+            while (!_Shutdown && !(mf?.IsDisposed ?? true))
             {
-                // try to process all tile requests till pool is not empty
+                bool processedAny = false;
+
+                // Drain the request pool
                 while (_RequestPool.TryTake(out Tile tile))
                 {
-                    Console.WriteLine($"{Thread.CurrentThread.Name} processing...");
+                    processedAny = true;
+                    var key = $"{tile.Z}:{tile.X}:{tile.Y}";
                     try
                     {
-                        tile.Image = (TileServerInstance.GetTile(tile.X, tile.Y, tile.Z));
-                        tile.Used = true;
+                        tile.Image = TileServerInstance.GetTile(tile.X, tile.Y, tile.Z);
+                        tile.Used = tile.Image != null;
                     }
                     catch (Exception ex)
                     {
-                        // keep error text to be displayed instead of the tile
                         tile.ErrorMessage = ex.Message;
                     }
                     finally
                     {
-                        // if we have obtained image from the server, save it in file system (if server supports file system cache)
-                        if (tile.Image != null)
+                        try
                         {
-                            string localPath = Path.Combine(CacheFolder, $"{tile.Z}", $"{tile.X}", $"{tile.Y}.tile");
-                            try
+                            if (tile.Image != null)
                             {
-                                Directory.CreateDirectory(Path.GetDirectoryName(localPath));
+                                string localPath = Path.Combine(CacheFolder, $"{tile.Z}", $"{tile.X}", $"{tile.Y}.tile");
+                                var dir = Path.GetDirectoryName(localPath);
+                                if (!string.IsNullOrEmpty(dir))
+                                {
+                                    Directory.CreateDirectory(dir);
+                                }
+
+                                // Save image safely
                                 tile.Image.Save(localPath);
                                 Debug.WriteLine($"saved {localPath}");
-                            }
-                            catch (Exception ex)
-                            {
-                                Debug.WriteLine($"Unable to save tile image {localPath}. Reason: {ex.Message}");
+
+                                // Add to the memory cache
+                                _Cache.Add(tile);
                             }
                         }
-
-                        // add tile to the memory cache
-                        if (tile.Image != null)
+                        catch (Exception ex)
                         {
-                            _Cache.Add(tile);
+                            Debug.WriteLine($"Unable to save tile image. Reason: {ex.Message}");
+                        }
+                        finally
+                        {
+                            // Clear in-flight marker
+                            byte _;
+                            _InFlight.TryRemove(key, out _);
                         }
                     }
                 }
-                _WorkerWaitHandle.WaitOne();
+
+                // If nothing processed, wait for new requests
+                if (!processedAny)
+                {
+                    _WorkerWaitHandle.WaitOne();
+                }
             }
         }
 
@@ -217,33 +195,34 @@ namespace Twol
             {
                 Tile tile;
 
-                // try to get tile from memory cache
+                // Try memory cache
                 tile = _Cache.FirstOrDefault(t => t.Z == z && t.X == x && t.Y == y);
-                if (tile != null)
-                {
-                    return tile;
-                }
+                if (tile != null) return tile;
 
-                // try to get tile from file system
+                // Try file system without locking the file
                 string localPath = Path.Combine(CacheFolder, $"{z}", $"{x}", $"{y}.tile");
                 if (File.Exists(localPath))
                 {
                     var fileInfo = new FileInfo(localPath);
                     if (fileInfo.Length > 0)
                     {
-                        Image image = Image.FromFile(localPath);
-                        tile = new Tile(image, x, y, z);
-                        _Cache.Add(tile);
-                        return tile;
+                        using (var fs = new FileStream(localPath, FileMode.Open, FileAccess.Read, FileShare.Read))
+                        using (var img = Image.FromStream(fs))
+                        {
+                            // Clone to detach from stream and avoid file lock
+                            var cloned = new Bitmap(img);
+                            tile = new Tile(cloned, x, y, z);
+                            _Cache.Add(tile);
+                            return tile;
+                        }
                     }
                 }
 
-                //request tile from the server
-                if (!isInternetConnected)
+                // Request from server if online
+                if (isInternetConnected)
                 {
                     RequestTile(x, y, z);
                 }
-
 
                 return null;
             }
@@ -253,7 +232,7 @@ namespace Twol
             }
         }
 
-        public GeoPnt TileToWorldPos(double x, double y, int z)
+        public GeoPnt TileToWSG84Pos(double x, double y, int z)
         {
             GeoPnt g = new GeoPnt();
             double z1 = 1 << z;
@@ -263,17 +242,7 @@ namespace Twol
             return g;
         }
 
-        /// <inheritdoc />
-        public PointF WorldToTilePos(GeoPnt g, int z)
-        {
-            var p = new PointF();
-            double z1 = 1 << z;
-            p.X = (float)((g.Longitude + 180.0) / 360.0 * z1);
-            p.Y = (float)((1.0 - Math.Log(Math.Tan(g.Latitude * Math.PI / 180.0) + 1.0 / Math.Cos(g.Latitude * Math.PI / 180.0)) / Math.PI) / 2.0 * z1);
-            return p;
-        }
-
-        public PointF ToTilePos(double Longitude, double Latitude, int z)
+        public PointF WSG84ToTilePos(double Longitude, double Latitude, int z)
         {
             var p = new PointF();
             double z1 = 1 << z;
@@ -282,47 +251,47 @@ namespace Twol
             return p;
         }
 
-        public PointF LatLongToTileXY(double latitude, double longitude, int zoom)
+        // Replaces the old IsConnectedToInternet() implementation.
+        public bool IsConnectedToInternet()
         {
-            // Clip latitude to the valid range for Mercator projection
-            //latitude = Math.Max(Math.Min(latitude, MaxLatitude), MinLatitude);
-            var p = new PointF();
+            const string testUrl = "http://clients3.google.com/generate_204";
+            try
+            {
+                // Create a simple request to a known endpoint that returns 204 when online.
+                var request = (HttpWebRequest)WebRequest.Create(testUrl);
+                request.Method = "GET";
+                request.Timeout = 3000; // milliseconds
+                request.AllowAutoRedirect = false; // avoid captive portal redirects being followed
+                                                   // Some environments may require TLS settings; keep default for http endpoint.
 
-            // Convert to pixel coordinates (global)
-            double sinLatitude = Math.Sin(latitude * Math.PI / 180.0);
-            double pixelX = ((longitude + 180.0) / 360.0) * 256 * Math.Pow(2, zoom);
-            double pixelY = (0.5 - Math.Log((1 + sinLatitude) / (1 - sinLatitude)) / (4 * Math.PI)) * 256 * Math.Pow(2, zoom);
+                using (var response = (HttpWebResponse)request.GetResponse())
+                {
+                    // 204 (NoContent) is the expected response for connectivity check.
+                    if (response.StatusCode == HttpStatusCode.NoContent || response.StatusCode == HttpStatusCode.OK)
+                        return true;
+                }
+            }
+            catch (WebException wex)
+            {
+                // If the server returned a response (e.g., captive portal), check its status code.
+                if (wex.Response is HttpWebResponse webResponse)
+                {
+                    if (webResponse.StatusCode == HttpStatusCode.NoContent || webResponse.StatusCode == HttpStatusCode.OK)
+                        return true;
+                }
+                // Otherwise fall through and return false.
+            }
+            catch
+            {
+                // Ignore other exceptions and report disconnected.
+            }
 
-            // Convert pixel coordinates to tile coordinates by integer division
-            p.X = (float)(pixelX / 256);
-            p.Y = (float)(pixelY / 256);
-            return p;
+            return false;
         }
-    }
 
-    public struct GeoPnt
-    {
-        public static GeoPnt Empty = new GeoPnt();
+        //safer concurrency
+        private readonly ConcurrentDictionary<string, byte> _InFlight = new ConcurrentDictionary<string, byte>();
 
-        /// <summary>
-        /// Longitude of the point, in degrees, from 0 to ±180, positive East, negative West. 0 is a point on prime meridian.
-        /// </summary>
-        public float Longitude { get; set; }
-
-        /// <summary>
-        /// Latitude of the point, in degrees, from +90 (North pole) to -90 (South Pole). 0 is a point on equator.
-        /// </summary>
-        public float Latitude { get; set; }
-
-        /// <summary>
-        /// Creates new instance of <see cref="GeoPnt"/> and initializes it with longitude and latitude values.
-        /// </summary>
-        /// <param name="longitude">Longitude of the point, in degrees, from 0 to ±180, positive East, negative West. 0 is a point on prime meridian.</param>
-        /// <param name="latitude">Latitude of the point, in degrees, from +90 (North pole) to -90 (South Pole). 0 is a point on equator.</param>
-        public GeoPnt(float longitude, float latitude)
-        {
-            Longitude = longitude;
-            Latitude = latitude;
-        }
+        private volatile bool _Shutdown;
     }
 }
