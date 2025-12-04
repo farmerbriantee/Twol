@@ -17,18 +17,6 @@ namespace Twol
         private readonly FormGPS mf;
 
         /// <summary>
-        /// Backing field for <see cref="_CacheFolder"/> property.
-        /// </summary>
-        private readonly string _CacheFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "TWOL", "Tiles");
-
-        /// <summary>
-        /// Represents a private instance of the <see cref="TileServer"/> class.private _TileServer instance
-        /// </summary>
-        /// <remarks>This instance is used internally to manage tile-related operations.  It is
-        /// initialized as a readonly field and cannot be modified after construction.</remarks>
-        private readonly TileServer _TileServer = new TileServer();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="CMap"/> class and starts worker threads to process requests.
         /// </summary>
         /// <remarks>This constructor initializes the worker threads used for processing requests and
@@ -54,40 +42,21 @@ namespace Twol
             isInternetConnected = CheckInternetConnection();
         }
 
+        #region Cache And Folder
+
+        /// <summary>
+        /// Backing field for <see cref="_CacheFolder"/> property.
+        /// </summary>
+        private readonly string _CacheFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "TWOL", "Tiles");
+
         /// <summary>
         /// Cache used to store tile images in memory.
         /// </summary>
         public ConcurrentBag<Tile> tileCache = new ConcurrentBag<Tile>();
 
-        /// <summary>
-        /// Pool of tiles to be requested from the server.
-        /// </summary>
-        private readonly ConcurrentBag<Tile> _RequestPool = new ConcurrentBag<Tile>();
+        #endregion
 
-        /// <summary>
-        /// Worker threads for processing tile requests to the server.
-        /// </summary>
-        private readonly Thread[] _Workers = new Thread[5];
-
-        /// <summary>
-        /// Event handle to stop/resume requests processing.
-        /// </summary>
-        private readonly EventWaitHandle _WorkerWaitHandle = new EventWaitHandle(false, EventResetMode.AutoReset);
-
-        /// <summary>
-        /// Represents a thread-safe collection of in-flight operations, identified by a unique string key.
-        /// </summary>
-        /// <remarks>This dictionary is used to track operations that are currently in progress. The keys
-        /// represent unique identifiers for the operations, and the values are placeholders (of type <see
-        /// cref="byte"/>) that are not used for any specific purpose.</remarks>
-        private readonly ConcurrentDictionary<string, byte> _InFlight = new ConcurrentDictionary<string, byte>();
-
-        /// <summary>
-        /// Indicates whether the system is in a shutdown state.
-        /// </summary>
-        /// <remarks>This field is read-only and is intended to track the shutdown status of the system.
-        /// It is not exposed publicly and should only be used internally within the class.</remarks>
-        public bool isShuttingDown = false;
+        #region Zoom
 
         /// <summary>
         /// Backing field for <see cref="ZoomLevel"/> property.
@@ -107,10 +76,51 @@ namespace Twol
             }
         }
 
+        #endregion
+
+        #region Tile Server Instance
+
+        /// <summary>
+        /// Represents a private instance of the <see cref="TileServer"/> class.private _TileServer instance
+        /// </summary>
+        /// <remarks>This instance is used internally to manage tile-related operations.  It is
+        /// initialized as a readonly field and cannot be modified after construction.</remarks>
+        private readonly TileServer _TileServer = new TileServer();
+
         /// <summary>
         /// Gets the current instance of the tile server.
         /// </summary>
         public TileServer tileServerInstance => _TileServer;
+
+        /// <summary>
+        /// Pool of tiles to be requested from the server.
+        /// </summary>
+        private readonly ConcurrentBag<Tile> _RequestPool = new ConcurrentBag<Tile>();
+
+        /// <summary>
+        /// Represents a thread-safe collection of in-flight operations, identified by a unique string key.
+        /// </summary>
+        /// <remarks>This dictionary is used to track operations that are currently in progress. The keys
+        /// represent unique identifiers for the operations, and the values are placeholders (of type <see
+        /// cref="byte"/>) that are not used for any specific purpose.</remarks>
+        private readonly ConcurrentDictionary<string, byte> _InFlight = new ConcurrentDictionary<string, byte>();
+
+        /// <summary>
+        /// Worker threads for processing tile requests to the server.
+        /// </summary>
+        private readonly Thread[] _Workers = new Thread[5];
+
+        /// <summary>
+        /// Event handle to stop/resume requests processing.
+        /// </summary>
+        private readonly EventWaitHandle _WorkerWaitHandle = new EventWaitHandle(false, EventResetMode.AutoReset);
+
+        /// <summary>
+        /// Indicates whether the system is in a shutdown state.
+        /// </summary>
+        /// <remarks>This field is read-only and is intended to track the shutdown status of the system.
+        /// It is not exposed publicly and should only be used internally within the class.</remarks>
+        public bool isShuttingDown = false;
 
         /// <summary>
         /// Does a tile request to threaded worker pool.
@@ -198,6 +208,10 @@ namespace Twol
                 }
             }
         }
+
+        #endregion
+
+        #region Tile Location Functions
 
         /// <summary>
         /// Retrieves a tile at the specified coordinates and zoom level.
@@ -295,6 +309,10 @@ namespace Twol
             return p;
         }
 
+        #endregion
+
+        #region Connected Internet Check
+
         /// <summary>
         /// /checks if internet is connected
         /// If not connected, tiles won't be requested from server
@@ -340,5 +358,7 @@ namespace Twol
             // Return the last known connectivity state immediately (non-blocking).
             return isInternetConnected;
         }
+
+        #endregion
     }
 }
