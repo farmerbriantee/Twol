@@ -554,6 +554,8 @@ namespace Twol
                 return;
             }
 
+            map.isShuttingDown = true;
+
             if (isFieldStarted)
             {
                 SetWorkState(btnStates.Off);

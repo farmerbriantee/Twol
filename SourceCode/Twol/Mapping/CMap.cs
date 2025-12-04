@@ -87,7 +87,7 @@ namespace Twol
         /// </summary>
         /// <remarks>This field is read-only and is intended to track the shutdown status of the system.
         /// It is not exposed publicly and should only be used internally within the class.</remarks>
-        private readonly bool _Shutdown;
+        public bool isShuttingDown = false;
 
         /// <summary>
         /// Backing field for <see cref="ZoomLevel"/> property.
@@ -137,7 +137,7 @@ namespace Twol
         /// </summary>
         private void ProcessRequests()
         {
-            while (!_Shutdown && !(mf?.IsDisposed ?? true))
+            while (!isShuttingDown && !(mf?.IsDisposed ?? true))
             {
                 bool processedAny = false;
 
