@@ -56,7 +56,7 @@ namespace Twol
         /// <summary>
         /// Backing field for <see cref="ZoomLevel"/> property.
         /// </summary>
-        public int _ZoomLevel = 15;
+        private int _ZoomLevel = 15;
 
         /// <summary>
         /// Map zoom level.
@@ -67,12 +67,9 @@ namespace Twol
             get => _ZoomLevel;
             set
             {
-                if (value < 0 || value > 19)
-                    throw new ArgumentException($"{value} is an incorrect value for {nameof(ZoomLevel)} property. Value should be in range from 0 to 19.");
+                if (value < 13 || value > 17) _ZoomLevel = 15;
+                else _ZoomLevel = value;
 
-                _ZoomLevel = value;
-                //SetZoomLevel(value, new Point(Width / 2, Height / 2));
-                //CenterChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -81,61 +78,10 @@ namespace Twol
         /// </summary>
         public string CacheFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "TWOL", "GoogleMapsSatelliteTileServer");
 
-        /// <summary>
-        /// Gets or sets minimal zoom level.
-        /// </summary>
-        public int MinZoomLevel = 12;
 
-        /// <summary>
-        /// Backing field for <see cref="MaxZoomLevel"/> property.
-        /// </summary>
-        public int MaxZoomLevel = 19;
-
-
-        /// <summary>
-        /// Sets zoom level with specifying central point to zoom in/out.
-        /// </summary>
-        /// <param name="z">Zoom level to be set.</param>
-        /// <param name="p">Central point to zoom in/out.</param>
-        
-        private void SetZoomLevel(int z, Point p)
-        {
-            //int max = Layers.Any() ? Math.Min(MaxZoomLevel, Layers.Min(lay => lay.TileServer.MaxZoomLevel)) : MaxZoomLevel;
-            //int min = Layers.Any() ? Math.Max(MinZoomLevel, Layers.Max(lay => lay.TileServer.MinZoomLevel)) : MinZoomLevel;
-
-            //if (z < min) z = min;
-            //if (z > max) z = max;
-
-            //if (z != _ZoomLevel)
-            //{
-            //    double factor = Math.Pow(2, z - _ZoomLevel);
-            //    _ZoomLevel = z;
-
-            //    foreach (var layer in Layers)
-            //    {
-            //        layer.Offset.X = (int)((layer.Offset.X - p.X) * factor) + p.X;
-            //        layer.Offset.Y = (int)((layer.Offset.Y - p.Y) * factor) + p.Y;
-            //        layer.Offset.X = (int)(layer.Offset.X % FullMapSizeInPixels);
-            //    }
-
-            //    UpdateOffsets();
-
-            //    //ZoomLevelChaged?.Invoke(this, EventArgs.Empty);
-            //}
-        }
-
-        /// <summary>
-        /// Gets tile image by X and Y indices and zoom level.
-        /// </summary>
-        /// <param name="x">X-index of the tile.</param>
-        /// <param name="y">Y-index of the tile.</param>
-        /// <param name="z">Zoom level.</param>
-        /// <param name="fromCacheOnly">Flag indicating the tile can be fetched from cache only (server request is not allowed).</param>
-        /// <returns><see cref="Tile"/> instance.</returns>
-        /// 
-
-        
-        TileServer tileServer = new TileServer();
+        //private tileServer instance
+        readonly TileServer tileServer = new TileServer();
+        public TileServer TileServerInstance => tileServer;
 
 
         /// <summary>
@@ -170,7 +116,7 @@ namespace Twol
                     Console.WriteLine($"{Thread.CurrentThread.Name} processing...");
                     try
                     {
-                        tile.Image = (tileServer.GetTile(tile.X, tile.Y, tile.Z));
+                        tile.Image = (TileServerInstance.GetTile(tile.X, tile.Y, tile.Z));
                         tile.Used = true;
                     }
                     catch (Exception ex)
@@ -253,23 +199,6 @@ namespace Twol
                 return null;
             }
         }
-
-        /// <summary>
-        /// Does a tile request to the tile server
-        /// </summary>
-        /// <param name="x">X-index of the tile to be requested.</param>
-        /// <param name="y">Y-index of the tile to be requested.</param>
-        /// <param name="z">Zoom level</param>
-        //private void RequestTile(Layer layer, int x, int y, int z)
-        //{
-        //    // Check the tile is already requested
-        //    string tileServer = layer.TileServer.GetType().Name;
-        //    if (!_RequestPool.Any(t => t.TileServer == tileServer && t.Z == z && t.X == x && t.Y == y))
-        //    {
-        //        _RequestPool.Add(new Tile(x, y, z, tileServer));
-        //        _WorkerWaitHandle.Set();
-        //    }
-        //}
 
         public GeoPnt TileToWorldPos(double x, double y, int z)
         {

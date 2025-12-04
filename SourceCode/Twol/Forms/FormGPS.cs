@@ -982,6 +982,8 @@ namespace Twol
 
         public void LoadGLTextures()
         {
+            mapTexture = new uint[9];
+
             GL.Enable(EnableCap.Texture2D);
 
             Bitmap[] oglTextures = new Bitmap[]
