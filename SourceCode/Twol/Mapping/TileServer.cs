@@ -6,8 +6,14 @@ using System.Net;
 namespace Twol.Mapping
 {
     /// <summary>
-    /// Request tiles from Google Maps tile server
+    /// Represents a tile server that provides map tiles from a Google Maps tile server.
     /// </summary>
+    /// <remarks>The <see cref="TileServer"/> class is designed to retrieve map tiles based on their x and y
+    /// coordinates and zoom level. It includes functionality for generating tile URIs, downloading tile images, and
+    /// configuring connection settings. This class is intended for use in applications that require map data, such as
+    /// GIS (Geographic Information Systems) or mapping tools. <para> By default, the class configures the application
+    /// to accept all SSL/TLS certificates and enables modern security protocols. This behavior is suitable for testing
+    /// or trusted internal environments but should be reviewed for production use. </para></remarks>
     public class TileServer
     {
         // Add a static Random instance to fix CS0120
@@ -41,6 +47,15 @@ namespace Twol.Mapping
             }
         }
 
+        /// <summary>
+        /// Generates a URI for retrieving a map tile from a Google Maps tile server.
+        /// </summary>
+        /// <remarks>The method selects one of four possible tile servers (mt0, mt1, mt2, mt3) at random
+        /// to distribute requests.</remarks>
+        /// <param name="x">The x-coordinate of the tile in the tile grid.</param>
+        /// <param name="y">The y-coordinate of the tile in the tile grid.</param>
+        /// <param name="z">The zoom level of the tile, where higher values represent more detailed zoom levels.</param>
+        /// <returns>A <see cref="Uri"/> representing the location of the requested map tile.</returns>
         private Uri GetTileUri(int x, int y, int z)
         {
             int ind = Random.Next(0, 4);
@@ -48,8 +63,12 @@ namespace Twol.Mapping
         }
 
         /// <summary>
-        /// Base constructor for initializing <see cref="WebTileServer"/>.
+        /// Initializes a new instance of the <see cref="TileServer"/> class.
         /// </summary>
+        /// <remarks>This constructor configures the default connection settings for the application,
+        /// including the maximum number of concurrent connections, certificate validation behavior, and supported
+        /// security protocols. It is designed to accept all server certificates and enable modern security
+        /// protocols.</remarks>
         public TileServer()
         {
             ServicePointManager.DefaultConnectionLimit = 10;
@@ -58,8 +77,17 @@ namespace Twol.Mapping
         }
 
         /// <summary>
-        /// Function to handle accepting HTTPs certificates 
+        /// A callback method that accepts all SSL/TLS certificates regardless of validation results.
         /// </summary>
+        /// <remarks>This method bypasses standard SSL/TLS certificate validation and should only be used
+        /// in scenarios  where certificate validation is intentionally disabled, such as for testing or trusted
+        /// internal environments.  Using this method in production environments can expose the application to security
+        /// risks, including  man-in-the-middle attacks.</remarks>
+        /// <param name="sender">The source of the certificate validation request.</param>
+        /// <param name="certification">The certificate to validate.</param>
+        /// <param name="chain">The chain of certificate authorities associated with the certificate.</param>
+        /// <param name="sslPolicyErrors">The SSL policy errors identified during validation.</param>
+        /// <returns>Always returns <see langword="true"/>, indicating that all certificates are accepted.</returns>
         private bool AcceptAllCertificates(object sender, System.Security.Cryptography.X509Certificates.X509Certificate certification, System.Security.Cryptography.X509Certificates.X509Chain chain, System.Net.Security.SslPolicyErrors sslPolicyErrors)
         {
             return true;

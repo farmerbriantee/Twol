@@ -93,7 +93,7 @@ namespace Twol
             get => _ZoomLevel;
             set
             {
-                if (value < 13 || value > 17) _ZoomLevel = 15;
+                if (value < 11 || value > 17) _ZoomLevel = 15;
                 else _ZoomLevel = value;
             }
         }
@@ -152,6 +152,8 @@ namespace Twol
                         {
                             if (tile.Image != null)
                             {
+                                Debug.WriteLine($"Thread {Thread.CurrentThread.Name} Found tile Z:{tile.Z} X:{tile.X} Y:{tile.Y}");
+
                                 string localPath = Path.Combine(_CacheFolder, $"{tile.Z}", $"{tile.X}", $"{tile.Y}.tile");
                                 var dir = Path.GetDirectoryName(localPath);
                                 if (!string.IsNullOrEmpty(dir))
@@ -163,7 +165,6 @@ namespace Twol
                                 tile.Image.Save(localPath);
                                 Debug.WriteLine($"saved {localPath}");
                                 Thread.Sleep(20); // Give some time for file system
-                                Debug.WriteLine($"Thread {Thread.CurrentThread.Name} saved tile Z:{tile.Z} X:{tile.X} Y:{tile.Y}");
                                 // Add to the memory cache
                                 tileCache.Add(tile);
                             }

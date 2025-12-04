@@ -5,20 +5,23 @@
         public static GeoPnt Empty = new GeoPnt();
 
         /// <summary>
-        /// Longitude of the point, in degrees, from 0 to ±180, positive East, negative West. 0 is a point on prime meridian.
+        /// Gets or sets the longitude coordinate of a geographic location.
         /// </summary>
         public float Longitude { get; set; }
 
         /// <summary>
-        /// Latitude of the point, in degrees, from +90 (North pole) to -90 (South Pole). 0 is a point on equator.
+        /// Gets or sets the latitude of the geographic location.
         /// </summary>
         public float Latitude { get; set; }
 
         /// <summary>
-        /// Creates new instance of <see cref="GeoPnt"/> and initializes it with longitude and latitude values.
+        /// Initializes a new instance of the <see cref="GeoPnt"/> class with the specified longitude and latitude.
         /// </summary>
-        /// <param name="longitude">Longitude of the point, in degrees, from 0 to ±180, positive East, negative West. 0 is a point on prime meridian.</param>
-        /// <param name="latitude">Latitude of the point, in degrees, from +90 (North pole) to -90 (South Pole). 0 is a point on equator.</param>
+        /// <remarks>This constructor creates a geographic point using the specified longitude and
+        /// latitude values. Ensure that the provided values are within the valid ranges to represent a valid geographic
+        /// location.</remarks>
+        /// <param name="longitude">The longitude of the geographic point, in degrees. Valid values range from -180 to 180.</param>
+        /// <param name="latitude">The latitude of the geographic point, in degrees. Valid values range from -90 to 90.</param>
         public GeoPnt(float longitude, float latitude)
         {
             Longitude = longitude;

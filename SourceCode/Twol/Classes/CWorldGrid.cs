@@ -44,18 +44,19 @@ namespace Twol
             //adjust bitmap zoom based on cam zoom
             double result = Math.Log(Settings.User.setDisplay_camZoom, 2);
 
-            //if (Settings.User.setDisplay_camZoom > 128)
-            //{
-            //    if (lastZoom != 128)
-            //    {
-            //        isSet = false;
-            //        lastZoom = 128;
-            //        mf.map.ZoomLevel = 11;
-            //    }
-            //    Count = 8;
-            //    Count = 4;
-            //}
-            if (Settings.User.setDisplay_camZoom > 64)
+            if (Settings.User.setDisplay_camZoom > 128)
+            {
+                if (lastZoom != 128)
+                {
+                    isSet = false;
+                    lastZoom = 128;
+                    mf.map.ZoomLevel = 11;
+                }
+                Count = 8;
+                Count = 4;
+            }
+
+            else if (Settings.User.setDisplay_camZoom > 64)
             {
                 if (lastZoom != 64)
                 {
@@ -65,6 +66,7 @@ namespace Twol
                 }
                 Count = 8;
             }
+
             else if (Settings.User.setDisplay_camZoom > 32)
             {
                 if (lastZoom != 32)
