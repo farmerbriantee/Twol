@@ -40,7 +40,6 @@ namespace Twol
 
         //texture holders
         public uint[] texture;
-        public uint[] mapTexture;
 
         //create instance of a stopwatch for timing of frames and NMEA hz determination
         private readonly Stopwatch swFrame = new Stopwatch();
@@ -984,8 +983,6 @@ namespace Twol
 
         public void LoadGLTextures()
         {
-            mapTexture = new uint[9];
-
             GL.Enable(EnableCap.Texture2D);
 
             Bitmap[] oglTextures = new Bitmap[]

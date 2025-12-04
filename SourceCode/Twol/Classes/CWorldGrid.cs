@@ -4,6 +4,7 @@ using OpenTK.Graphics.OpenGL;
 using System;
 using System.Drawing;
 using Twol.Mapping;
+
 namespace Twol
 {
     public class CWorldGrid
@@ -12,12 +13,10 @@ namespace Twol
 
         //Y
         public double northingMax = GridSize;
-
         public double northingMin = -GridSize;
 
         //X
         public double eastingMax = GridSize;
-
         public double eastingMin = -GridSize;
 
         public const double GridSize = 20000;
@@ -31,10 +30,13 @@ namespace Twol
 
         private double offsetX = 0, offsetY = 0;
 
+        public uint[] mapTexture;
+        //array for GL map textures
 
         public CWorldGrid(FormGPS _f)
         {
             mf = _f;
+            mapTexture = new uint[25];
         }
 
         public void DrawFieldSurface()
@@ -44,7 +46,18 @@ namespace Twol
             //adjust bitmap zoom based on cam zoom
             double result = Math.Log(Settings.User.setDisplay_camZoom, 2);
 
-            if (Settings.User.setDisplay_camZoom > 96)
+            if (Settings.User.setDisplay_camZoom > 128)
+            {
+                if (lastZoom != 128)
+                {
+                    isSet = false;
+                    lastZoom = 128;
+                    mf.map.ZoomLevel = 11;
+                }
+                Count = 4;
+            }
+
+            else if (Settings.User.setDisplay_camZoom > 96)
             {
                 if (lastZoom != 96)
                 {
@@ -66,6 +79,17 @@ namespace Twol
                 Count = 8;
             }
 
+            else if (Settings.User.setDisplay_camZoom > 48)
+            {
+                if (lastZoom != 48)
+                {
+                    isSet = false;
+                    lastZoom = 48;
+                    mf.map.ZoomLevel = 14;
+                }
+
+                Count = 12;
+            }
             else if (Settings.User.setDisplay_camZoom > 32)
             {
                 if (lastZoom != 32)
@@ -76,6 +100,16 @@ namespace Twol
                 }
 
                 Count = 16;
+            }
+            else if (Settings.User.setDisplay_camZoom > 24)
+            {
+                if (lastZoom != 24)
+                {
+                    isSet = false;
+                    lastZoom = 24;
+                    mf.map.ZoomLevel = 16;
+                }
+                Count = 32;
             }
             else if (Settings.User.setDisplay_camZoom > 16)
             {
@@ -111,7 +145,7 @@ namespace Twol
 
             if (!isSet)
             {
-                mf.mapTexture = new uint[9];
+                mapTexture = new uint[25];
                 PointF tileXY = mf.map.WSG84ToTilePos(CNMEA.lonStart, CNMEA.latStart, mf.map.ZoomLevel);
                 int tileX = (int)Math.Floor(tileXY.X);
                 int tileY = (int)Math.Floor(tileXY.Y);
@@ -120,13 +154,13 @@ namespace Twol
                 offsetY = ((tileXY.Y - (int)tileXY.Y) - 0.5) * mpp * 256;
 
                 //set to top-left tile
-                tileX = tileX - 1 - (int)travelX;
-                tileY = tileY - 1 - (int)travelY;
+                tileX = tileX - 2;
+                tileY = tileY - 2;
 
                 int tex = 0;
-                for (int i = 0; i < 3; i++)
+                for (int i = 0; i < 5; i++)
                 {
-                    for (int j = 0; j < 3; j++)
+                    for (int j = 0; j < 5; j++)
                     {
                         //if (tile == null)
                         {
@@ -136,8 +170,8 @@ namespace Twol
 
                             if (tile != null)
                             {
-                                GL.GenTextures(1, out mf.mapTexture[tex]);
-                                GL.BindTexture(TextureTarget.Texture2D, mf.mapTexture[tex]);
+                                GL.GenTextures(1, out mapTexture[tex]);
+                                GL.BindTexture(TextureTarget.Texture2D, mapTexture[tex]);
 
                                 // Set texture filtering parameters
                                 GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Linear);
@@ -173,17 +207,17 @@ namespace Twol
             }
 
             GL.Color3(0.542, 0.542, 0.542);
-            if (Settings.User.setDisplay_isTextureOn && mf.mapTexture != null)
+            if (Settings.User.setDisplay_isTextureOn && mapTexture != null)
             {
                 GL.Enable(EnableCap.Texture2D);
 
                 int t = 0;
-                for (double i = -1; i < 2; i += 1)
+                for (double i = -2; i < 3; i += 1)
                 {
-                    for (double j = 1; j > -2; j -= 1)
+                    for (double j = 2; j > -3; j -= 1)
                     {
-                        if (mf.mapTexture[t] != 0)
-                            GL.BindTexture(TextureTarget.Texture2D, mf.mapTexture[t]);
+                        if (mapTexture[t] != 0)
+                            GL.BindTexture(TextureTarget.Texture2D, mapTexture[t]);
                         else
                         {
                             GL.BindTexture(TextureTarget.Texture2D, mf.texture[(int)FormGPS.textures.Floor]);
@@ -208,17 +242,10 @@ namespace Twol
             }
             GL.Disable(EnableCap.Texture2D);
 
-            //GL.Vertex3(eastingMin, northingMax, -0.10);
-            //GL.TexCoord2(Count, 0.0);
-            //GL.Vertex3(eastingMax, northingMax, -0.10);
-            //GL.TexCoord2(0.0, Count);
-            //GL.Vertex3(eastingMin, northingMin, -0.10);
-            //GL.TexCoord2(Count, Count);
-            //GL.Vertex3(eastingMax, northingMin, -0.10);
-
-            for (int i = -2; i < 2; i++)
+            //grid lines based on tiles
+            for (int i = -3; i < 3; i++)
             {
-                for (int j = 1; j > -3; j--)
+                for (int j = 2; j > -4; j--)
                 {
                     double ii = i * bit;
                     double jj = j * bit;
