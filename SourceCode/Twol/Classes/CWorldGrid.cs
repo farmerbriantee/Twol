@@ -172,9 +172,14 @@ namespace Twol
                 {
                     for (double j = 1; j > -2; j -= 1)
                     {
-                        GL.BindTexture(TextureTarget.Texture2D, mf.mapTexture[t]);
+                        if (mf.mapTexture[t] != 0)
+                            GL.BindTexture(TextureTarget.Texture2D, mf.mapTexture[t]);
+                        else
+                        {
+                            GL.BindTexture(TextureTarget.Texture2D, mf.texture[(int)FormGPS.textures.Floor]);
+                        }
 
-                        double ii = i * bit;  //x
+                            double ii = i * bit;  //x
                         double jj = j * bit;   //y
                         double bitt = bit / 2;
                         GL.Begin(PrimitiveType.TriangleStrip);

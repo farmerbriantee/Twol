@@ -35,13 +35,12 @@ namespace Twol
         /// <summary>
         /// Worker threads for processing tile requests to the server.
         /// </summary>
-        private Thread[] _Workers = new Thread[10];
+        private Thread[] _Workers = new Thread[3];
 
         /// <summary>
         /// Event handle to stop/resume requests processing.
         /// </summary>
         private EventWaitHandle _WorkerWaitHandle = new EventWaitHandle(false, EventResetMode.AutoReset);
-
 
         /// <summary>
         /// Gets size of map in tiles.
@@ -78,11 +77,9 @@ namespace Twol
         /// </summary>
         public string CacheFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "TWOL", "GoogleMapsSatelliteTileServer");
 
-
         //private tileServer instance
         readonly TileServer tileServer = new TileServer();
         public TileServer TileServerInstance => tileServer;
-
 
         /// <summary>
         /// Does a tile request to the tile server
@@ -133,8 +130,6 @@ namespace Twol
                             try
                             {
                                 Directory.CreateDirectory(Path.GetDirectoryName(localPath));
-
-
                                 tile.Image.Save(localPath);
                                 Debug.WriteLine($"saved {localPath}");
                             }
@@ -150,13 +145,10 @@ namespace Twol
                             _Cache.Add(tile);
                         }
                     }
-
                 }
-
                 _WorkerWaitHandle.WaitOne();
             }
         }
-
 
         public Tile GetTile(int x, int y, int z, bool fromCacheOnly = false)
         {
