@@ -19,7 +19,7 @@ namespace Twol
         /// <summary>
         /// Backing field for <see cref="_CacheFolder"/> property.
         /// </summary>
-        private readonly string _CacheFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "TWOL", "GoogleMapsSatelliteTileServer");
+        private readonly string _CacheFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "TWOL", "Tiles");
 
         /// <summary>
         /// Represents a private instance of the <see cref="TileServer"/> class.private _TileServer instance
