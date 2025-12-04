@@ -49,7 +49,7 @@ namespace Twol
 
         //For field saving in background
         private int fileSaveCounter = 1;
-        private int fileSaveAlwaysCounter = 1;
+        private int counterCheckInternet = 1;
 
         private int threeSecondCounter = 0;
         public int twoSecondCounter = 0;
@@ -180,9 +180,9 @@ namespace Twol
                 //fix
                 if (timerSim.Enabled && pn.fixQuality++ > 5) pn.fixQuality = 2;
 
-                fileSaveAlwaysCounter += 3;
+                counterCheckInternet += 3;
 
-                //set btninternetconnection to correct image
+                //set btninternetconnection to correct image - checked every 50 secs by CheckInternetConnection
                 btnInternetConnection.BackColor = map.isInternetConnected ? Color.PaleGreen : Color.Salmon;
             }
 

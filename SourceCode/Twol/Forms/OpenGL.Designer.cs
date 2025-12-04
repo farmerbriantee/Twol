@@ -749,12 +749,6 @@ namespace Twol
 
                     #region FileSave and oglZoom
 
-                    //file writer that runs all the time
-                    if (fileSaveAlwaysCounter > 60)
-                    {
-                        fileSaveAlwaysCounter = 0;
-                    }
-
                     //if a minute has elapsed save the field in case of crash and to be able to resume            
                     if (fileSaveCounter > 50 && sentenceCounter < 20)
                     {
