@@ -863,6 +863,8 @@
     <None Include="btnImages\IO\Plugin.png" />
     <None Include="btnImages\PanDn.png" />
     <None Include="btnImages\PanUp.png" />
+    <None Include="btnImages\InternetOff.png" />
+    <None Include="btnImages\InternetOn.png" />
     <Content Include="btnImages\ZoomOut.png" />
     <Content Include="License.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -1088,7 +1090,6 @@
     <None Include="btnImages\AntennaHarvester.png" />
     <None Include="btnImages\AntennaTractor.png" />
     <None Include="btnImages\RadiusWheelBase.png" />
-    <None Include="btnImages\AgIO.png" />
     <None Include="btnImages\Config\Con_ImplementMenu.png" />
     <None Include="btnImages\Config\Con_ModulesMenu.png" />
     <None Include="btnImages\Config\Con_SourcesMenu.png" />

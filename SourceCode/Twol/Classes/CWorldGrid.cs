@@ -87,6 +87,16 @@ namespace Twol
                 }
                 Count = 32;
             }
+            else if (Settings.User.setDisplay_camZoom > 8)
+            {
+                if (lastZoom != 8)
+                {
+                    isSet = false;
+                    lastZoom = 8;
+                    mf.map.ZoomLevel = 18;
+                }
+                Count = 32;
+            }
             else
             {
                 Count = 80;

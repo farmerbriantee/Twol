@@ -181,6 +181,9 @@ namespace Twol
                 if (timerSim.Enabled && pn.fixQuality++ > 5) pn.fixQuality = 2;
 
                 fileSaveAlwaysCounter += 3;
+
+                //set btninternetconnection to correct image
+                btnInternetConnection.BackColor = map.isInternetConnected ? Color.PaleGreen : Color.Salmon;
             }
 
             /////////////////////////////   2 second  ////////////////////////////////////////
@@ -208,16 +211,18 @@ namespace Twol
 
                 DoTraffic();
 
-                if (ntripCounter > 30)
-                {
-                    isNTRIPToggle = !isNTRIPToggle;
-                    if (isNTRIPToggle) btnRTCM_Top.BackColor = Color.LightGray;
-                    else btnRTCM_Top.BackColor = Color.PaleGreen;
-                }
-                else
-                {
-                    btnRTCM_Top.BackColor = Color.Transparent;
-                }
+                //if (ntripCounter > 30)
+                //{
+                //    isNTRIPToggle = !isNTRIPToggle;
+                //    if (isNTRIPToggle) btnRTCM_Top.BackColor = Color.LightGray;
+                //    else btnRTCM_Top.BackColor = Color.PaleGreen;
+                //}
+                //else
+                //{
+                //    btnRTCM_Top.BackColor = Color.Transparent;
+                //}
+
+                btnRTCM_Top.BackColor = (ntripCounter > 30) ? Color.PaleGreen : Color.Salmon;
 
             }//end every 2 seconds
 
@@ -435,6 +440,8 @@ namespace Twol
             cboxIsIMUModule.Checked = Settings.IO.setMod_isIMUConnected;
             cboxIsSteerModule.Checked = Settings.IO.setMod_isSteerConnected;
             cboxIsMachineModule.Checked = Settings.IO.setMod_isMachineConnected;
+
+            btnGPSTool.Visible = Settings.Tool.setToolSteer.isGPSToolActive;
 
             SetModulesOnOff();
         }

@@ -51,7 +51,7 @@ namespace Twol
                 _Workers[w].Start();
             }
 
-            isInternetConnected = IsConnectedToInternet();
+            isInternetConnected = CheckInternetConnection();
         }
 
         /// <summary>
@@ -102,7 +102,7 @@ namespace Twol
             get => _ZoomLevel;
             set
             {
-                if (value < 11 || value > 17) _ZoomLevel = 15;
+                if (value < 11 || value > 18) _ZoomLevel = 15;
                 else _ZoomLevel = value;
             }
         }
@@ -301,7 +301,7 @@ namespace Twol
         /// </summary>
         public bool isInternetConnected;
 
-        public bool IsConnectedToInternet()
+        public bool CheckInternetConnection()
         {
             // Fire-and-forget connectivity probe; returns immediately with last known state.
             ThreadPool.QueueUserWorkItem(_ =>
