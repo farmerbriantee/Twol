@@ -3,9 +3,7 @@
 using OpenTK.Graphics.OpenGL;
 using System;
 using System.Drawing;
-using Twol.Mapping;
 using Twol.Properties;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Twol.Mapping
 {
@@ -21,9 +19,14 @@ namespace Twol.Mapping
 
         //tile textures array for openGL
         public uint[] mapTexture;
+        public int[] mapTextureStatus = new int[25];
 
         private int originToXinTiles = 0, originToYinTiles = 0;
         private int lastOriginToXinTiles = 0, lastOriginToYinTiles = 0;
+
+        private double secondCounter = 0;
+
+        //public PointF originTileXY = new PointF(0, 0);
 
         //cam z height to map zoom level mapping
         private readonly int[] camToZoomMapping = new int[]
@@ -38,17 +41,18 @@ namespace Twol.Mapping
 
         public void DrawWorldMap()
         {
-            Color field = Settings.User.setDisplay_isDayMode ? Settings.User.colorFieldDay : Settings.User.colorFieldNight;
+            secondCounter += 1.0 / mf.gpsHz;
+
+            UpdateMapZoomFromCamZoom();
 
             // adjust bitmap zoom based on cam zoom
             double result = Math.Log(Settings.User.setDisplay_camZoom, 2);
 
-            // Replaced long if/else chain with a single helper call
-            UpdateMapZoomFromCamZoom();
-
             //meters per pixel
             double mpp = (Math.Cos(mf.pn.latitude * Math.PI / 180) * 2 * Math.PI * 6378137) / (256 * Math.Pow(2, mf.map.ZoomLevel));
             double mPerTile = (mpp * 256);
+
+
 
             originToXinTiles = (int)(mf.pn.fix.easting / mPerTile);
             originToYinTiles = (int)(mf.pn.fix.northing / mPerTile);
@@ -60,66 +64,73 @@ namespace Twol.Mapping
                 lastOriginToYinTiles = originToYinTiles;
             }
 
-            if (!isSet)
+            if (secondCounter > 1)
             {
-                PointF tileXY = mf.map.WSG84ToTilePos(CNMEA.lonStart, CNMEA.latStart, mf.map.ZoomLevel);
-                int tileX = (int)Math.Floor(tileXY.X);
-                int tileY = (int)Math.Floor(tileXY.Y);
-
-                offsetX = (0.5 - (tileXY.X - (int)tileXY.X)) * mPerTile;
-                offsetY = ((tileXY.Y - (int)tileXY.Y) - 0.5) * mPerTile;
-
-                //set to top-left tile
-                tileX = tileX - 2 - lastOriginToXinTiles;
-                tileY = tileY - 2 - lastOriginToYinTiles;
-
-                int tex = 0;
-                for (int i = 0; i < 5; i++)
+                secondCounter = 0;
+                if (!isSet)
                 {
-                    for (int j = 0; j < 5; j++)
+                    PointF originTileXY = mf.map.WSG84ToTilePos(CNMEA.lonStart, CNMEA.latStart, mf.map.ZoomLevel);
+                    int tileX = (int)Math.Floor(originTileXY.X);
+                    int tileY = (int)Math.Floor(originTileXY.Y);
+
+                    offsetX = (0.5 - (originTileXY.X - (int)originTileXY.X)) * mPerTile;
+                    offsetY = ((originTileXY.Y - (int)originTileXY.Y) - 0.5) * mPerTile;
+
+                    //set to top-left tile
+                    tileX = tileX - 2 - lastOriginToXinTiles;
+                    tileY = tileY - 2 - lastOriginToYinTiles;
+
+                    int tex = 0;
+
+                    for (int i = 0; i < 5; i++)
                     {
-                        tile = mf.map.GetTile(tileX + i, tileY + j, mf.map.ZoomLevel);
-
-                        if (tile != null)
+                        for (int j = 0; j < 5; j++)
                         {
-                            GL.BindTexture(TextureTarget.Texture2D, mapTexture[tex]);
-                            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Nearest);
-                            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Nearest);
+                            tile = mf.map.GetTile(tileX + i, tileY + j, mf.map.ZoomLevel);
 
-                            if (tile.Image is Bitmap bitmap)
+                            if (tile != null)
                             {
-                                var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), System.Drawing.Imaging.ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+                                GL.BindTexture(TextureTarget.Texture2D, mapTexture[tex]);
+                                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Nearest);
+                                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Nearest);
 
-                                // Keep memory in place, fill with new image 
-                                GL.TexSubImage2D(TextureTarget.Texture2D, 0, 0, 0, bitmapData.Width, bitmapData.Height, PixelFormat.Rgba, PixelType.UnsignedByte, bitmapData.Scan0);
-                                bitmap.UnlockBits(bitmapData);
+                                if (tile.Image is Bitmap bitmap)
+                                {
+                                    var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), System.Drawing.Imaging.ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+
+                                    // Keep memory in place, fill with new image 
+                                    GL.TexSubImage2D(TextureTarget.Texture2D, 0, 0, 0, bitmapData.Width, bitmapData.Height, PixelFormat.Rgba, PixelType.UnsignedByte, bitmapData.Scan0);
+                                    bitmap.UnlockBits(bitmapData);
+                                }
+                                tex++;
                             }
-                            tex++;
-                        }
 
-                        else
-                        {
-                            GL.BindTexture(TextureTarget.Texture2D, mapTexture[tex]);
-                            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Nearest);
-                            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Nearest);
-
-                            Bitmap bitmap = Resources.z_Floor2;
+                            else
                             {
-                                var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), System.Drawing.Imaging.ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+                                GL.BindTexture(TextureTarget.Texture2D, mapTexture[tex]);
+                                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Nearest);
+                                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Nearest);
 
-                                // Keep memory in place, fill with new image 
-                                GL.TexSubImage2D(TextureTarget.Texture2D, 0, 0, 0, bitmapData.Width, bitmapData.Height, PixelFormat.Rgba, PixelType.UnsignedByte, bitmapData.Scan0);
-                                bitmap.UnlockBits(bitmapData);
+                                Bitmap bitmap = Resources.z_Floor2;
+                                {
+                                    var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), System.Drawing.Imaging.ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+
+                                    // Keep memory in place, fill with new image 
+                                    GL.TexSubImage2D(TextureTarget.Texture2D, 0, 0, 0, bitmapData.Width, bitmapData.Height, PixelFormat.Rgba, PixelType.UnsignedByte, bitmapData.Scan0);
+                                    bitmap.UnlockBits(bitmapData);
+                                }
+                                tex++;
                             }
-                            tex++;
                         }
                     }
-                }
 
-                isSet = true;
+                    isSet = true;
+                }
             }
 
-            GL.Color3(0.542, 0.542, 0.542);
+            Color field = Settings.User.setDisplay_isDayMode ? Settings.User.colorFieldDay : Settings.User.colorFieldNight;
+
+            GL.Color3(field.R, field.G, field.B);
             if (Settings.User.setDisplay_isTextureOn && mapTexture != null)
             {
                 GL.Enable(EnableCap.Texture2D);
@@ -214,6 +225,8 @@ namespace Twol.Mapping
                         var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), System.Drawing.Imaging.ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
                         GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, bitmapData.Width, bitmapData.Height, 0, PixelFormat.Bgra, PixelType.UnsignedByte, bitmapData.Scan0);
                         bitmap.UnlockBits(bitmapData);
+
+                        mapTextureStatus[tex] = 1;
                         tex++;
                     }
                 }
@@ -239,8 +252,8 @@ namespace Twol.Mapping
                     {
                         isSet = false;
                         lastZoom = camToZoomMapping[i];
-                        if (Settings.User.setDisplay_camPitch == 0) mf.map.ZoomLevel = (camToZoomMapping[i+1] + 1);
-                        else mf.map.ZoomLevel = camToZoomMapping[i+1];
+                        if (Settings.User.setDisplay_camPitch == 0) mf.map.ZoomLevel = (camToZoomMapping[i + 1] + 1);
+                        else mf.map.ZoomLevel = camToZoomMapping[i + 1];
 
                         lastOriginToXinTiles = 0;
                         lastOriginToYinTiles = 0;
