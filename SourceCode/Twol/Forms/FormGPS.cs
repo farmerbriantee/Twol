@@ -101,7 +101,7 @@ namespace Twol
         /// <summary>
         /// Represents the world map associated with the current instance.
         /// </summary>
-        public CWorldMap worldMap;
+        public WorldMap worldMap;
 
         /// <summary>
         /// The NMEA class that decodes it
@@ -211,7 +211,7 @@ namespace Twol
         /// <summary>
         /// Nozzle class
         /// </summary>
-        public CMap map;
+        public Map map;
 
         #endregion // Class Props and instances
 
@@ -266,7 +266,7 @@ namespace Twol
             worldGrid = new CWorldGrid(this);
 
             //create the world map
-            worldMap = new CWorldMap(this);
+            worldMap = new WorldMap(this);
 
             //our vehicle made with gl object and pointer of mainform
             vehicle = new CVehicle(this);
@@ -331,7 +331,7 @@ namespace Twol
             nozz = new CNozzle(this);
 
             //map class
-            map = new CMap(this);
+            map = new Map(this);
 
             vec2 b = new vec2(0, 0);
             gpsPtsCorr.Add(b);

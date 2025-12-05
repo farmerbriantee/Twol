@@ -11,19 +11,19 @@ using File = System.IO.File;
 
 namespace Twol
 {
-    public class CMap
+    public class Map
     {
         //copy of the mainform address
         private readonly FormGPS mf;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CMap"/> class and starts worker threads to process requests.
+        /// Initializes a new instance of the <see cref="Map"/> class and starts worker threads to process requests.
         /// </summary>
         /// <remarks>This constructor initializes the worker threads used for processing requests and
         /// starts them immediately. It also checks the current internet connection status and sets the
         /// <c>isInternetConnected</c> field accordingly.</remarks>
         /// <param name="_f">The <see cref="FormGPS"/> instance associated with this map.</param>
-        public CMap(FormGPS _f)
+        public Map(FormGPS _f)
         {
             mf = _f;
 

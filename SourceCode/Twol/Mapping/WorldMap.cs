@@ -7,7 +7,7 @@ using Twol.Mapping;
 
 namespace Twol.Mapping
 {
-    public class CWorldMap
+    public class WorldMap
     {
         private readonly FormGPS mf;
 
@@ -48,7 +48,7 @@ namespace Twol.Mapping
 
         //array for GL map textures
 
-        public CWorldMap(FormGPS _f)
+        public WorldMap(FormGPS _f)
         {
             mf = _f;
             mapTexture = new uint[25];
