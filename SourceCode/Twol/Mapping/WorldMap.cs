@@ -97,6 +97,22 @@ namespace Twol.Mapping
                             tex++;
                         }
 
+                        else
+                        {
+                            GL.BindTexture(TextureTarget.Texture2D, mapTexture[tex]);
+                            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Nearest);
+                            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Nearest);
+
+                            Bitmap bitmap = Resources.z_Floor2;
+                            {
+                                var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), System.Drawing.Imaging.ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+
+                                // Keep memory in place, fill with new image 
+                                GL.TexSubImage2D(TextureTarget.Texture2D, 0, 0, 0, bitmapData.Width, bitmapData.Height, PixelFormat.Rgba, PixelType.UnsignedByte, bitmapData.Scan0);
+                                bitmap.UnlockBits(bitmapData);
+                            }
+                            tex++;
+                        }
                     }
                 }
 
