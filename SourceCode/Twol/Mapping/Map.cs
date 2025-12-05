@@ -47,7 +47,7 @@ namespace Twol
         /// <summary>
         /// Backing field for <see cref="_CacheFolder"/> property.
         /// </summary>
-        private readonly string _CacheFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "TWOL", "Tiles");
+        private readonly string _CacheFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "TWOL", "TexCache");
 
         /// <summary>
         /// Cache used to store tile images in memory.
