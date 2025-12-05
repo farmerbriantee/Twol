@@ -10,6 +10,7 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Windows.Forms;
 using Twol.Classes;
+using Twol.Mapping;
 using Twol.Properties;
 
 namespace Twol
@@ -96,6 +97,11 @@ namespace Twol
         /// create world grid
         /// </summary>
         public CWorldGrid worldGrid;
+
+        /// <summary>
+        /// Represents the world map associated with the current instance.
+        /// </summary>
+        public CWorldMap worldMap;
 
         /// <summary>
         /// The NMEA class that decodes it
@@ -258,6 +264,9 @@ namespace Twol
 
             //create the world grid
             worldGrid = new CWorldGrid(this);
+
+            //create the world map
+            worldMap = new CWorldMap(this);
 
             //our vehicle made with gl object and pointer of mainform
             vehicle = new CVehicle(this);

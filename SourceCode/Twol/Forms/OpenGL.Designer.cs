@@ -151,7 +151,9 @@ namespace Twol
 
                     GL.Disable(EnableCap.Blend);
 
-                    worldGrid.DrawFieldSurface();
+                    //worldGrid.DrawFieldSurface();
+
+                    worldMap.DrawWorldMap();
 
                     ////if grid is on draw it
                     if (Settings.User.isGridOn) worldGrid.DrawWorldGrid(camera.gridZoom);

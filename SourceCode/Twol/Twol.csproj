@@ -239,6 +239,7 @@
     <Compile Include="Forms\Settings\FormToolSteer.Designer.cs">
       <DependentUpon>FormToolSteer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Mapping\CWorldMap.cs" />
     <Compile Include="Mapping\GeoPnt.cs" />
     <Compile Include="Mapping\Tile.cs" />
     <Compile Include="Mapping\TileServer.cs" />
