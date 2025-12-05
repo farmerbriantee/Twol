@@ -7,6 +7,24 @@ using Twol.Properties;
 
 namespace Twol.Mapping
 {
+    /// <summary>
+    /// Status enum for map texture slots.
+    /// </summary>
+    public enum TexStatus
+    {
+        MemoryIntialized = 1,
+        DefaultLoaded = 2,
+        TileCorrect = 3,
+        Unchanged = 4
+    }
+
+    /// <summary>
+    /// Represents a world map that provides functionality for rendering, zooming, and managing map textures.
+    /// </summary>
+    /// <remarks>The <see cref="WorldMap"/> class is designed to handle the rendering of a 5x5 grid of map
+    /// tiles using OpenGL. It supports dynamic zoom level adjustments based on camera settings and manages texture
+    /// memory for efficient rendering. This class interacts with a GPS form (<see cref="FormGPS"/>) to retrieve
+    /// positional and zoom data.</remarks>
     public class WorldMap
     {
         private readonly FormGPS mf;
@@ -34,6 +52,9 @@ namespace Twol.Mapping
              128, 11, 96, 12, 64, 13, 48, 14, 32, 15, 24, 16, 16, 17, 8, 18
         };
 
+        int[] headingMapMoveDistanceX = { 0, 1, 1, 1, 0, -1, -1, -1 };
+        int[] headingMapMoveDistanceY = { 1, 1, 0, -1, -1, -1, 0, 1 };
+
         public WorldMap(FormGPS _f)
         {
             mf = _f;
@@ -52,10 +73,10 @@ namespace Twol.Mapping
             double mpp = (Math.Cos(mf.pn.latitude * Math.PI / 180) * 2 * Math.PI * 6378137) / (256 * Math.Pow(2, mf.map.ZoomLevel));
             double mPerTile = (mpp * 256);
 
-
-
             originToXinTiles = (int)(mf.pn.fix.easting / mPerTile);
             originToYinTiles = (int)(mf.pn.fix.northing / mPerTile);
+
+            ApplyHeadingToTileOffset(ref originToXinTiles, ref originToYinTiles, glm.toDegrees(mf.fixHeading));
 
             if (originToXinTiles != lastOriginToXinTiles || originToYinTiles != lastOriginToYinTiles)
             {
@@ -64,24 +85,26 @@ namespace Twol.Mapping
                 lastOriginToYinTiles = originToYinTiles;
             }
 
-            if (secondCounter > 1)
+            if (secondCounter > 1 || !isSet)
             {
+                PointF originTileXY = mf.map.WSG84ToTilePos(CNMEA.lonStart, CNMEA.latStart, mf.map.ZoomLevel);
+                int tileX = (int)Math.Floor(originTileXY.X);
+                int tileY = (int)Math.Floor(originTileXY.Y);
+
+                offsetX = (0.5 - (originTileXY.X - (int)originTileXY.X)) * mPerTile;
+                offsetY = ((originTileXY.Y - (int)originTileXY.Y) - 0.5) * mPerTile;
+
+                //set to top-left tile
+                tileX = tileX - 2 + lastOriginToXinTiles;
+                tileY = tileY - 2 - lastOriginToYinTiles;
+
                 secondCounter = 0;
+
                 if (!isSet)
                 {
-                    PointF originTileXY = mf.map.WSG84ToTilePos(CNMEA.lonStart, CNMEA.latStart, mf.map.ZoomLevel);
-                    int tileX = (int)Math.Floor(originTileXY.X);
-                    int tileY = (int)Math.Floor(originTileXY.Y);
-
-                    offsetX = (0.5 - (originTileXY.X - (int)originTileXY.X)) * mPerTile;
-                    offsetY = ((originTileXY.Y - (int)originTileXY.Y) - 0.5) * mPerTile;
-
-                    //set to top-left tile
-                    tileX = tileX - 2 - lastOriginToXinTiles;
-                    tileY = tileY - 2 - lastOriginToYinTiles;
-
                     int tex = 0;
 
+                    //5 x 5 tilemap
                     for (int i = 0; i < 5; i++)
                     {
                         for (int j = 0; j < 5; j++)
@@ -91,8 +114,8 @@ namespace Twol.Mapping
                             if (tile != null)
                             {
                                 GL.BindTexture(TextureTarget.Texture2D, mapTexture[tex]);
-                                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Nearest);
-                                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Nearest);
+                                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Linear);
+                                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Linear);
 
                                 if (tile.Image is Bitmap bitmap)
                                 {
@@ -101,30 +124,46 @@ namespace Twol.Mapping
                                     // Keep memory in place, fill with new image 
                                     GL.TexSubImage2D(TextureTarget.Texture2D, 0, 0, 0, bitmapData.Width, bitmapData.Height, PixelFormat.Rgba, PixelType.UnsignedByte, bitmapData.Scan0);
                                     bitmap.UnlockBits(bitmapData);
-                                }
-                                tex++;
-                            }
 
+                                    //loaded
+                                    mapTextureStatus[tex] = (int)TexStatus.TileCorrect;
+                                }
+                                else
+                                {
+                                    //default status
+                                    mapTextureStatus[tex] = (int)TexStatus.DefaultLoaded;
+
+                                    //load default texture
+                                    LoadDefaultTexture(tex);
+                                }
+                            }
                             else
                             {
-                                GL.BindTexture(TextureTarget.Texture2D, mapTexture[tex]);
-                                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Nearest);
-                                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Nearest);
-
-                                Bitmap bitmap = Resources.z_Floor2;
-                                {
-                                    var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), System.Drawing.Imaging.ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-
-                                    // Keep memory in place, fill with new image 
-                                    GL.TexSubImage2D(TextureTarget.Texture2D, 0, 0, 0, bitmapData.Width, bitmapData.Height, PixelFormat.Rgba, PixelType.UnsignedByte, bitmapData.Scan0);
-                                    bitmap.UnlockBits(bitmapData);
-                                }
-                                tex++;
+                                //load default texture and wait till downloaded.
+                                LoadDefaultTexture(tex);
                             }
+
+                            //will never retrieve tiles if no internet
+                            if (mf.map.isInternetConnected == false)
+                            {
+                                mapTextureStatus[tex] = (int)TexStatus.TileCorrect;
+                            }
+                            tex++;
                         }
                     }
 
                     isSet = true;
+                }
+                else
+                {
+                    for (int m = 0; m < mapTextureStatus.Length; m++)
+                    {
+                        if (mapTextureStatus[m] == (int)TexStatus.DefaultLoaded)
+                        {
+                            isSet = false;
+                            break;
+                        }
+                    }
                 }
             }
 
@@ -196,8 +235,27 @@ namespace Twol.Mapping
             //GL.TexCoord2(0.0, Count);
             //GL.Vertex3(eastingMin, northingMin, -0.10);
             //GL.TexCoord2(Count, Count);
-            //GL.Vertex3(eastingMax, northingMin, -0.10);
+            //GL.Vertex3(eastingMax, northningMin, -0.10);
 
+        }
+
+        //load default texture
+        private void LoadDefaultTexture(int tex)
+        {
+            GL.BindTexture(TextureTarget.Texture2D, mapTexture[tex]);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Nearest);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Nearest);
+
+            Bitmap bitmap = Resources.z_Floor2;
+            {
+                var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), System.Drawing.Imaging.ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+
+                // Keep memory in place, fill with new image 
+                GL.TexSubImage2D(TextureTarget.Texture2D, 0, 0, 0, bitmapData.Width, bitmapData.Height, PixelFormat.Rgba, PixelType.UnsignedByte, bitmapData.Scan0);
+                bitmap.UnlockBits(bitmapData);
+            }
+            //not loaded
+            mapTextureStatus[tex] = (int)TexStatus.DefaultLoaded;
         }
 
         /// <summary>
@@ -226,7 +284,7 @@ namespace Twol.Mapping
                         GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, bitmapData.Width, bitmapData.Height, 0, PixelFormat.Bgra, PixelType.UnsignedByte, bitmapData.Scan0);
                         bitmap.UnlockBits(bitmapData);
 
-                        mapTextureStatus[tex] = 1;
+                        mapTextureStatus[tex] = (int)TexStatus.MemoryIntialized;
                         tex++;
                     }
                 }
@@ -254,7 +312,7 @@ namespace Twol.Mapping
                         lastZoom = camToZoomMapping[i];
                         if (Settings.User.setDisplay_camPitch == 0) mf.map.ZoomLevel = (camToZoomMapping[i + 1] + 1);
                         else mf.map.ZoomLevel = camToZoomMapping[i + 1];
-
+                        mf.map.ZoomLevel = 18;
                         lastOriginToXinTiles = 0;
                         lastOriginToYinTiles = 0;
                     }
@@ -263,8 +321,15 @@ namespace Twol.Mapping
             }
         }
 
-        public void checkZoomWorldGrid(double northing, double easting)
+        private void ApplyHeadingToTileOffset(ref int originToXinTiles, ref int originToYinTiles, double heading)
         {
+            // Determine sector: 0..7 where each sector is 45°, centered on multiples of 45°.
+            int sector = (int)Math.Floor((heading + 22.5) / 45.0) % 8;
+
+            // Lookup tables for x and y adjustments per sector.
+
+            originToXinTiles += headingMapMoveDistanceX[sector];
+            originToYinTiles += headingMapMoveDistanceY[sector];
         }
     }
 }
