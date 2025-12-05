@@ -155,13 +155,13 @@ namespace Twol.Mapping
                         double jj = j * bit;   //y
                         double bitt = bit / 2;
                         GL.Begin(PrimitiveType.TriangleStrip);
-                        GL.TexCoord2(0, 0);
+                        GL.TexCoord2(0.0, 0.0);
                         GL.Vertex3(ii - bitt + offsetX, jj + bitt + offsetY, -0.10);
-                        GL.TexCoord2(1, 0.0);
+                        GL.TexCoord2(1.0, 0.0);
                         GL.Vertex3(ii + bitt + offsetX, jj + bitt + offsetY, -0.10);
-                        GL.TexCoord2(0.0, 1);
+                        GL.TexCoord2(0.0, 1.0);
                         GL.Vertex3(ii - bitt + offsetX, jj - bitt + offsetY, -0.10);
-                        GL.TexCoord2(1, 1);
+                        GL.TexCoord2(1.0, 1.0);
                         GL.Vertex3(ii + bitt + offsetX, jj - bitt + offsetY, -0.10);
                         GL.End();
                         t++;
