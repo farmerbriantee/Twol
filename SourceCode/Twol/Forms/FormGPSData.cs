@@ -59,7 +59,7 @@ namespace Twol
 
             lblX.Text = tileXY.X.ToString("N2");
             lblY.Text = tileXY.Y.ToString("N2");
-            lblZoomZ.Text = Settings.User.setDisplay_camZoom.ToString("N0");
+            //lblZ.Text = Settings.User.setDisplay_camZoom.ToString("N0");
 
             double mpp = (Math.Cos(mf.pn.latitude * Math.PI / 180) * 2 * Math.PI * 6378137) / (256 * Math.Pow(2, mf.map.ZoomLevel));
             lblMPerTile.Text = (mpp *256).ToString("N3");
@@ -70,8 +70,8 @@ namespace Twol
 
         private void FormGPSData_Load(object sender, EventArgs e)
         {
-            this.Width = 120;
-            this.Height = 330;
+            this.Width = 200;
+            this.Height = 500;
         }
 
         private void FormGPSData_FormClosing(object sender, FormClosingEventArgs e)

@@ -782,14 +782,11 @@ namespace Twol
             }
 
             lbl_IO_Profile.Text = RegistrySettings.IOFileName;
-
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            worldGrid.isSet = false;
-            //if (map.ZoomLevel == 19) map.ZoomLevel = 15;
-            //else map.ZoomLevel += 2;
+            worldMap.isSet = false;
         }
 
         public void FieldClose()
