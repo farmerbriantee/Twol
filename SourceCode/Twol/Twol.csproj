@@ -866,6 +866,7 @@
     <None Include="btnImages\PanUp.png" />
     <None Include="btnImages\InternetOff.png" />
     <None Include="btnImages\InternetOn.png" />
+    <None Include="btnImages\Images\z_Floor2.png" />
     <Content Include="btnImages\ZoomOut.png" />
     <Content Include="License.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -4,25 +4,14 @@ using OpenTK.Graphics.OpenGL;
 using System;
 using System.Drawing;
 using Twol.Mapping;
+using Twol.Properties;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Twol.Mapping
 {
     public class WorldMap
     {
         private readonly FormGPS mf;
-
-        //Y
-        public double northingMax = GridSize;
-        public double northingMin = -GridSize;
-
-        //X
-        public double eastingMax = GridSize;
-        public double eastingMin = -GridSize;
-
-        public const double GridSize = 20000;
-        public double Count = 40;
-
-        public double gridRotation = 0.0;
 
         Tile tile;
         public bool isSet = false;
@@ -51,7 +40,6 @@ namespace Twol.Mapping
         public WorldMap(FormGPS _f)
         {
             mf = _f;
-            mapTexture = new uint[25];
         }
 
         public void DrawWorldMap()
@@ -73,7 +61,7 @@ namespace Twol.Mapping
 
             if (!isSet)
             {
-                mapTexture = new uint[25];
+                //mapTexture = new uint[25];
                 PointF tileXY = mf.map.WSG84ToTilePos(CNMEA.lonStart, CNMEA.latStart, mf.map.ZoomLevel);
                 int tileX = (int)Math.Floor(tileXY.X);
                 int tileY = (int)Math.Floor(tileXY.Y);
@@ -90,43 +78,25 @@ namespace Twol.Mapping
                 {
                     for (int j = 0; j < 5; j++)
                     {
-                        //if (tile == null)
+                        int tx = tileX + i;
+                        int ty = tileY + j;
+                        tile = mf.map.GetTile(tileX + i, tileY + j, mf.map.ZoomLevel);
+
+                        if (tile != null)
                         {
-                            int tx = tileX + i;
-                            int ty = tileY + j;
-                            tile = mf.map.GetTile(tileX + i, tileY + j, mf.map.ZoomLevel);
+                            GL.BindTexture(TextureTarget.Texture2D, mapTexture[tex]);
+                            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Nearest);
+                            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Nearest);
 
-                            if (tile != null)
+                            if (tile.Image is Bitmap bitmap)
                             {
-                                GL.GenTextures(1, out mapTexture[tex]);
-                                GL.BindTexture(TextureTarget.Texture2D, mapTexture[tex]);
+                                var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), System.Drawing.Imaging.ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
 
-                                // Set texture filtering parameters
-                                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Linear);
-                                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Linear);
-
-                                if (tile.Image is Bitmap bitmap)
-                                {
-                                    var bitmapData = bitmap.LockBits(
-                                        new Rectangle(0, 0, bitmap.Width, bitmap.Height),
-                                        System.Drawing.Imaging.ImageLockMode.ReadOnly,
-                                        System.Drawing.Imaging.PixelFormat.Format24bppRgb);
-
-                                    GL.TexImage2D(
-                                        TextureTarget.Texture2D,
-                                        0,
-                                        PixelInternalFormat.Rgb,
-                                        bitmapData.Width,
-                                        bitmapData.Height,
-                                        0,
-                                        OpenTK.Graphics.OpenGL.PixelFormat.Rgb,
-                                        PixelType.UnsignedByte,
-                                        bitmapData.Scan0);
-
-                                    bitmap.UnlockBits(bitmapData);
-                                }
-                                tex++;
+                                // Keep memory in place, fill with new image 
+                                GL.TexSubImage2D(TextureTarget.Texture2D, 0, 0, 0, bitmapData.Width, bitmapData.Height, PixelFormat.Rgba, PixelType.UnsignedByte, bitmapData.Scan0);
+                                bitmap.UnlockBits(bitmapData);
                             }
+                            tex++;
                         }
                     }
                 }
@@ -205,6 +175,37 @@ namespace Twol.Mapping
         }
 
         /// <summary>
+        /// Generates and initializes texture memory for a 5x5 grid of textures.
+        /// </summary>
+        /// <remarks>This method creates and binds OpenGL textures, sets texture parameters for filtering,
+        /// and loads texture data from a predefined bitmap resource. The textures are stored in  the <c>mapTexture</c>
+        /// array. </remarks>
+        public void GenerateTextureMemory()
+        {
+            mapTexture = new uint[25];
+
+            int tex = 0;
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < 5; j++)
+                {
+                    {
+                        GL.GenTextures(1, out mapTexture[tex]);
+                        GL.BindTexture(TextureTarget.Texture2D, mapTexture[tex]);
+                        GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Nearest);
+                        GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Nearest);
+
+                        Bitmap bitmap = Resources.z_Floor2;
+                        var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), System.Drawing.Imaging.ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+                        GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, bitmapData.Width, bitmapData.Height, 0, PixelFormat.Bgra, PixelType.UnsignedByte, bitmapData.Scan0);
+                        bitmap.UnlockBits(bitmapData);
+                        tex++;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// Updates the map's zoom level based on the current camera zoom level.
         /// </summary>
         /// <remarks>This method maps the camera zoom level to a corresponding map zoom level using
@@ -231,50 +232,8 @@ namespace Twol.Mapping
             }
         }
 
-        public void DrawWorldGrid(double _gridZoom)
-        {
-            //_gridZoom *= 0.5;
-
-            GL.Rotate(-gridRotation, 0, 0, 1.0);
-
-            if (Settings.User.setDisplay_isDayMode)
-            {
-                GL.Color3(0.25, 0.25, 0.25);
-            }
-            else
-            {
-                GL.Color3(0.12, 0.12, 0.12);
-            }
-            GL.LineWidth(1);
-            GL.Begin(PrimitiveType.Lines);
-            for (double num = Math.Round(eastingMin / _gridZoom, MidpointRounding.AwayFromZero) * _gridZoom; num < eastingMax; num += _gridZoom)
-            {
-                if (num < eastingMin) continue;
-
-                GL.Vertex3(num, northingMax, 0.1);
-                GL.Vertex3(num, northingMin, 0.1);
-            }
-            for (double num2 = Math.Round(northingMin / _gridZoom, MidpointRounding.AwayFromZero) * _gridZoom; num2 < northingMax; num2 += _gridZoom)
-            {
-                if (num2 < northingMin) continue;
-
-                GL.Vertex3(eastingMax, num2, 0.1);
-                GL.Vertex3(eastingMin, num2, 0.1);
-            }
-            GL.End();
-
-            GL.Rotate(gridRotation, 0, 0, 1.0);
-        }
-
         public void checkZoomWorldGrid(double northing, double easting)
         {
-            double n = Math.Round(northing / (GridSize / Count * 2), MidpointRounding.AwayFromZero) * (GridSize / Count * 2);
-            double e = Math.Round(easting / (GridSize / Count * 2), MidpointRounding.AwayFromZero) * (GridSize / Count * 2);
-
-            northingMax = n + GridSize;
-            northingMin = n - GridSize;
-            eastingMax = e + GridSize;
-            eastingMin = e - GridSize;
         }
     }
 }

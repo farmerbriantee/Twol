@@ -83,6 +83,7 @@ namespace Twol
         {
             oglMain.MakeCurrent();
             LoadGLTextures();
+            worldMap.GenerateTextureMemory();
             GL.ClearColor(0.14f, 0.14f, 0.37f, 1.0f);
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
             GL.CullFace(CullFaceMode.Back);
