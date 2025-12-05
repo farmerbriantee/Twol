@@ -22,20 +22,14 @@ namespace Twol.Mapping
         //tile textures array for openGL
         public uint[] mapTexture;
 
+        private int originToXinTiles = 0, originToYinTiles = 0;
+        private int lastOriginToXinTiles = 0, lastOriginToYinTiles = 0;
+
         //cam z height to map zoom level mapping
         private readonly int[] camToZoomMapping = new int[]
         {
-             128,11,
-             96, 12,
-             64, 13,
-             48, 14,
-             32, 15,
-             24, 16,
-             16, 17,
-              8,  18
+             128, 11, 96, 12, 64, 13, 48, 14, 32, 15, 24, 16, 16, 17, 8, 18
         };
-
-        //array for GL map textures
 
         public WorldMap(FormGPS _f)
         {
@@ -54,32 +48,36 @@ namespace Twol.Mapping
 
             //meters per pixel
             double mpp = (Math.Cos(mf.pn.latitude * Math.PI / 180) * 2 * Math.PI * 6378137) / (256 * Math.Pow(2, mf.map.ZoomLevel));
-            double bit = (mpp * 256);
+            double mPerTile = (mpp * 256);
 
-            double travelX = mf.pn.fix.easting / bit;
-            double travelY = mf.pn.fix.northing / bit;
+            originToXinTiles = (int)(mf.pn.fix.easting / mPerTile);
+            originToYinTiles = (int)(mf.pn.fix.northing / mPerTile);
+
+            if (originToXinTiles != lastOriginToXinTiles || originToYinTiles != lastOriginToYinTiles)
+            {
+                isSet = false;
+                lastOriginToXinTiles = originToXinTiles;
+                lastOriginToYinTiles = originToYinTiles;
+            }
 
             if (!isSet)
             {
-                //mapTexture = new uint[25];
                 PointF tileXY = mf.map.WSG84ToTilePos(CNMEA.lonStart, CNMEA.latStart, mf.map.ZoomLevel);
                 int tileX = (int)Math.Floor(tileXY.X);
                 int tileY = (int)Math.Floor(tileXY.Y);
 
-                offsetX = (0.5 - (tileXY.X - (int)tileXY.X)) * mpp * 256;
-                offsetY = ((tileXY.Y - (int)tileXY.Y) - 0.5) * mpp * 256;
+                offsetX = (0.5 - (tileXY.X - (int)tileXY.X)) * mPerTile;
+                offsetY = ((tileXY.Y - (int)tileXY.Y) - 0.5) * mPerTile;
 
                 //set to top-left tile
-                tileX = tileX - 2;
-                tileY = tileY - 2;
+                tileX = tileX - 2 - lastOriginToXinTiles;
+                tileY = tileY - 2 - lastOriginToYinTiles;
 
                 int tex = 0;
                 for (int i = 0; i < 5; i++)
                 {
                     for (int j = 0; j < 5; j++)
                     {
-                        int tx = tileX + i;
-                        int ty = tileY + j;
                         tile = mf.map.GetTile(tileX + i, tileY + j, mf.map.ZoomLevel);
 
                         if (tile != null)
@@ -98,6 +96,7 @@ namespace Twol.Mapping
                             }
                             tex++;
                         }
+
                     }
                 }
 
@@ -121,9 +120,9 @@ namespace Twol.Mapping
                             GL.BindTexture(TextureTarget.Texture2D, mf.texture[(int)FormGPS.textures.Floor]);
                         }
 
-                        double ii = i * bit;  //x
-                        double jj = j * bit;   //y
-                        double bitt = bit / 2;
+                        double ii = (i + lastOriginToXinTiles) * mPerTile;  //x
+                        double jj = (j + lastOriginToYinTiles) * mPerTile;   //y
+                        double bitt = mPerTile / 2;
                         GL.Begin(PrimitiveType.TriangleStrip);
                         GL.TexCoord2(0.0, 0.0);
                         GL.Vertex3(ii - bitt + offsetX, jj + bitt + offsetY, -0.10);
@@ -145,9 +144,9 @@ namespace Twol.Mapping
             {
                 for (int j = 2; j > -4; j--)
                 {
-                    double ii = i * bit;
-                    double jj = j * bit;
-                    double bitt = bit / 2;
+                    double ii = (i + lastOriginToXinTiles) * mPerTile;
+                    double jj = (j + lastOriginToYinTiles) * mPerTile;
+                    double bitt = mPerTile / 2;
 
                     GL.Disable(EnableCap.Texture2D);
 
@@ -226,6 +225,9 @@ namespace Twol.Mapping
                         lastZoom = camToZoomMapping[i];
                         if (Settings.User.setDisplay_camPitch == 0) mf.map.ZoomLevel = (camToZoomMapping[i+1] + 1);
                         else mf.map.ZoomLevel = camToZoomMapping[i+1];
+
+                        lastOriginToXinTiles = 0;
+                        lastOriginToYinTiles = 0;
                     }
                     break; // first (highest) matching threshold wins
                 }
