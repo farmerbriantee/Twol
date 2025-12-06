@@ -4,9 +4,9 @@ using OpenTK.Graphics.OpenGL;
 using System;
 using System.Drawing;
 
-namespace Twol
+namespace Twol.Mapping
 {
-    public class CWorldGrid
+    public class WorldFloor
     {
         private readonly FormGPS mf;
 
@@ -46,7 +46,7 @@ namespace Twol
         public double eastingMinRate;
 
 
-        public CWorldGrid(FormGPS _f)
+        public WorldFloor(FormGPS _f)
         {
             mf = _f;
 

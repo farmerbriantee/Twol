@@ -96,12 +96,12 @@ namespace Twol
         /// <summary>
         /// create world grid
         /// </summary>
-        public CWorldGrid worldGrid;
+        public WorldFloor worldGrid;
 
         /// <summary>
         /// Represents the world map associated with the current instance.
         /// </summary>
-        public WorldMap worldMap;
+        public WorldTileMap worldMap;
 
         /// <summary>
         /// The NMEA class that decodes it
@@ -263,10 +263,10 @@ namespace Twol
             camera = new CCamera();
 
             //create the world grid
-            worldGrid = new CWorldGrid(this);
+            worldGrid = new WorldFloor(this);
 
             //create the world map
-            worldMap = new WorldMap(this);
+            worldMap = new WorldTileMap(this);
 
             //our vehicle made with gl object and pointer of mainform
             vehicle = new CVehicle(this);

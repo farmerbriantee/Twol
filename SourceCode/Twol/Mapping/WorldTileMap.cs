@@ -22,11 +22,11 @@ namespace Twol.Mapping
     /// <summary>
     /// Represents a world map that provides functionality for rendering, zooming, and managing map textures.
     /// </summary>
-    /// <remarks>The <see cref="WorldMap"/> class is designed to handle the rendering of a 5x5 grid of map
+    /// <remarks>The <see cref="WorldTileMap"/> class is designed to handle the rendering of a 5x5 grid of map
     /// tiles using OpenGL. It supports dynamic zoom level adjustments based on camera settings and manages texture
     /// memory for efficient rendering. This class interacts with a GPS form (<see cref="FormGPS"/>) to retrieve
     /// positional and zoom data.</remarks>
-    public class WorldMap
+    public class WorldTileMap
     {
         private readonly FormGPS mf;
 
@@ -71,7 +71,7 @@ namespace Twol.Mapping
         int[] headingMapMoveDistanceX = { 0, 1, 1, 1, 0, -1, -1, -1 };
         int[] headingMapMoveDistanceY = { 1, 1, 0, -1, -1, -1, 0, 1 };
 
-        public WorldMap(FormGPS _f)
+        public WorldTileMap(FormGPS _f)
         {
             mf = _f;
         }

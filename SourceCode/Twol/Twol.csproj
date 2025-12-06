@@ -239,7 +239,7 @@
     <Compile Include="Forms\Settings\FormToolSteer.Designer.cs">
       <DependentUpon>FormToolSteer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Mapping\WorldMap.cs" />
+    <Compile Include="Mapping\WorldTileMap.cs" />
     <Compile Include="Mapping\GeoPnt.cs" />
     <Compile Include="Mapping\Tile.cs" />
     <Compile Include="Mapping\TileServer.cs" />
@@ -261,7 +261,7 @@
     <Compile Include="Classes\CNMEA.cs" />
     <Compile Include="Classes\CSection.cs" />
     <Compile Include="Classes\CVehicle.cs" />
-    <Compile Include="Classes\CWorldGrid.cs" />
+    <Compile Include="Mapping\WorldFloor.cs" />
     <Compile Include="Classes\CTool.cs" />
     <Compile Include="Forms\Field\FormEnterFlag.cs">
       <SubType>Form</SubType>
