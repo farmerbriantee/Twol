@@ -237,7 +237,6 @@ namespace Twol
             this.btnIMU = new System.Windows.Forms.Button();
             this.btnFieldStats = new System.Windows.Forms.Button();
             this.button15 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStripFlag.SuspendLayout();
             this.statusStripLeft.SuspendLayout();
@@ -595,7 +594,7 @@ namespace Twol
             this.toolStripMenuFlagForm.Image = global::Twol.Properties.Resources.FileEditName;
             this.toolStripMenuFlagForm.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripMenuFlagForm.Name = "toolStripMenuFlagForm";
-            this.toolStripMenuFlagForm.Size = new System.Drawing.Size(267, 70);
+            this.toolStripMenuFlagForm.Size = new System.Drawing.Size(259, 70);
             this.toolStripMenuFlagForm.Text = "toolStripMenuItem3";
             this.toolStripMenuFlagForm.Click += new System.EventHandler(this.toolStripMenuFlagForm_Click);
             // 
@@ -3589,31 +3588,12 @@ namespace Twol
             this.button15.TabIndex = 650;
             this.button15.UseVisualStyleBackColor = false;
             // 
-            // button8
-            // 
-            this.button8.BackColor = System.Drawing.Color.Transparent;
-            this.button8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button8.FlatAppearance.BorderSize = 0;
-            this.button8.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.button8.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.button8.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button8.Image = global::Twol.Properties.Resources.BrightnessUp;
-            this.button8.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.button8.Location = new System.Drawing.Point(289, 94);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(62, 54);
-            this.button8.TabIndex = 651;
-            this.button8.UseVisualStyleBackColor = false;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
-            // 
             // FormGPS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(1163, 847);
-            this.Controls.Add(this.button8);
             this.Controls.Add(this.flowLayoutPanelTop);
             this.Controls.Add(this.flp1);
             this.Controls.Add(this.panelNavigation);
@@ -3878,7 +3858,6 @@ namespace Twol
         public System.Windows.Forms.Button button7;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
-        public System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button btnInternetConnection;
     }
 }

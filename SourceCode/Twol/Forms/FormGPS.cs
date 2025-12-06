@@ -784,11 +784,6 @@ namespace Twol
             lbl_IO_Profile.Text = RegistrySettings.IOFileName;
         }
 
-        private void button8_Click(object sender, EventArgs e)
-        {
-            worldMap.isSet = false;
-        }
-
         public void FieldClose()
         {
             Settings.Vehicle.setF_CurrentFieldDir = currentFieldDirectory;
