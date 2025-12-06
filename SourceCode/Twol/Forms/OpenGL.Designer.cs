@@ -2470,7 +2470,7 @@ namespace Twol
 
             GL.Translate(center, 140, 0);
 
-            GL.Rotate(360 - camHeading, 0, 0, 1);
+            GL.Rotate(camHeading, 0, 0, 1);
             GL.Begin(PrimitiveType.TriangleStrip);              // Build Quad From A Triangle Strip
             {
                 GL.TexCoord2(1, 0); GL.Vertex2(42, -42.0); // 
