@@ -158,7 +158,7 @@ namespace Twol
         {
             int scrollPixels = flp.VerticalScroll.Value;
 
-            Font backupfont = new Font(Font.FontFamily, 18F, FontStyle.Regular);
+            System.Drawing.Font backupfont = new System.Drawing.Font(base.Font.FontFamily, 18F, FontStyle.Regular);
             flp.Controls.Clear();
 
             foreach (var track in mf.trk.gArr)

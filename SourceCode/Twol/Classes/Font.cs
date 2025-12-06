@@ -3,7 +3,7 @@ using System;
 
 namespace Twol
 {
-    public class CFont
+    public class Font
     {
         private readonly FormGPS mf;
 
@@ -20,7 +20,7 @@ namespace Twol
 
         public bool isFontOn;
 
-        public CFont(FormGPS _f)
+        public Font(FormGPS _f)
         {
             //constructor
             mf = _f;

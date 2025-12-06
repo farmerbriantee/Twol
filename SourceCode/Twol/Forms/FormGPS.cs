@@ -191,7 +191,7 @@ namespace Twol
         /// <summary>
         /// The font class
         /// </summary>
-        public CFont font;
+        public Font font;
 
         /// <summary>
         /// The new steer algorithms
@@ -316,7 +316,7 @@ namespace Twol
             tram = new CTram(this);
 
             //access to font class
-            font = new CFont(this);
+            font = new Font(this);
 
             //the new steer algorithms
             gyd = new CGuidance(this);

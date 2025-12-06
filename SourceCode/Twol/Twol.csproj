@@ -150,13 +150,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\CBrightness.cs" />
-    <Compile Include="Classes\CExtensionMethods.cs" />
+    <Compile Include="Classes\ExtensionMethods.cs" />
     <Compile Include="Classes\CBoundary.cs" />
     <Compile Include="Classes\CGuidance.cs" />
     <Compile Include="Classes\CHeadLine.cs" />
     <Compile Include="Classes\CHello.cs" />
-    <Compile Include="Classes\CLanguage.cs" />
-    <Compile Include="Classes\CLog.cs" />
+    <Compile Include="Classes\Language.cs" />
+    <Compile Include="Classes\Log.cs" />
     <Compile Include="Mapping\Map.cs" />
     <Compile Include="Classes\CNozzle.cs" />
     <Compile Include="Classes\CPolygon.cs" />
@@ -249,7 +249,7 @@
     <Compile Include="Classes\CFieldData.cs" />
     <Compile Include="Classes\CBoundaryList.cs" />
     <Compile Include="Classes\CAHRS.cs" />
-    <Compile Include="Classes\CFont.cs" />
+    <Compile Include="Classes\Font.cs" />
     <Compile Include="Classes\CSim.cs" />
     <Compile Include="Classes\CTracks.cs" />
     <Compile Include="Classes\CTram.cs" />
@@ -527,7 +527,7 @@
     <Compile Include="Forms\FormGPSData.Designer.cs">
       <DependentUpon>FormGPSData.cs</DependentUpon>
     </Compile>
-    <Compile Include="Classes\CGLM.cs" />
+    <Compile Include="Classes\GLM.cs" />
     <Compile Include="Forms\OpenGL.Designer.cs">
       <SubType>Form</SubType>
       <DependentUpon>FormGPS.cs</DependentUpon>
