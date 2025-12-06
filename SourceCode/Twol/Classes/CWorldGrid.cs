@@ -20,6 +20,11 @@ namespace Twol
 
         public double eastingMin = -GridSize;
 
+        public const double GridSize = 6000;
+        public double Count = 40;
+
+        public double gridRotation = 0.0;
+
         //Y
         public double northingMaxGeo;
 
@@ -40,10 +45,6 @@ namespace Twol
 
         public double eastingMinRate;
 
-        public const double GridSize = 6000;
-        public double Count = 40;
-
-        public double gridRotation = 0.0;
 
         public CWorldGrid(FormGPS _f)
         {

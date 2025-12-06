@@ -4,6 +4,7 @@ using OpenTK.Graphics.OpenGL;
 using System;
 using System.Drawing;
 using Twol.Properties;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
 
 namespace Twol.Mapping
 {
@@ -28,6 +29,21 @@ namespace Twol.Mapping
     public class WorldMap
     {
         private readonly FormGPS mf;
+
+        //Y
+        public double northingMax = GridSize;
+
+        public double northingMin = -GridSize;
+
+        //X
+        public double eastingMax = GridSize;
+
+        public double eastingMin = -GridSize;
+
+        public const double GridSize = 20000;
+        public double Count = 40;
+
+        public double gridRotation = 0.0;
 
         Tile tile;
         public bool isSet = false;
@@ -76,7 +92,9 @@ namespace Twol.Mapping
             originToXinTiles = (int)(mf.pn.fix.easting / mPerTile);
             originToYinTiles = (int)(mf.pn.fix.northing / mPerTile);
 
-            ApplyHeadingToTileOffset(ref originToXinTiles, ref originToYinTiles, glm.toDegrees(mf.fixHeading));
+            //only move map ahead if in 3D
+            if (Settings.User.setDisplay_camPitch != 0)
+                ApplyHeadingToTileOffset(ref originToXinTiles, ref originToYinTiles, glm.toDegrees(mf.fixHeading));
 
             if (originToXinTiles != lastOriginToXinTiles || originToYinTiles != lastOriginToYinTiles)
             {
@@ -165,6 +183,8 @@ namespace Twol.Mapping
                         }
                     }
                 }
+
+                checkZoomWorldGrid();
             }
 
             Color field = Settings.User.setDisplay_isDayMode ? Settings.User.colorFieldDay : Settings.User.colorFieldNight;
@@ -204,42 +224,62 @@ namespace Twol.Mapping
                 }
             }
             GL.Disable(EnableCap.Texture2D);
-
-            //grid lines based on tiles
-            for (int i = -3; i < 3; i++)
-            {
-                for (int j = 2; j > -4; j--)
-                {
-                    double ii = (i + lastOriginToXinTiles) * mPerTile;
-                    double jj = (j + lastOriginToYinTiles) * mPerTile;
-                    double bitt = mPerTile / 2;
-
-                    GL.Disable(EnableCap.Texture2D);
-
-                    GL.LineWidth(1);
-                    GL.Begin(PrimitiveType.Lines);
-
-                    GL.Vertex3(ii + offsetX + bitt, 3 * mpp * 256, 0.1);
-                    GL.Vertex3(ii + offsetX + bitt, -3 * mpp * 256, 0.1);
-
-                    GL.Vertex3(3 * mpp * 256, jj + offsetY + bitt, 0.1);
-                    GL.Vertex3(-3 * mpp * 256, jj + offsetY + bitt, 0.1);
-                    //}
-                    GL.End();
-                }
-            }
-
-            //GL.Vertex3(eastingMin, northingMax, -0.10);
-            //GL.TexCoord2(Count, 0.0);
-            //GL.Vertex3(eastingMax, northingMax, -0.10);
-            //GL.TexCoord2(0.0, Count);
-            //GL.Vertex3(eastingMin, northingMin, -0.10);
-            //GL.TexCoord2(Count, Count);
-            //GL.Vertex3(eastingMax, northningMin, -0.10);
-
         }
 
-        //load default texture
+        public void DrawWorldGrid(double _gridZoom)
+        {
+            //_gridZoom *= 0.5;
+
+            //GL.Rotate(-gridRotation, 0, 0, 1.0);
+
+            if (Settings.User.setDisplay_isDayMode)
+            {
+                GL.Color3(0.25, 0.25, 0.25);
+            }
+            else
+            {
+                GL.Color3(0.12, 0.12, 0.12);
+            }
+            GL.LineWidth(1);
+            GL.Begin(PrimitiveType.Lines);
+            for (double num = Math.Round(eastingMin / _gridZoom, MidpointRounding.AwayFromZero) * _gridZoom; num < eastingMax; num += _gridZoom)
+            {
+                if (num < eastingMin) continue;
+
+                GL.Vertex3(num, northingMax, 0.1);
+                GL.Vertex3(num, northingMin, 0.1);
+            }
+            for (double num2 = Math.Round(northingMin / _gridZoom, MidpointRounding.AwayFromZero) * _gridZoom; num2 < northingMax; num2 += _gridZoom)
+            {
+                if (num2 < northingMin) continue;
+
+                GL.Vertex3(eastingMax, num2, 0.1);
+                GL.Vertex3(eastingMin, num2, 0.1);
+            }
+            GL.End();
+
+            //GL.Rotate(gridRotation, 0, 0, 1.0);
+        }
+
+        public void checkZoomWorldGrid()
+        {
+            double n = Math.Round(mf.pivotAxlePos.northing / (GridSize / Count), MidpointRounding.AwayFromZero) * (GridSize / Count);
+            double e = Math.Round(mf.pivotAxlePos.easting / (GridSize / Count), MidpointRounding.AwayFromZero) * (GridSize / Count);
+
+            northingMax = n + GridSize;
+            northingMin = n - GridSize;
+            eastingMax = e + GridSize;
+            eastingMin = e - GridSize;
+        }
+
+
+        /// <summary>
+        /// Loads the default texture for the specified texture index and applies it to the texture map.
+        /// </summary>
+        /// <remarks>This method binds the specified texture, sets texture parameters for filtering, and
+        /// loads a default bitmap image into the texture. The texture is then marked as loaded with the default
+        /// status.</remarks>
+        /// <param name="tex">The index of the texture in the texture map to be loaded with the default texture.</param>
         private void LoadDefaultTexture(int tex)
         {
             GL.BindTexture(TextureTarget.Texture2D, mapTexture[tex]);
@@ -312,15 +352,32 @@ namespace Twol.Mapping
                         lastZoom = camToZoomMapping[i];
                         if (Settings.User.setDisplay_camPitch == 0) mf.map.ZoomLevel = (camToZoomMapping[i + 1] + 1);
                         else mf.map.ZoomLevel = camToZoomMapping[i + 1];
-                        mf.map.ZoomLevel = 18;
+                        //mf.map.ZoomLevel = 18;
                         lastOriginToXinTiles = 0;
                         lastOriginToYinTiles = 0;
                     }
                     break; // first (highest) matching threshold wins
                 }
             }
+
+            if (Settings.User.setDisplay_camZoom > 100) Count = 5;
+            else if (Settings.User.setDisplay_camZoom > 80) Count = 10;
+            else if (Settings.User.setDisplay_camZoom > 50) Count = 15;
+            else if (Settings.User.setDisplay_camZoom > 20) Count = 30;
+            else if (Settings.User.setDisplay_camZoom > 10) Count = 60;
+            else Count = 120;
         }
 
+        /// <summary>
+        /// Adjusts the tile offset based on the specified heading direction while in 3D only
+        /// </summary>
+        /// <remarks>The method calculates the adjustment to the tile offsets by determining the sector of
+        /// the heading. Each sector represents a 45° range, and the adjustments are applied using predefined lookup
+        /// tables.</remarks>
+        /// <param name="originToXinTiles">A reference to the X-coordinate offset in tiles. This value will be modified based on the heading.</param>
+        /// <param name="originToYinTiles">A reference to the Y-coordinate offset in tiles. This value will be modified based on the heading.</param>
+        /// <param name="heading">The heading direction in degrees, where 0° represents north, 90° represents east, 180° represents south, and
+        /// 270° represents west. The heading is used to determine the adjustment to the tile offsets.</param>
         private void ApplyHeadingToTileOffset(ref int originToXinTiles, ref int originToYinTiles, double heading)
         {
             // Determine sector: 0..7 where each sector is 45°, centered on multiples of 45°.

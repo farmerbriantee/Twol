@@ -951,7 +951,7 @@ namespace Twol
             camera.camSetDistance = Settings.User.setDisplay_camZoom * Settings.User.setDisplay_camZoom * -1;
 
             //match grid to cam distance and redo perspective
-            gridToolSpacing = (int)((camera.camSetDistance / -15) / Settings.Tool.toolWidth + 0.5);
+            gridToolSpacing = (int)((camera.camSetDistance / -10) / Settings.Tool.toolWidth * 2 + 0.5);
             if (gridToolSpacing < 1) gridToolSpacing = 1;
             camera.gridZoom = gridToolSpacing * Settings.Tool.toolWidth;
             ChangePerspective();

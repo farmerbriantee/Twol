@@ -84,7 +84,7 @@ namespace Twol
             oglMain.MakeCurrent();
             LoadGLTextures();
             worldMap.GenerateTextureMemory();
-            GL.ClearColor(0.14f, 0.14f, 0.37f, 1.0f);
+            GL.ClearColor(0.1f, 0.1f, 0.3f, 1.0f);
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
             GL.CullFace(CullFaceMode.Back);
             SetZoom();
@@ -135,7 +135,7 @@ namespace Twol
                     //  Clear the color and depth buffer.
                     GL.Clear(ClearBufferMask.DepthBufferBit | ClearBufferMask.ColorBufferBit);
 
-                    if (Settings.User.setDisplay_isDayMode) GL.ClearColor(0.07f, 0.14f, 0.07f, 1.0f);
+                    if (Settings.User.setDisplay_isDayMode) GL.ClearColor(0.037f, 0.1f, 0.037f, 1.0f);
                     else GL.ClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
                     GL.LoadIdentity();
@@ -157,7 +157,7 @@ namespace Twol
                     worldMap.DrawWorldMap();
 
                     ////if grid is on draw it
-                    if (Settings.User.isGridOn) worldGrid.DrawWorldGrid(camera.gridZoom);
+                    if (Settings.User.isGridOn) worldMap.DrawWorldGrid(camera.gridZoom);
 
                     GL.Enable(EnableCap.Blend);
 
