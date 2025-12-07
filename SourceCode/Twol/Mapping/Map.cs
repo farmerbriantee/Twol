@@ -128,7 +128,7 @@ namespace Twol
         /// <param name="x">X-index of the tile to be requested.</param>
         /// <param name="y">Y-index of the tile to be requested.</param>
         /// <param name="z">Zoom level</param>
-        private void RequestTileFromTileServer(int x, int y, int z)
+        public void RequestTileFromTileServer(int x, int y, int z)
         {
             var key = $"{z}:{x}:{y}";
             // Ensure only one request per tile at a time
@@ -268,6 +268,27 @@ namespace Twol
             }
         }
 
+        public bool PrefetchTile(int x, int y, int z)
+        {
+            try
+            {
+                // Try memory cache
+                var tile = tileCache.FirstOrDefault(t => t.Z == z && t.X == x && t.Y == y);
+                if (tile != null) return true;
+                // Try file system without locking the file
+                string localPath = Path.Combine(_CacheFolder, $"{z}", $"{x}", $"{y}.tile");
+                if (File.Exists(localPath))
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         /// <summary>
         /// Converts tile coordinates at a specific zoom level to a geographic position in the WGS84 coordinate system.
         /// </summary>
@@ -308,10 +329,6 @@ namespace Twol
             p.Y = (float)((1.0 - Math.Log(Math.Tan(Latitude * Math.PI / 180.0) + 1.0 / Math.Cos(Latitude * Math.PI / 180.0)) / Math.PI) / 2.0 * z1);
             return p;
         }
-
-        #endregion
-
-        #region Connected Internet Check
 
         #endregion
     }

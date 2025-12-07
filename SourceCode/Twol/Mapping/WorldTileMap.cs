@@ -46,7 +46,7 @@ namespace Twol.Mapping
         public double gridRotation = 0.0;
 
         Tile tile;
-        public bool isUpdateTiles = true;
+        public bool isUpdateTilesRequired = true;
         private int isMapCompleteCounter = 10;
 
         public double lastZoom = 0;
@@ -55,14 +55,13 @@ namespace Twol.Mapping
 
         //tile textures array for openGL
         public uint[] mapTexture;
-        public int[] mapTextureStatus = new int[25];
+        public int[] mapTextureStatus = new int[49];
 
         private int originToXinTiles = 0, originToYinTiles = 0;
         private int lastOriginToXinTiles = 0, lastOriginToYinTiles = 0;
 
+        //time counter for updating tiles
         private double secondCounter = 0;
-
-        //public PointF originTileXY = new PointF(0, 0);
 
         //cam z height to map zoom level mapping
         private readonly (int threshold, int zoom)[] camToZoomMapping = new (int threshold, int zoom)[]
@@ -77,6 +76,7 @@ namespace Twol.Mapping
              (8, 18)
         };
         
+        /// Represents a mapping of movement offsets corresponding to directional headings.
         private readonly (int dx, int dy)[] headingMapMoveOffsets = new (int dx, int dy)[]
         {
             (0, 1),  // sector 0: north
@@ -116,12 +116,12 @@ namespace Twol.Mapping
 
             if (originToXinTiles != lastOriginToXinTiles || originToYinTiles != lastOriginToYinTiles)
             {
-                isUpdateTiles = true;
+                isUpdateTilesRequired = true;
                 lastOriginToXinTiles = originToXinTiles;
                 lastOriginToYinTiles = originToYinTiles;
             }
 
-            if (secondCounter > 1 || isUpdateTiles)
+            if (secondCounter > 1 || isUpdateTilesRequired)
             {
                 PointF originTileXY = mf.map.WSG84ToTilePos(CNMEA.lonStart, CNMEA.latStart, mf.map.ZoomLevel);
                 int tileX = (int)Math.Floor(originTileXY.X);
@@ -131,19 +131,19 @@ namespace Twol.Mapping
                 offsetY = ((originTileXY.Y - (int)originTileXY.Y) - 0.5) * mPerTile;
 
                 //set to top-left tile
-                tileX = tileX - 2 + lastOriginToXinTiles;
-                tileY = tileY - 2 - lastOriginToYinTiles;
+                tileX = tileX - 3 + lastOriginToXinTiles;
+                tileY = tileY - 3 - lastOriginToYinTiles;
 
                 secondCounter = 0;
 
-                if (isUpdateTiles)
+                if (isUpdateTilesRequired)
                 {
                     int tex = 0;
 
                     //5 x 5 tilemap
-                    for (int i = 0; i < 5; i++)
+                    for (int i = 0; i < 7; i++)
                     {
-                        for (int j = 0; j < 5; j++)
+                        for (int j = 0; j < 7; j++)
                         {
                             tile = mf.map.GetTile(tileX + i, tileY + j, mf.map.ZoomLevel);
 
@@ -188,7 +188,13 @@ namespace Twol.Mapping
                         }
                     }
 
-                    isUpdateTiles = false;
+                    isUpdateTilesRequired = false;
+
+                    //prefetch outside ring of tiles
+                    if (mf.isInternetConnected)
+                    {
+                        //PrefetchRingTiles(tileX, tileY);
+                    }
                 }
                 else
                 {
@@ -196,13 +202,13 @@ namespace Twol.Mapping
                     {
                         if (mapTextureStatus[m] == (int)TexStatus.DefaultLoaded)
                         {
-                            isUpdateTiles = true;
+                            isUpdateTilesRequired = true;
                             break;
                         }
                     }
 
                     //Too many attempts at loading tiles and failing?
-                    if (isUpdateTiles == true)
+                    if (isUpdateTilesRequired == false)
                     {
                         isMapCompleteCounter = 0;
                     }
@@ -217,6 +223,7 @@ namespace Twol.Mapping
                             {
                                 mapTextureStatus[m] = (int)TexStatus.TileCorrect;
                                 mf.isInternetConnected = false;
+                                isMapCompleteCounter = 0;
                             }
                         }
                     }
@@ -233,9 +240,9 @@ namespace Twol.Mapping
                 GL.Enable(EnableCap.Texture2D);
 
                 int t = 0;
-                for (double i = -2; i < 3; i += 1)
+                for (double i = -3; i < 4; i += 1)
                 {
-                    for (double j = 2; j > -3; j -= 1)
+                    for (double j = 3; j > -4; j -= 1)
                     {
                         if (mapTexture[t] != 0)
                             GL.BindTexture(TextureTarget.Texture2D, mapTexture[t]);
@@ -262,6 +269,28 @@ namespace Twol.Mapping
                 }
             }
             GL.Disable(EnableCap.Texture2D);
+        }
+
+        private void PrefetchRingTiles(int scanTileX, int scanTileY)
+        {
+            //prefetch tiles around outside
+            for (int i = 0; i < 7; i++)
+            {
+                //make sure tile is not in cache or file already.
+                if (mf.map.PrefetchTile(scanTileX, scanTileY + i, mf.map.ZoomLevel) == false)
+                    mf.map.RequestTileFromTileServer(scanTileX, scanTileY + i, mf.map.ZoomLevel);
+                if (mf.map.PrefetchTile(scanTileX + 6, scanTileY + i, mf.map.ZoomLevel) == false)
+                    mf.map.RequestTileFromTileServer(scanTileX + 6, scanTileY + i, mf.map.ZoomLevel);
+            }
+
+            for (int j = 1; j < 6; j++)
+            {
+                if (mf.map.PrefetchTile(scanTileX + j, scanTileY, mf.map.ZoomLevel) == false)
+                    mf.map.RequestTileFromTileServer(scanTileX + j, scanTileY, mf.map.ZoomLevel);
+
+                if (mf.map.PrefetchTile(scanTileX + j, scanTileY + 6, mf.map.ZoomLevel) == false)
+                    mf.map.RequestTileFromTileServer(scanTileX + j, scanTileY + 6, mf.map.ZoomLevel);
+            }
         }
 
         public void DrawWorldGrid(double _gridZoom)
@@ -310,7 +339,6 @@ namespace Twol.Mapping
             eastingMin = e - GridSize;
         }
 
-
         /// <summary>
         /// Loads the default texture for the specified texture index and applies it to the texture map.
         /// </summary>
@@ -344,12 +372,12 @@ namespace Twol.Mapping
         /// array. </remarks>
         public void GenerateTextureMemory()
         {
-            mapTexture = new uint[25];
+            mapTexture = new uint[49];
 
             int tex = 0;
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 7; i++)
             {
-                for (int j = 0; j < 5; j++)
+                for (int j = 0; j < 7; j++)
                 {
                     {
                         GL.GenTextures(1, out mapTexture[tex]);
@@ -377,9 +405,6 @@ namespace Twol.Mapping
         /// differs from the last applied zoom level.</remarks>
         private void UpdateMapZoomFromCamZoom()
         {
-            // adjust bitmap zoom based on cam zoom
-            //double result = Math.Log(Settings.User.setDisplay_camZoom, 2);
-
             foreach (var pair in camToZoomMapping)
             {
                 int threshold = pair.threshold;
@@ -389,11 +414,11 @@ namespace Twol.Mapping
                 {
                     if (lastZoom != threshold)
                     {
-                        isUpdateTiles = true;
+                        isUpdateTilesRequired = true;
                         lastZoom = threshold;
 
-                        //2D is closer then 3D so add 1 to zoom level
-                        if (Settings.User.setDisplay_camPitch == 0) mf.map.ZoomLevel = (zoom + 1);
+                        //2D is closer then 3D so add 2 to zoom level
+                        if (Settings.User.setDisplay_camPitch == 0) mf.map.ZoomLevel = (zoom + 2);
                         else mf.map.ZoomLevel = zoom;
 
                         //mf.map.ZoomLevel = 18;

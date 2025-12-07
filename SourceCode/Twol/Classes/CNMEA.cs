@@ -85,7 +85,7 @@ namespace Twol
             mf.FileLoadFields();
 
             //since we moved load new tiles
-            mf.worldMap.isUpdateTiles = true;
+            mf.worldMap.isUpdateTilesRequired = true;
         }
 
         public void ConvertWGS84ToLocal(double Lat, double Lon, out double Northing, out double Easting)
