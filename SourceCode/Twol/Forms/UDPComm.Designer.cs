@@ -1,14 +1,14 @@
 ﻿using System;
-using System.Net;
-using System.Net.Sockets;
-using System.Windows.Forms;
+using System.Buffers;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
-using System.Diagnostics;
-using System.Xml.Linq;
-using System.Buffers;
-
+using System.Net;
+using System.Net.Sockets;
 using System.Text;
+using System.Threading;
+using System.Windows.Forms;
+using System.Xml.Linq;
 using Twol.Classes;
 
 namespace Twol
@@ -73,17 +73,50 @@ namespace Twol
         public StringBuilder logUDPSentence = new StringBuilder();
         public bool isGPSLogOn;
 
-        public void DisableSim()
-        {
-            isGPSPositionInitialized = false;
-            isFirstHeadingSet = false;
-            startCounter = 0;
-            panelSim.Visible = false;
-            timerSim.Enabled = false;
-            simulatorOnToolStripMenuItem.Checked = false;
-            Settings.User.isSimulatorOn = simulatorOnToolStripMenuItem.Checked;
+        /// <summary>
+        /// /checks if internet is connected
+        /// If not connected, tiles won't be requested from server
+        /// </summary>
+        public bool isInternetConnected;
 
-            return;
+        public bool CheckInternetConnection()
+        {
+            // Fire-and-forget connectivity probe; returns immediately with last known state.
+            ThreadPool.QueueUserWorkItem(_ =>
+            {
+                const string testUrl = "http://clients3.google.com/generate_204";
+                bool connected = false;
+
+                try
+                {
+                    var request = (HttpWebRequest)WebRequest.Create(testUrl);
+                    request.Method = "GET";
+                    request.Timeout = 3000;
+                    request.AllowAutoRedirect = false;
+
+                    using (var response = (HttpWebResponse)request.GetResponse())
+                    {
+                        connected = response.StatusCode == HttpStatusCode.NoContent || response.StatusCode == HttpStatusCode.OK;
+                    }
+                }
+                catch (WebException wex)
+                {
+                    if (wex.Response is HttpWebResponse webResponse)
+                    {
+                        connected = webResponse.StatusCode == HttpStatusCode.NoContent || webResponse.StatusCode == HttpStatusCode.OK;
+                    }
+                }
+                catch
+                {
+                    connected = false;
+                }
+
+                // Update cached state without blocking caller.
+                isInternetConnected = connected;
+            });
+
+            // Return the last known connectivity state immediately (non-blocking).
+            return isInternetConnected;
         }
 
         public void StartPluginsServer()
@@ -165,7 +198,6 @@ namespace Twol
                 btnUDP.BackColor = Color.Red;
             }
         }
-
 
         #region Send NTRIP
 
@@ -824,6 +856,18 @@ namespace Twol
 
         #endregion
 
+        public void DisableSim()
+        {
+            isGPSPositionInitialized = false;
+            isFirstHeadingSet = false;
+            startCounter = 0;
+            panelSim.Visible = false;
+            timerSim.Enabled = false;
+            simulatorOnToolStripMenuItem.Checked = false;
+            Settings.User.isSimulatorOn = simulatorOnToolStripMenuItem.Checked;
+
+            return;
+        }
         //for moving and sizing borderless window
         protected override void WndProc(ref Message m)
         {

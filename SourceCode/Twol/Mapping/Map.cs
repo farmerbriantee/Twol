@@ -39,7 +39,7 @@ namespace Twol
                 _Workers[w].Start();
             }
 
-            isInternetConnected = CheckInternetConnection();
+            mf.isInternetConnected = mf.CheckInternetConnection();
         }
 
         #region Cache And Folder
@@ -255,7 +255,7 @@ namespace Twol
                 }
 
                 // Request from server if online
-                if (isInternetConnected)
+                if (mf.isInternetConnected)
                 {
                     RequestTileFromTileServer(x, y, z);
                 }
@@ -312,52 +312,6 @@ namespace Twol
         #endregion
 
         #region Connected Internet Check
-
-        /// <summary>
-        /// /checks if internet is connected
-        /// If not connected, tiles won't be requested from server
-        /// </summary>
-        public bool isInternetConnected;
-
-        public bool CheckInternetConnection()
-        {
-            // Fire-and-forget connectivity probe; returns immediately with last known state.
-            ThreadPool.QueueUserWorkItem(_ =>
-            {
-                const string testUrl = "http://clients3.google.com/generate_204";
-                bool connected = false;
-
-                try
-                {
-                    var request = (HttpWebRequest)WebRequest.Create(testUrl);
-                    request.Method = "GET";
-                    request.Timeout = 3000;
-                    request.AllowAutoRedirect = false;
-
-                    using (var response = (HttpWebResponse)request.GetResponse())
-                    {
-                        connected = response.StatusCode == HttpStatusCode.NoContent || response.StatusCode == HttpStatusCode.OK;
-                    }
-                }
-                catch (WebException wex)
-                {
-                    if (wex.Response is HttpWebResponse webResponse)
-                    {
-                        connected = webResponse.StatusCode == HttpStatusCode.NoContent || webResponse.StatusCode == HttpStatusCode.OK;
-                    }
-                }
-                catch
-                {
-                    connected = false;
-                }
-
-                // Update cached state without blocking caller.
-                isInternetConnected = connected;
-            });
-
-            // Return the last known connectivity state immediately (non-blocking).
-            return isInternetConnected;
-        }
 
         #endregion
     }

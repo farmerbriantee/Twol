@@ -47,6 +47,8 @@ namespace Twol.Mapping
 
         Tile tile;
         public bool isUpdateTiles = true;
+        private int isMapCompleteCounter = 10;
+
         public double lastZoom = 0;
 
         private double offsetX = 0, offsetY = 0;
@@ -63,11 +65,18 @@ namespace Twol.Mapping
         //public PointF originTileXY = new PointF(0, 0);
 
         //cam z height to map zoom level mapping
-        private readonly int[] camToZoomMapping = new int[]
+        private readonly (int threshold, int zoom)[] camToZoomMapping = new (int threshold, int zoom)[]
         {
-             128, 11, 96, 12, 64, 13, 48, 14, 32, 15, 24, 16, 16, 17, 8, 18
+             (128, 11),
+             (96, 12),
+             (64, 13),
+             (48, 14),
+             (32, 15),
+             (24, 16),
+             (16, 17),
+             (8, 18)
         };
-
+        
         private readonly (int dx, int dy)[] headingMapMoveOffsets = new (int dx, int dy)[]
         {
             (0, 1),  // sector 0: north
@@ -171,7 +180,7 @@ namespace Twol.Mapping
                             }
 
                             //will never retrieve tiles if no internet
-                            if (mf.map.isInternetConnected == false)
+                            if (mf.isInternetConnected == false)
                             {
                                 mapTextureStatus[tex] = (int)TexStatus.TileCorrect;
                             }
@@ -189,6 +198,26 @@ namespace Twol.Mapping
                         {
                             isUpdateTiles = true;
                             break;
+                        }
+                    }
+
+                    //Too many attempts at loading tiles and failing?
+                    if (isUpdateTiles == true)
+                    {
+                        isMapCompleteCounter = 0;
+                    }
+                    else
+                    {
+                        isMapCompleteCounter++;
+                        if (isMapCompleteCounter > 8)
+                        {
+                            //set tiles to correct to stop trying to load. Set internetConnected to false
+                            //Will check again in a minute
+                            for (int m = 0; m < mapTextureStatus.Length; m++)
+                            {
+                                mapTextureStatus[m] = (int)TexStatus.TileCorrect;
+                                mf.isInternetConnected = false;
+                            }
                         }
                     }
                 }
@@ -215,18 +244,18 @@ namespace Twol.Mapping
                             GL.BindTexture(TextureTarget.Texture2D, mf.texture[(int)FormGPS.textures.Floor]);
                         }
 
-                        double ii = (i + lastOriginToXinTiles) * mPerTile;  //x
-                        double jj = (j + lastOriginToYinTiles) * mPerTile;   //y
+                        double ii = (i + lastOriginToXinTiles) * mPerTile + offsetX;  //x
+                        double jj = (j + lastOriginToYinTiles) * mPerTile + offsetY;   //y
                         double bitt = mPerTile / 2;
                         GL.Begin(PrimitiveType.TriangleStrip);
                         GL.TexCoord2(0.0, 0.0);
-                        GL.Vertex3(ii - bitt + offsetX, jj + bitt + offsetY, -0.10);
+                        GL.Vertex3(ii - bitt, jj + bitt, -0.10);
                         GL.TexCoord2(1.0, 0.0);
-                        GL.Vertex3(ii + bitt + offsetX, jj + bitt + offsetY, -0.10);
+                        GL.Vertex3(ii + bitt, jj + bitt, -0.10);
                         GL.TexCoord2(0.0, 1.0);
-                        GL.Vertex3(ii - bitt + offsetX, jj - bitt + offsetY, -0.10);
+                        GL.Vertex3(ii - bitt, jj - bitt, -0.10);
                         GL.TexCoord2(1.0, 1.0);
-                        GL.Vertex3(ii + bitt + offsetX, jj - bitt + offsetY, -0.10);
+                        GL.Vertex3(ii + bitt, jj - bitt, -0.10);
                         GL.End();
                         t++;
                     }
@@ -351,16 +380,22 @@ namespace Twol.Mapping
             // adjust bitmap zoom based on cam zoom
             //double result = Math.Log(Settings.User.setDisplay_camZoom, 2);
 
-            for (int i = 0; i < camToZoomMapping.Length; i += 2)
+            foreach (var pair in camToZoomMapping)
             {
-                if ((int)Settings.User.setDisplay_camZoom > camToZoomMapping[i])
+                int threshold = pair.threshold;
+                int zoom = pair.zoom;
+
+                if ((int)Settings.User.setDisplay_camZoom > threshold)
                 {
-                    if (lastZoom != camToZoomMapping[i])
+                    if (lastZoom != threshold)
                     {
                         isUpdateTiles = true;
-                        lastZoom = camToZoomMapping[i];
-                        if (Settings.User.setDisplay_camPitch == 0) mf.map.ZoomLevel = (camToZoomMapping[i + 1] + 1);
-                        else mf.map.ZoomLevel = camToZoomMapping[i + 1];
+                        lastZoom = threshold;
+
+                        //2D is closer then 3D so add 1 to zoom level
+                        if (Settings.User.setDisplay_camPitch == 0) mf.map.ZoomLevel = (zoom + 1);
+                        else mf.map.ZoomLevel = zoom;
+
                         //mf.map.ZoomLevel = 18;
                         lastOriginToXinTiles = 0;
                         lastOriginToYinTiles = 0;

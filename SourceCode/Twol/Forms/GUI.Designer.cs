@@ -183,7 +183,7 @@ namespace Twol
                 counterCheckInternet += 3;
 
                 //set btninternetconnection to correct image - checked every 50 secs by CheckInternetConnection
-                btnInternetConnection.BackColor = map.isInternetConnected ? Color.PaleGreen : Color.Salmon;
+                btnInternetConnection.BackColor = isInternetConnected ? Color.PaleGreen : Color.Salmon;
             }
 
             /////////////////////////////   2 second  ////////////////////////////////////////

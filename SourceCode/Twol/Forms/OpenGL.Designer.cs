@@ -777,7 +777,7 @@ namespace Twol
                         //calc overlap
                         oglZoom.Refresh();
 
-                        map.CheckInternetConnection();
+                        CheckInternetConnection();
                     }
 
                     #endregion
