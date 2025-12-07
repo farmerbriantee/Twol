@@ -46,7 +46,7 @@ namespace Twol.Mapping
         public double gridRotation = 0.0;
 
         Tile tile;
-        public bool isSet = false;
+        public bool isUpdateTiles = true;
         public double lastZoom = 0;
 
         private double offsetX = 0, offsetY = 0;
@@ -98,12 +98,12 @@ namespace Twol.Mapping
 
             if (originToXinTiles != lastOriginToXinTiles || originToYinTiles != lastOriginToYinTiles)
             {
-                isSet = false;
+                isUpdateTiles = true;
                 lastOriginToXinTiles = originToXinTiles;
                 lastOriginToYinTiles = originToYinTiles;
             }
 
-            if (secondCounter > 1 || !isSet)
+            if (secondCounter > 1 || isUpdateTiles)
             {
                 PointF originTileXY = mf.map.WSG84ToTilePos(CNMEA.lonStart, CNMEA.latStart, mf.map.ZoomLevel);
                 int tileX = (int)Math.Floor(originTileXY.X);
@@ -118,7 +118,7 @@ namespace Twol.Mapping
 
                 secondCounter = 0;
 
-                if (!isSet)
+                if (isUpdateTiles)
                 {
                     int tex = 0;
 
@@ -170,7 +170,7 @@ namespace Twol.Mapping
                         }
                     }
 
-                    isSet = true;
+                    isUpdateTiles = false;
                 }
                 else
                 {
@@ -178,7 +178,7 @@ namespace Twol.Mapping
                     {
                         if (mapTextureStatus[m] == (int)TexStatus.DefaultLoaded)
                         {
-                            isSet = false;
+                            isUpdateTiles = true;
                             break;
                         }
                     }
@@ -348,7 +348,7 @@ namespace Twol.Mapping
                 {
                     if (lastZoom != camToZoomMapping[i])
                     {
-                        isSet = false;
+                        isUpdateTiles = true;
                         lastZoom = camToZoomMapping[i];
                         if (Settings.User.setDisplay_camPitch == 0) mf.map.ZoomLevel = (camToZoomMapping[i + 1] + 1);
                         else mf.map.ZoomLevel = camToZoomMapping[i + 1];
