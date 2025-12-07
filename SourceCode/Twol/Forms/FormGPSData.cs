@@ -1,8 +1,13 @@
 ﻿//Please, if you use this give me some credit
 //Copyright BrianTee, copy right out of it.
 
+using OpenTK.Graphics.OpenGL;
 using System;
+using System.Drawing;
+using System.Reflection.Emit;
 using System.Windows.Forms;
+using static Twol.FormGPS;
+
 
 namespace Twol
 {
@@ -47,12 +52,26 @@ namespace Twol
             //lbludpWatchCounts.Text = mf.missedSentenceCount.ToString();
 
             lblAltitude.Text = mf.Altitude;
+
+            PointF tileXY = mf.map.WSG84ToTilePos(mf.pn.longitude, mf.pn.latitude, mf.map.ZoomLevel);
+
+            lblZ.Text = mf.map.ZoomLevel.ToString();
+
+            lblX.Text = tileXY.X.ToString("N2");
+            lblY.Text = tileXY.Y.ToString("N2");
+            //lblZ.Text = Settings.User.setDisplay_camZoom.ToString("N0");
+
+            double mpp = (Math.Cos(mf.pn.latitude * Math.PI / 180) * 2 * Math.PI * 6378137) / (256 * Math.Pow(2, mf.map.ZoomLevel));
+            lblMPerTile.Text = (mpp *256).ToString("N3");
+
+            lblOriX.Text = (mf.pn.fix.easting / (mpp*256)).ToString("N2");
+            lblOriY.Text = (mf.pn.fix.northing / (mpp*256)).ToString("N2");
         }
 
         private void FormGPSData_Load(object sender, EventArgs e)
         {
-            this.Width = 120;
-            this.Height = 330;
+            this.Width = 200;
+            this.Height = 500;
         }
 
         private void FormGPSData_FormClosing(object sender, FormClosingEventArgs e)

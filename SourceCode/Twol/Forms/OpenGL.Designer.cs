@@ -83,7 +83,8 @@ namespace Twol
         {
             oglMain.MakeCurrent();
             LoadGLTextures();
-            GL.ClearColor(0.14f, 0.14f, 0.37f, 1.0f);
+            worldMap.GenerateTextureMemory();
+            GL.ClearColor(0.1f, 0.1f, 0.3f, 1.0f);
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
             GL.CullFace(CullFaceMode.Back);
             SetZoom();
@@ -134,7 +135,7 @@ namespace Twol
                     //  Clear the color and depth buffer.
                     GL.Clear(ClearBufferMask.DepthBufferBit | ClearBufferMask.ColorBufferBit);
 
-                    if (Settings.User.setDisplay_isDayMode) GL.ClearColor(0.27f, 0.4f, 0.7f, 1.0f);
+                    if (Settings.User.setDisplay_isDayMode) GL.ClearColor(0.037f, 0.1f, 0.037f, 1.0f);
                     else GL.ClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
                     GL.LoadIdentity();
@@ -151,10 +152,12 @@ namespace Twol
 
                     GL.Disable(EnableCap.Blend);
 
-                    worldGrid.DrawFieldSurface();
+                    //worldGrid.DrawFieldSurface();
+
+                    worldMap.DrawWorldMap();
 
                     ////if grid is on draw it
-                    if (Settings.User.isGridOn) worldGrid.DrawWorldGrid(camera.gridZoom);
+                    if (Settings.User.isGridOn) worldMap.DrawWorldGrid(camera.gridZoom);
 
                     GL.Enable(EnableCap.Blend);
 
@@ -749,15 +752,8 @@ namespace Twol
 
                     #region FileSave and oglZoom
 
-                    //file writer that runs all the time
-                    if (fileSaveAlwaysCounter > 60)
-                    {
-                        fileSaveAlwaysCounter = 0;
-                        //if (sbMissedSentence.Length > 0) FileSaveMissedEvents();
-                    }
-
                     //if a minute has elapsed save the field in case of crash and to be able to resume            
-                    if (fileSaveCounter > 30 && sentenceCounter < 20)
+                    if (fileSaveCounter > 50 && sentenceCounter < 20)
                     {
                         tmrWatchdog.Enabled = false;
                         fileSaveCounter = 0;
@@ -780,6 +776,8 @@ namespace Twol
 
                         //calc overlap
                         oglZoom.Refresh();
+
+                        CheckInternetConnection();
                     }
 
                     #endregion
@@ -2472,7 +2470,7 @@ namespace Twol
 
             GL.Translate(center, 140, 0);
 
-            GL.Rotate(360 - camHeading, 0, 0, 1);
+            GL.Rotate(camHeading, 0, 0, 1);
             GL.Begin(PrimitiveType.TriangleStrip);              // Build Quad From A Triangle Strip
             {
                 GL.TexCoord2(1, 0); GL.Vertex2(42, -42.0); // 

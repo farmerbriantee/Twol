@@ -379,10 +379,10 @@ namespace Twol
                     while ((textSize.Width > base.Width - 10 || textSize.Height > base.Height - 5) && fontSize > 5)
                     {
                         fontSize -= 0.5f;
-                        textSize = g.MeasureString(base.Text, new Font(base.Font.FontFamily, fontSize, base.Font.Style));
+                        textSize = g.MeasureString(base.Text, new System.Drawing.Font(base.Font.FontFamily, fontSize, base.Font.Style));
                     }
 
-                    base.Font = new Font(base.Font.FontFamily, fontSize, base.Font.Style);
+                    base.Font = new System.Drawing.Font(base.Font.FontFamily, fontSize, base.Font.Style);
                 }
             }
             base.OnPaint(pevent);
@@ -565,10 +565,10 @@ namespace Twol
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public override Font Font { get => base.Font; set => base.Font = value; }
+        public override System.Drawing.Font Font { get => base.Font; set => base.Font = value; }
     }
 
-    public static class CExtensionMethods
+    public static class ExtensionMethods
     {
         /// <summary>
         /// Sets the progress bar value, without using 'Windows Aero' animation.

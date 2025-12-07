@@ -4,9 +4,9 @@ using OpenTK.Graphics.OpenGL;
 using System;
 using System.Drawing;
 
-namespace Twol
+namespace Twol.Mapping
 {
-    public class CWorldGrid
+    public class WorldFloor
     {
         private readonly FormGPS mf;
 
@@ -19,6 +19,11 @@ namespace Twol
         public double eastingMax = GridSize;
 
         public double eastingMin = -GridSize;
+
+        public const double GridSize = 6000;
+        public double Count = 40;
+
+        public double gridRotation = 0.0;
 
         //Y
         public double northingMaxGeo;
@@ -40,12 +45,8 @@ namespace Twol
 
         public double eastingMinRate;
 
-        public const double GridSize = 6000;
-        public double Count = 40;
 
-        public double gridRotation = 0.0;
-
-        public CWorldGrid(FormGPS _f)
+        public WorldFloor(FormGPS _f)
         {
             mf = _f;
 

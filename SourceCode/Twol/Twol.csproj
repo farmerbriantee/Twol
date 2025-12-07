@@ -150,13 +150,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\CBrightness.cs" />
-    <Compile Include="Classes\CExtensionMethods.cs" />
+    <Compile Include="Classes\ExtensionMethods.cs" />
     <Compile Include="Classes\CBoundary.cs" />
     <Compile Include="Classes\CGuidance.cs" />
     <Compile Include="Classes\CHeadLine.cs" />
     <Compile Include="Classes\CHello.cs" />
-    <Compile Include="Classes\CLanguage.cs" />
-    <Compile Include="Classes\CLog.cs" />
+    <Compile Include="Classes\Language.cs" />
+    <Compile Include="Classes\Log.cs" />
+    <Compile Include="Mapping\Map.cs" />
     <Compile Include="Classes\CNozzle.cs" />
     <Compile Include="Classes\CPolygon.cs" />
     <Compile Include="Classes\CPatches.cs" />
@@ -238,13 +239,17 @@
     <Compile Include="Forms\Settings\FormToolSteer.Designer.cs">
       <DependentUpon>FormToolSteer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Mapping\WorldTileMap.cs" />
+    <Compile Include="Mapping\GeoPnt.cs" />
+    <Compile Include="Mapping\Tile.cs" />
+    <Compile Include="Mapping\TileServer.cs" />
     <Compile Include="Properties\CRegistrySettings.cs" />
     <Compile Include="Classes\CSettings.cs" />
     <Compile Include="Classes\CSound.cs" />
     <Compile Include="Classes\CFieldData.cs" />
     <Compile Include="Classes\CBoundaryList.cs" />
     <Compile Include="Classes\CAHRS.cs" />
-    <Compile Include="Classes\CFont.cs" />
+    <Compile Include="Classes\Font.cs" />
     <Compile Include="Classes\CSim.cs" />
     <Compile Include="Classes\CTracks.cs" />
     <Compile Include="Classes\CTram.cs" />
@@ -256,7 +261,7 @@
     <Compile Include="Classes\CNMEA.cs" />
     <Compile Include="Classes\CSection.cs" />
     <Compile Include="Classes\CVehicle.cs" />
-    <Compile Include="Classes\CWorldGrid.cs" />
+    <Compile Include="Mapping\WorldFloor.cs" />
     <Compile Include="Classes\CTool.cs" />
     <Compile Include="Forms\Field\FormEnterFlag.cs">
       <SubType>Form</SubType>
@@ -522,7 +527,7 @@
     <Compile Include="Forms\FormGPSData.Designer.cs">
       <DependentUpon>FormGPSData.cs</DependentUpon>
     </Compile>
-    <Compile Include="Classes\CGLM.cs" />
+    <Compile Include="Classes\GLM.cs" />
     <Compile Include="Forms\OpenGL.Designer.cs">
       <SubType>Form</SubType>
       <DependentUpon>FormGPS.cs</DependentUpon>
@@ -859,6 +864,9 @@
     <None Include="btnImages\IO\Plugin.png" />
     <None Include="btnImages\PanDn.png" />
     <None Include="btnImages\PanUp.png" />
+    <None Include="btnImages\InternetOff.png" />
+    <None Include="btnImages\InternetOn.png" />
+    <None Include="btnImages\Images\z_Floor2.png" />
     <Content Include="btnImages\ZoomOut.png" />
     <Content Include="License.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -1084,7 +1092,6 @@
     <None Include="btnImages\AntennaHarvester.png" />
     <None Include="btnImages\AntennaTractor.png" />
     <None Include="btnImages\RadiusWheelBase.png" />
-    <None Include="btnImages\AgIO.png" />
     <None Include="btnImages\Config\Con_ImplementMenu.png" />
     <None Include="btnImages\Config\Con_ModulesMenu.png" />
     <None Include="btnImages\Config\Con_SourcesMenu.png" />

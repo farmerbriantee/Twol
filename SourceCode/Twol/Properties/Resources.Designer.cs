@@ -2370,6 +2370,26 @@ namespace Twol.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap InternetOff {
+            get {
+                object obj = ResourceManager.GetObject("InternetOff", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap InternetOn {
+            get {
+                object obj = ResourceManager.GetObject("InternetOn", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap IO {
             get {
                 object obj = ResourceManager.GetObject("IO", resourceCulture);
@@ -4147,6 +4167,16 @@ namespace Twol.Properties {
         internal static System.Drawing.Bitmap z_Floor {
             get {
                 object obj = ResourceManager.GetObject("z_Floor", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap z_Floor2 {
+            get {
+                object obj = ResourceManager.GetObject("z_Floor2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

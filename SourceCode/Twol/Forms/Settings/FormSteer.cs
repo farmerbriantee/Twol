@@ -362,14 +362,14 @@ namespace Twol
             if (actAng > 0)
             {
                 if (actAng > 49) actAng = 49;
-                CExtensionMethods.SetProgressNoAnimation(pbarRight, (int)actAng);
+                ExtensionMethods.SetProgressNoAnimation(pbarRight, (int)actAng);
                 pbarLeft.Value = 0;
             }
             else
             {
                 if (actAng < -49) actAng = -49;
                 pbarRight.Value = 0;
-                CExtensionMethods.SetProgressNoAnimation(pbarLeft, (int)-actAng);
+                ExtensionMethods.SetProgressNoAnimation(pbarLeft, (int)-actAng);
             }
 
             lblSteerAngle.Text = mf.SetSteerAngle;
@@ -431,7 +431,7 @@ namespace Twol
             if (mf.mc.sensorData != -1)
             {
                 if (mf.mc.sensorData < 0 || mf.mc.sensorData > 255) mf.mc.sensorData = 0;
-                CExtensionMethods.SetProgressNoAnimation(pbarSensor, mf.mc.sensorData);
+                ExtensionMethods.SetProgressNoAnimation(pbarSensor, mf.mc.sensorData);
                 if (nudMaxCounts.Visible == false)
                     lblPercentFS.Text = ((int)((double)mf.mc.sensorData * 0.3921568627)).ToString() + "%";
                 else

@@ -10,6 +10,7 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Windows.Forms;
 using Twol.Classes;
+using Twol.Mapping;
 using Twol.Properties;
 
 namespace Twol
@@ -95,7 +96,12 @@ namespace Twol
         /// <summary>
         /// create world grid
         /// </summary>
-        public CWorldGrid worldGrid;
+        public WorldFloor worldGrid;
+
+        /// <summary>
+        /// Represents the world map associated with the current instance.
+        /// </summary>
+        public WorldTileMap worldMap;
 
         /// <summary>
         /// The NMEA class that decodes it
@@ -185,7 +191,7 @@ namespace Twol
         /// <summary>
         /// The font class
         /// </summary>
-        public CFont font;
+        public Font font;
 
         /// <summary>
         /// The new steer algorithms
@@ -201,6 +207,11 @@ namespace Twol
         /// Nozzle class
         /// </summary>
         public CNozzle nozz;
+
+        /// <summary>
+        /// Nozzle class
+        /// </summary>
+        public Map map;
 
         #endregion // Class Props and instances
 
@@ -252,7 +263,10 @@ namespace Twol
             camera = new CCamera();
 
             //create the world grid
-            worldGrid = new CWorldGrid(this);
+            worldGrid = new WorldFloor(this);
+
+            //create the world map
+            worldMap = new WorldTileMap(this);
 
             //our vehicle made with gl object and pointer of mainform
             vehicle = new CVehicle(this);
@@ -302,7 +316,7 @@ namespace Twol
             tram = new CTram(this);
 
             //access to font class
-            font = new CFont(this);
+            font = new Font(this);
 
             //the new steer algorithms
             gyd = new CGuidance(this);
@@ -315,6 +329,9 @@ namespace Twol
 
             //Application rate controller
             nozz = new CNozzle(this);
+
+            //map class
+            map = new Map(this);
 
             vec2 b = new vec2(0, 0);
             gpsPtsCorr.Add(b);
@@ -545,6 +562,8 @@ namespace Twol
                 return;
             }
 
+            map.isShuttingDown = true;
+
             if (isFieldStarted)
             {
                 SetWorkState(btnStates.Off);
@@ -763,12 +782,6 @@ namespace Twol
             }
 
             lbl_IO_Profile.Text = RegistrySettings.IOFileName;
-
-        }
-
-        private void nudToolOffset_ValueChanged(object sender, EventArgs e)
-        {
-            sim.toolOffset = (double)nudToolOffset.Value * 0.001;
         }
 
         public void FieldClose()
@@ -928,12 +941,12 @@ namespace Twol
         //take the distance from object and convert to camera data
         public void SetZoom()
         {
-            if (Settings.User.setDisplay_camZoom < 2.0) Settings.User.setDisplay_camZoom = 2.0;
-            if (Settings.User.setDisplay_camZoom > 120) Settings.User.setDisplay_camZoom = 120;
+            if (Settings.User.setDisplay_camZoom < 5.0) Settings.User.setDisplay_camZoom = 5.0;
+            if (Settings.User.setDisplay_camZoom > 200) Settings.User.setDisplay_camZoom = 200;
             camera.camSetDistance = Settings.User.setDisplay_camZoom * Settings.User.setDisplay_camZoom * -1;
 
             //match grid to cam distance and redo perspective
-            gridToolSpacing = (int)((camera.camSetDistance / -15) / Settings.Tool.toolWidth + 0.5);
+            gridToolSpacing = (int)((camera.camSetDistance / -10) / Settings.Tool.toolWidth * 2 + 0.5);
             if (gridToolSpacing < 1) gridToolSpacing = 1;
             camera.gridZoom = gridToolSpacing * Settings.Tool.toolWidth;
             ChangePerspective();
