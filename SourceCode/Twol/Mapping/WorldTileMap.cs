@@ -68,8 +68,17 @@ namespace Twol.Mapping
              128, 11, 96, 12, 64, 13, 48, 14, 32, 15, 24, 16, 16, 17, 8, 18
         };
 
-        int[] headingMapMoveDistanceX = { 0, 1, 1, 1, 0, -1, -1, -1 };
-        int[] headingMapMoveDistanceY = { 1, 1, 0, -1, -1, -1, 0, 1 };
+        private readonly (int dx, int dy)[] headingMapMoveOffsets = new (int dx, int dy)[]
+        {
+            (0, 1),  // sector 0: north
+            (1, 1),  // sector 1: northeast
+            (1, 0),  // sector 2: east
+            (1, -1), // sector 3: southeast
+            (0, -1), // sector 4: south
+            (-1, -1),// sector 5: southwest
+            (-1, 0), // sector 6: west
+            (-1, 1)  // sector 7: northwest
+        };
 
         public WorldTileMap(FormGPS _f)
         {
@@ -373,7 +382,7 @@ namespace Twol.Mapping
         /// </summary>
         /// <remarks>The method calculates the adjustment to the tile offsets by determining the sector of
         /// the heading. Each sector represents a 45° range, and the adjustments are applied using predefined lookup
-        /// tables.</remarks>
+        /// tables (now tuples).</remarks>
         /// <param name="originToXinTiles">A reference to the X-coordinate offset in tiles. This value will be modified based on the heading.</param>
         /// <param name="originToYinTiles">A reference to the Y-coordinate offset in tiles. This value will be modified based on the heading.</param>
         /// <param name="heading">The heading direction in degrees, where 0° represents north, 90° represents east, 180° represents south, and
@@ -381,12 +390,15 @@ namespace Twol.Mapping
         private void ApplyHeadingToTileOffset(ref int originToXinTiles, ref int originToYinTiles, double heading)
         {
             // Determine sector: 0..7 where each sector is 45°, centered on multiples of 45°.
-            int sector = (int)Math.Floor((heading + 22.5) / 45.0) % 8;
+            int sector = (int)Math.Floor((heading + 22.5) / 45.0);
 
-            // Lookup tables for x and y adjustments per sector.
+            // Normalize to 0..7 to handle negative headings correctly.
+            sector = ((sector % 8) + 8) % 8;
 
-            originToXinTiles += headingMapMoveDistanceX[sector];
-            originToYinTiles += headingMapMoveDistanceY[sector];
+            // Retrieve tuple offsets and apply.
+            var offset = headingMapMoveOffsets[sector];
+            originToXinTiles += offset.dx;
+            originToYinTiles += offset.dy;
         }
     }
 }
