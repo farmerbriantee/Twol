@@ -84,7 +84,8 @@ namespace Twol
 
             mf.FileLoadFields();
 
-            //since we moved load new tiles
+
+            //since we moved origin, reset everything
             mf.worldMap.isUpdateTilesRequired = true;
         }
 

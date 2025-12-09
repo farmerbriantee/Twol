@@ -15,8 +15,7 @@ namespace Twol.Mapping
     {
         MemoryIntialized = 1,
         DefaultLoaded = 2,
-        TileCorrect = 3,
-        Unchanged = 4
+        TileCorrect = 3
     }
 
     /// <summary>
@@ -32,12 +31,10 @@ namespace Twol.Mapping
 
         //Y
         public double northingMax = GridSize;
-
         public double northingMin = -GridSize;
 
         //X
         public double eastingMax = GridSize;
-
         public double eastingMin = -GridSize;
 
         public const double GridSize = 20000;
@@ -57,8 +54,8 @@ namespace Twol.Mapping
         public uint[] mapTexture;
         public int[] mapTextureStatus = new int[49];
 
-        private int originToXinTiles = 0, originToYinTiles = 0;
-        private int lastOriginToXinTiles = 0, lastOriginToYinTiles = 0;
+        private int originToPivotInTilesX = 0, originToPivotInTilesY = 0;
+        private int lastOriginToPivotInTilesX = 0, lastOriginToPivotInTilesY = 0;
 
         //time counter for updating tiles
         private double secondCounter = 0;
@@ -94,45 +91,62 @@ namespace Twol.Mapping
             mf = _f;
         }
 
+
+        PointF originTileXY_F = new PointF();
+
+        int originTileX = 0;
+        int originTileY = 0;
+
+        double mPerTile = 100; 
+
+        public void CalculateOriginAndOffset()
+        {
+            originTileXY_F = mf.map.WSG84ToTilePos(CNMEA.lonStart, CNMEA.latStart, mf.map.ZoomLevel);
+
+            originTileX = (int)Math.Floor(originTileXY_F.X);
+            originTileY = (int)Math.Floor(originTileXY_F.Y);
+
+            //meters per pixel * 256 = meters per tile
+            mPerTile = (Math.Cos(mf.pn.latitude * Math.PI / 180) * 2 * Math.PI * 6378137) / (256 * Math.Pow(2, mf.map.ZoomLevel)) * 256;
+
+
+            offsetX = (0.5 - (originTileXY_F.X - (int)originTileXY_F.X)) * mPerTile;
+            offsetY = ((originTileXY_F.Y - (int)originTileXY_F.Y) - 0.5) * mPerTile;
+        }
+
+
         public void DrawWorldMap()
         {
             secondCounter += 1.0 / mf.gpsHz;
 
             UpdateMapZoomFromCamZoom();
 
-            // adjust bitmap zoom based on cam zoom
-            double result = Math.Log(Settings.User.setDisplay_camZoom, 2);
-
-            //meters per pixel
-            double mpp = (Math.Cos(mf.pn.latitude * Math.PI / 180) * 2 * Math.PI * 6378137) / (256 * Math.Pow(2, mf.map.ZoomLevel));
-            double mPerTile = (mpp * 256);
-
-            originToXinTiles = (int)(mf.pn.fix.easting / mPerTile);
-            originToYinTiles = (int)(mf.pn.fix.northing / mPerTile);
-
-            //only move map ahead if in 3D
-            if (Settings.User.setDisplay_camPitch != 0)
-                ApplyHeadingToTileOffset(ref originToXinTiles, ref originToYinTiles, glm.toDegrees(mf.fixHeading));
-
-            if (originToXinTiles != lastOriginToXinTiles || originToYinTiles != lastOriginToYinTiles)
-            {
-                isUpdateTilesRequired = true;
-                lastOriginToXinTiles = originToXinTiles;
-                lastOriginToYinTiles = originToYinTiles;
-            }
 
             if (secondCounter > 1 || isUpdateTilesRequired)
             {
-                PointF originTileXY = mf.map.WSG84ToTilePos(CNMEA.lonStart, CNMEA.latStart, mf.map.ZoomLevel);
-                int tileX = (int)Math.Floor(originTileXY.X);
-                int tileY = (int)Math.Floor(originTileXY.Y);
 
-                offsetX = (0.5 - (originTileXY.X - (int)originTileXY.X)) * mPerTile;
-                offsetY = ((originTileXY.Y - (int)originTileXY.Y) - 0.5) * mPerTile;
+                if (isUpdateTilesRequired)
+                {
+                    CalculateOriginAndOffset();
+                }
+
+                originToPivotInTilesX = (int)(mf.pn.fix.easting / mPerTile);
+                originToPivotInTilesY = (int)(mf.pn.fix.northing / mPerTile);
+
+                //only move map ahead if in 3D
+                if (Settings.User.setDisplay_camPitch != 0)
+                    ApplyHeadingToTileOffset(ref originToPivotInTilesX, ref originToPivotInTilesY, glm.toDegrees(mf.fixHeading));
+
+                if (originToPivotInTilesX != lastOriginToPivotInTilesX || originToPivotInTilesY != lastOriginToPivotInTilesY)
+                {
+                    isUpdateTilesRequired = true;
+                    lastOriginToPivotInTilesX = originToPivotInTilesX;
+                    lastOriginToPivotInTilesY = originToPivotInTilesY;
+                }
 
                 //set to top-left tile
-                tileX = tileX - 3 + lastOriginToXinTiles;
-                tileY = tileY - 3 - lastOriginToYinTiles;
+                int upperLeftTileX = originTileX - 3 + lastOriginToPivotInTilesX;
+                int upperLeftTileY = originTileY - 3 - lastOriginToPivotInTilesY;                
 
                 secondCounter = 0;
 
@@ -140,12 +154,12 @@ namespace Twol.Mapping
                 {
                     int tex = 0;
 
-                    //5 x 5 tilemap
+                    //7x7 tilemap
                     for (int i = 0; i < 7; i++)
                     {
                         for (int j = 0; j < 7; j++)
                         {
-                            tile = mf.map.GetTile(tileX + i, tileY + j, mf.map.ZoomLevel);
+                            tile = mf.map.GetTile(upperLeftTileX + i, upperLeftTileY + j, mf.map.ZoomLevel);
 
                             if (tile != null)
                             {
@@ -251,8 +265,8 @@ namespace Twol.Mapping
                             GL.BindTexture(TextureTarget.Texture2D, mf.texture[(int)FormGPS.textures.Floor]);
                         }
 
-                        double ii = (i + lastOriginToXinTiles) * mPerTile + offsetX;  //x
-                        double jj = (j + lastOriginToYinTiles) * mPerTile + offsetY;   //y
+                        double ii = (i + lastOriginToPivotInTilesX) * mPerTile + offsetX;  //x
+                        double jj = (j + lastOriginToPivotInTilesY) * mPerTile + offsetY;   //y
                         double bitt = mPerTile / 2;
                         GL.Begin(PrimitiveType.TriangleStrip);
                         GL.TexCoord2(0.0, 0.0);
@@ -269,28 +283,6 @@ namespace Twol.Mapping
                 }
             }
             GL.Disable(EnableCap.Texture2D);
-        }
-
-        private void PrefetchRingTiles(int scanTileX, int scanTileY)
-        {
-            //prefetch tiles around outside
-            for (int i = 0; i < 7; i++)
-            {
-                //make sure tile is not in cache or file already.
-                if (mf.map.PrefetchTile(scanTileX, scanTileY + i, mf.map.ZoomLevel) == false)
-                    mf.map.RequestTileFromTileServer(scanTileX, scanTileY + i, mf.map.ZoomLevel);
-                if (mf.map.PrefetchTile(scanTileX + 6, scanTileY + i, mf.map.ZoomLevel) == false)
-                    mf.map.RequestTileFromTileServer(scanTileX + 6, scanTileY + i, mf.map.ZoomLevel);
-            }
-
-            for (int j = 1; j < 6; j++)
-            {
-                if (mf.map.PrefetchTile(scanTileX + j, scanTileY, mf.map.ZoomLevel) == false)
-                    mf.map.RequestTileFromTileServer(scanTileX + j, scanTileY, mf.map.ZoomLevel);
-
-                if (mf.map.PrefetchTile(scanTileX + j, scanTileY + 6, mf.map.ZoomLevel) == false)
-                    mf.map.RequestTileFromTileServer(scanTileX + j, scanTileY + 6, mf.map.ZoomLevel);
-            }
         }
 
         public void DrawWorldGrid(double _gridZoom)
@@ -326,17 +318,6 @@ namespace Twol.Mapping
             GL.End();
 
             //GL.Rotate(gridRotation, 0, 0, 1.0);
-        }
-
-        public void checkZoomWorldGrid()
-        {
-            double n = Math.Round(mf.pivotAxlePos.northing / (GridSize / Count), MidpointRounding.AwayFromZero) * (GridSize / Count);
-            double e = Math.Round(mf.pivotAxlePos.easting / (GridSize / Count), MidpointRounding.AwayFromZero) * (GridSize / Count);
-
-            northingMax = n + GridSize;
-            northingMin = n - GridSize;
-            eastingMax = e + GridSize;
-            eastingMin = e - GridSize;
         }
 
         /// <summary>
@@ -422,8 +403,8 @@ namespace Twol.Mapping
                         else mf.map.ZoomLevel = zoom;
 
                         //mf.map.ZoomLevel = 18;
-                        lastOriginToXinTiles = 0;
-                        lastOriginToYinTiles = 0;
+                        lastOriginToPivotInTilesX = 0;
+                        lastOriginToPivotInTilesY = 0;
                     }
                     break; // first (highest) matching threshold wins
                 }
@@ -447,6 +428,7 @@ namespace Twol.Mapping
         /// <param name="originToYinTiles">A reference to the Y-coordinate offset in tiles. This value will be modified based on the heading.</param>
         /// <param name="heading">The heading direction in degrees, where 0° represents north, 90° represents east, 180° represents south, and
         /// 270° represents west. The heading is used to determine the adjustment to the tile offsets.</param>
+        
         private void ApplyHeadingToTileOffset(ref int originToXinTiles, ref int originToYinTiles, double heading)
         {
             // Determine sector: 0..7 where each sector is 45°, centered on multiples of 45°.
@@ -460,5 +442,39 @@ namespace Twol.Mapping
             originToXinTiles += offset.dx;
             originToYinTiles += offset.dy;
         }
+
+        public void checkZoomWorldGrid()
+        {
+            double n = Math.Round(mf.pivotAxlePos.northing / (GridSize / Count), MidpointRounding.AwayFromZero) * (GridSize / Count);
+            double e = Math.Round(mf.pivotAxlePos.easting / (GridSize / Count), MidpointRounding.AwayFromZero) * (GridSize / Count);
+
+            northingMax = n + GridSize;
+            northingMin = n - GridSize;
+            eastingMax = e + GridSize;
+            eastingMin = e - GridSize;
+        }
+
+        private void PrefetchRingTiles(int scanTileX, int scanTileY)
+        {
+            //prefetch tiles around outside
+            for (int i = 0; i < 7; i++)
+            {
+                //make sure tile is not in cache or file already.
+                if (mf.map.PrefetchTile(scanTileX, scanTileY + i, mf.map.ZoomLevel) == false)
+                    mf.map.RequestTileFromTileServer(scanTileX, scanTileY + i, mf.map.ZoomLevel);
+                if (mf.map.PrefetchTile(scanTileX + 6, scanTileY + i, mf.map.ZoomLevel) == false)
+                    mf.map.RequestTileFromTileServer(scanTileX + 6, scanTileY + i, mf.map.ZoomLevel);
+            }
+
+            for (int j = 1; j < 6; j++)
+            {
+                if (mf.map.PrefetchTile(scanTileX + j, scanTileY, mf.map.ZoomLevel) == false)
+                    mf.map.RequestTileFromTileServer(scanTileX + j, scanTileY, mf.map.ZoomLevel);
+
+                if (mf.map.PrefetchTile(scanTileX + j, scanTileY + 6, mf.map.ZoomLevel) == false)
+                    mf.map.RequestTileFromTileServer(scanTileX + j, scanTileY + 6, mf.map.ZoomLevel);
+            }
+        }
+
     }
 }
