@@ -63,15 +63,15 @@ namespace Twol.Mapping
         //cam z height to map zoom level mapping
         private readonly (int threshold, int zoom)[] camToZoomMapping = new (int threshold, int zoom)[]
         {
-             (800, 9),
-             (500, 10),
-             (340, 11),
+             (530, 9),
+             (400, 10),
+             (300, 11),
              (230, 12),
              (170, 13),
              (120, 14),
-             (80, 15),
-             (50, 16),
-             (32, 17),
+             (75, 15),
+             (45, 16),
+             (28, 17),
              (18, 18)
         };
         
@@ -112,7 +112,6 @@ namespace Twol.Mapping
 
             //meters per pixel * 256 = meters per tile
             metersPerTile = (Math.Cos(mf.pn.latitude * Math.PI / 180) * 2 * Math.PI * 6378137) / (256 * Math.Pow(2, mf.map.ZoomLevel)) * 256;
-
 
             offsetX = (0.5 - (originTileXY_F.X - (int)originTileXY_F.X)) * metersPerTile;
             offsetY = ((originTileXY_F.Y - (int)originTileXY_F.Y) - 0.5) * metersPerTile;
