@@ -59,7 +59,7 @@ namespace Twol
 
             lblX.Text = tileXY.X.ToString("N2");
             lblY.Text = tileXY.Y.ToString("N2");
-            //lblZ.Text = Settings.User.setDisplay_camZoom.ToString("N0");
+            lblCam.Text = Settings.User.setDisplay_camZoom.ToString("N0");
 
             double mpp = (Math.Cos(mf.pn.latitude * Math.PI / 180) * 2 * Math.PI * 6378137) / (256 * Math.Pow(2, mf.map.ZoomLevel));
             lblMPerTile.Text = (mpp *256).ToString("N3");

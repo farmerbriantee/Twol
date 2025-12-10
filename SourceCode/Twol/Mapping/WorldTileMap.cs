@@ -63,14 +63,16 @@ namespace Twol.Mapping
         //cam z height to map zoom level mapping
         private readonly (int threshold, int zoom)[] camToZoomMapping = new (int threshold, int zoom)[]
         {
-             (128, 11),
-             (96, 12),
-             (64, 13),
-             (48, 14),
-             (32, 15),
-             (24, 16),
-             (16, 17),
-             (8, 18)
+             (800, 9),
+             (500, 10),
+             (340, 11),
+             (230, 12),
+             (170, 13),
+             (120, 14),
+             (80, 15),
+             (50, 16),
+             (32, 17),
+             (18, 18)
         };
         
         /// Represents a mapping of movement offsets corresponding to directional headings.
@@ -97,7 +99,9 @@ namespace Twol.Mapping
         int originTileX = 0;
         int originTileY = 0;
 
-        double mPerTile = 100; 
+        double metersPerTile = 100; 
+
+        int columnCounter = 0;
 
         public void CalculateOriginAndOffset()
         {
@@ -107,46 +111,69 @@ namespace Twol.Mapping
             originTileY = (int)Math.Floor(originTileXY_F.Y);
 
             //meters per pixel * 256 = meters per tile
-            mPerTile = (Math.Cos(mf.pn.latitude * Math.PI / 180) * 2 * Math.PI * 6378137) / (256 * Math.Pow(2, mf.map.ZoomLevel)) * 256;
+            metersPerTile = (Math.Cos(mf.pn.latitude * Math.PI / 180) * 2 * Math.PI * 6378137) / (256 * Math.Pow(2, mf.map.ZoomLevel)) * 256;
 
 
-            offsetX = (0.5 - (originTileXY_F.X - (int)originTileXY_F.X)) * mPerTile;
-            offsetY = ((originTileXY_F.Y - (int)originTileXY_F.Y) - 0.5) * mPerTile;
+            offsetX = (0.5 - (originTileXY_F.X - (int)originTileXY_F.X)) * metersPerTile;
+            offsetY = ((originTileXY_F.Y - (int)originTileXY_F.Y) - 0.5) * metersPerTile;
         }
 
+        //draw the tiled quads
+        private void DrawTiledWorld()
+        {
+            Color field = Settings.User.setDisplay_isDayMode ? Settings.User.colorFieldDay : Settings.User.colorFieldNight;
+
+            GL.Color3(field.R, field.G, field.B);
+            if (Settings.User.setDisplay_isTextureOn && mapTexture != null)
+            {
+                GL.Enable(EnableCap.Texture2D);
+
+                int t = 0;
+                for (double i = -3; i < 4; i += 1)
+                {
+                    for (double j = 3; j > -4; j -= 1)
+                    {
+                        if (mapTexture[t] != 0)
+                            GL.BindTexture(TextureTarget.Texture2D, mapTexture[t]);
+                        else
+                        {
+                            GL.BindTexture(TextureTarget.Texture2D, mf.texture[(int)FormGPS.textures.Floor]);
+                        }
+
+                        double ii = (i + lastOriginToPivotInTilesX) * metersPerTile + offsetX;  //x
+                        double jj = (j + lastOriginToPivotInTilesY) * metersPerTile + offsetY;   //y
+                        double bitt = metersPerTile / 2;
+                        GL.Begin(PrimitiveType.TriangleStrip);
+                        GL.TexCoord2(0.0, 0.0);
+                        GL.Vertex3(ii - bitt, jj + bitt, -0.10);
+                        GL.TexCoord2(1.0, 0.0);
+                        GL.Vertex3(ii + bitt, jj + bitt, -0.10);
+                        GL.TexCoord2(0.0, 1.0);
+                        GL.Vertex3(ii - bitt, jj - bitt, -0.10);
+                        GL.TexCoord2(1.0, 1.0);
+                        GL.Vertex3(ii + bitt, jj - bitt, -0.10);
+                        GL.End();
+                        t++;
+                    }
+                }
+            }
+            GL.Disable(EnableCap.Texture2D);
+
+        }
 
         public void DrawWorldMap()
         {
+            DrawTiledWorld();
+
             secondCounter += 1.0 / mf.gpsHz;
 
             UpdateMapZoomFromCamZoom();
 
-
-            if (secondCounter > 1 || isUpdateTilesRequired)
+            if (secondCounter > 3 || isUpdateTilesRequired)
             {
-
-                if (isUpdateTilesRequired)
-                {
-                    CalculateOriginAndOffset();
-                }
-
-                originToPivotInTilesX = (int)(mf.pn.fix.easting / mPerTile);
-                originToPivotInTilesY = (int)(mf.pn.fix.northing / mPerTile);
-
-                //only move map ahead if in 3D
-                if (Settings.User.setDisplay_camPitch != 0)
-                    ApplyHeadingToTileOffset(ref originToPivotInTilesX, ref originToPivotInTilesY, glm.toDegrees(mf.fixHeading));
-
-                if (originToPivotInTilesX != lastOriginToPivotInTilesX || originToPivotInTilesY != lastOriginToPivotInTilesY)
-                {
-                    isUpdateTilesRequired = true;
-                    lastOriginToPivotInTilesX = originToPivotInTilesX;
-                    lastOriginToPivotInTilesY = originToPivotInTilesY;
-                }
-
                 //set to top-left tile
                 int upperLeftTileX = originTileX - 3 + lastOriginToPivotInTilesX;
-                int upperLeftTileY = originTileY - 3 - lastOriginToPivotInTilesY;                
+                int upperLeftTileY = originTileY - 3 - lastOriginToPivotInTilesY;
 
                 secondCounter = 0;
 
@@ -155,11 +182,11 @@ namespace Twol.Mapping
                     int tex = 0;
 
                     //7x7 tilemap
-                    for (int i = 0; i < 7; i++)
+                    for (int tx = 0; tx < 7; tx++)
                     {
-                        for (int j = 0; j < 7; j++)
+                        for (int ty = 0; ty < 7; ty++)
                         {
-                            tile = mf.map.GetTile(upperLeftTileX + i, upperLeftTileY + j, mf.map.ZoomLevel);
+                            tile = mf.map.GetTile(upperLeftTileX + tx, upperLeftTileY + ty, mf.map.ZoomLevel);
 
                             if (tile != null)
                             {
@@ -246,43 +273,6 @@ namespace Twol.Mapping
                 checkZoomWorldGrid();
             }
 
-            Color field = Settings.User.setDisplay_isDayMode ? Settings.User.colorFieldDay : Settings.User.colorFieldNight;
-
-            GL.Color3(field.R, field.G, field.B);
-            if (Settings.User.setDisplay_isTextureOn && mapTexture != null)
-            {
-                GL.Enable(EnableCap.Texture2D);
-
-                int t = 0;
-                for (double i = -3; i < 4; i += 1)
-                {
-                    for (double j = 3; j > -4; j -= 1)
-                    {
-                        if (mapTexture[t] != 0)
-                            GL.BindTexture(TextureTarget.Texture2D, mapTexture[t]);
-                        else
-                        {
-                            GL.BindTexture(TextureTarget.Texture2D, mf.texture[(int)FormGPS.textures.Floor]);
-                        }
-
-                        double ii = (i + lastOriginToPivotInTilesX) * mPerTile + offsetX;  //x
-                        double jj = (j + lastOriginToPivotInTilesY) * mPerTile + offsetY;   //y
-                        double bitt = mPerTile / 2;
-                        GL.Begin(PrimitiveType.TriangleStrip);
-                        GL.TexCoord2(0.0, 0.0);
-                        GL.Vertex3(ii - bitt, jj + bitt, -0.10);
-                        GL.TexCoord2(1.0, 0.0);
-                        GL.Vertex3(ii + bitt, jj + bitt, -0.10);
-                        GL.TexCoord2(0.0, 1.0);
-                        GL.Vertex3(ii - bitt, jj - bitt, -0.10);
-                        GL.TexCoord2(1.0, 1.0);
-                        GL.Vertex3(ii + bitt, jj - bitt, -0.10);
-                        GL.End();
-                        t++;
-                    }
-                }
-            }
-            GL.Disable(EnableCap.Texture2D);
         }
 
         public void DrawWorldGrid(double _gridZoom)
@@ -391,6 +381,7 @@ namespace Twol.Mapping
                 int threshold = pair.threshold;
                 int zoom = pair.zoom;
 
+                //based on  cam zoom set map zoom level
                 if ((int)Settings.User.setDisplay_camZoom > threshold)
                 {
                     if (lastZoom != threshold)
@@ -399,7 +390,7 @@ namespace Twol.Mapping
                         lastZoom = threshold;
 
                         //2D is closer then 3D so add 2 to zoom level
-                        if (Settings.User.setDisplay_camPitch == 0) mf.map.ZoomLevel = (zoom + 2);
+                        if (Settings.User.setDisplay_camPitch == 0) mf.map.ZoomLevel = (zoom);
                         else mf.map.ZoomLevel = zoom;
 
                         //mf.map.ZoomLevel = 18;
@@ -408,8 +399,31 @@ namespace Twol.Mapping
                     }
                     break; // first (highest) matching threshold wins
                 }
+
+
             }
 
+            if (isUpdateTilesRequired)
+            {
+                CalculateOriginAndOffset();
+            }
+
+            //based on position
+            originToPivotInTilesX = (int)(mf.pn.fix.easting / metersPerTile);
+            originToPivotInTilesY = (int)(mf.pn.fix.northing / metersPerTile);
+
+            //only move map ahead if in 3D
+            if (Settings.User.setDisplay_camPitch != 0)
+                ApplyHeadingToTileOffset(ref originToPivotInTilesX, ref originToPivotInTilesY, glm.toDegrees(mf.fixHeading));
+
+            if (originToPivotInTilesX != lastOriginToPivotInTilesX || originToPivotInTilesY != lastOriginToPivotInTilesY)
+            {
+                isUpdateTilesRequired = true;
+                lastOriginToPivotInTilesX = originToPivotInTilesX;
+                lastOriginToPivotInTilesY = originToPivotInTilesY;
+            }
+
+            //check grid spacing based on cam zoom
             if (Settings.User.setDisplay_camZoom > 100) Count = 5;
             else if (Settings.User.setDisplay_camZoom > 80) Count = 10;
             else if (Settings.User.setDisplay_camZoom > 50) Count = 15;

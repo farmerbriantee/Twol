@@ -70,6 +70,8 @@
             this.label18 = new System.Windows.Forms.Label();
             this.lblOriY = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
+            this.lblCam = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // timer1
@@ -420,7 +422,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(12, 132);
+            this.label1.Location = new System.Drawing.Point(12, 167);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(17, 18);
             this.label1.TabIndex = 525;
@@ -431,7 +433,7 @@
             this.lblX.AutoSize = true;
             this.lblX.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblX.ForeColor = System.Drawing.Color.White;
-            this.lblX.Location = new System.Drawing.Point(31, 132);
+            this.lblX.Location = new System.Drawing.Point(31, 167);
             this.lblX.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblX.Name = "lblX";
             this.lblX.Size = new System.Drawing.Size(44, 19);
@@ -444,7 +446,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(12, 152);
+            this.label7.Location = new System.Drawing.Point(12, 187);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(18, 18);
             this.label7.TabIndex = 527;
@@ -455,7 +457,7 @@
             this.lblY.AutoSize = true;
             this.lblY.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblY.ForeColor = System.Drawing.Color.White;
-            this.lblY.Location = new System.Drawing.Point(31, 152);
+            this.lblY.Location = new System.Drawing.Point(31, 187);
             this.lblY.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblY.Name = "lblY";
             this.lblY.Size = new System.Drawing.Size(44, 19);
@@ -468,7 +470,7 @@
             this.lblMPerTile.AutoSize = true;
             this.lblMPerTile.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMPerTile.ForeColor = System.Drawing.Color.White;
-            this.lblMPerTile.Location = new System.Drawing.Point(72, 178);
+            this.lblMPerTile.Location = new System.Drawing.Point(72, 213);
             this.lblMPerTile.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblMPerTile.Name = "lblMPerTile";
             this.lblMPerTile.Size = new System.Drawing.Size(33, 18);
@@ -481,7 +483,7 @@
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label14.ForeColor = System.Drawing.Color.White;
-            this.label14.Location = new System.Drawing.Point(24, 176);
+            this.label14.Location = new System.Drawing.Point(24, 211);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(49, 18);
             this.label14.TabIndex = 529;
@@ -492,7 +494,7 @@
             this.lblZ.AutoSize = true;
             this.lblZ.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblZ.ForeColor = System.Drawing.Color.White;
-            this.lblZ.Location = new System.Drawing.Point(58, 111);
+            this.lblZ.Location = new System.Drawing.Point(58, 120);
             this.lblZ.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblZ.Name = "lblZ";
             this.lblZ.Size = new System.Drawing.Size(33, 18);
@@ -505,7 +507,7 @@
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label16.ForeColor = System.Drawing.Color.White;
-            this.label16.Location = new System.Drawing.Point(9, 110);
+            this.label16.Location = new System.Drawing.Point(9, 119);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(45, 18);
             this.label16.TabIndex = 531;
@@ -516,7 +518,7 @@
             this.lblOriX.AutoSize = true;
             this.lblOriX.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblOriX.ForeColor = System.Drawing.Color.White;
-            this.lblOriX.Location = new System.Drawing.Point(72, 203);
+            this.lblOriX.Location = new System.Drawing.Point(72, 238);
             this.lblOriX.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblOriX.Name = "lblOriX";
             this.lblOriX.Size = new System.Drawing.Size(33, 18);
@@ -529,7 +531,7 @@
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label18.ForeColor = System.Drawing.Color.White;
-            this.label18.Location = new System.Drawing.Point(4, 202);
+            this.label18.Location = new System.Drawing.Point(4, 237);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(69, 18);
             this.label18.TabIndex = 533;
@@ -540,7 +542,7 @@
             this.lblOriY.AutoSize = true;
             this.lblOriY.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblOriY.ForeColor = System.Drawing.Color.White;
-            this.lblOriY.Location = new System.Drawing.Point(72, 226);
+            this.lblOriY.Location = new System.Drawing.Point(72, 261);
             this.lblOriY.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblOriY.Name = "lblOriY";
             this.lblOriY.Size = new System.Drawing.Size(33, 18);
@@ -553,18 +555,44 @@
             this.label20.AutoSize = true;
             this.label20.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label20.ForeColor = System.Drawing.Color.White;
-            this.label20.Location = new System.Drawing.Point(3, 225);
+            this.label20.Location = new System.Drawing.Point(3, 260);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(70, 18);
             this.label20.TabIndex = 535;
             this.label20.Text = "Ori_To_Y";
+            // 
+            // lblCam
+            // 
+            this.lblCam.AutoSize = true;
+            this.lblCam.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCam.ForeColor = System.Drawing.Color.White;
+            this.lblCam.Location = new System.Drawing.Point(57, 143);
+            this.lblCam.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.lblCam.Name = "lblCam";
+            this.lblCam.Size = new System.Drawing.Size(33, 18);
+            this.lblCam.TabIndex = 536;
+            this.lblCam.Text = "0.1";
+            this.lblCam.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.ForeColor = System.Drawing.Color.White;
+            this.label17.Location = new System.Drawing.Point(16, 142);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(38, 18);
+            this.label17.TabIndex = 537;
+            this.label17.Text = "Cam";
             // 
             // FormGPSData
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Black;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(200, 500);
+            this.ClientSize = new System.Drawing.Size(178, 418);
+            this.Controls.Add(this.lblCam);
+            this.Controls.Add(this.label17);
             this.Controls.Add(this.lblOriY);
             this.Controls.Add(this.label20);
             this.Controls.Add(this.lblOriX);
@@ -663,5 +691,7 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label lblOriY;
         private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label lblCam;
+        private System.Windows.Forms.Label label17;
     }
 }

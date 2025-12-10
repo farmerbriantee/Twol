@@ -71,7 +71,7 @@ namespace Twol
             get => _ZoomLevel;
             set
             {
-                if (value < 11 ) _ZoomLevel = 11;
+                if (value < 9 ) _ZoomLevel = 9;
                 else if (value > 18) _ZoomLevel = 18;
                 else _ZoomLevel = value;
             }

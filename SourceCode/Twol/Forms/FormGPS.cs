@@ -942,7 +942,7 @@ namespace Twol
         public void SetZoom()
         {
             if (Settings.User.setDisplay_camZoom < 5.0) Settings.User.setDisplay_camZoom = 5.0;
-            if (Settings.User.setDisplay_camZoom > 200) Settings.User.setDisplay_camZoom = 200;
+            if (Settings.User.setDisplay_camZoom > 800) Settings.User.setDisplay_camZoom = 800;
             camera.camSetDistance = Settings.User.setDisplay_camZoom * Settings.User.setDisplay_camZoom * -1;
 
             //match grid to cam distance and redo perspective
