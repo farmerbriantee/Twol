@@ -82,8 +82,13 @@ namespace Twol
         private void oglMain_Load(object sender, EventArgs e)
         {
             oglMain.MakeCurrent();
+
+            //load the static textures
             LoadGLTextures();
+
+            //generate the texture memory for the dynamic world map
             worldMap.GenerateTextureMemory();
+
             GL.ClearColor(0.1f, 0.1f, 0.3f, 1.0f);
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
             GL.CullFace(CullFaceMode.Back);
