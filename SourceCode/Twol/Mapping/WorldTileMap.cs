@@ -85,8 +85,6 @@ namespace Twol.Mapping
 
         double metersPerTile = 100;
 
-        int columnCounter = 0;
-
         public WorldTileMap(FormGPS _f)
         {
             mf = _f;
@@ -110,7 +108,7 @@ namespace Twol.Mapping
                     {
                         //reset the set and grid coords
                         tileSetArr[tx * 7 + ty] = new mapPoint(upperLeftTileX + tx, upperLeftTileY + ty, mf.map.ZoomLevel, 0);
-                        tileGridArr[tx * 7 + ty] = new mapPoint(0, upperLeftTileY + ty, mf.map.ZoomLevel, 0);
+                        tileGridArr[tx * 7 + ty].Status = 0;
                     }
                 }
             }
@@ -170,7 +168,6 @@ namespace Twol.Mapping
             if (isUpdateTilesRequired)
             {
                 TileSetCoords();
-                isUpdateTilesRequired = false;
             }
 
             //check grid spacing based on cam zoom
@@ -184,64 +181,44 @@ namespace Twol.Mapping
 
         public void UpdateWorldMapTiles()
         {
-            secondCounter += 1.0 / mf.gpsHz;
-
-            if (secondCounter < 1)
+            //7x7 tilemap
+            for (int texNum = 0; texNum < 49; texNum++)
             {
-                secondCounter = 0;
-                int tex = 0;
-
-                //7x7 tilemap
-                for (int tx = 0; tx < 7; tx++)
+                //too many attempts to load tile so skip
+                if ((tileGridArr[texNum].Status < 10) && (tileGridArr[texNum].X != tileSetArr[texNum].X || tileGridArr[texNum].Y != tileSetArr[texNum].Y || tileGridArr[texNum].Z != tileSetArr[texNum].Z))
                 {
-                    for (int ty = 0; ty < 7; ty++)
+                    tile = mf.map.GetTile(tileSetArr[texNum].X, tileSetArr[texNum].Y, tileSetArr[texNum].Z);
+
+                    if (tile != null)
                     {
-                        //too many attempts to load tile so skip
-                        if ((tileGridArr[tex].Status < 10) && (tileGridArr[tex].X != tileSetArr[tex].X || tileGridArr[tex].Y != tileSetArr[tex].Y || tileGridArr[tex].Z != tileSetArr[tex].Z))
+                        GL.BindTexture(TextureTarget.Texture2D, mapTexture[texNum]);
+                        GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Linear);
+                        GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Linear);
+
+                        if (tile.Image is Bitmap bitmap)
                         {
-                            tile = mf.map.GetTile(tileSetArr[tex].X, tileSetArr[tex].Y, tileSetArr[tex].Z);
+                            var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), System.Drawing.Imaging.ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
 
-                            if (tile != null)
-                            {
-                                GL.BindTexture(TextureTarget.Texture2D, mapTexture[tex]);
-                                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Linear);
-                                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Linear);
+                            // Keep memory in place, fill with new image 
+                            GL.TexSubImage2D(TextureTarget.Texture2D, 0, 0, 0, bitmapData.Width, bitmapData.Height, PixelFormat.Rgba, PixelType.UnsignedByte, bitmapData.Scan0);
+                            bitmap.UnlockBits(bitmapData);
 
-                                if (tile.Image is Bitmap bitmap)
-                                {
-                                    var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), System.Drawing.Imaging.ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-
-                                    // Keep memory in place, fill with new image 
-                                    GL.TexSubImage2D(TextureTarget.Texture2D, 0, 0, 0, bitmapData.Width, bitmapData.Height, PixelFormat.Rgba, PixelType.UnsignedByte, bitmapData.Scan0);
-                                    bitmap.UnlockBits(bitmapData);
-
-                                    //loaded
-                                    tileGridArr[tex].X = tileSetArr[tex].X;
-                                    tileGridArr[tex].Y = tileSetArr[tex].Y;
-                                    tileGridArr[tex].Z = tileSetArr[tex].Z;
-                                }
-                            }
-                            else
-                            {
-                                tileGridArr[tex].Status++;
-                            }
+                            //loaded
+                            tileGridArr[texNum].X = tileSetArr[texNum].X;
+                            tileGridArr[texNum].Y = tileSetArr[texNum].Y;
+                            tileGridArr[texNum].Z = tileSetArr[texNum].Z;
+                            tileGridArr[texNum].Status = 0;
                         }
-
-                        tex++;
                     }
-                }
-
-                //isUpdateTilesRequired = false;
-
-                //prefetch outside ring of tiles
-                if (mf.isInternetConnected)
-                {
-                    //PrefetchRingTiles(tileX, tileY);
+                    else
+                    {
+                        tileGridArr[texNum].Status++;
+                        if (!mf.isInternetConnected) tileGridArr[texNum].Status = 11; //stop trying if no internet
+                    }
                 }
             }
 
             checkZoomWorldGrid();
-
         }
 
         public void DrawWorldTilesMap()
@@ -258,12 +235,12 @@ namespace Twol.Mapping
                 {
                     for (double j = 3; j > -4; j -= 1)
                     {
-                        if (tileGridArr[tex].X == tileSetArr[tex].X && tileGridArr[tex].Y == tileSetArr[tex].Y && tileGridArr[tex].Z == tileSetArr[tex].Z)
-                            GL.BindTexture(TextureTarget.Texture2D, mapTexture[tex]);
-                        else
-                        {
-                            GL.BindTexture(TextureTarget.Texture2D, mf.texture[(int)FormGPS.textures.Floor2]);
-                        }
+                        //if (tileGridArr[tex].X == tileSetArr[tex].X && tileGridArr[tex].Y == tileSetArr[tex].Y && tileGridArr[tex].Z == tileSetArr[tex].Z)
+                           GL.BindTexture(TextureTarget.Texture2D, mapTexture[tex]);
+                        //else
+                        //{
+                        //    GL.BindTexture(TextureTarget.Texture2D, mf.texture[(int)FormGPS.textures.Floor2]);
+                        //}
 
                         double ii = (i + lastOriginToPivotInTilesX) * metersPerTile + offsetX;  //x
                         double jj = (j + lastOriginToPivotInTilesY) * metersPerTile + offsetY;   //y
@@ -360,9 +337,9 @@ namespace Twol.Mapping
             sector = ((sector % 8) + 8) % 8;
 
             // Retrieve tuple offsets and apply.
-            var offset = headingMapMoveOffsets[sector];
-            originToXinTiles += offset.dx;
-            originToYinTiles += offset.dy;
+            var (dx, dy) = headingMapMoveOffsets[sector];
+            originToXinTiles += dx;
+            originToYinTiles += dy;
         }
 
         /// <summary>

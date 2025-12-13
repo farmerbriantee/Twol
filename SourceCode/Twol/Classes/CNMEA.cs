@@ -348,9 +348,7 @@ namespace Twol
 
                 byte.TryParse(words[10], NumberStyles.Float, CultureInfo.InvariantCulture, out fixQuality);
 
-                int headingQuality;
-
-                int.TryParse(words[11], NumberStyles.Float, CultureInfo.InvariantCulture, out headingQuality);
+                int.TryParse(words[11], NumberStyles.Float, CultureInfo.InvariantCulture, out int headingQuality);
 
                 if (headingQuality == 3)   // roll only when rtk 
                 {
