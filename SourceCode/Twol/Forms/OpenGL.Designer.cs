@@ -157,12 +157,17 @@ namespace Twol
 
                     GL.Disable(EnableCap.Blend);
 
-                    //worldGrid.DrawFieldSurface();
+                    //draw basic floor texture repeating
+                    if (Settings.User.setDisplay_isTextureOn)
+                        worldGrid.DrawFieldSurface();
 
-                    worldMap.DrawWorldMap();
+                    //draw sat maps if on
+                    if (Settings.User.isWorldMapOn)
+                        worldMap.DrawWorldTilesMap();
 
-                    ////if grid is on draw it
-                    if (Settings.User.isGridOn) worldMap.DrawWorldGrid(camera.gridZoom);
+                    //if grid is on draw it
+                    if (Settings.User.isGridOn)
+                        worldMap.DrawWorldGrid(camera.gridZoom);
 
                     GL.Enable(EnableCap.Blend);
 
@@ -787,6 +792,9 @@ namespace Twol
 
                     #endregion
                 }
+
+                //check if world map tiles need update
+                if (Settings.User.isWorldMapOn) worldMap.UpdateWorldMapTiles();
             }
 
             #region No GPS
@@ -2475,7 +2483,7 @@ namespace Twol
 
             GL.Translate(center, 140, 0);
 
-            GL.Rotate(camHeading, 0, 0, 1);
+            GL.Rotate(camHeading, 0, 0, -1);
             GL.Begin(PrimitiveType.TriangleStrip);              // Build Quad From A Triangle Strip
             {
                 GL.TexCoord2(1, 0); GL.Vertex2(42, -42.0); // 

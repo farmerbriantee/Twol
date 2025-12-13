@@ -14,13 +14,15 @@ namespace Twol.Mapping
         public int X;
         public int Y;
         public int Z;
+        public int Status;
 
         // Optional: A constructor to initialize the values easily
-        public mapPoint(int x, int y, int z)
+        public mapPoint(int x, int y, int z, int status = 0)
         {
             X = x;
             Y = y;
             Z = z;
+            Status = status;
         }
     }
 
@@ -59,8 +61,6 @@ namespace Twol.Mapping
         public int Count = 40;
 
         Tile tile;
-        public bool isUpdateTilesRequired = true;
-        private int isMapCompleteCounter = 10;
 
         public double lastZoom = 0;
 
@@ -108,14 +108,18 @@ namespace Twol.Mapping
                 {
                     for (int ty = 0; ty < 7; ty++)
                     {
-                        tileSetArr[tx * 7 + ty] = new mapPoint(upperLeftTileX + tx, upperLeftTileY + ty, mf.map.ZoomLevel);
+                        //reset the set and grid coords
+                        tileSetArr[tx * 7 + ty] = new mapPoint(upperLeftTileX + tx, upperLeftTileY + ty, mf.map.ZoomLevel, 0);
+                        tileGridArr[tx * 7 + ty] = new mapPoint(0, upperLeftTileY + ty, mf.map.ZoomLevel, 0);
                     }
                 }
             }
         }
 
-        private void UpdateMapZoomFromCamZoom()
+        public void UpdateMapZoomFromCamZoom()
         {
+            bool isUpdateTilesRequired = false;
+
             foreach (var pair in camToZoomMapping)
             {
                 int threshold = pair.threshold;
@@ -163,6 +167,12 @@ namespace Twol.Mapping
                 lastOriginToPivotInTilesY = originToPivotInTilesY;
             }
 
+            if (isUpdateTilesRequired)
+            {
+                TileSetCoords();
+                isUpdateTilesRequired = false;
+            }
+
             //check grid spacing based on cam zoom
             if (Settings.User.setDisplay_camZoom > 100) Count = 5;
             else if (Settings.User.setDisplay_camZoom > 80) Count = 10;
@@ -170,40 +180,26 @@ namespace Twol.Mapping
             else if (Settings.User.setDisplay_camZoom > 20) Count = 30;
             else if (Settings.User.setDisplay_camZoom > 10) Count = 60;
             else Count = 120;
-
-            if (isUpdateTilesRequired)
-            {
-                TileSetCoords();
-                isUpdateTilesRequired = false;
-            }
         }
 
-        public void DrawWorldMap()
+        public void UpdateWorldMapTiles()
         {
-            DrawTiles();
-
             secondCounter += 1.0 / mf.gpsHz;
 
-            UpdateMapZoomFromCamZoom();
-
-            if (secondCounter > 3 || isUpdateTilesRequired)
+            if (secondCounter < 1)
             {
-                //set to top-left tile
-                int upperLeftTileX = originTileX - 3 + lastOriginToPivotInTilesX;
-                int upperLeftTileY = originTileY - 3 - lastOriginToPivotInTilesY;
-
                 secondCounter = 0;
+                int tex = 0;
 
-                if (isUpdateTilesRequired)
+                //7x7 tilemap
+                for (int tx = 0; tx < 7; tx++)
                 {
-                    int tex = 0;
-
-                    //7x7 tilemap
-                    for (int tx = 0; tx < 7; tx++)
+                    for (int ty = 0; ty < 7; ty++)
                     {
-                        for (int ty = 0; ty < 7; ty++)
+                        //too many attempts to load tile so skip
+                        if ((tileGridArr[tex].Status < 10) && (tileGridArr[tex].X != tileSetArr[tex].X || tileGridArr[tex].Y != tileSetArr[tex].Y || tileGridArr[tex].Z != tileSetArr[tex].Z))
                         {
-                            tile = mf.map.GetTile(upperLeftTileX + tx, upperLeftTileY + ty, mf.map.ZoomLevel);
+                            tile = mf.map.GetTile(tileSetArr[tex].X, tileSetArr[tex].Y, tileSetArr[tex].Z);
 
                             if (tile != null)
                             {
@@ -220,49 +216,40 @@ namespace Twol.Mapping
                                     bitmap.UnlockBits(bitmapData);
 
                                     //loaded
-                                }
-                                else
-                                {
-                                    //default status
-
-                                    //load default texture
-                                    LoadDefaultTexture(tex);
+                                    tileGridArr[tex].X = tileSetArr[tex].X;
+                                    tileGridArr[tex].Y = tileSetArr[tex].Y;
+                                    tileGridArr[tex].Z = tileSetArr[tex].Z;
                                 }
                             }
                             else
                             {
-                                //load default texture and wait till downloaded.
-                                LoadDefaultTexture(tex);
+                                tileGridArr[tex].Status++;
                             }
-
-                            //will never retrieve tiles if no internet
-                            if (mf.isInternetConnected == false)
-                            {
-                                //mapTextureStatus[tex] = (int)TexStatus.TileCorrect;
-                            }
-                            tex++;
                         }
-                    }
 
-                    //isUpdateTilesRequired = false;
-
-                    //prefetch outside ring of tiles
-                    if (mf.isInternetConnected)
-                    {
-                        //PrefetchRingTiles(tileX, tileY);
+                        tex++;
                     }
                 }
 
-                checkZoomWorldGrid();
+                //isUpdateTilesRequired = false;
+
+                //prefetch outside ring of tiles
+                if (mf.isInternetConnected)
+                {
+                    //PrefetchRingTiles(tileX, tileY);
+                }
             }
+
+            checkZoomWorldGrid();
+
         }
 
-        private void DrawTiles()
+        public void DrawWorldTilesMap()
         {
             Color field = Settings.User.setDisplay_isDayMode ? Settings.User.colorFieldDay : Settings.User.colorFieldNight;
 
             GL.Color3(field.R, field.G, field.B);
-            if (Settings.User.setDisplay_isTextureOn && mapTexture != null)
+            if (mapTexture != null)
             {
                 GL.Enable(EnableCap.Texture2D);
 
@@ -271,7 +258,7 @@ namespace Twol.Mapping
                 {
                     for (double j = 3; j > -4; j -= 1)
                     {
-                        if (tileGridArr[tex].X > -1)
+                        if (tileGridArr[tex].X == tileSetArr[tex].X && tileGridArr[tex].Y == tileSetArr[tex].Y && tileGridArr[tex].Z == tileSetArr[tex].Z)
                             GL.BindTexture(TextureTarget.Texture2D, mapTexture[tex]);
                         else
                         {
@@ -297,6 +284,7 @@ namespace Twol.Mapping
             }
             GL.Disable(EnableCap.Texture2D);
 
+            UpdateMapZoomFromCamZoom();
         }
 
         /// <summary>
@@ -318,38 +306,6 @@ namespace Twol.Mapping
 
             offsetX = (0.5 - (originTileXY_F.X - (int)originTileXY_F.X)) * metersPerTile;
             offsetY = ((originTileXY_F.Y - (int)originTileXY_F.Y) - 0.5) * metersPerTile;
-        }
-
-
-        /// <summary>
-        /// Loads the default texture for the specified texture index and applies it to the texture map.
-        /// </summary>
-        /// <remarks>This method binds the specified texture, sets texture parameters for filtering, and
-        /// loads a default bitmap image into the texture. The texture is then marked as loaded with the default
-        /// status.</remarks>
-        /// <param name="tex">The index of the texture in the texture map to be loaded with the default texture.</param>
-        private void LoadDefaultTexture(int tex)
-        {
-            //not loaded - default image used, if already used, decrease as count attempts
-            if (tileGridArr[tex].X < -1)
-            {
-                tileGridArr[tex].X--;
-                return;
-            }
-            else tileSetArr[tex].X = -1;
-
-            GL.BindTexture(TextureTarget.Texture2D, mapTexture[tex]);
-            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Nearest);
-            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Nearest);
-
-            Bitmap bitmap = Resources.z_Floor2;
-            {
-                var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), System.Drawing.Imaging.ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-
-                // Keep memory in place, fill with new image 
-                GL.TexSubImage2D(TextureTarget.Texture2D, 0, 0, 0, bitmapData.Width, bitmapData.Height, PixelFormat.Rgba, PixelType.UnsignedByte, bitmapData.Scan0);
-                bitmap.UnlockBits(bitmapData);
-            }
         }
 
         /// <summary>

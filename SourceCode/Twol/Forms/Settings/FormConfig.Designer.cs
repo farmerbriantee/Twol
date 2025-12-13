@@ -511,6 +511,8 @@
             this.btnOK = new System.Windows.Forms.Button();
             this.label22 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.label12 = new System.Windows.Forms.Label();
+            this.chkDisplayMapping = new System.Windows.Forms.CheckBox();
             this.panelLeftSideMenu.SuspendLayout();
             this.panelArduinoSubMenu.SuspendLayout();
             this.panelDataSourcesSubMenu.SuspendLayout();
@@ -7394,6 +7396,8 @@
             // tabDisplay
             // 
             this.tabDisplay.BackColor = System.Drawing.Color.Gainsboro;
+            this.tabDisplay.Controls.Add(this.label12);
+            this.tabDisplay.Controls.Add(this.chkDisplayMapping);
             this.tabDisplay.Controls.Add(this.label10);
             this.tabDisplay.Controls.Add(this.chkGPSCorrection);
             this.tabDisplay.Controls.Add(this.lblLineSmooth);
@@ -7436,7 +7440,7 @@
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label10.BackColor = System.Drawing.Color.Transparent;
             this.label10.ForeColor = System.Drawing.Color.Black;
-            this.label10.Location = new System.Drawing.Point(27, 557);
+            this.label10.Location = new System.Drawing.Point(224, 565);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(120, 16);
             this.label10.TabIndex = 541;
@@ -7455,7 +7459,7 @@
             this.chkGPSCorrection.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkGPSCorrection.ForeColor = System.Drawing.SystemColors.ControlText;
             this.chkGPSCorrection.Image = global::Twol.Properties.Resources.ConS_SourcesRoll;
-            this.chkGPSCorrection.Location = new System.Drawing.Point(37, 485);
+            this.chkGPSCorrection.Location = new System.Drawing.Point(234, 493);
             this.chkGPSCorrection.Name = "chkGPSCorrection";
             this.chkGPSCorrection.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.chkGPSCorrection.Size = new System.Drawing.Size(100, 69);
@@ -7468,7 +7472,7 @@
             this.lblLineSmooth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblLineSmooth.BackColor = System.Drawing.Color.Transparent;
             this.lblLineSmooth.ForeColor = System.Drawing.Color.Black;
-            this.lblLineSmooth.Location = new System.Drawing.Point(27, 445);
+            this.lblLineSmooth.Location = new System.Drawing.Point(27, 565);
             this.lblLineSmooth.Name = "lblLineSmooth";
             this.lblLineSmooth.Size = new System.Drawing.Size(120, 16);
             this.lblLineSmooth.TabIndex = 539;
@@ -7488,7 +7492,7 @@
             this.chkLineSmooth.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkLineSmooth.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkLineSmooth.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.chkLineSmooth.Location = new System.Drawing.Point(37, 373);
+            this.chkLineSmooth.Location = new System.Drawing.Point(37, 493);
             this.chkLineSmooth.Name = "chkLineSmooth";
             this.chkLineSmooth.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.chkLineSmooth.Size = new System.Drawing.Size(100, 69);
@@ -8076,6 +8080,40 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // label12
+            // 
+            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label12.BackColor = System.Drawing.Color.Transparent;
+            this.label12.ForeColor = System.Drawing.Color.Black;
+            this.label12.Location = new System.Drawing.Point(27, 445);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(120, 16);
+            this.label12.TabIndex = 543;
+            this.label12.Text = "Mapping";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // chkDisplayMapping
+            // 
+            this.chkDisplayMapping.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkDisplayMapping.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkDisplayMapping.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.chkDisplayMapping.Checked = true;
+            this.chkDisplayMapping.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkDisplayMapping.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.chkDisplayMapping.FlatAppearance.BorderSize = 2;
+            this.chkDisplayMapping.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
+            this.chkDisplayMapping.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chkDisplayMapping.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkDisplayMapping.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.chkDisplayMapping.Image = global::Twol.Properties.Resources.FieldStats;
+            this.chkDisplayMapping.Location = new System.Drawing.Point(37, 373);
+            this.chkDisplayMapping.Name = "chkDisplayMapping";
+            this.chkDisplayMapping.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.chkDisplayMapping.Size = new System.Drawing.Size(100, 69);
+            this.chkDisplayMapping.TabIndex = 542;
+            this.chkDisplayMapping.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chkDisplayMapping.UseVisualStyleBackColor = false;
+            // 
             // FormConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -8655,5 +8693,7 @@
         private System.Windows.Forms.CheckBox chkGPSCorrection;
         private System.Windows.Forms.Label label88;
         private System.Windows.Forms.CheckBox cboxFeatureHideContour;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.CheckBox chkDisplayMapping;
     }
 }

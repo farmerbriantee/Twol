@@ -86,7 +86,7 @@ namespace Twol
 
 
             //since we moved origin, reset everything
-            mf.worldMap.isUpdateTilesRequired = true;
+            mf.worldMap.UpdateMapZoomFromCamZoom();
         }
 
         public void ConvertWGS84ToLocal(double Lat, double Lon, out double Northing, out double Easting)

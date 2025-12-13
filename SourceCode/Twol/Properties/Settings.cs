@@ -133,6 +133,7 @@ namespace Twol
             public bool isSkyOn = true;
             public bool isSpeedoOn = false;
             public bool isGPSCorrectionLineOn = false;
+            public bool isWorldMapOn = false;
 
             public bool sound_isAutoSteerOn = true;
             public bool sound_isSectionsOn = true;

@@ -298,6 +298,10 @@ namespace Twol
             mf.isDrawPolygons = chkDisplayPolygons.Checked;
 
             Settings.User.setDisplay_isTextureOn = chkDisplayFloor.Checked;
+
+            Settings.User.isWorldMapOn = chkDisplayMapping.Checked;
+            if (Settings.User.isWorldMapOn) Settings.User.setDisplay_isTextureOn = false;
+
             Settings.User.isGridOn = chkDisplayGrid.Checked;
             Settings.User.isSpeedoOn = chkDisplaySpeedo.Checked;
             Settings.User.isGPSCorrectionLineOn = chkGPSCorrection.Checked;
