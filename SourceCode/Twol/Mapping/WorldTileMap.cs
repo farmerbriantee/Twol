@@ -7,7 +7,12 @@ using Twol.Properties;
 
 namespace Twol.Mapping
 {
-    // create a 3 integral structure
+    /// <summary>
+    /// Represents a point in a three-dimensional map with an associated status value.
+    /// </summary>
+    /// <remarks>The <c>mapPoint</c> class encapsulates X, Y, and Z coordinates along with a status indicator,
+    /// which can be used to represent additional information about the point, such as its state or type within the map
+    /// context.</remarks>
     public class mapPoint
     {
         // Fields (variables within the struct)
@@ -82,6 +87,7 @@ namespace Twol.Mapping
 
         int originTileX = 0;
         int originTileY = 0;
+        bool mapTrigger = true;
 
         double metersPerTile = 100;
 
@@ -112,6 +118,7 @@ namespace Twol.Mapping
                     }
                 }
             }
+            mapTrigger = true;
         }
 
         public void UpdateMapZoomFromCamZoom()
@@ -153,8 +160,8 @@ namespace Twol.Mapping
             originToPivotInTilesX = (int)(mf.pn.fix.easting / metersPerTile);
             originToPivotInTilesY = (int)(mf.pn.fix.northing / metersPerTile);
 
-            //only move map ahead if in 3D
-            if (Settings.User.setDisplay_camPitch != 0)
+            //only move map ahead if in 3D and not spinning
+            if (Settings.User.setDisplay_camPitch != 0 && Math.Abs(mf.ahrs.angularVehicleVelocity) < 1)
                 ApplyHeadingToTileOffset(ref originToPivotInTilesX, ref originToPivotInTilesY, glm.toDegrees(mf.fixHeading));
 
             //we have moved not zoomed so update tiles
@@ -181,44 +188,52 @@ namespace Twol.Mapping
 
         public void UpdateWorldMapTiles()
         {
+            secondCounter += 1 / mf.gpsHz;
             //7x7 tilemap
-            for (int texNum = 0; texNum < 49; texNum++)
+
+            if (secondCounter > 0.25 || mapTrigger)
             {
-                //too many attempts to load tile so skip
-                if ((tileGridArr[texNum].Status < 10) && (tileGridArr[texNum].X != tileSetArr[texNum].X || tileGridArr[texNum].Y != tileSetArr[texNum].Y || tileGridArr[texNum].Z != tileSetArr[texNum].Z))
+                // 7 x 7 tile map
+                mapTrigger = false;
+                secondCounter = 0;
+                for (int texNum = 0; texNum < 49; texNum++)
                 {
-                    tile = mf.map.GetTile(tileSetArr[texNum].X, tileSetArr[texNum].Y, tileSetArr[texNum].Z);
-
-                    if (tile != null)
+                    //too many attempts to load tile so skip if status > 10
+                    if ((tileGridArr[texNum].Status < 11) && (tileGridArr[texNum].X != tileSetArr[texNum].X || tileGridArr[texNum].Y != tileSetArr[texNum].Y || tileGridArr[texNum].Z != tileSetArr[texNum].Z))
                     {
-                        GL.BindTexture(TextureTarget.Texture2D, mapTexture[texNum]);
-                        GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Linear);
-                        GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Linear);
+                        tile = mf.map.GetTile(tileSetArr[texNum].X, tileSetArr[texNum].Y, tileSetArr[texNum].Z);
 
-                        if (tile.Image is Bitmap bitmap)
+                        if (tile != null)
                         {
-                            var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), System.Drawing.Imaging.ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+                            GL.BindTexture(TextureTarget.Texture2D, mapTexture[texNum]);
+                            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Linear);
+                            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Linear);
 
-                            // Keep memory in place, fill with new image 
-                            GL.TexSubImage2D(TextureTarget.Texture2D, 0, 0, 0, bitmapData.Width, bitmapData.Height, PixelFormat.Rgba, PixelType.UnsignedByte, bitmapData.Scan0);
-                            bitmap.UnlockBits(bitmapData);
+                            if (tile.Image is Bitmap bitmap)
+                            {
+                                var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), System.Drawing.Imaging.ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
 
-                            //loaded
-                            tileGridArr[texNum].X = tileSetArr[texNum].X;
-                            tileGridArr[texNum].Y = tileSetArr[texNum].Y;
-                            tileGridArr[texNum].Z = tileSetArr[texNum].Z;
-                            tileGridArr[texNum].Status = 0;
+                                // Keep memory in place, fill with new image 
+                                GL.TexSubImage2D(TextureTarget.Texture2D, 0, 0, 0, bitmapData.Width, bitmapData.Height, PixelFormat.Rgba, PixelType.UnsignedByte, bitmapData.Scan0);
+                                bitmap.UnlockBits(bitmapData);
+
+                                //loaded
+                                tileGridArr[texNum].X = tileSetArr[texNum].X;
+                                tileGridArr[texNum].Y = tileSetArr[texNum].Y;
+                                tileGridArr[texNum].Z = tileSetArr[texNum].Z;
+                                tileGridArr[texNum].Status = 0;
+                            }
+                        }
+                        else
+                        {
+                            tileGridArr[texNum].Status++;
+                            if (!mf.isInternetConnected) tileGridArr[texNum].Status = 11; //stop trying if no internet
                         }
                     }
-                    else
-                    {
-                        tileGridArr[texNum].Status++;
-                        if (!mf.isInternetConnected) tileGridArr[texNum].Status = 11; //stop trying if no internet
-                    }
                 }
-            }
 
-            checkZoomWorldGrid();
+                checkZoomWorldGrid();
+            }
         }
 
         public void DrawWorldTilesMap()
@@ -235,12 +250,12 @@ namespace Twol.Mapping
                 {
                     for (double j = 3; j > -4; j -= 1)
                     {
-                        //if (tileGridArr[tex].X == tileSetArr[tex].X && tileGridArr[tex].Y == tileSetArr[tex].Y && tileGridArr[tex].Z == tileSetArr[tex].Z)
-                           GL.BindTexture(TextureTarget.Texture2D, mapTexture[tex]);
-                        //else
-                        //{
-                        //    GL.BindTexture(TextureTarget.Texture2D, mf.texture[(int)FormGPS.textures.Floor2]);
-                        //}
+                        if (tileGridArr[tex].Status < 10)
+                            GL.BindTexture(TextureTarget.Texture2D, mapTexture[tex]);
+                        else
+                        {
+                            GL.BindTexture(TextureTarget.Texture2D, mf.texture[(int)FormGPS.textures.Floor2]);
+                        }
 
                         double ii = (i + lastOriginToPivotInTilesX) * metersPerTile + offsetX;  //x
                         double jj = (j + lastOriginToPivotInTilesY) * metersPerTile + offsetY;   //y

@@ -2455,8 +2455,16 @@ namespace Twol
             if (!Settings.User.isSpeedoOn) font.DrawText(oglMain.Width / 2 - 250, 10, Speed + " " + glm.unitsKmhMph, 1);
 
             //angular velocity
-            strHeading = ahrs.angVel.ToString();
-            font.DrawText(center, 80, strHeading, 1);
+            ahrs.angularVehicleVelocity = glm.twoPI * 0.277777 * avgSpeed * (Math.Tan(glm.toRadians(mc.actualSteerAngleDegrees))) / vehicle.wheelbase;
+
+            strHeading = ahrs.angularVehicleVelocity.ToString("N1");
+            font.DrawText(center, 90, strHeading, 1);
+
+            if (Settings.User.isWorldMapOn)
+            {
+                strHeading = "x" + map.ZoomLevel;
+                font.DrawText(center, 120, strHeading, 1);
+            }
 
             //GPS Step
             if (distanceCurrentStepFixDisplay < 0.03 * 100)
