@@ -87,10 +87,17 @@ namespace Twol.Mapping
 
         int originTileX = 0;
         int originTileY = 0;
-        bool mapTrigger = true;
+        bool isTileCoordsReset = true;
 
         double metersPerTile = 100;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WorldTileMap"/> class using the specified GPS form.
+        /// </summary>
+        /// <remarks>This constructor initializes the tile grid and tile set arrays to their default
+        /// values. The provided <paramref name="_f"/> parameter is used to associate the tile map with a specific GPS
+        /// form, which may be required for map operations.</remarks>
+        /// <param name="_f">The <see cref="FormGPS"/> instance that provides GPS data and context for the tile map.</param>
         public WorldTileMap(FormGPS _f)
         {
             mf = _f;
@@ -102,6 +109,13 @@ namespace Twol.Mapping
             }
         }
 
+        /// <summary>
+        /// Updates the coordinates and status of all tiles in the 7x7 tile grid based on the current origin and pivot
+        /// offsets.
+        /// </summary>
+        /// <remarks>This method recalculates the positions of each tile in the tile set and resets their
+        /// status, ensuring the tile grid reflects the latest origin and pivot values. It is intended to be called
+        /// whenever the origin or pivot changes to keep the tile grid in sync.</remarks>
         private void TileSetCoords()
         {
             int upperLeftTileX = originTileX - 3 + lastOriginToPivotInTilesX;
@@ -118,9 +132,16 @@ namespace Twol.Mapping
                     }
                 }
             }
-            mapTrigger = true;
+            isTileCoordsReset = true;
         }
 
+        /// <summary>
+        /// Updates the map's zoom level and tile display to reflect the current camera zoom and pitch settings.
+        /// </summary>
+        /// <remarks>This method synchronizes the map's zoom level with the camera's zoom and pitch,
+        /// recalculates tile origins and offsets as needed, and updates the visible map tiles accordingly. It also
+        /// adjusts grid spacing based on the camera zoom level. The method is typically called when camera zoom or
+        /// pitch changes, or when the map needs to respond to vehicle movement.</remarks>
         public void UpdateMapZoomFromCamZoom()
         {
             bool isUpdateTilesRequired = false;
@@ -186,15 +207,22 @@ namespace Twol.Mapping
             else Count = 120;
         }
 
+        /// <summary>
+        /// Updates the world map tile textures to reflect the current map state.
+        /// </summary>
+        /// <remarks>This method refreshes the 7x7 grid of world map tiles, updating their textures if the
+        /// underlying map data has changed or if a refresh is triggered. It manages tile loading attempts and skips
+        /// tiles that have failed to load repeatedly. This method should be called regularly to ensure the displayed
+        /// map remains in sync with the latest data.</remarks>
         public void UpdateWorldMapTiles()
         {
             secondCounter += 1 / mf.gpsHz;
             //7x7 tilemap
 
-            if (secondCounter > 0.25 || mapTrigger)
+            if (secondCounter > 0.25 || isTileCoordsReset)
             {
                 // 7 x 7 tile map
-                mapTrigger = false;
+                isTileCoordsReset = false;
                 secondCounter = 0;
                 for (int texNum = 0; texNum < 49; texNum++)
                 {
@@ -236,6 +264,13 @@ namespace Twol.Mapping
             }
         }
 
+        /// <summary>
+        /// Renders the world tiles map to the current OpenGL context using the appropriate textures and color scheme.
+        /// </summary>
+        /// <remarks>This method draws a grid of world tiles, applying either day or night color settings
+        /// based on user preferences. It uses OpenGL to render textured tiles, selecting the texture for each tile
+        /// according to its status. The method should be called within a valid OpenGL rendering context. After drawing
+        /// the tiles, the map zoom is updated to reflect the current camera zoom level.</remarks>
         public void DrawWorldTilesMap()
         {
             Color field = Settings.User.setDisplay_isDayMode ? Settings.User.colorFieldDay : Settings.User.colorFieldNight;
