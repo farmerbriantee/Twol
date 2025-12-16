@@ -64,14 +64,17 @@ namespace Twol
         private int _ZoomLevel = 15;
 
         /// <summary>
-        /// Map zoom level.
+        /// Gets or sets the zoom level for the map view.
         /// </summary>
+        /// <remarks>The zoom level determines the scale of the map, with higher values showing more
+        /// detail. Valid values range from 9 (farthest out) to 18 (closest in). Values outside this range are
+        /// automatically adjusted to the nearest valid value.</remarks>
         public int ZoomLevel
         {
             get => _ZoomLevel;
             set
             {
-                if (value < 11 ) _ZoomLevel = 11;
+                if (value < 9 ) _ZoomLevel = 9;
                 else if (value > 18) _ZoomLevel = 18;
                 else _ZoomLevel = value;
             }

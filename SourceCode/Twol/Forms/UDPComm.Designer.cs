@@ -1083,7 +1083,7 @@ namespace Twol
                 if (sim.stepDistance < 0.4 && sim.stepDistance > -0.36) sim.stepDistance += 0.01;
                 else 
                     sim.stepDistance += 0.04;
-                if (sim.stepDistance > 4) sim.stepDistance = 4;
+                if (sim.stepDistance > 8) sim.stepDistance = 8;
                 return true;
             }
 

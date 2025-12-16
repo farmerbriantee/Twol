@@ -141,8 +141,8 @@ namespace Twol
 
                     steerAngle = glm.toDegrees((xTrackSteerCorrection + steerHeadingError) * -1.0);
 
-                    if (Math.Abs(distanceFromCurrentLine) > 0.5) steerAngle *= 0.5;
-                    else steerAngle *= (1 - Math.Abs(distanceFromCurrentLine));
+                    //if (Math.Abs(distanceFromCurrentLine) > 0.5) steerAngle *= 0.5;
+                    //else steerAngle *= (1 - Math.Abs(distanceFromCurrentLine));
 
                     ////Tool GPS
                     //if (Settings.Tool.setToolSteer.isGPSToolActive && mf.gyd.FindClosestSegment(curList, false, mf.pnTool.fix, out A, out B))
@@ -307,7 +307,6 @@ namespace Twol
                             isPassiveSteering = true;
                     }
                     //angular velocity in rads/sec  = 2PI * m/sec * radians/meters
-                    //double angVel = glm.twoPI * 0.277777 * mf.avgSpeed * (Math.Tan(glm.toRadians(steerAngleCT))) / mf.vehicle.wheelbase;
 
                     //clamp the steering angle to not exceed safe angular velocity
                     //if (Math.Abs(angVel) > mf.vehicle.maxAngularVelocity)

@@ -9,6 +9,8 @@
 
         public System.Int16 angVel;
 
+        public double angularVehicleVelocity = 0;
+
         //constructor
         public CAHRS()
         {

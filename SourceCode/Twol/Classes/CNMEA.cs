@@ -86,7 +86,7 @@ namespace Twol
 
 
             //since we moved origin, reset everything
-            mf.worldMap.isUpdateTilesRequired = true;
+            mf.worldMap.UpdateMapZoomFromCamZoom();
         }
 
         public void ConvertWGS84ToLocal(double Lat, double Lon, out double Northing, out double Easting)
@@ -348,9 +348,7 @@ namespace Twol
 
                 byte.TryParse(words[10], NumberStyles.Float, CultureInfo.InvariantCulture, out fixQuality);
 
-                int headingQuality;
-
-                int.TryParse(words[11], NumberStyles.Float, CultureInfo.InvariantCulture, out headingQuality);
+                int.TryParse(words[11], NumberStyles.Float, CultureInfo.InvariantCulture, out int headingQuality);
 
                 if (headingQuality == 3)   // roll only when rtk 
                 {
