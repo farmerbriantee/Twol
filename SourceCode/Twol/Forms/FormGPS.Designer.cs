@@ -700,7 +700,7 @@ namespace Twol
             this.oglMain.Name = "oglMain";
             this.oglMain.Size = new System.Drawing.Size(854, 728);
             this.oglMain.TabIndex = 180;
-            this.oglMain.VSync = false;
+            this.oglMain.VSync = true;
             this.oglMain.Load += new System.EventHandler(this.oglMain_Load);
             this.oglMain.Paint += new System.Windows.Forms.PaintEventHandler(this.oglMain_Paint);
             this.oglMain.MouseDown += new System.Windows.Forms.MouseEventHandler(this.oglMain_MouseDown);
@@ -3594,6 +3594,7 @@ namespace Twol
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(1163, 847);
+            this.Controls.Add(this.tlpNozzle);
             this.Controls.Add(this.flowLayoutPanelTop);
             this.Controls.Add(this.flp1);
             this.Controls.Add(this.panelNavigation);
@@ -3611,7 +3612,6 @@ namespace Twol
             this.Controls.Add(this.lblGuidanceLine);
             this.Controls.Add(this.oglBack);
             this.Controls.Add(this.lblHardwareMessage);
-            this.Controls.Add(this.tlpNozzle);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Tahoma", 12F);
             this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
