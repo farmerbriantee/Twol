@@ -219,7 +219,7 @@ namespace Twol.Mapping
             secondCounter += 1 / mf.gpsHz;
             //7x7 tilemap
 
-            if (secondCounter > 0.25 || isTileCoordsReset)
+            if (secondCounter > 0.35 || isTileCoordsReset)
             {
                 // 7 x 7 tile map
                 isTileCoordsReset = false;
