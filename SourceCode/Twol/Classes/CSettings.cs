@@ -87,6 +87,9 @@
         public double antennaHeight = 0;
         public double antennaOffset = 0;
 
+        public double curvatureGain = 5.0;
+        public double passiveIntegralGain = 0.005;
+
         public CToolSteerSettings(CToolSteerSettings _setting)
         {
             isGPSToolActive = _setting.isGPSToolActive;
@@ -108,6 +111,8 @@
 
             antennaHeight = _setting.antennaHeight;
             antennaOffset = _setting.antennaOffset;
+            curvatureGain = _setting.curvatureGain;
+            passiveIntegralGain = _setting.passiveIntegralGain;
         }
     }
 }
