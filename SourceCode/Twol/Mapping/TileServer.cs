@@ -6,23 +6,21 @@ using System.Net;
 namespace Twol.Mapping
 {
     /// <summary>
-    /// Provides map tiles from a Google Maps tile server.
+    /// Provides map tiles from the ESRI World Imagery tile server.
     /// </summary>
     /// <remarks>
-    /// This class retrieves map tiles based on their x and y coordinates and zoom level.
-    /// It includes functionality for generating tile URIs, downloading tile images, and
-    /// configuring connection settings. By default, it configures the application to accept
-    /// all SSL/TLS certificates and enables modern security protocols.
+    /// This class retrieves satellite imagery tiles based on their x and y coordinates and zoom level.
+    /// Uses the official ESRI ArcGIS Online World Imagery service which provides high-resolution
+    /// satellite and aerial imagery. Configures SSL/TLS settings for secure HTTPS connections.
     /// </remarks>
     public class TileServer : ITileProvider
     {
-        private static readonly Random Random = new Random();
         private bool _disposed;
 
         /// <summary>
         /// Gets the display name of this tile provider.
         /// </summary>
-        public string Name => "Google Maps";
+        public string Name => "ESRI World Imagery";
 
         /// <summary>
         /// Gets whether this provider is currently available.
@@ -88,11 +86,11 @@ namespace Twol.Mapping
         }
 
         /// <summary>
-        /// Generates a URI for retrieving a map tile from Google Maps.
+        /// Generates a URI for retrieving a map tile from ESRI World Imagery.
         /// </summary>
         /// <remarks>
-        /// The method selects one of four possible tile servers (mt0, mt1, mt2, mt3) at random
-        /// to distribute requests.
+        /// Uses the official ESRI ArcGIS Online World Imagery MapServer endpoint.
+        /// URL format: tile/{z}/{y}/{x} (note: y before x, different from Google).
         /// </remarks>
         /// <param name="x">The x-coordinate of the tile in the tile grid.</param>
         /// <param name="y">The y-coordinate of the tile in the tile grid.</param>
@@ -100,8 +98,7 @@ namespace Twol.Mapping
         /// <returns>A <see cref="Uri"/> representing the location of the requested map tile.</returns>
         private Uri GetTileUri(int x, int y, int z)
         {
-            int ind = Random.Next(0, 4);
-            return new Uri($"http://mt{ind}.google.com/vt/lyrs=s&hl=en&x={x}&y={y}&z={z}");
+            return new Uri($"https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}");
         }
 
         /// <summary>
