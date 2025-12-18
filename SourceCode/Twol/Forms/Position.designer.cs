@@ -212,11 +212,11 @@ namespace Twol
 
                                 if (ahrs.imuRoll != 88888)
                                 {
-                                    //change for roll to the right is positive times -1
+                                    //change for rollDual to the right is positive times -1
                                     rollCorrectionDistance = Math.Tan(glm.toRadians((ahrs.imuRoll))) * -vehicle.antennaHeight;
 
-                                    // roll to left is positive  **** important!!
-                                    // not any more - April 30, 2019 - roll to right is positive Now! Still Important
+                                    // rollDual to left is positive  **** important!!
+                                    // not any more - April 30, 2019 - rollDual to right is positive Now! Still Important
                                     for (int i = 0; i < 3; i++)
                                     {
                                         stepFixPts[i].easting = (Math.Cos(-gpsHeading) * rollCorrectionDistance) + stepFixPts[i].easting;
@@ -310,7 +310,7 @@ namespace Twol
                             if ((fd.distanceUser += distanceCurrentStepFix) > 9999) fd.distanceUser = 0;
                             prevFix = pn.fix;
                         }
-
+                        
                         if (glm.Distance(lastReverseFix, pn.fix) > Settings.Vehicle.setGPS_dualReverseDetectionDistance)
                         {
                             //most recent heading
@@ -644,7 +644,7 @@ namespace Twol
 
             if (ahrs.imuRoll != 88888 && vehicle.antennaHeight != 0)
             {
-                //change for roll to the right is positive times -1
+                //change for rollDual to the right is positive times -1
                 rollCorrectionDistance = Math.Sin(glm.toRadians((ahrs.imuRoll))) * -vehicle.antennaHeight;
                 correctionDistanceGraph = rollCorrectionDistance;
 

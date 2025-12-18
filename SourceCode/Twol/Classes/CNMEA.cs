@@ -33,21 +33,21 @@ namespace Twol
             hpdSentence, rmcSentence, pandaSentence, ksxtSentence;
 
         public double altitude = float.MaxValue, headingTrue = float.MaxValue,
-            headingTrueDual = float.MaxValue, roll = float.MaxValue;
+            headingTrueDual = float.MaxValue, rollDual = 0;
 
         public double hdop, latitude, longitude;
         public int satellitesTracked;
 
         //imu data
-        public ushort imuHeading = ushort.MaxValue;
-        public short imuRoll = short.MaxValue, imuPitch = short.MaxValue, imuYawRate = short.MaxValue;
+        public double imuHeading = ushort.MaxValue;
+        public double imuRoll = short.MaxValue, imuPitch = short.MaxValue, imuYawRate = short.MaxValue;
 
         public byte fixQuality = byte.MaxValue;
 
         private double rollK, Pc, G, Xp, Zp, XeRoll, P = 1.0f;
         private readonly double varRoll = 0.1f, varProcess = 0.0003f;
 
-        double LastUpdateUTC = 0;
+        public bool isDualGPSConnected = false;
 
         private readonly FormGPS mf;
 
@@ -222,7 +222,7 @@ namespace Twol
                 words = nextNMEASentence.Split(',');
 
                 //parse them accordingly
-                if (words.Length < 3) break;
+                if (words.Length < 3) break;                
 
                 if ((words[0] == "$GPGGA" || words[0] == "$GNGGA") && words.Length > 13)
                 {
@@ -289,10 +289,6 @@ namespace Twol
                     ParseTRA();
                 }
 
-                else if (words[0] == "$PSTI" && (words[1] == "032" || words[1] == "035"))
-                {
-                    ParseSTI032(); //there is also an $PSTI,030,... wich contains different data!
-                }
             }// while still data
 
 
@@ -342,7 +338,7 @@ namespace Twol
 
                 double.TryParse(words[5], NumberStyles.Float, CultureInfo.InvariantCulture, out headingTrueDual);
 
-                double.TryParse(words[6], NumberStyles.Float, CultureInfo.InvariantCulture, out rollK);
+                double.TryParse(words[6], NumberStyles.Float, CultureInfo.InvariantCulture, out rollDual);
 
                 double.TryParse(words[8], NumberStyles.Float, CultureInfo.InvariantCulture, out vtgSpeed);
 
@@ -350,14 +346,12 @@ namespace Twol
 
                 int.TryParse(words[11], NumberStyles.Float, CultureInfo.InvariantCulture, out int headingQuality);
 
-                if (headingQuality == 3)   // roll only when rtk 
+                if (headingQuality != 3)   // rollDual only when rtk 
                 {
-                    roll = (float)(rollK);
+                    rollDual = 0;
                 }
-                else
-                {
-                    roll = float.MinValue;
-                }
+
+                isDualGPSConnected = true;
 
                 int.TryParse(words[13], NumberStyles.Float, CultureInfo.InvariantCulture, out satellitesTracked);
 
@@ -521,7 +515,7 @@ namespace Twol
                 Zp = Xp;
                 XeRoll = (G * (rollK - Zp)) + Xp;
 
-                roll = XeRoll;
+                rollDual = XeRoll;
             }
         }
 
@@ -532,28 +526,24 @@ namespace Twol
                 //Dual heading
                 double.TryParse(words[3], NumberStyles.Float, CultureInfo.InvariantCulture, out headingTrueDual);
 
-                double.TryParse(words[4], NumberStyles.Float, CultureInfo.InvariantCulture, out rollK);
+                double.TryParse(words[4], NumberStyles.Float, CultureInfo.InvariantCulture, out rollDual);
 
                 double.TryParse(words[18], NumberStyles.Float, CultureInfo.InvariantCulture, out double baseline);
 
-                //int.TryParse(words[21], NumberStyles.Float, CultureInfo.InvariantCulture, out int solheading);
+                if (baseline <= 0)   // rollDual only when rtk and baseline - above zero
+                {
+                    rollDual = 0;
+                }
 
-                if (baseline > 0)   // roll only when rtk and baseline
-                {
-                    roll = (float)(rollK);
-                }
-                else
-                {
-                    roll = float.MinValue;
-                }
+                isDualGPSConnected = true;
             }
         }
 
         private void ParseOGI()
         {
-            #region PTWOLI Message
+            #region PAOGI Message
             /*
-            $PTWOLI
+            $PAOGI
             (1) 123519 Fix taken at 1219 UTC
 
             Roll corrected position
@@ -579,13 +569,13 @@ namespace Twol
 
             FROM AHRS:
             (12) Heading in degrees
-            (13) Roll angle in degrees(positive roll = right leaning - right down, left up)
+            (13) Roll angle in degrees(positive rollDual = right leaning - right down, left up)
             (14) Pitch angle in degrees(Positive pitch = nose up)
             (15) Yaw Rate in Degrees / second
 
             * CHKSUM
             */
-            #endregion PTWOLI Message
+            #endregion PAOGI Message
 
             if (!string.IsNullOrEmpty(words[1]) && !string.IsNullOrEmpty(words[2]) && !string.IsNullOrEmpty(words[3])
                 && !string.IsNullOrEmpty(words[4]) && !string.IsNullOrEmpty(words[5]))
@@ -613,8 +603,10 @@ namespace Twol
                 //Dual antenna derived heading
                 double.TryParse(words[12], NumberStyles.Float, CultureInfo.InvariantCulture, out headingTrueDual);
 
-                //roll
-                double.TryParse(words[13], NumberStyles.Float, CultureInfo.InvariantCulture, out roll);
+                isDualGPSConnected = true;
+
+                //rollDual
+                double.TryParse(words[13], NumberStyles.Float, CultureInfo.InvariantCulture, out rollDual);
 
                 //get latitude and convert to decimal degrees
                 int decim = words[2].IndexOf(".", StringComparison.Ordinal);
@@ -648,7 +640,7 @@ namespace Twol
                 double.TryParse(words[4].Substring(decim), NumberStyles.Float, CultureInfo.InvariantCulture, out temp);
                 longitude += temp * 0.01666666666666666666666666666667;
 
-                { if (words[5] == "W") longitude *= -1; }
+                { if (words[5] == "W") longitude *= -1; }                
 
                 //always send because its probably the only one.
                 isNMEAToSend = true;
@@ -684,7 +676,7 @@ namespace Twol
 
             FROM IMU:
             (12) Heading in degrees
-            (13) Roll angle in degrees(positive roll = right leaning - right down, left up)
+            (13) Roll angle in degrees(positive rollDual = right leaning - right down, left up)
             
             (14) Pitch angle in degrees(Positive pitch = nose up)
             (15) Yaw Rate in Degrees / second
@@ -752,16 +744,16 @@ namespace Twol
                 vtgSpeed *= 1.852f;
 
                 //imu heading
-                ushort.TryParse(words[12], NumberStyles.Float, CultureInfo.InvariantCulture, out imuHeading);
+                double.TryParse(words[12], NumberStyles.Float, CultureInfo.InvariantCulture, out imuHeading);
 
-                //roll
-                short.TryParse(words[13], NumberStyles.Float, CultureInfo.InvariantCulture, out imuRoll);
+                //rollDual
+                double.TryParse(words[13], NumberStyles.Float, CultureInfo.InvariantCulture, out imuRoll);
 
                 //Pitch
-                short.TryParse(words[14], NumberStyles.Float, CultureInfo.InvariantCulture, out imuPitch);
+                double.TryParse(words[14], NumberStyles.Float, CultureInfo.InvariantCulture, out imuPitch);
 
                 //YawRate
-                short.TryParse(words[15], NumberStyles.Float, CultureInfo.InvariantCulture, out imuYawRate);
+                double.TryParse(words[15], NumberStyles.Float, CultureInfo.InvariantCulture, out imuYawRate);
 
                 //always send because its probably the only one.
                 isNMEAToSend = true;
@@ -787,135 +779,18 @@ namespace Twol
             }
         }
 
-        private void ParseSTI032() //heading and roll from SkyTraQ receiver
-        {
-            #region STI0 Message
-            //$PSTI,032,033010.000,111219,A,R,‐4.968,‐10.817,‐1.849,12.046,204.67,,,,,*39
-
-            //(1) 032 Baseline Data indicator
-            //(2) UTC time hhmmss.sss
-            //(3) UTC date ddmmyy
-            //(4) Status:
-            //    V = Void
-            //    A = Active
-            //(5) Mode Indicator:
-            //    F = Float RTK
-            //    R = fixed RTK
-            //(6) East-projection of baseline, meters
-            //(7) North-projection of baseline, meters
-            //(8) Up-projection of baseline, meters
-            //(9) Baseline length, meters
-            //(10) Baseline course: angle between baseline vector and north direction, degrees
-            //(11) - (15) Reserved
-            //(16) * Checksum
-            #endregion STI0 Message
-
-            if (!string.IsNullOrEmpty(words[10]))
-            {
-                //baselineCourse: angle between baseline vector (from kinematic base to rover) and north direction, degrees
-                float.TryParse(words[10], NumberStyles.Float, CultureInfo.InvariantCulture, out float baselineCourse);
-                headingTrueDual = ((baselineCourse < 270.0f) ? (baselineCourse + 90.0f) : (baselineCourse - 270.0f)); //Rover Antenna on the left, kinematic base on the right!!!
-            }
-
-            if (!string.IsNullOrEmpty(words[8]) && !string.IsNullOrEmpty(words[9]))
-            {
-                double.TryParse(words[8], NumberStyles.Float, CultureInfo.InvariantCulture, out double upProjection); //difference in hight of both antennas (rover - kinematic base)
-                double.TryParse(words[9], NumberStyles.Float, CultureInfo.InvariantCulture, out double baselineLength); //distance between kinematic base and rover
-                rollK = (float)glm.toDegrees(Math.Atan(upProjection / baselineLength)); //roll to the right is positiv (rover left, kinematic base right!)
-
-                //Kalman filter
-                Pc = P + varProcess;
-                G = Pc / (Pc + varRoll);
-                P = (1 - G) * Pc;
-                Xp = XeRoll;
-                Zp = Xp;
-                XeRoll = (G * (rollK - Zp)) + Xp;
-
-                roll = (float)(XeRoll);
-            }
-        }
-
-        private void ParseTRA()  //tra contains hdt and roll for the ub482 receiver
+        private void ParseTRA()  //tra contains hdt and rollDual for the ub482 receiver
         {
             if (!string.IsNullOrEmpty(words[1]))
             {
                 double.TryParse(words[2], NumberStyles.Float, CultureInfo.InvariantCulture, out age);
 
                 //  Console.WriteLine(HeadingForced);
-                double.TryParse(words[3], NumberStyles.Float, CultureInfo.InvariantCulture, out rollK);
+                double.TryParse(words[3], NumberStyles.Float, CultureInfo.InvariantCulture, out rollDual);
                 // Console.WriteLine(nRoll);
 
                 int.TryParse(words[5], NumberStyles.Float, CultureInfo.InvariantCulture, out int trasolution);
-                if (trasolution != 4) rollK = 0;
-                roll = (float)(rollK);
-            }
-        }
-
-        private void ParseRMC()
-        {
-            #region RMC Message
-            //$GPRMC,123519,A,4807.038,N,01131.000,E,022.4,084.4,230394,003.1,W*6A
-
-            //RMC          Recommended Minimum sentence C
-            //123519       Fix taken at 12:35:19 UTC
-            //A            Status A=active or V=Void.
-            //4807.038,N   Latitude 48 deg 07.038' N
-            //01131.000,E  Longitude 11 deg 31.000' E
-            //022.4        Speed over the ground in knots
-            //084.4        Track angle in degrees True
-            //230394       Date - 23rd of March 1994
-            //003.1,W      Magnetic Variation
-            //*6A          * Checksum
-            #endregion RMC Message
-
-            if (!string.IsNullOrEmpty(words[1]) && !string.IsNullOrEmpty(words[3]) && !string.IsNullOrEmpty(words[4])
-                && !string.IsNullOrEmpty(words[5]) && !string.IsNullOrEmpty(words[6]))
-            {
-                //Convert from knots to kph for vtgSpeed
-                double.TryParse(words[7], NumberStyles.Float, CultureInfo.InvariantCulture, out vtgSpeed);
-                vtgSpeed *= 1.852f;
-
-                //True heading
-                double.TryParse(words[8], NumberStyles.Float, CultureInfo.InvariantCulture, out headingTrueDual);
-
-                double.TryParse(words[1], NumberStyles.Float, CultureInfo.InvariantCulture, out double UTC);
-                if ((UTC < LastUpdateUTC ? 240000 + UTC : UTC) - LastUpdateUTC > 0.045)
-                {
-                    LastUpdateUTC = UTC;
-
-                    //get latitude and convert to decimal degrees
-                    int decim = words[3].IndexOf(".", StringComparison.Ordinal);
-                    if (decim == -1)
-                    {
-                        words[3] += ".00";
-                        decim = words[3].IndexOf(".", StringComparison.Ordinal);
-                    }
-
-                    decim -= 2;
-                    double.TryParse(words[3].Substring(0, decim), NumberStyles.Float, CultureInfo.InvariantCulture, out latitude);
-                    double.TryParse(words[3].Substring(decim), NumberStyles.Float, CultureInfo.InvariantCulture, out double temp);
-                    latitude += temp * 0.01666666666666666666666666666667;
-
-                    if (words[4] == "S")
-                        latitude *= -1;
-
-                    //get longitude and convert to decimal degrees
-                    decim = words[5].IndexOf(".", StringComparison.Ordinal);
-                    if (decim == -1)
-                    {
-                        words[5] += ".00";
-                        decim = words[5].IndexOf(".", StringComparison.Ordinal);
-                    }
-
-                    decim -= 2;
-                    double.TryParse(words[5].Substring(0, decim), NumberStyles.Float, CultureInfo.InvariantCulture, out longitude);
-                    double.TryParse(words[5].Substring(decim), NumberStyles.Float, CultureInfo.InvariantCulture, out temp);
-                    longitude += temp * 0.01666666666666666666666666666667;
-
-                    if (words[6] == "W") longitude *= -1;
-
-                    isNMEAToSend = true;
-                }
+                if (trasolution != 4) rollDual = 0;
             }
         }
 
