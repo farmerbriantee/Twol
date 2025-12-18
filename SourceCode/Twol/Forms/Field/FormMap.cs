@@ -5,6 +5,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Forms;
 using Twol.Classes;
+using Twol.Mapping;
 
 namespace Twol
 {
@@ -210,6 +211,8 @@ namespace Twol
         {
             if (bingLine.Count > 2)
             {
+                bool isFirstBoundary = mf.bnd.bndList.Count == 0;
+
                 CBoundaryList newBnd = new CBoundaryList();
                 for (int i = 0; i < bingLine.Count; i++)
                 {
@@ -221,6 +224,12 @@ namespace Twol
 
                 //turn lines made from boundaries
                 mf.FileSaveBoundary();
+
+                // Prompt to download satellite imagery after first boundary is created
+                if (isFirstBoundary && mf.isInternetConnected)
+                {
+                    PromptDownloadSatelliteImagery();
+                }
             }
 
             cboxEnableLineDraw.Checked = false;
@@ -232,6 +241,48 @@ namespace Twol
 
             btnAddFence.Enabled = false;
             btnDeletePoint.Enabled = false;
+        }
+
+        /// <summary>
+        /// Prompts the user to download satellite imagery for the field.
+        /// </summary>
+        private void PromptDownloadSatelliteImagery()
+        {
+            // Check if GeoTIFF already exists
+            string fieldPath = Path.Combine(RegistrySettings.fieldsDirectory, mf.currentFieldDirectory);
+            string geoTiffPath = Path.Combine(fieldPath, "satellite.tif");
+
+            if (File.Exists(geoTiffPath))
+                return; // Already have satellite imagery
+
+            DialogResult result = MessageBox.Show(
+                "Boundary saved!\n\nWould you like to download satellite imagery for offline use?\n\n" +
+                "This will download high-resolution ESRI imagery that can be used without internet.",
+                "Download Satellite Imagery",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                OpenSatelliteDownloadForm();
+            }
+        }
+
+        /// <summary>
+        /// Opens the satellite download form.
+        /// </summary>
+        private void OpenSatelliteDownloadForm()
+        {
+            using (var form = new FormMapDownload(mf))
+            {
+                if (form.ShowDialog(this) == DialogResult.OK && !string.IsNullOrEmpty(form.GeneratedGeoTiffPath))
+                {
+                    if (mf.map.LoadGeoTiff(form.GeneratedGeoTiffPath))
+                    {
+                        mf.TimedMessageBox(1500, "Success", "Satellite imagery loaded for offline use");
+                    }
+                }
+            }
         }
 
         private void btnDeleteAll_Click(object sender, EventArgs e)

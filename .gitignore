@@ -360,3 +360,7 @@ TwoL_Pgm/
 Installer/
 Program/
 *.zip
+.github/copilot-instructions.md
+CLAUDE.md
+.claude/settings.local.json
+.vscode/settings.json

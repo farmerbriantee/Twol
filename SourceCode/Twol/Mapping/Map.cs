@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -79,19 +80,122 @@ namespace Twol
 
         #endregion
 
-        #region Tile Server Instance
+        #region Tile Provider
 
         /// <summary>
-        /// Represents a private instance of the <see cref="TileServer"/> class.private _TileServer instance
+        /// The default online tile server (Google Maps).
         /// </summary>
-        /// <remarks>This instance is used internally to manage tile-related operations.  It is
-        /// initialized as a readonly field and cannot be modified after construction.</remarks>
         private readonly TileServer _TileServer = new TileServer();
+
+        /// <summary>
+        /// The active tile provider. Can be switched between online and GeoTIFF.
+        /// </summary>
+        private ITileProvider _activeProvider;
+
+        /// <summary>
+        /// The local GeoTIFF provider, if loaded.
+        /// </summary>
+        private GeoTiffProvider _geoTiffProvider;
 
         /// <summary>
         /// Gets the current instance of the tile server.
         /// </summary>
         public TileServer tileServerInstance => _TileServer;
+
+        /// <summary>
+        /// Gets the active tile provider.
+        /// </summary>
+        public ITileProvider ActiveProvider => _activeProvider ?? _TileServer;
+
+        /// <summary>
+        /// Gets whether a local GeoTIFF is currently loaded.
+        /// </summary>
+        public bool IsGeoTiffLoaded => _geoTiffProvider != null && _geoTiffProvider.IsAvailable;
+
+        /// <summary>
+        /// Gets the path to the currently loaded GeoTIFF file.
+        /// </summary>
+        public string GeoTiffPath => _geoTiffProvider?.FilePath;
+
+        /// <summary>
+        /// Gets the name of the currently active tile provider.
+        /// </summary>
+        public string ActiveProviderName => ActiveProvider?.Name ?? "Unknown";
+
+        /// <summary>
+        /// Loads a GeoTIFF file and sets it as the active tile provider.
+        /// </summary>
+        /// <param name="geoTiffPath">Path to the GeoTIFF file.</param>
+        /// <returns>True if the GeoTIFF was loaded successfully.</returns>
+        public bool LoadGeoTiff(string geoTiffPath)
+        {
+            try
+            {
+                // Dispose previous GeoTIFF provider if any
+                _geoTiffProvider?.Dispose();
+                _geoTiffProvider = null;
+
+                if (!File.Exists(geoTiffPath))
+                    return false;
+
+                _geoTiffProvider = new GeoTiffProvider(geoTiffPath);
+                _activeProvider = _geoTiffProvider;
+
+                // Clear tile cache when switching providers
+                tileCache = new ConcurrentBag<Tile>();
+
+                Debug.WriteLine($"Loaded GeoTIFF: {geoTiffPath}");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Failed to load GeoTIFF: {ex.Message}");
+                _geoTiffProvider = null;
+                _activeProvider = null;
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Unloads the current GeoTIFF and switches back to online tiles.
+        /// </summary>
+        public void UnloadGeoTiff()
+        {
+            _geoTiffProvider?.Dispose();
+            _geoTiffProvider = null;
+            _activeProvider = null;
+
+            // Clear tile cache when switching providers
+            tileCache = new ConcurrentBag<Tile>();
+
+            Debug.WriteLine("Switched to online tile server");
+        }
+
+        /// <summary>
+        /// Switches to using online tiles (Google Maps).
+        /// </summary>
+        public void UseOnlineTiles()
+        {
+            _activeProvider = null; // Will fall back to _TileServer
+            tileCache = new ConcurrentBag<Tile>();
+            Debug.WriteLine("Using online tiles");
+        }
+
+        /// <summary>
+        /// Switches to using the loaded GeoTIFF if available.
+        /// </summary>
+        /// <returns>True if switched to GeoTIFF, false if no GeoTIFF is loaded.</returns>
+        public bool UseGeoTiff()
+        {
+            if (_geoTiffProvider != null && _geoTiffProvider.IsAvailable)
+            {
+                _activeProvider = _geoTiffProvider;
+                tileCache = new ConcurrentBag<Tile>();
+                Debug.WriteLine("Using GeoTIFF tiles");
+                return true;
+            }
+            return false;
+        }
 
         /// <summary>
         /// Pool of tiles to be requested from the server.
@@ -141,8 +245,8 @@ namespace Twol
         }
 
         /// <summary>
-        /// Background worker function. 
-        /// Processes tiles requests if requests pool is not empty, 
+        /// Background worker function.
+        /// Processes tiles requests if requests pool is not empty,
         /// than stops execution until the pool gets a new image request.
         /// Breaks execution on disposing.
         /// </summary>
@@ -159,7 +263,9 @@ namespace Twol
                     var key = $"{tile.Z}:{tile.X}:{tile.Y}";
                     try
                     {
-                        tile.Image = tileServerInstance.GetImageFromTileOnServer(tile.X, tile.Y, tile.Z);
+                        // Use active provider or fall back to TileServer
+                        var provider = ActiveProvider;
+                        tile.Image = provider.GetTile(tile.X, tile.Y, tile.Z);
                         tile.Used = tile.Image != null;
                     }
                     catch (Exception ex)
@@ -174,17 +280,22 @@ namespace Twol
                             {
                                 Debug.WriteLine($"Thread {Thread.CurrentThread.Name} Found tile Z:{tile.Z} X:{tile.X} Y:{tile.Y}");
 
-                                string localPath = Path.Combine(_CacheFolder, $"{tile.Z}", $"{tile.X}", $"{tile.Y}.tile");
-                                var dir = Path.GetDirectoryName(localPath);
-                                if (!string.IsNullOrEmpty(dir))
+                                // Only cache to disk for online tiles
+                                if (ActiveProvider.RequiresInternet)
                                 {
-                                    Directory.CreateDirectory(dir);
+                                    string localPath = Path.Combine(_CacheFolder, $"{tile.Z}", $"{tile.X}", $"{tile.Y}.tile");
+                                    var dir = Path.GetDirectoryName(localPath);
+                                    if (!string.IsNullOrEmpty(dir))
+                                    {
+                                        Directory.CreateDirectory(dir);
+                                    }
+
+                                    // Save image safely
+                                    tile.Image.Save(localPath);
+                                    Debug.WriteLine($"saved {localPath}");
+                                    Thread.Sleep(20); // Give some time for file system
                                 }
 
-                                // Save image safely
-                                tile.Image.Save(localPath);
-                                Debug.WriteLine($"saved {localPath}");
-                                Thread.Sleep(20); // Give some time for file system
                                 // Add to the memory cache
                                 tileCache.Add(tile);
                             }
@@ -236,7 +347,59 @@ namespace Twol
                 tile = tileCache.FirstOrDefault(t => t.Z == z && t.X == x && t.Y == y);
                 if (tile != null) return tile;
 
-                // Try file system without locking the file
+                // For GeoTIFF provider, create hybrid tile (online background + GeoTIFF overlay)
+                if (_activeProvider is GeoTiffProvider geoProvider)
+                {
+                    var geoTiffImage = geoProvider.GetTile(x, y, z);
+
+                    // Check if tile is completely within GeoTIFF bounds (no transparency needed)
+                    bool isFullyCovered = IsTileFullyCoveredByGeoTiff(x, y, z, geoProvider);
+
+                    if (geoTiffImage != null && isFullyCovered)
+                    {
+                        // Tile is fully covered by GeoTIFF - use as-is
+                        tile = new Tile(geoTiffImage, x, y, z);
+                        tileCache.Add(tile);
+                        return tile;
+                    }
+                    else if (geoTiffImage != null)
+                    {
+                        // Tile is partially covered - need to composite with online background
+                        var backgroundImage = GetOnlineTileImage(x, y, z);
+
+                        if (backgroundImage != null)
+                        {
+                            // Create composite: background + GeoTIFF overlay
+                            var composite = new Bitmap(256, 256, PixelFormat.Format32bppArgb);
+                            using (var g = Graphics.FromImage(composite))
+                            {
+                                // Draw online tile as background
+                                g.DrawImage(backgroundImage, 0, 0, 256, 256);
+                                // Draw GeoTIFF on top (with transparency)
+                                g.DrawImage(geoTiffImage, 0, 0, 256, 256);
+                            }
+                            backgroundImage.Dispose();
+                            geoTiffImage.Dispose();
+
+                            tile = new Tile(composite, x, y, z);
+                            tileCache.Add(tile);
+                            return tile;
+                        }
+                        else
+                        {
+                            // No background available, use GeoTIFF alone
+                            tile = new Tile(geoTiffImage, x, y, z);
+                            tileCache.Add(tile);
+                            return tile;
+                        }
+                    }
+                    else
+                    {
+                        // Tile completely outside GeoTIFF bounds - fall through to online tile
+                    }
+                }
+
+                // Try file system without locking the file (for online tiles)
                 string localPath = Path.Combine(_CacheFolder, $"{z}", $"{x}", $"{y}.tile");
                 if (File.Exists(localPath))
                 {
@@ -269,6 +432,71 @@ namespace Twol
             }
         }
 
+        /// <summary>
+        /// Checks if a tile is completely covered by the GeoTIFF bounds.
+        /// </summary>
+        private bool IsTileFullyCoveredByGeoTiff(int x, int y, int z, GeoTiffProvider geoProvider)
+        {
+            double tileWest = ESRIDownloader.TileXToLon(x, z);
+            double tileEast = ESRIDownloader.TileXToLon(x + 1, z);
+            double tileNorth = ESRIDownloader.TileYToLat(y, z);
+            double tileSouth = ESRIDownloader.TileYToLat(y + 1, z);
+
+            var bounds = geoProvider.Bounds;
+
+            // Tile is fully covered if all corners are within GeoTIFF bounds
+            return tileWest >= bounds.MinLon && tileEast <= bounds.MaxLon &&
+                   tileSouth >= bounds.MinLat && tileNorth <= bounds.MaxLat;
+        }
+
+        /// <summary>
+        /// Gets an online tile image from cache or file system (without requesting from server).
+        /// </summary>
+        private Image GetOnlineTileImage(int x, int y, int z)
+        {
+            try
+            {
+                string localPath = Path.Combine(_CacheFolder, $"{z}", $"{x}", $"{y}.tile");
+                if (File.Exists(localPath))
+                {
+                    var fileInfo = new FileInfo(localPath);
+                    if (fileInfo.Length > 0)
+                    {
+                        using (var fs = new FileStream(localPath, FileMode.Open, FileAccess.Read, FileShare.Read))
+                        using (var img = Image.FromStream(fs))
+                        {
+                            return new Bitmap(img);
+                        }
+                    }
+                }
+
+                // If no cached tile and we're online, try to get it from server synchronously
+                if (mf.isInternetConnected)
+                {
+                    var image = _TileServer.GetTile(x, y, z);
+                    if (image != null)
+                    {
+                        // Cache it for future use
+                        try
+                        {
+                            var dir = Path.GetDirectoryName(localPath);
+                            if (!string.IsNullOrEmpty(dir))
+                            {
+                                Directory.CreateDirectory(dir);
+                            }
+                            image.Save(localPath);
+                        }
+                        catch { }
+
+                        return new Bitmap(image);
+                    }
+                }
+            }
+            catch { }
+
+            return null;
+        }
+
         public bool PrefetchTile(int x, int y, int z)
         {
             try
@@ -276,6 +504,21 @@ namespace Twol
                 // Try memory cache
                 var tile = tileCache.FirstOrDefault(t => t.Z == z && t.X == x && t.Y == y);
                 if (tile != null) return true;
+
+                // For GeoTIFF, always available if within bounds
+                if (_activeProvider is GeoTiffProvider geoProvider)
+                {
+                    // Check if tile is within GeoTIFF bounds
+                    double tileWest = ESRIDownloader.TileXToLon(x, z);
+                    double tileEast = ESRIDownloader.TileXToLon(x + 1, z);
+                    double tileNorth = ESRIDownloader.TileYToLat(y, z);
+                    double tileSouth = ESRIDownloader.TileYToLat(y + 1, z);
+
+                    var bounds = geoProvider.Bounds;
+                    return !(tileEast < bounds.MinLon || tileWest > bounds.MaxLon ||
+                             tileSouth > bounds.MaxLat || tileNorth < bounds.MinLat);
+                }
+
                 // Try file system without locking the file
                 string localPath = Path.Combine(_CacheFolder, $"{z}", $"{x}", $"{y}.tile");
                 if (File.Exists(localPath))

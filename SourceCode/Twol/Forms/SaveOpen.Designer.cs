@@ -346,12 +346,96 @@ namespace Twol
             //trams ---------------------------------------------------------------------------------
             FileLoadTrams();
 
+            // GeoTIFF satellite imagery ------------------------------------------------------------
+            TryLoadFieldGeoTiff();
+
             PanelsAndOGLSize();
 
             //update bndPts data
             oglZoom.Refresh();
 
             PanelUpdateRightAndBottom();
+        }
+
+        /// <summary>
+        /// Attempts to load a GeoTIFF satellite image for the current field.
+        /// If one exists, it's loaded automatically. If not, the user is prompted to download.
+        /// </summary>
+        private void TryLoadFieldGeoTiff()
+        {
+            try
+            {
+                string fieldPath = Path.Combine(RegistrySettings.fieldsDirectory, currentFieldDirectory);
+                string geoTiffPath = Path.Combine(fieldPath, "satellite.tif");
+
+                if (File.Exists(geoTiffPath))
+                {
+                    // Load existing GeoTIFF
+                    if (map.LoadGeoTiff(geoTiffPath))
+                    {
+                        // Get file size for info
+                        var fileInfo = new FileInfo(geoTiffPath);
+                        string sizeStr = fileInfo.Length < 1024 * 1024
+                            ? $"{fileInfo.Length / 1024.0:F1} KB"
+                            : $"{fileInfo.Length / (1024.0 * 1024.0):F1} MB";
+                        TimedMessageBox(1500, "GeoTIFF Local", $"Offline imagery ({sizeStr})");
+                    }
+                    else
+                    {
+                        // Failed to load, fall back to online
+                        map.UseOnlineTiles();
+                        TimedMessageBox(1500, "Map Source", "Using Google Maps (online)");
+                    }
+                }
+                else
+                {
+                    // No GeoTIFF exists - use online tiles
+                    map.UseOnlineTiles();
+
+                    // Only prompt to download if boundaries exist
+                    if (bnd.bndList.Count > 0 && bnd.bndList[0].fenceLine.Count > 3 && isInternetConnected)
+                    {
+                        // Optionally prompt user to download
+                        // Uncomment below to enable auto-prompt
+                        // PromptDownloadSatelliteImagery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.EventWriter("TryLoadFieldGeoTiff: " + ex.Message);
+                map.UseOnlineTiles();
+            }
+        }
+
+        /// <summary>
+        /// Opens the satellite imagery download form.
+        /// </summary>
+        public void OpenSatelliteDownloadForm()
+        {
+            if (!isFieldStarted)
+            {
+                TimedMessageBox(2000, "No Field", "Open a field first");
+                return;
+            }
+
+            if (bnd.bndList.Count == 0 || bnd.bndList[0].fenceLine.Count < 3)
+            {
+                TimedMessageBox(2000, "No Boundaries", "Create boundaries first");
+                return;
+            }
+
+            using (var form = new FormMapDownload(this))
+            {
+                if (form.ShowDialog(this) == DialogResult.OK && !string.IsNullOrEmpty(form.GeneratedGeoTiffPath))
+                {
+                    // Load the newly downloaded GeoTIFF
+                    if (map.LoadGeoTiff(form.GeneratedGeoTiffPath))
+                    {
+                        TimedMessageBox(1500, "Success", "Satellite imagery loaded");
+                    }
+                }
+            }
         }
 
         public void FileLoadFields()
