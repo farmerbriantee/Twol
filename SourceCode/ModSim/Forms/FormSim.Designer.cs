@@ -1010,7 +1010,7 @@ namespace ModSim
             // cboxKSXT
             // 
             this.cboxKSXT.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboxKSXT.Location = new System.Drawing.Point(283, 274);
+            this.cboxKSXT.Location = new System.Drawing.Point(271, 274);
             this.cboxKSXT.Name = "cboxKSXT";
             this.cboxKSXT.Size = new System.Drawing.Size(80, 24);
             this.cboxKSXT.TabIndex = 537;
@@ -1057,7 +1057,7 @@ namespace ModSim
             // cboxOGI
             // 
             this.cboxOGI.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboxOGI.Location = new System.Drawing.Point(283, 300);
+            this.cboxOGI.Location = new System.Drawing.Point(271, 300);
             this.cboxOGI.Name = "cboxOGI";
             this.cboxOGI.Size = new System.Drawing.Size(69, 24);
             this.cboxOGI.TabIndex = 532;
@@ -1100,7 +1100,7 @@ namespace ModSim
             // cboxHDT
             // 
             this.cboxHDT.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboxHDT.Location = new System.Drawing.Point(283, 248);
+            this.cboxHDT.Location = new System.Drawing.Point(271, 248);
             this.cboxHDT.Name = "cboxHDT";
             this.cboxHDT.Size = new System.Drawing.Size(69, 24);
             this.cboxHDT.TabIndex = 527;
@@ -1110,7 +1110,7 @@ namespace ModSim
             // cboxAVR
             // 
             this.cboxAVR.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboxAVR.Location = new System.Drawing.Point(283, 222);
+            this.cboxAVR.Location = new System.Drawing.Point(271, 222);
             this.cboxAVR.Name = "cboxAVR";
             this.cboxAVR.Size = new System.Drawing.Size(69, 24);
             this.cboxAVR.TabIndex = 526;
@@ -1721,7 +1721,7 @@ namespace ModSim
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ClientSize = new System.Drawing.Size(361, 325);
+            this.ClientSize = new System.Drawing.Size(350, 325);
             this.Controls.Add(this.rtbNtrip);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btn10Hz);
@@ -1767,7 +1767,7 @@ namespace ModSim
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(381, 370);
+            this.MinimumSize = new System.Drawing.Size(370, 370);
             this.Name = "FormSim";
             this.Padding = new System.Windows.Forms.Padding(4);
             this.Text = "Module Sim";
