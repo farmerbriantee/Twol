@@ -351,12 +351,12 @@ namespace Twol
                     rollDual = 0;
                 }
 
-                isDualGPSConnected = true;
 
                 int.TryParse(words[13], NumberStyles.Float, CultureInfo.InvariantCulture, out satellitesTracked);
 
                 double.TryParse(words[20], NumberStyles.Float, CultureInfo.InvariantCulture, out age);
 
+                isDualGPSConnected = true;
                 isNMEAToSend = true;
             }
         }
@@ -443,6 +443,7 @@ namespace Twol
 
                 { if (words[5] == "W") longitude *= -1; }
 
+                isDualGPSConnected = false;
                 isNMEAToSend = true;
             }
         }
@@ -603,8 +604,6 @@ namespace Twol
                 //Dual antenna derived heading
                 double.TryParse(words[12], NumberStyles.Float, CultureInfo.InvariantCulture, out headingTrueDual);
 
-                isDualGPSConnected = true;
-
                 //rollDual
                 double.TryParse(words[13], NumberStyles.Float, CultureInfo.InvariantCulture, out rollDual);
 
@@ -641,6 +640,8 @@ namespace Twol
                 longitude += temp * 0.01666666666666666666666666666667;
 
                 { if (words[5] == "W") longitude *= -1; }                
+
+                isDualGPSConnected = true;
 
                 //always send because its probably the only one.
                 isNMEAToSend = true;
@@ -755,6 +756,8 @@ namespace Twol
                 //YawRate
                 double.TryParse(words[15], NumberStyles.Float, CultureInfo.InvariantCulture, out imuYawRate);
 
+                isDualGPSConnected = false;
+
                 //always send because its probably the only one.
                 isNMEAToSend = true;
                 //}
@@ -776,6 +779,7 @@ namespace Twol
             {
                 //True heading
                 double.TryParse(words[1], NumberStyles.Float, CultureInfo.InvariantCulture, out headingTrueDual);
+                isDualGPSConnected = true;
             }
         }
 
