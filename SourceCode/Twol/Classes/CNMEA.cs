@@ -22,7 +22,6 @@ namespace Twol
 
         public double age;
 
-
         public string rawBuffer = "";
         private string[] words;
         private string nextNMEASentence = "";
@@ -83,7 +82,6 @@ namespace Twol
             mf.sim.Reset();
 
             mf.FileLoadFields();
-
 
             //since we moved origin, reset everything
             mf.worldMap.UpdateMapZoomFromCamZoom();
@@ -242,12 +240,6 @@ namespace Twol
                     if (mf.isGPSSentencesOn) paogiSentence = nextNMEASentence;
                 }
 
-                //else if (words[0] == "$GPRMC" || words[0] == "$GNRMC")
-                //{
-                //    ParseRMC();
-                //    if (isGPSSentencesOn) rmcSentence = nextNMEASentence;
-                //}
-
                 else if (words[0] == "$KSXT")
                 {
                     ParseKSXT();
@@ -260,7 +252,7 @@ namespace Twol
                     if (mf.isGPSSentencesOn) hpdSentence = nextNMEASentence;
                 }
 
-                else if (words[0] == "$PTWOLI" && words.Length > 14)
+                else if (words[0] == "$PAOGI" && words.Length > 14)
                 {
                     ParseOGI();
                     if (mf.isGPSSentencesOn) paogiSentence = nextNMEASentence;
@@ -290,7 +282,6 @@ namespace Twol
                 }
 
             }// while still data
-
 
             if (isNMEAToSend)
             {
@@ -350,7 +341,6 @@ namespace Twol
                 {
                     rollDual = 0;
                 }
-
 
                 int.TryParse(words[13], NumberStyles.Float, CultureInfo.InvariantCulture, out satellitesTracked);
 
@@ -460,7 +450,6 @@ namespace Twol
             //010.2,K      Ground speed, Kilometers per hour
             //*48          Checksum
             #endregion VTG Message
-
 
             if (!string.IsNullOrEmpty(words[7]))
             {

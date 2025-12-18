@@ -176,9 +176,6 @@ namespace Twol
 
         public sealed class VehicleSettings
         {
-            public double setAutoSwitchDualFixSpeed = 2.0;
-            public bool setAutoSwitchDualFixOn = false;
-
             public bool setArdMac_isDanfoss = false;
 
             public byte setArdMac_hydLowerTime = 4;
@@ -241,8 +238,6 @@ namespace Twol
             public bool setF_isWorkSwitchActiveLow = true;
             public bool setF_isWorkSwitchEnabled = false;
             public bool setF_isWorkSwitchManualSections = false;
-
-            public string setGPS_headingFromWhichSource = "Fix";
 
             public bool setGPS_isRTK = false;
             public bool setGPS_isRTK_KillAutoSteer = false;
