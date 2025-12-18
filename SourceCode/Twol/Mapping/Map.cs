@@ -108,9 +108,9 @@ namespace Twol
         public ITileProvider ActiveProvider => _activeProvider ?? _TileServer;
 
         /// <summary>
-        /// Gets whether a local GeoTIFF is currently loaded.
+        /// Gets whether a local GeoTIFF is currently active (loaded AND being used).
         /// </summary>
-        public bool IsGeoTiffLoaded => _geoTiffProvider != null && _geoTiffProvider.IsAvailable;
+        public bool IsGeoTiffLoaded => _activeProvider is GeoTiffProvider && _geoTiffProvider != null && _geoTiffProvider.IsAvailable;
 
         /// <summary>
         /// Gets the path to the currently loaded GeoTIFF file.
@@ -364,38 +364,17 @@ namespace Twol
                     }
                     else if (geoTiffImage != null)
                     {
-                        // Tile is partially covered - need to composite with online background
-                        var backgroundImage = GetOnlineTileImage(x, y, z);
-
-                        if (backgroundImage != null)
-                        {
-                            // Create composite: background + GeoTIFF overlay
-                            var composite = new Bitmap(256, 256, PixelFormat.Format32bppArgb);
-                            using (var g = Graphics.FromImage(composite))
-                            {
-                                // Draw online tile as background
-                                g.DrawImage(backgroundImage, 0, 0, 256, 256);
-                                // Draw GeoTIFF on top (with transparency)
-                                g.DrawImage(geoTiffImage, 0, 0, 256, 256);
-                            }
-                            backgroundImage.Dispose();
-                            geoTiffImage.Dispose();
-
-                            tile = new Tile(composite, x, y, z);
-                            tileCache.Add(tile);
-                            return tile;
-                        }
-                        else
-                        {
-                            // No background available, use GeoTIFF alone
-                            tile = new Tile(geoTiffImage, x, y, z);
-                            tileCache.Add(tile);
-                            return tile;
-                        }
+                        // Tile is partially covered - use GeoTIFF alone with transparent background
+                        // (no online requests when GeoTIFF is active)
+                        tile = new Tile(geoTiffImage, x, y, z);
+                        tileCache.Add(tile);
+                        return tile;
                     }
                     else
                     {
-                        // Tile completely outside GeoTIFF bounds - fall through to online tile
+                        // Tile completely outside GeoTIFF bounds - return null (transparent)
+                        // (no online requests when GeoTIFF is active)
+                        return null;
                     }
                 }
 

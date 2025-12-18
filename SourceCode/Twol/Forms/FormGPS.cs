@@ -680,6 +680,9 @@ namespace Twol
 
         public void FieldNew()
         {
+            // Unload any previous GeoTIFF when starting a new field
+            map.UnloadGeoTiff();
+
             isFieldStarted = true;
             isJobStarted = false;
 
@@ -862,6 +865,9 @@ namespace Twol
             displayFieldName = gStr.Get(gs.gsNone);
 
             isPanelBottomHidden = false;
+
+            // Unload GeoTIFF and switch to online tiles
+            map.UnloadGeoTiff();
 
             PanelsAndOGLSize();
 
