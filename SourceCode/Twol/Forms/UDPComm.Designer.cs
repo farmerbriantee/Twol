@@ -685,7 +685,7 @@ namespace Twol
                             if (Settings.Vehicle.setIMU_invertRoll) rollK *= -0.1;
                             else rollK *= 0.1;
                             rollK -= Settings.Vehicle.setIMU_rollZero;
-                            ahrs.imuRoll = ahrs.imuRoll * Settings.Vehicle.setIMU_rollFilter + rollK * (1 - Settings.Vehicle.setIMU_rollFilter);
+                            ahrsTool.imuRoll = ahrsTool.imuRoll * Settings.Vehicle.setIMU_rollFilter + rollK * (1 - Settings.Vehicle.setIMU_rollFilter);
                         }
 
 
