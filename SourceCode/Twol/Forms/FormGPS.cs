@@ -332,10 +332,6 @@ namespace Twol
 
             //map class
             map = new Map(this);
-
-            vec2 b = new vec2(0, 0);
-            gpsPtsCorr.Add(b);
-            gpsPts.Add(b);
         }
 
         private void FormGPS_Load(object sender, EventArgs e)

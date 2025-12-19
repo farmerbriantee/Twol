@@ -381,18 +381,51 @@ namespace Twol
 
             if (mf.camera.camSetDistance > -500)
             {
-                //draw the bright antenna dot
-                GL.PointSize(16);
-                GL.Begin(PrimitiveType.Points);
-                GL.Color3(0, 0, 0);
-                GL.Vertex3(-antennaOffset, antennaPivot, 0.1);
-                GL.End();
+                if (mf.pn.isDualGPSConnected)
+                {
+                    //draw the bright antenna dot
+                    GL.PointSize(16);
+                    GL.Begin(PrimitiveType.Points);
+                    GL.Color3(0, 0, 0);
+                    GL.Vertex3(-antennaOffset - 1, antennaPivot, 0.1);
+                    GL.End();
 
-                GL.PointSize(10);
-                GL.Begin(PrimitiveType.Points);
-                GL.Color3(0.20, 0.98, 0.98);
-                GL.Vertex3(-antennaOffset, antennaPivot, 0.1);
-                GL.End();
+                    GL.PointSize(10);
+                    GL.Begin(PrimitiveType.Points);
+                    GL.Color3(0.20, 0.98, 0.98);
+                    GL.Vertex3(-antennaOffset - 1, antennaPivot, 0.1);
+                    GL.End();
+
+                    GL.PointSize(16);
+                    GL.Begin(PrimitiveType.Points);
+                    GL.Color3(0, 0, 0);
+                    GL.Vertex3(-antennaOffset + 1, antennaPivot, 0.1);
+                    GL.End();
+
+                    GL.PointSize(10);
+                    GL.Begin(PrimitiveType.Points);
+                    GL.Color3(0.20, 0.98, 0.98);
+                    GL.Vertex3(-antennaOffset + 1, antennaPivot, 0.1);
+                    GL.End();
+
+
+
+                }
+                else
+                {
+                    //draw the bright antenna dot
+                    GL.PointSize(16);
+                    GL.Begin(PrimitiveType.Points);
+                    GL.Color3(0, 0, 0);
+                    GL.Vertex3(-antennaOffset, antennaPivot, 0.1);
+                    GL.End();
+
+                    GL.PointSize(10);
+                    GL.Begin(PrimitiveType.Points);
+                    GL.Color3(0.20, 0.98, 0.98);
+                    GL.Vertex3(-antennaOffset, antennaPivot, 0.1);
+                    GL.End();
+                }
             }
 
             if (mf.bnd.isFenceBeingMade)

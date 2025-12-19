@@ -178,8 +178,8 @@ namespace Twol.Mapping
             }
 
             //based on position
-            originToPivotInTilesX = (int)(mf.pn.fix.easting / metersPerTile);
-            originToPivotInTilesY = (int)(mf.pn.fix.northing / metersPerTile);
+            originToPivotInTilesX = (int)(mf.pivotAxlePos.easting / metersPerTile);
+            originToPivotInTilesY = (int)(mf.pivotAxlePos.northing / metersPerTile);
 
             //only move map ahead if in 3D and not spinning
             if (Settings.User.setDisplay_camPitch != 0 && Math.Abs(mf.ahrs.angularVehicleVelocity) < 1)

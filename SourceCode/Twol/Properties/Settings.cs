@@ -132,7 +132,6 @@ namespace Twol
             public bool isSimulatorOn = true;
             public bool isSkyOn = true;
             public bool isSpeedoOn = false;
-            public bool isGPSCorrectionLineOn = false;
             public bool isWorldMapOn = false;
 
             public bool sound_isAutoSteerOn = true;
@@ -296,7 +295,7 @@ namespace Twol
             public int setVehicle_vehicleType = 0;
             public int set_uTurnStyle = 0;
             public int set_youSkipWidth = 1;
-            public int set_youTurnExtensionLength = 20;
+            public int set_youTurnExtensionLength = 4;
 
             public LoadResult Load()
             {
