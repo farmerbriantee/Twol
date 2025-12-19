@@ -144,6 +144,17 @@ namespace Twol
                 // Clear tile cache when switching providers
                 tileCache = new ConcurrentBag<Tile>();
 
+                // Force WorldTileMap to refresh its textures immediately
+                if (mf.worldMap != null)
+                {
+                    mf.worldMap.isUpdateTilesRequired = true;
+                    // Reset all texture statuses to force reload from new provider
+                    for (int i = 0; i < mf.worldMap.mapTextureStatus.Length; i++)
+                    {
+                        mf.worldMap.mapTextureStatus[i] = (int)TexStatus.DefaultLoaded;
+                    }
+                }
+
                 Debug.WriteLine($"Loaded GeoTIFF: {geoTiffPath}");
                 return true;
             }
@@ -168,6 +179,17 @@ namespace Twol
             // Clear tile cache when switching providers
             tileCache = new ConcurrentBag<Tile>();
 
+            // Force WorldTileMap to refresh its textures
+            if (mf.worldMap != null)
+            {
+                mf.worldMap.isUpdateTilesRequired = true;
+                // Reset all texture statuses to force reload
+                for (int i = 0; i < mf.worldMap.mapTextureStatus.Length; i++)
+                {
+                    mf.worldMap.mapTextureStatus[i] = (int)TexStatus.DefaultLoaded;
+                }
+            }
+
             Debug.WriteLine("Switched to online tile server");
         }
 
@@ -179,6 +201,37 @@ namespace Twol
             _activeProvider = null; // Will fall back to _TileServer
             tileCache = new ConcurrentBag<Tile>();
             Debug.WriteLine("Using online tiles");
+        }
+
+        /// <summary>
+        /// Deletes the GeoTIFF file for the current field.
+        /// Unloads the GeoTIFF first if it's currently loaded.
+        /// </summary>
+        /// <returns>True if file was deleted, false otherwise.</returns>
+        public bool DeleteFieldGeoTiff()
+        {
+            try
+            {
+                // First unload if currently loaded
+                string currentPath = GeoTiffPath;
+                UnloadGeoTiff();
+
+                // Get the field path
+                string fieldPath = Path.Combine(RegistrySettings.fieldsDirectory, mf.currentFieldDirectory);
+                string geoTiffPath = Path.Combine(fieldPath, "satellite.tif");
+
+                if (File.Exists(geoTiffPath))
+                {
+                    File.Delete(geoTiffPath);
+                    Debug.WriteLine($"Deleted GeoTIFF: {geoTiffPath}");
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error deleting GeoTIFF: {ex.Message}");
+            }
+            return false;
         }
 
         /// <summary>
@@ -347,7 +400,13 @@ namespace Twol
                 tile = tileCache.FirstOrDefault(t => t.Z == z && t.X == x && t.Y == y);
                 if (tile != null) return tile;
 
-                // For GeoTIFF provider, create hybrid tile (online background + GeoTIFF overlay)
+                // If online tiles are disabled and no GeoTIFF is loaded, return null (green background)
+                if (!Settings.User.setDisplay_isOnlineTilesOn && !(_activeProvider is GeoTiffProvider))
+                {
+                    return null;
+                }
+
+                // For GeoTIFF provider, always show GeoTIFF tiles
                 if (_activeProvider is GeoTiffProvider geoProvider)
                 {
                     var geoTiffImage = geoProvider.GetTile(x, y, z);

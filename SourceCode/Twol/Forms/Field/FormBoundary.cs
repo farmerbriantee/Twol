@@ -205,6 +205,13 @@ namespace Twol
 
                 mf.FileSaveBoundary();
                 mf.FileSaveHeadland();
+
+                // If all boundaries are deleted, also delete the GeoTIFF
+                if (mf.bnd.bndList.Count == 0)
+                {
+                    mf.map.DeleteFieldGeoTiff();
+                }
+
                 UpdateChart();
             }
             else
@@ -218,6 +225,9 @@ namespace Twol
             fenceSelected = -1;
             mf.bnd.bndList.Clear();
             mf.FileSaveHeadland();
+
+            // Delete satellite imagery when all boundaries are deleted
+            mf.map.DeleteFieldGeoTiff();
 
             flp1.Controls.Clear();
 

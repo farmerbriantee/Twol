@@ -380,6 +380,9 @@ namespace Twol
             mf.bnd.bndList.Clear();
             mf.FileSaveHeadland();
 
+            // Delete satellite imagery when all boundaries are cleared
+            mf.map.DeleteFieldGeoTiff();
+
             //for every new chunk of patch
             foreach (var triList in mf.patchList)
             {
