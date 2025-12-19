@@ -1978,6 +1978,7 @@ namespace Twol
                 form.Show(this);
             navPanelCounter = 0;
         }
+
         private void btnBrightnessUPGN_Click(object sender, EventArgs e)
         {
             if (displayBrightness.isWmiMonitor)

@@ -3407,7 +3407,7 @@ namespace Twol
             this.btnInternetConnection.Size = new System.Drawing.Size(40, 38);
             this.btnInternetConnection.TabIndex = 539;
             this.btnInternetConnection.UseVisualStyleBackColor = false;
-            // 
+            //
             // btnGPSData
             // 
             this.btnGPSData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));

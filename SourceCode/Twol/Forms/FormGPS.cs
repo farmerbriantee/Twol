@@ -994,7 +994,7 @@ namespace Twol
 
             Bitmap[] oglTextures = new Bitmap[]
             {
-                Resources.z_Floor,Resources.z_Font,
+                Resources.z_Floor2,Resources.z_Font,
                 Resources.z_Turn,Resources.z_TurnCancel,
                 Resources.z_TurnManual,
                 Resources.z_Compass,Resources.z_Speedo,
