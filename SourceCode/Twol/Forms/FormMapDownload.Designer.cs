@@ -41,11 +41,17 @@ namespace Twol
             this.lblEstimatedSize = new System.Windows.Forms.Label();
             this.lblResLabel = new System.Windows.Forms.Label();
             this.lblResolution = new System.Windows.Forms.Label();
+            this.panelExisting = new System.Windows.Forms.Panel();
+            this.lblExistingLabel = new System.Windows.Forms.Label();
+            this.lblExistingSize = new System.Windows.Forms.Label();
+            this.lblExistingStatus = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.lblStatus = new System.Windows.Forms.Label();
             this.btnDownload = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.panelInfo = new System.Windows.Forms.Panel();
+            this.panelExisting.SuspendLayout();
             this.panelInfo.SuspendLayout();
             this.SuspendLayout();
             //
@@ -203,9 +209,52 @@ namespace Twol
             this.lblResolution.Text = "~1 m/pixel";
             this.lblResolution.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             //
+            // panelExisting
+            //
+            this.panelExisting.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(255)))), ((int)(((byte)(220)))));
+            this.panelExisting.Controls.Add(this.lblExistingLabel);
+            this.panelExisting.Controls.Add(this.lblExistingStatus);
+            this.panelExisting.Controls.Add(this.lblExistingSize);
+            this.panelExisting.Location = new System.Drawing.Point(12, 265);
+            this.panelExisting.Name = "panelExisting";
+            this.panelExisting.Size = new System.Drawing.Size(476, 50);
+            this.panelExisting.TabIndex = 10;
+            this.panelExisting.Visible = false;
+            //
+            // lblExistingLabel
+            //
+            this.lblExistingLabel.Font = new System.Drawing.Font("Tahoma", 11F, System.Drawing.FontStyle.Bold);
+            this.lblExistingLabel.Location = new System.Drawing.Point(10, 12);
+            this.lblExistingLabel.Name = "lblExistingLabel";
+            this.lblExistingLabel.Size = new System.Drawing.Size(150, 25);
+            this.lblExistingLabel.TabIndex = 0;
+            this.lblExistingLabel.Text = "Current Imagery:";
+            this.lblExistingLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            //
+            // lblExistingStatus
+            //
+            this.lblExistingStatus.Font = new System.Drawing.Font("Tahoma", 11F);
+            this.lblExistingStatus.ForeColor = System.Drawing.Color.Green;
+            this.lblExistingStatus.Location = new System.Drawing.Point(160, 12);
+            this.lblExistingStatus.Name = "lblExistingStatus";
+            this.lblExistingStatus.Size = new System.Drawing.Size(120, 25);
+            this.lblExistingStatus.TabIndex = 1;
+            this.lblExistingStatus.Text = "Downloaded";
+            this.lblExistingStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            //
+            // lblExistingSize
+            //
+            this.lblExistingSize.Font = new System.Drawing.Font("Tahoma", 11F);
+            this.lblExistingSize.Location = new System.Drawing.Point(300, 12);
+            this.lblExistingSize.Name = "lblExistingSize";
+            this.lblExistingSize.Size = new System.Drawing.Size(160, 25);
+            this.lblExistingSize.TabIndex = 2;
+            this.lblExistingSize.Text = "Size: 0 MB";
+            this.lblExistingSize.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            //
             // progressBar
             //
-            this.progressBar.Location = new System.Drawing.Point(12, 275);
+            this.progressBar.Location = new System.Drawing.Point(12, 325);
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(476, 30);
             this.progressBar.TabIndex = 2;
@@ -213,7 +262,7 @@ namespace Twol
             // lblStatus
             //
             this.lblStatus.Font = new System.Drawing.Font("Tahoma", 10F);
-            this.lblStatus.Location = new System.Drawing.Point(12, 310);
+            this.lblStatus.Location = new System.Drawing.Point(12, 360);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(476, 25);
             this.lblStatus.TabIndex = 3;
@@ -226,13 +275,28 @@ namespace Twol
             this.btnDownload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDownload.Font = new System.Drawing.Font("Tahoma", 14F, System.Drawing.FontStyle.Bold);
             this.btnDownload.ForeColor = System.Drawing.Color.White;
-            this.btnDownload.Location = new System.Drawing.Point(12, 345);
+            this.btnDownload.Location = new System.Drawing.Point(12, 395);
             this.btnDownload.Name = "btnDownload";
-            this.btnDownload.Size = new System.Drawing.Size(230, 55);
+            this.btnDownload.Size = new System.Drawing.Size(150, 55);
             this.btnDownload.TabIndex = 4;
             this.btnDownload.Text = "Download";
             this.btnDownload.UseVisualStyleBackColor = false;
             this.btnDownload.Click += new System.EventHandler(this.btnDownload_Click);
+            //
+            // btnDelete
+            //
+            this.btnDelete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(100)))), ((int)(((byte)(0)))));
+            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDelete.Font = new System.Drawing.Font("Tahoma", 14F, System.Drawing.FontStyle.Bold);
+            this.btnDelete.ForeColor = System.Drawing.Color.White;
+            this.btnDelete.Location = new System.Drawing.Point(175, 395);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(150, 55);
+            this.btnDelete.TabIndex = 6;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Visible = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             //
             // btnCancel
             //
@@ -240,9 +304,9 @@ namespace Twol
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Font = new System.Drawing.Font("Tahoma", 14F, System.Drawing.FontStyle.Bold);
             this.btnCancel.ForeColor = System.Drawing.Color.White;
-            this.btnCancel.Location = new System.Drawing.Point(258, 345);
+            this.btnCancel.Location = new System.Drawing.Point(338, 395);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(230, 55);
+            this.btnCancel.Size = new System.Drawing.Size(150, 55);
             this.btnCancel.TabIndex = 5;
             this.btnCancel.Text = "Close";
             this.btnCancel.UseVisualStyleBackColor = false;
@@ -253,12 +317,14 @@ namespace Twol
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.ClientSize = new System.Drawing.Size(500, 415);
+            this.ClientSize = new System.Drawing.Size(500, 465);
             this.ControlBox = false;
             this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnDownload);
             this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.progressBar);
+            this.Controls.Add(this.panelExisting);
             this.Controls.Add(this.panelInfo);
             this.Controls.Add(this.lblTitle);
             this.Font = new System.Drawing.Font("Tahoma", 12F);
@@ -273,6 +339,7 @@ namespace Twol
             this.Text = "Download Satellite Imagery";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMapDownload_FormClosing);
             this.Load += new System.EventHandler(this.FormMapDownload_Load);
+            this.panelExisting.ResumeLayout(false);
             this.panelInfo.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -294,9 +361,14 @@ namespace Twol
         private System.Windows.Forms.Label lblEstimatedSize;
         private System.Windows.Forms.Label lblResLabel;
         private System.Windows.Forms.Label lblResolution;
+        private System.Windows.Forms.Panel panelExisting;
+        private System.Windows.Forms.Label lblExistingLabel;
+        private System.Windows.Forms.Label lblExistingStatus;
+        private System.Windows.Forms.Label lblExistingSize;
         private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.Button btnDownload;
+        private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnCancel;
     }
 }

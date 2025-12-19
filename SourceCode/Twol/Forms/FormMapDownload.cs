@@ -20,6 +20,11 @@ namespace Twol
         // Boundary coordinates in WGS84
         private double minLon, minLat, maxLon, maxLat;
 
+        // Existing GeoTIFF state
+        private bool geoTiffExists;
+        private string existingGeoTiffPath;
+        private long existingFileSize;
+
         /// <summary>
         /// Gets the path to the generated GeoTIFF file after successful download.
         /// </summary>
@@ -39,12 +44,12 @@ namespace Twol
         private void FormMapDownload_Load(object sender, EventArgs e)
         {
             // Initialize zoom level combo box
+            // Note: ESRI World Imagery zoom 19+ is not available in many rural areas
             cboZoomLevel.Items.Clear();
             cboZoomLevel.Items.Add("Level 16 - Low (~4m/pixel)");
             cboZoomLevel.Items.Add("Level 17 - Medium (~2m/pixel)");
             cboZoomLevel.Items.Add("Level 18 - High (~1m/pixel)");
-            cboZoomLevel.Items.Add("Level 19 - Very High (~0.5m/pixel)");
-            cboZoomLevel.SelectedIndex = 2; // Default to level 18
+            cboZoomLevel.SelectedIndex = 2; // Default to level 18 (highest reliable coverage)
 
             // Calculate boundary coordinates from field boundaries
             if (!CalculateBoundaryCoordinates())
@@ -55,7 +60,72 @@ namespace Twol
                 return;
             }
 
+            // Check if GeoTIFF already exists
+            CheckExistingGeoTiff();
+
             UpdateUI();
+        }
+
+        /// <summary>
+        /// Checks if a GeoTIFF already exists for this field and updates UI accordingly.
+        /// </summary>
+        private void CheckExistingGeoTiff()
+        {
+            string fieldPath = Path.Combine(RegistrySettings.fieldsDirectory, mf.currentFieldDirectory);
+            existingGeoTiffPath = Path.Combine(fieldPath, "satellite.tif");
+            geoTiffExists = File.Exists(existingGeoTiffPath);
+
+            if (geoTiffExists)
+            {
+                var fileInfo = new FileInfo(existingGeoTiffPath);
+                existingFileSize = fileInfo.Length;
+                UpdateUIForExistingGeoTiff();
+            }
+            else
+            {
+                UpdateUIForNoGeoTiff();
+            }
+        }
+
+        /// <summary>
+        /// Updates UI when a GeoTIFF already exists.
+        /// </summary>
+        private void UpdateUIForExistingGeoTiff()
+        {
+            // Update title
+            lblTitle.Text = "Manage Satellite Imagery";
+            this.Text = "Manage Satellite Imagery";
+
+            // Show existing panel
+            panelExisting.Visible = true;
+            lblExistingSize.Text = $"Size: {FormatFileSize(existingFileSize)}";
+
+            // Update buttons
+            btnDownload.Text = "Re-download";
+            btnDelete.Visible = true;
+
+            // Update status
+            lblStatus.Text = "Satellite imagery is available for this field";
+        }
+
+        /// <summary>
+        /// Updates UI when no GeoTIFF exists.
+        /// </summary>
+        private void UpdateUIForNoGeoTiff()
+        {
+            // Update title
+            lblTitle.Text = "Download Satellite Imagery";
+            this.Text = "Download Satellite Imagery";
+
+            // Hide existing panel
+            panelExisting.Visible = false;
+
+            // Update buttons
+            btnDownload.Text = "Download";
+            btnDelete.Visible = false;
+
+            // Update status
+            lblStatus.Text = "Ready to download";
         }
 
         /// <summary>
@@ -126,7 +196,6 @@ namespace Twol
                 case 0: return 16;
                 case 1: return 17;
                 case 2: return 18;
-                case 3: return 19;
                 default: return 18;
             }
         }
@@ -153,6 +222,17 @@ namespace Twol
             if (isDownloading)
                 return;
 
+            // Check for internet connection before attempting download
+            if (!mf.isInternetConnected)
+            {
+                MessageBox.Show(
+                    "No internet connection available.\n\nPlease connect to the internet to download satellite imagery.",
+                    "No Internet",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+
             // Determine output path
             string fieldPath = Path.Combine(RegistrySettings.fieldsDirectory, mf.currentFieldDirectory);
             string geoTiffPath = Path.Combine(fieldPath, "satellite.tif");
@@ -171,6 +251,9 @@ namespace Twol
 
                 try
                 {
+                    // Unload the GeoTIFF first to release the file lock
+                    mf.map.UnloadGeoTiff();
+
                     File.Delete(geoTiffPath);
                 }
                 catch (Exception ex)
@@ -205,6 +288,10 @@ namespace Twol
                     GeneratedGeoTiffPath = geoTiffPath;
                     lblStatus.Text = "Download complete!";
                     progressBar.Value = 100;
+
+                    // Mark download as complete BEFORE showing message and closing
+                    // This prevents FormClosing from showing "cancel download?" dialog
+                    isDownloading = false;
 
                     MessageBox.Show(
                         "Satellite imagery downloaded successfully!\nThe image will be loaded automatically.",
@@ -278,6 +365,41 @@ namespace Twol
             {
                 DialogResult = DialogResult.Cancel;
                 Close();
+            }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (isDownloading)
+                return;
+
+            var result = MessageBox.Show(
+                "Delete satellite imagery for this field?\n\nThis cannot be undone.",
+                "Delete Satellite Imagery",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+
+            if (result == DialogResult.Yes)
+            {
+                if (mf.map.DeleteFieldGeoTiff())
+                {
+                    MessageBox.Show("Satellite imagery deleted successfully.",
+                        "Deleted", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    // Update UI to reflect deletion
+                    geoTiffExists = false;
+                    existingFileSize = 0;
+                    UpdateUIForNoGeoTiff();
+
+                    // Signal that changes were made
+                    DialogResult = DialogResult.OK;
+                    Close();
+                }
+                else
+                {
+                    MessageBox.Show("Failed to delete satellite imagery.\nThe file may be in use.",
+                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
