@@ -298,6 +298,40 @@ namespace Twol
             mf.isDrawPolygons = chkDisplayPolygons.Checked;
 
             Settings.User.setDisplay_isTextureOn = chkDisplayFloor.Checked;
+
+            // Detect if online tiles setting changed
+            bool wasOnlineTilesOn = Settings.User.setDisplay_isOnlineTilesOn;
+            bool isOnlineTilesOn = chkDisplayOnlineTiles.Checked;
+            Settings.User.setDisplay_isOnlineTilesOn = isOnlineTilesOn;
+
+            // If setting changed and a field is open, handle GeoTIFF loading
+            if (wasOnlineTilesOn != isOnlineTilesOn && mf.isFieldStarted)
+            {
+                if (isOnlineTilesOn)
+                {
+                    // Turning ON - try to load GeoTIFF if it exists
+                    string fieldPath = System.IO.Path.Combine(RegistrySettings.fieldsDirectory, mf.currentFieldDirectory);
+                    string geoTiffPath = System.IO.Path.Combine(fieldPath, "satellite.tif");
+                    if (System.IO.File.Exists(geoTiffPath))
+                    {
+                        if (mf.map.LoadGeoTiff(geoTiffPath))
+                        {
+                            mf.TimedMessageBox(1500, "GeoTIFF", "Local imagery loaded");
+                        }
+                    }
+                    // Force tiles to refresh
+                    if (mf.worldMap != null)
+                    {
+                        mf.worldMap.isUpdateTilesRequired = true;
+                    }
+                }
+                else
+                {
+                    // Turning OFF - unload GeoTIFF
+                    mf.map.UnloadGeoTiff();
+                }
+            }
+
             Settings.User.isGridOn = chkDisplayGrid.Checked;
             Settings.User.isSpeedoOn = chkDisplaySpeedo.Checked;
             Settings.User.isGPSCorrectionLineOn = chkGPSCorrection.Checked;

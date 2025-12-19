@@ -359,7 +359,8 @@ namespace Twol
 
         /// <summary>
         /// Attempts to load a GeoTIFF satellite image for the current field.
-        /// If one exists, it's loaded automatically. If not, the user is prompted to download.
+        /// If one exists and online tiles are enabled, it's loaded automatically.
+        /// GeoTIFF is only loaded when isOnlineTilesOn = true.
         /// </summary>
         private void TryLoadFieldGeoTiff()
         {
@@ -368,7 +369,9 @@ namespace Twol
                 string fieldPath = Path.Combine(RegistrySettings.fieldsDirectory, currentFieldDirectory);
                 string geoTiffPath = Path.Combine(fieldPath, "satellite.tif");
 
-                if (File.Exists(geoTiffPath))
+                // Only load GeoTIFF if online tiles setting is enabled
+                // When disabled, user wants green background only (no GeoTIFF, no online tiles)
+                if (Settings.User.setDisplay_isOnlineTilesOn && File.Exists(geoTiffPath))
                 {
                     // Load existing GeoTIFF
                     if (map.LoadGeoTiff(geoTiffPath))
@@ -384,21 +387,14 @@ namespace Twol
                     {
                         // Failed to load, fall back to online
                         map.UseOnlineTiles();
-                        TimedMessageBox(1500, "Map Source", "Using Google Maps (online)");
+                        TimedMessageBox(1500, "Map Source", "Using ESRI (online)");
                     }
                 }
                 else
                 {
-                    // No GeoTIFF exists - use online tiles
+                    // No GeoTIFF or online tiles disabled - use online tiles mode
+                    // (will show green background if isOnlineTilesOn = false)
                     map.UseOnlineTiles();
-
-                    // Only prompt to download if boundaries exist
-                    if (bnd.bndList.Count > 0 && bnd.bndList[0].fenceLine.Count > 3 && isInternetConnected)
-                    {
-                        // Optionally prompt user to download
-                        // Uncomment below to enable auto-prompt
-                        // PromptDownloadSatelliteImagery();
-                    }
                 }
             }
             catch (Exception ex)
