@@ -35,16 +35,18 @@
             this.lblPoints = new System.Windows.Forms.Label();
             this.lblBnds = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.label2 = new System.Windows.Forms.Label();
             this.btnZoomIn = new System.Windows.Forms.Button();
             this.btnZoomOut = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnGo = new System.Windows.Forms.Button();
             this.cboxEnableLineDraw = new System.Windows.Forms.CheckBox();
-            this.btnDeleteAll = new System.Windows.Forms.Button();
-            this.btnAddFence = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             this.btnDeletePoint = new System.Windows.Forms.Button();
+            this.btnAddFence = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.btnDeleteAll = new System.Windows.Forms.Button();
+            this.lblOfflineMap = new System.Windows.Forms.Label();
+            this.btnOfflineMap = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -101,7 +103,7 @@
             this.tableLayoutPanel1.SetColumnSpan(this.lblPoints, 2);
             this.lblPoints.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPoints.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblPoints.Location = new System.Drawing.Point(3, 167);
+            this.lblPoints.Location = new System.Drawing.Point(3, 170);
             this.lblPoints.Name = "lblPoints";
             this.lblPoints.Size = new System.Drawing.Size(117, 23);
             this.lblPoints.TabIndex = 476;
@@ -115,10 +117,10 @@
             this.lblBnds.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblBnds.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBnds.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblBnds.Location = new System.Drawing.Point(3, 261);
+            this.lblBnds.Location = new System.Drawing.Point(3, 264);
             this.lblBnds.Name = "lblBnds";
             this.tableLayoutPanel1.SetRowSpan(this.lblBnds, 2);
-            this.lblBnds.Size = new System.Drawing.Size(126, 179);
+            this.lblBnds.Size = new System.Drawing.Size(126, 116);
             this.lblBnds.TabIndex = 489;
             this.lblBnds.Text = "2";
             this.lblBnds.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -143,6 +145,8 @@
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.lblBnds, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.btnDeleteAll, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lblOfflineMap, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.btnOfflineMap, 2, 6);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(886, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 10;
@@ -151,27 +155,14 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.38177F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 37F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.54257F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.12066F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.548038F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 2.165088F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.12585F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 3.788904F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.23139F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.16915F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(241, 776);
             this.tableLayoutPanel1.TabIndex = 491;
-            // 
-            // label2
-            // 
-            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label2.Location = new System.Drawing.Point(137, 81);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(99, 23);
-            this.label2.TabIndex = 491;
-            this.label2.Text = "New Bnd";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnZoomIn
             // 
@@ -181,9 +172,9 @@
             this.btnZoomIn.FlatAppearance.BorderSize = 0;
             this.btnZoomIn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnZoomIn.Image = global::Twol.Properties.Resources.ZoomOGL;
-            this.btnZoomIn.Location = new System.Drawing.Point(135, 510);
+            this.btnZoomIn.Location = new System.Drawing.Point(135, 508);
             this.btnZoomIn.Name = "btnZoomIn";
-            this.btnZoomIn.Size = new System.Drawing.Size(103, 75);
+            this.btnZoomIn.Size = new System.Drawing.Size(103, 77);
             this.btnZoomIn.TabIndex = 484;
             this.btnZoomIn.UseVisualStyleBackColor = false;
             this.btnZoomIn.Click += new System.EventHandler(this.btnZoomIn_Click);
@@ -196,9 +187,9 @@
             this.btnZoomOut.FlatAppearance.BorderSize = 0;
             this.btnZoomOut.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnZoomOut.Image = global::Twol.Properties.Resources.ZoomOut;
-            this.btnZoomOut.Location = new System.Drawing.Point(3, 510);
+            this.btnZoomOut.Location = new System.Drawing.Point(3, 508);
             this.btnZoomOut.Name = "btnZoomOut";
-            this.btnZoomOut.Size = new System.Drawing.Size(99, 75);
+            this.btnZoomOut.Size = new System.Drawing.Size(99, 77);
             this.btnZoomOut.TabIndex = 485;
             this.btnZoomOut.UseVisualStyleBackColor = false;
             this.btnZoomOut.Click += new System.EventHandler(this.btnZoomOut_Click);
@@ -245,12 +236,69 @@
             this.cboxEnableLineDraw.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxEnableLineDraw.ForeColor = System.Drawing.SystemColors.ControlText;
             this.cboxEnableLineDraw.Image = global::Twol.Properties.Resources.BoundaryOuter;
-            this.cboxEnableLineDraw.Location = new System.Drawing.Point(145, 4);
+            this.cboxEnableLineDraw.Location = new System.Drawing.Point(145, 5);
             this.cboxEnableLineDraw.Name = "cboxEnableLineDraw";
             this.cboxEnableLineDraw.Size = new System.Drawing.Size(83, 72);
             this.cboxEnableLineDraw.TabIndex = 472;
             this.cboxEnableLineDraw.UseVisualStyleBackColor = false;
             this.cboxEnableLineDraw.Click += new System.EventHandler(this.cboxEnableLineDraw_Click);
+            // 
+            // label2
+            // 
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label2.Location = new System.Drawing.Point(137, 82);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(99, 23);
+            this.label2.TabIndex = 491;
+            this.label2.Text = "New Bnd";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnDeletePoint
+            // 
+            this.btnDeletePoint.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnDeletePoint.BackColor = System.Drawing.Color.Transparent;
+            this.btnDeletePoint.Enabled = false;
+            this.btnDeletePoint.FlatAppearance.BorderSize = 0;
+            this.btnDeletePoint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDeletePoint.Image = global::Twol.Properties.Resources.PointDelete;
+            this.btnDeletePoint.Location = new System.Drawing.Point(143, 142);
+            this.btnDeletePoint.Name = "btnDeletePoint";
+            this.btnDeletePoint.Size = new System.Drawing.Size(87, 78);
+            this.btnDeletePoint.TabIndex = 468;
+            this.btnDeletePoint.UseVisualStyleBackColor = false;
+            this.btnDeletePoint.Click += new System.EventHandler(this.btnDeletePoint_Click);
+            // 
+            // btnAddFence
+            // 
+            this.btnAddFence.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnAddFence.BackColor = System.Drawing.Color.Transparent;
+            this.btnAddFence.Enabled = false;
+            this.btnAddFence.FlatAppearance.BorderSize = 0;
+            this.btnAddFence.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddFence.Image = global::Twol.Properties.Resources.AddNew;
+            this.btnAddFence.Location = new System.Drawing.Point(156, 283);
+            this.btnAddFence.Name = "btnAddFence";
+            this.btnAddFence.Size = new System.Drawing.Size(61, 61);
+            this.btnAddFence.TabIndex = 470;
+            this.btnAddFence.UseVisualStyleBackColor = false;
+            this.btnAddFence.Click += new System.EventHandler(this.btnAddFence_Click);
+            // 
+            // label3
+            // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.tableLayoutPanel1.SetColumnSpan(this.label3, 2);
+            this.label3.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label3.Location = new System.Drawing.Point(3, 234);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(126, 23);
+            this.label3.TabIndex = 492;
+            this.label3.Text = "Boundary";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnDeleteAll
             // 
@@ -267,49 +315,33 @@
             this.btnDeleteAll.UseVisualStyleBackColor = false;
             this.btnDeleteAll.Click += new System.EventHandler(this.btnDeleteAll_Click);
             // 
-            // btnAddFence
+            // lblOfflineMap
             // 
-            this.btnAddFence.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnAddFence.BackColor = System.Drawing.Color.Transparent;
-            this.btnAddFence.Enabled = false;
-            this.btnAddFence.FlatAppearance.BorderSize = 0;
-            this.btnAddFence.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddFence.Image = global::Twol.Properties.Resources.AddNew;
-            this.btnAddFence.Location = new System.Drawing.Point(156, 279);
-            this.btnAddFence.Name = "btnAddFence";
-            this.btnAddFence.Size = new System.Drawing.Size(61, 61);
-            this.btnAddFence.TabIndex = 470;
-            this.btnAddFence.UseVisualStyleBackColor = false;
-            this.btnAddFence.Click += new System.EventHandler(this.btnAddFence_Click);
+            this.lblOfflineMap.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblOfflineMap.BackColor = System.Drawing.Color.Transparent;
+            this.tableLayoutPanel1.SetColumnSpan(this.lblOfflineMap, 2);
+            this.lblOfflineMap.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOfflineMap.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblOfflineMap.Location = new System.Drawing.Point(3, 417);
+            this.lblOfflineMap.Name = "lblOfflineMap";
+            this.lblOfflineMap.Size = new System.Drawing.Size(126, 23);
+            this.lblOfflineMap.TabIndex = 493;
+            this.lblOfflineMap.Text = "Offline Map";
+            this.lblOfflineMap.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // btnDeletePoint
+            // btnOfflineMap
             // 
-            this.btnDeletePoint.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnDeletePoint.BackColor = System.Drawing.Color.Transparent;
-            this.btnDeletePoint.Enabled = false;
-            this.btnDeletePoint.FlatAppearance.BorderSize = 0;
-            this.btnDeletePoint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDeletePoint.Image = global::Twol.Properties.Resources.PointDelete;
-            this.btnDeletePoint.Location = new System.Drawing.Point(143, 140);
-            this.btnDeletePoint.Name = "btnDeletePoint";
-            this.btnDeletePoint.Size = new System.Drawing.Size(87, 78);
-            this.btnDeletePoint.TabIndex = 468;
-            this.btnDeletePoint.UseVisualStyleBackColor = false;
-            this.btnDeletePoint.Click += new System.EventHandler(this.btnDeletePoint_Click);
-            // 
-            // label3
-            // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.tableLayoutPanel1.SetColumnSpan(this.label3, 2);
-            this.label3.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label3.Location = new System.Drawing.Point(3, 231);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(126, 23);
-            this.label3.TabIndex = 492;
-            this.label3.Text = "Boundary";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnOfflineMap.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnOfflineMap.BackColor = System.Drawing.Color.Transparent;
+            this.btnOfflineMap.FlatAppearance.BorderSize = 0;
+            this.btnOfflineMap.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOfflineMap.Image = global::Twol.Properties.Resources.MappingOn;
+            this.btnOfflineMap.Location = new System.Drawing.Point(143, 385);
+            this.btnOfflineMap.Name = "btnOfflineMap";
+            this.btnOfflineMap.Size = new System.Drawing.Size(87, 87);
+            this.btnOfflineMap.TabIndex = 494;
+            this.btnOfflineMap.UseVisualStyleBackColor = false;
+            this.btnOfflineMap.Click += new System.EventHandler(this.btnOfflineMap_Click);
             // 
             // FormMap
             // 
@@ -353,5 +385,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnOfflineMap;
+        private System.Windows.Forms.Label lblOfflineMap;
     }
 }

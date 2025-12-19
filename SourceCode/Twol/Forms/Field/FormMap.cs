@@ -69,6 +69,27 @@ namespace Twol
 
             btnDeleteAll.Enabled = true;
             label3.Text = gStr.Get(gs.gsBoundary);
+
+            // Update offline map button icon based on GeoTIFF availability
+            UpdateOfflineMapButtonIcon();
+        }
+
+        /// <summary>
+        /// Updates the Offline Map button icon based on whether a GeoTIFF exists for this field.
+        /// </summary>
+        private void UpdateOfflineMapButtonIcon()
+        {
+            string fieldPath = Path.Combine(RegistrySettings.fieldsDirectory, mf.currentFieldDirectory);
+            string geoTiffPath = Path.Combine(fieldPath, "satellite.tif");
+
+            if (File.Exists(geoTiffPath))
+            {
+                btnOfflineMap.Image = Properties.Resources.MappingOn;
+            }
+            else
+            {
+                btnOfflineMap.Image = Properties.Resources.MappingOff;
+            }
         }
 
         private void FormMap_FormClosing(object sender, FormClosingEventArgs e)
@@ -225,11 +246,7 @@ namespace Twol
                 //turn lines made from boundaries
                 mf.FileSaveBoundary();
 
-                // Prompt to download satellite imagery after first boundary is created
-                if (isFirstBoundary && mf.isInternetConnected)
-                {
-                    PromptDownloadSatelliteImagery();
-                }
+                // Auto-prompt removed - user can use the "Offline Map" button instead
             }
 
             cboxEnableLineDraw.Checked = false;
@@ -244,28 +261,25 @@ namespace Twol
         }
 
         /// <summary>
-        /// Prompts the user to download satellite imagery for the field.
+        /// Opens the satellite download form when the Offline Map button is clicked.
         /// </summary>
-        private void PromptDownloadSatelliteImagery()
+        private void btnOfflineMap_Click(object sender, EventArgs e)
         {
-            // Check if GeoTIFF already exists
-            string fieldPath = Path.Combine(RegistrySettings.fieldsDirectory, mf.currentFieldDirectory);
-            string geoTiffPath = Path.Combine(fieldPath, "satellite.tif");
-
-            if (File.Exists(geoTiffPath))
-                return; // Already have satellite imagery
-
-            DialogResult result = MessageBox.Show(
-                "Boundary saved!\n\nWould you like to download satellite imagery for offline use?\n\n" +
-                "This will download high-resolution ESRI imagery that can be used without internet.",
-                "Download Satellite Imagery",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
-
-            if (result == DialogResult.Yes)
+            // Check if boundaries exist
+            if (mf.bnd.bndList.Count == 0 || mf.bnd.bndList[0].fenceLine.Count < 3)
             {
-                OpenSatelliteDownloadForm();
+                MessageBox.Show(
+                    "Please create a boundary first before downloading satellite imagery.",
+                    "No Boundaries",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
             }
+
+            // Always open the form - it will handle internet check internally
+            // The form shows existing GeoTIFF info (for delete) even without internet
+            // and will show appropriate message when trying to download without internet
+            OpenSatelliteDownloadForm();
         }
 
         /// <summary>
@@ -282,6 +296,9 @@ namespace Twol
                         mf.TimedMessageBox(1500, "Success", "Satellite imagery loaded for offline use");
                     }
                 }
+
+                // Update button icon after download/delete operations
+                UpdateOfflineMapButtonIcon();
             }
         }
 
