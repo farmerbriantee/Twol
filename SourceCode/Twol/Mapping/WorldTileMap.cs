@@ -249,9 +249,43 @@ namespace Twol.Mapping
             Color field = Settings.User.setDisplay_isDayMode ? Settings.User.colorFieldDay : Settings.User.colorFieldNight;
 
             GL.Color3(field.R, field.G, field.B);
-            if (Settings.User.setDisplay_isTextureOn && mapTexture != null)
+
+            // Show map tiles if:
+            // - GeoTIFF is loaded (always show, regardless of online tiles setting)
+            // - OR online tiles are enabled via isOnlineTilesOn setting
+            bool shouldShowTiles = mf.map.IsGeoTiffLoaded || Settings.User.setDisplay_isOnlineTilesOn;
+
+            // ALWAYS draw the green background first
+            // This ensures transparent areas of GeoTIFF tiles show green instead of black
+            if (Settings.User.setDisplay_isTextureOn)
             {
                 GL.Enable(EnableCap.Texture2D);
+                GL.BindTexture(TextureTarget.Texture2D, mf.texture[(int)FormGPS.textures.Floor]);
+            }
+
+            GL.Begin(PrimitiveType.TriangleStrip);
+            GL.TexCoord2(0, 0);
+            GL.Vertex3(eastingMin, northingMax, -0.11);
+            GL.TexCoord2(40, 0.0);
+            GL.Vertex3(eastingMax, northingMax, -0.11);
+            GL.TexCoord2(0.0, 40);
+            GL.Vertex3(eastingMin, northingMin, -0.11);
+            GL.TexCoord2(40, 40);
+            GL.Vertex3(eastingMax, northingMin, -0.11);
+            GL.End();
+
+            GL.Disable(EnableCap.Texture2D);
+
+            // Now draw map tiles on top if enabled
+            if (shouldShowTiles && mapTexture != null)
+            {
+                // Enable blending so transparent GeoTIFF areas show the green background underneath
+                GL.Enable(EnableCap.Blend);
+                GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
+                GL.Enable(EnableCap.Texture2D);
+
+                // Reset color to white so texture colors are not tinted
+                GL.Color3(1.0f, 1.0f, 1.0f);
 
                 int t = 0;
                 for (double i = -3; i < 4; i += 1)
@@ -281,8 +315,9 @@ namespace Twol.Mapping
                         t++;
                     }
                 }
+                GL.Disable(EnableCap.Texture2D);
+                GL.Disable(EnableCap.Blend);
             }
-            GL.Disable(EnableCap.Texture2D);
         }
 
         public void DrawWorldGrid(double _gridZoom)
