@@ -179,6 +179,32 @@ namespace Twol
             }
         }
 
+        #region Tab Passive
+        private void tabPassive_Enter(object sender, EventArgs e)
+        {
+            lblCurvatureGain.Text = Settings.Tool.setToolSteer.curvatureGain.ToString("N1");
+            hsbarPassiveCurvature.Value = (int)(Settings.Tool.setToolSteer.curvatureGain * 10);
+
+            lblPassiveIntegralGain.Text = (Settings.Tool.setToolSteer.passiveIntegralGain * 1000).ToString("N0");
+            hsbarPassiveCurvature.Value = (int)(Settings.Tool.setToolSteer.passiveIntegralGain * 1000);
+
+        }
+
+        private void hsbarPassiveCurvature_Scroll(object sender, ScrollEventArgs e)
+        {
+            Settings.Tool.setToolSteer.curvatureGain = ((double)(e.NewValue) * 0.1);
+
+            lblCurvatureGain.Text = Settings.Tool.setToolSteer.curvatureGain.ToString("N1");
+        }
+        private void hsbarPassiveIntegralGain_Scroll(object sender, ScrollEventArgs e)
+        {
+            Settings.Tool.setToolSteer.passiveIntegralGain = ((double)(e.NewValue) * 0.001);
+
+            lblPassiveIntegralGain.Text = (Settings.Tool.setToolSteer.passiveIntegralGain * 1000).ToString("N0");
+        }
+
+
+        #endregion
 
 
         #region Tab On the Line

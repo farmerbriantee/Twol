@@ -787,6 +787,11 @@ namespace Twol
             lbl_IO_Profile.Text = RegistrySettings.IOFileName;
         }
 
+        private void nudToolOffset_ValueChanged(object sender, EventArgs e)
+        {
+            sim.toolOffset = (double)nudToolOffset.Value*0.001;
+        }
+
         public void FieldClose()
         {
             Settings.Vehicle.setF_CurrentFieldDir = currentFieldDirectory;
@@ -948,7 +953,7 @@ namespace Twol
         public void SetZoom()
         {
             if (Settings.User.setDisplay_camZoom < 5.0) Settings.User.setDisplay_camZoom = 5.0;
-            if (Settings.User.setDisplay_camZoom > 200) Settings.User.setDisplay_camZoom = 200;
+            if (Settings.User.setDisplay_camZoom > 800) Settings.User.setDisplay_camZoom = 800;
             camera.camSetDistance = Settings.User.setDisplay_camZoom * Settings.User.setDisplay_camZoom * -1;
 
             //match grid to cam distance and redo perspective
@@ -985,7 +990,8 @@ namespace Twol
             NoGPS, ZoomIn48, ZoomOut48,
             Pan, MenuHideShow,
             ToolWheels, Tire, TramDot,
-            YouTurnU, YouTurnH, CrossTrackBkgrnd, PanUp, PanDn
+            YouTurnU, YouTurnH, CrossTrackBkgrnd,
+            PanUp, PanDn, Floor2
         }
 
         public void LoadGLTextures()
@@ -997,9 +1003,11 @@ namespace Twol
                 Resources.z_Floor2,Resources.z_Font,
                 Resources.z_Turn,Resources.z_TurnCancel,
                 Resources.z_TurnManual,
-                Resources.z_Compass,Resources.z_Speedo,
+                Resources.z_Compass,
+                Resources.z_Speedo,
                 Resources.z_SpeedoNeedle,
-                Resources.z_Lift,Resources.z_SteerPointer,
+                Resources.z_Lift,
+                Resources.z_SteerPointer,
                 Resources.z_SteerDot,
                 Resources.z_Tractor,
                 Resources.z_QuestionMark,
@@ -1007,12 +1015,22 @@ namespace Twol
                 Resources.z_4WDFront,
                 Resources.z_4WDRear,
                 Resources.z_Harvester,
-                Resources.z_LateralManual, Resources.z_bingMap,
-                Resources.z_NoGPS, Resources.ZoomIn48, Resources.ZoomOut48,
-                Resources.Pan, Resources.MenuHideShow,
-                Resources.z_Tool, Resources.z_Tire, Resources.z_TramOnOff,
-                Resources.YouTurnU, Resources.YouTurnH, Resources.z_crossTrackBkgnd,
-                Resources.PanUp, Resources.PanDn
+                Resources.z_LateralManual,
+                Resources.z_bingMap,
+                Resources.z_NoGPS,
+                Resources.ZoomIn48,
+                Resources.ZoomOut48,
+                Resources.Pan,
+                Resources.MenuHideShow,
+                Resources.z_Tool,
+                Resources.z_Tire,
+                Resources.z_TramOnOff,
+                Resources.YouTurnU,
+                Resources.YouTurnH,
+                Resources.z_crossTrackBkgnd,
+                Resources.PanUp,
+                Resources.PanDn,
+                Resources.z_Floor2
             };
 
             texture = new uint[oglTextures.Length];
