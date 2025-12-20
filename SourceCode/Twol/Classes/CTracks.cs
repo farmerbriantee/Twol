@@ -348,7 +348,7 @@ namespace Twol
 
                     newCurList = ChaikinSmoothing.Smooth(newCurList, 3, preserveEndPoints: true);
 
-                    newCurList = GenerateEquidistantPoints(newCurList, 0.5);
+                    newCurList = GenerateEquidistantPoints(newCurList, 0.5, track.mode == TrackMode.bndCurve);
 
                     newCurList.CalculateHeadings(loops);
 
@@ -914,28 +914,7 @@ namespace Twol
             return _ = r.northing >= minx && r.northing <= maxx && (r.easting >= miny && r.easting <= maxy);
         }
 
-        /* PSEUDOCODE (detailed plan)
-- Function: GenerateEquidistantPoints(List<vec3> pts, double spacing)
-- Validate input: if pts null or less than 2, return a shallow copy.
-- If spacing <= 0, return a shallow copy.
-- Determine if the polyline is a closed loop by checking distance between first and last.
-- Build an array of segment lengths and cumulative distances.
-  - For loop: include final segment from last -> first.
-  - For open polyline: include segments from 0..n-2.
-- Compute total path length.
-- If total length is <= spacing: return copy (but ensure we include endpoints).
-- Initialize result list and add the first point (copy).
-- For each target distance t = spacing; t < totalLength; t += spacing:
-  - Find the segment that contains t by walking cumulative distances.
-  - Compute local fraction along that segment.
-  - Interpolate easting/northing to create new vec3 (heading left 0, will be recalculated later).
-  - Add interpolated point to result.
-- For open polyline, ensure last original point is present (avoid tiny-duplicate by epsilon).
-- Return result.
-- Notes: Use glm.Distance for distance computation and simple linear interpolation for positions.
-*/
-
-        private List<vec3> GenerateEquidistantPoints(List<vec3> pts, double spacing)
+        private List<vec3> GenerateEquidistantPoints(List<vec3> pts, double spacing, bool isLoop)
         {
             var result = new List<vec3>();
             const double eps = 1e-9;
@@ -945,12 +924,10 @@ namespace Twol
             if (pts.Count == 1) return new List<vec3>(pts);
 
             int n = pts.Count;
-            // detect closed loop (first and last essentially identical)
-            bool isLoop = glm.Distance(pts[0], pts[n - 1]) < 1e-6;
 
             // build segment lengths and cumulative distances
             List<double> segLen = new List<double>();
-            List<double> cum = new List<double> { 0.0 };
+            List<double> cumul = new List<double> { 0.0 };
 
             double total = 0.0;
             for (int i = 0; i < n - 1; i++)
@@ -958,7 +935,7 @@ namespace Twol
                 double d = glm.Distance(pts[i], pts[i + 1]);
                 segLen.Add(d);
                 total += d;
-                cum.Add(total);
+                cumul.Add(total);
             }
 
             if (isLoop)
@@ -966,7 +943,7 @@ namespace Twol
                 double d = glm.Distance(pts[n - 1], pts[0]);
                 segLen.Add(d);
                 total += d;
-                cum.Add(total);
+                cumul.Add(total);
             }
 
             // nothing to sample if tiny total length
@@ -982,12 +959,12 @@ namespace Twol
             double tDist = spacing;
             while (tDist < total - eps)
             {
-                // find segment index where cum[idx] < tDist <= cum[idx+1]
+                // find segment index where cumul[idx] < tDist <= cumul[idx+1]
                 int segIndex = -1;
                 int segCount = segLen.Count;
                 for (int i = 0; i < segCount; i++)
                 {
-                    if (tDist <= cum[i + 1] + eps)
+                    if (tDist <= cumul[i + 1] + eps)
                     {
                         segIndex = i;
                         break;
@@ -1003,7 +980,7 @@ namespace Twol
                     break;
                 }
 
-                double segStartDist = cum[segIndex];
+                double segStartDist = cumul[segIndex];
                 double local = tDist - segStartDist;
                 double thisSegLen = segLen[segIndex];
                 double frac = thisSegLen < eps ? 0.0 : (local / thisSegLen);

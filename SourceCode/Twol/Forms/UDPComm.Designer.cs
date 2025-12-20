@@ -307,21 +307,23 @@ namespace Twol
 
                         pn.ConvertWGS84ToLocal(pn.latitude, pn.longitude, out pn.fix.northing, out pn.fix.easting);
 
-                        if (pn.headingTrueDual != float.MaxValue)
+                        if (pn.isDualGPSConnected)
                         {
                             pn.headingTrueDual += Settings.Vehicle.setGPS_dualHeadingOffset;
                             if (pn.headingTrueDual >= 360) pn.headingTrueDual -= 360;
                             else if (pn.headingTrueDual < 0) pn.headingTrueDual += 360;
-                        }
 
-                        if (pn.imuHeading != ushort.MaxValue)
+                            double rollK = pn.rollDual;
+                            if (Settings.Vehicle.setIMU_invertRoll) rollK *= -1;
+                            rollK -= Settings.Vehicle.setIMU_rollZero;
+                            ahrs.imuRoll = ahrs.imuRoll * Settings.Vehicle.setIMU_rollFilter + rollK * (1 - Settings.Vehicle.setIMU_rollFilter);
+
+                        }
+                        else
                         {
                             ahrs.imuHeading = pn.imuHeading;
                             ahrs.imuHeading *= 0.1;
-                        }
 
-                        if (pn.imuRoll != short.MaxValue)
-                        {
                             double rollK = pn.imuRoll;
                             if (Settings.Vehicle.setIMU_invertRoll) rollK *= -0.1;
                             else rollK *= 0.1;
@@ -329,15 +331,9 @@ namespace Twol
                             ahrs.imuRoll = ahrs.imuRoll * Settings.Vehicle.setIMU_rollFilter + rollK * (1 - Settings.Vehicle.setIMU_rollFilter);
                         }
 
-                        if (pn.imuPitch != short.MaxValue)
-                        {
-                            ahrs.imuPitch = pn.imuPitch;
-                        }
+                        ahrs.imuPitch = pn.imuPitch;
 
-                        if (pn.imuYawRate != short.MaxValue)
-                        {
-                            ahrs.imuYawRate = pn.imuYawRate;
-                        }
+                        ahrs.imuYawRate = pn.imuYawRate;
 
                         sentenceCounter = 0;
 
@@ -669,27 +665,29 @@ namespace Twol
                         pnTool.isNMEAToSend = false;
                         pnTool.ConvertWGS84ToLocal(pnTool.latitude, pnTool.longitude, out pnTool.fix.northing, out pnTool.fix.easting);
 
-                        if (pnTool.headingTrueDual != float.MaxValue)
+                        if (pnTool.isDualGPSConnected)
                         {
                             pnTool.headingTrueDual += Settings.Vehicle.setGPS_dualHeadingOffset;
                             if (pnTool.headingTrueDual >= 360) pnTool.headingTrueDual -= 360;
                             else if (pnTool.headingTrueDual < 0) pnTool.headingTrueDual += 360;
-                        }
 
-                        if (pnTool.imuHeading != ushort.MaxValue)
+                            double rollK = pnTool.rollDual;
+                            if (Settings.Vehicle.setIMU_invertRoll) rollK *= -1;
+                            rollK -= Settings.Vehicle.setIMU_rollZero;
+                            ahrsTool.imuRoll = ahrsTool.imuRoll * Settings.Vehicle.setIMU_rollFilter + rollK * (1 - Settings.Vehicle.setIMU_rollFilter);
+                        }
+                        else
                         {
                             ahrsTool.imuHeading = pnTool.imuHeading;
                             ahrsTool.imuHeading *= 0.1;
-                        }
 
-                        if (pnTool.imuRoll != short.MaxValue)
-                        {
                             double rollK = pnTool.imuRoll;
                             if (Settings.Vehicle.setIMU_invertRoll) rollK *= -0.1;
                             else rollK *= 0.1;
                             rollK -= Settings.Vehicle.setIMU_rollZero;
                             ahrsTool.imuRoll = ahrsTool.imuRoll * Settings.Vehicle.setIMU_rollFilter + rollK * (1 - Settings.Vehicle.setIMU_rollFilter);
                         }
+
 
                         if (Settings.Tool.setToolSteer.antennaOffset != 0)
                         {
@@ -704,15 +702,9 @@ namespace Twol
                             pnTool.fix.northing = (Math.Sin(-fixHeading) * rollCorrectionDistance) + pnTool.fix.northing;
                         }
 
-                        if (pnTool.imuPitch != short.MaxValue)
-                        {
-                            ahrsTool.imuPitch = pnTool.imuPitch;
-                        }
+                        ahrsTool.imuPitch = pnTool.imuPitch;
 
-                        if (pnTool.imuYawRate != short.MaxValue)
-                        {
-                            ahrsTool.imuYawRate = pnTool.imuYawRate;
-                        }
+                        ahrsTool.imuYawRate = pnTool.imuYawRate;
                     }
                 }
             }

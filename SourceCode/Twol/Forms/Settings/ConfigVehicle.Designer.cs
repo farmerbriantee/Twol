@@ -304,7 +304,6 @@ namespace Twol
 
             Settings.User.isGridOn = chkDisplayGrid.Checked;
             Settings.User.isSpeedoOn = chkDisplaySpeedo.Checked;
-            Settings.User.isGPSCorrectionLineOn = chkGPSCorrection.Checked;
             Settings.User.isSideGuideLines = chkDisplayExtraGuides.Checked;
 
             Settings.User.setDisplay_isKeyboardOn = chkDisplayKeyboard.Checked;

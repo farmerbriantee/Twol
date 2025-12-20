@@ -9,38 +9,8 @@ namespace Twol
         #region Heading
         private void tabDHeading_Enter(object sender, EventArgs e)
         {
-            //heading
-            if (Settings.Vehicle.setGPS_headingFromWhichSource == "Fix") rbtnHeadingFix.Checked = true;
-            else if (Settings.Vehicle.setGPS_headingFromWhichSource == "VTG") rbtnHeadingVTG.Checked = true;
-            else if (Settings.Vehicle.setGPS_headingFromWhichSource == "Dual") rbtnHeadingHDT.Checked = true;
-
-            if (rbtnHeadingHDT.Checked)
-            {
-                if (Settings.Vehicle.setAutoSwitchDualFixOn)
-                {
-                    rbtnHeadingFix.Enabled = false;
-                    rbtnHeadingVTG.Enabled = false;
-
-                    gboxSingle.Enabled = true;
-                    gboxDual.Enabled = true;
-                }
-                else
-                {
-                    gboxSingle.Enabled = false;
-                    gboxDual.Enabled = true;
-                }
-            }
-            else
-            {
-                gboxSingle.Enabled = true;
-                gboxDual.Enabled = false;
-            }
-
             nudDualHeadingOffset.Value = Settings.Vehicle.setGPS_dualHeadingOffset;
             nudDualReverseDistance.Value = Settings.Vehicle.setGPS_dualReverseDetectionDistance;
-
-            nudAutoSwitchDualFixSpeed.Value = Settings.Vehicle.setAutoSwitchDualFixSpeed;
-            cboxIsAutoSwitchDualFixOn.Checked = Settings.Vehicle.setAutoSwitchDualFixOn;
 
             hsbarFusion.Value = (int)(Settings.Vehicle.setIMU_fusionWeight2 * 500);
             lblFusion.Text = (hsbarFusion.Value).ToString();
@@ -104,48 +74,6 @@ namespace Twol
                 Settings.Vehicle.setF_minHeadingStepDistance = 0.5;
                 Settings.Vehicle.setGPS_minimumStepLimit = 0.05;
             }            
-        }
-
-        private void rbtnHeadingFix_CheckedChanged(object sender, EventArgs e)
-        {
-            var checkedButton = headingGroupBox.Controls.OfType<RadioButton>().FirstOrDefault(r => r.Checked);
-            Settings.Vehicle.setGPS_headingFromWhichSource = checkedButton.Text;
-
-            if (rbtnHeadingHDT.Checked)
-            {
-                gboxSingle.Enabled = false;
-                gboxDual.Enabled = true;
-            }
-            else
-            {
-                gboxSingle.Enabled = true;
-                gboxDual.Enabled= false;
-            }
-        }
-
-        private void cboxIsAutoSwitchDualFixOn_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cboxIsAutoSwitchDualFixOn.Checked)
-            {
-                rbtnHeadingFix.Enabled = false;
-                rbtnHeadingVTG.Enabled = false;
-                gboxSingle.Enabled = true;
-                gboxDual.Enabled = true;
-            }
-            else
-            {
-                rbtnHeadingFix.Enabled = true;
-                rbtnHeadingVTG.Enabled = true;
-                gboxSingle.Enabled = false;
-                gboxDual.Enabled = true;
-            }
-
-            Settings.Vehicle.setAutoSwitchDualFixOn = cboxIsAutoSwitchDualFixOn.Checked;
-        }
-
-        private void nudAutoSwitchDualFixSpeed_Click(object sender, EventArgs e)
-        {
-                Settings.Vehicle.setAutoSwitchDualFixSpeed = nudAutoSwitchDualFixSpeed.Value;
         }
 
         private void nudDualHeadingOffset_ValueChanged(object sender, EventArgs e)

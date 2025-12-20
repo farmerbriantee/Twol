@@ -300,10 +300,10 @@ namespace Twol
             //nmea simulator built in.
             sim = new CSim(this);
 
-            ////all the attitude, heading, roll, pitch reference system
+            ////all the attitude, heading, rollDual, pitch reference system
             ahrs = new CAHRS();
 
-            ////all the attitude, heading, roll, pitch reference system GPS2
+            ////all the attitude, heading, rollDual, pitch reference system GPS2
             ahrsTool = new CAHRS();
 
             //fieldData all in one place
@@ -332,10 +332,6 @@ namespace Twol
 
             //map class
             map = new Map(this);
-
-            vec2 b = new vec2(0, 0);
-            gpsPtsCorr.Add(b);
-            gpsPts.Add(b);
         }
 
         private void FormGPS_Load(object sender, EventArgs e)

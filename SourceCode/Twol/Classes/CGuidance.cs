@@ -334,12 +334,16 @@ namespace Twol
                     if (dist < -2.0)
                         dist = -2.0;
 
+                    if (Uturn)
+                    {
+                        bobAvg = 0;
+                        dist = 0;
+                        segCurv = 0;
+                        isPassiveSteering = false;
+                    }
+
                     goalPoint.easting += (Math.Sin(curList[B].heading + 1.57) * dist);
                     goalPoint.northing += (Math.Cos(curList[B].heading + 1.57) * dist);
-
-                    //mf.lblToolOffset.Text = (segCurv * 100).ToString("N1");
-                    //mf.lblBobAvg.Text = (bobAvg * 100).ToString("N1");
-                    //mf.lblDistTotal.Text = (dist * 100).ToString("N1");
 
                     //calc "D" the distance from pivot axle to lookahead point
                     double goalPointDistanceSquared = glm.DistanceSquared(goalPoint, pivot);
@@ -372,20 +376,11 @@ namespace Twol
                     if (!isPassiveSteering && isPassiveTriggered)
                     {
                         if (Math.Abs(mf.vehicle.modeActualHeadingError) < 1.5
-                            && Math.Abs(distanceFromCurrentLine) < 0.25 && Math.Abs(distanceFromCurrentLineTool) < 0.25)
+                            && Math.Abs(distanceFromCurrentLine) < 0.10 && Math.Abs(distanceFromCurrentLineTool) < 0.20)
                             isPassiveSteering = true;
                     }
-                    //angular velocity in rads/sec  = 2PI * m/sec * radians/meters
-                    //double angVel = glm.twoPI * 0.277777 * mf.avgSpeed * (Math.Tan(glm.toRadians(steerAngleCT))) / mf.vehicle.wheelbase;
-
-                    //clamp the steering angle to not exceed safe angular velocity
-                    //if (Math.Abs(angVel) > mf.vehicle.maxAngularVelocity)
-                    //{
-                    //    steerAngleCT = glm.toDegrees(steerAngleCT > 0 ?
-                    //            (Math.Atan((mf.vehicle.wheelbase * mf.vehicle.maxAngularVelocity) / (glm.twoPI * mf.avgSpeed * 0.277777)))
-                    //        : (Math.Atan((mf.vehicle.wheelbase * -mf.vehicle.maxAngularVelocity) / (glm.twoPI * mf.avgSpeed * 0.277777))));
-                    //}
                 }
+
                 #endregion PurePursuit
 
                 if (!Uturn && mf.ahrs.imuRoll != 88888)

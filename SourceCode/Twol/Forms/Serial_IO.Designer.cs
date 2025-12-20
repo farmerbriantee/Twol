@@ -1070,21 +1070,22 @@ namespace Twol
 
                     pn.ConvertWGS84ToLocal(pn.latitude, pn.longitude, out pn.fix.northing, out pn.fix.easting);
 
-                    if (pn.headingTrueDual != float.MaxValue)
+                    if (pn.isDualGPSConnected)
                     {
                         pn.headingTrueDual += Settings.Vehicle.setGPS_dualHeadingOffset;
                         if (pn.headingTrueDual >= 360) pn.headingTrueDual -= 360;
                         else if (pn.headingTrueDual < 0) pn.headingTrueDual += 360;
-                    }
 
-                    if (pn.imuHeading != ushort.MaxValue)
+                        double rollK = pn.rollDual;
+                        if (Settings.Vehicle.setIMU_invertRoll) rollK *= -1;
+                        rollK -= Settings.Vehicle.setIMU_rollZero;
+                        ahrs.imuRoll = ahrs.imuRoll * Settings.Vehicle.setIMU_rollFilter + rollK * (1 - Settings.Vehicle.setIMU_rollFilter);
+                    }
+                    else
                     {
                         ahrs.imuHeading = pn.imuHeading;
                         ahrs.imuHeading *= 0.1;
-                    }
 
-                    if (pn.imuRoll != short.MaxValue)
-                    {
                         double rollK = pn.imuRoll;
                         if (Settings.Vehicle.setIMU_invertRoll) rollK *= -0.1;
                         else rollK *= 0.1;
@@ -1092,15 +1093,9 @@ namespace Twol
                         ahrs.imuRoll = ahrs.imuRoll * Settings.Vehicle.setIMU_rollFilter + rollK * (1 - Settings.Vehicle.setIMU_rollFilter);
                     }
 
-                    if (pn.imuPitch != short.MaxValue)
-                    {
-                        ahrs.imuPitch = pn.imuPitch;
-                    }
+                    ahrs.imuPitch = pn.imuPitch;
 
-                    if (pn.imuYawRate != short.MaxValue)
-                    {
-                        ahrs.imuYawRate = pn.imuYawRate;
-                    }
+                    ahrs.imuYawRate = pn.imuYawRate;
 
                     sentenceCounter = 0;
                     UpdateFixPosition();

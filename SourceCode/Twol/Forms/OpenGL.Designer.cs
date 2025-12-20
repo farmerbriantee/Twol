@@ -512,9 +512,18 @@ namespace Twol
                     }
                     GL.PopMatrix();
 
+                    //todo
+                    GL.PointSize(2);
+                    GL.Begin(PrimitiveType.Points);
+                    GL.Color3(1.0, 1.0, 0.0);
+                    for (int i = 0; i < gpsPts.Count; i++)
+                    {
+                        GL.Vertex3(gpsPts[i].easting, gpsPts[i].northing, 0.0);
+                    }
+                    GL.End();
+
                     if (camera.camSetDistance > -550)
                     {
-
                         //Draw Tool antenna
                         if (Settings.Tool.setToolSteer.isGPSToolActive)
                         {
@@ -559,36 +568,6 @@ namespace Twol
                             GL.Color3(0.920, 0.978, 0.2);
                             GL.Vertex3(steerAxlePos.easting, steerAxlePos.northing, 0.0);
                             GL.End();
-                        }
-                    }
-
-                    //Draw gps points and corrected
-                    if (Settings.User.isGPSCorrectionLineOn)
-                    {
-                        GL.LineWidth(4);
-                        GL.Begin(PrimitiveType.LineStrip);
-                        GL.Color3(1.0, 0.6, 0.3);
-
-                        for (int i = 0; i < gpsPts.Count; i++)
-                        {
-                            GL.Vertex3(gpsPts[i].easting, gpsPts[i].northing, 0.0);
-                        }
-                        GL.End();
-
-                        GL.LineWidth(4);
-                        GL.Begin(PrimitiveType.LineStrip);
-                        GL.Color3(0.30, 1.0, 0.0);
-
-                        for (int i = 0; i < gpsPtsCorr.Count; i++)
-                        {
-                            GL.Vertex3(gpsPtsCorr[i].easting, gpsPtsCorr[i].northing, 0.0);
-                        }
-                        GL.End();
-
-                        if (gpsPtsCorr.Count > 50)
-                        {
-                            gpsPtsCorr.RemoveRange(0, 10);
-                            gpsPts.RemoveRange(0, 10);
                         }
                     }
 
