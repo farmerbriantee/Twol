@@ -85,31 +85,38 @@
             this.label51 = new System.Windows.Forms.Label();
             this.label54 = new System.Windows.Forms.Label();
             this.label49 = new System.Windows.Forms.Label();
-            this.nudDeadZoneDelay = new Twol.NudlessNumericUpDown();
-            this.nudDeadZoneHeading = new Twol.NudlessNumericUpDown();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblPWMDisplay = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.btnExpand = new Twol.RepeatButton();
             this.tabSteerSettings = new System.Windows.Forms.TabControl();
             this.tabOnTheLine = new System.Windows.Forms.TabPage();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cboxIsActiveSteering = new System.Windows.Forms.CheckBox();
             this.cboxIsSteerNotSlide_Tool = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.nudAntennaHeight_Tool = new Twol.NudlessNumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label74 = new System.Windows.Forms.Label();
-            this.nudAntennaOffset_Tool = new Twol.NudlessNumericUpDown();
             this.cboxGPSTool = new System.Windows.Forms.CheckBox();
             this.tabConfig = new System.Windows.Forms.TabPage();
             this.label83 = new System.Windows.Forms.Label();
             this.cboxInvertWAS_Tool = new System.Windows.Forms.CheckBox();
             this.label31 = new System.Windows.Forms.Label();
             this.cboxInvertSteer_Tool = new System.Windows.Forms.CheckBox();
+            this.tabPassive = new System.Windows.Forms.TabPage();
+            this.lblPassiveIntegralGain = new System.Windows.Forms.Label();
+            this.hsbarPassiveIntegralGain = new System.Windows.Forms.HScrollBar();
+            this.label7 = new System.Windows.Forms.Label();
+            this.lblCurvatureGain = new System.Windows.Forms.Label();
+            this.hsbarPassiveCurvature = new System.Windows.Forms.HScrollBar();
+            this.label6 = new System.Windows.Forms.Label();
             this.imageList2 = new System.Windows.Forms.ImageList(this.components);
-            this.cboxIsActiveSteering = new System.Windows.Forms.CheckBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.nudAntennaHeight_Tool = new Twol.NudlessNumericUpDown();
+            this.nudAntennaOffset_Tool = new Twol.NudlessNumericUpDown();
+            this.btnExpand = new Twol.RepeatButton();
+            this.nudDeadZoneDelay = new Twol.NudlessNumericUpDown();
+            this.nudDeadZoneHeading = new Twol.NudlessNumericUpDown();
             this.tabControl1.SuspendLayout();
             this.tabGain.SuspendLayout();
             this.tabSteer.SuspendLayout();
@@ -119,6 +126,7 @@
             this.tabSteerSettings.SuspendLayout();
             this.tabOnTheLine.SuspendLayout();
             this.tabConfig.SuspendLayout();
+            this.tabPassive.SuspendLayout();
             this.SuspendLayout();
             // 
             // timer1
@@ -825,27 +833,6 @@
             this.label49.Text = "Heading (Degree)";
             this.label49.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // nudDeadZoneDelay
-            // 
-            this.nudDeadZoneDelay.Location = new System.Drawing.Point(224, 70);
-            this.nudDeadZoneDelay.Maximum = 10D;
-            this.nudDeadZoneDelay.Minimum = 1D;
-            this.nudDeadZoneDelay.Name = "nudDeadZoneDelay";
-            this.nudDeadZoneDelay.Size = new System.Drawing.Size(107, 36);
-            this.nudDeadZoneDelay.TabIndex = 542;
-            this.nudDeadZoneDelay.ValueChanged += new System.EventHandler(this.nudDeadZoneDelay_ValueChanged);
-            // 
-            // nudDeadZoneHeading
-            // 
-            this.nudDeadZoneHeading.DecimalPlaces = 1;
-            this.nudDeadZoneHeading.Location = new System.Drawing.Point(56, 71);
-            this.nudDeadZoneHeading.Maximum = 5D;
-            this.nudDeadZoneHeading.Minimum = 0.1D;
-            this.nudDeadZoneHeading.Name = "nudDeadZoneHeading";
-            this.nudDeadZoneHeading.Size = new System.Drawing.Size(107, 36);
-            this.nudDeadZoneHeading.TabIndex = 538;
-            this.nudDeadZoneHeading.ValueChanged += new System.EventHandler(this.nudDeadZoneHeading_ValueChanged);
-            // 
             // imageList1
             // 
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
@@ -899,31 +886,15 @@
             this.label9.Text = "PWM:";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // btnExpand
-            // 
-            this.btnExpand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnExpand.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnExpand.FlatAppearance.BorderColor = System.Drawing.SystemColors.AppWorkspace;
-            this.btnExpand.FlatAppearance.BorderSize = 0;
-            this.btnExpand.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExpand.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExpand.Image = global::Twol.Properties.Resources.ArrowRight;
-            this.btnExpand.Location = new System.Drawing.Point(299, 60);
-            this.btnExpand.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.btnExpand.Name = "btnExpand";
-            this.btnExpand.Size = new System.Drawing.Size(62, 37);
-            this.btnExpand.TabIndex = 329;
-            this.btnExpand.UseVisualStyleBackColor = true;
-            this.btnExpand.Click += new System.EventHandler(this.expandWindow_Click);
-            // 
             // tabSteerSettings
             // 
             this.tabSteerSettings.Appearance = System.Windows.Forms.TabAppearance.Buttons;
             this.tabSteerSettings.Controls.Add(this.tabOnTheLine);
             this.tabSteerSettings.Controls.Add(this.tabConfig);
+            this.tabSteerSettings.Controls.Add(this.tabPassive);
             this.tabSteerSettings.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabSteerSettings.ImageList = this.imageList2;
-            this.tabSteerSettings.ItemSize = new System.Drawing.Size(200, 54);
+            this.tabSteerSettings.ItemSize = new System.Drawing.Size(168, 54);
             this.tabSteerSettings.Location = new System.Drawing.Point(373, 5);
             this.tabSteerSettings.Name = "tabSteerSettings";
             this.tabSteerSettings.SelectedIndex = 0;
@@ -953,6 +924,36 @@
             this.tabOnTheLine.TabIndex = 4;
             this.tabOnTheLine.Enter += new System.EventHandler(this.tabOnTheLine_Enter);
             this.tabOnTheLine.Leave += new System.EventHandler(this.tabOnTheLine_Leave);
+            // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.Black;
+            this.label1.Location = new System.Drawing.Point(53, 141);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(143, 51);
+            this.label1.TabIndex = 586;
+            this.label1.Text = "Active/Passive";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // cboxIsActiveSteering
+            // 
+            this.cboxIsActiveSteering.Appearance = System.Windows.Forms.Appearance.Button;
+            this.cboxIsActiveSteering.BackColor = System.Drawing.Color.AliceBlue;
+            this.cboxIsActiveSteering.Checked = true;
+            this.cboxIsActiveSteering.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cboxIsActiveSteering.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
+            this.cboxIsActiveSteering.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cboxIsActiveSteering.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboxIsActiveSteering.ForeColor = System.Drawing.Color.Black;
+            this.cboxIsActiveSteering.Location = new System.Drawing.Point(64, 195);
+            this.cboxIsActiveSteering.Name = "cboxIsActiveSteering";
+            this.cboxIsActiveSteering.Size = new System.Drawing.Size(120, 47);
+            this.cboxIsActiveSteering.TabIndex = 585;
+            this.cboxIsActiveSteering.Text = "Active";
+            this.cboxIsActiveSteering.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.cboxIsActiveSteering.UseVisualStyleBackColor = false;
+            this.cboxIsActiveSteering.Click += new System.EventHandler(this.cboxIsActiveSteering_Click);
             // 
             // cboxIsSteerNotSlide_Tool
             // 
@@ -987,16 +988,6 @@
             this.label4.Text = "Tool Steer \r\nOn/Off";
             this.label4.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
-            // nudAntennaHeight_Tool
-            // 
-            this.nudAntennaHeight_Tool.Location = new System.Drawing.Point(53, 324);
-            this.nudAntennaHeight_Tool.Maximum = 5D;
-            this.nudAntennaHeight_Tool.Mode = Twol.UnitMode.Small;
-            this.nudAntennaHeight_Tool.Name = "nudAntennaHeight_Tool";
-            this.nudAntennaHeight_Tool.Size = new System.Drawing.Size(143, 56);
-            this.nudAntennaHeight_Tool.TabIndex = 580;
-            this.nudAntennaHeight_Tool.ValueChanged += new System.EventHandler(this.nudAntennaHeight_Tool_ValueChanged);
-            // 
             // label2
             // 
             this.label2.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1029,17 +1020,6 @@
             this.label74.TabIndex = 579;
             this.label74.Text = "Steering\r\nNot Sliding";
             this.label74.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            // 
-            // nudAntennaOffset_Tool
-            // 
-            this.nudAntennaOffset_Tool.Location = new System.Drawing.Point(305, 324);
-            this.nudAntennaOffset_Tool.Maximum = 5D;
-            this.nudAntennaOffset_Tool.Minimum = -5D;
-            this.nudAntennaOffset_Tool.Mode = Twol.UnitMode.Small;
-            this.nudAntennaOffset_Tool.Name = "nudAntennaOffset_Tool";
-            this.nudAntennaOffset_Tool.Size = new System.Drawing.Size(143, 56);
-            this.nudAntennaOffset_Tool.TabIndex = 582;
-            this.nudAntennaOffset_Tool.ValueChanged += new System.EventHandler(this.nudAntennaOffset_Tool_ValueChanged);
             // 
             // cboxGPSTool
             // 
@@ -1138,6 +1118,89 @@
             this.cboxInvertSteer_Tool.UseVisualStyleBackColor = false;
             this.cboxInvertSteer_Tool.Click += new System.EventHandler(this.cboxInvertSteer_Tool_Click);
             // 
+            // tabPassive
+            // 
+            this.tabPassive.BackColor = System.Drawing.Color.LightGray;
+            this.tabPassive.Controls.Add(this.lblPassiveIntegralGain);
+            this.tabPassive.Controls.Add(this.hsbarPassiveIntegralGain);
+            this.tabPassive.Controls.Add(this.label7);
+            this.tabPassive.Controls.Add(this.lblCurvatureGain);
+            this.tabPassive.Controls.Add(this.hsbarPassiveCurvature);
+            this.tabPassive.Controls.Add(this.label6);
+            this.tabPassive.Location = new System.Drawing.Point(4, 58);
+            this.tabPassive.Name = "tabPassive";
+            this.tabPassive.Size = new System.Drawing.Size(508, 440);
+            this.tabPassive.TabIndex = 5;
+            this.tabPassive.Text = "Passive";
+            this.tabPassive.Enter += new System.EventHandler(this.tabPassive_Enter);
+            // 
+            // lblPassiveIntegralGain
+            // 
+            this.lblPassiveIntegralGain.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPassiveIntegralGain.ForeColor = System.Drawing.Color.Black;
+            this.lblPassiveIntegralGain.Location = new System.Drawing.Point(34, 166);
+            this.lblPassiveIntegralGain.Name = "lblPassiveIntegralGain";
+            this.lblPassiveIntegralGain.Size = new System.Drawing.Size(93, 35);
+            this.lblPassiveIntegralGain.TabIndex = 564;
+            this.lblPassiveIntegralGain.Text = "888";
+            this.lblPassiveIntegralGain.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // hsbarPassiveIntegralGain
+            // 
+            this.hsbarPassiveIntegralGain.LargeChange = 1;
+            this.hsbarPassiveIntegralGain.Location = new System.Drawing.Point(139, 165);
+            this.hsbarPassiveIntegralGain.Maximum = 10;
+            this.hsbarPassiveIntegralGain.Minimum = 1;
+            this.hsbarPassiveIntegralGain.Name = "hsbarPassiveIntegralGain";
+            this.hsbarPassiveIntegralGain.Size = new System.Drawing.Size(292, 40);
+            this.hsbarPassiveIntegralGain.TabIndex = 563;
+            this.hsbarPassiveIntegralGain.Value = 4;
+            this.hsbarPassiveIntegralGain.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hsbarPassiveIntegralGain_Scroll);
+            // 
+            // label7
+            // 
+            this.label7.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.Black;
+            this.label7.Location = new System.Drawing.Point(154, 137);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(262, 24);
+            this.label7.TabIndex = 565;
+            this.label7.Text = "Integral  Gain";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblCurvatureGain
+            // 
+            this.lblCurvatureGain.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCurvatureGain.ForeColor = System.Drawing.Color.Black;
+            this.lblCurvatureGain.Location = new System.Drawing.Point(66, 54);
+            this.lblCurvatureGain.Name = "lblCurvatureGain";
+            this.lblCurvatureGain.Size = new System.Drawing.Size(61, 35);
+            this.lblCurvatureGain.TabIndex = 561;
+            this.lblCurvatureGain.Text = "888";
+            this.lblCurvatureGain.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // hsbarPassiveCurvature
+            // 
+            this.hsbarPassiveCurvature.LargeChange = 1;
+            this.hsbarPassiveCurvature.Location = new System.Drawing.Point(139, 53);
+            this.hsbarPassiveCurvature.Maximum = 200;
+            this.hsbarPassiveCurvature.Name = "hsbarPassiveCurvature";
+            this.hsbarPassiveCurvature.Size = new System.Drawing.Size(292, 40);
+            this.hsbarPassiveCurvature.TabIndex = 560;
+            this.hsbarPassiveCurvature.Value = 4;
+            this.hsbarPassiveCurvature.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hsbarPassiveCurvature_Scroll);
+            // 
+            // label6
+            // 
+            this.label6.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.Black;
+            this.label6.Location = new System.Drawing.Point(154, 25);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(262, 24);
+            this.label6.TabIndex = 562;
+            this.label6.Text = "Curvature Gain";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // imageList2
             // 
             this.imageList2.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList2.ImageStream")));
@@ -1149,35 +1212,64 @@
             this.imageList2.Images.SetKeyName(4, "Sensors.png");
             this.imageList2.Images.SetKeyName(5, "Con_ImplementMenu.png");
             // 
-            // cboxIsActiveSteering
+            // nudAntennaHeight_Tool
             // 
-            this.cboxIsActiveSteering.Appearance = System.Windows.Forms.Appearance.Button;
-            this.cboxIsActiveSteering.BackColor = System.Drawing.Color.AliceBlue;
-            this.cboxIsActiveSteering.Checked = true;
-            this.cboxIsActiveSteering.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cboxIsActiveSteering.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
-            this.cboxIsActiveSteering.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cboxIsActiveSteering.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboxIsActiveSteering.ForeColor = System.Drawing.Color.Black;
-            this.cboxIsActiveSteering.Location = new System.Drawing.Point(64, 195);
-            this.cboxIsActiveSteering.Name = "cboxIsActiveSteering";
-            this.cboxIsActiveSteering.Size = new System.Drawing.Size(120, 47);
-            this.cboxIsActiveSteering.TabIndex = 585;
-            this.cboxIsActiveSteering.Text = "Active";
-            this.cboxIsActiveSteering.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.cboxIsActiveSteering.UseVisualStyleBackColor = false;
-            this.cboxIsActiveSteering.Click += new System.EventHandler(this.cboxIsActiveSteering_Click);
+            this.nudAntennaHeight_Tool.Location = new System.Drawing.Point(53, 324);
+            this.nudAntennaHeight_Tool.Maximum = 5D;
+            this.nudAntennaHeight_Tool.Mode = Twol.UnitMode.Small;
+            this.nudAntennaHeight_Tool.Name = "nudAntennaHeight_Tool";
+            this.nudAntennaHeight_Tool.Size = new System.Drawing.Size(143, 56);
+            this.nudAntennaHeight_Tool.TabIndex = 580;
+            this.nudAntennaHeight_Tool.ValueChanged += new System.EventHandler(this.nudAntennaHeight_Tool_ValueChanged);
             // 
-            // label1
+            // nudAntennaOffset_Tool
             // 
-            this.label1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(53, 141);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(143, 51);
-            this.label1.TabIndex = 586;
-            this.label1.Text = "Active/Passive";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.nudAntennaOffset_Tool.Location = new System.Drawing.Point(305, 324);
+            this.nudAntennaOffset_Tool.Maximum = 5D;
+            this.nudAntennaOffset_Tool.Minimum = -5D;
+            this.nudAntennaOffset_Tool.Mode = Twol.UnitMode.Small;
+            this.nudAntennaOffset_Tool.Name = "nudAntennaOffset_Tool";
+            this.nudAntennaOffset_Tool.Size = new System.Drawing.Size(143, 56);
+            this.nudAntennaOffset_Tool.TabIndex = 582;
+            this.nudAntennaOffset_Tool.ValueChanged += new System.EventHandler(this.nudAntennaOffset_Tool_ValueChanged);
+            // 
+            // btnExpand
+            // 
+            this.btnExpand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnExpand.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnExpand.FlatAppearance.BorderColor = System.Drawing.SystemColors.AppWorkspace;
+            this.btnExpand.FlatAppearance.BorderSize = 0;
+            this.btnExpand.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExpand.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExpand.Image = global::Twol.Properties.Resources.ArrowRight;
+            this.btnExpand.Location = new System.Drawing.Point(299, 60);
+            this.btnExpand.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.btnExpand.Name = "btnExpand";
+            this.btnExpand.Size = new System.Drawing.Size(62, 37);
+            this.btnExpand.TabIndex = 329;
+            this.btnExpand.UseVisualStyleBackColor = true;
+            this.btnExpand.Click += new System.EventHandler(this.expandWindow_Click);
+            // 
+            // nudDeadZoneDelay
+            // 
+            this.nudDeadZoneDelay.Location = new System.Drawing.Point(224, 70);
+            this.nudDeadZoneDelay.Maximum = 10D;
+            this.nudDeadZoneDelay.Minimum = 1D;
+            this.nudDeadZoneDelay.Name = "nudDeadZoneDelay";
+            this.nudDeadZoneDelay.Size = new System.Drawing.Size(107, 36);
+            this.nudDeadZoneDelay.TabIndex = 542;
+            this.nudDeadZoneDelay.ValueChanged += new System.EventHandler(this.nudDeadZoneDelay_ValueChanged);
+            // 
+            // nudDeadZoneHeading
+            // 
+            this.nudDeadZoneHeading.DecimalPlaces = 1;
+            this.nudDeadZoneHeading.Location = new System.Drawing.Point(56, 71);
+            this.nudDeadZoneHeading.Maximum = 5D;
+            this.nudDeadZoneHeading.Minimum = 0.1D;
+            this.nudDeadZoneHeading.Name = "nudDeadZoneHeading";
+            this.nudDeadZoneHeading.Size = new System.Drawing.Size(107, 36);
+            this.nudDeadZoneHeading.TabIndex = 538;
+            this.nudDeadZoneHeading.ValueChanged += new System.EventHandler(this.nudDeadZoneHeading_ValueChanged);
             // 
             // FormToolSteer
             // 
@@ -1209,6 +1301,7 @@
             this.tabSteerSettings.ResumeLayout(false);
             this.tabOnTheLine.ResumeLayout(false);
             this.tabConfig.ResumeLayout(false);
+            this.tabPassive.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1294,5 +1387,12 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.CheckBox cboxIsActiveSteering;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TabPage tabPassive;
+        private System.Windows.Forms.Label lblCurvatureGain;
+        private System.Windows.Forms.HScrollBar hsbarPassiveCurvature;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblPassiveIntegralGain;
+        private System.Windows.Forms.HScrollBar hsbarPassiveIntegralGain;
+        private System.Windows.Forms.Label label7;
     }
 }

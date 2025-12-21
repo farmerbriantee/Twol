@@ -262,10 +262,9 @@ namespace Twol
         {
             chkDisplayBrightness.Checked = Settings.User.setDisplay_isBrightnessOn;
             chkDisplayFloor.Checked = Settings.User.setDisplay_isTextureOn;
-            chkDisplayOnlineTiles.Checked = Settings.User.setDisplay_isOnlineTilesOn;
+            chkDisplayMapping.Checked = Settings.User.isWorldMapOn;
             chkDisplayGrid.Checked = Settings.User.isGridOn;
             chkDisplaySpeedo.Checked = Settings.User.isSpeedoOn;
-            chkGPSCorrection.Checked = Settings.User.isGPSCorrectionLineOn;
 
             chkSvennArrow.Checked = Settings.User.setDisplay_isSvennArrowOn;
             chkDisplayExtraGuides.Checked = Settings.User.isSideGuideLines;

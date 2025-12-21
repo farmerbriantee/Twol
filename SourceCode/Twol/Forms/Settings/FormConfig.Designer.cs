@@ -289,35 +289,28 @@
             this.tabDHeading = new System.Windows.Forms.TabPage();
             this.lblAlarmStopsAutoSteer = new System.Windows.Forms.Label();
             this.label118 = new System.Windows.Forms.Label();
+            this.label167 = new System.Windows.Forms.Label();
             this.label113 = new System.Windows.Forms.Label();
+            this.lblFusionIMU = new System.Windows.Forms.Label();
             this.lblRTKFixAlarm = new System.Windows.Forms.Label();
+            this.lblIMU = new System.Windows.Forms.Label();
             this.gboxDual = new System.Windows.Forms.GroupBox();
-            this.labelAutoSwitchDualFixSpeed = new System.Windows.Forms.Label();
-            this.nudAutoSwitchDualFixSpeed = new Twol.NudlessNumericUpDown();
-            this.cboxIsAutoSwitchDualFixOn = new System.Windows.Forms.CheckBox();
             this.nudDualReverseDistance = new Twol.NudlessNumericUpDown();
             this.lblReverseDistance = new System.Windows.Forms.Label();
             this.pictureBox13 = new System.Windows.Forms.PictureBox();
             this.nudDualHeadingOffset = new Twol.NudlessNumericUpDown();
             this.lblHeadingOffset = new System.Windows.Forms.Label();
+            this.lblGPS = new System.Windows.Forms.Label();
             this.gboxSingle = new System.Windows.Forms.GroupBox();
             this.lblHeadingDistance = new System.Windows.Forms.Label();
             this.cboxMinGPSStep = new System.Windows.Forms.CheckBox();
-            this.label167 = new System.Windows.Forms.Label();
-            this.lblFusionIMU = new System.Windows.Forms.Label();
-            this.lblIMU = new System.Windows.Forms.Label();
-            this.lblGPS = new System.Windows.Forms.Label();
-            this.hsbarFusion = new System.Windows.Forms.HScrollBar();
-            this.lblFusion = new System.Windows.Forms.Label();
-            this.lblIMUFusion = new System.Windows.Forms.Label();
             this.cboxIsReverseOn = new System.Windows.Forms.CheckBox();
             this.lblFixToFixDistance = new System.Windows.Forms.Label();
             this.lblMinGPSStep = new System.Windows.Forms.Label();
-            this.headingGroupBox = new System.Windows.Forms.GroupBox();
-            this.rbtnHeadingVTG = new System.Windows.Forms.RadioButton();
-            this.rbtnHeadingHDT = new System.Windows.Forms.RadioButton();
-            this.rbtnHeadingFix = new System.Windows.Forms.RadioButton();
+            this.hsbarFusion = new System.Windows.Forms.HScrollBar();
+            this.lblFusion = new System.Windows.Forms.Label();
             this.cboxIsRTK_KillAutoSteer = new System.Windows.Forms.CheckBox();
+            this.lblIMUFusion = new System.Windows.Forms.Label();
             this.cboxIsRTK = new System.Windows.Forms.CheckBox();
             this.tabDRoll = new System.Windows.Forms.TabPage();
             this.btnRollOffsetUp = new Twol.RepeatButton();
@@ -470,8 +463,8 @@
             this.lblFieldMenu = new System.Windows.Forms.Label();
             this.cboxFeatureTram = new System.Windows.Forms.CheckBox();
             this.tabDisplay = new System.Windows.Forms.TabPage();
-            this.label10 = new System.Windows.Forms.Label();
-            this.chkGPSCorrection = new System.Windows.Forms.CheckBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.chkDisplayMapping = new System.Windows.Forms.CheckBox();
             this.lblLineSmooth = new System.Windows.Forms.Label();
             this.chkLineSmooth = new System.Windows.Forms.CheckBox();
             this.lblSectionLines = new System.Windows.Forms.Label();
@@ -551,7 +544,6 @@
             this.gboxDual.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).BeginInit();
             this.gboxSingle.SuspendLayout();
-            this.headingGroupBox.SuspendLayout();
             this.tabDRoll.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
             this.tabUTurn.SuspendLayout();
@@ -4323,12 +4315,18 @@
             this.tabDHeading.BackColor = System.Drawing.Color.WhiteSmoke;
             this.tabDHeading.Controls.Add(this.lblAlarmStopsAutoSteer);
             this.tabDHeading.Controls.Add(this.label118);
+            this.tabDHeading.Controls.Add(this.label167);
             this.tabDHeading.Controls.Add(this.label113);
+            this.tabDHeading.Controls.Add(this.lblFusionIMU);
             this.tabDHeading.Controls.Add(this.lblRTKFixAlarm);
+            this.tabDHeading.Controls.Add(this.lblIMU);
             this.tabDHeading.Controls.Add(this.gboxDual);
+            this.tabDHeading.Controls.Add(this.lblGPS);
             this.tabDHeading.Controls.Add(this.gboxSingle);
-            this.tabDHeading.Controls.Add(this.headingGroupBox);
+            this.tabDHeading.Controls.Add(this.hsbarFusion);
+            this.tabDHeading.Controls.Add(this.lblFusion);
             this.tabDHeading.Controls.Add(this.cboxIsRTK_KillAutoSteer);
+            this.tabDHeading.Controls.Add(this.lblIMUFusion);
             this.tabDHeading.Controls.Add(this.cboxIsRTK);
             this.tabDHeading.Location = new System.Drawing.Point(4, 44);
             this.tabDHeading.Name = "tabDHeading";
@@ -4343,7 +4341,7 @@
             this.lblAlarmStopsAutoSteer.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.lblAlarmStopsAutoSteer.ForeColor = System.Drawing.Color.Black;
             this.lblAlarmStopsAutoSteer.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblAlarmStopsAutoSteer.Location = new System.Drawing.Point(209, 475);
+            this.lblAlarmStopsAutoSteer.Location = new System.Drawing.Point(640, 458);
             this.lblAlarmStopsAutoSteer.Name = "lblAlarmStopsAutoSteer";
             this.lblAlarmStopsAutoSteer.Size = new System.Drawing.Size(228, 27);
             this.lblAlarmStopsAutoSteer.TabIndex = 478;
@@ -4364,6 +4362,18 @@
             this.label118.Text = "0 to Disable";
             this.label118.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // label167
+            // 
+            this.label167.AutoSize = true;
+            this.label167.Font = new System.Drawing.Font("Tahoma", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label167.ForeColor = System.Drawing.Color.Black;
+            this.label167.Location = new System.Drawing.Point(186, 411);
+            this.label167.Name = "label167";
+            this.label167.Size = new System.Drawing.Size(122, 23);
+            this.label167.TabIndex = 479;
+            this.label167.Text = "Default: 70%";
+            this.label167.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // label113
             // 
             this.label113.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -4378,6 +4388,17 @@
             this.label113.Text = "Fix Jump Distance (cm) ";
             this.label113.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // lblFusionIMU
+            // 
+            this.lblFusionIMU.AutoSize = true;
+            this.lblFusionIMU.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFusionIMU.ForeColor = System.Drawing.Color.Black;
+            this.lblFusionIMU.Location = new System.Drawing.Point(191, 352);
+            this.lblFusionIMU.Name = "lblFusionIMU";
+            this.lblFusionIMU.Size = new System.Drawing.Size(95, 39);
+            this.lblFusionIMU.TabIndex = 476;
+            this.lblFusionIMU.Text = "90%";
+            // 
             // lblRTKFixAlarm
             // 
             this.lblRTKFixAlarm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -4385,78 +4406,43 @@
             this.lblRTKFixAlarm.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.lblRTKFixAlarm.ForeColor = System.Drawing.Color.Black;
             this.lblRTKFixAlarm.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblRTKFixAlarm.Location = new System.Drawing.Point(34, 475);
+            this.lblRTKFixAlarm.Location = new System.Drawing.Point(465, 458);
             this.lblRTKFixAlarm.Name = "lblRTKFixAlarm";
             this.lblRTKFixAlarm.Size = new System.Drawing.Size(127, 29);
             this.lblRTKFixAlarm.TabIndex = 471;
             this.lblRTKFixAlarm.Text = "RTK Fix Alarm";
             this.lblRTKFixAlarm.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
+            // lblIMU
+            // 
+            this.lblIMU.Font = new System.Drawing.Font("Tahoma", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblIMU.ForeColor = System.Drawing.Color.ForestGreen;
+            this.lblIMU.Location = new System.Drawing.Point(238, 315);
+            this.lblIMU.Name = "lblIMU";
+            this.lblIMU.Size = new System.Drawing.Size(76, 23);
+            this.lblIMU.TabIndex = 475;
+            this.lblIMU.Text = "IMU <";
+            this.lblIMU.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // gboxDual
             // 
             this.gboxDual.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.gboxDual.Controls.Add(this.labelAutoSwitchDualFixSpeed);
-            this.gboxDual.Controls.Add(this.nudAutoSwitchDualFixSpeed);
-            this.gboxDual.Controls.Add(this.cboxIsAutoSwitchDualFixOn);
             this.gboxDual.Controls.Add(this.nudDualReverseDistance);
             this.gboxDual.Controls.Add(this.lblReverseDistance);
             this.gboxDual.Controls.Add(this.pictureBox13);
             this.gboxDual.Controls.Add(this.nudDualHeadingOffset);
             this.gboxDual.Controls.Add(this.lblHeadingOffset);
             this.gboxDual.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gboxDual.Location = new System.Drawing.Point(3, 116);
+            this.gboxDual.Location = new System.Drawing.Point(3, 18);
             this.gboxDual.Name = "gboxDual";
-            this.gboxDual.Size = new System.Drawing.Size(417, 346);
+            this.gboxDual.Size = new System.Drawing.Size(373, 277);
             this.gboxDual.TabIndex = 471;
             this.gboxDual.TabStop = false;
             this.gboxDual.Text = "Dual Antenna Settings";
             // 
-            // labelAutoSwitchDualFixSpeed
-            // 
-            this.labelAutoSwitchDualFixSpeed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.labelAutoSwitchDualFixSpeed.BackColor = System.Drawing.Color.Transparent;
-            this.labelAutoSwitchDualFixSpeed.Font = new System.Drawing.Font("Tahoma", 14.25F);
-            this.labelAutoSwitchDualFixSpeed.ForeColor = System.Drawing.Color.Black;
-            this.labelAutoSwitchDualFixSpeed.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.labelAutoSwitchDualFixSpeed.Location = new System.Drawing.Point(39, 301);
-            this.labelAutoSwitchDualFixSpeed.Name = "labelAutoSwitchDualFixSpeed";
-            this.labelAutoSwitchDualFixSpeed.Size = new System.Drawing.Size(184, 23);
-            this.labelAutoSwitchDualFixSpeed.TabIndex = 501;
-            this.labelAutoSwitchDualFixSpeed.Text = "Switch speed";
-            this.labelAutoSwitchDualFixSpeed.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // nudAutoSwitchDualFixSpeed
-            // 
-            this.nudAutoSwitchDualFixSpeed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudAutoSwitchDualFixSpeed.Location = new System.Drawing.Point(229, 294);
-            this.nudAutoSwitchDualFixSpeed.Maximum = 8D;
-            this.nudAutoSwitchDualFixSpeed.Minimum = 1D;
-            this.nudAutoSwitchDualFixSpeed.Mode = Twol.UnitMode.Speed;
-            this.nudAutoSwitchDualFixSpeed.Name = "nudAutoSwitchDualFixSpeed";
-            this.nudAutoSwitchDualFixSpeed.Size = new System.Drawing.Size(127, 42);
-            this.nudAutoSwitchDualFixSpeed.TabIndex = 500;
-            // 
-            // cboxIsAutoSwitchDualFixOn
-            // 
-            this.cboxIsAutoSwitchDualFixOn.Appearance = System.Windows.Forms.Appearance.Button;
-            this.cboxIsAutoSwitchDualFixOn.BackColor = System.Drawing.Color.AliceBlue;
-            this.cboxIsAutoSwitchDualFixOn.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
-            this.cboxIsAutoSwitchDualFixOn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cboxIsAutoSwitchDualFixOn.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboxIsAutoSwitchDualFixOn.ForeColor = System.Drawing.Color.Black;
-            this.cboxIsAutoSwitchDualFixOn.Location = new System.Drawing.Point(30, 246);
-            this.cboxIsAutoSwitchDualFixOn.Name = "cboxIsAutoSwitchDualFixOn";
-            this.cboxIsAutoSwitchDualFixOn.Size = new System.Drawing.Size(326, 33);
-            this.cboxIsAutoSwitchDualFixOn.TabIndex = 484;
-            this.cboxIsAutoSwitchDualFixOn.Text = "Auto Dual <-> Fix";
-            this.cboxIsAutoSwitchDualFixOn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.cboxIsAutoSwitchDualFixOn.UseVisualStyleBackColor = false;
-            this.cboxIsAutoSwitchDualFixOn.CheckedChanged += new System.EventHandler(this.cboxIsAutoSwitchDualFixOn_CheckedChanged);
-            // 
             // nudDualReverseDistance
             // 
-            this.nudDualReverseDistance.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudDualReverseDistance.Location = new System.Drawing.Point(212, 164);
+            this.nudDualReverseDistance.Location = new System.Drawing.Point(195, 208);
             this.nudDualReverseDistance.Maximum = 0.9D;
             this.nudDualReverseDistance.Minimum = 0.1D;
             this.nudDualReverseDistance.Mode = Twol.UnitMode.Small;
@@ -4467,14 +4453,13 @@
             // 
             // lblReverseDistance
             // 
-            this.lblReverseDistance.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblReverseDistance.BackColor = System.Drawing.Color.Transparent;
             this.lblReverseDistance.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.lblReverseDistance.ForeColor = System.Drawing.Color.Black;
             this.lblReverseDistance.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblReverseDistance.Location = new System.Drawing.Point(35, 157);
+            this.lblReverseDistance.Location = new System.Drawing.Point(6, 203);
             this.lblReverseDistance.Name = "lblReverseDistance";
-            this.lblReverseDistance.Size = new System.Drawing.Size(186, 60);
+            this.lblReverseDistance.Size = new System.Drawing.Size(186, 57);
             this.lblReverseDistance.TabIndex = 473;
             this.lblReverseDistance.Text = "Reverse Distance (m)";
             this.lblReverseDistance.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -4483,7 +4468,7 @@
             // 
             this.pictureBox13.BackgroundImage = global::Twol.Properties.Resources.Con_SourcesHead;
             this.pictureBox13.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox13.Location = new System.Drawing.Point(19, 34);
+            this.pictureBox13.Location = new System.Drawing.Point(41, 60);
             this.pictureBox13.Name = "pictureBox13";
             this.pictureBox13.Size = new System.Drawing.Size(130, 109);
             this.pictureBox13.TabIndex = 471;
@@ -4491,9 +4476,8 @@
             // 
             // nudDualHeadingOffset
             // 
-            this.nudDualHeadingOffset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.nudDualHeadingOffset.DecimalPlaces = 1;
-            this.nudDualHeadingOffset.Location = new System.Drawing.Point(212, 82);
+            this.nudDualHeadingOffset.Location = new System.Drawing.Point(195, 110);
             this.nudDualHeadingOffset.Minimum = -100D;
             this.nudDualHeadingOffset.Name = "nudDualHeadingOffset";
             this.nudDualHeadingOffset.Size = new System.Drawing.Size(144, 52);
@@ -4502,37 +4486,40 @@
             // 
             // lblHeadingOffset
             // 
-            this.lblHeadingOffset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblHeadingOffset.BackColor = System.Drawing.Color.Transparent;
             this.lblHeadingOffset.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.lblHeadingOffset.ForeColor = System.Drawing.Color.Black;
             this.lblHeadingOffset.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblHeadingOffset.Location = new System.Drawing.Point(191, 30);
+            this.lblHeadingOffset.Location = new System.Drawing.Point(174, 58);
             this.lblHeadingOffset.Name = "lblHeadingOffset";
             this.lblHeadingOffset.Size = new System.Drawing.Size(186, 46);
             this.lblHeadingOffset.TabIndex = 469;
             this.lblHeadingOffset.Text = "Heading Offset (Degree)";
             this.lblHeadingOffset.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
+            // lblGPS
+            // 
+            this.lblGPS.Font = new System.Drawing.Font("Tahoma", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGPS.ForeColor = System.Drawing.Color.Red;
+            this.lblGPS.Location = new System.Drawing.Point(498, 315);
+            this.lblGPS.Name = "lblGPS";
+            this.lblGPS.Size = new System.Drawing.Size(69, 23);
+            this.lblGPS.TabIndex = 474;
+            this.lblGPS.Text = "> GPS";
+            this.lblGPS.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // gboxSingle
             // 
             this.gboxSingle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.gboxSingle.Controls.Add(this.lblHeadingDistance);
             this.gboxSingle.Controls.Add(this.cboxMinGPSStep);
-            this.gboxSingle.Controls.Add(this.label167);
-            this.gboxSingle.Controls.Add(this.lblFusionIMU);
-            this.gboxSingle.Controls.Add(this.lblIMU);
-            this.gboxSingle.Controls.Add(this.lblGPS);
-            this.gboxSingle.Controls.Add(this.hsbarFusion);
-            this.gboxSingle.Controls.Add(this.lblFusion);
-            this.gboxSingle.Controls.Add(this.lblIMUFusion);
             this.gboxSingle.Controls.Add(this.cboxIsReverseOn);
             this.gboxSingle.Controls.Add(this.lblFixToFixDistance);
             this.gboxSingle.Controls.Add(this.lblMinGPSStep);
             this.gboxSingle.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gboxSingle.Location = new System.Drawing.Point(443, 116);
+            this.gboxSingle.Location = new System.Drawing.Point(443, 18);
             this.gboxSingle.Name = "gboxSingle";
-            this.gboxSingle.Size = new System.Drawing.Size(446, 451);
+            this.gboxSingle.Size = new System.Drawing.Size(446, 277);
             this.gboxSingle.TabIndex = 308;
             this.gboxSingle.TabStop = false;
             this.gboxSingle.Text = "Single Antenna Settings";
@@ -4569,85 +4556,6 @@
             this.cboxMinGPSStep.UseVisualStyleBackColor = false;
             this.cboxMinGPSStep.Click += new System.EventHandler(this.cboxMinGPSStePGN_Click);
             // 
-            // label167
-            // 
-            this.label167.AutoSize = true;
-            this.label167.Font = new System.Drawing.Font("Tahoma", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label167.ForeColor = System.Drawing.Color.Black;
-            this.label167.Location = new System.Drawing.Point(7, 299);
-            this.label167.Name = "label167";
-            this.label167.Size = new System.Drawing.Size(122, 23);
-            this.label167.TabIndex = 479;
-            this.label167.Text = "Default: 70%";
-            this.label167.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblFusionIMU
-            // 
-            this.lblFusionIMU.AutoSize = true;
-            this.lblFusionIMU.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFusionIMU.ForeColor = System.Drawing.Color.Black;
-            this.lblFusionIMU.Location = new System.Drawing.Point(12, 240);
-            this.lblFusionIMU.Name = "lblFusionIMU";
-            this.lblFusionIMU.Size = new System.Drawing.Size(95, 39);
-            this.lblFusionIMU.TabIndex = 476;
-            this.lblFusionIMU.Text = "90%";
-            // 
-            // lblIMU
-            // 
-            this.lblIMU.Font = new System.Drawing.Font("Tahoma", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblIMU.ForeColor = System.Drawing.Color.ForestGreen;
-            this.lblIMU.Location = new System.Drawing.Point(59, 203);
-            this.lblIMU.Name = "lblIMU";
-            this.lblIMU.Size = new System.Drawing.Size(76, 23);
-            this.lblIMU.TabIndex = 475;
-            this.lblIMU.Text = "IMU <";
-            this.lblIMU.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblGPS
-            // 
-            this.lblGPS.Font = new System.Drawing.Font("Tahoma", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblGPS.ForeColor = System.Drawing.Color.Red;
-            this.lblGPS.Location = new System.Drawing.Point(319, 203);
-            this.lblGPS.Name = "lblGPS";
-            this.lblGPS.Size = new System.Drawing.Size(69, 23);
-            this.lblGPS.TabIndex = 474;
-            this.lblGPS.Text = "> GPS";
-            this.lblGPS.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // hsbarFusion
-            // 
-            this.hsbarFusion.LargeChange = 1;
-            this.hsbarFusion.Location = new System.Drawing.Point(109, 233);
-            this.hsbarFusion.Maximum = 60;
-            this.hsbarFusion.Minimum = 5;
-            this.hsbarFusion.Name = "hsbarFusion";
-            this.hsbarFusion.Size = new System.Drawing.Size(235, 58);
-            this.hsbarFusion.TabIndex = 471;
-            this.hsbarFusion.Value = 30;
-            this.hsbarFusion.ValueChanged += new System.EventHandler(this.hsbarFusion_ValueChanged);
-            // 
-            // lblFusion
-            // 
-            this.lblFusion.AutoSize = true;
-            this.lblFusion.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFusion.ForeColor = System.Drawing.Color.Black;
-            this.lblFusion.Location = new System.Drawing.Point(349, 240);
-            this.lblFusion.Name = "lblFusion";
-            this.lblFusion.Size = new System.Drawing.Size(95, 39);
-            this.lblFusion.TabIndex = 473;
-            this.lblFusion.Text = "30%";
-            // 
-            // lblIMUFusion
-            // 
-            this.lblIMUFusion.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblIMUFusion.ForeColor = System.Drawing.Color.Black;
-            this.lblIMUFusion.Location = new System.Drawing.Point(136, 203);
-            this.lblIMUFusion.Name = "lblIMUFusion";
-            this.lblIMUFusion.Size = new System.Drawing.Size(181, 25);
-            this.lblIMUFusion.TabIndex = 472;
-            this.lblIMUFusion.Text = "Fusion";
-            this.lblIMUFusion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // cboxIsReverseOn
             // 
             this.cboxIsReverseOn.Appearance = System.Windows.Forms.Appearance.Button;
@@ -4658,7 +4566,7 @@
             this.cboxIsReverseOn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboxIsReverseOn.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxIsReverseOn.ForeColor = System.Drawing.Color.Black;
-            this.cboxIsReverseOn.Location = new System.Drawing.Point(118, 372);
+            this.cboxIsReverseOn.Location = new System.Drawing.Point(138, 169);
             this.cboxIsReverseOn.Name = "cboxIsReverseOn";
             this.cboxIsReverseOn.Size = new System.Drawing.Size(226, 52);
             this.cboxIsReverseOn.TabIndex = 465;
@@ -4690,74 +4598,28 @@
             this.lblMinGPSStep.Text = "Minimum GPS Step";
             this.lblMinGPSStep.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // headingGroupBox
+            // hsbarFusion
             // 
-            this.headingGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.headingGroupBox.Controls.Add(this.rbtnHeadingVTG);
-            this.headingGroupBox.Controls.Add(this.rbtnHeadingHDT);
-            this.headingGroupBox.Controls.Add(this.rbtnHeadingFix);
-            this.headingGroupBox.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.headingGroupBox.ForeColor = System.Drawing.Color.Black;
-            this.headingGroupBox.Location = new System.Drawing.Point(63, -26);
-            this.headingGroupBox.Name = "headingGroupBox";
-            this.headingGroupBox.Size = new System.Drawing.Size(820, 132);
-            this.headingGroupBox.TabIndex = 85;
-            this.headingGroupBox.TabStop = false;
-            this.headingGroupBox.Text = "Antenna Type";
+            this.hsbarFusion.LargeChange = 1;
+            this.hsbarFusion.Location = new System.Drawing.Point(288, 345);
+            this.hsbarFusion.Maximum = 60;
+            this.hsbarFusion.Minimum = 5;
+            this.hsbarFusion.Name = "hsbarFusion";
+            this.hsbarFusion.Size = new System.Drawing.Size(235, 58);
+            this.hsbarFusion.TabIndex = 471;
+            this.hsbarFusion.Value = 30;
+            this.hsbarFusion.ValueChanged += new System.EventHandler(this.hsbarFusion_ValueChanged);
             // 
-            // rbtnHeadingVTG
+            // lblFusion
             // 
-            this.rbtnHeadingVTG.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rbtnHeadingVTG.BackColor = System.Drawing.Color.AliceBlue;
-            this.rbtnHeadingVTG.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
-            this.rbtnHeadingVTG.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rbtnHeadingVTG.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbtnHeadingVTG.ForeColor = System.Drawing.Color.Black;
-            this.rbtnHeadingVTG.Image = global::Twol.Properties.Resources.Con_SourcesGPSSingle;
-            this.rbtnHeadingVTG.Location = new System.Drawing.Point(471, 44);
-            this.rbtnHeadingVTG.Name = "rbtnHeadingVTG";
-            this.rbtnHeadingVTG.Size = new System.Drawing.Size(117, 82);
-            this.rbtnHeadingVTG.TabIndex = 3;
-            this.rbtnHeadingVTG.Text = "VTG";
-            this.rbtnHeadingVTG.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.rbtnHeadingVTG.UseVisualStyleBackColor = false;
-            this.rbtnHeadingVTG.CheckedChanged += new System.EventHandler(this.rbtnHeadingFix_CheckedChanged);
-            // 
-            // rbtnHeadingHDT
-            // 
-            this.rbtnHeadingHDT.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rbtnHeadingHDT.BackColor = System.Drawing.Color.AliceBlue;
-            this.rbtnHeadingHDT.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
-            this.rbtnHeadingHDT.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rbtnHeadingHDT.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbtnHeadingHDT.ForeColor = System.Drawing.Color.Black;
-            this.rbtnHeadingHDT.Image = global::Twol.Properties.Resources.Con_SourcesGPSDual;
-            this.rbtnHeadingHDT.Location = new System.Drawing.Point(0, 44);
-            this.rbtnHeadingHDT.Name = "rbtnHeadingHDT";
-            this.rbtnHeadingHDT.Size = new System.Drawing.Size(117, 82);
-            this.rbtnHeadingHDT.TabIndex = 2;
-            this.rbtnHeadingHDT.Text = "Dual";
-            this.rbtnHeadingHDT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.rbtnHeadingHDT.UseVisualStyleBackColor = false;
-            this.rbtnHeadingHDT.CheckedChanged += new System.EventHandler(this.rbtnHeadingFix_CheckedChanged);
-            // 
-            // rbtnHeadingFix
-            // 
-            this.rbtnHeadingFix.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rbtnHeadingFix.BackColor = System.Drawing.Color.AliceBlue;
-            this.rbtnHeadingFix.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
-            this.rbtnHeadingFix.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rbtnHeadingFix.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbtnHeadingFix.ForeColor = System.Drawing.Color.Black;
-            this.rbtnHeadingFix.Image = global::Twol.Properties.Resources.Con_SourcesGPSSingle;
-            this.rbtnHeadingFix.Location = new System.Drawing.Point(637, 44);
-            this.rbtnHeadingFix.Name = "rbtnHeadingFix";
-            this.rbtnHeadingFix.Size = new System.Drawing.Size(117, 82);
-            this.rbtnHeadingFix.TabIndex = 0;
-            this.rbtnHeadingFix.Text = "Fix";
-            this.rbtnHeadingFix.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.rbtnHeadingFix.UseVisualStyleBackColor = false;
-            this.rbtnHeadingFix.CheckedChanged += new System.EventHandler(this.rbtnHeadingFix_CheckedChanged);
+            this.lblFusion.AutoSize = true;
+            this.lblFusion.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFusion.ForeColor = System.Drawing.Color.Black;
+            this.lblFusion.Location = new System.Drawing.Point(528, 352);
+            this.lblFusion.Name = "lblFusion";
+            this.lblFusion.Size = new System.Drawing.Size(95, 39);
+            this.lblFusion.TabIndex = 473;
+            this.lblFusion.Text = "30%";
             // 
             // cboxIsRTK_KillAutoSteer
             // 
@@ -4769,12 +4631,23 @@
             this.cboxIsRTK_KillAutoSteer.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxIsRTK_KillAutoSteer.ForeColor = System.Drawing.Color.Black;
             this.cboxIsRTK_KillAutoSteer.Image = global::Twol.Properties.Resources.AutoSteerOff;
-            this.cboxIsRTK_KillAutoSteer.Location = new System.Drawing.Point(273, 508);
+            this.cboxIsRTK_KillAutoSteer.Location = new System.Drawing.Point(704, 491);
             this.cboxIsRTK_KillAutoSteer.Name = "cboxIsRTK_KillAutoSteer";
             this.cboxIsRTK_KillAutoSteer.Size = new System.Drawing.Size(103, 69);
             this.cboxIsRTK_KillAutoSteer.TabIndex = 477;
             this.cboxIsRTK_KillAutoSteer.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.cboxIsRTK_KillAutoSteer.UseVisualStyleBackColor = false;
+            // 
+            // lblIMUFusion
+            // 
+            this.lblIMUFusion.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblIMUFusion.ForeColor = System.Drawing.Color.Black;
+            this.lblIMUFusion.Location = new System.Drawing.Point(315, 315);
+            this.lblIMUFusion.Name = "lblIMUFusion";
+            this.lblIMUFusion.Size = new System.Drawing.Size(181, 25);
+            this.lblIMUFusion.TabIndex = 472;
+            this.lblIMUFusion.Text = "Fusion";
+            this.lblIMUFusion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // cboxIsRTK
             // 
@@ -4786,7 +4659,7 @@
             this.cboxIsRTK.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxIsRTK.ForeColor = System.Drawing.Color.Black;
             this.cboxIsRTK.Image = global::Twol.Properties.Resources.Con_SourcesRTKAlarm;
-            this.cboxIsRTK.Location = new System.Drawing.Point(46, 508);
+            this.cboxIsRTK.Location = new System.Drawing.Point(477, 491);
             this.cboxIsRTK.Name = "cboxIsRTK";
             this.cboxIsRTK.Size = new System.Drawing.Size(103, 69);
             this.cboxIsRTK.TabIndex = 309;
@@ -7395,8 +7268,8 @@
             // tabDisplay
             // 
             this.tabDisplay.BackColor = System.Drawing.Color.Gainsboro;
-            this.tabDisplay.Controls.Add(this.label10);
-            this.tabDisplay.Controls.Add(this.chkGPSCorrection);
+            this.tabDisplay.Controls.Add(this.label12);
+            this.tabDisplay.Controls.Add(this.chkDisplayMapping);
             this.tabDisplay.Controls.Add(this.lblLineSmooth);
             this.tabDisplay.Controls.Add(this.chkLineSmooth);
             this.tabDisplay.Controls.Add(this.lblSectionLines);
@@ -7433,44 +7306,46 @@
             this.tabDisplay.TabIndex = 25;
             this.tabDisplay.Text = "fDisp";
             // 
-            // label10
+            // label12
             // 
-            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label10.BackColor = System.Drawing.Color.Transparent;
-            this.label10.ForeColor = System.Drawing.Color.Black;
-            this.label10.Location = new System.Drawing.Point(27, 557);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(120, 16);
-            this.label10.TabIndex = 541;
-            this.label10.Text = "GPS Correction Line";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label12.BackColor = System.Drawing.Color.Transparent;
+            this.label12.ForeColor = System.Drawing.Color.Black;
+            this.label12.Location = new System.Drawing.Point(27, 445);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(120, 16);
+            this.label12.TabIndex = 543;
+            this.label12.Text = "Mapping";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // chkGPSCorrection
+            // chkDisplayMapping
             // 
-            this.chkGPSCorrection.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkGPSCorrection.Appearance = System.Windows.Forms.Appearance.Button;
-            this.chkGPSCorrection.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.chkGPSCorrection.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.chkGPSCorrection.FlatAppearance.BorderSize = 2;
-            this.chkGPSCorrection.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
-            this.chkGPSCorrection.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkGPSCorrection.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkGPSCorrection.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.chkGPSCorrection.Image = global::Twol.Properties.Resources.ConS_SourcesRoll;
-            this.chkGPSCorrection.Location = new System.Drawing.Point(37, 485);
-            this.chkGPSCorrection.Name = "chkGPSCorrection";
-            this.chkGPSCorrection.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.chkGPSCorrection.Size = new System.Drawing.Size(100, 69);
-            this.chkGPSCorrection.TabIndex = 540;
-            this.chkGPSCorrection.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.chkGPSCorrection.UseVisualStyleBackColor = false;
+            this.chkDisplayMapping.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkDisplayMapping.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkDisplayMapping.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.chkDisplayMapping.Checked = true;
+            this.chkDisplayMapping.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkDisplayMapping.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.chkDisplayMapping.FlatAppearance.BorderSize = 2;
+            this.chkDisplayMapping.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
+            this.chkDisplayMapping.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chkDisplayMapping.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkDisplayMapping.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.chkDisplayMapping.Image = global::Twol.Properties.Resources.FieldStats;
+            this.chkDisplayMapping.Location = new System.Drawing.Point(37, 373);
+            this.chkDisplayMapping.Name = "chkDisplayMapping";
+            this.chkDisplayMapping.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.chkDisplayMapping.Size = new System.Drawing.Size(100, 69);
+            this.chkDisplayMapping.TabIndex = 542;
+            this.chkDisplayMapping.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chkDisplayMapping.UseVisualStyleBackColor = false;
             // 
             // lblLineSmooth
             // 
             this.lblLineSmooth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblLineSmooth.BackColor = System.Drawing.Color.Transparent;
             this.lblLineSmooth.ForeColor = System.Drawing.Color.Black;
-            this.lblLineSmooth.Location = new System.Drawing.Point(27, 445);
+            this.lblLineSmooth.Location = new System.Drawing.Point(27, 565);
             this.lblLineSmooth.Name = "lblLineSmooth";
             this.lblLineSmooth.Size = new System.Drawing.Size(120, 16);
             this.lblLineSmooth.TabIndex = 539;
@@ -7490,7 +7365,7 @@
             this.chkLineSmooth.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkLineSmooth.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkLineSmooth.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.chkLineSmooth.Location = new System.Drawing.Point(37, 373);
+            this.chkLineSmooth.Location = new System.Drawing.Point(37, 493);
             this.chkLineSmooth.Name = "chkLineSmooth";
             this.chkLineSmooth.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.chkLineSmooth.Size = new System.Drawing.Size(100, 69);
@@ -8167,11 +8042,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.tabDHeading.ResumeLayout(false);
+            this.tabDHeading.PerformLayout();
             this.gboxDual.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).EndInit();
             this.gboxSingle.ResumeLayout(false);
             this.gboxSingle.PerformLayout();
-            this.headingGroupBox.ResumeLayout(false);
             this.tabDRoll.ResumeLayout(false);
             this.tabDRoll.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
@@ -8229,9 +8104,6 @@
         private System.Windows.Forms.Button btnSubToolSettings;
         private System.Windows.Forms.Button btnSubToolType;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.GroupBox headingGroupBox;
-        private System.Windows.Forms.RadioButton rbtnHeadingHDT;
-        private System.Windows.Forms.RadioButton rbtnHeadingFix;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label lblRollFilterPercent;
@@ -8670,13 +8542,9 @@
         private System.Windows.Forms.Label lblSumWheelbase;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label lblSumLookAheadOff;
-        private System.Windows.Forms.RadioButton rbtnHeadingVTG;
-        private System.Windows.Forms.CheckBox cboxIsAutoSwitchDualFixOn;
-        private System.Windows.Forms.Label labelAutoSwitchDualFixSpeed;
-        private NudlessNumericUpDown nudAutoSwitchDualFixSpeed;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.CheckBox chkGPSCorrection;
         private System.Windows.Forms.Label label88;
         private System.Windows.Forms.CheckBox cboxFeatureHideContour;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.CheckBox chkDisplayMapping;
     }
 }

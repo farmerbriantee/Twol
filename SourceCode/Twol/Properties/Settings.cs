@@ -133,7 +133,7 @@ namespace Twol
             public bool isSimulatorOn = true;
             public bool isSkyOn = true;
             public bool isSpeedoOn = false;
-            public bool isGPSCorrectionLineOn = false;
+            public bool isWorldMapOn = false;
 
             public bool sound_isAutoSteerOn = true;
             public bool sound_isSectionsOn = true;
@@ -176,9 +176,6 @@ namespace Twol
 
         public sealed class VehicleSettings
         {
-            public double setAutoSwitchDualFixSpeed = 2.0;
-            public bool setAutoSwitchDualFixOn = false;
-
             public bool setArdMac_isDanfoss = false;
 
             public byte setArdMac_hydLowerTime = 4;
@@ -242,8 +239,6 @@ namespace Twol
             public bool setF_isWorkSwitchEnabled = false;
             public bool setF_isWorkSwitchManualSections = false;
 
-            public string setGPS_headingFromWhichSource = "Fix";
-
             public bool setGPS_isRTK = false;
             public bool setGPS_isRTK_KillAutoSteer = false;
 
@@ -301,7 +296,7 @@ namespace Twol
             public int setVehicle_vehicleType = 0;
             public int set_uTurnStyle = 0;
             public int set_youSkipWidth = 1;
-            public int set_youTurnExtensionLength = 20;
+            public int set_youTurnExtensionLength = 4;
 
             public LoadResult Load()
             {

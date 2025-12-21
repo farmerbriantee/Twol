@@ -36,6 +36,8 @@ namespace Twol
 
         public int currentLocationIndex;
         public double pivotDistanceErrorLast, pivotDerivative;
+        private double segK = 0, bob = 0, bobAvg = 0;
+
 
         public CGuidance(FormGPS _f)
         {
@@ -47,7 +49,7 @@ namespace Twol
         {
             bool completeUturn = !Uturn;
             var vec2point = new vec2(Settings.Vehicle.setVehicle_isStanleyUsed ? steer : pivot);
-
+            
             if (Settings.Tool.setToolSteer.isGPSToolActive)
             {
                 //Tool GPS
@@ -162,7 +164,6 @@ namespace Twol
 
                 else// Pure Pursuit ------------------------------------------
                 {
-                    int curveCenter = B;
                     //integral slider is set to 0
                     if (mf.vehicle.purePursuitIntegralGain != 0 && !mf.isReverse)
                     {
@@ -237,8 +238,7 @@ namespace Twol
                             else distSoFar += tempDist;
                             start = curList[i];
                             i += count;
-                            curveCenter = i;
-
+                            
                             if (i < 0)
                             {
                                 if (!loop)
@@ -272,6 +272,79 @@ namespace Twol
                         }
                     }
 
+                    if (isPassiveSteering && distanceFromCurrentLineTool != 0 && !Settings.Tool.setToolSteer.isActiveSteering)
+                    {
+                        bob = distanceFromCurrentLineTool;
+
+                        if (!mf.trk.isHeadingSameWay)
+                        {
+                            bob *= -1.0;
+                        }
+
+                        if (bob > 0.5) bob = 0.5;
+                        else if (bob < -0.5) bob = -0.5;
+                    }
+
+                    else
+                    {
+                        bob = 0;
+                        bobAvg = 0;
+                    }
+
+                    vec3 p1 = curList[A];
+                    vec3 p2 = curList[B];
+
+                    double d = glm.Distance(p1, p2);
+
+                    double theta = p2.heading - p1.heading;
+                    if (theta > Math.PI)
+                        theta -= Math.PI;
+                    else if (theta < -Math.PI)
+                        theta += Math.PI;
+
+                    if (theta > glm.PIBy2)
+                        theta -= Math.PI;
+                    else if (theta < -glm.PIBy2)
+                        theta += Math.PI;
+
+                    double segCurv = ((2 * Math.Sin(theta / 2)) / -d) * Settings.Tool.setToolSteer.curvatureGain;
+                    if (segCurv > 2.0)
+                        segCurv = 2.0;
+                    if (segCurv < -2.0)
+                        segCurv = -2.0;
+
+                    segK = 0.9 * segK + 0.1 * segCurv;
+
+                    double gain = (Math.Abs(bob) - 0.5);
+                    gain = 0.5 + gain;
+                    gain *= (0.004 + Settings.Tool.setToolSteer.passiveIntegralGain);
+
+                    if (bob < 0) bobAvg -= gain;
+                    else bobAvg += gain;
+                    //bobAvg += (0.01 * bob);                    
+
+                    if (bobAvg > 0.5)
+                        bobAvg = 0.5;
+                    if (bobAvg < -0.5)
+                        bobAvg = -0.5;
+
+                    double dist = (segK- bobAvg);
+                    if (dist > 2.0)
+                        dist = 2.0;
+                    if (dist < -2.0)
+                        dist = -2.0;
+
+                    if (Uturn)
+                    {
+                        bobAvg = 0;
+                        dist = 0;
+                        segCurv = 0;
+                        isPassiveSteering = false;
+                    }
+
+                    goalPoint.easting += (Math.Sin(curList[B].heading + 1.57) * dist);
+                    goalPoint.northing += (Math.Cos(curList[B].heading + 1.57) * dist);
+
                     //calc "D" the distance from pivot axle to lookahead point
                     double goalPointDistanceSquared = glm.DistanceSquared(goalPoint, pivot);
 
@@ -303,20 +376,11 @@ namespace Twol
                     if (!isPassiveSteering && isPassiveTriggered)
                     {
                         if (Math.Abs(mf.vehicle.modeActualHeadingError) < 1.5
-                            && Math.Abs(distanceFromCurrentLine) < 0.25 && Math.Abs(distanceFromCurrentLineTool) < 0.25)
+                            && Math.Abs(distanceFromCurrentLine) < 0.10 && Math.Abs(distanceFromCurrentLineTool) < 0.20)
                             isPassiveSteering = true;
                     }
-                    //angular velocity in rads/sec  = 2PI * m/sec * radians/meters
-                    //double angVel = glm.twoPI * 0.277777 * mf.avgSpeed * (Math.Tan(glm.toRadians(steerAngleCT))) / mf.vehicle.wheelbase;
-
-                    //clamp the steering angle to not exceed safe angular velocity
-                    //if (Math.Abs(angVel) > mf.vehicle.maxAngularVelocity)
-                    //{
-                    //    steerAngleCT = glm.toDegrees(steerAngleCT > 0 ?
-                    //            (Math.Atan((mf.vehicle.wheelbase * mf.vehicle.maxAngularVelocity) / (glm.twoPI * mf.avgSpeed * 0.277777)))
-                    //        : (Math.Atan((mf.vehicle.wheelbase * -mf.vehicle.maxAngularVelocity) / (glm.twoPI * mf.avgSpeed * 0.277777))));
-                    //}
                 }
+
                 #endregion PurePursuit
 
                 if (!Uturn && mf.ahrs.imuRoll != 88888)

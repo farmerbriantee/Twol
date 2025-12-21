@@ -299,15 +299,15 @@ namespace Twol
 
             Settings.User.setDisplay_isTextureOn = chkDisplayFloor.Checked;
 
-            // Detect if online tiles setting changed
-            bool wasOnlineTilesOn = Settings.User.setDisplay_isOnlineTilesOn;
-            bool isOnlineTilesOn = chkDisplayOnlineTiles.Checked;
-            Settings.User.setDisplay_isOnlineTilesOn = isOnlineTilesOn;
+            // World map toggle (satellite tiles or GeoTIFF)
+            bool wasWorldMapOn = Settings.User.isWorldMapOn;
+            Settings.User.isWorldMapOn = chkDisplayMapping.Checked;
+            if (Settings.User.isWorldMapOn) Settings.User.setDisplay_isTextureOn = false;
 
             // If setting changed and a field is open, handle GeoTIFF loading
-            if (wasOnlineTilesOn != isOnlineTilesOn && mf.isFieldStarted)
+            if (wasWorldMapOn != Settings.User.isWorldMapOn && mf.isFieldStarted)
             {
-                if (isOnlineTilesOn)
+                if (Settings.User.isWorldMapOn)
                 {
                     // Turning ON - try to load GeoTIFF if it exists
                     string fieldPath = System.IO.Path.Combine(RegistrySettings.fieldsDirectory, mf.currentFieldDirectory);
@@ -319,11 +319,6 @@ namespace Twol
                             mf.TimedMessageBox(1500, "GeoTIFF", "Local imagery loaded");
                         }
                     }
-                    // Force tiles to refresh
-                    if (mf.worldMap != null)
-                    {
-                        mf.worldMap.isUpdateTilesRequired = true;
-                    }
                 }
                 else
                 {
@@ -334,7 +329,6 @@ namespace Twol
 
             Settings.User.isGridOn = chkDisplayGrid.Checked;
             Settings.User.isSpeedoOn = chkDisplaySpeedo.Checked;
-            Settings.User.isGPSCorrectionLineOn = chkGPSCorrection.Checked;
             Settings.User.isSideGuideLines = chkDisplayExtraGuides.Checked;
 
             Settings.User.setDisplay_isKeyboardOn = chkDisplayKeyboard.Checked;

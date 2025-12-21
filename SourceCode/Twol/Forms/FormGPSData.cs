@@ -53,22 +53,22 @@ namespace Twol
 
             lblAltitude.Text = mf.Altitude;
 
-            PointF tileXY = mf.map.WSG84ToTilePos(mf.pn.longitude, mf.pn.latitude, mf.map.ZoomLevel);
+            //PointF tileXY = mf.map.WSG84ToTilePos(mf.pn.longitude, mf.pn.latitude, mf.map.ZoomLevel);
 
-            // Show map source: GeoTIFF (offline) or Google Maps (online)
+            // Show map source: GeoTIFF (offline) or Online
             lblZ.Text = mf.map.IsGeoTiffLoaded
                 ? $"{mf.map.ZoomLevel} GeoTIFF"
                 : $"{mf.map.ZoomLevel} Online";
 
-            lblX.Text = tileXY.X.ToString("N2");
-            lblY.Text = tileXY.Y.ToString("N2");
-            //lblZ.Text = Settings.User.setDisplay_camZoom.ToString("N0");
+            //lblX.Text = tileXY.X.ToString("N2");
+            //lblY.Text = tileXY.Y.ToString("N2");
+            //lblCam.Text = Settings.User.setDisplay_camZoom.ToString("N0");
 
-            double mpp = (Math.Cos(mf.pn.latitude * Math.PI / 180) * 2 * Math.PI * 6378137) / (256 * Math.Pow(2, mf.map.ZoomLevel));
-            lblMPerTile.Text = (mpp *256).ToString("N3");
+            //double mpp = (Math.Cos(mf.pn.latitude * Math.PI / 180) * 2 * Math.PI * 6378137) / (256 * Math.Pow(2, mf.map.ZoomLevel));
+            //lblMPerTile.Text = (mpp *256).ToString("N3");
 
-            lblOriX.Text = (mf.pn.fix.easting / (mpp*256)).ToString("N2");
-            lblOriY.Text = (mf.pn.fix.northing / (mpp*256)).ToString("N2");
+            //lblOriX.Text = (mf.pn.fix.easting / (mpp*256)).ToString("N2");
+            //lblOriY.Text = (mf.pn.fix.northing / (mpp*256)).ToString("N2");
         }
 
         private void FormGPSData_Load(object sender, EventArgs e)
