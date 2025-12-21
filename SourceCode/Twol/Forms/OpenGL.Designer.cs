@@ -773,7 +773,8 @@ namespace Twol
                 }
 
                 //check if world map tiles need update
-                if (Settings.User.isWorldMapOn) worldMap.UpdateWorldMapTiles();
+                // Update tiles if online map is enabled OR if GeoTIFF is loaded
+                if (Settings.User.isWorldMapOn || map.IsGeoTiffLoaded) worldMap.UpdateWorldMapTiles();
             }
 
             #region No GPS

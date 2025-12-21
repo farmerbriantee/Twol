@@ -148,15 +148,7 @@ namespace Twol
                 tileCache = new ConcurrentBag<Tile>();
 
                 // Force WorldTileMap to refresh its textures immediately
-                if (mf.worldMap != null)
-                {
-                    mf.worldMap.isUpdateTilesRequired = true;
-                    // Reset all texture statuses to force reload from new provider
-                    for (int i = 0; i < mf.worldMap.mapTextureStatus.Length; i++)
-                    {
-                        mf.worldMap.mapTextureStatus[i] = (int)TexStatus.DefaultLoaded;
-                    }
-                }
+                mf.worldMap?.ForceRefresh();
 
                 Debug.WriteLine($"Loaded GeoTIFF: {geoTiffPath}");
                 return true;
@@ -183,15 +175,7 @@ namespace Twol
             tileCache = new ConcurrentBag<Tile>();
 
             // Force WorldTileMap to refresh its textures
-            if (mf.worldMap != null)
-            {
-                mf.worldMap.isUpdateTilesRequired = true;
-                // Reset all texture statuses to force reload
-                for (int i = 0; i < mf.worldMap.mapTextureStatus.Length; i++)
-                {
-                    mf.worldMap.mapTextureStatus[i] = (int)TexStatus.DefaultLoaded;
-                }
-            }
+            mf.worldMap?.ForceRefresh();
 
             Debug.WriteLine("Switched to online tile server");
         }
@@ -203,6 +187,10 @@ namespace Twol
         {
             _activeProvider = null; // Will fall back to _TileServer
             tileCache = new ConcurrentBag<Tile>();
+
+            // Force WorldTileMap to refresh its textures
+            mf.worldMap?.ForceRefresh();
+
             Debug.WriteLine("Using online tiles");
         }
 
@@ -404,7 +392,7 @@ namespace Twol
                 if (tile != null) return tile;
 
                 // If online tiles are disabled and no GeoTIFF is loaded, return null (green background)
-                if (!Settings.User.setDisplay_isOnlineTilesOn && !(_activeProvider is GeoTiffProvider))
+                if (!Settings.User.isWorldMapOn && !(_activeProvider is GeoTiffProvider))
                 {
                     return null;
                 }
