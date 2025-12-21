@@ -157,7 +157,8 @@
     <Compile Include="Classes\CHello.cs" />
     <Compile Include="Classes\Language.cs" />
     <Compile Include="Classes\Log.cs" />
-    <Compile Include="Classes\Tool\ToolTrack.cs" />
+    <Compile Include="Classes\Tool\CToolTracks.cs" />
+    <Compile Include="Classes\Tool\CToolTrk.cs" />
     <Compile Include="Mapping\Map.cs" />
     <Compile Include="Classes\CNozzle.cs" />
     <Compile Include="Classes\CPolygon.cs" />
