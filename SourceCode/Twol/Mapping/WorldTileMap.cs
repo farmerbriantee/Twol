@@ -87,7 +87,187 @@ namespace Twol.Mapping
 
         int originTileX = 0;
         int originTileY = 0;
-        bool isTileCoordsReset = true;
+        private bool isTileCoordsReset = true;
+
+        // GeoTIFF full image texture (for rendering without tile clipping)
+        private uint geoTiffTexture = 0;
+        private bool geoTiffTextureLoaded = false;
+        private double geoTiffEastingMin, geoTiffEastingMax;
+        private double geoTiffNorthingMin, geoTiffNorthingMax;
+        private string loadedGeoTiffPath = null;
+
+        /// <summary>
+        /// Forces a complete refresh of all tile coordinates and textures.
+        /// Call this when switching tile providers (e.g., GeoTIFF to online or vice versa).
+        /// </summary>
+        public void ForceRefresh()
+        {
+            isTileCoordsReset = true;
+
+            // Unload the full GeoTIFF texture so it gets reloaded on next draw
+            // This ensures the correct image is displayed when switching providers
+            UnloadGeoTiffFullTexture();
+
+            // Reset all tile statuses and coordinates to force re-download/re-extract
+            // Also clear the OpenGL textures to prevent old images from showing
+            for (int i = 0; i < 49; i++)
+            {
+                tileGridArr[i].Status = 0;
+                tileSetArr[i].Status = 0;
+
+                // Reset coordinates to invalid values to force reload
+                // This ensures tiles reload even if zoom level hasn't changed
+                tileGridArr[i].X = -1;
+                tileGridArr[i].Y = -1;
+                tileGridArr[i].Z = -1;
+
+                // Clear the OpenGL texture with transparent pixels
+                // This prevents old cached textures from appearing when zooming
+                if (mapTexture != null && mapTexture[i] != 0)
+                {
+                    ClearTexture(i);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Clears a single texture slot with transparent pixels.
+        /// </summary>
+        private void ClearTexture(int textureIndex)
+        {
+            try
+            {
+                // Create a transparent 256x256 image to clear the texture
+                using (var clearBitmap = new Bitmap(256, 256, System.Drawing.Imaging.PixelFormat.Format32bppArgb))
+                {
+                    using (var g = Graphics.FromImage(clearBitmap))
+                    {
+                        g.Clear(Color.Transparent);
+                    }
+
+                    var bitmapData = clearBitmap.LockBits(
+                        new Rectangle(0, 0, 256, 256),
+                        System.Drawing.Imaging.ImageLockMode.ReadOnly,
+                        System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+
+                    GL.BindTexture(TextureTarget.Texture2D, mapTexture[textureIndex]);
+                    GL.TexSubImage2D(TextureTarget.Texture2D, 0, 0, 0, 256, 256,
+                        PixelFormat.Rgba, PixelType.UnsignedByte, bitmapData.Scan0);
+
+                    clearBitmap.UnlockBits(bitmapData);
+                }
+            }
+            catch
+            {
+                // Ignore errors - texture might not be initialized yet
+            }
+        }
+
+        /// <summary>
+        /// Loads the full GeoTIFF image as a single OpenGL texture.
+        /// This allows rendering the complete satellite image without tile boundaries.
+        /// </summary>
+        public void LoadGeoTiffFullTexture()
+        {
+            if (!mf.map.IsGeoTiffLoaded)
+            {
+                UnloadGeoTiffFullTexture();
+                return;
+            }
+
+            var provider = mf.map.ActiveProvider as GeoTiffProvider;
+            if (provider == null)
+            {
+                UnloadGeoTiffFullTexture();
+                return;
+            }
+
+            // Check if already loaded for this GeoTIFF
+            if (geoTiffTextureLoaded && loadedGeoTiffPath == provider.FilePath)
+                return;
+
+            try
+            {
+                // Get the full image from the GeoTIFF
+                using (var fullImage = provider.GetFullImage(4096))
+                {
+                    if (fullImage == null)
+                    {
+                        UnloadGeoTiffFullTexture();
+                        return;
+                    }
+
+                    // Delete old texture if exists
+                    if (geoTiffTexture != 0)
+                    {
+                        GL.DeleteTexture(geoTiffTexture);
+                        geoTiffTexture = 0;
+                    }
+
+                    // Generate new texture
+                    geoTiffTexture = (uint)GL.GenTexture();
+                    GL.BindTexture(TextureTarget.Texture2D, geoTiffTexture);
+                    GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Linear);
+                    GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Linear);
+                    GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.ClampToEdge);
+                    GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.ClampToEdge);
+
+                    // Upload texture data
+                    var bmpData = fullImage.LockBits(
+                        new Rectangle(0, 0, fullImage.Width, fullImage.Height),
+                        System.Drawing.Imaging.ImageLockMode.ReadOnly,
+                        System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+
+                    GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba,
+                        fullImage.Width, fullImage.Height, 0,
+                        PixelFormat.Rgba, PixelType.UnsignedByte, bmpData.Scan0);
+
+                    fullImage.UnlockBits(bmpData);
+
+                    // Calculate GeoTIFF bounds in local coordinates (easting/northing from origin)
+                    var bounds = provider.Bounds;
+
+                    // Convert WGS84 bounds to local meters coordinates
+                    // Using the same coordinate system as the field (relative to CNMEA.lonStart/latStart)
+                    double metersPerDegreeLon = Math.Cos(CNMEA.latStart * Math.PI / 180.0) * 111319.5;
+                    double metersPerDegreeLat = 111319.5;
+
+                    geoTiffEastingMin = (bounds.MinLon - CNMEA.lonStart) * metersPerDegreeLon;
+                    geoTiffEastingMax = (bounds.MaxLon - CNMEA.lonStart) * metersPerDegreeLon;
+                    geoTiffNorthingMin = (bounds.MinLat - CNMEA.latStart) * metersPerDegreeLat;
+                    geoTiffNorthingMax = (bounds.MaxLat - CNMEA.latStart) * metersPerDegreeLat;
+
+                    geoTiffTextureLoaded = true;
+                    loadedGeoTiffPath = provider.FilePath;
+
+                    System.Diagnostics.Debug.WriteLine($"GeoTIFF full texture loaded: {fullImage.Width}x{fullImage.Height}");
+                    System.Diagnostics.Debug.WriteLine($"GeoTIFF bounds: E[{geoTiffEastingMin:F1} to {geoTiffEastingMax:F1}] N[{geoTiffNorthingMin:F1} to {geoTiffNorthingMax:F1}]");
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Failed to load GeoTIFF full texture: {ex.Message}");
+                UnloadGeoTiffFullTexture();
+            }
+        }
+
+        /// <summary>
+        /// Unloads the full GeoTIFF texture and frees OpenGL resources.
+        /// </summary>
+        public void UnloadGeoTiffFullTexture()
+        {
+            if (geoTiffTexture != 0)
+            {
+                try
+                {
+                    GL.DeleteTexture(geoTiffTexture);
+                }
+                catch { }
+                geoTiffTexture = 0;
+            }
+            geoTiffTextureLoaded = false;
+            loadedGeoTiffPath = null;
+        }
 
         double metersPerTile = 100;
 
@@ -241,7 +421,7 @@ namespace Twol.Mapping
                             {
                                 var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), System.Drawing.Imaging.ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
 
-                                // Keep memory in place, fill with new image 
+                                // Keep memory in place, fill with new image
                                 GL.TexSubImage2D(TextureTarget.Texture2D, 0, 0, 0, bitmapData.Width, bitmapData.Height, PixelFormat.Rgba, PixelType.UnsignedByte, bitmapData.Scan0);
                                 bitmap.UnlockBits(bitmapData);
 
@@ -254,8 +434,21 @@ namespace Twol.Mapping
                         }
                         else
                         {
-                            tileGridArr[texNum].Status++;
-                            if (!mf.isInternetConnected) tileGridArr[texNum].Status = 11; //stop trying if no internet
+                            // When GeoTIFF is loaded and tile is outside bounds, immediately mark as "no tile"
+                            // This prevents showing old cached textures from different zoom levels
+                            if (mf.map.IsGeoTiffLoaded)
+                            {
+                                // Mark as outside bounds - will show Floor2 (green/transparent) texture
+                                tileGridArr[texNum].X = tileSetArr[texNum].X;
+                                tileGridArr[texNum].Y = tileSetArr[texNum].Y;
+                                tileGridArr[texNum].Z = tileSetArr[texNum].Z;
+                                tileGridArr[texNum].Status = 11;
+                            }
+                            else
+                            {
+                                tileGridArr[texNum].Status++;
+                                if (!mf.isInternetConnected) tileGridArr[texNum].Status = 11; //stop trying if no internet
+                            }
                         }
                     }
                 }
@@ -279,8 +472,8 @@ namespace Twol.Mapping
 
             // Show map tiles if:
             // - GeoTIFF is loaded (always show, regardless of online tiles setting)
-            // - OR online tiles are enabled via isOnlineTilesOn setting
-            bool shouldShowTiles = mf.map.IsGeoTiffLoaded || Settings.User.setDisplay_isOnlineTilesOn;
+            // - OR online tiles are enabled via isWorldMapOn setting
+            bool shouldShowTiles = mf.map.IsGeoTiffLoaded || Settings.User.isWorldMapOn;
 
             // ALWAYS draw the green background first
             // This ensures transparent areas of GeoTIFF tiles show green instead of black
@@ -304,9 +497,9 @@ namespace Twol.Mapping
             GL.Disable(EnableCap.Texture2D);
 
             // Now draw map tiles on top if enabled
-            if (shouldShowTiles && mapTexture != null)
+            if (shouldShowTiles)
             {
-                // Enable blending so transparent GeoTIFF areas show the green background underneath
+                // Enable blending so transparent areas show the green background underneath
                 GL.Enable(EnableCap.Blend);
                 GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
                 GL.Enable(EnableCap.Texture2D);
@@ -314,34 +507,73 @@ namespace Twol.Mapping
                 // Reset color to white so texture colors are not tinted
                 GL.Color3(1.0f, 1.0f, 1.0f);
 
-                int tex = 0;
-                for (double i = -3; i < 4; i += 1)
+                // If GeoTIFF is loaded, try to use the full texture (no tile clipping)
+                if (mf.map.IsGeoTiffLoaded)
                 {
-                    for (double j = 3; j > -4; j -= 1)
+                    // Try to load the full GeoTIFF texture if not already loaded
+                    if (!geoTiffTextureLoaded)
                     {
-                        if (tileGridArr[tex].Status < 10)
-                            GL.BindTexture(TextureTarget.Texture2D, mapTexture[tex]);
-                        else
-                        {
-                            GL.BindTexture(TextureTarget.Texture2D, mf.texture[(int)FormGPS.textures.Floor2]);
-                        }
+                        LoadGeoTiffFullTexture();
+                    }
 
-                        double ii = (i + lastOriginToPivotInTilesX) * metersPerTile + offsetX;  //x
-                        double jj = (j + lastOriginToPivotInTilesY) * metersPerTile + offsetY;   //y
-                        double bitt = metersPerTile / 2;
+                    // Draw the full GeoTIFF as a single rectangle
+                    if (geoTiffTextureLoaded && geoTiffTexture != 0)
+                    {
+                        GL.BindTexture(TextureTarget.Texture2D, geoTiffTexture);
+
+                        // Draw a single quad covering the entire GeoTIFF bounds
                         GL.Begin(PrimitiveType.TriangleStrip);
+                        // Top-left
                         GL.TexCoord2(0.0, 0.0);
-                        GL.Vertex3(ii - bitt, jj + bitt, -0.10);
+                        GL.Vertex3(geoTiffEastingMin, geoTiffNorthingMax, -0.10);
+                        // Top-right
                         GL.TexCoord2(1.0, 0.0);
-                        GL.Vertex3(ii + bitt, jj + bitt, -0.10);
+                        GL.Vertex3(geoTiffEastingMax, geoTiffNorthingMax, -0.10);
+                        // Bottom-left
                         GL.TexCoord2(0.0, 1.0);
-                        GL.Vertex3(ii - bitt, jj - bitt, -0.10);
+                        GL.Vertex3(geoTiffEastingMin, geoTiffNorthingMin, -0.10);
+                        // Bottom-right
                         GL.TexCoord2(1.0, 1.0);
-                        GL.Vertex3(ii + bitt, jj - bitt, -0.10);
+                        GL.Vertex3(geoTiffEastingMax, geoTiffNorthingMin, -0.10);
                         GL.End();
-                        tex++;
                     }
                 }
+                else if (mapTexture != null)
+                {
+                    // Online tiles mode - draw 7x7 tile grid
+                    int tex = 0;
+                    for (double i = -3; i < 4; i += 1)
+                    {
+                        for (double j = 3; j > -4; j -= 1)
+                        {
+                            // Skip tiles that are out of bounds (Status >= 10)
+                            // This lets the gray field background show through
+                            if (tileGridArr[tex].Status >= 10)
+                            {
+                                tex++;
+                                continue;
+                            }
+
+                            GL.BindTexture(TextureTarget.Texture2D, mapTexture[tex]);
+
+                            double ii = (i + lastOriginToPivotInTilesX) * metersPerTile + offsetX;  //x
+                            double jj = (j + lastOriginToPivotInTilesY) * metersPerTile + offsetY;   //y
+                            double bitt = metersPerTile / 2;
+                            GL.Begin(PrimitiveType.TriangleStrip);
+                            GL.TexCoord2(0.0, 0.0);
+                            GL.Vertex3(ii - bitt, jj + bitt, -0.10);
+                            GL.TexCoord2(1.0, 0.0);
+                            GL.Vertex3(ii + bitt, jj + bitt, -0.10);
+                            GL.TexCoord2(0.0, 1.0);
+                            GL.Vertex3(ii - bitt, jj - bitt, -0.10);
+                            GL.TexCoord2(1.0, 1.0);
+                            GL.Vertex3(ii + bitt, jj - bitt, -0.10);
+                            GL.End();
+                            tex++;
+                        }
+                    }
+                }
+
                 GL.Disable(EnableCap.Texture2D);
                 GL.Disable(EnableCap.Blend);
             }

@@ -288,6 +288,108 @@ namespace Twol.Mapping
         }
 
         /// <summary>
+        /// Gets the full GeoTIFF image scaled to a maximum size.
+        /// Used for rendering the entire GeoTIFF as a single texture.
+        /// </summary>
+        /// <param name="maxSize">Maximum dimension (width or height) of the output image.</param>
+        /// <returns>The full GeoTIFF image, or null if failed.</returns>
+        public Bitmap GetFullImage(int maxSize = 4096)
+        {
+            if (_dataset == null)
+                return null;
+
+            try
+            {
+                // Calculate output dimensions maintaining aspect ratio
+                double aspectRatio = (double)_rasterWidth / _rasterHeight;
+                int outWidth, outHeight;
+
+                if (_rasterWidth > _rasterHeight)
+                {
+                    outWidth = Math.Min(_rasterWidth, maxSize);
+                    outHeight = (int)(outWidth / aspectRatio);
+                }
+                else
+                {
+                    outHeight = Math.Min(_rasterHeight, maxSize);
+                    outWidth = (int)(outHeight * aspectRatio);
+                }
+
+                // Ensure minimum size
+                outWidth = Math.Max(1, outWidth);
+                outHeight = Math.Max(1, outHeight);
+
+                var bitmap = new Bitmap(outWidth, outHeight, PixelFormat.Format32bppArgb);
+
+                int bandCount = Math.Min(_dataset.RasterCount, 3);
+                if (bandCount == 0)
+                {
+                    bitmap.Dispose();
+                    return null;
+                }
+
+                // Read each band
+                byte[][] bandData = new byte[3][];
+                for (int b = 0; b < 3; b++)
+                {
+                    bandData[b] = new byte[outWidth * outHeight];
+
+                    int bandIndex = b < bandCount ? b + 1 : 1;
+                    var band = _dataset.GetRasterBand(bandIndex);
+
+                    // Read entire raster and resample to output size
+                    band.ReadRaster(0, 0, _rasterWidth, _rasterHeight,
+                        bandData[b], outWidth, outHeight, 0, 0);
+                }
+
+                // Lock the bitmap for writing
+                var bmpData = bitmap.LockBits(
+                    new Rectangle(0, 0, outWidth, outHeight),
+                    ImageLockMode.WriteOnly,
+                    PixelFormat.Format32bppArgb);
+
+                try
+                {
+                    int stride = bmpData.Stride;
+                    byte[] pixels = new byte[stride * outHeight];
+
+                    // Copy the GeoTIFF data
+                    for (int row = 0; row < outHeight; row++)
+                    {
+                        for (int col = 0; col < outWidth; col++)
+                        {
+                            int srcIdx = row * outWidth + col;
+                            int dstIdx = row * stride + col * 4;
+
+                            // BGRA format for 32bpp Bitmap
+                            pixels[dstIdx] = bandData[2][srcIdx];     // Blue
+                            pixels[dstIdx + 1] = bandData[1][srcIdx]; // Green
+                            pixels[dstIdx + 2] = bandData[0][srcIdx]; // Red
+                            pixels[dstIdx + 3] = 255;                  // Alpha (opaque)
+                        }
+                    }
+
+                    Marshal.Copy(pixels, 0, bmpData.Scan0, pixels.Length);
+                }
+                finally
+                {
+                    bitmap.UnlockBits(bmpData);
+                }
+
+                return bitmap;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Gets the raster dimensions.
+        /// </summary>
+        public (int Width, int Height) RasterSize => (_rasterWidth, _rasterHeight);
+
+        /// <summary>
         /// Releases resources used by this tile provider.
         /// </summary>
         public void Dispose()
