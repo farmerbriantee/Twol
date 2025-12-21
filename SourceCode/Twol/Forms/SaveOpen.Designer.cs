@@ -369,9 +369,9 @@ namespace Twol
                 string fieldPath = Path.Combine(RegistrySettings.fieldsDirectory, currentFieldDirectory);
                 string geoTiffPath = Path.Combine(fieldPath, "satellite.tif");
 
-                // Only load GeoTIFF if online tiles setting is enabled
+                // Only load GeoTIFF if world map setting is enabled
                 // When disabled, user wants green background only (no GeoTIFF, no online tiles)
-                if (Settings.User.setDisplay_isOnlineTilesOn && File.Exists(geoTiffPath))
+                if (Settings.User.isWorldMapOn && File.Exists(geoTiffPath))
                 {
                     // Load existing GeoTIFF
                     if (map.LoadGeoTiff(geoTiffPath))

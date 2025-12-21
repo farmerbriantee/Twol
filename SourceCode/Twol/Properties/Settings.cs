@@ -69,7 +69,6 @@ namespace Twol
             public bool setDisplay_isStartFullScreen = false;
             public bool setDisplay_isSvennArrowOn = false;
             public bool setDisplay_isTextureOn = false;
-            public bool setDisplay_isOnlineTilesOn = false;
 
             public int setDisplay_brightness = 40;
             public int setDisplay_brightnessSystem = 40;

@@ -488,7 +488,6 @@
             this.chkSvennArrow = new System.Windows.Forms.CheckBox();
             this.chkDisplayBrightness = new System.Windows.Forms.CheckBox();
             this.chkDisplayFloor = new System.Windows.Forms.CheckBox();
-            this.chkDisplayOnlineTiles = new System.Windows.Forms.CheckBox();
             this.chkDisplayKeyboard = new System.Windows.Forms.CheckBox();
             this.chkDisplayPolygons = new System.Windows.Forms.CheckBox();
             this.chkDisplayStartFullScreen = new System.Windows.Forms.CheckBox();
@@ -7291,7 +7290,6 @@
             this.tabDisplay.Controls.Add(this.chkSvennArrow);
             this.tabDisplay.Controls.Add(this.chkDisplayBrightness);
             this.tabDisplay.Controls.Add(this.chkDisplayFloor);
-            this.tabDisplay.Controls.Add(this.chkDisplayOnlineTiles);
             this.tabDisplay.Controls.Add(this.chkDisplayKeyboard);
             this.tabDisplay.Controls.Add(this.chkDisplayPolygons);
             this.tabDisplay.Controls.Add(this.chkDisplayStartFullScreen);
@@ -7698,26 +7696,6 @@
             this.chkDisplayFloor.TabIndex = 524;
             this.chkDisplayFloor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.chkDisplayFloor.UseVisualStyleBackColor = false;
-            //
-            // chkDisplayOnlineTiles
-            //
-            this.chkDisplayOnlineTiles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkDisplayOnlineTiles.Appearance = System.Windows.Forms.Appearance.Button;
-            this.chkDisplayOnlineTiles.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.chkDisplayOnlineTiles.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.chkDisplayOnlineTiles.FlatAppearance.BorderSize = 2;
-            this.chkDisplayOnlineTiles.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
-            this.chkDisplayOnlineTiles.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkDisplayOnlineTiles.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkDisplayOnlineTiles.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.chkDisplayOnlineTiles.Image = global::Twol.Properties.Resources.MappingOn;
-            this.chkDisplayOnlineTiles.Location = new System.Drawing.Point(143, 252);
-            this.chkDisplayOnlineTiles.Name = "chkDisplayOnlineTiles";
-            this.chkDisplayOnlineTiles.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.chkDisplayOnlineTiles.Size = new System.Drawing.Size(100, 69);
-            this.chkDisplayOnlineTiles.TabIndex = 530;
-            this.chkDisplayOnlineTiles.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.chkDisplayOnlineTiles.UseVisualStyleBackColor = false;
             //
             // chkDisplayKeyboard
             // 
@@ -8411,7 +8389,6 @@
         private System.Windows.Forms.CheckBox chkDisplayBrightness;
         private System.Windows.Forms.Label lblFieldTexture;
         private System.Windows.Forms.CheckBox chkDisplayFloor;
-        private System.Windows.Forms.CheckBox chkDisplayOnlineTiles;
         private System.Windows.Forms.Label lblPolygons;
         private System.Windows.Forms.Label lblKeyboard;
         private System.Windows.Forms.Label lblStartFullScreen;

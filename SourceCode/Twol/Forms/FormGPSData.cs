@@ -54,12 +54,6 @@ namespace Twol
             lblAltitude.Text = mf.Altitude;
 
             //PointF tileXY = mf.map.WSG84ToTilePos(mf.pn.longitude, mf.pn.latitude, mf.map.ZoomLevel);
-
-            // Show map source: GeoTIFF (offline) or Online
-            lblZ.Text = mf.map.IsGeoTiffLoaded
-                ? $"{mf.map.ZoomLevel} GeoTIFF"
-                : $"{mf.map.ZoomLevel} Online";
-
             //lblX.Text = tileXY.X.ToString("N2");
             //lblY.Text = tileXY.Y.ToString("N2");
             //lblCam.Text = Settings.User.setDisplay_camZoom.ToString("N0");
