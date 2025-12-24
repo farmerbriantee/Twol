@@ -28,6 +28,8 @@ namespace Twol
             ITileServer[] tileServers = new ITileServer[]
             {
                 new BingMapsHybridTileServer(),
+                //new GoogleMapsSatelliteTileServer(userAgent),
+
                 //new BingMapsRoadsTileServer(),
                 //new OpenStreetMapTileServer(userAgent: "Map Control AOG"),
                 new OfflineTileServer(),

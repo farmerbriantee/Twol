@@ -27,8 +27,6 @@ namespace Twol
             label51.Text = gStr.Get(gs.gsDeadzone);
             label49.Text = gStr.Get(gs.gsHeading);
             label54.Text = gStr.Get(gs.gsOnDelay);
-
-            lblGain.Text = gStr.Get(gs.gsProportionalGain);
         }
 
         private void FormSteer_Load(object sender, EventArgs e)
@@ -48,8 +46,6 @@ namespace Twol
                 Top = 0;
                 Left = 0;
             }
-
-            cboxGPSTool.Checked = Settings.Tool.setToolSteer.isGPSToolActive;
 
             //settings
             hsbarPGain_Tool.Value = Settings.Tool.setToolSteer.gainP;
@@ -82,13 +78,14 @@ namespace Twol
             nudAntennaHeight_Tool.Value = Settings.Tool.setToolSteer.antennaHeight;
             nudAntennaOffset_Tool.Value = Settings.Tool.setToolSteer.antennaOffset;
 
-            cboxIsActiveSteering.Checked = Settings.Tool.setToolSteer.isActiveSteering;
-            cboxIsActiveSteering.Text = cboxIsActiveSteering.Checked ? "Active" : "Passive";
+            cboxIsFollowCurrent.Checked = Settings.Tool.setToolSteer.isFollowCurrent;
+            cboxIsPassiveSteering.Checked = Settings.Tool.setToolSteer.isPassiveSteering;
+            cboxIsFollowToolLine.Checked = Settings.Tool.setToolSteer.isFollowToolLine;
+            cboxIsFollowPivot.Checked = Settings.Tool.setToolSteer.isFollowPivot;
         }
 
         private void FormSteer_FormClosing(object sender, FormClosingEventArgs e)
         {
-
             //settings
             Settings.Tool.setToolSteer.gainP = (byte)hsbarPGain_Tool.Value;
             Settings.Tool.setToolSteer.integral = (byte)hsbarIntegral_Tool.Value;
@@ -139,7 +136,6 @@ namespace Twol
 
             lblPWMDisplay.Text = mf.mc.pwmToolDisplay.ToString();
 
-
             //tool settings
             if (toolSend && toolCounterSettings > 4)
             {
@@ -179,15 +175,158 @@ namespace Twol
             }
         }
 
-        #region Tab Passive
+        private void expandWindow_Click(object sender, EventArgs e)
+        {
+            if (windowSizeState++ > 0) windowSizeState = 0;
+            if (windowSizeState == 1)
+            {
+                this.Size = new System.Drawing.Size(1060, 550);
+                btnExpand.Image = Properties.Resources.ArrowLeft;
+            }
+            else if (windowSizeState == 0)
+            {
+                this.Size = new System.Drawing.Size(390, 550);
+                btnExpand.Image = Properties.Resources.ArrowRight;
+            }
+        }
+
+        // Gain
+        private void hsbarPGain_Tool_Scroll(object sender, ScrollEventArgs e)
+        {
+            lblPGain_Tool.Text = e.NewValue.ToString();
+            toolSend = true;
+            toolCounterSettings = 0;
+        }
+        private void hsbarHighPWM_Tool_Scroll(object sender, ScrollEventArgs e)
+        {
+            lblHighPWM_Tool.Text = e.NewValue.ToString();
+            toolSend = true;
+            toolCounterSettings = 0;
+        }
+        private void hsbarMinPWM_Tool_Scroll(object sender, ScrollEventArgs e)
+        {
+            lblMinPWM_Tool.Text = e.NewValue.ToString();
+            toolSend = true;
+            toolCounterSettings = 0;
+        }
+
+        // WAS_CPD
+        private void btnZeroWAS_Tool_Click(object sender, EventArgs e)
+        {
+            hsbarZeroWAS_Tool.Value += (int)(hsbarCPD_Tool.Value * -mf.mc.actualToolAngleDegrees);
+            lblZeroWAS_Tool.Text = (hsbarZeroWAS_Tool.Value / (double)(hsbarCPD_Tool.Value)).ToString("N2");
+            toolSend = true;
+            toolCounterSettings = 0;
+        }
+        private void hsbarZeroWAS_Tool_Scroll(object sender, ScrollEventArgs e)
+        {
+            lblZeroWAS_Tool.Text = (e.NewValue / (double)(hsbarCPD_Tool.Value)).ToString("N2");
+            toolSend = true;
+            toolCounterSettings = 0;
+        }
+        private void hsbarCPD_Tool_Scroll(object sender, ScrollEventArgs e)
+        {
+            lblCPD_Tool.Text = e.NewValue.ToString();
+
+            lblCPD_Tool.Text = hsbarCPD_Tool.Value.ToString();
+
+            lblZeroWAS_Tool.Text = (hsbarZeroWAS_Tool.Value / (double)(hsbarCPD_Tool.Value)).ToString("N2");
+            toolSend = true;
+            toolCounterSettings = 0;
+        }
+        private void hsbarAckermann_Tool_Scroll(object sender, ScrollEventArgs e)
+        {
+            lblAckermann_Tool.Text = e.NewValue.ToString();
+            toolSend = true;
+            toolCounterSettings = 0;
+        }
+        private void hsbarMaxSteerAngle_Tool_Scroll(object sender, ScrollEventArgs e)
+        {
+            lblMaxSteerAngle_Tool.Text = e.NewValue.ToString();
+            toolSend2 = true;
+            toolCounterConfig = 0;
+        }
+
+        //Integral
+        private void hsbarAcquireFactor_ValueChanged(object sender, EventArgs e)
+        {
+            mf.vehicle.goalPointAcquireFactor = hsbarAcquireFactor.Value * 0.01;
+            lblAcquireFactor.Text = mf.vehicle.goalPointAcquireFactor.ToString();
+        }
+        private void hsbarIntegral_Tool_Scroll(object sender, ScrollEventArgs e)
+        {
+            lblIntegral_Tool.Text = e.NewValue.ToString();
+            toolSend = true;
+            toolCounterSettings = 0;
+        }
+
+        // DeadZone
+        private void nudDeadZoneHeading_ValueChanged(object sender, EventArgs e)
+        {
+        }
+        private void nudDeadZoneDelay_ValueChanged(object sender, EventArgs e)
+        {
+        }
+
+
+        #region Mode
+
+        private void ResetMode()
+        {
+            //default all off
+            Settings.Tool.setToolSteer.isGPSToolActive = (cboxIsFollowCurrent.Checked || cboxIsPassiveSteering.Checked || cboxIsFollowPivot.Checked || cboxIsFollowToolLine.Checked);
+        }
+
+        private void cboxIsFollowCurrent_Click(object sender, EventArgs e)
+        {
+            cboxIsPassiveSteering.Checked = Settings.Tool.setToolSteer.isPassiveSteering = false;
+            Settings.Tool.setToolSteer.isFollowPivot = cboxIsFollowPivot.Checked = false;
+            Settings.Tool.setToolSteer.isFollowToolLine = cboxIsFollowToolLine.Checked = false;
+
+            Settings.Tool.setToolSteer.isFollowCurrent = cboxIsFollowCurrent.Checked;
+            ResetMode();
+        }
+
+        private void cboxIsFollowPivot_Click(object sender, EventArgs e)
+        {
+            cboxIsFollowCurrent.Checked = Settings.Tool.setToolSteer.isFollowCurrent = false;
+            cboxIsPassiveSteering.Checked = Settings.Tool.setToolSteer.isPassiveSteering = false;
+            Settings.Tool.setToolSteer.isFollowToolLine = cboxIsFollowToolLine.Checked = false;
+
+            Settings.Tool.setToolSteer.isFollowPivot = cboxIsFollowPivot.Checked;
+            ResetMode();
+        }
+
+        private void cboxIsFollowToolLine_Click(object sender, EventArgs e)
+        {
+            cboxIsFollowCurrent.Checked = Settings.Tool.setToolSteer.isFollowCurrent = false;
+            cboxIsPassiveSteering.Checked = Settings.Tool.setToolSteer.isPassiveSteering = false;
+            Settings.Tool.setToolSteer.isFollowPivot = cboxIsFollowPivot.Checked = false;
+
+            Settings.Tool.setToolSteer.isFollowToolLine = cboxIsFollowToolLine.Checked;
+            ResetMode();
+        }
+
+        private void cboxIsPassiveSteering_Click(object sender, EventArgs e)
+        {
+            cboxIsFollowCurrent.Checked = Settings.Tool.setToolSteer.isFollowCurrent = false;
+            Settings.Tool.setToolSteer.isFollowPivot = cboxIsFollowPivot.Checked = false;
+            Settings.Tool.setToolSteer.isFollowToolLine = cboxIsFollowToolLine.Checked = false;
+
+            Settings.Tool.setToolSteer.isPassiveSteering = cboxIsPassiveSteering.Checked;
+            ResetMode();
+        }
+
+        #endregion
+
+        #region Passive
         private void tabPassive_Enter(object sender, EventArgs e)
         {
-            lblCurvatureGain.Text = Settings.Tool.setToolSteer.curvatureGain.ToString("N1");
             hsbarPassiveCurvature.Value = (int)(Settings.Tool.setToolSteer.curvatureGain * 10);
+            lblCurvatureGain.Text = Settings.Tool.setToolSteer.curvatureGain.ToString("N1");
 
+            hsbarPassiveIntegralGain.Value = (int)(Settings.Tool.setToolSteer.passiveIntegralGain * 1000);
             lblPassiveIntegralGain.Text = (Settings.Tool.setToolSteer.passiveIntegralGain * 1000).ToString("N0");
-            hsbarPassiveCurvature.Value = (int)(Settings.Tool.setToolSteer.passiveIntegralGain * 1000);
-
         }
 
         private void hsbarPassiveCurvature_Scroll(object sender, ScrollEventArgs e)
@@ -196,6 +335,7 @@ namespace Twol
 
             lblCurvatureGain.Text = Settings.Tool.setToolSteer.curvatureGain.ToString("N1");
         }
+
         private void hsbarPassiveIntegralGain_Scroll(object sender, ScrollEventArgs e)
         {
             Settings.Tool.setToolSteer.passiveIntegralGain = ((double)(e.NewValue) * 0.001);
@@ -203,43 +343,18 @@ namespace Twol
             lblPassiveIntegralGain.Text = (Settings.Tool.setToolSteer.passiveIntegralGain * 1000).ToString("N0");
         }
 
+        #endregion
+
+        #region Tab Active
+        private void cboxIsSteerNotSlide_Click(object sender, EventArgs e)
+        {
+            toolSend2 = true;
+            toolCounterConfig = 0;
+        }
 
         #endregion
 
-
-        #region Tab On the Line
-
-        private void tabOnTheLine_Enter(object sender, EventArgs e)
-        {
-
-            label20.Text = glm.unitsInCm;
-        }
-
-        private void tabOnTheLine_Leave(object sender, EventArgs e)
-        {
-        }
-
-        #endregion Tab On the Line
-
-        #region Tab Tool Steer
-
-        private void tabTool_Enter(object sender, EventArgs e)
-        {
-        }
-
-        private void tabTool_Leave(object sender, EventArgs e)
-        {
-        }
-
-        private void cboxGPSTool_Click(object sender, EventArgs e)
-        {
-            Settings.Tool.setToolSteer.isGPSToolActive = cboxGPSTool.Checked;
-            mf.YesMessageBox("You must restart TWOL to make changes to the networking");
-            Log.EventWriter("GPS Tool set to: " + cboxGPSTool.Checked.ToString());
-            Settings.Tool.setToolSteer.isGPSToolActive = Settings.Tool.setToolSteer.isGPSToolActive;
-        }
-
-        //config tool 
+        #region Tab Config
         private void cboxInvertWAS_Tool_Click(object sender, EventArgs e)
         {
             toolSend2 = true;
@@ -247,11 +362,6 @@ namespace Twol
         }
 
         private void cboxInvertSteer_Tool_Click(object sender, EventArgs e)
-        {
-            toolSend2 = true;
-            toolCounterConfig = 0;
-        }
-        private void cboxIsSteerNotSlide_Click(object sender, EventArgs e)
         {
             toolSend2 = true;
             toolCounterConfig = 0;
@@ -265,113 +375,6 @@ namespace Twol
         private void nudAntennaOffset_Tool_ValueChanged(object sender, EventArgs e)
         {
             Settings.Tool.setToolSteer.antennaOffset = nudAntennaOffset_Tool.Value;
-        }
-
-        private void hsbarMaxSteerAngle_Tool_Scroll(object sender, ScrollEventArgs e)
-        {
-            lblMaxSteerAngle_Tool.Text = e.NewValue.ToString();
-            toolSend2 = true;
-            toolCounterConfig = 0;
-        }
-
-        //settings tool
-        private void btnZeroWAS_Tool_Click(object sender, EventArgs e)
-        {
-            hsbarZeroWAS_Tool.Value += (int)(hsbarCPD_Tool.Value * -mf.mc.actualToolAngleDegrees);
-            lblZeroWAS_Tool.Text = (hsbarZeroWAS_Tool.Value / (double)(hsbarCPD_Tool.Value)).ToString("N2");
-            toolSend = true;
-            toolCounterSettings = 0;
-        }
-
-        private void hsbarPGain_Tool_Scroll(object sender, ScrollEventArgs e)
-        {
-            lblPGain_Tool.Text = e.NewValue.ToString();
-            toolSend = true;
-            toolCounterSettings = 0;
-        }
-
-        private void hsbarHighPWM_Tool_Scroll(object sender, ScrollEventArgs e)
-        {
-            lblHighPWM_Tool.Text = e.NewValue.ToString();
-            toolSend = true;
-            toolCounterSettings = 0;
-        }
-
-        private void hsbarMinPWM_Tool_Scroll(object sender, ScrollEventArgs e)
-        {
-            lblMinPWM_Tool.Text = e.NewValue.ToString();
-            toolSend = true;
-            toolCounterSettings = 0;
-        }
-
-        private void hsbarZeroWAS_Tool_Scroll(object sender, ScrollEventArgs e)
-        {
-            lblZeroWAS_Tool.Text = (e.NewValue / (double)(hsbarCPD_Tool.Value)).ToString("N2");
-            toolSend = true;
-            toolCounterSettings = 0;
-        }
-
-        private void hsbarCPD_Tool_Scroll(object sender, ScrollEventArgs e)
-        {
-            lblCPD_Tool.Text = e.NewValue.ToString();
-
-            lblCPD_Tool.Text = hsbarCPD_Tool.Value.ToString();
-
-            lblZeroWAS_Tool.Text = (hsbarZeroWAS_Tool.Value / (double)(hsbarCPD_Tool.Value)).ToString("N2");
-            toolSend = true;
-            toolCounterSettings = 0;
-        }
-
-        private void hsbarAckermann_Tool_Scroll(object sender, ScrollEventArgs e)
-        {
-            lblAckermann_Tool.Text = e.NewValue.ToString();
-            toolSend = true;
-            toolCounterSettings = 0;
-        }
-
-        private void hsbarIntegral_Tool_Scroll(object sender, ScrollEventArgs e)
-        {
-            lblIntegral_Tool.Text = e.NewValue.ToString();
-            toolSend = true;
-            toolCounterSettings = 0;
-        }
-
-
-        private void hsbarAcquireFactor_ValueChanged(object sender, EventArgs e)
-        {
-            mf.vehicle.goalPointAcquireFactor = hsbarAcquireFactor.Value * 0.01;
-            lblAcquireFactor.Text = mf.vehicle.goalPointAcquireFactor.ToString();
-        }
-
-        private void cboxIsActiveSteering_Click(object sender, EventArgs e)
-        {
-            cboxIsActiveSteering.Text = cboxIsActiveSteering.Checked ? "Active" : "Passive";
-            Settings.Tool.setToolSteer.isActiveSteering = cboxIsActiveSteering.Checked;
-        }
-
-        private void nudDeadZoneHeading_ValueChanged(object sender, EventArgs e)
-        {
-            mf.vehicle.deadZoneHeading = nudDeadZoneHeading.Value;
-        }
-
-        private void nudDeadZoneDelay_ValueChanged(object sender, EventArgs e)
-        {
-            mf.vehicle.deadZoneDelay = (int)nudDeadZoneDelay.Value;
-        }
-
-        private void expandWindow_Click(object sender, EventArgs e)
-        {
-            if (windowSizeState++ > 0) windowSizeState = 0;
-            if (windowSizeState == 1)
-            {
-                this.Size = new System.Drawing.Size(910, 550);
-                btnExpand.Image = Properties.Resources.ArrowLeft;
-            }
-            else if (windowSizeState == 0)
-            {
-                this.Size = new System.Drawing.Size(390, 550);
-                btnExpand.Image = Properties.Resources.ArrowRight;
-            }
         }
 
         #endregion

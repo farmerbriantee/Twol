@@ -1,10 +1,9 @@
-﻿using Twol.Classes;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
+using Twol.Classes;
 
 namespace Twol
 {
@@ -59,7 +58,7 @@ namespace Twol
                 for (int i = 0; i < lvLinesJob.Items.Count; i++)
                 {
                     if (lvLinesJob.Items[i].SubItems[1].Text == mf.displayJobName)
-                    {          
+                    {
                         lvLinesJob.Items[i].Selected = true;
                         lvLinesJob.Select();
                         lvLinesJob.Items[i].EnsureVisible();
@@ -93,7 +92,7 @@ namespace Twol
                 string areaString = "";
                 string filename = Path.Combine(dir, "Field.txt");
                 string line;
-                
+
                 //make sure directory has a field.txt in it
                 if (File.Exists(filename))
                 {

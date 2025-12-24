@@ -78,7 +78,6 @@ namespace Twol
 
                 if (mf.vehicle.vehicleType != 2)
                 {
-
                     //translate down to the hitch pin
                     GL.Translate(Math.Sin(mf.fixHeading) * (Settings.Tool.hitchLength),
                                 Math.Cos(mf.fixHeading) * (Settings.Tool.hitchLength), 0);

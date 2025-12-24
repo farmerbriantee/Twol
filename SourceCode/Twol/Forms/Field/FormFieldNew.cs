@@ -1,10 +1,9 @@
-﻿using Twol.Classes;
-
-using System;
+﻿using System;
 using System.Globalization;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using Twol.Classes;
 
 namespace Twol
 {
@@ -41,7 +40,7 @@ namespace Twol
 
             if (mf.isJobStarted)
             {
-                tboxJobName.Text = Path.GetFileName(mf.currentJobDirectory); 
+                tboxJobName.Text = Path.GetFileName(mf.currentJobDirectory);
                 tboxJobName.Enabled = false;
 
                 btnJobNew.Enabled = true;

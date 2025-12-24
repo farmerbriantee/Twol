@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Threading;
 using Twol.Mapping;
 using File = System.IO.File;
@@ -74,7 +73,7 @@ namespace Twol
             get => _ZoomLevel;
             set
             {
-                if (value < 9 ) _ZoomLevel = 9;
+                if (value < 9) _ZoomLevel = 9;
                 else if (value > 18) _ZoomLevel = 18;
                 else _ZoomLevel = value;
             }
@@ -112,7 +111,7 @@ namespace Twol
         /// <summary>
         /// Worker threads for processing tile requests to the server.
         /// </summary>
-        private readonly Thread[] _Workers = new Thread[5];
+        private readonly Thread[] _Workers = new Thread[8];
 
         /// <summary>
         /// Event handle to stop/resume requests processing.
@@ -187,7 +186,7 @@ namespace Twol
                                 // Save image safely
                                 tile.Image.Save(localPath);
                                 Debug.WriteLine($"saved {localPath}");
-                                Thread.Sleep(20); // Give some time for file system
+                                Thread.Sleep(5); // Give some time for file system
                                 // Add to the memory cache
                                 tileCache.Add(tile);
                             }

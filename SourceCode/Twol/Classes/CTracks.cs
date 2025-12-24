@@ -1,11 +1,8 @@
 ﻿using OpenTK.Graphics.OpenGL;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 using Twol.Classes;
 
 namespace Twol
@@ -34,7 +31,6 @@ namespace Twol
 
         //the list of points of curve to drive on
         public List<vec3> currentGuidanceTrack = new List<vec3>();
-        public List<vec3> currentPassiveTrack = new List<vec3>();
 
         //guidelines
         public List<List<vec3>> guideArr = new List<List<vec3>>();
@@ -377,7 +373,7 @@ namespace Twol
                                 else check += glm.twoPI;
                             }
                             delta += check;
-                            if (Math.Abs(delta) > 0.005 || counter > 30)
+                            if (Math.Abs(delta) > 0.0025 || counter > 30)
                             {
                                 newCurList.Add(new vec3(smList[i]));
                                 delta = 0;
@@ -493,12 +489,6 @@ namespace Twol
                 GL.LineWidth(Settings.User.setDisplay_lineWidth * 2);
                 GL.Color3(0.96, 0.2f, 0.2f);
                 currTrk.curvePts.DrawPolygon(PrimitiveType.Lines);
-
-                if (currentPassiveTrack != null && currentPassiveTrack.Count != 0)
-
-                    GL.LineWidth(Settings.User.setDisplay_lineWidth * 1);
-                GL.Color3(0.46, 0.72f, 0.92f);
-                currentPassiveTrack.DrawPolygon(PrimitiveType.Lines);
 
                 if (mf.font.isFontOn)
                 {

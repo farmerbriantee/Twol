@@ -1,9 +1,9 @@
 ﻿//Please, if you use this, share the improvements
 
-using Twol.Classes;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Twol.Classes;
 
 namespace Twol
 {
@@ -188,7 +188,7 @@ namespace Twol
 
         private void tabSummary_Enter(object sender, EventArgs e)
         {
-            UpdateVehicleListView(); 
+            UpdateVehicleListView();
             UpdateToolListView();
 
             UpdateSummary();

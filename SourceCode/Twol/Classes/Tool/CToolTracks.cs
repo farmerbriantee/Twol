@@ -1,12 +1,8 @@
 ﻿using OpenTK.Graphics.OpenGL;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Forms;
-using Twol.Classes;
 
 namespace Twol.Classes.Tool
 {
@@ -15,9 +11,9 @@ namespace Twol.Classes.Tool
         //pointers to mainform controls
         private readonly FormGPS mf;
 
-        public IReadOnlyList<CToolTrk> gArr => _gArr;
+        public IReadOnlyList<CToolTrk> tArr => _tArr;
 
-        private List<CToolTrk> _gArr = new List<CToolTrk>();
+        private List<CToolTrk> _tArr = new List<CToolTrk>();
 
         private CToolTrk _currTrk;
 
@@ -70,57 +66,57 @@ namespace Twol.Classes.Tool
 
             string name = track.name;
 
-            while (_gArr.Any(t => t.name == name))
+            while (_tArr.Any(t => t.name == name))
                 name += " ";
 
             track.name = name;
 
-            _gArr.Add(track);
+            _tArr.Add(track);
         }
 
         public void SetTracks(List<CToolTrk> tracks)
         {
-            _gArr = tracks;
+            _tArr = tracks;
         }
 
         public void setTrack(CToolTrk track)
         {
-            int index = _gArr.FindIndex(item => item == track);
+            int index = _tArr.FindIndex(item => item == track);
             if (index != -1)
             {
                 if (track == currTrk)
                     isTrackValid = false;
-                _gArr[index] = track;
+                _tArr[index] = track;
             }
         }
 
         public int TrackIndex(CToolTrk track)
         {
-            return _gArr.FindIndex(item => item == track);
+            return _tArr.FindIndex(item => item == track);
         }
 
         public void MoveTrackUp(CToolTrk track)
         {
-            int index = _gArr.IndexOf(track);
+            int index = _tArr.IndexOf(track);
             if (track == null || index == 0)
                 return;
 
-            _gArr.Reverse(index - 1, 2);
+            _tArr.Reverse(index - 1, 2);
         }
 
         public void MoveTrackDn(CToolTrk track)
         {
-            int index = _gArr.IndexOf(track);
+            int index = _tArr.IndexOf(track);
 
-            if (track == null || index == (_gArr.Count - 1))
+            if (track == null || index == (_tArr.Count - 1))
                 return;
 
-            _gArr.Reverse(index, 2);
+            _tArr.Reverse(index, 2);
         }
 
         public void RemoveTrack(CToolTrk track)
         {
-            _gArr.Remove(track);
+            _tArr.Remove(track);
         }
 
         public CToolTrk currTrk
@@ -139,8 +135,8 @@ namespace Twol.Classes.Tool
                     //mf.SetYouTurnButton(false);
                     //ss Log.EventWriter("Autosteer Stop, No Tracks Available");
 
-                    int index2 = _gArr.FindIndex(x => x == _currTrk);
-                    mf.lblNumCu.Text = (index2 + 1).ToString() + "/" + gArr.Count.ToString();
+                    int index2 = _tArr.FindIndex(x => x == _currTrk);
+                    mf.lblNumCu.Text = (index2 + 1).ToString() + "/" + tArr.Count.ToString();
                     mf.lblNumCu.Visible = !mf.ct.isContourBtnOn;
                     mf.PanelUpdateRightAndBottom();
                 }
@@ -150,7 +146,7 @@ namespace Twol.Classes.Tool
         public int GetVisibleTracks()
         {
             int tracksVisible = 0;
-            foreach (var track in gArr)
+            foreach (var track in tArr)
             {
                 if (track.isVisible) tracksVisible++;
             }
@@ -168,12 +164,12 @@ namespace Twol.Classes.Tool
 
         public void GetNextTrack(bool next = true)
         {
-            int index = _gArr.FindIndex(x => x == currTrk);
+            int index = _tArr.FindIndex(x => x == currTrk);
 
             if (next)
-                currTrk = gArr.Skip(index + 1).Concat(gArr.Take(index)).FirstOrDefault(x => x.isVisible);
+                currTrk = tArr.Skip(index + 1).Concat(tArr.Take(index)).FirstOrDefault(x => x.isVisible);
             else
-                currTrk = gArr.Take(index).Reverse().Concat(gArr.Skip(index + 1).Reverse()).FirstOrDefault(x => x.isVisible);
+                currTrk = tArr.Take(index).Reverse().Concat(tArr.Skip(index + 1).Reverse()).FirstOrDefault(x => x.isVisible);
         }
 
         public async void GetDistanceFromRefTrack(CToolTrk track, vec3 pivot)
@@ -211,7 +207,7 @@ namespace Twol.Classes.Tool
                 else howManyPathsAway = (int)(RefDist + 0.5);
             }
 
-            if (!isTrackValid || howManyPathsAway != lastHowManyPathsAway || (isHeadingSameWay != lastIsHeadingSameWay ))
+            if (!isTrackValid || howManyPathsAway != lastHowManyPathsAway || (isHeadingSameWay != lastIsHeadingSameWay))
             {
                 if (!isBusyWorking)
                 {
@@ -258,42 +254,42 @@ namespace Twol.Classes.Tool
 
             try
             {
-                    double step = 1;
+                double step = 1;
 
-                    newCurList = track.curvePts.OffsetLine(distAway, step, false);
+                newCurList = track.curvePts.OffsetLine(distAway, step, false);
 
-                        int cnt = newCurList.Count;
-                        if (cnt > 6)
-                        {
-                            vec3[] arr = new vec3[cnt];
-                            newCurList.CopyTo(arr);
+                int cnt = newCurList.Count;
+                if (cnt > 6)
+                {
+                    vec3[] arr = new vec3[cnt];
+                    newCurList.CopyTo(arr);
 
-                            newCurList.Clear();
+                    newCurList.Clear();
 
-                            for (int i = 0; i < (arr.Length - 1); i++)
-                            {
-                                arr[i].heading = Math.Atan2(arr[i + 1].easting - arr[i].easting, arr[i + 1].northing - arr[i].northing);
-                                if (arr[i].heading < 0) arr[i].heading += glm.twoPI;
-                            }
+                    for (int i = 0; i < (arr.Length - 1); i++)
+                    {
+                        arr[i].heading = Math.Atan2(arr[i + 1].easting - arr[i].easting, arr[i + 1].northing - arr[i].northing);
+                        if (arr[i].heading < 0) arr[i].heading += glm.twoPI;
+                    }
 
-                            arr[arr.Length - 1].heading = arr[arr.Length - 2].heading;
+                    arr[arr.Length - 1].heading = arr[arr.Length - 2].heading;
 
-                            cnt = arr.Length;
-                            //double distance;
+                    cnt = arr.Length;
+                    //double distance;
 
-                            for (int i = 0; i < cnt; i++)
-                            {
-                                // add p1
-                                newCurList.Add(arr[i]);
-                            }
-                        }
-                    
+                    for (int i = 0; i < cnt; i++)
+                    {
+                        // add p1
+                        newCurList.Add(arr[i]);
+                    }
+                }
 
-                    newCurList = ChaikinSmoothing.Smooth(newCurList, 3, preserveEndPoints: true);
 
-                    newCurList = GenerateEquidistantPoints(newCurList, 0.5, false);
+                newCurList = ChaikinSmoothing.Smooth(newCurList, 3, preserveEndPoints: true);
 
-                    newCurList.CalculateHeadings(false);
+                newCurList = GenerateEquidistantPoints(newCurList, 0.5, false);
+
+                newCurList.CalculateHeadings(false);
             }
             catch (Exception e)
             {
@@ -499,9 +495,9 @@ namespace Twol.Classes.Tool
                 points = arr.ToList();
         }
 
-        public CToolTrk CreateDesignedABTrack(bool isRefRightSide)
+        public CToolTrk CreateDesignedToolTrack(bool isRefRightSide)
         {
-            var track = new CToolTrk(TrackMode.AB);
+            var track = new CToolTrk(DateTime.Now.ToShortTimeString());
 
             //fill in the dots between A and B
             double len = glm.Distance(designPtA, designPtB);
@@ -518,7 +514,7 @@ namespace Twol.Classes.Tool
             track.ptB = new vec2(track.curvePts[track.curvePts.Count - 1]);
 
             //build the tail extensions
-            AddFirstLastPoints(ref track.curvePts, 200);
+            //AddFirstLastPoints(ref track.curvePts, 200);
 
             AddTrack(track);
             return track;
@@ -583,7 +579,7 @@ namespace Twol.Classes.Tool
         {
             currentGuidanceTrack?.Clear();
             currTrk = null;
-            _gArr.Clear();
+            _tArr.Clear();
         }
 
         public bool PointOnLine(vec3 pt1, vec3 pt2, vec3 pt)

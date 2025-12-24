@@ -1,11 +1,8 @@
-﻿using Twol.Classes;
-
-using System;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
+using Twol.Classes;
 
 namespace Twol
 {

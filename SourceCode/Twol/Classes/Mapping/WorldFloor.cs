@@ -13,7 +13,7 @@ namespace Twol.Mapping
         //Y
         public double northingMax = GridSize;
 
-        public double northingMin  = -GridSize;
+        public double northingMin = -GridSize;
 
         //X
         public double eastingMax = GridSize;

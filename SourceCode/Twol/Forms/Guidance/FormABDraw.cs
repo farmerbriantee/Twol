@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace Twol
@@ -442,11 +441,11 @@ namespace Twol
 
             var track = new CTrk(TrackMode.AB);
 
-            var form = new FormABDrawHeading(this,abHead);
+            var form = new FormABDrawHeading(this, abHead);
             form.ShowDialog(this);
 
             double len = glm.Distance(mf.bnd.bndList[bndSelect].fenceLine[end], mf.bnd.bndList[bndSelect].fenceLine[start]);
-            
+
             if (len < 20)
             {
                 len = 30;

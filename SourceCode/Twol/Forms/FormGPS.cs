@@ -10,6 +10,7 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Windows.Forms;
 using Twol.Classes;
+using Twol.Classes.Tool;
 using Twol.Mapping;
 using Twol.Properties;
 
@@ -129,9 +130,14 @@ namespace Twol
         public CContour ct;
 
         /// <summary>
-        /// Contour Mode Instance
+        /// Track Instance
         /// </summary>
         public CTracks trk;
+
+        /// <summary>
+        /// Tool Track Instance
+        /// </summary>
+        public CToolTracks toolTrk;
 
         /// <summary>
         /// Auto Headland YouTurn
@@ -284,6 +290,9 @@ namespace Twol
 
             //new track instance
             trk = new CTracks(this);
+
+            //new track instance
+            toolTrk = new CToolTracks(this);
 
             //new instance of contour mode
             hdl = new CHeadLine(this);
@@ -782,7 +791,7 @@ namespace Twol
 
         private void nudToolOffset_ValueChanged(object sender, EventArgs e)
         {
-            sim.toolOffset = (double)nudToolOffset.Value*0.001;
+            sim.toolOffset = (double)nudToolOffset.Value * 0.001;
         }
 
         public void FieldClose()
