@@ -1,5 +1,4 @@
-﻿using Twol.Properties;
-using System;
+﻿using System;
 using System.Drawing;
 using System.IO;
 using System.Text.RegularExpressions;
@@ -76,7 +75,7 @@ namespace Twol
                 Settings.IO.Save();
 
                 RegistrySettings.IOFileName = SanitizeFileName(cboxOverWrite.SelectedItem.ToString().Trim());
-                
+
                 RegistrySettings.Save("IOFileName", RegistrySettings.IOFileName);
                 Settings.IO.Save();
 

@@ -1,12 +1,9 @@
 ﻿//Please, if you use this, share the improvements
 
-using Twol.Classes;
-
-using Twol.Properties;
 using System;
 using System.Drawing;
-using System.Globalization;
 using System.Windows.Forms;
+using Twol.Classes;
 
 namespace Twol
 {

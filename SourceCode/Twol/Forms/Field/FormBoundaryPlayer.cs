@@ -1,7 +1,6 @@
-﻿using Twol.Classes;
-
-using System;
+﻿using System;
 using System.Windows.Forms;
+using Twol.Classes;
 
 namespace Twol
 {

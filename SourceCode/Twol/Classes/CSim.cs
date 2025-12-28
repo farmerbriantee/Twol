@@ -67,7 +67,7 @@ namespace Twol
             }
 
             double SteerRadius = mf.vehicle.wheelbase / Math.Tan(glm.toRadians(steerangleAve));
-            double tickdist = stepDistance * 10/mf.gpsHz;
+            double tickdist = stepDistance * 10 / mf.gpsHz;
 
             if (steerangleAve != 0 && Math.Abs(SteerRadius) < 10000000)
             {

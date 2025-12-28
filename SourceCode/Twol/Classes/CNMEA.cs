@@ -220,7 +220,7 @@ namespace Twol
                 words = nextNMEASentence.Split(',');
 
                 //parse them accordingly
-                if (words.Length < 3) break;                
+                if (words.Length < 3) break;
 
                 if ((words[0] == "$GPGGA" || words[0] == "$GNGGA") && words.Length > 13)
                 {
@@ -628,7 +628,7 @@ namespace Twol
                 double.TryParse(words[4].Substring(decim), NumberStyles.Float, CultureInfo.InvariantCulture, out temp);
                 longitude += temp * 0.01666666666666666666666666666667;
 
-                { if (words[5] == "W") longitude *= -1; }                
+                { if (words[5] == "W") longitude *= -1; }
 
                 isDualGPSConnected = true;
 

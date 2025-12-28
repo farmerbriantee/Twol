@@ -9,11 +9,11 @@ namespace Twol
 
         private int countExit = 2;
         private int countShutdown = 10;
-        
+
 
         public FormSaveOrNot()
         {
-            InitializeComponent();            
+            InitializeComponent();
         }
 
         private void FormSaveOrNot_Load(object sender, EventArgs e)

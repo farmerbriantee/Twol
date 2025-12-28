@@ -1,9 +1,8 @@
-﻿using Twol.Classes;
-
-using Twol.Properties;
-using System;
+﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Twol.Classes;
+using Twol.Properties;
 
 namespace Twol
 {
@@ -375,7 +374,7 @@ namespace Twol
             lblSteerAngle.Text = mf.SetSteerAngle;
             lblSteerAngleActual.Text = mf.mc.actualSteerAngleDegrees.ToString("N1") + "\u00B0";
             lblActualSteerAngleUpper.Text = lblSteerAngleActual.Text;
-            double err = mf.mc.actualSteerAngleDegrees - mf.guidanceLineSteerAngle;
+            double err = mf.mc.actualSteerAngleDegrees - mf.guidanceVehicleSteerAngle;
             lblError.Text = Math.Abs(err).ToString("N1") + "\u00B0";
             if (err > 0) lblError.ForeColor = Color.Red;
             else lblError.ForeColor = Color.DarkGreen;
@@ -1070,7 +1069,7 @@ namespace Twol
                 Settings.Vehicle.setAS_countsPerDegree = 110;
 
                 Settings.Vehicle.setAS_ackerman = 100;
-                
+
                 Settings.Vehicle.setAS_wasOffset = 3;
 
                 Settings.Vehicle.setAS_highSteerPWM = 180;

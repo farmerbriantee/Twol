@@ -1,11 +1,11 @@
-﻿using Twol.Classes;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
 using System.Xml;
+using Twol.Classes;
 
 namespace Twol
 {
@@ -80,7 +80,7 @@ namespace Twol
             panelLatLonLatLon.Top = 3; panelLatLonLatLon.Left = 3;
             panelPivot.Top = 3; panelPivot.Left = 3;
             panelPivot3Pt.Top = 3; panelPivot3Pt.Left = 3;
-            
+
             SetPanelVisible(quick ? panelChoose2 : panelMain);
 
 

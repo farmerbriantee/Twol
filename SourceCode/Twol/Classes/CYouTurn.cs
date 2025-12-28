@@ -389,7 +389,7 @@ namespace Twol
                 AddCurveSequenceLines(curList, ytList[0], currIdx, upDownCount, Settings.Vehicle.set_youTurnExtensionLength, true);
 
 
-                int offsetIdx = movePoint2.curveIndex + (mf.trk.isHeadingSameWay ^ isGoingStraightThrough ? 0 : + 1);
+                int offsetIdx = movePoint2.curveIndex + (mf.trk.isHeadingSameWay ^ isGoingStraightThrough ? 0 : +1);
                 upDownCount = mf.trk.isHeadingSameWay ^ isGoingStraightThrough ? -1 : 1;
 
                 AddCurveSequenceLines(nextCurve, ytList[ytList.Count - 1], offsetIdx, upDownCount, Settings.Vehicle.set_youTurnExtensionLength, false);
@@ -493,7 +493,7 @@ namespace Twol
                         }
                     }
                 }
-                
+
                 for (int i = 0; i < thisCurve.currentGuidanceTrack.Count - 1; i++)
                 {
                     if (glm.GetLineIntersection(from, turnLine[turnLineIndex], thisCurve.currentGuidanceTrack[i], thisCurve.currentGuidanceTrack[i + 1], out vec3 _crossing, out double time_, out double time2))
@@ -552,7 +552,7 @@ namespace Twol
                     double factor = (Length - distSoFar) / length1;
                     if (insert)
                         ytList.Insert(0, new vec3(point.easting - dy1 * factor, point.northing - dx1 * factor));
-                    else 
+                    else
                         ytList.Add(new vec3(point.easting - dy1 * factor, point.northing - dx1 * factor));
                     return true; //tempDist contains the full length of next segment
                 }

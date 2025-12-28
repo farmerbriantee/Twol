@@ -465,17 +465,17 @@ namespace Twol
 
                 if (decimalPlaces > 0)
 
-                for (int i = 0; i < decimalPlaces; i++)
-                {
-                    if (i == 0)
-                        format = "0.0";
-                    else
-                        format += "0";
-                }
+                    for (int i = 0; i < decimalPlaces; i++)
+                    {
+                        if (i == 0)
+                            format = "0.0";
+                        else
+                            format += "0";
+                    }
 
                 if (!initializing)
                     UpdateEditText();
-                
+
                 RefreshDesigner();
             }
         }

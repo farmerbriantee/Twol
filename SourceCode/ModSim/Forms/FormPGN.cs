@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace ModSim
 {
-    public partial class FormPGN: Form
+    public partial class FormPGN : Form
     {
         public FormPGN()
         {

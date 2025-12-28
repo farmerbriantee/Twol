@@ -42,9 +42,13 @@ namespace Twol.Mapping
     {
         private readonly FormGPS mf;
 
-        //cam z height to map zoom level mapping
+        //cam z height to map zoom level mapping 2D
         private readonly (int threshold, int zoom)[] camToZoomMapping = new (int threshold, int zoom)[]
-        {(530, 9), (400, 10), (300, 11), (230, 12), (170, 13), (120, 14), (75, 15), (45, 16), (28, 17), (18, 18)};
+        {(530, 9), (400, 10), (320, 11), (225, 12), (150, 13), (100, 14), (68, 15), (46, 16), (28, 17), (16, 18)};
+
+        //cam z height to map zoom level mapping 3D
+        private readonly (int threshold, int zoom)[] camToZoomMapping3D = new (int threshold, int zoom)[]
+        {(480, 9), (360, 10), (260, 11), (180, 12), (120, 13), (81, 14), (54, 15), (36, 16), (24, 17), (16, 18)};
 
         /// Represents a mapping of movement offsets corresponding to directional headings.
         private readonly (int dx, int dy)[] headingMapMoveOffsets = new (int dx, int dy)[]
@@ -57,6 +61,19 @@ namespace Twol.Mapping
             (-1, -1),// sector 5: southwest
             (-1, 0), // sector 6: west
             (-1, 1)  // sector 7: northwest
+        };
+
+        /// Represents a mapping of movement offsets corresponding to directional headings.
+        private readonly (int dx, int dy)[] headingMapMoveOffsets3D = new (int dx, int dy)[]
+        {
+            (0, 2),  // sector 0: north
+            (2, 2),  // sector 1: northeast
+            (2, 0),  // sector 2: east
+            (2, -2), // sector 3: southeast
+            (0, -2), // sector 4: south
+            (-2, -2),// sector 5: southwest
+            (-2, 0), // sector 6: west
+            (-2, 2)  // sector 7: northwest
         };
 
         public double northingMax, eastingMax = GridSize;
@@ -146,28 +163,54 @@ namespace Twol.Mapping
         {
             bool isUpdateTilesRequired = false;
 
-            foreach (var pair in camToZoomMapping)
+            if (Settings.User.setDisplay_camPitch == 0)
             {
-                int threshold = pair.threshold;
-                int zoom = pair.zoom;
-
-                //based on  cam zoom set map zoom level
-                if ((int)Settings.User.setDisplay_camZoom > threshold)
+                foreach (var pair in camToZoomMapping)
                 {
-                    if (lastZoom != threshold)
+                    int threshold = pair.threshold;
+                    int zoom = pair.zoom;
+
+                    //based on  cam zoom set map zoom level
+                    if ((int)Settings.User.setDisplay_camZoom > threshold)
                     {
-                        isUpdateTilesRequired = true;
-                        lastZoom = threshold;
+                        if (lastZoom != threshold)
+                        {
+                            isUpdateTilesRequired = true;
+                            lastZoom = threshold;
 
-                        //2D is closer then 3D so add 2 to zoom level
-                        if (Settings.User.setDisplay_camPitch == 0) mf.map.ZoomLevel = (zoom);
-                        else mf.map.ZoomLevel = zoom;
+                            mf.map.ZoomLevel = zoom;
 
-                        //mf.map.ZoomLevel = 18;
-                        lastOriginToPivotInTilesX = 0;
-                        lastOriginToPivotInTilesY = 0;
+                            //mf.map.ZoomLevel = 18;
+                            lastOriginToPivotInTilesX = 0;
+                            lastOriginToPivotInTilesY = 0;
+                        }
+                        break; // first (highest) matching threshold wins
                     }
-                    break; // first (highest) matching threshold wins
+                }
+            }
+            else
+            {
+                foreach (var pair in camToZoomMapping3D)
+                {
+                    int threshold = pair.threshold;
+                    int zoom = pair.zoom;
+
+                    //based on  cam zoom set map zoom level
+                    if ((int)Settings.User.setDisplay_camZoom > threshold)
+                    {
+                        if (lastZoom != threshold)
+                        {
+                            isUpdateTilesRequired = true;
+                            lastZoom = threshold;
+
+                            mf.map.ZoomLevel = zoom;
+
+                            //mf.map.ZoomLevel = 18;
+                            lastOriginToPivotInTilesX = 0;
+                            lastOriginToPivotInTilesY = 0;
+                        }
+                        break; // first (highest) matching threshold wins
+                    }
                 }
             }
 
@@ -387,9 +430,18 @@ namespace Twol.Mapping
             sector = ((sector % 8) + 8) % 8;
 
             // Retrieve tuple offsets and apply.
-            var (dx, dy) = headingMapMoveOffsets[sector];
-            originToXinTiles += dx;
-            originToYinTiles += dy;
+            if (Settings.User.setDisplay_camPitch == 0)
+            {
+                var (dx, dy) = headingMapMoveOffsets[sector];
+                originToXinTiles += dx;
+                originToYinTiles += dy;
+            }
+            else
+            {
+                var (dx, dy) = headingMapMoveOffsets3D[sector];
+                originToXinTiles += dx;
+                originToYinTiles += dy;
+            }
         }
 
         /// <summary>

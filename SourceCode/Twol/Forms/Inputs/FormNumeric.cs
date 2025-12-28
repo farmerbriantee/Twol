@@ -1,9 +1,9 @@
-﻿using Twol.Classes;
-using System;
+﻿using System;
 using System.Drawing;
 using System.Globalization;
 using System.Threading;
 using System.Windows.Forms;
+using Twol.Classes;
 
 namespace Twol
 {
@@ -35,7 +35,7 @@ namespace Twol
             tboxNumber.SelectionStart = tboxNumber.Text.Length;
             tboxNumber.SelectionLength = 0;
         }
-        
+
         private void RaiseButtonPressed(char keyChar)
         {
             if (isFirstKey)

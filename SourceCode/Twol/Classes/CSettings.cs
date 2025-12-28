@@ -82,7 +82,11 @@
         public byte isInvertWAS = 0;
         public byte isInvertSteer = 0;
         public byte isSteerNotSlide = 1;
-        public bool isActiveSteering = true;
+
+        public bool isFollowCurrent = false;
+        public bool isPassiveSteering = false;
+        public bool isFollowPivot = false;
+        public bool isFollowToolLine = false;
 
         public double antennaHeight = 0;
         public double antennaOffset = 0;
@@ -94,20 +98,24 @@
         {
             isGPSToolActive = _setting.isGPSToolActive;
 
+            isInvertWAS = _setting.isInvertWAS;
+            isInvertSteer = _setting.isInvertSteer;
+            isSteerNotSlide = _setting.isSteerNotSlide;
+
+            isFollowCurrent = _setting.isFollowCurrent;
+            isPassiveSteering = _setting.isPassiveSteering;
+            isFollowPivot = _setting.isFollowPivot;
+            isFollowToolLine = _setting.isFollowToolLine;
+
             gainP = _setting.gainP;
             integral = _setting.integral;
             minPWM = _setting.minPWM;
             highPWM = _setting.highPWM;
-            countsPerDegree = _setting.countsPerDegree;
 
+            countsPerDegree = _setting.countsPerDegree;
+            maxSteerAngle = _setting.maxSteerAngle;
             wasOffset = _setting.wasOffset;
             ackermann = _setting.ackermann;
-
-            isInvertWAS = _setting.isInvertWAS;
-            isInvertSteer = _setting.isInvertSteer;
-            maxSteerAngle = _setting.maxSteerAngle;
-            isSteerNotSlide = _setting.isSteerNotSlide;
-            isActiveSteering = _setting.isActiveSteering;
 
             antennaHeight = _setting.antennaHeight;
             antennaOffset = _setting.antennaOffset;

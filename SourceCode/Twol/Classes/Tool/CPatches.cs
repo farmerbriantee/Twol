@@ -49,7 +49,7 @@ namespace Twol
                 {
                     triangleList.Add(new vec3(Settings.User.colorSectionsDay.R, Settings.User.colorSectionsDay.G, Settings.User.colorSectionsDay.B));
                 }
-               
+
                 leftPoint = mf.section[currentStartSectionNum].leftPoint;
                 rightPoint = mf.section[currentEndSectionNum].rightPoint;
 

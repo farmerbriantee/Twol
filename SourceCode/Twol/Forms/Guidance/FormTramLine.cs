@@ -1,11 +1,10 @@
-﻿using Twol.Classes;
-
-using OpenTK;
+﻿using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using Twol.Classes;
 
 namespace Twol
 {
@@ -671,7 +670,7 @@ namespace Twol
         {
             mf.tram.tramBndOuterArr?.Clear();
             mf.tram.tramBndInnerArr?.Clear();
-            
+
             if (cboxIsOuter.Checked)//build outer tram
             {
                 mf.tram.displayMode = 1;

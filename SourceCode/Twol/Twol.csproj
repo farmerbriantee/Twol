@@ -157,11 +157,13 @@
     <Compile Include="Classes\CHello.cs" />
     <Compile Include="Classes\Language.cs" />
     <Compile Include="Classes\Log.cs" />
-    <Compile Include="Classes\Tool\ToolTrack.cs" />
-    <Compile Include="Mapping\Map.cs" />
-    <Compile Include="Classes\CNozzle.cs" />
+    <Compile Include="Classes\Tool\CActiveGuidance.cs" />
+    <Compile Include="Classes\Tool\CToolTracks.cs" />
+    <Compile Include="Classes\Tool\CToolTrk.cs" />
+    <Compile Include="Classes\Mapping\Map.cs" />
+    <Compile Include="Classes\Tool\CNozzle.cs" />
     <Compile Include="Classes\CPolygon.cs" />
-    <Compile Include="Classes\CPatches.cs" />
+    <Compile Include="Classes\Tool\CPatches.cs" />
     <Compile Include="Forms\Field\FormLayer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -240,10 +242,10 @@
     <Compile Include="Forms\Settings\FormToolSteer.Designer.cs">
       <DependentUpon>FormToolSteer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Mapping\WorldTileMap.cs" />
-    <Compile Include="Mapping\GeoPnt.cs" />
-    <Compile Include="Mapping\Tile.cs" />
-    <Compile Include="Mapping\TileServer.cs" />
+    <Compile Include="Classes\Mapping\WorldTileMap.cs" />
+    <Compile Include="Classes\Mapping\GeoPnt.cs" />
+    <Compile Include="Classes\Mapping\Tile.cs" />
+    <Compile Include="Classes\Mapping\TileServer.cs" />
     <Compile Include="Properties\CRegistrySettings.cs" />
     <Compile Include="Classes\CSettings.cs" />
     <Compile Include="Classes\CSound.cs" />
@@ -260,10 +262,10 @@
     <Compile Include="Classes\CContour.cs" />
     <Compile Include="Classes\CModuleComm.cs" />
     <Compile Include="Classes\CNMEA.cs" />
-    <Compile Include="Classes\CSection.cs" />
+    <Compile Include="Classes\Tool\CSection.cs" />
     <Compile Include="Classes\CVehicle.cs" />
-    <Compile Include="Mapping\WorldFloor.cs" />
-    <Compile Include="Classes\CTool.cs" />
+    <Compile Include="Classes\Mapping\WorldFloor.cs" />
+    <Compile Include="Classes\Tool\CTool.cs" />
     <Compile Include="Forms\Field\FormEnterFlag.cs">
       <SubType>Form</SubType>
     </Compile>

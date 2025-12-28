@@ -516,9 +516,9 @@ namespace Twol
                     GL.PointSize(2);
                     GL.Begin(PrimitiveType.Points);
                     GL.Color3(1.0, 1.0, 0.0);
-                    for (int i = 0; i < gpsPts.Count; i++)
+                    for (int i = 0; i < followPivotPoints.Count; i++)
                     {
-                        GL.Vertex3(gpsPts[i].easting, gpsPts[i].northing, 0.0);
+                        GL.Vertex3(followPivotPoints[i].easting, followPivotPoints[i].northing, 0.0);
                     }
                     GL.End();
 
@@ -2011,9 +2011,9 @@ namespace Twol
 
         private void DrawLightBarText()
         {
-            if (trk.currentGuidanceTrack.Count > 1 && !double.IsNaN(guidanceLineDistanceOff))
+            if (trk.currentGuidanceTrack.Count > 1 && !double.IsNaN(guidanceVehicleXTE))
             {
-                avgPivDistance = avgPivDistance * 0.5 + guidanceLineDistanceOff * 0.5;
+                avgPivDistance = avgPivDistance * 0.5 + guidanceVehicleXTE * 0.5;
 
                 double avgPivotDistance = avgPivDistance * glm.m2InchOrCm;
 
@@ -2083,7 +2083,7 @@ namespace Twol
 
         private void DrawSteerBarText()
         {
-            if (trk.currentGuidanceTrack.Count > 1 && !double.IsNaN(guidanceLineDistanceOff))
+            if (trk.currentGuidanceTrack.Count > 1 && !double.IsNaN(guidanceVehicleXTE))
             {
                 int spacing = oglMain.Width / 50;
                 if (spacing < 28) spacing = 28;
@@ -2101,11 +2101,11 @@ namespace Twol
                 double alphaBar = 1.0;
                 if (isBtnAutoSteerOn) alphaBar = 0.5;
 
-                avgPivDistance = avgPivDistance * 0.8 + guidanceLineDistanceOff * 0.2;
+                avgPivDistance = avgPivDistance * 0.8 + guidanceVehicleXTE * 0.2;
 
                 // in millimeters
                 double avgPivotDistance = avgPivDistance * glm.m2InchOrCm;
-                double err = mc.actualSteerAngleDegrees - guidanceLineSteerAngle;
+                double err = mc.actualSteerAngleDegrees - guidanceVehicleSteerAngle;
 
                 if (isBtnAutoSteerOn)
                 {
@@ -2233,10 +2233,10 @@ namespace Twol
 
                 font.DrawText(center, 8, hede, textSize);
 
-                if (Settings.Tool.setToolSteer.isGPSToolActive && !double.IsNaN(gyd.distanceFromCurrentLineTool))
+                if (Settings.Tool.setToolSteer.isGPSToolActive && !double.IsNaN(guidanceToolXTE))
                 {
                     //tool xte
-                    avgPivDistanceTool = avgPivDistanceTool * 0.5 + gyd.distanceFromCurrentLineTool * 0.5;
+                    avgPivDistanceTool = avgPivDistanceTool * 0.5 + guidanceToolXTE * 0.5;
                     double avgPivotDistanceTool = avgPivDistanceTool * glm.m2InchOrCm;
                     if (avgPivotDistanceTool > 999) avgPivotDistanceTool = 999;
                     if (avgPivotDistanceTool < -999) avgPivotDistanceTool = -999;
@@ -2289,7 +2289,7 @@ namespace Twol
 
                     font.DrawText(center, 8, hede, textSize);
 
-                    if (gyd.isPassiveSteering)
+                    if (gyd.isPassiveSteeringFlag)
                     {
                         GL.Color4(0.512f, 0.770f, 0.995120f, 1);
                         GL.LineWidth(8);

@@ -1,11 +1,9 @@
-﻿using Twol.Classes;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Security.AccessControl;
 using System.Windows.Forms;
+using Twol.Classes;
 
 namespace Twol
 {
@@ -36,7 +34,7 @@ namespace Twol
                 for (int i = 0; i < lvLinesJob.Items.Count; i++)
                 {
                     if (lvLinesJob.Items[i].SubItems[1].Text == mf.displayJobName)
-                    {          
+                    {
                         lvLinesJob.Items[i].Selected = true;
                         lvLinesJob.Select();
                         lvLinesJob.Items[i].EnsureVisible();
@@ -58,27 +56,27 @@ namespace Twol
         {
             lvLinesJob.Items.Clear();
 
-                string directoryName = Path.Combine(RegistrySettings.fieldsDirectory, mf.currentFieldDirectory,"Jobs");
+            string directoryName = Path.Combine(RegistrySettings.fieldsDirectory, mf.currentFieldDirectory, "Jobs");
 
-                if (string.IsNullOrEmpty(directoryName) || (!Directory.Exists(directoryName)))
-                {
-                    return;
-                }
+            if (string.IsNullOrEmpty(directoryName) || (!Directory.Exists(directoryName)))
+            {
+                return;
+            }
 
-                //list of jobs
-                string[] dirs = Directory.GetDirectories(directoryName);
+            //list of jobs
+            string[] dirs = Directory.GetDirectories(directoryName);
 
-                foreach (string dir in dirs)
-                {
+            foreach (string dir in dirs)
+            {
                 if (dir == Path.Combine(RegistrySettings.fieldsDirectory, mf.currentFieldDirectory, mf.currentJobDirectory)) continue;
 
-                    var time = Directory.GetCreationTime(dir).ToString("yyyy-M-dd HH:MM");
-                    var path = Path.GetFileName(dir);
-                    var itmJob = new string[] { time, path };
-                    lvLinesJob.Items.Add(new ListViewItem(itmJob));
-                }
-                if (lvLinesJob.Items.Count > 0)
-                    lvLinesJob.Items[lvLinesJob.Items.Count - 1].EnsureVisible();
+                var time = Directory.GetCreationTime(dir).ToString("yyyy-M-dd HH:MM");
+                var path = Path.GetFileName(dir);
+                var itmJob = new string[] { time, path };
+                lvLinesJob.Items.Add(new ListViewItem(itmJob));
+            }
+            if (lvLinesJob.Items.Count > 0)
+                lvLinesJob.Items[lvLinesJob.Items.Count - 1].EnsureVisible();
 
             lvLinesJob_SelectedIndexChanged(null, null);
         }

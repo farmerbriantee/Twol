@@ -1,5 +1,4 @@
-﻿using Twol.Properties;
-using System;
+﻿using System;
 using System.Globalization;
 using System.Threading;
 using System.Windows.Forms;
@@ -39,7 +38,7 @@ namespace Twol
         public static void Restart()
         {
             if (Mutex != null)
-            {   
+            {
                 Mutex.ReleaseMutex();
                 Mutex.Dispose();
                 Application.Restart();

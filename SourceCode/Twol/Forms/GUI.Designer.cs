@@ -1380,7 +1380,7 @@ namespace Twol
                 else return "-";
             }
         }
-        public string SetSteerAngle { get { return (guidanceLineSteerAngle).ToString("N1"); } }
+        public string SetSteerAngle { get { return (guidanceVehicleSteerAngle).ToString("N1"); } }
         public string ActualSteerAngle { get { return (mc.actualSteerAngleDegrees).ToString("N1"); } }
 
         //Metric and Imperial Properties

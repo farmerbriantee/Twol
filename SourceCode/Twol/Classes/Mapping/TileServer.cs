@@ -11,9 +11,7 @@ namespace Twol.Mapping
     /// <remarks>The <see cref="TileServer"/> class is designed to retrieve map tiles based on their x and y
     /// coordinates and zoom level. It includes functionality for generating tile URIs, downloading tile images, and
     /// configuring connection settings. This class is intended for use in applications that require map data, such as
-    /// GIS (Geographic Information Systems) or mapping tools. <para> By default, the class configures the application
-    /// to accept all SSL/TLS certificates and enables modern security protocols. This behavior is suitable for testing
-    /// or trusted internal environments but should be reviewed for production use. </para></remarks>
+    /// GIS (Geographic Information Systems) or mapping tools.</remarks>
     public class TileServer
     {
         // Add a static Random instance to fix CS0120
@@ -59,38 +57,19 @@ namespace Twol.Mapping
         private Uri GetTileUri(int x, int y, int z)
         {
             int ind = Random.Next(0, 4);
-            return new Uri($"http://mt{ind}.google.com/vt/lyrs=s&hl=en&x={x}&y={y}&z={z}");
+            return new Uri($"https://mt{ind}.google.com/vt/lyrs=s&hl=en&x={x}&y={y}&z={z}");
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TileServer"/> class.
         /// </summary>
         /// <remarks>This constructor configures the default connection settings for the application,
-        /// including the maximum number of concurrent connections, certificate validation behavior, and supported
-        /// security protocols. It is designed to accept all server certificates and enable modern security
-        /// protocols.</remarks>
+        /// including the maximum number of concurrent connections and supported security protocols.</remarks>
         public TileServer()
         {
             ServicePointManager.DefaultConnectionLimit = 10;
-            ServicePointManager.ServerCertificateValidationCallback = new System.Net.Security.RemoteCertificateValidationCallback(AcceptAllCertificates);
-            ServicePointManager.SecurityProtocol = (SecurityProtocolType)12288 | SecurityProtocolType.Tls12;
-        }
-
-        /// <summary>
-        /// A callback method that accepts all SSL/TLS certificates regardless of validation results.
-        /// </summary>
-        /// <remarks>This method bypasses standard SSL/TLS certificate validation and should only be used
-        /// in scenarios  where certificate validation is intentionally disabled, such as for testing or trusted
-        /// internal environments.  Using this method in production environments can expose the application to security
-        /// risks, including  man-in-the-middle attacks.</remarks>
-        /// <param name="sender">The source of the certificate validation request.</param>
-        /// <param name="certification">The certificate to validate.</param>
-        /// <param name="chain">The chain of certificate authorities associated with the certificate.</param>
-        /// <param name="sslPolicyErrors">The SSL policy errors identified during validation.</param>
-        /// <returns>Always returns <see langword="true"/>, indicating that all certificates are accepted.</returns>
-        private bool AcceptAllCertificates(object sender, System.Security.Cryptography.X509Certificates.X509Certificate certification, System.Security.Cryptography.X509Certificates.X509Chain chain, System.Net.Security.SslPolicyErrors sslPolicyErrors)
-        {
-            return true;
+            // Use system defaults for security protocols; .NET Framework 4.8.1 enables modern TLS by default.
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.SystemDefault;
         }
     }
 }

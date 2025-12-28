@@ -525,18 +525,18 @@ namespace Twol
             if (ct.isContourBtnOn)
                 ct.SetLockToLine();
 
-            //PAssive steering hold till on guidance line
-            if (!Settings.Tool.setToolSteer.isActiveSteering)
+            //Passive steering hold till on guidance line
+            if (Settings.Tool.setToolSteer.isPassiveSteering)
             {
                 if (state && !gyd.isPassiveTriggered)
                 {
                     gyd.isPassiveTriggered = true;
-                    gyd.isPassiveSteering = false;
+                    gyd.isPassiveSteeringFlag = false;
                 }
                 else
                 {
                     gyd.isPassiveTriggered = false;
-                    gyd.isPassiveSteering = false;
+                    gyd.isPassiveSteeringFlag = false;
                 }
             }
         }
@@ -2061,7 +2061,7 @@ namespace Twol
         {
             try
             {
-                if (isBtnAutoSteerOn && !double.IsNaN(guidanceLineDistanceOff))
+                if (isBtnAutoSteerOn && !double.IsNaN(guidanceVehicleXTE))
                 {
                     if (vehicle.isInDeadZone)
                     {
@@ -2069,7 +2069,7 @@ namespace Twol
                     }
                     else
                     {
-                        lastSimGuidanceAngle = guidanceLineSteerAngle * 0.9;
+                        lastSimGuidanceAngle = guidanceVehicleSteerAngle * 0.9;
                         sim.DoSimTick(lastSimGuidanceAngle);
                     }
                 }

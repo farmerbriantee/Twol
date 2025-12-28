@@ -20,8 +20,11 @@ namespace Twol
         public StringBuilder sbElevationString = new StringBuilder();
 
         // autosteer variables for sending serial
-        public double guidanceLineDistanceOff;
-        public double guidanceLineSteerAngle;
+        public double guidanceVehicleXTE;
+        public double guidanceVehicleSteerAngle;
+
+        //tool off guidance line
+        public double guidanceToolXTE;
 
         public double setAngVel, actAngVel;
 
@@ -47,9 +50,9 @@ namespace Twol
         public double cosSectionHeading = 1.0, sinSectionHeading = 0.0;
 
         //how far travelled since last section was added, section points
-        double sectionTriggerDistance = 0, contourTriggerDistance = 0, sectionTriggerStepDistance = 0, gridTriggerDistance = 0;
+        double sectionTriggerDistanceSq = 0, contourTriggerDistanceSq = 0, distanceTriggerSq = 0, gridTriggerDistanceSq = 0;
 
-        public vec2 prevSectionPos = new vec2(0, 0);
+        public vec2 prevPivotAxlePos = new vec2(0, 0);
         public vec2 prevContourPos = new vec2(0, 0);
         public vec2 prevGridPos = new vec2(0, 0);
         public int patchCounter = 0;
@@ -63,9 +66,9 @@ namespace Twol
         public List<CFlag> flagPts = new List<CFlag>();
 
         //todo
-        public List<vec2> gpsPts = new List<vec2>(256);
-        double toolTriggerDistance = 0;
-        public vec2 prevToolPos = new vec2(0, 0);
+        public List<vec2> followPivotPoints = new List<vec2>(256);
+        double toolPivotTriggerDistanceSq = 0;
+        public vec2 prevToolPivotPos = new vec2(0, 0);
 
         //tally counters for display
         //public double totalSquareMetersWorked = 0, totalUserSquareMeters = 0, userSquareMetersAlarm = 0;
@@ -100,6 +103,7 @@ namespace Twol
         public int minSteerSpeedTimer = 0;
 
         private double _steerAngleScrollBar;
+
         public double steerAngleScrollBar
         {
             get => _steerAngleScrollBar;
@@ -307,7 +311,7 @@ namespace Twol
             #region AutoSteer
 
             //preset the values
-            guidanceLineDistanceOff = double.NaN;
+            guidanceVehicleXTE = double.NaN;
 
             if (ct.isContourBtnOn)
             {
@@ -325,6 +329,12 @@ namespace Twol
             if (trk.currentGuidanceTrack.Count > 0)
             {
                 gyd.Guidance(pivotAxlePos, steerAxlePos, yt.isYouTurnTriggered, yt.isYouTurnTriggered ? yt.ytList : trk.currentGuidanceTrack);
+
+                if (Settings.Tool.setToolSteer.isFollowPivot && isJobStarted)
+                {
+
+
+                }
             }
             else
             {
@@ -336,8 +346,9 @@ namespace Twol
 
                 //invalid distance so tell AS module
                 gyd.distanceFromCurrentLine = 0;
-                guidanceLineDistanceOff = double.NaN;
+                guidanceVehicleXTE = double.NaN;
             }
+
             
             // autosteer at full speed of updates
 
@@ -351,14 +362,14 @@ namespace Twol
 
                 //convert to cm from mm and divide by 2 - lightbar
                 int distanceX2;
-                if (!isBtnAutoSteerOn || double.IsNaN(guidanceLineDistanceOff))
+                if (!isBtnAutoSteerOn || double.IsNaN(guidanceVehicleXTE))
                 {
                     distanceX2 = 255;
                     PGN_254.pgn[PGN_254.status] = 0;
                 }
                 else
                 {
-                    distanceX2 = (int)((guidanceLineDistanceOff * glm.m2InchOrCm) / Settings.User.setDisplay_lightbarCmPerPixel);
+                    distanceX2 = (int)((guidanceVehicleXTE * glm.m2InchOrCm) / Settings.User.setDisplay_lightbarCmPerPixel);
 
                     if (distanceX2 < -127) distanceX2 = -127;
                     else if (distanceX2 > 127) distanceX2 = 127;
@@ -398,7 +409,7 @@ namespace Twol
 
                 // delay on dead zone.
                 if (PGN_254.pgn[PGN_254.status] == 1 && !isReverse
-                    && Math.Abs(guidanceLineSteerAngle - mc.actualSteerAngleDegrees) < vehicle.deadZoneHeading)
+                    && Math.Abs(guidanceVehicleSteerAngle - mc.actualSteerAngleDegrees) < vehicle.deadZoneHeading)
                 {
                     if (vehicle.deadZoneDelayCounter > vehicle.deadZoneDelay)
                     {
@@ -413,17 +424,18 @@ namespace Twol
 
                 if (!vehicle.isInDeadZone)
                 {
-                    var angleX100 = (Int16)(guidanceLineSteerAngle * 100);
+                    var angleX100 = (Int16)(guidanceVehicleSteerAngle * 100);
 
                     PGN_254.pgn[PGN_254.steerAngleHi] = unchecked((byte)(angleX100 >> 8));
                     PGN_254.pgn[PGN_254.steerAngleLo] = unchecked((byte)(angleX100));
                 }
 
-                if (Settings.Tool.setToolSteer.isGPSToolActive)
+                //no pgn if passive is active
+                if (Settings.Tool.setToolSteer.isFollowCurrent|| Settings.Tool.setToolSteer.isPassiveSteering)
                 {
                     PGN_233.pgn[PGN_233.speed10] = unchecked((byte)((int)(Math.Abs(avgSpeed) * 10.0)));
 
-                    var distX1000 = (Int16)(gyd.distanceFromCurrentLineTool * 1000);
+                    var distX1000 = (Int16)(guidanceToolXTE * 1000);
                     PGN_233.pgn[PGN_233.xteHi] = unchecked((byte)(distX1000 >> 8));
                     PGN_233.pgn[PGN_233.xteLo] = unchecked((byte)(distX1000));
 
@@ -528,25 +540,6 @@ namespace Twol
                         yt.ResetCreatedYouTurn();
                         mc.isOutOfBounds = !bnd.IsPointInsideFenceArea(pivotAxlePos);
                     }
-                    //}
-                    //// here is stop logic for out of bounds - in an inner or out the outer turn border.
-                    //else
-                    //{
-                    //    //mc.isOutOfBounds = true;
-                    //    if (isBtnAutoSteerOn)
-                    //    {
-                    //        if (yt.isYouTurnBtnOn)
-                    //        {
-                    //            yt.ResetCreatedYouTurn();
-                    //            //sim.stepDistance = 0 / 17.86;
-                    //        }
-                    //    }
-                    //    else
-                    //    {
-                    //        yt.isTurnCreationTooClose = false;
-                    //    }
-
-                    //}
                 }
             }
             else
@@ -649,67 +642,46 @@ namespace Twol
             CalculateTrailingAndTBTHitch();
 
             //positions and headings 
-            CalculateSectionTriggerStepDistance();
+            CalculateTriggerDistance();
 
             //calculate lookahead at full speed, no sentence misses
             CalculateSectionLookAhead(toolPos.northing, toolPos.easting, cosSectionHeading, sinSectionHeading);
 
             //To prevent drawing high numbers of triangles, determine and test before drawing vertex
-            sectionTriggerDistance = glm.Distance(pivotAxlePos, prevSectionPos);
-            contourTriggerDistance = glm.Distance(pivotAxlePos, prevContourPos);
-            gridTriggerDistance = glm.DistanceSquared(pivotAxlePos, prevGridPos);
-            toolTriggerDistance = glm.Distance(toolPivotPos, prevToolPos);
-
-            if (Settings.User.isLogElevation && gridTriggerDistance > 2.9 && patchCounter !=0 && isFieldStarted)
-            {
-                //grab fix and elevation
-                sbElevationString.Append(
-                      pn.latitude.ToString("N7", CultureInfo.InvariantCulture) + ","
-                    + pn.longitude.ToString("N7", CultureInfo.InvariantCulture) + ","
-                    + Math.Round((pn.altitude - vehicle.antennaHeight),3).ToString(CultureInfo.InvariantCulture) + ","
-                    + pn.fixQuality.ToString(CultureInfo.InvariantCulture) + ","
-                    + pn.fix.easting.ToString("N2", CultureInfo.InvariantCulture) + ","
-                    + pn.fix.northing.ToString("N2", CultureInfo.InvariantCulture) + ","
-                    + pivotAxlePos.heading.ToString("N3", CultureInfo.InvariantCulture) + ","
-                    + Math.Round(ahrs.imuRoll,3).ToString(CultureInfo.InvariantCulture) + 
-                    "\r\n");
-
-                prevGridPos.easting = pivotAxlePos.easting;
-                prevGridPos.northing = pivotAxlePos.northing;
-            }
-
-            //contour points
-            if (isFieldStarted && (contourTriggerDistance > (Settings.Tool.toolWidth - Settings.Tool.overlap) / 3.0
-                || contourTriggerDistance > sectionTriggerStepDistance))
-            {
-                AddContourPoints();
-            }
+            sectionTriggerDistanceSq = glm.DistanceSquared(pivotAxlePos, prevPivotAxlePos);
+            toolPivotTriggerDistanceSq = glm.DistanceSquared(toolPivotPos, prevToolPivotPos);
 
             //tool track recording
-            if (toolTriggerDistance > (sectionTriggerStepDistance * 0.6) && isJobStarted)
+            if (Settings.Tool.setToolSteer.isFollowPivot && toolPivotTriggerDistanceSq > 0.5 && isJobStarted)
             {
-                //if (trk.isRecordingCurveTrack)
-                //{
-                //    trk.designPtsList.Add(new vec3(pivotAxlePos.easting, pivotAxlePos.northing, pivotAxlePos.heading));
-                //}
+                //followPivotPoints.Add(new vec2(toolPivotPos.easting, toolPivotPos.northing));
+                followPivotPoints.Add(new vec2(pivotAxlePos.easting, pivotAxlePos.northing));
 
-                gpsPts.Add(new vec2(toolPivotPos.easting, toolPivotPos.northing));
+                if (followPivotPoints.Count > 20) { followPivotPoints.RemoveRange(0, 5); }
 
                 //save the north & east as previous
-                prevToolPos.northing = toolPivotPos.northing;
-                prevToolPos.easting = toolPivotPos.easting;
+                prevToolPivotPos.northing = toolPivotPos.northing;
+                prevToolPivotPos.easting = toolPivotPos.easting;
             }
 
             //section on off and points
-            if (sectionTriggerDistance > sectionTriggerStepDistance && isJobStarted)
+            if (sectionTriggerDistanceSq > distanceTriggerSq && isJobStarted)
             {
                 AddSectionOrPathPoints();
+            }
+
+            //contour points
+            AddContourPoints();
+
+            if (Settings.User.isLogElevation)
+            {
+                AddElevationPoints();
             }
 
             //test if travelled far enough for new boundary point
             if (bnd.isOkToAddPoints)
             {
-                double boundaryDistance = glm.Distance(pivotAxlePos, prevBoundaryPos);
+                double boundaryDistance = glm.DistanceSquared(pivotAxlePos, prevBoundaryPos);
                 if (boundaryDistance > 1) AddBoundaryPoint();
             }
         }
@@ -862,17 +834,13 @@ namespace Twol
                 toolPos.easting = hitchPos.easting;
                 toolPos.northing = hitchPos.northing;
             }
-
-            //toolPos.easting += (Math.Cos(fixHeading - 1.57) * -sim.toolOffset);
-            //toolPos.northing += (Math.Sin(fixHeading - 1.57) * -sim.toolOffset);
-
         }
 
         //used to increase triangle countExit when going around corners, less on straight
-        private void CalculateSectionTriggerStepDistance()
+        private void CalculateTriggerDistance()
         {
             double distance = Settings.Tool.toolWidth*0.75;
-            if (distance > 6) distance = 6;
+            if (distance > 5) distance = 5;
 
             double twist = 0.2;
             //whichever is less
@@ -886,13 +854,14 @@ namespace Twol
             }
 
             twist *= twist;
-            if (twist < 0.2) twist = 0.2;
-            sectionTriggerStepDistance = distance * twist;
+            if (twist < 0.15) twist = 0.15;
+            distanceTriggerSq = distance * twist;
 
-            if (sectionTriggerStepDistance < 1.5) sectionTriggerStepDistance = 1.5;
+            if (distanceTriggerSq < 1.0) distanceTriggerSq = 1.0;
+            distanceTriggerSq *= distanceTriggerSq;
 
             //finally fixed distance for making a curve line
-            if (trk.isRecordingCurveTrack) sectionTriggerStepDistance *= 0.5;
+            if (trk.isRecordingCurveTrack) distanceTriggerSq *= 0.5;
 
             //precalc the sin and cos of heading * -1
             sinSectionHeading = Math.Sin(-toolPivotPos.heading);
@@ -1028,30 +997,35 @@ namespace Twol
         {
             //record contour all the time
             //Contour Base Track.... At least One section on, turn on if not
-            if (patchCounter != 0)
+            contourTriggerDistanceSq = glm.DistanceSquared(pivotAxlePos, prevContourPos);
+
+            if (isJobStarted && contourTriggerDistanceSq > distanceTriggerSq)
             {
-                //keep the line going, everything is on for recording path
-                if (ct.isContourOn) ct.AddPoint(pivotAxlePos);
+                if (patchCounter != 0)
+                {
+                    //keep the line going, everything is on for recording path
+                    if (ct.isContourOn) ct.AddPoint(pivotAxlePos);
+                    else
+                    {
+                        ct.StartContourLine();
+                        ct.AddPoint(pivotAxlePos);
+                    }
+                }
+
+                //All sections OFF so if on, turn off
                 else
                 {
-                    ct.StartContourLine();
-                    ct.AddPoint(pivotAxlePos);
+                    if (ct.isContourOn)
+                    { ct.StopContourLine(); }
                 }
+
+                //Build contour line if close enough to a patch
+                if (ct.isContourBtnOn) ct.BuildContourGuidanceLine(pivotAxlePos);
+
+                //save the north & east as previous
+                prevContourPos.northing = pivotAxlePos.northing;
+                prevContourPos.easting = pivotAxlePos.easting;
             }
-
-            //All sections OFF so if on, turn off
-            else
-            {
-                if (ct.isContourOn)
-                { ct.StopContourLine(); }
-            }
-
-            //Build contour line if close enough to a patch
-            if (ct.isContourBtnOn) ct.BuildContourGuidanceLine(pivotAxlePos);
-
-            //save the north & east as previous
-            prevContourPos.northing = pivotAxlePos.northing;
-            prevContourPos.easting = pivotAxlePos.easting;
         }
 
         //add the points for section, contour line points, Area Calc feature
@@ -1063,8 +1037,8 @@ namespace Twol
             }
 
             //save the north & east as previous
-            prevSectionPos.northing = pivotAxlePos.northing;
-            prevSectionPos.easting = pivotAxlePos.easting;
+            prevPivotAxlePos.northing = pivotAxlePos.northing;
+            prevPivotAxlePos.easting = pivotAxlePos.easting;
 
             // if non zero, at least one section is on.
             patchCounter = 0;
@@ -1085,5 +1059,29 @@ namespace Twol
                 }
             }
         }
+
+        private void AddElevationPoints()
+        {
+            gridTriggerDistanceSq = glm.DistanceSquared(pivotAxlePos, prevGridPos);
+
+            if (gridTriggerDistanceSq > 2.0 && patchCounter != 0 && isFieldStarted)
+            {
+                //grab fix and elevation
+                sbElevationString.Append(
+                      pn.latitude.ToString("N7", CultureInfo.InvariantCulture) + ","
+                    + pn.longitude.ToString("N7", CultureInfo.InvariantCulture) + ","
+                    + Math.Round((pn.altitude - vehicle.antennaHeight), 3).ToString(CultureInfo.InvariantCulture) + ","
+                    + pn.fixQuality.ToString(CultureInfo.InvariantCulture) + ","
+                    + pn.fix.easting.ToString("N2", CultureInfo.InvariantCulture) + ","
+                    + pn.fix.northing.ToString("N2", CultureInfo.InvariantCulture) + ","
+                    + pivotAxlePos.heading.ToString("N3", CultureInfo.InvariantCulture) + ","
+                    + Math.Round(ahrs.imuRoll, 3).ToString(CultureInfo.InvariantCulture) +
+                    "\r\n");
+
+                prevGridPos.easting = pivotAxlePos.easting;
+                prevGridPos.northing = pivotAxlePos.northing;
+            }
+        }
+
     }//end class
 }//end namespace

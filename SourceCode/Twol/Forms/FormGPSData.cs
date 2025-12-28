@@ -1,12 +1,8 @@
 ﻿//Please, if you use this give me some credit
 //Copyright BrianTee, copy right out of it.
 
-using OpenTK.Graphics.OpenGL;
 using System;
-using System.Drawing;
-using System.Reflection.Emit;
 using System.Windows.Forms;
-using static Twol.FormGPS;
 
 
 namespace Twol

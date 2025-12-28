@@ -1,9 +1,7 @@
-﻿using Twol.Classes;
-
-using System;
-using System.Globalization;
+﻿using System;
 using System.IO;
 using System.Windows.Forms;
+using Twol.Classes;
 
 namespace Twol
 {
@@ -71,7 +69,7 @@ namespace Twol
                 }
                 else
                 {
-                    lblResumeJob.Text = $"Job: { gStr.Get(gs.gsResume)}: {Path.GetFileName(mf.currentJobDirectory)}";
+                    lblResumeJob.Text = $"Job: {gStr.Get(gs.gsResume)}: {Path.GetFileName(mf.currentJobDirectory)}";
 
                     if (mf.isJobStarted)
                     {
@@ -87,7 +85,7 @@ namespace Twol
             else
             {
                 if (mf.isJobStarted)
-                    lblResumeJob.Text = $"Job: { gStr.Get(gs.gsOpen)}: {Path.GetFileName(mf.currentJobDirectory)}";
+                    lblResumeJob.Text = $"Job: {gStr.Get(gs.gsOpen)}: {Path.GetFileName(mf.currentJobDirectory)}";
                 else
                     lblResumeJob.Text = $" Job: {gStr.Get(gs.gsNone)}";
             }
@@ -142,7 +140,7 @@ namespace Twol
                         using (var form2 = new FormJobNew(mf))
                         { form2.ShowDialog(mf); }
                     }
-                    else if (mf.jobPickerFileAndDirectory != "" )
+                    else if (mf.jobPickerFileAndDirectory != "")
                     {
                         mf.JobClose();
 
