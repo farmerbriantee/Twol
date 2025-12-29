@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Twol
 {
-    public class CActiveGuidance
+    public class CGuidanceTool
     {
         private readonly FormGPS mf;
 
@@ -38,7 +38,7 @@ namespace Twol
         public double pivotDistanceErrorLast, pivotDerivative;
         private double segK = 0, bob = 0, bobAvg = 0;
 
-        public CActiveGuidance(FormGPS _f)
+        public CGuidanceTool(FormGPS _f)
         {
             //constructor
             mf = _f;
@@ -405,6 +405,20 @@ namespace Twol
                 mf.yt.CompleteYouTurn();
         }
 
+        public void GuidanceFollowPivot(vec3 pivot, vec3 steer, bool Uturn, List<vec3> curList)
+        {
+            if (FindClosestSegment(curList, false, mf.pnTool.fix, out A, out B))
+            {
+                distanceFromCurrentLineTool = FindDistanceToSegment(mf.pnTool.fix, curList[A], curList[B], out _, out _, true, false, false);
+            }
+            else
+            {
+                distanceFromCurrentLineTool = double.NaN;
+            }
+
+            mf.guidanceToolXTE = distanceFromCurrentLineTool;
+        }
+
         public bool FindClosestSegment(List<vec3> points, bool loop, vec2 point, out int AA, out int BB, int start = 0, int end = int.MaxValue)
         {
             AA = -1;
@@ -478,27 +492,6 @@ namespace Twol
             }
             else
                 return Math.Sqrt(dx * dx + dy * dy);
-        }
-
-        public int FindGlobalRoughNearest(vec2 pivot, List<vec3> points, int step, bool force)
-        {
-            if (force || isFindGlobalNearestTrackPoint)
-            {
-                currentLocationIndex = 0;
-                double minDistA = double.MaxValue;
-                for (int j = 0; j < points.Count; j += step)
-                {
-                    double dist = glm.DistanceSquared(pivot, points[j]);
-                    if (dist < minDistA)
-                    {
-                        minDistA = dist;
-                        currentLocationIndex = j;
-                    }
-                }
-                isFindGlobalNearestTrackPoint = false;
-            }
-
-            return currentLocationIndex;
         }
     }
 }

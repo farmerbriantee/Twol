@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace Twol.Classes.Tool
 {
-    public class CToolTracks
+    public class CTracksTool
     {
         //pointers to mainform controls
         private readonly FormGPS mf;
 
-        public IReadOnlyList<CToolTrk> tArr => _tArr;
+        public IReadOnlyList<CTrkTool> tArr => _tArr;
 
-        private List<CToolTrk> _tArr = new List<CToolTrk>();
+        private List<CTrkTool> _tArr = new List<CTrkTool>();
 
-        private CToolTrk _currTrk;
+        private CTrkTool _currTrk;
 
         public bool isHeadingSameWay = true, lastIsHeadingSameWay = true;
 
@@ -51,16 +51,13 @@ namespace Twol.Classes.Tool
         //flag for starting stop adding points for curve
         public bool isMakingTrack, isRecordingCurveTrack;
 
-        //to fake the user into thinking they are making a line - but is a curve
-        public bool isMakingABLine;
-
-        public CToolTracks(FormGPS _f)
+        public CTracksTool(FormGPS _f)
         {
             //constructor
             mf = _f;
         }
 
-        public void AddTrack(CToolTrk track)
+        public void AddTrack(CTrkTool track)
         {
             if (track == null) return;
 
@@ -74,12 +71,12 @@ namespace Twol.Classes.Tool
             _tArr.Add(track);
         }
 
-        public void SetTracks(List<CToolTrk> tracks)
+        public void SetTracks(List<CTrkTool> tracks)
         {
             _tArr = tracks;
         }
 
-        public void setTrack(CToolTrk track)
+        public void setTrack(CTrkTool track)
         {
             int index = _tArr.FindIndex(item => item == track);
             if (index != -1)
@@ -90,12 +87,12 @@ namespace Twol.Classes.Tool
             }
         }
 
-        public int TrackIndex(CToolTrk track)
+        public int TrackIndex(CTrkTool track)
         {
             return _tArr.FindIndex(item => item == track);
         }
 
-        public void MoveTrackUp(CToolTrk track)
+        public void MoveTrackUp(CTrkTool track)
         {
             int index = _tArr.IndexOf(track);
             if (track == null || index == 0)
@@ -104,7 +101,7 @@ namespace Twol.Classes.Tool
             _tArr.Reverse(index - 1, 2);
         }
 
-        public void MoveTrackDn(CToolTrk track)
+        public void MoveTrackDn(CTrkTool track)
         {
             int index = _tArr.IndexOf(track);
 
@@ -114,12 +111,12 @@ namespace Twol.Classes.Tool
             _tArr.Reverse(index, 2);
         }
 
-        public void RemoveTrack(CToolTrk track)
+        public void RemoveTrack(CTrkTool track)
         {
             _tArr.Remove(track);
         }
 
-        public CToolTrk currTrk
+        public CTrkTool currTrk
         {
             get => _currTrk;
             set
@@ -152,7 +149,7 @@ namespace Twol.Classes.Tool
             }
             return tracksVisible;
         }
-        public CToolTrk GetNextTrack(CToolTrk track, List<CToolTrk> gTemp, bool next = true, bool invisible = false)
+        public CTrkTool GetNextTrack(CTrkTool track, List<CTrkTool> gTemp, bool next = true, bool invisible = false)
         {
             int index = gTemp.FindIndex(x => x == track);
 
@@ -172,7 +169,7 @@ namespace Twol.Classes.Tool
                 currTrk = tArr.Take(index).Reverse().Concat(tArr.Skip(index + 1).Reverse()).FirstOrDefault(x => x.isVisible);
         }
 
-        public async void GetDistanceFromRefTrack(CToolTrk track, vec3 pivot)
+        public async void GetDistanceFromRefTrack(CTrkTool track, vec3 pivot)
         {
             double widthMinusOverlap = Settings.Tool.toolWidth - Settings.Tool.overlap;
 
@@ -247,7 +244,7 @@ namespace Twol.Classes.Tool
             }
         }
 
-        public List<vec3> BuildCurrentGuidanceTrack(double distAway, CToolTrk track)
+        public List<vec3> BuildCurrentGuidanceTrack(double distAway, CTrkTool track)
         {
             //the list of points of curve new list from async
             List<vec3> newCurList = new List<vec3>();
@@ -443,7 +440,7 @@ namespace Twol.Classes.Tool
         }
 
         //turning the visual line into the real reference line to use
-        public void SaveSmoothList(CToolTrk track)
+        public void SaveSmoothList(CTrkTool track)
         {
             if (smooList.Count > 3)
             {
@@ -495,9 +492,9 @@ namespace Twol.Classes.Tool
                 points = arr.ToList();
         }
 
-        public CToolTrk CreateDesignedToolTrack(bool isRefRightSide)
+        public CTrkTool CreateDesignedToolTrack(bool isRefRightSide)
         {
-            var track = new CToolTrk(DateTime.Now.ToShortTimeString());
+            var track = new CTrkTool(DateTime.Now.ToShortTimeString());
 
             //fill in the dots between A and B
             double len = glm.Distance(designPtA, designPtB);

@@ -66,7 +66,7 @@ namespace Twol
         public List<CFlag> flagPts = new List<CFlag>();
 
         //todo
-        public List<vec2> followPivotPoints = new List<vec2>(256);
+        public List<vec3> followPivotPoints = new List<vec3>(64);
         double toolPivotTriggerDistanceSq = 0;
         public vec2 prevToolPivotPos = new vec2(0, 0);
 
@@ -332,8 +332,12 @@ namespace Twol
 
                 if (Settings.Tool.setToolSteer.isFollowPivot && isJobStarted)
                 {
-
-
+                    //if (isBtnAutoSteerOn)
+                    gydTool.GuidanceFollowPivot(toolPivotPos, steerAxlePos, false, followPivotPoints);
+                    //else
+                    //{
+                    //    guidanceToolXTE = double.NaN;
+                    //}
                 }
             }
             else
@@ -347,6 +351,7 @@ namespace Twol
                 //invalid distance so tell AS module
                 gyd.distanceFromCurrentLine = 0;
                 guidanceVehicleXTE = double.NaN;
+                guidanceToolXTE = double.NaN;
             }
 
             
@@ -430,8 +435,8 @@ namespace Twol
                     PGN_254.pgn[PGN_254.steerAngleLo] = unchecked((byte)(angleX100));
                 }
 
-                //no pgn if passive is active
-                if (Settings.Tool.setToolSteer.isFollowCurrent|| Settings.Tool.setToolSteer.isPassiveSteering)
+                // is active mode for tool steer
+                if (Settings.Tool.setToolSteer.isFollowCurrent|| Settings.Tool.setToolSteer.isFollowPivot || Settings.Tool.setToolSteer.isFollowToolLine)
                 {
                     PGN_233.pgn[PGN_233.speed10] = unchecked((byte)((int)(Math.Abs(avgSpeed) * 10.0)));
 
@@ -655,7 +660,7 @@ namespace Twol
             if (Settings.Tool.setToolSteer.isFollowPivot && toolPivotTriggerDistanceSq > 0.5 && isJobStarted)
             {
                 //followPivotPoints.Add(new vec2(toolPivotPos.easting, toolPivotPos.northing));
-                followPivotPoints.Add(new vec2(pivotAxlePos.easting, pivotAxlePos.northing));
+                followPivotPoints.Add(new vec3(pivotAxlePos.easting, pivotAxlePos.northing, 0));
 
                 if (followPivotPoints.Count > 20) { followPivotPoints.RemoveRange(0, 5); }
 

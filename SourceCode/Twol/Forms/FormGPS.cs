@@ -137,7 +137,7 @@ namespace Twol
         /// <summary>
         /// Tool Track Instance
         /// </summary>
-        public CToolTracks toolTrk;
+        public CTracksTool trkTool;
 
         /// <summary>
         /// Auto Headland YouTurn
@@ -203,6 +203,11 @@ namespace Twol
         /// The new steer algorithms
         /// </summary>
         public CGuidance gyd;
+
+        /// <summary>
+        /// The new steer algorithms
+        /// </summary>
+        public CGuidanceTool gydTool;
 
         /// <summary>
         /// The new brightness code
@@ -292,7 +297,7 @@ namespace Twol
             trk = new CTracks(this);
 
             //new track instance
-            toolTrk = new CToolTracks(this);
+            trkTool = new CTracksTool(this);
 
             //new instance of contour mode
             hdl = new CHeadLine(this);
@@ -329,6 +334,9 @@ namespace Twol
 
             //the new steer algorithms
             gyd = new CGuidance(this);
+
+            //the new steer algorithms
+            gydTool = new CGuidanceTool(this);
 
             //sounds class
             sounds = new CSound();

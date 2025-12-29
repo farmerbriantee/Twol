@@ -603,6 +603,29 @@ namespace Twol
 
         #region Track Flyout
 
+        private void btnToolLineRecord_Click(object sender, EventArgs e)
+        {
+            Form fcc = Application.OpenForms["FormToolPathRec"];
+
+            if (fcc != null)
+            {
+                fcc.Focus();
+                TimedMessageBox(2000, "Nudge Window Open", "Close Nudge Window");
+                return;
+            }
+
+            Form form = new FormToolPathRec(this);
+            form.Show(this);
+
+            if (flp1.Visible)
+            {
+                flp1.Visible = false;
+            }
+
+            this.Activate();
+        }
+
+
         private void btnRefNudge_Click(object sender, EventArgs e)
         {
             Form fcc = Application.OpenForms["FormNudge"];

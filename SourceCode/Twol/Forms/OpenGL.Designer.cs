@@ -513,14 +513,18 @@ namespace Twol
                     GL.PopMatrix();
 
                     //todo
-                    GL.PointSize(2);
-                    GL.Begin(PrimitiveType.Points);
-                    GL.Color3(1.0, 1.0, 0.0);
-                    for (int i = 0; i < followPivotPoints.Count; i++)
+
+                    if (Settings.Tool.setToolSteer.isFollowPivot)
                     {
-                        GL.Vertex3(followPivotPoints[i].easting, followPivotPoints[i].northing, 0.0);
+                        GL.PointSize(4);
+                        GL.Begin(PrimitiveType.Points);
+                        GL.Color3(1.0, 1.0, 0.0);
+                        for (int i = 0; i < followPivotPoints.Count; i++)
+                        {
+                            GL.Vertex3(followPivotPoints[i].easting, followPivotPoints[i].northing, 0.0);
+                        }
+                        GL.End();
                     }
-                    GL.End();
 
                     if (camera.camSetDistance > -550)
                     {

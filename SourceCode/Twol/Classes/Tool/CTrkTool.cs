@@ -2,7 +2,7 @@
 
 namespace Twol.Classes.Tool
 {
-    public class CToolTrk
+    public class CTrkTool
     {
         public List<vec3> curvePts = new List<vec3>();
         public string name;
@@ -11,7 +11,7 @@ namespace Twol.Classes.Tool
         public vec2 ptB;
         public double nudgeDistance;
 
-        public CToolTrk(string _name = "1")
+        public CTrkTool(string _name = "1")
         {
             curvePts = new List<vec3>();
             name = _name;
@@ -21,7 +21,7 @@ namespace Twol.Classes.Tool
             nudgeDistance = 0;
         }
 
-        public CToolTrk(CToolTrk _trk)
+        public CTrkTool(CTrkTool _trk)
         {
             curvePts = new List<vec3>(_trk.curvePts);
             name = _trk.name;

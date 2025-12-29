@@ -238,6 +238,7 @@ namespace Twol
             this.btnFieldStats = new System.Windows.Forms.Button();
             this.button15 = new System.Windows.Forms.Button();
             this.nudToolOffset = new System.Windows.Forms.NumericUpDown();
+            this.btnToolLineRecord = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStripFlag.SuspendLayout();
             this.statusStripLeft.SuspendLayout();
@@ -596,7 +597,7 @@ namespace Twol
             this.toolStripMenuFlagForm.Image = global::Twol.Properties.Resources.FileEditName;
             this.toolStripMenuFlagForm.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripMenuFlagForm.Name = "toolStripMenuFlagForm";
-            this.toolStripMenuFlagForm.Size = new System.Drawing.Size(259, 70);
+            this.toolStripMenuFlagForm.Size = new System.Drawing.Size(267, 70);
             this.toolStripMenuFlagForm.Text = "toolStripMenuItem3";
             this.toolStripMenuFlagForm.Click += new System.EventHandler(this.toolStripMenuFlagForm_Click);
             // 
@@ -1540,10 +1541,11 @@ namespace Twol
             this.flp1.Controls.Add(this.btnBuildTracks);
             this.flp1.Controls.Add(this.btnTracksOff);
             this.flp1.Controls.Add(this.btnRefNudge);
+            this.flp1.Controls.Add(this.btnToolLineRecord);
             this.flp1.FlowDirection = System.Windows.Forms.FlowDirection.BottomUp;
             this.flp1.Location = new System.Drawing.Point(798, 77);
             this.flp1.Name = "flp1";
-            this.flp1.Size = new System.Drawing.Size(86, 488);
+            this.flp1.Size = new System.Drawing.Size(86, 571);
             this.flp1.TabIndex = 539;
             this.flp1.Visible = false;
             // 
@@ -1560,7 +1562,7 @@ namespace Twol
             this.btnNudge.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNudge.Image = global::Twol.Properties.Resources.ABSnapNudgeMenu;
             this.btnNudge.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnNudge.Location = new System.Drawing.Point(3, 413);
+            this.btnNudge.Location = new System.Drawing.Point(3, 496);
             this.btnNudge.Name = "btnNudge";
             this.btnNudge.Size = new System.Drawing.Size(80, 72);
             this.btnNudge.TabIndex = 489;
@@ -1582,7 +1584,7 @@ namespace Twol
             this.btnABDraw.Font = new System.Drawing.Font("Tahoma", 12F);
             this.btnABDraw.Image = global::Twol.Properties.Resources.ABDraw;
             this.btnABDraw.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnABDraw.Location = new System.Drawing.Point(3, 335);
+            this.btnABDraw.Location = new System.Drawing.Point(3, 418);
             this.btnABDraw.Name = "btnABDraw";
             this.btnABDraw.Size = new System.Drawing.Size(80, 72);
             this.btnABDraw.TabIndex = 250;
@@ -1605,7 +1607,7 @@ namespace Twol
             this.btnPlusAB.Font = new System.Drawing.Font("Tahoma", 12F);
             this.btnPlusAB.Image = global::Twol.Properties.Resources.AddNew;
             this.btnPlusAB.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnPlusAB.Location = new System.Drawing.Point(3, 252);
+            this.btnPlusAB.Location = new System.Drawing.Point(3, 335);
             this.btnPlusAB.Name = "btnPlusAB";
             this.btnPlusAB.Size = new System.Drawing.Size(80, 77);
             this.btnPlusAB.TabIndex = 545;
@@ -1627,7 +1629,7 @@ namespace Twol
             this.btnBuildTracks.Font = new System.Drawing.Font("Tahoma", 12F);
             this.btnBuildTracks.Image = global::Twol.Properties.Resources.ABTracks;
             this.btnBuildTracks.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnBuildTracks.Location = new System.Drawing.Point(3, 169);
+            this.btnBuildTracks.Location = new System.Drawing.Point(3, 252);
             this.btnBuildTracks.Name = "btnBuildTracks";
             this.btnBuildTracks.Size = new System.Drawing.Size(80, 77);
             this.btnBuildTracks.TabIndex = 539;
@@ -1648,7 +1650,7 @@ namespace Twol
             this.btnTracksOff.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTracksOff.Image = global::Twol.Properties.Resources.SwitchOff;
             this.btnTracksOff.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnTracksOff.Location = new System.Drawing.Point(3, 86);
+            this.btnTracksOff.Location = new System.Drawing.Point(3, 169);
             this.btnTracksOff.Name = "btnTracksOff";
             this.btnTracksOff.Size = new System.Drawing.Size(80, 77);
             this.btnTracksOff.TabIndex = 539;
@@ -1669,7 +1671,7 @@ namespace Twol
             this.btnRefNudge.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRefNudge.Image = global::Twol.Properties.Resources.ABSnapNudgeMenuRef;
             this.btnRefNudge.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnRefNudge.Location = new System.Drawing.Point(3, 3);
+            this.btnRefNudge.Location = new System.Drawing.Point(3, 86);
             this.btnRefNudge.Name = "btnRefNudge";
             this.btnRefNudge.Size = new System.Drawing.Size(80, 77);
             this.btnRefNudge.TabIndex = 538;
@@ -3615,6 +3617,27 @@ namespace Twol
             this.nudToolOffset.TabIndex = 651;
             this.nudToolOffset.ValueChanged += new System.EventHandler(this.nudToolOffset_ValueChanged);
             // 
+            // btnToolLineRecord
+            // 
+            this.btnToolLineRecord.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnToolLineRecord.BackColor = System.Drawing.Color.Transparent;
+            this.btnToolLineRecord.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnToolLineRecord.FlatAppearance.BorderSize = 0;
+            this.btnToolLineRecord.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.btnToolLineRecord.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnToolLineRecord.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnToolLineRecord.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnToolLineRecord.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnToolLineRecord.Image = global::Twol.Properties.Resources.BoundaryRecord;
+            this.btnToolLineRecord.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnToolLineRecord.Location = new System.Drawing.Point(3, 3);
+            this.btnToolLineRecord.Name = "btnToolLineRecord";
+            this.btnToolLineRecord.Size = new System.Drawing.Size(80, 77);
+            this.btnToolLineRecord.TabIndex = 546;
+            this.btnToolLineRecord.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnToolLineRecord.UseVisualStyleBackColor = false;
+            this.btnToolLineRecord.Click += new System.EventHandler(this.btnToolLineRecord_Click);
+            // 
             // FormGPS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -3889,6 +3912,7 @@ namespace Twol
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button btnInternetConnection;
         private System.Windows.Forms.NumericUpDown nudToolOffset;
+        private System.Windows.Forms.Button btnToolLineRecord;
     }
 }
 
