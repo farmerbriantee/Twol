@@ -603,7 +603,7 @@ namespace Twol.Classes.Tool
             return _ = r.northing >= minx && r.northing <= maxx && (r.easting >= miny && r.easting <= maxy);
         }
 
-        private List<vec3> GenerateEquidistantPoints(List<vec3> pts, double spacing, bool isLoop)
+        public List<vec3> GenerateEquidistantPoints(List<vec3> pts, double spacing, bool isLoop)
         {
             var result = new List<vec3>();
             const double eps = 1e-9;

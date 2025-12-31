@@ -539,6 +539,11 @@ namespace Twol
                     gyd.isPassiveSteeringFlag = false;
                 }
             }
+
+            if (Settings.Tool.setToolSteer.isFollowToolLine)
+            {
+                gydTool.isAutoSteerBtnOn = state;
+            }
         }
 
         private void btnAutoYouTurn_Click(object sender, EventArgs e)

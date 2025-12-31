@@ -32,6 +32,8 @@ namespace Twol
             mf = callingForm as FormGPS;
 
             InitializeComponent();
+
+            btnRecStartStop.Image = mf.gydTool.isGuidanceModeRecordNewTracks ? Properties.Resources.BoundaryRecord : Properties.Resources.boundaryPause;
         }
 
         private void FormToolPathRec_Load(object sender, EventArgs e)
@@ -61,9 +63,19 @@ namespace Twol
             mf.Activate();
         }
 
-        private void btnZeroMove_Click(object sender, EventArgs e)
+        private void btnRecStartStop_Click(object sender, EventArgs e)
         {
-            mf.trkTool.isRecordingCurveTrack = !mf.trkTool.isRecordingCurveTrack;
+            mf.gydTool.isGuidanceModeRecordNewTracks = !mf.gydTool.isGuidanceModeRecordNewTracks;
+
+            if (mf.gydTool.isGuidanceModeRecordNewTracks)
+            {
+                btnRecStartStop.Image = Properties.Resources.BoundaryRecord;
+            }
+            else
+            {
+                btnRecStartStop.Image = Properties.Resources.boundaryPause;
+            }
+
         }
 
         private void bntOk_Click(object sender, EventArgs e)

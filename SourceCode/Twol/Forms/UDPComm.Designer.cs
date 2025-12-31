@@ -81,6 +81,8 @@ namespace Twol
 
         public bool CheckInternetConnection()
         {
+            return false;
+
             // Fire-and-forget connectivity probe; returns immediately with last known state.
             ThreadPool.QueueUserWorkItem(_ =>
             {

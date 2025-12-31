@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using static System.Windows.Forms.AxHost;
 
 namespace Twol
 {
@@ -294,6 +295,12 @@ namespace Twol
             {
                 if (patch.isDrawing) patch.TurnMappingOff();
             }
+
+            if (Settings.Tool.setToolSteer.isFollowToolLine)
+            {
+                gydTool.isSectionsOn = false;
+            }
+
         }
 
         //function to set section positions
@@ -400,6 +407,19 @@ namespace Twol
 
             SendUDPMessage(PGN_229.pgn, epModule);
             SendUDPMessage(PGN_239.pgn, epModule);
+
+            if (Settings.Tool.setToolSteer.isFollowToolLine)
+            {
+                gydTool.isSectionsOn = false;
+                for (int i = 0; i < section.Count; i++)
+                {
+                    if (section[i].isSectionOn)
+                    {
+                        gydTool.isSectionsOn = true;
+                        break;
+                    }
+                }
+            }
         }
 
         private void DoRemoteSwitches()

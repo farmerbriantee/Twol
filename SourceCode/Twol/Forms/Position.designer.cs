@@ -312,6 +312,7 @@ namespace Twol
 
             //preset the values
             guidanceVehicleXTE = double.NaN;
+            guidanceToolXTE = double.NaN;
 
             if (ct.isContourBtnOn)
             {
@@ -332,12 +333,12 @@ namespace Twol
 
                 if (Settings.Tool.setToolSteer.isFollowPivot && isJobStarted)
                 {
-                    //if (isBtnAutoSteerOn)
-                    gydTool.GuidanceFollowPivot(toolPivotPos, steerAxlePos, false, followPivotPoints);
-                    //else
-                    //{
-                    //    guidanceToolXTE = double.NaN;
-                    //}
+                    gydTool.GuidanceFollowPivot(toolPivotPos, steerAxlePos, yt.isYouTurnTriggered, followPivotPoints);
+                }
+
+                else if (Settings.Tool.setToolSteer.isFollowToolLine && isJobStarted)
+                {
+                    gydTool.GuidanceToolLine();
                 }
             }
             else
@@ -353,9 +354,6 @@ namespace Twol
                 guidanceVehicleXTE = double.NaN;
                 guidanceToolXTE = double.NaN;
             }
-
-            
-            // autosteer at full speed of updates
 
             // If Drive button off - normal autosteer 
             if (!vehicle.isInFreeDriveMode)
@@ -655,40 +653,50 @@ namespace Twol
             //To prevent drawing high numbers of triangles, determine and test before drawing vertex
             sectionTriggerDistanceSq = glm.DistanceSquared(pivotAxlePos, prevPivotAxlePos);
             toolPivotTriggerDistanceSq = glm.DistanceSquared(toolPivotPos, prevToolPivotPos);
-
-            //tool track recording
-            if (Settings.Tool.setToolSteer.isFollowPivot && toolPivotTriggerDistanceSq > 0.5 && isJobStarted)
+            
+            if (isJobStarted)
             {
-                //followPivotPoints.Add(new vec2(toolPivotPos.easting, toolPivotPos.northing));
-                followPivotPoints.Add(new vec3(pivotAxlePos.easting, pivotAxlePos.northing, 0));
+                //tool track recording
+                if (Settings.Tool.setToolSteer.isFollowPivot && toolPivotTriggerDistanceSq > 0.5)
+                {
+                    //followPivotPoints.Add(new vec2(toolPivotPos.easting, toolPivotPos.northing));
+                    followPivotPoints.Add(new vec3(pivotAxlePos.easting, pivotAxlePos.northing, 0));
 
-                if (followPivotPoints.Count > 20) { followPivotPoints.RemoveRange(0, 5); }
+                    if (followPivotPoints.Count > 20) { followPivotPoints.RemoveRange(0, 5); }
 
-                //save the north & east as previous
-                prevToolPivotPos.northing = toolPivotPos.northing;
-                prevToolPivotPos.easting = toolPivotPos.easting;
-            }
+                    //save the north & east as previous
+                    prevToolPivotPos.northing = toolPivotPos.northing;
+                    prevToolPivotPos.easting = toolPivotPos.easting;
+                }
 
-            //section on off and points
-            if (sectionTriggerDistanceSq > distanceTriggerSq && isJobStarted)
-            {
-                AddSectionOrPathPoints();
-            }
+                //section on off and points
+                if (sectionTriggerDistanceSq > distanceTriggerSq)
+                {
+                    AddSectionOrPathPoints();
+                }
 
-            //contour points
-            AddContourPoints();
+                //contour points
+                AddContourPoints();
 
-            if (Settings.User.isLogElevation)
-            {
-                AddElevationPoints();
+                if (Settings.User.isLogElevation)
+                {
+                    AddElevationPoints();
+                }
+
+                if (Settings.Tool.setToolSteer.isFollowToolLine && trkTool.isRecordingCurveTrack)
+                {
+                    if (toolPivotTriggerDistanceSq > 0.5) trkTool.designPtsList.Add(new vec3(toolPivotPos));
+                }
             }
 
             //test if travelled far enough for new boundary point
             if (bnd.isOkToAddPoints)
             {
                 double boundaryDistance = glm.DistanceSquared(pivotAxlePos, prevBoundaryPos);
-                if (boundaryDistance > 1) AddBoundaryPoint();
-            }
+                
+                if (boundaryDistance > 1) 
+                    AddBoundaryPoint();
+            }            
         }
 
         //all the hitch, pivot, section, trailing hitch, headings and fixes

@@ -34,6 +34,7 @@
             // 
             // bthOK
             // 
+            this.bthOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.bthOK.BackColor = System.Drawing.Color.Transparent;
             this.bthOK.BackgroundImage = global::Twol.Properties.Resources.OK64;
             this.bthOK.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
@@ -42,7 +43,7 @@
             this.bthOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bthOK.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.bthOK.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.bthOK.Location = new System.Drawing.Point(19, 16);
+            this.bthOK.Location = new System.Drawing.Point(12, 175);
             this.bthOK.Name = "bthOK";
             this.bthOK.Size = new System.Drawing.Size(74, 65);
             this.bthOK.TabIndex = 1;
@@ -54,7 +55,6 @@
             // 
             this.btnRecStartStop.BackColor = System.Drawing.Color.Transparent;
             this.btnRecStartStop.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlText;
-            this.btnRecStartStop.FlatAppearance.BorderSize = 0;
             this.btnRecStartStop.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
             this.btnRecStartStop.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btnRecStartStop.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
@@ -62,26 +62,25 @@
             this.btnRecStartStop.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnRecStartStop.Image = global::Twol.Properties.Resources.BoundaryRecord;
             this.btnRecStartStop.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnRecStartStop.Location = new System.Drawing.Point(19, 140);
+            this.btnRecStartStop.Location = new System.Drawing.Point(12, 12);
             this.btnRecStartStop.Name = "btnRecStartStop";
             this.btnRecStartStop.Size = new System.Drawing.Size(87, 65);
             this.btnRecStartStop.TabIndex = 534;
             this.btnRecStartStop.UseVisualStyleBackColor = false;
-            this.btnRecStartStop.Click += new System.EventHandler(this.btnZeroMove_Click);
+            this.btnRecStartStop.Click += new System.EventHandler(this.btnRecStartStop_Click);
             // 
             // FormToolPathRec
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.ClientSize = new System.Drawing.Size(184, 342);
+            this.ClientSize = new System.Drawing.Size(120, 252);
             this.ControlBox = false;
             this.Controls.Add(this.btnRecStartStop);
             this.Controls.Add(this.bthOK);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(180, 115);
             this.Name = "FormToolPathRec";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
