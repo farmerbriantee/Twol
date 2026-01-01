@@ -35,7 +35,6 @@ namespace Twol
             InitializeComponent();
 
             btnRecStartStop.BackColor = mf.gydTool.isGuidanceModeRecordNewTracks ? Color.LightGreen : Color.Transparent;
-            lblRec.Text = mf.gydTool.isGuidanceModeRecordNewTracks ? "Recording" : "Paused";
 
             if (mf.gydTool.isboundaryLine)
             {
@@ -51,8 +50,8 @@ namespace Twol
 
         private void FormToolPathRec_Load(object sender, EventArgs e)
         {
-            Location = Settings.User.setWindow_formNudgeLocation;
-            Size = Settings.User.setWindow_formNudgeSize;
+            Location = Settings.User.setWindow_recordToolTracksLocation;
+            Size = Settings.User.setWindow_formRecordToolTracksSize;
             UpdateMoveLabel();
 
             if (!mf.IsOnScreen(Location, Size, 1))
@@ -64,8 +63,8 @@ namespace Twol
 
         private void FormToolPathRec_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Settings.User.setWindow_formNudgeLocation = Location;
-            Settings.User.setWindow_formNudgeSize = Size;
+            Settings.User.setWindow_recordToolTracksLocation = Location;
+            Settings.User.setWindow_formRecordToolTracksSize = Size;
 
             //save entire list
             mf.FileSaveTracks();
@@ -83,14 +82,11 @@ namespace Twol
             if (mf.gydTool.isGuidanceModeRecordNewTracks)
             {
                 btnRecStartStop.BackColor = Color.LightGreen;
-                lblRec.Text = "Recording";
             }
             else
             {
                 btnRecStartStop.BackColor = Color.Transparent;
-                lblRec.Text = "Pause";
             }
-
         }
 
         private void bntOk_Click(object sender, EventArgs e)
@@ -100,9 +96,25 @@ namespace Twol
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            lblRec.Visible = !lblRec.Visible;
+            lblPointsRec.Text = mf.trkTool.designPtsList.Count.ToString();
 
-            lblPointsRec.Text = mf.trkTool.designPtsList.Count.ToString("N0");
+            lblTracks.Text = mf.trkTool.tArr.Count.ToString();
+
+            if (mf.gydTool.isRecordingToolLine)
+            {
+                if (this.BackColor == Color.AliceBlue)
+                {
+                    this.BackColor = Color.Wheat;
+                }
+                else
+                {
+                    this.BackColor = Color.AliceBlue;
+                }
+            }
+            else
+            {
+                this.BackColor = Color.AliceBlue;
+            }
         }
 
         private void btnOuterInner_Click(object sender, EventArgs e)

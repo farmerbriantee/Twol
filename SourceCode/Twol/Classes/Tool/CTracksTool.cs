@@ -303,9 +303,9 @@ namespace Twol.Classes.Tool
             for (int i = 0; i < tArr.Count; i++)
             {
                 {
-                    GL.LineWidth(Settings.User.setDisplay_lineWidth);
+                    GL.LineWidth(1);
                     GL.Color3(0.95f, 0.5f, 0.5f);
-                    tArr[i].curvePts.DrawPolygon(PrimitiveType.Points);
+                    tArr[i].curvePts.DrawPolygon(PrimitiveType.LineStrip);
                 }
 
             }
@@ -354,24 +354,24 @@ namespace Twol.Classes.Tool
             //    }
             //    GL.End();
 
-                /*
+            /*
 
-                //GL.Disable(EnableCap.LineSmooth);
+            //GL.Disable(EnableCap.LineSmooth);
 
-                //GL.PointSize(12.0f);
-                //GL.Begin(PrimitiveType.Points);
-                //GL.Color3(0.920f, 0.6f, 0.30f);
-                ////for (int h = 0; h < currentGuidanceTrack.Count; h++) GL.Vertex3(currentGuidanceTrack[h].easting, currentGuidanceTrack[h].northing, 0);
-                //GL.Vertex3(currentGuidanceTrack[mf.gyd.A].easting, currentGuidanceTrack[mf.gyd.A].northing, 0);
-                //GL.End();
+            //GL.PointSize(12.0f);
+            //GL.Begin(PrimitiveType.Points);
+            //GL.Color3(0.920f, 0.6f, 0.30f);
+            ////for (int h = 0; h < currentGuidanceTrack.Count; h++) GL.Vertex3(currentGuidanceTrack[h].easting, currentGuidanceTrack[h].northing, 0);
+            //GL.Vertex3(currentGuidanceTrack[mf.gyd.A].easting, currentGuidanceTrack[mf.gyd.A].northing, 0);
+            //GL.End();
 
-                //GL.Begin(PrimitiveType.Points);
-                //GL.Color3(0.20f, 0.4f, 0.930f);
-                ////for (int h = 0; h < currentGuidanceTrack.Count; h++) GL.Vertex3(currentGuidanceTrack[h].easting, currentGuidanceTrack[h].northing, 0);
-                //GL.Vertex3(currentGuidanceTrack[mf.gyd.B].easting, currentGuidanceTrack[mf.gyd.B].northing, 0);
-                //GL.End();
-                */
-           // }
+            //GL.Begin(PrimitiveType.Points);
+            //GL.Color3(0.20f, 0.4f, 0.930f);
+            ////for (int h = 0; h < currentGuidanceTrack.Count; h++) GL.Vertex3(currentGuidanceTrack[h].easting, currentGuidanceTrack[h].northing, 0);
+            //GL.Vertex3(currentGuidanceTrack[mf.gyd.B].easting, currentGuidanceTrack[mf.gyd.B].northing, 0);
+            //GL.End();
+            */
+            // }
         }
 
         public void DrawNewTrack()

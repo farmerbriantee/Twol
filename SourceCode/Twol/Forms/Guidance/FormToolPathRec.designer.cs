@@ -36,7 +36,8 @@
             this.lblPointsRec = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.btnOuterInner = new System.Windows.Forms.Button();
-            this.lblRec = new System.Windows.Forms.Label();
+            this.lblTracks = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // bthOK
@@ -50,9 +51,9 @@
             this.bthOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bthOK.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.bthOK.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.bthOK.Location = new System.Drawing.Point(12, 317);
+            this.bthOK.Location = new System.Drawing.Point(23, 275);
             this.bthOK.Name = "bthOK";
-            this.bthOK.Size = new System.Drawing.Size(74, 65);
+            this.bthOK.Size = new System.Drawing.Size(87, 65);
             this.bthOK.TabIndex = 1;
             this.bthOK.TextAlign = System.Drawing.ContentAlignment.TopLeft;
             this.bthOK.UseVisualStyleBackColor = false;
@@ -69,9 +70,9 @@
             this.btnRecStartStop.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnRecStartStop.Image = global::Twol.Properties.Resources.BoundaryRecord;
             this.btnRecStartStop.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnRecStartStop.Location = new System.Drawing.Point(19, 12);
+            this.btnRecStartStop.Location = new System.Drawing.Point(8, 53);
             this.btnRecStartStop.Name = "btnRecStartStop";
-            this.btnRecStartStop.Size = new System.Drawing.Size(87, 65);
+            this.btnRecStartStop.Size = new System.Drawing.Size(116, 65);
             this.btnRecStartStop.TabIndex = 534;
             this.btnRecStartStop.UseVisualStyleBackColor = false;
             this.btnRecStartStop.Click += new System.EventHandler(this.btnRecStartStop_Click);
@@ -79,14 +80,14 @@
             // timer1
             // 
             this.timer1.Enabled = true;
-            this.timer1.Interval = 1000;
+            this.timer1.Interval = 1500;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // lblOuterInner
             // 
             this.lblOuterInner.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblOuterInner.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblOuterInner.Location = new System.Drawing.Point(4, 229);
+            this.lblOuterInner.Location = new System.Drawing.Point(6, 232);
             this.lblOuterInner.Name = "lblOuterInner";
             this.lblOuterInner.Size = new System.Drawing.Size(121, 31);
             this.lblOuterInner.TabIndex = 535;
@@ -97,23 +98,23 @@
             // 
             this.lblPointsRec.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPointsRec.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblPointsRec.Location = new System.Drawing.Point(171, 46);
+            this.lblPointsRec.Location = new System.Drawing.Point(72, 25);
             this.lblPointsRec.Name = "lblPointsRec";
-            this.lblPointsRec.Size = new System.Drawing.Size(74, 31);
+            this.lblPointsRec.Size = new System.Drawing.Size(63, 22);
             this.lblPointsRec.TabIndex = 536;
             this.lblPointsRec.Text = "32";
-            this.lblPointsRec.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblPointsRec.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label2
             // 
             this.label2.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label2.Location = new System.Drawing.Point(160, 15);
+            this.label2.Location = new System.Drawing.Point(8, 24);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(97, 31);
+            this.label2.Size = new System.Drawing.Size(77, 22);
             this.label2.TabIndex = 537;
-            this.label2.Text = "Points";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label2.Text = "Points: ";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // btnOuterInner
             // 
@@ -126,34 +127,46 @@
             this.btnOuterInner.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnOuterInner.Image = global::Twol.Properties.Resources.TramOuter;
             this.btnOuterInner.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnOuterInner.Location = new System.Drawing.Point(19, 157);
+            this.btnOuterInner.Location = new System.Drawing.Point(23, 164);
             this.btnOuterInner.Name = "btnOuterInner";
             this.btnOuterInner.Size = new System.Drawing.Size(87, 65);
             this.btnOuterInner.TabIndex = 538;
             this.btnOuterInner.UseVisualStyleBackColor = false;
             this.btnOuterInner.Click += new System.EventHandler(this.btnOuterInner_Click);
             // 
-            // lblRec
+            // lblTracks
             // 
-            this.lblRec.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRec.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblRec.Location = new System.Drawing.Point(4, 80);
-            this.lblRec.Name = "lblRec";
-            this.lblRec.Size = new System.Drawing.Size(121, 31);
-            this.lblRec.TabIndex = 535;
-            this.lblRec.Text = "Recording";
-            this.lblRec.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblTracks.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTracks.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblTracks.Location = new System.Drawing.Point(76, 122);
+            this.lblTracks.Name = "lblTracks";
+            this.lblTracks.Size = new System.Drawing.Size(63, 22);
+            this.lblTracks.TabIndex = 539;
+            this.lblTracks.Text = "32";
+            this.lblTracks.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label3
+            // 
+            this.label3.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label3.Location = new System.Drawing.Point(4, 121);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(77, 22);
+            this.label3.TabIndex = 540;
+            this.label3.Text = "Tracks:";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // FormToolPathRec
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.AliceBlue;
-            this.ClientSize = new System.Drawing.Size(360, 394);
+            this.BackColor = System.Drawing.Color.Beige;
+            this.ClientSize = new System.Drawing.Size(134, 348);
             this.ControlBox = false;
+            this.Controls.Add(this.lblTracks);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.btnOuterInner);
             this.Controls.Add(this.lblPointsRec);
-            this.Controls.Add(this.lblRec);
             this.Controls.Add(this.lblOuterInner);
             this.Controls.Add(this.btnRecStartStop);
             this.Controls.Add(this.bthOK);
@@ -179,6 +192,7 @@
         private System.Windows.Forms.Label lblPointsRec;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnOuterInner;
-        private System.Windows.Forms.Label lblRec;
+        private System.Windows.Forms.Label lblTracks;
+        private System.Windows.Forms.Label label3;
     }
 }

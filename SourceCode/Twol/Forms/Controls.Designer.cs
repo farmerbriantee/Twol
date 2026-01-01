@@ -465,15 +465,19 @@ namespace Twol
                 //ref nudge
                 flp1.Controls[5].Visible = tracksVisible > 0;
 
+                flp1.Controls[6].Visible = Settings.Tool.setToolSteer.isRecordToolLine;
+
+
                 for (int i = 0; i < flp1.Controls.Count; i++)
                 {
                     if (flp1.Controls[i].Visible) btnCount++;
                 }
 
                 //position of panel
-                flp1.Top = this.Height - 120 - (btnCount*75);
+                flp1.Top = this.Height - 120 - (btnCount * 75);
                 flp1.Left = this.Width - 120 - flp1.Width;
                 trackMethodPanelCounter = 4;
+
             }
 
             PanelUpdateRightAndBottom();
