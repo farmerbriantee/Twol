@@ -44,47 +44,80 @@ namespace Twol
         }
 
         // in tool line mode - record and playback of tool line
-        public void GuidanceToolLine()
+        public void GuidanceToolLineRecord(bool isUTurn)
         {
-            if (isGuidanceModeRecordNewTracks)
+            if (isGuidanceModeRecordNewTracks && !isUTurn && !isRecordingToolLine && isSectionsOn) // && isAutoSteerBtnOn
             {
-                if (!isRecordingToolLine && isAutoSteerBtnOn && isSectionsOn)
-                {
-                    isRecordingToolLine = true;
-
-                    // start recording a new design track
-                    mf.trkTool.designPtsList.Clear();
-
-                }
-                //line complete
-                else if (isRecordingToolLine && (!isAutoSteerBtnOn || !isSectionsOn))
-                {
-                    if (mf.trkTool.designPtsList.Count > 5)
-                    {
-                        //make a new tool track
-                        var track = new CTrkTool(mf.trkTool.tArr.Count.ToString("###"));
-
-                        mf.trk.SmoothAB(ref mf.trkTool.designPtsList, 4, false);
-
-                        mf.trk.designPtsList.CalculateHeadings(false);
-
-                        //write out the Curve Points
-                        foreach (vec3 item in mf.trkTool.designPtsList)
-                        {
-                            track.curvePts.Add(item);
-                        }
-
-                        mf.trkTool.AddTrack(track);
-
-                        isRecordingToolLine = false;
-                    }
-                }
-            }
-            else
-            {
-
+                isRecordingToolLine = true;
+                // start recording a new design track
+                mf.trkTool.designPtsList?.Clear();
             }
 
+            //line complete
+            if (isRecordingToolLine && (isUTurn || !isSectionsOn || !isGuidanceModeRecordNewTracks)) // && isAutoSteerBtnOn
+            {
+                if (mf.trkTool.designPtsList.Count > 5)
+                {
+                    FinishToolLineRecording();
+                    isRecordingToolLine = false;
+
+                    mf.trkTool.designPtsList?.Clear();
+                }
+            }
+        }
+
+        private void FinishToolLineRecording()
+        {
+            mf.trkTool.designPtsList.Add(new vec3(mf.toolPivotPos));
+
+            //make a new tool track
+            var track = new CTrkTool(mf.trkTool.tArr.Count.ToString("###"));
+
+            mf.trkTool.SmoothAB(ref mf.trkTool.designPtsList, 10, false);
+
+            mf.trkTool.designPtsList.CalculateHeadings(false);
+
+            double delta = 0;
+            int cont = mf.trkTool.designPtsList.Count;
+            vec3[] smList = new vec3[cont];
+            cont--;
+            mf.trkTool.designPtsList.CopyTo(smList);
+            mf.trkTool.designPtsList.Clear();
+            int counter = 0;
+            double check;
+
+            for (int i = 0; i < cont; i++)
+            {
+                if (i < 2 || i > cont - 3)
+                {
+                    mf.trkTool.designPtsList.Add(new vec3(smList[i]));
+                    continue;
+                }
+                check = (smList[i - 1].heading - smList[i].heading);
+                if (check > Math.PI || check < -Math.PI)
+                {
+                    if (check > 0) check -= glm.twoPI;
+                    else check += glm.twoPI;
+                }
+                delta += check;
+                if (Math.Abs(delta) > 0.01 || counter > 20)
+                {
+                    mf.trkTool.designPtsList.Add(new vec3(smList[i]));
+                    delta = 0;
+                    counter = 0;
+                }
+                counter++;
+            }
+
+            //write out the Curve Points
+            foreach (vec3 item in mf.trkTool.designPtsList)
+            {
+                track.curvePts.Add(item);
+            }
+
+            mf.trkTool.AddEndPoints(ref track.curvePts, 2);
+
+            mf.trkTool.AddTrack(track);
         }
 
         public bool FindClosestSegment(List<vec3> points, bool loop, vec2 point, out int AA, out int BB, int start = 0, int end = int.MaxValue)

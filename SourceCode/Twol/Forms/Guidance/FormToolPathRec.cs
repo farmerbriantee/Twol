@@ -33,7 +33,8 @@ namespace Twol
 
             InitializeComponent();
 
-            btnRecStartStop.Image = mf.gydTool.isGuidanceModeRecordNewTracks ? Properties.Resources.BoundaryRecord : Properties.Resources.boundaryPause;
+            btnRecStartStop.Image = mf.gydTool.isGuidanceModeRecordNewTracks ? Properties.Resources.boundaryPause : Properties.Resources.BoundaryRecord;
+            lblRec.Text = mf.gydTool.isGuidanceModeRecordNewTracks ? "Recording" : "Paused";
         }
 
         private void FormToolPathRec_Load(object sender, EventArgs e)
@@ -69,11 +70,13 @@ namespace Twol
 
             if (mf.gydTool.isGuidanceModeRecordNewTracks)
             {
-                btnRecStartStop.Image = Properties.Resources.BoundaryRecord;
+                btnRecStartStop.Image = Properties.Resources.boundaryPause;
+                lblRec.Text = "Recording";
             }
             else
             {
-                btnRecStartStop.Image = Properties.Resources.boundaryPause;
+                btnRecStartStop.Image = Properties.Resources.BoundaryRecord;
+                lblRec.Text = "Pause";
             }
 
         }
@@ -81,6 +84,13 @@ namespace Twol
         private void bntOk_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            lblRec.Visible = !lblRec.Visible;
+
+            lblPointsRec.Text = mf.trkTool.designPtsList.Count.ToString("N0");
         }
     }
 }

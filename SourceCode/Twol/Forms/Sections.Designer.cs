@@ -295,12 +295,6 @@ namespace Twol
             {
                 if (patch.isDrawing) patch.TurnMappingOff();
             }
-
-            if (Settings.Tool.setToolSteer.isFollowToolLine)
-            {
-                gydTool.isSectionsOn = false;
-            }
-
         }
 
         //function to set section positions
@@ -408,7 +402,7 @@ namespace Twol
             SendUDPMessage(PGN_229.pgn, epModule);
             SendUDPMessage(PGN_239.pgn, epModule);
 
-            if (Settings.Tool.setToolSteer.isFollowToolLine)
+            if (Settings.Tool.setToolSteer.isRecordToolLine)
             {
                 gydTool.isSectionsOn = false;
                 for (int i = 0; i < section.Count; i++)

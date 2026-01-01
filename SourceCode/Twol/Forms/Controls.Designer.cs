@@ -540,7 +540,7 @@ namespace Twol
                 }
             }
 
-            if (Settings.Tool.setToolSteer.isFollowToolLine)
+            if (Settings.Tool.setToolSteer.isRecordToolLine)
             {
                 gydTool.isAutoSteerBtnOn = state;
             }

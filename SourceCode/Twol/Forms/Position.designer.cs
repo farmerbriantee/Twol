@@ -336,9 +336,9 @@ namespace Twol
                     gydTool.GuidanceFollowPivot(toolPivotPos, steerAxlePos, yt.isYouTurnTriggered, followPivotPoints);
                 }
 
-                else if (Settings.Tool.setToolSteer.isFollowToolLine && isJobStarted)
+                else if (Settings.Tool.setToolSteer.isRecordToolLine && isJobStarted)
                 {
-                    gydTool.GuidanceToolLine();
+                    gydTool.GuidanceToolLineRecord(yt.isYouTurnTriggered);
                 }
             }
             else
@@ -653,7 +653,7 @@ namespace Twol
             //To prevent drawing high numbers of triangles, determine and test before drawing vertex
             sectionTriggerDistanceSq = glm.DistanceSquared(pivotAxlePos, prevPivotAxlePos);
             toolPivotTriggerDistanceSq = glm.DistanceSquared(toolPivotPos, prevToolPivotPos);
-            
+
             if (isJobStarted)
             {
                 //tool track recording
@@ -683,9 +683,16 @@ namespace Twol
                     AddElevationPoints();
                 }
 
-                if (Settings.Tool.setToolSteer.isFollowToolLine && trkTool.isRecordingCurveTrack)
+                if (Settings.Tool.setToolSteer.isRecordToolLine && gydTool.isRecordingToolLine)
                 {
-                    if (toolPivotTriggerDistanceSq > 0.5) trkTool.designPtsList.Add(new vec3(toolPivotPos));
+                    if (toolPivotTriggerDistanceSq > 0.5)
+                    {
+                        trkTool.designPtsList.Add(new vec3(toolPivotPos));
+
+                        //save the north & east as previous
+                        prevToolPivotPos.northing = toolPivotPos.northing;
+                        prevToolPivotPos.easting = toolPivotPos.easting;
+                    }
                 }
             }
 

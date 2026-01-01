@@ -28,8 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.bthOK = new System.Windows.Forms.Button();
             this.btnRecStartStop = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.lblRec = new System.Windows.Forms.Label();
+            this.lblPointsRec = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // bthOK
@@ -43,7 +48,7 @@
             this.bthOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bthOK.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.bthOK.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.bthOK.Location = new System.Drawing.Point(12, 175);
+            this.bthOK.Location = new System.Drawing.Point(12, 317);
             this.bthOK.Name = "bthOK";
             this.bthOK.Size = new System.Drawing.Size(74, 65);
             this.bthOK.TabIndex = 1;
@@ -62,22 +67,64 @@
             this.btnRecStartStop.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnRecStartStop.Image = global::Twol.Properties.Resources.BoundaryRecord;
             this.btnRecStartStop.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnRecStartStop.Location = new System.Drawing.Point(12, 12);
+            this.btnRecStartStop.Location = new System.Drawing.Point(19, 12);
             this.btnRecStartStop.Name = "btnRecStartStop";
             this.btnRecStartStop.Size = new System.Drawing.Size(87, 65);
             this.btnRecStartStop.TabIndex = 534;
             this.btnRecStartStop.UseVisualStyleBackColor = false;
             this.btnRecStartStop.Click += new System.EventHandler(this.btnRecStartStop_Click);
             // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // lblRec
+            // 
+            this.lblRec.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRec.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblRec.Location = new System.Drawing.Point(5, 80);
+            this.lblRec.Name = "lblRec";
+            this.lblRec.Size = new System.Drawing.Size(121, 31);
+            this.lblRec.TabIndex = 535;
+            this.lblRec.Text = "Recording";
+            this.lblRec.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblPointsRec
+            // 
+            this.lblPointsRec.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPointsRec.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblPointsRec.Location = new System.Drawing.Point(171, 46);
+            this.lblPointsRec.Name = "lblPointsRec";
+            this.lblPointsRec.Size = new System.Drawing.Size(74, 31);
+            this.lblPointsRec.TabIndex = 536;
+            this.lblPointsRec.Text = "32";
+            this.lblPointsRec.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label2
+            // 
+            this.label2.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label2.Location = new System.Drawing.Point(160, 15);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(97, 31);
+            this.label2.TabIndex = 537;
+            this.label2.Text = "Points";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // FormToolPathRec
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.ClientSize = new System.Drawing.Size(120, 252);
+            this.ClientSize = new System.Drawing.Size(360, 394);
             this.ControlBox = false;
+            this.Controls.Add(this.lblPointsRec);
+            this.Controls.Add(this.lblRec);
             this.Controls.Add(this.btnRecStartStop);
             this.Controls.Add(this.bthOK);
+            this.Controls.Add(this.label2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -94,5 +141,9 @@
         #endregion
         private System.Windows.Forms.Button bthOK;
         private System.Windows.Forms.Button btnRecStartStop;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label lblRec;
+        private System.Windows.Forms.Label lblPointsRec;
+        private System.Windows.Forms.Label label2;
     }
 }

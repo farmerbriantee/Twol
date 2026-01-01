@@ -287,6 +287,8 @@ namespace Twol.Classes.Tool
                 newCurList = GenerateEquidistantPoints(newCurList, 0.5, false);
 
                 newCurList.CalculateHeadings(false);
+
+
             }
             catch (Exception e)
             {
@@ -298,80 +300,59 @@ namespace Twol.Classes.Tool
 
         public void DrawTrack()
         {
-            if (guideArr.Count > 0)
+            for (int i = 0; i < tArr.Count; i++)
             {
-                GL.LineWidth(Settings.User.setDisplay_lineWidth * 3);
-                GL.Color3(0, 0, 0);
-
-                for (int i = 0; i < guideArr.Count; i++)
                 {
-                    guideArr[i].DrawPolygon(PrimitiveType.LineStrip);
+                    GL.LineWidth(Settings.User.setDisplay_lineWidth);
+                    GL.Color3(0.95f, 0.5f, 0.5f);
+                    tArr[i].curvePts.DrawPolygon(PrimitiveType.Points);
                 }
 
-                GL.LineWidth(Settings.User.setDisplay_lineWidth);
-                GL.Color4(0.2, 0.75, 0.2, 0.6);
-
-                for (int i = 0; i < guideArr.Count; i++)
-                {
-                    guideArr[i].DrawPolygon(PrimitiveType.LineStrip);
-                }
             }
 
-            //draw reference line
-            if (currTrk.curvePts == null || currTrk.curvePts.Count == 0) return;
+            ////draw reference line
+            //if (currTrk.curvePts == null || currTrk.curvePts.Count == 0) return;
 
-            GL.LineWidth(Settings.User.setDisplay_lineWidth * 2);
-            GL.Color3(0.96, 0.2f, 0.2f);
-            currTrk.curvePts.DrawPolygon(PrimitiveType.Lines);
+            //GL.LineWidth(Settings.User.setDisplay_lineWidth * 2);
+            //GL.Color3(0.96, 0.2f, 0.2f);
+            //currTrk.curvePts.DrawPolygon(PrimitiveType.Lines);
 
-            if (currentPassiveTrack != null && currentPassiveTrack.Count != 0)
+            //if (currentPassiveTrack != null && currentPassiveTrack.Count != 0)
 
-                GL.LineWidth(Settings.User.setDisplay_lineWidth * 1);
-            GL.Color3(0.46, 0.72f, 0.92f);
-            currentPassiveTrack.DrawPolygon(PrimitiveType.Lines);
+            //    GL.LineWidth(Settings.User.setDisplay_lineWidth * 1);
+            //GL.Color3(0.46, 0.72f, 0.92f);
+            //currentPassiveTrack.DrawPolygon(PrimitiveType.Lines);
 
-            if (mf.font.isFontOn)
-            {
-                GL.Color3(0.40f, 0.90f, 0.95f);
-                mf.font.DrawText3D(currTrk.ptA.easting, currTrk.ptA.northing, "&A", true);
-                mf.font.DrawText3D(currTrk.ptB.easting, currTrk.ptB.northing, "&B", true);
-            }
-
-            //just draw ref and smoothed line if smoothing window is open
-            if (isSmoothWindowOpen)
-            {
-                if (smooList.Count == 0) return;
-
-                GL.LineWidth(Settings.User.setDisplay_lineWidth);
-                GL.Color3(0.930f, 0.92f, 0.260f);
-                smooList.DrawPolygon(PrimitiveType.LineStrip);
-            }
+            //if (mf.font.isFontOn)
+            //{
+            //    GL.Color3(0.40f, 0.90f, 0.95f);
+            //    mf.font.DrawText3D(currTrk.ptA.easting, currTrk.ptA.northing, "&A", true);
+            //    mf.font.DrawText3D(currTrk.ptB.easting, currTrk.ptB.northing, "&B", true);
+            //}
 
             //Draw Tracks
-            if (currentGuidanceTrack.Count > 0 && !isSmoothWindowOpen) //normal. Smoothing window is not open.
-            {
-                GL.LineWidth(Settings.User.setDisplay_lineWidth * 4);
-                GL.Color3(0, 0, 0);
+            //if (currentGuidanceTrack.Count > 0 && !isSmoothWindowOpen) //normal. Smoothing window is not open.
+            //{
+            //    GL.LineWidth(Settings.User.setDisplay_lineWidth * 4);
+            //    GL.Color3(0, 0, 0);
 
-                //ablines and curves are a line - the rest a loop
-                currentGuidanceTrack.DrawPolygon(PrimitiveType.LineStrip);
+            //    //ablines and curves are a line - the rest a loop
+            //    currentGuidanceTrack.DrawPolygon(PrimitiveType.LineStrip);
 
-                GL.LineWidth(Settings.User.setDisplay_lineWidth);
-                GL.Color3(0.95f, 0.2f, 0.95f);
+            //    GL.LineWidth(Settings.User.setDisplay_lineWidth);
+            //    GL.Color3(0.95f, 0.2f, 0.95f);
 
-                currentGuidanceTrack.DrawPolygon(PrimitiveType.LineStrip);
+            //    currentGuidanceTrack.DrawPolygon(PrimitiveType.LineStrip);
 
-                GL.PointSize(4);
-                GL.Color3(0.95f, 0.992f, 0.95f);
-                GL.Begin(PrimitiveType.Points);
+            //    GL.PointSize(4);
+            //    GL.Color3(0.95f, 0.992f, 0.95f);
+            //    GL.Begin(PrimitiveType.Points);
 
-                for (int i = 0; i < currentGuidanceTrack.Count; i++)
-                {
-                    GL.Vertex3(currentGuidanceTrack[i].easting, currentGuidanceTrack[i].northing, 0);
-                }
-                GL.End();
-
-                mf.yt.DrawYouTurn();
+            //    for (int i = 0; i < currentGuidanceTrack.Count; i++)
+            //    {
+            //        GL.Vertex3(currentGuidanceTrack[i].easting, currentGuidanceTrack[i].northing, 0);
+            //    }
+            //    GL.End();
 
                 /*
 
@@ -390,27 +371,25 @@ namespace Twol.Classes.Tool
                 //GL.Vertex3(currentGuidanceTrack[mf.gyd.B].easting, currentGuidanceTrack[mf.gyd.B].northing, 0);
                 //GL.End();
                 */
-            }
+           // }
         }
-
 
         public void DrawNewTrack()
         {
             if (designPtsList.Count > 0)
             {
                 GL.Color3(0.95f, 0.42f, 0.750f);
-                GL.LineWidth(4.0f);
-                designPtsList.DrawPolygon(PrimitiveType.LineStrip);
+                GL.LineWidth(8.0f);
+                designPtsList.DrawPolygon(PrimitiveType.Lines);
 
-                GL.Enable(EnableCap.LineStipple);
-                GL.LineStipple(1, 0x0F00);
-                GL.Begin(PrimitiveType.Lines);
-                GL.Color3(0.99f, 0.99f, 0.0);
-                GL.Vertex3(designPtsList[designPtsList.Count - 1].easting, designPtsList[designPtsList.Count - 1].northing, 0);
-                GL.Vertex3(mf.pivotAxlePos.easting, mf.pivotAxlePos.northing, 0);
-                GL.End();
+                //GL.Enable(EnableCap.LineStipple);
+                //GL.LineStipple(1, 0x0F00);
+                //GL.Begin(PrimitiveType.Lines);
+                //GL.Color3(0.99f, 0.99f, 0.0);
+                //GL.Vertex3(designPtsList[designPtsList.Count - 1].easting, designPtsList[designPtsList.Count - 1].northing, 0);
+                //GL.Vertex3(mf.pivotAxlePos.easting, mf.pivotAxlePos.northing, 0);
+                //GL.End();
 
-                GL.Disable(EnableCap.LineStipple);
             }
         }
 

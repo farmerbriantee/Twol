@@ -274,7 +274,14 @@ namespace Twol
         private void ResetMode()
         {
             //default all off
-            Settings.Tool.setToolSteer.isGPSToolActive = (cboxIsFollowCurrent.Checked || cboxIsPassiveSteering.Checked || cboxIsFollowPivot.Checked || cboxIsFollowToolLine.Checked);
+            Settings.Tool.setToolSteer.isGPSToolActive = (cboxIsFollowCurrent.Checked || cboxIsPassiveSteering.Checked || cboxIsFollowPivot.Checked || cboxIsFollowToolLine.Checked || cboxIsRecordToolLine.Checked);
+        }
+
+        private void cboxIsRecordToolLine_Click(object sender, EventArgs e)
+        {
+            Settings.Tool.setToolSteer.isRecordToolLine = cboxIsRecordToolLine.Checked;
+            Settings.Tool.setToolSteer.isFollowToolLine = cboxIsFollowToolLine.Checked = false;
+            ResetMode();
         }
 
         private void cboxIsFollowCurrent_Click(object sender, EventArgs e)
@@ -302,6 +309,7 @@ namespace Twol
             cboxIsFollowCurrent.Checked = Settings.Tool.setToolSteer.isFollowCurrent = false;
             cboxIsPassiveSteering.Checked = Settings.Tool.setToolSteer.isPassiveSteering = false;
             Settings.Tool.setToolSteer.isFollowPivot = cboxIsFollowPivot.Checked = false;
+            Settings.Tool.setToolSteer.isRecordToolLine = cboxIsRecordToolLine.Checked = false;
 
             Settings.Tool.setToolSteer.isFollowToolLine = cboxIsFollowToolLine.Checked;
             ResetMode();
