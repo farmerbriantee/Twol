@@ -15,6 +15,8 @@ namespace Twol
         public bool isGuidanceModeRecordNewTracks = false, isRecordingToolLine = false,
             isRecordToolLineTriggered = false;
 
+        public bool isboundaryLine;
+
         public vec2 goalPoint = new vec2();
 
         public bool isAutoSteerBtnOn = false, isSectionsOn = false;
@@ -56,13 +58,14 @@ namespace Twol
             //line complete
             if (isRecordingToolLine && (isUTurn || !isSectionsOn || !isGuidanceModeRecordNewTracks)) // && isAutoSteerBtnOn
             {
-                if (mf.trkTool.designPtsList.Count > 5)
+                if (mf.trkTool.designPtsList.Count > 20)
                 {
                     FinishToolLineRecording();
-                    isRecordingToolLine = false;
-
-                    mf.trkTool.designPtsList?.Clear();
                 }
+
+                //clean up
+                isRecordingToolLine = false;
+                mf.trkTool.designPtsList?.Clear();
             }
         }
 
@@ -71,9 +74,10 @@ namespace Twol
             mf.trkTool.designPtsList.Add(new vec3(mf.toolPivotPos));
 
             //make a new tool track
-            var track = new CTrkTool(mf.trkTool.tArr.Count.ToString("###"));
+            string name = (mf.gydTool.isboundaryLine ? "Outer " : "Inner ") + mf.trkTool.tArr.Count.ToString("000");
+            var track = new CTrkTool(name);
 
-            mf.trkTool.SmoothAB(ref mf.trkTool.designPtsList, 10, false);
+            mf.trkTool.SmoothAB(ref mf.trkTool.designPtsList, 6, false);
 
             mf.trkTool.designPtsList.CalculateHeadings(false);
 
@@ -117,7 +121,12 @@ namespace Twol
 
             mf.trkTool.AddEndPoints(ref track.curvePts, 2);
 
+            track.ptA = new vec2(track.curvePts[0].easting, track.curvePts[0].northing);
+            track.ptB = new vec2(track.curvePts[track.curvePts.Count - 1].easting, track.curvePts[track.curvePts.Count - 1].northing);
+
             mf.trkTool.AddTrack(track);
+
+            mf.FileSaveToolTrack(track);
         }
 
         public bool FindClosestSegment(List<vec3> points, bool loop, vec2 point, out int AA, out int BB, int start = 0, int end = int.MaxValue)

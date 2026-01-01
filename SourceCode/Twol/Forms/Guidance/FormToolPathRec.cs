@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
@@ -33,8 +34,19 @@ namespace Twol
 
             InitializeComponent();
 
-            btnRecStartStop.Image = mf.gydTool.isGuidanceModeRecordNewTracks ? Properties.Resources.boundaryPause : Properties.Resources.BoundaryRecord;
+            btnRecStartStop.BackColor = mf.gydTool.isGuidanceModeRecordNewTracks ? Color.LightGreen : Color.Transparent;
             lblRec.Text = mf.gydTool.isGuidanceModeRecordNewTracks ? "Recording" : "Paused";
+
+            if (mf.gydTool.isboundaryLine)
+            {
+                btnOuterInner.Image = Properties.Resources.TramOuter;
+                lblOuterInner.Text = "Outer";
+            }
+            else
+            {
+                btnOuterInner.Image = Properties.Resources.TramLines;
+                lblOuterInner.Text = "Inner";
+            }
         }
 
         private void FormToolPathRec_Load(object sender, EventArgs e)
@@ -70,12 +82,12 @@ namespace Twol
 
             if (mf.gydTool.isGuidanceModeRecordNewTracks)
             {
-                btnRecStartStop.Image = Properties.Resources.boundaryPause;
+                btnRecStartStop.BackColor = Color.LightGreen;
                 lblRec.Text = "Recording";
             }
             else
             {
-                btnRecStartStop.Image = Properties.Resources.BoundaryRecord;
+                btnRecStartStop.BackColor = Color.Transparent;
                 lblRec.Text = "Pause";
             }
 
@@ -91,6 +103,22 @@ namespace Twol
             lblRec.Visible = !lblRec.Visible;
 
             lblPointsRec.Text = mf.trkTool.designPtsList.Count.ToString("N0");
+        }
+
+        private void btnOuterInner_Click(object sender, EventArgs e)
+        {
+            mf.gydTool.isboundaryLine = !mf.gydTool.isboundaryLine;
+
+            if (mf.gydTool.isboundaryLine)
+            {
+                btnOuterInner.Image = Properties.Resources.TramOuter;
+                lblOuterInner.Text = "Outer";
+            }
+            else
+            {
+                btnOuterInner.Image = Properties.Resources.TramLines;
+                lblOuterInner.Text = "Inner";
+            }
         }
     }
 }

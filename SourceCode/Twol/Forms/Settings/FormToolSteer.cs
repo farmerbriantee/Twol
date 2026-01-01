@@ -82,6 +82,7 @@ namespace Twol
             cboxIsPassiveSteering.Checked = Settings.Tool.setToolSteer.isPassiveSteering;
             cboxIsFollowToolLine.Checked = Settings.Tool.setToolSteer.isFollowToolLine;
             cboxIsFollowPivot.Checked = Settings.Tool.setToolSteer.isFollowPivot;
+            cboxIsRecordToolLine.Checked = Settings.Tool.setToolSteer.isRecordToolLine;
         }
 
         private void FormSteer_FormClosing(object sender, FormClosingEventArgs e)
