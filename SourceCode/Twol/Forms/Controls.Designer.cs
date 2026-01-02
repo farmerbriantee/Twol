@@ -526,8 +526,7 @@ namespace Twol
             if (!state && reason != "" && (isBtnAutoSteerOn || triggerstate))
                 TimedMessageBox(2000, gStr.Get(gs.gsGuidanceStopped), reason);
 
-            if (ct.isContourBtnOn)
-                ct.SetLockToLine();
+            if (ct.isContourBtnOn) ct.SetLockToLine();
 
             //Passive steering hold till on guidance line
             if (Settings.Tool.setToolSteer.isPassiveSteering)
