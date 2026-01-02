@@ -200,19 +200,9 @@ void loop()
         parser << SerialGPS.read();
     }
 
-    // If both dual messages are ready, send to AgOpen
-    // Serial.println("Dual GGA Ready: " + String(dualReadyGGA) + " RelPos Ready: " + String(dualReadyRelPos));
-    if (dualReadyGGA == true && dualReadyRelPos == true)
-    {
-        BuildNmea();
-        dualReadyGGA = false;
-        dualReadyRelPos = false;
-    }
-
     // If anything comes in SerialGPS2 RelPos data
     if (SerialGPS2.available())
     {
-        Serial.println("GPS2 data available");
         uint8_t incoming_char = SerialGPS2.read(); // Read RELPOSNED from F9P
 
         // Just increase the byte counter for the first 3 bytes
@@ -233,6 +223,15 @@ void loop()
         }
     }
 
+    // If both dual messages are ready, send to AgOpen
+    // Serial.println("Dual GGA Ready: " + String(dualReadyGGA) + " RelPos Ready: " + String(dualReadyRelPos));
+    if (dualReadyGGA == true && dualReadyRelPos == true)
+    {
+        BuildNmea();
+        dualReadyGGA = false;
+        dualReadyRelPos = false;
+    }
+    
     // Check the message when the buffer is full
     if (relposnedByteCount > 71)
     {
