@@ -1,5 +1,6 @@
+#include <Arduino.h>
 // Conversion to Hexidecimal
-const char* asciiHex = "0123456789ABCDEF";
+const char *asciiHex = "0123456789ABCDEF";
 
 // the new PANDA sentence buffer
 char nmea[100];
@@ -17,8 +18,8 @@ char altitude[12];
 char ageDGPS[10];
 
 // VTG
-char vtgHeading[12] = { };
-char speedKnots[10] = { };
+char vtgHeading[12] = {};
+char speedKnots[10] = {};
 
 // IMU
 char imuHeading[6];
@@ -26,145 +27,184 @@ char imuRoll[6];
 char imuPitch[6];
 char imuYawRate[6];
 
+// HPR
+char solQuality[2];
+char umHeading[15];
+char umRoll[15];
+
 // If odd characters showed up.
 void errorHandler()
 {
-  //nothing at the moment
+  // nothing at the moment
 }
 
-void GGA_Handler() //Rec'd GGA
+void GGA_Handler() // Rec'd GGA
 {
-    // fix time
-    parser.getArg(0, fixTime);
+  // fix time
+  parser.getArg(0, fixTime);
 
-    // latitude
-    parser.getArg(1, latitude);
-    parser.getArg(2, latNS);
+  // latitude
+  parser.getArg(1, latitude);
+  parser.getArg(2, latNS);
 
-    // longitude
-    parser.getArg(3, longitude);
-    parser.getArg(4, lonEW);
+  // longitude
+  parser.getArg(3, longitude);
+  parser.getArg(4, lonEW);
 
-    // fix quality
-    parser.getArg(5, fixQuality);
+  // fix quality
+  parser.getArg(5, fixQuality);
 
-    // satellite #
-    parser.getArg(6, numSats);
+  // satellite #
+  parser.getArg(6, numSats);
 
-    // HDOP
-    parser.getArg(7, HDOP);
+  // HDOP
+  parser.getArg(7, HDOP);
 
-    // altitude
-    parser.getArg(8, altitude);
+  // altitude
+  parser.getArg(8, altitude);
 
-    // time of last DGPS update
-    parser.getArg(12, ageDGPS);
+  // time of last DGPS update
+  parser.getArg(12, ageDGPS);
 
-    if (blink)
-    {
-        digitalWrite(GGAReceivedLED, HIGH);
-    }
-    else
-    {
-        digitalWrite(GGAReceivedLED, LOW);
-    }
+  if (blink)
+  {
+    digitalWrite(GGAReceivedLED, HIGH);
+  }
+  else
+  {
+    digitalWrite(GGAReceivedLED, LOW);
+  }
 
-    blink = !blink;
-    GGA_Available = true;
+  blink = !blink;
+  GGA_Available = true;
 
-    dualReadyGGA = true;
-    gpsReadyTime = systick_millis_count;    //Used for GGA timeout (LED's ETC) 
+  dualReadyGGA = true;
+  gpsReadyTime = systick_millis_count; // Used for GGA timeout (LED's ETC)
 }
 
 void imuHandler()
 {
-    int16_t temp = 0;
-    if (useDual)
-    {
-        // the roll
-        dtostrf(rollDual, 4, 2, imuRoll);
+  if (useDual) // in UM982 case
+  {
+    // the roll
+    dtostrf(rollDual, 4, 2, imuRoll);
 
-        // the Dual heading raw
-        dtostrf(heading, 4, 2, imuHeading);
-    }
+    // the Dual heading raw
+    dtostrf(heading, 4, 2, imuHeading);
+
+    static double headingOld = heading;
+
+    headingRate = (heading - headingOld) * GPS_Hz;
+    headingOld = heading;
+    if (headingRate > 360)
+      headingRate -= 360;
+    if (headingRate < -360)
+      headingRate += 360;
+
+    int16_t yawRatex10 = (int16_t)(headingRate * 10);
+    itoa(yawRatex10, imuYawRate, 10);
+
+  }
+}
+
+void HPR_Handler()
+{
+  parser.getArg(1, umHeading);
+  heading = atof(umHeading);
+
+  // HPR Roll
+  parser.getArg(2, umRoll);
+  rollDual = atof(umRoll);
+
+  // Solution quality factor
+  parser.getArg(4, solQuality);
+  solQualityHPR = atoi(solQuality);
+  useDual = true;
+  dualReadyRelPos = true;
+  imuHandler();
+  BuildNmea();
+  dualReadyGGA = false;
 }
 
 void BuildNmea(void)
 {
-    strcpy(nmea, "");
+  strcpy(nmea, "");
 
-    if (useDual) strcat(nmea, "$PAOGI,");
-    else strcat(nmea, "$PANDA,");
+  if (useDual)
+    strcat(nmea, "$PAOGI,");
+  else
+    strcat(nmea, "$PANDA,");
 
-    strcat(nmea, fixTime);
-    strcat(nmea, ",");
+  strcat(nmea, fixTime);
+  strcat(nmea, ",");
 
-    strcat(nmea, latitude);
-    strcat(nmea, ",");
+  strcat(nmea, latitude);
+  strcat(nmea, ",");
 
-    strcat(nmea, latNS);
-    strcat(nmea, ",");
+  strcat(nmea, latNS);
+  strcat(nmea, ",");
 
-    strcat(nmea, longitude);
-    strcat(nmea, ",");
+  strcat(nmea, longitude);
+  strcat(nmea, ",");
 
-    strcat(nmea, lonEW);
-    strcat(nmea, ",");
+  strcat(nmea, lonEW);
+  strcat(nmea, ",");
 
-    // 6
-    strcat(nmea, fixQuality);
-    strcat(nmea, ",");
+  // 6
+  strcat(nmea, fixQuality);
+  strcat(nmea, ",");
 
-    strcat(nmea, numSats);
-    strcat(nmea, ",");
+  strcat(nmea, numSats);
+  strcat(nmea, ",");
 
-    strcat(nmea, HDOP);
-    strcat(nmea, ",");
+  strcat(nmea, HDOP);
+  strcat(nmea, ",");
 
-    strcat(nmea, altitude);
-    strcat(nmea, ",");
+  strcat(nmea, altitude);
+  strcat(nmea, ",");
 
-    //10
-    strcat(nmea, ageDGPS);
-    strcat(nmea, ",");
+  // 10
+  strcat(nmea, ageDGPS);
+  strcat(nmea, ",");
 
-    //11
-    strcat(nmea, speedKnots);
-    strcat(nmea, ",");
+  // 11
+  strcat(nmea, speedKnots);
+  strcat(nmea, ",");
 
-    //12
-    strcat(nmea, imuHeading);
-    strcat(nmea, ",");
+  // 12
+  strcat(nmea, imuHeading);
+  strcat(nmea, ",");
 
-    //13
-    strcat(nmea, imuRoll);
-    strcat(nmea, ",");
+  // 13
+  strcat(nmea, imuRoll);
+  strcat(nmea, ",");
 
-    //14
-    strcat(nmea, imuPitch);
-    strcat(nmea, ",");
+  // 14
+  strcat(nmea, imuPitch);
+  strcat(nmea, ",");
 
-    //15
-    strcat(nmea, imuYawRate);
+  // 15
+  strcat(nmea, imuYawRate);
 
-    strcat(nmea, "*");
+  strcat(nmea, "*");
 
-    CalculateChecksum();
+  CalculateChecksum();
 
-    strcat(nmea, "\r\n");
+  strcat(nmea, "\r\n");
 
-    //if (!passThroughGPS && !passThroughGPS2)
-    //{
-    SerialAOG.write(nmea);  //Always send USB GPS data
-    //}
+  // if (!passThroughGPS && !passThroughGPS2)
+  //{
+  //Serial.println(nmea); // Always send USB GPS data
+  //}
 
-    if (Ethernet_running)   //If ethernet running send the GPS there
-    {
-        int len = strlen(nmea);
-        Eth_udpPAOGI.beginPacket(Eth_ipDestination, portDestination);
-        Eth_udpPAOGI.write(nmea, len);
-        Eth_udpPAOGI.endPacket();
-    }
+  if (Ethernet_running) // If ethernet running send the GPS there
+  {
+    int len = strlen(nmea);
+    //Serial.println("Sending NMEA via UDP:");
+    Eth_udpPAOGI.beginPacket(Eth_ipDestination, portDestination);
+    Eth_udpPAOGI.write(nmea, len);
+    Eth_udpPAOGI.endPacket();
+  }
 }
 
 void CalculateChecksum(void)
@@ -184,15 +224,15 @@ void CalculateChecksum(void)
       break;
     }
 
-    sum ^= tmp;    // Build checksum
+    sum ^= tmp; // Build checksum
   }
 
   byte chk = (sum >> 4);
-  char hex[2] = { asciiHex[chk], 0 };
+  char hex[2] = {asciiHex[chk], 0};
   strcat(nmea, hex);
 
   chk = (sum % 16);
-  char hex2[2] = { asciiHex[chk], 0 };
+  char hex2[2] = {asciiHex[chk], 0};
   strcat(nmea, hex2);
 }
 
