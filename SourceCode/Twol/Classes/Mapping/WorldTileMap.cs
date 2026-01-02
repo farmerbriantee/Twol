@@ -270,7 +270,7 @@ namespace Twol.Mapping
                 for (int texNum = 0; texNum < 49; texNum++)
                 {
                     //too many attempts to load tile so skip if status > 10
-                    if ((tileGridArr[texNum].Status < 11) && (tileGridArr[texNum].X != tileSetArr[texNum].X || tileGridArr[texNum].Y != tileSetArr[texNum].Y || tileGridArr[texNum].Z != tileSetArr[texNum].Z))
+                    if ((tileGridArr[texNum].Status < 11) && ((tileGridArr[texNum].X != tileSetArr[texNum].X) || (tileGridArr[texNum].Y != tileSetArr[texNum].Y) || (tileGridArr[texNum].Z != tileSetArr[texNum].Z)))
                     {
                         tile = mf.map.GetTile(tileSetArr[texNum].X, tileSetArr[texNum].Y, tileSetArr[texNum].Z);
 

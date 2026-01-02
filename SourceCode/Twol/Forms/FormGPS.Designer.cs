@@ -138,6 +138,7 @@ namespace Twol
             this.btnBuildTracks = new System.Windows.Forms.Button();
             this.btnTracksOff = new System.Windows.Forms.Button();
             this.btnRefNudge = new System.Windows.Forms.Button();
+            this.btnToolLineRecord = new System.Windows.Forms.Button();
             this.panelBottom = new System.Windows.Forms.FlowLayoutPanel();
             this.btnTrack = new System.Windows.Forms.Button();
             this.btnSnapToPivot = new System.Windows.Forms.Button();
@@ -238,7 +239,6 @@ namespace Twol
             this.btnFieldStats = new System.Windows.Forms.Button();
             this.button15 = new System.Windows.Forms.Button();
             this.nudToolOffset = new System.Windows.Forms.NumericUpDown();
-            this.btnToolLineRecord = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStripFlag.SuspendLayout();
             this.statusStripLeft.SuspendLayout();
@@ -949,7 +949,7 @@ namespace Twol
             this.panelNavigation.Controls.Add(this.btn2D, 0, 1);
             this.panelNavigation.Controls.Add(this.btnGrid, 1, 2);
             this.panelNavigation.Controls.Add(this.btnN2D, 0, 2);
-            this.panelNavigation.Location = new System.Drawing.Point(906, 87);
+            this.panelNavigation.Location = new System.Drawing.Point(796, 152);
             this.panelNavigation.Name = "panelNavigation";
             this.panelNavigation.RowCount = 5;
             this.panelNavigation.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
@@ -1543,7 +1543,7 @@ namespace Twol
             this.flp1.Controls.Add(this.btnRefNudge);
             this.flp1.Controls.Add(this.btnToolLineRecord);
             this.flp1.FlowDirection = System.Windows.Forms.FlowDirection.BottomUp;
-            this.flp1.Location = new System.Drawing.Point(798, 77);
+            this.flp1.Location = new System.Drawing.Point(983, 157);
             this.flp1.Name = "flp1";
             this.flp1.Size = new System.Drawing.Size(86, 571);
             this.flp1.TabIndex = 539;
@@ -1679,6 +1679,27 @@ namespace Twol
             this.btnRefNudge.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnRefNudge.UseVisualStyleBackColor = false;
             this.btnRefNudge.Click += new System.EventHandler(this.btnRefNudge_Click);
+            // 
+            // btnToolLineRecord
+            // 
+            this.btnToolLineRecord.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnToolLineRecord.BackColor = System.Drawing.Color.Transparent;
+            this.btnToolLineRecord.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnToolLineRecord.FlatAppearance.BorderSize = 0;
+            this.btnToolLineRecord.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.btnToolLineRecord.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnToolLineRecord.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnToolLineRecord.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnToolLineRecord.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnToolLineRecord.Image = global::Twol.Properties.Resources.ToolTrackRecord;
+            this.btnToolLineRecord.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnToolLineRecord.Location = new System.Drawing.Point(3, 3);
+            this.btnToolLineRecord.Name = "btnToolLineRecord";
+            this.btnToolLineRecord.Size = new System.Drawing.Size(80, 77);
+            this.btnToolLineRecord.TabIndex = 546;
+            this.btnToolLineRecord.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnToolLineRecord.UseVisualStyleBackColor = false;
+            this.btnToolLineRecord.Click += new System.EventHandler(this.btnToolLineRecord_Click);
             // 
             // panelBottom
             // 
@@ -3616,27 +3637,6 @@ namespace Twol
             this.nudToolOffset.Size = new System.Drawing.Size(86, 36);
             this.nudToolOffset.TabIndex = 651;
             this.nudToolOffset.ValueChanged += new System.EventHandler(this.nudToolOffset_ValueChanged);
-            // 
-            // btnToolLineRecord
-            // 
-            this.btnToolLineRecord.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnToolLineRecord.BackColor = System.Drawing.Color.Transparent;
-            this.btnToolLineRecord.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnToolLineRecord.FlatAppearance.BorderSize = 0;
-            this.btnToolLineRecord.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.btnToolLineRecord.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnToolLineRecord.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnToolLineRecord.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnToolLineRecord.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnToolLineRecord.Image = global::Twol.Properties.Resources.BoundaryRecord;
-            this.btnToolLineRecord.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnToolLineRecord.Location = new System.Drawing.Point(3, 3);
-            this.btnToolLineRecord.Name = "btnToolLineRecord";
-            this.btnToolLineRecord.Size = new System.Drawing.Size(80, 77);
-            this.btnToolLineRecord.TabIndex = 546;
-            this.btnToolLineRecord.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnToolLineRecord.UseVisualStyleBackColor = false;
-            this.btnToolLineRecord.Click += new System.EventHandler(this.btnToolLineRecord_Click);
             // 
             // FormGPS
             // 

@@ -80,8 +80,9 @@ namespace Twol
 
             cboxIsFollowCurrent.Checked = Settings.Tool.setToolSteer.isFollowCurrent;
             cboxIsPassiveSteering.Checked = Settings.Tool.setToolSteer.isPassiveSteering;
-            cboxIsFollowToolLine.Checked = Settings.Tool.setToolSteer.isFollowToolLine;
+            cboxIsFollowRecordedLine.Checked = Settings.Tool.setToolSteer.isFollowRecordedLine;
             cboxIsFollowPivot.Checked = Settings.Tool.setToolSteer.isFollowPivot;
+            cboxIsRecordToolLine.Checked = Settings.Tool.setToolSteer.isRecordToolLine;
         }
 
         private void FormSteer_FormClosing(object sender, FormClosingEventArgs e)
@@ -274,14 +275,21 @@ namespace Twol
         private void ResetMode()
         {
             //default all off
-            Settings.Tool.setToolSteer.isGPSToolActive = (cboxIsFollowCurrent.Checked || cboxIsPassiveSteering.Checked || cboxIsFollowPivot.Checked || cboxIsFollowToolLine.Checked);
+            Settings.Tool.setToolSteer.isGPSToolActive = (cboxIsFollowCurrent.Checked || cboxIsPassiveSteering.Checked || cboxIsFollowPivot.Checked || cboxIsFollowRecordedLine.Checked || cboxIsRecordToolLine.Checked);
+        }
+
+        private void cboxIsRecordToolLine_Click(object sender, EventArgs e)
+        {
+            Settings.Tool.setToolSteer.isRecordToolLine = cboxIsRecordToolLine.Checked;
+            Settings.Tool.setToolSteer.isFollowRecordedLine = cboxIsFollowRecordedLine.Checked = false;
+            ResetMode();
         }
 
         private void cboxIsFollowCurrent_Click(object sender, EventArgs e)
         {
             cboxIsPassiveSteering.Checked = Settings.Tool.setToolSteer.isPassiveSteering = false;
             Settings.Tool.setToolSteer.isFollowPivot = cboxIsFollowPivot.Checked = false;
-            Settings.Tool.setToolSteer.isFollowToolLine = cboxIsFollowToolLine.Checked = false;
+            Settings.Tool.setToolSteer.isFollowRecordedLine = cboxIsFollowRecordedLine.Checked = false;
 
             Settings.Tool.setToolSteer.isFollowCurrent = cboxIsFollowCurrent.Checked;
             ResetMode();
@@ -291,19 +299,20 @@ namespace Twol
         {
             cboxIsFollowCurrent.Checked = Settings.Tool.setToolSteer.isFollowCurrent = false;
             cboxIsPassiveSteering.Checked = Settings.Tool.setToolSteer.isPassiveSteering = false;
-            Settings.Tool.setToolSteer.isFollowToolLine = cboxIsFollowToolLine.Checked = false;
+            Settings.Tool.setToolSteer.isFollowRecordedLine = cboxIsFollowRecordedLine.Checked = false;
 
             Settings.Tool.setToolSteer.isFollowPivot = cboxIsFollowPivot.Checked;
             ResetMode();
         }
 
-        private void cboxIsFollowToolLine_Click(object sender, EventArgs e)
+        private void cboxIsFollowRecordedLine_Click(object sender, EventArgs e)
         {
             cboxIsFollowCurrent.Checked = Settings.Tool.setToolSteer.isFollowCurrent = false;
             cboxIsPassiveSteering.Checked = Settings.Tool.setToolSteer.isPassiveSteering = false;
             Settings.Tool.setToolSteer.isFollowPivot = cboxIsFollowPivot.Checked = false;
+            Settings.Tool.setToolSteer.isRecordToolLine = cboxIsRecordToolLine.Checked = false;
 
-            Settings.Tool.setToolSteer.isFollowToolLine = cboxIsFollowToolLine.Checked;
+            Settings.Tool.setToolSteer.isFollowRecordedLine = cboxIsFollowRecordedLine.Checked;
             ResetMode();
         }
 
@@ -311,7 +320,7 @@ namespace Twol
         {
             cboxIsFollowCurrent.Checked = Settings.Tool.setToolSteer.isFollowCurrent = false;
             Settings.Tool.setToolSteer.isFollowPivot = cboxIsFollowPivot.Checked = false;
-            Settings.Tool.setToolSteer.isFollowToolLine = cboxIsFollowToolLine.Checked = false;
+            Settings.Tool.setToolSteer.isFollowRecordedLine = cboxIsFollowRecordedLine.Checked = false;
 
             Settings.Tool.setToolSteer.isPassiveSteering = cboxIsPassiveSteering.Checked;
             ResetMode();

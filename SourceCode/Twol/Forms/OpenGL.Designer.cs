@@ -471,8 +471,16 @@ namespace Twol
                         trk.DrawTrack();
                     }
 
+                    if (trkTool.tArr != null)// draw the ref tool lines
+                    {
+                        //when switching lines, draw the ghost
+                        trkTool.DrawTrack();
+                    }
+
                     //draw line creations
                     if (trk.isMakingTrack) trk.DrawNewTrack();
+
+                    if (gydTool.isRecordingToolLine) trkTool.DrawNewTrack();
 
                     #endregion
 

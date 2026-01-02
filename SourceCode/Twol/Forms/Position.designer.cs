@@ -312,6 +312,7 @@ namespace Twol
 
             //preset the values
             guidanceVehicleXTE = double.NaN;
+            guidanceToolXTE = double.NaN;
 
             if (ct.isContourBtnOn)
             {
@@ -322,7 +323,7 @@ namespace Twol
             //like normal
             else if (trk.currTrk != null)
             {
-                //build new current ref line if required
+                //build new current line if required
                 trk.GetDistanceFromRefTrack(trk.currTrk, pivotAxlePos);
             }
 
@@ -330,14 +331,9 @@ namespace Twol
             {
                 gyd.Guidance(pivotAxlePos, steerAxlePos, yt.isYouTurnTriggered, yt.isYouTurnTriggered ? yt.ytList : trk.currentGuidanceTrack);
 
-                if (Settings.Tool.setToolSteer.isFollowPivot && isJobStarted)
+                if (Settings.Tool.setToolSteer.isFollowRecordedLine && guidanceVehicleXTE != double.NaN);
                 {
-                    //if (isBtnAutoSteerOn)
-                    gydTool.GuidanceFollowPivot(toolPivotPos, steerAxlePos, false, followPivotPoints);
-                    //else
-                    //{
-                    //    guidanceToolXTE = double.NaN;
-                    //}
+                    gydTool.GuidanceFollowRecordedLine(toolPivotPos, yt.isYouTurnTriggered);
                 }
             }
             else
@@ -354,8 +350,20 @@ namespace Twol
                 guidanceToolXTE = double.NaN;
             }
 
-            
-            // autosteer at full speed of updates
+            if (Settings.Tool.setToolSteer.isFollowPivot && isJobStarted)
+            {
+                gydTool.GuidanceFollowPivot(toolPivotPos, yt.isYouTurnTriggered, followPivotPoints);
+            }
+
+            if (Settings.Tool.setToolSteer.isRecordToolLine && isJobStarted)
+            {
+                gydTool.GuidanceToolLineRecord(yt.isYouTurnTriggered);
+            }
+
+            if (Settings.Tool.setToolSteer.isFollowRecordedLine && isJobStarted)
+            {
+                gydTool.GuidanceToolLineRecord(yt.isYouTurnTriggered);
+            }
 
             // If Drive button off - normal autosteer 
             if (!vehicle.isInFreeDriveMode)
@@ -436,7 +444,7 @@ namespace Twol
                 }
 
                 // is active mode for tool steer
-                if (Settings.Tool.setToolSteer.isFollowCurrent|| Settings.Tool.setToolSteer.isFollowPivot || Settings.Tool.setToolSteer.isFollowToolLine)
+                if (Settings.Tool.setToolSteer.isFollowCurrent|| Settings.Tool.setToolSteer.isFollowPivot || Settings.Tool.setToolSteer.isFollowRecordedLine)
                 {
                     PGN_233.pgn[PGN_233.speed10] = unchecked((byte)((int)(Math.Abs(avgSpeed) * 10.0)));
 
@@ -656,39 +664,56 @@ namespace Twol
             sectionTriggerDistanceSq = glm.DistanceSquared(pivotAxlePos, prevPivotAxlePos);
             toolPivotTriggerDistanceSq = glm.DistanceSquared(toolPivotPos, prevToolPivotPos);
 
-            //tool track recording
-            if (Settings.Tool.setToolSteer.isFollowPivot && toolPivotTriggerDistanceSq > 0.5 && isJobStarted)
+            if (isJobStarted)
             {
-                //followPivotPoints.Add(new vec2(toolPivotPos.easting, toolPivotPos.northing));
-                followPivotPoints.Add(new vec3(pivotAxlePos.easting, pivotAxlePos.northing, 0));
+                //tool track recording
+                if (Settings.Tool.setToolSteer.isFollowPivot && toolPivotTriggerDistanceSq > 0.5)
+                {
+                    //followPivotPoints.Add(new vec2(toolPivotPos.easting, toolPivotPos.northing));
+                    followPivotPoints.Add(new vec3(pivotAxlePos.easting, pivotAxlePos.northing, 0));
 
-                if (followPivotPoints.Count > 20) { followPivotPoints.RemoveRange(0, 5); }
+                    if (followPivotPoints.Count > 20) { followPivotPoints.RemoveRange(0, 5); }
 
-                //save the north & east as previous
-                prevToolPivotPos.northing = toolPivotPos.northing;
-                prevToolPivotPos.easting = toolPivotPos.easting;
-            }
+                    //save the north & east as previous
+                    prevToolPivotPos.northing = toolPivotPos.northing;
+                    prevToolPivotPos.easting = toolPivotPos.easting;
+                }
 
-            //section on off and points
-            if (sectionTriggerDistanceSq > distanceTriggerSq && isJobStarted)
-            {
-                AddSectionOrPathPoints();
-            }
+                //section on off and points
+                if (sectionTriggerDistanceSq > distanceTriggerSq)
+                {
+                    AddSectionOrPathPoints();
+                }
 
-            //contour points
-            AddContourPoints();
+                //contour points
+                AddContourPoints();
 
-            if (Settings.User.isLogElevation)
-            {
-                AddElevationPoints();
+                if (Settings.User.isLogElevation)
+                {
+                    AddElevationPoints();
+                }
+
+                if (Settings.Tool.setToolSteer.isRecordToolLine && gydTool.isRecordingToolLine)
+                {
+                    if (toolPivotTriggerDistanceSq > 0.5)
+                    {
+                        trkTool.designPtsList.Add(new vec3(toolPivotPos));
+
+                        //save the north & east as previous
+                        prevToolPivotPos.northing = toolPivotPos.northing;
+                        prevToolPivotPos.easting = toolPivotPos.easting;
+                    }
+                }
             }
 
             //test if travelled far enough for new boundary point
             if (bnd.isOkToAddPoints)
             {
                 double boundaryDistance = glm.DistanceSquared(pivotAxlePos, prevBoundaryPos);
-                if (boundaryDistance > 1) AddBoundaryPoint();
-            }
+                
+                if (boundaryDistance > 1) 
+                    AddBoundaryPoint();
+            }            
         }
 
         //all the hitch, pivot, section, trailing hitch, headings and fixes

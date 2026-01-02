@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenTK.Graphics.OpenGL;
+using System;
 using System.Buffers;
 using System.Diagnostics;
 using System.Drawing;
@@ -81,6 +82,8 @@ namespace Twol
 
         public bool CheckInternetConnection()
         {
+            return false;
+
             // Fire-and-forget connectivity probe; returns immediately with last known state.
             ThreadPool.QueueUserWorkItem(_ =>
             {
@@ -263,7 +266,7 @@ namespace Twol
                     SendToPlugins(byteData);
                 }
 
-                    if (isUDPMonitorOn)
+                if (isUDPMonitorOn)
                 {
                     string code = byteData.Length > 3 ? byteData[3].ToString() : "N/A";
                     logUDPSentence.Append(DateTime.Now.ToString("ss.fff\t >  ") + (byteData.Length > 3 ? byteData[3].ToString() : "N/A") + " \t" + endPoint + "\r\n");
@@ -457,7 +460,7 @@ namespace Twol
                         case 234:
                             {
                                 if (length != 14) break;
-                                Buffer.BlockCopy(data, 5, mc.ss, 1, 8);
+                                System.Buffer.BlockCopy(data, 5, mc.ss, 1, 8);
                                 DoRemoteSwitches();
                                 break;
                             }
@@ -657,7 +660,8 @@ namespace Twol
                 else if (data[0] == 36 && (data[1] == 71 || data[1] == 80 || data[1] == 75))
                 {
                     traffic.cntrGPSOutTool += msgLen;
-                    pnTool.rawBuffer += Encoding.ASCII.GetString(data, 0, msgLen);
+                    string tmpToolSteer = Encoding.ASCII.GetString(data, 0, msgLen);
+                    pnTool.rawBuffer += tmpToolSteer;
                     pnTool.ParseNMEA(ref pnTool.rawBuffer);
 
                     if (pnTool.isNMEAToSend)
@@ -705,6 +709,10 @@ namespace Twol
                         ahrsTool.imuPitch = pnTool.imuPitch;
 
                         ahrsTool.imuYawRate = pnTool.imuYawRate;
+                        if (isUDPMonitorOn)
+                        {
+                            logUDPSentence.Append(DateTime.Now.ToString("ss.fff\tTool: ") + $"Lat/Lon: {pnTool.latitude}, {pnTool.longitude} Heading: {pnTool.headingTrueDual} Roll: {pnTool.rollDual}\r\n");
+                        }
                     }
                 }
             }
@@ -772,7 +780,7 @@ namespace Twol
                                 if (data.Length != 14)
                                     break;
 
-                                Buffer.BlockCopy(data, 5, mc.ss, 1, 8);
+                                System.Buffer.BlockCopy(data, 5, mc.ss, 1, 8);
 
                                 DoRemoteSwitches();
 
@@ -1073,7 +1081,7 @@ namespace Twol
             if (keyData == Keys.Up)
             {
                 if (sim.stepDistance < 0.4 && sim.stepDistance > -0.36) sim.stepDistance += 0.01;
-                else 
+                else
                     sim.stepDistance += 0.04;
                 if (sim.stepDistance > 8) sim.stepDistance = 8;
                 return true;
@@ -1139,7 +1147,7 @@ namespace Twol
                     if (timerSim.Interval < 50)
                     {
                         timerSim.Interval = 94;
-                        TimedMessageBox(2200, "Simulation Speed","Simulation speed set to 10Hz");
+                        TimedMessageBox(2200, "Simulation Speed", "Simulation speed set to 10Hz");
                     }
                     else
                     {

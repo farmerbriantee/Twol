@@ -363,7 +363,7 @@ namespace Twol
                         {
                             if (i < 5)
                             {
-                                smooList.Add(new vec3(smList[i]));
+                                newCurList.Add(new vec3(smList[i]));
                                 continue;
                             }
                             check = (smList[i - 1].heading - smList[i].heading);

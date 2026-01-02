@@ -465,15 +465,19 @@ namespace Twol
                 //ref nudge
                 flp1.Controls[5].Visible = tracksVisible > 0;
 
+                flp1.Controls[6].Visible = Settings.Tool.setToolSteer.isRecordToolLine;
+
+
                 for (int i = 0; i < flp1.Controls.Count; i++)
                 {
                     if (flp1.Controls[i].Visible) btnCount++;
                 }
 
                 //position of panel
-                flp1.Top = this.Height - 120 - (btnCount*75);
+                flp1.Top = this.Height - 120 - (btnCount * 75);
                 flp1.Left = this.Width - 120 - flp1.Width;
                 trackMethodPanelCounter = 4;
+
             }
 
             PanelUpdateRightAndBottom();
@@ -522,8 +526,7 @@ namespace Twol
             if (!state && reason != "" && (isBtnAutoSteerOn || triggerstate))
                 TimedMessageBox(2000, gStr.Get(gs.gsGuidanceStopped), reason);
 
-            if (ct.isContourBtnOn)
-                ct.SetLockToLine();
+            if (ct.isContourBtnOn) ct.SetLockToLine();
 
             //Passive steering hold till on guidance line
             if (Settings.Tool.setToolSteer.isPassiveSteering)
@@ -538,6 +541,11 @@ namespace Twol
                     gyd.isPassiveTriggered = false;
                     gyd.isPassiveSteeringFlag = false;
                 }
+            }
+
+            if (Settings.Tool.setToolSteer.isRecordToolLine)
+            {
+                gydTool.isAutoSteerBtnOn = state;
             }
         }
 

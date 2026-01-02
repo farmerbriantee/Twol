@@ -3634,6 +3634,16 @@ namespace Twol.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ToolTrackRecord {
+            get {
+                object obj = ResourceManager.GetObject("ToolTrackRecord", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap TrackCurve {
             get {
                 object obj = ResourceManager.GetObject("TrackCurve", resourceCulture);
