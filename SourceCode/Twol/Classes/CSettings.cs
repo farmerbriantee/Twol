@@ -86,7 +86,7 @@
         public bool isFollowCurrent = false;
         public bool isPassiveSteering = false;
         public bool isFollowPivot = false;
-        public bool isFollowRecordedLine = false;
+        public bool isFollowToolLine = false;
         public bool isRecordToolLine = false;
 
         public double antennaHeight = 0;
@@ -106,7 +106,7 @@
             isFollowCurrent = _setting.isFollowCurrent;
             isPassiveSteering = _setting.isPassiveSteering;
             isFollowPivot = _setting.isFollowPivot;
-            isFollowRecordedLine = _setting.isFollowRecordedLine;
+            isFollowToolLine = _setting.isFollowToolLine;
             isRecordToolLine = _setting.isRecordToolLine;
 
             gainP = _setting.gainP;

@@ -323,7 +323,7 @@ namespace Twol
             //like normal
             else if (trk.currTrk != null)
             {
-                //build new current line if required
+                //build new current ref line if required
                 trk.GetDistanceFromRefTrack(trk.currTrk, pivotAxlePos);
             }
 
@@ -331,9 +331,14 @@ namespace Twol
             {
                 gyd.Guidance(pivotAxlePos, steerAxlePos, yt.isYouTurnTriggered, yt.isYouTurnTriggered ? yt.ytList : trk.currentGuidanceTrack);
 
-                if (Settings.Tool.setToolSteer.isFollowRecordedLine && guidanceVehicleXTE != double.NaN);
+                if (Settings.Tool.setToolSteer.isFollowPivot && isJobStarted)
                 {
-                    gydTool.GuidanceFollowRecordedLine(toolPivotPos, yt.isYouTurnTriggered);
+                    gydTool.GuidanceFollowPivot(toolPivotPos, steerAxlePos, yt.isYouTurnTriggered, followPivotPoints);
+                }
+
+                else if (Settings.Tool.setToolSteer.isRecordToolLine && isJobStarted)
+                {
+                    gydTool.GuidanceToolLineRecord(yt.isYouTurnTriggered);
                 }
             }
             else
@@ -348,21 +353,6 @@ namespace Twol
                 gyd.distanceFromCurrentLine = 0;
                 guidanceVehicleXTE = double.NaN;
                 guidanceToolXTE = double.NaN;
-            }
-
-            if (Settings.Tool.setToolSteer.isFollowPivot && isJobStarted)
-            {
-                gydTool.GuidanceFollowPivot(toolPivotPos, yt.isYouTurnTriggered, followPivotPoints);
-            }
-
-            if (Settings.Tool.setToolSteer.isRecordToolLine && isJobStarted)
-            {
-                gydTool.GuidanceToolLineRecord(yt.isYouTurnTriggered);
-            }
-
-            if (Settings.Tool.setToolSteer.isFollowRecordedLine && isJobStarted)
-            {
-                gydTool.GuidanceToolLineRecord(yt.isYouTurnTriggered);
             }
 
             // If Drive button off - normal autosteer 
@@ -444,7 +434,7 @@ namespace Twol
                 }
 
                 // is active mode for tool steer
-                if (Settings.Tool.setToolSteer.isFollowCurrent|| Settings.Tool.setToolSteer.isFollowPivot || Settings.Tool.setToolSteer.isFollowRecordedLine)
+                if (Settings.Tool.setToolSteer.isFollowCurrent|| Settings.Tool.setToolSteer.isFollowPivot || Settings.Tool.setToolSteer.isFollowToolLine)
                 {
                     PGN_233.pgn[PGN_233.speed10] = unchecked((byte)((int)(Math.Abs(avgSpeed) * 10.0)));
 

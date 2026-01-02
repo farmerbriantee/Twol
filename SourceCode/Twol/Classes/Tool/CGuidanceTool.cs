@@ -30,13 +30,8 @@ namespace Twol
             mf = _f;
         }
 
-        internal void GuidanceFollowRecordedLine(vec3 toolPivotPos, bool isYouTurnTriggered)
-        {
-            throw new NotImplementedException();
-        }
-
         //in pivot follow mode - tool to vehicle pivot history
-        public void GuidanceFollowPivot(vec3 pivot, bool Uturn, List<vec3> curList)
+        public void GuidanceFollowPivot(vec3 pivot, vec3 steer, bool Uturn, List<vec3> curList)
         {
             if (FindClosestSegment(curList, false, mf.pnTool.fix, out A, out B))
             {
@@ -65,7 +60,7 @@ namespace Twol
             {
                 if (mf.trkTool.designPtsList.Count > 20)
                 {
-                    FinishLineRecording();
+                    FinishToolLineRecording();
                 }
 
                 //clean up
@@ -74,7 +69,7 @@ namespace Twol
             }
         }
 
-        private void FinishLineRecording()
+        private void FinishToolLineRecording()
         {
             mf.trkTool.designPtsList.Add(new vec3(mf.toolPivotPos));
 
@@ -208,7 +203,6 @@ namespace Twol
             else
                 return Math.Sqrt(dx * dx + dy * dy);
         }
-
         //public void Guidance(vec3 pivot, vec3 steer, bool Uturn, List<vec3> curList)
         //{
         //    bool completeUturn = !Uturn;

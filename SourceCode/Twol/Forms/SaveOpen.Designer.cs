@@ -348,7 +348,7 @@ namespace Twol
             FileLoadTrams();
 
             //toolpath recording ----------------------------------------------------------------
-            if (Settings.Tool.setToolSteer.isFollowRecordedLine || Settings.Tool.setToolSteer.isRecordToolLine) FileLoadToolTracks();
+            if (Settings.Tool.setToolSteer.isFollowToolLine || Settings.Tool.setToolSteer.isRecordToolLine) FileLoadToolTracks();
 
             PanelsAndOGLSize();
 
