@@ -473,7 +473,7 @@ namespace Twol.Classes.Tool
 
         public CTrkTool CreateDesignedToolTrack(bool isRefRightSide)
         {
-            var track = new CTrkTool(DateTime.Now.ToShortTimeString());
+            var track = new CTrkTool(TrackMode.toolLineInner);
 
             //fill in the dots between A and B
             double len = glm.Distance(designPtA, designPtB);

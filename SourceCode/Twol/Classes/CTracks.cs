@@ -8,7 +8,7 @@ using Twol.Classes;
 namespace Twol
 {
     public enum TrackMode
-    { None = 0, AB = 2, Curve = 4, bndTrackOuter = 8, bndTrackInner = 16, bndCurve = 32, waterPivot = 64 };//, Heading, Circle, Spiral
+    { None = 0, AB = 2, Curve = 4, bndTrackOuter = 8, bndTrackInner = 16, bndCurve = 32, waterPivot = 64, toolLineOuter = 128, toolLineInner = 129};//, Heading, Circle, Spiral
 
     public class CTracks
     {

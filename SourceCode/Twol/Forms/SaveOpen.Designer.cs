@@ -348,7 +348,7 @@ namespace Twol
             FileLoadTrams();
 
             //toolpath recording ----------------------------------------------------------------
-            if (Settings.Tool.setToolSteer.isFollowToolLine || Settings.Tool.setToolSteer.isRecordToolLine) FileLoadToolTracks();
+            //if (Settings.Tool.setToolSteer.isFollowToolLine || Settings.Tool.setToolSteer.isRecordToolLine) FileLoadToolTracks();
 
             PanelsAndOGLSize();
 
@@ -1033,6 +1033,98 @@ namespace Twol
             }
         }
 
+        public void FileLoadToolTracks()
+        {
+            trkTool.ResetTrack();
+
+            //get the directory and make sure it exists, create if not
+            string directoryName = Path.Combine(RegistrySettings.fieldsDirectory, currentFieldDirectory);
+
+            if ((directoryName.Length > 0) && (!Directory.Exists(directoryName)))
+            { Directory.CreateDirectory(directoryName); }
+
+            string filename = Path.Combine(directoryName, "TrackLines.txt");
+
+            //get the file of previous AB Lines
+            if ((directoryName.Length > 0) && (!Directory.Exists(directoryName)))
+            { Directory.CreateDirectory(directoryName); }
+
+            if (!File.Exists(filename))
+            {
+                TimedMessageBox(2000, gStr.Get(gs.gsFileError), "Missing Tool Tracks File");
+                Log.EventWriter("Load Field, Missing Tool Tracks File");
+            }
+            else
+            {
+                using (StreamReader reader = new StreamReader(filename))
+                {
+                    try
+                    {
+                        string line;
+
+                        while (!reader.EndOfStream)
+                        {
+                            var track = new CTrk(TrackMode.None);
+
+                            track.name = reader.ReadLine();
+                            // get the average heading
+                            line = reader.ReadLine();
+                            track.heading = double.Parse(line, CultureInfo.InvariantCulture);
+
+                            line = reader.ReadLine();
+                            string[] words = line.Split(',');
+                            vec2 vecPt = new vec2(double.Parse(words[0], CultureInfo.InvariantCulture),
+                                double.Parse(words[1], CultureInfo.InvariantCulture));
+                            track.ptA = (vecPt);
+
+                            line = reader.ReadLine();
+                            words = line.Split(',');
+                            vecPt = new vec2(double.Parse(words[0], CultureInfo.InvariantCulture),
+                                double.Parse(words[1], CultureInfo.InvariantCulture));
+                            track.ptB = (vecPt);
+
+                            line = reader.ReadLine();
+                            track.nudgeDistance = double.Parse(line, CultureInfo.InvariantCulture);
+
+                            line = reader.ReadLine();
+                            track.mode = (TrackMode)int.Parse(line, CultureInfo.InvariantCulture);
+
+                            line = reader.ReadLine();
+                            track.isVisible = bool.Parse(line);
+
+                            line = reader.ReadLine();
+                            int numPoints = int.Parse(line);
+
+                            if (numPoints > 3)
+                            {
+                                track.curvePts?.Clear();
+
+                                for (int i = 0; i < numPoints; i++)
+                                {
+                                    line = reader.ReadLine();
+                                    words = line.Split(',');
+                                    vec3 vecPtt = new vec3(double.Parse(words[0], CultureInfo.InvariantCulture),
+                                        double.Parse(words[1], CultureInfo.InvariantCulture),
+                                        double.Parse(words[2], CultureInfo.InvariantCulture));
+                                    track.curvePts.Add(vecPtt);
+                                }
+                            }
+
+
+                            trk.AddTrack(track);
+                        }
+
+                        trk.GetNextTrack();
+                    }
+                    catch (Exception er)
+                    {
+                        TimedMessageBox(2000, "Tool Tracks File is Corrupt", gStr.Get(gs.gsButFieldIsLoaded));
+                        Log.EventWriter("Load Tool Line Failure" + er.ToString());
+                    }
+                }
+            }
+        }
+
         public void FileLoadTrams()
         {
             string fileAndDirectory = Path.Combine(RegistrySettings.fieldsDirectory, currentFieldDirectory, "Tram.txt");
@@ -1133,85 +1225,6 @@ namespace Twol
                 }
             }
 
-        }
-
-        public void FileLoadToolTracks()
-        {
-            trkTool.ResetTrack();
-
-            //get the directory and make sure it exists, create if not
-            string directoryName = Path.Combine(RegistrySettings.fieldsDirectory, currentFieldDirectory);
-
-            if ((directoryName.Length > 0) && (!Directory.Exists(directoryName)))
-            { Directory.CreateDirectory(directoryName); }
-
-            string filename = Path.Combine(directoryName, "ToolTrackLines.txt");
-
-            //get the file of previous AB Lines
-            if ((directoryName.Length > 0) && (!Directory.Exists(directoryName)))
-            { Directory.CreateDirectory(directoryName); }
-
-            if (!File.Exists(filename))
-            {
-                TimedMessageBox(2000, gStr.Get(gs.gsFileError), "Missing Tool Tracks File");
-                Log.EventWriter("Load Field, Missing Tool Tracks File");
-            }
-            else
-            {
-                using (StreamReader reader = new StreamReader(filename))
-                {
-                    try
-                    {
-                        string line;
-
-                        while (!reader.EndOfStream)
-                        {
-                            var track = new CTrkTool("");
-
-                            track.name = reader.ReadLine();
-
-                            line = reader.ReadLine();
-                            string[] words = line.Split(',');
-                            vec2 vecPt = new vec2(double.Parse(words[0], CultureInfo.InvariantCulture),
-                                double.Parse(words[1], CultureInfo.InvariantCulture));
-                            track.ptA = (vecPt);
-
-                            line = reader.ReadLine();
-                            words = line.Split(',');
-                            vecPt = new vec2(double.Parse(words[0], CultureInfo.InvariantCulture),
-                                double.Parse(words[1], CultureInfo.InvariantCulture));
-                            track.ptB = (vecPt);
-
-                            line = reader.ReadLine();
-                            int numPoints = int.Parse(line);
-
-                            if (numPoints > 3)
-                            {
-                                track.curvePts?.Clear();
-
-                                for (int i = 0; i < numPoints; i++)
-                                {
-                                    line = reader.ReadLine();
-                                    words = line.Split(',');
-                                    vec3 vecPtt = new vec3(double.Parse(words[0], CultureInfo.InvariantCulture),
-                                        double.Parse(words[1], CultureInfo.InvariantCulture),
-                                        double.Parse(words[2], CultureInfo.InvariantCulture));
-                                    track.curvePts.Add(vecPtt);
-                                }
-                            }
-
-                            trkTool.AddTrack(track);
-                        }
-
-                        trkTool.GetNextTrack();
-                    }
-                    catch (Exception er)
-                    {
-                        TimedMessageBox(2000, "Tool Tracks File is Corrupt", gStr.Get(gs.gsButFieldIsLoaded));
-                        Log.EventWriter("Load Tool Line Failure" + er.ToString());
-                    }
-                }
-            }
         }
 
         #endregion
@@ -1597,52 +1610,6 @@ namespace Twol
             }
         }
 
-        public void FileSaveToolTracks()
-        {
-            string directoryName = Path.Combine(RegistrySettings.fieldsDirectory, currentFieldDirectory);
-
-            if (!string.IsNullOrEmpty(directoryName) && (!Directory.Exists(directoryName)))
-            { Directory.CreateDirectory(directoryName); }
-
-            string filename = Path.Combine(directoryName, "ToolTrackLines.txt");
-
-            using (StreamWriter writer = new StreamWriter(filename, false))
-            {
-                try
-                {
-                    foreach (var track in trkTool.tArr)
-                    {
-                        //write out the name
-                        writer.WriteLine(track.name);
-
-                        //A nd B
-                        writer.WriteLine(Math.Round(track.ptA.easting, 3).ToString(CultureInfo.InvariantCulture) + "," +
-                                            Math.Round(track.ptA.northing, 3).ToString(CultureInfo.InvariantCulture));
-                        writer.WriteLine(Math.Round(track.ptB.easting, 3).ToString(CultureInfo.InvariantCulture) + "," +
-                                            Math.Round(track.ptB.northing, 3).ToString(CultureInfo.InvariantCulture));
-
-                        //write out the points of ref line
-                        int cnt2 = track.curvePts.Count;
-
-                        writer.WriteLine(cnt2.ToString(CultureInfo.InvariantCulture));
-                        if (track.curvePts.Count > 0)
-                        {
-                            for (int j = 0; j < cnt2; j++)
-                                writer.WriteLine(Math.Round(track.curvePts[j].easting, 3).ToString(CultureInfo.InvariantCulture) + "," +
-                                                 Math.Round(track.curvePts[j].northing, 3).ToString(CultureInfo.InvariantCulture) + "," +
-                                                 Math.Round(track.curvePts[j].heading, 5).ToString(CultureInfo.InvariantCulture));
-                        }
-                    }
-                }
-                catch (Exception er)
-                {
-                    Log.EventWriter("Saving Tool Track Line" + er.ToString());
-
-                    return;
-                }
-            }
-        }
-
         public void FileSaveToolTrack(CTrkTool track)
         {
             string directoryName = Path.Combine(RegistrySettings.fieldsDirectory, currentFieldDirectory);
@@ -1656,27 +1623,39 @@ namespace Twol
             {
                 try
                 {
-                        //write out the name
-                        writer.WriteLine(track.name);
+                    //write out the name
+                    writer.WriteLine(track.name);
 
-                        //A nd B
-                        writer.WriteLine(Math.Round(track.ptA.easting, 3).ToString(CultureInfo.InvariantCulture) + "," +
-                                            Math.Round(track.ptA.northing, 3).ToString(CultureInfo.InvariantCulture));
-                        writer.WriteLine(Math.Round(track.ptB.easting, 3).ToString(CultureInfo.InvariantCulture) + "," +
-                                            Math.Round(track.ptB.northing, 3).ToString(CultureInfo.InvariantCulture));
+                    //write out the heading
+                    writer.WriteLine(track.heading.ToString(CultureInfo.InvariantCulture));
 
-                        //write out the points of ref line
-                        int cnt2 = track.curvePts.Count;
+                    //A nd B
+                    writer.WriteLine(Math.Round(track.ptA.easting, 3).ToString(CultureInfo.InvariantCulture) + "," +
+                                        Math.Round(track.ptA.northing, 3).ToString(CultureInfo.InvariantCulture));
+                    writer.WriteLine(Math.Round(track.ptB.easting, 3).ToString(CultureInfo.InvariantCulture) + "," +
+                                        Math.Round(track.ptB.northing, 3).ToString(CultureInfo.InvariantCulture));
 
-                        writer.WriteLine(cnt2.ToString(CultureInfo.InvariantCulture));
-                        if (track.curvePts.Count > 0)
-                        {
-                            for (int j = 0; j < cnt2; j++)
-                                writer.WriteLine(Math.Round(track.curvePts[j].easting, 3).ToString(CultureInfo.InvariantCulture) + "," +
-                                                 Math.Round(track.curvePts[j].northing, 3).ToString(CultureInfo.InvariantCulture) + "," +
-                                                 Math.Round(track.curvePts[j].heading, 5).ToString(CultureInfo.InvariantCulture));
-                        }
-                    
+                    //write out the nudgeDistance
+                    writer.WriteLine(track.nudgeDistance.ToString(CultureInfo.InvariantCulture));
+
+                    //write out the mode
+                    writer.WriteLine(((int)track.mode).ToString(CultureInfo.InvariantCulture));
+
+                    //visible?
+                    writer.WriteLine(track.isVisible.ToString(CultureInfo.InvariantCulture));
+
+                    //write out the points of ref line
+                    int cnt2 = track.curvePts.Count;
+
+                    writer.WriteLine(cnt2.ToString(CultureInfo.InvariantCulture));
+                    if (track.curvePts.Count > 0)
+                    {
+                        for (int j = 0; j < cnt2; j++)
+                            writer.WriteLine(Math.Round(track.curvePts[j].easting, 3).ToString(CultureInfo.InvariantCulture) + "," +
+                                             Math.Round(track.curvePts[j].northing, 3).ToString(CultureInfo.InvariantCulture) + "," +
+                                             Math.Round(track.curvePts[j].heading, 5).ToString(CultureInfo.InvariantCulture));
+                    }
+
                 }
                 catch (Exception er)
                 {

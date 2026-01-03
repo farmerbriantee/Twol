@@ -74,8 +74,9 @@ namespace Twol
             mf.trkTool.designPtsList.Add(new vec3(mf.toolPivotPos));
 
             //make a new tool track
-            string name = (mf.gydTool.isboundaryLine ? "Outer " : "Inner ") + mf.trkTool.tArr.Count.ToString("000");
-            var track = new CTrkTool(name);
+            var track = new CTrkTool(TrackMode.toolLineInner);
+
+            track.name = (mf.gydTool.isboundaryLine ? "Outer " : "Inner ") + mf.trkTool.tArr.Count.ToString("000"); 
 
             mf.trkTool.SmoothAB(ref mf.trkTool.designPtsList, 6, false);
 
@@ -119,7 +120,8 @@ namespace Twol
                 track.curvePts.Add(item);
             }
 
-            mf.trkTool.AddEndPoints(ref track.curvePts, 2);
+            mf.trkTool.AddEndPoints(ref track.curvePts, 4);
+            mf.trkTool.AddStartPoints(ref track.curvePts, 4);
 
             track.ptA = new vec2(track.curvePts[0].easting, track.curvePts[0].northing);
             track.ptB = new vec2(track.curvePts[track.curvePts.Count - 1].easting, track.curvePts[track.curvePts.Count - 1].northing);
