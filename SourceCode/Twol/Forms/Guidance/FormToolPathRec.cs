@@ -132,5 +132,18 @@ namespace Twol
                 lblOuterInner.Text = "Inner";
             }
         }
+
+        private void btnExportLines_Click(object sender, EventArgs e)
+        {
+            //save any track changes first
+            mf.FileSaveTracks();
+
+            //add the tool tracks to the tracks arr
+            mf.FileLoadTracksFromToolTracksRecorded();
+
+            //save the tracks file after adding the tool tracks
+            mf.FileSaveTracks();
+
+        }
     }
 }

@@ -329,12 +329,6 @@ namespace Twol
             // Tracks -------------------------------------------------------------------------------------------------
             FileLoadTracks();
 
-            ////section patches
-            //FileLoadSections();
-
-            //// Contour points ----------------------------------------------------------------------------
-            //FileLoadContour();
-
             // Flags ------------------------------------------------------------------------------
             FileLoadFlags();
 
@@ -348,7 +342,7 @@ namespace Twol
             FileLoadTrams();
 
             //toolpath recording ----------------------------------------------------------------
-            //if (Settings.Tool.setToolSteer.isFollowToolLine || Settings.Tool.setToolSteer.isRecordToolLine) FileLoadToolTracks();
+            if (Settings.Tool.setToolSteer.isRecordToolLine) FileLoadToolTracks();
 
             PanelsAndOGLSize();
 
@@ -1033,6 +1027,101 @@ namespace Twol
             }
         }
 
+        public void FileLoadTracksFromToolTracksRecorded()
+        {
+            //trk.ResetTrack();
+
+            //get the directory and make sure it exists, create if not
+            string directoryName = Path.Combine(RegistrySettings.fieldsDirectory, currentFieldDirectory);
+
+            if ((directoryName.Length > 0) && (!Directory.Exists(directoryName)))
+            { Directory.CreateDirectory(directoryName); }
+
+            string filename = Path.Combine(directoryName, "ToolTrackLines.txt");
+
+            //get the file of previous AB Lines
+            if ((directoryName.Length > 0) && (!Directory.Exists(directoryName)))
+            { Directory.CreateDirectory(directoryName); }
+
+            if (!File.Exists(filename))
+            {
+                TimedMessageBox(2000, gStr.Get(gs.gsFileError), "Missing Tracks File");
+                Log.EventWriter("Load Field, Missing Tracks File");
+                return;
+            }
+            else
+            {
+                using (StreamReader reader = new StreamReader(filename))
+                {
+                    try
+                    {
+                        string line;
+
+                        //read header $CurveLine
+                        line = reader.ReadLine();
+
+                        while (!reader.EndOfStream)
+                        {
+                            var track = new CTrk(TrackMode.None);
+                            //read header $CurveLine
+                            track.name = reader.ReadLine();
+                            // get the average heading
+                            line = reader.ReadLine();
+                            track.heading = double.Parse(line, CultureInfo.InvariantCulture);
+
+                            line = reader.ReadLine();
+                            string[] words = line.Split(',');
+                            vec2 vecPt = new vec2(double.Parse(words[0], CultureInfo.InvariantCulture),
+                                double.Parse(words[1], CultureInfo.InvariantCulture));
+                            track.ptA = (vecPt);
+
+                            line = reader.ReadLine();
+                            words = line.Split(',');
+                            vecPt = new vec2(double.Parse(words[0], CultureInfo.InvariantCulture),
+                                double.Parse(words[1], CultureInfo.InvariantCulture));
+                            track.ptB = (vecPt);
+
+                            line = reader.ReadLine();
+                            track.nudgeDistance = double.Parse(line, CultureInfo.InvariantCulture);
+
+                            line = reader.ReadLine();
+                            track.mode = (TrackMode)int.Parse(line, CultureInfo.InvariantCulture);
+
+                            line = reader.ReadLine();
+                            track.isVisible = bool.Parse(line);
+
+                            line = reader.ReadLine();
+                            int numPoints = int.Parse(line);
+
+                            if (numPoints > 3)
+                            {
+                                track.curvePts?.Clear();
+
+                                for (int i = 0; i < numPoints; i++)
+                                {
+                                    line = reader.ReadLine();
+                                    words = line.Split(',');
+                                    vec3 vecPtt = new vec3(double.Parse(words[0], CultureInfo.InvariantCulture),
+                                        double.Parse(words[1], CultureInfo.InvariantCulture),
+                                        double.Parse(words[2], CultureInfo.InvariantCulture));
+                                    track.curvePts.Add(vecPtt);
+                                }
+                            }
+
+                            trk.AddTrack(track);
+                        }
+
+                        trk.GetNextTrack();
+                    }
+                    catch (Exception er)
+                    {
+                        TimedMessageBox(2000, gStr.Get(gs.gsCurveLineFileIsCorrupt), gStr.Get(gs.gsButFieldIsLoaded));
+                        Log.EventWriter("Load Curve Line" + er.ToString());
+                    }
+                }
+            }
+        }
+
         public void FileLoadToolTracks()
         {
             trkTool.ResetTrack();
@@ -1043,7 +1132,7 @@ namespace Twol
             if ((directoryName.Length > 0) && (!Directory.Exists(directoryName)))
             { Directory.CreateDirectory(directoryName); }
 
-            string filename = Path.Combine(directoryName, "TrackLines.txt");
+            string filename = Path.Combine(directoryName, "ToolTrackLines.txt");
 
             //get the file of previous AB Lines
             if ((directoryName.Length > 0) && (!Directory.Exists(directoryName)))
@@ -1051,8 +1140,7 @@ namespace Twol
 
             if (!File.Exists(filename))
             {
-                TimedMessageBox(2000, gStr.Get(gs.gsFileError), "Missing Tool Tracks File");
-                Log.EventWriter("Load Field, Missing Tool Tracks File");
+                Log.EventWriter("Load Field, No Tool Tracks File");
             }
             else
             {
@@ -1064,7 +1152,7 @@ namespace Twol
 
                         while (!reader.EndOfStream)
                         {
-                            var track = new CTrk(TrackMode.None);
+                            var track = new CTrkTool(TrackMode.None);
 
                             track.name = reader.ReadLine();
                             // get the average heading
@@ -1110,11 +1198,8 @@ namespace Twol
                                 }
                             }
 
-
-                            trk.AddTrack(track);
+                            trkTool.AddTrack(track);
                         }
-
-                        trk.GetNextTrack();
                     }
                     catch (Exception er)
                     {

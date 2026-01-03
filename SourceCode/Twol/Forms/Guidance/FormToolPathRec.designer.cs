@@ -38,11 +38,12 @@
             this.btnOuterInner = new System.Windows.Forms.Button();
             this.lblTracks = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.btnExportLines = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // bthOK
             // 
-            this.bthOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.bthOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.bthOK.BackColor = System.Drawing.Color.Transparent;
             this.bthOK.BackgroundImage = global::Twol.Properties.Resources.OK64;
             this.bthOK.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
@@ -51,7 +52,7 @@
             this.bthOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bthOK.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.bthOK.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.bthOK.Location = new System.Drawing.Point(23, 275);
+            this.bthOK.Location = new System.Drawing.Point(185, 285);
             this.bthOK.Name = "bthOK";
             this.bthOK.Size = new System.Drawing.Size(87, 65);
             this.bthOK.TabIndex = 1;
@@ -156,13 +157,32 @@
             this.label3.Text = "Tracks:";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // btnExportLines
+            // 
+            this.btnExportLines.BackColor = System.Drawing.Color.Transparent;
+            this.btnExportLines.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlText;
+            this.btnExportLines.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.btnExportLines.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnExportLines.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnExportLines.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExportLines.Font = new System.Drawing.Font("Tahoma", 14.25F);
+            this.btnExportLines.Image = global::Twol.Properties.Resources.FileSave;
+            this.btnExportLines.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnExportLines.Location = new System.Drawing.Point(185, 164);
+            this.btnExportLines.Name = "btnExportLines";
+            this.btnExportLines.Size = new System.Drawing.Size(87, 65);
+            this.btnExportLines.TabIndex = 541;
+            this.btnExportLines.UseVisualStyleBackColor = false;
+            this.btnExportLines.Click += new System.EventHandler(this.btnExportLines_Click);
+            // 
             // FormToolPathRec
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Beige;
-            this.ClientSize = new System.Drawing.Size(134, 348);
+            this.ClientSize = new System.Drawing.Size(284, 362);
             this.ControlBox = false;
+            this.Controls.Add(this.btnExportLines);
             this.Controls.Add(this.lblTracks);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnOuterInner);
@@ -194,5 +214,6 @@
         private System.Windows.Forms.Button btnOuterInner;
         private System.Windows.Forms.Label lblTracks;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnExportLines;
     }
 }
