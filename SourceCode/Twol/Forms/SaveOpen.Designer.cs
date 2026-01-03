@@ -1057,9 +1057,6 @@ namespace Twol
                     {
                         string line;
 
-                        //read header $CurveLine
-                        line = reader.ReadLine();
-
                         while (!reader.EndOfStream)
                         {
                             var track = new CTrk(TrackMode.None);
