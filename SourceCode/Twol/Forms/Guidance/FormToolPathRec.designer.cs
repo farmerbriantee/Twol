@@ -43,7 +43,7 @@
             // 
             // bthOK
             // 
-            this.bthOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.bthOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.bthOK.BackColor = System.Drawing.Color.Transparent;
             this.bthOK.BackgroundImage = global::Twol.Properties.Resources.OK64;
             this.bthOK.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
@@ -52,9 +52,9 @@
             this.bthOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bthOK.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.bthOK.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.bthOK.Location = new System.Drawing.Point(185, 285);
+            this.bthOK.Location = new System.Drawing.Point(8, 285);
             this.bthOK.Name = "bthOK";
-            this.bthOK.Size = new System.Drawing.Size(87, 65);
+            this.bthOK.Size = new System.Drawing.Size(116, 65);
             this.bthOK.TabIndex = 1;
             this.bthOK.TextAlign = System.Drawing.ContentAlignment.TopLeft;
             this.bthOK.UseVisualStyleBackColor = false;
@@ -128,9 +128,9 @@
             this.btnOuterInner.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnOuterInner.Image = global::Twol.Properties.Resources.TramOuter;
             this.btnOuterInner.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnOuterInner.Location = new System.Drawing.Point(23, 164);
+            this.btnOuterInner.Location = new System.Drawing.Point(8, 164);
             this.btnOuterInner.Name = "btnOuterInner";
-            this.btnOuterInner.Size = new System.Drawing.Size(87, 65);
+            this.btnOuterInner.Size = new System.Drawing.Size(116, 65);
             this.btnOuterInner.TabIndex = 538;
             this.btnOuterInner.UseVisualStyleBackColor = false;
             this.btnOuterInner.Click += new System.EventHandler(this.btnOuterInner_Click);
@@ -179,8 +179,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Beige;
-            this.ClientSize = new System.Drawing.Size(284, 362);
+            this.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.ClientSize = new System.Drawing.Size(304, 362);
             this.ControlBox = false;
             this.Controls.Add(this.btnExportLines);
             this.Controls.Add(this.lblTracks);

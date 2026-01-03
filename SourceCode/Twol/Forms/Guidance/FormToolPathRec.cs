@@ -52,7 +52,6 @@ namespace Twol
         {
             Location = Settings.User.setWindow_recordToolTracksLocation;
             Size = Settings.User.setWindow_formRecordToolTracksSize;
-            UpdateMoveLabel();
 
             if (!mf.IsOnScreen(Location, Size, 1))
             {
@@ -70,11 +69,6 @@ namespace Twol
             mf.FileSaveTracks();
         }
 
-        private void UpdateMoveLabel()
-        {
-            mf.Activate();
-        }
-
         private void btnRecStartStop_Click(object sender, EventArgs e)
         {
             mf.gydTool.isGuidanceModeRecordNewTracks = !mf.gydTool.isGuidanceModeRecordNewTracks;
@@ -87,6 +81,7 @@ namespace Twol
             {
                 btnRecStartStop.BackColor = Color.Transparent;
             }
+            mf.Activate();
         }
 
         private void bntOk_Click(object sender, EventArgs e)
@@ -102,18 +97,19 @@ namespace Twol
 
             if (mf.gydTool.isRecordingToolLine)
             {
-                if (this.BackColor == Color.AliceBlue)
+                if (btnRecStartStop.BackColor == Color.Green)
                 {
-                    this.BackColor = Color.Wheat;
+                    btnRecStartStop.BackColor = Color.LightGreen;
                 }
                 else
                 {
-                    this.BackColor = Color.AliceBlue;
+                    btnRecStartStop.BackColor = Color.Green;
                 }
             }
             else
             {
-                this.BackColor = Color.AliceBlue;
+                if (mf.gydTool.isGuidanceModeRecordNewTracks) btnRecStartStop.BackColor = Color.LightGreen;
+                else btnRecStartStop.BackColor = Color.Transparent;
             }
         }
 
@@ -131,6 +127,7 @@ namespace Twol
                 btnOuterInner.Image = Properties.Resources.TramLines;
                 lblOuterInner.Text = "Inner";
             }
+            mf.Activate();
         }
 
         private void btnExportLines_Click(object sender, EventArgs e)
@@ -144,6 +141,7 @@ namespace Twol
             //save the tracks file after adding the tool tracks
             mf.FileSaveTracks();
 
+            mf.Activate();
         }
     }
 }
