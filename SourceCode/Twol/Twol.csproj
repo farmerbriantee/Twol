@@ -152,7 +152,7 @@
     <Compile Include="Classes\CBrightness.cs" />
     <Compile Include="Classes\ExtensionMethods.cs" />
     <Compile Include="Classes\CBoundary.cs" />
-    <Compile Include="Classes\CGuidance.cs" />
+    <Compile Include="Classes\Guidance\CGuidance.cs" />
     <Compile Include="Classes\CHeadLine.cs" />
     <Compile Include="Classes\CHello.cs" />
     <Compile Include="Classes\Language.cs" />
@@ -260,12 +260,12 @@
     <Compile Include="Classes\CAHRS.cs" />
     <Compile Include="Classes\Font.cs" />
     <Compile Include="Classes\CSim.cs" />
-    <Compile Include="Classes\CTracks.cs" />
+    <Compile Include="Classes\Guidance\CTracks.cs" />
     <Compile Include="Classes\CTram.cs" />
-    <Compile Include="Classes\CYouTurn.cs" />
+    <Compile Include="Classes\Guidance\CYouTurn.cs" />
     <Compile Include="Classes\CFlag.cs" />
     <Compile Include="Classes\CCamera.cs" />
-    <Compile Include="Classes\CContour.cs" />
+    <Compile Include="Classes\Guidance\CContour.cs" />
     <Compile Include="Classes\CModuleComm.cs" />
     <Compile Include="Classes\CNMEA.cs" />
     <Compile Include="Classes\Tool\CSection.cs" />
