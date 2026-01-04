@@ -8,7 +8,7 @@ using Twol.Classes;
 namespace Twol
 {
     public enum TrackMode
-    { None = 0, AB = 2, Curve = 4, bndTrackOuter = 8, bndTrackInner = 16, bndCurve = 32, waterPivot = 64, toolLineOuter = 128, toolLineInner = 129};//, Heading, Circle, Spiral
+    { toolLineInner = -2, toolLineOuter = -1,  None = 0, AB = 2, Curve = 4, bndTrackOuter = 8, bndTrackInner = 16, bndCurve = 32, waterPivot = 64};//, Heading, Circle, Spiral
 
     public class CTracks
     {
@@ -214,7 +214,7 @@ namespace Twol
                     distanceFromRefLine = -glm.Distance(mf.guidanceLookPos, track.ptA);
                 }
 
-                distanceFromRefLine -= (0.5 * widthMinusOverlap);
+                if (track.mode > TrackMode.None) distanceFromRefLine -= (0.5 * widthMinusOverlap);
 
                 double RefDist = (distanceFromRefLine + (isHeadingSameWay ? Settings.Tool.offset : -Settings.Tool.offset) - track.nudgeDistance) / widthMinusOverlap;
 
@@ -235,7 +235,7 @@ namespace Twol
                         lastIsHeadingSameWay = isHeadingSameWay;
                         double distAway = widthMinusOverlap * howManyPathsAway + (isHeadingSameWay ? -Settings.Tool.offset : Settings.Tool.offset) + track.nudgeDistance;
 
-                        distAway += (0.5 * widthMinusOverlap);
+                        if (track.mode > TrackMode.None) distAway += (0.5 * widthMinusOverlap);
 
                         currentGuidanceTrack = await Task.Run(() => BuildCurrentGuidanceTrack(distAway, track));
 
@@ -267,7 +267,7 @@ namespace Twol
             //the list of points of curve new list from async
             List<vec3> newCurList = new List<vec3>();
 
-            bool loops = track.mode > TrackMode.Curve;
+            bool loops = (track.mode > TrackMode.Curve && track.mode < TrackMode.toolLineOuter);
 
             try
             {
