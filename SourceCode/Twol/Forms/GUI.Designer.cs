@@ -242,6 +242,9 @@ namespace Twol
                 //wait to engage deadzone before time is up
                 vehicle.deadZoneDelayCounter++;
 
+                //auto find closest track counter
+                trk.autoTrack3SecTimer++;
+
                 //used for alarm flashing
                 isFlashOnOff = !isFlashOnOff;
 
@@ -778,6 +781,8 @@ namespace Twol
                 btnAdjLeft.Visible = validTrk && Settings.User.setFeatures.isABLineOn;
                 btnAdjRight.Visible = validTrk && Settings.User.setFeatures.isABLineOn;
 
+                btnAutoTrack.Visible = tracksVisible > 1 && !ct.isContourBtnOn;
+
                 btnTramDisplayMode.Visible = istram;
                 btnHeadlandOnOff.Visible = isHdl;
 
@@ -812,14 +817,18 @@ namespace Twol
                         break;
 
                     case "4":
-                        panelRight.Controls.Add(btnCycleLinesBk);
+                        panelRight.Controls.Add(btnAutoTrack);
                         break;
 
                     case "5":
-                        panelRight.Controls.Add(btnCycleLines);
+                        panelRight.Controls.Add(btnCycleLinesBk);
                         break;
 
                     case "6":
+                        panelRight.Controls.Add(btnCycleLines);
+                        break;
+
+                    case "7":
                         panelRight.Controls.Add(btnContour);
                         panelRight.Controls.Add(btnContourLock);
                         break;

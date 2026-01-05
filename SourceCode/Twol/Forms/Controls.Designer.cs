@@ -384,6 +384,9 @@ namespace Twol
         public bool isABCyled = false;
         private void btnContour_Click(object sender, EventArgs e)
         {
+            trk.isAutoTrack = false;
+            btnAutoTrack.Image = Resources.AutoTrackOff;
+
             SetContourButton(!ct.isContourBtnOn);
         }
 
@@ -403,6 +406,8 @@ namespace Twol
                     trk.isTrackValid = false;
                     SetAutoSteerButton(false, gStr.Get(gs.gsContourOn));
                 }
+
+
 
                 PanelUpdateRightAndBottom();
             }
@@ -577,8 +582,17 @@ namespace Twol
             }
         }
 
+        private void btnAutoTrack_Click(object sender, EventArgs e)
+        {
+            trk.isAutoTrack = !trk.isAutoTrack;
+            btnAutoTrack.Image = trk.isAutoTrack ? Resources.AutoTrack : Resources.AutoTrackOff;
+        }
+
         private void btnCycleLines_Click(object sender, EventArgs e)
         {
+            trk.isAutoTrack = false;
+            btnAutoTrack.Image = Resources.AutoTrackOff;
+
             trk.GetNextTrack();
 
             if (trk.currTrk != null)
@@ -591,6 +605,9 @@ namespace Twol
 
         private void btnCycleLinesBk_Click(object sender, EventArgs e)
         {
+            trk.isAutoTrack = false;
+            btnAutoTrack.Image = Resources.AutoTrackOff;
+
             if (ct.isContourBtnOn)
             {
                 ct.SetLockToLine();

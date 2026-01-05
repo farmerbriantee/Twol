@@ -726,6 +726,9 @@ namespace Twol
         {
             btnContour.Enabled = true;
 
+            btnAutoTrack.Image = Resources.AutoTrackOff;
+            trk.isAutoTrack = false;
+
             isJobStarted = true;
             btnFieldStats.Visible = true;
 

@@ -239,6 +239,7 @@ namespace Twol
             this.btnFieldStats = new System.Windows.Forms.Button();
             this.button15 = new System.Windows.Forms.Button();
             this.nudToolOffset = new System.Windows.Forms.NumericUpDown();
+            this.btnAutoTrack = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStripFlag.SuspendLayout();
             this.statusStripLeft.SuspendLayout();
@@ -597,7 +598,7 @@ namespace Twol
             this.toolStripMenuFlagForm.Image = global::Twol.Properties.Resources.FileEditName;
             this.toolStripMenuFlagForm.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripMenuFlagForm.Name = "toolStripMenuFlagForm";
-            this.toolStripMenuFlagForm.Size = new System.Drawing.Size(267, 70);
+            this.toolStripMenuFlagForm.Size = new System.Drawing.Size(259, 70);
             this.toolStripMenuFlagForm.Text = "toolStripMenuItem3";
             this.toolStripMenuFlagForm.Click += new System.EventHandler(this.toolStripMenuFlagForm_Click);
             // 
@@ -1979,15 +1980,16 @@ namespace Twol
             this.panelRight.Controls.Add(this.btnAutoYouTurn);
             this.panelRight.Controls.Add(this.btnSectionMasterAuto);
             this.panelRight.Controls.Add(this.btnSectionMasterManual);
+            this.panelRight.Controls.Add(this.btnAutoTrack);
             this.panelRight.Controls.Add(this.btnCycleLinesBk);
             this.panelRight.Controls.Add(this.btnCycleLines);
             this.panelRight.Controls.Add(this.btnContour);
             this.panelRight.Controls.Add(this.btnContourLock);
             this.panelRight.Controls.Add(this.lblNumCu);
             this.panelRight.FlowDirection = System.Windows.Forms.FlowDirection.BottomUp;
-            this.panelRight.Location = new System.Drawing.Point(1088, 268);
+            this.panelRight.Location = new System.Drawing.Point(1088, 198);
             this.panelRight.Name = "panelRight";
-            this.panelRight.Size = new System.Drawing.Size(70, 574);
+            this.panelRight.Size = new System.Drawing.Size(70, 644);
             this.panelRight.TabIndex = 541;
             this.panelRight.Visible = false;
             // 
@@ -2004,7 +2006,7 @@ namespace Twol
             this.btnAutoSteer.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
             this.btnAutoSteer.Image = global::Twol.Properties.Resources.AutoSteerOff;
             this.btnAutoSteer.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnAutoSteer.Location = new System.Drawing.Point(3, 510);
+            this.btnAutoSteer.Location = new System.Drawing.Point(3, 580);
             this.btnAutoSteer.Margin = new System.Windows.Forms.Padding(0);
             this.btnAutoSteer.Name = "btnAutoSteer";
             this.btnAutoSteer.Size = new System.Drawing.Size(64, 64);
@@ -2026,7 +2028,7 @@ namespace Twol
             this.btnAutoYouTurn.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnAutoYouTurn.Image = global::Twol.Properties.Resources.YouTurnNo;
             this.btnAutoYouTurn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnAutoYouTurn.Location = new System.Drawing.Point(3, 443);
+            this.btnAutoYouTurn.Location = new System.Drawing.Point(3, 513);
             this.btnAutoYouTurn.Name = "btnAutoYouTurn";
             this.btnAutoYouTurn.Size = new System.Drawing.Size(64, 64);
             this.btnAutoYouTurn.TabIndex = 132;
@@ -2048,7 +2050,7 @@ namespace Twol
             this.btnSectionMasterAuto.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSectionMasterAuto.Image = global::Twol.Properties.Resources.SectionMasterOff;
             this.btnSectionMasterAuto.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSectionMasterAuto.Location = new System.Drawing.Point(3, 376);
+            this.btnSectionMasterAuto.Location = new System.Drawing.Point(3, 446);
             this.btnSectionMasterAuto.Margin = new System.Windows.Forms.Padding(0);
             this.btnSectionMasterAuto.Name = "btnSectionMasterAuto";
             this.btnSectionMasterAuto.Size = new System.Drawing.Size(64, 64);
@@ -2072,7 +2074,7 @@ namespace Twol
             this.btnSectionMasterManual.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSectionMasterManual.Image = global::Twol.Properties.Resources.ManualOff;
             this.btnSectionMasterManual.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSectionMasterManual.Location = new System.Drawing.Point(3, 309);
+            this.btnSectionMasterManual.Location = new System.Drawing.Point(3, 379);
             this.btnSectionMasterManual.Name = "btnSectionMasterManual";
             this.btnSectionMasterManual.Size = new System.Drawing.Size(64, 64);
             this.btnSectionMasterManual.TabIndex = 98;
@@ -3638,6 +3640,28 @@ namespace Twol
             this.nudToolOffset.TabIndex = 651;
             this.nudToolOffset.ValueChanged += new System.EventHandler(this.nudToolOffset_ValueChanged);
             // 
+            // btnAutoTrack
+            // 
+            this.btnAutoTrack.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnAutoTrack.BackColor = System.Drawing.Color.Transparent;
+            this.btnAutoTrack.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnAutoTrack.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
+            this.btnAutoTrack.FlatAppearance.BorderSize = 0;
+            this.btnAutoTrack.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.btnAutoTrack.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnAutoTrack.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnAutoTrack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAutoTrack.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAutoTrack.Image = global::Twol.Properties.Resources.AutoTrackOff;
+            this.btnAutoTrack.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnAutoTrack.Location = new System.Drawing.Point(3, 309);
+            this.btnAutoTrack.Name = "btnAutoTrack";
+            this.btnAutoTrack.Size = new System.Drawing.Size(64, 64);
+            this.btnAutoTrack.TabIndex = 544;
+            this.btnAutoTrack.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnAutoTrack.UseVisualStyleBackColor = false;
+            this.btnAutoTrack.Click += new System.EventHandler(this.btnAutoTrack_Click);
+            // 
             // FormGPS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -3913,6 +3937,7 @@ namespace Twol
         private System.Windows.Forms.Button btnInternetConnection;
         private System.Windows.Forms.NumericUpDown nudToolOffset;
         private System.Windows.Forms.Button btnToolLineRecord;
+        public System.Windows.Forms.Button btnAutoTrack;
     }
 }
 

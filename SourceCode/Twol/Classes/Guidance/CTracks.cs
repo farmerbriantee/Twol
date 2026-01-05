@@ -15,9 +15,9 @@ namespace Twol
         //pointers to mainform controls
         private readonly FormGPS mf;
 
-        public IReadOnlyList<CTrk> gArr => _gArr;
-
         private List<CTrk> _gArr = new List<CTrk>();
+
+        public IReadOnlyList<CTrk> gArr => _gArr;
 
         private CTrk _currTrk;
 
@@ -26,6 +26,9 @@ namespace Twol
         public double howManyPathsAway, lastHowManyPathsAway;
 
         public bool isSmoothWindowOpen;
+
+        public bool isAutoTrack;
+        public int autoTrack3SecTimer;
 
         public List<vec3> smooList = new List<vec3>();
 
@@ -155,6 +158,7 @@ namespace Twol
             }
             return tracksVisible;
         }
+
         public CTrk GetNextTrack(CTrk track, List<CTrk> gTemp, bool next = true, bool invisible = false)
         {
             int index = gTemp.FindIndex(x => x == track);
