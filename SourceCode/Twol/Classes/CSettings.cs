@@ -95,7 +95,7 @@
         public double passiveIntegralGain = 0.005;
 
         public byte manualSteerPWM = 125;
-        public int manaulSteerSeconds = 2;
+        public int manualSteerSeconds = 2;
 
         public CToolSteerSettings(CToolSteerSettings _setting)
         {
@@ -126,7 +126,7 @@
             passiveIntegralGain = _setting.passiveIntegralGain;
 
             manualSteerPWM = _setting.manualSteerPWM;
-            manaulSteerSeconds = _setting.manaulSteerSeconds;
+            manualSteerSeconds = _setting.manualSteerSeconds;
         }
     }
 }

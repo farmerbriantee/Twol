@@ -276,6 +276,8 @@ namespace Twol
                     UpdateNozzleMainPanel();
                 }
 
+                if (gydTool.manualSteerTimer > 0) gydTool.manualSteerTimer--;
+
                 UpdateNTRIP();
             }
 

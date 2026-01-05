@@ -83,12 +83,14 @@ namespace Twol
 
         private void btnToolRight_Click(object sender, EventArgs e)
         {
-
+            mf.gydTool.manualSteerTimer += Settings.Tool.setToolSteer.manualSteerSeconds;
+            mf.gydTool.isManualSteerRight = true;
         }
 
         private void btnToolLeft_Click(object sender, EventArgs e)
         {
-
+            mf.gydTool.manualSteerTimer += Settings.Tool.setToolSteer.manualSteerSeconds;
+            mf.gydTool.isManualSteerRight = false;
         }
     }
 }

@@ -355,8 +355,8 @@ namespace Twol
         public static int xteVehLo = 8;
         public static int xteVehHi = 9;
         public static int speed10 = 10;
-        public static int headLo = 11;
-        public static int headHi = 12;
+        public static int manualLo = 11;
+        public static int manualHi = 12;
     }
 
     //ToolSteer Settings

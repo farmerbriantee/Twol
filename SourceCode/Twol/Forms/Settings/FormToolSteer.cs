@@ -29,7 +29,7 @@ namespace Twol
             label54.Text = gStr.Get(gs.gsOnDelay);
         }
 
-        private void FormSteer_Load(object sender, EventArgs e)
+        private void FormToolSteer_Load(object sender, EventArgs e)
         {
             Location = Settings.User.setWindow_steerSettingsLocation;
             //WAS Zero, CPD
@@ -82,9 +82,15 @@ namespace Twol
             cboxIsPassiveSteering.Checked = Settings.Tool.setToolSteer.isPassiveSteering;
             cboxIsFollowPivot.Checked = Settings.Tool.setToolSteer.isFollowPivot;
             cboxIsRecordToolLine.Checked = Settings.Tool.setToolSteer.isRecordToolLine;
+
+            //active Tool
+            hsbarManualPWM_Percent.Value = (int)(Settings.Tool.setToolSteer.manualSteerPWM * 0.4);
+            hsbarManualSecondsOn.Value = Settings.Tool.setToolSteer.manualSteerSeconds;
+            lblManualPWM_Percent.Text = hsbarManualPWM_Percent.Value.ToString();
+            lblManualSecondsOn.Text = hsbarManualSecondsOn.Value.ToString();
         }
 
-        private void FormSteer_FormClosing(object sender, FormClosingEventArgs e)
+        private void FormToolSteer_FormClosing(object sender, FormClosingEventArgs e)
         {
             //settings
             Settings.Tool.setToolSteer.gainP = (byte)hsbarPGain_Tool.Value;
@@ -353,6 +359,18 @@ namespace Twol
         {
             toolSend2 = true;
             toolCounterConfig = 0;
+        }
+
+        private void hsbarManualPWM_Percent_Scroll(object sender, ScrollEventArgs e)
+        {
+            Settings.Tool.setToolSteer.manualSteerPWM = (byte)((double)(hsbarManualPWM_Percent.Value) *2.5);
+            lblManualPWM_Percent.Text = hsbarManualPWM_Percent.Value.ToString();
+        }
+
+        private void hsbarManualSecondsOn_Scroll(object sender, ScrollEventArgs e)
+        {
+            Settings.Tool.setToolSteer.manualSteerSeconds = (int)hsbarManualSecondsOn.Value;
+            lblManualSecondsOn.Text = hsbarManualSecondsOn.Value.ToString();
         }
 
         #endregion

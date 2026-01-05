@@ -462,9 +462,13 @@ namespace Twol
                     PGN_233.pgn[PGN_233.xteVehHi] = unchecked((byte)(distX1000 >> 8));
                     PGN_233.pgn[PGN_233.xteVehLo] = unchecked((byte)(distX1000));
 
-                    distX1000 = (Int16)(glm.toDegrees(gpsHeading) * 10);
-                    PGN_233.pgn[PGN_233.headHi] = unchecked((byte)(distX1000 >> 8));
-                    PGN_233.pgn[PGN_233.headLo] = unchecked((byte)(distX1000));
+                    if (gydTool.manualSteerTimer > 0)
+                    {
+                        distX1000 = (Int16)(gydTool.isManualSteerRight ? Settings.Tool.setToolSteer.manualSteerPWM : -Settings.Tool.setToolSteer.manualSteerPWM);
+                    }
+
+                    PGN_233.pgn[PGN_233.manualHi] = unchecked((byte)(distX1000 >> 8));
+                    PGN_233.pgn[PGN_233.manualLo] = unchecked((byte)(distX1000));
 
                     if (!vehicle.isInFreeDriveMode)
                     {

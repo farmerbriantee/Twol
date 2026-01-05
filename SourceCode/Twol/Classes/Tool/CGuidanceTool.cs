@@ -24,6 +24,10 @@ namespace Twol
         // Should we find the global nearest curve point (instead of local) on the next search.
         public bool isFindGlobalNearestTrackPoint = true;
 
+        //for direction steering of tool manually
+        public int manualSteerTimer = 0;
+        public bool isManualSteerRight = false;
+
         public CGuidanceTool(FormGPS _f)
         {
             //constructor
