@@ -1,6 +1,6 @@
 ﻿namespace Twol
 {
-    partial class FormToolPathRec
+    partial class FormToolControl
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.bthOK = new System.Windows.Forms.Button();
-            this.btnRecStartStop = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.btnOuterInner = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -58,25 +57,6 @@
             this.bthOK.UseVisualStyleBackColor = false;
             this.bthOK.Click += new System.EventHandler(this.bntOk_Click);
             // 
-            // btnRecStartStop
-            // 
-            this.btnRecStartStop.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnRecStartStop.BackColor = System.Drawing.Color.Transparent;
-            this.btnRecStartStop.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlText;
-            this.btnRecStartStop.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.btnRecStartStop.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnRecStartStop.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnRecStartStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRecStartStop.Font = new System.Drawing.Font("Tahoma", 14.25F);
-            this.btnRecStartStop.Image = global::Twol.Properties.Resources.BoundaryRecord;
-            this.btnRecStartStop.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnRecStartStop.Location = new System.Drawing.Point(3, 50);
-            this.btnRecStartStop.Name = "btnRecStartStop";
-            this.btnRecStartStop.Size = new System.Drawing.Size(53, 61);
-            this.btnRecStartStop.TabIndex = 534;
-            this.btnRecStartStop.UseVisualStyleBackColor = false;
-            this.btnRecStartStop.Click += new System.EventHandler(this.btnRecStartStop_Click);
-            // 
             // timer1
             // 
             this.timer1.Enabled = true;
@@ -95,7 +75,7 @@
             this.btnOuterInner.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnOuterInner.Image = global::Twol.Properties.Resources.TramOuter;
             this.btnOuterInner.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnOuterInner.Location = new System.Drawing.Point(3, 117);
+            this.btnOuterInner.Location = new System.Drawing.Point(3, 50);
             this.btnOuterInner.Name = "btnOuterInner";
             this.btnOuterInner.Size = new System.Drawing.Size(53, 61);
             this.btnOuterInner.TabIndex = 538;
@@ -108,13 +88,12 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.flowLayoutPanel1.Controls.Add(this.bthOK);
-            this.flowLayoutPanel1.Controls.Add(this.btnRecStartStop);
             this.flowLayoutPanel1.Controls.Add(this.btnOuterInner);
             this.flowLayoutPanel1.Controls.Add(this.btnToolRight);
             this.flowLayoutPanel1.Controls.Add(this.btnToolLeft);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(1, 17);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(57, 316);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(60, 260);
             this.flowLayoutPanel1.TabIndex = 542;
             // 
             // btnToolRight
@@ -129,7 +108,7 @@
             this.btnToolRight.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnToolRight.Image = global::Twol.Properties.Resources.ArrowGrnRight;
             this.btnToolRight.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnToolRight.Location = new System.Drawing.Point(3, 184);
+            this.btnToolRight.Location = new System.Drawing.Point(3, 117);
             this.btnToolRight.Name = "btnToolRight";
             this.btnToolRight.Size = new System.Drawing.Size(53, 61);
             this.btnToolRight.TabIndex = 542;
@@ -147,24 +126,24 @@
             this.btnToolLeft.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnToolLeft.Image = global::Twol.Properties.Resources.ArrowGrnLeft;
             this.btnToolLeft.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnToolLeft.Location = new System.Drawing.Point(3, 251);
+            this.btnToolLeft.Location = new System.Drawing.Point(3, 184);
             this.btnToolLeft.Name = "btnToolLeft";
             this.btnToolLeft.Size = new System.Drawing.Size(53, 61);
             this.btnToolLeft.TabIndex = 543;
             this.btnToolLeft.UseVisualStyleBackColor = false;
             // 
-            // FormToolPathRec
+            // FormToolControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.ClientSize = new System.Drawing.Size(60, 345);
+            this.ClientSize = new System.Drawing.Size(60, 289);
             this.ControlBox = false;
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "FormToolPathRec";
+            this.Name = "FormToolControl";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormToolPathRec_FormClosing);
@@ -177,7 +156,6 @@
 
         #endregion
         private System.Windows.Forms.Button bthOK;
-        private System.Windows.Forms.Button btnRecStartStop;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button btnOuterInner;
         private System.Windows.Forms.Button btnExportLines;

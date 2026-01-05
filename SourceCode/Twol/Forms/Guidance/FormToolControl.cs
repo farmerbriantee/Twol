@@ -6,7 +6,7 @@ using Twol.Classes;
 
 namespace Twol
 {
-    public partial class FormToolPathRec : Form
+    public partial class FormToolControl : Form
     {
         private readonly FormGPS mf = null;
 
@@ -28,7 +28,7 @@ namespace Twol
             }
         }
 
-        public FormToolPathRec(Form callingForm)
+        public FormToolControl(Form callingForm)
         {
             //get copy of the calling main form
             mf = callingForm as FormGPS;

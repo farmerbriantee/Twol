@@ -101,8 +101,10 @@
             this.hsbarPassiveCurvature = new System.Windows.Forms.HScrollBar();
             this.label6 = new System.Windows.Forms.Label();
             this.tabActive = new System.Windows.Forms.TabPage();
+            this.label8 = new System.Windows.Forms.Label();
             this.cboxIsSteerNotSlide_Tool = new System.Windows.Forms.CheckBox();
             this.label74 = new System.Windows.Forms.Label();
+            this.btnSaveRecordedTracks = new System.Windows.Forms.Button();
             this.tabSetup = new System.Windows.Forms.TabPage();
             this.nudAntennaHeight_Tool = new Twol.NudlessNumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
@@ -1018,14 +1020,27 @@
             // 
             // tabActive
             // 
+            this.tabActive.Controls.Add(this.label8);
             this.tabActive.Controls.Add(this.cboxIsSteerNotSlide_Tool);
             this.tabActive.Controls.Add(this.label74);
+            this.tabActive.Controls.Add(this.btnSaveRecordedTracks);
             this.tabActive.Location = new System.Drawing.Point(4, 58);
             this.tabActive.Name = "tabActive";
             this.tabActive.Size = new System.Drawing.Size(664, 440);
             this.tabActive.TabIndex = 7;
             this.tabActive.Text = "Active";
             this.tabActive.UseVisualStyleBackColor = true;
+            // 
+            // label8
+            // 
+            this.label8.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.Black;
+            this.label8.Location = new System.Drawing.Point(82, 250);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(158, 41);
+            this.label8.TabIndex = 580;
+            this.label8.Text = "Transfer Recorded Tracks";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // cboxIsSteerNotSlide_Tool
             // 
@@ -1059,6 +1074,25 @@
             this.label74.TabIndex = 579;
             this.label74.Text = "Steering\r\nNot Sliding";
             this.label74.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // btnSaveRecordedTracks
+            // 
+            this.btnSaveRecordedTracks.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnSaveRecordedTracks.BackColor = System.Drawing.Color.Transparent;
+            this.btnSaveRecordedTracks.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlText;
+            this.btnSaveRecordedTracks.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.btnSaveRecordedTracks.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnSaveRecordedTracks.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnSaveRecordedTracks.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSaveRecordedTracks.Font = new System.Drawing.Font("Tahoma", 14.25F);
+            this.btnSaveRecordedTracks.Image = global::Twol.Properties.Resources.FileSave;
+            this.btnSaveRecordedTracks.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnSaveRecordedTracks.Location = new System.Drawing.Point(101, 294);
+            this.btnSaveRecordedTracks.Name = "btnSaveRecordedTracks";
+            this.btnSaveRecordedTracks.Size = new System.Drawing.Size(122, 61);
+            this.btnSaveRecordedTracks.TabIndex = 541;
+            this.btnSaveRecordedTracks.UseVisualStyleBackColor = false;
+            this.btnSaveRecordedTracks.Click += new System.EventHandler(this.btnSaveRecordedTracks_Click);
             // 
             // tabSetup
             // 
@@ -1315,5 +1349,7 @@
         private System.Windows.Forms.TabPage tabActive;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.CheckBox cboxIsRecordToolLine;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button btnSaveRecordedTracks;
     }
 }

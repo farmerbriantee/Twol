@@ -472,6 +472,7 @@ namespace Twol
 
                 flp1.Controls[6].Visible = Settings.Tool.setToolSteer.isRecordToolLine;
 
+                flp1.Controls[7].Visible = (!Settings.Tool.setToolSteer.isRecordToolLine && (Settings.Tool.setToolSteer.isFollowCurrent || Settings.Tool.setToolSteer.isFollowPivot));
 
                 for (int i = 0; i < flp1.Controls.Count; i++)
                 {
@@ -482,7 +483,6 @@ namespace Twol
                 flp1.Top = this.Height - 120 - (btnCount * 75);
                 flp1.Left = this.Width - 120 - flp1.Width;
                 trackMethodPanelCounter = 4;
-
             }
 
             PanelUpdateRightAndBottom();
@@ -629,6 +629,27 @@ namespace Twol
 
         #region Track Flyout
 
+        private void btnToolControl_Click(object sender, EventArgs e)
+        {
+            Form fcc = Application.OpenForms["FormToolControl"];
+
+            if (fcc != null)
+            {
+                fcc.Focus();
+                return;
+            }
+
+            Form form = new FormToolControl(this);
+            form.Show(this);
+
+            if (flp1.Visible)
+            {
+                flp1.Visible = false;
+            }
+
+            this.Activate();
+        }
+
         private void btnToolLineRecord_Click(object sender, EventArgs e)
         {
             Form fcc = Application.OpenForms["FormToolPathRec"];
@@ -636,7 +657,6 @@ namespace Twol
             if (fcc != null)
             {
                 fcc.Focus();
-                TimedMessageBox(2000, "Nudge Window Open", "Close Nudge Window");
                 return;
             }
 

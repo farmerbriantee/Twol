@@ -364,6 +364,25 @@ namespace Twol
             toolCounterConfig = 0;
         }
 
+        private void btnSaveRecordedTracks_Click(object sender, EventArgs e)
+        {
+            DialogResult result2 = MessageBox.Show(gStr.Get(gs.gsAreYouSure), "Transfer to Tracks?", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
+            if (result2 == DialogResult.Yes)
+            {
+                //save any track changes first
+                mf.FileSaveTracks();
+
+                //add the tool tracks to the tracks arr
+                mf.FileLoadTracksFromToolTracksRecorded();
+
+                //save the tracks file after adding the tool tracks
+                mf.FileSaveTracks();
+            }
+
+            mf.Activate();
+        }
+
         private void cboxInvertSteer_Tool_Click(object sender, EventArgs e)
         {
             toolSend2 = true;

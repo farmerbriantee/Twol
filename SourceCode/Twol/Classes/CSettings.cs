@@ -94,6 +94,9 @@
         public double curvatureGain = 5.0;
         public double passiveIntegralGain = 0.005;
 
+        public byte manualSteerPWM = 125;
+        public int manaulSteerSeconds = 2;
+
         public CToolSteerSettings(CToolSteerSettings _setting)
         {
             isGPSToolActive = _setting.isGPSToolActive;
@@ -121,6 +124,9 @@
             antennaOffset = _setting.antennaOffset;
             curvatureGain = _setting.curvatureGain;
             passiveIntegralGain = _setting.passiveIntegralGain;
+
+            manualSteerPWM = _setting.manualSteerPWM;
+            manaulSteerSeconds = _setting.manaulSteerSeconds;
         }
     }
 }

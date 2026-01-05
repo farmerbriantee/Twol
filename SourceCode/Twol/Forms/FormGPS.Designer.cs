@@ -156,6 +156,7 @@ namespace Twol
             this.btnAutoYouTurn = new System.Windows.Forms.Button();
             this.btnSectionMasterAuto = new System.Windows.Forms.Button();
             this.btnSectionMasterManual = new System.Windows.Forms.Button();
+            this.btnAutoTrack = new System.Windows.Forms.Button();
             this.btnCycleLinesBk = new System.Windows.Forms.Button();
             this.btnCycleLines = new System.Windows.Forms.Button();
             this.btnContour = new System.Windows.Forms.Button();
@@ -239,7 +240,7 @@ namespace Twol
             this.btnFieldStats = new System.Windows.Forms.Button();
             this.button15 = new System.Windows.Forms.Button();
             this.nudToolOffset = new System.Windows.Forms.NumericUpDown();
-            this.btnAutoTrack = new System.Windows.Forms.Button();
+            this.btnToolControl = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStripFlag.SuspendLayout();
             this.statusStripLeft.SuspendLayout();
@@ -1543,10 +1544,11 @@ namespace Twol
             this.flp1.Controls.Add(this.btnTracksOff);
             this.flp1.Controls.Add(this.btnRefNudge);
             this.flp1.Controls.Add(this.btnToolLineRecord);
+            this.flp1.Controls.Add(this.btnToolControl);
             this.flp1.FlowDirection = System.Windows.Forms.FlowDirection.BottomUp;
             this.flp1.Location = new System.Drawing.Point(983, 157);
             this.flp1.Name = "flp1";
-            this.flp1.Size = new System.Drawing.Size(86, 571);
+            this.flp1.Size = new System.Drawing.Size(86, 654);
             this.flp1.TabIndex = 539;
             this.flp1.Visible = false;
             // 
@@ -1563,7 +1565,7 @@ namespace Twol
             this.btnNudge.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNudge.Image = global::Twol.Properties.Resources.ABSnapNudgeMenu;
             this.btnNudge.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnNudge.Location = new System.Drawing.Point(3, 496);
+            this.btnNudge.Location = new System.Drawing.Point(3, 579);
             this.btnNudge.Name = "btnNudge";
             this.btnNudge.Size = new System.Drawing.Size(80, 72);
             this.btnNudge.TabIndex = 489;
@@ -1585,7 +1587,7 @@ namespace Twol
             this.btnABDraw.Font = new System.Drawing.Font("Tahoma", 12F);
             this.btnABDraw.Image = global::Twol.Properties.Resources.ABDraw;
             this.btnABDraw.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnABDraw.Location = new System.Drawing.Point(3, 418);
+            this.btnABDraw.Location = new System.Drawing.Point(3, 501);
             this.btnABDraw.Name = "btnABDraw";
             this.btnABDraw.Size = new System.Drawing.Size(80, 72);
             this.btnABDraw.TabIndex = 250;
@@ -1608,7 +1610,7 @@ namespace Twol
             this.btnPlusAB.Font = new System.Drawing.Font("Tahoma", 12F);
             this.btnPlusAB.Image = global::Twol.Properties.Resources.AddNew;
             this.btnPlusAB.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnPlusAB.Location = new System.Drawing.Point(3, 335);
+            this.btnPlusAB.Location = new System.Drawing.Point(3, 418);
             this.btnPlusAB.Name = "btnPlusAB";
             this.btnPlusAB.Size = new System.Drawing.Size(80, 77);
             this.btnPlusAB.TabIndex = 545;
@@ -1630,7 +1632,7 @@ namespace Twol
             this.btnBuildTracks.Font = new System.Drawing.Font("Tahoma", 12F);
             this.btnBuildTracks.Image = global::Twol.Properties.Resources.ABTracks;
             this.btnBuildTracks.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnBuildTracks.Location = new System.Drawing.Point(3, 252);
+            this.btnBuildTracks.Location = new System.Drawing.Point(3, 335);
             this.btnBuildTracks.Name = "btnBuildTracks";
             this.btnBuildTracks.Size = new System.Drawing.Size(80, 77);
             this.btnBuildTracks.TabIndex = 539;
@@ -1651,7 +1653,7 @@ namespace Twol
             this.btnTracksOff.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTracksOff.Image = global::Twol.Properties.Resources.SwitchOff;
             this.btnTracksOff.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnTracksOff.Location = new System.Drawing.Point(3, 169);
+            this.btnTracksOff.Location = new System.Drawing.Point(3, 252);
             this.btnTracksOff.Name = "btnTracksOff";
             this.btnTracksOff.Size = new System.Drawing.Size(80, 77);
             this.btnTracksOff.TabIndex = 539;
@@ -1672,7 +1674,7 @@ namespace Twol
             this.btnRefNudge.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRefNudge.Image = global::Twol.Properties.Resources.ABSnapNudgeMenuRef;
             this.btnRefNudge.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnRefNudge.Location = new System.Drawing.Point(3, 86);
+            this.btnRefNudge.Location = new System.Drawing.Point(3, 169);
             this.btnRefNudge.Name = "btnRefNudge";
             this.btnRefNudge.Size = new System.Drawing.Size(80, 77);
             this.btnRefNudge.TabIndex = 538;
@@ -1694,7 +1696,7 @@ namespace Twol
             this.btnToolLineRecord.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnToolLineRecord.Image = global::Twol.Properties.Resources.ToolTrackRecord;
             this.btnToolLineRecord.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnToolLineRecord.Location = new System.Drawing.Point(3, 3);
+            this.btnToolLineRecord.Location = new System.Drawing.Point(3, 86);
             this.btnToolLineRecord.Name = "btnToolLineRecord";
             this.btnToolLineRecord.Size = new System.Drawing.Size(80, 77);
             this.btnToolLineRecord.TabIndex = 546;
@@ -2082,6 +2084,28 @@ namespace Twol
             this.btnSectionMasterManual.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSectionMasterManual.UseVisualStyleBackColor = false;
             this.btnSectionMasterManual.Click += new System.EventHandler(this.btnSectionMasterManual_Click);
+            // 
+            // btnAutoTrack
+            // 
+            this.btnAutoTrack.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnAutoTrack.BackColor = System.Drawing.Color.Transparent;
+            this.btnAutoTrack.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnAutoTrack.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
+            this.btnAutoTrack.FlatAppearance.BorderSize = 0;
+            this.btnAutoTrack.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.btnAutoTrack.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnAutoTrack.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnAutoTrack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAutoTrack.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAutoTrack.Image = global::Twol.Properties.Resources.AutoTrackOff;
+            this.btnAutoTrack.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnAutoTrack.Location = new System.Drawing.Point(3, 309);
+            this.btnAutoTrack.Name = "btnAutoTrack";
+            this.btnAutoTrack.Size = new System.Drawing.Size(64, 64);
+            this.btnAutoTrack.TabIndex = 544;
+            this.btnAutoTrack.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnAutoTrack.UseVisualStyleBackColor = false;
+            this.btnAutoTrack.Click += new System.EventHandler(this.btnAutoTrack_Click);
             // 
             // btnCycleLinesBk
             // 
@@ -3640,27 +3664,26 @@ namespace Twol
             this.nudToolOffset.TabIndex = 651;
             this.nudToolOffset.ValueChanged += new System.EventHandler(this.nudToolOffset_ValueChanged);
             // 
-            // btnAutoTrack
+            // btnToolControl
             // 
-            this.btnAutoTrack.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnAutoTrack.BackColor = System.Drawing.Color.Transparent;
-            this.btnAutoTrack.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnAutoTrack.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
-            this.btnAutoTrack.FlatAppearance.BorderSize = 0;
-            this.btnAutoTrack.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.btnAutoTrack.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnAutoTrack.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnAutoTrack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAutoTrack.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAutoTrack.Image = global::Twol.Properties.Resources.AutoTrackOff;
-            this.btnAutoTrack.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnAutoTrack.Location = new System.Drawing.Point(3, 309);
-            this.btnAutoTrack.Name = "btnAutoTrack";
-            this.btnAutoTrack.Size = new System.Drawing.Size(64, 64);
-            this.btnAutoTrack.TabIndex = 544;
-            this.btnAutoTrack.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnAutoTrack.UseVisualStyleBackColor = false;
-            this.btnAutoTrack.Click += new System.EventHandler(this.btnAutoTrack_Click);
+            this.btnToolControl.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnToolControl.BackColor = System.Drawing.Color.Transparent;
+            this.btnToolControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnToolControl.FlatAppearance.BorderSize = 0;
+            this.btnToolControl.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.btnToolControl.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnToolControl.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnToolControl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnToolControl.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnToolControl.Image = global::Twol.Properties.Resources.ToolSteer;
+            this.btnToolControl.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnToolControl.Location = new System.Drawing.Point(3, 3);
+            this.btnToolControl.Name = "btnToolControl";
+            this.btnToolControl.Size = new System.Drawing.Size(80, 77);
+            this.btnToolControl.TabIndex = 547;
+            this.btnToolControl.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnToolControl.UseVisualStyleBackColor = false;
+            this.btnToolControl.Click += new System.EventHandler(this.btnToolControl_Click);
             // 
             // FormGPS
             // 
@@ -3938,6 +3961,7 @@ namespace Twol
         private System.Windows.Forms.NumericUpDown nudToolOffset;
         private System.Windows.Forms.Button btnToolLineRecord;
         public System.Windows.Forms.Button btnAutoTrack;
+        private System.Windows.Forms.Button btnToolControl;
     }
 }
 

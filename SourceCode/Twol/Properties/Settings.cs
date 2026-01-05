@@ -88,6 +88,7 @@ namespace Twol
             public Point setWindow_buildTracksLocation = new Point(40, 40);
             public Point setWindow_formNudgeLocation = new Point(200, 200);
             public Point setWindow_recordToolTracksLocation = new Point(40, 40);
+            public Point setWindow_formToolControlLocation = new Point(40, 40);
             public Point setWindow_gridLocation = new Point(20, 20);
             public Point setWindow_JobMenulocation = new Point(200, 200);
             public Point setWindow_Location = new Point(30, 30);
@@ -95,12 +96,12 @@ namespace Twol
             public Point setWindow_steerSettingsLocation = new Point(40, 40);
             public Point setWindow_FieldMenulocation = new Point(200, 200);
 
-
             public Size setWindow_abDrawSize = new Size(1022, 742);
             public Size setWindow_BingMapSize = new Size(965, 700);
             public Size setWindow_FieldMenuSize = new Size(640, 530);
             public Size setWindow_formNudgeSize = new Size(200, 400);
-            public Size setWindow_formRecordToolTracksSize = new Size(150, 365);
+            public Size setWindow_formRecordToolTracksSize = new Size(80, 365);
+            public Size setWindow_formToolControlSize = new Size(80, 365);
             public Size setWindow_gridSize = new Size(400, 400);
             public Size setWindow_HeadAcheSize = new Size(1022, 742);
             public Size setWindow_HeadlineSize = new Size(1022, 742);
@@ -520,7 +521,6 @@ namespace Twol
             public string setPort_baudRateRadio = "9600";
             public string setPort_portNameRadio = "***";
             public string setPort_radioChannel = "439.000";
-
 
             public LoadResult Load()
             {
