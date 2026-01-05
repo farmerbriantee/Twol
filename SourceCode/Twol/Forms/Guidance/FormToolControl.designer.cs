@@ -113,6 +113,7 @@
             this.btnToolRight.Size = new System.Drawing.Size(53, 61);
             this.btnToolRight.TabIndex = 542;
             this.btnToolRight.UseVisualStyleBackColor = false;
+            this.btnToolRight.Click += new System.EventHandler(this.btnToolRight_Click);
             // 
             // btnToolLeft
             // 
@@ -131,6 +132,7 @@
             this.btnToolLeft.Size = new System.Drawing.Size(53, 61);
             this.btnToolLeft.TabIndex = 543;
             this.btnToolLeft.UseVisualStyleBackColor = false;
+            this.btnToolLeft.Click += new System.EventHandler(this.btnToolLeft_Click);
             // 
             // FormToolControl
             // 
@@ -146,9 +148,9 @@
             this.Name = "FormToolControl";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormToolPathRec_FormClosing);
-            this.Load += new System.EventHandler(this.FormToolPathRec_Load);
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FormToolPathRec_MouseDown);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormToolControl_FormClosing);
+            this.Load += new System.EventHandler(this.FormToolControl_Load);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FormToolControl_MouseDown);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 

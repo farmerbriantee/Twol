@@ -19,7 +19,7 @@ namespace Twol
         [DllImportAttribute("user32.dll")]
         public static extern bool ReleaseCapture();
 
-        private void FormToolPathRec_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void FormToolControl_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
@@ -34,23 +34,12 @@ namespace Twol
             mf = callingForm as FormGPS;
 
             InitializeComponent();
-
-            btnRecStartStop.BackColor = mf.gydTool.isGuidanceModeRecordNewTracks ? Color.LightGreen : Color.Transparent;
-
-            if (mf.gydTool.isboundaryLine)
-            {
-                btnOuterInner.Image = Properties.Resources.TramOuter;
-            }
-            else
-            {
-                btnOuterInner.Image = Properties.Resources.TramLines;
-            }
         }
 
-        private void FormToolPathRec_Load(object sender, EventArgs e)
+        private void FormToolControl_Load(object sender, EventArgs e)
         {
-            Location = Settings.User.setWindow_recordToolTracksLocation;
-            Size = Settings.User.setWindow_formRecordToolTracksSize;
+            Location = Settings.User.setWindow_formToolControlLocation;
+            Size = Settings.User.setWindow_formToolControlSize;
 
             if (!mf.IsOnScreen(Location, Size, 1))
             {
@@ -59,28 +48,13 @@ namespace Twol
             }
         }
 
-        private void FormToolPathRec_FormClosing(object sender, FormClosingEventArgs e)
+        private void FormToolControl_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Settings.User.setWindow_recordToolTracksLocation = Location;
-            Settings.User.setWindow_formRecordToolTracksSize = Size;
+            Settings.User.setWindow_formToolControlLocation = Location;
+            Settings.User.setWindow_formToolControlSize = Size;
 
             //save entire list
             mf.FileSaveTracks();
-        }
-
-        private void btnRecStartStop_Click(object sender, EventArgs e)
-        {
-            mf.gydTool.isGuidanceModeRecordNewTracks = !mf.gydTool.isGuidanceModeRecordNewTracks;
-
-            if (mf.gydTool.isGuidanceModeRecordNewTracks)
-            {
-                btnRecStartStop.BackColor = Color.LightGreen;
-            }
-            else
-            {
-                btnRecStartStop.BackColor = Color.Transparent;
-            }
-            mf.Activate();
         }
 
         private void bntOk_Click(object sender, EventArgs e)
@@ -90,22 +64,6 @@ namespace Twol
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (mf.gydTool.isRecordingToolLine)
-            {
-                if (btnRecStartStop.BackColor == Color.Green)
-                {
-                    btnRecStartStop.BackColor = Color.LightGreen;
-                }
-                else
-                {
-                    btnRecStartStop.BackColor = Color.Green;
-                }
-            }
-            else
-            {
-                if (mf.gydTool.isGuidanceModeRecordNewTracks) btnRecStartStop.BackColor = Color.LightGreen;
-                else btnRecStartStop.BackColor = Color.Transparent;
-            }
         }
 
         private void btnOuterInner_Click(object sender, EventArgs e)
@@ -121,6 +79,16 @@ namespace Twol
                 btnOuterInner.Image = Properties.Resources.TramLines;
             }
             mf.Activate();
+        }
+
+        private void btnToolRight_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnToolLeft_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
