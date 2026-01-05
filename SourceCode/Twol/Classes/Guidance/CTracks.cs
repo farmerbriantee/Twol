@@ -179,6 +179,64 @@ namespace Twol
                 currTrk = gArr.Take(index).Reverse().Concat(gArr.Skip(index + 1).Reverse()).FirstOrDefault(x => x.isVisible);
         }
 
+        public int FindClosestRefTrack(vec3 steer)
+        {
+            if (_gArr.Count == 0) return -1;
+
+            //only 1 track
+            if (_gArr.Count == 1) return 0;
+
+            int trak = -1;
+            int cntr = 0;
+
+            //Count visible
+            for (int i = 0; i < _gArr.Count; i++)
+            {
+                if (_gArr[i].isVisible)
+                {
+                    cntr++;
+                    trak = i;
+                }
+            }
+
+            //only 1 track visible of the group
+            if (cntr == 1) return trak;
+
+            //no visible tracks
+            if (cntr == 0) return -1;
+
+            double minDistA = double.MaxValue;
+            double dist;
+
+            //vec2 endPtA, endPtB;
+
+            for (int i = 0; i < _gArr.Count; i++)
+            {
+                //if (!isAlignedArr[i]) continue;
+                if (!gArr[i].isVisible) continue;
+
+
+                dist = glm.DistanceSquared(steer, mf.trk._gArr[i].ptA);
+
+                if (dist < minDistA)
+                {
+                    minDistA = dist;
+                    trak = i;
+                }
+
+                dist = glm.DistanceSquared(steer, mf.trk._gArr[i].ptB);
+
+                if (dist < minDistA)
+                {
+                    minDistA = dist;
+                    trak = i;
+                }
+            }
+
+            return trak;
+        }
+
+
         public async void GetDistanceFromRefTrack(CTrk track, vec3 pivot)
         {
             double widthMinusOverlap = Settings.Tool.toolWidth - Settings.Tool.overlap;

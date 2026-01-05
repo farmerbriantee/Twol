@@ -1,13 +1,14 @@
 ﻿//Please, if you use this, share the improvements
 
-using Twol.Classes;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
+using Twol.Classes;
 
 namespace Twol
 {
@@ -313,6 +314,21 @@ namespace Twol
             //preset the values
             guidanceVehicleXTE = double.NaN;
             guidanceToolXTE = double.NaN;
+
+            if (!ct.isContourBtnOn)
+            {
+                if (trk.isAutoTrack && !ct.isContourBtnOn && !isBtnAutoSteerOn && trk.autoTrack3SecTimer >= 2)
+                {
+                    trk.autoTrack3SecTimer = 0;
+                    //int lastIndex = trk.idx;
+                    int idx = trk.FindClosestRefTrack(steerAxlePos);
+                    //if (lastIndex != trk.idx)
+                    //{
+                    //    curve.isCurveValid = false;
+                    //    ABLine.isABValid = false;
+                    //}
+                }
+            }
 
             if (ct.isContourBtnOn)
             {
