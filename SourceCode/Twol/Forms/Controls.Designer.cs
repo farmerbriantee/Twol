@@ -1367,6 +1367,15 @@ namespace Twol
                 f.Close();
             }
 
+            f = null;
+            f = Application.OpenForms["FormToolManual"];
+
+            if (f != null)
+            {
+                f.Focus();
+                f.Close();
+            }
+
             Close();
 
         }
@@ -1898,6 +1907,23 @@ namespace Twol
             Settings.User.isSideGuideLines = !Settings.User.isSideGuideLines;
             if (Settings.User.isSideGuideLines) guidelinesToolStripMenuItem.Checked = true;
             else guidelinesToolStripMenuItem.Checked = false;            
+        }
+
+        private void manualToolSteerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //check if window already exists
+            Form fc = Application.OpenForms["FormToolManual"];
+
+            if (fc != null)
+            {
+                fc.Focus();
+                fc.Close();
+                return;
+            }
+
+            Form form = new FormToolManual(this);
+            form.Show(this);
+            this.Activate();
         }
 
         private void boundaryToolToolStripMenu_Click(object sender, EventArgs e)

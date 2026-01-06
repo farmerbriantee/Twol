@@ -26,7 +26,7 @@ namespace Twol
 
         //for direction steering of tool manually
         public int manualSteerTimer = 0;
-        public bool isManualSteerRight = false;
+        public bool isManualSteerRight = false, isZeroToolSteer = false;
 
         public CGuidanceTool(FormGPS _f)
         {
@@ -80,7 +80,7 @@ namespace Twol
             //make a new tool track
             var track = new CTrkTool(TrackMode.toolLineInner);
 
-            track.name = (mf.gydTool.isboundaryLine ? "Outer " : "Inner ") + mf.trkTool.tArr.Count.ToString("000"); 
+            track.name = (mf.gydTool.isboundaryLine ? "Outer " : "Inner ") + mf.trkTool.tArr.Count.ToString("000");
 
             mf.trkTool.SmoothAB(ref mf.trkTool.designPtsList, 6, false);
 

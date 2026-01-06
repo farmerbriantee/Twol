@@ -464,7 +464,15 @@ namespace Twol
 
                     if (gydTool.manualSteerTimer > 0)
                     {
+                        gydTool.isZeroToolSteer = false;
                         distX1000 = (Int16)(gydTool.isManualSteerRight ? Settings.Tool.setToolSteer.manualSteerPWM : -Settings.Tool.setToolSteer.manualSteerPWM);
+                    }
+
+                    if (gydTool.isZeroToolSteer) 
+                    {
+                            distX1000 = (Int16)(mc.actualToolAngleDegrees < 0 ? Settings.Tool.setToolSteer.manualSteerPWM : -Settings.Tool.setToolSteer.manualSteerPWM);
+
+                        if (Math.Abs(mc.actualToolAngleDegrees) < 2) gydTool.isZeroToolSteer = false;
                     }
 
                     PGN_233.pgn[PGN_233.manualHi] = unchecked((byte)(distX1000 >> 8));
