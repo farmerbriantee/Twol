@@ -224,7 +224,7 @@ namespace Twol
 
             sinH = Math.Sin(heading);
             cosH = Math.Cos(heading);
-            mf.trk.isHeadingSameWay = !mf.trk.isHeadingSameWay;
+            mf.trks.isHeadingSameWay = !mf.trks.isHeadingSameWay;
 
             //if (isBtnAutoSteerOn)
             {

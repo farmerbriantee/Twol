@@ -193,7 +193,7 @@ namespace Twol
                 }
 
                 mf.gyd.isFindGlobalNearestTrackPoint = true;
-                mf.trk.isHeadingSameWay = isSameWay;
+                mf.trks.isHeadingSameWay = isSameWay;
             }
         }
 

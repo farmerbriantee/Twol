@@ -88,7 +88,6 @@ namespace Twol
             this.layersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eventViewerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.guidelinesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.SmoothABtoolStripMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteContourPathsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelSim = new System.Windows.Forms.TableLayoutPanel();
             this.btnSimReverseDirection = new System.Windows.Forms.Button();
@@ -221,7 +220,6 @@ namespace Twol
             this.btnMachine = new System.Windows.Forms.Button();
             this.btnIMU = new System.Windows.Forms.Button();
             this.btnFieldStats = new System.Windows.Forms.Button();
-            this.button15 = new System.Windows.Forms.Button();
             this.nudToolOffset = new System.Windows.Forms.NumericUpDown();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStripFlag.SuspendLayout();
@@ -765,7 +763,6 @@ namespace Twol
             this.layersToolStripMenuItem,
             this.eventViewerToolStripMenuItem,
             this.guidelinesToolStripMenuItem,
-            this.SmoothABtoolStripMenu,
             this.deleteContourPathsToolStripMenuItem});
             this.toolStripDropDownButton4.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripDropDownButton4.Image = global::Twol.Properties.Resources.SpecialFunctions;
@@ -814,14 +811,6 @@ namespace Twol
             this.guidelinesToolStripMenuItem.Size = new System.Drawing.Size(450, 70);
             this.guidelinesToolStripMenuItem.Text = "Extra Guides";
             this.guidelinesToolStripMenuItem.Click += new System.EventHandler(this.guidelinesToolStripMenuItem_Click);
-            // 
-            // SmoothABtoolStripMenu
-            // 
-            this.SmoothABtoolStripMenu.Image = global::Twol.Properties.Resources.ABSmooth;
-            this.SmoothABtoolStripMenu.Name = "SmoothABtoolStripMenu";
-            this.SmoothABtoolStripMenu.Size = new System.Drawing.Size(450, 70);
-            this.SmoothABtoolStripMenu.Text = "Smooth AB Curve";
-            this.SmoothABtoolStripMenu.Click += new System.EventHandler(this.SmoothABtoolStripMenu_Click);
             // 
             // deleteContourPathsToolStripMenuItem
             // 
@@ -2278,7 +2267,7 @@ namespace Twol
             this.tlpNozzle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.95901F));
             this.tlpNozzle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.74393F));
             this.tlpNozzle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 14F));
-            this.tlpNozzle.Size = new System.Drawing.Size(210, 725);
+            this.tlpNozzle.Size = new System.Drawing.Size(210, 728);
             this.tlpNozzle.TabIndex = 545;
             this.tlpNozzle.Visible = false;
             // 
@@ -2290,7 +2279,7 @@ namespace Twol
             this.label10.Location = new System.Drawing.Point(198, 0);
             this.label10.Name = "label10";
             this.tlpNozzle.SetRowSpan(this.label10, 13);
-            this.label10.Size = new System.Drawing.Size(9, 725);
+            this.label10.Size = new System.Drawing.Size(9, 728);
             this.label10.TabIndex = 561;
             // 
             // lblTankArea
@@ -2298,7 +2287,7 @@ namespace Twol
             this.lblTankArea.BackColor = System.Drawing.Color.Transparent;
             this.lblTankArea.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTankArea.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(240)))), ((int)(((byte)(255)))));
-            this.lblTankArea.Location = new System.Drawing.Point(108, 223);
+            this.lblTankArea.Location = new System.Drawing.Point(108, 224);
             this.lblTankArea.Name = "lblTankArea";
             this.lblTankArea.Size = new System.Drawing.Size(76, 25);
             this.lblTankArea.TabIndex = 561;
@@ -2357,7 +2346,7 @@ namespace Twol
             this.btnSprayVolumeTotal.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSprayVolumeTotal.ForeColor = System.Drawing.Color.Aqua;
             this.btnSprayVolumeTotal.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSprayVolumeTotal.Location = new System.Drawing.Point(15, 139);
+            this.btnSprayVolumeTotal.Location = new System.Drawing.Point(15, 140);
             this.btnSprayVolumeTotal.Margin = new System.Windows.Forms.Padding(0);
             this.btnSprayVolumeTotal.Name = "btnSprayVolumeTotal";
             this.btnSprayVolumeTotal.Size = new System.Drawing.Size(180, 51);
@@ -2373,7 +2362,7 @@ namespace Twol
             this.tlpNozzle.SetColumnSpan(this.lbl_Volume, 2);
             this.lbl_Volume.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_Volume.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(240)))), ((int)(((byte)(255)))));
-            this.lbl_Volume.Location = new System.Drawing.Point(18, 190);
+            this.lbl_Volume.Location = new System.Drawing.Point(18, 191);
             this.lbl_Volume.Name = "lbl_Volume";
             this.lbl_Volume.Size = new System.Drawing.Size(158, 29);
             this.lbl_Volume.TabIndex = 551;
@@ -2393,7 +2382,7 @@ namespace Twol
             this.cboxSprayAutoManual.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboxSprayAutoManual.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxSprayAutoManual.ForeColor = System.Drawing.Color.White;
-            this.cboxSprayAutoManual.Location = new System.Drawing.Point(42, 554);
+            this.cboxSprayAutoManual.Location = new System.Drawing.Point(42, 557);
             this.cboxSprayAutoManual.Name = "cboxSprayAutoManual";
             this.cboxSprayAutoManual.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.cboxSprayAutoManual.Size = new System.Drawing.Size(126, 55);
@@ -2417,7 +2406,7 @@ namespace Twol
             this.cboxRate1Rate2Select.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboxRate1Rate2Select.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxRate1Rate2Select.ForeColor = System.Drawing.Color.White;
-            this.cboxRate1Rate2Select.Location = new System.Drawing.Point(15, 372);
+            this.cboxRate1Rate2Select.Location = new System.Drawing.Point(15, 374);
             this.cboxRate1Rate2Select.Margin = new System.Windows.Forms.Padding(0);
             this.cboxRate1Rate2Select.Name = "cboxRate1Rate2Select";
             this.cboxRate1Rate2Select.Size = new System.Drawing.Size(180, 49);
@@ -2441,7 +2430,7 @@ namespace Twol
             this.btnSprayRateUp.ForeColor = System.Drawing.Color.Black;
             this.btnSprayRateUp.Image = global::Twol.Properties.Resources.UpArrow64;
             this.btnSprayRateUp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSprayRateUp.Location = new System.Drawing.Point(119, 447);
+            this.btnSprayRateUp.Location = new System.Drawing.Point(119, 449);
             this.btnSprayRateUp.Margin = new System.Windows.Forms.Padding(0);
             this.btnSprayRateUp.Name = "btnSprayRateUp";
             this.btnSprayRateUp.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -2465,7 +2454,7 @@ namespace Twol
             this.btnSprayRateDn.ForeColor = System.Drawing.Color.Black;
             this.btnSprayRateDn.Image = global::Twol.Properties.Resources.DnArrow64;
             this.btnSprayRateDn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSprayRateDn.Location = new System.Drawing.Point(29, 447);
+            this.btnSprayRateDn.Location = new System.Drawing.Point(29, 449);
             this.btnSprayRateDn.Margin = new System.Windows.Forms.Padding(0);
             this.btnSprayRateDn.Name = "btnSprayRateDn";
             this.btnSprayRateDn.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -2490,7 +2479,7 @@ namespace Twol
             this.btnNozConfig.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNozConfig.ForeColor = System.Drawing.Color.Aqua;
             this.btnNozConfig.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnNozConfig.Location = new System.Drawing.Point(63, 642);
+            this.btnNozConfig.Location = new System.Drawing.Point(63, 646);
             this.btnNozConfig.Name = "btnNozConfig";
             this.btnNozConfig.Size = new System.Drawing.Size(84, 48);
             this.btnNozConfig.TabIndex = 553;
@@ -2547,7 +2536,7 @@ namespace Twol
             this.btnSprayGalPerAcre.Font = new System.Drawing.Font("Tahoma", 32F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSprayGalPerAcre.ForeColor = System.Drawing.Color.White;
             this.btnSprayGalPerAcre.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSprayGalPerAcre.Location = new System.Drawing.Point(15, 268);
+            this.btnSprayGalPerAcre.Location = new System.Drawing.Point(15, 269);
             this.btnSprayGalPerAcre.Margin = new System.Windows.Forms.Padding(0);
             this.btnSprayGalPerAcre.Name = "btnSprayGalPerAcre";
             this.btnSprayGalPerAcre.Size = new System.Drawing.Size(180, 63);
@@ -2561,7 +2550,7 @@ namespace Twol
             this.lblAreaPossible.BackColor = System.Drawing.Color.Transparent;
             this.lblAreaPossible.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAreaPossible.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(240)))), ((int)(((byte)(255)))));
-            this.lblAreaPossible.Location = new System.Drawing.Point(18, 223);
+            this.lblAreaPossible.Location = new System.Drawing.Point(18, 224);
             this.lblAreaPossible.Name = "lblAreaPossible";
             this.lblAreaPossible.Size = new System.Drawing.Size(76, 25);
             this.lblAreaPossible.TabIndex = 618;
@@ -2575,7 +2564,7 @@ namespace Twol
             this.tlpNozzle.SetColumnSpan(this.lblIsFlowing, 2);
             this.lblIsFlowing.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblIsFlowing.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblIsFlowing.Location = new System.Drawing.Point(18, 331);
+            this.lblIsFlowing.Location = new System.Drawing.Point(18, 332);
             this.lblIsFlowing.Name = "lblIsFlowing";
             this.lblIsFlowing.Size = new System.Drawing.Size(174, 15);
             this.lblIsFlowing.TabIndex = 617;
@@ -3278,26 +3267,6 @@ namespace Twol
             this.btnFieldStats.Visible = false;
             this.btnFieldStats.Click += new System.EventHandler(this.btnFieldStats_Click);
             // 
-            // button15
-            // 
-            this.button15.BackColor = System.Drawing.Color.DarkGray;
-            this.button15.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button15.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
-            this.button15.FlatAppearance.BorderSize = 0;
-            this.button15.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.button15.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.button15.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button15.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button15.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button15.ForeColor = System.Drawing.SystemColors.Control;
-            this.button15.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.button15.Location = new System.Drawing.Point(6, 843);
-            this.button15.Margin = new System.Windows.Forms.Padding(0);
-            this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(313, 14);
-            this.button15.TabIndex = 650;
-            this.button15.UseVisualStyleBackColor = false;
-            // 
             // nudToolOffset
             // 
             this.nudToolOffset.DecimalPlaces = 1;
@@ -3344,7 +3313,6 @@ namespace Twol
             this.Controls.Add(this.oglMain);
             this.Controls.Add(this.oglZoom);
             this.Controls.Add(this.lblCurrentField);
-            this.Controls.Add(this.button15);
             this.Controls.Add(this.lblGuidanceLine);
             this.Controls.Add(this.oglBack);
             this.Controls.Add(this.lblHardwareMessage);
@@ -3445,7 +3413,6 @@ namespace Twol
         public System.Windows.Forms.Button btn2D;
         public System.Windows.Forms.Button btn3D;
         private System.Windows.Forms.ToolStripMenuItem deleteContourPathsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem SmoothABtoolStripMenu;
         public System.Windows.Forms.Button btnAutoSteerConfig;
         public System.Windows.Forms.Button btnChangeMappingColor;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
@@ -3572,7 +3539,6 @@ namespace Twol
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ToolStripMenuItem externalModuleSimToolStripMenuItem;
-        public System.Windows.Forms.Button button15;
         public System.Windows.Forms.Label lblTankArea;
         public System.Windows.Forms.Label lblAreaPossible;
         private System.Windows.Forms.Label label10;

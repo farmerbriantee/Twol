@@ -99,7 +99,7 @@ namespace Twol
             bool isTurnRight = turnOffset > 0 ^ isTurnLeft;
 
 
-            CTrk track = mf.trk.currTrk;
+            CTrk track = mf.trks.currentRefTrack;
 
             bool loop = track.mode == TrackMode.bndCurve || track.mode == TrackMode.waterPivot;
 
@@ -116,19 +116,19 @@ namespace Twol
                 ytList.Clear();
 
                 bool Loop = true;
-                int Count = mf.trk.isHeadingSameWay ? 1 : -1;
+                int Count = mf.trks.isHeadingSameWay ? 1 : -1;
                 exitPoint = new CClose();
 
                 vec3 Start = new vec3(mf.gyd.rEastTrk, mf.gyd.rNorthTrk), End;
 
-                for (int i = mf.trk.isHeadingSameWay ? mf.gyd.B : mf.gyd.A; (mf.trk.isHeadingSameWay ? i < mf.gyd.B : i > mf.gyd.A) || Loop; i += Count)
+                for (int i = mf.trks.isHeadingSameWay ? mf.gyd.B : mf.gyd.A; (mf.trks.isHeadingSameWay ? i < mf.gyd.B : i > mf.gyd.A) || Loop; i += Count)
                 {
-                    if ((mf.trk.isHeadingSameWay && i >= mf.trk.currentGuidanceTrack.Count) || (!mf.trk.isHeadingSameWay && i < 0))
+                    if ((mf.trks.isHeadingSameWay && i >= mf.trks.currentGuidanceTrack.Count) || (!mf.trks.isHeadingSameWay && i < 0))
                     {
                         if (loop && Loop)
                         {
                             if (i < 0)
-                                i = mf.trk.currentGuidanceTrack.Count;
+                                i = mf.trks.currentGuidanceTrack.Count;
                             else
                                 i = -1;
                             Loop = false;
@@ -139,7 +139,7 @@ namespace Twol
 
                     double time = 2;
 
-                    End = new vec3(mf.trk.currentGuidanceTrack[i].easting, mf.trk.currentGuidanceTrack[i].northing);
+                    End = new vec3(mf.trks.currentGuidanceTrack[i].easting, mf.trks.currentGuidanceTrack[i].northing);
                     for (int j = 0; j < mf.bnd.bndList.Count; j++)
                     {
                         if (mf.bnd.bndList[j].isDriveThru) continue;
@@ -152,7 +152,7 @@ namespace Twol
                                 if (timeA < time)
                                 {
                                     time = timeA;
-                                    exitPoint = new CClose(_Crossing, j, i - (mf.trk.isHeadingSameWay ? Count : 0), k);
+                                    exitPoint = new CClose(_Crossing, j, i - (mf.trks.isHeadingSameWay ? Count : 0), k);
                                 }
                             }
                             k = l;
@@ -186,7 +186,7 @@ namespace Twol
             {
                 double step = youTurnPhase == 20 ? 5.0 : youTurnPhase == 30 ? 1.0 : youTurnPhase == 40 ? 0.2 : 0.04;
 
-                movePoint = MoveTurnLine(mf.trk.currentGuidanceTrack, movePoint, step, mf.trk.isHeadingSameWay ^ youTurnPhase % 20 == 0, loop);
+                movePoint = MoveTurnLine(mf.trks.currentGuidanceTrack, movePoint, step, mf.trks.isHeadingSameWay ^ youTurnPhase % 20 == 0, loop);
 
                 // creates half a circle starting at the crossing point
                 double extraSagitta = 0;
@@ -194,9 +194,9 @@ namespace Twol
                     extraSagitta = (youTurnRadius * 2 - Math.Abs(turnOffset)) * 0.5;
 
                 int A = movePoint.curveIndex;
-                double head = Math.Atan2(mf.trk.currentGuidanceTrack[A + 1].easting - mf.trk.currentGuidanceTrack[A].easting, mf.trk.currentGuidanceTrack[A + 1].northing - mf.trk.currentGuidanceTrack[A].northing);
+                double head = Math.Atan2(mf.trks.currentGuidanceTrack[A + 1].easting - mf.trks.currentGuidanceTrack[A].easting, mf.trks.currentGuidanceTrack[A + 1].northing - mf.trks.currentGuidanceTrack[A].northing);
 
-                ytList = GetOffsetSemicirclePoints(movePoint.closePt, head + (mf.trk.isHeadingSameWay ? 0 : Math.PI), isTurnRight, youTurnRadius, extraSagitta, uTurnStyle == 1 ? 2.2 : Math.PI);
+                ytList = GetOffsetSemicirclePoints(movePoint.closePt, head + (mf.trks.isHeadingSameWay ? 0 : Math.PI), isTurnRight, youTurnRadius, extraSagitta, uTurnStyle == 1 ? 2.2 : Math.PI);
 
                 mf.distancePivotToTurnLine = glm.Distance(ytList[0], mf.pivotAxlePos);
 
@@ -233,7 +233,7 @@ namespace Twol
                     if (pt3.heading < 0) pt3.heading += glm.twoPI;
                     ytList[ytList.Count - 1] = pt3;
 
-                    mf.trk.AddEndPoints(ref ytList, 50);
+                    mf.trks.AddEndPoints(ref ytList, 50);
                 }
 
                 youTurnPhase = 255;
@@ -271,16 +271,16 @@ namespace Twol
                 //build the next line to add sequencelines
                 double widthMinusOverlap = Settings.Tool.toolWidth - Settings.Tool.overlap;
 
-                double distAway = widthMinusOverlap * (mf.trk.howManyPathsAway + (isTurnLeft ^ mf.trk.isHeadingSameWay ? rowSkipsWidth : -rowSkipsWidth)) + (mf.trk.isHeadingSameWay ? Settings.Tool.offset : -Settings.Tool.offset) + track.nudgeDistance;
+                double distAway = widthMinusOverlap * (mf.trks.howManyPathsAway + (isTurnLeft ^ mf.trks.isHeadingSameWay ? rowSkipsWidth : -rowSkipsWidth)) + (mf.trks.isHeadingSameWay ? Settings.Tool.offset : -Settings.Tool.offset) + track.nudgeDistance;
 
                 distAway += 0.5 * widthMinusOverlap;
 
                 //create the next line
-                nextCurve = mf.trk.BuildCurrentGuidanceTrack(distAway, track);
+                nextCurve = mf.trks.BuildCurrentGuidanceTrack(distAway, track);
 
 
                 bool isTurnLineSameWay = !isTurnRight ^ movePoint.turnLineNum == 0;
-                if (!FindCurveOutTurnPoint(mf.trk, exitPoint, isTurnLineSameWay))
+                if (!FindCurveOutTurnPoint(mf.trks, exitPoint, isTurnLineSameWay))
                 {
                     //error
                     FailCreate();
@@ -295,7 +295,7 @@ namespace Twol
             {
                 double step = youTurnPhase == 80 ? 5.0 : youTurnPhase == 90 ? 1.0 : youTurnPhase == 100 ? 0.2 : 0.04;
 
-                movePoint2 = MoveTurnLine(nextCurve, movePoint2, step, mf.trk.isHeadingSameWay ^ isGoingStraightThrough ^ youTurnPhase % 20 == 0, loop);
+                movePoint2 = MoveTurnLine(nextCurve, movePoint2, step, mf.trks.isHeadingSameWay ^ isGoingStraightThrough ^ youTurnPhase % 20 == 0, loop);
 
                 // creates half a circle starting at the crossing point
                 double extraSagitta = 0;
@@ -305,7 +305,7 @@ namespace Twol
                 int A = movePoint2.curveIndex;
                 double head = Math.Atan2(nextCurve[A + 1].easting - nextCurve[A].easting, nextCurve[A + 1].northing - nextCurve[A].northing);
 
-                ytList2 = GetOffsetSemicirclePoints(movePoint2.closePt, head + (mf.trk.isHeadingSameWay ^ isGoingStraightThrough ? 0 : Math.PI), !isTurnRight, youTurnRadius, extraSagitta, uTurnStyle == 1 ? 2.2 : Math.PI);
+                ytList2 = GetOffsetSemicirclePoints(movePoint2.closePt, head + (mf.trks.isHeadingSameWay ^ isGoingStraightThrough ? 0 : Math.PI), !isTurnRight, youTurnRadius, extraSagitta, uTurnStyle == 1 ? 2.2 : Math.PI);
 
                 isOutOfBounds = false;
                 //Are we out of bounds?
@@ -381,16 +381,16 @@ namespace Twol
                 ytList.AddRange(ytList2);
                 ytList2.Clear();
 
-                int upDownCount = mf.trk.isHeadingSameWay ? -1 : 1;
+                int upDownCount = mf.trks.isHeadingSameWay ? -1 : 1;
 
-                int currIdx = movePoint.curveIndex + (mf.trk.isHeadingSameWay ? 0 : 1);
-                var curList = mf.trk.currentGuidanceTrack;
+                int currIdx = movePoint.curveIndex + (mf.trks.isHeadingSameWay ? 0 : 1);
+                var curList = mf.trks.currentGuidanceTrack;
 
                 AddCurveSequenceLines(curList, ytList[0], currIdx, upDownCount, Settings.Vehicle.set_youTurnExtensionLength, true);
 
 
-                int offsetIdx = movePoint2.curveIndex + (mf.trk.isHeadingSameWay ^ isGoingStraightThrough ? 0 : +1);
-                upDownCount = mf.trk.isHeadingSameWay ^ isGoingStraightThrough ? -1 : 1;
+                int offsetIdx = movePoint2.curveIndex + (mf.trks.isHeadingSameWay ^ isGoingStraightThrough ? 0 : +1);
+                upDownCount = mf.trks.isHeadingSameWay ^ isGoingStraightThrough ? -1 : 1;
 
                 AddCurveSequenceLines(nextCurve, ytList[ytList.Count - 1], offsetIdx, upDownCount, Settings.Vehicle.set_youTurnExtensionLength, false);
 
@@ -712,8 +712,8 @@ namespace Twol
         {
             isGoingStraightThrough = true;
 
-            mf.trk.howManyPathsAway += (isTurnLeft ^ mf.trk.isHeadingSameWay) ? rowSkipsWidth : -rowSkipsWidth;
-            mf.trk.isHeadingSameWay = !mf.trk.isHeadingSameWay;
+            mf.trks.howManyPathsAway += (isTurnLeft ^ mf.trks.isHeadingSameWay) ? rowSkipsWidth : -rowSkipsWidth;
+            mf.trks.isHeadingSameWay = !mf.trks.isHeadingSameWay;
 
             if (alternateSkips && rowSkipsWidth2 > 1)
             {
@@ -771,7 +771,7 @@ namespace Twol
         public void BuildManualYouLateral(bool isTurnLeft)
         {
             //point on AB line closest to pivot axle point from AB Line PurePursuit
-            mf.trk.howManyPathsAway += mf.trk.isHeadingSameWay == isTurnLeft ? 1 : -1;
+            mf.trks.howManyPathsAway += mf.trks.isHeadingSameWay == isTurnLeft ? 1 : -1;
         }
 
         //build the points and path of youturn to be scaled and transformed
@@ -784,7 +784,7 @@ namespace Twol
             double turnOffset = (Settings.Tool.toolWidth - Settings.Tool.overlap) * rowSkipsWidth + (isTurnRight ? Settings.Tool.offset * 2.0 : -Settings.Tool.offset * 2.0);
 
             //if its straight across it makes 2 loops instead so goal is a little lower then start
-            if (!mf.trk.isHeadingSameWay) head += Math.PI;
+            if (!mf.trks.isHeadingSameWay) head += Math.PI;
 
             //move the start forward 2 meters, this point is critical to formation of uturn
             double rEastYT = mf.gyd.rEastTrk + Math.Sin(head) * (4 + Settings.Vehicle.set_youTurnExtensionLength);

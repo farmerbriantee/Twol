@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using Twol.Classes;
 
 namespace Twol
 {
@@ -36,10 +34,12 @@ namespace Twol
             InitializeComponent();
         }
 
+        private readonly int[] modes = { -2, -1, 2, 4, 99 };
+        private int modeSet = 4;
+
         private void FormToolControl_Load(object sender, EventArgs e)
         {
             Location = Settings.User.setWindow_formToolControlLocation;
-            Size = Settings.User.setWindow_formToolControlSize;
 
             if (!mf.IsOnScreen(Location, Size, 1))
             {
@@ -51,10 +51,6 @@ namespace Twol
         private void FormToolControl_FormClosing(object sender, FormClosingEventArgs e)
         {
             Settings.User.setWindow_formToolControlLocation = Location;
-            Settings.User.setWindow_formToolControlSize = Size;
-
-            //save entire list
-            mf.FileSaveTracks();
         }
 
         private void bntOk_Click(object sender, EventArgs e)
@@ -62,35 +58,55 @@ namespace Twol
             Close();
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-        }
-
         private void btnOuterInner_Click(object sender, EventArgs e)
         {
-            mf.gydTool.isboundaryLine = !mf.gydTool.isboundaryLine;
+            modeSet++;
+            if (modeSet > 3) modeSet = 0;
 
-            if (mf.gydTool.isboundaryLine)
+            switch (modeSet)
             {
-                btnOuterInner.Image = Properties.Resources.TramOuter;
+                case 0:
+                    btnOuterInner.BackgroundImage = Properties.Resources.FilterInnerToolLines;
+                    for (int i = 0; i < mf.trks.gArr.Count; i++)
+                    {
+                        if (mf.trks.gArr[i].mode == TrackMode.toolLineInner) mf.trks.gArr[i].isVisible = true;
+                        else mf.trks.gArr[i].isVisible = false;
+                    }
+                    break;
+
+                case 1:
+                    btnOuterInner.BackgroundImage = Properties.Resources.FilterOuterToolLines;
+                    for (int i = 0; i < mf.trks.gArr.Count; i++)
+                    {
+                        if (mf.trks.gArr[i].mode == TrackMode.toolLineOuter) mf.trks.gArr[i].isVisible = true;
+                        else mf.trks.gArr[i].isVisible = false;
+                    }
+                    break;
+
+                case 2:
+                    btnOuterInner.BackgroundImage = Properties.Resources.FilterNoToolLines;
+                    for (int i = 0; i < mf.trks.gArr.Count; i++)
+                    {
+                        if (mf.trks.gArr[i].mode > TrackMode.None) mf.trks.gArr[i].isVisible = true;
+                        else mf.trks.gArr[i].isVisible = false;
+                    }
+                    break;
+
+                case 3:
+                    btnOuterInner.BackgroundImage = Properties.Resources.FilterAllToolLines;
+                    for (int i = 0; i < mf.trks.gArr.Count; i++)
+                    {
+                        mf.trks.gArr[i].isVisible = true;
+                    }
+                    break;
+
+                default:
+                    break;
             }
-            else
-            {
-                btnOuterInner.Image = Properties.Resources.TramLines;
-            }
+
+            mf.trks.isTrackValid = false;
+            this.Focus();
             mf.Activate();
-        }
-
-        private void btnToolRight_Click(object sender, EventArgs e)
-        {
-            mf.gydTool.manualSteerTimer += Settings.Tool.setToolSteer.manualSteerSeconds;
-            mf.gydTool.isManualSteerRight = true;
-        }
-
-        private void btnToolLeft_Click(object sender, EventArgs e)
-        {
-            mf.gydTool.manualSteerTimer += Settings.Tool.setToolSteer.manualSteerSeconds;
-            mf.gydTool.isManualSteerRight = false;
         }
     }
 }

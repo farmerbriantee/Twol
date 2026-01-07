@@ -90,6 +90,7 @@
 
         public double antennaHeight = 0;
         public double antennaOffset = 0;
+        public double nudgeGlobal = 0;
 
         public double curvatureGain = 5.0;
         public double passiveIntegralGain = 0.005;
@@ -122,6 +123,8 @@
 
             antennaHeight = _setting.antennaHeight;
             antennaOffset = _setting.antennaOffset;
+            nudgeGlobal = _setting.nudgeGlobal;
+
             curvatureGain = _setting.curvatureGain;
             passiveIntegralGain = _setting.passiveIntegralGain;
 

@@ -378,7 +378,7 @@ namespace Twol
         public bool isABCyled = false;
         private void btnContour_Click(object sender, EventArgs e)
         {
-            trk.isAutoTrack = false;
+            trks.isAutoTrack = false;
             btnAutoTrack.Image = Resources.AutoTrackOff;
 
             SetContourButton(!ct.isContourBtnOn);
@@ -397,7 +397,7 @@ namespace Twol
                 //SetYouTurnButton(false);
                 if (!state)
                 {
-                    trk.isTrackValid = false;
+                    trks.isTrackValid = false;
                     SetAutoSteerButton(false, gStr.Get(gs.gsContourOn));
                 }
 
@@ -422,14 +422,12 @@ namespace Twol
         {
             SetContourButton(false);
 
-            if (trk.gArr.Count > 0)
+            if (trks.gArr.Count > 0)
             {
                 //SetYouTurnButton(false);
-                if (trk.currTrk == null)
+                if (trks.currentRefTrack == null)
                 {
-                    trk.GetNextTrack();
-                    PanelUpdateRightAndBottom();
-                    return;
+                    trks.GetNextTrack();
                 }
             }
 
@@ -442,7 +440,7 @@ namespace Twol
                 flp1.Visible = true;
 
                 //build the flyout based on properties of program
-                int tracksVisible = trk.GetVisibleTracks();
+                int tracksVisible = trks.GetVisibleTracks();
                 bool isBnd = bnd.bndList.Count > 0;
 
                 int btnCount = 0;
@@ -490,7 +488,7 @@ namespace Twol
         internal void SetAutoSteerButton(bool state, string reason)
         {
             var triggerstate = state;
-            if (state && (!ct.isContourBtnOn && trk.currTrk == null))
+            if (state && (!ct.isContourBtnOn && trks.currentRefTrack == null))
             {
                 state = false;
                 reason = gStr.Get(gs.gsTurnOnContourOrMakeABLine);
@@ -502,7 +500,7 @@ namespace Twol
                 reason = "Above Maximum Safe Steering Speed: " + (Settings.Vehicle.setAS_maxSteerSpeed * glm.kmhToMphOrKmh).ToString("N1") + glm.unitsKmhMph;
             }
 
-            if (state && trk.currentGuidanceTrack.Count == 0)
+            if (state && trks.currentGuidanceTrack.Count == 0)
             {
                 state = false;
                 reason = gStr.Get(gs.gsNoGuidanceLines);
@@ -566,7 +564,7 @@ namespace Twol
                         TimedMessageBox(2000, gStr.Get(gs.gsNoBoundary), gStr.Get(gs.gsCreateABoundaryFirst));
                         Log.EventWriter("Uturn attempted without boundary");
                     }
-                    //if (trk.currTrk == null)
+                    //if (trks.currentRefTrack == null)
                     //    state = false;
                 }
 
@@ -578,28 +576,28 @@ namespace Twol
 
         private void btnAutoTrack_Click(object sender, EventArgs e)
         {
-            trk.isAutoTrack = !trk.isAutoTrack;
-            btnAutoTrack.Image = trk.isAutoTrack ? Resources.AutoTrack : Resources.AutoTrackOff;
+            trks.isAutoTrack = !trks.isAutoTrack;
+            btnAutoTrack.Image = trks.isAutoTrack ? Resources.AutoTrack : Resources.AutoTrackOff;
         }
 
         private void btnCycleLines_Click(object sender, EventArgs e)
         {
-            trk.isAutoTrack = false;
+            trks.isAutoTrack = false;
             btnAutoTrack.Image = Resources.AutoTrackOff;
 
-            trk.GetNextTrack();
+            trks.GetNextTrack();
 
-            if (trk.currTrk != null)
+            if (trks.currentRefTrack != null)
             {
                 guideLineCounter = 20;
                 lblGuidanceLine.Visible = true;
-                lblGuidanceLine.Text = trk.currTrk.name;
+                lblGuidanceLine.Text = trks.currentRefTrack.name;
             }
         }
 
         private void btnCycleLinesBk_Click(object sender, EventArgs e)
         {
-            trk.isAutoTrack = false;
+            trks.isAutoTrack = false;
             btnAutoTrack.Image = Resources.AutoTrackOff;
 
             if (ct.isContourBtnOn)
@@ -608,13 +606,13 @@ namespace Twol
             }
             else
             {
-                trk.GetNextTrack(false);
+                trks.GetNextTrack(false);
 
-                if (trk.currTrk != null)
+                if (trks.currentRefTrack != null)
                 {
                     guideLineCounter = 20;
                     lblGuidanceLine.Visible = true;
-                    lblGuidanceLine.Text = trk.currTrk.name;
+                    lblGuidanceLine.Text = trks.currentRefTrack.name;
                 }
             }
         }
@@ -678,9 +676,9 @@ namespace Twol
             }
 
 
-            if (trk.currTrk != null)
+            if (trks.currentRefTrack != null)
             {
-                Form form = new FormRefNudge(this, trk.currTrk);
+                Form form = new FormRefNudge(this, trks.currentRefTrack);
                 form.Show(this);
             }
             else
@@ -698,7 +696,7 @@ namespace Twol
 
         private void btnTracksOff_Click(object sender, EventArgs e)
         {
-            trk.currTrk = null;
+            trks.currentRefTrack = null;
 
             if (flp1.Visible)
             {
@@ -717,9 +715,9 @@ namespace Twol
                 return;
             }
 
-            if (trk.currTrk != null)
+            if (trks.currentRefTrack != null)
             {
-                Form form = new FormNudge(this, trk.currTrk);
+                Form form = new FormNudge(this, trks.currentRefTrack);
                 form.Show(this);
             }
             else
@@ -867,10 +865,25 @@ namespace Twol
                 f.Close();
             }
 
+            f = Application.OpenForms["FormToolControl"];
+
+            if (f != null)
+            {
+                f.Focus();
+                f.Close();
+            }
+
+
             if (this.OwnedForms.Any())
             {
-                TimedMessageBox(1000, gStr.Get(gs.gsWindowsStillOpen), gStr.Get(gs.gsCloseAllWindowsFirst));
-                return;
+                f = null;
+                f = Application.OpenForms["FormToolManual"];
+
+                if (f == null)
+                {
+                    TimedMessageBox(1000, gStr.Get(gs.gsWindowsStillOpen), gStr.Get(gs.gsCloseAllWindowsFirst));
+                    return;
+                }
             }
 
             using (var form = new FormField(this))
@@ -939,7 +952,7 @@ namespace Twol
         {
             SetContourButton(false);
 
-            if (trk.gArr.Count < 1)
+            if (trks.gArr.Count < 1)
             {
                 TimedMessageBox(1500, gStr.Get(gs.gsNoGuidanceLines), gStr.Get(gs.gsNoGuidanceLines));
                 return;
@@ -1196,17 +1209,17 @@ namespace Twol
 
         private void btnSnapToPivot_Click(object sender, EventArgs e)
         {
-            trk.SnapToPivot(trk.currTrk);
+            trks.SnapToPivot(trks.currentRefTrack);
         }
 
         private void btnAdjRight_Click(object sender, EventArgs e)
         {
-            trk.NudgeTrack(trk.currTrk, Settings.Vehicle.setAS_snapDistance);
+            trks.NudgeTrack(trks.currentRefTrack, Settings.Vehicle.setAS_snapDistance);
         }
 
         private void btnAdjLeft_Click(object sender, EventArgs e)
         {
-            trk.NudgeTrack(trk.currTrk, -Settings.Vehicle.setAS_snapDistance);
+            trks.NudgeTrack(trks.currentRefTrack, -Settings.Vehicle.setAS_snapDistance);
         }
 
         #endregion
@@ -1940,21 +1953,6 @@ namespace Twol
             }
         }
 
-        private void SmoothABtoolStripMenu_Click(object sender, EventArgs e)
-        {
-            if (isFieldStarted && trk.currTrk != null && trk.currTrk.mode > TrackMode.AB)
-            {
-                using (var form = new FormSmoothAB(this, trk.currTrk))
-                {
-                    form.ShowDialog(this);
-                }
-            }
-            else
-            {
-                if (!isFieldStarted) TimedMessageBox(2000, gStr.Get(gs.gsFieldNotOpen), gStr.Get(gs.gsStartNewField));
-                else TimedMessageBox(2000, gStr.Get(gs.gsCurveNotOn), gStr.Get(gs.gsTurnABCurveOn));
-            }
-        }
         private void deleteContourPathsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ct.stripList?.Clear();

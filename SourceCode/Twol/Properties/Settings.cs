@@ -89,9 +89,7 @@ namespace Twol
             public Point setWindow_formNudgeLocation = new Point(200, 200);
 
             public Point setWindow_recordToolTracksLocation = new Point(40, 40);
-            public Size setWindow_formRecordToolTracksSize = new Size(80, 365);
             public Point setWindow_formToolControlLocation = new Point(40, 40);
-            public Size setWindow_formToolControlSize = new Size(80, 365);
             public Point setWindow_FormToolManualLocation = new Point(40, 40);
 
             public Point setWindow_gridLocation = new Point(20, 20);

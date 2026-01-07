@@ -398,7 +398,7 @@ namespace Twol
                     mf.hdl.tracksArr[mf.hdl.idx].mode = TrackMode.AB;
                 }
 
-                mf.trk.AddFirstLastPoints(ref mf.hdl.tracksArr[mf.hdl.idx].trackPts, 30);
+                mf.trks.AddFirstLastPoints(ref mf.hdl.tracksArr[mf.hdl.idx].trackPts, 30);
                 mf.hdl.tracksArr[mf.hdl.idx].moveDistance = 0;
 
                 //update the arrays

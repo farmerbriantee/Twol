@@ -63,7 +63,7 @@ namespace Twol
 
         private void btnZeroMove_Click(object sender, EventArgs e)
         {
-            mf.trk.NudgeDistanceReset(track);
+            mf.trks.NudgeDistanceReset(track);
             UpdateMoveLabel();
         }
 
@@ -76,19 +76,19 @@ namespace Twol
 
         private void btnAdjRight_Click(object sender, EventArgs e)
         {
-            mf.trk.NudgeTrack(track, snapAdj);
+            mf.trks.NudgeTrack(track, snapAdj);
             UpdateMoveLabel();
         }
 
         private void btnAdjLeft_Click(object sender, EventArgs e)
         {
-            mf.trk.NudgeTrack(track, -snapAdj);
+            mf.trks.NudgeTrack(track, -snapAdj);
             UpdateMoveLabel();
         }
 
         private void btnSnapToPivot_Click(object sender, EventArgs e)
         {
-            mf.trk.SnapToPivot(track);
+            mf.trks.SnapToPivot(track);
             UpdateMoveLabel();
         }
 
@@ -99,13 +99,13 @@ namespace Twol
 
         private void btnHalfToolRight_Click(object sender, EventArgs e)
         {
-            mf.trk.NudgeTrack(track, (Settings.Tool.toolWidth - Settings.Tool.overlap) * 0.5);
+            mf.trks.NudgeTrack(track, (Settings.Tool.toolWidth - Settings.Tool.overlap) * 0.5);
             UpdateMoveLabel();
         }
 
         private void btnHalfToolLeft_Click(object sender, EventArgs e)
         {
-            mf.trk.NudgeTrack(track, (Settings.Tool.toolWidth - Settings.Tool.overlap) * -0.5);
+            mf.trks.NudgeTrack(track, (Settings.Tool.toolWidth - Settings.Tool.overlap) * -0.5);
             UpdateMoveLabel();
         }
 

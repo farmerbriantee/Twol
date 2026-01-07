@@ -54,7 +54,7 @@ namespace Twol
 
         private void btnAdjRight_Click(object sender, EventArgs e)
         {
-            mf.trk.NudgeRefTrack(track, nudSnapDistance.Value);
+            mf.trks.NudgeRefTrack(track, nudSnapDistance.Value);
             distanceMoved += nudSnapDistance.Value;
             DistanceMovedLabel();
             mf.Activate();
@@ -62,7 +62,7 @@ namespace Twol
 
         private void btnAdjLeft_Click(object sender, EventArgs e)
         {
-            mf.trk.NudgeRefTrack(track, -nudSnapDistance.Value);
+            mf.trks.NudgeRefTrack(track, -nudSnapDistance.Value);
             distanceMoved += -nudSnapDistance.Value;
             DistanceMovedLabel();
             mf.Activate();
@@ -70,7 +70,7 @@ namespace Twol
 
         private void btnHalfToolRight_Click(object sender, EventArgs e)
         {
-            mf.trk.NudgeRefTrack(track, (Settings.Tool.toolWidth - Settings.Tool.overlap) * 0.5);
+            mf.trks.NudgeRefTrack(track, (Settings.Tool.toolWidth - Settings.Tool.overlap) * 0.5);
             distanceMoved += (Settings.Tool.toolWidth - Settings.Tool.overlap) * 0.5;
             DistanceMovedLabel();
             mf.Activate();
@@ -78,7 +78,7 @@ namespace Twol
 
         private void btnHalfToolLeft_Click(object sender, EventArgs e)
         {
-            mf.trk.NudgeRefTrack(track, (Settings.Tool.toolWidth - Settings.Tool.overlap) * -0.5);
+            mf.trks.NudgeRefTrack(track, (Settings.Tool.toolWidth - Settings.Tool.overlap) * -0.5);
             distanceMoved += (Settings.Tool.toolWidth - Settings.Tool.overlap) * -0.5;
             DistanceMovedLabel();
             mf.Activate();
@@ -102,7 +102,7 @@ namespace Twol
 
         private void btnCancelMain_Click(object sender, EventArgs e)
         {
-            mf.trk.setTrack(gBack);
+            mf.trks.setTrack(gBack);
             //mf.FileSaveTracks();
             Close();
         }

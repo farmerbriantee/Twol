@@ -10,7 +10,7 @@ namespace Twol
 
         private bool toolSend = false, toolSend2 = false;
         private int counter = 0, toolCounterSettings = 0, toolCounterConfig = 0;
-        private int windowSizeState = 0;
+        private int windowSizeState = 1;
 
         //Form stuff
         public FormToolSteer(Form callingForm)
@@ -19,7 +19,7 @@ namespace Twol
             InitializeComponent();
 
             this.Text = gStr.Get(gs.gsToolSteerConfiguration);
-            this.Width = 390;
+            this.Width = 970;
             this.Height = 550;
 
             label19.Text = gStr.Get(gs.gsSpeedFactor);
@@ -77,6 +77,7 @@ namespace Twol
             //antenna
             nudAntennaHeight_Tool.Value = Settings.Tool.setToolSteer.antennaHeight;
             nudAntennaOffset_Tool.Value = Settings.Tool.setToolSteer.antennaOffset;
+            nudNudge.Value = Settings.Tool.setToolSteer.nudgeGlobal;
 
             cboxIsFollowCurrent.Checked = Settings.Tool.setToolSteer.isFollowCurrent;
             cboxIsPassiveSteering.Checked = Settings.Tool.setToolSteer.isPassiveSteering;
@@ -186,7 +187,7 @@ namespace Twol
             if (windowSizeState++ > 0) windowSizeState = 0;
             if (windowSizeState == 1)
             {
-                this.Size = new System.Drawing.Size(1060, 550);
+                this.Size = new System.Drawing.Size(970, 550);
                 btnExpand.Image = Properties.Resources.ArrowLeft;
             }
             else if (windowSizeState == 0)
@@ -363,7 +364,7 @@ namespace Twol
 
         private void hsbarManualPWM_Percent_Scroll(object sender, ScrollEventArgs e)
         {
-            Settings.Tool.setToolSteer.manualSteerPWM = (byte)((double)(hsbarManualPWM_Percent.Value) *2.5);
+            Settings.Tool.setToolSteer.manualSteerPWM = (byte)((double)(hsbarManualPWM_Percent.Value) * 2.5);
             lblManualPWM_Percent.Text = hsbarManualPWM_Percent.Value.ToString();
         }
 
@@ -373,6 +374,11 @@ namespace Twol
             lblManualSecondsOn.Text = hsbarManualSecondsOn.Value.ToString();
         }
 
+        private void nudNudge_ValueChanged(object sender, EventArgs e)
+        {
+            Settings.Tool.setToolSteer.nudgeGlobal = (double)(nudNudge.Value);
+        }
+
         #endregion
 
         #region Tab Config
@@ -380,25 +386,6 @@ namespace Twol
         {
             toolSend2 = true;
             toolCounterConfig = 0;
-        }
-
-        private void btnSaveRecordedTracks_Click(object sender, EventArgs e)
-        {
-            DialogResult result2 = MessageBox.Show(gStr.Get(gs.gsAreYouSure), "Transfer to Tracks?", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-
-            if (result2 == DialogResult.Yes)
-            {
-                //save any track changes first
-                mf.FileSaveTracks();
-
-                //add the tool tracks to the tracks arr
-                mf.FileLoadTracksFromToolTracksRecorded();
-
-                //save the tracks file after adding the tool tracks
-                mf.FileSaveTracks();
-            }
-
-            mf.Activate();
         }
 
         private void cboxInvertSteer_Tool_Click(object sender, EventArgs e)

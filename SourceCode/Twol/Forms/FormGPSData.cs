@@ -66,8 +66,8 @@ namespace Twol
 
         private void FormGPSData_Load(object sender, EventArgs e)
         {
-            this.Width = 200;
-            this.Height = 500;
+            this.Width = 140;
+            this.Height = 350;
         }
 
         private void FormGPSData_FormClosing(object sender, FormClosingEventArgs e)

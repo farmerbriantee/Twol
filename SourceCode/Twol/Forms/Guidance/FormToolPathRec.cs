@@ -2,7 +2,6 @@
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using Twol.Classes;
 
 namespace Twol
 {
@@ -39,18 +38,17 @@ namespace Twol
 
             if (mf.gydTool.isboundaryLine)
             {
-                btnOuterInner.Image = Properties.Resources.TramOuter;
+                btnOuterInner.Image = Properties.Resources.FilterOuterToolLines;
             }
             else
             {
-                btnOuterInner.Image = Properties.Resources.TramLines;
+                btnOuterInner.Image = Properties.Resources.FilterInnerToolLines;
             }
         }
 
         private void FormToolPathRec_Load(object sender, EventArgs e)
         {
             Location = Settings.User.setWindow_recordToolTracksLocation;
-            Size = Settings.User.setWindow_formRecordToolTracksSize;
 
             if (!mf.IsOnScreen(Location, Size, 1))
             {
@@ -62,7 +60,6 @@ namespace Twol
         private void FormToolPathRec_FormClosing(object sender, FormClosingEventArgs e)
         {
             Settings.User.setWindow_recordToolTracksLocation = Location;
-            Settings.User.setWindow_formRecordToolTracksSize = Size;
 
             //save entire list
             mf.FileSaveTracks();
@@ -85,6 +82,13 @@ namespace Twol
 
         private void bntOk_Click(object sender, EventArgs e)
         {
+            if (mf.gydTool.isGuidanceModeRecordNewTracks)
+            {
+                mf.gydTool.isGuidanceModeRecordNewTracks = false;
+                var form = new FormYes("Recording Stopped");
+                form.ShowDialog(this);
+            }
+
             Close();
         }
 
@@ -114,12 +118,14 @@ namespace Twol
 
             if (mf.gydTool.isboundaryLine)
             {
-                btnOuterInner.Image = Properties.Resources.TramOuter;
+                btnOuterInner.Image = Properties.Resources.FilterOuterToolLines;
             }
             else
             {
-                btnOuterInner.Image = Properties.Resources.TramLines;
+                btnOuterInner.Image = Properties.Resources.FilterInnerToolLines;
             }
+
+            mf.trks.isTrackValid = false;
             mf.Activate();
         }
     }

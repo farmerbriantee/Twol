@@ -8,31 +8,29 @@ using Twol.Classes;
 namespace Twol
 {
     public enum TrackMode
-    { toolLineInner = -2, toolLineOuter = -1,  None = 0, AB = 2, Curve = 4, bndTrackOuter = 8, bndTrackInner = 16, bndCurve = 32, waterPivot = 64};//, Heading, Circle, Spiral
+    { toolLineInner = -2, toolLineOuter = -1, None = 0, AB = 2, Curve = 4, bndTrackOuter = 8, bndTrackInner = 16, bndCurve = 32, waterPivot = 64 };//, Heading, Circle, Spiral
 
     public class CTracks
     {
         //pointers to mainform controls
         private readonly FormGPS mf;
 
-        private List<CTrk> _gArr = new List<CTrk>();
+        private List<CTrk> _gListArr = new List<CTrk>();
 
-        public IReadOnlyList<CTrk> gArr => _gArr;
+        public IReadOnlyList<CTrk> gArr => _gListArr;
 
-        private CTrk _currTrk;
+        private CTrk _currentRefTrack;
 
         public bool isHeadingSameWay = true, lastIsHeadingSameWay = true;
-
         public double howManyPathsAway, lastHowManyPathsAway;
-
-        public bool isSmoothWindowOpen;
+        public bool isWest;
 
         public bool isAutoTrack;
         public int autoTrack3SecTimer;
 
         public List<vec3> smooList = new List<vec3>();
 
-        //the list of points of curve to drive on
+        //the list of toBeSmoothedList of curve to drive on
         public List<vec3> currentGuidanceTrack = new List<vec3>();
 
         //guidelines
@@ -46,19 +44,18 @@ namespace Twol
 
         //design a new track
         public List<vec3> designPtsList = new List<vec3>();
-
         public vec2 designPtA = new vec2(0.2, 0.15);
         public vec2 designPtB = new vec2(0.3, 0.3);
         public vec2 designLineEndA = new vec2(0.2, 0.15);
         public vec2 designLineEndB = new vec2(0.3, 0.3);
-
         public double designHeading = 0;
 
-        //flag for starting stop adding points for curve
-        public bool isMakingTrack, isRecordingCurveTrack;
+        //flag for starting stop adding toBeSmoothedList for curve
+        public bool isMakingTrack, isMakingABLine;
 
-        //to fake the user into thinking they are making a line - but is a curve
-        public bool isMakingABLine;
+        //design tool line
+        public List<vec3> toolDesignPtsList = new List<vec3>();
+        public bool isRecordingCurveTrack;
 
         public CTracks(FormGPS _f)
         {
@@ -66,82 +63,23 @@ namespace Twol
             mf = _f;
         }
 
-        public void AddTrack(CTrk track)
+        public CTrk currentRefTrack
         {
-            if (track == null) return;
-
-            string name = track.name;
-
-            while (_gArr.Any(t => t.name == name))
-                name += " ";
-
-            track.name = name;
-
-            _gArr.Add(track);
-        }
-
-        public void SetTracks(List<CTrk> tracks)
-        {
-            _gArr = tracks;
-        }
-
-        public void setTrack(CTrk track)
-        {
-            int index = _gArr.FindIndex(item => item == track);
-            if (index != -1)
-            {
-                if (track == currTrk)
-                    isTrackValid = false;
-                _gArr[index] = track;
-            }
-        }
-
-        public int TrackIndex(CTrk track)
-        {
-            return _gArr.FindIndex(item => item == track);
-        }
-
-        public void MoveTrackUp(CTrk track)
-        {
-            int index = _gArr.IndexOf(track);
-            if (track == null || index == 0)
-                return;
-
-            _gArr.Reverse(index - 1, 2);
-        }
-
-        public void MoveTrackDn(CTrk track)
-        {
-            int index = _gArr.IndexOf(track);
-
-            if (track == null || index == (_gArr.Count - 1))
-                return;
-
-            _gArr.Reverse(index, 2);
-        }
-
-        public void RemoveTrack(CTrk track)
-        {
-            _gArr.Remove(track);
-        }
-
-        public CTrk currTrk
-        {
-            get => _currTrk;
+            get => _currentRefTrack;
             set
             {
-                if (_currTrk != value)
+                if (_currentRefTrack != value)
                 {
-                    _currTrk = value;
+                    _currentRefTrack = value;
 
                     isTrackValid = false;
 
-                    mf.SetAutoSteerButton(false, _currTrk == null ? gStr.Get(gs.gsNoABLineActive) : "Track Changed");
+                    mf.SetAutoSteerButton(false, _currentRefTrack == null ? gStr.Get(gs.gsNoABLineActive) : "Track Changed");
 
                     //mf.SetYouTurnButton(false);
                     //ss Log.EventWriter("Autosteer Stop, No Tracks Available");
 
-                    int index2 = _gArr.FindIndex(x => x == _currTrk);
+                    int index2 = _gListArr.FindIndex(x => x == _currentRefTrack);
                     mf.lblNumCu.Text = (index2 + 1).ToString() + "/" + gArr.Count.ToString();
                     mf.lblNumCu.Visible = !mf.ct.isContourBtnOn;
                     mf.PanelUpdateRightAndBottom();
@@ -149,58 +87,29 @@ namespace Twol
             }
         }
 
-        public int GetVisibleTracks()
-        {
-            int tracksVisible = 0;
-            foreach (var track in gArr)
-            {
-                if (track.isVisible) tracksVisible++;
-            }
-            return tracksVisible;
-        }
-
-        public CTrk GetNextTrack(CTrk track, List<CTrk> gTemp, bool next = true, bool invisible = false)
-        {
-            int index = gTemp.FindIndex(x => x == track);
-
-            if (next)
-                return gTemp.Skip(index + 1).Concat(gTemp.Take(index)).FirstOrDefault(x => x.isVisible || invisible);
-            else
-                return gTemp.Take(index).Reverse().Concat(gTemp.Skip(index + 1).Reverse()).FirstOrDefault(x => x.isVisible || invisible);
-        }
-
-        public void GetNextTrack(bool next = true)
-        {
-            int index = _gArr.FindIndex(x => x == currTrk);
-
-            if (next)
-                currTrk = gArr.Skip(index + 1).Concat(gArr.Take(index)).FirstOrDefault(x => x.isVisible);
-            else
-                currTrk = gArr.Take(index).Reverse().Concat(gArr.Skip(index + 1).Reverse()).FirstOrDefault(x => x.isVisible);
-        }
-
         public int FindClosestRefTrack(vec3 steer)
         {
-            if (_gArr.Count == 0) return -1;
+            if (_gListArr.Count == 0) return -1;
 
             //only 1 track
-            if (_gArr.Count == 1) return 0;
+            if (_gListArr.Count == 1)
+            {
+                currentRefTrack = _gListArr[0];
+                return 0;
+            }
 
             int trak = -1;
             int cntr = 0;
 
             //Count visible
-            for (int i = 0; i < _gArr.Count; i++)
+            for (int i = 0; i < _gListArr.Count; i++)
             {
-                if (_gArr[i].isVisible)
+                if (_gListArr[i].isVisible)
                 {
                     cntr++;
                     trak = i;
                 }
             }
-
-            //only 1 track visible of the group
-            if (cntr == 1) return trak;
 
             //no visible tracks
             if (cntr == 0) return -1;
@@ -208,34 +117,27 @@ namespace Twol
             double minDistA = double.MaxValue;
             double dist;
 
-            //vec2 endPtA, endPtB;
-
-            for (int i = 0; i < _gArr.Count; i++)
+            for (int i = 0; i < _gListArr.Count; i++)
             {
                 //if (!isAlignedArr[i]) continue;
                 if (!gArr[i].isVisible) continue;
 
-
-                dist = glm.DistanceSquared(steer, mf.trk._gArr[i].ptA);
-
-                if (dist < minDistA)
+                for (int j = 0; j < mf.trks._gListArr[i].curvePts.Count; j++)
                 {
-                    minDistA = dist;
-                    trak = i;
-                }
+                    dist = glm.DistanceSquared(steer, mf.trks._gListArr[i].curvePts[j]);
 
-                dist = glm.DistanceSquared(steer, mf.trk._gArr[i].ptB);
-
-                if (dist < minDistA)
-                {
-                    minDistA = dist;
-                    trak = i;
+                    if (dist < minDistA)
+                    {
+                        minDistA = dist;
+                        trak = i;
+                    }
                 }
             }
 
+            currentRefTrack = _gListArr[trak];
+
             return trak;
         }
-
 
         public async void GetDistanceFromRefTrack(CTrk track, vec3 pivot)
         {
@@ -261,9 +163,7 @@ namespace Twol
                         distanceFromRefLine = mf.gyd.FindDistanceToSegment(mf.guidanceLookPos, track.curvePts[rA], track.curvePts[rB], out vec3 point, out _, true, false, false);
 
                         //same way as line creation or not
-                        isHeadingSameWay = Math.PI - Math.Abs(Math.Abs(pivot.heading
-                            + glm.toRadians(mf.mc.actualSteerAngleDegrees) - track.curvePts[rA].heading)
-                            - Math.PI) < glm.PIBy2;
+                        isHeadingSameWay = Math.PI - Math.Abs(Math.Abs(pivot.heading + glm.toRadians(mf.mc.actualSteerAngleDegrees) - track.curvePts[rA].heading) - Math.PI) < glm.PIBy2;
                     }
                 }
                 else //pivot guide list
@@ -278,7 +178,7 @@ namespace Twol
 
                 if (track.mode > TrackMode.None) distanceFromRefLine -= (0.5 * widthMinusOverlap);
 
-                double RefDist = (distanceFromRefLine + (isHeadingSameWay ? Settings.Tool.offset : -Settings.Tool.offset) - track.nudgeDistance) / widthMinusOverlap;
+                double RefDist = (distanceFromRefLine + (isHeadingSameWay ? Settings.Tool.offset : -Settings.Tool.offset) - (track.nudgeDistance)) / widthMinusOverlap;
 
                 if (RefDist < 0) howManyPathsAway = (int)(RefDist - 0.5);
                 else howManyPathsAway = (int)(RefDist + 0.5);
@@ -290,14 +190,20 @@ namespace Twol
                 {
                     try
                     {
-                        //is boundary curve - use task
                         isBusyWorking = true;
                         isTrackValid = true;
                         lastHowManyPathsAway = howManyPathsAway;
                         lastIsHeadingSameWay = isHeadingSameWay;
-                        double distAway = widthMinusOverlap * howManyPathsAway + (isHeadingSameWay ? -Settings.Tool.offset : Settings.Tool.offset) + track.nudgeDistance;
+                        double distAway = widthMinusOverlap * howManyPathsAway + (isHeadingSameWay ? -Settings.Tool.offset : Settings.Tool.offset) + (track.nudgeDistance);
 
                         if (track.mode > TrackMode.None) distAway += (0.5 * widthMinusOverlap);
+
+                        if (track.mode < TrackMode.None)
+                        {
+                            //is track between 45 and 225 degrees or not
+                            if (track.heading < 3.92699 && track.heading > 0.785398) distAway += -Settings.Tool.setToolSteer.nudgeGlobal;
+                            else distAway += Settings.Tool.setToolSteer.nudgeGlobal;
+                        }
 
                         currentGuidanceTrack = await Task.Run(() => BuildCurrentGuidanceTrack(distAway, track));
 
@@ -326,17 +232,17 @@ namespace Twol
 
         public List<vec3> BuildCurrentGuidanceTrack(double distAway, CTrk track)
         {
-            //the list of points of curve new list from async
+            //the list of toBeSmoothedList of curve new list from async
             List<vec3> newCurList = new List<vec3>();
 
-            bool loops = (track.mode > TrackMode.Curve && track.mode < TrackMode.toolLineOuter);
+            bool loops = track.mode > TrackMode.Curve;
 
             try
             {
                 if (track.mode == TrackMode.waterPivot)
                 {
-                    //max 2 cm offset from correct circle or limit to 500 points
-                    double Angle = glm.twoPI / Math.Min(Math.Max(Math.Ceiling(glm.twoPI / (2 * Math.Acos(1 - (0.02 / Math.Abs(distAway))))), 100), 1000);//limit between 50 and 500 points
+                    //max 2 cm offset from correct circle or limit to 500 toBeSmoothedList
+                    double Angle = glm.twoPI / Math.Min(Math.Max(Math.Ceiling(glm.twoPI / (2 * Math.Acos(1 - (0.02 / Math.Abs(distAway))))), 100), 1000);//limit between 50 and 500 toBeSmoothedList
 
                     vec3 centerPos = new vec3(track.ptA.easting, track.ptA.northing, 0);
                     double rotation = 0;
@@ -388,15 +294,15 @@ namespace Twol
 
                                 distance = glm.Distance(arr[i + 1], arr[i + 2]);
 
-                                if (distance > step)
-                                {
-                                    int loopTimes = (int)(distance / step + 1);
-                                    for (int j = 1; j < loopTimes; j++)
-                                    {
-                                        vec3 pos = new vec3(glm.Catmull(j / (double)(loopTimes), arr[i], arr[i + 1], arr[i + 2], arr[i + 3]));
-                                        newCurList.Add(pos);
-                                    }
-                                }
+                                //if (distance > step)
+                                //{
+                                //    int loopTimes = (int)(distance / step + 1);
+                                //    for (int j = 1; j < loopTimes; j++)
+                                //    {
+                                //        vec3 pos = new vec3(glm.Catmull(j / (double)(loopTimes), arr[i], arr[i + 1], arr[i + 2], arr[i + 3]));
+                                //        newCurList.Add(pos);
+                                //    }
+                                //}
                             }
 
                             newCurList.Add(arr[cnt - 2]);
@@ -445,7 +351,7 @@ namespace Twol
                         }
                     }
 
-                    if (!loops)
+                    if (!loops && track.mode != TrackMode.toolLineOuter)
                     {
                         vec3 pt1 = new vec3(newCurList[0]);
                         pt1.easting -= (Math.Sin(pt1.heading) * 10000);
@@ -480,7 +386,7 @@ namespace Twol
                 {
                     if (numGuides == 0) continue;
 
-                    //the list of points of curve new list from async
+                    //the list of toBeSmoothedList of curve new list from async
                     List<vec3> newGuideList = new List<vec3>
                     {
                         Capacity = 128
@@ -524,103 +430,90 @@ namespace Twol
 
         public void DrawTrack()
         {
-            if (guideArr.Count > 0)
+            try
             {
-                GL.LineWidth(Settings.User.setDisplay_lineWidth * 3);
-                GL.Color3(0, 0, 0);
-
-                for (int i = 0; i < guideArr.Count; i++)
+                if (guideArr.Count > 0)
                 {
-                    guideArr[i].DrawPolygon(currTrk.mode != TrackMode.bndCurve ? PrimitiveType.LineStrip : PrimitiveType.LineLoop);
-                }
+                    GL.LineWidth(Settings.User.setDisplay_lineWidth * 3);
+                    GL.Color3(0, 0, 0);
 
-                GL.LineWidth(Settings.User.setDisplay_lineWidth);
-                GL.Color4(0.2, 0.75, 0.2, 0.6);
-
-                for (int i = 0; i < guideArr.Count; i++)
-                {
-                    guideArr[i].DrawPolygon(currTrk.mode != TrackMode.bndCurve ? PrimitiveType.LineStrip : PrimitiveType.LineLoop);
-                }
-            }
-
-            //draw reference line
-            if (currTrk.mode != TrackMode.waterPivot)
-            {
-                if (currTrk.curvePts == null || currTrk.curvePts.Count == 0) return;
-
-                GL.LineWidth(Settings.User.setDisplay_lineWidth * 2);
-                GL.Color3(0.96, 0.2f, 0.2f);
-                currTrk.curvePts.DrawPolygon(PrimitiveType.Lines);
-
-                if (mf.font.isFontOn)
-                {
-                    GL.Color3(0.40f, 0.90f, 0.95f);
-                    mf.font.DrawText3D(currTrk.ptA.easting, currTrk.ptA.northing, "&A", true);
-                    mf.font.DrawText3D(currTrk.ptB.easting, currTrk.ptB.northing, "&B", true);
-                }
-
-                //just draw ref and smoothed line if smoothing window is open
-                if (isSmoothWindowOpen)
-                {
-                    if (smooList.Count == 0) return;
+                    for (int i = 0; i < guideArr.Count; i++)
+                    {
+                        guideArr[i].DrawPolygon(currentRefTrack.mode != TrackMode.bndCurve ? PrimitiveType.LineStrip : PrimitiveType.LineLoop);
+                    }
 
                     GL.LineWidth(Settings.User.setDisplay_lineWidth);
-                    GL.Color3(0.930f, 0.92f, 0.260f);
-                    smooList.DrawPolygon(PrimitiveType.LineStrip);
+                    GL.Color4(0.2, 0.75, 0.2, 0.6);
+
+                    for (int i = 0; i < guideArr.Count; i++)
+                    {
+                        guideArr[i].DrawPolygon(currentRefTrack.mode != TrackMode.bndCurve ? PrimitiveType.LineStrip : PrimitiveType.LineLoop);
+                    }
+                }
+
+                //Draw Tracks
+                if (currentRefTrack != null && currentGuidanceTrack != null && currentGuidanceTrack.Count > 0) //normal
+                {
+                    GL.LineWidth(Settings.User.setDisplay_lineWidth * 4);
+                    GL.Color3(0, 0, 0);
+
+                    //ablines and curves are a line - the rest a loop
+                    currentGuidanceTrack.DrawPolygon(currentRefTrack.mode <= TrackMode.Curve ? PrimitiveType.LineStrip : PrimitiveType.LineLoop);
+
+                    GL.LineWidth(Settings.User.setDisplay_lineWidth);
+                    GL.Color3(0.95f, 0.2f, 0.95f);
+
+                    currentGuidanceTrack.DrawPolygon(currentRefTrack.mode <= TrackMode.Curve ? PrimitiveType.LineStrip : PrimitiveType.LineLoop);
+
+                    mf.yt.DrawYouTurn();
+                }
+
+                //draw reference lines
+                if (gArr != null && gArr.Count != 0)
+                {
+                    GL.LineWidth(1);
+                    GL.Color3(0.95f, 0.5f, 0.5f);
+
+                    for (int i = 0; i < gArr.Count; i++)
+                    {
+                        if (!gArr[i].isVisible) continue;
+                        gArr[i].curvePts.DrawPolygon(PrimitiveType.LineStrip);
+                    }
+                }
+
+                if (currentRefTrack != null)
+                {
+                    if (currentRefTrack.mode != TrackMode.waterPivot)
+                    {
+                        if (currentRefTrack.curvePts == null || currentRefTrack.curvePts.Count == 0) return;
+
+                        GL.LineWidth(Settings.User.setDisplay_lineWidth * 2);
+                        GL.Color3(0.96, 0.2f, 0.2f);
+                        currentRefTrack.curvePts.DrawPolygon(PrimitiveType.Lines);
+
+                        if (mf.font.isFontOn)
+                        {
+                            GL.Color3(0.40f, 0.90f, 0.95f);
+                            mf.font.DrawText3D(currentRefTrack.ptA.easting, currentRefTrack.ptA.northing, "&A", true);
+                            mf.font.DrawText3D(currentRefTrack.ptB.easting, currentRefTrack.ptB.northing, "&B", true);
+                        }
+
+                        GL.PointSize(4);
+                        GL.Color3(0.95f, 0.992f, 0.95f);
+                        currentRefTrack.curvePts.DrawPolygon(PrimitiveType.Points);
+                    }
+                    else
+                    {
+                        GL.PointSize(15.0f);
+                        GL.Begin(PrimitiveType.Points);
+                        GL.Vertex3(currentRefTrack.ptA.easting, currentRefTrack.ptA.northing, 0);
+                        GL.End();
+                    }
                 }
             }
-
-            //Draw Tracks
-            if (currentGuidanceTrack.Count > 0 && !isSmoothWindowOpen) //normal. Smoothing window is not open.
+            catch (Exception e)
             {
-                GL.LineWidth(Settings.User.setDisplay_lineWidth * 4);
-                GL.Color3(0, 0, 0);
-
-                //ablines and curves are a line - the rest a loop
-                currentGuidanceTrack.DrawPolygon(currTrk.mode <= TrackMode.Curve ? PrimitiveType.LineStrip : PrimitiveType.LineLoop);
-
-                GL.LineWidth(Settings.User.setDisplay_lineWidth);
-                GL.Color3(0.95f, 0.2f, 0.95f);
-
-                if (currTrk.mode == TrackMode.waterPivot)
-                {
-                    GL.PointSize(15.0f);
-                    GL.Begin(PrimitiveType.Points);
-                    GL.Vertex3(currTrk.ptA.easting, currTrk.ptA.northing, 0);
-                    GL.End();
-                }
-
-                currentGuidanceTrack.DrawPolygon(currTrk.mode <= TrackMode.Curve ? PrimitiveType.LineStrip : PrimitiveType.LineLoop);
-
-                GL.PointSize(4);
-                GL.Color3(0.95f, 0.992f, 0.95f);
-                GL.Begin(PrimitiveType.Points);
-
-                for (int i = 0; i < currentGuidanceTrack.Count; i++)
-                {
-                    GL.Vertex3(currentGuidanceTrack[i].easting, currentGuidanceTrack[i].northing, 0);
-                }
-                GL.End();
-
-                mf.yt.DrawYouTurn();
-
-                /*
-
-                //GL.Disable(EnableCap.LineSmooth);
-
-                //GL.PointSize(12.0f);
-                //GL.Begin(PrimitiveType.Points);
-                //GL.Color3(0.920f, 0.6f, 0.30f);
-                ////for (int h = 0; h < currentGuidanceTrack.Count; h++) GL.Vertex3(currentGuidanceTrack[h].easting, currentGuidanceTrack[h].northing, 0);
-                //GL.Vertex3(currentGuidanceTrack[mf.gyd.A].easting, currentGuidanceTrack[mf.gyd.A].northing, 0);
-                //GL.End();
-
-                //GL.Begin(PrimitiveType.Points);
-                //GL.Color3(0.20f, 0.4f, 0.930f);
-                ////for (int h = 0; h < currentGuidanceTrack.Count; h++) GL.Vertex3(currentGuidanceTrack[h].easting, currentGuidanceTrack[h].northing, 0);
-                //GL.Vertex3(currentGuidanceTrack[mf.gyd.B].easting, currentGuidanceTrack[mf.gyd.B].northing, 0);
-                //GL.End();
-                */
+                Log.EventWriter("Exception Draw Track: " + e.ToString());
             }
         }
 
@@ -659,65 +552,198 @@ namespace Twol
 
                 GL.Disable(EnableCap.LineStipple);
             }
+            if (toolDesignPtsList.Count > 0)
+            {
+                GL.Color3(0.95f, 0.42f, 0.750f);
+                GL.LineWidth(10.0f);
+                toolDesignPtsList.DrawPolygon(PrimitiveType.Lines);
+            }
         }
 
-        public void MakePointMinimumSpacing(ref List<vec3> xList, double minDistance)
+        public void FinishToolLineRecording()
         {
-            int cnt = xList.Count;
-            if (cnt > 3)
+            mf.trks.toolDesignPtsList.Add(new vec3(mf.toolPivotPos));
+
+            //make a new tool track
+            var track = new CTrk(TrackMode.toolLineInner)
             {
-                //make sure point distance isn't too big
-                for (int i = 0; i < cnt - 1; i++)
+                name = (mf.gydTool.isboundaryLine ? "T_Outer " : "T_Inner ") + (mf.trks.gArr.Count + 1).ToString("000")
+            };
+
+            if (mf.gydTool.isboundaryLine) track.mode = TrackMode.toolLineOuter;
+
+            mf.trks.SmoothAB(ref mf.trks.toolDesignPtsList, 4);
+
+            mf.trks.toolDesignPtsList.CalculateHeadings(false);
+
+            double delta = 0;
+            int cont = mf.trks.toolDesignPtsList.Count;
+            vec3[] smList = new vec3[cont];
+            cont--;
+            mf.trks.toolDesignPtsList.CopyTo(smList);
+            mf.trks.toolDesignPtsList.Clear();
+            int counter = 0;
+            double check;
+
+            for (int i = 0; i < cont; i++)
+            {
+                if (i < 2 || i > cont - 3)
                 {
-                    int j = i + 1;
-                    //if (j == cnt) j = 0;
-                    double distance = glm.Distance(xList[i], xList[j]);
-                    if (distance > minDistance)
-                    {
-                        vec3 pointB = new vec3((xList[i].easting + xList[j].easting) / 2.0,
-                            (xList[i].northing + xList[j].northing) / 2.0,
-                            xList[i].heading);
-
-                        xList.Insert(j, pointB);
-                        cnt = xList.Count;
-                        i = -1;
-                    }
+                    mf.trks.toolDesignPtsList.Add(new vec3(smList[i]));
+                    continue;
                 }
+                check = (smList[i - 1].heading - smList[i].heading);
+                if (check > Math.PI || check < -Math.PI)
+                {
+                    if (check > 0) check -= glm.twoPI;
+                    else check += glm.twoPI;
+                }
+                delta += check;
+                if (Math.Abs(delta) > 0.01 || counter > 20)
+                {
+                    mf.trks.toolDesignPtsList.Add(new vec3(smList[i]));
+                    delta = 0;
+                    counter = 0;
+                }
+                counter++;
             }
-        }
 
-        //turning the visual line into the real reference line to use
-        public void SaveSmoothList(CTrk track)
-        {
-            if (smooList.Count > 3)
+            double x = 0, y = 0;
+
+            //write out the Curve Points and ave heading
+            foreach (vec3 item in toolDesignPtsList)
             {
-                smooList.CalculateHeadings(track.mode > TrackMode.Curve);
-                track.curvePts = smooList;
-                smooList = new List<vec3>();
+                track.curvePts.Add(item);
+                x += Math.Cos(item.heading);
+                y += Math.Sin(item.heading);
+            }
+            x /= toolDesignPtsList.Count;
+            y /= toolDesignPtsList.Count;
+
+            track.heading = Math.Atan2(y, x);
+            if (track.heading < 0) track.heading += glm.twoPI;
+
+            AddEndPoints(ref track.curvePts, 4);
+            AddStartPoints(ref track.curvePts, 4);
+
+            track.ptA = new vec2(track.curvePts[0].easting, track.curvePts[0].northing);
+            track.ptB = new vec2(track.curvePts[track.curvePts.Count - 1].easting, track.curvePts[track.curvePts.Count - 1].northing);
+
+            AddTrack(track);
+
+            mf.FileSaveNewToolTrack(track);
+        }
+
+        public void AddTrack(CTrk track)
+        {
+            if (track == null) return;
+
+            string name = track.name;
+
+            while (_gListArr.Any(t => t.name == name))
+                name += " ";
+
+            track.name = name;
+
+            _gListArr.Add(track);
+        }
+
+        public void SetTracks(List<CTrk> tracks)
+        {
+            _gListArr = tracks;
+        }
+
+        public void setTrack(CTrk track)
+        {
+            int index = _gListArr.FindIndex(item => item == track);
+            if (index != -1)
+            {
+                if (track == currentRefTrack)
+                    isTrackValid = false;
+                _gListArr[index] = track;
             }
         }
 
-        public void SmoothAB(ref List<vec3> points, int smPts, bool setSmoothList = true)
+        public int TrackIndex(CTrk track)
+        {
+            return _gListArr.FindIndex(item => item == track);
+        }
+
+        public void MoveTrackUp(CTrk track)
+        {
+            int index = _gListArr.IndexOf(track);
+            if (track == null || index == 0)
+                return;
+
+            _gListArr.Reverse(index - 1, 2);
+        }
+
+        public void MoveTrackDn(CTrk track)
+        {
+            int index = _gListArr.IndexOf(track);
+
+            if (track == null || index == (_gListArr.Count - 1))
+                return;
+
+            _gListArr.Reverse(index, 2);
+        }
+
+        public void RemoveTrack(CTrk track)
+        {
+            _gListArr.Remove(track);
+        }
+
+        public int GetVisibleTracks()
+        {
+            int tracksVisible = 0;
+            foreach (var track in gArr)
+            {
+                if (track.isVisible) tracksVisible++;
+            }
+            return tracksVisible;
+        }
+
+        public CTrk GetNextTrack(CTrk track, List<CTrk> gTemp, bool next = true, bool invisible = false)
+        {
+            int index = gTemp.FindIndex(x => x == track);
+
+            if (next)
+                return gTemp.Skip(index + 1).Concat(gTemp.Take(index)).FirstOrDefault(x => x.isVisible || invisible);
+            else
+                return gTemp.Take(index).Reverse().Concat(gTemp.Skip(index + 1).Reverse()).FirstOrDefault(x => x.isVisible || invisible);
+        }
+
+        public void GetNextTrack(bool next = true)
+        {
+            int index = _gListArr.FindIndex(x => x == currentRefTrack);
+
+            if (next)
+                currentRefTrack = gArr.Skip(index + 1).Concat(gArr.Take(index)).FirstOrDefault(x => x.isVisible);
+            else
+                currentRefTrack = gArr.Take(index).Reverse().Concat(gArr.Skip(index + 1).Reverse()).FirstOrDefault(x => x.isVisible);
+        }
+
+        public void SmoothAB(ref List<vec3> toBeSmoothedList, int smPts)
         {
             //countExit the reference list of original curve
-            int cnt = points.Count;
+            int cnt = toBeSmoothedList.Count;
 
             //the temp array
             vec3[] arr = new vec3[cnt];
 
-            //read the points before and after the setpoint
+            //read the toBeSmoothedList before and after the setpoint
             for (int s = 0; s < smPts / 2 && s < cnt; s++)
             {
-                arr[s].easting = points[s].easting;
-                arr[s].northing = points[s].northing;
-                arr[s].heading = points[s].heading;
+                arr[s].easting = toBeSmoothedList[s].easting;
+                arr[s].northing = toBeSmoothedList[s].northing;
+                arr[s].heading = toBeSmoothedList[s].heading;
             }
 
             for (int s = cnt - (smPts / 2); s < cnt; s++)
             {
-                arr[s].easting = points[s].easting;
-                arr[s].northing = points[s].northing;
-                arr[s].heading = points[s].heading;
+                arr[s].easting = toBeSmoothedList[s].easting;
+                arr[s].northing = toBeSmoothedList[s].northing;
+                arr[s].heading = toBeSmoothedList[s].heading;
             }
 
             //average them - center weighted average
@@ -725,18 +751,15 @@ namespace Twol
             {
                 for (int j = -smPts / 2; j < smPts / 2; j++)
                 {
-                    arr[i].easting += points[j + i].easting;
-                    arr[i].northing += points[j + i].northing;
+                    arr[i].easting += toBeSmoothedList[j + i].easting;
+                    arr[i].northing += toBeSmoothedList[j + i].northing;
                 }
                 arr[i].easting /= smPts;
                 arr[i].northing /= smPts;
-                arr[i].heading = points[i].heading;
+                arr[i].heading = toBeSmoothedList[i].heading;
             }
 
-            if (setSmoothList)
-                smooList = arr.ToList();
-            else
-                points = arr.ToList();
+            toBeSmoothedList = arr.ToList();
         }
 
         public CTrk CreateDesignedABTrack(bool isRefRightSide)
@@ -762,7 +785,7 @@ namespace Twol
             track.ptB = new vec2(track.curvePts[track.curvePts.Count - 1]);
 
             //build the tail extensions
-            AddFirstLastPoints(ref track.curvePts, 200);
+            AddFirstLastPoints(ref track.curvePts, 300);
 
             AddTrack(track);
             return track;
@@ -773,7 +796,7 @@ namespace Twol
             int ptCnt = xList.Count - 1;
             vec3 start;
 
-            for (int i = 2; i < metersToAdd; i += 2)
+            for (int i = 1; i < 6; i += 2)
             {
                 vec3 pt = new vec3(xList[ptCnt]);
                 pt.easting += (Math.Sin(pt.heading) * i);
@@ -784,7 +807,28 @@ namespace Twol
             //and the beginning
             start = new vec3(xList[0]);
 
-            for (int i = 2; i < metersToAdd; i += 2)
+            for (int i = 1; i < 6; i += 2)
+            {
+                vec3 pt = new vec3(start);
+                pt.easting -= (Math.Sin(pt.heading) * i);
+                pt.northing -= (Math.Cos(pt.heading) * i);
+                xList.Insert(0, pt);
+            }
+
+            ptCnt = xList.Count - 1;
+
+            for (int i = 2; i < metersToAdd; i += 10)
+            {
+                vec3 pt = new vec3(xList[ptCnt]);
+                pt.easting += (Math.Sin(pt.heading) * i);
+                pt.northing += (Math.Cos(pt.heading) * i);
+                xList.Add(pt);
+            }
+
+            //and the beginning
+            start = new vec3(xList[0]);
+
+            for (int i = 2; i < metersToAdd; i += 10)
             {
                 vec3 pt = new vec3(start);
                 pt.easting -= (Math.Sin(pt.heading) * i);
@@ -900,7 +944,7 @@ namespace Twol
             }
             else
             {
-                //find the A and B points in the ref
+                //find the A and B toBeSmoothedList in the ref
 
                 int aClose = 0, bClose = 0;
                 double minDist = double.MaxValue;
@@ -938,8 +982,8 @@ namespace Twol
         public void ResetTrack()
         {
             currentGuidanceTrack?.Clear();
-            currTrk = null;
-            _gArr.Clear();
+            currentRefTrack = null;
+            _gListArr.Clear();
         }
 
         public bool PointOnLine(vec3 pt1, vec3 pt2, vec3 pt)
@@ -964,6 +1008,31 @@ namespace Twol
             miny = Math.Min(pt1.easting, pt2.easting);
             maxy = Math.Max(pt1.easting, pt2.easting);
             return _ = r.northing >= minx && r.northing <= maxx && (r.easting >= miny && r.easting <= maxy);
+        }
+
+        public void MakePointMinimumSpacing(ref List<vec3> xList, double minDistance)
+        {
+            int cnt = xList.Count;
+            if (cnt > 3)
+            {
+                //make sure point distance isn't too big
+                for (int i = 0; i < cnt - 1; i++)
+                {
+                    int j = i + 1;
+                    //if (j == cnt) j = 0;
+                    double distance = glm.Distance(xList[i], xList[j]);
+                    if (distance > minDistance)
+                    {
+                        vec3 pointB = new vec3((xList[i].easting + xList[j].easting) / 2.0,
+                            (xList[i].northing + xList[j].northing) / 2.0,
+                            xList[i].heading);
+
+                        xList.Insert(j, pointB);
+                        cnt = xList.Count;
+                        i = -1;
+                    }
+                }
+            }
         }
 
         private List<vec3> GenerateEquidistantPoints(List<vec3> pts, double spacing, bool isLoop)
@@ -1007,7 +1076,7 @@ namespace Twol
             // Add the first point
             result.Add(new vec3(pts[0]));
 
-            // sample points at multiples of spacing
+            // sample toBeSmoothedList at multiples of spacing
             double tDist = spacing;
             while (tDist < total - eps)
             {

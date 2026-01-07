@@ -82,8 +82,6 @@ namespace Twol
 
         public bool CheckInternetConnection()
         {
-            return false;
-
             // Fire-and-forget connectivity probe; returns immediately with last known state.
             ThreadPool.QueueUserWorkItem(_ =>
             {
@@ -956,19 +954,19 @@ namespace Twol
 
             if ((char)keyData == hotkeys[6]) // Snap/Prioritu click
             {
-                trk.SnapToPivot(trk.currTrk);
+                trks.SnapToPivot(trks.currentRefTrack);
                 return true;    // indicate that you handled this keystroke
             }
 
             if ((char)keyData == hotkeys[7])
             {
-                trk.NudgeTrack(trk.currTrk, -Settings.Vehicle.setAS_snapDistance);
+                trks.NudgeTrack(trks.currentRefTrack, -Settings.Vehicle.setAS_snapDistance);
                 return true;
             }
 
             if ((char)keyData == hotkeys[8])
             {
-                trk.NudgeTrack(trk.currTrk, Settings.Vehicle.setAS_snapDistance);
+                trks.NudgeTrack(trks.currentRefTrack, Settings.Vehicle.setAS_snapDistance);
                 return true;
             }
 

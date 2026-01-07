@@ -63,7 +63,7 @@ namespace Twol
             else
             {
                 //make sure point distance isn't too big
-                mf.trk.MakePointMinimumSpacing(ref mf.bnd.bndList[0].hdLine, 1.2);
+                mf.trks.MakePointMinimumSpacing(ref mf.bnd.bndList[0].hdLine, 1.2);
                 mf.bnd.bndList[0].hdLine.CalculateHeadings(true);
             }
 
@@ -625,7 +625,7 @@ namespace Twol
                 if (cnt > 3)
                 {
                     //make sure point distance isn't too big
-                    mf.trk.MakePointMinimumSpacing(ref desList, 1.2);
+                    mf.trks.MakePointMinimumSpacing(ref desList, 1.2);
                     desList.CalculateHeadings(true);
 
                     //write out the Points

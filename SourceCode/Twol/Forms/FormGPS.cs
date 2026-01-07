@@ -10,7 +10,6 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Windows.Forms;
 using Twol.Classes;
-using Twol.Classes.Tool;
 using Twol.Mapping;
 using Twol.Properties;
 
@@ -132,12 +131,7 @@ namespace Twol
         /// <summary>
         /// Track Instance
         /// </summary>
-        public CTracks trk;
-
-        /// <summary>
-        /// Tool Track Instance
-        /// </summary>
-        public CTracksTool trkTool;
+        public CTracks trks;
 
         /// <summary>
         /// Auto Headland YouTurn
@@ -294,10 +288,7 @@ namespace Twol
             ct = new CContour(this);
 
             //new track instance
-            trk = new CTracks(this);
-
-            //new track instance
-            trkTool = new CTracksTool(this);
+            trks = new CTracks(this);
 
             //new instance of contour mode
             hdl = new CHeadLine(this);
@@ -520,6 +511,7 @@ namespace Twol
 
             if (!Settings.IO.setUDP_isOn) ReconnectSerialPorts();
 
+            lastThisLocation = this.Location;
         }
 
         #region Shutdown Handling
@@ -559,11 +551,25 @@ namespace Twol
                 f.Close();
             }
 
+            f = Application.OpenForms["FormToolControl"];
+
+            if (f != null)
+            {
+                f.Focus();
+                f.Close();
+            }
+
             if (this.OwnedForms.Any())
             {
-                TimedMessageBox(2000, gStr.Get(gs.gsWindowsStillOpen), gStr.Get(gs.gsCloseAllWindowsFirst));
-                e.Cancel = true;
-                return;
+                f = null;
+                f = Application.OpenForms["FormToolManual"];
+
+                if (f == null)
+                {
+                    TimedMessageBox(2000, gStr.Get(gs.gsWindowsStillOpen), gStr.Get(gs.gsCloseAllWindowsFirst));
+                    e.Cancel = true;
+                    return;
+                }
             }
 
             int choice = SaveOrNot();
@@ -680,6 +686,63 @@ namespace Twol
             Panel_IO_Location();
         }
 
+        private void FormGPS_Move(object sender, EventArgs e)
+        {
+            Form f = Application.OpenForms["FormGPSData"];
+            if (f != null)
+            {
+                f.Top = this.Top + this.Height / 2 - GPSDataWindowTopOffset;
+                f.Left = this.Left + GPSDataWindowLeft;
+            }
+
+            f = Application.OpenForms["FormFieldData"];
+            if (f != null)
+            {
+                f.Top = this.Top + this.Height / 2 - GPSDataWindowTopOffset;
+                f.Left = this.Left + GPSDataWindowLeft;
+            }
+
+            f = Application.OpenForms["FormPan"];
+            if (f != null)
+            {
+                f.Top = this.Top + 75;
+                f.Left = this.Left + this.Width - 380;
+            }
+
+            Point delta = this.Location;
+
+
+            f = Application.OpenForms["FormToolManual"];
+            if (f != null)
+            {
+                f.Top += delta.Y - lastThisLocation.Y;
+                f.Left += delta.X - lastThisLocation.X;
+                Settings.User.setWindow_FormToolManualLocation.Y = f.Top;
+                Settings.User.setWindow_FormToolManualLocation.X = f.Left;
+            }
+
+            f = Application.OpenForms["FormToolPathRec"];
+            if (f != null)
+            {
+                f.Top += delta.Y - lastThisLocation.Y;
+                f.Left += delta.X - lastThisLocation.X;
+                Settings.User.setWindow_recordToolTracksLocation.Y = f.Top;
+                Settings.User.setWindow_recordToolTracksLocation.X = f.Left;
+            }
+
+            f = Application.OpenForms["FormToolControl"];
+            if (f != null)
+            {
+                f.Top += delta.Y - lastThisLocation.Y;
+                f.Left += delta.X - lastThisLocation.X;
+                Settings.User.setWindow_formToolControlLocation.Y = f.Top;
+                Settings.User.setWindow_formToolControlLocation.X = f.Left;
+            }
+
+            lastThisLocation = this.Location;
+        }
+
+        private Point lastThisLocation;
         public void FileSaveEverythingBeforeClosingField()
         {
             FieldMenuButtonEnableDisable(false);
@@ -727,7 +790,7 @@ namespace Twol
             btnContour.Enabled = true;
 
             btnAutoTrack.Image = Resources.AutoTrackOff;
-            trk.isAutoTrack = false;
+            trks.isAutoTrack = false;
 
             isJobStarted = true;
             btnFieldStats.Visible = true;
@@ -737,6 +800,18 @@ namespace Twol
             SetSectionButtonVisible(true);
 
             PanelsAndOGLSize();
+
+            if (Settings.Tool.setToolSteer.isFollowCurrent && !Settings.Tool.setToolSteer.isRecordToolLine)
+            {
+                Form form = new FormToolControl(this);
+                form.Show(this);
+            }
+
+            else if (Settings.Tool.setToolSteer.isFollowCurrent && Settings.Tool.setToolSteer.isRecordToolLine)
+            {
+                Form form = new FormToolPathRec(this);
+                form.Show(this);
+            }
         }
 
         public void JobClose()
@@ -869,7 +944,7 @@ namespace Twol
             SetAutoSteerButton(false, "Field Closed");
 
             //tracks
-            trk.ResetTrack();
+            trks.ResetTrack();
 
             //auto YouTurn shutdown
             SetYouTurnButton(false);
@@ -908,30 +983,6 @@ namespace Twol
             return PixelsVisible >= (Rec.Width * Rec.Height) * MinPercentOnScreen;
         }
 
-        private void FormGPS_Move(object sender, EventArgs e)
-        {
-            Form f = Application.OpenForms["FormGPSData"];
-            if (f != null)
-            {
-                f.Top = this.Top + this.Height / 2 - GPSDataWindowTopOffset;
-                f.Left = this.Left + GPSDataWindowLeft;
-            }
-
-            f = Application.OpenForms["FormFieldData"];
-            if (f != null)
-            {
-                f.Top = this.Top + this.Height / 2 - GPSDataWindowTopOffset;
-                f.Left = this.Left + GPSDataWindowLeft;
-            }
-
-            f = Application.OpenForms["FormPan"];
-            if (f != null)
-            {
-                f.Top = this.Top + 75;
-                f.Left = this.Left + this.Width - 380;
-            }
-        }
-
         public void KeyboardToText(TextBox sender, Form owner)
         {
             var colour = sender.BackColor;
@@ -948,7 +999,6 @@ namespace Twol
 
         public void FieldMenuButtonEnableDisable(bool isOn)
         {
-            SmoothABtoolStripMenu.Enabled = isOn;
             deleteContourPathsToolStripMenuItem.Enabled = isOn;
             boundaryToolToolStripMenu.Enabled = isOn;
 
