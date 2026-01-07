@@ -50,39 +50,33 @@ namespace Twol
             if (Settings.IO.setMod_isIMUConnected)
             {
                 btnIMU.Visible = true;
-                lblIMUComm.Visible = true;
                 cboxIsIMUModule.BackgroundImage = Properties.Resources.SwitchOn;
             }
             else
             {
                 btnIMU.Visible = false;
-                lblIMUComm.Visible = false;
                 cboxIsIMUModule.BackgroundImage = Properties.Resources.SwitchOff;
             }
 
             if (Settings.IO.setMod_isMachineConnected)
             {
                 btnMachine.Visible = true;
-                lblMachineComm.Visible = true;
                 cboxIsMachineModule.BackgroundImage = Properties.Resources.SwitchOn;
             }
             else
             {
                 btnMachine.Visible = false;
-                lblMachineComm.Visible = false;
                 cboxIsMachineModule.BackgroundImage = Properties.Resources.SwitchOff;
             }
 
             if (Settings.IO.setMod_isSteerConnected)
             {
                 btnSteer.Visible = true;
-                lblSteerComm.Visible = true;
                 cboxIsSteerModule.BackgroundImage = Properties.Resources.SwitchOn;
             }
             else
             {
                 btnSteer.Visible = false;
-                lblSteerComm.Visible = false;
                 cboxIsSteerModule.BackgroundImage = Properties.Resources.SwitchOff;
             }
 

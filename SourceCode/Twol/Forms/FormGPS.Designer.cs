@@ -84,6 +84,7 @@ namespace Twol
             this.distanceToolBtn = new System.Windows.Forms.ToolStripDropDownButton();
             this.toolStripDropDownButton4 = new System.Windows.Forms.ToolStripDropDownButton();
             this.boundaryToolToolStripMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.manualToolSteerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.layersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eventViewerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.guidelinesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -180,23 +181,7 @@ namespace Twol
             this.btnSprayGalPerMinActual = new System.Windows.Forms.Button();
             this.btnSprayGalPerAcre = new System.Windows.Forms.Button();
             this.lblAreaPossible = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.label8 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.button7 = new System.Windows.Forms.Button();
-            this.label9 = new System.Windows.Forms.Label();
             this.lblIsFlowing = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
             this.lbl_IO_Profile = new System.Windows.Forms.Label();
             this.btnStartStopNtrip = new System.Windows.Forms.Button();
             this.lblWatch = new System.Windows.Forms.Label();
@@ -209,9 +194,6 @@ namespace Twol
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.lblMachineComm = new System.Windows.Forms.Label();
-            this.lblSteerComm = new System.Windows.Forms.Label();
-            this.lblIMUComm = new System.Windows.Forms.Label();
             this.btnSteerSet = new System.Windows.Forms.Button();
             this.cboxIsIMUModule = new System.Windows.Forms.CheckBox();
             this.cboxIsSteerModule = new System.Windows.Forms.CheckBox();
@@ -241,7 +223,6 @@ namespace Twol
             this.btnFieldStats = new System.Windows.Forms.Button();
             this.button15 = new System.Windows.Forms.Button();
             this.nudToolOffset = new System.Windows.Forms.NumericUpDown();
-            this.manualToolSteerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStripFlag.SuspendLayout();
             this.statusStripLeft.SuspendLayout();
@@ -804,6 +785,13 @@ namespace Twol
             this.boundaryToolToolStripMenu.Text = "Boundary Tool";
             this.boundaryToolToolStripMenu.Click += new System.EventHandler(this.boundaryToolToolStripMenu_Click);
             // 
+            // manualToolSteerToolStripMenuItem
+            // 
+            this.manualToolSteerToolStripMenuItem.Name = "manualToolSteerToolStripMenuItem";
+            this.manualToolSteerToolStripMenuItem.Size = new System.Drawing.Size(450, 70);
+            this.manualToolSteerToolStripMenuItem.Text = "Manual Tool Steer";
+            this.manualToolSteerToolStripMenuItem.Click += new System.EventHandler(this.manualToolSteerToolStripMenuItem_Click);
+            // 
             // layersToolStripMenuItem
             // 
             this.layersToolStripMenuItem.Name = "layersToolStripMenuItem";
@@ -953,7 +941,7 @@ namespace Twol
             this.panelNavigation.Controls.Add(this.btn2D, 0, 1);
             this.panelNavigation.Controls.Add(this.btnGrid, 1, 2);
             this.panelNavigation.Controls.Add(this.btnN2D, 0, 2);
-            this.panelNavigation.Location = new System.Drawing.Point(796, 152);
+            this.panelNavigation.Location = new System.Drawing.Point(801, 76);
             this.panelNavigation.Name = "panelNavigation";
             this.panelNavigation.RowCount = 5;
             this.panelNavigation.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
@@ -2253,10 +2241,7 @@ namespace Twol
             this.tlpNozzle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.tlpNozzle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(50)))));
-            this.tlpNozzle.ColumnCount = 7;
-            this.tlpNozzle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 15F));
-            this.tlpNozzle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
-            this.tlpNozzle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
+            this.tlpNozzle.ColumnCount = 4;
             this.tlpNozzle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 15F));
             this.tlpNozzle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
             this.tlpNozzle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
@@ -2276,23 +2261,7 @@ namespace Twol
             this.tlpNozzle.Controls.Add(this.btnSprayGalPerMinActual, 2, 0);
             this.tlpNozzle.Controls.Add(this.btnSprayGalPerAcre, 1, 6);
             this.tlpNozzle.Controls.Add(this.lblAreaPossible, 1, 5);
-            this.tlpNozzle.Controls.Add(this.button1, 4, 6);
-            this.tlpNozzle.Controls.Add(this.label4, 5, 5);
-            this.tlpNozzle.Controls.Add(this.label5, 4, 5);
-            this.tlpNozzle.Controls.Add(this.label6, 4, 4);
-            this.tlpNozzle.Controls.Add(this.button2, 4, 3);
-            this.tlpNozzle.Controls.Add(this.label7, 4, 2);
-            this.tlpNozzle.Controls.Add(this.button3, 4, 1);
-            this.tlpNozzle.Controls.Add(this.button4, 5, 0);
-            this.tlpNozzle.Controls.Add(this.label8, 4, 0);
-            this.tlpNozzle.Controls.Add(this.checkBox1, 4, 8);
-            this.tlpNozzle.Controls.Add(this.button5, 5, 9);
-            this.tlpNozzle.Controls.Add(this.button6, 4, 9);
-            this.tlpNozzle.Controls.Add(this.checkBox2, 4, 10);
-            this.tlpNozzle.Controls.Add(this.button7, 4, 11);
-            this.tlpNozzle.Controls.Add(this.label9, 4, 7);
             this.tlpNozzle.Controls.Add(this.lblIsFlowing, 1, 7);
-            this.tlpNozzle.Controls.Add(this.label11, 6, 0);
             this.tlpNozzle.Location = new System.Drawing.Point(76, 50);
             this.tlpNozzle.Name = "tlpNozzle";
             this.tlpNozzle.RowCount = 12;
@@ -2309,7 +2278,7 @@ namespace Twol
             this.tlpNozzle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.95901F));
             this.tlpNozzle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.74393F));
             this.tlpNozzle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 14F));
-            this.tlpNozzle.Size = new System.Drawing.Size(205, 725);
+            this.tlpNozzle.Size = new System.Drawing.Size(210, 725);
             this.tlpNozzle.TabIndex = 545;
             this.tlpNozzle.Visible = false;
             // 
@@ -2599,287 +2568,6 @@ namespace Twol
             this.lblAreaPossible.Text = "10.9";
             this.lblAreaPossible.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.BackColor = System.Drawing.Color.Transparent;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.tlpNozzle.SetColumnSpan(this.button1, 2);
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.Olive;
-            this.button1.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Tahoma", 32F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.button1.Location = new System.Drawing.Point(210, 268);
-            this.button1.Margin = new System.Windows.Forms.Padding(0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(180, 63);
-            this.button1.TabIndex = 619;
-            this.button1.Text = "999.9";
-            this.button1.UseVisualStyleBackColor = false;
-            // 
-            // label4
-            // 
-            this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(240)))), ((int)(((byte)(255)))));
-            this.label4.Location = new System.Drawing.Point(303, 223);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(76, 25);
-            this.label4.TabIndex = 620;
-            this.label4.Text = "Ha";
-            // 
-            // label5
-            // 
-            this.label5.BackColor = System.Drawing.Color.Transparent;
-            this.label5.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(240)))), ((int)(((byte)(255)))));
-            this.label5.Location = new System.Drawing.Point(213, 223);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(76, 25);
-            this.label5.TabIndex = 621;
-            this.label5.Text = "10.9";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // label6
-            // 
-            this.label6.BackColor = System.Drawing.Color.Transparent;
-            this.tlpNozzle.SetColumnSpan(this.label6, 2);
-            this.label6.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(240)))), ((int)(((byte)(255)))));
-            this.label6.Location = new System.Drawing.Point(213, 190);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(158, 29);
-            this.label6.TabIndex = 622;
-            this.label6.Text = "Tank Gallons";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // button2
-            // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.BackColor = System.Drawing.Color.Transparent;
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.tlpNozzle.SetColumnSpan(this.button2, 2);
-            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.Olive;
-            this.button2.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.Aqua;
-            this.button2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.button2.Location = new System.Drawing.Point(210, 139);
-            this.button2.Margin = new System.Windows.Forms.Padding(0);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(180, 51);
-            this.button2.TabIndex = 623;
-            this.button2.Text = "9999.9";
-            this.button2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button2.UseVisualStyleBackColor = false;
-            // 
-            // label7
-            // 
-            this.label7.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label7.BackColor = System.Drawing.Color.Transparent;
-            this.tlpNozzle.SetColumnSpan(this.label7, 2);
-            this.label7.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(237, 95);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(126, 19);
-            this.label7.TabIndex = 624;
-            this.label7.Text = "Pressure";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // button3
-            // 
-            this.button3.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button3.AutoSize = true;
-            this.button3.BackColor = System.Drawing.Color.Transparent;
-            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.tlpNozzle.SetColumnSpan(this.button3, 2);
-            this.button3.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.button3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.ForeColor = System.Drawing.Color.Yellow;
-            this.button3.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.button3.Location = new System.Drawing.Point(254, 36);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(92, 55);
-            this.button3.TabIndex = 625;
-            this.button3.Text = "10";
-            this.button3.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button3.UseVisualStyleBackColor = false;
-            // 
-            // button4
-            // 
-            this.button4.BackColor = System.Drawing.Color.Transparent;
-            this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button4.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
-            this.button4.FlatAppearance.BorderSize = 0;
-            this.button4.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.button4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.button4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.ForeColor = System.Drawing.Color.Yellow;
-            this.button4.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.button4.Location = new System.Drawing.Point(300, 0);
-            this.button4.Margin = new System.Windows.Forms.Padding(0);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(82, 31);
-            this.button4.TabIndex = 626;
-            this.button4.Text = "10.9";
-            this.button4.UseVisualStyleBackColor = false;
-            // 
-            // label8
-            // 
-            this.label8.BackColor = System.Drawing.Color.Transparent;
-            this.label8.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(220)))), ((int)(((byte)(70)))));
-            this.label8.Location = new System.Drawing.Point(210, 0);
-            this.label8.Margin = new System.Windows.Forms.Padding(0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(82, 31);
-            this.label8.TabIndex = 627;
-            this.label8.Text = "Flow";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkBox1.Appearance = System.Windows.Forms.Appearance.Button;
-            this.checkBox1.BackColor = System.Drawing.Color.Transparent;
-            this.tlpNozzle.SetColumnSpan(this.checkBox1, 2);
-            this.checkBox1.FlatAppearance.BorderColor = System.Drawing.Color.Olive;
-            this.checkBox1.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.checkBox1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.checkBox1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.checkBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBox1.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox1.ForeColor = System.Drawing.Color.White;
-            this.checkBox1.Location = new System.Drawing.Point(210, 372);
-            this.checkBox1.Margin = new System.Windows.Forms.Padding(0);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(180, 49);
-            this.checkBox1.TabIndex = 628;
-            this.checkBox1.Text = "Rate: 1";
-            this.checkBox1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.checkBox1.UseVisualStyleBackColor = false;
-            // 
-            // button5
-            // 
-            this.button5.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button5.BackColor = System.Drawing.Color.Transparent;
-            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button5.FlatAppearance.BorderColor = System.Drawing.Color.Olive;
-            this.button5.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.button5.FlatAppearance.MouseDownBackColor = System.Drawing.Color.PowderBlue;
-            this.button5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Font = new System.Drawing.Font("Tahoma", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.ForeColor = System.Drawing.Color.Black;
-            this.button5.Image = global::Twol.Properties.Resources.UpArrow64;
-            this.button5.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.button5.Location = new System.Drawing.Point(314, 447);
-            this.button5.Margin = new System.Windows.Forms.Padding(0);
-            this.button5.Name = "button5";
-            this.button5.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.button5.Size = new System.Drawing.Size(62, 62);
-            this.button5.TabIndex = 629;
-            this.button5.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button5.UseVisualStyleBackColor = false;
-            // 
-            // button6
-            // 
-            this.button6.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button6.BackColor = System.Drawing.Color.Transparent;
-            this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button6.FlatAppearance.BorderColor = System.Drawing.Color.Olive;
-            this.button6.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.button6.FlatAppearance.MouseDownBackColor = System.Drawing.Color.PowderBlue;
-            this.button6.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Font = new System.Drawing.Font("Tahoma", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button6.ForeColor = System.Drawing.Color.Black;
-            this.button6.Image = global::Twol.Properties.Resources.DnArrow64;
-            this.button6.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.button6.Location = new System.Drawing.Point(224, 447);
-            this.button6.Margin = new System.Windows.Forms.Padding(0);
-            this.button6.Name = "button6";
-            this.button6.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.button6.Size = new System.Drawing.Size(62, 62);
-            this.button6.TabIndex = 630;
-            this.button6.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button6.UseVisualStyleBackColor = false;
-            // 
-            // checkBox2
-            // 
-            this.checkBox2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.checkBox2.Appearance = System.Windows.Forms.Appearance.Button;
-            this.checkBox2.BackColor = System.Drawing.Color.DarkRed;
-            this.checkBox2.Checked = true;
-            this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.tlpNozzle.SetColumnSpan(this.checkBox2, 2);
-            this.checkBox2.FlatAppearance.BorderColor = System.Drawing.Color.Olive;
-            this.checkBox2.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(50)))), ((int)(((byte)(20)))));
-            this.checkBox2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBox2.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox2.ForeColor = System.Drawing.Color.White;
-            this.checkBox2.Location = new System.Drawing.Point(237, 554);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.checkBox2.Size = new System.Drawing.Size(126, 55);
-            this.checkBox2.TabIndex = 631;
-            this.checkBox2.Text = "Auto";
-            this.checkBox2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.checkBox2.UseVisualStyleBackColor = false;
-            // 
-            // button7
-            // 
-            this.button7.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button7.BackColor = System.Drawing.Color.Transparent;
-            this.button7.BackgroundImage = global::Twol.Properties.Resources.SpecialFunctions;
-            this.button7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.tlpNozzle.SetColumnSpan(this.button7, 2);
-            this.button7.FlatAppearance.BorderColor = System.Drawing.Color.Olive;
-            this.button7.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.button7.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.button7.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button7.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button7.ForeColor = System.Drawing.Color.Aqua;
-            this.button7.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.button7.Location = new System.Drawing.Point(258, 642);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(84, 48);
-            this.button7.TabIndex = 632;
-            this.button7.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button7.UseVisualStyleBackColor = false;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.BackColor = System.Drawing.Color.OrangeRed;
-            this.tlpNozzle.SetColumnSpan(this.label9, 2);
-            this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label9.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(213, 331);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(174, 15);
-            this.label9.TabIndex = 651;
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // lblIsFlowing
             // 
             this.lblIsFlowing.AutoSize = true;
@@ -2892,18 +2580,6 @@ namespace Twol
             this.lblIsFlowing.Size = new System.Drawing.Size(174, 15);
             this.lblIsFlowing.TabIndex = 617;
             this.lblIsFlowing.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.BackColor = System.Drawing.Color.Silver;
-            this.label11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label11.Location = new System.Drawing.Point(393, 0);
-            this.label11.Name = "label11";
-            this.tlpNozzle.SetRowSpan(this.label11, 13);
-            this.label11.Size = new System.Drawing.Size(9, 725);
-            this.label11.TabIndex = 652;
-            this.label11.Text = "label11";
             // 
             // lbl_IO_Profile
             // 
@@ -3021,9 +2697,6 @@ namespace Twol
             this.panel_IO.Controls.Add(this.label3);
             this.panel_IO.Controls.Add(this.label2);
             this.panel_IO.Controls.Add(this.label1);
-            this.panel_IO.Controls.Add(this.lblMachineComm);
-            this.panel_IO.Controls.Add(this.lblSteerComm);
-            this.panel_IO.Controls.Add(this.lblIMUComm);
             this.panel_IO.Controls.Add(this.btnSteerSet);
             this.panel_IO.Controls.Add(this.cboxIsIMUModule);
             this.panel_IO.Controls.Add(this.cboxIsSteerModule);
@@ -3091,43 +2764,6 @@ namespace Twol
             this.label1.TabIndex = 558;
             this.label1.Text = "RTK";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblMachineComm
-            // 
-            this.lblMachineComm.BackColor = System.Drawing.Color.Silver;
-            this.lblMachineComm.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMachineComm.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblMachineComm.Location = new System.Drawing.Point(347, 143);
-            this.lblMachineComm.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblMachineComm.Name = "lblMachineComm";
-            this.lblMachineComm.Size = new System.Drawing.Size(42, 36);
-            this.lblMachineComm.TabIndex = 557;
-            this.lblMachineComm.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // lblSteerComm
-            // 
-            this.lblSteerComm.BackColor = System.Drawing.Color.Silver;
-            this.lblSteerComm.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSteerComm.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblSteerComm.Location = new System.Drawing.Point(347, 213);
-            this.lblSteerComm.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblSteerComm.Name = "lblSteerComm";
-            this.lblSteerComm.Size = new System.Drawing.Size(42, 36);
-            this.lblSteerComm.TabIndex = 556;
-            this.lblSteerComm.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // lblIMUComm
-            // 
-            this.lblIMUComm.BackColor = System.Drawing.Color.Silver;
-            this.lblIMUComm.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblIMUComm.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblIMUComm.Location = new System.Drawing.Point(347, 73);
-            this.lblIMUComm.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblIMUComm.Name = "lblIMUComm";
-            this.lblIMUComm.Size = new System.Drawing.Size(42, 36);
-            this.lblIMUComm.TabIndex = 554;
-            this.lblIMUComm.Text = "COM12";
-            this.lblIMUComm.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnSteerSet
             // 
@@ -3671,7 +3307,7 @@ namespace Twol
             0,
             0,
             65536});
-            this.nudToolOffset.Location = new System.Drawing.Point(286, 121);
+            this.nudToolOffset.Location = new System.Drawing.Point(608, 623);
             this.nudToolOffset.Maximum = new decimal(new int[] {
             30,
             0,
@@ -3686,13 +3322,6 @@ namespace Twol
             this.nudToolOffset.Size = new System.Drawing.Size(86, 36);
             this.nudToolOffset.TabIndex = 651;
             this.nudToolOffset.ValueChanged += new System.EventHandler(this.nudToolOffset_ValueChanged);
-            // 
-            // manualToolSteerToolStripMenuItem
-            // 
-            this.manualToolSteerToolStripMenuItem.Name = "manualToolSteerToolStripMenuItem";
-            this.manualToolSteerToolStripMenuItem.Size = new System.Drawing.Size(450, 70);
-            this.manualToolSteerToolStripMenuItem.Text = "Manual Tool Steer";
-            this.manualToolSteerToolStripMenuItem.Click += new System.EventHandler(this.manualToolSteerToolStripMenuItem_Click);
             // 
             // FormGPS
             // 
@@ -3939,9 +3568,6 @@ namespace Twol
         private System.Windows.Forms.CheckBox cboxIsMachineModule;
         private System.Windows.Forms.CheckBox cboxIsIMUModule;
         public System.Windows.Forms.Button btnSteerSet;
-        private System.Windows.Forms.Label lblMachineComm;
-        private System.Windows.Forms.Label lblSteerComm;
-        private System.Windows.Forms.Label lblIMUComm;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
@@ -3949,23 +3575,7 @@ namespace Twol
         public System.Windows.Forms.Button button15;
         public System.Windows.Forms.Label lblTankArea;
         public System.Windows.Forms.Label lblAreaPossible;
-        private System.Windows.Forms.CheckBox checkBox2;
-        public System.Windows.Forms.Button button1;
-        public System.Windows.Forms.Label label4;
-        public System.Windows.Forms.Label label5;
-        public System.Windows.Forms.Label label6;
-        public System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Label label7;
-        public System.Windows.Forms.Button button3;
-        public System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.CheckBox checkBox1;
-        public System.Windows.Forms.Button button5;
-        public System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Label label9;
-        public System.Windows.Forms.Button button7;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button btnInternetConnection;
         private System.Windows.Forms.NumericUpDown nudToolOffset;
         private System.Windows.Forms.Button btnToolLineRecord;
