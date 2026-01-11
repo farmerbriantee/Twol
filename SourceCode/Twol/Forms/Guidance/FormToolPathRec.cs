@@ -38,21 +38,17 @@ namespace Twol
 
             if (mf.gydTool.isboundaryLine)
             {
-                btnOuterInner.Image = Properties.Resources.TramOuter;
-                lblOuterInner.Text = "Outer";
+                btnOuterInner.Image = Properties.Resources.FilterOuterToolLines;
             }
             else
             {
-                btnOuterInner.Image = Properties.Resources.TramLines;
-                lblOuterInner.Text = "Inner";
+                btnOuterInner.Image = Properties.Resources.FilterInnerToolLines;
             }
         }
 
         private void FormToolPathRec_Load(object sender, EventArgs e)
         {
             Location = Settings.User.setWindow_recordToolTracksLocation;
-            Size = Settings.User.setWindow_formRecordToolTracksSize;
-            UpdateMoveLabel();
 
             if (!mf.IsOnScreen(Location, Size, 1))
             {
@@ -64,15 +60,9 @@ namespace Twol
         private void FormToolPathRec_FormClosing(object sender, FormClosingEventArgs e)
         {
             Settings.User.setWindow_recordToolTracksLocation = Location;
-            Settings.User.setWindow_formRecordToolTracksSize = Size;
 
             //save entire list
             mf.FileSaveTracks();
-        }
-
-        private void UpdateMoveLabel()
-        {
-            mf.Activate();
         }
 
         private void btnRecStartStop_Click(object sender, EventArgs e)
@@ -87,33 +77,38 @@ namespace Twol
             {
                 btnRecStartStop.BackColor = Color.Transparent;
             }
+            mf.Activate();
         }
 
         private void bntOk_Click(object sender, EventArgs e)
         {
+            if (mf.gydTool.isGuidanceModeRecordNewTracks)
+            {
+                mf.gydTool.isGuidanceModeRecordNewTracks = false;
+                var form = new FormYes("Recording Stopped");
+                form.ShowDialog(this);
+            }
+
             Close();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            lblPointsRec.Text = mf.trkTool.designPtsList.Count.ToString();
-
-            lblTracks.Text = mf.trkTool.tArr.Count.ToString();
-
             if (mf.gydTool.isRecordingToolLine)
             {
-                if (this.BackColor == Color.AliceBlue)
+                if (btnRecStartStop.BackColor == Color.Green)
                 {
-                    this.BackColor = Color.Wheat;
+                    btnRecStartStop.BackColor = Color.LightGreen;
                 }
                 else
                 {
-                    this.BackColor = Color.AliceBlue;
+                    btnRecStartStop.BackColor = Color.Green;
                 }
             }
             else
             {
-                this.BackColor = Color.AliceBlue;
+                if (mf.gydTool.isGuidanceModeRecordNewTracks) btnRecStartStop.BackColor = Color.LightGreen;
+                else btnRecStartStop.BackColor = Color.Transparent;
             }
         }
 
@@ -123,14 +118,15 @@ namespace Twol
 
             if (mf.gydTool.isboundaryLine)
             {
-                btnOuterInner.Image = Properties.Resources.TramOuter;
-                lblOuterInner.Text = "Outer";
+                btnOuterInner.Image = Properties.Resources.FilterOuterToolLines;
             }
             else
             {
-                btnOuterInner.Image = Properties.Resources.TramLines;
-                lblOuterInner.Text = "Inner";
+                btnOuterInner.Image = Properties.Resources.FilterInnerToolLines;
             }
+
+            mf.trks.isTrackValid = false;
+            mf.Activate();
         }
     }
 }

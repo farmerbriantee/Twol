@@ -1,13 +1,14 @@
 ﻿//Please, if you use this, share the improvements
 
-using Twol.Classes;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
+using Twol.Classes;
 
 namespace Twol
 {
@@ -314,26 +315,32 @@ namespace Twol
             guidanceVehicleXTE = double.NaN;
             guidanceToolXTE = double.NaN;
 
+            if (trks.isAutoTrack && !ct.isContourBtnOn && !isBtnAutoSteerOn && trks.autoTrack3SecTimer >= 2)
+            {
+                trks.autoTrack3SecTimer = 0;
+                int idx = trks.FindClosestRefTrack(steerAxlePos);
+            }
+
             if (ct.isContourBtnOn)
             {
                 //quick hack will change later
-                trk.currentGuidanceTrack = ct.ctList;
+                trks.currentGuidanceTrack = ct.ctList;
             }
 
             //like normal
-            else if (trk.currTrk != null)
+            else if (trks.currentRefTrack != null)
             {
                 //build new current ref line if required
-                trk.GetDistanceFromRefTrack(trk.currTrk, pivotAxlePos);
+                trks.GetDistanceFromRefTrack(trks.currentRefTrack, pivotAxlePos);
             }
 
-            if (trk.currentGuidanceTrack.Count > 0)
+            if (trks.currentGuidanceTrack.Count > 0)
             {
-                gyd.Guidance(pivotAxlePos, steerAxlePos, yt.isYouTurnTriggered, yt.isYouTurnTriggered ? yt.ytList : trk.currentGuidanceTrack);
+                gyd.Guidance(pivotAxlePos, steerAxlePos, yt.isYouTurnTriggered, yt.isYouTurnTriggered ? yt.ytList : trks.currentGuidanceTrack);
 
                 if (Settings.Tool.setToolSteer.isFollowPivot && isJobStarted)
                 {
-                    gydTool.GuidanceFollowPivot(toolPivotPos, steerAxlePos, yt.isYouTurnTriggered, followPivotPoints);
+                    gydTool.GuidanceFollowPivot(yt.isYouTurnTriggered, followPivotPoints);
                 }
 
                 else if (Settings.Tool.setToolSteer.isRecordToolLine && isJobStarted)
@@ -434,7 +441,7 @@ namespace Twol
                 }
 
                 // is active mode for tool steer
-                if (Settings.Tool.setToolSteer.isFollowCurrent|| Settings.Tool.setToolSteer.isFollowPivot || Settings.Tool.setToolSteer.isFollowToolLine)
+                if (Settings.Tool.setToolSteer.isFollowCurrent|| Settings.Tool.setToolSteer.isFollowPivot)
                 {
                     PGN_233.pgn[PGN_233.speed10] = unchecked((byte)((int)(Math.Abs(avgSpeed) * 10.0)));
 
@@ -446,9 +453,22 @@ namespace Twol
                     PGN_233.pgn[PGN_233.xteVehHi] = unchecked((byte)(distX1000 >> 8));
                     PGN_233.pgn[PGN_233.xteVehLo] = unchecked((byte)(distX1000));
 
-                    distX1000 = (Int16)(glm.toDegrees(gpsHeading) * 10);
-                    PGN_233.pgn[PGN_233.headHi] = unchecked((byte)(distX1000 >> 8));
-                    PGN_233.pgn[PGN_233.headLo] = unchecked((byte)(distX1000));
+                    distX1000 = 0;
+                    if (gydTool.manualSteerTimer > 0)
+                    {
+                        gydTool.isZeroToolSteer = false;
+                        distX1000 = (Int16)(gydTool.isManualSteerRight ? Settings.Tool.setToolSteer.manualSteerPWM : -Settings.Tool.setToolSteer.manualSteerPWM);
+                    }
+
+                    if (gydTool.isZeroToolSteer) 
+                    {
+                            distX1000 = (Int16)(mc.actualToolAngleDegrees < 0 ? Settings.Tool.setToolSteer.manualSteerPWM : -Settings.Tool.setToolSteer.manualSteerPWM);
+
+                        if (Math.Abs(mc.actualToolAngleDegrees) < 2) gydTool.isZeroToolSteer = false;
+                    }
+
+                    PGN_233.pgn[PGN_233.manualHi] = unchecked((byte)(distX1000 >> 8));
+                    PGN_233.pgn[PGN_233.manualLo] = unchecked((byte)(distX1000));
 
                     if (!vehicle.isInFreeDriveMode)
                     {
@@ -511,7 +531,7 @@ namespace Twol
 
                         if (yt.youTurnPhase < 250)
                         {
-                            if (trk.currTrk != null)
+                            if (trks.currentRefTrack != null)
                             {
                                 yt.BuildCurveDubinsYouTurn();
                             }
@@ -687,7 +707,7 @@ namespace Twol
                 {
                     if (toolPivotTriggerDistanceSq > 0.5)
                     {
-                        trkTool.designPtsList.Add(new vec3(toolPivotPos));
+                        trks.toolDesignPtsList.Add(new vec3(toolPivotPos));
 
                         //save the north & east as previous
                         prevToolPivotPos.northing = toolPivotPos.northing;
@@ -881,7 +901,7 @@ namespace Twol
             distanceTriggerSq *= distanceTriggerSq;
 
             //finally fixed distance for making a curve line
-            if (trk.isRecordingCurveTrack) distanceTriggerSq *= 0.5;
+            if (trks.isRecordingCurveTrack) distanceTriggerSq *= 0.5;
 
             //precalc the sin and cos of heading * -1
             sinSectionHeading = Math.Sin(-toolPivotPos.heading);
@@ -1051,9 +1071,9 @@ namespace Twol
         //add the points for section, contour line points, Area Calc feature
         private void AddSectionOrPathPoints()
         {
-            if (trk.isRecordingCurveTrack)
+            if (trks.isRecordingCurveTrack)
             {
-                trk.designPtsList.Add(new vec3(pivotAxlePos.easting, pivotAxlePos.northing, pivotAxlePos.heading));
+                trks.designPtsList.Add(new vec3(pivotAxlePos.easting, pivotAxlePos.northing, pivotAxlePos.heading));
             }
 
             //save the north & east as previous

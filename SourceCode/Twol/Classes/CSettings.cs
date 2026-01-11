@@ -86,14 +86,17 @@
         public bool isFollowCurrent = false;
         public bool isPassiveSteering = false;
         public bool isFollowPivot = false;
-        public bool isFollowToolLine = false;
         public bool isRecordToolLine = false;
 
         public double antennaHeight = 0;
         public double antennaOffset = 0;
+        public double nudgeGlobal = 0;
 
         public double curvatureGain = 5.0;
         public double passiveIntegralGain = 0.005;
+
+        public byte manualSteerPWM = 125;
+        public int manualSteerSeconds = 2;
 
         public CToolSteerSettings(CToolSteerSettings _setting)
         {
@@ -106,7 +109,6 @@
             isFollowCurrent = _setting.isFollowCurrent;
             isPassiveSteering = _setting.isPassiveSteering;
             isFollowPivot = _setting.isFollowPivot;
-            isFollowToolLine = _setting.isFollowToolLine;
             isRecordToolLine = _setting.isRecordToolLine;
 
             gainP = _setting.gainP;
@@ -121,8 +123,13 @@
 
             antennaHeight = _setting.antennaHeight;
             antennaOffset = _setting.antennaOffset;
+            nudgeGlobal = _setting.nudgeGlobal;
+
             curvatureGain = _setting.curvatureGain;
             passiveIntegralGain = _setting.passiveIntegralGain;
+
+            manualSteerPWM = _setting.manualSteerPWM;
+            manualSteerSeconds = _setting.manualSteerSeconds;
         }
     }
 }

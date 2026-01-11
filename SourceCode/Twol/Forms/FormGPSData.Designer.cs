@@ -408,7 +408,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Black;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(147, 348);
+            this.ClientSize = new System.Drawing.Size(140, 350);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.lblAngularVelocity);
             this.Controls.Add(this.label15);

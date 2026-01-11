@@ -122,8 +122,8 @@ namespace Twol
                             break;
 
                         case 2:
-                            if (trk.currTrk != null)
-                                lblCurrentField.Text = "Line: " + trk.currTrk.name;
+                            if (trks.currentRefTrack != null)
+                                lblCurrentField.Text = "Line: " + trks.currentRefTrack.name;
                             else
                                 lblCurrentField.Text = "Line: " + gStr.Get(gs.gsNoGuidanceLines);
                             break;
@@ -242,6 +242,9 @@ namespace Twol
                 //wait to engage deadzone before time is up
                 vehicle.deadZoneDelayCounter++;
 
+                //auto find closest track counter
+                trks.autoTrack3SecTimer++;
+
                 //used for alarm flashing
                 isFlashOnOff = !isFlashOnOff;
 
@@ -272,6 +275,8 @@ namespace Twol
                 {
                     UpdateNozzleMainPanel();
                 }
+
+                if (gydTool.manualSteerTimer > 0) gydTool.manualSteerTimer--;
 
                 UpdateNTRIP();
             }
@@ -444,6 +449,13 @@ namespace Twol
             btnGPSTool.Visible = Settings.Tool.setToolSteer.isGPSToolActive;
 
             SetModulesOnOff();
+
+            if (Settings.Tool.setToolSteer.isFollowCurrent || Settings.Tool.setToolSteer.isFollowPivot || Settings.Tool.setToolSteer.isRecordToolLine)
+            {
+                //show FormToolManual
+                Form form = new FormToolManual(this);
+                form.Show(this);
+            }
         }
 
         public void SetFeatureSettings()
@@ -456,7 +468,6 @@ namespace Twol
             recordedPathStripMenu.Visible = Settings.User.setFeatures.isRecPathOn;
 
             //tools menu
-            SmoothABtoolStripMenu.Visible = Settings.User.setFeatures.isABSmoothOn;
             deleteContourPathsToolStripMenuItem.Visible = Settings.User.setFeatures.isHideContourOn;
 
             //left side
@@ -514,7 +525,6 @@ namespace Twol
 
             lblTankArea.Text = (Settings.User.isMetric ? "Ha" : "Acre");
 
-            
         }
 
         public void SetToolSettings()
@@ -553,7 +563,6 @@ namespace Twol
             resetEverythingToolStripMenuItem.Text = gStr.Get(gs.gsResetAllForSure);
 
             //Tools Menu
-            SmoothABtoolStripMenu.Text = gStr.Get(gs.gsSmoothABCurve);
             boundariesToolStripMenuItem.Text = gStr.Get(gs.gsBoundary);
             headlandToolStripMenuItem.Text = gStr.Get(gs.gsHeadland);
             headlandBuildToolStripMenuItem.Text = gStr.Get(gs.gsHeadland) + " Builder";
@@ -759,13 +768,13 @@ namespace Twol
 
                 bool istram = (tram.tramList.Count + tram.tramBndOuterArr.Count) > 0;
 
-                int tracksVisible = trk.GetVisibleTracks();
+                int tracksVisible = trks.GetVisibleTracks();
 
                 btnContourLock.Visible = ct.isContourBtnOn;
 
-                btnAutoSteer.Enabled = trk.currTrk != null || ct.isContourBtnOn;
+                btnAutoSteer.Enabled = trks.currentRefTrack != null || ct.isContourBtnOn;
 
-                bool validTrk = trk.currTrk != null && !ct.isContourBtnOn;
+                bool validTrk = trks.currentRefTrack != null && !ct.isContourBtnOn;
 
                 btnAutoYouTurn.Visible = validTrk && isBnd;
                 btnCycleLines.Visible = tracksVisible > 1 && validTrk;
@@ -777,6 +786,8 @@ namespace Twol
                 btnSnapToPivot.Visible = validTrk && Settings.User.setFeatures.isABLineOn;
                 btnAdjLeft.Visible = validTrk && Settings.User.setFeatures.isABLineOn;
                 btnAdjRight.Visible = validTrk && Settings.User.setFeatures.isABLineOn;
+
+                btnAutoTrack.Visible = tracksVisible > 1 && !ct.isContourBtnOn;
 
                 btnTramDisplayMode.Visible = istram;
                 btnHeadlandOnOff.Visible = isHdl;
@@ -812,14 +823,18 @@ namespace Twol
                         break;
 
                     case "4":
-                        panelRight.Controls.Add(btnCycleLinesBk);
+                        panelRight.Controls.Add(btnAutoTrack);
                         break;
 
                     case "5":
-                        panelRight.Controls.Add(btnCycleLines);
+                        panelRight.Controls.Add(btnCycleLinesBk);
                         break;
 
                     case "6":
+                        panelRight.Controls.Add(btnCycleLines);
+                        break;
+
+                    case "7":
                         panelRight.Controls.Add(btnContour);
                         panelRight.Controls.Add(btnContourLock);
                         break;
@@ -1072,7 +1087,7 @@ namespace Twol
 
                 if (isFieldStarted)
                 {
-                    if (!ct.isContourBtnOn && trk.currentGuidanceTrack.Count > 1)
+                    if (!ct.isContourBtnOn && trks.currentGuidanceTrack.Count > 1)
                     {
                         //uturn and swap uturn direction
                         if (point.Y < 150 && point.Y > 90)

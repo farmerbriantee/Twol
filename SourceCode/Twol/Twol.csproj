@@ -152,14 +152,12 @@
     <Compile Include="Classes\CBrightness.cs" />
     <Compile Include="Classes\ExtensionMethods.cs" />
     <Compile Include="Classes\CBoundary.cs" />
-    <Compile Include="Classes\CGuidance.cs" />
+    <Compile Include="Classes\Guidance\CGuidance.cs" />
     <Compile Include="Classes\CHeadLine.cs" />
     <Compile Include="Classes\CHello.cs" />
     <Compile Include="Classes\Language.cs" />
     <Compile Include="Classes\Log.cs" />
     <Compile Include="Classes\Tool\CGuidanceTool.cs" />
-    <Compile Include="Classes\Tool\CTracksTool.cs" />
-    <Compile Include="Classes\Tool\CTrkTool.cs" />
     <Compile Include="Classes\Mapping\Map.cs" />
     <Compile Include="Classes\Tool\CNozzle.cs" />
     <Compile Include="Classes\CPolygon.cs" />
@@ -181,6 +179,18 @@
     </Compile>
     <Compile Include="Forms\Guidance\FormABDrawHeading.designer.cs">
       <DependentUpon>FormABDrawHeading.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Guidance\FormToolControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Guidance\FormToolControl.designer.cs">
+      <DependentUpon>FormToolControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Guidance\FormToolManual.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Guidance\FormToolManual.designer.cs">
+      <DependentUpon>FormToolManual.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Guidance\FormToolPathRec.cs">
       <SubType>Form</SubType>
@@ -260,12 +270,12 @@
     <Compile Include="Classes\CAHRS.cs" />
     <Compile Include="Classes\Font.cs" />
     <Compile Include="Classes\CSim.cs" />
-    <Compile Include="Classes\CTracks.cs" />
+    <Compile Include="Classes\Guidance\CTracks.cs" />
     <Compile Include="Classes\CTram.cs" />
-    <Compile Include="Classes\CYouTurn.cs" />
+    <Compile Include="Classes\Guidance\CYouTurn.cs" />
     <Compile Include="Classes\CFlag.cs" />
     <Compile Include="Classes\CCamera.cs" />
-    <Compile Include="Classes\CContour.cs" />
+    <Compile Include="Classes\Guidance\CContour.cs" />
     <Compile Include="Classes\CModuleComm.cs" />
     <Compile Include="Classes\CNMEA.cs" />
     <Compile Include="Classes\Tool\CSection.cs" />
@@ -446,12 +456,6 @@
     <Compile Include="Forms\Field\FormFlags.Designer.cs">
       <DependentUpon>FormFlags.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Guidance\FormSmoothAB.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Guidance\FormSmoothAB.Designer.cs">
-      <DependentUpon>FormSmoothAB.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Guidance\FormBuildTracks.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -610,6 +614,12 @@
     <EmbeddedResource Include="Forms\FormYes.resx">
       <DependentUpon>FormYes.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Guidance\FormToolControl.resx">
+      <DependentUpon>FormToolControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Guidance\FormToolManual.resx">
+      <DependentUpon>FormToolManual.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Guidance\FormToolPathRec.resx">
       <DependentUpon>FormToolPathRec.cs</DependentUpon>
     </EmbeddedResource>
@@ -745,9 +755,6 @@
     <EmbeddedResource Include="Forms\Settings\FormSimCoords.resx">
       <DependentUpon>FormSimCoords.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Guidance\FormSmoothAB.resx">
-      <DependentUpon>FormSmoothAB.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormtimedMessage.resx">
       <DependentUpon>FormTimedMessage.cs</DependentUpon>
     </EmbeddedResource>
@@ -880,6 +887,10 @@
     <None Include="btnImages\InternetOn.png" />
     <None Include="btnImages\Images\z_Floor2.png" />
     <None Include="btnImages\ToolTrackRecord.png" />
+    <None Include="btnImages\FilterAllToolLines.png" />
+    <None Include="btnImages\FilterInnerToolLines.png" />
+    <None Include="btnImages\FilterNoToolLines.png" />
+    <None Include="btnImages\FilterOuterToolLines.png" />
     <Content Include="btnImages\ZoomOut.png" />
     <Content Include="License.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

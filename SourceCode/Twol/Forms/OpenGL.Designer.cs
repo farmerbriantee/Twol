@@ -1,10 +1,11 @@
-﻿using System;
-using OpenTK;
-using OpenTK.Graphics.OpenGL;
-using System.Windows.Forms;
-using System.Text;
-using System.Diagnostics;
+﻿using OpenTK;
 using OpenTK.Graphics;
+using OpenTK.Graphics.OpenGL;
+using System;
+using System.Diagnostics;
+using System.Text;
+using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
 
 namespace Twol
 {
@@ -465,22 +466,16 @@ namespace Twol
                     {
                         ct.DrawContourLine();
                     }
-                    else if (trk.currTrk != null)// draw the current and reference AB Lines or CurveAB Ref and line
+                    else if (trks.gArr != null && trks.gArr.Count > 0)// draw the ref tool lines
                     {
                         //when switching lines, draw the ghost
-                        trk.DrawTrack();
-                    }
-
-                    if (trkTool.tArr != null)// draw the ref tool lines
-                    {
-                        //when switching lines, draw the ghost
-                        trkTool.DrawTrack();
+                        trks.DrawTrack();
                     }
 
                     //draw line creations
-                    if (trk.isMakingTrack) trk.DrawNewTrack();
+                    if (trks.isMakingTrack) trks.DrawNewTrack();
 
-                    if (gydTool.isRecordingToolLine) trkTool.DrawNewTrack();
+                    if (gydTool.isRecordingToolLine) trks.DrawNewTrack();
 
                     #endregion
 
@@ -552,7 +547,7 @@ namespace Twol
                             GL.End();
                         }
 
-                        if (!Settings.Vehicle.setVehicle_isStanleyUsed && trk.currentGuidanceTrack.Count > 1)
+                        if (!Settings.Vehicle.setVehicle_isStanleyUsed && trks.currentGuidanceTrack.Count > 1)
                         {
                             GL.PointSize(16);
                             GL.Begin(PrimitiveType.Points);
@@ -610,7 +605,7 @@ namespace Twol
                         DrawSteerBarText();
                     }
 
-                    if (!ct.isContourBtnOn && trk.currTrk != null) DrawTrackInfo();
+                    if (!ct.isContourBtnOn && trks.currentRefTrack != null) DrawTrackInfo();
 
                     if (bnd.bndList.Count > 0 && yt.isYouTurnBtnOn && !ct.isContourBtnOn) DrawUTurnBtn();
 
@@ -2023,7 +2018,7 @@ namespace Twol
 
         private void DrawLightBarText()
         {
-            if (trk.currentGuidanceTrack.Count > 1 && !double.IsNaN(guidanceVehicleXTE))
+            if (trks.currentGuidanceTrack.Count > 1 && !double.IsNaN(guidanceVehicleXTE))
             {
                 avgPivDistance = avgPivDistance * 0.5 + guidanceVehicleXTE * 0.5;
 
@@ -2095,7 +2090,7 @@ namespace Twol
 
         private void DrawSteerBarText()
         {
-            if (trk.currentGuidanceTrack.Count > 1 && !double.IsNaN(guidanceVehicleXTE))
+            if (trks.currentGuidanceTrack.Count > 1 && !double.IsNaN(guidanceVehicleXTE))
             {
                 int spacing = oglMain.Width / 50;
                 if (spacing < 28) spacing = 28;
@@ -2329,19 +2324,19 @@ namespace Twol
         {
             string offs = "";
 
-            if (trk.currTrk.nudgeDistance != 0)
-                offs = ((int)(trk.currTrk.nudgeDistance * glm.m2InchOrCm)).ToString() + glm.unitsInCmNS;
+            if (trks.currentRefTrack.nudgeDistance != 0)
+                offs = ((int)((trks.currentRefTrack.nudgeDistance) * glm.m2InchOrCm)).ToString() + glm.unitsInCmNS;
 
             string dire;
 
-            if (trk.isHeadingSameWay) dire = "{";
+            if (trks.isHeadingSameWay) dire = "{";
             else dire = "}";
 
             GL.Color4(1.269, 1.25, 1.2510, 0.87);
-            if (trk.howManyPathsAway > -1)
-                dire = dire + (trk.howManyPathsAway + 1).ToString() + "R " + offs;
+            if (trks.howManyPathsAway > -1)
+                dire = dire + (trks.howManyPathsAway + 1).ToString() + "R " + offs;
             else
-                dire = dire + (-trk.howManyPathsAway).ToString() + "L " + offs;
+                dire = dire + (-trks.howManyPathsAway).ToString() + "L " + offs;
 
             int start = -(int)(((double)(dire.Length) * 0.45) * (20 * (1.0)));
             int down = 68 + (int)((double)(oglMain.Height - 600) / 12);

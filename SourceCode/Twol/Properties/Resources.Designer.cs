@@ -2052,6 +2052,46 @@ namespace Twol.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap FilterAllToolLines {
+            get {
+                object obj = ResourceManager.GetObject("FilterAllToolLines", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap FilterInnerToolLines {
+            get {
+                object obj = ResourceManager.GetObject("FilterInnerToolLines", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap FilterNoToolLines {
+            get {
+                object obj = ResourceManager.GetObject("FilterNoToolLines", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap FilterOuterToolLines {
+            get {
+                object obj = ResourceManager.GetObject("FilterOuterToolLines", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap First {
             get {
                 object obj = ResourceManager.GetObject("First", resourceCulture);

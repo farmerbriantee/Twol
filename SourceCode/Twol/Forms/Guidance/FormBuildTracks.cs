@@ -22,7 +22,7 @@ namespace Twol
         private bool isRefRightSide = true; //left side 0 middle 1 right 2
 
         private bool isOn = true;
-        private bool quick = false;
+        private readonly bool quick = false;
         public FormBuildTracks(Form _mf, bool quick)
         {
             mf = _mf as FormGPS;
@@ -55,15 +55,15 @@ namespace Twol
 
         private void FormBuildTracks_Load(object sender, EventArgs e)
         {
-            originalLine = mf.trk.currTrk;
+            originalLine = mf.trks.currentRefTrack;
 
             gTemp.Clear();
 
-            foreach (var item in mf.trk.gArr)
+            foreach (var item in mf.trks.gArr)
             {
                 gTemp.Add(new CTrk(item));
 
-                if (item == mf.trk.currTrk)
+                if (item == mf.trks.currentRefTrack)
                     selectedItem = item;
             }
 
@@ -87,7 +87,7 @@ namespace Twol
             if (quick)
             {
                 Location = Settings.User.setWindow_QuickABLocation;
-                mf.trk.designPtsList?.Clear();
+                mf.trks.designPtsList?.Clear();
             }
             else
             {
@@ -116,21 +116,21 @@ namespace Twol
         private void FormBuildTracks_FormClosing(object sender, FormClosingEventArgs e)
         {
             //reset to generate new reference
-            mf.trk.designPtsList?.Clear();
+            mf.trks.designPtsList?.Clear();
 
             if (isSaving)
             {
                 mf.FileSaveTracks();
 
                 if (selectedItem != null && selectedItem.isVisible)
-                    mf.trk.currTrk = selectedItem;
+                    mf.trks.currentRefTrack = selectedItem;
                 else
-                    mf.trk.GetNextTrack();
+                    mf.trks.GetNextTrack();
             }
             else
             {
-                mf.trk.SetTracks(gTemp);
-                mf.trk.currTrk = originalLine;//test this!
+                mf.trks.SetTracks(gTemp);
+                mf.trks.currentRefTrack = originalLine;//test this!
             }
 
             if (quick)
@@ -161,7 +161,7 @@ namespace Twol
             System.Drawing.Font backupfont = new System.Drawing.Font(base.Font.FontFamily, 18F, FontStyle.Regular);
             flp.Controls.Clear();
 
-            foreach (var track in mf.trk.gArr)
+            foreach (var track in mf.trks.gArr)
             {
                 //outer inner
                 Button a = new Button
@@ -225,10 +225,10 @@ namespace Twol
         {
             if (sender is Button b && b.Tag is CTrk track)
             {
-                int line = mf.trk.TrackIndex(track);
+                int line = mf.trks.TrackIndex(track);
                 track.isVisible = !track.isVisible;
 
-                for (int i = 0; i < mf.trk.gArr.Count; i++)
+                for (int i = 0; i < mf.trks.gArr.Count; i++)
                 {
                     flp.Controls[(i) * 3 + 1].BackColor = Color.AliceBlue;
                 }
@@ -243,8 +243,8 @@ namespace Twol
         {
             if (sender is TextBox t && t.Tag is CTrk track)
             {
-                int line = mf.trk.TrackIndex(track);
-                int numLines = mf.trk.gArr.Count;
+                int line = mf.trks.TrackIndex(track);
+                int numLines = mf.trks.gArr.Count;
 
                 //un highlight selected item
                 for (int i = 0; i < numLines; i++)
@@ -263,7 +263,7 @@ namespace Twol
 
         private void btnMoveUPGN_Click(object sender, EventArgs e)
         {
-            mf.trk.MoveTrackUp(selectedItem);
+            mf.trks.MoveTrackUp(selectedItem);
             int scrollPixels = flp.VerticalScroll.Value;
 
             scrollPixels -= 45;
@@ -278,7 +278,7 @@ namespace Twol
 
         private void btnMoveDn_Click(object sender, EventArgs e)
         {
-            mf.trk.MoveTrackDn(selectedItem);
+            mf.trks.MoveTrackDn(selectedItem);
 
             int scrollPixels = flp.VerticalScroll.Value;
 
@@ -296,10 +296,7 @@ namespace Twol
         {
             if (selectedItem != null)
             {
-                vec2 temp = selectedItem.ptA;
-                selectedItem.ptA = selectedItem.ptB;
-                selectedItem.ptB = temp;
-
+                (selectedItem.ptB, selectedItem.ptA) = (selectedItem.ptA, selectedItem.ptB);
                 selectedItem.heading += Math.PI;
                 if (selectedItem.heading > glm.twoPI) selectedItem.heading -= glm.twoPI;
 
@@ -341,9 +338,9 @@ namespace Twol
         {
             isOn = !isOn;
 
-            for (int i = 0; i < mf.trk.gArr.Count; i++)
+            for (int i = 0; i < mf.trks.gArr.Count; i++)
             {
-                mf.trk.gArr[i].isVisible = isOn;
+                mf.trks.gArr[i].isVisible = isOn;
             }
 
             UpdateTable();
@@ -351,7 +348,7 @@ namespace Twol
 
         private void btnNewTrack_Click(object sender, EventArgs e)
         {
-            mf.trk.designPtsList?.Clear();
+            mf.trks.designPtsList?.Clear();
             SetPanelVisible(panelChoose);
         }
 
@@ -359,7 +356,7 @@ namespace Twol
         {
             if (selectedItem != null)
             {
-                mf.trk.RemoveTrack(selectedItem);
+                mf.trks.RemoveTrack(selectedItem);
                 selectedItem = null;
 
                 UpdateTable();
@@ -372,7 +369,7 @@ namespace Twol
             if (selectedItem != null)
             {
                 selectedItem = new CTrk(selectedItem);
-                mf.trk.AddTrack(selectedItem);
+                mf.trks.AddTrack(selectedItem);
 
                 textBox1.Text = selectedItem.name + " Copy";
 
@@ -399,7 +396,7 @@ namespace Twol
             btnACurve.Enabled = true;
             btnBCurve.Enabled = false;
             btnPausePlay.Enabled = false;
-            mf.trk.designPtsList?.Clear();
+            mf.trks.designPtsList?.Clear();
 
             SetPanelVisible(panelCurve);
             mf.Activate();
@@ -408,7 +405,7 @@ namespace Twol
         private void btnzAPlus_Click(object sender, EventArgs e)
         {
             btnAPlus.Enabled = true;
-            mf.trk.designPtsList?.Clear();
+            mf.trks.designPtsList?.Clear();
             nudHeading.Enabled = false;
 
             SetPanelVisible(panelAPlus);
@@ -420,7 +417,7 @@ namespace Twol
             btnALine.Enabled = true;
             btnBLine.Enabled = false;
             btnPausePlay.Enabled = false;
-            mf.trk.designPtsList?.Clear();
+            mf.trks.designPtsList?.Clear();
 
             SetPanelVisible(panelABLine);
             mf.Activate();
@@ -452,9 +449,9 @@ namespace Twol
 
         private void btnPivot3Pt_Click(object sender, EventArgs e)
         {
-            mf.trk.designPtsList?.Clear();
-            mf.trk.designPtA.easting = 20000;
-            mf.trk.designPtB.easting = 20000;
+            mf.trks.designPtsList?.Clear();
+            mf.trks.designPtA.easting = 20000;
+            mf.trks.designPtB.easting = 20000;
 
             SetPanelVisible(panelPivot3Pt);
             mf.Activate();
@@ -474,15 +471,15 @@ namespace Twol
 
         private void btnACurve_Click(object sender, System.EventArgs e)
         {
-            if (mf.trk.isMakingTrack)
+            if (mf.trks.isMakingTrack)
             {
-                mf.trk.designPtsList.Add(new vec3(mf.pivotAxlePos.easting, mf.pivotAxlePos.northing, mf.pivotAxlePos.heading));
-                btnBCurve.Enabled = mf.trk.designPtsList.Count > 3;
+                mf.trks.designPtsList.Add(new vec3(mf.pivotAxlePos.easting, mf.pivotAxlePos.northing, mf.pivotAxlePos.heading));
+                btnBCurve.Enabled = mf.trks.designPtsList.Count > 3;
             }
             else
             {
-                mf.trk.designPtA.easting = mf.pivotAxlePos.easting;
-                mf.trk.designPtA.northing = mf.pivotAxlePos.northing;
+                mf.trks.designPtA.easting = mf.pivotAxlePos.easting;
+                mf.trks.designPtA.northing = mf.pivotAxlePos.northing;
 
                 lblCurveExists.Text = gStr.Get(gs.gsDriving);
 
@@ -493,48 +490,48 @@ namespace Twol
                 btnPausePlay.Enabled = true;
                 btnPausePlay.Visible = true;
 
-                mf.trk.isMakingTrack = true;
-                mf.trk.isRecordingCurveTrack = true;
+                mf.trks.isMakingTrack = true;
+                mf.trks.isRecordingCurveTrack = true;
             }
             mf.Activate();
         }
 
         private void btnBCurve_Click(object sender, System.EventArgs e)
         {
-            mf.trk.isMakingTrack = false;
-            mf.trk.isRecordingCurveTrack = false;
+            mf.trks.isMakingTrack = false;
+            mf.trks.isRecordingCurveTrack = false;
 
-            //mf.trk.designPtB.easting = mf.pivotAxlePos.easting;
-            //mf.trk.designPtB.northing = mf.pivotAxlePos.northing;
+            //mf.trks.designPtB.easting = mf.pivotAxlePos.easting;
+            //mf.trks.designPtB.northing = mf.pivotAxlePos.northing;
 
-            int cnt = mf.trk.designPtsList.Count;
+            int cnt = mf.trks.designPtsList.Count;
             if (cnt > 3)
             {
                 //make sure point distance isn't too big
-                mf.trk.MakePointMinimumSpacing(ref mf.trk.designPtsList, 0.5);
-                mf.trk.designPtsList.CalculateHeadings(false);
+                mf.trks.MakePointMinimumSpacing(ref mf.trks.designPtsList, 0.5);
+                mf.trks.designPtsList.CalculateHeadings(false);
 
                 var track = new CTrk(TrackMode.Curve);
 
                 //calculate average heading of line
                 double x = 0, y = 0;
-                foreach (vec3 pt in mf.trk.designPtsList)
+                foreach (vec3 pt in mf.trks.designPtsList)
                 {
                     x += Math.Cos(pt.heading);
                     y += Math.Sin(pt.heading);
                 }
-                x /= mf.trk.designPtsList.Count;
-                y /= mf.trk.designPtsList.Count;
+                x /= mf.trks.designPtsList.Count;
+                y /= mf.trks.designPtsList.Count;
                 double aveLineHeading = Math.Atan2(y, x);
                 if (aveLineHeading < 0) aveLineHeading += glm.twoPI;
 
                 track.heading = aveLineHeading;
 
-                mf.trk.SmoothAB(ref mf.trk.designPtsList, 4, false);
-                mf.trk.designPtsList.CalculateHeadings(false);
+                mf.trks.SmoothAB(ref mf.trks.designPtsList, 4);
+                mf.trks.designPtsList.CalculateHeadings(false);
 
                 //write out the Curve Points
-                foreach (vec3 item in mf.trk.designPtsList)
+                foreach (vec3 item in mf.trks.designPtsList)
                 {
                     track.curvePts.Add(item);
                 }
@@ -544,15 +541,15 @@ namespace Twol
 
                 double dist = (Settings.Tool.toolWidth - Settings.Tool.overlap) * (isRefRightSide ? 0.5 : -0.5) + Settings.Tool.offset;
 
-                mf.trk.NudgeRefTrack(track, dist);
+                mf.trks.NudgeRefTrack(track, dist);
 
                 track.ptA = new vec2(track.curvePts[0]);
                 track.ptB = new vec2(track.curvePts[track.curvePts.Count - 1]);
 
                 //build the tail extensions
-                mf.trk.AddFirstLastPoints(ref track.curvePts, 200);
+                mf.trks.AddFirstLastPoints(ref track.curvePts, 300);
 
-                mf.trk.AddTrack(track);
+                mf.trks.AddTrack(track);
                 selectedItem = track;
 
                 SetPanelVisible(panelName);
@@ -570,21 +567,21 @@ namespace Twol
 
         private void btnPausePlayCurve_Click(object sender, EventArgs e)
         {
-            if (mf.trk.isRecordingCurveTrack)
+            if (mf.trks.isRecordingCurveTrack)
             {
-                mf.trk.isRecordingCurveTrack = false;
+                mf.trks.isRecordingCurveTrack = false;
                 btnPausePlay.Image = Properties.Resources.BoundaryRecord;
                 //btnPausePlay.Text = gStr.Get(gs.gsRecord;
                 btnACurve.Enabled = true;
             }
             else
             {
-                mf.trk.isRecordingCurveTrack = true;
+                mf.trks.isRecordingCurveTrack = true;
                 btnPausePlay.Image = Properties.Resources.boundaryPause;
                 //btnPausePlay.Text = gStr.Get(gs.gsPause;
                 btnACurve.Enabled = false;
             }
-            btnBCurve.Enabled = mf.trk.designPtsList.Count > 3;
+            btnBCurve.Enabled = mf.trks.designPtsList.Count > 3;
             mf.Activate();
         }
 
@@ -602,19 +599,19 @@ namespace Twol
 
         private void btnALine_Click(object sender, EventArgs e)
         {
-            mf.trk.isMakingTrack = true;
+            mf.trks.isMakingTrack = true;
             btnALine.Enabled = false;
 
-            mf.trk.designPtA = new vec2(mf.pivotAxlePos);
+            mf.trks.designPtA = new vec2(mf.pivotAxlePos);
 
-            mf.trk.designPtB.easting = mf.trk.designPtA.easting - (Math.Sin(mf.pivotAxlePos.heading) * 1);
-            mf.trk.designPtB.northing = mf.trk.designPtA.northing - (Math.Cos(mf.pivotAxlePos.heading) * 1);
+            mf.trks.designPtB.easting = mf.trks.designPtA.easting - (Math.Sin(mf.pivotAxlePos.heading) * 1);
+            mf.trks.designPtB.northing = mf.trks.designPtA.northing - (Math.Cos(mf.pivotAxlePos.heading) * 1);
 
-            mf.trk.designLineEndA.easting = mf.trk.designPtA.easting - (Math.Sin(mf.pivotAxlePos.heading) * 1000);
-            mf.trk.designLineEndA.northing = mf.trk.designPtA.northing - (Math.Cos(mf.pivotAxlePos.heading) * 1000);
+            mf.trks.designLineEndA.easting = mf.trks.designPtA.easting - (Math.Sin(mf.pivotAxlePos.heading) * 1000);
+            mf.trks.designLineEndA.northing = mf.trks.designPtA.northing - (Math.Cos(mf.pivotAxlePos.heading) * 1000);
 
-            mf.trk.designLineEndB.easting = mf.trk.designPtA.easting + (Math.Sin(mf.pivotAxlePos.heading) * 1000);
-            mf.trk.designLineEndB.northing = mf.trk.designPtA.northing + (Math.Cos(mf.pivotAxlePos.heading) * 1000);
+            mf.trks.designLineEndB.easting = mf.trks.designPtA.easting + (Math.Sin(mf.pivotAxlePos.heading) * 1000);
+            mf.trks.designLineEndB.northing = mf.trks.designPtA.northing + (Math.Cos(mf.pivotAxlePos.heading) * 1000);
 
             btnBLine.Enabled = true;
             btnALine.Enabled = false;
@@ -628,38 +625,38 @@ namespace Twol
         private void btnBLine_Click(object sender, EventArgs e)
         {
             timer1.Enabled = false;
-            mf.trk.designPtB = new vec2(mf.pivotAxlePos);
+            mf.trks.designPtB = new vec2(mf.pivotAxlePos);
             btnBLine.BackColor = System.Drawing.Color.Teal;
 
-            mf.trk.designHeading = Math.Atan2(mf.trk.designPtB.easting - mf.trk.designPtA.easting,
-               mf.trk.designPtB.northing - mf.trk.designPtA.northing);
-            if (mf.trk.designHeading < 0) mf.trk.designHeading += glm.twoPI;
+            mf.trks.designHeading = Math.Atan2(mf.trks.designPtB.easting - mf.trks.designPtA.easting,
+               mf.trks.designPtB.northing - mf.trks.designPtA.northing);
+            if (mf.trks.designHeading < 0) mf.trks.designHeading += glm.twoPI;
 
             //make sure line is long enough
-            double len = glm.Distance(mf.trk.designPtA, mf.trk.designPtB);
+            double len = glm.Distance(mf.trks.designPtA, mf.trks.designPtB);
             if (len < 20)
             {
-                mf.trk.designPtB.easting = mf.trk.designPtA.easting + (Math.Sin(mf.trk.designHeading) * 30);
-                mf.trk.designPtB.northing = mf.trk.designPtA.northing + (Math.Cos(mf.trk.designHeading) * 30);
+                mf.trks.designPtB.easting = mf.trks.designPtA.easting + (Math.Sin(mf.trks.designHeading) * 30);
+                mf.trks.designPtB.northing = mf.trks.designPtA.northing + (Math.Cos(mf.trks.designHeading) * 30);
             }
 
-            mf.trk.designLineEndA.easting = mf.trk.designPtA.easting - (Math.Sin(mf.trk.designHeading) * 1000);
-            mf.trk.designLineEndA.northing = mf.trk.designPtA.northing - (Math.Cos(mf.trk.designHeading) * 1000);
+            mf.trks.designLineEndA.easting = mf.trks.designPtA.easting - (Math.Sin(mf.trks.designHeading) * 1000);
+            mf.trks.designLineEndA.northing = mf.trks.designPtA.northing - (Math.Cos(mf.trks.designHeading) * 1000);
 
-            mf.trk.designLineEndB.easting = mf.trk.designPtA.easting + (Math.Sin(mf.trk.designHeading) * 1000);
-            mf.trk.designLineEndB.northing = mf.trk.designPtA.northing + (Math.Cos(mf.trk.designHeading) * 1000);
+            mf.trks.designLineEndB.easting = mf.trks.designPtA.easting + (Math.Sin(mf.trks.designHeading) * 1000);
+            mf.trks.designLineEndB.northing = mf.trks.designPtA.northing + (Math.Cos(mf.trks.designHeading) * 1000);
             mf.Activate();
         }
 
         private void btnEnter_AB_Click(object sender, EventArgs e)
         {
             timer1.Enabled = false;
-            mf.trk.isMakingTrack = false;
+            mf.trks.isMakingTrack = false;
 
-            selectedItem = mf.trk.CreateDesignedABTrack(isRefRightSide);
+            selectedItem = mf.trks.CreateDesignedABTrack(isRefRightSide);
 
             textBox1.Text = "AB: " +
-                (Math.Round(glm.toDegrees(mf.trk.designHeading), 5)).ToString(CultureInfo.InvariantCulture) + "\u00B0 ";
+                (Math.Round(glm.toDegrees(mf.trks.designHeading), 5)).ToString(CultureInfo.InvariantCulture) + "\u00B0 ";
 
             SetPanelVisible(panelName);
             mf.Activate();
@@ -679,25 +676,25 @@ namespace Twol
 
         private void btnAPlus_Click(object sender, EventArgs e)
         {
-            mf.trk.isMakingTrack = true;
+            mf.trks.isMakingTrack = true;
 
-            mf.trk.designPtA = new vec2(mf.pivotAxlePos);
+            mf.trks.designPtA = new vec2(mf.pivotAxlePos);
 
-            mf.trk.designPtB.easting = mf.trk.designPtA.easting + (Math.Sin(mf.pivotAxlePos.heading) * 30);
-            mf.trk.designPtB.northing = mf.trk.designPtA.northing + (Math.Cos(mf.pivotAxlePos.heading) * 30);
+            mf.trks.designPtB.easting = mf.trks.designPtA.easting + (Math.Sin(mf.pivotAxlePos.heading) * 30);
+            mf.trks.designPtB.northing = mf.trks.designPtA.northing + (Math.Cos(mf.pivotAxlePos.heading) * 30);
 
-            mf.trk.designLineEndA.easting = mf.trk.designPtA.easting - (Math.Sin(mf.pivotAxlePos.heading) * 1000);
-            mf.trk.designLineEndA.northing = mf.trk.designPtA.northing - (Math.Cos(mf.pivotAxlePos.heading) * 1000);
+            mf.trks.designLineEndA.easting = mf.trks.designPtA.easting - (Math.Sin(mf.pivotAxlePos.heading) * 1000);
+            mf.trks.designLineEndA.northing = mf.trks.designPtA.northing - (Math.Cos(mf.pivotAxlePos.heading) * 1000);
 
-            mf.trk.designLineEndB.easting = mf.trk.designPtA.easting + (Math.Sin(mf.pivotAxlePos.heading) * 1000);
-            mf.trk.designLineEndB.northing = mf.trk.designPtA.northing + (Math.Cos(mf.pivotAxlePos.heading) * 1000);
+            mf.trks.designLineEndB.easting = mf.trks.designPtA.easting + (Math.Sin(mf.pivotAxlePos.heading) * 1000);
+            mf.trks.designLineEndB.northing = mf.trks.designPtA.northing + (Math.Cos(mf.pivotAxlePos.heading) * 1000);
 
-            mf.trk.designHeading = mf.pivotAxlePos.heading;
+            mf.trks.designHeading = mf.pivotAxlePos.heading;
 
             btnEnter_AB.Enabled = true;
             nudHeading.Enabled = true;
 
-            nudHeading.Value = glm.toDegrees(mf.trk.designHeading);
+            nudHeading.Value = glm.toDegrees(mf.trks.designHeading);
             timer1.Enabled = true;
             mf.Activate();
         }
@@ -707,17 +704,17 @@ namespace Twol
             timer1.Enabled = false;
 
             //original A pt.
-            mf.trk.designHeading = glm.toRadians((double)nudHeading.Value);
+            mf.trks.designHeading = glm.toRadians((double)nudHeading.Value);
 
             //start end of line
-            mf.trk.designPtB.easting = mf.trk.designPtA.easting + (Math.Sin(mf.trk.designHeading) * 30);
-            mf.trk.designPtB.northing = mf.trk.designPtA.northing + (Math.Cos(mf.trk.designHeading) * 30);
+            mf.trks.designPtB.easting = mf.trks.designPtA.easting + (Math.Sin(mf.trks.designHeading) * 30);
+            mf.trks.designPtB.northing = mf.trks.designPtA.northing + (Math.Cos(mf.trks.designHeading) * 30);
 
-            mf.trk.designLineEndA.easting = mf.trk.designPtA.easting - (Math.Sin(mf.trk.designHeading) * 1000);
-            mf.trk.designLineEndA.northing = mf.trk.designPtA.northing - (Math.Cos(mf.trk.designHeading) * 1000);
+            mf.trks.designLineEndA.easting = mf.trks.designPtA.easting - (Math.Sin(mf.trks.designHeading) * 1000);
+            mf.trks.designLineEndA.northing = mf.trks.designPtA.northing - (Math.Cos(mf.trks.designHeading) * 1000);
 
-            mf.trk.designLineEndB.easting = mf.trk.designPtA.easting + (Math.Sin(mf.trk.designHeading) * 1000);
-            mf.trk.designLineEndB.northing = mf.trk.designPtA.northing + (Math.Cos(mf.trk.designHeading) * 1000);
+            mf.trks.designLineEndB.easting = mf.trks.designPtA.easting + (Math.Sin(mf.trks.designHeading) * 1000);
+            mf.trks.designLineEndB.northing = mf.trks.designPtA.northing + (Math.Cos(mf.trks.designHeading) * 1000);
 
             mf.Activate();
         }
@@ -726,12 +723,12 @@ namespace Twol
         {
             timer1.Enabled = false;
 
-            mf.trk.isMakingTrack = false;
+            mf.trks.isMakingTrack = false;
 
-            selectedItem = mf.trk.CreateDesignedABTrack(isRefRightSide);
+            selectedItem = mf.trks.CreateDesignedABTrack(isRefRightSide);
 
             textBox1.Text = "A+" +
-                (Math.Round(glm.toDegrees(mf.trk.designHeading), 5)).ToString(CultureInfo.InvariantCulture) + "\u00B0 ";
+                (Math.Round(glm.toDegrees(mf.trks.designHeading), 5)).ToString(CultureInfo.InvariantCulture) + "\u00B0 ";
 
             SetPanelVisible(panelName);
             mf.Activate();
@@ -741,17 +738,17 @@ namespace Twol
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            mf.trk.designPtB = new vec2(mf.pivotAxlePos);
+            mf.trks.designPtB = new vec2(mf.pivotAxlePos);
 
-            mf.trk.designHeading = Math.Atan2(mf.trk.designPtB.easting - mf.trk.designPtA.easting,
-               mf.trk.designPtB.northing - mf.trk.designPtA.northing);
-            if (mf.trk.designHeading < 0) mf.trk.designHeading += glm.twoPI;
+            mf.trks.designHeading = Math.Atan2(mf.trks.designPtB.easting - mf.trks.designPtA.easting,
+               mf.trks.designPtB.northing - mf.trks.designPtA.northing);
+            if (mf.trks.designHeading < 0) mf.trks.designHeading += glm.twoPI;
 
-            mf.trk.designLineEndA.easting = mf.trk.designPtA.easting - (Math.Sin(mf.trk.designHeading) * 1000);
-            mf.trk.designLineEndA.northing = mf.trk.designPtA.northing - (Math.Cos(mf.trk.designHeading) * 1000);
+            mf.trks.designLineEndA.easting = mf.trks.designPtA.easting - (Math.Sin(mf.trks.designHeading) * 1000);
+            mf.trks.designLineEndA.northing = mf.trks.designPtA.northing - (Math.Cos(mf.trks.designHeading) * 1000);
 
-            mf.trk.designLineEndB.easting = mf.trk.designPtA.easting + (Math.Sin(mf.trk.designHeading) * 1000);
-            mf.trk.designLineEndB.northing = mf.trk.designPtA.northing + (Math.Cos(mf.trk.designHeading) * 1000);
+            mf.trks.designLineEndB.easting = mf.trks.designPtA.easting + (Math.Sin(mf.trks.designHeading) * 1000);
+            mf.trks.designLineEndB.northing = mf.trks.designPtA.northing + (Math.Cos(mf.trks.designHeading) * 1000);
         }
 
         #region KML Curve and line
@@ -830,24 +827,24 @@ namespace Twol
                     //2 points
                     if (designPtsList.Count == 2)
                     {
-                        mf.trk.designPtA.easting = designPtsList[0].easting;
-                        mf.trk.designPtA.northing = designPtsList[0].northing;
+                        mf.trks.designPtA.easting = designPtsList[0].easting;
+                        mf.trks.designPtA.northing = designPtsList[0].northing;
 
-                        mf.trk.designPtB.easting = designPtsList[1].easting;
-                        mf.trk.designPtB.northing = designPtsList[1].northing;
+                        mf.trks.designPtB.easting = designPtsList[1].easting;
+                        mf.trks.designPtB.northing = designPtsList[1].northing;
 
-                        mf.trk.designHeading = Math.Atan2(mf.trk.designPtB.easting - mf.trk.designPtA.easting,
-                           mf.trk.designPtB.northing - mf.trk.designPtA.northing);
-                        if (mf.trk.designHeading < 0) mf.trk.designHeading += glm.twoPI;
+                        mf.trks.designHeading = Math.Atan2(mf.trks.designPtB.easting - mf.trks.designPtA.easting,
+                           mf.trks.designPtB.northing - mf.trks.designPtA.northing);
+                        if (mf.trks.designHeading < 0) mf.trks.designHeading += glm.twoPI;
 
                         if (namelist.Count > i)
                         {
                             trackName = namelist[i + 1].InnerText;
                         }
                         else trackName = "AB: " +
-                            (Math.Round(glm.toDegrees(mf.trk.designHeading), 5)).ToString(CultureInfo.InvariantCulture) + "\u00B0 ";
+                            (Math.Round(glm.toDegrees(mf.trks.designHeading), 5)).ToString(CultureInfo.InvariantCulture) + "\u00B0 ";
 
-                        selectedItem = mf.trk.CreateDesignedABTrack(isRefRightSide);
+                        selectedItem = mf.trks.CreateDesignedABTrack(isRefRightSide);
 
                         //create a name
                         selectedItem.name = trackName;
@@ -855,13 +852,14 @@ namespace Twol
                     else if (designPtsList.Count > 2)
                     {
                         //make sure point distance isn't too big
-                        mf.trk.MakePointMinimumSpacing(ref designPtsList, 1.6);
+                        mf.trks.MakePointMinimumSpacing(ref designPtsList, 1.6);
                         designPtsList.CalculateHeadings(false);
 
-                        var track = new CTrk(TrackMode.Curve);
-
-                        track.ptA = new vec2(designPtsList[0]);
-                        track.ptB = new vec2(designPtsList[designPtsList.Count - 1]);
+                        var track = new CTrk(TrackMode.Curve)
+                        {
+                            ptA = new vec2(designPtsList[0]),
+                            ptB = new vec2(designPtsList[designPtsList.Count - 1])
+                        };
 
                         //calculate average heading of line
                         double x = 0, y = 0;
@@ -877,8 +875,8 @@ namespace Twol
                         track.heading = aveLineHeading;
 
                         //build the tail extensions
-                        mf.trk.AddFirstLastPoints(ref designPtsList, 200);
-                        //mf.trk.SmoothAB(ref designPtsList, 4, false);
+                        mf.trks.AddFirstLastPoints(ref designPtsList, 300);
+                        //mf.trks.SmoothAB(ref designPtsList, 4, false);
 
                         //write out the Curve Points
                         track.curvePts = designPtsList;
@@ -892,7 +890,7 @@ namespace Twol
 
                         track.name = trackName;
 
-                        mf.trk.AddTrack(track);
+                        mf.trks.AddTrack(track);
                         selectedItem = track;
                     }
                     else
@@ -933,24 +931,24 @@ namespace Twol
         {
             mf.pn.ConvertWGS84ToLocal((double)nudLatitudeA.Value, (double)nudLongitudeA.Value, out double nort, out double east);
 
-            mf.trk.designPtA.easting = east;
-            mf.trk.designPtA.northing = nort;
+            mf.trks.designPtA.easting = east;
+            mf.trks.designPtA.northing = nort;
 
             mf.pn.ConvertWGS84ToLocal((double)nudLatitudeB.Value, (double)nudLongitudeB.Value, out nort, out east);
-            mf.trk.designPtB.easting = east;
-            mf.trk.designPtB.northing = nort;
+            mf.trks.designPtB.easting = east;
+            mf.trks.designPtB.northing = nort;
 
             //calc heading
-            mf.trk.designHeading = Math.Atan2(mf.trk.designPtB.easting - mf.trk.designPtA.easting,
-               mf.trk.designPtB.northing - mf.trk.designPtA.northing);
-            if (mf.trk.designHeading < 0) mf.trk.designHeading += glm.twoPI;
+            mf.trks.designHeading = Math.Atan2(mf.trks.designPtB.easting - mf.trks.designPtA.easting,
+               mf.trks.designPtB.northing - mf.trks.designPtA.northing);
+            if (mf.trks.designHeading < 0) mf.trks.designHeading += glm.twoPI;
 
             //make sure line is long enough
-            double len = glm.Distance(mf.trk.designPtA, mf.trk.designPtB);
+            double len = glm.Distance(mf.trks.designPtA, mf.trks.designPtB);
             if (len < 20)
             {
-                mf.trk.designPtB.easting = mf.trk.designPtA.easting + (Math.Sin(mf.trk.designHeading) * 30);
-                mf.trk.designPtB.northing = mf.trk.designPtA.northing + (Math.Cos(mf.trk.designHeading) * 30);
+                mf.trks.designPtB.easting = mf.trks.designPtA.easting + (Math.Sin(mf.trks.designHeading) * 30);
+                mf.trks.designPtB.northing = mf.trks.designPtA.northing + (Math.Cos(mf.trks.designHeading) * 30);
             }
         }
 
@@ -958,12 +956,12 @@ namespace Twol
         {
             CalcHeadingAB();
 
-            mf.trk.isMakingTrack = false;
+            mf.trks.isMakingTrack = false;
 
-            selectedItem = mf.trk.CreateDesignedABTrack(isRefRightSide);
+            selectedItem = mf.trks.CreateDesignedABTrack(isRefRightSide);
 
             textBox1.Text = "AB: " +
-                (Math.Round(glm.toDegrees(mf.trk.designHeading), 5)).ToString(CultureInfo.InvariantCulture) + "\u00B0 ";
+                (Math.Round(glm.toDegrees(mf.trks.designHeading), 5)).ToString(CultureInfo.InvariantCulture) + "\u00B0 ";
 
             SetPanelVisible(panelName);
         }
@@ -982,24 +980,24 @@ namespace Twol
         {
             mf.pn.ConvertWGS84ToLocal((double)nudLatitudePlus.Value, (double)nudLongitudePlus.Value, out double nort, out double east);
 
-            mf.trk.designHeading = glm.toRadians((double)nudHeadingLatLonPlus.Value);
-            mf.trk.designPtA.easting = east;
-            mf.trk.designPtA.northing = nort;
+            mf.trks.designHeading = glm.toRadians((double)nudHeadingLatLonPlus.Value);
+            mf.trks.designPtA.easting = east;
+            mf.trks.designPtA.northing = nort;
 
-            mf.trk.designPtB.easting = mf.trk.designPtA.easting + (Math.Sin(mf.pivotAxlePos.heading) * 30);
-            mf.trk.designPtB.northing = mf.trk.designPtA.northing + (Math.Cos(mf.pivotAxlePos.heading) * 30);
+            mf.trks.designPtB.easting = mf.trks.designPtA.easting + (Math.Sin(mf.pivotAxlePos.heading) * 30);
+            mf.trks.designPtB.northing = mf.trks.designPtA.northing + (Math.Cos(mf.pivotAxlePos.heading) * 30);
         }
 
         private void btnEnter_LatLonPlus_Click(object sender, EventArgs e)
         {
             CalcHeadingAPlus();
 
-            mf.trk.isMakingTrack = false;
+            mf.trks.isMakingTrack = false;
 
-            selectedItem = mf.trk.CreateDesignedABTrack(isRefRightSide);
+            selectedItem = mf.trks.CreateDesignedABTrack(isRefRightSide);
 
             textBox1.Text = "A+" +
-                (Math.Round(glm.toDegrees(mf.trk.designHeading), 5)).ToString(CultureInfo.InvariantCulture) + "\u00B0 ";
+                (Math.Round(glm.toDegrees(mf.trks.designHeading), 5)).ToString(CultureInfo.InvariantCulture) + "\u00B0 ";
 
             SetPanelVisible(panelName);
         }
@@ -1011,8 +1009,8 @@ namespace Twol
 
         private void btnPivot1_Click(object sender, EventArgs e)
         {
-            mf.trk.designPtA = new vec2(mf.pivotAxlePos);
-            mf.trk.isMakingTrack = true;
+            mf.trks.designPtA = new vec2(mf.pivotAxlePos);
+            mf.trks.isMakingTrack = true;
             btnPivot2.Enabled = true;
             btnPivot1.Enabled = false;
 
@@ -1020,20 +1018,21 @@ namespace Twol
 
         private void btnPivot2_Click(object sender, EventArgs e)
         {
-            mf.trk.designPtB = new vec2(mf.pivotAxlePos);
+            mf.trks.designPtB = new vec2(mf.pivotAxlePos);
             btnPivot3.Enabled = true;
             btnPivot2.Enabled = false;
         }
 
         private void btnPivot3_Click(object sender, EventArgs e)
         {
-            mf.trk.isMakingTrack = false;
+            mf.trks.isMakingTrack = false;
 
-            var track = new CTrk(TrackMode.waterPivot);
+            var track = new CTrk(TrackMode.waterPivot)
+            {
+                ptA = FindCircleCenter(mf.pivotAxlePos, mf.trks.designPtA, mf.trks.designPtB)
+            };
 
-            track.ptA = FindCircleCenter(mf.pivotAxlePos, mf.trk.designPtA, mf.trk.designPtB);
-
-            mf.trk.AddTrack(track);
+            mf.trks.AddTrack(track);
             selectedItem = track;
 
             textBox1.Text = "Piv";
@@ -1086,11 +1085,12 @@ namespace Twol
         {
             mf.pn.ConvertWGS84ToLocal((double)nudLatitudePivot.Value, (double)nudLongitudePivot.Value, out double nort, out double east);
 
-            var track = new CTrk(TrackMode.waterPivot);
+            var track = new CTrk(TrackMode.waterPivot)
+            {
+                ptA = new vec2(east, nort)
+            };
 
-            track.ptA = new vec2(east, nort);
-
-            mf.trk.AddTrack(track);
+            mf.trks.AddTrack(track);
             selectedItem = track;
 
             textBox1.Text = "Piv";
@@ -1109,9 +1109,9 @@ namespace Twol
 
         private void btnCancelCurve_Click(object sender, EventArgs e)
         {
-            mf.trk.isMakingTrack = false;
-            mf.trk.isRecordingCurveTrack = false;
-            mf.trk.designPtsList?.Clear();
+            mf.trks.isMakingTrack = false;
+            mf.trks.isRecordingCurveTrack = false;
+            mf.trks.designPtsList?.Clear();
 
             if (quick)
             {

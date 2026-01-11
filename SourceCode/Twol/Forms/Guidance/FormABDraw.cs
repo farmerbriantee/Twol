@@ -43,7 +43,7 @@ namespace Twol
 
         private void FormABDraw_Load(object sender, EventArgs e)
         {
-            foreach (var item in mf.trk.gArr)
+            foreach (var item in mf.trks.gArr)
             {
                 gTemp.Add(new CTrk(item));
             }
@@ -74,12 +74,12 @@ namespace Twol
             if (!isCancel)
             {
                 //load tracks from temp
-                mf.trk.SetTracks(gTemp);
+                mf.trks.SetTracks(gTemp);
                 mf.FileSaveTracks();
 
                 if (selectedLine != null && selectedLine.isVisible)
                 {
-                    mf.trk.currTrk = selectedLine;
+                    mf.trks.currentRefTrack = selectedLine;
                 }
             }
             Settings.User.setWindow_abDrawSize = Size;
@@ -147,13 +147,13 @@ namespace Twol
 
         private void btnSelectCurve_Click(object sender, EventArgs e)
         {
-            selectedLine = mf.trk.GetNextTrack(selectedLine, gTemp, true, true);
+            selectedLine = mf.trks.GetNextTrack(selectedLine, gTemp, true, true);
             FixLabelsCurve();
         }
 
         private void btnSelectCurveBk_Click(object sender, EventArgs e)
         {
-            selectedLine = mf.trk.GetNextTrack(selectedLine, gTemp, false, true);
+            selectedLine = mf.trks.GetNextTrack(selectedLine, gTemp, false, true);
             FixLabelsCurve();
         }
 
@@ -168,7 +168,7 @@ namespace Twol
             if (selectedLine != null)
             {
                 gTemp.Remove(selectedLine);
-                mf.trk.GetNextTrack(selectedLine, gTemp, true, true);
+                mf.trks.GetNextTrack(selectedLine, gTemp, true, true);
                 FixLabelsCurve();
             }
         }
@@ -229,7 +229,7 @@ namespace Twol
                     track.ptB = new vec2(designPtsList[designPtsList.Count - 1]);
 
                     //make sure point distance isn't too big
-                    mf.trk.MakePointMinimumSpacing(ref designPtsList, 1.6);
+                    mf.trks.MakePointMinimumSpacing(ref designPtsList, 1.6);
                     designPtsList.CalculateHeadings(true);
 
                     //create a name
@@ -305,7 +305,7 @@ namespace Twol
                 track.ptB = new vec2(designPtsList[designPtsList.Count - 1]);
 
                 //make sure point distance isn't too big
-                mf.trk.MakePointMinimumSpacing(ref designPtsList, 1.6);
+                mf.trks.MakePointMinimumSpacing(ref designPtsList, 1.6);
                 designPtsList.CalculateHeadings(false);
 
                 //calculate average heading of line
@@ -322,8 +322,8 @@ namespace Twol
                 if (track.heading < 0) track.heading += glm.twoPI;
 
                 //build the tail extensions
-                mf.trk.AddFirstLastPoints(ref designPtsList, 200);
-                //mf.trk.SmoothAB(ref designPtsList, 2, false);
+                mf.trks.AddFirstLastPoints(ref designPtsList, 300);
+                //mf.trks.SmoothAB(ref designPtsList, 2, false);
 
                 //create a name
                 track.name = "Cu " +
@@ -396,7 +396,7 @@ namespace Twol
             track.curvePts.Add(new vec3(track.ptB, abHead));
 
             //build the tail extensions
-            mf.trk.AddFirstLastPoints(ref track.curvePts, 100);
+            mf.trks.AddFirstLastPoints(ref track.curvePts, 300);
 
             //create a name
             track.name = "AB: " +
@@ -468,7 +468,7 @@ namespace Twol
             track.curvePts.Add(new vec3(track.ptB, abHead));
 
             //build the tail extensions
-            mf.trk.AddFirstLastPoints(ref track.curvePts, 100);
+            mf.trks.AddFirstLastPoints(ref track.curvePts, 300);
 
             //create a name
             track.name = "AB: " +
@@ -586,7 +586,7 @@ namespace Twol
             track.curvePts.Add(new vec3(track.ptB, abHead));
 
             //build the tail extensions
-            mf.trk.AddFirstLastPoints(ref track.curvePts, 100);
+            mf.trks.AddFirstLastPoints(ref track.curvePts, 300);
 
             //create a name
             track.name = "AB: " +

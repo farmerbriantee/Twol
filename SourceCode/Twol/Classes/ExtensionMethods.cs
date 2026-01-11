@@ -195,11 +195,7 @@ namespace Twol
 
             if (disposing)
             {
-                if (m_components != null)
-                {
-                    m_components.Dispose();
-                }
-
+                m_components?.Dispose();
                 m_timerRepeater.Dispose();
             }
 

@@ -10,7 +10,7 @@ namespace Twol
 
         private bool toolSend = false, toolSend2 = false;
         private int counter = 0, toolCounterSettings = 0, toolCounterConfig = 0;
-        private int windowSizeState = 0;
+        private int windowSizeState = 1;
 
         //Form stuff
         public FormToolSteer(Form callingForm)
@@ -19,7 +19,7 @@ namespace Twol
             InitializeComponent();
 
             this.Text = gStr.Get(gs.gsToolSteerConfiguration);
-            this.Width = 390;
+            this.Width = 970;
             this.Height = 550;
 
             label19.Text = gStr.Get(gs.gsSpeedFactor);
@@ -29,7 +29,7 @@ namespace Twol
             label54.Text = gStr.Get(gs.gsOnDelay);
         }
 
-        private void FormSteer_Load(object sender, EventArgs e)
+        private void FormToolSteer_Load(object sender, EventArgs e)
         {
             Location = Settings.User.setWindow_steerSettingsLocation;
             //WAS Zero, CPD
@@ -77,15 +77,21 @@ namespace Twol
             //antenna
             nudAntennaHeight_Tool.Value = Settings.Tool.setToolSteer.antennaHeight;
             nudAntennaOffset_Tool.Value = Settings.Tool.setToolSteer.antennaOffset;
+            nudNudge.Value = Settings.Tool.setToolSteer.nudgeGlobal;
 
             cboxIsFollowCurrent.Checked = Settings.Tool.setToolSteer.isFollowCurrent;
             cboxIsPassiveSteering.Checked = Settings.Tool.setToolSteer.isPassiveSteering;
-            cboxIsFollowToolLine.Checked = Settings.Tool.setToolSteer.isFollowToolLine;
             cboxIsFollowPivot.Checked = Settings.Tool.setToolSteer.isFollowPivot;
             cboxIsRecordToolLine.Checked = Settings.Tool.setToolSteer.isRecordToolLine;
+
+            //active Tool
+            hsbarManualPWM_Percent.Value = (int)(Settings.Tool.setToolSteer.manualSteerPWM * 0.4);
+            hsbarManualSecondsOn.Value = Settings.Tool.setToolSteer.manualSteerSeconds;
+            lblManualPWM_Percent.Text = hsbarManualPWM_Percent.Value.ToString();
+            lblManualSecondsOn.Text = hsbarManualSecondsOn.Value.ToString();
         }
 
-        private void FormSteer_FormClosing(object sender, FormClosingEventArgs e)
+        private void FormToolSteer_FormClosing(object sender, FormClosingEventArgs e)
         {
             //settings
             Settings.Tool.setToolSteer.gainP = (byte)hsbarPGain_Tool.Value;
@@ -181,7 +187,7 @@ namespace Twol
             if (windowSizeState++ > 0) windowSizeState = 0;
             if (windowSizeState == 1)
             {
-                this.Size = new System.Drawing.Size(1060, 550);
+                this.Size = new System.Drawing.Size(970, 550);
                 btnExpand.Image = Properties.Resources.ArrowLeft;
             }
             else if (windowSizeState == 0)
@@ -275,13 +281,12 @@ namespace Twol
         private void ResetMode()
         {
             //default all off
-            Settings.Tool.setToolSteer.isGPSToolActive = (cboxIsFollowCurrent.Checked || cboxIsPassiveSteering.Checked || cboxIsFollowPivot.Checked || cboxIsFollowToolLine.Checked || cboxIsRecordToolLine.Checked);
+            Settings.Tool.setToolSteer.isGPSToolActive = (cboxIsFollowCurrent.Checked || cboxIsPassiveSteering.Checked || cboxIsFollowPivot.Checked || cboxIsRecordToolLine.Checked);
         }
 
         private void cboxIsRecordToolLine_Click(object sender, EventArgs e)
         {
             Settings.Tool.setToolSteer.isRecordToolLine = cboxIsRecordToolLine.Checked;
-            Settings.Tool.setToolSteer.isFollowToolLine = cboxIsFollowToolLine.Checked = false;
             ResetMode();
         }
 
@@ -289,7 +294,6 @@ namespace Twol
         {
             cboxIsPassiveSteering.Checked = Settings.Tool.setToolSteer.isPassiveSteering = false;
             Settings.Tool.setToolSteer.isFollowPivot = cboxIsFollowPivot.Checked = false;
-            Settings.Tool.setToolSteer.isFollowToolLine = cboxIsFollowToolLine.Checked = false;
 
             Settings.Tool.setToolSteer.isFollowCurrent = cboxIsFollowCurrent.Checked;
             ResetMode();
@@ -299,7 +303,6 @@ namespace Twol
         {
             cboxIsFollowCurrent.Checked = Settings.Tool.setToolSteer.isFollowCurrent = false;
             cboxIsPassiveSteering.Checked = Settings.Tool.setToolSteer.isPassiveSteering = false;
-            Settings.Tool.setToolSteer.isFollowToolLine = cboxIsFollowToolLine.Checked = false;
 
             Settings.Tool.setToolSteer.isFollowPivot = cboxIsFollowPivot.Checked;
             ResetMode();
@@ -312,7 +315,6 @@ namespace Twol
             Settings.Tool.setToolSteer.isFollowPivot = cboxIsFollowPivot.Checked = false;
             Settings.Tool.setToolSteer.isRecordToolLine = cboxIsRecordToolLine.Checked = false;
 
-            Settings.Tool.setToolSteer.isFollowToolLine = cboxIsFollowToolLine.Checked;
             ResetMode();
         }
 
@@ -320,7 +322,6 @@ namespace Twol
         {
             cboxIsFollowCurrent.Checked = Settings.Tool.setToolSteer.isFollowCurrent = false;
             Settings.Tool.setToolSteer.isFollowPivot = cboxIsFollowPivot.Checked = false;
-            Settings.Tool.setToolSteer.isFollowToolLine = cboxIsFollowToolLine.Checked = false;
 
             Settings.Tool.setToolSteer.isPassiveSteering = cboxIsPassiveSteering.Checked;
             ResetMode();
@@ -359,6 +360,23 @@ namespace Twol
         {
             toolSend2 = true;
             toolCounterConfig = 0;
+        }
+
+        private void hsbarManualPWM_Percent_Scroll(object sender, ScrollEventArgs e)
+        {
+            Settings.Tool.setToolSteer.manualSteerPWM = (byte)((double)(hsbarManualPWM_Percent.Value) * 2.5);
+            lblManualPWM_Percent.Text = hsbarManualPWM_Percent.Value.ToString();
+        }
+
+        private void hsbarManualSecondsOn_Scroll(object sender, ScrollEventArgs e)
+        {
+            Settings.Tool.setToolSteer.manualSteerSeconds = (int)hsbarManualSecondsOn.Value;
+            lblManualSecondsOn.Text = hsbarManualSecondsOn.Value.ToString();
+        }
+
+        private void nudNudge_ValueChanged(object sender, EventArgs e)
+        {
+            Settings.Tool.setToolSteer.nudgeGlobal = (double)(nudNudge.Value);
         }
 
         #endregion

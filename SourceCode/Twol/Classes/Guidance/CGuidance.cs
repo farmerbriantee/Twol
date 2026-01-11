@@ -57,7 +57,7 @@ namespace Twol
                 {
                     distanceFromCurrentLinePassiveTool = FindDistanceToSegment(mf.pnTool.fix, curList[A], curList[B], out _, out _, true, false, false);
 
-                    if (!Uturn && !mf.trk.isHeadingSameWay)
+                    if (!Uturn && !mf.trks.isHeadingSameWay)
                         distanceFromCurrentLinePassiveTool *= -1.0;
                 }
                 else
@@ -91,7 +91,7 @@ namespace Twol
                 else
                     currentLocationIndex = A;
 
-                if (!Uturn && !mf.trk.isHeadingSameWay)
+                if (!Uturn && !mf.trks.isHeadingSameWay)
                     //segCurv *= -1;
                     distanceFromCurrentLine *= -1;
 
@@ -110,7 +110,7 @@ namespace Twol
                 {
 
                     //distance is negative if on left, positive if on right
-                    steerHeadingError = steer.heading - abHeading + (Uturn || mf.trk.isHeadingSameWay ? 0 : Math.PI);
+                    steerHeadingError = steer.heading - abHeading + (Uturn || mf.trks.isHeadingSameWay ? 0 : Math.PI);
 
                     //Fix the circular error
                     if (steerHeadingError > Math.PI) steerHeadingError -= glm.twoPI;
@@ -149,7 +149,7 @@ namespace Twol
                     //{
                     //    distanceFromCurrentLinePassiveTool = FindDistanceToSegment(mf.pnTool.fix, curList[A], curList[B], out _, out _, true, false, false);
 
-                    //    if (!Uturn && !mf.trk.isHeadingSameWay)
+                    //    if (!Uturn && !mf.trks.isHeadingSameWay)
                     //        distanceFromCurrentLinePassiveTool *= -1.0;
                     //}
                     //else
@@ -198,7 +198,7 @@ namespace Twol
 
                     double goalPointDistance = mf.vehicle.UpdateGoalPointDistance();
 
-                    bool CountUp = Uturn ? !mf.isReverse : (mf.isReverse ? !mf.trk.isHeadingSameWay : mf.trk.isHeadingSameWay);
+                    bool CountUp = Uturn ? !mf.isReverse : (mf.isReverse ? !mf.trks.isHeadingSameWay : mf.trks.isHeadingSameWay);
 
                     if (A == 0 && !CountUp && time < 0)//extend end of line
                     {
@@ -277,7 +277,7 @@ namespace Twol
                         {
                             toolDistance = distanceFromCurrentLinePassiveTool;
 
-                            if (!mf.trk.isHeadingSameWay)
+                            if (!mf.trks.isHeadingSameWay)
                             {
                                 toolDistance *= -1.0;
                             }

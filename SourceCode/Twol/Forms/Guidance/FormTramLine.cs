@@ -123,7 +123,7 @@ namespace Twol
             //load the lines from Trks
             gTemp?.Clear();
 
-            foreach (var track in mf.trk.gArr)
+            foreach (var track in mf.trks.gArr)
             {
                 if ((track.mode == TrackMode.AB || track.mode == TrackMode.Curve) && track.isVisible)
                 {
