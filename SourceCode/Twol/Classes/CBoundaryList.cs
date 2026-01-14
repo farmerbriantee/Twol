@@ -100,7 +100,7 @@ namespace Twol
             }
 
             //make sure headings are correct for calculated points
-            fenceLine.CalculateHeadings(true);
+            fenceLine.CalculateAverageHeadings(true);
 
             double delta = 0;
             fenceLineEar?.Clear();
@@ -144,7 +144,7 @@ namespace Twol
             }
 
             //make sure headings are correct for calculated points
-            turnLine.CalculateHeadings(true);
+            turnLine.CalculateAverageHeadings(true);
 
             //countExit the reference list of original curve
             int cnt = turnLine.Count;

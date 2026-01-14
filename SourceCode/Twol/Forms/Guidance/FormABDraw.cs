@@ -230,7 +230,7 @@ namespace Twol
 
                     //make sure point distance isn't too big
                     mf.trks.MakePointMinimumSpacing(ref designPtsList, 1.6);
-                    designPtsList.CalculateHeadings(true);
+                    designPtsList.CalculateAverageHeadings(true);
 
                     //create a name
                     track.name = q == 0 ? "Boundary Curve" : "Inner Boundary Curve " + q.ToString();
@@ -299,14 +299,16 @@ namespace Twol
             int cnt = designPtsList.Count;
             if (cnt > 3)
             {
-                var track = new CTrk(TrackMode.Curve);
-
-                track.ptA = new vec2(designPtsList[0]);
-                track.ptB = new vec2(designPtsList[designPtsList.Count - 1]);
+                var track = new CTrk(TrackMode.Curve)
+                {
+                    ptA = new vec2(designPtsList[0]),
+                    ptB = new vec2(designPtsList[designPtsList.Count - 1])
+                };
 
                 //make sure point distance isn't too big
                 mf.trks.MakePointMinimumSpacing(ref designPtsList, 1.6);
-                designPtsList.CalculateHeadings(false);
+
+                designPtsList.CalculateAverageHeadings(false);
 
                 //calculate average heading of line
                 double x = 0, y = 0;

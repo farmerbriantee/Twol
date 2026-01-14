@@ -707,7 +707,7 @@ namespace Twol
                 smooList.Add(arr[i]);
             }
 
-            smooList.CalculateHeadings(true);
+            smooList.CalculateAverageHeadings(true);
 
             List<vec3> smList = new List<vec3>();
 
@@ -752,7 +752,7 @@ namespace Twol
                 }
             }
 
-            smooList.CalculateHeadings(true);
+            smooList.CalculateAverageHeadings(true);
         }
 
         private void btnSlice_Click(object sender, EventArgs e)

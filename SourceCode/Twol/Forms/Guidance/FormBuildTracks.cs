@@ -509,7 +509,7 @@ namespace Twol
             {
                 //make sure point distance isn't too big
                 mf.trks.MakePointMinimumSpacing(ref mf.trks.designPtsList, 0.5);
-                mf.trks.designPtsList.CalculateHeadings(false);
+                mf.trks.designPtsList.CalculateAverageHeadings(false);
 
                 var track = new CTrk(TrackMode.Curve);
 
@@ -528,7 +528,7 @@ namespace Twol
                 track.heading = aveLineHeading;
 
                 mf.trks.SmoothAB(ref mf.trks.designPtsList, 4);
-                mf.trks.designPtsList.CalculateHeadings(false);
+                mf.trks.designPtsList.CalculateAverageHeadings(false);
 
                 //write out the Curve Points
                 foreach (vec3 item in mf.trks.designPtsList)
@@ -853,7 +853,7 @@ namespace Twol
                     {
                         //make sure point distance isn't too big
                         mf.trks.MakePointMinimumSpacing(ref designPtsList, 1.6);
-                        designPtsList.CalculateHeadings(false);
+                        designPtsList.CalculateAverageHeadings(false);
 
                         var track = new CTrk(TrackMode.Curve)
                         {

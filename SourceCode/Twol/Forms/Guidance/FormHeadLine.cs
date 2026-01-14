@@ -64,7 +64,7 @@ namespace Twol
             {
                 //make sure point distance isn't too big
                 mf.trks.MakePointMinimumSpacing(ref mf.bnd.bndList[0].hdLine, 1.2);
-                mf.bnd.bndList[0].hdLine.CalculateHeadings(true);
+                mf.bnd.bndList[0].hdLine.CalculateAverageHeadings(true);
             }
 
             cboxIsZoom.Checked = false;
@@ -270,7 +270,7 @@ namespace Twol
                     if (ptCnt > 0)
                     {
                         //who knows which way it actually goes
-                        sliceArr.CalculateHeadings(false);
+                        sliceArr.CalculateAverageHeadings(false);
 
                         for (int i = 1; i < 30; i++)
                         {
@@ -626,7 +626,7 @@ namespace Twol
                 {
                     //make sure point distance isn't too big
                     mf.trks.MakePointMinimumSpacing(ref desList, 1.2);
-                    desList.CalculateHeadings(true);
+                    desList.CalculateAverageHeadings(true);
 
                     //write out the Points
                     mf.bnd.bndList[0].hdLine = desList;

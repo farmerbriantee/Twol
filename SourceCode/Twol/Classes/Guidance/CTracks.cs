@@ -255,7 +255,7 @@ namespace Twol
                         newCurList.Add(new vec3(centerPos.easting + distAway * Math.Sin(rotation), centerPos.northing + distAway * Math.Cos(rotation), 0));
                     }
 
-                    newCurList.CalculateHeadings(loops);
+                    newCurList.CalculateAverageHeadings(loops);
                 }
                 else
                 {
@@ -310,11 +310,11 @@ namespace Twol
                         }
                     }
 
-                    newCurList = ChaikinSmoothing.Smooth(newCurList, 3, preserveEndPoints: true);
+                    newCurList.ChaikinsSmooth(3, true);
 
-                    newCurList = GenerateEquidistantPoints(newCurList, 0.5, track.mode == TrackMode.bndCurve);
+                    newCurList.GenerateEquidistantPoints(0.5, track.mode == TrackMode.bndCurve);
 
-                    newCurList.CalculateHeadings(loops);
+                    newCurList.CalculateAverageHeadings(loops);
 
                     //if (track.mode != TrackMode.AB)
                     {
@@ -574,7 +574,7 @@ namespace Twol
 
             mf.trks.SmoothAB(ref mf.trks.toolDesignPtsList, 4);
 
-            mf.trks.toolDesignPtsList.CalculateHeadings(false);
+            mf.trks.toolDesignPtsList.CalculateAverageHeadings(false);
 
             double delta = 0;
             int cont = mf.trks.toolDesignPtsList.Count;
@@ -893,7 +893,7 @@ namespace Twol
 
             if (track.mode != TrackMode.AB)
             {
-                //curList.CalculateHeadings(track.mode > TrackMode.Curve);
+                //curList.CalculateAverageHeadings(track.mode > TrackMode.Curve);
 
                 int cnt = curList.Count;
                 if (cnt > 6)
@@ -975,7 +975,7 @@ namespace Twol
                 track.ptB.northing = (track.curvePts[bClose].northing);
             }
 
-            curList.CalculateHeadings(track.mode > TrackMode.Curve);
+            curList.CalculateAverageHeadings(track.mode > TrackMode.Curve);
             track.curvePts = curList;
         }
 
@@ -1033,100 +1033,6 @@ namespace Twol
                     }
                 }
             }
-        }
-
-        private List<vec3> GenerateEquidistantPoints(List<vec3> pts, double spacing, bool isLoop)
-        {
-            var result = new List<vec3>();
-            const double eps = 1e-9;
-
-            if (pts == null || pts.Count == 0) return result;
-            if (spacing <= 0) return new List<vec3>(pts);
-            if (pts.Count == 1) return new List<vec3>(pts);
-
-            int n = pts.Count;
-
-            // build segment lengths and cumulative distances
-            List<double> segLen = new List<double>();
-            List<double> cumul = new List<double> { 0.0 };
-
-            double total = 0.0;
-            for (int i = 0; i < n - 1; i++)
-            {
-                double d = glm.Distance(pts[i], pts[i + 1]);
-                segLen.Add(d);
-                total += d;
-                cumul.Add(total);
-            }
-
-            if (isLoop)
-            {
-                double d = glm.Distance(pts[n - 1], pts[0]);
-                segLen.Add(d);
-                total += d;
-                cumul.Add(total);
-            }
-
-            // nothing to sample if tiny total length
-            if (total < eps)
-            {
-                return new List<vec3>(pts);
-            }
-
-            // Add the first point
-            result.Add(new vec3(pts[0]));
-
-            // sample toBeSmoothedList at multiples of spacing
-            double tDist = spacing;
-            while (tDist < total - eps)
-            {
-                // find segment index where cumul[idx] < tDist <= cumul[idx+1]
-                int segIndex = -1;
-                int segCount = segLen.Count;
-                for (int i = 0; i < segCount; i++)
-                {
-                    if (tDist <= cumul[i + 1] + eps)
-                    {
-                        segIndex = i;
-                        break;
-                    }
-                }
-                if (segIndex == -1)
-                {
-                    // fallback: place at end
-                    if (!isLoop)
-                    {
-                        result.Add(new vec3(pts[n - 1]));
-                    }
-                    break;
-                }
-
-                double segStartDist = cumul[segIndex];
-                double local = tDist - segStartDist;
-                double thisSegLen = segLen[segIndex];
-                double frac = thisSegLen < eps ? 0.0 : (local / thisSegLen);
-
-                // determine segment endpoints (wrap for loop)
-                vec3 a = pts[segIndex];
-                vec3 b = (segIndex + 1 < n) ? pts[segIndex + 1] : pts[0];
-
-                double x = a.easting + (b.easting - a.easting) * frac;
-                double y = a.northing + (b.northing - a.northing) * frac;
-
-                result.Add(new vec3(x, y, 0));
-
-                tDist += spacing;
-            }
-
-            // For open polyline ensure last point present
-            if (!isLoop)
-            {
-                vec3 last = pts[n - 1];
-                if (result.Count == 0 || glm.Distance(result[result.Count - 1], last) > 1e-6)
-                    result.Add(new vec3(last));
-            }
-
-            return result;
         }
     }
 

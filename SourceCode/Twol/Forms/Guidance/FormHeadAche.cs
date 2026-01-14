@@ -329,7 +329,7 @@ namespace Twol
                     }
 
                     //who knows which way it actually goes
-                    mf.hdl.tracksArr[mf.hdl.idx].trackPts.CalculateHeadings(false);
+                    mf.hdl.tracksArr[mf.hdl.idx].trackPts.CalculateAverageHeadings(false);
 
                     //create a name
                     mf.hdl.tracksArr[mf.hdl.idx].name = mf.hdl.idx.ToString() + " Cu " + DateTime.Now.ToString("mm:ss", CultureInfo.InvariantCulture);

@@ -401,7 +401,7 @@ namespace Twol
             }
             else if (youTurnPhase == 240)
             {
-                ytList.CalculateHeadings(false);
+                ytList.CalculateAverageHeadings(false);
                 //if (uTurnSmoothing > 0)
                 //    SmoothYouTurn(6);// uTurnSmoothing????
                 youTurnPhase = 255;
