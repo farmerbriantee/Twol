@@ -139,7 +139,7 @@ namespace Twol
             return trak;
         }
 
-        public async void GetDistanceFromRefTrack(CTrk track, vec3 pivot)
+        public async Task GetDistanceFromRefTrack(CTrk track, vec3 pivot)
         {
             double widthMinusOverlap = Settings.Tool.toolWidth - Settings.Tool.overlap;
 
@@ -178,19 +178,19 @@ namespace Twol
 
                 if (track.mode > TrackMode.None) distanceFromRefLine -= (0.5 * widthMinusOverlap);
 
-                double RefDist = (distanceFromRefLine + (isHeadingSameWay ? Settings.Tool.offset : -Settings.Tool.offset) - (track.nudgeDistance)) / widthMinusOverlap;
+                double refDist = (distanceFromRefLine + (isHeadingSameWay ? Settings.Tool.offset : -Settings.Tool.offset) - (track.nudgeDistance)) / widthMinusOverlap;
 
-                if (RefDist < 0) howManyPathsAway = (int)(RefDist - 0.5);
-                else howManyPathsAway = (int)(RefDist + 0.5);
+                if (refDist < 0) howManyPathsAway = (int)(refDist - 0.5);
+                else howManyPathsAway = (int)(refDist + 0.5);
             }
 
             if (!isTrackValid || howManyPathsAway != lastHowManyPathsAway || (isHeadingSameWay != lastIsHeadingSameWay && Settings.Tool.offset != 0))
             {
                 if (!isBusyWorking)
                 {
+                    isBusyWorking = true;
                     try
                     {
-                        isBusyWorking = true;
                         isTrackValid = true;
                         lastHowManyPathsAway = howManyPathsAway;
                         lastIsHeadingSameWay = isHeadingSameWay;
@@ -212,7 +212,6 @@ namespace Twol
                             mf.yt.ResetCreatedYouTurn();
                         }
 
-                        isBusyWorking = false;
                         mf.gyd.isFindGlobalNearestTrackPoint = true;
 
                         guideArr?.Clear();
@@ -225,6 +224,10 @@ namespace Twol
                     catch (Exception ex)
                     {
                         Log.EventWriter("BuildGuidanceCatch: " + ex.ToString());
+                    }
+                    finally
+                    {
+                        isBusyWorking = false;
                     }
                 }
             }
@@ -907,7 +910,9 @@ namespace Twol
 
         public override bool Equals(object obj)
         {
-            return this == (CTrk)obj;
+            var other = obj as CTrk;
+            if (other is null) return false;
+            return this == other;
         }
         public override int GetHashCode()
         {

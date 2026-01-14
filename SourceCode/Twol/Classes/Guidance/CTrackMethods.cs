@@ -6,51 +6,6 @@ namespace Twol
 {
     public static class TrackMethods
     {
-        public static List<vec3> OffsetLine(this List<vec3> points, double distance, double minDist, bool loop)
-        {
-            points.CalculateAverageHeadings(loop);
-
-            var result = new List<vec3>();
-            //countExit the points from the boundary
-            int count = points.Count;
-
-            double distSq = distance * distance - 0.0001;
-
-            //make the boundary tram outer array
-            for (int i = 0; i < count; i++)
-            {
-                //calculate the point inside the boundary
-                var easting = points[i].easting + (Math.Cos(points[i].heading) * distance);
-                var northing = points[i].northing - (Math.Sin(points[i].heading) * distance);
-
-                bool Add = true;
-
-                for (int j = 0; j < count; j++)
-                {
-                    double check = glm.DistanceSquared(northing, easting, points[j].northing, points[j].easting);
-                    if (check < distSq)
-                    {
-                        Add = false;
-                        break;
-                    }
-                }
-
-                if (Add)
-                {
-                    if (result.Count > 0)
-                    {
-                        double dist = glm.DistanceSquared(northing, easting, result[result.Count - 1].northing, result[result.Count - 1].easting);
-                        if (dist > minDist)
-                            result.Add(new vec3(easting, northing));
-                    }
-                    else
-                        result.Add(new vec3(easting, northing));
-                }
-            }
-
-            return result;
-        }
-
         public static void CalculateAverageHeadings(this List<vec3> points, bool loop)
         {
             //to calc heading based on next and previous points to give an average heading.
@@ -321,23 +276,55 @@ namespace Twol
             }
         }
 
+        public static List<vec3> OffsetLine(this List<vec3> points, double distance, double minDist, bool loop)
+        {
+            points.CalculateAverageHeadings(loop);
+
+            var result = new List<vec3>();
+            //countExit the points from the boundary
+            int count = points.Count;
+
+            double distSq = distance * distance - 0.0001;
+
+            //make the boundary tram outer array
+            for (int i = 0; i < count; i++)
+            {
+                //calculate the point inside the boundary
+                var easting = points[i].easting + (Math.Cos(points[i].heading) * distance);
+                var northing = points[i].northing - (Math.Sin(points[i].heading) * distance);
+
+                bool Add = true;
+
+                for (int j = 0; j < count; j++)
+                {
+                    double check = glm.DistanceSquared(northing, easting, points[j].northing, points[j].easting);
+                    if (check < distSq)
+                    {
+                        Add = false;
+                        break;
+                    }
+                }
+
+                if (Add)
+                {
+                    if (result.Count > 0)
+                    {
+                        double dist = glm.DistanceSquared(northing, easting, result[result.Count - 1].northing, result[result.Count - 1].easting);
+                        if (dist > minDist)
+                            result.Add(new vec3(easting, northing));
+                    }
+                    else
+                        result.Add(new vec3(easting, northing));
+                }
+            }
+
+            return result;
+        }
+
         public static List<vec3> ClipperOffset(CTrk track, double distAway, double minDist, bool loop)
         {
             //currentGuidanceTrack = await Task.Run(() => BuildCurrentGuidanceTrack(distAway, track));
             List<vec3> outputPts = new List<vec3>();
-
-            //vec3 ptt = new vec3(inputPts[inputPts.Count - 1]);
-            //ptt.easting += (Math.Sin(ptt.heading) * 20000);
-            //ptt.northing += (Math.Cos(ptt.heading) * 20000);
-            //inputPts.Add(ptt);
-
-            //ptt = new vec3(inputPts[0]);
-            //ptt.easting -= (Math.Sin(ptt.heading) * 20000);
-            //ptt.northing -= (Math.Cos(ptt.heading) * 20000);
-            //inputPts.Insert(0, ptt);
-
-            //for (int i = track.curvePts.Count - 1; i > 0; i--)
-            //    newCurList.Add(new vec3(track.curvePts[i]));
 
             //convert to Clipper path
             Path64 path = new Path64(track.curvePts.Count);
@@ -347,20 +334,11 @@ namespace Twol
                 path.Add(new Point64(track.curvePts[i].easting * 10000, track.curvePts[i].northing * 10000));
             }
 
-            //for (int i = track.curvePts.Count - 2; i > 0 ; i--)
-            //{
-            //    path.Add(new Point64(track.curvePts[i].easting * 10000, track.curvePts[i].northing * 10000));
-            //}
-
-
-
             bool isPos = Clipper.IsPositive(path);
-
-            //path.Reverse();
 
             ClipperOffset co = new ClipperOffset();
             co.ReverseSolution = true;
-            co.AddPath(path, JoinType.Round, EndType.Round);
+            co.AddPath(path, JoinType.Round, EndType.Polygon);
 
             Paths64 solution = new Paths64();
 
@@ -380,6 +358,19 @@ namespace Twol
             outputPts.ReducePointsByAngle();
 
             return outputPts;
+
+            //vec3 ptt = new vec3(inputPts[inputPts.Count - 1]);
+            //ptt.easting += (Math.Sin(ptt.heading) * 20000);
+            //ptt.northing += (Math.Cos(ptt.heading) * 20000);
+            //inputPts.Add(ptt);
+
+            //ptt = new vec3(inputPts[0]);
+            //ptt.easting -= (Math.Sin(ptt.heading) * 20000);
+            //ptt.northing -= (Math.Cos(ptt.heading) * 20000);
+            //inputPts.Insert(0, ptt);
+
+            //for (int i = track.curvePts.Count - 1; i > 0; i--)
+            //    newCurList.Add(new vec3(track.curvePts[i]));
         }
 
         public static void AddStartEndPoints(this List<vec3> xList, int ptsToAdd = 10, double distBetweenPoints = 50)
@@ -493,13 +484,6 @@ namespace Twol
 
             return aveLineHeading;
         }
-
-        /// <summary>
-        /// Applies Chaikin's corner-cutting algorithm to smooth a polyline.
-        /// </summary>
-        /// <param name="points">The original list of points (polyline).</param>
-        /// <param name="iterations">The number of smoothing iterations to apply.</param>
-        /// <param name="preserveEndPoints">Whether to keep the start and end points in their original positions.</param>
 
         public static void ChaikinsSmooth(this List<vec3> points, int iterations, bool preserveEndPoints = true)
         {
