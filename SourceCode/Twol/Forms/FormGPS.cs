@@ -80,7 +80,7 @@ namespace Twol
         public string filePickerFileAndDirectory, jobPickerFileAndDirectory;
 
         //the position of the GPS Data window within the FormGPS window
-        public int GPSDataWindowLeft = 80, GPSDataWindowTopOffset = 220;
+        public int GPSDataWindowLeft = 80, GPSDataWindowTopOffset = 180;
 
         //the autoManual drive button. Assume in Auto
         public bool isInAutoDrive = true;
