@@ -1,7 +1,6 @@
 ﻿using Clipper2Lib;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Twol
 {
@@ -432,13 +431,12 @@ namespace Twol
 
         public static void SmoothAB(this List<vec3> points, int smPts = 4)
         {
-            //countExit the reference list of original curve
             int cnt = points.Count;
+            if (cnt == 0 || smPts <= 0) return;
 
-            //the temp array
             vec3[] arr = new vec3[cnt];
 
-            //read the points before and after the setpoint
+            // copy first smPts/2 (or all, if fewer)
             for (int s = 0; s < smPts / 2 && s < cnt; s++)
             {
                 arr[s].easting = points[s].easting;
@@ -446,27 +444,37 @@ namespace Twol
                 arr[s].heading = points[s].heading;
             }
 
+            // copy last smPts/2
             for (int s = cnt - (smPts / 2); s < cnt; s++)
             {
+                if (s < 0) continue;
                 arr[s].easting = points[s].easting;
                 arr[s].northing = points[s].northing;
                 arr[s].heading = points[s].heading;
             }
 
-            //average them - center weighted average
+            // average middle region
             for (int i = smPts / 2; i < cnt - (smPts / 2); i++)
             {
+                double sumEast = 0;
+                double sumNorth = 0;
+
                 for (int j = -smPts / 2; j < smPts / 2; j++)
                 {
-                    arr[i].easting += points[j + i].easting;
-                    arr[i].northing += points[j + i].northing;
+                    int idx = i + j;
+                    if (idx < 0 || idx >= cnt) continue;
+
+                    sumEast += points[idx].easting;
+                    sumNorth += points[idx].northing;
                 }
-                arr[i].easting /= smPts;
-                arr[i].northing /= smPts;
+
+                arr[i].easting = sumEast / smPts;
+                arr[i].northing = sumNorth / smPts;
                 arr[i].heading = points[i].heading;
             }
 
-            points = arr.ToList();
+            points.Clear();
+            points.AddRange(arr);
         }
 
         public static double TrackAverageHeading(this List<vec3> points)
