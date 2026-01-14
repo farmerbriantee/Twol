@@ -1001,10 +1001,10 @@ namespace Twol
 
                                 //fill in the dots between A and B
                                 double len = glm.Distance(track.ptA, track.ptB);
-                                if (len < 30)
+                                if (len < 50)
                                 {
-                                    track.ptB.easting = track.ptA.easting + (Math.Sin(designHeading) * 30);
-                                    track.ptB.northing = track.ptA.northing + (Math.Cos(designHeading) * 30);
+                                    track.ptB.easting = track.ptA.easting + (Math.Sin(designHeading) * 50);
+                                    track.ptB.northing = track.ptA.northing + (Math.Cos(designHeading) * 50);
                                 }
                                 track.curvePts.Add(new vec3(track.ptA, designHeading));
                                 track.curvePts.Add(new vec3(track.ptB, designHeading));

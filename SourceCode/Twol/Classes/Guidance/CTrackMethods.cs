@@ -179,7 +179,7 @@ namespace Twol
             // Add the first point
             result.Add(new vec3(points[0]));
 
-            // sample toBeSmoothedList at multiples of spacing
+            // sample points at multiples of spacing
             double tDist = spacing;
             while (tDist < total - eps)
             {
@@ -322,52 +322,6 @@ namespace Twol
             }
         }
 
-        /// <summary>
-        /// Applies Chaikin's corner-cutting algorithm to smooth a polyline.
-        /// </summary>
-        /// <param name="points">The original list of points (polyline).</param>
-        /// <param name="iterations">The number of smoothing iterations to apply.</param>
-        /// <param name="preserveEndPoints">Whether to keep the start and end points in their original positions.</param>
-        /// <returns>A new list of smoothed points.</returns>
-        public static void ChaikinsSmooth(this List<vec3> points, int iterations, bool preserveEndPoints = true)
-        {
-            List<vec3> currentPoints = new List<vec3>(points);
-
-            for (int iter = 0; iter < iterations; iter++)
-            {
-                List<vec3> nextPoints = new List<vec3>();
-
-                // Optionally preserve the start point for non-closed polylines
-                if (preserveEndPoints && currentPoints.Count > 0)
-                {
-                    nextPoints.Add(currentPoints[0]);
-                }
-
-                for (int i = 0; i < currentPoints.Count - 1; i++)
-                {
-                    vec3 p0 = currentPoints[i];
-                    vec3 p1 = currentPoints[i + 1];
-
-                    // Calculate Q and R points, which are 25% and 75% along the segment
-                    nextPoints.Add(new vec3(0.75f * p0.easting + 0.25f * p1.easting, 0.75f * p0.northing + 0.25f * p1.northing, 0));
-                    nextPoints.Add(new vec3(0.25f * p0.easting + 0.75f * p1.easting, 0.25f * p0.northing + 0.75f * p1.northing, 0));
-                }
-
-                // Optionally preserve the end point for non-closed polylines
-                if (preserveEndPoints && currentPoints.Count > 1)
-                {
-                    nextPoints.Add(currentPoints[currentPoints.Count - 1]);
-                }
-                // If the user wants a closed polygon, the last R point implicitly connects to the first Q point.
-                // A separate implementation is needed for perfect closed-loop handling by wrapping indices (not shown here).
-
-                currentPoints = nextPoints;
-            }
-
-            points?.Clear();
-            points.AddRange(currentPoints);
-        }
-
         public static List<vec3> ClipperOffset(CTrk track, double distAway, double minDist, bool loop)
         {
             //currentGuidanceTrack = await Task.Run(() => BuildCurrentGuidanceTrack(distAway, track));
@@ -476,27 +430,27 @@ namespace Twol
             }
         }
 
-        public static void SmoothAB(this List<vec3> toBeSmoothedList, int smPts = 4)
+        public static void SmoothAB(this List<vec3> points, int smPts = 4)
         {
             //countExit the reference list of original curve
-            int cnt = toBeSmoothedList.Count;
+            int cnt = points.Count;
 
             //the temp array
             vec3[] arr = new vec3[cnt];
 
-            //read the toBeSmoothedList before and after the setpoint
+            //read the points before and after the setpoint
             for (int s = 0; s < smPts / 2 && s < cnt; s++)
             {
-                arr[s].easting = toBeSmoothedList[s].easting;
-                arr[s].northing = toBeSmoothedList[s].northing;
-                arr[s].heading = toBeSmoothedList[s].heading;
+                arr[s].easting = points[s].easting;
+                arr[s].northing = points[s].northing;
+                arr[s].heading = points[s].heading;
             }
 
             for (int s = cnt - (smPts / 2); s < cnt; s++)
             {
-                arr[s].easting = toBeSmoothedList[s].easting;
-                arr[s].northing = toBeSmoothedList[s].northing;
-                arr[s].heading = toBeSmoothedList[s].heading;
+                arr[s].easting = points[s].easting;
+                arr[s].northing = points[s].northing;
+                arr[s].heading = points[s].heading;
             }
 
             //average them - center weighted average
@@ -504,15 +458,15 @@ namespace Twol
             {
                 for (int j = -smPts / 2; j < smPts / 2; j++)
                 {
-                    arr[i].easting += toBeSmoothedList[j + i].easting;
-                    arr[i].northing += toBeSmoothedList[j + i].northing;
+                    arr[i].easting += points[j + i].easting;
+                    arr[i].northing += points[j + i].northing;
                 }
                 arr[i].easting /= smPts;
                 arr[i].northing /= smPts;
-                arr[i].heading = toBeSmoothedList[i].heading;
+                arr[i].heading = points[i].heading;
             }
 
-            toBeSmoothedList = arr.ToList();
+            points = arr.ToList();
         }
 
         public static double TrackAverageHeading(this List<vec3> points)
@@ -532,5 +486,52 @@ namespace Twol
 
             return aveLineHeading;
         }
+
+        /// <summary>
+        /// Applies Chaikin's corner-cutting algorithm to smooth a polyline.
+        /// </summary>
+        /// <param name="points">The original list of points (polyline).</param>
+        /// <param name="iterations">The number of smoothing iterations to apply.</param>
+        /// <param name="preserveEndPoints">Whether to keep the start and end points in their original positions.</param>
+
+        public static void ChaikinsSmooth(this List<vec3> points, int iterations, bool preserveEndPoints = true)
+        {
+            List<vec3> currentPoints = new List<vec3>(points);
+
+            for (int iter = 0; iter < iterations; iter++)
+            {
+                List<vec3> nextPoints = new List<vec3>();
+
+                // Optionally preserve the start point for non-closed polylines
+                if (preserveEndPoints && currentPoints.Count > 0)
+                {
+                    nextPoints.Add(currentPoints[0]);
+                }
+
+                for (int i = 0; i < currentPoints.Count - 1; i++)
+                {
+                    vec3 p0 = currentPoints[i];
+                    vec3 p1 = currentPoints[i + 1];
+
+                    // Calculate Q and R points, which are 25% and 75% along the segment
+                    nextPoints.Add(new vec3(0.75f * p0.easting + 0.25f * p1.easting, 0.75f * p0.northing + 0.25f * p1.northing, 0));
+                    nextPoints.Add(new vec3(0.25f * p0.easting + 0.75f * p1.easting, 0.25f * p0.northing + 0.75f * p1.northing, 0));
+                }
+
+                // Optionally preserve the end point for non-closed polylines
+                if (preserveEndPoints && currentPoints.Count > 1)
+                {
+                    nextPoints.Add(currentPoints[currentPoints.Count - 1]);
+                }
+                // If the user wants a closed polygon, the last R point implicitly connects to the first Q point.
+                // A separate implementation is needed for perfect closed-loop handling by wrapping indices (not shown here).
+
+                currentPoints = nextPoints;
+            }
+
+            points?.Clear();
+            points.AddRange(currentPoints);
+        }
     }
 }
+
