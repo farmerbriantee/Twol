@@ -508,27 +508,15 @@ namespace Twol
             if (cnt > 3)
             {
                 //make sure point distance isn't too big
-                mf.trks.MakePointMinimumSpacing(ref mf.trks.designPtsList, 0.5);
+                mf.trks.designPtsList.MinimumSpacingPointRemoval(1);
                 mf.trks.designPtsList.CalculateAverageHeadings(false);
 
                 var track = new CTrk(TrackMode.Curve);
 
-                //calculate average heading of line
-                double x = 0, y = 0;
-                foreach (vec3 pt in mf.trks.designPtsList)
-                {
-                    x += Math.Cos(pt.heading);
-                    y += Math.Sin(pt.heading);
-                }
-                x /= mf.trks.designPtsList.Count;
-                y /= mf.trks.designPtsList.Count;
-                double aveLineHeading = Math.Atan2(y, x);
-                if (aveLineHeading < 0) aveLineHeading += glm.twoPI;
-
-                track.heading = aveLineHeading;
-
-                mf.trks.SmoothAB(ref mf.trks.designPtsList, 4);
+                mf.trks.designPtsList.SmoothAB();
                 mf.trks.designPtsList.CalculateAverageHeadings(false);
+
+                track.heading = mf.trks.designPtsList.TrackAverageHeading();
 
                 //write out the Curve Points
                 foreach (vec3 item in mf.trks.designPtsList)
@@ -537,7 +525,7 @@ namespace Twol
                 }
 
                 textBox1.Text = "Cu " +
-                    (Math.Round(glm.toDegrees(aveLineHeading), 1)).ToString(CultureInfo.InvariantCulture) + "\u00B0 ";
+                    (Math.Round(glm.toDegrees(track.heading), 1)).ToString(CultureInfo.InvariantCulture) + "\u00B0 ";
 
                 double dist = (Settings.Tool.toolWidth - Settings.Tool.overlap) * (isRefRightSide ? 0.5 : -0.5) + Settings.Tool.offset;
 
@@ -547,7 +535,7 @@ namespace Twol
                 track.ptB = new vec2(track.curvePts[track.curvePts.Count - 1]);
 
                 //build the tail extensions
-                mf.trks.AddFirstLastPoints(ref track.curvePts, 300);
+                track.curvePts.AddStartEndPoints(5, 300);
 
                 mf.trks.AddTrack(track);
                 selectedItem = track;
@@ -852,7 +840,7 @@ namespace Twol
                     else if (designPtsList.Count > 2)
                     {
                         //make sure point distance isn't too big
-                        mf.trks.MakePointMinimumSpacing(ref designPtsList, 1.6);
+                        designPtsList.MinimumSpacingPointRemoval(1);
                         designPtsList.CalculateAverageHeadings(false);
 
                         var track = new CTrk(TrackMode.Curve)
@@ -861,21 +849,10 @@ namespace Twol
                             ptB = new vec2(designPtsList[designPtsList.Count - 1])
                         };
 
-                        //calculate average heading of line
-                        double x = 0, y = 0;
-                        foreach (vec3 pt in designPtsList)
-                        {
-                            x += Math.Cos(pt.heading);
-                            y += Math.Sin(pt.heading);
-                        }
-                        x /= designPtsList.Count;
-                        y /= designPtsList.Count;
-                        double aveLineHeading = Math.Atan2(y, x);
-                        if (aveLineHeading < 0) aveLineHeading += glm.twoPI;
-                        track.heading = aveLineHeading;
+                        track.heading = mf.trks.designPtsList.TrackAverageHeading();
 
                         //build the tail extensions
-                        mf.trks.AddFirstLastPoints(ref designPtsList, 300);
+                        designPtsList.AddStartEndPoints(5, 300);
                         //mf.trks.SmoothAB(ref designPtsList, 4, false);
 
                         //write out the Curve Points
@@ -886,7 +863,7 @@ namespace Twol
                             trackName = namelist[i + 1].InnerText;
                         }
                         else trackName = "Cu " +
-                                 (Math.Round(glm.toDegrees(aveLineHeading), 1)).ToString(CultureInfo.InvariantCulture) + "\u00B0 ";
+                                 (Math.Round(glm.toDegrees(track.heading), 1)).ToString(CultureInfo.InvariantCulture) + "\u00B0 ";
 
                         track.name = trackName;
 

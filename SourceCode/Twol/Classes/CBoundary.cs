@@ -150,6 +150,14 @@ namespace Twol
                 bndList[i].fenceLineEar.DrawPolygon();
             }
 
+            //for (int i = 0; i < bndList.Count; i++)
+            //{
+            //    GL.Color3(0.0f, 0.95f, 0.95f);
+            //    GL.PointSize(4.0f);
+            //    bndList[i].fenceLine.DrawPolygon(PrimitiveType.Points);
+            //}
+
+
             if (fenceBeingMadePts.Count > 0)
             {
                 //the boundary so far

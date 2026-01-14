@@ -498,9 +498,9 @@ namespace Twol
                             mf.font.DrawText3D(currentRefTrack.ptB.easting, currentRefTrack.ptB.northing, "&B", true);
                         }
 
-                        GL.PointSize(4);
-                        GL.Color3(0.95f, 0.992f, 0.95f);
-                        currentRefTrack.curvePts.DrawPolygon(PrimitiveType.Points);
+                        //GL.PointSize(4);
+                        //GL.Color3(0.95f, 0.992f, 0.95f);
+                        //currentRefTrack.curvePts.DrawPolygon(PrimitiveType.Points);
                     }
                     else
                     {
@@ -572,59 +572,15 @@ namespace Twol
 
             if (mf.gydTool.isboundaryLine) track.mode = TrackMode.toolLineOuter;
 
-            mf.trks.SmoothAB(ref mf.trks.toolDesignPtsList, 4);
+            mf.trks.toolDesignPtsList.SmoothAB();
 
             mf.trks.toolDesignPtsList.CalculateAverageHeadings(false);
+            mf.trks.toolDesignPtsList.ReducePointsByAngle();
 
-            double delta = 0;
-            int cont = mf.trks.toolDesignPtsList.Count;
-            vec3[] smList = new vec3[cont];
-            cont--;
-            mf.trks.toolDesignPtsList.CopyTo(smList);
-            mf.trks.toolDesignPtsList.Clear();
-            int counter = 0;
-            double check;
+            track.heading = mf.trks.toolDesignPtsList.TrackAverageHeading();
 
-            for (int i = 0; i < cont; i++)
-            {
-                if (i < 2 || i > cont - 3)
-                {
-                    mf.trks.toolDesignPtsList.Add(new vec3(smList[i]));
-                    continue;
-                }
-                check = (smList[i - 1].heading - smList[i].heading);
-                if (check > Math.PI || check < -Math.PI)
-                {
-                    if (check > 0) check -= glm.twoPI;
-                    else check += glm.twoPI;
-                }
-                delta += check;
-                if (Math.Abs(delta) > 0.01 || counter > 20)
-                {
-                    mf.trks.toolDesignPtsList.Add(new vec3(smList[i]));
-                    delta = 0;
-                    counter = 0;
-                }
-                counter++;
-            }
-
-            double x = 0, y = 0;
-
-            //write out the Curve Points and ave heading
-            foreach (vec3 item in toolDesignPtsList)
-            {
-                track.curvePts.Add(item);
-                x += Math.Cos(item.heading);
-                y += Math.Sin(item.heading);
-            }
-            x /= toolDesignPtsList.Count;
-            y /= toolDesignPtsList.Count;
-
-            track.heading = Math.Atan2(y, x);
-            if (track.heading < 0) track.heading += glm.twoPI;
-
-            AddEndPoints(ref track.curvePts, 4);
-            AddStartPoints(ref track.curvePts, 4);
+            track.curvePts.AddEndPoints(5, 10);
+            track.curvePts.AddStartPoints(5, 10);
 
             track.ptA = new vec2(track.curvePts[0].easting, track.curvePts[0].northing);
             track.ptB = new vec2(track.curvePts[track.curvePts.Count - 1].easting, track.curvePts[track.curvePts.Count - 1].northing);
@@ -723,45 +679,6 @@ namespace Twol
                 currentRefTrack = gArr.Take(index).Reverse().Concat(gArr.Skip(index + 1).Reverse()).FirstOrDefault(x => x.isVisible);
         }
 
-        public void SmoothAB(ref List<vec3> toBeSmoothedList, int smPts)
-        {
-            //countExit the reference list of original curve
-            int cnt = toBeSmoothedList.Count;
-
-            //the temp array
-            vec3[] arr = new vec3[cnt];
-
-            //read the toBeSmoothedList before and after the setpoint
-            for (int s = 0; s < smPts / 2 && s < cnt; s++)
-            {
-                arr[s].easting = toBeSmoothedList[s].easting;
-                arr[s].northing = toBeSmoothedList[s].northing;
-                arr[s].heading = toBeSmoothedList[s].heading;
-            }
-
-            for (int s = cnt - (smPts / 2); s < cnt; s++)
-            {
-                arr[s].easting = toBeSmoothedList[s].easting;
-                arr[s].northing = toBeSmoothedList[s].northing;
-                arr[s].heading = toBeSmoothedList[s].heading;
-            }
-
-            //average them - center weighted average
-            for (int i = smPts / 2; i < cnt - (smPts / 2); i++)
-            {
-                for (int j = -smPts / 2; j < smPts / 2; j++)
-                {
-                    arr[i].easting += toBeSmoothedList[j + i].easting;
-                    arr[i].northing += toBeSmoothedList[j + i].northing;
-                }
-                arr[i].easting /= smPts;
-                arr[i].northing /= smPts;
-                arr[i].heading = toBeSmoothedList[i].heading;
-            }
-
-            toBeSmoothedList = arr.ToList();
-        }
-
         public CTrk CreateDesignedABTrack(bool isRefRightSide)
         {
             var track = new CTrk(TrackMode.AB);
@@ -785,86 +702,10 @@ namespace Twol
             track.ptB = new vec2(track.curvePts[track.curvePts.Count - 1]);
 
             //build the tail extensions
-            AddFirstLastPoints(ref track.curvePts, 300);
+            track.curvePts.AddStartEndPoints(5, 300);
 
             AddTrack(track);
             return track;
-        }
-
-        public void AddFirstLastPoints(ref List<vec3> xList, int metersToAdd)
-        {
-            int ptCnt = xList.Count - 1;
-            vec3 start;
-
-            for (int i = 1; i < 6; i += 2)
-            {
-                vec3 pt = new vec3(xList[ptCnt]);
-                pt.easting += (Math.Sin(pt.heading) * i);
-                pt.northing += (Math.Cos(pt.heading) * i);
-                xList.Add(pt);
-            }
-
-            //and the beginning
-            start = new vec3(xList[0]);
-
-            for (int i = 1; i < 6; i += 2)
-            {
-                vec3 pt = new vec3(start);
-                pt.easting -= (Math.Sin(pt.heading) * i);
-                pt.northing -= (Math.Cos(pt.heading) * i);
-                xList.Insert(0, pt);
-            }
-
-            ptCnt = xList.Count - 1;
-
-            for (int i = 2; i < metersToAdd; i += 10)
-            {
-                vec3 pt = new vec3(xList[ptCnt]);
-                pt.easting += (Math.Sin(pt.heading) * i);
-                pt.northing += (Math.Cos(pt.heading) * i);
-                xList.Add(pt);
-            }
-
-            //and the beginning
-            start = new vec3(xList[0]);
-
-            for (int i = 2; i < metersToAdd; i += 10)
-            {
-                vec3 pt = new vec3(start);
-                pt.easting -= (Math.Sin(pt.heading) * i);
-                pt.northing -= (Math.Cos(pt.heading) * i);
-                xList.Insert(0, pt);
-            }
-        }
-
-        public void AddStartPoints(ref List<vec3> xList, int ptsToAdd)
-        {
-            vec3 start;
-            ptsToAdd *= 2;
-
-            start = new vec3(xList[0]);
-
-            for (int i = 1; i < ptsToAdd; i += 2)
-            {
-                vec3 pt = new vec3(start);
-                pt.easting -= (Math.Sin(pt.heading) * i);
-                pt.northing -= (Math.Cos(pt.heading) * i);
-                xList.Insert(0, pt);
-            }
-        }
-
-        public void AddEndPoints(ref List<vec3> xList, int ptsToAdd)
-        {
-            int ptCnt = xList.Count - 1;
-            ptsToAdd *= 2;
-
-            for (int i = 1; i < ptsToAdd; i += 2)
-            {
-                vec3 pt = new vec3(xList[ptCnt]);
-                pt.easting += (Math.Sin(pt.heading) * i);
-                pt.northing += (Math.Cos(pt.heading) * i);
-                xList.Add(pt);
-            }
         }
 
         public void NudgeTrack(CTrk track, double dist)
@@ -1008,31 +849,6 @@ namespace Twol
             miny = Math.Min(pt1.easting, pt2.easting);
             maxy = Math.Max(pt1.easting, pt2.easting);
             return _ = r.northing >= minx && r.northing <= maxx && (r.easting >= miny && r.easting <= maxy);
-        }
-
-        public void MakePointMinimumSpacing(ref List<vec3> xList, double minDistance)
-        {
-            int cnt = xList.Count;
-            if (cnt > 3)
-            {
-                //make sure point distance isn't too big
-                for (int i = 0; i < cnt - 1; i++)
-                {
-                    int j = i + 1;
-                    //if (j == cnt) j = 0;
-                    double distance = glm.Distance(xList[i], xList[j]);
-                    if (distance > minDistance)
-                    {
-                        vec3 pointB = new vec3((xList[i].easting + xList[j].easting) / 2.0,
-                            (xList[i].northing + xList[j].northing) / 2.0,
-                            xList[i].heading);
-
-                        xList.Insert(j, pointB);
-                        cnt = xList.Count;
-                        i = -1;
-                    }
-                }
-            }
         }
     }
 

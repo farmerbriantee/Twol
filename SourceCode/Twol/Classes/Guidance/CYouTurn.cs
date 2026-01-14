@@ -233,7 +233,7 @@ namespace Twol
                     if (pt3.heading < 0) pt3.heading += glm.twoPI;
                     ytList[ytList.Count - 1] = pt3;
 
-                    mf.trks.AddEndPoints(ref ytList, 50);
+                    ytList.AddEndPoints(10, 5);
                 }
 
                 youTurnPhase = 255;

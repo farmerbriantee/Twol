@@ -1,6 +1,7 @@
 ﻿using Clipper2Lib;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Twol
 {
@@ -267,6 +268,60 @@ namespace Twol
             }
         }
 
+        public static List<vec2> ReducePointsByAngleToVec2(this List<vec3> points, double angleDelta = 0.02, double spread = 30)
+        {
+            List<vec2> smList = new List<vec2>();
+
+            double delta = 0;
+            int cont = points.Count;
+            cont--;
+            int counter = 0;
+            double check;
+
+            for (int i = 0; i < cont; i++)
+            {
+                if (i < 2 || i > cont - 3)
+                {
+                    smList.Add(new vec2(points[i].easting, points[i].northing));
+                    continue;
+                }
+                check = (points[i - 1].heading - points[i].heading);
+                if (check > Math.PI || check < -Math.PI)
+                {
+                    if (check > 0) check -= glm.twoPI;
+                    else check += glm.twoPI;
+                }
+                delta += check;
+                if (Math.Abs(delta) > angleDelta || counter > spread)
+                {
+                    smList.Add(new vec2(points[i].easting, points[i].northing));
+                    delta = 0;
+                    counter = 0;
+                }
+                counter++;
+            }
+
+            return smList;
+        }
+
+        public static void MinimumSpacingPointRemoval(this List<vec3> points, double spacing = 1)
+        {
+            //make sure distance isn't too small between points on headland
+            spacing *= spacing;
+            int ptCount = points.Count;
+
+            for (int i = 0; i < ptCount - 1; i++)
+            {
+                double distance = glm.DistanceSquared(points[i], points[i + 1]);
+                if (distance < spacing)
+                {
+                    points.RemoveAt(i + 1);
+                    ptCount = points.Count;
+                    i--;
+                }
+            }
+        }
+
         /// <summary>
         /// Applies Chaikin's corner-cutting algorithm to smooth a polyline.
         /// </summary>
@@ -372,6 +427,110 @@ namespace Twol
             outputPts.ReducePointsByAngle();
 
             return outputPts;
+        }
+
+        public static void AddStartEndPoints(this List<vec3> xList, int ptsToAdd = 10, double distBetweenPoints = 50)
+        {
+            vec3 start = new vec3(xList[0]);
+
+            for (int i = 1; i < ptsToAdd; i++)
+            {
+                vec3 pt = new vec3(start);
+                pt.easting -= (Math.Sin(pt.heading) * i * distBetweenPoints);
+                pt.northing -= (Math.Cos(pt.heading) * i * distBetweenPoints);
+                xList.Insert(0, pt);
+            }
+
+            int ptCnt = xList.Count - 1;
+            for (int i = 1; i < ptsToAdd; i++)
+            {
+                vec3 pt = new vec3(xList[ptCnt]);
+                pt.easting += (Math.Sin(pt.heading) * i * distBetweenPoints);
+                pt.northing += (Math.Cos(pt.heading) * i * distBetweenPoints);
+                xList.Add(pt);
+            }
+        }
+
+        public static void AddStartPoints(this List<vec3> xList, int ptsToAdd = 10, double distBetweenPoints = 50)
+        {
+            vec3 start = new vec3(xList[0]);
+
+            for (int i = 1; i < ptsToAdd; i++)
+            {
+                vec3 pt = new vec3(start);
+                pt.easting -= (Math.Sin(pt.heading) * i * distBetweenPoints);
+                pt.northing -= (Math.Cos(pt.heading) * i * distBetweenPoints);
+                xList.Insert(0, pt);
+            }
+        }
+
+        public static void AddEndPoints(this List<vec3> xList, int ptsToAdd = 10, double distBetweenPoints = 50)
+        {
+            int ptCnt = xList.Count - 1;
+            for (int i = 1; i < ptsToAdd; i++)
+            {
+                vec3 pt = new vec3(xList[ptCnt]);
+                pt.easting += (Math.Sin(pt.heading) * i * distBetweenPoints);
+                pt.northing += (Math.Cos(pt.heading) * i * distBetweenPoints);
+                xList.Add(pt);
+            }
+        }
+
+        public static void SmoothAB(this List<vec3> toBeSmoothedList, int smPts = 4)
+        {
+            //countExit the reference list of original curve
+            int cnt = toBeSmoothedList.Count;
+
+            //the temp array
+            vec3[] arr = new vec3[cnt];
+
+            //read the toBeSmoothedList before and after the setpoint
+            for (int s = 0; s < smPts / 2 && s < cnt; s++)
+            {
+                arr[s].easting = toBeSmoothedList[s].easting;
+                arr[s].northing = toBeSmoothedList[s].northing;
+                arr[s].heading = toBeSmoothedList[s].heading;
+            }
+
+            for (int s = cnt - (smPts / 2); s < cnt; s++)
+            {
+                arr[s].easting = toBeSmoothedList[s].easting;
+                arr[s].northing = toBeSmoothedList[s].northing;
+                arr[s].heading = toBeSmoothedList[s].heading;
+            }
+
+            //average them - center weighted average
+            for (int i = smPts / 2; i < cnt - (smPts / 2); i++)
+            {
+                for (int j = -smPts / 2; j < smPts / 2; j++)
+                {
+                    arr[i].easting += toBeSmoothedList[j + i].easting;
+                    arr[i].northing += toBeSmoothedList[j + i].northing;
+                }
+                arr[i].easting /= smPts;
+                arr[i].northing /= smPts;
+                arr[i].heading = toBeSmoothedList[i].heading;
+            }
+
+            toBeSmoothedList = arr.ToList();
+        }
+
+        public static double TrackAverageHeading(this List<vec3> points)
+        {
+            //calculate average heading of line
+            double x = 0, y = 0;
+            foreach (vec3 pt in points)
+            {
+                x += Math.Cos(pt.heading);
+                y += Math.Sin(pt.heading);
+            }
+            x /= points.Count;
+            y /= points.Count;
+
+            double aveLineHeading = Math.Atan2(y, x);
+            if (aveLineHeading < 0) aveLineHeading += glm.twoPI;
+
+            return aveLineHeading;
         }
     }
 }

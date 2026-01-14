@@ -1009,7 +1009,7 @@ namespace Twol
                                 track.curvePts.Add(new vec3(track.ptA, designHeading));
                                 track.curvePts.Add(new vec3(track.ptB, designHeading));
 
-                                trks.AddFirstLastPoints(ref track.curvePts, 300);
+                                track.curvePts.AddStartEndPoints(5, 300);
                             }
 
                             trks.AddTrack(track);

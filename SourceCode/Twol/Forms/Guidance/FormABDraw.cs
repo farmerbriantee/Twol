@@ -228,9 +228,11 @@ namespace Twol
                     track.ptA = new vec2(designPtsList[0]);
                     track.ptB = new vec2(designPtsList[designPtsList.Count - 1]);
 
-                    designPtsList.GenerateEquidistantPoints(3, false);
-                    designPtsList.ChaikinsSmooth(2, false);
-                    designPtsList.CalculateAverageHeadings(false);
+                    designPtsList.GenerateEquidistantPoints(4, true);
+                    designPtsList.ChaikinsSmooth(2, true);
+                    designPtsList.CalculateAverageHeadings(true);
+                    designPtsList.ReducePointsByAngle();
+                    designPtsList.CalculateAverageHeadings(true);
 
                     //create a name
                     track.name = q == 0 ? "Boundary Curve" : "Inner Boundary Curve " + q.ToString();
@@ -306,26 +308,14 @@ namespace Twol
                 };
 
                 //make sure point distance isn't too big
-                mf.trks.MakePointMinimumSpacing(ref designPtsList, 1.6);
+                designPtsList.MinimumSpacingPointRemoval(1);
 
                 designPtsList.CalculateAverageHeadings(false);
 
-                //calculate average heading of line
-                double x = 0, y = 0;
-
-                foreach (vec3 pt in designPtsList)
-                {
-                    x += Math.Cos(pt.heading);
-                    y += Math.Sin(pt.heading);
-                }
-                x /= designPtsList.Count;
-                y /= designPtsList.Count;
-                track.heading = Math.Atan2(y, x);
-                if (track.heading < 0) track.heading += glm.twoPI;
+                track.heading = designPtsList.TrackAverageHeading();
 
                 //build the tail extensions
-                mf.trks.AddFirstLastPoints(ref designPtsList, 300);
-                //mf.trks.SmoothAB(ref designPtsList, 2, false);
+                designPtsList.AddStartEndPoints(5, 300);
 
                 //create a name
                 track.name = "Cu " +
@@ -386,19 +376,22 @@ namespace Twol
             track.ptB.easting = mf.bnd.bndList[bndSelect].fenceLine[start].easting;
             track.ptB.northing = mf.bnd.bndList[bndSelect].fenceLine[start].northing;
 
+            var designPtsList = new List<vec3>();
+
             //fill in the dots between A and B
             double len = glm.Distance(track.ptA, track.ptB);
-            if (len < 20)
+            if (len < 50)
             {
-                track.ptB.easting = track.ptA.easting + (Math.Sin(abHead) * 30);
-                track.ptB.northing = track.ptA.northing + (Math.Cos(abHead) * 30);
+                track.ptB.easting = track.ptA.easting + (Math.Sin(abHead) * 50);
+                track.ptB.northing = track.ptA.northing + (Math.Cos(abHead) * 50);
             }
 
-            track.curvePts.Add(new vec3(track.ptA, abHead));
-            track.curvePts.Add(new vec3(track.ptB, abHead));
+            designPtsList.Add(new vec3(track.ptA, abHead));
+            designPtsList.Add(new vec3(track.ptB, abHead));
 
             //build the tail extensions
-            mf.trks.AddFirstLastPoints(ref track.curvePts, 300);
+            designPtsList.AddStartPoints(5, 400);
+            designPtsList.AddEndPoints(5, 400);
 
             //create a name
             track.name = "AB: " +
@@ -411,6 +404,9 @@ namespace Twol
             btnMakeCurve.Enabled = false;
 
             start = 99999; end = 99999;
+
+            //write out the Curve Points
+            track.curvePts = designPtsList;
 
             gTemp.Add(track);
             selectedLine = track;
@@ -470,7 +466,7 @@ namespace Twol
             track.curvePts.Add(new vec3(track.ptB, abHead));
 
             //build the tail extensions
-            mf.trks.AddFirstLastPoints(ref track.curvePts, 300);
+            track.curvePts.AddStartEndPoints(5, 300);
 
             //create a name
             track.name = "AB: " +
@@ -588,7 +584,7 @@ namespace Twol
             track.curvePts.Add(new vec3(track.ptB, abHead));
 
             //build the tail extensions
-            mf.trks.AddFirstLastPoints(ref track.curvePts, 300);
+            track.curvePts.AddStartEndPoints(5, 300);
 
             //create a name
             track.name = "AB: " +
