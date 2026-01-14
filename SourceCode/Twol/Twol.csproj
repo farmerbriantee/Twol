@@ -78,6 +78,9 @@
   <PropertyGroup />
   <PropertyGroup />
   <ItemGroup>
+    <Reference Include="Clipper2Lib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ddeb3f68c442d6e4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Clipper2.2.0.0\lib\netstandard2.0\Clipper2Lib.dll</HintPath>
+    </Reference>
     <Reference Include="ColorPicker, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\References\ColorPicker.dll</HintPath>
@@ -155,6 +158,7 @@
     <Compile Include="Classes\Guidance\CGuidance.cs" />
     <Compile Include="Classes\CHeadLine.cs" />
     <Compile Include="Classes\CHello.cs" />
+    <Compile Include="Classes\Guidance\CTrackMethods.cs" />
     <Compile Include="Classes\Language.cs" />
     <Compile Include="Classes\Log.cs" />
     <Compile Include="Classes\Tool\CGuidanceTool.cs" />
