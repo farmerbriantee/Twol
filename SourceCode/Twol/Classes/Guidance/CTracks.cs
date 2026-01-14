@@ -579,6 +579,8 @@ namespace Twol
 
             track.heading = mf.trks.toolDesignPtsList.TrackAverageHeading();
 
+            track.curvePts = new List<vec3>(mf.trks.toolDesignPtsList);
+
             track.curvePts.AddEndPoints(5, 10);
             track.curvePts.AddStartPoints(5, 10);
 

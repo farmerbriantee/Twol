@@ -228,7 +228,7 @@ namespace Twol
                     result.Add(new vec3(last));
             }
 
-            points?.Clear();
+            points.Clear();
             points.AddRange(result);
         }
 
@@ -447,7 +447,6 @@ namespace Twol
             // copy last smPts/2
             for (int s = cnt - (smPts / 2); s < cnt; s++)
             {
-                if (s < 0) continue;
                 arr[s].easting = points[s].easting;
                 arr[s].northing = points[s].northing;
                 arr[s].heading = points[s].heading;
@@ -531,8 +530,6 @@ namespace Twol
                 {
                     nextPoints.Add(currentPoints[currentPoints.Count - 1]);
                 }
-                // If the user wants a closed polygon, the last R point implicitly connects to the first Q point.
-                // A separate implementation is needed for perfect closed-loop handling by wrapping indices (not shown here).
 
                 currentPoints = nextPoints;
             }
