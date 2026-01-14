@@ -29,7 +29,7 @@ namespace Twol
 
             lblAge.Text = mf.pn.age.ToString("N1");
 
-            lblAltitude.Text = mf.pn.altitude.ToString("N1");
+            lblElevation.Text = mf.pn.elevation.ToString("N1");
 
             tboxVTG.Text = mf.pn.vtgSentence;
             tboxGGA.Text = mf.pn.ggaSentence;

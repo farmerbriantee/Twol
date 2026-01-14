@@ -541,7 +541,7 @@ namespace Twol
 
             else sbGGA.Append("1,");
 
-            sbGGA.Append(pn.altitude.ToString("0.###", CultureInfo.InvariantCulture)).Append(',');
+            sbGGA.Append(pn.elevation.ToString("0.###", CultureInfo.InvariantCulture)).Append(',');
             sbGGA.Append("M,");
             sbGGA.Append("46.4,M,");  //udulation
             sbGGA.Append(pn.age.ToString("0.#", CultureInfo.InvariantCulture)).Append(','); //age

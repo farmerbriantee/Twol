@@ -8,7 +8,7 @@ namespace Twol
 
         #region properties sim
 
-        public double altitude = 300;
+        public double elevation = 300;
 
         public double stepDistance = 0.0, steerangleAve = 0.0;
 
@@ -104,12 +104,12 @@ namespace Twol
             double temp = Math.Abs(mf.pn.latitude * 100);
             temp -= ((int)(temp));
             temp *= 100;
-            mf.pn.altitude = temp + 200;
+            mf.pn.elevation = temp + 200;
 
             temp = Math.Abs(mf.pn.longitude * 100);
             temp -= ((int)(temp));
             temp *= 100;
-            mf.pn.altitude += temp;
+            mf.pn.elevation += temp;
 
             mf.pn.satellitesTracked = 12;
 

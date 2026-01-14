@@ -1410,7 +1410,7 @@ namespace Twol
             }
         }
 
-        public string Altitude { get { return Convert.ToString((Math.Round((pn.altitude * glm.m2FtOrM), 2))); } }
+        public string ElevationInMeters { get { return Convert.ToString((Math.Round((pn.elevation * glm.m2FtOrM), 2))); } }
 
         public string DistPivot
         {

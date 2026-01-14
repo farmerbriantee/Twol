@@ -2,6 +2,7 @@
 //Copyright BrianTee, copy right out of it.
 
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 
@@ -10,6 +11,11 @@ namespace Twol
     public partial class FormGPSData : Form
     {
         private readonly FormGPS mf = null;
+
+        protected override void OnPaintBackground(PaintEventArgs e)
+        {
+            e.Graphics.FillRectangle(Brushes.AliceBlue, e.ClipRectangle);
+        }
 
         public FormGPSData(Form callingForm)
         {
@@ -47,7 +53,7 @@ namespace Twol
 
             //lbludpWatchCounts.Text = mf.missedSentenceCount.ToString();
 
-            lblAltitude.Text = mf.Altitude;
+            lblElevation.Text = mf.ElevationInMeters;
 
             //PointF tileXY = mf.map.WSG84ToTilePos(mf.pn.longitude, mf.pn.latitude, mf.map.ZoomLevel);
 
@@ -66,8 +72,8 @@ namespace Twol
 
         private void FormGPSData_Load(object sender, EventArgs e)
         {
-            this.Width = 140;
-            this.Height = 350;
+            this.BackColor = Color.AliceBlue;
+            this.TransparencyKey = Color.AliceBlue;
         }
 
         private void FormGPSData_FormClosing(object sender, FormClosingEventArgs e)

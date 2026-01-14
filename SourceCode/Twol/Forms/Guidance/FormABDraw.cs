@@ -228,9 +228,9 @@ namespace Twol
                     track.ptA = new vec2(designPtsList[0]);
                     track.ptB = new vec2(designPtsList[designPtsList.Count - 1]);
 
-                    //make sure point distance isn't too big
-                    mf.trks.MakePointMinimumSpacing(ref designPtsList, 1.6);
-                    designPtsList.CalculateAverageHeadings(true);
+                    designPtsList.GenerateEquidistantPoints(3, false);
+                    designPtsList.ChaikinsSmooth(2, false);
+                    designPtsList.CalculateAverageHeadings(false);
 
                     //create a name
                     track.name = q == 0 ? "Boundary Curve" : "Inner Boundary Curve " + q.ToString();

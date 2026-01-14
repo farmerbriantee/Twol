@@ -61,7 +61,7 @@ namespace Twol
     {
         public double easting; //easting
         public double northing; //norting
-        public bool isSet;    //altitude
+        public bool isSet;
     }
 
     [System.Diagnostics.DebuggerDisplay("{ToString()}")]

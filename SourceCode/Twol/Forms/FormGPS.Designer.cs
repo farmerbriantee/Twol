@@ -3276,7 +3276,7 @@ namespace Twol
             0,
             0,
             65536});
-            this.nudToolOffset.Location = new System.Drawing.Point(608, 623);
+            this.nudToolOffset.Location = new System.Drawing.Point(292, 71);
             this.nudToolOffset.Maximum = new decimal(new int[] {
             30,
             0,

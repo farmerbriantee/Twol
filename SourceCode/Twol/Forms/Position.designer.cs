@@ -1110,7 +1110,7 @@ namespace Twol
                 sbElevationString.Append(
                       pn.latitude.ToString("N7", CultureInfo.InvariantCulture) + ","
                     + pn.longitude.ToString("N7", CultureInfo.InvariantCulture) + ","
-                    + Math.Round((pn.altitude - vehicle.antennaHeight), 3).ToString(CultureInfo.InvariantCulture) + ","
+                    + Math.Round((pn.elevation - vehicle.antennaHeight), 3).ToString(CultureInfo.InvariantCulture) + ","
                     + pn.fixQuality.ToString(CultureInfo.InvariantCulture) + ","
                     + pn.fix.easting.ToString("N2", CultureInfo.InvariantCulture) + ","
                     + pn.fix.northing.ToString("N2", CultureInfo.InvariantCulture) + ","

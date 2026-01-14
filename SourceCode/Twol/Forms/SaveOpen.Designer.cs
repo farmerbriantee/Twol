@@ -91,7 +91,7 @@ namespace Twol
         public void FileCreateContour()
         {
             //12  - points in patch
-            //64.697,0.168,-21.654,0 - east, heading, north, altitude
+            //64.697,0.168,-21.654,0 - east, heading, north, elevation
 
             //get the directory and make sure it exists, create if not
             string directoryName = Path.Combine(RegistrySettings.fieldsDirectory, currentFieldDirectory, currentJobDirectory);
@@ -800,7 +800,7 @@ namespace Twol
                 return;
             }
 
-            //Points in Patch followed by easting, heading, northing, altitude
+            //Points in Patch followed by easting, heading, northing, elevation
             else
             {
                 using (StreamReader reader = new StreamReader(dir))
@@ -1170,7 +1170,7 @@ namespace Twol
         public void FileSaveContour()
         {
             //1  - points in patch
-            //64.697,0.168,-21.654,0 - east, heading, north, altitude
+            //64.697,0.168,-21.654,0 - east, heading, north, elevation
 
             //make sure there is something to save
             if (contourSaveList == null) return;
