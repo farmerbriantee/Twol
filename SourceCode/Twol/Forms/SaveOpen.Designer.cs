@@ -923,7 +923,7 @@ namespace Twol
 
             string filename = Path.Combine(directoryName, "TrackLines.txt");
 
-            //get the file of previous AB Lines
+            //get the file of previous ABLine Lines
             if ((directoryName.Length > 0) && (!Directory.Exists(directoryName)))
             { Directory.CreateDirectory(directoryName); }
 
@@ -992,7 +992,7 @@ namespace Twol
                                 }
                             }
 
-                            if (track.mode == TrackMode.AB && track.curvePts.Count == 0)
+                            if (track.mode == TrackMode.ABLine && track.curvePts.Count == 0)
                             {
                                 double designHeading = track.heading;
 

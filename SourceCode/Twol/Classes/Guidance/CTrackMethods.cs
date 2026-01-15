@@ -420,7 +420,7 @@ namespace Twol
             }
         }
 
-        public static void SmoothAB(this List<vec3> points, int smPts = 4)
+        public static void SmoothSegments(this List<vec3> points, int smPts = 4)
         {
             int cnt = points.Count;
             if (cnt == 0 || smPts <= 0) return;

@@ -125,9 +125,9 @@ namespace Twol
 
             foreach (var track in mf.trks.gArr)
             {
-                if ((track.mode == TrackMode.AB || track.mode == TrackMode.Curve) && track.isVisible)
+                if ((track.mode == TrackMode.ABLine || track.mode == TrackMode.PolyLine) && track.isVisible)
                 {
-                    //default side assuming built in AB Draw - isVisible is used for side to draw
+                    //default side assuming built in ABLine Draw - isVisible is used for side to draw
                     gTemp.Add(new CTrk(track));
                     gTemp[gTemp.Count - 1].isVisible = true;
                 }
@@ -207,7 +207,7 @@ namespace Twol
 
         private void BuildTram()
         {
-            if (gTemp[indx].mode == TrackMode.Curve || gTemp[indx].mode == TrackMode.AB)
+            if (gTemp[indx].mode == TrackMode.PolyLine || gTemp[indx].mode == TrackMode.ABLine)
             {
                 BuildCurveTram();
             }
@@ -230,7 +230,7 @@ namespace Twol
                 widd = (Settings.Tool.tram_Width * 0.5) - mf.tram.halfWheelTrack;
                 widd += (Settings.Tool.tram_Width * i);
 
-                var temp = gTemp[indx].curvePts.OffsetLine(gTemp[indx].isVisible ? -widd : widd, 1.2, gTemp[indx].mode > TrackMode.Curve);
+                var temp = gTemp[indx].curvePts.OffsetLine(gTemp[indx].isVisible ? -widd : widd, 1.2, gTemp[indx].mode > TrackMode.PolyLine);
 
                 tramArr = new List<vec2>(temp.Count);
 
@@ -251,7 +251,7 @@ namespace Twol
                 widd = (Settings.Tool.tram_Width * 0.5) + mf.tram.halfWheelTrack;
                 widd += (Settings.Tool.tram_Width * i);
 
-                var temp = gTemp[indx].curvePts.OffsetLine(gTemp[indx].isVisible ? -widd : widd, 1.2, gTemp[indx].mode > TrackMode.Curve);
+                var temp = gTemp[indx].curvePts.OffsetLine(gTemp[indx].isVisible ? -widd : widd, 1.2, gTemp[indx].mode > TrackMode.PolyLine);
 
                 tramArr = new List<vec2>(temp.Count);
 
@@ -465,7 +465,7 @@ namespace Twol
                 GL.Enable(EnableCap.LineStipple);
                 GL.LineWidth(5);
 
-                if (gTemp[i].mode == TrackMode.bndCurve) GL.LineStipple(1, 0x0007);
+                if (gTemp[i].mode == TrackMode.Polygon) GL.LineStipple(1, 0x0007);
                 else GL.LineStipple(1, 0x0707);
 
                 if (i == indx)
@@ -475,8 +475,8 @@ namespace Twol
                 }
 
                 GL.Color3(0.30f, 0.97f, 0.30f);
-                if (gTemp[i].mode == TrackMode.AB) GL.Color3(0.9730f, 0.37f, 0.30f);
-                if (gTemp[i].mode == TrackMode.bndCurve) GL.Color3(0.70f, 0.5f, 0.2f);
+                if (gTemp[i].mode == TrackMode.ABLine) GL.Color3(0.9730f, 0.37f, 0.30f);
+                if (gTemp[i].mode == TrackMode.Polygon) GL.Color3(0.70f, 0.5f, 0.2f);
 
                 GL.Begin(PrimitiveType.LineStrip);
                 foreach (vec3 pts in gTemp[i].curvePts)

@@ -595,7 +595,7 @@ namespace Twol
                     GL.PushMatrix();
                     GL.LoadIdentity();
 
-                    //LightBar if AB Line is set and turned on or contour
+                    //LightBar if ABLine Line is set and turned on or contour
                     if (Settings.User.isLightbarNotSteerBar)
                     {
                         DrawLightBarText();
@@ -1948,7 +1948,7 @@ namespace Twol
             GL.LineWidth(1);
             //GL.Translate(0, 0, 0.01);
             //offlineDistance *= -1;
-            //  Dot distance is representation of how far from AB Line
+            //  Dot distance is representation of how far from ABLine Line
             int dotDistance = (int)(offlineDistance);
             int limit = (int)Settings.User.setDisplay_lightbarCmPerPixel * 8;
             if (dotDistance < -limit) dotDistance = -limit;

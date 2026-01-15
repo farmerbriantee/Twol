@@ -334,7 +334,7 @@ namespace Twol
                     //create a name
                     mf.hdl.tracksArr[mf.hdl.idx].name = mf.hdl.idx.ToString() + " Cu " + DateTime.Now.ToString("mm:ss", CultureInfo.InvariantCulture);
 
-                    mf.hdl.tracksArr[mf.hdl.idx].mode = TrackMode.Curve;
+                    mf.hdl.tracksArr[mf.hdl.idx].mode = TrackMode.PolyLine;
 
                     btnExit.Focus();
                 }
@@ -358,7 +358,7 @@ namespace Twol
                     vec3 ptA = new vec3(mf.bnd.bndList[bndSelect].fenceLine[start]);
                     vec3 ptB = new vec3(mf.bnd.bndList[bndSelect].fenceLine[end]);
 
-                    //calculate the AB Heading
+                    //calculate the ABLine Heading
                     double abHead = Math.Atan2(
                         mf.bnd.bndList[bndSelect].fenceLine[end].easting - mf.bnd.bndList[bndSelect].fenceLine[start].easting,
                         mf.bnd.bndList[bndSelect].fenceLine[end].northing - mf.bnd.bndList[bndSelect].fenceLine[start].northing);
@@ -395,7 +395,7 @@ namespace Twol
                     //create a name
                     mf.hdl.tracksArr[mf.hdl.idx].name = mf.hdl.idx.ToString() + " AB " + DateTime.Now.ToString("hh:mm:ss", CultureInfo.InvariantCulture);
 
-                    mf.hdl.tracksArr[mf.hdl.idx].mode = TrackMode.AB;
+                    mf.hdl.tracksArr[mf.hdl.idx].mode = TrackMode.ABLine;
                 }
 
                 mf.hdl.tracksArr[mf.hdl.idx].trackPts.AddStartEndPoints(30, 2);
@@ -410,7 +410,7 @@ namespace Twol
                 double distAway = nudSetDistance.Value;
                 mf.hdl.tracksArr[mf.hdl.idx].moveDistance += distAway;
 
-                var desList = mf.hdl.tracksArr[mf.hdl.idx].trackPts.OffsetLine(distAway, 1, mf.hdl.tracksArr[mf.hdl.idx].mode > TrackMode.Curve);
+                var desList = mf.hdl.tracksArr[mf.hdl.idx].trackPts.OffsetLine(distAway, 1, mf.hdl.tracksArr[mf.hdl.idx].mode > TrackMode.PolyLine);
 
                 mf.hdl.tracksArr[mf.hdl.idx].trackPts = desList;
 
@@ -493,7 +493,7 @@ namespace Twol
 
                 for (int i = 0; i < mf.hdl.tracksArr.Count; i++)
                 {
-                    if (mf.hdl.tracksArr[i].mode == TrackMode.AB)
+                    if (mf.hdl.tracksArr[i].mode == TrackMode.ABLine)
                     {
                         GL.Color3(0.973f, 0.9f, 0.10f);
                     }

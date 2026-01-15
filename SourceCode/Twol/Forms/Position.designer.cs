@@ -331,7 +331,9 @@ namespace Twol
             else if (trks.currentRefTrack != null)
             {
                 //build new current ref line if required
+                #pragma warning disable CS4014 
                 trks.GetDistanceFromRefTrack(trks.currentRefTrack, pivotAxlePos);
+                #pragma warning restore CS4014 
             }
 
             if (trks.currentGuidanceTrack.Count > 0)
@@ -1122,6 +1124,5 @@ namespace Twol
                 prevGridPos.northing = pivotAxlePos.northing;
             }
         }
-
     }//end class
 }//end namespace

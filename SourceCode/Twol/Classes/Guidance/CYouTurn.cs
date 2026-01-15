@@ -92,7 +92,7 @@ namespace Twol
 
 
         #region CreateTurn
-        //Finds the point where an AB Curve crosses the turn line
+        //Finds the point where an ABLine PolyLine crosses the turn line
         public void BuildCurveDubinsYouTurn()
         {
             double turnOffset = (Settings.Tool.toolWidth - Settings.Tool.overlap) * rowSkipsWidth + (isTurnLeft ? -Settings.Tool.offset * 2.0 : Settings.Tool.offset * 2.0);
@@ -101,7 +101,7 @@ namespace Twol
 
             CTrk track = mf.trks.currentRefTrack;
 
-            bool loop = track.mode == TrackMode.bndCurve || track.mode == TrackMode.waterPivot;
+            bool loop = track.mode == TrackMode.Polygon || track.mode == TrackMode.waterPivot;
 
 
             if (youTurnPhase < 10)
@@ -169,7 +169,7 @@ namespace Twol
 
                 if (exitPoint.turnLineNum == -1)//didnt hit any turn line
                 {
-                    if (track.mode == TrackMode.waterPivot || track.mode == TrackMode.bndCurve)
+                    if (track.mode == TrackMode.waterPivot || track.mode == TrackMode.Polygon)
                     {
                         youTurnPhase = 251;//ignore
                     }
@@ -770,7 +770,7 @@ namespace Twol
 
         public void BuildManualYouLateral(bool isTurnLeft)
         {
-            //point on AB line closest to pivot axle point from AB Line PurePursuit
+            //point on ABLine line closest to pivot axle point from ABLine Line PurePursuit
             mf.trks.howManyPathsAway += mf.trks.isHeadingSameWay == isTurnLeft ? 1 : -1;
         }
 

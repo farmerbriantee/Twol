@@ -8,7 +8,7 @@ using Twol.Classes;
 namespace Twol
 {
     public enum TrackMode
-    { toolLineInner = -2, toolLineOuter = -1, None = 0, AB = 2, Curve = 4, bndTrackOuter = 8, bndTrackInner = 16, bndCurve = 32, waterPivot = 64 };//, Heading, Circle, Spiral
+    { toolLineInner = -2, toolLineOuter = -1, None = 0, ABLine = 2, PolyLine = 4, Polygon = 32, waterPivot = 64 };//, Heading, Circle, Spiral
 
     public class CTracks
     {
@@ -56,6 +56,9 @@ namespace Twol
         //design tool line
         public List<vec3> toolDesignPtsList = new List<vec3>();
         public bool isRecordingCurveTrack;
+
+        private const double Is45DegInRads = 0.785398;  // 45 deg
+        private const double Is225DegInRads = 3.92699;  // 225 deg
 
         public CTracks(FormGPS _f)
         {
@@ -196,29 +199,41 @@ namespace Twol
                         lastIsHeadingSameWay = isHeadingSameWay;
                         double distAway = widthMinusOverlap * howManyPathsAway + (isHeadingSameWay ? -Settings.Tool.offset : Settings.Tool.offset) + (track.nudgeDistance);
 
+                        //Add egde guidance offset
                         if (track.mode > TrackMode.None) distAway += (0.5 * widthMinusOverlap);
 
+                        //determine global line direction for nudge direction
                         if (track.mode < TrackMode.None)
                         {
                             //is track between 45 and 225 degrees or not
-                            if (track.heading < 3.92699 && track.heading > 0.785398) distAway += -Settings.Tool.setToolSteer.nudgeGlobal;
+                            if (track.heading < Is225DegInRads && track.heading > Is45DegInRads) distAway += -Settings.Tool.setToolSteer.nudgeGlobal;
                             else distAway += Settings.Tool.setToolSteer.nudgeGlobal;
                         }
 
-                        currentGuidanceTrack = await Task.Run(() => BuildCurrentGuidanceTrack(distAway, track));
-
-                        if (!mf.yt.isYouTurnTriggered)
+                        //create current guidance lines to follow
+                        if (track.mode == TrackMode.ABLine)
                         {
-                            mf.yt.ResetCreatedYouTurn();
+                            //simple shift of A and B points
+                            currentGuidanceTrack.Clear();
+                            BuildCurrentGuidanceABLine(track, distAway);
                         }
-
-                        mf.gyd.isFindGlobalNearestTrackPoint = true;
-
-                        guideArr?.Clear();
-                        if (Settings.User.isSideGuideLines && mf.camera.camSetDistance > Settings.Tool.toolWidth * -400)
+                        else if (track.mode == TrackMode.Polygon)
                         {
-                            //build the list list of guide lines
-                            guideArr = await Task.Run(() => BuildTrackGuidelines(distAway, Settings.Vehicle.setAS_numGuideLines, track));
+                            currentGuidanceTrack = await Task.Run(() => BuildCurrentGuidanceTrack(distAway, track));
+
+                            if (!mf.yt.isYouTurnTriggered)
+                            {
+                                mf.yt.ResetCreatedYouTurn();
+                            }
+
+                            mf.gyd.isFindGlobalNearestTrackPoint = true;
+
+                            guideArr?.Clear();
+                            if (Settings.User.isSideGuideLines && mf.camera.camSetDistance > Settings.Tool.toolWidth * -400)
+                            {
+                                //build the list list of guide lines
+                                guideArr = await Task.Run(() => BuildTrackGuidelines(distAway, Settings.Vehicle.setAS_numGuideLines, track));
+                            }
                         }
                     }
                     catch (Exception ex)
@@ -233,12 +248,14 @@ namespace Twol
             }
         }
 
+
+
         public List<vec3> BuildCurrentGuidanceTrack(double distAway, CTrk track)
         {
             //the list of toBeSmoothedList of curve new list from async
             List<vec3> newCurList = new List<vec3>();
 
-            bool loops = track.mode > TrackMode.Curve;
+            bool loops = track.mode > TrackMode.PolyLine;
 
             try
             {
@@ -266,7 +283,7 @@ namespace Twol
 
                     newCurList = track.curvePts.OffsetLine(distAway, step, loops);
 
-                    if (track.mode != TrackMode.AB)
+                    if (track.mode != TrackMode.ABLine)
                     {
                         int cnt = newCurList.Count;
                         if (cnt > 6)
@@ -315,11 +332,11 @@ namespace Twol
 
                     newCurList.ChaikinsSmooth(3, true);
 
-                    newCurList.GenerateEquidistantPoints(0.5, track.mode == TrackMode.bndCurve);
+                    newCurList.GenerateEquidistantPoints(0.5, track.mode == TrackMode.Polygon);
 
                     newCurList.CalculateAverageHeadings(loops);
 
-                    //if (track.mode != TrackMode.AB)
+                    //if (track.mode != TrackMode.ABLine)
                     {
                         double delta = 0;
                         int cont = newCurList.Count;
@@ -406,7 +423,7 @@ namespace Twol
                     if (step > 4) step = 4;
                     if (step < 1) step = 1;
 
-                    newGuideList = track.curvePts.OffsetLine(nextGuideDist, step, track.mode > TrackMode.Curve);
+                    newGuideList = track.curvePts.OffsetLine(nextGuideDist, step, track.mode > TrackMode.PolyLine);
 
                     if (mf.bnd.bndList.Count > 0)
                     {
@@ -431,6 +448,26 @@ namespace Twol
             return newGuideLL;
         }
 
+        private void BuildCurrentGuidanceABLine(CTrk track, double distAway)
+        {
+            //simple shift of A and B points
+            currentGuidanceTrack.Clear();
+
+            vec3 pt = new vec3(track.ptA);
+            pt.easting += (Math.Sin(track.heading + glm.PIBy2) * distAway);
+            pt.northing += (Math.Cos(track.heading + glm.PIBy2) * distAway);
+            pt.heading = track.heading;
+            currentGuidanceTrack.Add(pt);
+
+            pt = new vec3(track.ptB);
+            pt.easting += (Math.Sin(track.heading + glm.PIBy2) * distAway);
+            pt.northing += (Math.Cos(track.heading + glm.PIBy2) * distAway);
+            pt.heading = track.heading;
+            currentGuidanceTrack.Add(pt);
+
+            currentGuidanceTrack.AddStartEndPoints(4, 1000);
+        }
+
         public void DrawTrack()
         {
             try
@@ -442,7 +479,7 @@ namespace Twol
 
                     for (int i = 0; i < guideArr.Count; i++)
                     {
-                        guideArr[i].DrawPolygon(currentRefTrack.mode != TrackMode.bndCurve ? PrimitiveType.LineStrip : PrimitiveType.LineLoop);
+                        guideArr[i].DrawPolygon(currentRefTrack.mode != TrackMode.Polygon ? PrimitiveType.LineStrip : PrimitiveType.LineLoop);
                     }
 
                     GL.LineWidth(Settings.User.setDisplay_lineWidth);
@@ -450,7 +487,7 @@ namespace Twol
 
                     for (int i = 0; i < guideArr.Count; i++)
                     {
-                        guideArr[i].DrawPolygon(currentRefTrack.mode != TrackMode.bndCurve ? PrimitiveType.LineStrip : PrimitiveType.LineLoop);
+                        guideArr[i].DrawPolygon(currentRefTrack.mode != TrackMode.Polygon ? PrimitiveType.LineStrip : PrimitiveType.LineLoop);
                     }
                 }
 
@@ -460,13 +497,12 @@ namespace Twol
                     GL.LineWidth(Settings.User.setDisplay_lineWidth * 4);
                     GL.Color3(0, 0, 0);
 
-                    //ablines and curves are a line - the rest a loop
-                    currentGuidanceTrack.DrawPolygon(currentRefTrack.mode <= TrackMode.Curve ? PrimitiveType.LineStrip : PrimitiveType.LineLoop);
+                    currentGuidanceTrack.DrawPolygon(currentRefTrack.mode <= TrackMode.PolyLine ? PrimitiveType.LineStrip : PrimitiveType.LineLoop);
 
                     GL.LineWidth(Settings.User.setDisplay_lineWidth);
                     GL.Color3(0.95f, 0.2f, 0.95f);
 
-                    currentGuidanceTrack.DrawPolygon(currentRefTrack.mode <= TrackMode.Curve ? PrimitiveType.LineStrip : PrimitiveType.LineLoop);
+                    currentGuidanceTrack.DrawPolygon(currentRefTrack.mode <= TrackMode.PolyLine ? PrimitiveType.LineStrip : PrimitiveType.LineLoop);
 
                     mf.yt.DrawYouTurn();
                 }
@@ -520,9 +556,9 @@ namespace Twol
             }
         }
 
-        public void DrawABLineNew()
+        public void DrawNewABLine()
         {
-            //AB Line currently being designed
+            //ABLine Line currently being designed
             GL.LineWidth(Settings.User.setDisplay_lineWidth);
             GL.Begin(PrimitiveType.Lines);
             GL.Color3(0.95f, 0.70f, 0.50f);
@@ -537,7 +573,7 @@ namespace Twol
 
         public void DrawNewTrack()
         {
-            DrawABLineNew();
+            DrawNewABLine();
 
             if (designPtsList.Count > 0)
             {
@@ -575,7 +611,7 @@ namespace Twol
 
             if (mf.gydTool.isboundaryLine) track.mode = TrackMode.toolLineOuter;
 
-            mf.trks.toolDesignPtsList.SmoothAB();
+            mf.trks.toolDesignPtsList.SmoothSegments();
 
             mf.trks.toolDesignPtsList.CalculateAverageHeadings(false);
             mf.trks.toolDesignPtsList.ReducePointsByAngle();
@@ -686,7 +722,7 @@ namespace Twol
 
         public CTrk CreateDesignedABTrack(bool isRefRightSide)
         {
-            var track = new CTrk(TrackMode.AB);
+            var track = new CTrk(TrackMode.ABLine);
 
             //fill in the dots between A and B
             double len = glm.Distance(designPtA, designPtB);
@@ -735,11 +771,11 @@ namespace Twol
         {
             isTrackValid = false;
 
-            var curList = track.curvePts.OffsetLine(distAway, 1, track.mode > TrackMode.Curve);
+            var curList = track.curvePts.OffsetLine(distAway, 1, track.mode > TrackMode.PolyLine);
 
-            if (track.mode != TrackMode.AB)
+            if (track.mode != TrackMode.ABLine)
             {
-                //curList.CalculateAverageHeadings(track.mode > TrackMode.Curve);
+                //curList.CalculateAverageHeadings(track.mode > TrackMode.PolyLine);
 
                 int cnt = curList.Count;
                 if (cnt > 6)
@@ -821,7 +857,7 @@ namespace Twol
                 track.ptB.northing = (track.curvePts[bClose].northing);
             }
 
-            curList.CalculateAverageHeadings(track.mode > TrackMode.Curve);
+            curList.CalculateAverageHeadings(track.mode > TrackMode.PolyLine);
             track.curvePts = curList;
         }
 
@@ -910,8 +946,7 @@ namespace Twol
 
         public override bool Equals(object obj)
         {
-            var other = obj as CTrk;
-            if (other is null) return false;
+            if (!(obj is CTrk other)) return false;
             return this == other;
         }
         public override int GetHashCode()

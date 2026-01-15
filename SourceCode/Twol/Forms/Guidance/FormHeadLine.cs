@@ -290,7 +290,7 @@ namespace Twol
                             sliceArr.Insert(0, pt);
                         }
 
-                        mode = TrackMode.Curve;
+                        mode = TrackMode.PolyLine;
                     }
                     else
                     {
@@ -323,7 +323,7 @@ namespace Twol
                     vec3 ptA = new vec3(mf.bnd.bndList[bndSelect].fenceLine[start]);
                     vec3 ptB = new vec3(mf.bnd.bndList[bndSelect].fenceLine[end]);
 
-                    //calculate the AB Heading
+                    //calculate the ABLine Heading
                     double abHead = Math.Atan2(
                         mf.bnd.bndList[bndSelect].fenceLine[end].easting - mf.bnd.bndList[bndSelect].fenceLine[start].easting,
                         mf.bnd.bndList[bndSelect].fenceLine[end].northing - mf.bnd.bndList[bndSelect].fenceLine[start].northing);
@@ -365,7 +365,7 @@ namespace Twol
                         sliceArr.Insert(0, pt);
                     }
 
-                    mode = TrackMode.AB;
+                    mode = TrackMode.ABLine;
 
                     start = -1; end = -1;
                 }
@@ -447,7 +447,7 @@ namespace Twol
                 //GL.LineStipple(1, 0x7070);
                 GL.PointSize(8);
 
-                if (mode == TrackMode.AB)
+                if (mode == TrackMode.ABLine)
                 {
                     GL.Color3(0.95f, 0.09f, 0.0f);
                 }

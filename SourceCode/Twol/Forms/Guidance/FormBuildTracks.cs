@@ -187,7 +187,7 @@ namespace Twol
                     FlatStyle = FlatStyle.Flat,
                 };
 
-                if (track.mode == TrackMode.AB)
+                if (track.mode == TrackMode.ABLine)
                     b.Image = Properties.Resources.TrackLine;
                 else if (track.mode == TrackMode.waterPivot)
                     b.Image = Properties.Resources.TrackPivot;
@@ -300,7 +300,7 @@ namespace Twol
                 selectedItem.heading += Math.PI;
                 if (selectedItem.heading > glm.twoPI) selectedItem.heading -= glm.twoPI;
 
-                if (selectedItem.mode != TrackMode.AB)
+                if (selectedItem.mode != TrackMode.ABLine)
                 {
                     int cnt = selectedItem.curvePts.Count;
                     if (cnt > 0)
@@ -511,14 +511,14 @@ namespace Twol
                 mf.trks.designPtsList.MinimumSpacingPointRemoval(1);
                 mf.trks.designPtsList.CalculateAverageHeadings(false);
 
-                var track = new CTrk(TrackMode.Curve);
+                var track = new CTrk(TrackMode.PolyLine);
 
-                mf.trks.designPtsList.SmoothAB();
+                mf.trks.designPtsList.SmoothSegments();
                 mf.trks.designPtsList.CalculateAverageHeadings(false);
 
                 track.heading = mf.trks.designPtsList.TrackAverageHeading();
 
-                //write out the Curve Points
+                //write out the PolyLine Points
                 foreach (vec3 item in mf.trks.designPtsList)
                 {
                     track.curvePts.Add(item);
@@ -622,10 +622,10 @@ namespace Twol
 
             //make sure line is long enough
             double len = glm.Distance(mf.trks.designPtA, mf.trks.designPtB);
-            if (len < 20)
+            if (len < 50)
             {
-                mf.trks.designPtB.easting = mf.trks.designPtA.easting + (Math.Sin(mf.trks.designHeading) * 30);
-                mf.trks.designPtB.northing = mf.trks.designPtA.northing + (Math.Cos(mf.trks.designHeading) * 30);
+                mf.trks.designPtB.easting = mf.trks.designPtA.easting + (Math.Sin(mf.trks.designHeading) * 50);
+                mf.trks.designPtB.northing = mf.trks.designPtA.northing + (Math.Cos(mf.trks.designHeading) * 50);
             }
 
             mf.trks.designLineEndA.easting = mf.trks.designPtA.easting - (Math.Sin(mf.trks.designHeading) * 1000);
@@ -668,8 +668,8 @@ namespace Twol
 
             mf.trks.designPtA = new vec2(mf.pivotAxlePos);
 
-            mf.trks.designPtB.easting = mf.trks.designPtA.easting + (Math.Sin(mf.pivotAxlePos.heading) * 30);
-            mf.trks.designPtB.northing = mf.trks.designPtA.northing + (Math.Cos(mf.pivotAxlePos.heading) * 30);
+            mf.trks.designPtB.easting = mf.trks.designPtA.easting + (Math.Sin(mf.pivotAxlePos.heading) * 50);
+            mf.trks.designPtB.northing = mf.trks.designPtA.northing + (Math.Cos(mf.pivotAxlePos.heading) * 50);
 
             mf.trks.designLineEndA.easting = mf.trks.designPtA.easting - (Math.Sin(mf.pivotAxlePos.heading) * 1000);
             mf.trks.designLineEndA.northing = mf.trks.designPtA.northing - (Math.Cos(mf.pivotAxlePos.heading) * 1000);
@@ -843,7 +843,7 @@ namespace Twol
                         designPtsList.MinimumSpacingPointRemoval(1);
                         designPtsList.CalculateAverageHeadings(false);
 
-                        var track = new CTrk(TrackMode.Curve)
+                        var track = new CTrk(TrackMode.PolyLine)
                         {
                             ptA = new vec2(designPtsList[0]),
                             ptB = new vec2(designPtsList[designPtsList.Count - 1])
@@ -853,9 +853,9 @@ namespace Twol
 
                         //build the tail extensions
                         designPtsList.AddStartEndPoints(5, 300);
-                        //mf.trks.SmoothAB(ref designPtsList, 4, false);
+                        //mf.trks.SmoothSegments(ref designPtsList, 4, false);
 
-                        //write out the Curve Points
+                        //write out the PolyLine Points
                         track.curvePts = designPtsList;
 
                         if (namelist.Count > i)
