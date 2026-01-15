@@ -144,111 +144,174 @@ namespace Twol
 
         public async Task GetDistanceFromRefTrack(CTrk track, vec3 pivot)
         {
+            if (track == null) return;
+
             double widthMinusOverlap = Settings.Tool.toolWidth - Settings.Tool.overlap;
 
-            if (!isTrackValid || ((mf.secondsSinceStart - lastSecond) > 2 && (!mf.isBtnAutoSteerOn || mf.mc.steerSwitchHigh)))
+            if (ShouldRecalculateDistance())
             {
-                double distanceFromRefLine = 0;
-                lastSecond = mf.secondsSinceStart;
-                if (track.mode != TrackMode.waterPivot)
+                if (!TryUpdateDistanceAndPaths(track, pivot, widthMinusOverlap))
                 {
-                    int refCount = track.curvePts.Count;
-                    if (refCount < 2)
-                    {
-                        currentGuidanceTrack?.Clear();
-                        return;
-                    }
-
-                    //int cc = mf.gyd.FindGlobalRoughNearest(mf.guidanceLookPos, track.curvePts, 10, !isTrackValid);
-
-                    if (mf.gyd.FindClosestSegment(track.curvePts, false, mf.guidanceLookPos, out int rA, out int rB))//, cc - 10, cc + 10))
-                    {
-                        distanceFromRefLine = mf.gyd.FindDistanceToSegment(mf.guidanceLookPos, track.curvePts[rA], track.curvePts[rB], out vec3 point, out _, true, false, false);
-
-                        //same way as line creation or not
-                        isHeadingSameWay = Math.PI - Math.Abs(Math.Abs(pivot.heading + glm.toRadians(mf.mc.actualSteerAngleDegrees) - track.curvePts[rA].heading) - Math.PI) < glm.PIBy2;
-                    }
+                    return;
                 }
-                else //pivot guide list
-                {
-                    //cross product
-                    isHeadingSameWay = ((mf.pivotAxlePos.easting - track.ptA.easting) * (mf.steerAxlePos.northing - track.ptA.northing)
-                        - (mf.pivotAxlePos.northing - track.ptA.northing) * (mf.steerAxlePos.easting - track.ptA.easting)) < 0;
-
-                    //pivot circle center
-                    distanceFromRefLine = -glm.Distance(mf.guidanceLookPos, track.ptA);
-                }
-
-                if (track.mode > TrackMode.None) distanceFromRefLine -= (0.5 * widthMinusOverlap);
-
-                double refDist = (distanceFromRefLine + (isHeadingSameWay ? Settings.Tool.offset : -Settings.Tool.offset) - (track.nudgeDistance)) / widthMinusOverlap;
-
-                if (refDist < 0) howManyPathsAway = (int)(refDist - 0.5);
-                else howManyPathsAway = (int)(refDist + 0.5);
             }
 
-            if (!isTrackValid || howManyPathsAway != lastHowManyPathsAway || (isHeadingSameWay != lastIsHeadingSameWay && Settings.Tool.offset != 0))
+            if (!ShouldRebuildGuidance())
             {
-                if (!isBusyWorking)
+                return;
+            }
+
+            if (isBusyWorking)
+            {
+                return;
+            }
+
+            isBusyWorking = true;
+
+            try
+            {
+                isTrackValid = true;
+                lastHowManyPathsAway = howManyPathsAway;
+                lastIsHeadingSameWay = isHeadingSameWay;
+
+                double distAway = CalculateTrackOffset(track, widthMinusOverlap);
+
+                if (track.mode == TrackMode.ABLine)
                 {
-                    isBusyWorking = true;
-                    try
-                    {
-                        isTrackValid = true;
-                        lastHowManyPathsAway = howManyPathsAway;
-                        lastIsHeadingSameWay = isHeadingSameWay;
-                        double distAway = widthMinusOverlap * howManyPathsAway + (isHeadingSameWay ? -Settings.Tool.offset : Settings.Tool.offset) + (track.nudgeDistance);
-
-                        //Add egde guidance offset
-                        if (track.mode > TrackMode.None) distAway += (0.5 * widthMinusOverlap);
-
-                        //determine global line direction for nudge direction
-                        if (track.mode < TrackMode.None)
-                        {
-                            //is track between 45 and 225 degrees or not
-                            if (track.heading < Is225DegInRads && track.heading > Is45DegInRads) distAway += -Settings.Tool.setToolSteer.nudgeGlobal;
-                            else distAway += Settings.Tool.setToolSteer.nudgeGlobal;
-                        }
-
-                        //create current guidance lines to follow
-                        if (track.mode == TrackMode.ABLine)
-                        {
-                            //simple shift of A and B points
-                            currentGuidanceTrack.Clear();
-                            BuildCurrentGuidanceABLine(track, distAway);
-                        }
-                        else if (track.mode == TrackMode.Polygon)
-                        {
-                            currentGuidanceTrack = await Task.Run(() => BuildCurrentGuidanceTrack(distAway, track));
-
-                            if (!mf.yt.isYouTurnTriggered)
-                            {
-                                mf.yt.ResetCreatedYouTurn();
-                            }
-
-                            mf.gyd.isFindGlobalNearestTrackPoint = true;
-
-                            guideArr?.Clear();
-                            if (Settings.User.isSideGuideLines && mf.camera.camSetDistance > Settings.Tool.toolWidth * -400)
-                            {
-                                //build the list list of guide lines
-                                guideArr = await Task.Run(() => BuildTrackGuidelines(distAway, Settings.Vehicle.setAS_numGuideLines, track));
-                            }
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        Log.EventWriter("BuildGuidanceCatch: " + ex.ToString());
-                    }
-                    finally
-                    {
-                        isBusyWorking = false;
-                    }
+                    currentGuidanceTrack.Clear();
+                    BuildCurrentGuidanceABLine(track, distAway);
                 }
+                else if (track.mode == TrackMode.Polygon || track.mode == TrackMode.PolyLine)
+                {
+                    currentGuidanceTrack = await Task.Run(() => BuildCurrentGuidanceTrack(distAway, track));
+
+                    if (!mf.yt.isYouTurnTriggered)
+                    {
+                        mf.yt.ResetCreatedYouTurn();
+                    }
+
+                    mf.gyd.isFindGlobalNearestTrackPoint = true;
+
+                    //guideArr?.Clear();
+
+                    //if (Settings.User.isSideGuideLines && mf.camera.camSetDistance > Settings.Tool.toolWidth * -400)
+                    //{
+                    //    guideArr = await Task.Run(() => BuildTrackGuidelines(distAway, Settings.Vehicle.setAS_numGuideLines, track));
+                    //}
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.EventWriter("GetDistanceFromRef Catch: " + ex.ToString());
+            }
+            finally
+            {
+                isBusyWorking = false;
             }
         }
+        private bool ShouldRecalculateDistance()
+        {
+            if (!isTrackValid) { return true; }
+            bool twoSecondsPassed = (mf.secondsSinceStart - lastSecond) > 2;
+            bool autoSteerOffOrSwitchHigh = !mf.isBtnAutoSteerOn || mf.mc.steerSwitchHigh;
 
+            return twoSecondsPassed && autoSteerOffOrSwitchHigh;
+        }
+        private bool TryUpdateDistanceAndPaths(CTrk track, vec3 pivot, double widthMinusOverlap)
+        {
+            lastSecond = mf.secondsSinceStart;
+            double distanceFromRefLine;
+            if (track.mode != TrackMode.waterPivot)
+            {
+                int refCount = track.curvePts.Count;
+                if (refCount < 2)
+                {
+                    currentGuidanceTrack?.Clear();
+                    return false;
+                }
 
+                if (!mf.gyd.FindClosestSegment(track.curvePts, false, mf.guidanceLookPos, out int rA, out int rB))
+                {
+                    return false;
+                }
+
+                distanceFromRefLine = mf.gyd.FindDistanceToSegment(
+                    mf.guidanceLookPos,
+                    track.curvePts[rA],
+                    track.curvePts[rB],
+                    out vec3 point,
+                    out _,
+                    true,
+                    false,
+                    false);
+
+                // same way as line creation or not
+                isHeadingSameWay =
+                    Math.PI - Math.Abs(Math.Abs(pivot.heading + glm.toRadians(mf.mc.actualSteerAngleDegrees) - track.curvePts[rA].heading) - Math.PI)
+                    < glm.PIBy2;
+            }
+            else
+            {
+                // pivot guide list
+
+                // cross product
+                isHeadingSameWay =
+                    ((mf.pivotAxlePos.easting - track.ptA.easting) * (mf.steerAxlePos.northing - track.ptA.northing)
+                     - (mf.pivotAxlePos.northing - track.ptA.northing) * (mf.steerAxlePos.easting - track.ptA.easting)) < 0;
+
+                // pivot circle center
+                distanceFromRefLine = -glm.Distance(mf.guidanceLookPos, track.ptA);
+            }
+
+            if (track.mode > TrackMode.None)
+            {
+                distanceFromRefLine -= (0.5 * widthMinusOverlap);
+            }
+
+            double offset = isHeadingSameWay ? Settings.Tool.offset : -Settings.Tool.offset;
+            double refDist = (distanceFromRefLine + offset - track.nudgeDistance) / widthMinusOverlap;
+
+            howManyPathsAway = refDist < 0 ? (int)(refDist - 0.5) : (int)(refDist + 0.5);
+
+            return true;
+        }
+        private bool ShouldRebuildGuidance()
+        {
+            if (!isTrackValid) { return true; }
+            if (howManyPathsAway != lastHowManyPathsAway)
+            {
+                return true;
+            }
+
+            if (Settings.Tool.offset != 0 && isHeadingSameWay != lastIsHeadingSameWay)
+            {
+                return true;
+            }
+
+            return false;
+        }
+        private double CalculateTrackOffset(CTrk track, double widthMinusOverlap)
+        {
+            double baseOffset = widthMinusOverlap * howManyPathsAway;
+            double sideOffset = isHeadingSameWay ? -Settings.Tool.offset : Settings.Tool.offset;
+            double distAway = baseOffset + sideOffset + track.nudgeDistance;
+
+            // Add edge guidance offset
+            if (track.mode > TrackMode.None)
+            {
+                distAway += (0.5 * widthMinusOverlap);
+            }
+
+            // determine global line direction for nudge direction
+            if (track.mode < TrackMode.None)
+            {
+                bool between45And225 = track.heading < 3.92699 && track.heading > 0.785398;
+                distAway += between45And225 ? -Settings.Tool.setToolSteer.nudgeGlobal : Settings.Tool.setToolSteer.nudgeGlobal;
+            }
+
+            return distAway;
+        }
 
         public List<vec3> BuildCurrentGuidanceTrack(double distAway, CTrk track)
         {
@@ -336,40 +399,8 @@ namespace Twol
 
                     newCurList.CalculateAverageHeadings(loops);
 
-                    //if (track.mode != TrackMode.ABLine)
-                    {
-                        double delta = 0;
-                        int cont = newCurList.Count;
-                        vec3[] smList = new vec3[cont];
-                        cont--;
-                        newCurList.CopyTo(smList);
-                        newCurList.Clear();
-                        int counter = 0;
-                        double check = 0;
+                    newCurList.ReducePointsByAngle();
 
-                        for (int i = 0; i < cont; i++)
-                        {
-                            if (i < 5)
-                            {
-                                newCurList.Add(new vec3(smList[i]));
-                                continue;
-                            }
-                            check = (smList[i - 1].heading - smList[i].heading);
-                            if (check > Math.PI || check < -Math.PI)
-                            {
-                                if (check > 0) check -= glm.twoPI;
-                                else check += glm.twoPI;
-                            }
-                            delta += check;
-                            if (Math.Abs(delta) > 0.0025 || counter > 30)
-                            {
-                                newCurList.Add(new vec3(smList[i]));
-                                delta = 0;
-                                counter = 0;
-                            }
-                            counter++;
-                        }
-                    }
 
                     if (!loops && track.mode != TrackMode.toolLineOuter)
                     {
@@ -393,59 +424,6 @@ namespace Twol
             }
 
             return newCurList;
-        }
-
-        private List<List<vec3>> BuildTrackGuidelines(double distAway, int _passes, CTrk track)
-        {
-            // the listlist of all the guidelines
-            List<List<vec3>> newGuideLL = new List<List<vec3>>();
-
-            try
-            {
-                for (int numGuides = -_passes; numGuides <= _passes; numGuides++)
-                {
-                    if (numGuides == 0) continue;
-
-                    //the list of toBeSmoothedList of curve new list from async
-                    List<vec3> newGuideList = new List<vec3>
-                    {
-                        Capacity = 128
-                    };
-
-                    double nextGuideDist = (Settings.Tool.toolWidth - Settings.Tool.overlap) * numGuides +
-                        (isHeadingSameWay ? -Settings.Tool.offset : Settings.Tool.offset);
-
-                    //nextGuideDist += (0.5 * (Settings.Tool.toolWidth - Settings.Tool.overlap));
-
-                    nextGuideDist += distAway;
-
-                    double step = (Settings.Tool.toolWidth - Settings.Tool.overlap) * 0.48;
-                    if (step > 4) step = 4;
-                    if (step < 1) step = 1;
-
-                    newGuideList = track.curvePts.OffsetLine(nextGuideDist, step, track.mode > TrackMode.PolyLine);
-
-                    if (mf.bnd.bndList.Count > 0)
-                    {
-                        for (int i = newGuideList.Count - 1; i >= 0; i--)
-                        {
-                            if (!mf.bnd.bndList[0].fenceLineEar.IsPointInPolygon(newGuideList[i]))
-                            {
-                                newGuideList.RemoveAt(i);
-                            }
-                        }
-                    }
-
-                    if (newGuideList.Count > 5) newGuideLL.Add(newGuideList);
-
-                }
-            }
-            catch (Exception e)
-            {
-                Log.EventWriter("Exception Build new offset curve" + e.ToString());
-            }
-
-            return newGuideLL;
         }
 
         private void BuildCurrentGuidanceABLine(CTrk track, double distAway)
@@ -555,6 +533,60 @@ namespace Twol
                 Log.EventWriter("Exception Draw Track: " + e.ToString());
             }
         }
+
+        private List<List<vec3>> BuildTrackGuidelines(double distAway, int _passes, CTrk track)
+        {
+            // the listlist of all the guidelines
+            List<List<vec3>> newGuideLL = new List<List<vec3>>();
+
+            try
+            {
+                for (int numGuides = -_passes; numGuides <= _passes; numGuides++)
+                {
+                    if (numGuides == 0) continue;
+
+                    //the list of toBeSmoothedList of curve new list from async
+                    List<vec3> newGuideList = new List<vec3>
+                    {
+                        Capacity = 128
+                    };
+
+                    double nextGuideDist = (Settings.Tool.toolWidth - Settings.Tool.overlap) * numGuides +
+                        (isHeadingSameWay ? -Settings.Tool.offset : Settings.Tool.offset);
+
+                    //nextGuideDist += (0.5 * (Settings.Tool.toolWidth - Settings.Tool.overlap));
+
+                    nextGuideDist += distAway;
+
+                    double step = (Settings.Tool.toolWidth - Settings.Tool.overlap) * 0.48;
+                    if (step > 4) step = 4;
+                    if (step < 1) step = 1;
+
+                    newGuideList = track.curvePts.OffsetLine(nextGuideDist, step, track.mode > TrackMode.PolyLine);
+
+                    if (mf.bnd.bndList.Count > 0)
+                    {
+                        for (int i = newGuideList.Count - 1; i >= 0; i--)
+                        {
+                            if (!mf.bnd.bndList[0].fenceLineEar.IsPointInPolygon(newGuideList[i]))
+                            {
+                                newGuideList.RemoveAt(i);
+                            }
+                        }
+                    }
+
+                    if (newGuideList.Count > 5) newGuideLL.Add(newGuideList);
+
+                }
+            }
+            catch (Exception e)
+            {
+                Log.EventWriter("Exception Build new offset curve" + e.ToString());
+            }
+
+            return newGuideLL;
+        }
+
 
         public void DrawNewABLine()
         {
@@ -955,3 +987,111 @@ namespace Twol
         }
     }
 }
+
+//public async Task GetDistanceFromRefTrack(CTrk track, vec3 pivot)
+//{
+//    double widthMinusOverlap = Settings.Tool.toolWidth - Settings.Tool.overlap;
+
+//    if (!isTrackValid ||
+//        ((mf.secondsSinceStart - lastSecond) > 2 && (!mf.isBtnAutoSteerOn || mf.mc.steerSwitchHigh)))
+//    {
+//        double distanceFromRefLine = 0;
+//        lastSecond = mf.secondsSinceStart;
+//        if (track.mode != TrackMode.waterPivot)
+//        {
+//            int refCount = track.curvePts.Count;
+//            if (refCount < 2)
+//            {
+//                currentGuidanceTrack?.Clear();
+//                return;
+//            }
+
+//            if (mf.gyd.FindClosestSegment(track.curvePts, false, mf.guidanceLookPos, out int rA, out int rB))//, cc - 10, cc + 10))
+//            {
+//                //find distance to segment from ref line
+//                distanceFromRefLine = mf.gyd.FindDistanceToSegment(mf.guidanceLookPos, track.curvePts[rA], track.curvePts[rB], out vec3 point, out _, true, false, false);
+
+//                //same way as line creation or not
+//                isHeadingSameWay = Math.PI - Math.Abs(Math.Abs(pivot.heading + glm.toRadians(mf.mc.actualSteerAngleDegrees) - track.curvePts[rA].heading) - Math.PI) < glm.PIBy2;
+//            }
+//        }
+//        else //pivot guide list
+//        {
+//            //cross product
+//            isHeadingSameWay = ((mf.pivotAxlePos.easting - track.ptA.easting) * (mf.steerAxlePos.northing - track.ptA.northing)
+//                - (mf.pivotAxlePos.northing - track.ptA.northing) * (mf.steerAxlePos.easting - track.ptA.easting)) < 0;
+
+//            //pivot circle center
+//            distanceFromRefLine = -glm.Distance(mf.guidanceLookPos, track.ptA);
+//        }
+
+//        //add edge guidance offset
+//        if (track.mode > TrackMode.None) distanceFromRefLine -= (0.5 * widthMinusOverlap);
+
+//        //calculate how many paths away from reference line
+//        double refDist = (distanceFromRefLine + (isHeadingSameWay ? Settings.Tool.offset : -Settings.Tool.offset) - (track.nudgeDistance)) / widthMinusOverlap;
+
+//        if (refDist < 0) howManyPathsAway = (int)(refDist - 0.5);
+//        else howManyPathsAway = (int)(refDist + 0.5);
+//    }
+
+//    if (!isTrackValid || howManyPathsAway != lastHowManyPathsAway || (isHeadingSameWay != lastIsHeadingSameWay && Settings.Tool.offset != 0))
+//    {
+//        if (!isBusyWorking)
+//        {
+//            isBusyWorking = true;
+//            try
+//            {
+//                isTrackValid = true;
+//                lastHowManyPathsAway = howManyPathsAway;
+//                lastIsHeadingSameWay = isHeadingSameWay;
+//                double distAway = widthMinusOverlap * howManyPathsAway + (isHeadingSameWay ? -Settings.Tool.offset : Settings.Tool.offset) + (track.nudgeDistance);
+
+//                //Add egde guidance offset
+//                if (track.mode > TrackMode.None) distAway += (0.5 * widthMinusOverlap);
+
+//                //determine global line direction for nudge direction
+//                if (track.mode < TrackMode.None)
+//                {
+//                    //is track between 45 and 225 degrees or not
+//                    if (track.heading < Is225DegInRads && track.heading > Is45DegInRads) distAway += -Settings.Tool.setToolSteer.nudgeGlobal;
+//                    else distAway += Settings.Tool.setToolSteer.nudgeGlobal;
+//                }
+
+//                //create current guidance lines to follow
+//                if (track.mode == TrackMode.ABLine)
+//                {
+//                    //simple shift of A and B points
+//                    currentGuidanceTrack.Clear();
+//                    BuildCurrentGuidanceABLine(track, distAway);
+//                }
+//                else if (track.mode == TrackMode.Polygon)
+//                {
+//                    currentGuidanceTrack = await Task.Run(() => BuildCurrentGuidanceTrack(distAway, track));
+
+//                    if (!mf.yt.isYouTurnTriggered)
+//                    {
+//                        mf.yt.ResetCreatedYouTurn();
+//                    }
+
+//                    mf.gyd.isFindGlobalNearestTrackPoint = true;
+
+//                    guideArr?.Clear();
+//                    if (Settings.User.isSideGuideLines && mf.camera.camSetDistance > Settings.Tool.toolWidth * -400)
+//                    {
+//                        //build the list list of guide lines
+//                        guideArr = await Task.Run(() => BuildTrackGuidelines(distAway, Settings.Vehicle.setAS_numGuideLines, track));
+//                    }
+//                }
+//            }
+//            catch (Exception ex)
+//            {
+//                Log.EventWriter("BuildGuidanceCatch: " + ex.ToString());
+//            }
+//            finally
+//            {
+//                isBusyWorking = false;
+//            }
+//        }
+//    }
+//}
