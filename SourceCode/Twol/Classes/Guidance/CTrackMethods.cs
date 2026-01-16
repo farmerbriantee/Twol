@@ -352,9 +352,13 @@ namespace Twol
                 }
             }
 
+            outputPts.GenerateEquidistantPoints(4, true);
+
+            outputPts.ChaikinsSmooth(2, true);
+
             outputPts.CalculateAverageHeadings(true);
 
-            outputPts.ReducePointsByAngle();
+            outputPts.ReducePointsByAngle(0.01, 400);
 
             outputPts.CalculateAverageHeadings(true);
 
