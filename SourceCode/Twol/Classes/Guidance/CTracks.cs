@@ -142,74 +142,6 @@ namespace Twol
             return trak;
         }
 
-        public async Task GetDistanceFromRefTrack(CTrk track, vec3 pivot)
-        {
-            if (track == null) return;
-
-            double widthMinusOverlap = Settings.Tool.toolWidth - Settings.Tool.overlap;
-
-            if (ShouldRecalculateDistance())
-            {
-                if (!TryUpdateDistanceAndPaths(track, pivot, widthMinusOverlap))
-                {
-                    return;
-                }
-            }
-
-            if (!ShouldRebuildGuidance())
-            {
-                return;
-            }
-
-            if (isBusyWorking)
-            {
-                return;
-            }
-
-            isBusyWorking = true;
-
-            try
-            {
-                isTrackValid = true;
-                lastHowManyPathsAway = howManyPathsAway;
-                lastIsHeadingSameWay = isHeadingSameWay;
-
-                double distAway = CalculateTrackOffset(track, widthMinusOverlap);
-
-                if (track.mode == TrackMode.ABLine)
-                {
-                    currentGuidanceTrack.Clear();
-                    BuildCurrentGuidanceABLine(track, distAway);
-                }
-                else if (track.mode == TrackMode.Polygon || track.mode == TrackMode.PolyLine)
-                {
-                    currentGuidanceTrack = await Task.Run(() => BuildCurrentGuidanceTrack(distAway, track));
-
-                    if (!mf.yt.isYouTurnTriggered)
-                    {
-                        mf.yt.ResetCreatedYouTurn();
-                    }
-
-                    mf.gyd.isFindGlobalNearestTrackPoint = true;
-
-                    //guideArr?.Clear();
-
-                    //if (Settings.User.isSideGuideLines && mf.camera.camSetDistance > Settings.Tool.toolWidth * -400)
-                    //{
-                    //    guideArr = await Task.Run(() => BuildTrackGuidelines(distAway, Settings.Vehicle.setAS_numGuideLines, track));
-                    //}
-
-                }
-            }
-            catch (Exception ex)
-            {
-                Log.EventWriter("GetDistanceFromRef Catch: " + ex.ToString());
-            }
-            finally
-            {
-                isBusyWorking = false;
-            }
-        }
         private bool ShouldRecalculateDistance()
         {
             if (!isTrackValid) { return true; }
@@ -312,20 +244,103 @@ namespace Twol
 
             return distAway;
         }
-
-        public List<vec3> BuildCurrentGuidanceTrack(double distAway, CTrk track)
+        public async Task GetDistanceFromRefTrack(CTrk track, vec3 pivot)
         {
-            //the list of toBeSmoothedList of curve new list from async
-            List<vec3> newCurList = new List<vec3>();
+            if (track == null) return;
 
-            bool loops = track.mode > TrackMode.PolyLine;
+            double widthMinusOverlap = Settings.Tool.toolWidth - Settings.Tool.overlap;
+
+            if (ShouldRecalculateDistance())
+            {
+                if (!TryUpdateDistanceAndPaths(track, pivot, widthMinusOverlap))
+                {
+                    return;
+                }
+            }
+
+            if (!ShouldRebuildGuidance())
+            {
+                return;
+            }
+
+            if (isBusyWorking)
+            {
+                return;
+            }
+
+            isBusyWorking = true;
 
             try
             {
-                if (track.mode == TrackMode.waterPivot)
+                isTrackValid = true;
+                lastHowManyPathsAway = howManyPathsAway;
+                lastIsHeadingSameWay = isHeadingSameWay;
+
+                double distAway = CalculateTrackOffset(track, widthMinusOverlap);
+
+                currentGuidanceTrack = await Task.Run(() => BuildCurrentGuidanceTrack(distAway, track));
+
+                if (!mf.yt.isYouTurnTriggered)
                 {
-                    //max 2 cm offset from correct circle or limit to 500 toBeSmoothedList
-                    double Angle = glm.twoPI / Math.Min(Math.Max(Math.Ceiling(glm.twoPI / (2 * Math.Acos(1 - (0.02 / Math.Abs(distAway))))), 100), 1000);//limit between 50 and 500 toBeSmoothedList
+                    mf.yt.ResetCreatedYouTurn();
+                }
+
+                mf.gyd.isFindGlobalNearestTrackPoint = true;
+            }
+            catch (Exception ex)
+            {
+                Log.EventWriter("GetDistanceFromRef Catch: " + ex.ToString());
+            }
+            finally
+            {
+                isBusyWorking = false;
+            }
+        }
+        public List<vec3> BuildCurrentGuidanceTrack(double distAway, CTrk track)
+        {
+            //the new current guidance track
+            List<vec3> newCurList = new List<vec3>();
+
+            try
+            {
+                if (track.mode == TrackMode.ABLine)
+                {
+                    //simple shift of A and B points
+                    vec3 pt = new vec3(track.ptA);
+                    pt.easting += (Math.Sin(track.heading + glm.PIBy2) * distAway);
+                    pt.northing += (Math.Cos(track.heading + glm.PIBy2) * distAway);
+                    pt.heading = track.heading;
+                    newCurList.Add(pt);
+
+                    pt = new vec3(track.ptB);
+                    pt.easting += (Math.Sin(track.heading + glm.PIBy2) * distAway);
+                    pt.northing += (Math.Cos(track.heading + glm.PIBy2) * distAway);
+                    pt.heading = track.heading;
+                    newCurList.Add(pt);
+
+                    newCurList.AddStartEndPoints(4, 5000);
+                    return newCurList;
+                }
+
+                //else if (track.mode == TrackMode.Polygon)
+                //{
+
+                //}
+
+                //else if (track.mode == TrackMode.PolyLine)
+                //{
+
+                //}
+
+                //else if (track.mode == TrackMode.toolLineInner || track.mode == TrackMode.toolLineOuter)
+                //{
+
+                //}
+
+                else if (track.mode == TrackMode.waterPivot)
+                {
+                    //max 2 cm offset from correct circle or limit to 500
+                    double Angle = glm.twoPI / Math.Min(Math.Max(Math.Ceiling(glm.twoPI / (2 * Math.Acos(1 - (0.02 / Math.Abs(distAway))))), 100), 1000);
 
                     vec3 centerPos = new vec3(track.ptA.easting, track.ptA.northing, 0);
                     double rotation = 0;
@@ -338,84 +353,69 @@ namespace Twol
                         newCurList.Add(new vec3(centerPos.easting + distAway * Math.Sin(rotation), centerPos.northing + distAway * Math.Cos(rotation), 0));
                     }
 
-                    newCurList.CalculateAverageHeadings(loops);
+                    newCurList.CalculateAverageHeadings(true);
                 }
+
                 else
                 {
                     double step = 1;
 
-                    newCurList = track.curvePts.OffsetLine(distAway, step, loops);
+                    newCurList = track.curvePts.OffsetLine(distAway, step, true);
 
-                    if (track.mode != TrackMode.ABLine)
-                    {
-                        int cnt = newCurList.Count;
-                        if (cnt > 6)
-                        {
-                            vec3[] arr = new vec3[cnt];
-                            newCurList.CopyTo(arr);
+                    //if (track.mode != TrackMode.ABLine)
+                    //{
+                    //    int cnt = newCurList.Count;
+                    //    if (cnt > 6)
+                    //    {
+                    //        vec3[] arr = new vec3[cnt];
+                    //        newCurList.CopyTo(arr);
 
-                            newCurList.Clear();
+                    //        newCurList.Clear();
 
-                            for (int i = 0; i < (arr.Length - 1); i++)
-                            {
-                                arr[i].heading = Math.Atan2(arr[i + 1].easting - arr[i].easting, arr[i + 1].northing - arr[i].northing);
-                                if (arr[i].heading < 0) arr[i].heading += glm.twoPI;
-                            }
+                    //        for (int i = 0; i < (arr.Length - 1); i++)
+                    //        {
+                    //            arr[i].heading = Math.Atan2(arr[i + 1].easting - arr[i].easting, arr[i + 1].northing - arr[i].northing);
+                    //            if (arr[i].heading < 0) arr[i].heading += glm.twoPI;
+                    //        }
 
-                            arr[arr.Length - 1].heading = arr[arr.Length - 2].heading;
+                    //        arr[arr.Length - 1].heading = arr[arr.Length - 2].heading;
 
-                            cnt = arr.Length;
-                            double distance;
+                    //        cnt = arr.Length;
+                    //        double distance;
 
-                            //add the first point of loop - it will be p1
-                            newCurList.Add(arr[0]);
+                    //        //add the first point of loop - it will be p1
+                    //        newCurList.Add(arr[0]);
 
-                            for (int i = 0; i < cnt - 3; i++)
-                            {
-                                // add p1
-                                newCurList.Add(arr[i + 1]);
+                    //        for (int i = 0; i < cnt - 3; i++)
+                    //        {
+                    //            // add p1
+                    //            newCurList.Add(arr[i + 1]);
 
-                                distance = glm.Distance(arr[i + 1], arr[i + 2]);
+                    //            distance = glm.Distance(arr[i + 1], arr[i + 2]);
 
-                                //if (distance > step)
-                                //{
-                                //    int loopTimes = (int)(distance / step + 1);
-                                //    for (int j = 1; j < loopTimes; j++)
-                                //    {
-                                //        vec3 pos = new vec3(glm.Catmull(j / (double)(loopTimes), arr[i], arr[i + 1], arr[i + 2], arr[i + 3]));
-                                //        newCurList.Add(pos);
-                                //    }
-                                //}
-                            }
+                    //            if (distance > step)
+                    //            {
+                    //                int loopTimes = (int)(distance / step + 1);
+                    //                for (int j = 1; j < loopTimes; j++)
+                    //                {
+                    //                    vec3 pos = new vec3(glm.Catmull(j / (double)(loopTimes), arr[i], arr[i + 1], arr[i + 2], arr[i + 3]));
+                    //                    newCurList.Add(pos);
+                    //                }
+                    //            }
+                    //        }
 
-                            newCurList.Add(arr[cnt - 2]);
-                            newCurList.Add(arr[cnt - 1]);
-                        }
-                    }
+                    //        newCurList.Add(arr[cnt - 2]);
+                    //        newCurList.Add(arr[cnt - 1]);
+                    //    }
+                    //}
 
-                    newCurList.ChaikinsSmooth(3, true);
+                    //newCurList.ChaikinsSmooth(3, true);
 
-                    newCurList.GenerateEquidistantPoints(0.5, track.mode == TrackMode.Polygon);
+                    //newCurList.GenerateEquidistantPoints(0.5, track.mode == TrackMode.Polygon);
 
-                    newCurList.CalculateAverageHeadings(loops);
+                    newCurList.CalculateAverageHeadings(false);
 
-                    newCurList.ReducePointsByAngle();
-
-
-                    if (!loops && track.mode != TrackMode.toolLineOuter)
-                    {
-                        vec3 pt1 = new vec3(newCurList[0]);
-                        pt1.easting -= (Math.Sin(pt1.heading) * 10000);
-                        pt1.northing -= (Math.Cos(pt1.heading) * 10000);
-
-                        newCurList.Insert(0, pt1);
-
-                        vec3 pt2 = new vec3(newCurList[newCurList.Count - 1]);
-                        pt2.easting += (Math.Sin(pt2.heading) * 10000);
-                        pt2.northing += (Math.Cos(pt2.heading) * 10000);
-
-                        newCurList.Add(pt2);
-                    }
+                    //newCurList.ReducePointsByAngle();
                 }
             }
             catch (Exception e)
@@ -426,25 +426,25 @@ namespace Twol
             return newCurList;
         }
 
-        private void BuildCurrentGuidanceABLine(CTrk track, double distAway)
-        {
-            //simple shift of A and B points
-            currentGuidanceTrack.Clear();
 
-            vec3 pt = new vec3(track.ptA);
-            pt.easting += (Math.Sin(track.heading + glm.PIBy2) * distAway);
-            pt.northing += (Math.Cos(track.heading + glm.PIBy2) * distAway);
-            pt.heading = track.heading;
-            currentGuidanceTrack.Add(pt);
 
-            pt = new vec3(track.ptB);
-            pt.easting += (Math.Sin(track.heading + glm.PIBy2) * distAway);
-            pt.northing += (Math.Cos(track.heading + glm.PIBy2) * distAway);
-            pt.heading = track.heading;
-            currentGuidanceTrack.Add(pt);
 
-            currentGuidanceTrack.AddStartEndPoints(4, 1000);
-        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         public void DrawTrack()
         {

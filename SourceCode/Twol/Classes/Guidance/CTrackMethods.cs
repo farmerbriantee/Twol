@@ -321,7 +321,7 @@ namespace Twol
             return result;
         }
 
-        public static List<vec3> ClipperOffset(CTrk track, double distAway, double minDist, bool loop)
+        public static List<vec3> ClipperOffset(CTrk track, double distAway)
         {
             //currentGuidanceTrack = await Task.Run(() => BuildCurrentGuidanceTrack(distAway, track));
             List<vec3> outputPts = new List<vec3>();
