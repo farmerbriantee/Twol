@@ -322,10 +322,10 @@ namespace Twol
                     return newCurList;
                 }
 
-                //else if (track.mode == TrackMode.Polygon)
-                //{
-
-                //}
+                else if (track.mode == TrackMode.Polygon)
+                {
+                    newCurList = track.curvePts.ClipperOffsetPolygon(distAway);
+                }
 
                 //else if (track.mode == TrackMode.PolyLine)
                 //{
@@ -358,62 +358,17 @@ namespace Twol
 
                 else
                 {
-                    double step = 1;
 
-                    newCurList = track.curvePts.OffsetLine(distAway, step, true);
+                    //newCurList = track.curvePts.OffsetLine(distAway, step, false);
 
-                    //if (track.mode != TrackMode.ABLine)
-                    //{
-                    //    int cnt = newCurList.Count;
-                    //    if (cnt > 6)
-                    //    {
-                    //        vec3[] arr = new vec3[cnt];
-                    //        newCurList.CopyTo(arr);
+                    //newCurList = track.curvePts.ClipperOffsetPolygon(distAway);
 
-                    //        newCurList.Clear();
-
-                    //        for (int i = 0; i < (arr.Length - 1); i++)
-                    //        {
-                    //            arr[i].heading = Math.Atan2(arr[i + 1].easting - arr[i].easting, arr[i + 1].northing - arr[i].northing);
-                    //            if (arr[i].heading < 0) arr[i].heading += glm.twoPI;
-                    //        }
-
-                    //        arr[arr.Length - 1].heading = arr[arr.Length - 2].heading;
-
-                    //        cnt = arr.Length;
-                    //        double distance;
-
-                    //        //add the first point of loop - it will be p1
-                    //        newCurList.Add(arr[0]);
-
-                    //        for (int i = 0; i < cnt - 3; i++)
-                    //        {
-                    //            // add p1
-                    //            newCurList.Add(arr[i + 1]);
-
-                    //            distance = glm.Distance(arr[i + 1], arr[i + 2]);
-
-                    //            if (distance > step)
-                    //            {
-                    //                int loopTimes = (int)(distance / step + 1);
-                    //                for (int j = 1; j < loopTimes; j++)
-                    //                {
-                    //                    vec3 pos = new vec3(glm.Catmull(j / (double)(loopTimes), arr[i], arr[i + 1], arr[i + 2], arr[i + 3]));
-                    //                    newCurList.Add(pos);
-                    //                }
-                    //            }
-                    //        }
-
-                    //        newCurList.Add(arr[cnt - 2]);
-                    //        newCurList.Add(arr[cnt - 1]);
-                    //    }
-                    //}
 
                     //newCurList.ChaikinsSmooth(3, true);
 
                     //newCurList.GenerateEquidistantPoints(0.5, track.mode == TrackMode.Polygon);
 
-                    newCurList.CalculateAverageHeadings(false);
+                    //newCurList.CalculateAverageHeadings(false);
 
                     //newCurList.ReducePointsByAngle();
                 }
@@ -481,6 +436,10 @@ namespace Twol
                     GL.Color3(0.95f, 0.2f, 0.95f);
 
                     currentGuidanceTrack.DrawPolygon(currentRefTrack.mode <= TrackMode.PolyLine ? PrimitiveType.LineStrip : PrimitiveType.LineLoop);
+
+                    GL.Color3(0.95f, 0.92f, 0.95f);
+                    GL.PointSize(4);
+                    currentGuidanceTrack.DrawPolygon(PrimitiveType.Points);
 
                     mf.yt.DrawYouTurn();
                 }

@@ -321,17 +321,16 @@ namespace Twol
             return result;
         }
 
-        public static List<vec3> ClipperOffset(CTrk track, double distAway)
+        public static List<vec3> ClipperOffsetPolygon(this List<vec3> points, double distAway)
         {
-            //currentGuidanceTrack = await Task.Run(() => BuildCurrentGuidanceTrack(distAway, track));
             List<vec3> outputPts = new List<vec3>();
 
             //convert to Clipper path
-            Path64 path = new Path64(track.curvePts.Count);
+            Path64 path = new Path64(points.Count);
 
-            for (int i = 0; i < track.curvePts.Count; i++)
+            for (int i = 0; i < points.Count; i++)
             {
-                path.Add(new Point64(track.curvePts[i].easting * 10000, track.curvePts[i].northing * 10000));
+                path.Add(new Point64(points[i].easting * 10000, points[i].northing * 10000));
             }
 
             bool isPos = Clipper.IsPositive(path);
@@ -356,6 +355,8 @@ namespace Twol
             outputPts.CalculateAverageHeadings(true);
 
             outputPts.ReducePointsByAngle();
+
+            outputPts.CalculateAverageHeadings(true);
 
             return outputPts;
 

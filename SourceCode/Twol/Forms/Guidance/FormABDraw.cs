@@ -314,6 +314,9 @@ namespace Twol
 
                 track.heading = designPtsList.TrackAverageHeading();
 
+                designPtsList.ReducePointsByAngle();
+                designPtsList.CalculateAverageHeadings(false);
+
                 //build the tail extensions
                 designPtsList.AddStartEndPoints(5, 300);
 
