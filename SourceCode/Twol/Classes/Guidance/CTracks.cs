@@ -142,6 +142,7 @@ namespace Twol
             return trak;
         }
 
+        //Generate the current guidance line to follow
         private bool ShouldRecalculateDistance()
         {
             if (!isTrackValid) { return true; }
@@ -296,10 +297,11 @@ namespace Twol
                 isBusyWorking = false;
             }
         }
+
         public List<vec3> BuildCurrentGuidanceTrack(double distAway, CTrk track)
         {
             //the new current guidance track
-            List<vec3> newCurList = new List<vec3>();
+            List<vec3> newCurList = new List<vec3>(64);
 
             try
             {
@@ -327,16 +329,6 @@ namespace Twol
                     newCurList = track.curvePts.ClipperOffsetPolygon(distAway);
                 }
 
-                //else if (track.mode == TrackMode.PolyLine)
-                //{
-
-                //}
-
-                //else if (track.mode == TrackMode.toolLineInner || track.mode == TrackMode.toolLineOuter)
-                //{
-
-                //}
-
                 else if (track.mode == TrackMode.waterPivot)
                 {
                     //max 2 cm offset from correct circle or limit to 500
@@ -355,6 +347,16 @@ namespace Twol
 
                     newCurList.CalculateAverageHeadings(true);
                 }
+
+                else if (track.mode < TrackMode.Polygon)
+                {
+                    newCurList = track.curvePts.ClipperOffsetPolyline(distAway);
+                }
+
+                //else if (track.mode == TrackMode.toolLineInner || track.mode == TrackMode.toolLineOuter)
+                //{
+
+                //}
 
                 else
                 {
@@ -493,58 +495,58 @@ namespace Twol
             }
         }
 
-        private List<List<vec3>> BuildTrackGuidelines(double distAway, int _passes, CTrk track)
-        {
-            // the listlist of all the guidelines
-            List<List<vec3>> newGuideLL = new List<List<vec3>>();
+        //private List<List<vec3>> BuildTrackGuidelines(double distAway, int _passes, CTrk track)
+        //{
+        //    // the listlist of all the guidelines
+        //    List<List<vec3>> newGuideLL = new List<List<vec3>>();
 
-            try
-            {
-                for (int numGuides = -_passes; numGuides <= _passes; numGuides++)
-                {
-                    if (numGuides == 0) continue;
+        //    try
+        //    {
+        //        for (int numGuides = -_passes; numGuides <= _passes; numGuides++)
+        //        {
+        //            if (numGuides == 0) continue;
 
-                    //the list of toBeSmoothedList of curve new list from async
-                    List<vec3> newGuideList = new List<vec3>
-                    {
-                        Capacity = 128
-                    };
+        //            //the list of toBeSmoothedList of curve new list from async
+        //            List<vec3> newGuideList = new List<vec3>
+        //            {
+        //                Capacity = 128
+        //            };
 
-                    double nextGuideDist = (Settings.Tool.toolWidth - Settings.Tool.overlap) * numGuides +
-                        (isHeadingSameWay ? -Settings.Tool.offset : Settings.Tool.offset);
+        //            double nextGuideDist = (Settings.Tool.toolWidth - Settings.Tool.overlap) * numGuides +
+        //                (isHeadingSameWay ? -Settings.Tool.offset : Settings.Tool.offset);
 
-                    //nextGuideDist += (0.5 * (Settings.Tool.toolWidth - Settings.Tool.overlap));
+        //            //nextGuideDist += (0.5 * (Settings.Tool.toolWidth - Settings.Tool.overlap));
 
-                    nextGuideDist += distAway;
+        //            nextGuideDist += distAway;
 
-                    double step = (Settings.Tool.toolWidth - Settings.Tool.overlap) * 0.48;
-                    if (step > 4) step = 4;
-                    if (step < 1) step = 1;
+        //            double step = (Settings.Tool.toolWidth - Settings.Tool.overlap) * 0.48;
+        //            if (step > 4) step = 4;
+        //            if (step < 1) step = 1;
 
-                    newGuideList = track.curvePts.OffsetLine(nextGuideDist, step, track.mode > TrackMode.PolyLine);
+        //            newGuideList = track.curvePts.OffsetLine(nextGuideDist, step, track.mode > TrackMode.PolyLine);
 
-                    if (mf.bnd.bndList.Count > 0)
-                    {
-                        for (int i = newGuideList.Count - 1; i >= 0; i--)
-                        {
-                            if (!mf.bnd.bndList[0].fenceLineEar.IsPointInPolygon(newGuideList[i]))
-                            {
-                                newGuideList.RemoveAt(i);
-                            }
-                        }
-                    }
+        //            if (mf.bnd.bndList.Count > 0)
+        //            {
+        //                for (int i = newGuideList.Count - 1; i >= 0; i--)
+        //                {
+        //                    if (!mf.bnd.bndList[0].fenceLineEar.IsPointInPolygon(newGuideList[i]))
+        //                    {
+        //                        newGuideList.RemoveAt(i);
+        //                    }
+        //                }
+        //            }
 
-                    if (newGuideList.Count > 5) newGuideLL.Add(newGuideList);
+        //            if (newGuideList.Count > 5) newGuideLL.Add(newGuideList);
 
-                }
-            }
-            catch (Exception e)
-            {
-                Log.EventWriter("Exception Build new offset curve" + e.ToString());
-            }
+        //        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Log.EventWriter("Exception Build new offset curve" + e.ToString());
+        //    }
 
-            return newGuideLL;
-        }
+        //    return newGuideLL;
+        //}
 
 
         public void DrawNewABLine()

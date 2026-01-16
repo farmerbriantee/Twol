@@ -359,19 +359,80 @@ namespace Twol
             outputPts.CalculateAverageHeadings(true);
 
             return outputPts;
+        }
 
-            //vec3 ptt = new vec3(inputPts[inputPts.Count - 1]);
-            //ptt.easting += (Math.Sin(ptt.heading) * 20000);
-            //ptt.northing += (Math.Cos(ptt.heading) * 20000);
-            //inputPts.Add(ptt);
+        public static List<vec3> ClipperOffsetPolyline(this List<vec3> points, double distAway)
+        {
+            List<vec3> outputPts = new List<vec3>();
 
-            //ptt = new vec3(inputPts[0]);
-            //ptt.easting -= (Math.Sin(ptt.heading) * 20000);
-            //ptt.northing -= (Math.Cos(ptt.heading) * 20000);
-            //inputPts.Insert(0, ptt);
+            //convert to Clipper path
+            Path64 path = new Path64(points.Count + 2);
 
-            //for (int i = track.curvePts.Count - 1; i > 0; i--)
-            //    newCurList.Add(new vec3(track.curvePts[i]));
+            vec3 pt = new vec3(points[0].easting, points[0].northing);
+            pt.easting -= (Math.Sin(points[0].heading) * 10000);
+            pt.northing -= (Math.Cos(points[0].heading) * 10000);
+            path.Add(new Point64(pt.easting * 10000, pt.northing * 10000));
+
+            for (int i = 0; i < points.Count; i++)
+            {
+                path.Add(new Point64(points[i].easting * 10000, points[i].northing * 10000));
+            }
+
+            pt = new vec3(points[points.Count - 1].easting, points[points.Count - 1].northing);
+            pt.easting += (Math.Sin(points[points.Count - 1].heading) * 10000);
+            pt.northing += (Math.Cos(points[points.Count - 1].heading) * 10000);
+            path.Add(new Point64(pt.easting * 10000, pt.northing * 10000));
+
+            bool isPos = Clipper.IsPositive(path);
+
+            ClipperOffset co = new ClipperOffset();
+
+            if (distAway >= 0)
+                co.ReverseSolution = true;
+
+            co.AddPath(path, JoinType.Round, EndType.Round);
+
+            Paths64 solution = new Paths64();
+
+            co.Execute(distAway * 10000, solution);
+
+            if (solution.Count > 0)
+            {
+                //convert back to vec3 list
+                for (int i = solution[0].Count - 1; i > 2; i--)
+                {
+                    outputPts.Add(new vec3((solution[0][i].X / 10000.0), (solution[0][i].Y / 10000.0), 0));
+                }
+            }
+
+            outputPts.GenerateEquidistantPoints(4, false);
+
+            outputPts.ChaikinsSmooth(2, false);
+
+            outputPts.CalculateAverageHeadings(false);
+
+            outputPts.ReducePointsByAngle(0.01, 400);
+
+            outputPts.CalculateAverageHeadings(false);
+
+            List<vec3> pts = new List<vec3>();
+
+            bool started = false;
+
+            for (int i = 0; i < outputPts.Count - 1; i++)
+            {
+                if (Math.Abs(outputPts[i].easting) < 3000 && Math.Abs(outputPts[i].northing) < 3000)
+                {
+                    started = true;
+                    pts.Add(new vec3(outputPts[i]));
+                }
+                else
+                {
+                    if (started) break;
+                }
+            }
+
+            return pts;
         }
 
         public static void AddStartEndPoints(this List<vec3> xList, int ptsToAdd = 10, double distBetweenPoints = 50)
