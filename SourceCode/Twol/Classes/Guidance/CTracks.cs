@@ -592,6 +592,12 @@ namespace Twol
             _gListArr.Remove(track);
         }
 
+        //sort the tracks
+        public void SortTracks()
+        {
+            _gListArr.Sort((a, b) =>
+                string.Compare(a?.name, b?.name, StringComparison.OrdinalIgnoreCase));
+        }
         public int GetVisibleTracks()
         {
             int tracksVisible = 0;

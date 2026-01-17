@@ -34,7 +34,6 @@
             this.lblCurveSelected = new System.Windows.Forms.Label();
             this.tboxNameCurve = new System.Windows.Forms.TextBox();
             this.tlp1 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnMakeAB_Bnd = new System.Windows.Forms.Button();
             this.btnBLength = new System.Windows.Forms.Button();
             this.btnALength = new System.Windows.Forms.Button();
             this.cboxIsZoom = new System.Windows.Forms.CheckBox();
@@ -50,8 +49,8 @@
             this.btnDeleteCurve = new System.Windows.Forms.Button();
             this.btnSelectCurveBk = new System.Windows.Forms.Button();
             this.btnMakeCurve = new System.Windows.Forms.Button();
-            this.btnMakeCurveBnd = new System.Windows.Forms.Button();
             this.btnCancelTouch = new System.Windows.Forms.Button();
+            this.cboxFldOrBnd = new System.Windows.Forms.CheckBox();
             this.tlp1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -114,7 +113,7 @@
             this.tlp1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tlp1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tlp1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tlp1.Controls.Add(this.btnMakeAB_Bnd, 1, 3);
+            this.tlp1.Controls.Add(this.cboxFldOrBnd, 1, 2);
             this.tlp1.Controls.Add(this.btnBLength, 0, 0);
             this.tlp1.Controls.Add(this.btnALength, 0, 1);
             this.tlp1.Controls.Add(this.cboxIsZoom, 0, 3);
@@ -132,7 +131,6 @@
             this.tlp1.Controls.Add(this.btnDeleteCurve, 0, 4);
             this.tlp1.Controls.Add(this.btnSelectCurveBk, 1, 4);
             this.tlp1.Controls.Add(this.btnMakeCurve, 2, 2);
-            this.tlp1.Controls.Add(this.btnMakeCurveBnd, 1, 2);
             this.tlp1.Controls.Add(this.btnCancelTouch, 1, 1);
             this.tlp1.Location = new System.Drawing.Point(706, 2);
             this.tlp1.Name = "tlp1";
@@ -147,25 +145,6 @@
             this.tlp1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 17.26221F));
             this.tlp1.Size = new System.Drawing.Size(390, 700);
             this.tlp1.TabIndex = 564;
-            // 
-            // btnMakeAB_Bnd
-            // 
-            this.btnMakeAB_Bnd.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnMakeAB_Bnd.BackColor = System.Drawing.Color.Transparent;
-            this.btnMakeAB_Bnd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnMakeAB_Bnd.Enabled = false;
-            this.btnMakeAB_Bnd.FlatAppearance.BorderColor = System.Drawing.SystemColors.HotTrack;
-            this.btnMakeAB_Bnd.FlatAppearance.BorderSize = 0;
-            this.btnMakeAB_Bnd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMakeAB_Bnd.Font = new System.Drawing.Font("Tahoma", 14.25F);
-            this.btnMakeAB_Bnd.Image = global::Twol.Properties.Resources.ABTrackBnd;
-            this.btnMakeAB_Bnd.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnMakeAB_Bnd.Location = new System.Drawing.Point(146, 295);
-            this.btnMakeAB_Bnd.Name = "btnMakeAB_Bnd";
-            this.btnMakeAB_Bnd.Size = new System.Drawing.Size(98, 87);
-            this.btnMakeAB_Bnd.TabIndex = 567;
-            this.btnMakeAB_Bnd.UseVisualStyleBackColor = false;
-            this.btnMakeAB_Bnd.Click += new System.EventHandler(this.btnMakeAB_Bnd_Click);
             // 
             // btnBLength
             // 
@@ -452,25 +431,6 @@
             this.btnMakeCurve.UseVisualStyleBackColor = false;
             this.btnMakeCurve.Click += new System.EventHandler(this.btnMakeCurve_Click);
             // 
-            // btnMakeCurveBnd
-            // 
-            this.btnMakeCurveBnd.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnMakeCurveBnd.BackColor = System.Drawing.Color.Transparent;
-            this.btnMakeCurveBnd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnMakeCurveBnd.Enabled = false;
-            this.btnMakeCurveBnd.FlatAppearance.BorderColor = System.Drawing.SystemColors.HotTrack;
-            this.btnMakeCurveBnd.FlatAppearance.BorderSize = 0;
-            this.btnMakeCurveBnd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMakeCurveBnd.Font = new System.Drawing.Font("Tahoma", 14.25F);
-            this.btnMakeCurveBnd.Image = global::Twol.Properties.Resources.ABCurveBnd;
-            this.btnMakeCurveBnd.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnMakeCurveBnd.Location = new System.Drawing.Point(146, 194);
-            this.btnMakeCurveBnd.Name = "btnMakeCurveBnd";
-            this.btnMakeCurveBnd.Size = new System.Drawing.Size(98, 87);
-            this.btnMakeCurveBnd.TabIndex = 566;
-            this.btnMakeCurveBnd.UseVisualStyleBackColor = false;
-            this.btnMakeCurveBnd.Click += new System.EventHandler(this.btnMakeCurveBnd_Click);
-            // 
             // btnCancelTouch
             // 
             this.btnCancelTouch.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -488,6 +448,31 @@
             this.btnCancelTouch.TabIndex = 470;
             this.btnCancelTouch.UseVisualStyleBackColor = false;
             this.btnCancelTouch.Click += new System.EventHandler(this.btnCancelTouch_Click);
+            // 
+            // cboxFldOrBnd
+            // 
+            this.cboxFldOrBnd.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cboxFldOrBnd.Appearance = System.Windows.Forms.Appearance.Button;
+            this.cboxFldOrBnd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.cboxFldOrBnd.Checked = true;
+            this.cboxFldOrBnd.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cboxFldOrBnd.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.cboxFldOrBnd.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.cboxFldOrBnd.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray;
+            this.cboxFldOrBnd.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.cboxFldOrBnd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cboxFldOrBnd.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboxFldOrBnd.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.cboxFldOrBnd.Image = global::Twol.Properties.Resources.Boundary;
+            this.cboxFldOrBnd.Location = new System.Drawing.Point(159, 256);
+            this.cboxFldOrBnd.Name = "cboxFldOrBnd";
+            this.cboxFldOrBnd.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.tlp1.SetRowSpan(this.cboxFldOrBnd, 2);
+            this.cboxFldOrBnd.Size = new System.Drawing.Size(72, 68);
+            this.cboxFldOrBnd.TabIndex = 566;
+            this.cboxFldOrBnd.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.cboxFldOrBnd.UseVisualStyleBackColor = false;
+            this.cboxFldOrBnd.Click += new System.EventHandler(this.cboxFldOrBnd_Click);
             // 
             // FormABDraw
             // 
@@ -538,7 +523,6 @@
         private System.Windows.Forms.TableLayoutPanel tlp1;
         private System.Windows.Forms.Button btnEdgeAB;
         private System.Windows.Forms.Button btnMakeAPlus;
-        private System.Windows.Forms.Button btnMakeCurveBnd;
-        private System.Windows.Forms.Button btnMakeAB_Bnd;
+        private System.Windows.Forms.CheckBox cboxFldOrBnd;
     }
 }

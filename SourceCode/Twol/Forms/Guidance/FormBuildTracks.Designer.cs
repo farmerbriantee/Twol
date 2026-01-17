@@ -32,13 +32,18 @@
             this.lblCurveExists = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panelName = new System.Windows.Forms.Panel();
+            this.btnAddA_Fld = new System.Windows.Forms.Button();
+            this.BtnAddA_Bnd = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btnAddTime = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnCancel_Name = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.panelMain = new System.Windows.Forms.Panel();
+            this.btnSort = new System.Windows.Forms.Button();
+            this.btnHideShowBndTool = new System.Windows.Forms.Button();
+            this.btnHideShowFldTool = new System.Windows.Forms.Button();
+            this.btnHideShowFld = new System.Windows.Forms.Button();
+            this.btnHideShowBnd = new System.Windows.Forms.Button();
             this.btnListDelete = new System.Windows.Forms.Button();
             this.btnCancelMain = new System.Windows.Forms.Button();
             this.btnHideShow = new System.Windows.Forms.Button();
@@ -59,8 +64,6 @@
             this.btnPausePlay = new System.Windows.Forms.Button();
             this.panelEditName = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.btnAddTimeEdit = new System.Windows.Forms.Button();
             this.btnSaveEditName = new System.Windows.Forms.Button();
             this.btnCancel_EditName = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -96,6 +99,7 @@
             this.label13 = new System.Windows.Forms.Label();
             this.btnCancel_APlus = new System.Windows.Forms.Button();
             this.btnEnter_APlus = new System.Windows.Forms.Button();
+            this.nudHeading = new Twol.NudlessNumericUpDown();
             this.btnAPlus = new System.Windows.Forms.Button();
             this.panelLatLonPlus = new System.Windows.Forms.Panel();
             this.label28 = new System.Windows.Forms.Label();
@@ -103,8 +107,11 @@
             this.label17 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
+            this.nudLatitudePlus = new Twol.NudlessNumericUpDown();
+            this.nudLongitudePlus = new Twol.NudlessNumericUpDown();
             this.btnCancel_LatLonPlus = new System.Windows.Forms.Button();
             this.btnEnter_LatLonPlus = new System.Windows.Forms.Button();
+            this.nudHeadingLatLonPlus = new Twol.NudlessNumericUpDown();
             this.panelLatLonLatLon = new System.Windows.Forms.Panel();
             this.label29 = new System.Windows.Forms.Label();
             this.btnFillLatLonLatLonB = new System.Windows.Forms.Button();
@@ -113,8 +120,12 @@
             this.label23 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
+            this.nudLatitudeB = new Twol.NudlessNumericUpDown();
+            this.nudLongitudeB = new Twol.NudlessNumericUpDown();
             this.label19 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
+            this.nudLatitudeA = new Twol.NudlessNumericUpDown();
+            this.nudLongitudeA = new Twol.NudlessNumericUpDown();
             this.btnCancelLatLonLatLon = new System.Windows.Forms.Button();
             this.btnEnter_LatLonLatLon = new System.Windows.Forms.Button();
             this.panelPivot = new System.Windows.Forms.Panel();
@@ -122,6 +133,8 @@
             this.btnFillLAtLonPivot = new System.Windows.Forms.Button();
             this.label25 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
+            this.nudLatitudePivot = new Twol.NudlessNumericUpDown();
+            this.nudLongitudePivot = new Twol.NudlessNumericUpDown();
             this.btnCancel_Pivot = new System.Windows.Forms.Button();
             this.btnEnter_Pivot = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -136,20 +149,8 @@
             this.btnzAPlus2 = new System.Windows.Forms.Button();
             this.btnzABLine2 = new System.Windows.Forms.Button();
             this.btnzABCurve2 = new System.Windows.Forms.Button();
-            this.btnHideShowBnd = new System.Windows.Forms.Button();
-            this.btnHideShowFld = new System.Windows.Forms.Button();
-            this.btnHideShowFldTool = new System.Windows.Forms.Button();
-            this.btnHideShowBndTool = new System.Windows.Forms.Button();
-            this.nudLatitudeB = new Twol.NudlessNumericUpDown();
-            this.nudLongitudeB = new Twol.NudlessNumericUpDown();
-            this.nudLatitudeA = new Twol.NudlessNumericUpDown();
-            this.nudLongitudeA = new Twol.NudlessNumericUpDown();
-            this.nudLatitudePivot = new Twol.NudlessNumericUpDown();
-            this.nudLongitudePivot = new Twol.NudlessNumericUpDown();
-            this.nudLatitudePlus = new Twol.NudlessNumericUpDown();
-            this.nudLongitudePlus = new Twol.NudlessNumericUpDown();
-            this.nudHeadingLatLonPlus = new Twol.NudlessNumericUpDown();
-            this.nudHeading = new Twol.NudlessNumericUpDown();
+            this.btnEditAddAFld = new System.Windows.Forms.Button();
+            this.btnEditAddABnd = new System.Windows.Forms.Button();
             this.panelName.SuspendLayout();
             this.panelMain.SuspendLayout();
             this.panelCurve.SuspendLayout();
@@ -194,9 +195,9 @@
             // panelName
             // 
             this.panelName.BackColor = System.Drawing.Color.White;
+            this.panelName.Controls.Add(this.btnAddA_Fld);
+            this.panelName.Controls.Add(this.BtnAddA_Bnd);
             this.panelName.Controls.Add(this.label11);
-            this.panelName.Controls.Add(this.label1);
-            this.panelName.Controls.Add(this.btnAddTime);
             this.panelName.Controls.Add(this.btnAdd);
             this.panelName.Controls.Add(this.btnCancel_Name);
             this.panelName.Controls.Add(this.textBox1);
@@ -204,6 +205,34 @@
             this.panelName.Name = "panelName";
             this.panelName.Size = new System.Drawing.Size(241, 310);
             this.panelName.TabIndex = 434;
+            // 
+            // btnAddA_Fld
+            // 
+            this.btnAddA_Fld.BackColor = System.Drawing.Color.Transparent;
+            this.btnAddA_Fld.FlatAppearance.BorderSize = 0;
+            this.btnAddA_Fld.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddA_Fld.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddA_Fld.Image = global::Twol.Properties.Resources.JobActive;
+            this.btnAddA_Fld.Location = new System.Drawing.Point(141, 154);
+            this.btnAddA_Fld.Name = "btnAddA_Fld";
+            this.btnAddA_Fld.Size = new System.Drawing.Size(78, 57);
+            this.btnAddA_Fld.TabIndex = 452;
+            this.btnAddA_Fld.UseVisualStyleBackColor = false;
+            this.btnAddA_Fld.Click += new System.EventHandler(this.btnAddA_Fld_Click);
+            // 
+            // BtnAddA_Bnd
+            // 
+            this.BtnAddA_Bnd.BackColor = System.Drawing.Color.Transparent;
+            this.BtnAddA_Bnd.FlatAppearance.BorderSize = 0;
+            this.BtnAddA_Bnd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnAddA_Bnd.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnAddA_Bnd.Image = global::Twol.Properties.Resources.Boundary;
+            this.BtnAddA_Bnd.Location = new System.Drawing.Point(17, 154);
+            this.BtnAddA_Bnd.Name = "BtnAddA_Bnd";
+            this.BtnAddA_Bnd.Size = new System.Drawing.Size(78, 57);
+            this.BtnAddA_Bnd.TabIndex = 451;
+            this.BtnAddA_Bnd.UseVisualStyleBackColor = false;
+            this.BtnAddA_Bnd.Click += new System.EventHandler(this.BtnAddA_Bnd_Click);
             // 
             // label11
             // 
@@ -217,34 +246,6 @@
             this.label11.TabIndex = 450;
             this.label11.Text = "Add Name";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(48, 154);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(33, 29);
-            this.label1.TabIndex = 424;
-            this.label1.Text = "+";
-            // 
-            // btnAddTime
-            // 
-            this.btnAddTime.BackColor = System.Drawing.Color.Transparent;
-            this.btnAddTime.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnAddTime.FlatAppearance.BorderSize = 0;
-            this.btnAddTime.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddTime.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddTime.Image = global::Twol.Properties.Resources.JobNameTime;
-            this.btnAddTime.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnAddTime.Location = new System.Drawing.Point(87, 133);
-            this.btnAddTime.Name = "btnAddTime";
-            this.btnAddTime.Size = new System.Drawing.Size(68, 69);
-            this.btnAddTime.TabIndex = 150;
-            this.btnAddTime.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnAddTime.UseVisualStyleBackColor = false;
-            this.btnAddTime.Click += new System.EventHandler(this.btnAddTime_Click);
             // 
             // btnAdd
             // 
@@ -299,6 +300,7 @@
             // panelMain
             // 
             this.panelMain.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panelMain.Controls.Add(this.btnSort);
             this.panelMain.Controls.Add(this.btnHideShowBndTool);
             this.panelMain.Controls.Add(this.btnHideShowFldTool);
             this.panelMain.Controls.Add(this.btnHideShowFld);
@@ -318,6 +320,78 @@
             this.panelMain.Name = "panelMain";
             this.panelMain.Size = new System.Drawing.Size(750, 425);
             this.panelMain.TabIndex = 435;
+            // 
+            // btnSort
+            // 
+            this.btnSort.BackColor = System.Drawing.Color.Transparent;
+            this.btnSort.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnSort.FlatAppearance.BorderSize = 0;
+            this.btnSort.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSort.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSort.Image = global::Twol.Properties.Resources.Sort;
+            this.btnSort.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnSort.Location = new System.Drawing.Point(11, 88);
+            this.btnSort.Name = "btnSort";
+            this.btnSort.Size = new System.Drawing.Size(71, 63);
+            this.btnSort.TabIndex = 437;
+            this.btnSort.UseVisualStyleBackColor = false;
+            this.btnSort.Click += new System.EventHandler(this.btnSort_Click);
+            // 
+            // btnHideShowBndTool
+            // 
+            this.btnHideShowBndTool.BackColor = System.Drawing.Color.Transparent;
+            this.btnHideShowBndTool.FlatAppearance.BorderSize = 0;
+            this.btnHideShowBndTool.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHideShowBndTool.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHideShowBndTool.Image = global::Twol.Properties.Resources.FilterOuterToolLines;
+            this.btnHideShowBndTool.Location = new System.Drawing.Point(668, 352);
+            this.btnHideShowBndTool.Name = "btnHideShowBndTool";
+            this.btnHideShowBndTool.Size = new System.Drawing.Size(78, 57);
+            this.btnHideShowBndTool.TabIndex = 436;
+            this.btnHideShowBndTool.UseVisualStyleBackColor = false;
+            this.btnHideShowBndTool.Click += new System.EventHandler(this.btnHideShowBndTool_Click);
+            // 
+            // btnHideShowFldTool
+            // 
+            this.btnHideShowFldTool.BackColor = System.Drawing.Color.Transparent;
+            this.btnHideShowFldTool.FlatAppearance.BorderSize = 0;
+            this.btnHideShowFldTool.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHideShowFldTool.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHideShowFldTool.Image = global::Twol.Properties.Resources.FilterInnerToolLines;
+            this.btnHideShowFldTool.Location = new System.Drawing.Point(668, 266);
+            this.btnHideShowFldTool.Name = "btnHideShowFldTool";
+            this.btnHideShowFldTool.Size = new System.Drawing.Size(78, 57);
+            this.btnHideShowFldTool.TabIndex = 435;
+            this.btnHideShowFldTool.UseVisualStyleBackColor = false;
+            this.btnHideShowFldTool.Click += new System.EventHandler(this.btnHideShowFldTool_Click);
+            // 
+            // btnHideShowFld
+            // 
+            this.btnHideShowFld.BackColor = System.Drawing.Color.Transparent;
+            this.btnHideShowFld.FlatAppearance.BorderSize = 0;
+            this.btnHideShowFld.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHideShowFld.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHideShowFld.Image = global::Twol.Properties.Resources.JobActive;
+            this.btnHideShowFld.Location = new System.Drawing.Point(668, 180);
+            this.btnHideShowFld.Name = "btnHideShowFld";
+            this.btnHideShowFld.Size = new System.Drawing.Size(78, 57);
+            this.btnHideShowFld.TabIndex = 434;
+            this.btnHideShowFld.UseVisualStyleBackColor = false;
+            this.btnHideShowFld.Click += new System.EventHandler(this.btnHideShowFld_Click);
+            // 
+            // btnHideShowBnd
+            // 
+            this.btnHideShowBnd.BackColor = System.Drawing.Color.Transparent;
+            this.btnHideShowBnd.FlatAppearance.BorderSize = 0;
+            this.btnHideShowBnd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHideShowBnd.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHideShowBnd.Image = global::Twol.Properties.Resources.Boundary;
+            this.btnHideShowBnd.Location = new System.Drawing.Point(668, 94);
+            this.btnHideShowBnd.Name = "btnHideShowBnd";
+            this.btnHideShowBnd.Size = new System.Drawing.Size(78, 57);
+            this.btnHideShowBnd.TabIndex = 433;
+            this.btnHideShowBnd.UseVisualStyleBackColor = false;
+            this.btnHideShowBnd.Click += new System.EventHandler(this.btnHideShowBnd_Click);
             // 
             // btnListDelete
             // 
@@ -411,7 +485,7 @@
             this.btnSwapAB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSwapAB.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSwapAB.Image = global::Twol.Properties.Resources.ABSwapPoints;
-            this.btnSwapAB.Location = new System.Drawing.Point(5, 334);
+            this.btnSwapAB.Location = new System.Drawing.Point(10, 350);
             this.btnSwapAB.Name = "btnSwapAB";
             this.btnSwapAB.Size = new System.Drawing.Size(71, 63);
             this.btnSwapAB.TabIndex = 426;
@@ -427,7 +501,7 @@
             this.btnEditName.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEditName.Image = global::Twol.Properties.Resources.FileEditName;
             this.btnEditName.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnEditName.Location = new System.Drawing.Point(5, 138);
+            this.btnEditName.Location = new System.Drawing.Point(11, 174);
             this.btnEditName.Name = "btnEditName";
             this.btnEditName.Size = new System.Drawing.Size(71, 63);
             this.btnEditName.TabIndex = 425;
@@ -443,7 +517,7 @@
             this.btnDuplicate.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDuplicate.Image = global::Twol.Properties.Resources.FileCopy;
             this.btnDuplicate.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnDuplicate.Location = new System.Drawing.Point(5, 236);
+            this.btnDuplicate.Location = new System.Drawing.Point(11, 263);
             this.btnDuplicate.Name = "btnDuplicate";
             this.btnDuplicate.Size = new System.Drawing.Size(71, 63);
             this.btnDuplicate.TabIndex = 424;
@@ -602,9 +676,9 @@
             // panelEditName
             // 
             this.panelEditName.BackColor = System.Drawing.Color.White;
+            this.panelEditName.Controls.Add(this.btnEditAddAFld);
+            this.panelEditName.Controls.Add(this.btnEditAddABnd);
             this.panelEditName.Controls.Add(this.label8);
-            this.panelEditName.Controls.Add(this.label3);
-            this.panelEditName.Controls.Add(this.btnAddTimeEdit);
             this.panelEditName.Controls.Add(this.btnSaveEditName);
             this.panelEditName.Controls.Add(this.btnCancel_EditName);
             this.panelEditName.Controls.Add(this.textBox2);
@@ -625,34 +699,6 @@
             this.label8.TabIndex = 449;
             this.label8.Text = "Edit Name";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(48, 154);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(33, 29);
-            this.label3.TabIndex = 424;
-            this.label3.Text = "+";
-            // 
-            // btnAddTimeEdit
-            // 
-            this.btnAddTimeEdit.BackColor = System.Drawing.Color.Transparent;
-            this.btnAddTimeEdit.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnAddTimeEdit.FlatAppearance.BorderSize = 0;
-            this.btnAddTimeEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddTimeEdit.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddTimeEdit.Image = global::Twol.Properties.Resources.JobNameTime;
-            this.btnAddTimeEdit.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnAddTimeEdit.Location = new System.Drawing.Point(87, 133);
-            this.btnAddTimeEdit.Name = "btnAddTimeEdit";
-            this.btnAddTimeEdit.Size = new System.Drawing.Size(68, 69);
-            this.btnAddTimeEdit.TabIndex = 150;
-            this.btnAddTimeEdit.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnAddTimeEdit.UseVisualStyleBackColor = false;
-            this.btnAddTimeEdit.Click += new System.EventHandler(this.btnAddTimeEdit_Click);
             // 
             // btnSaveEditName
             // 
@@ -1198,6 +1244,16 @@
             this.btnEnter_APlus.UseVisualStyleBackColor = false;
             this.btnEnter_APlus.Click += new System.EventHandler(this.btnEnter_APlus_Click);
             // 
+            // nudHeading
+            // 
+            this.nudHeading.DecimalPlaces = 4;
+            this.nudHeading.Location = new System.Drawing.Point(9, 146);
+            this.nudHeading.Maximum = 360D;
+            this.nudHeading.Name = "nudHeading";
+            this.nudHeading.Size = new System.Drawing.Size(221, 52);
+            this.nudHeading.TabIndex = 413;
+            this.nudHeading.ValueChanged += new System.EventHandler(this.nudHeading_ValueChanged);
+            // 
             // btnAPlus
             // 
             this.btnAPlus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -1300,6 +1356,26 @@
             this.label15.Text = "Lattitude (+- 90)";
             this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // nudLatitudePlus
+            // 
+            this.nudLatitudePlus.DecimalPlaces = 7;
+            this.nudLatitudePlus.Location = new System.Drawing.Point(90, 58);
+            this.nudLatitudePlus.Maximum = 90D;
+            this.nudLatitudePlus.Minimum = -90D;
+            this.nudLatitudePlus.Name = "nudLatitudePlus";
+            this.nudLatitudePlus.Size = new System.Drawing.Size(228, 43);
+            this.nudLatitudePlus.TabIndex = 451;
+            // 
+            // nudLongitudePlus
+            // 
+            this.nudLongitudePlus.DecimalPlaces = 7;
+            this.nudLongitudePlus.Location = new System.Drawing.Point(90, 138);
+            this.nudLongitudePlus.Maximum = 180D;
+            this.nudLongitudePlus.Minimum = -180D;
+            this.nudLongitudePlus.Name = "nudLongitudePlus";
+            this.nudLongitudePlus.Size = new System.Drawing.Size(228, 43);
+            this.nudLongitudePlus.TabIndex = 450;
+            // 
             // btnCancel_LatLonPlus
             // 
             this.btnCancel_LatLonPlus.BackColor = System.Drawing.Color.Transparent;
@@ -1335,6 +1411,15 @@
             this.btnEnter_LatLonPlus.TextAlign = System.Drawing.ContentAlignment.TopLeft;
             this.btnEnter_LatLonPlus.UseVisualStyleBackColor = false;
             this.btnEnter_LatLonPlus.Click += new System.EventHandler(this.btnEnter_LatLonPlus_Click);
+            // 
+            // nudHeadingLatLonPlus
+            // 
+            this.nudHeadingLatLonPlus.DecimalPlaces = 4;
+            this.nudHeadingLatLonPlus.Location = new System.Drawing.Point(90, 250);
+            this.nudHeadingLatLonPlus.Maximum = 360D;
+            this.nudHeadingLatLonPlus.Name = "nudHeadingLatLonPlus";
+            this.nudHeadingLatLonPlus.Size = new System.Drawing.Size(207, 46);
+            this.nudHeadingLatLonPlus.TabIndex = 413;
             // 
             // panelLatLonLatLon
             // 
@@ -1456,6 +1541,26 @@
             this.label22.Text = "Lattitude (+- 90)";
             this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // nudLatitudeB
+            // 
+            this.nudLatitudeB.DecimalPlaces = 7;
+            this.nudLatitudeB.Location = new System.Drawing.Point(81, 194);
+            this.nudLatitudeB.Maximum = 90D;
+            this.nudLatitudeB.Minimum = -90D;
+            this.nudLatitudeB.Name = "nudLatitudeB";
+            this.nudLatitudeB.Size = new System.Drawing.Size(228, 43);
+            this.nudLatitudeB.TabIndex = 455;
+            // 
+            // nudLongitudeB
+            // 
+            this.nudLongitudeB.DecimalPlaces = 7;
+            this.nudLongitudeB.Location = new System.Drawing.Point(81, 273);
+            this.nudLongitudeB.Maximum = 180D;
+            this.nudLongitudeB.Minimum = -180D;
+            this.nudLongitudeB.Name = "nudLongitudeB";
+            this.nudLongitudeB.Size = new System.Drawing.Size(228, 43);
+            this.nudLongitudeB.TabIndex = 454;
+            // 
             // label19
             // 
             this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -1481,6 +1586,26 @@
             this.label20.TabIndex = 452;
             this.label20.Text = "Lattitude (+- 90)";
             this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // nudLatitudeA
+            // 
+            this.nudLatitudeA.DecimalPlaces = 7;
+            this.nudLatitudeA.Location = new System.Drawing.Point(81, 27);
+            this.nudLatitudeA.Maximum = 90D;
+            this.nudLatitudeA.Minimum = -90D;
+            this.nudLatitudeA.Name = "nudLatitudeA";
+            this.nudLatitudeA.Size = new System.Drawing.Size(228, 43);
+            this.nudLatitudeA.TabIndex = 451;
+            // 
+            // nudLongitudeA
+            // 
+            this.nudLongitudeA.DecimalPlaces = 7;
+            this.nudLongitudeA.Location = new System.Drawing.Point(81, 107);
+            this.nudLongitudeA.Maximum = 180D;
+            this.nudLongitudeA.Minimum = -180D;
+            this.nudLongitudeA.Name = "nudLongitudeA";
+            this.nudLongitudeA.Size = new System.Drawing.Size(228, 43);
+            this.nudLongitudeA.TabIndex = 450;
             // 
             // btnCancelLatLonLatLon
             // 
@@ -1588,6 +1713,26 @@
             this.label26.TabIndex = 452;
             this.label26.Text = "Lattitude (+- 90)";
             this.label26.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // nudLatitudePivot
+            // 
+            this.nudLatitudePivot.DecimalPlaces = 7;
+            this.nudLatitudePivot.Location = new System.Drawing.Point(72, 58);
+            this.nudLatitudePivot.Maximum = 90D;
+            this.nudLatitudePivot.Minimum = -90D;
+            this.nudLatitudePivot.Name = "nudLatitudePivot";
+            this.nudLatitudePivot.Size = new System.Drawing.Size(253, 46);
+            this.nudLatitudePivot.TabIndex = 451;
+            // 
+            // nudLongitudePivot
+            // 
+            this.nudLongitudePivot.DecimalPlaces = 7;
+            this.nudLongitudePivot.Location = new System.Drawing.Point(72, 138);
+            this.nudLongitudePivot.Maximum = 180D;
+            this.nudLongitudePivot.Minimum = -180D;
+            this.nudLongitudePivot.Name = "nudLongitudePivot";
+            this.nudLongitudePivot.Size = new System.Drawing.Size(253, 46);
+            this.nudLongitudePivot.TabIndex = 450;
             // 
             // btnCancel_Pivot
             // 
@@ -1801,160 +1946,33 @@
             this.btnzABCurve2.UseVisualStyleBackColor = false;
             this.btnzABCurve2.Click += new System.EventHandler(this.btnzABCurve_Click);
             // 
-            // btnHideShowBnd
+            // btnEditAddAFld
             // 
-            this.btnHideShowBnd.BackColor = System.Drawing.Color.Transparent;
-            this.btnHideShowBnd.FlatAppearance.BorderSize = 0;
-            this.btnHideShowBnd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnHideShowBnd.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHideShowBnd.Image = global::Twol.Properties.Resources.Boundary;
-            this.btnHideShowBnd.Location = new System.Drawing.Point(668, 94);
-            this.btnHideShowBnd.Name = "btnHideShowBnd";
-            this.btnHideShowBnd.Size = new System.Drawing.Size(78, 57);
-            this.btnHideShowBnd.TabIndex = 433;
-            this.btnHideShowBnd.UseVisualStyleBackColor = false;
-            this.btnHideShowBnd.Click += new System.EventHandler(this.btnHideShowBnd_Click);
+            this.btnEditAddAFld.BackColor = System.Drawing.Color.Transparent;
+            this.btnEditAddAFld.FlatAppearance.BorderSize = 0;
+            this.btnEditAddAFld.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEditAddAFld.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEditAddAFld.Image = global::Twol.Properties.Resources.JobActive;
+            this.btnEditAddAFld.Location = new System.Drawing.Point(141, 154);
+            this.btnEditAddAFld.Name = "btnEditAddAFld";
+            this.btnEditAddAFld.Size = new System.Drawing.Size(78, 57);
+            this.btnEditAddAFld.TabIndex = 454;
+            this.btnEditAddAFld.UseVisualStyleBackColor = false;
+            this.btnEditAddAFld.Click += new System.EventHandler(this.btnEditAddAFld_Click);
             // 
-            // btnHideShowFld
+            // btnEditAddABnd
             // 
-            this.btnHideShowFld.BackColor = System.Drawing.Color.Transparent;
-            this.btnHideShowFld.FlatAppearance.BorderSize = 0;
-            this.btnHideShowFld.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnHideShowFld.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHideShowFld.Image = global::Twol.Properties.Resources.JobActive;
-            this.btnHideShowFld.Location = new System.Drawing.Point(668, 180);
-            this.btnHideShowFld.Name = "btnHideShowFld";
-            this.btnHideShowFld.Size = new System.Drawing.Size(78, 57);
-            this.btnHideShowFld.TabIndex = 434;
-            this.btnHideShowFld.UseVisualStyleBackColor = false;
-            this.btnHideShowFld.Click += new System.EventHandler(this.btnHideShowFld_Click);
-            // 
-            // btnHideShowFldTool
-            // 
-            this.btnHideShowFldTool.BackColor = System.Drawing.Color.Transparent;
-            this.btnHideShowFldTool.FlatAppearance.BorderSize = 0;
-            this.btnHideShowFldTool.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnHideShowFldTool.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHideShowFldTool.Image = global::Twol.Properties.Resources.FilterInnerToolLines;
-            this.btnHideShowFldTool.Location = new System.Drawing.Point(668, 266);
-            this.btnHideShowFldTool.Name = "btnHideShowFldTool";
-            this.btnHideShowFldTool.Size = new System.Drawing.Size(78, 57);
-            this.btnHideShowFldTool.TabIndex = 435;
-            this.btnHideShowFldTool.UseVisualStyleBackColor = false;
-            this.btnHideShowFldTool.Click += new System.EventHandler(this.btnHideShowFldTool_Click);
-            // 
-            // btnHideShowBndTool
-            // 
-            this.btnHideShowBndTool.BackColor = System.Drawing.Color.Transparent;
-            this.btnHideShowBndTool.FlatAppearance.BorderSize = 0;
-            this.btnHideShowBndTool.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnHideShowBndTool.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHideShowBndTool.Image = global::Twol.Properties.Resources.FilterOuterToolLines;
-            this.btnHideShowBndTool.Location = new System.Drawing.Point(668, 352);
-            this.btnHideShowBndTool.Name = "btnHideShowBndTool";
-            this.btnHideShowBndTool.Size = new System.Drawing.Size(78, 57);
-            this.btnHideShowBndTool.TabIndex = 436;
-            this.btnHideShowBndTool.UseVisualStyleBackColor = false;
-            this.btnHideShowBndTool.Click += new System.EventHandler(this.btnHideShowBndTool_Click);
-            // 
-            // nudLatitudeB
-            // 
-            this.nudLatitudeB.DecimalPlaces = 7;
-            this.nudLatitudeB.Location = new System.Drawing.Point(81, 194);
-            this.nudLatitudeB.Maximum = 90D;
-            this.nudLatitudeB.Minimum = -90D;
-            this.nudLatitudeB.Name = "nudLatitudeB";
-            this.nudLatitudeB.Size = new System.Drawing.Size(228, 43);
-            this.nudLatitudeB.TabIndex = 455;
-            // 
-            // nudLongitudeB
-            // 
-            this.nudLongitudeB.DecimalPlaces = 7;
-            this.nudLongitudeB.Location = new System.Drawing.Point(81, 273);
-            this.nudLongitudeB.Maximum = 180D;
-            this.nudLongitudeB.Minimum = -180D;
-            this.nudLongitudeB.Name = "nudLongitudeB";
-            this.nudLongitudeB.Size = new System.Drawing.Size(228, 43);
-            this.nudLongitudeB.TabIndex = 454;
-            // 
-            // nudLatitudeA
-            // 
-            this.nudLatitudeA.DecimalPlaces = 7;
-            this.nudLatitudeA.Location = new System.Drawing.Point(81, 27);
-            this.nudLatitudeA.Maximum = 90D;
-            this.nudLatitudeA.Minimum = -90D;
-            this.nudLatitudeA.Name = "nudLatitudeA";
-            this.nudLatitudeA.Size = new System.Drawing.Size(228, 43);
-            this.nudLatitudeA.TabIndex = 451;
-            // 
-            // nudLongitudeA
-            // 
-            this.nudLongitudeA.DecimalPlaces = 7;
-            this.nudLongitudeA.Location = new System.Drawing.Point(81, 107);
-            this.nudLongitudeA.Maximum = 180D;
-            this.nudLongitudeA.Minimum = -180D;
-            this.nudLongitudeA.Name = "nudLongitudeA";
-            this.nudLongitudeA.Size = new System.Drawing.Size(228, 43);
-            this.nudLongitudeA.TabIndex = 450;
-            // 
-            // nudLatitudePivot
-            // 
-            this.nudLatitudePivot.DecimalPlaces = 7;
-            this.nudLatitudePivot.Location = new System.Drawing.Point(72, 58);
-            this.nudLatitudePivot.Maximum = 90D;
-            this.nudLatitudePivot.Minimum = -90D;
-            this.nudLatitudePivot.Name = "nudLatitudePivot";
-            this.nudLatitudePivot.Size = new System.Drawing.Size(253, 46);
-            this.nudLatitudePivot.TabIndex = 451;
-            // 
-            // nudLongitudePivot
-            // 
-            this.nudLongitudePivot.DecimalPlaces = 7;
-            this.nudLongitudePivot.Location = new System.Drawing.Point(72, 138);
-            this.nudLongitudePivot.Maximum = 180D;
-            this.nudLongitudePivot.Minimum = -180D;
-            this.nudLongitudePivot.Name = "nudLongitudePivot";
-            this.nudLongitudePivot.Size = new System.Drawing.Size(253, 46);
-            this.nudLongitudePivot.TabIndex = 450;
-            // 
-            // nudLatitudePlus
-            // 
-            this.nudLatitudePlus.DecimalPlaces = 7;
-            this.nudLatitudePlus.Location = new System.Drawing.Point(90, 58);
-            this.nudLatitudePlus.Maximum = 90D;
-            this.nudLatitudePlus.Minimum = -90D;
-            this.nudLatitudePlus.Name = "nudLatitudePlus";
-            this.nudLatitudePlus.Size = new System.Drawing.Size(228, 43);
-            this.nudLatitudePlus.TabIndex = 451;
-            // 
-            // nudLongitudePlus
-            // 
-            this.nudLongitudePlus.DecimalPlaces = 7;
-            this.nudLongitudePlus.Location = new System.Drawing.Point(90, 138);
-            this.nudLongitudePlus.Maximum = 180D;
-            this.nudLongitudePlus.Minimum = -180D;
-            this.nudLongitudePlus.Name = "nudLongitudePlus";
-            this.nudLongitudePlus.Size = new System.Drawing.Size(228, 43);
-            this.nudLongitudePlus.TabIndex = 450;
-            // 
-            // nudHeadingLatLonPlus
-            // 
-            this.nudHeadingLatLonPlus.DecimalPlaces = 4;
-            this.nudHeadingLatLonPlus.Location = new System.Drawing.Point(90, 250);
-            this.nudHeadingLatLonPlus.Maximum = 360D;
-            this.nudHeadingLatLonPlus.Name = "nudHeadingLatLonPlus";
-            this.nudHeadingLatLonPlus.Size = new System.Drawing.Size(207, 46);
-            this.nudHeadingLatLonPlus.TabIndex = 413;
-            // 
-            // nudHeading
-            // 
-            this.nudHeading.DecimalPlaces = 4;
-            this.nudHeading.Location = new System.Drawing.Point(9, 146);
-            this.nudHeading.Maximum = 360D;
-            this.nudHeading.Name = "nudHeading";
-            this.nudHeading.Size = new System.Drawing.Size(221, 52);
-            this.nudHeading.TabIndex = 413;
-            this.nudHeading.ValueChanged += new System.EventHandler(this.nudHeading_ValueChanged);
+            this.btnEditAddABnd.BackColor = System.Drawing.Color.Transparent;
+            this.btnEditAddABnd.FlatAppearance.BorderSize = 0;
+            this.btnEditAddABnd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEditAddABnd.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEditAddABnd.Image = global::Twol.Properties.Resources.Boundary;
+            this.btnEditAddABnd.Location = new System.Drawing.Point(17, 154);
+            this.btnEditAddABnd.Name = "btnEditAddABnd";
+            this.btnEditAddABnd.Size = new System.Drawing.Size(78, 57);
+            this.btnEditAddABnd.TabIndex = 453;
+            this.btnEditAddABnd.UseVisualStyleBackColor = false;
+            this.btnEditAddABnd.Click += new System.EventHandler(this.btnEditAddABnd_Click);
             // 
             // FormBuildTracks
             // 
@@ -2025,8 +2043,6 @@
         private System.Windows.Forms.Button btnNewTrack;
         private System.Windows.Forms.Button btnCancel_Curve;
         private System.Windows.Forms.Panel panelName;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnAddTime;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnCancel_Name;
         private System.Windows.Forms.TextBox textBox1;
@@ -2035,8 +2051,6 @@
         private System.Windows.Forms.Button btnEditName;
         private System.Windows.Forms.Button btnDuplicate;
         private System.Windows.Forms.Panel panelEditName;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button btnAddTimeEdit;
         private System.Windows.Forms.Button btnSaveEditName;
         private System.Windows.Forms.Button btnCancel_EditName;
         private System.Windows.Forms.TextBox textBox2;
@@ -2136,5 +2150,10 @@
         private System.Windows.Forms.Button btnHideShowBnd;
         private System.Windows.Forms.Button btnHideShowFldTool;
         private System.Windows.Forms.Button btnHideShowBndTool;
+        private System.Windows.Forms.Button btnSort;
+        private System.Windows.Forms.Button btnAddA_Fld;
+        private System.Windows.Forms.Button BtnAddA_Bnd;
+        private System.Windows.Forms.Button btnEditAddAFld;
+        private System.Windows.Forms.Button btnEditAddABnd;
     }
 }

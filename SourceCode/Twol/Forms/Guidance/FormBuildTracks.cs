@@ -15,7 +15,7 @@ namespace Twol
         private readonly FormGPS mf;
 
         private CTrk originalLine;
-        private CTrk selectedItem;
+        private CTrk selectedTrack;
         private bool isSaving = false;
         public List<CTrk> gTemp = new List<CTrk>();
 
@@ -64,7 +64,7 @@ namespace Twol
                 gTemp.Add(new CTrk(item));
 
                 if (item == mf.trks.currentRefTrack)
-                    selectedItem = item;
+                    selectedTrack = item;
             }
 
             panelMain.Top = 3; panelMain.Left = 3;
@@ -122,8 +122,8 @@ namespace Twol
             {
                 mf.FileSaveTracks();
 
-                if (selectedItem != null && selectedItem.isVisible)
-                    mf.trks.currentRefTrack = selectedItem;
+                if (selectedTrack != null && selectedTrack.isVisible)
+                    mf.trks.currentRefTrack = selectedTrack;
                 else
                     mf.trks.GetNextTrack();
             }
@@ -209,7 +209,7 @@ namespace Twol
                 t.Click += LineSelected_Click;
                 t.Cursor = System.Windows.Forms.Cursors.Default;
                 t.ForeColor = track.isVisible ? Color.Black : Color.Gray;
-                t.BackColor = track == selectedItem ? Color.LightBlue : Color.AliceBlue;
+                t.BackColor = track == selectedTrack ? Color.LightBlue : Color.AliceBlue;
 
                 flp.Controls.Add(b);
                 flp.Controls.Add(t);
@@ -255,7 +255,7 @@ namespace Twol
                 if (track.isVisible)
                 {
                     //a different line was selcted and one already was
-                    selectedItem = track;
+                    selectedTrack = track;
                     flp.Controls[(line) * 3 + 1].BackColor = Color.LightBlue;
                 }
             }
@@ -263,7 +263,7 @@ namespace Twol
 
         private void btnMoveUPGN_Click(object sender, EventArgs e)
         {
-            mf.trks.MoveTrackUp(selectedItem);
+            mf.trks.MoveTrackUp(selectedTrack);
             int scrollPixels = flp.VerticalScroll.Value;
 
             scrollPixels -= 45;
@@ -278,7 +278,7 @@ namespace Twol
 
         private void btnMoveDn_Click(object sender, EventArgs e)
         {
-            mf.trks.MoveTrackDn(selectedItem);
+            mf.trks.MoveTrackDn(selectedTrack);
 
             int scrollPixels = flp.VerticalScroll.Value;
 
@@ -294,27 +294,27 @@ namespace Twol
 
         private void btnSwapAB_Click(object sender, EventArgs e)
         {
-            if (selectedItem != null)
+            if (selectedTrack != null)
             {
-                (selectedItem.ptB, selectedItem.ptA) = (selectedItem.ptA, selectedItem.ptB);
-                selectedItem.heading += Math.PI;
-                if (selectedItem.heading > glm.twoPI) selectedItem.heading -= glm.twoPI;
+                (selectedTrack.ptB, selectedTrack.ptA) = (selectedTrack.ptA, selectedTrack.ptB);
+                selectedTrack.heading += Math.PI;
+                if (selectedTrack.heading > glm.twoPI) selectedTrack.heading -= glm.twoPI;
 
-                if (selectedItem.mode != TrackMode.ABLine)
+                if (selectedTrack.mode != TrackMode.ABLine)
                 {
-                    int cnt = selectedItem.curvePts.Count;
+                    int cnt = selectedTrack.curvePts.Count;
                     if (cnt > 0)
                     {
-                        selectedItem.curvePts.Reverse();
+                        selectedTrack.curvePts.Reverse();
 
                         vec3[] arr = new vec3[cnt];
                         cnt--;
-                        selectedItem.curvePts.CopyTo(arr);
-                        selectedItem.curvePts.Clear();
+                        selectedTrack.curvePts.CopyTo(arr);
+                        selectedTrack.curvePts.Clear();
 
-                        selectedItem.heading += Math.PI;
-                        if (selectedItem.heading < 0) selectedItem.heading += glm.twoPI;
-                        if (selectedItem.heading > glm.twoPI) selectedItem.heading -= glm.twoPI;
+                        selectedTrack.heading += Math.PI;
+                        if (selectedTrack.heading < 0) selectedTrack.heading += glm.twoPI;
+                        if (selectedTrack.heading > glm.twoPI) selectedTrack.heading -= glm.twoPI;
 
                         for (int i = 1; i < cnt; i++)
                         {
@@ -322,7 +322,7 @@ namespace Twol
                             pt3.heading += Math.PI;
                             if (pt3.heading > glm.twoPI) pt3.heading -= glm.twoPI;
                             if (pt3.heading < 0) pt3.heading += glm.twoPI;
-                            selectedItem.curvePts.Add(new vec3(pt3));
+                            selectedTrack.curvePts.Add(new vec3(pt3));
                         }
                     }
                 }
@@ -354,10 +354,10 @@ namespace Twol
 
         private void btnListDelete_Click(object sender, EventArgs e)
         {
-            if (selectedItem != null)
+            if (selectedTrack != null)
             {
-                mf.trks.RemoveTrack(selectedItem);
-                selectedItem = null;
+                mf.trks.RemoveTrack(selectedTrack);
+                selectedTrack = null;
 
                 UpdateTable();
                 flp.Focus();
@@ -366,12 +366,12 @@ namespace Twol
 
         private void btnDuplicate_Click(object sender, EventArgs e)
         {
-            if (selectedItem != null)
+            if (selectedTrack != null)
             {
-                selectedItem = new CTrk(selectedItem);
-                mf.trks.AddTrack(selectedItem);
+                selectedTrack = new CTrk(selectedTrack);
+                mf.trks.AddTrack(selectedTrack);
 
-                textBox1.Text = selectedItem.name + " Copy";
+                textBox1.Text = selectedTrack.name + " Copy";
 
                 SetPanelVisible(panelName);
             }
@@ -379,9 +379,9 @@ namespace Twol
 
         private void btnEditName_Click(object sender, EventArgs e)
         {
-            if (selectedItem != null)
+            if (selectedTrack != null)
             {
-                textBox2.Text = selectedItem.name;
+                textBox2.Text = selectedTrack.name;
 
                 SetPanelVisible(panelEditName);
             }
@@ -524,7 +524,7 @@ namespace Twol
                     track.curvePts.Add(item);
                 }
 
-                textBox1.Text = "V_Fld Cu " +
+                textBox1.Text = "Cu " +
                     (Math.Round(glm.toDegrees(track.heading), 1)).ToString(CultureInfo.InvariantCulture) + "\u00B0 ";
 
                 double dist = (Settings.Tool.toolWidth - Settings.Tool.overlap) * (isRefRightSide ? 0.5 : -0.5) + Settings.Tool.offset;
@@ -538,7 +538,7 @@ namespace Twol
                 track.curvePts.AddStartEndPoints(5, 300);
 
                 mf.trks.AddTrack(track);
-                selectedItem = track;
+                selectedTrack = track;
 
                 SetPanelVisible(panelName);
             }
@@ -641,9 +641,9 @@ namespace Twol
             timer1.Enabled = false;
             mf.trks.isMakingTrack = false;
 
-            selectedItem = mf.trks.CreateDesignedABTrack(isRefRightSide);
+            selectedTrack = mf.trks.CreateDesignedABTrack(isRefRightSide);
 
-            textBox1.Text = "V_Fld AB " +
+            textBox1.Text = "AB " +
                 (Math.Round(glm.toDegrees(mf.trks.designHeading), 5)).ToString(CultureInfo.InvariantCulture) + "\u00B0 ";
 
             SetPanelVisible(panelName);
@@ -713,9 +713,9 @@ namespace Twol
 
             mf.trks.isMakingTrack = false;
 
-            selectedItem = mf.trks.CreateDesignedABTrack(isRefRightSide);
+            selectedTrack = mf.trks.CreateDesignedABTrack(isRefRightSide);
 
-            textBox1.Text = "V_Fld A+" +
+            textBox1.Text = "A+" +
                 (Math.Round(glm.toDegrees(mf.trks.designHeading), 5)).ToString(CultureInfo.InvariantCulture) + "\u00B0 ";
 
             SetPanelVisible(panelName);
@@ -783,8 +783,7 @@ namespace Twol
 
                 if (namelist.Count > 1)
                 {
-                    trackName = "V_Fld ";
-                    trackName += namelist[1].InnerText;
+                    trackName = namelist[1].InnerText;
                 }
 
                 //each element in the list is a track
@@ -828,17 +827,15 @@ namespace Twol
 
                         if (namelist.Count > i)
                         {
-                            trackName = "V_Fld ";
-
-                            trackName += namelist[i + 1].InnerText;
+                            trackName = namelist[i + 1].InnerText;
                         }
-                        else trackName = "V_Fld AB: " +
+                        else trackName = "AB " +
                             (Math.Round(glm.toDegrees(mf.trks.designHeading), 5)).ToString(CultureInfo.InvariantCulture) + "\u00B0 ";
 
-                        selectedItem = mf.trks.CreateDesignedABTrack(isRefRightSide);
+                        selectedTrack = mf.trks.CreateDesignedABTrack(isRefRightSide);
 
                         //create a name
-                        selectedItem.name = trackName;
+                        selectedTrack.name = trackName;
                     }
                     else if (designPtsList.Count > 2)
                     {
@@ -863,17 +860,15 @@ namespace Twol
 
                         if (namelist.Count > i)
                         {
-                            trackName = "V_Fld ";
-
-                            trackName += namelist[i + 1].InnerText;
+                            trackName = namelist[i + 1].InnerText;
                         }
-                        else trackName = "V_Fld Cu " +
+                        else trackName = "Cu " +
                                  (Math.Round(glm.toDegrees(track.heading), 1)).ToString(CultureInfo.InvariantCulture) + "\u00B0 ";
 
                         track.name = trackName;
 
                         mf.trks.AddTrack(track);
-                        selectedItem = track;
+                        selectedTrack = track;
                     }
                     else
                     {
@@ -940,9 +935,9 @@ namespace Twol
 
             mf.trks.isMakingTrack = false;
 
-            selectedItem = mf.trks.CreateDesignedABTrack(isRefRightSide);
+            selectedTrack = mf.trks.CreateDesignedABTrack(isRefRightSide);
 
-            textBox1.Text = "V_Fld LatLon" +
+            textBox1.Text = "LatLon" +
                 (Math.Round(glm.toDegrees(mf.trks.designHeading), 5)).ToString(CultureInfo.InvariantCulture) + "\u00B0 ";
 
             SetPanelVisible(panelName);
@@ -976,9 +971,9 @@ namespace Twol
 
             mf.trks.isMakingTrack = false;
 
-            selectedItem = mf.trks.CreateDesignedABTrack(isRefRightSide);
+            selectedTrack = mf.trks.CreateDesignedABTrack(isRefRightSide);
 
-            textBox1.Text = "V_Fld LatLon A+" +
+            textBox1.Text = "LatLon A+" +
                 (Math.Round(glm.toDegrees(mf.trks.designHeading), 5)).ToString(CultureInfo.InvariantCulture) + "\u00B0 ";
 
             SetPanelVisible(panelName);
@@ -1015,7 +1010,7 @@ namespace Twol
             };
 
             mf.trks.AddTrack(track);
-            selectedItem = track;
+            selectedTrack = track;
 
             textBox1.Text = "Piv";
 
@@ -1073,7 +1068,7 @@ namespace Twol
             };
 
             mf.trks.AddTrack(track);
-            selectedItem = track;
+            selectedTrack = track;
 
             textBox1.Text = "Piv";
 
@@ -1116,8 +1111,8 @@ namespace Twol
         {
             if (textBox1.Text.Length == 0) textBox1.Text = "No Name " + DateTime.Now.ToString("hh:mm:ss", CultureInfo.InvariantCulture);
 
-            if (selectedItem != null)
-                selectedItem.name = textBox1.Text.Trim();
+            if (selectedTrack != null)
+                selectedTrack.name = textBox1.Text.Trim();
 
             if (quick)
             {
@@ -1132,24 +1127,12 @@ namespace Twol
             }
         }
 
-        private void btnAddTime_Click(object sender, EventArgs e)
-        {
-            textBox1.Text += DateTime.Now.ToString(" hh:mm:ss", CultureInfo.InvariantCulture);
-            mf.Activate();
-        }
-
-        private void btnAddTimeEdit_Click(object sender, EventArgs e)
-        {
-            textBox2.Text += DateTime.Now.ToString(" hh:mm:ss", CultureInfo.InvariantCulture);
-            mf.Activate();
-        }
-
         private void btnSaveEditName_Click(object sender, EventArgs e)
         {
             if (textBox2.Text.Trim() == "") textBox2.Text = "No Name " + DateTime.Now.ToString("hh:mm:ss", CultureInfo.InvariantCulture);
 
-            if (selectedItem != null)
-                selectedItem.name = textBox2.Text.Trim();
+            if (selectedTrack != null)
+                selectedTrack.name = textBox2.Text.Trim();
 
             SetPanelVisible(panelMain);
 
@@ -1163,7 +1146,7 @@ namespace Twol
         {
             foreach (CTrk item in mf.trks.gArr)
             {
-                item.isVisible = item.name.Contains("V_Bnd");
+                item.isVisible = item.name.Contains("A_Bnd");
                 UpdateTable();
             }
 
@@ -1173,7 +1156,7 @@ namespace Twol
         {
             foreach (CTrk item in mf.trks.gArr)
             {
-                item.isVisible = item.name.Contains("V_Fld");
+                item.isVisible = item.name.Contains("A_Fld");
                 UpdateTable();
             }
         }
@@ -1195,5 +1178,35 @@ namespace Twol
                 UpdateTable();
             }
         }
+
+        private void btnSort_Click(object sender, EventArgs e)
+        {
+            mf.trks.SortTracks();
+            UpdateTable();
+        }
+
+        private void BtnAddA_Bnd_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = "A_Bnd " + textBox1.Text;
+            mf.Activate();
+        }
+
+        private void btnAddA_Fld_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = "A_Fld " + textBox1.Text;
+            mf.Activate();
+        }
+
+        private void btnEditAddAFld_Click(object sender, EventArgs e)
+        {
+            textBox2.Text = "A_Fld " + textBox2.Text;
+            mf.Activate();
+        }
+        private void btnEditAddABnd_Click(object sender, EventArgs e)
+        {
+            textBox2.Text = "A_Bnd " + textBox2.Text;
+            mf.Activate();
+        }
+
     }
 }
