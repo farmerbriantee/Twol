@@ -109,6 +109,9 @@ namespace Twol
             btnMakeAPlus.Enabled = false;
             btnEdgeAB.Enabled = false;
             btnMakeCurve.Enabled = false;
+            btnMakeAB_Bnd.Enabled = false;
+            btnMakeCurveBnd.Enabled = false;
+
             start = 99999; end = 99999;
             isA = true;
 
@@ -235,7 +238,7 @@ namespace Twol
                     designPtsList.CalculateAverageHeadings(true);
 
                     //create a name
-                    track.name = q == 0 ? "Boundary Curve" : "Inner Boundary Curve " + q.ToString();
+                    track.name = q == 0 ? "Boundary Track" : "Boundary Inner Track" + q.ToString();
 
                     track.heading = 0;
 
@@ -252,6 +255,9 @@ namespace Twol
             btnEdgeAB.Enabled = false;
             btnMakeAPlus.Enabled = false;
             btnMakeCurve.Enabled = false;
+            btnMakeAB_Bnd.Enabled = false;
+            btnMakeCurveBnd.Enabled = false;
+
             start = 99999; end = 99999;
 
             FixLabelsCurve();
@@ -321,7 +327,7 @@ namespace Twol
                 track.heading = designPtsList.TrackAverageHeading();
 
                 //create a name
-                track.name = "Cu " +
+                track.name = "Fld Cu " +
                     (Math.Round(glm.toDegrees(track.heading), 1)).ToString(CultureInfo.InvariantCulture)
                     + "\u00B0";
 
@@ -333,6 +339,9 @@ namespace Twol
                 btnMakeAPlus.Enabled = false;
                 btnEdgeAB.Enabled = false;
                 btnMakeCurve.Enabled = false;
+                btnMakeAB_Bnd.Enabled = false;
+                btnMakeCurveBnd.Enabled = false;
+
                 start = 99999; end = 99999;
 
                 FixLabelsCurve();
@@ -342,6 +351,92 @@ namespace Twol
             }
 
             btnExit.Focus();
+        }
+
+        private void btnMakeCurveBnd_Click(object sender, EventArgs e)
+        {
+            bool isLoop = false;
+            int limit = end;
+
+            if ((Math.Abs(start - end)) > (mf.bnd.bndList[bndSelect].fenceLine.Count * 0.5))
+            {
+                isLoop = true;
+                if (start < end)
+                {
+                    (end, start) = (start, end);
+                }
+
+                limit = end;
+                end = mf.bnd.bndList[bndSelect].fenceLine.Count;
+            }
+            else //normal
+            {
+                if (start > end)
+                {
+                    (end, start) = (start, end);
+                }
+            }
+
+            var designPtsList = new List<vec3>();
+
+            for (int i = start; i < end; i++)
+            {
+                //calculate the point inside the boundary
+                designPtsList.Add(new vec3(mf.bnd.bndList[bndSelect].fenceLine[i]));
+
+                if (isLoop && i == mf.bnd.bndList[bndSelect].fenceLine.Count - 1)
+                {
+                    i = -1;
+                    isLoop = false;
+                    end = limit;
+                }
+            }
+
+            int cnt = designPtsList.Count;
+            if (cnt > 3)
+            {
+                var track = new CTrk(TrackMode.PolyLine)
+                {
+                    ptA = new vec2(designPtsList[0]),
+                    ptB = new vec2(designPtsList[designPtsList.Count - 1])
+                };
+
+                //make sure point distance isn't too big
+
+                designPtsList.GenerateEquidistantPoints(4, false);
+                designPtsList.ChaikinsSmooth(1, false);
+                designPtsList.CalculateAverageHeadings(false);
+                designPtsList.ReducePointsByAngle();
+                designPtsList.CalculateAverageHeadings(false);
+
+                //build the tail extensions
+                designPtsList.AddStartEndPoints(5, 300);
+
+                track.heading = designPtsList.TrackAverageHeading();
+
+                //create a name
+                track.name = "Bnd Cu " +
+                    (Math.Round(glm.toDegrees(track.heading), 1)).ToString(CultureInfo.InvariantCulture)
+                    + "\u00B0";
+
+                //write out the PolyLine Points
+                track.curvePts = designPtsList;
+
+                //update the arrays
+                btnMakeABLine.Enabled = false;
+                btnMakeAPlus.Enabled = false;
+                btnEdgeAB.Enabled = false;
+                btnMakeCurve.Enabled = false;
+                btnMakeAB_Bnd.Enabled = false;
+                btnMakeCurveBnd.Enabled = false;
+
+                start = 99999; end = 99999;
+
+                FixLabelsCurve();
+
+                gTemp.Add(track);
+                selectedLine = track;
+            }
         }
 
         private void btnMakeABLine_Click(object sender, EventArgs e)
@@ -397,7 +492,7 @@ namespace Twol
             designPtsList.AddEndPoints(5, 400);
 
             //create a name
-            track.name = "AB: " +
+            track.name = "Fld AB: " +
                 Math.Round(glm.toDegrees(track.heading), 1).ToString(CultureInfo.InvariantCulture) + "\u00B0";
 
             //clean up gui
@@ -405,6 +500,82 @@ namespace Twol
             btnMakeAPlus.Enabled = false;
             btnEdgeAB.Enabled = false;
             btnMakeCurve.Enabled = false;
+            btnMakeAB_Bnd.Enabled = false;
+            btnMakeCurveBnd.Enabled = false;
+
+            start = 99999; end = 99999;
+
+            //write out the PolyLine Points
+            track.curvePts = designPtsList;
+
+            gTemp.Add(track);
+            selectedLine = track;
+            FixLabelsCurve();
+        }
+
+        private void btnMakeAB_Bnd_Click(object sender, EventArgs e)
+        {
+            //if more then half way around, it crosses start finish
+            if ((Math.Abs(start - end)) <= (mf.bnd.bndList[bndSelect].fenceLine.Count * 0.5))
+            {
+                if (start < end)
+                {
+                    (end, start) = (start, end);
+                }
+            }
+            else
+            {
+                if (start > end)
+                {
+                    (end, start) = (start, end);
+                }
+            }
+
+            //calculate the ABLine Heading
+            double abHead = Math.Atan2(
+                mf.bnd.bndList[bndSelect].fenceLine[start].easting - mf.bnd.bndList[bndSelect].fenceLine[end].easting,
+                mf.bnd.bndList[bndSelect].fenceLine[start].northing - mf.bnd.bndList[bndSelect].fenceLine[end].northing);
+            if (abHead < 0) abHead += glm.twoPI;
+
+            var track = new CTrk(TrackMode.ABLine);
+
+            track.heading = abHead;
+
+            //calculate the new points for the reference line and points
+            track.ptA.easting = mf.bnd.bndList[bndSelect].fenceLine[end].easting;
+            track.ptA.northing = mf.bnd.bndList[bndSelect].fenceLine[end].northing;
+
+            track.ptB.easting = mf.bnd.bndList[bndSelect].fenceLine[start].easting;
+            track.ptB.northing = mf.bnd.bndList[bndSelect].fenceLine[start].northing;
+
+            var designPtsList = new List<vec3>();
+
+            //fill in the dots between A and B
+            double len = glm.Distance(track.ptA, track.ptB);
+            if (len < 50)
+            {
+                track.ptB.easting = track.ptA.easting + (Math.Sin(abHead) * 50);
+                track.ptB.northing = track.ptA.northing + (Math.Cos(abHead) * 50);
+            }
+
+            designPtsList.Add(new vec3(track.ptA, abHead));
+            designPtsList.Add(new vec3(track.ptB, abHead));
+
+            //build the tail extensions
+            designPtsList.AddStartPoints(5, 400);
+            designPtsList.AddEndPoints(5, 400);
+
+            //create a name
+            track.name = "Bnd AB: " +
+                Math.Round(glm.toDegrees(track.heading), 1).ToString(CultureInfo.InvariantCulture) + "\u00B0";
+
+            //clean up gui
+            btnMakeABLine.Enabled = false;
+            btnMakeAPlus.Enabled = false;
+            btnEdgeAB.Enabled = false;
+            btnMakeCurve.Enabled = false;
+            btnMakeAB_Bnd.Enabled = false;
+            btnMakeCurveBnd.Enabled = false;
 
             start = 99999; end = 99999;
 
@@ -480,6 +651,8 @@ namespace Twol
             btnMakeAPlus.Enabled = false;
             btnEdgeAB.Enabled = false;
             btnMakeCurve.Enabled = false;
+            btnMakeAB_Bnd.Enabled = false;
+            btnMakeCurveBnd.Enabled = false;
 
             start = 99999; end = 99999;
 
@@ -590,7 +763,7 @@ namespace Twol
             track.curvePts.AddStartEndPoints(5, 300);
 
             //create a name
-            track.name = "AB: " +
+            track.name = "Fld AB: " +
                 Math.Round(glm.toDegrees(track.heading), 1).ToString(CultureInfo.InvariantCulture) + "\u00B0";
 
             //clean up gui
@@ -598,6 +771,10 @@ namespace Twol
             btnMakeAPlus.Enabled = false;
             btnMakeCurve.Enabled = false;
             btnEdgeAB.Enabled = false;
+            btnMakeAB_Bnd.Enabled = false;
+            btnMakeCurveBnd.Enabled = false;
+            btnMakeAB_Bnd.Enabled = false;
+            btnMakeCurveBnd.Enabled = false;
 
             start = 99999; end = 99999;
 
@@ -694,6 +871,8 @@ namespace Twol
                 btnMakeCurve.Enabled = true;
                 btnEdgeAB.Enabled = true;
                 btnMakeAPlus.Enabled = true;
+                btnMakeAB_Bnd.Enabled = true;
+                btnMakeCurveBnd.Enabled = true;
             }
         }
 

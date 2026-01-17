@@ -63,6 +63,16 @@ namespace Twol.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ABCurveBnd {
+            get {
+                object obj = ResourceManager.GetObject("ABCurveBnd", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ABDraw {
             get {
                 object obj = ResourceManager.GetObject("ABDraw", resourceCulture);
@@ -206,6 +216,16 @@ namespace Twol.Properties {
         internal static System.Drawing.Bitmap ABTrackAB {
             get {
                 object obj = ResourceManager.GetObject("ABTrackAB", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ABTrackBnd {
+            get {
+                object obj = ResourceManager.GetObject("ABTrackBnd", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
