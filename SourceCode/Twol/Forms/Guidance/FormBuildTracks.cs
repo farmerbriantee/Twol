@@ -846,10 +846,9 @@ namespace Twol
                         var track = new CTrk(TrackMode.PolyLine)
                         {
                             ptA = new vec2(designPtsList[0]),
-                            ptB = new vec2(designPtsList[designPtsList.Count - 1])
+                            ptB = new vec2(designPtsList[designPtsList.Count - 1]),
+                            heading = mf.trks.designPtsList.TrackAverageHeading()
                         };
-
-                        track.heading = mf.trks.designPtsList.TrackAverageHeading();
 
                         //build the tail extensions
                         designPtsList.AddStartEndPoints(5, 300);

@@ -453,22 +453,20 @@
             // 
             this.cboxFldOrBnd.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cboxFldOrBnd.Appearance = System.Windows.Forms.Appearance.Button;
-            this.cboxFldOrBnd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.cboxFldOrBnd.Checked = true;
-            this.cboxFldOrBnd.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cboxFldOrBnd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(250)))), ((int)(((byte)(220)))));
             this.cboxFldOrBnd.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.cboxFldOrBnd.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.cboxFldOrBnd.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(250)))), ((int)(((byte)(220)))));
             this.cboxFldOrBnd.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray;
             this.cboxFldOrBnd.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.cboxFldOrBnd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboxFldOrBnd.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxFldOrBnd.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.cboxFldOrBnd.Image = global::Twol.Properties.Resources.Boundary;
-            this.cboxFldOrBnd.Location = new System.Drawing.Point(159, 256);
+            this.cboxFldOrBnd.Location = new System.Drawing.Point(146, 250);
             this.cboxFldOrBnd.Name = "cboxFldOrBnd";
             this.cboxFldOrBnd.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.tlp1.SetRowSpan(this.cboxFldOrBnd, 2);
-            this.cboxFldOrBnd.Size = new System.Drawing.Size(72, 68);
+            this.cboxFldOrBnd.Size = new System.Drawing.Size(97, 81);
             this.cboxFldOrBnd.TabIndex = 566;
             this.cboxFldOrBnd.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.cboxFldOrBnd.UseVisualStyleBackColor = false;

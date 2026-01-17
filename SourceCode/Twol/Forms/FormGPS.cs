@@ -803,7 +803,7 @@ namespace Twol
 
             if (Settings.Tool.setToolSteer.isFollowCurrent && !Settings.Tool.setToolSteer.isRecordToolLine)
             {
-                Form form = new FormToolControl(this);
+                Form form = new FormTrackFilter(this);
                 form.Show(this);
             }
 

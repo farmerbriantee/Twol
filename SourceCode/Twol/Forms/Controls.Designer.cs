@@ -631,7 +631,7 @@ namespace Twol
                 return;
             }
 
-            Form form = new FormToolControl(this);
+            Form form = new FormTrackFilter(this);
             form.Show(this);
 
             if (flp1.Visible)

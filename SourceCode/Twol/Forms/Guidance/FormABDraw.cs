@@ -310,7 +310,6 @@ namespace Twol
                 };
 
                 //make sure point distance isn't too big
-
                 designPtsList.GenerateEquidistantPoints(4, false);
                 designPtsList.ChaikinsSmooth(1, false);
                 designPtsList.CalculateAverageHeadings(false);
@@ -371,9 +370,10 @@ namespace Twol
                 mf.bnd.bndList[bndSelect].fenceLine[start].northing - mf.bnd.bndList[bndSelect].fenceLine[end].northing);
             if (abHead < 0) abHead += glm.twoPI;
 
-            var track = new CTrk(TrackMode.ABLine);
-
-            track.heading = abHead;
+            var track = new CTrk(TrackMode.ABLine)
+            {
+                heading = abHead
+            };
 
             //calculate the new points for the reference line and points
             track.ptA.easting = mf.bnd.bndList[bndSelect].fenceLine[end].easting;

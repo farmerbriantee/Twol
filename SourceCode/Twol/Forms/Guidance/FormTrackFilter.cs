@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace Twol
 {
-    public partial class FormToolControl : Form
+    public partial class FormTrackFilter : Form
     {
         private readonly FormGPS mf = null;
 
@@ -26,7 +26,7 @@ namespace Twol
             }
         }
 
-        public FormToolControl(Form callingForm)
+        public FormTrackFilter(Form callingForm)
         {
             //get copy of the calling main form
             mf = callingForm as FormGPS;

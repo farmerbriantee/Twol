@@ -184,11 +184,11 @@
     <Compile Include="Forms\Guidance\FormABDrawHeading.designer.cs">
       <DependentUpon>FormABDrawHeading.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Guidance\FormToolControl.cs">
+    <Compile Include="Forms\Guidance\FormTrackFilter.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Guidance\FormToolControl.designer.cs">
-      <DependentUpon>FormToolControl.cs</DependentUpon>
+    <Compile Include="Forms\Guidance\FormTrackFilter.designer.cs">
+      <DependentUpon>FormTrackFilter.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Guidance\FormToolManual.cs">
       <SubType>Form</SubType>
@@ -618,8 +618,8 @@
     <EmbeddedResource Include="Forms\FormYes.resx">
       <DependentUpon>FormYes.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Guidance\FormToolControl.resx">
-      <DependentUpon>FormToolControl.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Guidance\FormTrackFilter.resx">
+      <DependentUpon>FormTrackFilter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Guidance\FormToolManual.resx">
       <DependentUpon>FormToolManual.cs</DependentUpon>

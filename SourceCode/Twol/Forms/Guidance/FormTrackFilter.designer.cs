@@ -1,6 +1,6 @@
 ﻿namespace Twol
 {
-    partial class FormToolControl
+    partial class FormTrackFilter
     {
         /// <summary>
         /// Required designer variable.
@@ -46,7 +46,7 @@
             this.bthOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bthOK.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.bthOK.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.bthOK.Location = new System.Drawing.Point(44, 9);
+            this.bthOK.Location = new System.Drawing.Point(12, 12);
             this.bthOK.Name = "bthOK";
             this.bthOK.Size = new System.Drawing.Size(52, 38);
             this.bthOK.TabIndex = 1;
@@ -67,26 +67,26 @@
             this.btnOuterInner.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOuterInner.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnOuterInner.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnOuterInner.Location = new System.Drawing.Point(133, 2);
+            this.btnOuterInner.Location = new System.Drawing.Point(12, 77);
             this.btnOuterInner.Name = "btnOuterInner";
-            this.btnOuterInner.Size = new System.Drawing.Size(93, 54);
+            this.btnOuterInner.Size = new System.Drawing.Size(50, 54);
             this.btnOuterInner.TabIndex = 538;
             this.btnOuterInner.UseVisualStyleBackColor = false;
             this.btnOuterInner.Click += new System.EventHandler(this.btnOuterInner_Click);
             // 
-            // FormToolControl
+            // FormTrackFilter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.ClientSize = new System.Drawing.Size(229, 56);
+            this.ClientSize = new System.Drawing.Size(70, 304);
             this.ControlBox = false;
             this.Controls.Add(this.bthOK);
             this.Controls.Add(this.btnOuterInner);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "FormToolControl";
+            this.Name = "FormTrackFilter";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormToolControl_FormClosing);
