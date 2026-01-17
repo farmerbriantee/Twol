@@ -142,159 +142,91 @@ namespace Twol
             return trak;
         }
 
-        //Generate the current guidance line to follow
-        private bool ShouldRecalculateDistance()
-        {
-            if (!isTrackValid) { return true; }
-            bool twoSecondsPassed = (mf.secondsSinceStart - lastSecond) > 2;
-            bool autoSteerOffOrSwitchHigh = !mf.isBtnAutoSteerOn || mf.mc.steerSwitchHigh;
-
-            return twoSecondsPassed && autoSteerOffOrSwitchHigh;
-        }
-        private bool TryUpdateDistanceAndPaths(CTrk track, vec3 pivot, double widthMinusOverlap)
-        {
-            lastSecond = mf.secondsSinceStart;
-            double distanceFromRefLine;
-            if (track.mode != TrackMode.waterPivot)
-            {
-                int refCount = track.curvePts.Count;
-                if (refCount < 2)
-                {
-                    currentGuidanceTrack?.Clear();
-                    return false;
-                }
-
-                if (!mf.gyd.FindClosestSegment(track.curvePts, false, mf.guidanceLookPos, out int rA, out int rB))
-                {
-                    return false;
-                }
-
-                distanceFromRefLine = mf.gyd.FindDistanceToSegment(
-                    mf.guidanceLookPos,
-                    track.curvePts[rA],
-                    track.curvePts[rB],
-                    out vec3 point,
-                    out _,
-                    true,
-                    false,
-                    false);
-
-                // same way as line creation or not
-                isHeadingSameWay =
-                    Math.PI - Math.Abs(Math.Abs(pivot.heading + glm.toRadians(mf.mc.actualSteerAngleDegrees) - track.curvePts[rA].heading) - Math.PI)
-                    < glm.PIBy2;
-            }
-            else
-            {
-                // pivot guide list
-
-                // cross product
-                isHeadingSameWay =
-                    ((mf.pivotAxlePos.easting - track.ptA.easting) * (mf.steerAxlePos.northing - track.ptA.northing)
-                     - (mf.pivotAxlePos.northing - track.ptA.northing) * (mf.steerAxlePos.easting - track.ptA.easting)) < 0;
-
-                // pivot circle center
-                distanceFromRefLine = -glm.Distance(mf.guidanceLookPos, track.ptA);
-            }
-
-            if (track.mode > TrackMode.None)
-            {
-                distanceFromRefLine -= (0.5 * widthMinusOverlap);
-            }
-
-            double offset = isHeadingSameWay ? Settings.Tool.offset : -Settings.Tool.offset;
-            double refDist = (distanceFromRefLine + offset - track.nudgeDistance) / widthMinusOverlap;
-
-            howManyPathsAway = refDist < 0 ? (int)(refDist - 0.5) : (int)(refDist + 0.5);
-
-            return true;
-        }
-        private bool ShouldRebuildGuidance()
-        {
-            if (!isTrackValid) { return true; }
-            if (howManyPathsAway != lastHowManyPathsAway)
-            {
-                return true;
-            }
-
-            if (Settings.Tool.offset != 0 && isHeadingSameWay != lastIsHeadingSameWay)
-            {
-                return true;
-            }
-
-            return false;
-        }
-        private double CalculateTrackOffset(CTrk track, double widthMinusOverlap)
-        {
-            double baseOffset = widthMinusOverlap * howManyPathsAway;
-            double sideOffset = isHeadingSameWay ? -Settings.Tool.offset : Settings.Tool.offset;
-            double distAway = baseOffset + sideOffset + track.nudgeDistance;
-
-            // Add edge guidance offset
-            if (track.mode > TrackMode.None)
-            {
-                distAway += (0.5 * widthMinusOverlap);
-            }
-
-            // determine global line direction for nudge direction
-            if (track.mode < TrackMode.None)
-            {
-                bool between45And225 = track.heading < 3.92699 && track.heading > 0.785398;
-                distAway += between45And225 ? -Settings.Tool.setToolSteer.nudgeGlobal : Settings.Tool.setToolSteer.nudgeGlobal;
-            }
-
-            return distAway;
-        }
         public async Task GetDistanceFromRefTrack(CTrk track, vec3 pivot)
         {
             if (track == null) return;
 
             double widthMinusOverlap = Settings.Tool.toolWidth - Settings.Tool.overlap;
 
-            if (ShouldRecalculateDistance())
+            if (!isTrackValid || ((mf.secondsSinceStart - lastSecond) > 2 && (!mf.isBtnAutoSteerOn || mf.mc.steerSwitchHigh)))
             {
-                if (!TryUpdateDistanceAndPaths(track, pivot, widthMinusOverlap))
+                double distanceFromRefLine = 0;
+                lastSecond = mf.secondsSinceStart;
+                if (track.mode != TrackMode.waterPivot)
                 {
-                    return;
+                    int refCount = track.curvePts.Count;
+                    if (refCount < 2)
+                    {
+                        currentGuidanceTrack?.Clear();
+                        return;
+                    }
+
+                    //int cc = mf.gyd.FindGlobalRoughNearest(mf.guidanceLookPos, track.curvePts, 10, !isTrackValid);
+
+                    if (mf.gyd.FindClosestSegment(track.curvePts, false, mf.guidanceLookPos, out int rA, out int rB))//, cc - 10, cc + 10))
+                    {
+                        distanceFromRefLine = mf.gyd.FindDistanceToSegment(mf.guidanceLookPos, track.curvePts[rA], track.curvePts[rB], out vec3 point, out _, true, false, false);
+
+                        //same way as line creation or not
+                        isHeadingSameWay = Math.PI - Math.Abs(Math.Abs(pivot.heading + glm.toRadians(mf.mc.actualSteerAngleDegrees) - track.curvePts[rA].heading) - Math.PI) < glm.PIBy2;
+                    }
                 }
-            }
-
-            if (!ShouldRebuildGuidance())
-            {
-                return;
-            }
-
-            if (isBusyWorking)
-            {
-                return;
-            }
-
-            isBusyWorking = true;
-
-            try
-            {
-                isTrackValid = true;
-                lastHowManyPathsAway = howManyPathsAway;
-                lastIsHeadingSameWay = isHeadingSameWay;
-
-                double distAway = CalculateTrackOffset(track, widthMinusOverlap);
-
-                currentGuidanceTrack = await Task.Run(() => BuildCurrentGuidanceTrack(distAway, track));
-
-                if (!mf.yt.isYouTurnTriggered)
+                else //pivot guide list
                 {
-                    mf.yt.ResetCreatedYouTurn();
+                    //cross product
+                    isHeadingSameWay = ((mf.pivotAxlePos.easting - track.ptA.easting) * (mf.steerAxlePos.northing - track.ptA.northing)
+                        - (mf.pivotAxlePos.northing - track.ptA.northing) * (mf.steerAxlePos.easting - track.ptA.easting)) < 0;
+
+                    //pivot circle center
+                    distanceFromRefLine = -glm.Distance(mf.guidanceLookPos, track.ptA);
                 }
 
-                mf.gyd.isFindGlobalNearestTrackPoint = true;
+                if (track.mode > TrackMode.None) distanceFromRefLine -= (0.5 * widthMinusOverlap);
+
+                double RefDist = (distanceFromRefLine + (isHeadingSameWay ? Settings.Tool.offset : -Settings.Tool.offset) - (track.nudgeDistance)) / widthMinusOverlap;
+
+                if (RefDist < 0) howManyPathsAway = (int)(RefDist - 0.5);
+                else howManyPathsAway = (int)(RefDist + 0.5);
             }
-            catch (Exception ex)
+
+            if (!isTrackValid || howManyPathsAway != lastHowManyPathsAway || (isHeadingSameWay != lastIsHeadingSameWay && Settings.Tool.offset != 0))
             {
-                Log.EventWriter("GetDistanceFromRef Catch: " + ex.ToString());
-            }
-            finally
-            {
-                isBusyWorking = false;
+                if (!isBusyWorking)
+                {
+                    try
+                    {
+                        isBusyWorking = true;
+                        isTrackValid = true;
+                        lastHowManyPathsAway = howManyPathsAway;
+                        lastIsHeadingSameWay = isHeadingSameWay;
+                        double distAway = widthMinusOverlap * howManyPathsAway + (isHeadingSameWay ? -Settings.Tool.offset : Settings.Tool.offset) + (track.nudgeDistance);
+
+                        if (track.mode > TrackMode.None) distAway += (0.5 * widthMinusOverlap);
+
+                        if (track.mode < TrackMode.None)
+                        {
+                            //is track between 45 and 225 degrees or not
+                            if (track.heading < 3.92699 && track.heading > 0.785398) distAway += -Settings.Tool.setToolSteer.nudgeGlobal;
+                            else distAway += Settings.Tool.setToolSteer.nudgeGlobal;
+                        }
+                        currentGuidanceTrack = await Task.Run(() => BuildCurrentGuidanceTrack(distAway, track));
+
+                        if (!mf.yt.isYouTurnTriggered)
+                        {
+                            mf.yt.ResetCreatedYouTurn();
+                        }
+
+                        mf.gyd.isFindGlobalNearestTrackPoint = true;
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.EventWriter("GetDistanceFromRef Catch: " + ex.ToString());
+                    }
+                    finally
+                    {
+                        isBusyWorking = false;
+                    }
+                }
             }
         }
 
