@@ -350,13 +350,8 @@ namespace Twol
 
                 else if (track.mode < TrackMode.Polygon)
                 {
-                    newCurList = track.curvePts.ClipperOffsetPolyline(distAway);
+                    newCurList = track.curvePts.ClipperOffsetPolyline(distAway, new vec2(mf.steerAxlePos.easting, mf.steerAxlePos.northing));
                 }
-
-                //else if (track.mode == TrackMode.toolLineInner || track.mode == TrackMode.toolLineOuter)
-                //{
-
-                //}
 
                 else
                 {
@@ -382,25 +377,6 @@ namespace Twol
 
             return newCurList;
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         public void DrawTrack()

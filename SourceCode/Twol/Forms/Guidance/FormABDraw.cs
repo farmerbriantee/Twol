@@ -229,7 +229,7 @@ namespace Twol
                     track.ptB = new vec2(designPtsList[designPtsList.Count - 1]);
 
                     designPtsList.GenerateEquidistantPoints(4, true);
-                    designPtsList.ChaikinsSmooth(2, true);
+                    designPtsList.ChaikinsSmooth(1, true);
                     designPtsList.CalculateAverageHeadings(true);
                     designPtsList.ReducePointsByAngle();
                     designPtsList.CalculateAverageHeadings(true);
@@ -308,17 +308,17 @@ namespace Twol
                 };
 
                 //make sure point distance isn't too big
-                designPtsList.MinimumSpacingPointRemoval(1);
 
+                designPtsList.GenerateEquidistantPoints(4, false);
+                designPtsList.ChaikinsSmooth(1, false);
                 designPtsList.CalculateAverageHeadings(false);
-
-                track.heading = designPtsList.TrackAverageHeading();
-
                 designPtsList.ReducePointsByAngle();
                 designPtsList.CalculateAverageHeadings(false);
 
                 //build the tail extensions
                 designPtsList.AddStartEndPoints(5, 300);
+
+                track.heading = designPtsList.TrackAverageHeading();
 
                 //create a name
                 track.name = "Cu " +
