@@ -575,13 +575,14 @@ namespace Twol
             //make a new tool track
             var track = new CTrk(TrackMode.toolLineInner)
             {
-                name = (mf.gydTool.isboundaryLine ? "T_Outer " : "T_Inner ") + (mf.trks.gArr.Count + 1).ToString("000")
+                name = (mf.gydTool.isboundaryLine ? "T_Bnd " : "T_Fld ") + (mf.trks.gArr.Count + 1).ToString("000")
             };
 
             if (mf.gydTool.isboundaryLine) track.mode = TrackMode.toolLineOuter;
 
             mf.trks.toolDesignPtsList.SmoothSegments();
-
+            mf.trks.toolDesignPtsList.Reverse();
+            mf.trks.toolDesignPtsList.GenerateEquidistantPoints(2, false);
             mf.trks.toolDesignPtsList.CalculateAverageHeadings(false);
             mf.trks.toolDesignPtsList.ReducePointsByAngle();
 
@@ -589,8 +590,8 @@ namespace Twol
 
             track.curvePts = new List<vec3>(mf.trks.toolDesignPtsList);
 
-            track.curvePts.AddEndPoints(5, 10);
-            track.curvePts.AddStartPoints(5, 10);
+            track.curvePts.AddEndPoints(15, 5);
+            track.curvePts.AddStartPoints(15, 5);
 
             track.ptA = new vec2(track.curvePts[0].easting, track.curvePts[0].northing);
             track.ptB = new vec2(track.curvePts[track.curvePts.Count - 1].easting, track.curvePts[track.curvePts.Count - 1].northing);

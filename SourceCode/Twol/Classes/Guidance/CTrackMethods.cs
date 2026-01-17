@@ -187,7 +187,7 @@ namespace Twol
             points.AddRange(result);
         }
 
-        public static void ReducePointsByAngle(this List<vec3> points, double angleDelta = 0.02, double spread = 30)
+        public static void ReducePointsByAngle(this List<vec3> points, double angleDelta = 0.005, double spread = 30)
         {
             double delta = 0;
             int cont = points.Count;

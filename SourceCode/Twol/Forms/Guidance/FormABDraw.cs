@@ -415,7 +415,7 @@ namespace Twol
                 track.heading = designPtsList.TrackAverageHeading();
 
                 //create a name
-                track.name = "Bnd Cu " +
+                track.name = "V_Bnd Cu " +
                     (Math.Round(glm.toDegrees(track.heading), 1)).ToString(CultureInfo.InvariantCulture)
                     + "\u00B0";
 
@@ -492,7 +492,7 @@ namespace Twol
             designPtsList.AddEndPoints(5, 400);
 
             //create a name
-            track.name = "Fld AB: " +
+            track.name = "V_Fld AB: " +
                 Math.Round(glm.toDegrees(track.heading), 1).ToString(CultureInfo.InvariantCulture) + "\u00B0";
 
             //clean up gui
@@ -566,7 +566,7 @@ namespace Twol
             designPtsList.AddEndPoints(5, 400);
 
             //create a name
-            track.name = "Bnd AB: " +
+            track.name = "V_Bnd AB: " +
                 Math.Round(glm.toDegrees(track.heading), 1).ToString(CultureInfo.InvariantCulture) + "\u00B0";
 
             //clean up gui
@@ -643,7 +643,7 @@ namespace Twol
             track.curvePts.AddStartEndPoints(5, 300);
 
             //create a name
-            track.name = "AB: " +
+            track.name = "V_Fld A+: " +
                 Math.Round(glm.toDegrees(track.heading), 1).ToString(CultureInfo.InvariantCulture) + "\u00B0";
 
             //clean up gui
@@ -763,7 +763,7 @@ namespace Twol
             track.curvePts.AddStartEndPoints(5, 300);
 
             //create a name
-            track.name = "Fld AB: " +
+            track.name = "V_Fld AB: " +
                 Math.Round(glm.toDegrees(track.heading), 1).ToString(CultureInfo.InvariantCulture) + "\u00B0";
 
             //clean up gui

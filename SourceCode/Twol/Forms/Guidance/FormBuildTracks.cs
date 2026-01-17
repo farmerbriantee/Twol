@@ -524,7 +524,7 @@ namespace Twol
                     track.curvePts.Add(item);
                 }
 
-                textBox1.Text = "Cu " +
+                textBox1.Text = "V_Fld Cu " +
                     (Math.Round(glm.toDegrees(track.heading), 1)).ToString(CultureInfo.InvariantCulture) + "\u00B0 ";
 
                 double dist = (Settings.Tool.toolWidth - Settings.Tool.overlap) * (isRefRightSide ? 0.5 : -0.5) + Settings.Tool.offset;
@@ -643,7 +643,7 @@ namespace Twol
 
             selectedItem = mf.trks.CreateDesignedABTrack(isRefRightSide);
 
-            textBox1.Text = "AB: " +
+            textBox1.Text = "V_Fld AB " +
                 (Math.Round(glm.toDegrees(mf.trks.designHeading), 5)).ToString(CultureInfo.InvariantCulture) + "\u00B0 ";
 
             SetPanelVisible(panelName);
@@ -715,7 +715,7 @@ namespace Twol
 
             selectedItem = mf.trks.CreateDesignedABTrack(isRefRightSide);
 
-            textBox1.Text = "A+" +
+            textBox1.Text = "V_Fld A+" +
                 (Math.Round(glm.toDegrees(mf.trks.designHeading), 5)).ToString(CultureInfo.InvariantCulture) + "\u00B0 ";
 
             SetPanelVisible(panelName);
@@ -783,7 +783,8 @@ namespace Twol
 
                 if (namelist.Count > 1)
                 {
-                    trackName = namelist[1].InnerText;
+                    trackName = "V_Fld ";
+                    trackName += namelist[1].InnerText;
                 }
 
                 //each element in the list is a track
@@ -827,9 +828,11 @@ namespace Twol
 
                         if (namelist.Count > i)
                         {
-                            trackName = namelist[i + 1].InnerText;
+                            trackName = "V_Fld ";
+
+                            trackName += namelist[i + 1].InnerText;
                         }
-                        else trackName = "AB: " +
+                        else trackName = "V_Fld AB: " +
                             (Math.Round(glm.toDegrees(mf.trks.designHeading), 5)).ToString(CultureInfo.InvariantCulture) + "\u00B0 ";
 
                         selectedItem = mf.trks.CreateDesignedABTrack(isRefRightSide);
@@ -860,9 +863,11 @@ namespace Twol
 
                         if (namelist.Count > i)
                         {
-                            trackName = namelist[i + 1].InnerText;
+                            trackName = "V_Fld ";
+
+                            trackName += namelist[i + 1].InnerText;
                         }
-                        else trackName = "Cu " +
+                        else trackName = "V_Fld Cu " +
                                  (Math.Round(glm.toDegrees(track.heading), 1)).ToString(CultureInfo.InvariantCulture) + "\u00B0 ";
 
                         track.name = trackName;
@@ -937,7 +942,7 @@ namespace Twol
 
             selectedItem = mf.trks.CreateDesignedABTrack(isRefRightSide);
 
-            textBox1.Text = "AB: " +
+            textBox1.Text = "V_Fld LatLon" +
                 (Math.Round(glm.toDegrees(mf.trks.designHeading), 5)).ToString(CultureInfo.InvariantCulture) + "\u00B0 ";
 
             SetPanelVisible(panelName);
@@ -973,7 +978,7 @@ namespace Twol
 
             selectedItem = mf.trks.CreateDesignedABTrack(isRefRightSide);
 
-            textBox1.Text = "A+" +
+            textBox1.Text = "V_Fld LatLon A+" +
                 (Math.Round(glm.toDegrees(mf.trks.designHeading), 5)).ToString(CultureInfo.InvariantCulture) + "\u00B0 ";
 
             SetPanelVisible(panelName);
@@ -1151,6 +1156,44 @@ namespace Twol
             UpdateTable();
             flp.Focus();
             mf.Activate();
+        }
+
+        //Filter buttons
+        private void btnHideShowBnd_Click(object sender, EventArgs e)
+        {
+            foreach (CTrk item in mf.trks.gArr)
+            {
+                item.isVisible = item.name.Contains("V_Bnd");
+                UpdateTable();
+            }
+
+        }
+
+        private void btnHideShowFld_Click(object sender, EventArgs e)
+        {
+            foreach (CTrk item in mf.trks.gArr)
+            {
+                item.isVisible = item.name.Contains("V_Fld");
+                UpdateTable();
+            }
+        }
+
+        private void btnHideShowFldTool_Click(object sender, EventArgs e)
+        {
+            foreach (CTrk item in mf.trks.gArr)
+            {
+                item.isVisible = item.name.Contains("T_Fld");
+                UpdateTable();
+            }
+        }
+
+        private void btnHideShowBndTool_Click(object sender, EventArgs e)
+        {
+            foreach (CTrk item in mf.trks.gArr)
+            {
+                item.isVisible = item.name.Contains("T_Bnd");
+                UpdateTable();
+            }
         }
     }
 }
