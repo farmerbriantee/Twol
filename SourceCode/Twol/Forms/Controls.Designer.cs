@@ -865,7 +865,7 @@ namespace Twol
                 f.Close();
             }
 
-            f = Application.OpenForms["FormToolControl"];
+            f = Application.OpenForms["FormTrackFilter"];
 
             if (f != null)
             {

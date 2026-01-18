@@ -24,6 +24,7 @@ namespace Twol
 
         [System.Runtime.InteropServices.DllImport("User32.dll")]
         private static extern bool ShowWindow(IntPtr hWind, int nCmdShow);
+        private Point lastThisLocation;
 
         #region // Class Props and instances
 
@@ -551,7 +552,7 @@ namespace Twol
                 f.Close();
             }
 
-            f = Application.OpenForms["FormToolControl"];
+            f = Application.OpenForms["FormTrackFilter"];
 
             if (f != null)
             {
@@ -730,7 +731,7 @@ namespace Twol
                 Settings.User.setWindow_recordToolTracksLocation.X = f.Left;
             }
 
-            f = Application.OpenForms["FormToolControl"];
+            f = Application.OpenForms["FormTrackFilter"];
             if (f != null)
             {
                 f.Top += delta.Y - lastThisLocation.Y;
@@ -742,7 +743,6 @@ namespace Twol
             lastThisLocation = this.Location;
         }
 
-        private Point lastThisLocation;
         public void FileSaveEverythingBeforeClosingField()
         {
             FieldMenuButtonEnableDisable(false);

@@ -62,7 +62,7 @@ namespace Twol
             }
             else
             {
-                Size = new System.Drawing.Size(50, 245);
+                Size = new System.Drawing.Size(56, 260);
             }
 
         }

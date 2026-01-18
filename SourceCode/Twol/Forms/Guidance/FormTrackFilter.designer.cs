@@ -44,9 +44,9 @@
             this.btnToolOuter.FlatAppearance.BorderSize = 0;
             this.btnToolOuter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnToolOuter.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnToolOuter.Location = new System.Drawing.Point(3, 312);
+            this.btnToolOuter.Location = new System.Drawing.Point(3, 336);
             this.btnToolOuter.Name = "btnToolOuter";
-            this.btnToolOuter.Size = new System.Drawing.Size(42, 42);
+            this.btnToolOuter.Size = new System.Drawing.Size(48, 48);
             this.btnToolOuter.TabIndex = 543;
             this.btnToolOuter.UseVisualStyleBackColor = false;
             this.btnToolOuter.Click += new System.EventHandler(this.btnToolOuter_Click);
@@ -59,9 +59,9 @@
             this.btnToolInner.FlatAppearance.BorderSize = 0;
             this.btnToolInner.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnToolInner.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnToolInner.Location = new System.Drawing.Point(3, 253);
+            this.btnToolInner.Location = new System.Drawing.Point(3, 271);
             this.btnToolInner.Name = "btnToolInner";
-            this.btnToolInner.Size = new System.Drawing.Size(42, 42);
+            this.btnToolInner.Size = new System.Drawing.Size(48, 48);
             this.btnToolInner.TabIndex = 542;
             this.btnToolInner.UseVisualStyleBackColor = false;
             this.btnToolInner.Click += new System.EventHandler(this.btnToolInner_Click);
@@ -74,9 +74,9 @@
             this.btnBnd.FlatAppearance.BorderSize = 0;
             this.btnBnd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBnd.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBnd.Location = new System.Drawing.Point(3, 194);
+            this.btnBnd.Location = new System.Drawing.Point(3, 206);
             this.btnBnd.Name = "btnBnd";
-            this.btnBnd.Size = new System.Drawing.Size(42, 42);
+            this.btnBnd.Size = new System.Drawing.Size(48, 48);
             this.btnBnd.TabIndex = 541;
             this.btnBnd.UseVisualStyleBackColor = false;
             this.btnBnd.Click += new System.EventHandler(this.btnBnd_Click);
@@ -89,9 +89,9 @@
             this.btnField.FlatAppearance.BorderSize = 0;
             this.btnField.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnField.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnField.Location = new System.Drawing.Point(3, 135);
+            this.btnField.Location = new System.Drawing.Point(3, 141);
             this.btnField.Name = "btnField";
-            this.btnField.Size = new System.Drawing.Size(42, 42);
+            this.btnField.Size = new System.Drawing.Size(48, 48);
             this.btnField.TabIndex = 540;
             this.btnField.UseVisualStyleBackColor = false;
             this.btnField.Click += new System.EventHandler(this.btnField_Click);
@@ -105,7 +105,7 @@
             this.btnHideShow.Image = global::Twol.Properties.Resources.ABLinesHideShow;
             this.btnHideShow.Location = new System.Drawing.Point(3, 76);
             this.btnHideShow.Name = "btnHideShow";
-            this.btnHideShow.Size = new System.Drawing.Size(42, 42);
+            this.btnHideShow.Size = new System.Drawing.Size(48, 48);
             this.btnHideShow.TabIndex = 539;
             this.btnHideShow.UseVisualStyleBackColor = false;
             this.btnHideShow.Click += new System.EventHandler(this.btnHideShow_Click);
@@ -136,7 +136,7 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.ClientSize = new System.Drawing.Size(48, 243);
+            this.ClientSize = new System.Drawing.Size(54, 387);
             this.ControlBox = false;
             this.Controls.Add(this.btnToolOuter);
             this.Controls.Add(this.btnToolInner);
