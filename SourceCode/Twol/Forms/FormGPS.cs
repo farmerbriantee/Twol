@@ -560,17 +560,27 @@ namespace Twol
                 f.Close();
             }
 
+            f = Application.OpenForms["FormToolPathRec"];
+
+            if (f != null)
+            {
+                f.Focus();
+                f.Close();
+            }
+
+            f = Application.OpenForms["FormToolManual"];
+
+            if (f != null)
+            {
+                f.Focus();
+                f.Close();
+            }
+
             if (this.OwnedForms.Any())
             {
-                f = null;
-                f = Application.OpenForms["FormToolManual"];
-
-                if (f == null)
-                {
-                    TimedMessageBox(2000, gStr.Get(gs.gsWindowsStillOpen), gStr.Get(gs.gsCloseAllWindowsFirst));
-                    e.Cancel = true;
-                    return;
-                }
+                TimedMessageBox(2000, gStr.Get(gs.gsWindowsStillOpen), gStr.Get(gs.gsCloseAllWindowsFirst));
+                e.Cancel = true;
+                return;
             }
 
             int choice = SaveOrNot();

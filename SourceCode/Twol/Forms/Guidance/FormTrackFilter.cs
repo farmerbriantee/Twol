@@ -10,8 +10,6 @@ namespace Twol
 
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
-
-        //DLL functions to allow form dragging
         [DllImportAttribute("user32.dll")]
         public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
         [DllImportAttribute("user32.dll")]
@@ -26,6 +24,11 @@ namespace Twol
             }
         }
 
+        //protected override void OnPaintBackground(PaintEventArgs e)
+        //{
+        //   // e.Graphics.FillRectangle(Brushes.Black, e.ClipRectangle);
+        //}
+
         public FormTrackFilter(Form callingForm)
         {
             //get copy of the calling main form
@@ -36,6 +39,9 @@ namespace Twol
 
         private void FormToolControl_Load(object sender, EventArgs e)
         {
+            //this.BackColor = Color.Black;
+            //this.TransparencyKey = Color.Black;
+
             Location = Settings.User.setWindow_formToolControlLocation;
 
             if (!mf.IsOnScreen(Location, Size, 1))
@@ -127,6 +133,15 @@ namespace Twol
             }
             mf.trks.GetNextTrack();
             mf.PanelUpdateRightAndBottom();
+        }
+
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
         }
     }
 }

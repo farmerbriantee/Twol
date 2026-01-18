@@ -17,15 +17,6 @@ namespace Twol
         [DllImportAttribute("user32.dll")]
         public static extern bool ReleaseCapture();
 
-        private void FormToolManual_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                ReleaseCapture();
-                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
-            }
-        }
-
         public FormToolManual(Form callingForm)
         {
             //get copy of the calling main form
@@ -66,6 +57,15 @@ namespace Twol
         private void btnZero_Click(object sender, EventArgs e)
         {
             mf.gydTool.isZeroToolSteer = !mf.gydTool.isZeroToolSteer;
+        }
+
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
         }
     }
 }

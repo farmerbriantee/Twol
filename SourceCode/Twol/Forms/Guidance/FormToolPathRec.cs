@@ -18,15 +18,6 @@ namespace Twol
         [DllImportAttribute("user32.dll")]
         public static extern bool ReleaseCapture();
 
-        private void FormToolPathRec_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                ReleaseCapture();
-                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
-            }
-        }
-
         public FormToolPathRec(Form callingForm)
         {
             //get copy of the calling main form
@@ -127,6 +118,15 @@ namespace Twol
 
             mf.trks.isTrackValid = false;
             mf.Activate();
+        }
+
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
         }
     }
 }
