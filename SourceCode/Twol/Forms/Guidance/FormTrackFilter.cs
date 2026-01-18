@@ -34,9 +34,6 @@ namespace Twol
             InitializeComponent();
         }
 
-        private readonly int[] modes = { -2, -1, 2, 4, 99 };
-        private int modeSet = 4;
-
         private void FormToolControl_Load(object sender, EventArgs e)
         {
             Location = Settings.User.setWindow_formToolControlLocation;
@@ -46,6 +43,28 @@ namespace Twol
                 Top = 0;
                 Left = 0;
             }
+
+            bool isToolTrksPresent = false;
+
+            foreach (CTrk item in mf.trks.gArr)
+            {
+                if (item.mode == TrackMode.toolLineInner || item.mode == TrackMode.toolLineOuter)
+                {
+                    isToolTrksPresent = true;
+                    break;
+
+                }
+            }
+
+            if (isToolTrksPresent)
+            {
+                Size = new System.Drawing.Size(50, 360);
+            }
+            else
+            {
+                Size = new System.Drawing.Size(50, 245);
+            }
+
         }
 
         private void FormToolControl_FormClosing(object sender, FormClosingEventArgs e)
@@ -57,56 +76,57 @@ namespace Twol
         {
             Close();
         }
-
-        private void btnOuterInner_Click(object sender, EventArgs e)
+        private bool isOn;
+        private void btnHideShow_Click(object sender, EventArgs e)
         {
-            modeSet++;
-            if (modeSet > 3) modeSet = 0;
+            isOn = !isOn;
 
-            switch (modeSet)
+            for (int i = 0; i < mf.trks.gArr.Count; i++)
             {
-                case 0:
-                    btnOuterInner.BackgroundImage = Properties.Resources.FilterInnerToolLines;
-                    for (int i = 0; i < mf.trks.gArr.Count; i++)
-                    {
-                        if (mf.trks.gArr[i].mode == TrackMode.toolLineInner) mf.trks.gArr[i].isVisible = true;
-                        else mf.trks.gArr[i].isVisible = false;
-                    }
-                    break;
-
-                case 1:
-                    btnOuterInner.BackgroundImage = Properties.Resources.FilterOuterToolLines;
-                    for (int i = 0; i < mf.trks.gArr.Count; i++)
-                    {
-                        if (mf.trks.gArr[i].mode == TrackMode.toolLineOuter) mf.trks.gArr[i].isVisible = true;
-                        else mf.trks.gArr[i].isVisible = false;
-                    }
-                    break;
-
-                case 2:
-                    btnOuterInner.BackgroundImage = Properties.Resources.FilterNoToolLines;
-                    for (int i = 0; i < mf.trks.gArr.Count; i++)
-                    {
-                        if (mf.trks.gArr[i].mode > TrackMode.None) mf.trks.gArr[i].isVisible = true;
-                        else mf.trks.gArr[i].isVisible = false;
-                    }
-                    break;
-
-                case 3:
-                    btnOuterInner.BackgroundImage = Properties.Resources.FilterAllToolLines;
-                    for (int i = 0; i < mf.trks.gArr.Count; i++)
-                    {
-                        mf.trks.gArr[i].isVisible = true;
-                    }
-                    break;
-
-                default:
-                    break;
+                mf.trks.gArr[i].isVisible = isOn;
             }
+            mf.trks.GetNextTrack();
+            mf.PanelUpdateRightAndBottom();
+        }
 
-            mf.trks.isTrackValid = false;
-            this.Focus();
-            mf.Activate();
+        private void btnField_Click(object sender, EventArgs e)
+        {
+            foreach (CTrk item in mf.trks.gArr)
+            {
+                item.isVisible = item.name.Contains("A_Fld");
+            }
+            mf.trks.GetNextTrack();
+            mf.PanelUpdateRightAndBottom();
+        }
+
+        private void btnBnd_Click(object sender, EventArgs e)
+        {
+            foreach (CTrk item in mf.trks.gArr)
+            {
+                item.isVisible = item.name.Contains("A_Bnd");
+            }
+            mf.trks.GetNextTrack();
+            mf.PanelUpdateRightAndBottom();
+        }
+
+        private void btnToolInner_Click(object sender, EventArgs e)
+        {
+            foreach (CTrk item in mf.trks.gArr)
+            {
+                item.isVisible = (item.mode == TrackMode.toolLineInner);
+            }
+            mf.trks.GetNextTrack();
+            mf.PanelUpdateRightAndBottom();
+        }
+
+        private void btnToolOuter_Click(object sender, EventArgs e)
+        {
+            foreach (CTrk item in mf.trks.gArr)
+            {
+                item.isVisible = (item.mode == TrackMode.toolLineOuter);
+            }
+            mf.trks.GetNextTrack();
+            mf.PanelUpdateRightAndBottom();
         }
     }
 }

@@ -897,6 +897,8 @@
     <None Include="btnImages\FilterOuterToolLines.png" />
     <None Include="btnImages\ABCurveBnd.png" />
     <None Include="btnImages\ABTrackBnd.png" />
+    <None Include="btnImages\FilterInnerLines.png" />
+    <None Include="btnImages\FilterOuterLines.png" />
     <Content Include="btnImages\ZoomOut.png" />
     <Content Include="License.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

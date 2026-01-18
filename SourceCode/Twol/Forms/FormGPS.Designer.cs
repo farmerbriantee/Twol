@@ -1694,7 +1694,7 @@ namespace Twol
             this.btnToolControl.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnToolControl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnToolControl.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnToolControl.Image = global::Twol.Properties.Resources.ToolSteer;
+            this.btnToolControl.Image = global::Twol.Properties.Resources.Sort;
             this.btnToolControl.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.btnToolControl.Location = new System.Drawing.Point(3, 3);
             this.btnToolControl.Name = "btnToolControl";

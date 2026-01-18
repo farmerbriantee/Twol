@@ -464,7 +464,7 @@ namespace Twol
 
                 flp1.Controls[6].Visible = Settings.Tool.setToolSteer.isRecordToolLine;
 
-                flp1.Controls[7].Visible = (!Settings.Tool.setToolSteer.isRecordToolLine && (Settings.Tool.setToolSteer.isFollowCurrent || Settings.Tool.setToolSteer.isFollowPivot));
+                flp1.Controls[7].Visible = true;
 
                 for (int i = 0; i < flp1.Controls.Count; i++)
                 {
@@ -623,7 +623,7 @@ namespace Twol
 
         private void btnToolControl_Click(object sender, EventArgs e)
         {
-            Form fcc = Application.OpenForms["FormToolControl"];
+            Form fcc = Application.OpenForms["FormTrackFilter"];
 
             if (fcc != null)
             {
