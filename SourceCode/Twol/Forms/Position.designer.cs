@@ -332,7 +332,7 @@ namespace Twol
             {
                 //build new current ref line if required
                 #pragma warning disable CS4014 
-                trks.GetDistanceFromRefTrack(trks.currentRefTrack, pivotAxlePos);
+                trks.GetDistanceFromRefTrack(trks.currentRefTrack, new vec3(guidanceLookPos, pivotAxlePos.heading));
                 #pragma warning restore CS4014 
             }
 

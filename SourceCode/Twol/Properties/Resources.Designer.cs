@@ -2102,6 +2102,16 @@ namespace Twol.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap FilterLinesOnOff {
+            get {
+                object obj = ResourceManager.GetObject("FilterLinesOnOff", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap FilterNoToolLines {
             get {
                 object obj = ResourceManager.GetObject("FilterNoToolLines", resourceCulture);

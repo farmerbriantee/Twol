@@ -64,11 +64,11 @@ namespace Twol
 
             if (isToolTrksPresent)
             {
-                Size = new System.Drawing.Size(72, 470);
+                Size = new System.Drawing.Size(63, 420);
             }
             else
             {
-                Size = new System.Drawing.Size(72, 300);
+                Size = new System.Drawing.Size(63, 270);
             }
         }
 
