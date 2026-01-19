@@ -169,7 +169,7 @@ namespace Twol
             if (selectedLine != null)
             {
                 gTemp.Remove(selectedLine);
-                mf.trks.GetNextTrack(selectedLine, gTemp, true, true);
+                selectedLine = mf.trks.GetNextTrack(selectedLine, gTemp, true, true);
                 FixLabelsCurve();
             }
         }
@@ -322,8 +322,8 @@ namespace Twol
                 track.heading = designPtsList.TrackAverageHeading();
 
                 //create a name
-                track.name = cboxFldOrBnd.Checked ? "A_Fld Cu " : "A_Bnd Cu " +
-                    (Math.Round(glm.toDegrees(track.heading), 1)).ToString(CultureInfo.InvariantCulture)
+                track.name = cboxFldOrBnd.Checked ? "A_Fld Cu " : "A_Bnd Cu ";
+                track.name += (Math.Round(glm.toDegrees(track.heading), 1)).ToString(CultureInfo.InvariantCulture)
                     + "\u00B0";
 
                 //write out the PolyLine Points
@@ -337,10 +337,11 @@ namespace Twol
 
                 start = 99999; end = 99999;
 
-                FixLabelsCurve();
 
                 gTemp.Add(track);
                 selectedLine = track;
+
+                FixLabelsCurve();
             }
 
             btnExit.Focus();
@@ -400,8 +401,8 @@ namespace Twol
             designPtsList.AddEndPoints(5, 400);
 
             //create a name
-            track.name = cboxFldOrBnd.Checked ? "A_Fld Cu " : "A_Bnd Cu "
-                + Math.Round(glm.toDegrees(track.heading), 1).ToString(CultureInfo.InvariantCulture) + "\u00B0";
+            track.name = cboxFldOrBnd.Checked ? "A_Fld AB " : "A_Bnd AB ";
+            track.name += Math.Round(glm.toDegrees(track.heading), 1).ToString(CultureInfo.InvariantCulture) + "\u00B0";
 
             //clean up gui
             btnMakeABLine.Enabled = false;
@@ -416,6 +417,7 @@ namespace Twol
 
             gTemp.Add(track);
             selectedLine = track;
+
             FixLabelsCurve();
         }
 

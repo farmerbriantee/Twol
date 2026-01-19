@@ -350,8 +350,6 @@ namespace Twol
                 {
                     outputPts.Add(new vec3((solution[0][i].X / 10000.0), (solution[0][i].Y / 10000.0), 0));
                 }
-
-                //outputPts.Add(new vec3((solution[0][solution[0].Count - 1].X / 10000.0), (solution[0][solution[0].Count - 1].Y / 10000.0), 0));
             }
 
             //outputPts.GenerateEquidistantPoints(2, true);

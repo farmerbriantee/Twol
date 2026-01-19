@@ -336,9 +336,9 @@ namespace Twol
                 #pragma warning restore CS4014 
             }
 
-            if (trks.currentGuidanceTrack.Count > 0)
+            if (trks.currentRefTrack != null && trks.currentGuidanceTrack.Count > 0)
             {
-                gyd.Guidance(pivotAxlePos, steerAxlePos, yt.isYouTurnTriggered, yt.isYouTurnTriggered ? yt.ytList : trks.currentGuidanceTrack);
+                gyd.Guidance(pivotAxlePos, steerAxlePos, trks.currentRefTrack.mode == TrackMode.Polygon, yt.isYouTurnTriggered, yt.isYouTurnTriggered ? yt.ytList : trks.currentGuidanceTrack);
 
                 if (Settings.Tool.setToolSteer.isFollowPivot && isJobStarted)
                 {

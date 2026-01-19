@@ -92,6 +92,7 @@ namespace Twol
                 mf.trks.gArr[i].isVisible = isOn;
             }
             mf.trks.GetNextTrack();
+            mf.NotifyTrackChange();
             mf.PanelUpdateRightAndBottom();
         }
 
@@ -101,7 +102,9 @@ namespace Twol
             {
                 item.isVisible = item.name.Contains("A_Fld");
             }
+
             mf.trks.GetNextTrack();
+            mf.NotifyTrackChange();
             mf.PanelUpdateRightAndBottom();
         }
 
@@ -112,6 +115,7 @@ namespace Twol
                 item.isVisible = item.name.Contains("A_Bnd");
             }
             mf.trks.GetNextTrack();
+            mf.NotifyTrackChange();
             mf.PanelUpdateRightAndBottom();
         }
 
@@ -122,6 +126,7 @@ namespace Twol
                 item.isVisible = (item.mode == TrackMode.toolLineInner);
             }
             mf.trks.GetNextTrack();
+            mf.NotifyTrackChange();
             mf.PanelUpdateRightAndBottom();
         }
 
@@ -132,6 +137,7 @@ namespace Twol
                 item.isVisible = (item.mode == TrackMode.toolLineOuter);
             }
             mf.trks.GetNextTrack();
+            mf.NotifyTrackChange();
             mf.PanelUpdateRightAndBottom();
         }
 

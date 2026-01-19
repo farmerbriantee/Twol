@@ -34,6 +34,7 @@
             this.lblCurveSelected = new System.Windows.Forms.Label();
             this.tboxNameCurve = new System.Windows.Forms.TextBox();
             this.tlp1 = new System.Windows.Forms.TableLayoutPanel();
+            this.cboxFldOrBnd = new System.Windows.Forms.CheckBox();
             this.btnBLength = new System.Windows.Forms.Button();
             this.btnALength = new System.Windows.Forms.Button();
             this.cboxIsZoom = new System.Windows.Forms.CheckBox();
@@ -50,7 +51,6 @@
             this.btnSelectCurveBk = new System.Windows.Forms.Button();
             this.btnMakeCurve = new System.Windows.Forms.Button();
             this.btnCancelTouch = new System.Windows.Forms.Button();
-            this.cboxFldOrBnd = new System.Windows.Forms.CheckBox();
             this.tlp1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -145,6 +145,29 @@
             this.tlp1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 17.26221F));
             this.tlp1.Size = new System.Drawing.Size(390, 700);
             this.tlp1.TabIndex = 564;
+            // 
+            // cboxFldOrBnd
+            // 
+            this.cboxFldOrBnd.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cboxFldOrBnd.Appearance = System.Windows.Forms.Appearance.Button;
+            this.cboxFldOrBnd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(210)))), ((int)(((byte)(210)))));
+            this.cboxFldOrBnd.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.cboxFldOrBnd.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(250)))), ((int)(((byte)(220)))));
+            this.cboxFldOrBnd.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray;
+            this.cboxFldOrBnd.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.cboxFldOrBnd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cboxFldOrBnd.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboxFldOrBnd.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.cboxFldOrBnd.Image = global::Twol.Properties.Resources.Boundary;
+            this.cboxFldOrBnd.Location = new System.Drawing.Point(146, 250);
+            this.cboxFldOrBnd.Name = "cboxFldOrBnd";
+            this.cboxFldOrBnd.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.tlp1.SetRowSpan(this.cboxFldOrBnd, 2);
+            this.cboxFldOrBnd.Size = new System.Drawing.Size(97, 81);
+            this.cboxFldOrBnd.TabIndex = 566;
+            this.cboxFldOrBnd.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.cboxFldOrBnd.UseVisualStyleBackColor = false;
+            this.cboxFldOrBnd.Click += new System.EventHandler(this.cboxFldOrBnd_Click);
             // 
             // btnBLength
             // 
@@ -448,29 +471,6 @@
             this.btnCancelTouch.TabIndex = 470;
             this.btnCancelTouch.UseVisualStyleBackColor = false;
             this.btnCancelTouch.Click += new System.EventHandler(this.btnCancelTouch_Click);
-            // 
-            // cboxFldOrBnd
-            // 
-            this.cboxFldOrBnd.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.cboxFldOrBnd.Appearance = System.Windows.Forms.Appearance.Button;
-            this.cboxFldOrBnd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(250)))), ((int)(((byte)(220)))));
-            this.cboxFldOrBnd.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.cboxFldOrBnd.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(250)))), ((int)(((byte)(220)))));
-            this.cboxFldOrBnd.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray;
-            this.cboxFldOrBnd.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.cboxFldOrBnd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cboxFldOrBnd.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboxFldOrBnd.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.cboxFldOrBnd.Image = global::Twol.Properties.Resources.Boundary;
-            this.cboxFldOrBnd.Location = new System.Drawing.Point(146, 250);
-            this.cboxFldOrBnd.Name = "cboxFldOrBnd";
-            this.cboxFldOrBnd.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.tlp1.SetRowSpan(this.cboxFldOrBnd, 2);
-            this.cboxFldOrBnd.Size = new System.Drawing.Size(97, 81);
-            this.cboxFldOrBnd.TabIndex = 566;
-            this.cboxFldOrBnd.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.cboxFldOrBnd.UseVisualStyleBackColor = false;
-            this.cboxFldOrBnd.Click += new System.EventHandler(this.cboxFldOrBnd_Click);
             // 
             // FormABDraw
             // 

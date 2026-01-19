@@ -811,9 +811,6 @@ namespace Twol
 
             PanelsAndOGLSize();
 
-            Form form = new FormTrackFilter(this);
-            form.Show(this);
-
             //else if (Settings.Tool.setToolSteer.isFollowCurrent && Settings.Tool.setToolSteer.isRecordToolLine)
             //{
             //    Form form = new FormToolPathRec(this);

@@ -795,6 +795,21 @@ namespace Twol
                 cboxIsSectionControlled.Visible = isHdl;
 
                 PanelSizeRightAndBottom();
+
+                Form fcc = Application.OpenForms["FormTrackFilter"];
+
+                if (fcc != null)
+                {
+                    return;
+                }
+                else
+                {
+                    if (trks.gArr.Count > 0)
+                    {
+                        Form form = new FormTrackFilter(this);
+                        form.Show(this);
+                    }
+                }
             }
         }
 
@@ -943,6 +958,22 @@ namespace Twol
         private void Panel_IO_Location()
         {
                 panel_IO.Location = new Point(this.Width - panel_IO.Width - (isJobStarted?90:40), oglMain.Height / 2 - 230);            
+        }
+
+        public void NotifyTrackChange()
+        {
+            if (trks.currentRefTrack != null)
+            {
+                guideLineCounter = 20;
+                lblGuidanceLine.Visible = true;
+                lblGuidanceLine.Text = trks.currentRefTrack.name;
+            }
+            else
+            {
+                guideLineCounter = 12;
+                lblGuidanceLine.Visible = true;
+                lblGuidanceLine.Text = "No Tracks";
+            }
         }
 
         private void ZoomByMouseWheel(object sender, MouseEventArgs e)

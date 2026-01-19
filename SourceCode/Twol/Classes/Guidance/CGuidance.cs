@@ -46,14 +46,16 @@ namespace Twol
             mf = _f;
         }
 
-        public void Guidance(vec3 pivot, vec3 steer, bool Uturn, List<vec3> curList)
+        public void Guidance(vec3 pivot, vec3 steer, bool isLoop, bool Uturn, List<vec3> curList)
         {
+            if (Uturn) isLoop = false;
+
             bool completeUturn = !Uturn;
             var vec2point = new vec2(Settings.Vehicle.setVehicle_isStanleyUsed ? steer : pivot);
 
             if (Settings.Tool.setToolSteer.isPassiveSteering || Settings.Tool.setToolSteer.isFollowCurrent)
             {
-                if (FindClosestSegment(curList, false, mf.pnTool.fix, out A, out B))
+                if (FindClosestSegment(curList, isLoop, mf.pnTool.fix, out A, out B))
                 {
                     distanceFromCurrentLinePassiveTool = FindDistanceToSegment(mf.pnTool.fix, curList[A], curList[B], out _, out _, true, false, false);
 
@@ -64,7 +66,7 @@ namespace Twol
                     distanceFromCurrentLinePassiveTool = 0;
             }
 
-            if (mf.gyd.FindClosestSegment(curList, false, vec2point, out A, out B))
+            if (mf.gyd.FindClosestSegment(curList, isLoop, vec2point, out A, out B))
             {
                 distanceFromCurrentLine = FindDistanceToSegment(vec2point, curList[A], curList[B], out vec3 point, out double time, true, false, false);
 
