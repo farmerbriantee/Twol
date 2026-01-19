@@ -146,6 +146,8 @@ namespace Twol
         {
             if (track == null) return;
 
+            bool loops = track.mode > TrackMode.PolyLine;
+
             double widthMinusOverlap = Settings.Tool.toolWidth - Settings.Tool.overlap;
 
             if (!isTrackValid || ((mf.secondsSinceStart - lastSecond) > 2 && (!mf.isBtnAutoSteerOn || mf.mc.steerSwitchHigh)))
@@ -163,7 +165,7 @@ namespace Twol
 
                     //int cc = mf.gyd.FindGlobalRoughNearest(mf.guidanceLookPos, track.curvePts, 10, !isTrackValid);
 
-                    if (mf.gyd.FindClosestSegment(track.curvePts, false, mf.guidanceLookPos, out int rA, out int rB))//, cc - 10, cc + 10))
+                    if (mf.gyd.FindClosestSegment(track.curvePts, loops, mf.guidanceLookPos, out int rA, out int rB))//, cc - 10, cc + 10))
                     {
                         distanceFromRefLine = mf.gyd.FindDistanceToSegment(mf.guidanceLookPos, track.curvePts[rA], track.curvePts[rB], out vec3 point, out _, true, false, false);
 
@@ -309,7 +311,6 @@ namespace Twol
 
             return newCurList;
         }
-
 
         public void DrawTrack()
         {

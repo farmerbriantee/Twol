@@ -346,13 +346,15 @@ namespace Twol
             if (solution.Count > 0)
             {
                 //convert back to vec3 list
-                for (int i = solution[0].Count - 1; i > 2; i--)
+                for (int i = solution[0].Count - 1; i >= 0; i--)
                 {
                     outputPts.Add(new vec3((solution[0][i].X / 10000.0), (solution[0][i].Y / 10000.0), 0));
                 }
+
+                //outputPts.Add(new vec3((solution[0][solution[0].Count - 1].X / 10000.0), (solution[0][solution[0].Count - 1].Y / 10000.0), 0));
             }
 
-            outputPts.GenerateEquidistantPoints(2, true);
+            //outputPts.GenerateEquidistantPoints(2, true);
 
             //outputPts.ChaikinsSmooth(2, true);
 
@@ -511,7 +513,6 @@ namespace Twol
             }
             return AA >= 0;
         }
-
 
         public static double FindDistanceToSegment(vec2 pt, vec3 p1, vec3 p2, out vec3 point, out double Time, bool signed = false, bool aa = true, bool bb = true)
         {
