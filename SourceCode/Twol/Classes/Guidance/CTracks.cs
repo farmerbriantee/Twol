@@ -189,6 +189,8 @@ namespace Twol
 
                 if (RefDist < 0) howManyPathsAway = (int)(RefDist - 0.5);
                 else howManyPathsAway = (int)(RefDist + 0.5);
+
+                lastHowManyPathsAway = 99999;
             }
 
             if (!isTrackValid || howManyPathsAway != lastHowManyPathsAway || (isHeadingSameWay != lastIsHeadingSameWay && Settings.Tool.offset != 0))
@@ -282,9 +284,14 @@ namespace Twol
                     newCurList.CalculateAverageHeadings(true);
                 }
 
-                else if (track.mode < TrackMode.Polygon)
+                else if (track.mode < TrackMode.Polygon && track.mode > TrackMode.None)
                 {
                     newCurList = track.curvePts.ClipperOffsetPolyline(distAway, mf.guidanceLookPos);
+                }
+
+                else if (track.mode < TrackMode.None)
+                {
+                    newCurList = track.curvePts.ClipperOffsetCenterGuidance(distAway, mf.guidanceLookPos, ((int)howManyPathsAway == 0));
                 }
 
                 else

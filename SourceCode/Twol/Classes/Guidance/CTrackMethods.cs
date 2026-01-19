@@ -482,6 +482,127 @@ namespace Twol
             return pts;
         }
 
+        public static List<vec3> ClipperOffsetCenterGuidance(this List<vec3> points, double distAway, vec2 lookPos, bool isZeroAway)
+        {
+            List<vec3> outPts = new List<vec3>();
+
+            //convert to Clipper path
+            Path64 path = new Path64(points.Count + 2);
+
+            vec3 pt = new vec3(points[0].easting, points[0].northing);
+            pt.easting -= (Math.Sin(points[0].heading) * 3000);
+            pt.northing -= (Math.Cos(points[0].heading) * 3000);
+            path.Add(new Point64(pt.easting * 10000, pt.northing * 10000));
+
+            for (int i = 0; i < points.Count; i++)
+            {
+                path.Add(new Point64(points[i].easting * 10000, points[i].northing * 10000));
+            }
+
+            pt = new vec3(points[points.Count - 1].easting, points[points.Count - 1].northing);
+            pt.easting += (Math.Sin(points[points.Count - 1].heading) * 3000);
+            pt.northing += (Math.Cos(points[points.Count - 1].heading) * 3000);
+            path.Add(new Point64(pt.easting * 10000, pt.northing * 10000));
+
+            bool isPos = Clipper.IsPositive(path);
+
+            ClipperOffset co = new ClipperOffset();
+
+            if (distAway >= 0)
+                co.ReverseSolution = true;
+
+            co.AddPath(path, JoinType.Round, EndType.Round);
+
+            Paths64 solution = new Paths64();
+
+            co.Execute(distAway * 10000, solution);
+
+            if (solution.Count > 0)
+            {
+                //convert back to vec3 list
+                for (int i = solution[0].Count - 1; i >= 0; i--)
+                {
+                    outPts.Add(new vec3((solution[0][i].X / 10000.0), (solution[0][i].Y / 10000.0), 0));
+                }
+            }
+
+            double dist;
+            int AA = -1;
+            double minDistA = double.MaxValue;
+            for (int A = 0; A < outPts.Count - 1; A++)
+            {
+                dist = FindDistanceToSegment(lookPos, outPts[A], outPts[A + 1], out _, out _);
+
+                if (dist < minDistA)
+                {
+                    minDistA = dist;
+                    AA = A;
+                }
+            }
+
+
+            dist = FindDistanceToSegment(lookPos, outPts[AA], outPts[AA + 1], out _, out _, true);
+
+            //outPts.GenerateEquidistantPoints(4, false);  
+            //outPts.ReducePointsByAngle(0.01, 400);
+            //outPts.CalculateAverageHeadings(false);
+
+            List<vec3> pts = new List<vec3>();
+
+            if (AA == 0) AA = outPts.Count - 1;
+
+            for (int i = AA; i >= 0;)
+            {
+                if (Math.Abs(outPts[i].easting) < 1500 && Math.Abs(outPts[i].northing) < 1500)
+                {
+                    i--;
+                    if (i < 0) i = outPts.Count - 1;
+                }
+                else
+                {
+                    AA = i;
+                    break;
+                }
+            }
+
+            minDistA = 0;
+
+            AA++;
+            if (AA >= outPts.Count) AA = 0;
+
+
+            for (int i = AA; i < outPts.Count - 1;)
+            {
+                if (Math.Abs(outPts[i].easting) < 3000 && Math.Abs(outPts[i].northing) < 3000)
+                {
+                    pts.Add(new vec3(outPts[i]));
+                    i++;
+                    if (i >= outPts.Count) i = 0;
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            //pts.MinimumSpacingPointRemoval(1);
+            if (isZeroAway)
+            {
+                pts.Reverse();
+                pts.CalculateAverageHeadings(false);
+            }
+
+            //return outPts;
+            pts.GenerateEquidistantPoints(2, false);
+
+            //pts.ChaikinsSmooth(2, false);
+
+            pts.CalculateAverageHeadings(false);
+            pts.ReducePointsByAngle(0.005, 30);
+
+            return pts;
+        }
+
         public static bool FindClosestSegment(List<vec3> points, bool loop, vec2 point, out int AA, out int BB, int start = 0, int end = int.MaxValue)
         {
             AA = -1;
@@ -556,7 +677,6 @@ namespace Twol
             else
                 return Math.Sqrt(dx * dx + dy * dy);
         }
-
 
         public static void AddStartEndPoints(this List<vec3> xList, int ptsToAdd = 10, double distBetweenPoints = 50)
         {
