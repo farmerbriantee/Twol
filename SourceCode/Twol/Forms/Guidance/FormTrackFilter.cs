@@ -64,13 +64,12 @@ namespace Twol
 
             if (isToolTrksPresent)
             {
-                Size = new System.Drawing.Size(50, 360);
+                Size = new System.Drawing.Size(72, 470);
             }
             else
             {
-                Size = new System.Drawing.Size(56, 260);
+                Size = new System.Drawing.Size(72, 300);
             }
-
         }
 
         private void FormToolControl_FormClosing(object sender, FormClosingEventArgs e)

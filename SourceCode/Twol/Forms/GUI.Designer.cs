@@ -761,6 +761,8 @@ namespace Twol
 
         public void PanelUpdateRightAndBottom()
         {
+            Form fcc = Application.OpenForms["FormTrackFilter"];
+
             if (isFieldStarted)
             {
                 bool isBnd = bnd.bndList.Count > 0;
@@ -796,19 +798,27 @@ namespace Twol
 
                 PanelSizeRightAndBottom();
 
-                Form fcc = Application.OpenForms["FormTrackFilter"];
 
-                if (fcc != null)
+                if (fcc == null && trks.gArr.Count > 0)
                 {
-                    return;
+                    Form form = new FormTrackFilter(this);
+                    form.Show(this);
                 }
                 else
                 {
-                    if (trks.gArr.Count > 0)
+                    if (fcc != null && trks.gArr.Count == 0)
                     {
-                        Form form = new FormTrackFilter(this);
-                        form.Show(this);
+                        fcc.Focus();
+                        fcc.Close();
                     }
+                }
+            }
+            else
+            {
+                if (fcc != null)
+                {
+                    fcc.Focus();
+                    fcc.Close();
                 }
             }
         }
