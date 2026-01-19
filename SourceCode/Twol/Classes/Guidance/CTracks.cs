@@ -183,18 +183,12 @@ namespace Twol
                     distanceFromRefLine = -glm.Distance(mf.guidanceLookPos, track.ptA);
                 }
 
-                if (track.mode > TrackMode.None)
-                {
-                    if (distanceFromRefLine > 0) distanceFromRefLine += (0.5 * widthMinusOverlap);
-                    else distanceFromRefLine -= (0.5 * widthMinusOverlap);
-                }
+                if (track.mode > TrackMode.None) distanceFromRefLine -= (0.5 * widthMinusOverlap);
 
                 double RefDist = (distanceFromRefLine + (isHeadingSameWay ? Settings.Tool.offset : -Settings.Tool.offset) - (track.nudgeDistance)) / widthMinusOverlap;
 
                 if (RefDist < 0) howManyPathsAway = (int)(RefDist - 0.5);
                 else howManyPathsAway = (int)(RefDist + 0.5);
-
-                lastHowManyPathsAway = 999;
             }
 
             if (!isTrackValid || howManyPathsAway != lastHowManyPathsAway || (isHeadingSameWay != lastIsHeadingSameWay && Settings.Tool.offset != 0))
@@ -209,11 +203,7 @@ namespace Twol
                         lastIsHeadingSameWay = isHeadingSameWay;
                         double distAway = widthMinusOverlap * howManyPathsAway + (isHeadingSameWay ? -Settings.Tool.offset : Settings.Tool.offset) + (track.nudgeDistance);
 
-                        if (track.mode > TrackMode.None)
-                        {
-                            if (distAway > 0) distAway -= (0.5 * widthMinusOverlap);
-                            else distAway += (0.5 * widthMinusOverlap);
-                        }
+                        if (track.mode > TrackMode.None) distAway += (0.5 * widthMinusOverlap);
 
                         if (track.mode < TrackMode.None)
                         {

@@ -318,7 +318,7 @@ namespace Twol
             if (trks.isAutoTrack && !ct.isContourBtnOn && !isBtnAutoSteerOn && trks.autoTrack3SecTimer >= 2)
             {
                 trks.autoTrack3SecTimer = 0;
-                int idx = trks.FindClosestRefTrack(steerAxlePos);
+                int idx = trks.FindClosestRefTrack(new vec3(guidanceLookPos));
             }
 
             if (ct.isContourBtnOn)
