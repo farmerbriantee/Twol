@@ -220,7 +220,6 @@ namespace Twol
             this.btnMachine = new System.Windows.Forms.Button();
             this.btnIMU = new System.Windows.Forms.Button();
             this.btnFieldStats = new System.Windows.Forms.Button();
-            this.nudToolOffset = new System.Windows.Forms.NumericUpDown();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStripFlag.SuspendLayout();
             this.statusStripLeft.SuspendLayout();
@@ -235,7 +234,6 @@ namespace Twol
             this.tlpNozzle.SuspendLayout();
             this.panel_IO.SuspendLayout();
             this.flowLayoutPanelTop.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudToolOffset)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -1989,7 +1987,7 @@ namespace Twol
             this.panelRight.Controls.Add(this.btnContourLock);
             this.panelRight.Controls.Add(this.lblNumCu);
             this.panelRight.FlowDirection = System.Windows.Forms.FlowDirection.BottomUp;
-            this.panelRight.Location = new System.Drawing.Point(1088, 198);
+            this.panelRight.Location = new System.Drawing.Point(1091, 178);
             this.panelRight.Name = "panelRight";
             this.panelRight.Size = new System.Drawing.Size(70, 644);
             this.panelRight.TabIndex = 541;
@@ -3264,38 +3262,12 @@ namespace Twol
             this.btnFieldStats.Visible = false;
             this.btnFieldStats.Click += new System.EventHandler(this.btnFieldStats_Click);
             // 
-            // nudToolOffset
-            // 
-            this.nudToolOffset.DecimalPlaces = 1;
-            this.nudToolOffset.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudToolOffset.Increment = new decimal(new int[] {
-            2,
-            0,
-            0,
-            65536});
-            this.nudToolOffset.Location = new System.Drawing.Point(292, 71);
-            this.nudToolOffset.Maximum = new decimal(new int[] {
-            30,
-            0,
-            0,
-            0});
-            this.nudToolOffset.Minimum = new decimal(new int[] {
-            30,
-            0,
-            0,
-            -2147483648});
-            this.nudToolOffset.Name = "nudToolOffset";
-            this.nudToolOffset.Size = new System.Drawing.Size(86, 36);
-            this.nudToolOffset.TabIndex = 651;
-            this.nudToolOffset.ValueChanged += new System.EventHandler(this.nudToolOffset_ValueChanged);
-            // 
             // FormGPS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(1163, 847);
-            this.Controls.Add(this.nudToolOffset);
             this.Controls.Add(this.tlpNozzle);
             this.Controls.Add(this.flowLayoutPanelTop);
             this.Controls.Add(this.flp1);
@@ -3347,7 +3319,6 @@ namespace Twol
             this.panel_IO.ResumeLayout(false);
             this.panel_IO.PerformLayout();
             this.flowLayoutPanelTop.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.nudToolOffset)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3540,7 +3511,6 @@ namespace Twol
         public System.Windows.Forms.Label lblAreaPossible;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button btnInternetConnection;
-        private System.Windows.Forms.NumericUpDown nudToolOffset;
         private System.Windows.Forms.Button btnToolLineRecord;
         public System.Windows.Forms.Button btnAutoTrack;
         private System.Windows.Forms.Button btnToolControl;

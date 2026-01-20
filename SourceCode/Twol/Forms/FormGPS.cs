@@ -879,11 +879,6 @@ namespace Twol
             lbl_IO_Profile.Text = RegistrySettings.IOFileName;
         }
 
-        private void nudToolOffset_ValueChanged(object sender, EventArgs e)
-        {
-            sim.toolOffset = (double)nudToolOffset.Value * 0.001;
-        }
-
         public void FieldClose()
         {
             Settings.Vehicle.setF_CurrentFieldDir = currentFieldDirectory;
