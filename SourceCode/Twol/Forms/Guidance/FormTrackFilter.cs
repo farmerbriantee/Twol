@@ -64,11 +64,11 @@ namespace Twol
 
             if (isToolTrksPresent)
             {
-                Size = new System.Drawing.Size(63, 420);
+                Size = new System.Drawing.Size(68, 420);
             }
             else
             {
-                Size = new System.Drawing.Size(63, 270);
+                Size = new System.Drawing.Size(68, 270);
             }
         }
 
@@ -126,7 +126,7 @@ namespace Twol
             }
             foreach (CTrk item in mf.trks.gArr)
             {
-                item.isVisible = item.name.Contains("A_Bnd");
+                item.isVisible = item.name.Contains("A_Bnd") || item.mode == TrackMode.Polygon;
             }
             mf.trks.GetNextTrack();
             mf.NotifyTrackChange();

@@ -29,11 +29,11 @@ namespace Twol
 
             if (mf.gydTool.isboundaryLine)
             {
-                btnOuterInner.Image = Properties.Resources.FilterOuterToolLines;
+                btnOuterInner.BackgroundImage = Properties.Resources.FilterOuterToolLines;
             }
             else
             {
-                btnOuterInner.Image = Properties.Resources.FilterInnerToolLines;
+                btnOuterInner.BackgroundImage = Properties.Resources.FilterInnerToolLines;
             }
         }
 
@@ -109,11 +109,11 @@ namespace Twol
 
             if (mf.gydTool.isboundaryLine)
             {
-                btnOuterInner.Image = Properties.Resources.FilterOuterToolLines;
+                btnOuterInner.BackgroundImage = Properties.Resources.FilterOuterToolLines;
             }
             else
             {
-                btnOuterInner.Image = Properties.Resources.FilterInnerToolLines;
+                btnOuterInner.BackgroundImage = Properties.Resources.FilterInnerToolLines;
             }
 
             mf.trks.isTrackValid = false;

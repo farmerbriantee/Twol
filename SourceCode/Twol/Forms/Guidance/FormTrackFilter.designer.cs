@@ -39,75 +39,70 @@
             // 
             // btnToolOuter
             // 
-            this.btnToolOuter.BackColor = System.Drawing.Color.Transparent;
+            this.btnToolOuter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(60)))));
             this.btnToolOuter.BackgroundImage = global::Twol.Properties.Resources.FilterOuterToolLines;
             this.btnToolOuter.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnToolOuter.FlatAppearance.BorderSize = 0;
-            this.btnToolOuter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnToolOuter.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnToolOuter.Location = new System.Drawing.Point(3, 362);
             this.btnToolOuter.Name = "btnToolOuter";
-            this.btnToolOuter.Size = new System.Drawing.Size(56, 56);
+            this.btnToolOuter.Size = new System.Drawing.Size(62, 56);
             this.btnToolOuter.TabIndex = 543;
             this.btnToolOuter.UseVisualStyleBackColor = false;
             this.btnToolOuter.Click += new System.EventHandler(this.btnToolOuter_Click);
             // 
             // btnToolInner
             // 
-            this.btnToolInner.BackColor = System.Drawing.Color.Transparent;
+            this.btnToolInner.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(60)))));
             this.btnToolInner.BackgroundImage = global::Twol.Properties.Resources.FilterInnerToolLines;
             this.btnToolInner.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnToolInner.FlatAppearance.BorderSize = 0;
-            this.btnToolInner.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnToolInner.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnToolInner.Location = new System.Drawing.Point(3, 285);
             this.btnToolInner.Name = "btnToolInner";
-            this.btnToolInner.Size = new System.Drawing.Size(56, 56);
+            this.btnToolInner.Size = new System.Drawing.Size(62, 56);
             this.btnToolInner.TabIndex = 542;
             this.btnToolInner.UseVisualStyleBackColor = false;
             this.btnToolInner.Click += new System.EventHandler(this.btnToolInner_Click);
             // 
             // btnBnd
             // 
-            this.btnBnd.BackColor = System.Drawing.Color.Transparent;
+            this.btnBnd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(60)))));
             this.btnBnd.BackgroundImage = global::Twol.Properties.Resources.FilterOuterLines;
             this.btnBnd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnBnd.FlatAppearance.BorderSize = 0;
-            this.btnBnd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBnd.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBnd.Location = new System.Drawing.Point(3, 208);
             this.btnBnd.Name = "btnBnd";
-            this.btnBnd.Size = new System.Drawing.Size(56, 56);
+            this.btnBnd.Size = new System.Drawing.Size(62, 56);
             this.btnBnd.TabIndex = 541;
             this.btnBnd.UseVisualStyleBackColor = false;
             this.btnBnd.Click += new System.EventHandler(this.btnBnd_Click);
             // 
             // btnField
             // 
-            this.btnField.BackColor = System.Drawing.Color.Transparent;
+            this.btnField.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(60)))));
             this.btnField.BackgroundImage = global::Twol.Properties.Resources.FilterInnerLines;
             this.btnField.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnField.FlatAppearance.BorderSize = 0;
-            this.btnField.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnField.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnField.Location = new System.Drawing.Point(3, 131);
             this.btnField.Name = "btnField";
-            this.btnField.Size = new System.Drawing.Size(56, 56);
+            this.btnField.Size = new System.Drawing.Size(62, 56);
             this.btnField.TabIndex = 540;
             this.btnField.UseVisualStyleBackColor = false;
             this.btnField.Click += new System.EventHandler(this.btnField_Click);
             // 
             // btnHideShow
             // 
-            this.btnHideShow.BackColor = System.Drawing.Color.Transparent;
+            this.btnHideShow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(60)))));
             this.btnHideShow.BackgroundImage = global::Twol.Properties.Resources.FilterLinesOnOff;
             this.btnHideShow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnHideShow.FlatAppearance.BorderSize = 0;
-            this.btnHideShow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnHideShow.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnHideShow.Location = new System.Drawing.Point(3, 54);
             this.btnHideShow.Name = "btnHideShow";
-            this.btnHideShow.Size = new System.Drawing.Size(56, 56);
+            this.btnHideShow.Size = new System.Drawing.Size(62, 56);
             this.btnHideShow.TabIndex = 539;
             this.btnHideShow.UseVisualStyleBackColor = false;
             this.btnHideShow.Click += new System.EventHandler(this.btnHideShow_Click);
@@ -116,9 +111,9 @@
             // 
             this.pictureBox1.BackgroundImage = global::Twol.Properties.Resources.AddNew;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox1.Location = new System.Drawing.Point(14, 0);
+            this.pictureBox1.Location = new System.Drawing.Point(5, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(48, 39);
+            this.pictureBox1.Size = new System.Drawing.Size(59, 39);
             this.pictureBox1.TabIndex = 544;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
@@ -127,7 +122,7 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(63, 428);
+            this.ClientSize = new System.Drawing.Size(68, 428);
             this.ControlBox = false;
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnToolOuter);

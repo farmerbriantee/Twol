@@ -628,6 +628,7 @@ namespace Twol
             if (fcc != null)
             {
                 fcc.Focus();
+                fcc.Close();
                 return;
             }
 
@@ -649,6 +650,7 @@ namespace Twol
             if (fcc != null)
             {
                 fcc.Focus();
+                fcc.Close();
                 return;
             }
 

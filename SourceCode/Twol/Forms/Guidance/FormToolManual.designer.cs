@@ -37,13 +37,12 @@
             // 
             // btnToolLeft
             // 
-            this.btnToolLeft.BackColor = System.Drawing.Color.Transparent;
+            this.btnToolLeft.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(60)))));
             this.btnToolLeft.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.btnToolLeft.FlatAppearance.BorderSize = 0;
             this.btnToolLeft.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
             this.btnToolLeft.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DimGray;
             this.btnToolLeft.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnToolLeft.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnToolLeft.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnToolLeft.Image = global::Twol.Properties.Resources.ArrowLeft;
             this.btnToolLeft.ImeMode = System.Windows.Forms.ImeMode.NoControl;
@@ -56,13 +55,12 @@
             // 
             // btnZero
             // 
-            this.btnZero.BackColor = System.Drawing.Color.Transparent;
+            this.btnZero.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(60)))));
             this.btnZero.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.btnZero.FlatAppearance.BorderSize = 0;
             this.btnZero.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
             this.btnZero.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DimGray;
             this.btnZero.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnZero.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnZero.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnZero.Image = global::Twol.Properties.Resources.SteerZero;
             this.btnZero.ImeMode = System.Windows.Forms.ImeMode.NoControl;
@@ -75,13 +73,12 @@
             // 
             // btnToolRight
             // 
-            this.btnToolRight.BackColor = System.Drawing.Color.Transparent;
+            this.btnToolRight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(60)))));
             this.btnToolRight.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.btnToolRight.FlatAppearance.BorderSize = 0;
             this.btnToolRight.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
             this.btnToolRight.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DimGray;
             this.btnToolRight.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnToolRight.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnToolRight.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnToolRight.Image = global::Twol.Properties.Resources.ArrowRight;
             this.btnToolRight.ImeMode = System.Windows.Forms.ImeMode.NoControl;

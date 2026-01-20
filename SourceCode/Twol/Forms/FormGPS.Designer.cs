@@ -2777,7 +2777,6 @@ namespace Twol
             // 
             this.cboxIsIMUModule.Appearance = System.Windows.Forms.Appearance.Button;
             this.cboxIsIMUModule.BackColor = System.Drawing.Color.Transparent;
-            this.cboxIsIMUModule.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("cboxIsIMUModule.BackgroundImage")));
             this.cboxIsIMUModule.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.cboxIsIMUModule.FlatAppearance.BorderSize = 0;
             this.cboxIsIMUModule.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
@@ -2792,7 +2791,6 @@ namespace Twol
             // 
             this.cboxIsSteerModule.Appearance = System.Windows.Forms.Appearance.Button;
             this.cboxIsSteerModule.BackColor = System.Drawing.Color.Transparent;
-            this.cboxIsSteerModule.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("cboxIsSteerModule.BackgroundImage")));
             this.cboxIsSteerModule.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.cboxIsSteerModule.FlatAppearance.BorderSize = 0;
             this.cboxIsSteerModule.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
@@ -2807,7 +2805,6 @@ namespace Twol
             // 
             this.cboxIsMachineModule.Appearance = System.Windows.Forms.Appearance.Button;
             this.cboxIsMachineModule.BackColor = System.Drawing.Color.Transparent;
-            this.cboxIsMachineModule.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("cboxIsMachineModule.BackgroundImage")));
             this.cboxIsMachineModule.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.cboxIsMachineModule.FlatAppearance.BorderSize = 0;
             this.cboxIsMachineModule.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
