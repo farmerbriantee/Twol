@@ -209,7 +209,7 @@ namespace Twol
                                 GL.Color3(0.3, 0.9, 0.3);
                                 GL.Begin(PrimitiveType.Points);
 
-                                GL.Vertex3(field.start.easting, field.start.northing, 0);
+                                GL.Vertex2(field.start.easting, field.start.northing);
                                 GL.End();
 
                                 font.DrawText3D(field.start.easting, field.start.northing, field.name, true, 2);
@@ -396,11 +396,11 @@ namespace Twol
                                     //GL.LineWidth(3.0f);
 
                                     GL.Begin(PrimitiveType.Triangles);
-                                    GL.Vertex3(left.easting, left.northing, 0);
-                                    GL.Vertex3(right.easting, right.northing, 0);
+                                    GL.Vertex2(left.easting, left.northing);
+                                    GL.Vertex2(right.easting, right.northing);
 
                                     GL.Color4(0.85, 0.85, 1, 1.0);
-                                    GL.Vertex3(ptTip.easting, ptTip.northing, 0);
+                                    GL.Vertex2(ptTip.easting, ptTip.northing);
                                     GL.End();
                                 }
                             }
@@ -421,19 +421,19 @@ namespace Twol
                                     GL.Begin(PrimitiveType.TriangleStrip);
 
                                     for (int i = 1; i < patch.triangleList.Count; i++)
-                                        GL.Vertex3(patch.triangleList[i].easting, patch.triangleList[i].northing, 0);
+                                        GL.Vertex2(patch.triangleList[i].easting, patch.triangleList[i].northing);
 
                                     //left side of triangle
                                     vec2 pt = new vec2((cosSectionHeading * section[patch.currentStartSectionNum].positionLeft) + toolPos.easting,
                                             (sinSectionHeading * section[patch.currentStartSectionNum].positionLeft) + toolPos.northing);
 
-                                    GL.Vertex3(pt.easting, pt.northing, 0);
+                                    GL.Vertex2(pt.easting, pt.northing);
 
                                     //Right side of triangle
                                     pt = new vec2((cosSectionHeading * section[patch.currentEndSectionNum].positionRight) + toolPos.easting,
                                        (sinSectionHeading * section[patch.currentEndSectionNum].positionRight) + toolPos.northing);
 
-                                    GL.Vertex3(pt.easting, pt.northing, 0);
+                                    GL.Vertex2(pt.easting, pt.northing);
 
                                     GL.End();
                                 }
@@ -495,8 +495,8 @@ namespace Twol
                             GL.LineStipple(1, 0x0707);
                             GL.Begin(PrimitiveType.Lines);
                             GL.Color3(0.930f, 0.72f, 0.32f);
-                            GL.Vertex3(pivotAxlePos.easting, pivotAxlePos.northing, 0);
-                            GL.Vertex3(flagPts[flagNumberPicked - 1].easting, flagPts[flagNumberPicked - 1].northing, 0);
+                            GL.Vertex2(pivotAxlePos.easting, pivotAxlePos.northing);
+                            GL.Vertex2(flagPts[flagNumberPicked - 1].easting, flagPts[flagNumberPicked - 1].northing);
                             GL.End();
                             GL.Disable(EnableCap.LineStipple);
                         }
@@ -524,7 +524,7 @@ namespace Twol
                         GL.Color3(1.0, 1.0, 0.0);
                         for (int i = 0; i < followPivotPoints.Count; i++)
                         {
-                            GL.Vertex3(followPivotPoints[i].easting, followPivotPoints[i].northing, 0.0);
+                            GL.Vertex2(followPivotPoints[i].easting, followPivotPoints[i].northing);
                         }
                         GL.End();
                     }
@@ -537,13 +537,13 @@ namespace Twol
                             GL.PointSize(16);
                             GL.Begin(PrimitiveType.Points);
                             GL.Color3(0.0, 0.0, 0.0);
-                            GL.Vertex3(pnTool.fix.easting, pnTool.fix.northing, 0.0);
+                            GL.Vertex2(pnTool.fix.easting, pnTool.fix.northing);
                             GL.End();
 
                             GL.PointSize(10);
                             GL.Begin(PrimitiveType.Points);
                             GL.Color3(0.20, 0.78, 0.98);
-                            GL.Vertex3(pnTool.fix.easting, pnTool.fix.northing, 0.0);
+                            GL.Vertex2(pnTool.fix.easting, pnTool.fix.northing);
                             GL.End();
                         }
 
@@ -552,13 +552,13 @@ namespace Twol
                             GL.PointSize(16);
                             GL.Begin(PrimitiveType.Points);
                             GL.Color3(0, 0, 0);
-                            GL.Vertex3(gyd.goalPoint.easting, gyd.goalPoint.northing, 0.0);
+                            GL.Vertex2(gyd.goalPoint.easting, gyd.goalPoint.northing);
                             GL.End();
 
                             GL.PointSize(10);
                             GL.Begin(PrimitiveType.Points);
                             GL.Color3(0.98, 0.98, 0.098);
-                            GL.Vertex3(gyd.goalPoint.easting, gyd.goalPoint.northing, 0.0);
+                            GL.Vertex2(gyd.goalPoint.easting, gyd.goalPoint.northing);
                             GL.End();
                         }
 
@@ -567,13 +567,13 @@ namespace Twol
                             GL.PointSize(16);
                             GL.Begin(PrimitiveType.Points);
                             GL.Color3(0.0, 0.0, 0.0);
-                            GL.Vertex3(steerAxlePos.easting, steerAxlePos.northing, 0.0);
+                            GL.Vertex2(steerAxlePos.easting, steerAxlePos.northing);
                             GL.End();
 
                             GL.PointSize(10);
                             GL.Begin(PrimitiveType.Points);
                             GL.Color3(0.920, 0.978, 0.2);
-                            GL.Vertex3(steerAxlePos.easting, steerAxlePos.northing, 0.0);
+                            GL.Vertex2(steerAxlePos.easting, steerAxlePos.northing);
                             GL.End();
                         }
                     }
@@ -724,10 +724,10 @@ namespace Twol
 
                     GL.Begin(PrimitiveType.LineLoop);
 
-                    GL.Vertex3(-oglMain.Width / 2, 0, 0);
-                    GL.Vertex3(oglMain.Width / 2, 0, 0);
-                    GL.Vertex3(oglMain.Width / 2, oglMain.Height, 0);
-                    GL.Vertex3(-oglMain.Width / 2, oglMain.Height, 0);
+                    GL.Vertex2(-oglMain.Width / 2, 0);
+                    GL.Vertex2(oglMain.Width / 2, 0);
+                    GL.Vertex2(oglMain.Width / 2, oglMain.Height);
+                    GL.Vertex2(-oglMain.Width / 2, oglMain.Height);
 
                     GL.End();
 
@@ -972,7 +972,7 @@ namespace Twol
                             GL.Begin(PrimitiveType.TriangleStrip);
 
                             for (int i = 1; i < patch.triangleList.Count; i++)
-                                GL.Vertex3(patch.triangleList[i].easting, patch.triangleList[i].northing, 0);
+                                GL.Vertex2(patch.triangleList[i].easting, patch.triangleList[i].northing);
 
                             GL.End();
                         }
@@ -996,7 +996,7 @@ namespace Twol
                     {
                         GL.Begin(PrimitiveType.LineStrip);
                         for (int h = 0; h < tram.tramList[i].Count; h++)
-                            GL.Vertex3(tram.tramList[i][h].easting, tram.tramList[i][h].northing, 0);
+                            GL.Vertex2(tram.tramList[i][h].easting, tram.tramList[i][h].northing);
                         GL.End();
                     }
                 }
@@ -1473,8 +1473,8 @@ namespace Twol
                         int step = mipmap;
                         for (int i = 1; i < count2; i += step)
                         {
-                            GL.Vertex3(triList[i].easting, triList[i].northing, 0); i++;
-                            GL.Vertex3(triList[i].easting, triList[i].northing, 0); i++;
+                            GL.Vertex2(triList[i].easting, triList[i].northing); i++;
+                            GL.Vertex2(triList[i].easting, triList[i].northing); i++;
 
                             //too small to mipmap it
                             if (count2 - i <= (mipmap))
@@ -1484,7 +1484,7 @@ namespace Twol
 
                     else
                     {
-                        for (int i = 1; i < count2; i++) GL.Vertex3(triList[i].easting, triList[i].northing, 0);
+                        for (int i = 1; i < count2; i++) GL.Vertex2(triList[i].easting, triList[i].northing);
                     }
                     GL.End();
                 }
@@ -1810,12 +1810,12 @@ namespace Twol
             //            //right side
             //            if (((mf.tram.controlByte) & 1) == 1) GL.Color3(0.0f, 0.900f, 0.39630f);
             //            else GL.Color3(0, 0, 0);
-            //            GL.Vertex3(farRightPosition - mf.tram.halfWheelTrack, trailingTool, 0);
+            //            GL.Vertex2(farRightPosition - mf.tram.halfWheelTrack, trailingTool, 0);
 
             //            //left side
             //            if ((mf.tram.controlByte & 2) == 2) GL.Color3(0.0f, 0.900f, 0.3930f);
             //            else GL.Color3(0, 0, 0);
-            //            GL.Vertex3(farLeftPosition + mf.tram.halfWheelTrack, trailingTool, 0);
+            //            GL.Vertex2(farLeftPosition + mf.tram.halfWheelTrack, trailingTool, 0);
             //            GL.End();
             //        }
             //        else
@@ -1825,12 +1825,12 @@ namespace Twol
             //            //right side
             //            if (((mf.tram.controlByte) & 1) == 1) GL.Color3(0.0f, 0.900f, 0.39630f);
             //            else GL.Color3(0, 0, 0);
-            //            GL.Vertex3(mf.tram.halfWheelTrack, trailingTool, 0);
+            //            GL.Vertex2(mf.tram.halfWheelTrack, trailingTool, 0);
 
             //            //left side
             //            if ((mf.tram.controlByte & 2) == 2) GL.Color3(0.0f, 0.900f, 0.3930f);
             //            else GL.Color3(0, 0, 0);
-            //            GL.Vertex3(-mf.tram.halfWheelTrack, trailingTool, 0);
+            //            GL.Vertex2(-mf.tram.halfWheelTrack, trailingTool, 0);
             //            GL.End();
             //        }
             //    }
@@ -1909,7 +1909,7 @@ namespace Twol
                         flagColor = "~";
                     }
 
-                    GL.Vertex3(flagPts[f].easting, flagPts[f].northing, 0);
+                    GL.Vertex2(flagPts[f].easting, flagPts[f].northing);
                     GL.End();
 
                     font.DrawText3D(flagPts[f].easting, flagPts[f].northing, flagColor + flagPts[f].notes, true);
@@ -1924,18 +1924,18 @@ namespace Twol
                     GL.LineWidth(4);
                     GL.Color3(0.980f, 0.0f, 0.980f);
                     GL.Begin(PrimitiveType.LineStrip);
-                    GL.Vertex3(flagPts[flagNumberPicked - 1].easting, flagPts[flagNumberPicked - 1].northing + offSet, 0);
-                    GL.Vertex3(flagPts[flagNumberPicked - 1].easting - offSet, flagPts[flagNumberPicked - 1].northing, 0);
-                    GL.Vertex3(flagPts[flagNumberPicked - 1].easting, flagPts[flagNumberPicked - 1].northing - offSet, 0);
-                    GL.Vertex3(flagPts[flagNumberPicked - 1].easting + offSet, flagPts[flagNumberPicked - 1].northing, 0);
-                    GL.Vertex3(flagPts[flagNumberPicked - 1].easting, flagPts[flagNumberPicked - 1].northing + offSet, 0);
+                    GL.Vertex2(flagPts[flagNumberPicked - 1].easting, flagPts[flagNumberPicked - 1].northing + offSet);
+                    GL.Vertex2(flagPts[flagNumberPicked - 1].easting - offSet, flagPts[flagNumberPicked - 1].northing);
+                    GL.Vertex2(flagPts[flagNumberPicked - 1].easting, flagPts[flagNumberPicked - 1].northing - offSet);
+                    GL.Vertex2(flagPts[flagNumberPicked - 1].easting + offSet, flagPts[flagNumberPicked - 1].northing);
+                    GL.Vertex2(flagPts[flagNumberPicked - 1].easting, flagPts[flagNumberPicked - 1].northing + offSet);
                     GL.End();
 
                     //draw the flag with a black dot inside
                     //GL.PointSize(4.0f);
                     //GL.Color3(0, 0, 0);
                     //GL.Begin(PrimitiveType.Points);
-                    //GL.Vertex3(flagPts[flagNumberPicked - 1].easting, flagPts[flagNumberPicked - 1].northing, 0);
+                    //GL.Vertex2(flagPts[flagNumberPicked - 1].easting, flagPts[flagNumberPicked - 1].northing, 0);
                     //GL.End();
                 }
             }
