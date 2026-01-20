@@ -407,7 +407,7 @@ namespace Twol
             GL.PointSize(16.0f);
             GL.Begin(PrimitiveType.Points);
             GL.Color3(0.95f, 0.190f, 0.20f);
-            GL.Vertex3(mf.pivotAxlePos.easting, mf.pivotAxlePos.northing, 0.0);
+            GL.Vertex2(mf.pivotAxlePos.easting, mf.pivotAxlePos.northing);
             GL.End();
 
             //draw the line building graphics
@@ -433,7 +433,7 @@ namespace Twol
 
             //for (int i = 0; i < mf.bnd.buildList[0].hdLine.Count; i++)
             //{
-            //    GL.Vertex3(mf.bnd.buildList[0].hdLine[i].easting, mf.bnd.buildList[0].hdLine[i].northing, 0);
+            //    GL.Vertex2(mf.bnd.buildList[0].hdLine[i].easting, mf.bnd.buildList[0].hdLine[i].northing, 0);
             //}
             //GL.End();
 
@@ -459,7 +459,7 @@ namespace Twol
                 GL.Begin(PrimitiveType.LineStrip);
                 foreach (vec3 item in sliceArr)
                 {
-                    GL.Vertex3(item.easting, item.northing, 0);
+                    GL.Vertex2(item.easting, item.northing);
                 }
                 GL.End();
 
@@ -467,9 +467,9 @@ namespace Twol
                 GL.PointSize(24);
                 GL.Color3(1.0f, 0.6f, 0.3f);
                 GL.Begin(PrimitiveType.Points);
-                GL.Vertex3(sliceArr[0].easting, sliceArr[0].northing, 0);
+                GL.Vertex2(sliceArr[0].easting, sliceArr[0].northing);
                 GL.Color3(0.5f, 0.73f, 0.99f);
-                GL.Vertex3(sliceArr[cnt].easting, sliceArr[cnt].northing, 0);
+                GL.Vertex2(sliceArr[cnt].easting, sliceArr[cnt].northing);
                 GL.End();
             }
         }
@@ -480,18 +480,18 @@ namespace Twol
             GL.Begin(PrimitiveType.Points);
 
             GL.Color3(0, 0, 0);
-            if (start != -1) GL.Vertex3(mf.bnd.bndList[bndSelect].fenceLine[start].easting, mf.bnd.bndList[bndSelect].fenceLine[start].northing, 0);
-            if (end != -1) GL.Vertex3(mf.bnd.bndList[bndSelect].fenceLine[end].easting, mf.bnd.bndList[bndSelect].fenceLine[end].northing, 0);
+            if (start != -1) GL.Vertex2(mf.bnd.bndList[bndSelect].fenceLine[start].easting, mf.bnd.bndList[bndSelect].fenceLine[start].northing);
+            if (end != -1) GL.Vertex2(mf.bnd.bndList[bndSelect].fenceLine[end].easting, mf.bnd.bndList[bndSelect].fenceLine[end].northing);
             GL.End();
 
             GL.PointSize(18);
             GL.Begin(PrimitiveType.Points);
 
             GL.Color3(1.0f, 0.75f, 0.350f);
-            if (start != -1) GL.Vertex3(mf.bnd.bndList[bndSelect].fenceLine[start].easting, mf.bnd.bndList[bndSelect].fenceLine[start].northing, 0);
+            if (start != -1) GL.Vertex2(mf.bnd.bndList[bndSelect].fenceLine[start].easting, mf.bnd.bndList[bndSelect].fenceLine[start].northing);
 
             GL.Color3(0.5f, 0.75f, 1.0f);
-            if (end != -1) GL.Vertex3(mf.bnd.bndList[bndSelect].fenceLine[end].easting, mf.bnd.bndList[bndSelect].fenceLine[end].northing, 0);
+            if (end != -1) GL.Vertex2(mf.bnd.bndList[bndSelect].fenceLine[end].easting, mf.bnd.bndList[bndSelect].fenceLine[end].northing);
             GL.End();
         }
 

@@ -401,7 +401,7 @@ namespace Twol
                     {
                         GL.PointSize(15.0f);
                         GL.Begin(PrimitiveType.Points);
-                        GL.Vertex3(currentRefTrack.ptA.easting, currentRefTrack.ptA.northing, 0);
+                        GL.Vertex2(currentRefTrack.ptA.easting, currentRefTrack.ptA.northing);
                         GL.End();
                     }
                 }
@@ -472,8 +472,8 @@ namespace Twol
             GL.LineWidth(Settings.User.setDisplay_lineWidth);
             GL.Begin(PrimitiveType.Lines);
             GL.Color3(0.95f, 0.70f, 0.50f);
-            GL.Vertex3(designLineEndA.easting, designLineEndA.northing, 0.0);
-            GL.Vertex3(designLineEndB.easting, designLineEndB.northing, 0.0);
+            GL.Vertex2(designLineEndA.easting, designLineEndA.northing);
+            GL.Vertex2(designLineEndB.easting, designLineEndB.northing);
             GL.End();
 
             GL.Color3(0.2f, 0.950f, 0.20f);
@@ -495,8 +495,8 @@ namespace Twol
                 GL.LineStipple(1, 0x0F00);
                 GL.Begin(PrimitiveType.Lines);
                 GL.Color3(0.99f, 0.99f, 0.0);
-                GL.Vertex3(designPtsList[designPtsList.Count - 1].easting, designPtsList[designPtsList.Count - 1].northing, 0);
-                GL.Vertex3(mf.pivotAxlePos.easting, mf.pivotAxlePos.northing, 0);
+                GL.Vertex2(designPtsList[designPtsList.Count - 1].easting, designPtsList[designPtsList.Count - 1].northing);
+                GL.Vertex2(mf.pivotAxlePos.easting, mf.pivotAxlePos.northing);
                 GL.End();
 
                 GL.Disable(EnableCap.LineStipple);

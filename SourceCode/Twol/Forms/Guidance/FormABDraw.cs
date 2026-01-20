@@ -741,13 +741,13 @@ namespace Twol
             GL.PointSize(16.0f);
             GL.Begin(PrimitiveType.Points);
             GL.Color3(1.0f, 0.00f, 0.0f);
-            GL.Vertex3(mf.pivotAxlePos.easting, mf.pivotAxlePos.northing, 0.0);
+            GL.Vertex2(mf.pivotAxlePos.easting, mf.pivotAxlePos.northing);
             GL.End();
 
             GL.PointSize(8.0f);
             GL.Begin(PrimitiveType.Points);
             GL.Color3(0.00f, 0.0f, 0.0f);
-            GL.Vertex3(mf.pivotAxlePos.easting, mf.pivotAxlePos.northing, 0.0);
+            GL.Vertex2(mf.pivotAxlePos.easting, mf.pivotAxlePos.northing);
             GL.End();
 
             //draw the line building graphics
@@ -794,12 +794,11 @@ namespace Twol
                 GL.Color3(1.0f, 0.75f, 0.350f);
                 GL.Begin(PrimitiveType.Points);
 
-                GL.Vertex3(track.curvePts[0].easting, track.curvePts[0].northing, 0);
+                GL.Vertex2(track.curvePts[0].easting, track.curvePts[0].northing);
 
                 GL.Color3(0.5f, 0.5f, 1.0f);
-                GL.Vertex3(track.curvePts[track.curvePts.Count - 1].easting,
-                            track.curvePts[track.curvePts.Count - 1].northing,
-                            0);
+                GL.Vertex2(track.curvePts[track.curvePts.Count - 1].easting,
+                            track.curvePts[track.curvePts.Count - 1].northing);
                 GL.End();
             }
         }
@@ -811,18 +810,18 @@ namespace Twol
             GL.Begin(PrimitiveType.Points);
 
             GL.Color3(0, 0, 0);
-            if (start != 99999) GL.Vertex3(mf.bnd.bndList[bndSelect].fenceLine[start].easting, mf.bnd.bndList[bndSelect].fenceLine[start].northing, 0);
-            if (end != 99999) GL.Vertex3(mf.bnd.bndList[bndSelect].fenceLine[end].easting, mf.bnd.bndList[bndSelect].fenceLine[end].northing, 0);
+            if (start != 99999) GL.Vertex2(mf.bnd.bndList[bndSelect].fenceLine[start].easting, mf.bnd.bndList[bndSelect].fenceLine[start].northing);
+            if (end != 99999) GL.Vertex2(mf.bnd.bndList[bndSelect].fenceLine[end].easting, mf.bnd.bndList[bndSelect].fenceLine[end].northing);
             GL.End();
 
             GL.PointSize(16);
             GL.Begin(PrimitiveType.Points);
 
             GL.Color3(1.0f, 0.75f, 0.350f);
-            if (start != 99999) GL.Vertex3(mf.bnd.bndList[bndSelect].fenceLine[start].easting, mf.bnd.bndList[bndSelect].fenceLine[start].northing, 0);
+            if (start != 99999) GL.Vertex2(mf.bnd.bndList[bndSelect].fenceLine[start].easting, mf.bnd.bndList[bndSelect].fenceLine[start].northing);
 
             GL.Color3(0.5f, 0.5f, 1.0f);
-            if (end != 99999) GL.Vertex3(mf.bnd.bndList[bndSelect].fenceLine[end].easting, mf.bnd.bndList[bndSelect].fenceLine[end].northing, 0);
+            if (end != 99999) GL.Vertex2(mf.bnd.bndList[bndSelect].fenceLine[end].easting, mf.bnd.bndList[bndSelect].fenceLine[end].northing);
             GL.End();
         }
 

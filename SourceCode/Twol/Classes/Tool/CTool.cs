@@ -114,9 +114,9 @@ namespace Twol
                     //draw the rigid hitch
                     GL.Color3(0, 0, 0);
                     GL.Begin(PrimitiveType.LineLoop);
-                    GL.Vertex3(-0.57, trailingTank, 0);
-                    GL.Vertex3(0, 0, 0);
-                    GL.Vertex3(0.57, trailingTank, 0);
+                    GL.Vertex2(-0.57, trailingTank);
+                    GL.Vertex2(0, 0);
+                    GL.Vertex2(0.57, trailingTank);
 
                     GL.End();
 
@@ -124,9 +124,9 @@ namespace Twol
                     //draw the rigid hitch
                     GL.Color3(0.765f, 0.76f, 0.32f);
                     GL.Begin(PrimitiveType.LineLoop);
-                    GL.Vertex3(-0.57, trailingTank, 0);
-                    GL.Vertex3(0, 0, 0);
-                    GL.Vertex3(0.57, trailingTank, 0);
+                    GL.Vertex2(-0.57, trailingTank);
+                    GL.Vertex2(0, 0);
+                    GL.Vertex2(0.57, trailingTank);
 
                     GL.End();
 
@@ -159,9 +159,9 @@ namespace Twol
                     GL.LineWidth(6);
                     GL.Color3(0, 0, 0);
                     GL.Begin(PrimitiveType.LineLoop);
-                    GL.Vertex3(-0.65 + Settings.Tool.offset, trailingTool, 0);
-                    GL.Vertex3(0, 0, 0);
-                    GL.Vertex3(0.65 + Settings.Tool.offset, trailingTool, 0);
+                    GL.Vertex2(-0.65 + Settings.Tool.offset, trailingTool);
+                    GL.Vertex2(0, 0);
+                    GL.Vertex2(0.65 + Settings.Tool.offset, trailingTool);
 
                     GL.End();
 
@@ -169,9 +169,9 @@ namespace Twol
                     //draw the rigid hitch
                     GL.Color3(0.7f, 0.4f, 0.2f);
                     GL.Begin(PrimitiveType.LineLoop);
-                    GL.Vertex3(-0.65 + Settings.Tool.offset, trailingTool, 0);
-                    GL.Vertex3(0, 0, 0);
-                    GL.Vertex3(0.65 + Settings.Tool.offset, trailingTool, 0);
+                    GL.Vertex2(-0.65 + Settings.Tool.offset, trailingTool);
+                    GL.Vertex2(0, 0);
+                    GL.Vertex2(0.65 + Settings.Tool.offset, trailingTool);
 
                     GL.End();
 
@@ -205,13 +205,13 @@ namespace Twol
 
                 //lookahead section on
                 GL.Color3(0.20f, 0.7f, 0.2f);
-                GL.Vertex3(mf.tool.farLeftPosition, (mf.tool.lookAheadDistanceOnPixelsLeft) * 0.1 + trailingTool, 0);
-                GL.Vertex3(mf.tool.farRightPosition, (mf.tool.lookAheadDistanceOnPixelsRight) * 0.1 + trailingTool, 0);
+                GL.Vertex2(mf.tool.farLeftPosition, (mf.tool.lookAheadDistanceOnPixelsLeft) * 0.1 + trailingTool);
+                GL.Vertex2(mf.tool.farRightPosition, (mf.tool.lookAheadDistanceOnPixelsRight) * 0.1 + trailingTool);
 
                 //lookahead section off
                 GL.Color3(0.70f, 0.2f, 0.2f);
-                GL.Vertex3(mf.tool.farLeftPosition, (mf.tool.lookAheadDistanceOffPixelsLeft) * 0.1 + trailingTool, 0);
-                GL.Vertex3(mf.tool.farRightPosition, (mf.tool.lookAheadDistanceOffPixelsRight) * 0.1 + trailingTool, 0);
+                GL.Vertex2(mf.tool.farLeftPosition, (mf.tool.lookAheadDistanceOffPixelsLeft) * 0.1 + trailingTool);
+                GL.Vertex2(mf.tool.farRightPosition, (mf.tool.lookAheadDistanceOffPixelsRight) * 0.1 + trailingTool);
 
                 GL.End();
 
@@ -249,13 +249,13 @@ namespace Twol
 
                     GL.Begin(PrimitiveType.TriangleFan);
                     {
-                        GL.Vertex3(mf.section[j].positionLeft, trailingTool, 0);
-                        GL.Vertex3(mf.section[j].positionLeft, trailingTool - hite, 0);
+                        GL.Vertex2(mf.section[j].positionLeft, trailingTool);
+                        GL.Vertex2(mf.section[j].positionLeft, trailingTool - hite);
 
-                        GL.Vertex3(mid, trailingTool - hite * 1.5, 0);
+                        GL.Vertex2(mid, trailingTool - hite * 1.5);
 
-                        GL.Vertex3(mf.section[j].positionRight, trailingTool - hite, 0);
-                        GL.Vertex3(mf.section[j].positionRight, trailingTool, 0);
+                        GL.Vertex2(mf.section[j].positionRight, trailingTool - hite);
+                        GL.Vertex2(mf.section[j].positionRight, trailingTool);
                     }
                     GL.End();
 
@@ -264,13 +264,13 @@ namespace Twol
                         GL.Begin(PrimitiveType.LineLoop);
                         {
                             GL.Color3(0.0, 0.0, 0.0);
-                            GL.Vertex3(mf.section[j].positionLeft, trailingTool, 0);
-                            GL.Vertex3(mf.section[j].positionLeft, trailingTool - hite, 0);
+                            GL.Vertex2(mf.section[j].positionLeft, trailingTool);
+                            GL.Vertex2(mf.section[j].positionLeft, trailingTool - hite);
 
-                            GL.Vertex3(mid, trailingTool - hite * 1.5, 0);
+                            GL.Vertex2(mid, trailingTool - hite * 1.5);
 
-                            GL.Vertex3(mf.section[j].positionRight, trailingTool - hite, 0);
-                            GL.Vertex3(mf.section[j].positionRight, trailingTool, 0);
+                            GL.Vertex2(mf.section[j].positionRight, trailingTool - hite);
+                            GL.Vertex2(mf.section[j].positionRight, trailingTool);
                         }
                         GL.End();
                     }
@@ -288,8 +288,8 @@ namespace Twol
                         GL.Color3(0.5f, 0.80f, 0.950f);
                         if (zoneRanges[i] < mf.section.Count)
                         {
-                            GL.Vertex3(mf.section[zoneRanges[i]].positionLeft, trailingTool - 0.4, 0);
-                            GL.Vertex3(mf.section[zoneRanges[i]].positionLeft, trailingTool + 0.2, 0);
+                            GL.Vertex2(mf.section[zoneRanges[i]].positionLeft, trailingTool - 0.4);
+                            GL.Vertex2(mf.section[zoneRanges[i]].positionLeft, trailingTool + 0.2);
                         }
                     }
 
@@ -313,12 +313,12 @@ namespace Twol
                             //right side
                             if (((mf.tram.controlByte) & 1) == 1) GL.Color3(0.0f, 0.900f, 0.39630f);
                             else GL.Color3(0, 0, 0);
-                            GL.Vertex3(farRightPosition - mf.tram.halfWheelTrack, trailingTool, 0);
+                            GL.Vertex2(farRightPosition - mf.tram.halfWheelTrack, trailingTool);
 
                             //left side
                             if ((mf.tram.controlByte & 2) == 2) GL.Color3(0.0f, 0.900f, 0.3930f);
                             else GL.Color3(0, 0, 0);
-                            GL.Vertex3(farLeftPosition + mf.tram.halfWheelTrack, trailingTool, 0);
+                            GL.Vertex2(farLeftPosition + mf.tram.halfWheelTrack, trailingTool);
                             GL.End();
                         }
                         else
@@ -328,12 +328,12 @@ namespace Twol
                             //right side
                             if (((mf.tram.controlByte) & 1) == 1) GL.Color3(0.0f, 0.900f, 0.39630f);
                             else GL.Color3(0, 0, 0);
-                            GL.Vertex3(mf.tram.halfWheelTrack, trailingTool, 0);
+                            GL.Vertex2(mf.tram.halfWheelTrack, trailingTool);
 
                             //left side
                             if ((mf.tram.controlByte & 2) == 2) GL.Color3(0.0f, 0.900f, 0.3930f);
                             else GL.Color3(0, 0, 0);
-                            GL.Vertex3(-mf.tram.halfWheelTrack, trailingTool, 0);
+                            GL.Vertex2(-mf.tram.halfWheelTrack, trailingTool);
                             GL.End();
                         }
                     }
@@ -357,13 +357,13 @@ namespace Twol
 
                 //lookahead section on
                 GL.Color3(0.20f, 0.7f, 0.2f);
-                GL.Vertex3(mf.tool.farLeftPosition, (mf.tool.lookAheadDistanceOnPixelsLeft) * 0.1, 0);
-                GL.Vertex3(mf.tool.farRightPosition, (mf.tool.lookAheadDistanceOnPixelsRight) * 0.1, 0);
+                GL.Vertex2(mf.tool.farLeftPosition, (mf.tool.lookAheadDistanceOnPixelsLeft) * 0.1);
+                GL.Vertex2(mf.tool.farRightPosition, (mf.tool.lookAheadDistanceOnPixelsRight) * 0.1);
 
                 //lookahead section off
                 GL.Color3(0.70f, 0.2f, 0.2f);
-                GL.Vertex3(mf.tool.farLeftPosition, (mf.tool.lookAheadDistanceOffPixelsLeft) * 0.1, 0);
-                GL.Vertex3(mf.tool.farRightPosition, (mf.tool.lookAheadDistanceOffPixelsRight) * 0.1, 0);
+                GL.Vertex2(mf.tool.farLeftPosition, (mf.tool.lookAheadDistanceOffPixelsLeft) * 0.1);
+                GL.Vertex2(mf.tool.farRightPosition, (mf.tool.lookAheadDistanceOffPixelsRight) * 0.1);
 
                 GL.End();
 
@@ -401,13 +401,13 @@ namespace Twol
 
                     GL.Begin(PrimitiveType.TriangleFan);
                     {
-                        GL.Vertex3(mf.section[j].positionLeft, 0, 0);
-                        GL.Vertex3(mf.section[j].positionLeft, 0 - hite, 0);
+                        GL.Vertex2(mf.section[j].positionLeft, 0);
+                        GL.Vertex2(mf.section[j].positionLeft, 0 - hite);
 
-                        GL.Vertex3(mid, 0 - hite * 1.5, 0);
+                        GL.Vertex2(mid, 0 - hite * 1.5);
 
-                        GL.Vertex3(mf.section[j].positionRight, 0 - hite, 0);
-                        GL.Vertex3(mf.section[j].positionRight, 0, 0);
+                        GL.Vertex2(mf.section[j].positionRight, 0 - hite);
+                        GL.Vertex2(mf.section[j].positionRight, 0);
                     }
                     GL.End();
 
@@ -416,13 +416,13 @@ namespace Twol
                         GL.Begin(PrimitiveType.LineLoop);
                         {
                             GL.Color3(0.0, 0.0, 0.0);
-                            GL.Vertex3(mf.section[j].positionLeft, 0, 0);
-                            GL.Vertex3(mf.section[j].positionLeft, 0 - hite, 0);
+                            GL.Vertex2(mf.section[j].positionLeft, 0);
+                            GL.Vertex2(mf.section[j].positionLeft, 0 - hite);
 
-                            GL.Vertex3(mid, 0 - hite * 1.5, 0);
+                            GL.Vertex2(mid, 0 - hite * 1.5);
 
-                            GL.Vertex3(mf.section[j].positionRight, 0 - hite, 0);
-                            GL.Vertex3(mf.section[j].positionRight, 0, 0);
+                            GL.Vertex2(mf.section[j].positionRight, 0 - hite);
+                            GL.Vertex2(mf.section[j].positionRight, 0);
                         }
                         GL.End();
                     }
@@ -438,8 +438,8 @@ namespace Twol
                     for (int i = 1; i < zones; i++)
                     {
                         GL.Color3(0.5f, 0.80f, 0.950f);
-                        GL.Vertex3(mf.section[zoneRanges[i]].positionLeft, 0 - 0.4, 0);
-                        GL.Vertex3(mf.section[zoneRanges[i]].positionLeft, 0 + 0.2, 0);
+                        GL.Vertex2(mf.section[zoneRanges[i]].positionLeft, 0 - 0.4);
+                        GL.Vertex2(mf.section[zoneRanges[i]].positionLeft, 0 + 0.2);
                     }
 
                     GL.End();
@@ -462,12 +462,12 @@ namespace Twol
                             //right side
                             if (((mf.tram.controlByte) & 1) == 1) GL.Color3(0.0f, 0.900f, 0.39630f);
                             else GL.Color3(0, 0, 0);
-                            GL.Vertex3(farRightPosition - mf.tram.halfWheelTrack, 0, 0);
+                            GL.Vertex2(farRightPosition - mf.tram.halfWheelTrack, 0);
 
                             //left side
                             if ((mf.tram.controlByte & 2) == 2) GL.Color3(0.0f, 0.900f, 0.3930f);
                             else GL.Color3(0, 0, 0);
-                            GL.Vertex3(farLeftPosition + mf.tram.halfWheelTrack, 0, 0);
+                            GL.Vertex2(farLeftPosition + mf.tram.halfWheelTrack, 0);
                             GL.End();
                         }
                         else
@@ -477,12 +477,12 @@ namespace Twol
                             //right side
                             if (((mf.tram.controlByte) & 1) == 1) GL.Color3(0.0f, 0.900f, 0.39630f);
                             else GL.Color3(0, 0, 0);
-                            GL.Vertex3(mf.tram.halfWheelTrack, 0, 0);
+                            GL.Vertex2(mf.tram.halfWheelTrack, 0);
 
                             //left side
                             if ((mf.tram.controlByte & 2) == 2) GL.Color3(0.0f, 0.900f, 0.3930f);
                             else GL.Color3(0, 0, 0);
-                            GL.Vertex3(-mf.tram.halfWheelTrack, 0, 0);
+                            GL.Vertex2(-mf.tram.halfWheelTrack, 0);
                             GL.End();
                         }
                     }

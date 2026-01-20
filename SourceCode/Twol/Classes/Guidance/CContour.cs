@@ -282,8 +282,8 @@ namespace Twol
         {
             //GL.Color3(0.98f, 0.98f, 0.50f);
             //GL.Begin(PrimitiveType.Lines);
-            //GL.Vertex3(boxA.easting, boxA.northing, 0);
-            //GL.Vertex3(boxB.easting, boxB.northing, 0);
+            //GL.Vertex2(boxA.easting, boxA.northing, 0);
+            //GL.Vertex2(boxB.easting, boxB.northing, 0);
             //GL.End();
 
             ////draw the guidance line
@@ -318,7 +318,7 @@ namespace Twol
                 GL.Color3(0.35f, 0.30f, 0.90f);
                 GL.PointSize(6.0f);
                 GL.Begin(PrimitiveType.Points);
-                GL.Vertex3(stripList[stripNum][pt].easting, stripList[stripNum][pt].northing, 0);
+                GL.Vertex2(stripList[stripNum][pt].easting, stripList[stripNum][pt].northing);
                 GL.End();
             }
 

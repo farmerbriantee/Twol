@@ -1043,9 +1043,9 @@ namespace Twol
                         GL.Color3(0.90f, 0.5f, 0.25f);
                         GL.Begin(PrimitiveType.LineStrip);
                         {
-                            GL.Vertex3(mf.bnd.bndList[bndSelect].fenceLine[start].easting, mf.bnd.bndList[bndSelect].fenceLine[start].northing, 0);
-                            GL.Vertex3(pint.easting, pint.northing, 0);
-                            GL.Vertex3(mf.bnd.bndList[bndSelect].fenceLine[end].easting, mf.bnd.bndList[bndSelect].fenceLine[end].northing, 0);
+                            GL.Vertex2(mf.bnd.bndList[bndSelect].fenceLine[start].easting, mf.bnd.bndList[bndSelect].fenceLine[start].northing);
+                            GL.Vertex2(pint.easting, pint.northing);
+                            GL.Vertex2(mf.bnd.bndList[bndSelect].fenceLine[end].easting, mf.bnd.bndList[bndSelect].fenceLine[end].northing);
                         }
                         GL.End();
                     }
@@ -1055,8 +1055,8 @@ namespace Twol
                         GL.Color3(0.90f, 0.5f, 0.25f);
                         GL.Begin(PrimitiveType.Lines);
                         {
-                            GL.Vertex3(mf.bnd.bndList[bndSelect].fenceLine[start].easting, mf.bnd.bndList[bndSelect].fenceLine[start].northing, 0);
-                            GL.Vertex3(mf.bnd.bndList[bndSelect].fenceLine[end].easting, mf.bnd.bndList[bndSelect].fenceLine[end].northing, 0);
+                            GL.Vertex2(mf.bnd.bndList[bndSelect].fenceLine[start].easting, mf.bnd.bndList[bndSelect].fenceLine[start].northing);
+                            GL.Vertex2(mf.bnd.bndList[bndSelect].fenceLine[end].easting, mf.bnd.bndList[bndSelect].fenceLine[end].northing);
                         }
                         GL.End();
                     }
@@ -1075,39 +1075,39 @@ namespace Twol
             if (mf.bnd.bndList.Count != 0)
             {
                 GL.Color3(0, 0, 0);
-                if (start != 99999) GL.Vertex3(mf.bnd.bndList[bndSelect].fenceLine[start].easting, mf.bnd.bndList[bndSelect].fenceLine[start].northing, 0);
-                if (end != 99999) GL.Vertex3(mf.bnd.bndList[bndSelect].fenceLine[end].easting, mf.bnd.bndList[bndSelect].fenceLine[end].northing, 0);
+                if (start != 99999) GL.Vertex2(mf.bnd.bndList[bndSelect].fenceLine[start].easting, mf.bnd.bndList[bndSelect].fenceLine[start].northing);
+                if (end != 99999) GL.Vertex2(mf.bnd.bndList[bndSelect].fenceLine[end].easting, mf.bnd.bndList[bndSelect].fenceLine[end].northing);
                 GL.End();
 
                 GL.PointSize(16);
                 GL.Begin(PrimitiveType.Points);
 
                 GL.Color3(.950f, 0.75f, 0.50f);
-                if (start != 99999) GL.Vertex3(mf.bnd.bndList[bndSelect].fenceLine[start].easting, mf.bnd.bndList[bndSelect].fenceLine[start].northing, 0);
+                if (start != 99999) GL.Vertex2(mf.bnd.bndList[bndSelect].fenceLine[start].easting, mf.bnd.bndList[bndSelect].fenceLine[start].northing);
 
                 GL.Color3(0.5f, 0.5f, 0.935f);
-                if (end != 99999) GL.Vertex3(mf.bnd.bndList[bndSelect].fenceLine[end].easting, mf.bnd.bndList[bndSelect].fenceLine[end].northing, 0);
+                if (end != 99999) GL.Vertex2(mf.bnd.bndList[bndSelect].fenceLine[end].easting, mf.bnd.bndList[bndSelect].fenceLine[end].northing);
             }
             else
             {
                 GL.Color3(0, 0, 0);
-                if (start != 99999) GL.Vertex3(ptA.easting, ptA.northing, 0);
-                if (end != 99999) GL.Vertex3(ptB.easting, ptB.northing, 0);
+                if (start != 99999) GL.Vertex2(ptA.easting, ptA.northing);
+                if (end != 99999) GL.Vertex2(ptB.easting, ptB.northing);
                 GL.End();
 
                 GL.PointSize(16);
                 GL.Begin(PrimitiveType.Points);
 
                 GL.Color3(.950f, 0.75f, 0.50f);
-                if (start != 99999) GL.Vertex3(ptA.easting, ptA.northing, 0);
+                if (start != 99999) GL.Vertex2(ptA.easting, ptA.northing);
 
                 GL.Color3(0.5f, 0.5f, 0.935f);
-                if (end != 99999) GL.Vertex3(ptB.easting, ptB.northing, 0);
+                if (end != 99999) GL.Vertex2(ptB.easting, ptB.northing);
             }
             if (isC)
             {
                 GL.Color3(0.95f, 0.95f, 0.35f);
-                GL.Vertex3(pint.easting, pint.northing, 0);
+                GL.Vertex2(pint.easting, pint.northing);
             }
 
             GL.End();

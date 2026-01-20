@@ -860,9 +860,9 @@ namespace Twol
             //GL.PointSize(12.0f);
             //GL.Begin(PrimitiveType.Points);
             //GL.Color3(0.95f, 0.73f, 1.0f);
-            //GL.Vertex3(inClosestTurnPt.closePt.easting, inClosestTurnPt.closePt.northing, 0);
+            //GL.Vertex2(inClosestTurnPt.closePt.easting, inClosestTurnPt.closePt.northing, 0);
             //GL.Color3(0.395f, 0.925f, 0.30f);
-            //GL.Vertex3(outClosestTurnPt.closePt.easting, outClosestTurnPt.closePt.northing, 0);
+            //GL.Vertex2(outClosestTurnPt.closePt.easting, outClosestTurnPt.closePt.northing, 0);
             //GL.End();
             //GL.PointSize(1.0f);
         }
