@@ -450,12 +450,12 @@ namespace Twol
 
             SetModulesOnOff();
 
-            if (Settings.Tool.setToolSteer.isFollowCurrent || Settings.Tool.setToolSteer.isFollowPivot || Settings.Tool.setToolSteer.isRecordToolLine)
-            {
-                //show FormToolManual
-                Form form = new FormToolManual(this);
-                form.Show(this);
-            }
+            //if (Settings.Tool.setToolSteer.isFollowCurrent || Settings.Tool.setToolSteer.isFollowPivot || Settings.Tool.setToolSteer.isRecordToolLine)
+            //{
+            //    //show FormToolManual
+            //    Form form = new FormToolManual(this);
+            //    form.Show(this);
+            //}
         }
 
         public void SetFeatureSettings()

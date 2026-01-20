@@ -23,7 +23,6 @@ namespace Twol
             mf = callingForm as FormGPS;
 
             InitializeComponent();
-
         }
 
         private void FormToolManual_Load(object sender, EventArgs e)

@@ -704,7 +704,7 @@ namespace Twol
         {
             vec3 start = new vec3(xList[0]);
 
-            for (int i = 1; i < ptsToAdd; i++)
+            for (int i = 1; i <= ptsToAdd; i++)
             {
                 vec3 pt = new vec3(start);
                 pt.easting -= (Math.Sin(pt.heading) * i * distBetweenPoints);
@@ -716,7 +716,7 @@ namespace Twol
         public static void AddEndPoints(this List<vec3> xList, int ptsToAdd = 10, double distBetweenPoints = 50)
         {
             int ptCnt = xList.Count - 1;
-            for (int i = 1; i < ptsToAdd; i++)
+            for (int i = 1; i <= ptsToAdd; i++)
             {
                 vec3 pt = new vec3(xList[ptCnt]);
                 pt.easting += (Math.Sin(pt.heading) * i * distBetweenPoints);

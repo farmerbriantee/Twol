@@ -119,15 +119,16 @@ namespace Twol
 
             double minDistA = double.MaxValue;
             double dist;
+            int A, B;
 
             for (int i = 0; i < _gListArr.Count; i++)
             {
                 //if (!isAlignedArr[i]) continue;
                 if (!gArr[i].isVisible) continue;
 
-                for (int j = 0; j < mf.trks._gListArr[i].curvePts.Count; j++)
+                if (mf.gyd.FindClosestSegment(gArr[i].curvePts, false, mf.guidanceLookPos, out A, out B))
                 {
-                    dist = glm.DistanceSquared(steer, mf.trks._gListArr[i].curvePts[j]);
+                    dist = mf.gyd.FindDistanceToSegment(mf.guidanceLookPos, gArr[i].curvePts[A], gArr[i].curvePts[B], out _, out _, false, false, false);
 
                     if (dist < minDistA)
                     {
@@ -530,8 +531,8 @@ namespace Twol
 
             track.curvePts = new List<vec3>(mf.trks.toolDesignPtsList);
 
-            track.curvePts.AddEndPoints(15, 5);
-            track.curvePts.AddStartPoints(15, 5);
+            track.curvePts.AddEndPoints(1, 30);
+            track.curvePts.AddStartPoints(1, 30);
 
             track.ptA = new vec2(track.curvePts[0].easting, track.curvePts[0].northing);
             track.ptB = new vec2(track.curvePts[track.curvePts.Count - 1].easting, track.curvePts[track.curvePts.Count - 1].northing);

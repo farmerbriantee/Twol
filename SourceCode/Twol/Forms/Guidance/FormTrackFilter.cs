@@ -84,6 +84,11 @@ namespace Twol
         private bool isOn;
         private void btnHideShow_Click(object sender, EventArgs e)
         {
+            if (mf.gydTool.isRecordingToolLine)
+            {
+                mf.TimedMessageBox(2000, "Cannot hide/show tracks while recording tool line.", "Track Hide/Show");
+                return;
+            }
             isOn = !isOn;
 
             for (int i = 0; i < mf.trks.gArr.Count; i++)
@@ -97,6 +102,11 @@ namespace Twol
 
         private void btnField_Click(object sender, EventArgs e)
         {
+            if (mf.gydTool.isRecordingToolLine)
+            {
+                mf.TimedMessageBox(2000, "Cannot hide/show tracks while recording tool line.", "Track Hide/Show");
+                return;
+            }
             foreach (CTrk item in mf.trks.gArr)
             {
                 item.isVisible = item.name.Contains("A_Fld");
@@ -109,6 +119,11 @@ namespace Twol
 
         private void btnBnd_Click(object sender, EventArgs e)
         {
+            if (mf.gydTool.isRecordingToolLine)
+            {
+                mf.TimedMessageBox(2000, "Cannot hide/show tracks while recording tool line.", "Track Hide/Show");
+                return;
+            }
             foreach (CTrk item in mf.trks.gArr)
             {
                 item.isVisible = item.name.Contains("A_Bnd");
@@ -120,6 +135,11 @@ namespace Twol
 
         private void btnToolInner_Click(object sender, EventArgs e)
         {
+            if (mf.gydTool.isRecordingToolLine)
+            {
+                mf.TimedMessageBox(2000, "Cannot hide/show tracks while recording tool line.", "Track Hide/Show");
+                return;
+            }
             foreach (CTrk item in mf.trks.gArr)
             {
                 item.isVisible = (item.mode == TrackMode.toolLineInner);
@@ -131,6 +151,11 @@ namespace Twol
 
         private void btnToolOuter_Click(object sender, EventArgs e)
         {
+            if (mf.gydTool.isRecordingToolLine)
+            {
+                mf.TimedMessageBox(2000, "Cannot hide/show tracks while recording tool line.", "Track Hide/Show");
+                return;
+            }
             foreach (CTrk item in mf.trks.gArr)
             {
                 item.isVisible = (item.mode == TrackMode.toolLineOuter);
