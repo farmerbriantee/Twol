@@ -248,7 +248,7 @@ namespace Twol
                 //used for alarm flashing
                 isFlashOnOff = !isFlashOnOff;
 
-                lblFix.Text = FixQuality + "Age: " + pn.age.ToString("N1");
+                lblFix.Text = FixQuality + "Age: " + pn.age.ToString("N1") + "   " + frameTime.ToString("N1") ;
 
                 switch (pn.fixQuality)
                 {
