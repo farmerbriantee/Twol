@@ -240,7 +240,8 @@ namespace Twol
                             //draw outer field polygon (fence)
                             GL.Color4(0.1, 0.3, 0.1, 0.25);
 
-                            bnd.bndList[0].fenceTriangleList.DrawPolygon(PrimitiveType.Triangles);
+                            //bnd.bndList[0].fenceTriangleList.DrawPolygon(PrimitiveType.Triangles);
+                            GL.DrawArrays(PrimitiveType.Triangles, 0, bnd.bndList[0].fenceTriangleList.Count * 3);
                         }
 
                         //draw red in inner boundary of field

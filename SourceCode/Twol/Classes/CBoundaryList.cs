@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenTK.Graphics.OpenGL;
+using System;
 using System.Collections.Generic;
 
 namespace Twol
@@ -22,12 +23,15 @@ namespace Twol
 
         public bool isDriveThru;
 
+        public int VBO_triangleList;
+
         private int idx = 0;
         //constructor
         public CBoundaryList()
         {
             area = 0;
             isDriveThru = false;
+            VBO_triangleList = GL.GenBuffer();
         }
 
         public void FixFenceLine(int bndNum)
@@ -49,6 +53,26 @@ namespace Twol
             //Triangulate the bundary polygon
             CPolygon bndPolygon = new CPolygon(fenceLineEar.ToArray());
             fenceTriangleList = bndPolygon.Triangulate();
+
+            GL.BindBuffer(BufferTarget.ArrayBuffer, VBO_triangleList);
+
+            double[] triangleVertexData = new double[fenceTriangleList.Count * 6];
+
+            for (int i = 0; i < fenceTriangleList.Count; i++)
+            {
+                // Assuming Triangle has properties or fields: A, B, C of type vec3 with .x, .y, .z
+                triangleVertexData[i * 6 + 0] = fenceTriangleList[i].polygonPts[0].easting;
+                triangleVertexData[i * 6 + 1] = fenceTriangleList[i].polygonPts[0].northing;
+                triangleVertexData[i * 6 + 2] = fenceTriangleList[i].polygonPts[1].easting;
+                triangleVertexData[i * 6 + 3] = fenceTriangleList[i].polygonPts[1].northing;
+                triangleVertexData[i * 6 + 4] = fenceTriangleList[i].polygonPts[2].easting;
+                triangleVertexData[i * 6 + 5] = fenceTriangleList[i].polygonPts[2].northing;
+            }
+
+            GL.BufferData(BufferTarget.ArrayBuffer, triangleVertexData.Length * sizeof(double), triangleVertexData, BufferUsageHint.StaticDraw);
+
+            GL.EnableClientState(ArrayCap.VertexArray);
+            GL.VertexPointer(2, VertexPointerType.Double, 0, 0);
 
             BuildTurnLine();
         }
