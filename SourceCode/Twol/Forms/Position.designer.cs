@@ -51,10 +51,11 @@ namespace Twol
         public double cosSectionHeading = 1.0, sinSectionHeading = 0.0;
 
         //how far travelled since last section was added, section points
-        double sectionTriggerDistanceSq = 0, contourTriggerDistanceSq = 0, distanceTriggerSq = 0, gridTriggerDistanceSq = 0;
+        double sectionTriggerDistanceSq = 0, distanceTriggerSq = 0, gridTriggerDistanceSq = 0;
 
         public vec2 prevPivotAxlePos = new vec2(0, 0);
         public vec2 prevContourPos = new vec2(0, 0);
+        public vec2 prevToolRecPos = new vec2(0, 0);
         public vec2 prevGridPos = new vec2(0, 0);
         public int patchCounter = 0;
 
@@ -698,7 +699,8 @@ namespace Twol
                 }
 
                 //contour points
-                AddContourPoints();
+                //AddContourPoints();
+                AddToolLineRecordPoints();
 
                 if (Settings.User.isLogElevation)
                 {
@@ -1039,7 +1041,7 @@ namespace Twol
         {
             //record contour all the time
             //Contour Base Track.... At least One section on, turn on if not
-            contourTriggerDistanceSq = glm.DistanceSquared(pivotAxlePos, prevContourPos);
+            double contourTriggerDistanceSq = glm.DistanceSquared(pivotAxlePos, prevContourPos);
 
             if (isJobStarted && contourTriggerDistanceSq > distanceTriggerSq)
             {
@@ -1067,6 +1069,38 @@ namespace Twol
                 //save the north & east as previous
                 prevContourPos.northing = pivotAxlePos.northing;
                 prevContourPos.easting = pivotAxlePos.easting;
+            }
+        }
+
+        private void AddToolLineRecordPoints()
+        {
+            //record contour all the time
+            //Contour Base Track.... At least One section on, turn on if not
+            double toolDistanceSq = glm.DistanceSquared(toolPivotPos, prevToolRecPos);
+
+            if (isJobStarted && toolDistanceSq > 2.0)
+            {
+                if (patchCounter != 0)
+                {
+                    //keep the line going, everything is on for recording path
+                    if (tRec.isToolRecordOn) tRec.AddPoint(toolPivotPos);
+                    else
+                    {
+                        tRec.StartToolRecordLine();
+                        tRec.AddPoint(toolPivotPos);
+                    }
+                }
+
+                //All sections OFF so if on, turn off
+                else
+                {
+                    if (tRec.isToolRecordOn)
+                    { tRec.StopToolRecordLine(); }
+                }
+
+                //save the north & east as previous
+                prevToolRecPos.northing = toolPivotPos.northing;
+                prevToolRecPos.easting = toolPivotPos.easting;
             }
         }
 

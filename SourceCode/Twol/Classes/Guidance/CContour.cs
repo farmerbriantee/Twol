@@ -200,24 +200,10 @@ namespace Twol
         //start stop and add points to list
         public void StartContourLine()
         {
-            //if (stripList.Count == 0)
-            //{
-            //make new ptList
             ptList = new List<vec3>(16);
-            //ptList.Add(new vec3(pivot.easting + Math.Cos(pivot.heading)
-            //    * mf.tool.toolOffset, pivot.northing - Math.Sin(pivot.heading) * mf.tool.toolOffset, pivot.heading));
             stripList.Add(ptList);
             isContourOn = true;
             return;
-            //}
-            //else
-            //{
-            //    //reuse ptList
-            //    ptList?.Clear();
-            //    //ptList.Add(new vec3(pivot.easting + Math.Cos(pivot.heading)
-            //    //    * mf.tool.toolOffset, pivot.northing - Math.Sin(pivot.heading) * mf.tool.toolOffset, pivot.heading));
-            //    isContourOn = true;
-            //}
         }
 
         //Add current position to stripList
@@ -230,7 +216,7 @@ namespace Twol
 
         //End the strip
         public void StopContourLine()
-        {
+        {            
             //make sure its long enough to bother
             if (ptList.Count > 5)
             {

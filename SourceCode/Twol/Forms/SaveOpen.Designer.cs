@@ -32,6 +32,9 @@ namespace Twol
         //list of the list of patch data individual triangles for contour tracking
         public List<List<vec3>> contourSaveList = new List<List<vec3>>();
 
+        //list of the list of patch data individual triangles for tool recording
+        public List<List<vec3>> toolRecSaveList = new List<List<vec3>>();
+
         //list of the list of patch data individual triangles for bndPts sections
         public List<List<vec3>> patchSaveList = new List<List<vec3>>();
 
@@ -846,6 +849,62 @@ namespace Twol
             }
         }
 
+        public void FileLoadToolRec(string dir)
+        {
+            if (!File.Exists(dir))
+            {
+                //write out the file
+                using (StreamWriter writer = new StreamWriter(dir))
+                {
+                    //write paths # of sections
+                    //writer.WriteLine("$Sectionsv4");
+                }
+                return;
+            }
+
+            //Points in Patch followed by easting, heading, northing, elevation
+            else
+            {
+                using (StreamReader reader = new StreamReader(dir))
+                {
+                    try
+                    {
+                        //read header
+                        string line;
+                        while (!reader.EndOfStream)
+                        {
+                            //read how many vertices in the following patch
+                            line = reader.ReadLine();
+                            int verts = int.Parse(line);
+
+                            vec3 vecFix = new vec3(0, 0, 0);
+
+                            var ptList = new List<vec3>();
+                            ptList.Capacity = verts + 1;
+
+                            for (int v = 0; v < verts; v++)
+                            {
+                                line = reader.ReadLine();
+                                string[] words = line.Split(',');
+                                vecFix.easting = double.Parse(words[0], CultureInfo.InvariantCulture);
+                                vecFix.northing = double.Parse(words[1], CultureInfo.InvariantCulture);
+                                vecFix.heading = double.Parse(words[2], CultureInfo.InvariantCulture);
+                                ptList.Add(vecFix);
+                            }
+
+                            tRec.stripList.Add(ptList);
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Log.EventWriter("Loading ToolRec file" + e.ToString());
+
+                        TimedMessageBox(2000, gStr.Get("Tool Recording File is Corrupt"), gStr.Get(gs.gsButFieldIsLoaded));
+                    }
+                }
+            }
+        }
+
         public void FileLoadSections(string dir)
         {
             if (!File.Exists(dir))
@@ -1224,6 +1283,64 @@ namespace Twol
                 {
                     // Log exception from background thread; don't throw.
                     Log.EventWriter("FileSaveContour (async): " + ex.ToString());
+                }
+            });
+        }
+        public void FileSaveToolRecordList()
+        {
+            //1  - points in patch
+            //64.697,0.168,-21.654,0 - east, heading, north, elevation
+
+            //make sure there is something to save
+            if (toolRecSaveList == null) return;
+
+            // Quick-copy and clear the buffer on the caller (UI) thread, then write to disk on a background task.
+            List<List<vec3>> toSave;
+            lock (toolRecSaveList)
+            {
+                if (toolRecSaveList.Count == 0) return;
+
+                toSave = new List<List<vec3>>(toolRecSaveList.Count);
+                foreach (var triList in toolRecSaveList)
+                {
+                    // copy inner lists to avoid concurrent modification while writing
+                    toSave.Add(new List<vec3>(triList));
+                }
+
+                // Clear immediately so new data can be collected without waiting for IO
+                toolRecSaveList.Clear();
+            }
+
+            System.Threading.Tasks.Task.Run(() =>
+            {
+                try
+                {
+                    string directory = Path.Combine(RegistrySettings.fieldsDirectory, currentFieldDirectory, currentJobDirectory);
+                    if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
+                        Directory.CreateDirectory(directory);
+
+                    string filePath = Path.Combine(directory, "ToolRecording.txt");
+                    using (StreamWriter writer = new StreamWriter(filePath, true))
+                    {
+                        foreach (var triList in toSave)
+                        {
+                            int count2 = triList.Count;
+                            writer.WriteLine(count2.ToString(CultureInfo.InvariantCulture));
+
+                            for (int i = 0; i < count2; i++)
+                            {
+                                writer.WriteLine(
+                                    Math.Round(triList[i].easting, 3).ToString(CultureInfo.InvariantCulture) + "," +
+                                    Math.Round(triList[i].northing, 3).ToString(CultureInfo.InvariantCulture) + "," +
+                                    Math.Round(triList[i].heading, 3).ToString(CultureInfo.InvariantCulture));
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Log exception from background thread; don't throw.
+                    Log.EventWriter("FileSaveToolRecording (async): " + ex.ToString());
                 }
             });
         }

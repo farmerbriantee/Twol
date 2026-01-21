@@ -130,6 +130,11 @@ namespace Twol
         public CContour ct;
 
         /// <summary>
+        /// Tool Record Instance
+        /// </summary>
+        public CToolRecord tRec;
+
+        /// <summary>
         /// Track Instance
         /// </summary>
         public CTracks trks;
@@ -287,6 +292,9 @@ namespace Twol
 
             //new instance of contour mode
             ct = new CContour(this);
+
+            //new instance of contour mode
+            tRec = new CToolRecord(this);
 
             //new track instance
             trks = new CTracks(this);
@@ -828,8 +836,9 @@ namespace Twol
                 Settings.Vehicle.setF_CurrentJobDir = currentJobDirectory;
 
                 //auto save the field patches, contours accumulated so far
-                FileSaveSections();
-                FileSaveContour();
+                if (patchSaveList.Count > 0) FileSaveSections();
+                if (contourSaveList.Count > 0) FileSaveContour();
+                if (toolRecSaveList.Count > 0) FileSaveToolRecordList();
 
                 //NMEA elevation file
                 if (Settings.User.isLogElevation && sbElevationString.Length > 0) FileSaveElevation();

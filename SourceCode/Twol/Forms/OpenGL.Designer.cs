@@ -341,7 +341,6 @@ namespace Twol
                                     triList.DrawPolygon(mipmap, 1, PrimitiveType.LineStrip);
                                     triList.DrawPolygon(mipmap, 2, PrimitiveType.LineStrip);
                                 }
-
                             }
                         }
                     }
@@ -494,6 +493,16 @@ namespace Twol
                     {
                         //when switching lines, draw the ghost
                         trks.DrawTrack();
+                    }
+
+                    GL.Color3(0.9, 0.7, 0.6);
+                    GL.PointSize(2);
+                    for (int i = 0; i < tRec.stripList.Count; i++)
+                    {
+                        for (int j = 0; j < tRec.stripList[i].Count; j++)
+                        {
+                            tRec.stripList[i].DrawPolygon(PrimitiveType.Points);
+                        }
                     }
 
                     //draw line creations
@@ -784,8 +793,9 @@ namespace Twol
                         if (isJobStarted)
                         {
                             //auto save the field patches, contours accumulated so far
-                            FileSaveSections();
-                            FileSaveContour();
+                            if (patchSaveList.Count > 0)FileSaveSections();
+                            if (contourSaveList.Count > 0) FileSaveContour();
+                            if (toolRecSaveList.Count > 0) FileSaveToolRecordList();
 
                             //NMEA elevation file
                             if (Settings.User.isLogElevation && sbElevationString.Length > 0) FileSaveElevation();

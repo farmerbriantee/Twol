@@ -155,6 +155,7 @@
     <Compile Include="Classes\CBrightness.cs" />
     <Compile Include="Classes\ExtensionMethods.cs" />
     <Compile Include="Classes\CBoundary.cs" />
+    <Compile Include="Classes\Guidance\CToolRecord.cs" />
     <Compile Include="Classes\Guidance\CGuidance.cs" />
     <Compile Include="Classes\CHeadLine.cs" />
     <Compile Include="Classes\CHello.cs" />
