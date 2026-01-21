@@ -552,6 +552,7 @@ namespace Twol
                 hdArr = new vec3[mf.bnd.bndList[0].hdLine.Count];
                 mf.bnd.bndList[0].hdLine.CopyTo(hdArr);
                 mf.bnd.bndList[0].hdLine?.Clear();
+                mf.bnd.DeleteHeadLineVertexArray(0);
 
                 //does headland control sections
                 mf.bnd.isSectionControlledByHeadland = true;
@@ -588,6 +589,7 @@ namespace Twol
                 //triangulate headland area
                 CPolygon hdLinePolygon = new CPolygon(mf.bnd.bndList[0].hdLine.ToArray());
                 mf.bnd.bndList[0].hdLineTriangleList = hdLinePolygon.Triangulate();
+                mf.bnd.CreateHdLineVertexArray(0);
                 mf.bnd.isHeadlandOn = true;
             }
 
@@ -609,6 +611,7 @@ namespace Twol
                 int ptCount = mf.bnd.bndList[0].fenceLine.Count;
 
                 mf.bnd.bndList[0].hdLine?.Clear();
+                mf.bnd.DeleteHeadLineVertexArray(0);
 
                 for (int i = 0; i < ptCount; i++)
                 {
@@ -746,6 +749,7 @@ namespace Twol
             sliceArr?.Clear();
             backupList?.Clear();
             mf.bnd.bndList[0].hdLine?.Clear();
+            mf.bnd.DeleteHeadLineVertexArray(0);
 
             int ptCount = mf.bnd.bndList[0].fenceLine.Count;
 
@@ -824,6 +828,7 @@ namespace Twol
         {
             mf.bnd.bndList[0].hdLine?.Clear();
             mf.bnd.bndList[0].hdLineTriangleList?.Clear();
+            mf.bnd.DeleteHeadLineVertexArray(0);
 
             mf.FileSaveHeadland();
             mf.bnd.isHeadlandOn = false;

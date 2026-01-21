@@ -681,6 +681,7 @@ namespace Twol
                 //Triangulate headland polygon
                 CPolygon hdLinePolygon = new CPolygon(bnd.bndList[0].hdLine.ToArray());
                 bnd.bndList[0].hdLineTriangleList = hdLinePolygon.Triangulate();
+                bnd.CreateHdLineVertexArray(0);
 
                 bnd.isHeadlandOn = true;
                 btnHeadlandOnOff.Image = Properties.Resources.HeadlandOn;
@@ -691,6 +692,7 @@ namespace Twol
                 bnd.isHeadlandOn = false;
                 btnHeadlandOnOff.Image = Properties.Resources.HeadlandOff;
                 btnHeadlandOnOff.Visible = false;
+                bnd.DeleteHeadLineVertexArray(0);
             }
         }
 

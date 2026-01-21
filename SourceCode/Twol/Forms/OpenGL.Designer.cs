@@ -221,38 +221,61 @@ namespace Twol
 
                     if (bnd.bndList.Count > 0)
                     {
+                        //draw outer bnd highlight
+                        GL.EnableClientState(ArrayCap.VertexArray);
+
                         if (bnd.isHeadlandOn && bnd.bndList.Count > 0)
                         {
                             //draw whole outer field polygon
-                            GL.Color4(0.1, 0.1, 0.351, 0.25);
+                            GL.BindBuffer(BufferTarget.ArrayBuffer, bnd.vbo_FenceTriangles[0]);
+                            GL.VertexPointer(2, VertexPointerType.Double, 0, 0);
 
-                            bnd.bndList[0].fenceTriangleList.DrawPolygon(PrimitiveType.Triangles);
+                            GL.Color4(0.41, 0.41, 0.051, 0.25);
+                            GL.DrawArrays(PrimitiveType.Triangles, 0, bnd.bndList[0].fenceTriangleList.Count * 3);
 
-                            //draw headland polygon
-                            GL.Color4(0.1, 0.3, 0.1, 0.25);
+                            //draw inner polygon
 
-                            bnd.bndList[0].hdLineTriangleList.DrawPolygon(PrimitiveType.Triangles);
+                            GL.BindBuffer(BufferTarget.ArrayBuffer, bnd.vbo_HeadTriangles[0]);
+                            GL.VertexPointer(2, VertexPointerType.Double, 0, 0);
+
+                            GL.Color4(0.031, 0.3, 0.51, 0.25);
+                            GL.DrawArrays(PrimitiveType.Triangles, 0, bnd.bndList[0].hdLineTriangleList.Count * 3);
 
                             //if we would have inner boundary headline draw them here
                         }
                         else //no headland excists
                         {
                             //draw outer field polygon (fence)
+
+                            GL.BindBuffer(BufferTarget.ArrayBuffer, bnd.vbo_FenceTriangles[0]);
+                            GL.VertexPointer(2, VertexPointerType.Double, 0, 0);
+
                             GL.Color4(0.1, 0.3, 0.1, 0.25);
+                            GL.DrawArrays(PrimitiveType.Triangles, 0, bnd.bndList[0].fenceTriangleList.Count * 3);
 
                             //bnd.bndList[0].fenceTriangleList.DrawPolygon(PrimitiveType.Triangles);
-                            GL.DrawArrays(PrimitiveType.Triangles, 0, bnd.bndList[0].fenceTriangleList.Count * 3);
                         }
+
 
                         //draw red in inner boundary of field
                         if (bnd.bndList.Count > 1)
                         {
+                            //draw outer bnd highlight
                             GL.Color4(0.351, 0.1, 0.1, 0.32);
                             for (int a = 1; a < bnd.bndList.Count; a++)
                             {
-                                bnd.bndList[a].fenceTriangleList.DrawPolygon(PrimitiveType.Triangles);
+                                //bnd.bndList[a].fenceTriangleList.DrawPolygon(PrimitiveType.Triangles);
+                                GL.BindBuffer(BufferTarget.ArrayBuffer, bnd.vbo_FenceTriangles[a]);
+                                GL.VertexPointer(2, VertexPointerType.Double, 0, 0);
+
+                                GL.DrawArrays(PrimitiveType.Triangles, 0, bnd.bndList[a].fenceTriangleList.Count * 3);
+
                             }
+
                         }
+
+                        GL.DisableClientState(ArrayCap.VertexArray);
+
                     }
 
                     #endregion

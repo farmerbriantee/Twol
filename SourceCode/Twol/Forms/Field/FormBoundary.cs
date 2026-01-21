@@ -200,6 +200,8 @@ namespace Twol
                 {
                     mf.bnd.bndList[fenceSelected].hdLine?.Clear();
                     mf.bnd.bndList.RemoveAt(fenceSelected);
+                    mf.bnd.DeleteHeadLineVertexArray(0);
+                    mf.bnd.DeleteFenceTriangleVertexArray(fenceSelected);
                 }
                 fenceSelected = -1;
 

@@ -916,6 +916,12 @@ namespace Twol
             //zoom gone
             oglZoom.SendToBack();
 
+            for (int i = 0; i < bnd.bndList.Count; i++)
+            {
+                bnd.DeleteHeadLineVertexArray(i);
+                bnd.DeleteFenceTriangleVertexArray(i);
+            }
+
             //clean all the lines
             bnd.bndList.Clear();
 

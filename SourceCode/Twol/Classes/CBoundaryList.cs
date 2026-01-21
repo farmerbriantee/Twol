@@ -23,21 +23,16 @@ namespace Twol
 
         public bool isDriveThru;
 
-        public int VBO_triangleList;
-
         private int idx = 0;
         //constructor
         public CBoundaryList()
         {
             area = 0;
             isDriveThru = false;
-            VBO_triangleList = GL.GenBuffer();
         }
 
-        public void FixFenceLine(int bndNum)
+        public void FixFenceLine(int bndNum, int vboIndex, bool add)
         {
-            idx = bndNum;
-
             CalculateFenceArea(bndNum);
 
             fenceLine.MinimumSpacingPointRemoval();
@@ -54,7 +49,7 @@ namespace Twol
             CPolygon bndPolygon = new CPolygon(fenceLineEar.ToArray());
             fenceTriangleList = bndPolygon.Triangulate();
 
-            GL.BindBuffer(BufferTarget.ArrayBuffer, VBO_triangleList);
+            GL.BindBuffer(BufferTarget.ArrayBuffer, vboIndex);
 
             double[] triangleVertexData = new double[fenceTriangleList.Count * 6];
 
@@ -70,9 +65,6 @@ namespace Twol
             }
 
             GL.BufferData(BufferTarget.ArrayBuffer, triangleVertexData.Length * sizeof(double), triangleVertexData, BufferUsageHint.StaticDraw);
-
-            GL.EnableClientState(ArrayCap.VertexArray);
-            GL.VertexPointer(2, VertexPointerType.Double, 0, 0);
 
             BuildTurnLine();
         }

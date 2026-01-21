@@ -15,6 +15,9 @@ namespace Twol
         //create a new fence and show it
         public List<vec2> fenceBeingMadePts = new List<vec2>(128);
 
+        public int[] vbo_FenceTriangles = new int[5] { 0, 0, 0, 0, 0 };
+        public int[] vbo_HeadTriangles = new int[5] { 0, 0, 0, 0, 0 };
+
         //boundary record properties
         public double createFenceOffset;
 
@@ -41,10 +44,68 @@ namespace Twol
             isSectionControlledByHeadland = true;
         }
 
-        public void AddToBoundList(CBoundaryList bound, int k, bool add = true)
+        public void CreateHdLineVertexArray(int bndNum)
         {
+            DeleteHeadLineVertexArray(bndNum);
+
+            vbo_HeadTriangles[bndNum] = GL.GenBuffer();
+
+            GL.BindBuffer(BufferTarget.ArrayBuffer, vbo_HeadTriangles[bndNum]);
+
+            double[] triangleVertexData = new double[bndList[bndNum].hdLineTriangleList.Count * 6];
+
+            for (int i = 0; i < bndList[bndNum].hdLineTriangleList.Count; i++)
+            {
+                // Assuming Triangle has properties or fields: A, B, C of type vec3 with .x, .y, .z
+                triangleVertexData[i * 6 + 0] = bndList[0].hdLineTriangleList[i].polygonPts[0].easting;
+                triangleVertexData[i * 6 + 1] = bndList[0].hdLineTriangleList[i].polygonPts[0].northing;
+                triangleVertexData[i * 6 + 2] = bndList[0].hdLineTriangleList[i].polygonPts[1].easting;
+                triangleVertexData[i * 6 + 3] = bndList[0].hdLineTriangleList[i].polygonPts[1].northing;
+                triangleVertexData[i * 6 + 4] = bndList[0].hdLineTriangleList[i].polygonPts[2].easting;
+                triangleVertexData[i * 6 + 5] = bndList[0].hdLineTriangleList[i].polygonPts[2].northing;
+            }
+
+            GL.BufferData(BufferTarget.ArrayBuffer, triangleVertexData.Length * sizeof(double), triangleVertexData, BufferUsageHint.StaticDraw);
+        }
+
+        public void DeleteHeadLineVertexArray(int bndNum)
+        {
+            if (vbo_HeadTriangles[bndNum] != 0)
+            {
+                GL.DeleteBuffer(vbo_HeadTriangles[bndNum]);
+                vbo_HeadTriangles[bndNum] = 0; // Set the handle to 0 (null/invalid) after deletion
+            }
+        }
+
+        public void DeleteFenceTriangleVertexArray(int bndNum)
+        {
+            GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
+
+            if (vbo_FenceTriangles[bndNum] != 0)
+            {
+                GL.DeleteBuffer(vbo_FenceTriangles[bndNum]);
+                vbo_FenceTriangles[bndNum] = 0; // Set the handle to 0 (null/invalid) after deletion
+            }
+        }
+
+        public void AddToBoundList(CBoundaryList bound, int bndNum, bool add = true)
+        {
+            if (add)
+            {
+                GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
+
+                if (vbo_FenceTriangles[bndNum] != 0)
+                {
+                    GL.DeleteBuffer(vbo_FenceTriangles[bndNum]);
+                    vbo_FenceTriangles[bndNum] = 0; // Set the handle to 0 (null/invalid) after deletion
+                }
+
+                vbo_FenceTriangles[bndNum] = GL.GenBuffer();
+            }
+
             //build the boundary, make sure is clockwise for outer counter clockwise for inner
-            bound.FixFenceLine(k);
+            bound.FixFenceLine(bndNum, vbo_FenceTriangles[bndNum], add);
+
             if (add)
                 bndList.Add(bound);
         }
