@@ -162,7 +162,7 @@
     <Compile Include="Classes\Guidance\CTrackMethods.cs" />
     <Compile Include="Classes\Language.cs" />
     <Compile Include="Classes\Log.cs" />
-    <Compile Include="Classes\Tool\CGuidanceTool.cs" />
+    <Compile Include="Classes\Guidance\CGuidanceTool.cs" />
     <Compile Include="Classes\Mapping\Map.cs" />
     <Compile Include="Classes\Tool\CNozzle.cs" />
     <Compile Include="Classes\CPolygon.cs" />
