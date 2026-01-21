@@ -499,10 +499,7 @@ namespace Twol
                     GL.PointSize(2);
                     for (int i = 0; i < tRec.stripList.Count; i++)
                     {
-                        for (int j = 0; j < tRec.stripList[i].Count; j++)
-                        {
-                            tRec.stripList[i].DrawPolygon(PrimitiveType.Points);
-                        }
+                       tRec.stripList[i].DrawPolygon(PrimitiveType.Points);
                     }
 
                     //draw line creations

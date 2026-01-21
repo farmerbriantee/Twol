@@ -1234,14 +1234,12 @@ namespace Twol
             //64.697,0.168,-21.654,0 - east, heading, north, elevation
 
             //make sure there is something to save
-            if (contourSaveList == null) return;
+            if (contourSaveList == null || contourSaveList.Count == 0) return;
 
             // Quick-copy and clear the buffer on the caller (UI) thread, then write to disk on a background task.
             List<List<vec3>> toSave;
             lock (contourSaveList)
             {
-                if (contourSaveList.Count == 0) return;
-
                 toSave = new List<List<vec3>>(contourSaveList.Count);
                 foreach (var triList in contourSaveList)
                 {
@@ -1292,14 +1290,12 @@ namespace Twol
             //64.697,0.168,-21.654,0 - east, heading, north, elevation
 
             //make sure there is something to save
-            if (toolRecSaveList == null) return;
+            if (toolRecSaveList == null || toolRecSaveList.Count == 0) return;
 
             // Quick-copy and clear the buffer on the caller (UI) thread, then write to disk on a background task.
             List<List<vec3>> toSave;
             lock (toolRecSaveList)
             {
-                if (toolRecSaveList.Count == 0) return;
-
                 toSave = new List<List<vec3>>(toolRecSaveList.Count);
                 foreach (var triList in toolRecSaveList)
                 {
