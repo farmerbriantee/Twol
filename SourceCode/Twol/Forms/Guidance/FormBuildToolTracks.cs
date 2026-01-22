@@ -295,7 +295,7 @@ namespace Twol
                 GL.PointSize(2);
                 for (int i = 0; i < recList.Count; i++)
                 {
-                    if (recList[i][0].heading == 0) GL.Color3(0.19, 0.39, 0.596);
+                    if (recList[i][0].heading == 0) GL.Color3(0.19, 1.0, 1.0);
                     else if (recList[i][0].heading == 1) GL.Color3(1.0, 0.09, 0.56);
                     else if (recList[i][0].heading == 2) GL.Color3(0.39, 1.0, 0.396);
                     else if (recList[i][0].heading == 3) GL.Color3(0.39, 0.9, 1.0);
