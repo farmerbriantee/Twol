@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
@@ -24,8 +23,6 @@ namespace Twol
             mf = callingForm as FormGPS;
 
             InitializeComponent();
-
-            btnRecStartStop.BackColor = mf.gydTool.isGuidanceModeRecordNewTracks ? Color.LightGreen : Color.Transparent;
 
             if (mf.gydTool.isboundaryLine)
             {
@@ -56,51 +53,8 @@ namespace Twol
             mf.FileSaveTracks();
         }
 
-        private void btnRecStartStop_Click(object sender, EventArgs e)
-        {
-            mf.gydTool.isGuidanceModeRecordNewTracks = !mf.gydTool.isGuidanceModeRecordNewTracks;
-
-            if (mf.gydTool.isGuidanceModeRecordNewTracks)
-            {
-                btnRecStartStop.BackColor = Color.LightGreen;
-            }
-            else
-            {
-                btnRecStartStop.BackColor = Color.Transparent;
-            }
-            mf.Activate();
-        }
-
-        private void bntOk_Click(object sender, EventArgs e)
-        {
-            if (mf.gydTool.isGuidanceModeRecordNewTracks)
-            {
-                mf.gydTool.isGuidanceModeRecordNewTracks = false;
-                var form = new FormYes("Recording Stopped");
-                form.ShowDialog(this);
-            }
-
-            Close();
-        }
-
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (mf.gydTool.isRecordingToolLine)
-            {
-                if (btnRecStartStop.BackColor == Color.Green)
-                {
-                    btnRecStartStop.BackColor = Color.LightGreen;
-                }
-                else
-                {
-                    btnRecStartStop.BackColor = Color.Green;
-                }
-            }
-            else
-            {
-                if (mf.gydTool.isGuidanceModeRecordNewTracks) btnRecStartStop.BackColor = Color.LightGreen;
-                else btnRecStartStop.BackColor = Color.Transparent;
-            }
         }
 
         private void btnOuterInner_Click(object sender, EventArgs e)

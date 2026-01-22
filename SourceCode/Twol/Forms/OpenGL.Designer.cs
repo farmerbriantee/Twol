@@ -505,8 +505,6 @@ namespace Twol
                     //draw line creations
                     if (trks.isMakingTrack) trks.DrawNewTrack();
 
-                    if (gydTool.isRecordingToolLine) trks.DrawNewTrack();
-
                     #endregion
 
                     #region Flags

@@ -462,9 +462,7 @@ namespace Twol
                 //ref nudge
                 flp1.Controls[5].Visible = tracksVisible > 0;
 
-                flp1.Controls[6].Visible = Settings.Tool.setToolSteer.isRecordToolLine;
-
-                flp1.Controls[7].Visible = true;
+                flp1.Controls[6].Visible = true;
 
                 for (int i = 0; i < flp1.Controls.Count; i++)
                 {
@@ -539,11 +537,6 @@ namespace Twol
                     gyd.isPassiveTriggered = false;
                     gyd.isPassiveSteeringFlag = false;
                 }
-            }
-
-            if (Settings.Tool.setToolSteer.isRecordToolLine)
-            {
-                gydTool.isAutoSteerBtnOn = state;
             }
         }
 

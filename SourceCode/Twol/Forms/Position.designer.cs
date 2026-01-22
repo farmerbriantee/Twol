@@ -345,11 +345,6 @@ namespace Twol
                 {
                     gydTool.GuidanceFollowPivot(yt.isYouTurnTriggered, followPivotPoints);
                 }
-
-                else if (Settings.Tool.setToolSteer.isRecordToolLine && isJobStarted)
-                {
-                    gydTool.GuidanceToolLineRecord(yt.isYouTurnTriggered);
-                }
             }
             else
             {
@@ -698,25 +693,12 @@ namespace Twol
                     AddSectionOrPathPoints();
                 }
 
-                //contour points
-                //AddContourPoints();
-                AddToolLineRecordPoints();
+                //record tool path for guidance lines
+                if (Settings.Tool.setToolSteer.isRecordToolLine) AddToolLineRecordPoints();
 
                 if (Settings.User.isLogElevation)
                 {
                     AddElevationPoints();
-                }
-
-                if (Settings.Tool.setToolSteer.isRecordToolLine && gydTool.isRecordingToolLine)
-                {
-                    if (toolPivotTriggerDistanceSq > 0.5)
-                    {
-                        trks.toolDesignPtsList.Add(new vec3(toolPivotPos));
-
-                        //save the north & east as previous
-                        prevToolPivotPos.northing = toolPivotPos.northing;
-                        prevToolPivotPos.easting = toolPivotPos.easting;
-                    }
                 }
             }
 

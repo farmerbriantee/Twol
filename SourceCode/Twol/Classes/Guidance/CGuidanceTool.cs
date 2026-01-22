@@ -11,9 +11,6 @@ namespace Twol
 
         public double distanceFromCurrentLineTool;
 
-        public bool isGuidanceModeRecordNewTracks = false, isRecordingToolLine = false,
-            isRecordToolLineTriggered = false;
-
         public bool isboundaryLine;
 
         public vec2 goalPoint = new vec2();
@@ -49,29 +46,6 @@ namespace Twol
         }
 
         // in tool line mode - record and playback of tool line
-        public void GuidanceToolLineRecord(bool isUTurn)
-        {
-            if (isGuidanceModeRecordNewTracks && !isUTurn && !isRecordingToolLine && isSectionsOn) // && isAutoSteerBtnOn
-            {
-                isRecordingToolLine = true;
-                // start recording a new design track
-                mf.trks.toolDesignPtsList?.Clear();
-            }
-
-            //line complete
-            if (isRecordingToolLine && (isUTurn || !isSectionsOn || !isGuidanceModeRecordNewTracks)) // && isAutoSteerBtnOn
-            {
-                if (mf.trks.toolDesignPtsList.Count > 20)
-                {
-                    mf.trks.FinishToolLineRecording();
-                }
-
-                //clean up
-                isRecordingToolLine = false;
-                mf.trks.toolDesignPtsList?.Clear();
-            }
-        }
-
         public bool FindClosestSegment(List<vec3> points, bool loop, vec2 point, out int AA, out int BB, int start = 0, int end = int.MaxValue)
         {
             AA = -1;

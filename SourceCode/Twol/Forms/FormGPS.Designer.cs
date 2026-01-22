@@ -84,6 +84,7 @@ namespace Twol
             this.toolStripDropDownButton4 = new System.Windows.Forms.ToolStripDropDownButton();
             this.boundaryToolToolStripMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.manualToolSteerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.buildToolTracksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.layersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eventViewerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.guidelinesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -137,7 +138,6 @@ namespace Twol
             this.btnBuildTracks = new System.Windows.Forms.Button();
             this.btnTracksOff = new System.Windows.Forms.Button();
             this.btnRefNudge = new System.Windows.Forms.Button();
-            this.btnToolLineRecord = new System.Windows.Forms.Button();
             this.btnToolControl = new System.Windows.Forms.Button();
             this.panelBottom = new System.Windows.Forms.FlowLayoutPanel();
             this.btnTrack = new System.Windows.Forms.Button();
@@ -219,7 +219,6 @@ namespace Twol
             this.btnMachine = new System.Windows.Forms.Button();
             this.btnIMU = new System.Windows.Forms.Button();
             this.btnFieldStats = new System.Windows.Forms.Button();
-            this.buildToolTracksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStripFlag.SuspendLayout();
             this.statusStripLeft.SuspendLayout();
@@ -577,7 +576,7 @@ namespace Twol
             this.toolStripMenuFlagForm.Image = global::Twol.Properties.Resources.FileEditName;
             this.toolStripMenuFlagForm.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripMenuFlagForm.Name = "toolStripMenuFlagForm";
-            this.toolStripMenuFlagForm.Size = new System.Drawing.Size(259, 70);
+            this.toolStripMenuFlagForm.Size = new System.Drawing.Size(267, 70);
             this.toolStripMenuFlagForm.Text = "toolStripMenuItem3";
             this.toolStripMenuFlagForm.Click += new System.EventHandler(this.toolStripMenuFlagForm_Click);
             // 
@@ -773,6 +772,13 @@ namespace Twol
             this.manualToolSteerToolStripMenuItem.Size = new System.Drawing.Size(450, 70);
             this.manualToolSteerToolStripMenuItem.Text = "Manual Tool Steer";
             this.manualToolSteerToolStripMenuItem.Click += new System.EventHandler(this.manualToolSteerToolStripMenuItem_Click);
+            // 
+            // buildToolTracksToolStripMenuItem
+            // 
+            this.buildToolTracksToolStripMenuItem.Name = "buildToolTracksToolStripMenuItem";
+            this.buildToolTracksToolStripMenuItem.Size = new System.Drawing.Size(450, 70);
+            this.buildToolTracksToolStripMenuItem.Text = "Build Tool Tracks";
+            this.buildToolTracksToolStripMenuItem.Click += new System.EventHandler(this.buildToolTracksToolStripMenuItem_Click);
             // 
             // layersToolStripMenuItem
             // 
@@ -1508,12 +1514,11 @@ namespace Twol
             this.flp1.Controls.Add(this.btnBuildTracks);
             this.flp1.Controls.Add(this.btnTracksOff);
             this.flp1.Controls.Add(this.btnRefNudge);
-            this.flp1.Controls.Add(this.btnToolLineRecord);
             this.flp1.Controls.Add(this.btnToolControl);
             this.flp1.FlowDirection = System.Windows.Forms.FlowDirection.BottomUp;
             this.flp1.Location = new System.Drawing.Point(1113, 92);
             this.flp1.Name = "flp1";
-            this.flp1.Size = new System.Drawing.Size(86, 654);
+            this.flp1.Size = new System.Drawing.Size(86, 571);
             this.flp1.TabIndex = 539;
             this.flp1.Visible = false;
             // 
@@ -1530,7 +1535,7 @@ namespace Twol
             this.btnNudge.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNudge.Image = global::Twol.Properties.Resources.ABSnapNudgeMenu;
             this.btnNudge.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnNudge.Location = new System.Drawing.Point(3, 579);
+            this.btnNudge.Location = new System.Drawing.Point(3, 496);
             this.btnNudge.Name = "btnNudge";
             this.btnNudge.Size = new System.Drawing.Size(80, 72);
             this.btnNudge.TabIndex = 489;
@@ -1552,7 +1557,7 @@ namespace Twol
             this.btnABDraw.Font = new System.Drawing.Font("Tahoma", 12F);
             this.btnABDraw.Image = global::Twol.Properties.Resources.ABDraw;
             this.btnABDraw.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnABDraw.Location = new System.Drawing.Point(3, 501);
+            this.btnABDraw.Location = new System.Drawing.Point(3, 418);
             this.btnABDraw.Name = "btnABDraw";
             this.btnABDraw.Size = new System.Drawing.Size(80, 72);
             this.btnABDraw.TabIndex = 250;
@@ -1575,7 +1580,7 @@ namespace Twol
             this.btnPlusAB.Font = new System.Drawing.Font("Tahoma", 12F);
             this.btnPlusAB.Image = global::Twol.Properties.Resources.AddNew;
             this.btnPlusAB.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnPlusAB.Location = new System.Drawing.Point(3, 418);
+            this.btnPlusAB.Location = new System.Drawing.Point(3, 335);
             this.btnPlusAB.Name = "btnPlusAB";
             this.btnPlusAB.Size = new System.Drawing.Size(80, 77);
             this.btnPlusAB.TabIndex = 545;
@@ -1597,7 +1602,7 @@ namespace Twol
             this.btnBuildTracks.Font = new System.Drawing.Font("Tahoma", 12F);
             this.btnBuildTracks.Image = global::Twol.Properties.Resources.ABTracks;
             this.btnBuildTracks.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnBuildTracks.Location = new System.Drawing.Point(3, 335);
+            this.btnBuildTracks.Location = new System.Drawing.Point(3, 252);
             this.btnBuildTracks.Name = "btnBuildTracks";
             this.btnBuildTracks.Size = new System.Drawing.Size(80, 77);
             this.btnBuildTracks.TabIndex = 539;
@@ -1618,7 +1623,7 @@ namespace Twol
             this.btnTracksOff.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTracksOff.Image = global::Twol.Properties.Resources.SwitchOff;
             this.btnTracksOff.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnTracksOff.Location = new System.Drawing.Point(3, 252);
+            this.btnTracksOff.Location = new System.Drawing.Point(3, 169);
             this.btnTracksOff.Name = "btnTracksOff";
             this.btnTracksOff.Size = new System.Drawing.Size(80, 77);
             this.btnTracksOff.TabIndex = 539;
@@ -1639,7 +1644,7 @@ namespace Twol
             this.btnRefNudge.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRefNudge.Image = global::Twol.Properties.Resources.ABSnapNudgeMenuRef;
             this.btnRefNudge.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnRefNudge.Location = new System.Drawing.Point(3, 169);
+            this.btnRefNudge.Location = new System.Drawing.Point(3, 86);
             this.btnRefNudge.Name = "btnRefNudge";
             this.btnRefNudge.Size = new System.Drawing.Size(80, 77);
             this.btnRefNudge.TabIndex = 538;
@@ -1647,27 +1652,6 @@ namespace Twol
             this.btnRefNudge.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnRefNudge.UseVisualStyleBackColor = false;
             this.btnRefNudge.Click += new System.EventHandler(this.btnRefNudge_Click);
-            // 
-            // btnToolLineRecord
-            // 
-            this.btnToolLineRecord.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnToolLineRecord.BackColor = System.Drawing.Color.Transparent;
-            this.btnToolLineRecord.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnToolLineRecord.FlatAppearance.BorderSize = 0;
-            this.btnToolLineRecord.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.btnToolLineRecord.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnToolLineRecord.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnToolLineRecord.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnToolLineRecord.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnToolLineRecord.Image = global::Twol.Properties.Resources.ToolTrackRecord;
-            this.btnToolLineRecord.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnToolLineRecord.Location = new System.Drawing.Point(3, 86);
-            this.btnToolLineRecord.Name = "btnToolLineRecord";
-            this.btnToolLineRecord.Size = new System.Drawing.Size(80, 77);
-            this.btnToolLineRecord.TabIndex = 546;
-            this.btnToolLineRecord.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnToolLineRecord.UseVisualStyleBackColor = false;
-            this.btnToolLineRecord.Click += new System.EventHandler(this.btnToolLineRecord_Click);
             // 
             // btnToolControl
             // 
@@ -3250,13 +3234,6 @@ namespace Twol
             this.btnFieldStats.Visible = false;
             this.btnFieldStats.Click += new System.EventHandler(this.btnFieldStats_Click);
             // 
-            // buildToolTracksToolStripMenuItem
-            // 
-            this.buildToolTracksToolStripMenuItem.Name = "buildToolTracksToolStripMenuItem";
-            this.buildToolTracksToolStripMenuItem.Size = new System.Drawing.Size(450, 70);
-            this.buildToolTracksToolStripMenuItem.Text = "Build Tool Tracks";
-            this.buildToolTracksToolStripMenuItem.Click += new System.EventHandler(this.buildToolTracksToolStripMenuItem_Click);
-            // 
             // FormGPS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -3505,7 +3482,6 @@ namespace Twol
         public System.Windows.Forms.Label lblAreaPossible;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button btnInternetConnection;
-        private System.Windows.Forms.Button btnToolLineRecord;
         public System.Windows.Forms.Button btnAutoTrack;
         private System.Windows.Forms.Button btnToolControl;
         private System.Windows.Forms.ToolStripMenuItem manualToolSteerToolStripMenuItem;

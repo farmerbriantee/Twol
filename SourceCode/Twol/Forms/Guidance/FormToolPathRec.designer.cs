@@ -29,30 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.btnRecStartStop = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.btnOuterInner = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // btnRecStartStop
-            // 
-            this.btnRecStartStop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(60)))));
-            this.btnRecStartStop.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
-            this.btnRecStartStop.FlatAppearance.BorderSize = 0;
-            this.btnRecStartStop.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.btnRecStartStop.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DimGray;
-            this.btnRecStartStop.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnRecStartStop.Font = new System.Drawing.Font("Tahoma", 14.25F);
-            this.btnRecStartStop.Image = global::Twol.Properties.Resources.BoundaryRecord;
-            this.btnRecStartStop.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnRecStartStop.Location = new System.Drawing.Point(3, 164);
-            this.btnRecStartStop.Name = "btnRecStartStop";
-            this.btnRecStartStop.Size = new System.Drawing.Size(62, 106);
-            this.btnRecStartStop.TabIndex = 534;
-            this.btnRecStartStop.UseVisualStyleBackColor = false;
-            this.btnRecStartStop.Click += new System.EventHandler(this.btnRecStartStop_Click);
             // 
             // timer1
             // 
@@ -99,7 +80,6 @@
             this.ControlBox = false;
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnOuterInner);
-            this.Controls.Add(this.btnRecStartStop);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -115,7 +95,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button btnRecStartStop;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button btnOuterInner;
         private System.Windows.Forms.PictureBox pictureBox1;

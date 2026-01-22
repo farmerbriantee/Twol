@@ -34,7 +34,6 @@ namespace Twol
         //list of the list of patch data individual triangles for tool recording
         public List<List<vec3>> recList = new List<List<vec3>>();
 
-
         public FormBuildToolTracks(Form callingForm)
         {
             //get copy of the calling main form
@@ -145,9 +144,17 @@ namespace Twol
 
         private void btnDeleteCurve_Click(object sender, EventArgs e)
         {
-            recList.RemoveAt(selectedLineIndex);
-            if (selectedLineIndex >= recList.Count) selectedLineIndex = 0;
-            if (selectedLineIndex < 0) selectedLineIndex = recList.Count - 1;
+            if (recList.Count > 0)
+            {
+                recList.RemoveAt(selectedLineIndex);
+                if (selectedLineIndex >= recList.Count) selectedLineIndex = 0;
+                if (selectedLineIndex < 0) selectedLineIndex = recList.Count - 1;
+            }
+            else
+            {
+                selectedLineIndex = -1;
+            }
+
             FixLabelsCurve();
         }
 
@@ -156,18 +163,20 @@ namespace Twol
             lblCurveSelected.Text = (selectedLineIndex + 1).ToString() + " / " + recList.Count.ToString();
         }
 
-        private void btnMakeBoundaryCurve_Click(object sender, EventArgs e)
+        private void btnOuterLine_Click(object sender, EventArgs e)
         {
-        }
-        private void cboxFldOrBnd_Click(object sender, EventArgs e)
-        {
-            cboxFldOrBnd.Image = cboxFldOrBnd.Checked ? Properties.Resources.JobActive : Properties.Resources.Boundary;
+
         }
 
+        private void btnJoinCurve_Click(object sender, EventArgs e)
+        {
+
+        }
 
         private void btnMakeCurve_Click(object sender, EventArgs e)
         {
-             FixLabelsCurve();
+            FixLabelsCurve();
+            // "A_Fld Cu " : "A_Bnd Cu ";
         }
 
         private void btnMakeABLine_Click(object sender, EventArgs e)
@@ -255,8 +264,11 @@ namespace Twol
                 recList[i].DrawPolygon(PrimitiveType.Points);
             }
 
-            GL.Color3(0.09, 0.99, 0.36);
-            recList[selectedLineIndex].DrawPolygon(PrimitiveType.Points);
+            if (recList.Count > 0 && selectedLineIndex >= 0 && selectedLineIndex < recList.Count)
+            {
+                GL.Color3(0.09, 0.99, 0.36);
+                recList[selectedLineIndex].DrawPolygon(PrimitiveType.Points);
+            }
 
             //the vehicle
             GL.PointSize(16.0f);
@@ -300,6 +312,7 @@ namespace Twol
 
         private void btnALength_Click(object sender, EventArgs e)
         {
+            if (recList.Count > 0)
             {
                 //and the beginning
                 vec3 start = new vec3(recList[selectedLineIndex][0]);
@@ -312,31 +325,40 @@ namespace Twol
                 recList[selectedLineIndex].Insert(0, pt);
             }
         }
+
         private void bntALengthShorter_Click(object sender, EventArgs e)
         {
-            recList[selectedLineIndex].RemoveAt(0);
+            if (recList.Count > 0)
+            {
+                recList[selectedLineIndex].RemoveAt(0);
+            }
         }
 
         private void btnBLength_Click(object sender, EventArgs e)
         {
-            vec3 start = new vec3(recList[selectedLineIndex][recList[selectedLineIndex].Count - 1]);
-            double heading = Math.Atan2(recList[selectedLineIndex][recList[selectedLineIndex].Count - 1].easting - recList[selectedLineIndex][recList[selectedLineIndex].Count - 2].easting, recList[selectedLineIndex][recList[selectedLineIndex].Count - 1].northing - recList[selectedLineIndex][recList[selectedLineIndex].Count - 2].northing);
+            if (recList.Count > 0)
+            {
+                vec3 start = new vec3(recList[selectedLineIndex][recList[selectedLineIndex].Count - 1]);
+                double heading = Math.Atan2(recList[selectedLineIndex][recList[selectedLineIndex].Count - 1].easting - recList[selectedLineIndex][recList[selectedLineIndex].Count - 2].easting, recList[selectedLineIndex][recList[selectedLineIndex].Count - 1].northing - recList[selectedLineIndex][recList[selectedLineIndex].Count - 2].northing);
 
-            vec3 pt = new vec3(start);
-            pt.easting += (Math.Sin(heading) * 3);
-            pt.northing += (Math.Cos(heading) * 3);
-            pt.heading = start.heading;
-            recList[selectedLineIndex].Add(pt);
+                vec3 pt = new vec3(start);
+                pt.easting += (Math.Sin(heading) * 3);
+                pt.northing += (Math.Cos(heading) * 3);
+                pt.heading = start.heading;
+                recList[selectedLineIndex].Add(pt);
+            }
         }
 
         private void btnBLengthShorter_Click(object sender, EventArgs e)
         {
-            recList[selectedLineIndex].RemoveAt(recList[selectedLineIndex].Count-1);
-
+            if (recList.Count > 0)
+            {
+                recList[selectedLineIndex].RemoveAt(recList[selectedLineIndex].Count - 1);
+            }
         }
 
         private void oglSelf_Resize(object sender, EventArgs e)
-        {           
+        {
             oglSelf.Height = oglSelf.Width;
 
             oglSelf.MakeCurrent();
