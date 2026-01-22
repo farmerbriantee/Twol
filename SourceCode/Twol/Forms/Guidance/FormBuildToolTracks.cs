@@ -151,12 +151,6 @@ namespace Twol
             FixLabelsCurve();
         }
 
-        private void btnDrawSections_Click(object sender, EventArgs e)
-        {
-            isDrawSections = !isDrawSections;
-            //btnDrawSections.Image = isDrawSections ? Properties.Resources.MappingOn : Properties.Resources.MappingOff;
-        }
-
         private void FixLabelsCurve()
         {
             lblCurveSelected.Text = (selectedLineIndex + 1).ToString() + " / " + recList.Count.ToString();
@@ -180,7 +174,6 @@ namespace Twol
         {
             FixLabelsCurve();
         }
-
 
         private void oglSelf_MouseDown(object sender, MouseEventArgs e)
         {
@@ -340,21 +333,6 @@ namespace Twol
         {
             recList[selectedLineIndex].RemoveAt(recList[selectedLineIndex].Count-1);
 
-        }
-        private void FormBuildToolTracks_ResizeEnd(object sender, EventArgs e)
-        {
-
-            oglSelf.MakeCurrent();
-            GL.MatrixMode(MatrixMode.Projection);
-            GL.LoadIdentity();
-
-            //58 degrees view
-            GL.Viewport(0, 0, oglSelf.Width, oglSelf.Height);
-
-            Matrix4 mat = Matrix4.CreatePerspectiveFieldOfView(1.01f, 1.0f, 1.0f, 20000);
-            GL.LoadMatrix(ref mat);
-
-            GL.MatrixMode(MatrixMode.Modelview);
         }
 
         private void oglSelf_Resize(object sender, EventArgs e)
