@@ -200,7 +200,6 @@ namespace Twol
                     {
                         panelNavigation.Visible = false;
                     }
-                    lblHz.Text = gpsHz.ToString("N1") + " ~ " + (frameTime.ToString("N1")) + " " + FixQuality;
                 }
 
                 //send a hello to modules

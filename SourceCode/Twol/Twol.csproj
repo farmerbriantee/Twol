@@ -179,6 +179,12 @@
     <Compile Include="Forms\Field\FormMap.Designer.cs">
       <DependentUpon>FormMap.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Guidance\FormBuildToolTracks.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Guidance\FormBuildToolTracks.Designer.cs">
+      <DependentUpon>FormBuildToolTracks.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Guidance\FormABDrawHeading.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -618,6 +624,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormYes.resx">
       <DependentUpon>FormYes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Guidance\FormBuildToolTracks.resx">
+      <DependentUpon>FormBuildToolTracks.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Guidance\FormTrackFilter.resx">
       <DependentUpon>FormTrackFilter.cs</DependentUpon>

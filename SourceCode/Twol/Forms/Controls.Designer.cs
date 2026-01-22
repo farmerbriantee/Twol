@@ -1918,7 +1918,21 @@ namespace Twol
             else guidelinesToolStripMenuItem.Checked = false;            
         }
 
-        private void manualToolSteerToolStripMenuItem_Click(object sender, EventArgs e)
+         private void buildToolTracksToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!isJobStarted)
+            {
+                TimedMessageBox(2000, gStr.Get(gs.gsToolSteerConfiguration), gStr.Get(gs.gsEnterJobName));
+                return;
+            }
+
+            using (FormBuildToolTracks form = new FormBuildToolTracks(this))
+            {
+                form.ShowDialog(this);           
+            }
+        }
+
+       private void manualToolSteerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //check if window already exists
             Form fc = Application.OpenForms["FormToolManual"];

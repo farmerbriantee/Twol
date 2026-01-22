@@ -24,7 +24,6 @@ namespace Twol
     public class CFieldFiles
     {
         public List<CFieldFile> fieldArr = new List<CFieldFile>();
-
     }
 
     public partial class FormGPS
@@ -33,7 +32,7 @@ namespace Twol
         public List<List<vec3>> contourSaveList = new List<List<vec3>>();
 
         //list of the list of patch data individual triangles for tool recording
-        public List<List<vec3>> toolRecSaveList = new List<List<vec3>>();
+        public List<List<vec3>> toolRecordSaveList = new List<List<vec3>>();
 
         //list of the list of patch data individual triangles for bndPts sections
         public List<List<vec3>> patchSaveList = new List<List<vec3>>();
@@ -849,7 +848,7 @@ namespace Twol
             }
         }
 
-        public void FileLoadToolRec(string dir)
+        public void FileLoadToolRecord(string dir)
         {
             if (!File.Exists(dir))
             {
@@ -1290,21 +1289,21 @@ namespace Twol
             //64.697,0.168,-21.654,0 - east, heading, north, elevation
 
             //make sure there is something to save
-            if (toolRecSaveList == null || toolRecSaveList.Count == 0) return;
+            if (toolRecordSaveList == null || toolRecordSaveList.Count == 0) return;
 
             // Quick-copy and clear the buffer on the caller (UI) thread, then write to disk on a background task.
             List<List<vec3>> toSave;
-            lock (toolRecSaveList)
+            lock (toolRecordSaveList)
             {
-                toSave = new List<List<vec3>>(toolRecSaveList.Count);
-                foreach (var triList in toolRecSaveList)
+                toSave = new List<List<vec3>>(toolRecordSaveList.Count);
+                foreach (var triList in toolRecordSaveList)
                 {
                     // copy inner lists to avoid concurrent modification while writing
                     toSave.Add(new List<vec3>(triList));
                 }
 
                 // Clear immediately so new data can be collected without waiting for IO
-                toolRecSaveList.Clear();
+                toolRecordSaveList.Clear();
             }
 
             System.Threading.Tasks.Task.Run(() =>

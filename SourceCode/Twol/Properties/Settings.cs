@@ -100,6 +100,7 @@ namespace Twol
             public Point setWindow_FieldMenulocation = new Point(200, 200);
 
             public Size setWindow_abDrawSize = new Size(1022, 742);
+            public Size setWindow_BuildToolTracksSize = new Size(1022, 742);
             public Size setWindow_BingMapSize = new Size(965, 700);
             public Size setWindow_FieldMenuSize = new Size(640, 530);
             public Size setWindow_formNudgeSize = new Size(200, 400);

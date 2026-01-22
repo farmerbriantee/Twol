@@ -153,7 +153,7 @@ namespace Twol
                         //create the field file header info
                         mf.FileLoadSections(Path.Combine(RegistrySettings.fieldsDirectory, mf.currentFieldDirectory, mf.currentJobDirectory, "Sections.txt"));
                         mf.FileLoadContour(Path.Combine(RegistrySettings.fieldsDirectory, mf.currentFieldDirectory, mf.currentJobDirectory, "Contour.txt"));
-                        mf.FileLoadToolRec(Path.Combine(RegistrySettings.fieldsDirectory, mf.currentFieldDirectory, mf.currentJobDirectory, "ToolRecording.txt"));
+                        mf.FileLoadToolRecord(Path.Combine(RegistrySettings.fieldsDirectory, mf.currentFieldDirectory, mf.currentJobDirectory, "ToolRecording.txt"));
                     }
                 }
                 else
@@ -209,7 +209,7 @@ namespace Twol
                 //create the field file header info
                 mf.FileLoadSections(Path.Combine(RegistrySettings.fieldsDirectory, mf.currentFieldDirectory, mf.currentJobDirectory, "Sections.txt"));
                 mf.FileLoadContour(Path.Combine(RegistrySettings.fieldsDirectory, mf.currentFieldDirectory, mf.currentJobDirectory, "Contour.txt"));
-                mf.FileLoadToolRec(Path.Combine(RegistrySettings.fieldsDirectory, mf.currentFieldDirectory, mf.currentJobDirectory, "ToolRecording.txt"));
+                mf.FileLoadToolRecord(Path.Combine(RegistrySettings.fieldsDirectory, mf.currentFieldDirectory, mf.currentJobDirectory, "ToolRecording.txt"));
             }
 
             isResumeJob = false;

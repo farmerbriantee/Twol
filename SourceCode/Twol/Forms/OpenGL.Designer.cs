@@ -792,7 +792,7 @@ namespace Twol
                             //auto save the field patches, contours accumulated so far
                             if (patchSaveList.Count > 0)FileSaveSections();
                             if (contourSaveList.Count > 0) FileSaveContour();
-                            if (toolRecSaveList.Count > 0) FileSaveToolRecordList();
+                            if (toolRecordSaveList.Count > 0) FileSaveToolRecordList();
 
                             //NMEA elevation file
                             if (Settings.User.isLogElevation && sbElevationString.Length > 0) FileSaveElevation();

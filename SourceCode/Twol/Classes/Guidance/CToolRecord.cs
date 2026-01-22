@@ -11,12 +11,8 @@ namespace Twol
 
         public bool isToolRecordOn, isToolRecordBtnOn;
 
-        private int stripNum;
 
         public vec2 boxA = new vec2(0, 0), boxB = new vec2(0, 2);
-
-        private double lastSecond;
-        private int pt = 0;
 
         //list of strip data individual points
         public List<vec3> ptList = new List<vec3>();
@@ -59,7 +55,7 @@ namespace Twol
             if (ptList.Count > 5)
             {
                 //add the point list to the save list for appending to tool record file
-                mf.toolRecSaveList.Add(ptList);
+                mf.toolRecordSaveList.Add(ptList);
             }
             //delete ptList
             else

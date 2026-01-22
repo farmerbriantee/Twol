@@ -11,6 +11,7 @@ namespace Twol
         private bool toolSend = false, toolSend2 = false;
         private int counter = 0, toolCounterSettings = 0, toolCounterConfig = 0;
         private int windowSizeState = 1;
+        private bool isOpenToolTrackBuilder = false;
 
         //Form stuff
         public FormToolSteer(Form callingForm)
@@ -132,6 +133,13 @@ namespace Twol
 
             //save current vehicle
             Settings.Tool.Save();
+            if (!isOpenToolTrackBuilder)
+            {
+                using (FormBuildToolTracks form = new FormBuildToolTracks(this))
+                {
+                    form.ShowDialog(this);
+                }
+            }
         }
 
         private void Timer1_Tick(object sender, EventArgs e)
@@ -386,6 +394,10 @@ namespace Twol
         {
             toolSend2 = true;
             toolCounterConfig = 0;
+        }
+
+        private void btnDesignToolTracks_Click(object sender, EventArgs e)
+        {
         }
 
         private void cboxInvertSteer_Tool_Click(object sender, EventArgs e)
