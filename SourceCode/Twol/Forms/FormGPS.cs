@@ -838,7 +838,7 @@ namespace Twol
                 //auto save the field patches, contours accumulated so far
                 if (patchSaveList.Count > 0) FileSaveSections();
                 if (contourSaveList.Count > 0) FileSaveContour();
-                if (toolRecordSaveList.Count > 0) FileSaveToolRecordList();
+                if (toolRecordSaveList.Count > 0) FileSaveToolRecordList(true);
 
                 //NMEA elevation file
                 if (Settings.User.isLogElevation && sbElevationString.Length > 0) FileSaveElevation();
@@ -864,6 +864,8 @@ namespace Twol
             patchList?.Clear();
             patchSaveList?.Clear();
             contourSaveList?.Clear();
+            tRec.recList?.Clear();
+            toolRecordSaveList?.Clear();
         }
 
         private void btnProfiles_Click(object sender, EventArgs e)

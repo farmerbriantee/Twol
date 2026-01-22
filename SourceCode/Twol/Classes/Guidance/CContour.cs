@@ -126,7 +126,7 @@ namespace Twol
             {
                 double distanceFromRefLine = mf.gyd.FindDistanceToSegment(vec2pivot, stripList[stripNum][A], stripList[stripNum][B], out _, out double Time, true, false, false);
 
-                //are we going same direction as stripList was created?
+                //are we going same direction as recList was created?
                 bool isSameWay = Math.PI - Math.Abs(Math.Abs(mf.fixHeading - stripList[stripNum][A].heading) - Math.PI) < 1.57;
 
                 double howManyPathsAway = Math.Round((distanceFromRefLine + (isSameWay ? Settings.Tool.offset : -Settings.Tool.offset))
@@ -206,7 +206,7 @@ namespace Twol
             return;
         }
 
-        //Add current position to stripList
+        //Add current position to recList
         public void AddPoint(vec3 pivot)
         {
             ptList.Add(new vec3(pivot.easting + Math.Cos(pivot.heading) * Settings.Tool.offset,
@@ -312,14 +312,14 @@ namespace Twol
             //GL.PointSize(3.0f);
             ////if (isContourBtnOn)
             //{
-            //    ptCount = stripList.Count;
+            //    ptCount = recList.Count;
             //    if (ptCount > 0)
             //    {
-            //        ptCount = stripList[closestRefPatch].Count;
+            //        ptCount = recList[closestRefPatch].Count;
             //        GL.Begin(PrimitiveType.Points);
             //        for (int i = 0; i < ptCount; i++)
             //        {
-            //            GL.Vertex2(stripList[closestRefPatch][i].easting, stripList[closestRefPatch][i].northing);
+            //            GL.Vertex2(recList[closestRefPatch][i].easting, recList[closestRefPatch][i].northing);
             //        }
             //        GL.End();
             //    }

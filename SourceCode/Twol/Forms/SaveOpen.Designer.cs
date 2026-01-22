@@ -885,13 +885,14 @@ namespace Twol
                             {
                                 line = reader.ReadLine();
                                 string[] words = line.Split(',');
+                                if (words[2] != "0" || words[2] != "1" || words[2] != "2" || words[2] != "3") words[2] = "0";
                                 vecFix.easting = double.Parse(words[0], CultureInfo.InvariantCulture);
                                 vecFix.northing = double.Parse(words[1], CultureInfo.InvariantCulture);
                                 vecFix.heading = double.Parse(words[2], CultureInfo.InvariantCulture);
                                 ptList.Add(vecFix);
                             }
 
-                            tRec.stripList.Add(ptList);
+                            tRec.recList.Add(ptList);
                         }
                     }
                     catch (Exception e)
@@ -1283,7 +1284,7 @@ namespace Twol
                 }
             });
         }
-        public void FileSaveToolRecordList()
+        public void FileSaveToolRecordList(bool isAppend)
         {
             //1  - points in patch
             //64.697,0.168,-21.654,0 - east, heading, north, elevation
@@ -1315,7 +1316,7 @@ namespace Twol
                         Directory.CreateDirectory(directory);
 
                     string filePath = Path.Combine(directory, "ToolRecording.txt");
-                    using (StreamWriter writer = new StreamWriter(filePath, true))
+                    using (StreamWriter writer = new StreamWriter(filePath, isAppend))
                     {
                         foreach (var triList in toSave)
                         {

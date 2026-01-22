@@ -495,11 +495,15 @@ namespace Twol
                         trks.DrawTrack();
                     }
 
-                    GL.Color3(0.9, 0.7, 0.6);
-                    GL.PointSize(2);
-                    for (int i = 0; i < tRec.stripList.Count; i++)
+                    if (Settings.Tool.setToolSteer.isRecordToolLine)
                     {
-                       tRec.stripList[i].DrawPolygon(PrimitiveType.Points);
+                        GL.Color3(0.9, 0.7, 0.6);
+                        //GL.PointSize(4);
+                        GL.LineWidth(1);
+                        for (int i = 0; i < tRec.recList.Count; i++)
+                        {
+                            tRec.recList[i].DrawPolygonFifths(PrimitiveType.LineStrip);
+                        }
                     }
 
                     //draw line creations
@@ -790,7 +794,7 @@ namespace Twol
                             //auto save the field patches, contours accumulated so far
                             if (patchSaveList.Count > 0)FileSaveSections();
                             if (contourSaveList.Count > 0) FileSaveContour();
-                            if (toolRecordSaveList.Count > 0) FileSaveToolRecordList();
+                            if (toolRecordSaveList.Count > 0) FileSaveToolRecordList(true);
 
                             //NMEA elevation file
                             if (Settings.User.isLogElevation && sbElevationString.Length > 0) FileSaveElevation();

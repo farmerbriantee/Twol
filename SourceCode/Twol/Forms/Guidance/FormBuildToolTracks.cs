@@ -79,23 +79,32 @@ namespace Twol
                             //read how many vertices in the following patch
                             line = reader.ReadLine();
                             int verts = int.Parse(line);
-
-                            vec3 vecFix = new vec3(0, 0, 0);
-
-                            var ptList = new List<vec3>();
-                            ptList.Capacity = verts + 1;
-
-                            for (int v = 0; v < verts; v++)
+                            if (verts > 10)
                             {
-                                line = reader.ReadLine();
-                                string[] words = line.Split(',');
-                                vecFix.easting = double.Parse(words[0], CultureInfo.InvariantCulture);
-                                vecFix.northing = double.Parse(words[1], CultureInfo.InvariantCulture);
-                                vecFix.heading = double.Parse(words[2], CultureInfo.InvariantCulture);
-                                ptList.Add(vecFix);
-                            }
+                                vec3 vecFix = new vec3(0, 0, 0);
 
-                            recList.Add(ptList);
+                                var ptList = new List<vec3>();
+                                ptList.Capacity = verts + 1;
+
+                                for (int v = 0; v < verts; v++)
+                                {
+                                    line = reader.ReadLine();
+                                    string[] words = line.Split(',');
+                                    vecFix.easting = double.Parse(words[0], CultureInfo.InvariantCulture);
+                                    vecFix.northing = double.Parse(words[1], CultureInfo.InvariantCulture);
+                                    vecFix.heading = double.Parse(words[2], CultureInfo.InvariantCulture);
+                                    ptList.Add(vecFix);
+                                }
+
+                                recList.Add(ptList);
+                            }
+                            else
+                            {
+                                for (int v = 0; v < verts; v++)
+                                {
+                                    line = reader.ReadLine();
+                                }
+                            }
                         }
                     }
                     catch (Exception e)
@@ -119,6 +128,10 @@ namespace Twol
         private void btnOK_Click(object sender, EventArgs e)
         {
             isCancel = false;
+            mf.toolRecordSaveList.Clear();
+            mf.toolRecordSaveList.AddRange(recList);
+            mf.FileSaveToolRecordList(false);
+
             Close();
         }
 
@@ -165,19 +178,39 @@ namespace Twol
 
         private void btnOuterLine_Click(object sender, EventArgs e)
         {
+            if (recList.Count > 0 && selectedLineIndex >= 0 && selectedLineIndex < recList.Count && recList[selectedLineIndex].Count > 0)
+            {
+                // Copy the struct, modify, and assign back to the list
+                vec3 temp = recList[selectedLineIndex][0];
+                temp.heading = 1;
+                recList[selectedLineIndex][0] = temp;
+            }
 
-        }
-
-        private void btnJoinCurve_Click(object sender, EventArgs e)
-        {
+            selectedLineIndex++;
+            if (selectedLineIndex >= recList.Count) selectedLineIndex = 0;
+            FixLabelsCurve();
 
         }
 
         private void btnMakeCurve_Click(object sender, EventArgs e)
         {
+            vec3 temp = recList[selectedLineIndex][0];
+            temp.heading = 2;
+            recList[selectedLineIndex][0] = temp;
+
+            selectedLineIndex++;
+            if (selectedLineIndex >= recList.Count) selectedLineIndex = 0;
             FixLabelsCurve();
+
             // "A_Fld Cu " : "A_Bnd Cu ";
         }
+        private void btnJoinCurve_Click(object sender, EventArgs e)
+        {
+            vec3 temp = recList[selectedLineIndex][0];
+            temp.heading = 3;
+            recList[selectedLineIndex][0] = temp;
+        }
+
 
         private void btnMakeABLine_Click(object sender, EventArgs e)
         {
@@ -257,34 +290,57 @@ namespace Twol
                 mf.bnd.bndList[j].fenceLineEar.DrawPolygon(PrimitiveType.LineLoop);
             }
 
-            GL.Color3(0.9, 0.7, 0.6);
-            GL.PointSize(2);
-            for (int i = 0; i < recList.Count; i++)
-            {
-                recList[i].DrawPolygon(PrimitiveType.Points);
-            }
-
             if (recList.Count > 0 && selectedLineIndex >= 0 && selectedLineIndex < recList.Count)
             {
-                GL.Color3(0.09, 0.99, 0.36);
-                recList[selectedLineIndex].DrawPolygon(PrimitiveType.Points);
+                GL.PointSize(2);
+                for (int i = 0; i < recList.Count; i++)
+                {
+                    if (recList[i][0].heading == 0) GL.Color3(0.19, 0.39, 0.596);
+                    else if (recList[i][0].heading == 1) GL.Color3(1.0, 0.09, 0.56);
+                    else if (recList[i][0].heading == 2) GL.Color3(0.39, 1.0, 0.396);
+                    else if (recList[i][0].heading == 3) GL.Color3(0.39, 0.9, 1.0);
+
+                    recList[i].DrawPolygon(PrimitiveType.Points);
+                }
+
+                //selected line
+                GL.Color3(1.0f, 0.975f, 0.9350f);
+                GL.PointSize(4);
+                GL.Begin(PrimitiveType.Points);
+
+                for (int i = 0; i < recList[selectedLineIndex].Count; i += 5)
+                {
+                    GL.Vertex2(recList[selectedLineIndex][i].easting, recList[selectedLineIndex][i].northing);
+                }
+                GL.End();
+
+                //start of Line
+                GL.Color3(1.0f, 0.75f, 0.350f);
+
+                GL.PointSize(12);
+                for (int i = 0; i < recList.Count; i++)
+                {
+                    GL.Begin(PrimitiveType.Points);
+                    GL.Vertex2(recList[i][0].easting, recList[i][0].northing);
+                    GL.End();
+                }
             }
 
             //the vehicle
-            GL.PointSize(16.0f);
-            GL.Begin(PrimitiveType.Points);
-            GL.Color3(1.0f, 0.00f, 0.0f);
-            GL.Vertex2(mf.pivotAxlePos.easting, mf.pivotAxlePos.northing);
-            GL.End();
+            //GL.PointSize(16.0f);
+            //GL.Begin(PrimitiveType.Points);
+            //GL.Color3(1.0f, 0.00f, 0.0f);
+            //GL.Vertex2(mf.pivotAxlePos.easting, mf.pivotAxlePos.northing);
+            //GL.End();
 
-            GL.PointSize(8.0f);
-            GL.Begin(PrimitiveType.Points);
-            GL.Color3(0.00f, 0.0f, 0.0f);
-            GL.Vertex2(mf.pivotAxlePos.easting, mf.pivotAxlePos.northing);
-            GL.End();
+            //GL.PointSize(8.0f);
+            //GL.Begin(PrimitiveType.Points);
+            //GL.Color3(0.00f, 0.0f, 0.0f);
+            //GL.Vertex2(mf.pivotAxlePos.easting, mf.pivotAxlePos.northing);
+            //GL.End();
 
             //draw the line building graphics
-            DrawABTouchPoints();
+            //DrawABTouchPoints();
 
             GL.Flush();
             oglSelf.SwapBuffers();

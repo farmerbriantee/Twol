@@ -2105,7 +2105,6 @@ namespace Twol
             this.btnCycleLines.BackColor = System.Drawing.Color.Transparent;
             this.btnCycleLines.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnCycleLines.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
-            this.btnCycleLines.FlatAppearance.BorderSize = 0;
             this.btnCycleLines.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
             this.btnCycleLines.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btnCycleLines.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;

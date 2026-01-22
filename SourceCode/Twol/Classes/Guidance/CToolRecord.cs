@@ -1,6 +1,4 @@
-﻿using OpenTK.Graphics.OpenGL;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Twol
 {
@@ -18,16 +16,12 @@ namespace Twol
         public List<vec3> ptList = new List<vec3>();
 
         //list of the list of individual Lines for entire field
-        public List<List<vec3>> stripList = new List<List<vec3>>();
-
-        //list of points for the new tool recording line
-        public List<vec3> trList = new List<vec3>();
+        public List<List<vec3>> recList = new List<List<vec3>>();
 
         //constructor
         public CToolRecord(FormGPS _f)
         {
             mf = _f;
-            trList.Capacity = 128;
             ptList.Capacity = 128;
         }
 
@@ -37,15 +31,15 @@ namespace Twol
         public void StartToolRecordLine()
         {
             ptList = new List<vec3>(16);
-            stripList.Add(ptList);
+            recList.Add(ptList);
             isToolRecordOn = true;
             return;
         }
 
-        //Add current position to stripList
+        //Add current position to recList
         public void AddPoint(vec3 toolPos)
         {
-            ptList.Add(new vec3(toolPos.easting,toolPos.northing, 0));
+            ptList.Add(new vec3(toolPos.easting, toolPos.northing, 0));
         }
 
         //End the strip
@@ -70,9 +64,8 @@ namespace Twol
         //Reset the toolRec to zip
         public void ResetToolRecord()
         {
-            stripList.Clear();
+            recList.Clear();
             ptList?.Clear();
-            trList?.Clear();
         }
     }//class
 }//namespace

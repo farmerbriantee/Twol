@@ -33,6 +33,8 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.lblCurveSelected = new System.Windows.Forms.Label();
             this.tlp1 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnJoinCurve = new System.Windows.Forms.Button();
+            this.btnOuterLine = new System.Windows.Forms.Button();
             this.bntALengthShorter = new System.Windows.Forms.Button();
             this.btnBLengthShorter = new System.Windows.Forms.Button();
             this.btnBLength = new System.Windows.Forms.Button();
@@ -43,8 +45,6 @@
             this.btnSelectCurve = new System.Windows.Forms.Button();
             this.btnMakeCurve = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
-            this.btnOuterLine = new System.Windows.Forms.Button();
-            this.btnJoinCurve = new System.Windows.Forms.Button();
             this.tlp1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -77,7 +77,7 @@
             this.lblCurveSelected.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblCurveSelected.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCurveSelected.ForeColor = System.Drawing.Color.Black;
-            this.lblCurveSelected.Location = new System.Drawing.Point(7, 570);
+            this.lblCurveSelected.Location = new System.Drawing.Point(7, 561);
             this.lblCurveSelected.Margin = new System.Windows.Forms.Padding(0);
             this.lblCurveSelected.Name = "lblCurveSelected";
             this.lblCurveSelected.Size = new System.Drawing.Size(120, 26);
@@ -89,35 +89,72 @@
             // 
             this.tlp1.BackColor = System.Drawing.Color.LightGray;
             this.tlp1.ColumnCount = 2;
-            this.tlp1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tlp1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tlp1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlp1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlp1.Controls.Add(this.btnJoinCurve, 0, 2);
             this.tlp1.Controls.Add(this.btnOuterLine, 1, 2);
             this.tlp1.Controls.Add(this.bntALengthShorter, 1, 1);
             this.tlp1.Controls.Add(this.btnBLengthShorter, 1, 0);
             this.tlp1.Controls.Add(this.btnBLength, 0, 0);
             this.tlp1.Controls.Add(this.btnALength, 0, 1);
-            this.tlp1.Controls.Add(this.btnCancel, 0, 7);
             this.tlp1.Controls.Add(this.btnDeleteCurve, 0, 3);
             this.tlp1.Controls.Add(this.lblCurveSelected, 0, 5);
             this.tlp1.Controls.Add(this.btnSelectCurveBk, 0, 4);
             this.tlp1.Controls.Add(this.btnSelectCurve, 1, 4);
             this.tlp1.Controls.Add(this.btnMakeCurve, 1, 3);
-            this.tlp1.Controls.Add(this.btnOK, 1, 7);
+            this.tlp1.Controls.Add(this.btnOK, 1, 6);
+            this.tlp1.Controls.Add(this.btnCancel, 0, 6);
             this.tlp1.Dock = System.Windows.Forms.DockStyle.Right;
             this.tlp1.Location = new System.Drawing.Point(708, 0);
             this.tlp1.Name = "tlp1";
-            this.tlp1.RowCount = 8;
-            this.tlp1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.78567F));
-            this.tlp1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 17.12143F));
-            this.tlp1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.13364F));
-            this.tlp1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 17.64706F));
-            this.tlp1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.80672F));
-            this.tlp1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 53F));
-            this.tlp1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 8F));
-            this.tlp1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 17.26221F));
-            this.tlp1.Size = new System.Drawing.Size(268, 737);
+            this.tlp1.RowCount = 7;
+            this.tlp1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.52795F));
+            this.tlp1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.52795F));
+            this.tlp1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.52795F));
+            this.tlp1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.52795F));
+            this.tlp1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.52795F));
+            this.tlp1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.832294F));
+            this.tlp1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.52795F));
+            this.tlp1.Size = new System.Drawing.Size(268, 713);
             this.tlp1.TabIndex = 564;
+            // 
+            // btnJoinCurve
+            // 
+            this.btnJoinCurve.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnJoinCurve.BackColor = System.Drawing.Color.Transparent;
+            this.btnJoinCurve.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnJoinCurve.FlatAppearance.BorderColor = System.Drawing.SystemColors.HotTrack;
+            this.btnJoinCurve.FlatAppearance.BorderSize = 0;
+            this.btnJoinCurve.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnJoinCurve.Font = new System.Drawing.Font("Tahoma", 14.25F);
+            this.btnJoinCurve.Image = global::Twol.Properties.Resources.BoundaryCurveLine;
+            this.btnJoinCurve.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnJoinCurve.Location = new System.Drawing.Point(18, 223);
+            this.btnJoinCurve.Name = "btnJoinCurve";
+            this.btnJoinCurve.Size = new System.Drawing.Size(98, 104);
+            this.btnJoinCurve.TabIndex = 570;
+            this.btnJoinCurve.Text = "Join Line";
+            this.btnJoinCurve.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnJoinCurve.UseVisualStyleBackColor = false;
+            this.btnJoinCurve.Click += new System.EventHandler(this.btnJoinCurve_Click);
+            // 
+            // btnOuterLine
+            // 
+            this.btnOuterLine.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnOuterLine.BackColor = System.Drawing.Color.Transparent;
+            this.btnOuterLine.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnOuterLine.FlatAppearance.BorderColor = System.Drawing.SystemColors.HotTrack;
+            this.btnOuterLine.FlatAppearance.BorderSize = 0;
+            this.btnOuterLine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOuterLine.Font = new System.Drawing.Font("Tahoma", 14.25F);
+            this.btnOuterLine.Image = global::Twol.Properties.Resources.FilterOuterLines;
+            this.btnOuterLine.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnOuterLine.Location = new System.Drawing.Point(152, 231);
+            this.btnOuterLine.Name = "btnOuterLine";
+            this.btnOuterLine.Size = new System.Drawing.Size(98, 87);
+            this.btnOuterLine.TabIndex = 569;
+            this.btnOuterLine.UseVisualStyleBackColor = false;
+            this.btnOuterLine.Click += new System.EventHandler(this.btnOuterLine_Click);
             // 
             // bntALengthShorter
             // 
@@ -132,7 +169,7 @@
             this.bntALengthShorter.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.bntALengthShorter.Image = global::Twol.Properties.Resources.APlusMinusA;
             this.bntALengthShorter.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.bntALengthShorter.Location = new System.Drawing.Point(146, 136);
+            this.bntALengthShorter.Location = new System.Drawing.Point(146, 143);
             this.bntALengthShorter.Name = "bntALengthShorter";
             this.bntALengthShorter.Size = new System.Drawing.Size(110, 43);
             this.bntALengthShorter.TabIndex = 568;
@@ -152,7 +189,7 @@
             this.btnBLengthShorter.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnBLengthShorter.Image = global::Twol.Properties.Resources.APlusMinusB;
             this.btnBLengthShorter.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnBLengthShorter.Location = new System.Drawing.Point(146, 28);
+            this.btnBLengthShorter.Location = new System.Drawing.Point(146, 33);
             this.btnBLengthShorter.Name = "btnBLengthShorter";
             this.btnBLengthShorter.Size = new System.Drawing.Size(110, 43);
             this.btnBLengthShorter.TabIndex = 567;
@@ -172,7 +209,7 @@
             this.btnBLength.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnBLength.Image = global::Twol.Properties.Resources.APlusPlusB;
             this.btnBLength.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnBLength.Location = new System.Drawing.Point(12, 28);
+            this.btnBLength.Location = new System.Drawing.Point(12, 33);
             this.btnBLength.Name = "btnBLength";
             this.btnBLength.Size = new System.Drawing.Size(110, 43);
             this.btnBLength.TabIndex = 351;
@@ -192,7 +229,7 @@
             this.btnALength.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnALength.Image = global::Twol.Properties.Resources.APlusPlusA;
             this.btnALength.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnALength.Location = new System.Drawing.Point(12, 136);
+            this.btnALength.Location = new System.Drawing.Point(12, 143);
             this.btnALength.Name = "btnALength";
             this.btnALength.Size = new System.Drawing.Size(110, 43);
             this.btnALength.TabIndex = 352;
@@ -210,7 +247,7 @@
             this.btnCancel.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnCancel.Image = global::Twol.Properties.Resources.Cancel64;
             this.btnCancel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnCancel.Location = new System.Drawing.Point(23, 649);
+            this.btnCancel.Location = new System.Drawing.Point(23, 627);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(88, 56);
             this.btnCancel.TabIndex = 469;
@@ -246,7 +283,7 @@
             this.btnSelectCurveBk.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnSelectCurveBk.Image = global::Twol.Properties.Resources.ABLineCycleBk;
             this.btnSelectCurveBk.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSelectCurveBk.Location = new System.Drawing.Point(5, 466);
+            this.btnSelectCurveBk.Location = new System.Drawing.Point(5, 461);
             this.btnSelectCurveBk.Name = "btnSelectCurveBk";
             this.btnSelectCurveBk.Size = new System.Drawing.Size(123, 68);
             this.btnSelectCurveBk.TabIndex = 472;
@@ -264,7 +301,7 @@
             this.btnSelectCurve.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnSelectCurve.Image = global::Twol.Properties.Resources.ABLineCycle;
             this.btnSelectCurve.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSelectCurve.Location = new System.Drawing.Point(139, 466);
+            this.btnSelectCurve.Location = new System.Drawing.Point(139, 461);
             this.btnSelectCurve.Name = "btnSelectCurve";
             this.btnSelectCurve.Size = new System.Drawing.Size(124, 68);
             this.btnSelectCurve.TabIndex = 5;
@@ -276,7 +313,6 @@
             this.btnMakeCurve.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnMakeCurve.BackColor = System.Drawing.Color.Transparent;
             this.btnMakeCurve.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnMakeCurve.Enabled = false;
             this.btnMakeCurve.FlatAppearance.BorderColor = System.Drawing.SystemColors.HotTrack;
             this.btnMakeCurve.FlatAppearance.BorderSize = 0;
             this.btnMakeCurve.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -301,57 +337,19 @@
             this.btnOK.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.btnOK.Image = global::Twol.Properties.Resources.OK64;
             this.btnOK.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnOK.Location = new System.Drawing.Point(157, 649);
+            this.btnOK.Location = new System.Drawing.Point(157, 627);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(88, 56);
             this.btnOK.TabIndex = 0;
             this.btnOK.UseVisualStyleBackColor = false;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
-            // btnOuterLine
-            // 
-            this.btnOuterLine.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnOuterLine.BackColor = System.Drawing.Color.Transparent;
-            this.btnOuterLine.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnOuterLine.Enabled = false;
-            this.btnOuterLine.FlatAppearance.BorderColor = System.Drawing.SystemColors.HotTrack;
-            this.btnOuterLine.FlatAppearance.BorderSize = 0;
-            this.btnOuterLine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOuterLine.Font = new System.Drawing.Font("Tahoma", 14.25F);
-            this.btnOuterLine.Image = global::Twol.Properties.Resources.FilterOuterLines;
-            this.btnOuterLine.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnOuterLine.Location = new System.Drawing.Point(152, 227);
-            this.btnOuterLine.Name = "btnOuterLine";
-            this.btnOuterLine.Size = new System.Drawing.Size(98, 87);
-            this.btnOuterLine.TabIndex = 569;
-            this.btnOuterLine.UseVisualStyleBackColor = false;
-            this.btnOuterLine.Click += new System.EventHandler(this.btnOuterLine_Click);
-            // 
-            // btnJoinCurve
-            // 
-            this.btnJoinCurve.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnJoinCurve.BackColor = System.Drawing.Color.Transparent;
-            this.btnJoinCurve.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnJoinCurve.Enabled = false;
-            this.btnJoinCurve.FlatAppearance.BorderColor = System.Drawing.SystemColors.HotTrack;
-            this.btnJoinCurve.FlatAppearance.BorderSize = 0;
-            this.btnJoinCurve.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnJoinCurve.Font = new System.Drawing.Font("Tahoma", 14.25F);
-            this.btnJoinCurve.Image = global::Twol.Properties.Resources.BoundaryCurveLine;
-            this.btnJoinCurve.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnJoinCurve.Location = new System.Drawing.Point(18, 227);
-            this.btnJoinCurve.Name = "btnJoinCurve";
-            this.btnJoinCurve.Size = new System.Drawing.Size(98, 87);
-            this.btnJoinCurve.TabIndex = 570;
-            this.btnJoinCurve.UseVisualStyleBackColor = false;
-            this.btnJoinCurve.Click += new System.EventHandler(this.btnJoinCurve_Click);
-            // 
             // FormBuildToolTracks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(976, 737);
+            this.ClientSize = new System.Drawing.Size(976, 713);
             this.ControlBox = false;
             this.Controls.Add(this.tlp1);
             this.Controls.Add(this.oglSelf);
