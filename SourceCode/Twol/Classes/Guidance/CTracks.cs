@@ -242,31 +242,28 @@ namespace Twol
 
             try
             {
-                if (track.mode == TrackMode.ABLine)
-                {
-                    //simple shift of A and B points
-                    vec3 pt = new vec3(track.ptA);
-                    pt.easting += (Math.Sin(track.heading + glm.PIBy2) * distAway);
-                    pt.northing += (Math.Cos(track.heading + glm.PIBy2) * distAway);
-                    pt.heading = track.heading;
-                    newCurList.Add(pt);
+                //if (track.mode == TrackMode.ABLine)
+                //{
+                //    //simple shift of A and B points
+                //    vec3 pt = new vec3(track.ptA);
+                //    pt.easting += (Math.Sin(track.heading + glm.PIBy2) * distAway);
+                //    pt.northing += (Math.Cos(track.heading + glm.PIBy2) * distAway);
+                //    pt.heading = track.heading;
+                //    newCurList.Add(pt);
 
-                    pt = new vec3(track.ptB);
-                    pt.easting += (Math.Sin(track.heading + glm.PIBy2) * distAway);
-                    pt.northing += (Math.Cos(track.heading + glm.PIBy2) * distAway);
-                    pt.heading = track.heading;
-                    newCurList.Add(pt);
+                //    pt = new vec3(track.ptB);
+                //    pt.easting += (Math.Sin(track.heading + glm.PIBy2) * distAway);
+                //    pt.northing += (Math.Cos(track.heading + glm.PIBy2) * distAway);
+                //    pt.heading = track.heading;
+                //    newCurList.Add(pt);
 
-                    newCurList.AddStartEndPoints(4, 5000);
-                    return newCurList;
-                }
+                //    newCurList.AddStartEndPoints(4, 5000);
+                //    return newCurList;
+                //}
 
-                else if (track.mode == TrackMode.Polygon)
-                {
-                    newCurList = track.curvePts.ClipperOffsetPolygon(distAway);
-                }
+                bool loops = track.mode > TrackMode.PolyLine;
 
-                else if (track.mode == TrackMode.waterPivot)
+                if (track.mode == TrackMode.waterPivot)
                 {
                     //max 2 cm offset from correct circle or limit to 500
                     double Angle = glm.twoPI / Math.Min(Math.Max(Math.Ceiling(glm.twoPI / (2 * Math.Acos(1 - (0.02 / Math.Abs(distAway))))), 100), 1000);
@@ -285,31 +282,81 @@ namespace Twol
                     newCurList.CalculateAverageHeadings(true);
                 }
 
-                else if (track.mode < TrackMode.Polygon && track.mode > TrackMode.None)
-                {
-                    newCurList = track.curvePts.ClipperOffsetPolyline(distAway, mf.guidanceLookPos);
-                }
-
-                else if (track.mode < TrackMode.None)
-                {
-                    newCurList = track.curvePts.ClipperOffsetCenterGuidance(distAway, mf.guidanceLookPos, ((int)howManyPathsAway == 0));
-                }
-
                 else
                 {
+                    double step = 1;
 
-                    //newCurList = track.curvePts.OffsetLine(distAway, step, false);
+                    newCurList = track.curvePts.OffsetLine(distAway, step, loops);
 
-                    //newCurList = track.curvePts.ClipperOffsetPolygon(distAway);
+                    if (track.mode != TrackMode.PolyLine)
+                    {
+                        int cnt = newCurList.Count;
+                        if (cnt > 6)
+                        {
+                            vec3[] arr = new vec3[cnt];
+                            newCurList.CopyTo(arr);
+
+                            newCurList.Clear();
+
+                            for (int i = 0; i < (arr.Length - 1); i++)
+                            {
+                                arr[i].heading = Math.Atan2(arr[i + 1].easting - arr[i].easting, arr[i + 1].northing - arr[i].northing);
+                                if (arr[i].heading < 0) arr[i].heading += glm.twoPI;
+                            }
+
+                            arr[arr.Length - 1].heading = arr[arr.Length - 2].heading;
+
+                            cnt = arr.Length;
+                            double distance;
+
+                            //add the first point of loop - it will be p1
+                            newCurList.Add(arr[0]);
+
+                            for (int i = 0; i < cnt - 3; i++)
+                            {
+                                // add p1
+                                newCurList.Add(arr[i + 1]);
+
+                                distance = glm.Distance(arr[i + 1], arr[i + 2]);
+
+                                //if (distance > step)
+                                //{
+                                //    int loopTimes = (int)(distance / step + 1);
+                                //    for (int j = 1; j < loopTimes; j++)
+                                //    {
+                                //        vec3 pos = new vec3(glm.Catmull(j / (double)(loopTimes), arr[i], arr[i + 1], arr[i + 2], arr[i + 3]));
+                                //        newCurList.Add(pos);
+                                //    }
+                                //}
+                            }
+
+                            newCurList.Add(arr[cnt - 2]);
+                            newCurList.Add(arr[cnt - 1]);
+                        }
+
+                        newCurList.GenerateEquidistantPoints(2, track.mode == TrackMode.Polygon);
+                        newCurList.CalculateAverageHeadings(false);
+
+                        //newCurList.ReducePointsByAngle();
+                    }
 
 
-                    //newCurList.ChaikinsSmooth(3, true);
+                    //else
+                    {
 
-                    //newCurList.GenerateEquidistantPoints(0.5, track.mode == TrackMode.Polygon);
+                        //newCurList = track.curvePts.OffsetLine(distAway, step, false);
 
-                    //newCurList.CalculateAverageHeadings(false);
+                        //newCurList = track.curvePts.ClipperOffsetPolygon(distAway);
 
-                    //newCurList.ReducePointsByAngle();
+
+                        //newCurList.ChaikinsSmooth(3, true);
+
+                        //newCurList.GenerateEquidistantPoints(0.5, track.mode == TrackMode.Polygon);
+
+                        //newCurList.CalculateAverageHeadings(false);
+
+                        //newCurList.ReducePointsByAngle();
+                    }
                 }
             }
             catch (Exception e)
