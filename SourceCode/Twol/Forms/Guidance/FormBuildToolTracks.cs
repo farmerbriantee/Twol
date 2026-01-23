@@ -295,19 +295,8 @@ namespace Twol
 
         void oglSelf_MouseWheel(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            ///process mouse event
-            //Point ptt = oglSelf.PointToClient(Cursor.Position);
-
-            //int wid = oglSelf.Width;
-            //int halfWid = oglSelf.Width / 2;
-            //double scale = (double)wid * 0.903;
-
-            {
-                //sX = ((halfWid - (double)ptt.X) / wid) * 1.1;
-                //sY = ((halfWid - (double)ptt.Y) / -wid) * 1.1;
-                zoom += (e.Delta * 0.0005);
-                return;
-            }
+            zoom += (e.Delta * 0.0005);
+            return;
         }
 
         private void oglSelf_MouseMove(object sender, MouseEventArgs e)
@@ -484,21 +473,6 @@ namespace Twol
 
             GL.Flush();
             oglSelf.SwapBuffers();
-        }
-
-        private void DrawABTouchPoints()
-        {
-            GL.PointSize(24);
-            GL.Begin(PrimitiveType.Points);
-            GL.Color3(0, 0, 0);
-            GL.Vertex2(pint.easting, pint.northing);
-            GL.End();
-
-            GL.PointSize(16);
-            GL.Begin(PrimitiveType.Points);
-            GL.Color3(1.0f, 0.75f, 0.350f);
-            GL.Vertex2(pint.easting, pint.northing);
-            GL.End();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
