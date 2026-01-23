@@ -363,7 +363,7 @@ namespace Twol
                     mf.yt.DrawYouTurn();
                 }
 
-                //draw reference lines
+                //draw reference tracks
                 if (gArr != null && gArr.Count != 0)
                 {
                     GL.LineWidth(1);

@@ -17,7 +17,7 @@ namespace Twol
 
         private Point fixPt;
 
-        private int selectedLineIndex = 0;
+        private int selectedLineIndex = 0, mode = 0;
 
         private bool isCancel = false;
 
@@ -26,8 +26,6 @@ namespace Twol
         public List<CTrk> gTemp = new List<CTrk>();
 
         public vec3 pint = new vec3(0.0, 1.0, 0.0);
-
-        private bool isDrawSections = true;
 
         public double remoteHeading = 0.0;
 
@@ -79,7 +77,9 @@ namespace Twol
                             //read how many vertices in the following patch
                             line = reader.ReadLine();
                             int verts = int.Parse(line);
-                            if (verts > 10)
+
+                            //too short to be valid?
+                            if (verts > 5)
                             {
                                 vec3 vecFix = new vec3(0, 0, 0);
 
@@ -127,12 +127,90 @@ namespace Twol
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            isCancel = false;
-            mf.toolRecordSaveList.Clear();
-            mf.toolRecordSaveList.AddRange(recList);
-            mf.FileSaveToolRecordList(false);
+            using (var form = new FormYesNo("Have You Saved Lines and Exported Tracks?"))
+            {
+                form.ShowDialog(this);
+                if (form.DialogResult == DialogResult.OK)
+                {
+                    Close();
+                }
+            }
+        }
 
-            Close();
+        private void btnSaveTracks_Click(object sender, EventArgs e)
+        {
+            using (var form = new FormYesNo("Export the Tool Tracks to The Field?"))
+            {
+                form.ShowDialog(this);
+                if (form.DialogResult == DialogResult.OK)
+                {
+                    BuildTrackLines();
+                    mf.FileSaveTracks();
+                }
+            }
+        }
+        private void btnSaveToolRecordTxtFile_Click(object sender, EventArgs e)
+        {
+            using (var form = new FormYesNo("Save the Tool Record Text File?"))
+            {
+                form.ShowDialog(this);
+                if (form.DialogResult == DialogResult.OK)
+                {
+                    mf.toolRecordSaveList.Clear();
+                    mf.toolRecordSaveList.AddRange(recList);
+                    mf.FileSaveToolRecordList(false);
+                }
+            }
+        }
+
+
+        private void btnSectionsTrams_Click(object sender, EventArgs e)
+        {
+            mode++;
+            if (mode > 3) { mode = 0; }
+        }
+
+
+        private void BuildTrackLines()
+        {
+            for (int i = 0; i < recList.Count; i++)
+            {
+                CTrk newTrk = new CTrk
+                {
+                    isVisible = true
+                };
+
+                if (recList[i][0].heading == 0) continue;
+                else if (recList[i][0].heading == 10)
+                {
+                    newTrk.mode = TrackMode.toolLineOuter;
+                    newTrk.name = "T_Bnd " + mf.trks.gArr.Count;
+                }
+                else if (recList[i][0].heading == 20)
+                {
+                    newTrk.mode = TrackMode.toolLineInner;
+                    newTrk.name = "T_Fld " + mf.trks.gArr.Count;
+                }
+
+                newTrk.curvePts = new List<vec3>();
+                for (int j = 0; j < recList[i].Count; j++)
+                {
+                    newTrk.curvePts.Add(new vec3(recList[i][j]));
+                }
+
+                newTrk.ptA = new vec2(newTrk.curvePts[0].easting, newTrk.curvePts[0].northing);
+                newTrk.ptB = new vec2(newTrk.curvePts[newTrk.curvePts.Count - 1].easting, newTrk.curvePts[newTrk.curvePts.Count - 1].northing);
+
+                newTrk.curvePts.SmoothSegments(4);
+                newTrk.curvePts.GenerateEquidistantPoints(2, false);
+                newTrk.curvePts.CalculateAverageHeadings(false);
+                newTrk.curvePts.ReducePointsByAngle(0.005, 30);
+
+                newTrk.heading = newTrk.curvePts.TrackAverageHeading();
+                newTrk.name += " " + (Math.Round(glm.toDegrees(newTrk.heading), 1)).ToString(CultureInfo.InvariantCulture) + "\u00B0";
+
+                mf.trks.AddTrack(newTrk);
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -176,13 +254,14 @@ namespace Twol
             lblCurveSelected.Text = (selectedLineIndex + 1).ToString() + " / " + recList.Count.ToString();
         }
 
+        //outer lines
         private void btnOuterLine_Click(object sender, EventArgs e)
         {
             if (recList.Count > 0 && selectedLineIndex >= 0 && selectedLineIndex < recList.Count && recList[selectedLineIndex].Count > 0)
             {
                 // Copy the struct, modify, and assign back to the list
                 vec3 temp = recList[selectedLineIndex][0];
-                temp.heading = 1;
+                temp.heading = 10;
                 recList[selectedLineIndex][0] = temp;
             }
 
@@ -192,10 +271,11 @@ namespace Twol
 
         }
 
+        //inner lines
         private void btnMakeCurve_Click(object sender, EventArgs e)
         {
             vec3 temp = recList[selectedLineIndex][0];
-            temp.heading = 2;
+            temp.heading = 20;
             recList[selectedLineIndex][0] = temp;
 
             selectedLineIndex++;
@@ -204,13 +284,6 @@ namespace Twol
 
             // "A_Fld Cu " : "A_Bnd Cu ";
         }
-        private void btnJoinCurve_Click(object sender, EventArgs e)
-        {
-            vec3 temp = recList[selectedLineIndex][0];
-            temp.heading = 3;
-            recList[selectedLineIndex][0] = temp;
-        }
-
 
         private void btnMakeABLine_Click(object sender, EventArgs e)
         {
@@ -271,7 +344,8 @@ namespace Twol
             //translate to that spot in the world
             GL.Translate(-mf.fieldCenterX + sX * mf.maxFieldDistance, -mf.fieldCenterY + sY * mf.maxFieldDistance, 0);
 
-            if (isDrawSections)
+            //draw sections
+            if (mode > 1)
             {
                 GL.Color3(0.2f, 0.2f, 0.2f);
 
@@ -279,6 +353,26 @@ namespace Twol
                 foreach (var triList in mf.patchList)
                 {
                     triList.DrawPolygon(8, 1, PrimitiveType.TriangleStrip);
+                }
+            }
+
+            //draw trams
+            if (mode == 1 || mode == 3)
+            {
+                GL.LineWidth(4);
+                GL.Color3(0.915f, 0.915f, 0.915f);
+                if (mf.tram.tramList.Count > 0)
+                {
+                    for (int i = 0; i < mf.tram.tramList.Count; i++)
+                    {
+                        mf.tram.tramList[i].DrawPolygon(PrimitiveType.LineStrip);
+                    }
+                }
+
+                if (mf.tram.tramBndOuterArr.Count > 0)
+                {
+                    mf.tram.tramBndOuterArr.DrawPolygon(PrimitiveType.LineStrip);
+                    mf.tram.tramBndInnerArr.DrawPolygon(PrimitiveType.LineStrip);
                 }
             }
 
@@ -295,10 +389,11 @@ namespace Twol
                 GL.PointSize(2);
                 for (int i = 0; i < recList.Count; i++)
                 {
-                    if (recList[i][0].heading == 0) GL.Color3(0.19, 1.0, 1.0);
-                    else if (recList[i][0].heading == 1) GL.Color3(1.0, 0.09, 0.56);
-                    else if (recList[i][0].heading == 2) GL.Color3(0.39, 1.0, 0.396);
-                    else if (recList[i][0].heading == 3) GL.Color3(0.39, 0.9, 1.0);
+                    if (recList[i][0].heading == 10)
+                        GL.Color3(1.0, 0.09, 0.56);
+                    else if (recList[i][0].heading == 20)
+                        GL.Color3(0.39, 1.0, 0.396);
+                    else GL.Color3(0.19, 1.0, 1.0);
 
                     recList[i].DrawPolygon(PrimitiveType.Points);
                 }

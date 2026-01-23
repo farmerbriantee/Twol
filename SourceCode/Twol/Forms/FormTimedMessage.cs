@@ -8,6 +8,12 @@ namespace Twol
         //class variables
         //private FormGPS mf = null;
 
+        /// <summary>
+        /// Timed out message box
+        /// </summary>
+        /// <param name="timeInMsec"></param>
+        /// <param name="titleString"></param>
+        /// <param name="messageString"></param>
         public FormTimedMessage(int timeInMsec, string titleString, string messageString)
         {
             InitializeComponent();

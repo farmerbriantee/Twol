@@ -40,7 +40,7 @@
             // 
             this.lblMessage.AutoSize = true;
             this.lblMessage.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold);
-            this.lblMessage.Location = new System.Drawing.Point(3, 0);
+            this.lblMessage.Location = new System.Drawing.Point(3, 3);
             this.lblMessage.Name = "lblMessage";
             this.lblMessage.Size = new System.Drawing.Size(115, 29);
             this.lblMessage.TabIndex = 0;
@@ -56,7 +56,7 @@
             // 
             this.lblMessage2.AutoSize = true;
             this.lblMessage2.Font = new System.Drawing.Font("Tahoma", 18F);
-            this.lblMessage2.Location = new System.Drawing.Point(43, 52);
+            this.lblMessage2.Location = new System.Drawing.Point(43, 56);
             this.lblMessage2.Name = "lblMessage2";
             this.lblMessage2.Size = new System.Drawing.Size(127, 29);
             this.lblMessage2.TabIndex = 1;
@@ -70,15 +70,15 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(7, 7);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(262, 120);
+            this.panel1.Size = new System.Drawing.Size(296, 168);
             this.panel1.TabIndex = 2;
             // 
             // FormTimedMessage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Red;
-            this.ClientSize = new System.Drawing.Size(276, 134);
+            this.BackColor = System.Drawing.Color.PeachPuff;
+            this.ClientSize = new System.Drawing.Size(310, 182);
             this.ControlBox = false;
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Tahoma", 14.25F);

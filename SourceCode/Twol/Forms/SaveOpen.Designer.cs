@@ -885,7 +885,7 @@ namespace Twol
                             {
                                 line = reader.ReadLine();
                                 string[] words = line.Split(',');
-                                if (words[2] != "0" || words[2] != "1" || words[2] != "2" || words[2] != "3") words[2] = "0";
+                                if (words[2] != "0" && words[2] != "10" && words[2] != "20") words[2] = "0";
                                 vecFix.easting = double.Parse(words[0], CultureInfo.InvariantCulture);
                                 vecFix.northing = double.Parse(words[1], CultureInfo.InvariantCulture);
                                 vecFix.heading = double.Parse(words[2], CultureInfo.InvariantCulture);
