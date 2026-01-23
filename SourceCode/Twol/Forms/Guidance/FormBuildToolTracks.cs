@@ -53,6 +53,9 @@ namespace Twol
             //load the tool recording file
             FileLoadToolRecord(Path.Combine(RegistrySettings.fieldsDirectory, mf.currentFieldDirectory, mf.currentJobDirectory, "ToolRecording.txt"));
             FixLabelsCurve();
+
+            //scroll detect
+            this.oglSelf.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.oglSelf_MouseWheel);
         }
 
         public void FileLoadToolRecord(string dir)
@@ -290,42 +293,84 @@ namespace Twol
             FixLabelsCurve();
         }
 
+        void oglSelf_MouseWheel(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            ///process mouse event
+            //Point ptt = oglSelf.PointToClient(Cursor.Position);
+
+            //int wid = oglSelf.Width;
+            //int halfWid = oglSelf.Width / 2;
+            //double scale = (double)wid * 0.903;
+
+            {
+                //sX = ((halfWid - (double)ptt.X) / wid) * 1.1;
+                //sY = ((halfWid - (double)ptt.Y) / -wid) * 1.1;
+                zoom += (e.Delta * 0.0005);
+                return;
+            }
+        }
+
+        private void oglSelf_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (!isRightDn) return;
+            sX += (double)(e.X - lastMousePt.X) * 0.002 * zoom;
+            sY -= (double)(e.Y - lastMousePt.Y) * 0.002 * zoom;
+            lastMousePt = e.Location;
+        }
+
+        bool isRightDn = false;
+        Point lastMousePt;
+
+        private void oglSelf_MouseUp(object sender, MouseEventArgs e)
+        {
+            isRightDn = false;
+            lastMousePt = e.Location;
+        }
+
         private void oglSelf_MouseDown(object sender, MouseEventArgs e)
         {
-            Point pt = oglSelf.PointToClient(Cursor.Position);
+            Point ptt = oglSelf.PointToClient(Cursor.Position);
 
             int wid = oglSelf.Width;
             int halfWid = oglSelf.Width / 2;
             double scale = (double)wid * 0.903;
 
-            //Convert to Origin in the center of window, 800 pixels
-            fixPt.X = pt.X - halfWid;
-            fixPt.Y = (wid - pt.Y - halfWid);
-            vec3 plotPt = new vec3
+            if (e.Button == MouseButtons.Right)
             {
-                //convert screen coordinates to field coordinates
-                easting = fixPt.X * mf.maxFieldDistance / scale * zoom,
-                northing = fixPt.Y * mf.maxFieldDistance / scale * zoom,
-                heading = 0
-            };
-
-            plotPt.easting += mf.fieldCenterX + mf.maxFieldDistance * -sX;
-            plotPt.northing += mf.fieldCenterY + mf.maxFieldDistance * -sY;
-
-            double minDistA = double.MaxValue;
-            pint.easting = plotPt.easting;
-            pint.northing = plotPt.northing;
-
-            for (int j = 0; j < recList.Count; j++)
+                isRightDn = true;
+                lastMousePt = e.Location;
+            }
+            else
             {
-                for (int i = 0; i < recList[j].Count; i++)
+                //Convert to Origin in the center of window, 800 pixels
+                fixPt.X = ptt.X - halfWid;
+                fixPt.Y = (wid - ptt.Y - halfWid);
+                vec3 plotPt = new vec3
                 {
-                    double dist = ((pint.easting - recList[j][i].easting) * (pint.easting - recList[j][i].easting))
-                                    + ((pint.northing - recList[j][i].northing) * (pint.northing - recList[j][i].northing));
-                    if (dist < minDistA)
+                    //convert screen coordinates to field coordinates
+                    easting = fixPt.X * mf.maxFieldDistance / scale * zoom,
+                    northing = fixPt.Y * mf.maxFieldDistance / scale * zoom,
+                    heading = 0
+                };
+
+                plotPt.easting += mf.fieldCenterX + mf.maxFieldDistance * -sX;
+                plotPt.northing += mf.fieldCenterY + mf.maxFieldDistance * -sY;
+
+                double minDistA = double.MaxValue;
+                pint.easting = plotPt.easting;
+                pint.northing = plotPt.northing;
+
+                for (int j = 0; j < recList.Count; j++)
+                {
+                    for (int i = 0; i < recList[j].Count; i++)
                     {
-                        minDistA = dist;
-                        selectedLineIndex = j;
+                        double dist = ((pint.easting - recList[j][i].easting) * (pint.easting - recList[j][i].easting))
+                                        + ((pint.northing - recList[j][i].northing) * (pint.northing - recList[j][i].northing));
+                        if (dist < minDistA)
+                        {
+                            minDistA = dist;
+                            selectedLineIndex = j;
+                        }
                     }
                 }
             }
@@ -498,6 +543,11 @@ namespace Twol
                 pt.heading = start.heading;
                 recList[selectedLineIndex].Add(pt);
             }
+        }
+
+        private void btnZoomReset_Click(object sender, EventArgs e)
+        {
+            sX = 0; sY = 0; zoom = 1;
         }
 
         private void btnBLengthShorter_Click(object sender, EventArgs e)
