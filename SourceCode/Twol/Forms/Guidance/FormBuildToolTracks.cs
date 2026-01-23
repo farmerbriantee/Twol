@@ -51,7 +51,7 @@ namespace Twol
             }
 
             //load the tool recording file
-            FileLoadToolRecord(Path.Combine(RegistrySettings.fieldsDirectory, mf.currentFieldDirectory, mf.currentJobDirectory, "ToolRecording.txt"));
+            FileLoadToolRecord(Path.Combine(RegistrySettings.fieldsDirectory, mf.currentFieldDirectory, "ToolRecording.txt"));
             FixLabelsCurve();
 
             //scroll detect
@@ -433,8 +433,8 @@ namespace Twol
                 }
 
                 //selected line
-                GL.Color3(1.0f, 0.975f, 0.9350f);
-                GL.PointSize(4);
+                GL.Color3(1f, 0.1f, 1f);
+                GL.PointSize(8);
                 GL.Begin(PrimitiveType.Points);
 
                 for (int i = 0; i < recList[selectedLineIndex].Count; i += 5)
@@ -446,7 +446,7 @@ namespace Twol
                 //start of Line
                 GL.Color3(1.0f, 0.75f, 0.350f);
 
-                GL.PointSize(12);
+                GL.PointSize(8);
                 for (int i = 0; i < recList.Count; i++)
                 {
                     GL.Begin(PrimitiveType.Points);

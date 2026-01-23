@@ -6,6 +6,15 @@ namespace Twol
 {
     public static class TrackMethods
     {
+        public static void FixReferenceTrack(this List<vec3> points, bool isLoop)
+        {
+            points.SmoothSegments(4);
+            points.GenerateEquidistantPoints(2.1, isLoop);
+            points.CalculateAverageHeadings(isLoop);
+            points.ReducePointsByAngle(0.005, 2);
+            points.CalculateAverageHeadings(isLoop);
+        }
+
         public static void CalculateAverageHeadings(this List<vec3> points, bool loop)
         {
             //to calc heading based on next and previous points to give an average heading.
@@ -187,19 +196,24 @@ namespace Twol
             points.AddRange(result);
         }
 
-        public static void ReducePointsByAngle(this List<vec3> points, double angleDelta = 0.005, double spread = 30)
+        public static void ReducePointsByAngle(this List<vec3> points, double angleDelta = 0.005, double spread = 2)
         {
-            double delta = 0;
             int cont = points.Count;
             vec3[] smList = new vec3[cont];
             cont--;
             points.CopyTo(smList);
             points.Clear();
-            int counter = 0;
+
+            double delta = 0;
             double check;
+            double dist = 0;
+            vec3 lastPt = new vec3(smList[0]);
+            spread *= spread;
+            spread *= 0.95;
 
             for (int i = 0; i < cont; i++)
             {
+
                 if (i < 2 || i > cont - 3)
                 {
                     points.Add(new vec3(smList[i]));
@@ -211,14 +225,17 @@ namespace Twol
                     if (check > 0) check -= glm.twoPI;
                     else check += glm.twoPI;
                 }
+
                 delta += check;
-                if (Math.Abs(delta) > angleDelta || counter > spread)
+                dist += glm.DistanceSquared(lastPt, smList[i]);
+                lastPt = smList[i];
+
+                if (Math.Abs(delta) > angleDelta || dist >= spread)
                 {
                     points.Add(new vec3(smList[i]));
                     delta = 0;
-                    counter = 0;
+                    dist = 0;
                 }
-                counter++;
             }
         }
 

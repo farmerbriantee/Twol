@@ -507,14 +507,10 @@ namespace Twol
             int cnt = mf.trks.designPtsList.Count;
             if (cnt > 3)
             {
-                //make sure point distance isn't too big
-                mf.trks.designPtsList.MinimumSpacingPointRemoval(1);
-                mf.trks.designPtsList.CalculateAverageHeadings(false);
-
                 var track = new CTrk(TrackMode.PolyLine);
 
-                mf.trks.designPtsList.SmoothSegments();
-                mf.trks.designPtsList.CalculateAverageHeadings(false);
+                //make pretty
+                mf.trks.designPtsList.FixReferenceTrack(false);
 
                 track.heading = mf.trks.designPtsList.TrackAverageHeading();
 
@@ -533,9 +529,6 @@ namespace Twol
 
                 track.ptA = new vec2(track.curvePts[0]);
                 track.ptB = new vec2(track.curvePts[track.curvePts.Count - 1]);
-
-                //build the tail extensions
-                track.curvePts.AddStartEndPoints(5, 300);
 
                 mf.trks.AddTrack(track);
                 selectedTrack = track;
@@ -839,9 +832,8 @@ namespace Twol
                     }
                     else if (designPtsList.Count > 2)
                     {
-                        //make sure point distance isn't too big
-                        designPtsList.MinimumSpacingPointRemoval(1);
-                        designPtsList.CalculateAverageHeadings(false);
+                        //make pretty
+                        mf.trks.designPtsList.FixReferenceTrack(false);
 
                         var track = new CTrk(TrackMode.PolyLine)
                         {
@@ -849,10 +841,6 @@ namespace Twol
                             ptB = new vec2(designPtsList[designPtsList.Count - 1]),
                             heading = mf.trks.designPtsList.TrackAverageHeading()
                         };
-
-                        //build the tail extensions
-                        designPtsList.AddStartEndPoints(5, 300);
-                        //mf.trks.SmoothSegments(ref designPtsList, 4, false);
 
                         //write out the PolyLine Points
                         track.curvePts = designPtsList;

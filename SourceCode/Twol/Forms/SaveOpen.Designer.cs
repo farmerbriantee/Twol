@@ -1311,7 +1311,7 @@ namespace Twol
             {
                 try
                 {
-                    string directory = Path.Combine(RegistrySettings.fieldsDirectory, currentFieldDirectory, currentJobDirectory);
+                    string directory = Path.Combine(RegistrySettings.fieldsDirectory, currentFieldDirectory);
                     if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
                         Directory.CreateDirectory(directory);
 

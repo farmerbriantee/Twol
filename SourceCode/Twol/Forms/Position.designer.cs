@@ -1076,7 +1076,7 @@ namespace Twol
                 //All sections OFF so if on, turn off
                 else
                 {
-                    if (tRec.isToolRecordOn)
+                    if (tRec.isToolRecordOn && avgSpeed > 1)
                     { tRec.StopToolRecordLine(); }
                 }
 

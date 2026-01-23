@@ -121,15 +121,19 @@ namespace Twol
         // Remove an ear from the polygon and add it to the triangles array.
         private void RemoveEar(List<Triangle> triangles)
         {
-            // Find an ear.
-            int A = 0, B = 0, C = 0;
-            FindEar(ref A, ref B, ref C);
+            try
+            {
+                // Find an ear.
+                int A = 0, B = 0, C = 0;
+                FindEar(ref A, ref B, ref C);
 
-            // Create a new triangle for the ear.
-            triangles.Add(new Triangle(polygonPts[A], polygonPts[B], polygonPts[C]));
+                // Create a new triangle for the ear.
+                triangles.Add(new Triangle(polygonPts[A], polygonPts[B], polygonPts[C]));
 
-            // Remove the ear from the polygon.
-            RemovePointFromArray(B);
+                // Remove the ear from the polygon.
+                RemovePointFromArray(B);
+            }
+            catch { }
         }
 
         // Remove point target from the array.

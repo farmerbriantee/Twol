@@ -229,11 +229,7 @@ namespace Twol
                     track.ptA = new vec2(designPtsList[0]);
                     track.ptB = new vec2(designPtsList[designPtsList.Count - 1]);
 
-                    designPtsList.GenerateEquidistantPoints(4, true);
-                    designPtsList.ChaikinsSmooth(1, true);
-                    designPtsList.CalculateAverageHeadings(true);
-                    designPtsList.ReducePointsByAngle();
-                    designPtsList.CalculateAverageHeadings(true);
+                    designPtsList.FixReferenceTrack(true);
 
                     //create a name
                     track.name = q == 0 ? "Boundary Track" : "Boundary Inner Track" + q.ToString();
@@ -309,15 +305,8 @@ namespace Twol
                     ptB = new vec2(designPtsList[designPtsList.Count - 1])
                 };
 
-                //make sure point distance isn't too big
-                designPtsList.GenerateEquidistantPoints(4, false);
-                designPtsList.ChaikinsSmooth(1, false);
-                designPtsList.CalculateAverageHeadings(false);
-                designPtsList.ReducePointsByAngle();
-                designPtsList.CalculateAverageHeadings(false);
-
-                //build the tail extensions
-                designPtsList.AddStartEndPoints(5, 300);
+                //clean it up
+                designPtsList.FixReferenceTrack(false);
 
                 track.heading = designPtsList.TrackAverageHeading();
 
@@ -396,10 +385,6 @@ namespace Twol
             designPtsList.Add(new vec3(track.ptA, abHead));
             designPtsList.Add(new vec3(track.ptB, abHead));
 
-            //build the tail extensions
-            designPtsList.AddStartPoints(5, 400);
-            designPtsList.AddEndPoints(5, 400);
-
             //create a name
             track.name = cboxFldOrBnd.Checked ? "A_Fld AB " : "A_Bnd AB ";
             track.name += Math.Round(glm.toDegrees(track.heading), 1).ToString(CultureInfo.InvariantCulture) + "\u00B0";
@@ -413,7 +398,9 @@ namespace Twol
             start = 99999; end = 99999;
 
             //write out the PolyLine Points
+            designPtsList.GenerateEquidistantPoints(50, false);
             track.curvePts = designPtsList;
+
 
             gTemp.Add(track);
             selectedLine = track;

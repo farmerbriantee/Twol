@@ -261,7 +261,7 @@ namespace Twol
                 //    return newCurList;
                 //}
 
-                bool loops = track.mode > TrackMode.PolyLine;
+                bool loops = track.mode == TrackMode.Polygon;
 
                 if (track.mode == TrackMode.waterPivot)
                 {
@@ -288,7 +288,7 @@ namespace Twol
 
                     newCurList = track.curvePts.OffsetLine(distAway, step, loops);
 
-                    if (track.mode != TrackMode.PolyLine)
+                    if (track.mode != TrackMode.ABLine)
                     {
                         int cnt = newCurList.Count;
                         if (cnt > 6)
@@ -319,25 +319,41 @@ namespace Twol
 
                                 distance = glm.Distance(arr[i + 1], arr[i + 2]);
 
-                                //if (distance > step)
-                                //{
-                                //    int loopTimes = (int)(distance / step + 1);
-                                //    for (int j = 1; j < loopTimes; j++)
-                                //    {
-                                //        vec3 pos = new vec3(glm.Catmull(j / (double)(loopTimes), arr[i], arr[i + 1], arr[i + 2], arr[i + 3]));
-                                //        newCurList.Add(pos);
-                                //    }
-                                //}
+                                if (distance > step)
+                                {
+                                    int loopTimes = (int)(distance / step + 1);
+                                    for (int j = 1; j < loopTimes; j++)
+                                    {
+                                        vec3 pos = new vec3(glm.Catmull(j / (double)(loopTimes), arr[i], arr[i + 1], arr[i + 2], arr[i + 3]));
+                                        newCurList.Add(pos);
+                                    }
+                                }
                             }
 
                             newCurList.Add(arr[cnt - 2]);
                             newCurList.Add(arr[cnt - 1]);
                         }
 
-                        newCurList.GenerateEquidistantPoints(2, track.mode == TrackMode.Polygon);
-                        newCurList.CalculateAverageHeadings(false);
+                        //designPtsList.ChaikinsSmooth(4, true);
+                        newCurList.SmoothSegments(4);
+                        //newCurList.ChaikinsSmooth(1, loops);
+                        //newCurList.MinimumSpacingPointRemoval();
+                        if (Settings.Tool.setToolSteer.isPassiveSteering)
+                        {
+                            newCurList.GenerateEquidistantPoints(1.1, loops);
+                            newCurList.CalculateAverageHeadings(loops);
+                            newCurList.ReducePointsByAngle(0.005, 20);
 
-                        //newCurList.ReducePointsByAngle();
+                        }
+                        else
+                        {
+                            newCurList.GenerateEquidistantPoints(1.5, loops);
+                            newCurList.CalculateAverageHeadings(loops);
+                            newCurList.ReducePointsByAngle(0.01, 20);
+                        }
+
+                        if (track.mode != TrackMode.Polygon)
+                            newCurList.AddStartEndPoints(2, 1000);
                     }
 
 
@@ -414,12 +430,13 @@ namespace Twol
                 if (gArr != null && gArr.Count != 0)
                 {
                     GL.LineWidth(1);
+                    GL.PointSize(4);
                     GL.Color3(0.95f, 0.5f, 0.5f);
 
                     for (int i = 0; i < gArr.Count; i++)
                     {
                         if (!gArr[i].isVisible) continue;
-                        gArr[i].curvePts.DrawPolygon(PrimitiveType.LineStrip);
+                        gArr[i].curvePts.DrawPolygonFifths(PrimitiveType.LineStrip);
                     }
                 }
 
@@ -431,7 +448,7 @@ namespace Twol
 
                         GL.LineWidth(Settings.User.setDisplay_lineWidth * 2);
                         GL.Color3(0.96, 0.2f, 0.2f);
-                        currentRefTrack.curvePts.DrawPolygon(PrimitiveType.Lines);
+                        currentRefTrack.curvePts.DrawPolygonFifths(PrimitiveType.LineStrip);
 
                         if (mf.font.isFontOn)
                         {
@@ -692,8 +709,8 @@ namespace Twol
             double len = glm.Distance(designPtA, designPtB);
             if (len < 20)
             {
-                designPtB.easting = designPtA.easting + (Math.Sin(designHeading) * 30);
-                designPtB.northing = designPtA.northing + (Math.Cos(designHeading) * 30);
+                designPtB.easting = designPtA.easting + (Math.Sin(designHeading) * 50);
+                designPtB.northing = designPtA.northing + (Math.Cos(designHeading) * 50);
             }
 
             track.curvePts.Add(new vec3(designPtA, designHeading));
@@ -705,9 +722,6 @@ namespace Twol
 
             track.ptA = new vec2(track.curvePts[0]);
             track.ptB = new vec2(track.curvePts[track.curvePts.Count - 1]);
-
-            //build the tail extensions
-            track.curvePts.AddStartEndPoints(5, 300);
 
             AddTrack(track);
             return track;

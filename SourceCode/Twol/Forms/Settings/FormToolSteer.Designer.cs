@@ -87,27 +87,33 @@
             this.tabToolSetup = new System.Windows.Forms.TabControl();
             this.tabMode = new System.Windows.Forms.TabPage();
             this.cboxIsRecordToolLine = new System.Windows.Forms.CheckBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.cboxIsFollowPivot = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.cboxIsFollowCurrent = new System.Windows.Forms.CheckBox();
-            this.cboxIsPassiveSteering = new System.Windows.Forms.CheckBox();
             this.tabPassive = new System.Windows.Forms.TabPage();
             this.lblPassiveIntegralGain = new System.Windows.Forms.Label();
             this.hsbarPassiveIntegralGain = new System.Windows.Forms.HScrollBar();
+            this.label4 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.lblCurvatureGain = new System.Windows.Forms.Label();
             this.hsbarPassiveCurvature = new System.Windows.Forms.HScrollBar();
             this.label6 = new System.Windows.Forms.Label();
+            this.cboxIsPassiveSteering = new System.Windows.Forms.CheckBox();
             this.tabActive = new System.Windows.Forms.TabPage();
+            this.cboxLockToReference = new System.Windows.Forms.CheckBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.cboxRecordSourceTool = new System.Windows.Forms.CheckBox();
+            this.nudToolGuidanceSpacing = new Twol.NudlessNumericUpDown();
+            this.label10 = new System.Windows.Forms.Label();
             this.nudNudge = new Twol.NudlessNumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
-            this.cboxIsSteerNotSlide_Tool = new System.Windows.Forms.CheckBox();
-            this.label74 = new System.Windows.Forms.Label();
             this.tabSetup = new System.Windows.Forms.TabPage();
             this.nudAntennaHeight_Tool = new Twol.NudlessNumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.lblManualPWM_Percent = new System.Windows.Forms.Label();
+            this.cboxIsSteerNotSlide_Tool = new System.Windows.Forms.CheckBox();
+            this.label74 = new System.Windows.Forms.Label();
             this.cboxInvertWAS_Tool = new System.Windows.Forms.CheckBox();
             this.cboxInvertSteer_Tool = new System.Windows.Forms.CheckBox();
             this.hsbarManualPWM_Percent = new System.Windows.Forms.HScrollBar();
@@ -826,11 +832,9 @@
             // tabMode
             // 
             this.tabMode.Controls.Add(this.cboxIsRecordToolLine);
-            this.tabMode.Controls.Add(this.label4);
             this.tabMode.Controls.Add(this.cboxIsFollowPivot);
             this.tabMode.Controls.Add(this.label1);
             this.tabMode.Controls.Add(this.cboxIsFollowCurrent);
-            this.tabMode.Controls.Add(this.cboxIsPassiveSteering);
             this.tabMode.Location = new System.Drawing.Point(4, 58);
             this.tabMode.Name = "tabMode";
             this.tabMode.Size = new System.Drawing.Size(571, 440);
@@ -846,7 +850,7 @@
             this.cboxIsRecordToolLine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboxIsRecordToolLine.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxIsRecordToolLine.ForeColor = System.Drawing.Color.Black;
-            this.cboxIsRecordToolLine.Location = new System.Drawing.Point(42, 315);
+            this.cboxIsRecordToolLine.Location = new System.Drawing.Point(328, 147);
             this.cboxIsRecordToolLine.Name = "cboxIsRecordToolLine";
             this.cboxIsRecordToolLine.Size = new System.Drawing.Size(217, 70);
             this.cboxIsRecordToolLine.TabIndex = 592;
@@ -854,17 +858,6 @@
             this.cboxIsRecordToolLine.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.cboxIsRecordToolLine.UseVisualStyleBackColor = false;
             this.cboxIsRecordToolLine.Click += new System.EventHandler(this.cboxIsRecordToolLine_Click);
-            // 
-            // label4
-            // 
-            this.label4.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(296, 42);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(262, 24);
-            this.label4.TabIndex = 591;
-            this.label4.Text = "Passive Modes";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // cboxIsFollowPivot
             // 
@@ -874,7 +867,7 @@
             this.cboxIsFollowPivot.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboxIsFollowPivot.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxIsFollowPivot.ForeColor = System.Drawing.Color.Black;
-            this.cboxIsFollowPivot.Location = new System.Drawing.Point(42, 172);
+            this.cboxIsFollowPivot.Location = new System.Drawing.Point(39, 146);
             this.cboxIsFollowPivot.Name = "cboxIsFollowPivot";
             this.cboxIsFollowPivot.Size = new System.Drawing.Size(217, 70);
             this.cboxIsFollowPivot.TabIndex = 587;
@@ -887,7 +880,7 @@
             // 
             this.label1.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(6, 39);
+            this.label1.Location = new System.Drawing.Point(3, 13);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(262, 24);
             this.label1.TabIndex = 590;
@@ -902,7 +895,7 @@
             this.cboxIsFollowCurrent.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboxIsFollowCurrent.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxIsFollowCurrent.ForeColor = System.Drawing.Color.Black;
-            this.cboxIsFollowCurrent.Location = new System.Drawing.Point(42, 71);
+            this.cboxIsFollowCurrent.Location = new System.Drawing.Point(39, 45);
             this.cboxIsFollowCurrent.Name = "cboxIsFollowCurrent";
             this.cboxIsFollowCurrent.Size = new System.Drawing.Size(217, 70);
             this.cboxIsFollowCurrent.TabIndex = 585;
@@ -911,32 +904,17 @@
             this.cboxIsFollowCurrent.UseVisualStyleBackColor = false;
             this.cboxIsFollowCurrent.Click += new System.EventHandler(this.cboxIsFollowCurrent_Click);
             // 
-            // cboxIsPassiveSteering
-            // 
-            this.cboxIsPassiveSteering.Appearance = System.Windows.Forms.Appearance.Button;
-            this.cboxIsPassiveSteering.BackColor = System.Drawing.Color.AliceBlue;
-            this.cboxIsPassiveSteering.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
-            this.cboxIsPassiveSteering.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cboxIsPassiveSteering.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboxIsPassiveSteering.ForeColor = System.Drawing.Color.Black;
-            this.cboxIsPassiveSteering.Location = new System.Drawing.Point(319, 72);
-            this.cboxIsPassiveSteering.Name = "cboxIsPassiveSteering";
-            this.cboxIsPassiveSteering.Size = new System.Drawing.Size(217, 70);
-            this.cboxIsPassiveSteering.TabIndex = 587;
-            this.cboxIsPassiveSteering.Text = "Curvature PID";
-            this.cboxIsPassiveSteering.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.cboxIsPassiveSteering.UseVisualStyleBackColor = false;
-            this.cboxIsPassiveSteering.Click += new System.EventHandler(this.cboxIsPassiveSteering_Click);
-            // 
             // tabPassive
             // 
             this.tabPassive.BackColor = System.Drawing.Color.LightGray;
             this.tabPassive.Controls.Add(this.lblPassiveIntegralGain);
             this.tabPassive.Controls.Add(this.hsbarPassiveIntegralGain);
+            this.tabPassive.Controls.Add(this.label4);
             this.tabPassive.Controls.Add(this.label7);
             this.tabPassive.Controls.Add(this.lblCurvatureGain);
             this.tabPassive.Controls.Add(this.hsbarPassiveCurvature);
             this.tabPassive.Controls.Add(this.label6);
+            this.tabPassive.Controls.Add(this.cboxIsPassiveSteering);
             this.tabPassive.Location = new System.Drawing.Point(4, 58);
             this.tabPassive.Name = "tabPassive";
             this.tabPassive.Size = new System.Drawing.Size(571, 440);
@@ -966,6 +944,17 @@
             this.hsbarPassiveIntegralGain.TabIndex = 563;
             this.hsbarPassiveIntegralGain.Value = 4;
             this.hsbarPassiveIntegralGain.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hsbarPassiveIntegralGain_Scroll);
+            // 
+            // label4
+            // 
+            this.label4.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.Black;
+            this.label4.Location = new System.Drawing.Point(120, 273);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(262, 24);
+            this.label4.TabIndex = 591;
+            this.label4.Text = "Passive Mode";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label7
             // 
@@ -1011,22 +1000,126 @@
             this.label6.Text = "Curvature Gain";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // cboxIsPassiveSteering
+            // 
+            this.cboxIsPassiveSteering.Appearance = System.Windows.Forms.Appearance.Button;
+            this.cboxIsPassiveSteering.BackColor = System.Drawing.Color.AliceBlue;
+            this.cboxIsPassiveSteering.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
+            this.cboxIsPassiveSteering.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cboxIsPassiveSteering.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboxIsPassiveSteering.ForeColor = System.Drawing.Color.Black;
+            this.cboxIsPassiveSteering.Location = new System.Drawing.Point(143, 303);
+            this.cboxIsPassiveSteering.Name = "cboxIsPassiveSteering";
+            this.cboxIsPassiveSteering.Size = new System.Drawing.Size(217, 70);
+            this.cboxIsPassiveSteering.TabIndex = 587;
+            this.cboxIsPassiveSteering.Text = "Curvature PID";
+            this.cboxIsPassiveSteering.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.cboxIsPassiveSteering.UseVisualStyleBackColor = false;
+            this.cboxIsPassiveSteering.Click += new System.EventHandler(this.cboxIsPassiveSteering_Click);
+            // 
             // tabActive
             // 
             this.tabActive.BackColor = System.Drawing.Color.LightGray;
+            this.tabActive.Controls.Add(this.cboxLockToReference);
+            this.tabActive.Controls.Add(this.label12);
+            this.tabActive.Controls.Add(this.label8);
+            this.tabActive.Controls.Add(this.cboxRecordSourceTool);
+            this.tabActive.Controls.Add(this.nudToolGuidanceSpacing);
+            this.tabActive.Controls.Add(this.label10);
             this.tabActive.Controls.Add(this.nudNudge);
             this.tabActive.Controls.Add(this.label5);
-            this.tabActive.Controls.Add(this.cboxIsSteerNotSlide_Tool);
-            this.tabActive.Controls.Add(this.label74);
             this.tabActive.Location = new System.Drawing.Point(4, 58);
             this.tabActive.Name = "tabActive";
             this.tabActive.Size = new System.Drawing.Size(571, 440);
             this.tabActive.TabIndex = 7;
             this.tabActive.Text = "Active";
             // 
+            // cboxLockToReference
+            // 
+            this.cboxLockToReference.Appearance = System.Windows.Forms.Appearance.Button;
+            this.cboxLockToReference.BackColor = System.Drawing.Color.White;
+            this.cboxLockToReference.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.cboxLockToReference.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.cboxLockToReference.FlatAppearance.CheckedBackColor = System.Drawing.Color.MediumAquamarine;
+            this.cboxLockToReference.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cboxLockToReference.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboxLockToReference.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.cboxLockToReference.Image = global::Twol.Properties.Resources.ColorLocked;
+            this.cboxLockToReference.Location = new System.Drawing.Point(88, 89);
+            this.cboxLockToReference.Name = "cboxLockToReference";
+            this.cboxLockToReference.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.cboxLockToReference.Size = new System.Drawing.Size(99, 78);
+            this.cboxLockToReference.TabIndex = 597;
+            this.cboxLockToReference.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.cboxLockToReference.UseVisualStyleBackColor = false;
+            this.cboxLockToReference.Click += new System.EventHandler(this.cboxLockToReference_Click);
+            // 
+            // label12
+            // 
+            this.label12.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.ForeColor = System.Drawing.Color.Black;
+            this.label12.Location = new System.Drawing.Point(58, 36);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(158, 50);
+            this.label12.TabIndex = 598;
+            this.label12.Text = "Reference Only";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // label8
+            // 
+            this.label8.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.Black;
+            this.label8.Location = new System.Drawing.Point(289, 318);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(262, 24);
+            this.label8.TabIndex = 596;
+            this.label8.Text = "Record Source";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // cboxRecordSourceTool
+            // 
+            this.cboxRecordSourceTool.Appearance = System.Windows.Forms.Appearance.Button;
+            this.cboxRecordSourceTool.BackColor = System.Drawing.Color.AliceBlue;
+            this.cboxRecordSourceTool.Checked = true;
+            this.cboxRecordSourceTool.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cboxRecordSourceTool.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
+            this.cboxRecordSourceTool.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cboxRecordSourceTool.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboxRecordSourceTool.ForeColor = System.Drawing.Color.Black;
+            this.cboxRecordSourceTool.Location = new System.Drawing.Point(315, 345);
+            this.cboxRecordSourceTool.Name = "cboxRecordSourceTool";
+            this.cboxRecordSourceTool.Size = new System.Drawing.Size(217, 70);
+            this.cboxRecordSourceTool.TabIndex = 595;
+            this.cboxRecordSourceTool.Text = "Tool GPS";
+            this.cboxRecordSourceTool.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.cboxRecordSourceTool.UseVisualStyleBackColor = false;
+            this.cboxRecordSourceTool.Click += new System.EventHandler(this.cboxRecordSourceTool_Click);
+            // 
+            // nudToolGuidanceSpacing
+            // 
+            this.nudToolGuidanceSpacing.Location = new System.Drawing.Point(73, 229);
+            this.nudToolGuidanceSpacing.Maximum = 2000D;
+            this.nudToolGuidanceSpacing.Minimum = 1D;
+            this.nudToolGuidanceSpacing.Mode = Twol.UnitMode.Small;
+            this.nudToolGuidanceSpacing.Name = "nudToolGuidanceSpacing";
+            this.nudToolGuidanceSpacing.Size = new System.Drawing.Size(143, 56);
+            this.nudToolGuidanceSpacing.TabIndex = 589;
+            this.nudToolGuidanceSpacing.Click += new System.EventHandler(this.nudToolGuidanceSpacing_Click);
+            // 
+            // label10
+            // 
+            this.label10.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.Black;
+            this.label10.Location = new System.Drawing.Point(44, 185);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(201, 41);
+            this.label10.TabIndex = 590;
+            this.label10.Text = "Guidance Spacing";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
             // nudNudge
             // 
-            this.nudNudge.Location = new System.Drawing.Point(343, 84);
+            this.nudNudge.Location = new System.Drawing.Point(360, 84);
             this.nudNudge.Maximum = 500D;
             this.nudNudge.Minimum = -500D;
             this.nudNudge.Mode = Twol.UnitMode.Small;
@@ -1039,45 +1132,12 @@
             // 
             this.label5.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(335, 40);
+            this.label5.Location = new System.Drawing.Point(352, 40);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(158, 41);
             this.label5.TabIndex = 588;
             this.label5.Text = "Nudge";
             this.label5.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            // 
-            // cboxIsSteerNotSlide_Tool
-            // 
-            this.cboxIsSteerNotSlide_Tool.Appearance = System.Windows.Forms.Appearance.Button;
-            this.cboxIsSteerNotSlide_Tool.BackColor = System.Drawing.Color.White;
-            this.cboxIsSteerNotSlide_Tool.BackgroundImage = global::Twol.Properties.Resources.ConS_ModulesSteer;
-            this.cboxIsSteerNotSlide_Tool.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.cboxIsSteerNotSlide_Tool.Checked = true;
-            this.cboxIsSteerNotSlide_Tool.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cboxIsSteerNotSlide_Tool.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.cboxIsSteerNotSlide_Tool.FlatAppearance.CheckedBackColor = System.Drawing.Color.MediumAquamarine;
-            this.cboxIsSteerNotSlide_Tool.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cboxIsSteerNotSlide_Tool.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboxIsSteerNotSlide_Tool.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.cboxIsSteerNotSlide_Tool.Location = new System.Drawing.Point(61, 74);
-            this.cboxIsSteerNotSlide_Tool.Name = "cboxIsSteerNotSlide_Tool";
-            this.cboxIsSteerNotSlide_Tool.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.cboxIsSteerNotSlide_Tool.Size = new System.Drawing.Size(122, 78);
-            this.cboxIsSteerNotSlide_Tool.TabIndex = 578;
-            this.cboxIsSteerNotSlide_Tool.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.cboxIsSteerNotSlide_Tool.UseVisualStyleBackColor = false;
-            this.cboxIsSteerNotSlide_Tool.Click += new System.EventHandler(this.cboxIsSteerNotSlide_Click);
-            // 
-            // label74
-            // 
-            this.label74.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label74.ForeColor = System.Drawing.Color.Black;
-            this.label74.Location = new System.Drawing.Point(42, 21);
-            this.label74.Name = "label74";
-            this.label74.Size = new System.Drawing.Size(158, 48);
-            this.label74.TabIndex = 579;
-            this.label74.Text = "Sliding";
-            this.label74.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // tabSetup
             // 
@@ -1086,6 +1146,8 @@
             this.tabSetup.Controls.Add(this.nudAntennaHeight_Tool);
             this.tabSetup.Controls.Add(this.label2);
             this.tabSetup.Controls.Add(this.lblManualPWM_Percent);
+            this.tabSetup.Controls.Add(this.cboxIsSteerNotSlide_Tool);
+            this.tabSetup.Controls.Add(this.label74);
             this.tabSetup.Controls.Add(this.cboxInvertWAS_Tool);
             this.tabSetup.Controls.Add(this.cboxInvertSteer_Tool);
             this.tabSetup.Controls.Add(this.hsbarManualPWM_Percent);
@@ -1116,11 +1178,11 @@
             // 
             // label2
             // 
-            this.label2.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(12, 21);
+            this.label2.Location = new System.Drawing.Point(12, 4);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(158, 41);
+            this.label2.Size = new System.Drawing.Size(158, 58);
             this.label2.TabIndex = 581;
             this.label2.Text = "Antenna Height";
             this.label2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1137,6 +1199,39 @@
             this.lblManualPWM_Percent.Text = "888";
             this.lblManualPWM_Percent.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // cboxIsSteerNotSlide_Tool
+            // 
+            this.cboxIsSteerNotSlide_Tool.Appearance = System.Windows.Forms.Appearance.Button;
+            this.cboxIsSteerNotSlide_Tool.BackColor = System.Drawing.Color.White;
+            this.cboxIsSteerNotSlide_Tool.BackgroundImage = global::Twol.Properties.Resources.ConS_ModulesSteer;
+            this.cboxIsSteerNotSlide_Tool.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.cboxIsSteerNotSlide_Tool.Checked = true;
+            this.cboxIsSteerNotSlide_Tool.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cboxIsSteerNotSlide_Tool.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.cboxIsSteerNotSlide_Tool.FlatAppearance.CheckedBackColor = System.Drawing.Color.MediumAquamarine;
+            this.cboxIsSteerNotSlide_Tool.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cboxIsSteerNotSlide_Tool.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboxIsSteerNotSlide_Tool.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.cboxIsSteerNotSlide_Tool.Location = new System.Drawing.Point(437, 349);
+            this.cboxIsSteerNotSlide_Tool.Name = "cboxIsSteerNotSlide_Tool";
+            this.cboxIsSteerNotSlide_Tool.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.cboxIsSteerNotSlide_Tool.Size = new System.Drawing.Size(99, 78);
+            this.cboxIsSteerNotSlide_Tool.TabIndex = 578;
+            this.cboxIsSteerNotSlide_Tool.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.cboxIsSteerNotSlide_Tool.UseVisualStyleBackColor = false;
+            this.cboxIsSteerNotSlide_Tool.Click += new System.EventHandler(this.cboxIsSteerNotSlide_Click);
+            // 
+            // label74
+            // 
+            this.label74.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label74.ForeColor = System.Drawing.Color.Black;
+            this.label74.Location = new System.Drawing.Point(407, 298);
+            this.label74.Name = "label74";
+            this.label74.Size = new System.Drawing.Size(158, 48);
+            this.label74.TabIndex = 579;
+            this.label74.Text = "Sliding";
+            this.label74.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
             // cboxInvertWAS_Tool
             // 
             this.cboxInvertWAS_Tool.Appearance = System.Windows.Forms.Appearance.Button;
@@ -1150,7 +1245,7 @@
             this.cboxInvertWAS_Tool.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboxInvertWAS_Tool.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxInvertWAS_Tool.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.cboxInvertWAS_Tool.Location = new System.Drawing.Point(437, 59);
+            this.cboxInvertWAS_Tool.Location = new System.Drawing.Point(437, 53);
             this.cboxInvertWAS_Tool.Name = "cboxInvertWAS_Tool";
             this.cboxInvertWAS_Tool.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.cboxInvertWAS_Tool.Size = new System.Drawing.Size(99, 78);
@@ -1170,7 +1265,7 @@
             this.cboxInvertSteer_Tool.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboxInvertSteer_Tool.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxInvertSteer_Tool.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.cboxInvertSteer_Tool.Location = new System.Drawing.Point(437, 231);
+            this.cboxInvertSteer_Tool.Location = new System.Drawing.Point(437, 201);
             this.cboxInvertSteer_Tool.Name = "cboxInvertSteer_Tool";
             this.cboxInvertSteer_Tool.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.cboxInvertSteer_Tool.Size = new System.Drawing.Size(99, 78);
@@ -1205,7 +1300,7 @@
             // 
             // label3
             // 
-            this.label3.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Black;
             this.label3.Location = new System.Drawing.Point(212, 21);
             this.label3.Name = "label3";
@@ -1229,9 +1324,9 @@
             // 
             // label31
             // 
-            this.label31.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label31.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label31.ForeColor = System.Drawing.Color.Black;
-            this.label31.Location = new System.Drawing.Point(407, 17);
+            this.label31.Location = new System.Drawing.Point(407, 9);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(158, 41);
             this.label31.TabIndex = 519;
@@ -1252,11 +1347,11 @@
             // 
             // label83
             // 
-            this.label83.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label83.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label83.ForeColor = System.Drawing.Color.Black;
-            this.label83.Location = new System.Drawing.Point(407, 187);
+            this.label83.Location = new System.Drawing.Point(407, 148);
             this.label83.Name = "label83";
-            this.label83.Size = new System.Drawing.Size(158, 41);
+            this.label83.Size = new System.Drawing.Size(158, 50);
             this.label83.TabIndex = 518;
             this.label83.Text = "Invert \r\nMotor Dir";
             this.label83.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1300,7 +1395,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(949, 510);
+            this.ClientSize = new System.Drawing.Size(951, 510);
             this.Controls.Add(this.tabToolSetup);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.tabControl1);
@@ -1420,5 +1515,11 @@
         private System.Windows.Forms.Label label11;
         private NudlessNumericUpDown nudNudge;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.CheckBox cboxRecordSourceTool;
+        private NudlessNumericUpDown nudToolGuidanceSpacing;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.CheckBox cboxLockToReference;
+        private System.Windows.Forms.Label label12;
     }
 }

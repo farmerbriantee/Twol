@@ -384,6 +384,24 @@ namespace Twol
             Settings.Tool.setToolSteer.nudgeGlobal = (double)(nudNudge.Value);
         }
 
+        // Tool Guidance Spacing instead of using toolWidth
+        private void nudToolGuidanceSpacing_Click(object sender, EventArgs e)
+        {
+            Settings.Tool.setToolSteer.toolGuidanceSpacing = (double)(nudToolGuidanceSpacing.Value);
+        }
+
+        // Lock To Reference Only no distAway
+        private void cboxLockToReference_Click(object sender, EventArgs e)
+        {
+            Settings.Tool.setToolSteer.isLockToReference = cboxLockToReference.Checked;
+        }
+
+        // Record Source For Tool
+        private void cboxRecordSourceTool_Click(object sender, EventArgs e)
+        {
+            Settings.Tool.setToolSteer.isRecordSourceTool = cboxRecordSourceTool.Checked;
+        }
+
         #endregion
 
         #region Tab Config

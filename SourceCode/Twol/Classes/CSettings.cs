@@ -87,10 +87,13 @@
         public bool isPassiveSteering = false;
         public bool isFollowPivot = false;
         public bool isRecordToolLine = false;
+        public bool isRecordSourceTool = true;
 
         public double antennaHeight = 0;
         public double antennaOffset = 0;
         public double nudgeGlobal = 0;
+        public double toolGuidanceSpacing = 0;
+        public bool isLockToReference = false;
 
         public double curvatureGain = 5.0;
         public double passiveIntegralGain = 0.005;
@@ -130,6 +133,10 @@
 
             manualSteerPWM = _setting.manualSteerPWM;
             manualSteerSeconds = _setting.manualSteerSeconds;
+
+            toolGuidanceSpacing = _setting.toolGuidanceSpacing;
+            isLockToReference = _setting.isLockToReference;
+            isRecordSourceTool = _setting.isRecordSourceTool;
         }
     }
 }
