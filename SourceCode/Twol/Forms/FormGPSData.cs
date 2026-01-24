@@ -27,8 +27,8 @@ namespace Twol
         {
             //lblTram.Text = mf.tram.controlByte.ToString();
 
-            lblFrameTime.Text = mf.frameTime.ToString("N1");
-            lblTimeSlice.Text = (1 / mf.timeSliceOfLastFix).ToString("N1");
+            //lblFrameTime.Text = mf.frameTime.ToString("N1");
+            //lblTimeSlice.Text = (1 / mf.timeSliceOfLastFix).ToString("N1");
             lblHz.Text = mf.gpsHz.ToString("N1");
 
             lblEastingField.Text = Math.Round(mf.pivotAxlePos.easting, 2).ToString();
@@ -38,7 +38,7 @@ namespace Twol
             lblLongitude.Text = mf.Longitude;
 
             //other sat and GPS info
-            lblSatsTracked.Text = mf.SatsTracked;
+            //lblSatsTracked.Text = mf.SatsTracked;
             lblHDOP.Text = mf.HDOP;
             //lblSpeed.Text = mf.avgSpeed.ToString("N2");
 
@@ -47,7 +47,7 @@ namespace Twol
             //lblRoll.Text = mf.RollInDegrees;
             lblIMUHeading.Text = mf.GyroInDegrees;
             lblFix2FixHeading.Text = mf.GPSHeading;
-            lblFuzeHeading.Text = glm.toDegrees(mf.fixHeading).ToString("N1");
+            //lblFuzeHeading.Text = glm.toDegrees(mf.fixHeading).ToString("N1");
 
             //lblAngularVelocity.Text = mf.ahrs.imuYawRate.ToString("N2");
 

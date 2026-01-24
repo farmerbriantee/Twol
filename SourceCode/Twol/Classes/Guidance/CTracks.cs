@@ -150,7 +150,7 @@ namespace Twol
             bool loops = track.mode > TrackMode.PolyLine;
             double widthMinusOverlap;
 
-            if (Settings.Tool.setToolSteer.toolGuidanceSpacing == 0)
+            if (Settings.Tool.setToolSteer.toolGuidanceSpacing == 0 || track.mode >= TrackMode.None)
                 widthMinusOverlap = Settings.Tool.toolWidth - Settings.Tool.overlap;
             else
                 widthMinusOverlap = Settings.Tool.setToolSteer.toolGuidanceSpacing;
@@ -196,7 +196,7 @@ namespace Twol
                 if (RefDist < 0) howManyPathsAway = (int)(RefDist - 0.5);
                 else howManyPathsAway = (int)(RefDist + 0.5);
 
-                if (Settings.Tool.setToolSteer.passesPerReference != 0)
+                if (Settings.Tool.setToolSteer.passesPerReference != 0 && track.mode < TrackMode.None)
                 {
                     switch (Settings.Tool.setToolSteer.passesPerReference)
                     {

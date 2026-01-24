@@ -927,7 +927,7 @@
             // 
             this.lblPassiveIntegralGain.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPassiveIntegralGain.ForeColor = System.Drawing.Color.Black;
-            this.lblPassiveIntegralGain.Location = new System.Drawing.Point(44, 180);
+            this.lblPassiveIntegralGain.Location = new System.Drawing.Point(77, 368);
             this.lblPassiveIntegralGain.Name = "lblPassiveIntegralGain";
             this.lblPassiveIntegralGain.Size = new System.Drawing.Size(61, 35);
             this.lblPassiveIntegralGain.TabIndex = 564;
@@ -937,7 +937,7 @@
             // hsbarPassiveIntegralGain
             // 
             this.hsbarPassiveIntegralGain.LargeChange = 1;
-            this.hsbarPassiveIntegralGain.Location = new System.Drawing.Point(108, 179);
+            this.hsbarPassiveIntegralGain.Location = new System.Drawing.Point(141, 367);
             this.hsbarPassiveIntegralGain.Maximum = 10;
             this.hsbarPassiveIntegralGain.Minimum = 1;
             this.hsbarPassiveIntegralGain.Name = "hsbarPassiveIntegralGain";
@@ -950,7 +950,7 @@
             // 
             this.label4.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(120, 273);
+            this.label4.Location = new System.Drawing.Point(165, 44);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(262, 24);
             this.label4.TabIndex = 591;
@@ -961,7 +961,7 @@
             // 
             this.label7.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.Black;
-            this.label7.Location = new System.Drawing.Point(139, 151);
+            this.label7.Location = new System.Drawing.Point(172, 339);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(262, 24);
             this.label7.TabIndex = 565;
@@ -972,7 +972,7 @@
             // 
             this.lblCurvatureGain.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCurvatureGain.ForeColor = System.Drawing.Color.Black;
-            this.lblCurvatureGain.Location = new System.Drawing.Point(44, 68);
+            this.lblCurvatureGain.Location = new System.Drawing.Point(77, 256);
             this.lblCurvatureGain.Name = "lblCurvatureGain";
             this.lblCurvatureGain.Size = new System.Drawing.Size(61, 35);
             this.lblCurvatureGain.TabIndex = 561;
@@ -982,7 +982,7 @@
             // hsbarPassiveCurvature
             // 
             this.hsbarPassiveCurvature.LargeChange = 1;
-            this.hsbarPassiveCurvature.Location = new System.Drawing.Point(108, 67);
+            this.hsbarPassiveCurvature.Location = new System.Drawing.Point(141, 255);
             this.hsbarPassiveCurvature.Maximum = 200;
             this.hsbarPassiveCurvature.Name = "hsbarPassiveCurvature";
             this.hsbarPassiveCurvature.Size = new System.Drawing.Size(325, 40);
@@ -994,7 +994,7 @@
             // 
             this.label6.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.Black;
-            this.label6.Location = new System.Drawing.Point(139, 39);
+            this.label6.Location = new System.Drawing.Point(172, 227);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(262, 24);
             this.label6.TabIndex = 562;
@@ -1009,7 +1009,7 @@
             this.cboxIsPassiveSteering.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboxIsPassiveSteering.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxIsPassiveSteering.ForeColor = System.Drawing.Color.Black;
-            this.cboxIsPassiveSteering.Location = new System.Drawing.Point(143, 303);
+            this.cboxIsPassiveSteering.Location = new System.Drawing.Point(188, 74);
             this.cboxIsPassiveSteering.Name = "cboxIsPassiveSteering";
             this.cboxIsPassiveSteering.Size = new System.Drawing.Size(217, 70);
             this.cboxIsPassiveSteering.TabIndex = 587;
@@ -1041,7 +1041,6 @@
             this.cboxPassesPerReference.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.cboxPassesPerReference.BackColor = System.Drawing.Color.Lavender;
             this.cboxPassesPerReference.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboxPassesPerReference.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboxPassesPerReference.Font = new System.Drawing.Font("Tahoma", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxPassesPerReference.FormattingEnabled = true;
             this.cboxPassesPerReference.Items.AddRange(new object[] {
@@ -1062,7 +1061,7 @@
             // 
             this.label12.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.Color.Firebrick;
-            this.label12.Location = new System.Drawing.Point(63, 141);
+            this.label12.Location = new System.Drawing.Point(65, 141);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(143, 23);
             this.label12.TabIndex = 601;
@@ -1073,7 +1072,7 @@
             // 
             this.label14.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label14.ForeColor = System.Drawing.Color.Black;
-            this.label14.Location = new System.Drawing.Point(34, 14);
+            this.label14.Location = new System.Drawing.Point(36, 14);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(201, 59);
             this.label14.TabIndex = 600;
@@ -1084,7 +1083,7 @@
             // 
             this.label8.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.Black;
-            this.label8.Location = new System.Drawing.Point(292, 312);
+            this.label8.Location = new System.Drawing.Point(306, 194);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(262, 24);
             this.label8.TabIndex = 596;
@@ -1101,9 +1100,9 @@
             this.cboxRecordSourceTool.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboxRecordSourceTool.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxRecordSourceTool.ForeColor = System.Drawing.Color.Black;
-            this.cboxRecordSourceTool.Location = new System.Drawing.Point(315, 345);
+            this.cboxRecordSourceTool.Location = new System.Drawing.Point(330, 222);
             this.cboxRecordSourceTool.Name = "cboxRecordSourceTool";
-            this.cboxRecordSourceTool.Size = new System.Drawing.Size(217, 70);
+            this.cboxRecordSourceTool.Size = new System.Drawing.Size(215, 64);
             this.cboxRecordSourceTool.TabIndex = 595;
             this.cboxRecordSourceTool.Text = "Tool GPS";
             this.cboxRecordSourceTool.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1112,11 +1111,12 @@
             // 
             // nudToolGuidanceSpacing
             // 
-            this.nudToolGuidanceSpacing.Location = new System.Drawing.Point(55, 222);
+            this.nudToolGuidanceSpacing.DecimalPlaces = 1;
+            this.nudToolGuidanceSpacing.Location = new System.Drawing.Point(29, 222);
             this.nudToolGuidanceSpacing.Maximum = 2000D;
             this.nudToolGuidanceSpacing.Mode = Twol.UnitMode.Small;
             this.nudToolGuidanceSpacing.Name = "nudToolGuidanceSpacing";
-            this.nudToolGuidanceSpacing.Size = new System.Drawing.Size(158, 64);
+            this.nudToolGuidanceSpacing.Size = new System.Drawing.Size(215, 64);
             this.nudToolGuidanceSpacing.TabIndex = 589;
             this.nudToolGuidanceSpacing.ValueChanged += new System.EventHandler(this.nudToolGuidanceSpacing_ValueChanged);
             // 
@@ -1124,7 +1124,7 @@
             // 
             this.label10.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.Black;
-            this.label10.Location = new System.Drawing.Point(34, 178);
+            this.label10.Location = new System.Drawing.Point(36, 178);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(201, 41);
             this.label10.TabIndex = 590;
@@ -1133,7 +1133,7 @@
             // 
             // nudNudge
             // 
-            this.nudNudge.Location = new System.Drawing.Point(360, 84);
+            this.nudNudge.Location = new System.Drawing.Point(366, 74);
             this.nudNudge.Maximum = 500D;
             this.nudNudge.Minimum = -500D;
             this.nudNudge.Mode = Twol.UnitMode.Small;
@@ -1146,7 +1146,7 @@
             // 
             this.label5.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(352, 40);
+            this.label5.Location = new System.Drawing.Point(358, 30);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(158, 41);
             this.label5.TabIndex = 588;
