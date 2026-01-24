@@ -200,7 +200,6 @@ namespace Twol
                     {
                         panelNavigation.Visible = false;
                     }
-                    lblHz.Text = gpsHz.ToString("N1") + " ~ " + (frameTime.ToString("N1")) + " " + FixQuality;
                 }
 
                 //send a hello to modules
@@ -248,7 +247,7 @@ namespace Twol
                 //used for alarm flashing
                 isFlashOnOff = !isFlashOnOff;
 
-                lblFix.Text = FixQuality + "Age: " + pn.age.ToString("N1");
+                lblFix.Text = FixQuality + "Age: " + pn.age.ToString("N1") + "   " + frameTime.ToString("N1") ;
 
                 switch (pn.fixQuality)
                 {
@@ -450,12 +449,12 @@ namespace Twol
 
             SetModulesOnOff();
 
-            if (Settings.Tool.setToolSteer.isFollowCurrent || Settings.Tool.setToolSteer.isFollowPivot || Settings.Tool.setToolSteer.isRecordToolLine)
-            {
-                //show FormToolManual
-                Form form = new FormToolManual(this);
-                form.Show(this);
-            }
+            //if (Settings.Tool.setToolSteer.isFollowCurrent || Settings.Tool.setToolSteer.isFollowPivot || Settings.Tool.setToolSteer.isRecordToolLine)
+            //{
+            //    //show FormToolManual
+            //    Form form = new FormToolManual(this);
+            //    form.Show(this);
+            //}
         }
 
         public void SetFeatureSettings()
@@ -761,6 +760,8 @@ namespace Twol
 
         public void PanelUpdateRightAndBottom()
         {
+            Form fcc = Application.OpenForms["FormTrackFilter"];
+
             if (isFieldStarted)
             {
                 bool isBnd = bnd.bndList.Count > 0;
@@ -795,6 +796,29 @@ namespace Twol
                 cboxIsSectionControlled.Visible = isHdl;
 
                 PanelSizeRightAndBottom();
+
+
+                if (fcc == null && trks.gArr.Count > 0)
+                {
+                    Form form = new FormTrackFilter(this);
+                    form.Show(this);
+                }
+                else
+                {
+                    if (fcc != null && trks.gArr.Count == 0)
+                    {
+                        fcc.Focus();
+                        fcc.Close();
+                    }
+                }
+            }
+            else
+            {
+                if (fcc != null)
+                {
+                    fcc.Focus();
+                    fcc.Close();
+                }
             }
         }
 
@@ -943,6 +967,22 @@ namespace Twol
         private void Panel_IO_Location()
         {
                 panel_IO.Location = new Point(this.Width - panel_IO.Width - (isJobStarted?90:40), oglMain.Height / 2 - 230);            
+        }
+
+        public void NotifyTrackChange()
+        {
+            if (trks.currentRefTrack != null)
+            {
+                guideLineCounter = 20;
+                lblGuidanceLine.Visible = true;
+                lblGuidanceLine.Text = trks.currentRefTrack.name + " " + trks.gArr.Count.ToString() + " Tracks ";
+            }
+            else
+            {
+                guideLineCounter = 12;
+                lblGuidanceLine.Visible = true;
+                lblGuidanceLine.Text = trks.gArr.Count.ToString() + " Tracks, " + trks.GetVisibleTracks().ToString() + " Visible";
+            }
         }
 
         private void ZoomByMouseWheel(object sender, MouseEventArgs e)
@@ -1410,7 +1450,7 @@ namespace Twol
             }
         }
 
-        public string Altitude { get { return Convert.ToString((Math.Round((pn.altitude * glm.m2FtOrM), 2))); } }
+        public string ElevationInMeters { get { return Convert.ToString((Math.Round((pn.elevation * glm.m2FtOrM), 2))); } }
 
         public string DistPivot
         {

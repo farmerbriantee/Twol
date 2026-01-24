@@ -51,10 +51,11 @@ namespace Twol
         public double cosSectionHeading = 1.0, sinSectionHeading = 0.0;
 
         //how far travelled since last section was added, section points
-        double sectionTriggerDistanceSq = 0, contourTriggerDistanceSq = 0, distanceTriggerSq = 0, gridTriggerDistanceSq = 0;
+        double sectionTriggerDistanceSq = 0, distanceTriggerSq = 0, gridTriggerDistanceSq = 0;
 
         public vec2 prevPivotAxlePos = new vec2(0, 0);
         public vec2 prevContourPos = new vec2(0, 0);
+        public vec2 prevToolRecPos = new vec2(0, 0);
         public vec2 prevGridPos = new vec2(0, 0);
         public int patchCounter = 0;
 
@@ -318,7 +319,7 @@ namespace Twol
             if (trks.isAutoTrack && !ct.isContourBtnOn && !isBtnAutoSteerOn && trks.autoTrack3SecTimer >= 2)
             {
                 trks.autoTrack3SecTimer = 0;
-                int idx = trks.FindClosestRefTrack(steerAxlePos);
+                int idx = trks.FindClosestRefTrack(new vec3(guidanceLookPos));
             }
 
             if (ct.isContourBtnOn)
@@ -331,21 +332,18 @@ namespace Twol
             else if (trks.currentRefTrack != null)
             {
                 //build new current ref line if required
-                trks.GetDistanceFromRefTrack(trks.currentRefTrack, pivotAxlePos);
+                #pragma warning disable CS4014 
+                trks.GetDistanceFromRefTrack(trks.currentRefTrack, new vec3(guidanceLookPos, pivotAxlePos.heading));
+                #pragma warning restore CS4014 
             }
 
-            if (trks.currentGuidanceTrack.Count > 0)
+            if (trks.currentRefTrack != null && trks.currentGuidanceTrack.Count > 0)
             {
-                gyd.Guidance(pivotAxlePos, steerAxlePos, yt.isYouTurnTriggered, yt.isYouTurnTriggered ? yt.ytList : trks.currentGuidanceTrack);
+                gyd.Guidance(pivotAxlePos, steerAxlePos, trks.currentRefTrack.mode == TrackMode.Polygon, yt.isYouTurnTriggered, yt.isYouTurnTriggered ? yt.ytList : trks.currentGuidanceTrack);
 
                 if (Settings.Tool.setToolSteer.isFollowPivot && isJobStarted)
                 {
                     gydTool.GuidanceFollowPivot(yt.isYouTurnTriggered, followPivotPoints);
-                }
-
-                else if (Settings.Tool.setToolSteer.isRecordToolLine && isJobStarted)
-                {
-                    gydTool.GuidanceToolLineRecord(yt.isYouTurnTriggered);
                 }
             }
             else
@@ -480,7 +478,7 @@ namespace Twol
                     }
 
                     //send to tool steer
-                    SendUDPMessageTool(PGN_233.pgn, epModule);
+                    SendUDPMessageTool(PGN_233.pgn, epModuleTool);
                 }
             }
 
@@ -695,24 +693,12 @@ namespace Twol
                     AddSectionOrPathPoints();
                 }
 
-                //contour points
-                AddContourPoints();
+                //record tool path for guidance lines
+                if (Settings.Tool.setToolSteer.isRecordToolLine) AddToolLineRecordPoints();
 
                 if (Settings.User.isLogElevation)
                 {
                     AddElevationPoints();
-                }
-
-                if (Settings.Tool.setToolSteer.isRecordToolLine && gydTool.isRecordingToolLine)
-                {
-                    if (toolPivotTriggerDistanceSq > 0.5)
-                    {
-                        trks.toolDesignPtsList.Add(new vec3(toolPivotPos));
-
-                        //save the north & east as previous
-                        prevToolPivotPos.northing = toolPivotPos.northing;
-                        prevToolPivotPos.easting = toolPivotPos.easting;
-                    }
                 }
             }
 
@@ -1037,7 +1023,7 @@ namespace Twol
         {
             //record contour all the time
             //Contour Base Track.... At least One section on, turn on if not
-            contourTriggerDistanceSq = glm.DistanceSquared(pivotAxlePos, prevContourPos);
+            double contourTriggerDistanceSq = glm.DistanceSquared(pivotAxlePos, prevContourPos);
 
             if (isJobStarted && contourTriggerDistanceSq > distanceTriggerSq)
             {
@@ -1065,6 +1051,38 @@ namespace Twol
                 //save the north & east as previous
                 prevContourPos.northing = pivotAxlePos.northing;
                 prevContourPos.easting = pivotAxlePos.easting;
+            }
+        }
+
+        private void AddToolLineRecordPoints()
+        {
+            //record contour all the time
+            //Contour Base Track.... At least One section on, turn on if not
+            double toolDistanceSq = glm.DistanceSquared(toolPivotPos, prevToolRecPos);
+
+            if (isJobStarted && toolDistanceSq > 2.0)
+            {
+                if (patchCounter != 0)
+                {
+                    //keep the line going, everything is on for recording path
+                    if (tRec.isToolRecordOn) tRec.AddPoint(toolPivotPos);
+                    else
+                    {
+                        tRec.StartToolRecordLine();
+                        tRec.AddPoint(toolPivotPos);
+                    }
+                }
+
+                //All sections OFF so if on, turn off
+                else
+                {
+                    if (tRec.isToolRecordOn && avgSpeed > 1)
+                    { tRec.StopToolRecordLine(); }
+                }
+
+                //save the north & east as previous
+                prevToolRecPos.northing = toolPivotPos.northing;
+                prevToolRecPos.easting = toolPivotPos.easting;
             }
         }
 
@@ -1110,7 +1128,7 @@ namespace Twol
                 sbElevationString.Append(
                       pn.latitude.ToString("N7", CultureInfo.InvariantCulture) + ","
                     + pn.longitude.ToString("N7", CultureInfo.InvariantCulture) + ","
-                    + Math.Round((pn.altitude - vehicle.antennaHeight), 3).ToString(CultureInfo.InvariantCulture) + ","
+                    + Math.Round((pn.elevation - vehicle.antennaHeight), 3).ToString(CultureInfo.InvariantCulture) + ","
                     + pn.fixQuality.ToString(CultureInfo.InvariantCulture) + ","
                     + pn.fix.easting.ToString("N2", CultureInfo.InvariantCulture) + ","
                     + pn.fix.northing.ToString("N2", CultureInfo.InvariantCulture) + ","
@@ -1122,6 +1140,5 @@ namespace Twol
                 prevGridPos.northing = pivotAxlePos.northing;
             }
         }
-
     }//end class
 }//end namespace

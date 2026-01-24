@@ -34,7 +34,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.lblFixQuality = new System.Windows.Forms.Label();
             this.lblSatsTracked = new System.Windows.Forms.Label();
-            this.lblAltitude = new System.Windows.Forms.Label();
+            this.lblElevation = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.lblHDOP = new System.Windows.Forms.Label();
@@ -116,17 +116,17 @@
             this.lblSatsTracked.Text = "Sats";
             this.lblSatsTracked.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // lblAltitude
+            // lblElevation
             // 
-            this.lblAltitude.AutoSize = true;
-            this.lblAltitude.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAltitude.Location = new System.Drawing.Point(443, 5);
-            this.lblAltitude.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.lblAltitude.Name = "lblAltitude";
-            this.lblAltitude.Size = new System.Drawing.Size(67, 18);
-            this.lblAltitude.TabIndex = 14;
-            this.lblAltitude.Text = "Altitude";
-            this.lblAltitude.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblElevation.AutoSize = true;
+            this.lblElevation.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblElevation.Location = new System.Drawing.Point(443, 5);
+            this.lblElevation.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.lblElevation.Name = "lblElevation";
+            this.lblElevation.Size = new System.Drawing.Size(67, 18);
+            this.lblElevation.TabIndex = 14;
+            this.lblElevation.Text = "Elevation";
+            this.lblElevation.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label8
             // 
@@ -403,7 +403,7 @@
             this.lblAge.Name = "lblAge";
             this.lblAge.Size = new System.Drawing.Size(67, 18);
             this.lblAge.TabIndex = 515;
-            this.lblAge.Text = "Altitude";
+            this.lblAge.Text = "Elevation";
             this.lblAge.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label12
@@ -502,7 +502,7 @@
             this.Controls.Add(this.lblSpeed);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.lblHDOP);
-            this.Controls.Add(this.lblAltitude);
+            this.Controls.Add(this.lblElevation);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lblSatsTracked);
             this.Controls.Add(this.lblFixQuality);
@@ -529,7 +529,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lblFixQuality;
         private System.Windows.Forms.Label lblSatsTracked;
-        private System.Windows.Forms.Label lblAltitude;
+        private System.Windows.Forms.Label lblElevation;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label lblHDOP;

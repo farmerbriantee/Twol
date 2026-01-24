@@ -8,7 +8,7 @@ namespace Twol
 
         #region properties sim
 
-        public double altitude = 300;
+        public double elevation = 300;
 
         public double stepDistance = 0.0, steerangleAve = 0.0;
 
@@ -104,12 +104,12 @@ namespace Twol
             double temp = Math.Abs(mf.pn.latitude * 100);
             temp -= ((int)(temp));
             temp *= 100;
-            mf.pn.altitude = temp + 200;
+            mf.pn.elevation = temp + 200;
 
             temp = Math.Abs(mf.pn.longitude * 100);
             temp -= ((int)(temp));
             temp *= 100;
-            mf.pn.altitude += temp;
+            mf.pn.elevation += temp;
 
             mf.pn.satellitesTracked = 12;
 
@@ -130,14 +130,15 @@ namespace Twol
 
             if (Settings.IO.setUDP_isLoopBack)
             {
-                byte[] nmeaPGN = new byte[30];
+                byte[] nmeaPGN = new byte[38];
 
                 nmeaPGN[0] = 128;
                 nmeaPGN[1] = 129;
                 nmeaPGN[2] = 124;
                 nmeaPGN[3] = 208; //pgn number aka D0
-                nmeaPGN[4] = 24; // nmea total array count minus 6
+                nmeaPGN[4] = 32; // nmea total array count minus 6 (was 24, now 32 for altitude)
 
+                //longitude
                 //longitude
                 Buffer.BlockCopy(BitConverter.GetBytes(mf.pn.longitude), 0, nmeaPGN, 5, 8);
 
@@ -147,13 +148,15 @@ namespace Twol
                 //speed converted to kmh from knots
                 Buffer.BlockCopy(BitConverter.GetBytes(mf.pn.vtgSpeed), 0, nmeaPGN, 21, 8);
 
+                //altitude in meters
+                Buffer.BlockCopy(BitConverter.GetBytes(mf.pn.elevation), 0, nmeaPGN, 29, 8);
+
                 //checksum
-                nmeaPGN[29] = 0;
+                nmeaPGN[37] = 0;
 
                 //Send nmea to AgOpenGPS
                 mf.SendToPlugins(nmeaPGN);
             }
-
 
             if (isAccelForward)
             {
@@ -171,33 +174,6 @@ namespace Twol
                 stepDistance -= 0.01;
                 if (stepDistance < -0.06) isAccelBack = false;
             }
-
-            if (Settings.IO.setUDP_isLoopBack)
-            {
-                byte[] nmeaPGN = new byte[30];
-
-                nmeaPGN[0] = 128;
-                nmeaPGN[1] = 129;
-                nmeaPGN[2] = 124;
-                nmeaPGN[3] = 208; //pgn number aka D0
-                nmeaPGN[4] = 24; // nmea total array count minus 6
-
-                //longitude
-                Buffer.BlockCopy(BitConverter.GetBytes(mf.pn.longitude), 0, nmeaPGN, 5, 8);
-
-                //latitude
-                Buffer.BlockCopy(BitConverter.GetBytes(mf.pn.latitude), 0, nmeaPGN, 13, 8);
-
-                //speed converted to kmh from knots
-                Buffer.BlockCopy(BitConverter.GetBytes(mf.pn.vtgSpeed), 0, nmeaPGN, 21, 8);
-
-                //checksum
-                nmeaPGN[29] = 0;
-
-                //Send nmea to AgOpenGPS
-                mf.SendToPlugins(nmeaPGN);
-            }
-
         }
 
         public void Reset()

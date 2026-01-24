@@ -46,14 +46,16 @@ namespace Twol
             mf = _f;
         }
 
-        public void Guidance(vec3 pivot, vec3 steer, bool Uturn, List<vec3> curList)
+        public void Guidance(vec3 pivot, vec3 steer, bool isLoop, bool Uturn, List<vec3> curList)
         {
+            if (Uturn) isLoop = false;
+
             bool completeUturn = !Uturn;
             var vec2point = new vec2(Settings.Vehicle.setVehicle_isStanleyUsed ? steer : pivot);
 
             if (Settings.Tool.setToolSteer.isPassiveSteering || Settings.Tool.setToolSteer.isFollowCurrent)
             {
-                if (FindClosestSegment(curList, false, mf.pnTool.fix, out A, out B))
+                if (FindClosestSegment(curList, isLoop, mf.pnTool.fix, out A, out B))
                 {
                     distanceFromCurrentLinePassiveTool = FindDistanceToSegment(mf.pnTool.fix, curList[A], curList[B], out _, out _, true, false, false);
 
@@ -64,7 +66,7 @@ namespace Twol
                     distanceFromCurrentLinePassiveTool = 0;
             }
 
-            if (mf.gyd.FindClosestSegment(curList, false, vec2point, out A, out B))
+            if (mf.gyd.FindClosestSegment(curList, isLoop, vec2point, out A, out B))
             {
                 distanceFromCurrentLine = FindDistanceToSegment(vec2point, curList[A], curList[B], out vec3 point, out double time, true, false, false);
 
@@ -500,54 +502,6 @@ namespace Twol
             }
 
             return currentLocationIndex;
-        }
-    }
-
-    public static class ChaikinSmoothing
-    {
-        /// <summary>
-        /// Applies Chaikin's corner-cutting algorithm to smooth a polyline.
-        /// </summary>
-        /// <param name="points">The original list of points (polyline).</param>
-        /// <param name="iterations">The number of smoothing iterations to apply.</param>
-        /// <param name="preserveEndPoints">Whether to keep the start and end points in their original positions.</param>
-        /// <returns>A new list of smoothed points.</returns>
-        public static List<vec3> Smooth(List<vec3> points, int iterations, bool preserveEndPoints = true)
-        {
-            List<vec3> currentPoints = new List<vec3>(points);
-
-            for (int iter = 0; iter < iterations; iter++)
-            {
-                List<vec3> nextPoints = new List<vec3>();
-
-                // Optionally preserve the start point for non-closed polylines
-                if (preserveEndPoints && currentPoints.Count > 0)
-                {
-                    nextPoints.Add(currentPoints[0]);
-                }
-
-                for (int i = 0; i < currentPoints.Count - 1; i++)
-                {
-                    vec3 p0 = currentPoints[i];
-                    vec3 p1 = currentPoints[i + 1];
-
-                    // Calculate Q and R points, which are 25% and 75% along the segment
-                    nextPoints.Add(new vec3(0.75f * p0.easting + 0.25f * p1.easting, 0.75f * p0.northing + 0.25f * p1.northing, 0));
-                    nextPoints.Add(new vec3(0.25f * p0.easting + 0.75f * p1.easting, 0.25f * p0.northing + 0.75f * p1.northing, 0));
-                }
-
-                // Optionally preserve the end point for non-closed polylines
-                if (preserveEndPoints && currentPoints.Count > 1)
-                {
-                    nextPoints.Add(currentPoints[currentPoints.Count - 1]);
-                }
-                // If the user wants a closed polygon, the last R point implicitly connects to the first Q point.
-                // A separate implementation is needed for perfect closed-loop handling by wrapping indices (not shown here).
-
-                currentPoints = nextPoints;
-            }
-
-            return currentPoints;
         }
     }
 }

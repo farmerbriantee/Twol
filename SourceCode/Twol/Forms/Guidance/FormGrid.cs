@@ -166,13 +166,13 @@ namespace Twol
             GL.PointSize(16.0f);
             GL.Begin(PrimitiveType.Points);
             GL.Color3(1.0f, 0.00f, 0.0f);
-            GL.Vertex3(mf.pivotAxlePos.easting, mf.pivotAxlePos.northing, 0.0);
+            GL.Vertex2(mf.pivotAxlePos.easting, mf.pivotAxlePos.northing);
             GL.End();
 
             GL.PointSize(8.0f);
             GL.Begin(PrimitiveType.Points);
             GL.Color3(0.00f, 0.0f, 0.0f);
-            GL.Vertex3(mf.pivotAxlePos.easting, mf.pivotAxlePos.northing, 0.0);
+            GL.Vertex2(mf.pivotAxlePos.easting, mf.pivotAxlePos.northing);
             GL.End();
 
             //draw the line building graphics
@@ -189,18 +189,18 @@ namespace Twol
             GL.Begin(PrimitiveType.Points);
 
             GL.Color3(0, 0, 0);
-            if (start != 99999) GL.Vertex3(pntA.easting, pntA.northing, 0);
-            if (end != 99999) GL.Vertex3(pntB.easting, pntB.northing, 0);
+            if (start != 99999) GL.Vertex2(pntA.easting, pntA.northing);
+            if (end != 99999) GL.Vertex2(pntB.easting, pntB.northing);
             GL.End();
 
             GL.PointSize(16);
             GL.Begin(PrimitiveType.Points);
 
             GL.Color3(1.0f, 0.75f, 0.350f);
-            if (start != 99999) GL.Vertex3(pntA.easting, pntA.northing, 0);
+            if (start != 99999) GL.Vertex2(pntA.easting, pntA.northing);
 
             GL.Color3(0.5f, 0.5f, 1.0f);
-            if (end != 99999) GL.Vertex3(pntB.easting, pntB.northing, 0);
+            if (end != 99999) GL.Vertex2(pntB.easting, pntB.northing);
             GL.End();
         }
 

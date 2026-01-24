@@ -2,12 +2,18 @@
 //Copyright BrianTee, copy right out of it.
 
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Twol
 {
     public partial class FormFieldData : Form
     {
+        protected override void OnPaintBackground(PaintEventArgs e)
+        {
+            e.Graphics.FillRectangle(Brushes.AliceBlue, e.ClipRectangle);
+        }
+
         private readonly FormGPS mf = null;
 
         public FormFieldData(Form callingForm)
@@ -18,6 +24,9 @@ namespace Twol
 
         private void FormFieldData_Load(object sender, EventArgs e)
         {
+            this.BackColor = Color.AliceBlue;
+            this.TransparencyKey = Color.AliceBlue;
+
             timer1_Tick(this, EventArgs.Empty);
         }
 

@@ -109,6 +109,7 @@ namespace Twol
             btnMakeAPlus.Enabled = false;
             btnEdgeAB.Enabled = false;
             btnMakeCurve.Enabled = false;
+
             start = 99999; end = 99999;
             isA = true;
 
@@ -168,7 +169,7 @@ namespace Twol
             if (selectedLine != null)
             {
                 gTemp.Remove(selectedLine);
-                mf.trks.GetNextTrack(selectedLine, gTemp, true, true);
+                selectedLine = mf.trks.GetNextTrack(selectedLine, gTemp, true, true);
                 FixLabelsCurve();
             }
         }
@@ -221,23 +222,21 @@ namespace Twol
                 int cnt = designPtsList.Count;
                 if (cnt > 3)
                 {
-                    var track = new CTrk(TrackMode.bndCurve);
+                    var track = new CTrk(TrackMode.Polygon);
 
                     designPtsList.Add(new vec3(designPtsList[0]));//WUT
 
                     track.ptA = new vec2(designPtsList[0]);
                     track.ptB = new vec2(designPtsList[designPtsList.Count - 1]);
 
-                    //make sure point distance isn't too big
-                    mf.trks.MakePointMinimumSpacing(ref designPtsList, 1.6);
-                    designPtsList.CalculateHeadings(true);
+                    designPtsList.FixReferenceTrack(true);
 
                     //create a name
-                    track.name = q == 0 ? "Boundary Curve" : "Inner Boundary Curve " + q.ToString();
+                    track.name = q == 0 ? "Boundary Track" : "Boundary Inner Track" + q.ToString();
 
                     track.heading = 0;
 
-                    //write out the Curve Points
+                    //write out the PolyLine Points
                     track.curvePts = designPtsList;
 
                     gTemp.Add(track);
@@ -250,6 +249,7 @@ namespace Twol
             btnEdgeAB.Enabled = false;
             btnMakeAPlus.Enabled = false;
             btnMakeCurve.Enabled = false;
+
             start = 99999; end = 99999;
 
             FixLabelsCurve();
@@ -299,38 +299,23 @@ namespace Twol
             int cnt = designPtsList.Count;
             if (cnt > 3)
             {
-                var track = new CTrk(TrackMode.Curve);
-
-                track.ptA = new vec2(designPtsList[0]);
-                track.ptB = new vec2(designPtsList[designPtsList.Count - 1]);
-
-                //make sure point distance isn't too big
-                mf.trks.MakePointMinimumSpacing(ref designPtsList, 1.6);
-                designPtsList.CalculateHeadings(false);
-
-                //calculate average heading of line
-                double x = 0, y = 0;
-
-                foreach (vec3 pt in designPtsList)
+                var track = new CTrk(TrackMode.PolyLine)
                 {
-                    x += Math.Cos(pt.heading);
-                    y += Math.Sin(pt.heading);
-                }
-                x /= designPtsList.Count;
-                y /= designPtsList.Count;
-                track.heading = Math.Atan2(y, x);
-                if (track.heading < 0) track.heading += glm.twoPI;
+                    ptA = new vec2(designPtsList[0]),
+                    ptB = new vec2(designPtsList[designPtsList.Count - 1])
+                };
 
-                //build the tail extensions
-                mf.trks.AddFirstLastPoints(ref designPtsList, 300);
-                //mf.trks.SmoothAB(ref designPtsList, 2, false);
+                //clean it up
+                designPtsList.FixReferenceTrack(false);
+
+                track.heading = designPtsList.TrackAverageHeading();
 
                 //create a name
-                track.name = "Cu " +
-                    (Math.Round(glm.toDegrees(track.heading), 1)).ToString(CultureInfo.InvariantCulture)
+                track.name = cboxFldOrBnd.Checked ? "A_Fld Cu " : "A_Bnd Cu ";
+                track.name += (Math.Round(glm.toDegrees(track.heading), 1)).ToString(CultureInfo.InvariantCulture)
                     + "\u00B0";
 
-                //write out the Curve Points
+                //write out the PolyLine Points
                 track.curvePts = designPtsList;
 
                 //update the arrays
@@ -338,12 +323,14 @@ namespace Twol
                 btnMakeAPlus.Enabled = false;
                 btnEdgeAB.Enabled = false;
                 btnMakeCurve.Enabled = false;
+
                 start = 99999; end = 99999;
 
-                FixLabelsCurve();
 
                 gTemp.Add(track);
                 selectedLine = track;
+
+                FixLabelsCurve();
             }
 
             btnExit.Focus();
@@ -367,15 +354,16 @@ namespace Twol
                 }
             }
 
-            //calculate the AB Heading
+            //calculate the ABLine Heading
             double abHead = Math.Atan2(
                 mf.bnd.bndList[bndSelect].fenceLine[start].easting - mf.bnd.bndList[bndSelect].fenceLine[end].easting,
                 mf.bnd.bndList[bndSelect].fenceLine[start].northing - mf.bnd.bndList[bndSelect].fenceLine[end].northing);
             if (abHead < 0) abHead += glm.twoPI;
 
-            var track = new CTrk(TrackMode.AB);
-
-            track.heading = abHead;
+            var track = new CTrk(TrackMode.ABLine)
+            {
+                heading = abHead
+            };
 
             //calculate the new points for the reference line and points
             track.ptA.easting = mf.bnd.bndList[bndSelect].fenceLine[end].easting;
@@ -384,23 +372,22 @@ namespace Twol
             track.ptB.easting = mf.bnd.bndList[bndSelect].fenceLine[start].easting;
             track.ptB.northing = mf.bnd.bndList[bndSelect].fenceLine[start].northing;
 
+            var designPtsList = new List<vec3>();
+
             //fill in the dots between A and B
             double len = glm.Distance(track.ptA, track.ptB);
-            if (len < 20)
+            if (len < 50)
             {
-                track.ptB.easting = track.ptA.easting + (Math.Sin(abHead) * 30);
-                track.ptB.northing = track.ptA.northing + (Math.Cos(abHead) * 30);
+                track.ptB.easting = track.ptA.easting + (Math.Sin(abHead) * 50);
+                track.ptB.northing = track.ptA.northing + (Math.Cos(abHead) * 50);
             }
 
-            track.curvePts.Add(new vec3(track.ptA, abHead));
-            track.curvePts.Add(new vec3(track.ptB, abHead));
-
-            //build the tail extensions
-            mf.trks.AddFirstLastPoints(ref track.curvePts, 300);
+            designPtsList.Add(new vec3(track.ptA, abHead));
+            designPtsList.Add(new vec3(track.ptB, abHead));
 
             //create a name
-            track.name = "AB: " +
-                Math.Round(glm.toDegrees(track.heading), 1).ToString(CultureInfo.InvariantCulture) + "\u00B0";
+            track.name = cboxFldOrBnd.Checked ? "A_Fld AB " : "A_Bnd AB ";
+            track.name += Math.Round(glm.toDegrees(track.heading), 1).ToString(CultureInfo.InvariantCulture) + "\u00B0";
 
             //clean up gui
             btnMakeABLine.Enabled = false;
@@ -410,8 +397,14 @@ namespace Twol
 
             start = 99999; end = 99999;
 
+            //write out the PolyLine Points
+            designPtsList.GenerateEquidistantPoints(50, false);
+            track.curvePts = designPtsList;
+
+
             gTemp.Add(track);
             selectedLine = track;
+
             FixLabelsCurve();
         }
 
@@ -433,13 +426,13 @@ namespace Twol
                 }
             }
 
-            //calculate the AB Heading
+            //calculate the ABLine Heading
             double abHead = Math.Atan2(
                 mf.bnd.bndList[bndSelect].fenceLine[start].easting - mf.bnd.bndList[bndSelect].fenceLine[end].easting,
                 mf.bnd.bndList[bndSelect].fenceLine[start].northing - mf.bnd.bndList[bndSelect].fenceLine[end].northing);
             if (abHead < 0) abHead += glm.twoPI;
 
-            var track = new CTrk(TrackMode.AB);
+            var track = new CTrk(TrackMode.ABLine);
 
             var form = new FormABDrawHeading(this, abHead);
             form.ShowDialog(this);
@@ -468,11 +461,10 @@ namespace Twol
             track.curvePts.Add(new vec3(track.ptB, abHead));
 
             //build the tail extensions
-            mf.trks.AddFirstLastPoints(ref track.curvePts, 300);
+            track.curvePts.AddStartEndPoints(5, 300);
 
             //create a name
-            track.name = "AB: " +
-                Math.Round(glm.toDegrees(track.heading), 1).ToString(CultureInfo.InvariantCulture) + "\u00B0";
+            track.name = cboxFldOrBnd.Checked ? "A_Fld A+ " : "A_Bnd A+ " + Math.Round(glm.toDegrees(track.heading), 1).ToString(CultureInfo.InvariantCulture) + "\u00B0";
 
             //clean up gui
             btnMakeABLine.Enabled = false;
@@ -526,13 +518,13 @@ namespace Twol
                 }
             }
 
-            //calculate the AB Heading
+            //calculate the ABLine Heading
             double abHead = Math.Atan2(
                 mf.bnd.bndList[bndSelect].fenceLine[end].easting - mf.bnd.bndList[bndSelect].fenceLine[start].easting,
                 mf.bnd.bndList[bndSelect].fenceLine[end].northing - mf.bnd.bndList[bndSelect].fenceLine[start].northing);
             if (abHead < 0) abHead += glm.twoPI;
 
-            var track = new CTrk(TrackMode.AB);
+            var track = new CTrk(TrackMode.ABLine);
 
             var form = new FormABDrawHeading(this, abHead);
             form.ShowDialog(this);
@@ -557,7 +549,7 @@ namespace Twol
 
             track.heading = abHead;
 
-            //get the pivot distance from currently active AB segment   ///////////  Pivot  ////////////
+            //get the pivot distance from currently active ABLine segment   ///////////  Pivot  ////////////
             double dx = track.ptB.easting - track.ptA.easting;
             double dy = track.ptB.northing - track.ptA.northing;
             if (Math.Abs(dx) < Double.Epsilon && Math.Abs(dy) < Double.Epsilon)
@@ -567,7 +559,7 @@ namespace Twol
 
             for (int i = 0; i < mf.bnd.bndList[bndSelect].fenceLine.Count; i++)
             {
-                //how far from current AB Line is fix
+                //how far from current ABLine Line is fix
                 double distanceFromBnd = ((dy * mf.bnd.bndList[bndSelect].fenceLine[i].easting) - (dx * mf.bnd.bndList[bndSelect].fenceLine[i].northing) + (track.ptB.easting
                             * track.ptA.northing) - (track.ptB.northing * track.ptA.easting))
                                 / Math.Sqrt((dy * dy) + (dx * dx));
@@ -586,10 +578,10 @@ namespace Twol
             track.curvePts.Add(new vec3(track.ptB, abHead));
 
             //build the tail extensions
-            mf.trks.AddFirstLastPoints(ref track.curvePts, 300);
+            track.curvePts.AddStartEndPoints(5, 300);
 
             //create a name
-            track.name = "AB: " +
+            track.name = "AB " +
                 Math.Round(glm.toDegrees(track.heading), 1).ToString(CultureInfo.InvariantCulture) + "\u00B0";
 
             //clean up gui
@@ -736,13 +728,13 @@ namespace Twol
             GL.PointSize(16.0f);
             GL.Begin(PrimitiveType.Points);
             GL.Color3(1.0f, 0.00f, 0.0f);
-            GL.Vertex3(mf.pivotAxlePos.easting, mf.pivotAxlePos.northing, 0.0);
+            GL.Vertex2(mf.pivotAxlePos.easting, mf.pivotAxlePos.northing);
             GL.End();
 
             GL.PointSize(8.0f);
             GL.Begin(PrimitiveType.Points);
             GL.Color3(0.00f, 0.0f, 0.0f);
-            GL.Vertex3(mf.pivotAxlePos.easting, mf.pivotAxlePos.northing, 0.0);
+            GL.Vertex2(mf.pivotAxlePos.easting, mf.pivotAxlePos.northing);
             GL.End();
 
             //draw the line building graphics
@@ -766,7 +758,7 @@ namespace Twol
                 GL.Enable(EnableCap.LineStipple);
                 GL.LineWidth(5);
 
-                if (track.mode == TrackMode.bndCurve) GL.LineStipple(1, 0x0007);
+                if (track.mode == TrackMode.Polygon) GL.LineStipple(1, 0x0007);
                 else GL.LineStipple(1, 0x0707);
 
                 if (track == selectedLine)
@@ -776,8 +768,8 @@ namespace Twol
                 }
 
                 GL.Color3(0.30f, 0.97f, 0.30f);
-                if (track.mode == TrackMode.AB) GL.Color3(1.0f, 0.20f, 0.20f);
-                if (track.mode == TrackMode.bndCurve) GL.Color3(0.70f, 0.5f, 0.2f);
+                if (track.mode == TrackMode.ABLine) GL.Color3(1.0f, 0.20f, 0.20f);
+                if (track.mode == TrackMode.Polygon) GL.Color3(0.70f, 0.5f, 0.2f);
 
                 track.curvePts.DrawPolygon(PrimitiveType.LineStrip);
 
@@ -789,12 +781,11 @@ namespace Twol
                 GL.Color3(1.0f, 0.75f, 0.350f);
                 GL.Begin(PrimitiveType.Points);
 
-                GL.Vertex3(track.curvePts[0].easting, track.curvePts[0].northing, 0);
+                GL.Vertex2(track.curvePts[0].easting, track.curvePts[0].northing);
 
                 GL.Color3(0.5f, 0.5f, 1.0f);
-                GL.Vertex3(track.curvePts[track.curvePts.Count - 1].easting,
-                            track.curvePts[track.curvePts.Count - 1].northing,
-                            0);
+                GL.Vertex2(track.curvePts[track.curvePts.Count - 1].easting,
+                            track.curvePts[track.curvePts.Count - 1].northing);
                 GL.End();
             }
         }
@@ -806,18 +797,18 @@ namespace Twol
             GL.Begin(PrimitiveType.Points);
 
             GL.Color3(0, 0, 0);
-            if (start != 99999) GL.Vertex3(mf.bnd.bndList[bndSelect].fenceLine[start].easting, mf.bnd.bndList[bndSelect].fenceLine[start].northing, 0);
-            if (end != 99999) GL.Vertex3(mf.bnd.bndList[bndSelect].fenceLine[end].easting, mf.bnd.bndList[bndSelect].fenceLine[end].northing, 0);
+            if (start != 99999) GL.Vertex2(mf.bnd.bndList[bndSelect].fenceLine[start].easting, mf.bnd.bndList[bndSelect].fenceLine[start].northing);
+            if (end != 99999) GL.Vertex2(mf.bnd.bndList[bndSelect].fenceLine[end].easting, mf.bnd.bndList[bndSelect].fenceLine[end].northing);
             GL.End();
 
             GL.PointSize(16);
             GL.Begin(PrimitiveType.Points);
 
             GL.Color3(1.0f, 0.75f, 0.350f);
-            if (start != 99999) GL.Vertex3(mf.bnd.bndList[bndSelect].fenceLine[start].easting, mf.bnd.bndList[bndSelect].fenceLine[start].northing, 0);
+            if (start != 99999) GL.Vertex2(mf.bnd.bndList[bndSelect].fenceLine[start].easting, mf.bnd.bndList[bndSelect].fenceLine[start].northing);
 
             GL.Color3(0.5f, 0.5f, 1.0f);
-            if (end != 99999) GL.Vertex3(mf.bnd.bndList[bndSelect].fenceLine[end].easting, mf.bnd.bndList[bndSelect].fenceLine[end].northing, 0);
+            if (end != 99999) GL.Vertex2(mf.bnd.bndList[bndSelect].fenceLine[end].easting, mf.bnd.bndList[bndSelect].fenceLine[end].northing);
             GL.End();
         }
 
@@ -828,14 +819,14 @@ namespace Twol
             btnMakeBoundaryCurve.Enabled = true;
             foreach (var track in gTemp)
             {
-                if (track.mode == TrackMode.bndCurve)
+                if (track.mode == TrackMode.Polygon)
                 {
                     btnMakeBoundaryCurve.Enabled = false;
                     break;
                 }
             }
 
-            if (selectedLine != null && selectedLine.mode != TrackMode.Curve)
+            if (selectedLine != null && selectedLine.mode != TrackMode.PolyLine)
             {
                 btnALength.Enabled = true;
                 btnBLength.Enabled = true;
@@ -849,7 +840,7 @@ namespace Twol
 
         private void btnALength_Click(object sender, EventArgs e)
         {
-            if (selectedLine != null && (selectedLine.mode == TrackMode.Curve || selectedLine.mode == TrackMode.AB))
+            if (selectedLine != null && (selectedLine.mode == TrackMode.PolyLine || selectedLine.mode == TrackMode.ABLine))
             {
                 //and the beginning
                 vec3 start = new vec3(selectedLine.curvePts[0]);
@@ -868,7 +859,7 @@ namespace Twol
 
         private void btnBLength_Click(object sender, EventArgs e)
         {
-            if (selectedLine != null && (selectedLine.mode == TrackMode.Curve || selectedLine.mode == TrackMode.AB))
+            if (selectedLine != null && (selectedLine.mode == TrackMode.PolyLine || selectedLine.mode == TrackMode.ABLine))
             {
                 int ptCnt = selectedLine.curvePts.Count - 1;
 
@@ -882,6 +873,11 @@ namespace Twol
 
                 selectedLine.ptB = new vec2(selectedLine.curvePts[selectedLine.curvePts.Count - 1]);
             }
+        }
+
+        private void cboxFldOrBnd_Click(object sender, EventArgs e)
+        {
+            cboxFldOrBnd.Image = cboxFldOrBnd.Checked ? Properties.Resources.FilterInnerLines : Properties.Resources.FilterOuterLines;
         }
 
         private void FormABDraw_ResizeEnd(object sender, EventArgs e)

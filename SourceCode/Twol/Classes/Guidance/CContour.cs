@@ -126,7 +126,7 @@ namespace Twol
             {
                 double distanceFromRefLine = mf.gyd.FindDistanceToSegment(vec2pivot, stripList[stripNum][A], stripList[stripNum][B], out _, out double Time, true, false, false);
 
-                //are we going same direction as stripList was created?
+                //are we going same direction as recList was created?
                 bool isSameWay = Math.PI - Math.Abs(Math.Abs(mf.fixHeading - stripList[stripNum][A].heading) - Math.PI) < 1.57;
 
                 double howManyPathsAway = Math.Round((distanceFromRefLine + (isSameWay ? Settings.Tool.offset : -Settings.Tool.offset))
@@ -200,27 +200,13 @@ namespace Twol
         //start stop and add points to list
         public void StartContourLine()
         {
-            //if (stripList.Count == 0)
-            //{
-            //make new ptList
             ptList = new List<vec3>(16);
-            //ptList.Add(new vec3(pivot.easting + Math.Cos(pivot.heading)
-            //    * mf.tool.toolOffset, pivot.northing - Math.Sin(pivot.heading) * mf.tool.toolOffset, pivot.heading));
             stripList.Add(ptList);
             isContourOn = true;
             return;
-            //}
-            //else
-            //{
-            //    //reuse ptList
-            //    ptList?.Clear();
-            //    //ptList.Add(new vec3(pivot.easting + Math.Cos(pivot.heading)
-            //    //    * mf.tool.toolOffset, pivot.northing - Math.Sin(pivot.heading) * mf.tool.toolOffset, pivot.heading));
-            //    isContourOn = true;
-            //}
         }
 
-        //Add current position to stripList
+        //Add current position to recList
         public void AddPoint(vec3 pivot)
         {
             ptList.Add(new vec3(pivot.easting + Math.Cos(pivot.heading) * Settings.Tool.offset,
@@ -230,7 +216,7 @@ namespace Twol
 
         //End the strip
         public void StopContourLine()
-        {
+        {            
             //make sure its long enough to bother
             if (ptList.Count > 5)
             {
@@ -282,8 +268,8 @@ namespace Twol
         {
             //GL.Color3(0.98f, 0.98f, 0.50f);
             //GL.Begin(PrimitiveType.Lines);
-            //GL.Vertex3(boxA.easting, boxA.northing, 0);
-            //GL.Vertex3(boxB.easting, boxB.northing, 0);
+            //GL.Vertex2(boxA.easting, boxA.northing, 0);
+            //GL.Vertex2(boxB.easting, boxB.northing, 0);
             //GL.End();
 
             ////draw the guidance line
@@ -318,7 +304,7 @@ namespace Twol
                 GL.Color3(0.35f, 0.30f, 0.90f);
                 GL.PointSize(6.0f);
                 GL.Begin(PrimitiveType.Points);
-                GL.Vertex3(stripList[stripNum][pt].easting, stripList[stripNum][pt].northing, 0);
+                GL.Vertex2(stripList[stripNum][pt].easting, stripList[stripNum][pt].northing);
                 GL.End();
             }
 
@@ -326,14 +312,14 @@ namespace Twol
             //GL.PointSize(3.0f);
             ////if (isContourBtnOn)
             //{
-            //    ptCount = stripList.Count;
+            //    ptCount = recList.Count;
             //    if (ptCount > 0)
             //    {
-            //        ptCount = stripList[closestRefPatch].Count;
+            //        ptCount = recList[closestRefPatch].Count;
             //        GL.Begin(PrimitiveType.Points);
             //        for (int i = 0; i < ptCount; i++)
             //        {
-            //            GL.Vertex2(stripList[closestRefPatch][i].easting, stripList[closestRefPatch][i].northing);
+            //            GL.Vertex2(recList[closestRefPatch][i].easting, recList[closestRefPatch][i].northing);
             //        }
             //        GL.End();
             //    }

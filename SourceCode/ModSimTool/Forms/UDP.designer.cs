@@ -136,59 +136,6 @@ namespace ModSimTool
 
         #region Receive UDP
 
-        private void ReceiveDataUDPAsync(IAsyncResult asyncResult)
-        {
-            try
-            {
-                // Receive all data
-                int msgLen = UDPSocket.EndReceiveFrom(asyncResult, ref endPointUDP);
-
-                byte[] localMsg = new byte[msgLen];
-                Array.Copy(buffer, localMsg, msgLen);
-
-                // Listen for more connections again...
-                UDPSocket.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref endPointUDP, 
-                    new AsyncCallback(ReceiveDataUDPAsync), null);
-
-                BeginInvoke((MethodInvoker)(() => ReceiveFromUDP(localMsg)));
-
-            }
-            catch (Exception)
-            {
-                //WriteErrorLog("UDP Recv data " + e.ToString());
-                //MessageBox.Show("ReceiveData Error: " + e.Message, "UDP Server", MessageBoxButtons.OK,
-                //MessageBoxIcon.Error);
-            }
-        }
-
-
-        static byte [] PGN_253 = { 128, 129, 126, 253, 8, 0, 0, 0, 0, 0, 0, 0, 0, 12 };
-        int PGN_253_Size = PGN_253.Length - 1;
-
-        //Heart beat hello
-        static byte [] helloFromAutoSteer = { 128, 129, 226, 226, 5, 0, 0, 0, 0, 0, 71 };
-
-        ////hello from Modules
-        //static byte[] helloFromMachine = { 128, 129, 123, 123, 5, 0, 0, 0, 0, 0, 71 };
-
-        ////hello from Modules
-        //static byte[] helloFromIMU = { 128, 129, 121, 121, 5, 0, 0, 0, 0, 0, 71 };
-
-        //steer reply pgn
-        static byte[] PGN_230 = { 0x80, 0x81, 0x7f, 230, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0xCC };
-        int PGN_230_Size = PGN_230.Length - 1;
-
-
-        //On Off
-        byte guidanceStatus = 0;
-
-        //speed sent as *10
-        double gpsSpeed = 0;
-        double XTE = 0; 
-
-        //steering variables
-        double steerAngleActual = 0;
-
         private void ReceiveFromUDP(byte[] data)
         {
             try
@@ -201,19 +148,27 @@ namespace ModSimTool
 
                         case 233:
                             {
-                                gpsSpeed = ((double)(data[5] | data[6] << 8)) * 0.1;
+                                gpsSpeed = ((double)(data[10])) * 0.1;
                                 lblSpeed.Text = gpsSpeed.ToString("N1");
 
                                 guidanceStatus = data[7];
                                 lblStatus.Text = guidanceStatus.ToString();
 
-                                int temp = (data[9] << 8);
-                                temp |= data[8];
-                                short temp2 = (short)temp;
+                                //tool XTE
+                                short bob = (short)(data[5] | (data[6] << 8));
+                                XTE = (double)bob * 0.01;
+                                //Bit 5,6    set xte * 1000 is sent 
+                                lblXTE.Text = XTE.ToString();
 
-                                //Bit 8,9    set xte * 100 is sent
-                                XTE = (double)(temp2); //high low bytes
-                                lblXTE.Text = XTE.ToString("N2");
+                                //vehicle XTE
+                                //Bit 8,9    set xte * 1000 is sent
+                                bob = (short)(data[8] | data[9] << 8);
+                                XTE = (double)bob * 0.01;
+                                lblVehXTE.Text = XTE.ToString();
+
+                                //Manual PWM
+                                bob = (short)(data[11] | data[12] << 8);
+                                lblManualPWM.Text = bob.ToString();
 
                                 //----------------------------------------------------------------------------
                                 //Serial Send to agopenGPS
@@ -403,6 +358,59 @@ namespace ModSimTool
 
             }
         }
+
+        private void ReceiveDataUDPAsync(IAsyncResult asyncResult)
+        {
+            try
+            {
+                // Receive all data
+                int msgLen = UDPSocket.EndReceiveFrom(asyncResult, ref endPointUDP);
+
+                byte[] localMsg = new byte[msgLen];
+                Array.Copy(buffer, localMsg, msgLen);
+
+                // Listen for more connections again...
+                UDPSocket.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref endPointUDP, 
+                    new AsyncCallback(ReceiveDataUDPAsync), null);
+
+                BeginInvoke((MethodInvoker)(() => ReceiveFromUDP(localMsg)));
+
+            }
+            catch (Exception)
+            {
+                //WriteErrorLog("UDP Recv data " + e.ToString());
+                //MessageBox.Show("ReceiveData Error: " + e.Message, "UDP Server", MessageBoxButtons.OK,
+                //MessageBoxIcon.Error);
+            }
+        }
+
+
+        static byte [] PGN_253 = { 128, 129, 126, 253, 8, 0, 0, 0, 0, 0, 0, 0, 0, 12 };
+        int PGN_253_Size = PGN_253.Length - 1;
+
+        //Heart beat hello
+        static byte [] helloFromAutoSteer = { 128, 129, 226, 226, 5, 0, 0, 0, 0, 0, 71 };
+
+        ////hello from Modules
+        //static byte[] helloFromMachine = { 128, 129, 123, 123, 5, 0, 0, 0, 0, 0, 71 };
+
+        ////hello from Modules
+        //static byte[] helloFromIMU = { 128, 129, 121, 121, 5, 0, 0, 0, 0, 0, 71 };
+
+        //steer reply pgn
+        static byte[] PGN_230 = { 0x80, 0x81, 0x7f, 230, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0xCC };
+        int PGN_230_Size = PGN_230.Length - 1;
+
+
+        //On Off
+        byte guidanceStatus = 0;
+
+        //speed sent as *10
+        double gpsSpeed = 0;
+        double XTE = 0; 
+
+        //steering variables
+        double steerAngleActual = 0;
 
         #endregion
 

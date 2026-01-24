@@ -2,6 +2,7 @@
 //Copyright BrianTee, copy right out of it.
 
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 
@@ -10,6 +11,11 @@ namespace Twol
     public partial class FormGPSData : Form
     {
         private readonly FormGPS mf = null;
+
+        protected override void OnPaintBackground(PaintEventArgs e)
+        {
+            e.Graphics.FillRectangle(Brushes.AliceBlue, e.ClipRectangle);
+        }
 
         public FormGPSData(Form callingForm)
         {
@@ -21,18 +27,18 @@ namespace Twol
         {
             //lblTram.Text = mf.tram.controlByte.ToString();
 
-            lblFrameTime.Text = mf.frameTime.ToString("N1");
-            lblTimeSlice.Text = (1 / mf.timeSliceOfLastFix).ToString("N3");
+            //lblFrameTime.Text = mf.frameTime.ToString("N1");
+            //lblTimeSlice.Text = (1 / mf.timeSliceOfLastFix).ToString("N1");
             lblHz.Text = mf.gpsHz.ToString("N1");
 
-            lblEastingField.Text = Math.Round(mf.pivotAxlePos.easting, 1).ToString();
-            lblNorthingField.Text = Math.Round(mf.pivotAxlePos.northing, 1).ToString();
+            lblEastingField.Text = Math.Round(mf.pivotAxlePos.easting, 2).ToString();
+            lblNorthingField.Text = Math.Round(mf.pivotAxlePos.northing, 2).ToString();
 
             lblLatitude.Text = mf.Latitude;
             lblLongitude.Text = mf.Longitude;
 
             //other sat and GPS info
-            lblSatsTracked.Text = mf.SatsTracked;
+            //lblSatsTracked.Text = mf.SatsTracked;
             lblHDOP.Text = mf.HDOP;
             //lblSpeed.Text = mf.avgSpeed.ToString("N2");
 
@@ -41,13 +47,13 @@ namespace Twol
             //lblRoll.Text = mf.RollInDegrees;
             lblIMUHeading.Text = mf.GyroInDegrees;
             lblFix2FixHeading.Text = mf.GPSHeading;
-            lblFuzeHeading.Text = glm.toDegrees(mf.fixHeading).ToString("N1");
+            //lblFuzeHeading.Text = glm.toDegrees(mf.fixHeading).ToString("N1");
 
-            lblAngularVelocity.Text = mf.ahrs.imuYawRate.ToString("N2");
+            //lblAngularVelocity.Text = mf.ahrs.imuYawRate.ToString("N2");
 
             //lbludpWatchCounts.Text = mf.missedSentenceCount.ToString();
 
-            lblAltitude.Text = mf.Altitude;
+            lblElevation.Text = mf.ElevationInMeters;
 
             //PointF tileXY = mf.map.WSG84ToTilePos(mf.pn.longitude, mf.pn.latitude, mf.map.ZoomLevel);
 
@@ -66,8 +72,8 @@ namespace Twol
 
         private void FormGPSData_Load(object sender, EventArgs e)
         {
-            this.Width = 140;
-            this.Height = 350;
+            this.BackColor = Color.AliceBlue;
+            this.TransparencyKey = Color.AliceBlue;
         }
 
         private void FormGPSData_FormClosing(object sender, FormClosingEventArgs e)

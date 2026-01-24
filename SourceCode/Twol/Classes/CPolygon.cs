@@ -121,15 +121,19 @@ namespace Twol
         // Remove an ear from the polygon and add it to the triangles array.
         private void RemoveEar(List<Triangle> triangles)
         {
-            // Find an ear.
-            int A = 0, B = 0, C = 0;
-            FindEar(ref A, ref B, ref C);
+            try
+            {
+                // Find an ear.
+                int A = 0, B = 0, C = 0;
+                FindEar(ref A, ref B, ref C);
 
-            // Create a new triangle for the ear.
-            triangles.Add(new Triangle(polygonPts[A], polygonPts[B], polygonPts[C]));
+                // Create a new triangle for the ear.
+                triangles.Add(new Triangle(polygonPts[A], polygonPts[B], polygonPts[C]));
 
-            // Remove the ear from the polygon.
-            RemovePointFromArray(B);
+                // Remove the ear from the polygon.
+                RemovePointFromArray(B);
+            }
+            catch { }
         }
 
         // Remove point target from the array.
@@ -194,7 +198,7 @@ namespace Twol
                 Array.Reverse(polygonPts);
         }
 
-        // Return the cross product AB x BC.
+        // Return the cross product ABLine x BC.
         public static double CrossProductLength(double Ax, double Ay,
             double Bx, double By, double Cx, double Cy)
         {
@@ -208,7 +212,7 @@ namespace Twol
             return (BAx * BCy - BAy * BCx);
         }
 
-        // dot product AB · BC. Note that AB · BC = |AB| * |BC| * Cos(theta).
+        // dot product ABLine · BC. Note that ABLine · BC = |ABLine| * |BC| * Cos(theta).
         private static double DotProduct(double Ax, double Ay,
             double Bx, double By, double Cx, double Cy)
         {
@@ -257,7 +261,7 @@ namespace Twol
         public bool PolygonIsConvex()
         {
             // For each set of three adjacent _points A, B, C,
-            // find the dot product AB · BC. If the sign of
+            // find the dot product ABLine · BC. If the sign of
             // all the dot products is the same, the angles
             // are all positive or negative (depending on the
             // order in which we visit them) so the polygon

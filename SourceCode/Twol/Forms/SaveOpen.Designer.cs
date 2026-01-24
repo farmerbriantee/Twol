@@ -24,13 +24,15 @@ namespace Twol
     public class CFieldFiles
     {
         public List<CFieldFile> fieldArr = new List<CFieldFile>();
-
     }
 
     public partial class FormGPS
     {
         //list of the list of patch data individual triangles for contour tracking
         public List<List<vec3>> contourSaveList = new List<List<vec3>>();
+
+        //list of the list of patch data individual triangles for tool recording
+        public List<List<vec3>> toolRecordSaveList = new List<List<vec3>>();
 
         //list of the list of patch data individual triangles for bndPts sections
         public List<List<vec3>> patchSaveList = new List<List<vec3>>();
@@ -91,7 +93,7 @@ namespace Twol
         public void FileCreateContour()
         {
             //12  - points in patch
-            //64.697,0.168,-21.654,0 - east, heading, north, altitude
+            //64.697,0.168,-21.654,0 - east, heading, north, elevation
 
             //get the directory and make sure it exists, create if not
             string directoryName = Path.Combine(RegistrySettings.fieldsDirectory, currentFieldDirectory, currentJobDirectory);
@@ -681,6 +683,7 @@ namespace Twol
                 //Triangulate headland polygon
                 CPolygon hdLinePolygon = new CPolygon(bnd.bndList[0].hdLine.ToArray());
                 bnd.bndList[0].hdLineTriangleList = hdLinePolygon.Triangulate();
+                bnd.CreateHdLineVertexArray(0);
 
                 bnd.isHeadlandOn = true;
                 btnHeadlandOnOff.Image = Properties.Resources.HeadlandOn;
@@ -691,6 +694,7 @@ namespace Twol
                 bnd.isHeadlandOn = false;
                 btnHeadlandOnOff.Image = Properties.Resources.HeadlandOff;
                 btnHeadlandOnOff.Visible = false;
+                bnd.DeleteHeadLineVertexArray(0);
             }
         }
 
@@ -800,7 +804,7 @@ namespace Twol
                 return;
             }
 
-            //Points in Patch followed by easting, heading, northing, altitude
+            //Points in Patch followed by easting, heading, northing, elevation
             else
             {
                 using (StreamReader reader = new StreamReader(dir))
@@ -839,6 +843,63 @@ namespace Twol
                         Log.EventWriter("Loading Contour file" + e.ToString());
 
                         TimedMessageBox(2000, gStr.Get(gs.gsContourFileIsCorrupt), gStr.Get(gs.gsButFieldIsLoaded));
+                    }
+                }
+            }
+        }
+
+        public void FileLoadToolRecord(string dir)
+        {
+            if (!File.Exists(dir))
+            {
+                //write out the file
+                using (StreamWriter writer = new StreamWriter(dir))
+                {
+                    //write paths # of sections
+                    //writer.WriteLine("$Sectionsv4");
+                }
+                return;
+            }
+
+            //Points in Patch followed by easting, heading, northing, elevation
+            else
+            {
+                using (StreamReader reader = new StreamReader(dir))
+                {
+                    try
+                    {
+                        //read header
+                        string line;
+                        while (!reader.EndOfStream)
+                        {
+                            //read how many vertices in the following patch
+                            line = reader.ReadLine();
+                            int verts = int.Parse(line);
+
+                            vec3 vecFix = new vec3(0, 0, 0);
+
+                            var ptList = new List<vec3>();
+                            ptList.Capacity = verts + 1;
+
+                            for (int v = 0; v < verts; v++)
+                            {
+                                line = reader.ReadLine();
+                                string[] words = line.Split(',');
+                                if (words[2] != "0" && words[2] != "10" && words[2] != "20") words[2] = "0";
+                                vecFix.easting = double.Parse(words[0], CultureInfo.InvariantCulture);
+                                vecFix.northing = double.Parse(words[1], CultureInfo.InvariantCulture);
+                                vecFix.heading = double.Parse(words[2], CultureInfo.InvariantCulture);
+                                ptList.Add(vecFix);
+                            }
+
+                            tRec.recList.Add(ptList);
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Log.EventWriter("Loading ToolRec file" + e.ToString());
+
+                        TimedMessageBox(2000, gStr.Get("Tool Recording File is Corrupt"), gStr.Get(gs.gsButFieldIsLoaded));
                     }
                 }
             }
@@ -923,7 +984,7 @@ namespace Twol
 
             string filename = Path.Combine(directoryName, "TrackLines.txt");
 
-            //get the file of previous AB Lines
+            //get the file of previous ABLine Lines
             if ((directoryName.Length > 0) && (!Directory.Exists(directoryName)))
             { Directory.CreateDirectory(directoryName); }
 
@@ -992,7 +1053,7 @@ namespace Twol
                                 }
                             }
 
-                            if (track.mode == TrackMode.AB && track.curvePts.Count == 0)
+                            if (track.mode == TrackMode.ABLine && track.curvePts.Count == 0)
                             {
                                 double designHeading = track.heading;
 
@@ -1001,15 +1062,15 @@ namespace Twol
 
                                 //fill in the dots between A and B
                                 double len = glm.Distance(track.ptA, track.ptB);
-                                if (len < 30)
+                                if (len < 50)
                                 {
-                                    track.ptB.easting = track.ptA.easting + (Math.Sin(designHeading) * 30);
-                                    track.ptB.northing = track.ptA.northing + (Math.Cos(designHeading) * 30);
+                                    track.ptB.easting = track.ptA.easting + (Math.Sin(designHeading) * 50);
+                                    track.ptB.northing = track.ptA.northing + (Math.Cos(designHeading) * 50);
                                 }
                                 track.curvePts.Add(new vec3(track.ptA, designHeading));
                                 track.curvePts.Add(new vec3(track.ptB, designHeading));
 
-                                trks.AddFirstLastPoints(ref track.curvePts, 300);
+                                track.curvePts.AddStartEndPoints(5, 300);
                             }
 
                             trks.AddTrack(track);
@@ -1170,17 +1231,15 @@ namespace Twol
         public void FileSaveContour()
         {
             //1  - points in patch
-            //64.697,0.168,-21.654,0 - east, heading, north, altitude
+            //64.697,0.168,-21.654,0 - east, heading, north, elevation
 
             //make sure there is something to save
-            if (contourSaveList == null) return;
+            if (contourSaveList == null || contourSaveList.Count == 0) return;
 
             // Quick-copy and clear the buffer on the caller (UI) thread, then write to disk on a background task.
             List<List<vec3>> toSave;
             lock (contourSaveList)
             {
-                if (contourSaveList.Count == 0) return;
-
                 toSave = new List<List<vec3>>(contourSaveList.Count);
                 foreach (var triList in contourSaveList)
                 {
@@ -1222,6 +1281,62 @@ namespace Twol
                 {
                     // Log exception from background thread; don't throw.
                     Log.EventWriter("FileSaveContour (async): " + ex.ToString());
+                }
+            });
+        }
+        public void FileSaveToolRecordList(bool isAppend)
+        {
+            //1  - points in patch
+            //64.697,0.168,-21.654,0 - east, heading, north, elevation
+
+            //make sure there is something to save
+            if (toolRecordSaveList == null || toolRecordSaveList.Count == 0) return;
+
+            // Quick-copy and clear the buffer on the caller (UI) thread, then write to disk on a background task.
+            List<List<vec3>> toSave;
+            lock (toolRecordSaveList)
+            {
+                toSave = new List<List<vec3>>(toolRecordSaveList.Count);
+                foreach (var triList in toolRecordSaveList)
+                {
+                    // copy inner lists to avoid concurrent modification while writing
+                    toSave.Add(new List<vec3>(triList));
+                }
+
+                // Clear immediately so new data can be collected without waiting for IO
+                toolRecordSaveList.Clear();
+            }
+
+            System.Threading.Tasks.Task.Run(() =>
+            {
+                try
+                {
+                    string directory = Path.Combine(RegistrySettings.fieldsDirectory, currentFieldDirectory);
+                    if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
+                        Directory.CreateDirectory(directory);
+
+                    string filePath = Path.Combine(directory, "ToolRecording.txt");
+                    using (StreamWriter writer = new StreamWriter(filePath, isAppend))
+                    {
+                        foreach (var triList in toSave)
+                        {
+                            int count2 = triList.Count;
+                            writer.WriteLine(count2.ToString(CultureInfo.InvariantCulture));
+
+                            for (int i = 0; i < count2; i++)
+                            {
+                                writer.WriteLine(
+                                    Math.Round(triList[i].easting, 3).ToString(CultureInfo.InvariantCulture) + "," +
+                                    Math.Round(triList[i].northing, 3).ToString(CultureInfo.InvariantCulture) + "," +
+                                    Math.Round(triList[i].heading, 3).ToString(CultureInfo.InvariantCulture));
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Log exception from background thread; don't throw.
+                    Log.EventWriter("FileSaveToolRecording (async): " + ex.ToString());
                 }
             });
         }

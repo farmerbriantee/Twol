@@ -5,7 +5,6 @@ namespace Twol
 {
     public class CNMEA
     {
-
         //local plane geometry
         public static double latStart, lonStart;
 
@@ -31,7 +30,7 @@ namespace Twol
         public string ggaSentence, vtgSentence, hdtSentence, avrSentence, paogiSentence,
             hpdSentence, rmcSentence, pandaSentence, ksxtSentence;
 
-        public double altitude = float.MaxValue, headingTrue = float.MaxValue,
+        public double elevation = float.MaxValue, headingTrue = float.MaxValue,
             headingTrueDual = float.MaxValue, rollDual = 0;
 
         public double hdop, latitude, longitude;
@@ -290,13 +289,13 @@ namespace Twol
 
                 if (Settings.IO.setUDP_isLoopBack)
                 {
-                    byte[] nmeaPGN = new byte[30];
+                    byte[] nmeaPGN = new byte[38];
 
                     nmeaPGN[0] = 128;
                     nmeaPGN[1] = 129;
                     nmeaPGN[2] = 124;
                     nmeaPGN[3] = 208; //pgn number aka D0
-                    nmeaPGN[4] = 24; // nmea total array count minus 6
+                    nmeaPGN[4] = 32; // nmea total array count minus 6 (was 24, now 32 for elevation)
 
                     //longitude
                     Buffer.BlockCopy(BitConverter.GetBytes(longitude), 0, nmeaPGN, 5, 8);
@@ -307,8 +306,11 @@ namespace Twol
                     //speed converted to kmh from knots
                     Buffer.BlockCopy(BitConverter.GetBytes(vtgSpeed), 0, nmeaPGN, 21, 8);
 
+                    //elevation in meters
+                    Buffer.BlockCopy(BitConverter.GetBytes(elevation), 0, nmeaPGN, 29, 8);
+
                     //checksum
-                    nmeaPGN[29] = 0;
+                    nmeaPGN[37] = 0;
 
                     //Send nmea to AgOpenGPS
                     mf.SendToPlugins(nmeaPGN);
@@ -325,7 +327,7 @@ namespace Twol
 
                 double.TryParse(words[3], NumberStyles.Float, CultureInfo.InvariantCulture, out latitude);
 
-                double.TryParse(words[4], NumberStyles.Float, CultureInfo.InvariantCulture, out altitude);
+                double.TryParse(words[4], NumberStyles.Float, CultureInfo.InvariantCulture, out elevation);
 
                 double.TryParse(words[5], NumberStyles.Float, CultureInfo.InvariantCulture, out headingTrueDual);
 
@@ -371,7 +373,7 @@ namespace Twol
             //                          8 = Simulation mode
             //08           Number of satellitesTracked being tracked
             //0.9          Horizontal dilution of position
-            //545.4,M      Altitude, Meters, above mean sea level
+            //545.4,M      ElevationInMeters, Meters, above mean sea level
             //46.9,M       Height of geoid (mean sea level) above WGS84 ellipsoid
             //(empty field) time in seconds since last DGPS update
             //(empty field) DGPS station ID number
@@ -394,8 +396,8 @@ namespace Twol
                 //hdop
                 double.TryParse(words[8], NumberStyles.Float, CultureInfo.InvariantCulture, out hdop);
 
-                //altitude
-                double.TryParse(words[9], NumberStyles.Float, CultureInfo.InvariantCulture, out altitude);
+                //elevation
+                double.TryParse(words[9], NumberStyles.Float, CultureInfo.InvariantCulture, out elevation);
 
                 //age
                 double.TryParse(words[13], NumberStyles.Float, CultureInfo.InvariantCulture, out age);
@@ -552,7 +554,7 @@ namespace Twol
                 8 = Simulation mode
             (7) Number of satellitesTracked being tracked
             (8) 0.9 Horizontal dilution of position
-            (9) 545.4 Altitude (ALWAYS in Meters, above mean sea level)
+            (9) 545.4 ElevationInMeters (ALWAYS in Meters, above mean sea level)
             (10) 1.2 time in seconds since last DGPS update
 
             (11) 022.4 Speed over the ground in knots - can be positive or negative
@@ -583,8 +585,8 @@ namespace Twol
                 //hdop
                 double.TryParse(words[8], NumberStyles.Float, CultureInfo.InvariantCulture, out hdop);
 
-                //altitude
-                double.TryParse(words[9], NumberStyles.Float, CultureInfo.InvariantCulture, out altitude);
+                //elevation
+                double.TryParse(words[9], NumberStyles.Float, CultureInfo.InvariantCulture, out elevation);
 
                 //kph for vtgSpeed - knots read
                 double.TryParse(words[11], NumberStyles.Float, CultureInfo.InvariantCulture, out vtgSpeed);
@@ -660,7 +662,7 @@ namespace Twol
                 8 = Simulation mode
             (7) Number of satellitesTracked being tracked
             (8) 0.9 Horizontal dilution of position
-            (9) 545.4 Altitude (ALWAYS in Meters, above mean sea level)
+            (9) 545.4 ElevationInMeters (ALWAYS in Meters, above mean sea level)
             (10) 1.2 time in seconds since last DGPS update
             (11) Speed in knots
 
@@ -723,8 +725,8 @@ namespace Twol
                 //hdop
                 double.TryParse(words[8], NumberStyles.Float, CultureInfo.InvariantCulture, out hdop);
 
-                //altitude
-                double.TryParse(words[9], NumberStyles.Float, CultureInfo.InvariantCulture, out altitude);
+                //elevation
+                double.TryParse(words[9], NumberStyles.Float, CultureInfo.InvariantCulture, out elevation);
 
                 //age
                 double.TryParse(words[10], NumberStyles.Float, CultureInfo.InvariantCulture, out age);

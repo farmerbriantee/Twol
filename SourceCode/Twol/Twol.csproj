@@ -78,6 +78,9 @@
   <PropertyGroup />
   <PropertyGroup />
   <ItemGroup>
+    <Reference Include="Clipper2Lib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ddeb3f68c442d6e4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Clipper2.2.0.0\lib\netstandard2.0\Clipper2Lib.dll</HintPath>
+    </Reference>
     <Reference Include="ColorPicker, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\References\ColorPicker.dll</HintPath>
@@ -152,12 +155,14 @@
     <Compile Include="Classes\CBrightness.cs" />
     <Compile Include="Classes\ExtensionMethods.cs" />
     <Compile Include="Classes\CBoundary.cs" />
+    <Compile Include="Classes\Guidance\CToolRecord.cs" />
     <Compile Include="Classes\Guidance\CGuidance.cs" />
     <Compile Include="Classes\CHeadLine.cs" />
     <Compile Include="Classes\CHello.cs" />
+    <Compile Include="Classes\Guidance\CTrackMethods.cs" />
     <Compile Include="Classes\Language.cs" />
     <Compile Include="Classes\Log.cs" />
-    <Compile Include="Classes\Tool\CGuidanceTool.cs" />
+    <Compile Include="Classes\Guidance\CGuidanceTool.cs" />
     <Compile Include="Classes\Mapping\Map.cs" />
     <Compile Include="Classes\Tool\CNozzle.cs" />
     <Compile Include="Classes\CPolygon.cs" />
@@ -174,17 +179,29 @@
     <Compile Include="Forms\Field\FormMap.Designer.cs">
       <DependentUpon>FormMap.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FormYesNo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormYesNo.designer.cs">
+      <DependentUpon>FormYesNo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Guidance\FormBuildToolTracks.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Guidance\FormBuildToolTracks.Designer.cs">
+      <DependentUpon>FormBuildToolTracks.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Guidance\FormABDrawHeading.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Guidance\FormABDrawHeading.designer.cs">
       <DependentUpon>FormABDrawHeading.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Guidance\FormToolControl.cs">
+    <Compile Include="Forms\Guidance\FormTrackFilter.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Guidance\FormToolControl.designer.cs">
-      <DependentUpon>FormToolControl.cs</DependentUpon>
+    <Compile Include="Forms\Guidance\FormTrackFilter.designer.cs">
+      <DependentUpon>FormTrackFilter.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Guidance\FormToolManual.cs">
       <SubType>Form</SubType>
@@ -611,11 +628,18 @@
     <EmbeddedResource Include="Forms\FormEventViewer.resx">
       <DependentUpon>FormEventViewer.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormYesNo.resx">
+      <DependentUpon>FormYesNo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormYes.resx">
       <DependentUpon>FormYes.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Guidance\FormToolControl.resx">
-      <DependentUpon>FormToolControl.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Guidance\FormBuildToolTracks.resx">
+      <DependentUpon>FormBuildToolTracks.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Guidance\FormTrackFilter.resx">
+      <DependentUpon>FormTrackFilter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Guidance\FormToolManual.resx">
       <DependentUpon>FormToolManual.cs</DependentUpon>
@@ -891,6 +915,14 @@
     <None Include="btnImages\FilterInnerToolLines.png" />
     <None Include="btnImages\FilterNoToolLines.png" />
     <None Include="btnImages\FilterOuterToolLines.png" />
+    <None Include="btnImages\ABCurveBnd.png" />
+    <None Include="btnImages\ABTrackBnd.png" />
+    <None Include="btnImages\FilterInnerLines.png" />
+    <None Include="btnImages\FilterOuterLines.png" />
+    <None Include="btnImages\FilterLinesOnOff.png" />
+    <None Include="btnImages\FileSaveToolTracks.png" />
+    <None Include="btnImages\FileSaveRecordedTool.png" />
+    <None Include="btnImages\FileExportToolTracks.png" />
     <Content Include="btnImages\ZoomOut.png" />
     <Content Include="License.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

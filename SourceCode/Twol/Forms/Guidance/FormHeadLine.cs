@@ -63,8 +63,8 @@ namespace Twol
             else
             {
                 //make sure point distance isn't too big
-                mf.trks.MakePointMinimumSpacing(ref mf.bnd.bndList[0].hdLine, 1.2);
-                mf.bnd.bndList[0].hdLine.CalculateHeadings(true);
+                mf.bnd.bndList[0].hdLine.MinimumSpacingPointRemoval(1);
+                mf.bnd.bndList[0].hdLine.CalculateAverageHeadings(true);
             }
 
             cboxIsZoom.Checked = false;
@@ -270,7 +270,7 @@ namespace Twol
                     if (ptCnt > 0)
                     {
                         //who knows which way it actually goes
-                        sliceArr.CalculateHeadings(false);
+                        sliceArr.CalculateAverageHeadings(false);
 
                         for (int i = 1; i < 30; i++)
                         {
@@ -290,7 +290,7 @@ namespace Twol
                             sliceArr.Insert(0, pt);
                         }
 
-                        mode = TrackMode.Curve;
+                        mode = TrackMode.PolyLine;
                     }
                     else
                     {
@@ -323,7 +323,7 @@ namespace Twol
                     vec3 ptA = new vec3(mf.bnd.bndList[bndSelect].fenceLine[start]);
                     vec3 ptB = new vec3(mf.bnd.bndList[bndSelect].fenceLine[end]);
 
-                    //calculate the AB Heading
+                    //calculate the ABLine Heading
                     double abHead = Math.Atan2(
                         mf.bnd.bndList[bndSelect].fenceLine[end].easting - mf.bnd.bndList[bndSelect].fenceLine[start].easting,
                         mf.bnd.bndList[bndSelect].fenceLine[end].northing - mf.bnd.bndList[bndSelect].fenceLine[start].northing);
@@ -365,7 +365,7 @@ namespace Twol
                         sliceArr.Insert(0, pt);
                     }
 
-                    mode = TrackMode.AB;
+                    mode = TrackMode.ABLine;
 
                     start = -1; end = -1;
                 }
@@ -407,7 +407,7 @@ namespace Twol
             GL.PointSize(16.0f);
             GL.Begin(PrimitiveType.Points);
             GL.Color3(0.95f, 0.190f, 0.20f);
-            GL.Vertex3(mf.pivotAxlePos.easting, mf.pivotAxlePos.northing, 0.0);
+            GL.Vertex2(mf.pivotAxlePos.easting, mf.pivotAxlePos.northing);
             GL.End();
 
             //draw the line building graphics
@@ -433,7 +433,7 @@ namespace Twol
 
             //for (int i = 0; i < mf.bnd.buildList[0].hdLine.Count; i++)
             //{
-            //    GL.Vertex3(mf.bnd.buildList[0].hdLine[i].easting, mf.bnd.buildList[0].hdLine[i].northing, 0);
+            //    GL.Vertex2(mf.bnd.buildList[0].hdLine[i].easting, mf.bnd.buildList[0].hdLine[i].northing, 0);
             //}
             //GL.End();
 
@@ -447,7 +447,7 @@ namespace Twol
                 //GL.LineStipple(1, 0x7070);
                 GL.PointSize(8);
 
-                if (mode == TrackMode.AB)
+                if (mode == TrackMode.ABLine)
                 {
                     GL.Color3(0.95f, 0.09f, 0.0f);
                 }
@@ -459,7 +459,7 @@ namespace Twol
                 GL.Begin(PrimitiveType.LineStrip);
                 foreach (vec3 item in sliceArr)
                 {
-                    GL.Vertex3(item.easting, item.northing, 0);
+                    GL.Vertex2(item.easting, item.northing);
                 }
                 GL.End();
 
@@ -467,9 +467,9 @@ namespace Twol
                 GL.PointSize(24);
                 GL.Color3(1.0f, 0.6f, 0.3f);
                 GL.Begin(PrimitiveType.Points);
-                GL.Vertex3(sliceArr[0].easting, sliceArr[0].northing, 0);
+                GL.Vertex2(sliceArr[0].easting, sliceArr[0].northing);
                 GL.Color3(0.5f, 0.73f, 0.99f);
-                GL.Vertex3(sliceArr[cnt].easting, sliceArr[cnt].northing, 0);
+                GL.Vertex2(sliceArr[cnt].easting, sliceArr[cnt].northing);
                 GL.End();
             }
         }
@@ -480,18 +480,18 @@ namespace Twol
             GL.Begin(PrimitiveType.Points);
 
             GL.Color3(0, 0, 0);
-            if (start != -1) GL.Vertex3(mf.bnd.bndList[bndSelect].fenceLine[start].easting, mf.bnd.bndList[bndSelect].fenceLine[start].northing, 0);
-            if (end != -1) GL.Vertex3(mf.bnd.bndList[bndSelect].fenceLine[end].easting, mf.bnd.bndList[bndSelect].fenceLine[end].northing, 0);
+            if (start != -1) GL.Vertex2(mf.bnd.bndList[bndSelect].fenceLine[start].easting, mf.bnd.bndList[bndSelect].fenceLine[start].northing);
+            if (end != -1) GL.Vertex2(mf.bnd.bndList[bndSelect].fenceLine[end].easting, mf.bnd.bndList[bndSelect].fenceLine[end].northing);
             GL.End();
 
             GL.PointSize(18);
             GL.Begin(PrimitiveType.Points);
 
             GL.Color3(1.0f, 0.75f, 0.350f);
-            if (start != -1) GL.Vertex3(mf.bnd.bndList[bndSelect].fenceLine[start].easting, mf.bnd.bndList[bndSelect].fenceLine[start].northing, 0);
+            if (start != -1) GL.Vertex2(mf.bnd.bndList[bndSelect].fenceLine[start].easting, mf.bnd.bndList[bndSelect].fenceLine[start].northing);
 
             GL.Color3(0.5f, 0.75f, 1.0f);
-            if (end != -1) GL.Vertex3(mf.bnd.bndList[bndSelect].fenceLine[end].easting, mf.bnd.bndList[bndSelect].fenceLine[end].northing, 0);
+            if (end != -1) GL.Vertex2(mf.bnd.bndList[bndSelect].fenceLine[end].easting, mf.bnd.bndList[bndSelect].fenceLine[end].northing);
             GL.End();
         }
 
@@ -552,6 +552,7 @@ namespace Twol
                 hdArr = new vec3[mf.bnd.bndList[0].hdLine.Count];
                 mf.bnd.bndList[0].hdLine.CopyTo(hdArr);
                 mf.bnd.bndList[0].hdLine?.Clear();
+                mf.bnd.DeleteHeadLineVertexArray(0);
 
                 //does headland control sections
                 mf.bnd.isSectionControlledByHeadland = true;
@@ -588,6 +589,7 @@ namespace Twol
                 //triangulate headland area
                 CPolygon hdLinePolygon = new CPolygon(mf.bnd.bndList[0].hdLine.ToArray());
                 mf.bnd.bndList[0].hdLineTriangleList = hdLinePolygon.Triangulate();
+                mf.bnd.CreateHdLineVertexArray(0);
                 mf.bnd.isHeadlandOn = true;
             }
 
@@ -609,6 +611,7 @@ namespace Twol
                 int ptCount = mf.bnd.bndList[0].fenceLine.Count;
 
                 mf.bnd.bndList[0].hdLine?.Clear();
+                mf.bnd.DeleteHeadLineVertexArray(0);
 
                 for (int i = 0; i < ptCount; i++)
                 {
@@ -625,8 +628,8 @@ namespace Twol
                 if (cnt > 3)
                 {
                     //make sure point distance isn't too big
-                    mf.trks.MakePointMinimumSpacing(ref desList, 1.2);
-                    desList.CalculateHeadings(true);
+                    desList.MinimumSpacingPointRemoval(1);
+                    desList.CalculateAverageHeadings(true);
 
                     //write out the Points
                     mf.bnd.bndList[0].hdLine = desList;
@@ -746,6 +749,7 @@ namespace Twol
             sliceArr?.Clear();
             backupList?.Clear();
             mf.bnd.bndList[0].hdLine?.Clear();
+            mf.bnd.DeleteHeadLineVertexArray(0);
 
             int ptCount = mf.bnd.bndList[0].fenceLine.Count;
 
@@ -824,6 +828,7 @@ namespace Twol
         {
             mf.bnd.bndList[0].hdLine?.Clear();
             mf.bnd.bndList[0].hdLineTriangleList?.Clear();
+            mf.bnd.DeleteHeadLineVertexArray(0);
 
             mf.FileSaveHeadland();
             mf.bnd.isHeadlandOn = false;

@@ -263,6 +263,8 @@ namespace Twol
                 int cnt = mf.bnd.bndList.Count;
                 mf.bnd.bndList[cnt - 1].hdLine?.Clear();
                 mf.bnd.bndList.RemoveAt(cnt - 1);
+                mf.bnd.DeleteHeadLineVertexArray(0);
+                mf.bnd.DeleteFenceTriangleVertexArray(cnt - 1);
 
                 mf.FileSaveBoundary();
                 mf.FileSaveHeadland();

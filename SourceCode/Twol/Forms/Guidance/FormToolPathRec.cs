@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
@@ -18,15 +17,6 @@ namespace Twol
         [DllImportAttribute("user32.dll")]
         public static extern bool ReleaseCapture();
 
-        private void FormToolPathRec_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                ReleaseCapture();
-                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
-            }
-        }
-
         public FormToolPathRec(Form callingForm)
         {
             //get copy of the calling main form
@@ -34,15 +24,13 @@ namespace Twol
 
             InitializeComponent();
 
-            btnRecStartStop.BackColor = mf.gydTool.isGuidanceModeRecordNewTracks ? Color.LightGreen : Color.Transparent;
-
             if (mf.gydTool.isboundaryLine)
             {
-                btnOuterInner.Image = Properties.Resources.FilterOuterToolLines;
+                btnOuterInner.BackgroundImage = Properties.Resources.FilterOuterToolLines;
             }
             else
             {
-                btnOuterInner.Image = Properties.Resources.FilterInnerToolLines;
+                btnOuterInner.BackgroundImage = Properties.Resources.FilterInnerToolLines;
             }
         }
 
@@ -65,51 +53,8 @@ namespace Twol
             mf.FileSaveTracks();
         }
 
-        private void btnRecStartStop_Click(object sender, EventArgs e)
-        {
-            mf.gydTool.isGuidanceModeRecordNewTracks = !mf.gydTool.isGuidanceModeRecordNewTracks;
-
-            if (mf.gydTool.isGuidanceModeRecordNewTracks)
-            {
-                btnRecStartStop.BackColor = Color.LightGreen;
-            }
-            else
-            {
-                btnRecStartStop.BackColor = Color.Transparent;
-            }
-            mf.Activate();
-        }
-
-        private void bntOk_Click(object sender, EventArgs e)
-        {
-            if (mf.gydTool.isGuidanceModeRecordNewTracks)
-            {
-                mf.gydTool.isGuidanceModeRecordNewTracks = false;
-                var form = new FormYes("Recording Stopped");
-                form.ShowDialog(this);
-            }
-
-            Close();
-        }
-
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (mf.gydTool.isRecordingToolLine)
-            {
-                if (btnRecStartStop.BackColor == Color.Green)
-                {
-                    btnRecStartStop.BackColor = Color.LightGreen;
-                }
-                else
-                {
-                    btnRecStartStop.BackColor = Color.Green;
-                }
-            }
-            else
-            {
-                if (mf.gydTool.isGuidanceModeRecordNewTracks) btnRecStartStop.BackColor = Color.LightGreen;
-                else btnRecStartStop.BackColor = Color.Transparent;
-            }
         }
 
         private void btnOuterInner_Click(object sender, EventArgs e)
@@ -118,15 +63,24 @@ namespace Twol
 
             if (mf.gydTool.isboundaryLine)
             {
-                btnOuterInner.Image = Properties.Resources.FilterOuterToolLines;
+                btnOuterInner.BackgroundImage = Properties.Resources.FilterOuterToolLines;
             }
             else
             {
-                btnOuterInner.Image = Properties.Resources.FilterInnerToolLines;
+                btnOuterInner.BackgroundImage = Properties.Resources.FilterInnerToolLines;
             }
 
             mf.trks.isTrackValid = false;
             mf.Activate();
+        }
+
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
         }
     }
 }

@@ -462,9 +462,7 @@ namespace Twol
                 //ref nudge
                 flp1.Controls[5].Visible = tracksVisible > 0;
 
-                flp1.Controls[6].Visible = Settings.Tool.setToolSteer.isRecordToolLine;
-
-                flp1.Controls[7].Visible = (!Settings.Tool.setToolSteer.isRecordToolLine && (Settings.Tool.setToolSteer.isFollowCurrent || Settings.Tool.setToolSteer.isFollowPivot));
+                flp1.Controls[6].Visible = true;
 
                 for (int i = 0; i < flp1.Controls.Count; i++)
                 {
@@ -539,11 +537,6 @@ namespace Twol
                     gyd.isPassiveTriggered = false;
                     gyd.isPassiveSteeringFlag = false;
                 }
-            }
-
-            if (Settings.Tool.setToolSteer.isRecordToolLine)
-            {
-                gydTool.isAutoSteerBtnOn = state;
             }
         }
 
@@ -623,15 +616,16 @@ namespace Twol
 
         private void btnToolControl_Click(object sender, EventArgs e)
         {
-            Form fcc = Application.OpenForms["FormToolControl"];
+            Form fcc = Application.OpenForms["FormTrackFilter"];
 
             if (fcc != null)
             {
                 fcc.Focus();
+                fcc.Close();
                 return;
             }
 
-            Form form = new FormToolControl(this);
+            Form form = new FormTrackFilter(this);
             form.Show(this);
 
             if (flp1.Visible)
@@ -649,6 +643,7 @@ namespace Twol
             if (fcc != null)
             {
                 fcc.Focus();
+                fcc.Close();
                 return;
             }
 
@@ -865,7 +860,7 @@ namespace Twol
                 f.Close();
             }
 
-            f = Application.OpenForms["FormToolControl"];
+            f = Application.OpenForms["FormTrackFilter"];
 
             if (f != null)
             {
@@ -1916,7 +1911,21 @@ namespace Twol
             else guidelinesToolStripMenuItem.Checked = false;            
         }
 
-        private void manualToolSteerToolStripMenuItem_Click(object sender, EventArgs e)
+         private void buildToolTracksToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!isJobStarted)
+            {
+                TimedMessageBox(2000, gStr.Get(gs.gsToolSteerConfiguration), gStr.Get(gs.gsEnterJobName));
+                return;
+            }
+
+            using (FormBuildToolTracks form = new FormBuildToolTracks(this))
+            {
+                form.ShowDialog(this);           
+            }
+        }
+
+       private void manualToolSteerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //check if window already exists
             Form fc = Application.OpenForms["FormToolManual"];

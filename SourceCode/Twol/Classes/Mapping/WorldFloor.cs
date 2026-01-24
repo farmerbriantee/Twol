@@ -81,13 +81,13 @@ namespace Twol.Mapping
 
             GL.Begin(PrimitiveType.TriangleStrip);
             GL.TexCoord2(0, 0);
-            GL.Vertex3(eastingMin, northingMax, -0.10);
+            GL.Vertex2(eastingMin, northingMax);
             GL.TexCoord2(Count, 0.0);
-            GL.Vertex3(eastingMax, northingMax, -0.10);
+            GL.Vertex2(eastingMax, northingMax);
             GL.TexCoord2(0.0, Count);
-            GL.Vertex3(eastingMin, northingMin, -0.10);
+            GL.Vertex2(eastingMin, northingMin);
             GL.TexCoord2(Count, Count);
-            GL.Vertex3(eastingMax, northingMin, -0.10);
+            GL.Vertex2(eastingMax, northingMin);
             GL.End();
 
             GL.Disable(EnableCap.Texture2D);
@@ -113,15 +113,15 @@ namespace Twol.Mapping
             {
                 if (num < eastingMin) continue;
 
-                GL.Vertex3(num, northingMax, 0.1);
-                GL.Vertex3(num, northingMin, 0.1);
+                GL.Vertex2(num, northingMax);
+                GL.Vertex2(num, northingMin);
             }
             for (double num2 = Math.Round(northingMin / _gridZoom, MidpointRounding.AwayFromZero) * _gridZoom; num2 < northingMax; num2 += _gridZoom)
             {
                 if (num2 < northingMin) continue;
 
-                GL.Vertex3(eastingMax, num2, 0.1);
-                GL.Vertex3(eastingMin, num2, 0.1);
+                GL.Vertex2(eastingMax, num2);
+                GL.Vertex2(eastingMin, num2);
             }
             GL.End();
 

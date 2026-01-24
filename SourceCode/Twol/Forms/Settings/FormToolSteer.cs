@@ -89,6 +89,24 @@ namespace Twol
             hsbarManualSecondsOn.Value = Settings.Tool.setToolSteer.manualSteerSeconds;
             lblManualPWM_Percent.Text = hsbarManualPWM_Percent.Value.ToString();
             lblManualSecondsOn.Text = hsbarManualSecondsOn.Value.ToString();
+
+            cboxRecordSourceTool.Checked = Settings.Tool.setToolSteer.isRecordSourceTool;
+            nudToolGuidanceSpacing.Value = (Settings.Tool.setToolSteer.toolGuidanceSpacing * 2);
+
+            cboxPassesPerReference.SelectedIndexChanged -= cboxPassesPerReference_SelectedIndexChanged;
+            cboxPassesPerReference.Text = Settings.Tool.setToolSteer.passesPerReference.ToString();
+            cboxPassesPerReference.SelectedIndexChanged += cboxPassesPerReference_SelectedIndexChanged;
+
+            nudToolGuidanceSpacing.Value = (Settings.Tool.setToolSteer.toolGuidanceSpacing);
+
+            if (Settings.Tool.setToolSteer.passesPerReference == 0)
+            {
+                Settings.Tool.setToolSteer.toolGuidanceSpacing = nudToolGuidanceSpacing.Value = 0;
+            }
+            else
+            {
+                if (Settings.Tool.setToolSteer.passesPerReference % 2 == 0) nudToolGuidanceSpacing.Value = Settings.Tool.setToolSteer.toolGuidanceSpacing * 2.0;
+            }
         }
 
         private void FormToolSteer_FormClosing(object sender, FormClosingEventArgs e)
@@ -134,6 +152,7 @@ namespace Twol
             Settings.Tool.Save();
         }
 
+        #region Main Tab
         private void Timer1_Tick(object sender, EventArgs e)
         {
             //limit how many pgns are set when doing the settings
@@ -275,17 +294,23 @@ namespace Twol
         {
         }
 
+        #endregion
 
         #region Mode
 
         private void ResetMode()
         {
             //default all off
-            Settings.Tool.setToolSteer.isGPSToolActive = (cboxIsFollowCurrent.Checked || cboxIsPassiveSteering.Checked || cboxIsFollowPivot.Checked || cboxIsRecordToolLine.Checked);
+            Settings.Tool.setToolSteer.isGPSToolActive = (cboxIsFollowCurrent.Checked || cboxIsPassiveSteering.Checked || cboxIsFollowPivot.Checked);
         }
 
         private void cboxIsRecordToolLine_Click(object sender, EventArgs e)
         {
+            if (mf.patchCounter > 0)
+            {
+                mf.TimedMessageBox(2000, "Sections On", "Turn off Sections First");
+                return;
+            }
             Settings.Tool.setToolSteer.isRecordToolLine = cboxIsRecordToolLine.Checked;
             ResetMode();
         }
@@ -377,6 +402,45 @@ namespace Twol
         private void nudNudge_ValueChanged(object sender, EventArgs e)
         {
             Settings.Tool.setToolSteer.nudgeGlobal = (double)(nudNudge.Value);
+        }
+
+        // Tool Guidance Spacing instead of using toolWidth
+        private void nudToolGuidanceSpacing_ValueChanged(object sender, EventArgs e)
+        {
+            Settings.Tool.setToolSteer.toolGuidanceSpacing = (double)nudToolGuidanceSpacing.Value;
+
+            if (Settings.Tool.setToolSteer.passesPerReference == 0)
+            {
+                Settings.Tool.setToolSteer.toolGuidanceSpacing = nudToolGuidanceSpacing.Value = 0;
+            }
+            else
+            {
+                //fix the tool width
+                Settings.Tool.setToolSteer.toolGuidanceSpacing = (double)nudToolGuidanceSpacing.Value;
+                if (Settings.Tool.setToolSteer.passesPerReference % 2 == 0) Settings.Tool.setToolSteer.toolGuidanceSpacing = (double)nudToolGuidanceSpacing.Value * 0.5;
+            }
+        }
+
+        private void cboxPassesPerReference_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Settings.Tool.setToolSteer.passesPerReference = cboxPassesPerReference.SelectedIndex;
+
+            if (Settings.Tool.setToolSteer.passesPerReference == 0)
+            {
+                Settings.Tool.setToolSteer.toolGuidanceSpacing = nudToolGuidanceSpacing.Value = 0;
+            }
+            else
+            {
+                //fix the tool width
+                Settings.Tool.setToolSteer.toolGuidanceSpacing = (double)nudToolGuidanceSpacing.Value;
+                if (Settings.Tool.setToolSteer.passesPerReference % 2 == 0) Settings.Tool.setToolSteer.toolGuidanceSpacing = (double)nudToolGuidanceSpacing.Value * 0.5;
+            }
+        }
+
+        // Record Source For Tool
+        private void cboxRecordSourceTool_Click(object sender, EventArgs e)
+        {
+            Settings.Tool.setToolSteer.isRecordSourceTool = cboxRecordSourceTool.Checked;
         }
 
         #endregion

@@ -24,6 +24,7 @@ namespace Twol
 
         [System.Runtime.InteropServices.DllImport("User32.dll")]
         private static extern bool ShowWindow(IntPtr hWind, int nCmdShow);
+        private Point lastThisLocation;
 
         #region // Class Props and instances
 
@@ -80,7 +81,7 @@ namespace Twol
         public string filePickerFileAndDirectory, jobPickerFileAndDirectory;
 
         //the position of the GPS Data window within the FormGPS window
-        public int GPSDataWindowLeft = 80, GPSDataWindowTopOffset = 220;
+        public int GPSDataWindowLeft = 80, GPSDataWindowTopOffset = 180;
 
         //the autoManual drive button. Assume in Auto
         public bool isInAutoDrive = true;
@@ -127,6 +128,11 @@ namespace Twol
         /// Contour Mode Instance
         /// </summary>
         public CContour ct;
+
+        /// <summary>
+        /// Tool Record Instance
+        /// </summary>
+        public CToolRecord tRec;
 
         /// <summary>
         /// Track Instance
@@ -286,6 +292,9 @@ namespace Twol
 
             //new instance of contour mode
             ct = new CContour(this);
+
+            //new instance of contour mode
+            tRec = new CToolRecord(this);
 
             //new track instance
             trks = new CTracks(this);
@@ -551,7 +560,23 @@ namespace Twol
                 f.Close();
             }
 
-            f = Application.OpenForms["FormToolControl"];
+            f = Application.OpenForms["FormTrackFilter"];
+
+            if (f != null)
+            {
+                f.Focus();
+                f.Close();
+            }
+
+            f = Application.OpenForms["FormToolPathRec"];
+
+            if (f != null)
+            {
+                f.Focus();
+                f.Close();
+            }
+
+            f = Application.OpenForms["FormToolManual"];
 
             if (f != null)
             {
@@ -561,15 +586,9 @@ namespace Twol
 
             if (this.OwnedForms.Any())
             {
-                f = null;
-                f = Application.OpenForms["FormToolManual"];
-
-                if (f == null)
-                {
-                    TimedMessageBox(2000, gStr.Get(gs.gsWindowsStillOpen), gStr.Get(gs.gsCloseAllWindowsFirst));
-                    e.Cancel = true;
-                    return;
-                }
+                TimedMessageBox(2000, gStr.Get(gs.gsWindowsStillOpen), gStr.Get(gs.gsCloseAllWindowsFirst));
+                e.Cancel = true;
+                return;
             }
 
             int choice = SaveOrNot();
@@ -730,7 +749,7 @@ namespace Twol
                 Settings.User.setWindow_recordToolTracksLocation.X = f.Left;
             }
 
-            f = Application.OpenForms["FormToolControl"];
+            f = Application.OpenForms["FormTrackFilter"];
             if (f != null)
             {
                 f.Top += delta.Y - lastThisLocation.Y;
@@ -742,7 +761,6 @@ namespace Twol
             lastThisLocation = this.Location;
         }
 
-        private Point lastThisLocation;
         public void FileSaveEverythingBeforeClosingField()
         {
             FieldMenuButtonEnableDisable(false);
@@ -801,17 +819,11 @@ namespace Twol
 
             PanelsAndOGLSize();
 
-            if (Settings.Tool.setToolSteer.isFollowCurrent && !Settings.Tool.setToolSteer.isRecordToolLine)
-            {
-                Form form = new FormToolControl(this);
-                form.Show(this);
-            }
-
-            else if (Settings.Tool.setToolSteer.isFollowCurrent && Settings.Tool.setToolSteer.isRecordToolLine)
-            {
-                Form form = new FormToolPathRec(this);
-                form.Show(this);
-            }
+            //else if (Settings.Tool.setToolSteer.isFollowCurrent && Settings.Tool.setToolSteer.isRecordToolLine)
+            //{
+            //    Form form = new FormToolPathRec(this);
+            //    form.Show(this);
+            //}
         }
 
         public void JobClose()
@@ -824,8 +836,9 @@ namespace Twol
                 Settings.Vehicle.setF_CurrentJobDir = currentJobDirectory;
 
                 //auto save the field patches, contours accumulated so far
-                FileSaveSections();
-                FileSaveContour();
+                if (patchSaveList.Count > 0) FileSaveSections();
+                if (contourSaveList.Count > 0) FileSaveContour();
+                if (toolRecordSaveList.Count > 0) FileSaveToolRecordList(true);
 
                 //NMEA elevation file
                 if (Settings.User.isLogElevation && sbElevationString.Length > 0) FileSaveElevation();
@@ -851,6 +864,8 @@ namespace Twol
             patchList?.Clear();
             patchSaveList?.Clear();
             contourSaveList?.Clear();
+            tRec.recList?.Clear();
+            toolRecordSaveList?.Clear();
         }
 
         private void btnProfiles_Click(object sender, EventArgs e)
@@ -873,11 +888,6 @@ namespace Twol
             }
 
             lbl_IO_Profile.Text = RegistrySettings.IOFileName;
-        }
-
-        private void nudToolOffset_ValueChanged(object sender, EventArgs e)
-        {
-            sim.toolOffset = (double)nudToolOffset.Value * 0.001;
         }
 
         public void FieldClose()
@@ -916,6 +926,12 @@ namespace Twol
 
             //zoom gone
             oglZoom.SendToBack();
+
+            for (int i = 0; i < bnd.bndList.Count; i++)
+            {
+                bnd.DeleteHeadLineVertexArray(i);
+                bnd.DeleteFenceTriangleVertexArray(i);
+            }
 
             //clean all the lines
             bnd.bndList.Clear();

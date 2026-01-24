@@ -53,43 +53,51 @@ void calcSteeringPID(void)
 
 void motorDrive(void)
 {
-  // Used with Cytron MD30C Driver
-  // Steering Motor
-  // Dir + PWM Signal
-  if (steerConfig.CytronDriver)
-  {
-    // Cytron MD30C Driver Dir + PWM Signal
-    if (pwmDrive >= 0)
+    // Used with Cytron MD30C Driver
+    // Steering Motor
+    // Dir + PWM Signal
+
+	//Override the set pwmDrive with manualPWM if not zero
+    if (manualPWM != 0)
     {
-      bitSet(PORTD, 4);  //set the correct direction
+        pwmDrive = manualPWM;
+		if (toolConfig.invertSteer) pwmDrive *= -1;
+    }
+
+    if (steerConfig.CytronDriver)
+    {
+        // Cytron MD30C Driver Dir + PWM Signal
+        if (pwmDrive >= 0)
+        {
+            bitSet(PORTD, 4);  //set the correct direction
+        }
+        else
+        {
+            bitClear(PORTD, 4);
+            pwmDrive = -1 * pwmDrive;
+        }
+
+        //write out the 0 to 255 value
+        analogWrite(PWM1_LPWM, pwmDrive);
+        pwmDisplay = pwmDrive;
     }
     else
     {
-      bitClear(PORTD, 4);
-      pwmDrive = -1 * pwmDrive;
-    }
+        // IBT 2 Driver Dir1 connected to BOTH enables
+        // PWM Left + PWM Right Signal
 
-    //write out the 0 to 255 value
-    analogWrite(PWM1_LPWM, pwmDrive);
-    pwmDisplay = pwmDrive;
-  }
-  else
-  {
-    // IBT 2 Driver Dir1 connected to BOTH enables
-    // PWM Left + PWM Right Signal
+        if (pwmDrive > 0)
+        {
+            analogWrite(PWM2_RPWM, 0);//Turn off before other one on
+            analogWrite(PWM1_LPWM, pwmDrive);
+        }
+        else
+        {
+            pwmDrive = -1 * pwmDrive;
+            analogWrite(PWM1_LPWM, 0);//Turn off before other one on
+            analogWrite(PWM2_RPWM, pwmDrive);
+        }
 
-    if (pwmDrive > 0)
-    {
-      analogWrite(PWM2_RPWM, 0);//Turn off before other one on
-      analogWrite(PWM1_LPWM, pwmDrive);
+        pwmDisplay = pwmDrive;
     }
-    else
-    {
-      pwmDrive = -1 * pwmDrive;
-      analogWrite(PWM1_LPWM, 0);//Turn off before other one on
-      analogWrite(PWM2_RPWM, pwmDrive);
-    }
-
-    pwmDisplay = pwmDrive;
-  }
 }

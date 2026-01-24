@@ -27,7 +27,7 @@ namespace Twol
             {
                 for (int j = controlButtons.Count - 1; j >= numOfButtons; j--)
                 {
-                    this.oglMain.Controls.Remove(controlButtons[j]);
+                    this.Controls.Remove(controlButtons[j]);
                     controlButtons.RemoveAt(j);
                 }
                 SetControlButtonPositions();
@@ -40,7 +40,7 @@ namespace Twol
                     btn.Click += Butt_Click;
                     btn.Text = (j + 1).ToString();
                     btn.Index = j + 1;
-                    this.oglMain.Controls.Add(btn);
+                    this.Controls.Add(btn);
                     btn.BringToFront();
                     btn.Visible = isJobStarted;
 
@@ -73,7 +73,7 @@ namespace Twol
             {
                 for (int j = controlLbls.Count - 1; j >= numOfSections; j--)
                 {
-                    this.oglMain.Controls.Remove(controlLbls[j]);
+                    this.Controls.Remove(controlLbls[j]);
                     controlLbls.RemoveAt(j);
                 }
                 SetControlLabelPositions();
@@ -84,7 +84,7 @@ namespace Twol
                 {
                     //labels
                     var lbl = new Label();
-                    this.oglMain.Controls.Add(lbl);
+                    this.Controls.Add(lbl);
                     lbl.BringToFront();
                     lbl.Visible = isJobStarted;
 
@@ -402,18 +402,18 @@ namespace Twol
             SendUDPMessage(PGN_229.pgn, epModule);
             SendUDPMessage(PGN_239.pgn, epModule);
 
-            if (Settings.Tool.setToolSteer.isRecordToolLine)
-            {
-                gydTool.isSectionsOn = false;
-                for (int i = 0; i < section.Count; i++)
-                {
-                    if (section[i].isSectionOn)
-                    {
-                        gydTool.isSectionsOn = true;
-                        break;
-                    }
-                }
-            }
+            //if (Settings.Tool.setToolSteer.isRecordToolLine)
+            //{
+            //    gydTool.isSectionsOn = false;
+            //    for (int i = 0; i < section.Count; i++)
+            //    {
+            //        if (section[i].isSectionOn)
+            //        {
+            //            gydTool.isSectionsOn = true;
+            //            break;
+            //        }
+            //    }
+            //}
         }
 
         private void DoRemoteSwitches()

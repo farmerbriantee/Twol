@@ -92,7 +92,7 @@ namespace Twol
 
 
         #region CreateTurn
-        //Finds the point where an AB Curve crosses the turn line
+        //Finds the point where an ABLine PolyLine crosses the turn line
         public void BuildCurveDubinsYouTurn()
         {
             double turnOffset = (Settings.Tool.toolWidth - Settings.Tool.overlap) * rowSkipsWidth + (isTurnLeft ? -Settings.Tool.offset * 2.0 : Settings.Tool.offset * 2.0);
@@ -101,7 +101,7 @@ namespace Twol
 
             CTrk track = mf.trks.currentRefTrack;
 
-            bool loop = track.mode == TrackMode.bndCurve || track.mode == TrackMode.waterPivot;
+            bool loop = track.mode == TrackMode.Polygon || track.mode == TrackMode.waterPivot;
 
 
             if (youTurnPhase < 10)
@@ -169,7 +169,7 @@ namespace Twol
 
                 if (exitPoint.turnLineNum == -1)//didnt hit any turn line
                 {
-                    if (track.mode == TrackMode.waterPivot || track.mode == TrackMode.bndCurve)
+                    if (track.mode == TrackMode.waterPivot || track.mode == TrackMode.Polygon)
                     {
                         youTurnPhase = 251;//ignore
                     }
@@ -233,7 +233,7 @@ namespace Twol
                     if (pt3.heading < 0) pt3.heading += glm.twoPI;
                     ytList[ytList.Count - 1] = pt3;
 
-                    mf.trks.AddEndPoints(ref ytList, 50);
+                    ytList.AddEndPoints(10, 5);
                 }
 
                 youTurnPhase = 255;
@@ -401,7 +401,7 @@ namespace Twol
             }
             else if (youTurnPhase == 240)
             {
-                ytList.CalculateHeadings(false);
+                ytList.CalculateAverageHeadings(false);
                 //if (uTurnSmoothing > 0)
                 //    SmoothYouTurn(6);// uTurnSmoothing????
                 youTurnPhase = 255;
@@ -770,7 +770,7 @@ namespace Twol
 
         public void BuildManualYouLateral(bool isTurnLeft)
         {
-            //point on AB line closest to pivot axle point from AB Line PurePursuit
+            //point on ABLine line closest to pivot axle point from ABLine Line PurePursuit
             mf.trks.howManyPathsAway += mf.trks.isHeadingSameWay == isTurnLeft ? 1 : -1;
         }
 
@@ -860,9 +860,9 @@ namespace Twol
             //GL.PointSize(12.0f);
             //GL.Begin(PrimitiveType.Points);
             //GL.Color3(0.95f, 0.73f, 1.0f);
-            //GL.Vertex3(inClosestTurnPt.closePt.easting, inClosestTurnPt.closePt.northing, 0);
+            //GL.Vertex2(inClosestTurnPt.closePt.easting, inClosestTurnPt.closePt.northing, 0);
             //GL.Color3(0.395f, 0.925f, 0.30f);
-            //GL.Vertex3(outClosestTurnPt.closePt.easting, outClosestTurnPt.closePt.northing, 0);
+            //GL.Vertex2(outClosestTurnPt.closePt.easting, outClosestTurnPt.closePt.northing, 0);
             //GL.End();
             //GL.PointSize(1.0f);
         }

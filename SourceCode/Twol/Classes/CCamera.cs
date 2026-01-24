@@ -53,11 +53,11 @@ namespace Twol
             ////draw the guide
             //GL.Begin(PrimitiveType.Triangles);
             //GL.Color3(0.98f, 0.0f, 0.0f);
-            //GL.Vertex3(0.0f, -2.0f, 0.0f);
+            //GL.Vertex2(0.0f, -2.0f, 0.0f);
             //GL.Color3(0.0f, 0.98f, 0.0f);
-            //GL.Vertex3(-2.0f, -3.0f, 0.0f);
+            //GL.Vertex2(-2.0f, -3.0f, 0.0f);
             //GL.Color3(0.98f, 0.98f, 0.0f);
-            //GL.Vertex3(2.0f, -3.0f, 0.0f);
+            //GL.Vertex2(2.0f, -3.0f, 0.0f);
             //GL.End();						// Done Drawing Reticle
 
             //following game style or N fixed cam
