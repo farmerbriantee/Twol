@@ -478,7 +478,7 @@ namespace Twol
                     }
 
                     //send to tool steer
-                    SendUDPMessageTool(PGN_233.pgn, epModule);
+                    SendUDPMessageTool(PGN_233.pgn, epModuleTool);
                 }
             }
 

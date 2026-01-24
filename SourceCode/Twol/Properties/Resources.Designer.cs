@@ -2002,6 +2002,16 @@ namespace Twol.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap FileExportToolTracks {
+            get {
+                object obj = ResourceManager.GetObject("FileExportToolTracks", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap fileMenu {
             get {
                 object obj = ResourceManager.GetObject("fileMenu", resourceCulture);
@@ -2065,16 +2075,6 @@ namespace Twol.Properties {
         internal static System.Drawing.Bitmap FileSaveRecordedTool {
             get {
                 object obj = ResourceManager.GetObject("FileSaveRecordedTool", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap FileSaveToolTracks {
-            get {
-                object obj = ResourceManager.GetObject("FileSaveToolTracks", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

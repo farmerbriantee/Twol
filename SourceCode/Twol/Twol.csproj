@@ -922,6 +922,7 @@
     <None Include="btnImages\FilterLinesOnOff.png" />
     <None Include="btnImages\FileSaveToolTracks.png" />
     <None Include="btnImages\FileSaveRecordedTool.png" />
+    <None Include="btnImages\FileExportToolTracks.png" />
     <Content Include="btnImages\ZoomOut.png" />
     <Content Include="License.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
