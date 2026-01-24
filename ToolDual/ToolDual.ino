@@ -12,7 +12,7 @@
 // Position F9P
 // CFG-RATE-MEAS - 100 ms -> 10 Hz
 // CFG-UART1-BAUDRATE 460800
-// Serial 1 In - RTCM (Correction Data from AOG)
+// Serial 1 In - RTCM (Correction Data from Twol)
 // Serial 1 Out - NMEA GGA
 // CFG-UART2-BAUDRATE 460800
 // Serial 2 Out - RTCM 1074,1084,1094,1230,4072.0 (Correction data for Heading F9P, Moving Base)
@@ -27,12 +27,12 @@
 
 /************************* User Settings *************************/
 // Serial Ports
-#define SerialAOG Serial   // AgIO USB conection
+#define SerialTwol Serial   // AgIO USB conection
 #define SerialRTK Serial3  // RTK radio
 #define SerialGPS Serial7  // Main postion receiver (GGA) (Serial2 must be used here with T4.0 / Basic Panda boards - Should auto swap)
 #define SerialGPS2 Serial2 // Dual heading receiver
 
-const int32_t baudAOG = 115200;
+const int32_t baudTwol = 115200;
 const int32_t baudGPS = 460800;
 const int32_t baudRTK = 9600; // most are using Xbee radios with default of 115200
 
@@ -73,9 +73,9 @@ byte Eth_myip[4] = {0, 0, 0, 0}; // This is now set via AgIO
 byte mac[] = {0x00, 0x00, 0x56, 0x00, 0x00, 0x78};
 
 unsigned int portMy = 5120;            // port of this module
-unsigned int AOGNtripPort = 2233;      // port NTRIP data from AOG comes in
-unsigned int AOGAutoSteerPort = 18888; // port Autosteer data from AOG comes in
-unsigned int portDestination = 19999;  // Port of AOG that listens
+unsigned int Twol_NtripPort = 2233;      // port NTRIP data from Twol comes in
+unsigned int Twol_AutoSteerPort = 18888; // port Autosteer data from Twol comes in
+unsigned int portDestination = 19999;  // Port of Twol that listens
 char Eth_NTRIP_packetBuffer[512];      // buffer for receiving ntrip data
 
 // An EthernetUDP instance to let us send and receive packets over UDP
@@ -130,7 +130,7 @@ bool GGA_Available = false;    // Do we have GGA on correct port?
 
 uint32_t PortSwapTime = 0;
 
-// Buffer to read chars from Serial, to check if "!AOG" is found
+// Buffer to read chars from Serial, to check if "!Twol" is found
 uint8_t aogSerialCmd[4] = {'!', 'A', 'O', 'G'};
 uint8_t aogSerialCmdBuffer[6];
 uint8_t aogSerialCmdCounter = 0;
@@ -163,7 +163,7 @@ void setup()
     parser.addHandler("G-HPR", HPR_Handler);
 
     delay(10);
-    Serial.begin(baudAOG);
+    Serial.begin(baudTwol);
     delay(10);
     Serial.println("Start setup");
 
@@ -180,7 +180,7 @@ void setup()
     SerialGPS2.addMemoryForRead(GPS2rxbuffer, serial_buffer_size);
     SerialGPS2.addMemoryForWrite(GPS2txbuffer, serial_buffer_size);
 
-    Serial.println("SerialAOG, SerialRTK, SerialGPS and SerialGPS2 initialized");
+    Serial.println("SerialTwol, SerialRTK, SerialGPS and SerialGPS2 initialized");
 
     Serial.println("\r\nStarting AutoSteer...");
     ToolsteerSetup();
@@ -264,9 +264,9 @@ void loop()
     }
 
     // Pass NTRIP etc to GPS
-    if (SerialAOG.available())
+    if (SerialTwol.available())
     {
-        SerialGPS.write(SerialAOG.read());
+        SerialGPS.write(SerialTwol.read());
     }
 
     if (Ethernet.linkStatus() == LinkOFF)

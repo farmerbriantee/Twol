@@ -1,6 +1,6 @@
 /*
    UDP Autosteer code for Teensy 4.1
-   For AgOpenGPS
+   For Twol
    01 Feb 2022
    Like all Arduino code - copied from somewhere else :)
    So don't claim it as your own
@@ -99,9 +99,10 @@ float steerAngleActual = 0;
 
 
 //from AgOpen
-float toolXTE_AOG = 0; //tool XTE from AgOpen
-float vehicleXTE_AOG = 0; //vehicle XTE from AgOpen
-float vehicleHeading_AOG = 0; //vehicle heading from AgOpen
+float toolXTE_Set = 0; //tool XTE from Twol
+float vehicleXTE = 0; //vehicle XTE from Twol
+
+int16_t manualPWM = 0; //manual PWM from Twol
 
 int16_t steeringPosition = 0; //from steering sensor
 float toolCorrectionError = 0; //setpoint - actual
@@ -163,7 +164,7 @@ struct Tool_Settings {
 union _udpPacket {
     byte udpData[512];    // Incoming Buffer
     struct {
-        uint16_t AOGID;
+        uint16_t Twol_ID;
         byte MajorPGN;
         byte MinorPGN;
         byte data[508];
@@ -259,7 +260,7 @@ void ToolsteerSetup()
     toolSettingsInit();
     steerConfigInit();
 
-    Serial.println("Autosteer running, waiting for AgOpenGPS");
+    Serial.println("Autosteer running, waiting for Twol");
     // Autosteer Led goes Red if ADS1115 is found
     digitalWrite(AUTOSTEER_ACTIVE_LED, 0);
     digitalWrite(AUTOSTEER_STANDBY_LED, 1);
@@ -278,7 +279,7 @@ void toolsteerLoop()
     {
         steerLoopLastTime = currentTime;
 
-        //If connection lost to AgOpenGPS, the watchdog will count up and turn off steering
+        //If connection lost to Twol, the watchdog will count up and turn off steering
         if (watchdogTimer++ > 250) watchdogTimer = WATCHDOG_FORCE_VALUE;
 
         //read all the switches
@@ -350,7 +351,7 @@ void toolsteerLoop()
             }
             else digitalWrite(DIR1_RL_ENABLE, 1);
 
-            toolCorrectionError = ((float)(toolXTE_AOG) * 0.1);   //calculate the error
+            toolCorrectionError = ((float)(toolXTE_Set) * 0.1);   //calculate the error
 
             if (toolConfig.isSteer) //is slide not steer
               toolCorrectionError = steerAngleActual - toolCorrectionError;
@@ -364,7 +365,7 @@ void toolsteerLoop()
         }
         else
         {
-            //we've lost the comm to AgOpenGPS, or just stop request
+            //we've lost the comm to Twol, or just stop request
             //Disable H Bridge for IBT2, hyd aux, etc for cytron
             if (steerConfig.CytronDriver)
             {
@@ -416,22 +417,22 @@ void ReceiveUdp()
     {
         Eth_udpToolSteer.read(udpPacket.udpData, UDP_TX_PACKET_MAX_SIZE);
 
-        if (udpPacket.AOGID == 0x8180 && udpPacket.MajorPGN == 0x7F) //Data
+        if (udpPacket.Twol_ID == 0x8180 && udpPacket.MajorPGN == 0x7F) //Data
         {
             if (udpPacket.MinorPGN == PGNs::ToolSteer)  //tool steer data
             {
-                //Bit 5,6   Tool XTE from AOG * 100 is sent
-                toolXTE_AOG = ((float)(udpPacket.udpData[toolIDs::xteLo] | ((int8_t)udpPacket.udpData[toolIDs::xteHi]) << 8)) * 0.01; //low high bytes
+                //Bit 5,6   Tool XTE from Twol * 100 is sent
+                toolXTE_Set = ((float)(udpPacket.udpData[toolIDs::xteLo] | ((int8_t)udpPacket.udpData[toolIDs::xteHi]) << 8)) * 0.01; //low high bytes
                 
                 guidanceStatus = udpPacket.udpData[toolIDs::status];
 
-                //Bit 8,9   Tool XTE from AOG * 100 is sent
-                vehicleXTE_AOG = ((float)(udpPacket.udpData[toolIDs::xteVehLo] | ((int8_t)udpPacket.udpData[toolIDs::xteVehHi]) << 8)) * 0.01; //low high bytes
+                //Bit 8,9   Tool XTE from Twol * 100 is sent
+                vehicleXTE = ((float)(udpPacket.udpData[toolIDs::xteVehLo] | ((int8_t)udpPacket.udpData[toolIDs::xteVehHi]) << 8)) * 0.01; //low high bytes
 
                 gpsSpeed = ((float)(udpPacket.udpData[toolIDs::speed10])) * 0.1;
 
-                //Bit 11,12   Tool XTE from AOG * 100 is sent
-                vehicleHeading_AOG = ((float)(udpPacket.udpData[toolIDs::headLo] | ((int8_t)udpPacket.udpData[toolIDs::headHi]) << 8)) * 0.01; //low high bytes
+                //Bit 11,12   Tool XTE from Twol * 100 is sent
+                manualPWM = ((float)(udpPacket.udpData[toolIDs::manualLo] | ((int8_t)udpPacket.udpData[toolIDs::manualHi]) << 8)) * 0.01; //low high bytes
 
                 //Serial.print("steerAngleSetPoint: ");//Serial.println(steerAngleSetPoint); //Serial.println(gpsSpeed);
 
@@ -446,7 +447,7 @@ void ReceiveUdp()
                 }
 
                 //----------------------------------------------------------------------------
-                //Serial Send to agopenGPS
+                //Serial Send to Twol
                 int16_t sa;
                 if (toolConfig.isSteer) //is slide not steer
                 {
@@ -478,7 +479,7 @@ void ReceiveUdp()
 
                 PGN_230[PGN_230_Size] = CK_A;
 
-                //off to AOG
+                //off to Twol
                 SendUdp(PGN_230, sizeof(PGN_230), Eth_ipDestination, portDestination);
 
                 //Serial.println(steerAngleActual);
@@ -498,7 +499,7 @@ void ReceiveUdp()
                 // ackerman = 12;
 
                 //PID values
-                toolSettings.Kp = ((float)udpPacket.udpData[toolSteerIDs::gainP]);   // read Kp from AgOpenGPS
+                toolSettings.Kp = ((float)udpPacket.udpData[toolSteerIDs::gainP]);   // read Kp from Twol
 
                 toolSettings.Ki = udpPacket.udpData[toolSteerIDs::integral]; // read high pwm
 
@@ -509,7 +510,7 @@ void ReceiveUdp()
 
                 toolSettings.highPWM = udpPacket.udpData[toolSteerIDs::highPWM]; // read high pwm
 
-                toolSettings.steerSensorCounts = udpPacket.udpData[toolSteerIDs::countsPerDegree]; //sent as setting displayed in AOG
+                toolSettings.steerSensorCounts = udpPacket.udpData[toolSteerIDs::countsPerDegree]; //sent as setting displayed in Twol
 
                 toolSettings.wasOffset = udpPacket.udpData[toolSteerIDs::wasOffsetLo];  //read was zero offset Lo
                 toolSettings.wasOffset |= (udpPacket.udpData[toolSteerIDs::wasOffsetHi] << 8);  //read was zero offset Hi
@@ -599,9 +600,9 @@ void ReceiveUdp()
                     scanReply[sizeof(scanReply) - 1] = CK_A;
 
                     static uint8_t ipDest[] = { 255,255,255,255 };
-                    //uint16_t portDest = 19999; //AOG port that listens
+                    //uint16_t portDest = 19999; //Twol port that listens
 
-                    //off to AOG
+                    //off to Twol
                     SendUdp(scanReply, sizeof(scanReply), ipDest, portDestination);
                 }
             }

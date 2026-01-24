@@ -20,8 +20,8 @@ enum toolIDs {
 	xteVehLo = 8,
 	xteVehHi = 9,
 	speed10 = 10,
-	headLo = 11,
-	headHi = 12,
+	manualLo = 11,
+	manualHi = 12,
 };
 
 enum toolSteerIDs {

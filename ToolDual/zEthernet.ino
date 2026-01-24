@@ -41,24 +41,24 @@ void EthernetStart()
     Serial.print("Ethernet sending to IP: "); Serial.println(Eth_ipDestination);
     Serial.print("All data sending to port: "); Serial.println(portDestination);
 
-    // init UPD Port sending to AOG
+    // init UPD Port sending to Twol
     if (Eth_udpPAOGI.begin(portMy))
     {
         Serial.print("Ethernet GPS UDP sending from port: ");
         Serial.println(portMy);
     }
 
-    // init UPD Port getting NTRIP from AOG
-    if (Eth_udpNtrip.begin(AOGNtripPort)) // AOGNtripPort
+    // init UPD Port getting NTRIP from Twol
+    if (Eth_udpNtrip.begin(Twol_NtripPort))
     {
         Serial.print("Ethernet NTRIP UDP listening to port: ");
-        Serial.println(AOGNtripPort);
+        Serial.println(Twol_NtripPort);
     }
 
-    // init UPD Port getting AutoSteer data from AOG
-    if (Eth_udpToolSteer.begin(AOGAutoSteerPort)) // AOGAutoSteerPortipPort
+    // init UPD Port getting AutoSteer data from Twol
+    if (Eth_udpToolSteer.begin(Twol_AutoSteerPort))
     {
         Serial.print("Ethernet AutoSteer UDP listening to & send from port: ");
-        Serial.println(AOGAutoSteerPort);
+        Serial.println(Twol_AutoSteerPort);
     }
 }
