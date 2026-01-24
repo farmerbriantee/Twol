@@ -100,6 +100,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.cboxIsPassiveSteering = new System.Windows.Forms.CheckBox();
             this.tabActive = new System.Windows.Forms.TabPage();
+            this.label12 = new System.Windows.Forms.Label();
             this.nudPassesPerReference = new Twol.NudlessNumericUpDown();
             this.label14 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -1020,6 +1021,7 @@
             // tabActive
             // 
             this.tabActive.BackColor = System.Drawing.Color.LightGray;
+            this.tabActive.Controls.Add(this.label12);
             this.tabActive.Controls.Add(this.nudPassesPerReference);
             this.tabActive.Controls.Add(this.label14);
             this.tabActive.Controls.Add(this.label8);
@@ -1034,9 +1036,20 @@
             this.tabActive.TabIndex = 7;
             this.tabActive.Text = "Active";
             // 
+            // label12
+            // 
+            this.label12.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.ForeColor = System.Drawing.Color.Firebrick;
+            this.label12.Location = new System.Drawing.Point(63, 136);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(143, 23);
+            this.label12.TabIndex = 601;
+            this.label12.Text = "0 = Off";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
             // nudPassesPerReference
             // 
-            this.nudPassesPerReference.Location = new System.Drawing.Point(95, 84);
+            this.nudPassesPerReference.Location = new System.Drawing.Point(63, 80);
             this.nudPassesPerReference.Maximum = 3D;
             this.nudPassesPerReference.Name = "nudPassesPerReference";
             this.nudPassesPerReference.Size = new System.Drawing.Size(143, 56);
@@ -1047,7 +1060,7 @@
             // 
             this.label14.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label14.ForeColor = System.Drawing.Color.Black;
-            this.label14.Location = new System.Drawing.Point(66, 22);
+            this.label14.Location = new System.Drawing.Point(34, 18);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(201, 59);
             this.label14.TabIndex = 600;
@@ -1058,7 +1071,7 @@
             // 
             this.label8.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.Black;
-            this.label8.Location = new System.Drawing.Point(289, 318);
+            this.label8.Location = new System.Drawing.Point(292, 312);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(262, 24);
             this.label8.TabIndex = 596;
@@ -1086,11 +1099,11 @@
             // 
             // nudToolGuidanceSpacing
             // 
-            this.nudToolGuidanceSpacing.Location = new System.Drawing.Point(95, 199);
+            this.nudToolGuidanceSpacing.Location = new System.Drawing.Point(55, 222);
             this.nudToolGuidanceSpacing.Maximum = 2000D;
             this.nudToolGuidanceSpacing.Mode = Twol.UnitMode.Small;
             this.nudToolGuidanceSpacing.Name = "nudToolGuidanceSpacing";
-            this.nudToolGuidanceSpacing.Size = new System.Drawing.Size(143, 56);
+            this.nudToolGuidanceSpacing.Size = new System.Drawing.Size(158, 64);
             this.nudToolGuidanceSpacing.TabIndex = 589;
             this.nudToolGuidanceSpacing.ValueChanged += new System.EventHandler(this.nudToolGuidanceSpacing_ValueChanged);
             // 
@@ -1098,7 +1111,7 @@
             // 
             this.label10.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.Black;
-            this.label10.Location = new System.Drawing.Point(66, 155);
+            this.label10.Location = new System.Drawing.Point(34, 178);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(201, 41);
             this.label10.TabIndex = 590;
@@ -1509,5 +1522,6 @@
         private System.Windows.Forms.Label label10;
         private NudlessNumericUpDown nudPassesPerReference;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label12;
     }
 }

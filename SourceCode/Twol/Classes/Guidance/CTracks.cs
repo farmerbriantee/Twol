@@ -195,8 +195,6 @@ namespace Twol
 
                 if (RefDist < 0) howManyPathsAway = (int)(RefDist - 0.5);
                 else howManyPathsAway = (int)(RefDist + 0.5);
-
-                lastHowManyPathsAway = 99999;
             }
 
             if (Settings.Tool.setToolSteer.passesPerReference != 0)

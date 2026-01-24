@@ -95,7 +95,15 @@ namespace Twol
 
             nudPassesPerReference.Value = Settings.Tool.setToolSteer.passesPerReference;
             nudToolGuidanceSpacing.Value = (Settings.Tool.setToolSteer.toolGuidanceSpacing);
-            if (Settings.Tool.setToolSteer.passesPerReference == 2) nudToolGuidanceSpacing.Value = Settings.Tool.setToolSteer.toolGuidanceSpacing * 2.0;
+
+            if (Settings.Tool.setToolSteer.passesPerReference == 0)
+            {
+                Settings.Tool.setToolSteer.toolGuidanceSpacing = nudToolGuidanceSpacing.Value = 0;
+            }
+            else
+            {
+                if (Settings.Tool.setToolSteer.passesPerReference == 2) nudToolGuidanceSpacing.Value = Settings.Tool.setToolSteer.toolGuidanceSpacing * 2.0;
+            }
         }
 
         private void FormToolSteer_FormClosing(object sender, FormClosingEventArgs e)
@@ -397,16 +405,33 @@ namespace Twol
         private void nudToolGuidanceSpacing_ValueChanged(object sender, EventArgs e)
         {
             Settings.Tool.setToolSteer.toolGuidanceSpacing = (double)nudToolGuidanceSpacing.Value;
-            if (Settings.Tool.setToolSteer.passesPerReference == 2) Settings.Tool.setToolSteer.toolGuidanceSpacing = (double)nudToolGuidanceSpacing.Value * 0.5;
+
+            if (Settings.Tool.setToolSteer.passesPerReference == 0)
+            {
+                Settings.Tool.setToolSteer.toolGuidanceSpacing = nudToolGuidanceSpacing.Value = 0;
+            }
+            else
+            {
+                //fix the tool width
+                Settings.Tool.setToolSteer.toolGuidanceSpacing = (double)nudToolGuidanceSpacing.Value;
+                if (Settings.Tool.setToolSteer.passesPerReference == 2) Settings.Tool.setToolSteer.toolGuidanceSpacing = (double)nudToolGuidanceSpacing.Value * 0.5;
+            }
         }
 
         private void nudPassesPerReference_ValueChanged(object sender, EventArgs e)
         {
             Settings.Tool.setToolSteer.passesPerReference = (byte)nudPassesPerReference.Value;
 
-            //fix the tool width
-            Settings.Tool.setToolSteer.toolGuidanceSpacing = (double)nudToolGuidanceSpacing.Value;
-            if (Settings.Tool.setToolSteer.passesPerReference == 2) Settings.Tool.setToolSteer.toolGuidanceSpacing = (double)nudToolGuidanceSpacing.Value * 0.5;
+            if (Settings.Tool.setToolSteer.passesPerReference == 0)
+            {
+                Settings.Tool.setToolSteer.toolGuidanceSpacing = nudToolGuidanceSpacing.Value = 0;
+            }
+            else
+            {
+                //fix the tool width
+                Settings.Tool.setToolSteer.toolGuidanceSpacing = (double)nudToolGuidanceSpacing.Value;
+                if (Settings.Tool.setToolSteer.passesPerReference == 2) Settings.Tool.setToolSteer.toolGuidanceSpacing = (double)nudToolGuidanceSpacing.Value * 0.5;
+            }
         }
 
         // Record Source For Tool
