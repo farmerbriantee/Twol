@@ -93,7 +93,7 @@
         public double antennaOffset = 0;
         public double nudgeGlobal = 0;
         public double toolGuidanceSpacing = 0;
-        public bool isLockToReference = false;
+        public int passesPerReference = 0;
 
         public double curvatureGain = 5.0;
         public double passiveIntegralGain = 0.005;
@@ -135,8 +135,8 @@
             manualSteerSeconds = _setting.manualSteerSeconds;
 
             toolGuidanceSpacing = _setting.toolGuidanceSpacing;
-            isLockToReference = _setting.isLockToReference;
             isRecordSourceTool = _setting.isRecordSourceTool;
+            passesPerReference = _setting.passesPerReference;
         }
     }
 }

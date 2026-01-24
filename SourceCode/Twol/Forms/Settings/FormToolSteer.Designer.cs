@@ -100,8 +100,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.cboxIsPassiveSteering = new System.Windows.Forms.CheckBox();
             this.tabActive = new System.Windows.Forms.TabPage();
-            this.cboxLockToReference = new System.Windows.Forms.CheckBox();
-            this.label12 = new System.Windows.Forms.Label();
+            this.nudPassesPerReference = new Twol.NudlessNumericUpDown();
+            this.label14 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.cboxRecordSourceTool = new System.Windows.Forms.CheckBox();
             this.nudToolGuidanceSpacing = new Twol.NudlessNumericUpDown();
@@ -1020,8 +1020,8 @@
             // tabActive
             // 
             this.tabActive.BackColor = System.Drawing.Color.LightGray;
-            this.tabActive.Controls.Add(this.cboxLockToReference);
-            this.tabActive.Controls.Add(this.label12);
+            this.tabActive.Controls.Add(this.nudPassesPerReference);
+            this.tabActive.Controls.Add(this.label14);
             this.tabActive.Controls.Add(this.label8);
             this.tabActive.Controls.Add(this.cboxRecordSourceTool);
             this.tabActive.Controls.Add(this.nudToolGuidanceSpacing);
@@ -1034,36 +1034,25 @@
             this.tabActive.TabIndex = 7;
             this.tabActive.Text = "Active";
             // 
-            // cboxLockToReference
+            // nudPassesPerReference
             // 
-            this.cboxLockToReference.Appearance = System.Windows.Forms.Appearance.Button;
-            this.cboxLockToReference.BackColor = System.Drawing.Color.White;
-            this.cboxLockToReference.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.cboxLockToReference.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.cboxLockToReference.FlatAppearance.CheckedBackColor = System.Drawing.Color.MediumAquamarine;
-            this.cboxLockToReference.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cboxLockToReference.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboxLockToReference.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.cboxLockToReference.Image = global::Twol.Properties.Resources.ColorLocked;
-            this.cboxLockToReference.Location = new System.Drawing.Point(88, 89);
-            this.cboxLockToReference.Name = "cboxLockToReference";
-            this.cboxLockToReference.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.cboxLockToReference.Size = new System.Drawing.Size(99, 78);
-            this.cboxLockToReference.TabIndex = 597;
-            this.cboxLockToReference.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.cboxLockToReference.UseVisualStyleBackColor = false;
-            this.cboxLockToReference.Click += new System.EventHandler(this.cboxLockToReference_Click);
+            this.nudPassesPerReference.Location = new System.Drawing.Point(95, 84);
+            this.nudPassesPerReference.Maximum = 3D;
+            this.nudPassesPerReference.Name = "nudPassesPerReference";
+            this.nudPassesPerReference.Size = new System.Drawing.Size(143, 56);
+            this.nudPassesPerReference.TabIndex = 599;
+            this.nudPassesPerReference.ValueChanged += new System.EventHandler(this.nudPassesPerReference_ValueChanged);
             // 
-            // label12
+            // label14
             // 
-            this.label12.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.ForeColor = System.Drawing.Color.Black;
-            this.label12.Location = new System.Drawing.Point(58, 36);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(158, 50);
-            this.label12.TabIndex = 598;
-            this.label12.Text = "Reference Only";
-            this.label12.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.label14.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.ForeColor = System.Drawing.Color.Black;
+            this.label14.Location = new System.Drawing.Point(66, 22);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(201, 59);
+            this.label14.TabIndex = 600;
+            this.label14.Text = "Passes Per Recorded Track";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // label8
             // 
@@ -1097,24 +1086,23 @@
             // 
             // nudToolGuidanceSpacing
             // 
-            this.nudToolGuidanceSpacing.Location = new System.Drawing.Point(73, 229);
+            this.nudToolGuidanceSpacing.Location = new System.Drawing.Point(95, 199);
             this.nudToolGuidanceSpacing.Maximum = 2000D;
-            this.nudToolGuidanceSpacing.Minimum = 1D;
             this.nudToolGuidanceSpacing.Mode = Twol.UnitMode.Small;
             this.nudToolGuidanceSpacing.Name = "nudToolGuidanceSpacing";
             this.nudToolGuidanceSpacing.Size = new System.Drawing.Size(143, 56);
             this.nudToolGuidanceSpacing.TabIndex = 589;
-            this.nudToolGuidanceSpacing.Click += new System.EventHandler(this.nudToolGuidanceSpacing_Click);
+            this.nudToolGuidanceSpacing.ValueChanged += new System.EventHandler(this.nudToolGuidanceSpacing_ValueChanged);
             // 
             // label10
             // 
             this.label10.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.Black;
-            this.label10.Location = new System.Drawing.Point(44, 185);
+            this.label10.Location = new System.Drawing.Point(66, 155);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(201, 41);
             this.label10.TabIndex = 590;
-            this.label10.Text = "Guidance Spacing";
+            this.label10.Text = "Tool Width";
             this.label10.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // nudNudge
@@ -1519,7 +1507,7 @@
         private System.Windows.Forms.CheckBox cboxRecordSourceTool;
         private NudlessNumericUpDown nudToolGuidanceSpacing;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.CheckBox cboxLockToReference;
-        private System.Windows.Forms.Label label12;
+        private NudlessNumericUpDown nudPassesPerReference;
+        private System.Windows.Forms.Label label14;
     }
 }

@@ -148,12 +148,17 @@ namespace Twol
             if (track == null) return;
 
             bool loops = track.mode > TrackMode.PolyLine;
+            double widthMinusOverlap;
 
-            double widthMinusOverlap = Settings.Tool.toolWidth - Settings.Tool.overlap;
+            if (Settings.Tool.setToolSteer.toolGuidanceSpacing == 0)
+                widthMinusOverlap = Settings.Tool.toolWidth - Settings.Tool.overlap;
+            else
+                widthMinusOverlap = Settings.Tool.setToolSteer.toolGuidanceSpacing;
+
+            double distanceFromRefLine = 0;
 
             if (!isTrackValid || ((mf.secondsSinceStart - lastSecond) > 2 && (!mf.isBtnAutoSteerOn || mf.mc.steerSwitchHigh)))
             {
-                double distanceFromRefLine = 0;
                 lastSecond = mf.secondsSinceStart;
                 if (track.mode != TrackMode.waterPivot)
                 {
@@ -194,6 +199,44 @@ namespace Twol
                 lastHowManyPathsAway = 99999;
             }
 
+            if (Settings.Tool.setToolSteer.passesPerReference != 0)
+            {
+                switch (Settings.Tool.setToolSteer.passesPerReference)
+                {
+                    case 1:
+                        //nothing but center (0)
+                        if (howManyPathsAway != 0) howManyPathsAway = 0;
+                        break;
+
+                    case 2:
+                        //not center and only +-1
+                        if (howManyPathsAway == 0 || Math.Abs(howManyPathsAway) > 1)
+                        {
+                            if (distanceFromRefLine > 0) howManyPathsAway = 1;
+                            else howManyPathsAway = -1;
+                        }
+                        break;
+
+                    case 3:
+                        //center and -1 or +1 only
+                        if (Math.Abs(howManyPathsAway) > 1)
+                        {
+                            if (distanceFromRefLine > 0.5) howManyPathsAway = 1;
+                            else if (distanceFromRefLine < -0.5) howManyPathsAway = -1;
+                        }
+                        break;
+
+                    case 4:
+                        //not 0 and not odd
+                        if (howManyPathsAway == 0 || Math.Abs(howManyPathsAway) % 2 != 0)
+                        {
+                            if (distanceFromRefLine > 0) howManyPathsAway = 1;
+                            else howManyPathsAway = -1;
+                        }
+                        break;
+                }
+            }
+
             if (!isTrackValid || howManyPathsAway != lastHowManyPathsAway || (isHeadingSameWay != lastIsHeadingSameWay && Settings.Tool.offset != 0))
             {
                 if (!isBusyWorking)
@@ -214,6 +257,7 @@ namespace Twol
                             if (track.heading < 3.92699 && track.heading > 0.785398) distAway += -Settings.Tool.setToolSteer.nudgeGlobal;
                             else distAway += Settings.Tool.setToolSteer.nudgeGlobal;
                         }
+
                         currentGuidanceTrack = await Task.Run(() => BuildCurrentGuidanceTrack(distAway, track));
 
                         if (!mf.yt.isYouTurnTriggered)
