@@ -195,45 +195,54 @@ namespace Twol
 
                 if (RefDist < 0) howManyPathsAway = (int)(RefDist - 0.5);
                 else howManyPathsAway = (int)(RefDist + 0.5);
-            }
 
-            if (Settings.Tool.setToolSteer.passesPerReference != 0)
-            {
-                switch (Settings.Tool.setToolSteer.passesPerReference)
+                if (Settings.Tool.setToolSteer.passesPerReference != 0)
                 {
-                    case 1:
-                        //nothing but center (0)
-                        if (howManyPathsAway != 0) howManyPathsAway = 0;
-                        break;
+                    switch (Settings.Tool.setToolSteer.passesPerReference)
+                    {
+                        case 1:
+                            //nothing but center (0)
+                            if (howManyPathsAway != 0) howManyPathsAway = 0;
+                            break;
 
-                    case 2:
-                        //not center and only +-1
-                        if (howManyPathsAway == 0 || Math.Abs(howManyPathsAway) > 1)
-                        {
-                            if (distanceFromRefLine > 0) howManyPathsAway = 1;
-                            else howManyPathsAway = -1;
-                        }
-                        break;
+                        case 2:
+                            //not center and only +-1
+                            if (howManyPathsAway == 0 || Math.Abs(howManyPathsAway) > 1)
+                            {
+                                if (distanceFromRefLine >= 0) howManyPathsAway = 1;
+                                else howManyPathsAway = -1;
+                            }
+                            break;
 
-                    case 3:
-                        //center and -1 or +1 only
-                        if (Math.Abs(howManyPathsAway) > 1)
-                        {
-                            if (distanceFromRefLine > 0.5) howManyPathsAway = 1;
-                            else if (distanceFromRefLine < -0.5) howManyPathsAway = -1;
-                        }
-                        break;
+                        case 3:
+                            //center and -1 or +1 only
+                            if (Math.Abs(howManyPathsAway) > 1)
+                            {
+                                if (distanceFromRefLine >= (0.5 * widthMinusOverlap)) howManyPathsAway = 1;
+                                else if (distanceFromRefLine < -(0.5 * widthMinusOverlap)) howManyPathsAway = -1;
+                            }
+                            break;
 
-                    case 4:
-                        //not 0 and not odd
-                        if (howManyPathsAway == 0 || Math.Abs(howManyPathsAway) % 2 != 0)
-                        {
-                            if (distanceFromRefLine > 0) howManyPathsAway = 1;
-                            else howManyPathsAway = -1;
-                        }
-                        break;
+                        case 4:
+                            //not 0 and not even
+                            if (howManyPathsAway == 0 || Math.Abs(howManyPathsAway) % 2 == 0 || Math.Abs(howManyPathsAway) > 3)
+                            {
+                                if (distanceFromRefLine >= 0)
+                                {
+                                    if (distanceFromRefLine < (2 * widthMinusOverlap)) howManyPathsAway = 1;
+                                    else howManyPathsAway = 3;
+                                }
+                                else
+                                {
+                                    if (distanceFromRefLine > (-2 * widthMinusOverlap)) howManyPathsAway = -1;
+                                    else howManyPathsAway = -3;
+                                }
+                            }
+                            break;
+                    }
                 }
             }
+
 
             if (!isTrackValid || howManyPathsAway != lastHowManyPathsAway || (isHeadingSameWay != lastIsHeadingSameWay && Settings.Tool.offset != 0))
             {

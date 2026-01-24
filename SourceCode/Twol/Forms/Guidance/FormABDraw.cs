@@ -877,7 +877,7 @@ namespace Twol
 
         private void cboxFldOrBnd_Click(object sender, EventArgs e)
         {
-            cboxFldOrBnd.Image = cboxFldOrBnd.Checked ? Properties.Resources.JobActive : Properties.Resources.Boundary;
+            cboxFldOrBnd.Image = cboxFldOrBnd.Checked ? Properties.Resources.FilterInnerLines : Properties.Resources.FilterOuterLines;
         }
 
         private void FormABDraw_ResizeEnd(object sender, EventArgs e)

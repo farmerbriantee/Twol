@@ -93,7 +93,10 @@ namespace Twol
             cboxRecordSourceTool.Checked = Settings.Tool.setToolSteer.isRecordSourceTool;
             nudToolGuidanceSpacing.Value = (Settings.Tool.setToolSteer.toolGuidanceSpacing * 2);
 
-            nudPassesPerReference.Value = Settings.Tool.setToolSteer.passesPerReference;
+            cboxPassesPerReference.SelectedIndexChanged -= cboxPassesPerReference_SelectedIndexChanged;
+            cboxPassesPerReference.Text = Settings.Tool.setToolSteer.passesPerReference.ToString();
+            cboxPassesPerReference.SelectedIndexChanged += cboxPassesPerReference_SelectedIndexChanged;
+
             nudToolGuidanceSpacing.Value = (Settings.Tool.setToolSteer.toolGuidanceSpacing);
 
             if (Settings.Tool.setToolSteer.passesPerReference == 0)
@@ -102,7 +105,7 @@ namespace Twol
             }
             else
             {
-                if (Settings.Tool.setToolSteer.passesPerReference == 2) nudToolGuidanceSpacing.Value = Settings.Tool.setToolSteer.toolGuidanceSpacing * 2.0;
+                if (Settings.Tool.setToolSteer.passesPerReference % 2 == 0) nudToolGuidanceSpacing.Value = Settings.Tool.setToolSteer.toolGuidanceSpacing * 2.0;
             }
         }
 
@@ -414,13 +417,13 @@ namespace Twol
             {
                 //fix the tool width
                 Settings.Tool.setToolSteer.toolGuidanceSpacing = (double)nudToolGuidanceSpacing.Value;
-                if (Settings.Tool.setToolSteer.passesPerReference == 2) Settings.Tool.setToolSteer.toolGuidanceSpacing = (double)nudToolGuidanceSpacing.Value * 0.5;
+                if (Settings.Tool.setToolSteer.passesPerReference % 2 == 0) Settings.Tool.setToolSteer.toolGuidanceSpacing = (double)nudToolGuidanceSpacing.Value * 0.5;
             }
         }
 
-        private void nudPassesPerReference_ValueChanged(object sender, EventArgs e)
+        private void cboxPassesPerReference_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Settings.Tool.setToolSteer.passesPerReference = (byte)nudPassesPerReference.Value;
+            Settings.Tool.setToolSteer.passesPerReference = cboxPassesPerReference.SelectedIndex;
 
             if (Settings.Tool.setToolSteer.passesPerReference == 0)
             {
@@ -430,7 +433,7 @@ namespace Twol
             {
                 //fix the tool width
                 Settings.Tool.setToolSteer.toolGuidanceSpacing = (double)nudToolGuidanceSpacing.Value;
-                if (Settings.Tool.setToolSteer.passesPerReference == 2) Settings.Tool.setToolSteer.toolGuidanceSpacing = (double)nudToolGuidanceSpacing.Value * 0.5;
+                if (Settings.Tool.setToolSteer.passesPerReference % 2 == 0) Settings.Tool.setToolSteer.toolGuidanceSpacing = (double)nudToolGuidanceSpacing.Value * 0.5;
             }
         }
 

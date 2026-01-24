@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormBuildTracks));
             this.lblCurveExists = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panelName = new System.Windows.Forms.Panel();
@@ -63,6 +64,8 @@
             this.btnBCurve = new System.Windows.Forms.Button();
             this.btnPausePlay = new System.Windows.Forms.Button();
             this.panelEditName = new System.Windows.Forms.Panel();
+            this.btnEditAddAFld = new System.Windows.Forms.Button();
+            this.btnEditAddABnd = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.btnSaveEditName = new System.Windows.Forms.Button();
             this.btnCancel_EditName = new System.Windows.Forms.Button();
@@ -149,8 +152,6 @@
             this.btnzAPlus2 = new System.Windows.Forms.Button();
             this.btnzABLine2 = new System.Windows.Forms.Button();
             this.btnzABCurve2 = new System.Windows.Forms.Button();
-            this.btnEditAddAFld = new System.Windows.Forms.Button();
-            this.btnEditAddABnd = new System.Windows.Forms.Button();
             this.panelName.SuspendLayout();
             this.panelMain.SuspendLayout();
             this.panelCurve.SuspendLayout();
@@ -212,7 +213,7 @@
             this.btnAddA_Fld.FlatAppearance.BorderSize = 0;
             this.btnAddA_Fld.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddA_Fld.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddA_Fld.Image = global::Twol.Properties.Resources.JobActive;
+            this.btnAddA_Fld.Image = ((System.Drawing.Image)(resources.GetObject("btnAddA_Fld.Image")));
             this.btnAddA_Fld.Location = new System.Drawing.Point(141, 154);
             this.btnAddA_Fld.Name = "btnAddA_Fld";
             this.btnAddA_Fld.Size = new System.Drawing.Size(78, 57);
@@ -226,7 +227,7 @@
             this.BtnAddA_Bnd.FlatAppearance.BorderSize = 0;
             this.BtnAddA_Bnd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnAddA_Bnd.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnAddA_Bnd.Image = global::Twol.Properties.Resources.Boundary;
+            this.BtnAddA_Bnd.Image = global::Twol.Properties.Resources.FilterOuterLines;
             this.BtnAddA_Bnd.Location = new System.Drawing.Point(17, 154);
             this.BtnAddA_Bnd.Name = "BtnAddA_Bnd";
             this.BtnAddA_Bnd.Size = new System.Drawing.Size(78, 57);
@@ -371,7 +372,7 @@
             this.btnHideShowFld.FlatAppearance.BorderSize = 0;
             this.btnHideShowFld.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnHideShowFld.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHideShowFld.Image = global::Twol.Properties.Resources.JobActive;
+            this.btnHideShowFld.Image = global::Twol.Properties.Resources.FilterInnerLines;
             this.btnHideShowFld.Location = new System.Drawing.Point(668, 180);
             this.btnHideShowFld.Name = "btnHideShowFld";
             this.btnHideShowFld.Size = new System.Drawing.Size(78, 57);
@@ -385,7 +386,7 @@
             this.btnHideShowBnd.FlatAppearance.BorderSize = 0;
             this.btnHideShowBnd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnHideShowBnd.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHideShowBnd.Image = global::Twol.Properties.Resources.Boundary;
+            this.btnHideShowBnd.Image = global::Twol.Properties.Resources.FilterOuterLines;
             this.btnHideShowBnd.Location = new System.Drawing.Point(668, 94);
             this.btnHideShowBnd.Name = "btnHideShowBnd";
             this.btnHideShowBnd.Size = new System.Drawing.Size(78, 57);
@@ -686,6 +687,34 @@
             this.panelEditName.Name = "panelEditName";
             this.panelEditName.Size = new System.Drawing.Size(241, 310);
             this.panelEditName.TabIndex = 437;
+            // 
+            // btnEditAddAFld
+            // 
+            this.btnEditAddAFld.BackColor = System.Drawing.Color.Transparent;
+            this.btnEditAddAFld.FlatAppearance.BorderSize = 0;
+            this.btnEditAddAFld.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEditAddAFld.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEditAddAFld.Image = ((System.Drawing.Image)(resources.GetObject("btnEditAddAFld.Image")));
+            this.btnEditAddAFld.Location = new System.Drawing.Point(141, 154);
+            this.btnEditAddAFld.Name = "btnEditAddAFld";
+            this.btnEditAddAFld.Size = new System.Drawing.Size(78, 57);
+            this.btnEditAddAFld.TabIndex = 454;
+            this.btnEditAddAFld.UseVisualStyleBackColor = false;
+            this.btnEditAddAFld.Click += new System.EventHandler(this.btnEditAddAFld_Click);
+            // 
+            // btnEditAddABnd
+            // 
+            this.btnEditAddABnd.BackColor = System.Drawing.Color.Transparent;
+            this.btnEditAddABnd.FlatAppearance.BorderSize = 0;
+            this.btnEditAddABnd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEditAddABnd.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEditAddABnd.Image = global::Twol.Properties.Resources.FilterOuterLines;
+            this.btnEditAddABnd.Location = new System.Drawing.Point(17, 154);
+            this.btnEditAddABnd.Name = "btnEditAddABnd";
+            this.btnEditAddABnd.Size = new System.Drawing.Size(78, 57);
+            this.btnEditAddABnd.TabIndex = 453;
+            this.btnEditAddABnd.UseVisualStyleBackColor = false;
+            this.btnEditAddABnd.Click += new System.EventHandler(this.btnEditAddABnd_Click);
             // 
             // label8
             // 
@@ -1945,34 +1974,6 @@
             this.btnzABCurve2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnzABCurve2.UseVisualStyleBackColor = false;
             this.btnzABCurve2.Click += new System.EventHandler(this.btnzABCurve_Click);
-            // 
-            // btnEditAddAFld
-            // 
-            this.btnEditAddAFld.BackColor = System.Drawing.Color.Transparent;
-            this.btnEditAddAFld.FlatAppearance.BorderSize = 0;
-            this.btnEditAddAFld.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEditAddAFld.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEditAddAFld.Image = global::Twol.Properties.Resources.JobActive;
-            this.btnEditAddAFld.Location = new System.Drawing.Point(141, 154);
-            this.btnEditAddAFld.Name = "btnEditAddAFld";
-            this.btnEditAddAFld.Size = new System.Drawing.Size(78, 57);
-            this.btnEditAddAFld.TabIndex = 454;
-            this.btnEditAddAFld.UseVisualStyleBackColor = false;
-            this.btnEditAddAFld.Click += new System.EventHandler(this.btnEditAddAFld_Click);
-            // 
-            // btnEditAddABnd
-            // 
-            this.btnEditAddABnd.BackColor = System.Drawing.Color.Transparent;
-            this.btnEditAddABnd.FlatAppearance.BorderSize = 0;
-            this.btnEditAddABnd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEditAddABnd.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEditAddABnd.Image = global::Twol.Properties.Resources.Boundary;
-            this.btnEditAddABnd.Location = new System.Drawing.Point(17, 154);
-            this.btnEditAddABnd.Name = "btnEditAddABnd";
-            this.btnEditAddABnd.Size = new System.Drawing.Size(78, 57);
-            this.btnEditAddABnd.TabIndex = 453;
-            this.btnEditAddABnd.UseVisualStyleBackColor = false;
-            this.btnEditAddABnd.Click += new System.EventHandler(this.btnEditAddABnd_Click);
             // 
             // FormBuildTracks
             // 

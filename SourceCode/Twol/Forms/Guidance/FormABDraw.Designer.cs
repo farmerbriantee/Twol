@@ -158,7 +158,7 @@
             this.cboxFldOrBnd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboxFldOrBnd.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxFldOrBnd.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.cboxFldOrBnd.Image = global::Twol.Properties.Resources.Boundary;
+            this.cboxFldOrBnd.Image = global::Twol.Properties.Resources.FilterOuterLines;
             this.cboxFldOrBnd.Location = new System.Drawing.Point(146, 250);
             this.cboxFldOrBnd.Name = "cboxFldOrBnd";
             this.cboxFldOrBnd.RightToLeft = System.Windows.Forms.RightToLeft.Yes;

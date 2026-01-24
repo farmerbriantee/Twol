@@ -100,8 +100,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.cboxIsPassiveSteering = new System.Windows.Forms.CheckBox();
             this.tabActive = new System.Windows.Forms.TabPage();
+            this.cboxPassesPerReference = new System.Windows.Forms.ComboBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.nudPassesPerReference = new Twol.NudlessNumericUpDown();
             this.label14 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.cboxRecordSourceTool = new System.Windows.Forms.CheckBox();
@@ -1021,8 +1021,8 @@
             // tabActive
             // 
             this.tabActive.BackColor = System.Drawing.Color.LightGray;
+            this.tabActive.Controls.Add(this.cboxPassesPerReference);
             this.tabActive.Controls.Add(this.label12);
-            this.tabActive.Controls.Add(this.nudPassesPerReference);
             this.tabActive.Controls.Add(this.label14);
             this.tabActive.Controls.Add(this.label8);
             this.tabActive.Controls.Add(this.cboxRecordSourceTool);
@@ -1036,31 +1036,44 @@
             this.tabActive.TabIndex = 7;
             this.tabActive.Text = "Active";
             // 
+            // cboxPassesPerReference
+            // 
+            this.cboxPassesPerReference.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.cboxPassesPerReference.BackColor = System.Drawing.Color.Lavender;
+            this.cboxPassesPerReference.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboxPassesPerReference.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cboxPassesPerReference.Font = new System.Drawing.Font("Tahoma", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboxPassesPerReference.FormattingEnabled = true;
+            this.cboxPassesPerReference.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2",
+            "3",
+            "4"});
+            this.cboxPassesPerReference.Location = new System.Drawing.Point(59, 74);
+            this.cboxPassesPerReference.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.cboxPassesPerReference.MaxDropDownItems = 5;
+            this.cboxPassesPerReference.Name = "cboxPassesPerReference";
+            this.cboxPassesPerReference.Size = new System.Drawing.Size(154, 66);
+            this.cboxPassesPerReference.TabIndex = 602;
+            this.cboxPassesPerReference.SelectedIndexChanged += new System.EventHandler(this.cboxPassesPerReference_SelectedIndexChanged);
+            // 
             // label12
             // 
             this.label12.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.Color.Firebrick;
-            this.label12.Location = new System.Drawing.Point(63, 136);
+            this.label12.Location = new System.Drawing.Point(63, 141);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(143, 23);
             this.label12.TabIndex = 601;
             this.label12.Text = "0 = Off";
             this.label12.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
-            // nudPassesPerReference
-            // 
-            this.nudPassesPerReference.Location = new System.Drawing.Point(63, 80);
-            this.nudPassesPerReference.Maximum = 3D;
-            this.nudPassesPerReference.Name = "nudPassesPerReference";
-            this.nudPassesPerReference.Size = new System.Drawing.Size(143, 56);
-            this.nudPassesPerReference.TabIndex = 599;
-            this.nudPassesPerReference.ValueChanged += new System.EventHandler(this.nudPassesPerReference_ValueChanged);
-            // 
             // label14
             // 
             this.label14.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label14.ForeColor = System.Drawing.Color.Black;
-            this.label14.Location = new System.Drawing.Point(34, 18);
+            this.label14.Location = new System.Drawing.Point(34, 14);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(201, 59);
             this.label14.TabIndex = 600;
@@ -1520,8 +1533,8 @@
         private System.Windows.Forms.CheckBox cboxRecordSourceTool;
         private NudlessNumericUpDown nudToolGuidanceSpacing;
         private System.Windows.Forms.Label label10;
-        private NudlessNumericUpDown nudPassesPerReference;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.ComboBox cboxPassesPerReference;
     }
 }
