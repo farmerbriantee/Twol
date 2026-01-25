@@ -655,7 +655,7 @@ namespace Twol
                             }
                     }
                 }
-                else if (data[0] == 36 && (data[1] == 71 || data[1] == 80 || data[1] == 75))
+                else if (data[0] == 36 && (data[1] == 71 || data[1] == 80 || data[1] == 75)) //plea for hex!! pleeeeaaa!!
                 {
                     traffic.cntrGPSOutTool += msgLen;
                     string tmpToolSteer = Encoding.ASCII.GetString(data, 0, msgLen);

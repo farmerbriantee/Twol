@@ -70,7 +70,7 @@ namespace Twol
             lblAckermann_Tool.Text = hsbarAckermann_Tool.Value.ToString();
             lblZeroWAS_Tool.Text = (hsbarZeroWAS_Tool.Value / (double)(hsbarCPD_Tool.Value)).ToString("N2");
             lblCPD_Tool.Text = hsbarCPD_Tool.Value.ToString();
-
+            lblTollRollCompensationValue.Text = Settings.Tool.toolRollOffset.ToString();
             //config
             lblMaxSteerAngle_Tool.Text = hsbarMaxSteerAngle_Tool.Value.ToString();
 
@@ -119,6 +119,9 @@ namespace Twol
             Settings.Tool.setToolSteer.countsPerDegree = (byte)hsbarCPD_Tool.Value;
             Settings.Tool.setToolSteer.ackermann = (byte)hsbarAckermann_Tool.Value;
             Settings.Tool.setToolSteer.wasOffset = hsbarZeroWAS_Tool.Value;
+            if (double.TryParse(lblTollRollCompensationValue.Text, out double value)) {
+                Settings.Tool.toolRollOffset = value;
+            }
 
             //config
             Settings.Tool.setToolSteer.maxSteerAngle = (byte)hsbarMaxSteerAngle_Tool.Value;
@@ -450,6 +453,21 @@ namespace Twol
         {
             toolSend2 = true;
             toolCounterConfig = 0;
+        }
+
+        private void btnZeroToolRoll_Click(object sender, EventArgs e)
+        {
+            if (mf.ahrsTool.imuRoll != 88888)
+            {
+                mf.ahrsTool.imuRoll += Settings.Vehicle.setIMU_rollZero;
+                Settings.Tool.toolRollOffset = mf.ahrsTool.imuRoll;
+                lblTollRollCompensationValue.Text = Settings.Tool.toolRollOffset.ToString("N2");
+                Log.EventWriter("Roll Zeroed with " + Settings.Tool.toolRollOffset.ToString());
+            }
+            else
+            {
+                lblTollRollCompensationValue.Text = "0";
+            }
         }
 
         private void cboxInvertSteer_Tool_Click(object sender, EventArgs e)

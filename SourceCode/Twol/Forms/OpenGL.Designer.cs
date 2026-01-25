@@ -1765,6 +1765,13 @@ namespace Twol
                 string head = Math.Round(ahrs.imuRoll, 1).ToString();
                 font.DrawText((int)(((head.Length) * -9)), -45, head, 1.2);
             }
+            GL.Rotate(ahrsTool.imuRoll, 0, 0, 1);
+
+            if ((ahrsTool.imuRoll != 88888))
+            {
+                string head = Math.Round(ahrsTool.imuRoll, 1).ToString();
+                font.DrawText((int)(((head.Length) * -9)), -85, head, 1.2);
+            }
 
             GL.PopMatrix();
             GL.Enable(EnableCap.Texture2D);

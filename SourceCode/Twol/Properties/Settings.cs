@@ -390,6 +390,8 @@ namespace Twol
             public double defaultSectionWidth = 2;
             public double sectionWidthMulti = 0.5;
 
+            public double toolRollOffset = 0;
+
             public double[] setSection_Widths = new double[3] { 2, 2, 2 };
 
             public string setRelay_pinConfig = "1,2,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0";

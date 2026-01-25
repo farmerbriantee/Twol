@@ -127,6 +127,9 @@
             this.hsbarManualSecondsOn = new System.Windows.Forms.HScrollBar();
             this.nudAntennaOffset_Tool = new Twol.NudlessNumericUpDown();
             this.imageList2 = new System.Windows.Forms.ImageList(this.components);
+            this.btnZeroToolRoll = new System.Windows.Forms.Button();
+            this.label15 = new System.Windows.Forms.Label();
+            this.lblTollRollCompensationValue = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabGain.SuspendLayout();
             this.tabSteer.SuspendLayout();
@@ -832,6 +835,9 @@
             // 
             // tabMode
             // 
+            this.tabMode.Controls.Add(this.lblTollRollCompensationValue);
+            this.tabMode.Controls.Add(this.label15);
+            this.tabMode.Controls.Add(this.btnZeroToolRoll);
             this.tabMode.Controls.Add(this.cboxIsRecordToolLine);
             this.tabMode.Controls.Add(this.cboxIsFollowPivot);
             this.tabMode.Controls.Add(this.label1);
@@ -1404,6 +1410,34 @@
             this.imageList2.Images.SetKeyName(4, "Sensors.png");
             this.imageList2.Images.SetKeyName(5, "Con_ImplementMenu.png");
             // 
+            // btnZeroToolRoll
+            // 
+            this.btnZeroToolRoll.Location = new System.Drawing.Point(39, 293);
+            this.btnZeroToolRoll.Name = "btnZeroToolRoll";
+            this.btnZeroToolRoll.Size = new System.Drawing.Size(201, 65);
+            this.btnZeroToolRoll.TabIndex = 593;
+            this.btnZeroToolRoll.Text = "Zero Roll";
+            this.btnZeroToolRoll.UseVisualStyleBackColor = true;
+            this.btnZeroToolRoll.Click += new System.EventHandler(this.btnZeroToolRoll_Click);
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(246, 309);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(187, 33);
+            this.label15.TabIndex = 594;
+            this.label15.Text = "Current Value:";
+            // 
+            // lblTollRollCompensationValue
+            // 
+            this.lblTollRollCompensationValue.AutoSize = true;
+            this.lblTollRollCompensationValue.Location = new System.Drawing.Point(439, 309);
+            this.lblTollRollCompensationValue.Name = "lblTollRollCompensationValue";
+            this.lblTollRollCompensationValue.Size = new System.Drawing.Size(30, 33);
+            this.lblTollRollCompensationValue.TabIndex = 595;
+            this.lblTollRollCompensationValue.Text = "0";
+            // 
             // FormToolSteer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -1431,6 +1465,7 @@
             this.panel2.ResumeLayout(false);
             this.tabToolSetup.ResumeLayout(false);
             this.tabMode.ResumeLayout(false);
+            this.tabMode.PerformLayout();
             this.tabPassive.ResumeLayout(false);
             this.tabActive.ResumeLayout(false);
             this.tabSetup.ResumeLayout(false);
@@ -1536,5 +1571,8 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ComboBox cboxPassesPerReference;
+        private System.Windows.Forms.Button btnZeroToolRoll;
+        private System.Windows.Forms.Label lblTollRollCompensationValue;
+        private System.Windows.Forms.Label label15;
     }
 }
