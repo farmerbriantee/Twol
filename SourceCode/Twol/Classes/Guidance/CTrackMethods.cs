@@ -238,6 +238,55 @@ namespace Twol
             }
         }
 
+        public static void ReducePointsByAngle(this List<vec2> points, double angleDelta = 0.005, double spread = 2)
+        {
+            if (points == null || points.Count < 6) return;
+
+            int cont = points.Count;
+            vec2[] smList = new vec2[cont];
+            cont--;
+            points.CopyTo(smList);
+            points.Clear();
+
+            double delta = 0;
+            double check;
+            double dist = 0;
+            vec2 lastPt = new vec2(smList[0]);
+            spread *= spread;
+            spread *= 0.95;
+
+            for (int i = 0; i < cont; i++)
+            {
+
+                if (i < 2 || i > cont - 3)
+                {
+                    points.Add(new vec2(smList[i]));
+                    continue;
+                }
+
+                double heading = Math.Atan2(smList[i - 2].easting - smList[i - 1].easting, smList[i - 2].northing - smList[i - 1].northing);
+                double heading2 = Math.Atan2(smList[i - 1].easting - smList[i].easting, smList[i - 1].northing - smList[i].northing);
+
+                check = heading - heading2;
+                if (check > Math.PI || check < -Math.PI)
+                {
+                    if (check > 0) check -= glm.twoPI;
+                    else check += glm.twoPI;
+                }
+
+                delta += check;
+                dist += glm.DistanceSquared(lastPt, smList[i]);
+                lastPt = smList[i];
+
+                if (Math.Abs(delta) > angleDelta || dist >= spread)
+                {
+                    points.Add(new vec2(smList[i]));
+                    delta = 0;
+                    dist = 0;
+                }
+            }
+        }
+
         public static List<vec2> ReducePointsByAngleToVec2(this List<vec3> points, double angleDelta = 0.02, double spread = 30)
         {
             List<vec2> smList = new List<vec2>();
@@ -431,6 +480,50 @@ namespace Twol
             points.AddRange(arr);
         }
 
+        public static void SmoothSegments(this List<vec2> points, int smPts = 4)
+        {
+            int cnt = points.Count;
+            if (cnt == 0 || smPts <= 0) return;
+
+            vec2[] arr = new vec2[cnt];
+
+            // copy first smPts/2 (or all, if fewer)
+            for (int s = 0; s < smPts / 2 && s < cnt; s++)
+            {
+                arr[s].easting = points[s].easting;
+                arr[s].northing = points[s].northing;
+            }
+
+            // copy last smPts/2
+            for (int s = cnt - (smPts / 2); s < cnt; s++)
+            {
+                arr[s].easting = points[s].easting;
+                arr[s].northing = points[s].northing;
+            }
+
+            // average middle region
+            for (int i = smPts / 2; i < cnt - (smPts / 2); i++)
+            {
+                double sumEast = 0;
+                double sumNorth = 0;
+
+                for (int j = -smPts / 2; j < smPts / 2; j++)
+                {
+                    int idx = i + j;
+                    if (idx < 0 || idx >= cnt) continue;
+
+                    sumEast += points[idx].easting;
+                    sumNorth += points[idx].northing;
+                }
+
+                arr[i].easting = sumEast / smPts;
+                arr[i].northing = sumNorth / smPts;
+            }
+
+            points.Clear();
+            points.AddRange(arr);
+        }
+
         public static double TrackAverageHeading(this List<vec3> points)
         {
             //calculate average heading of line
@@ -471,6 +564,43 @@ namespace Twol
                     // Calculate Q and R points, which are 25% and 75% along the segment
                     nextPoints.Add(new vec3(0.75f * p0.easting + 0.25f * p1.easting, 0.75f * p0.northing + 0.25f * p1.northing, 0));
                     nextPoints.Add(new vec3(0.25f * p0.easting + 0.75f * p1.easting, 0.25f * p0.northing + 0.75f * p1.northing, 0));
+                }
+
+                // Optionally preserve the end point for non-closed polylines
+                if (preserveEndPoints && currentPoints.Count > 1)
+                {
+                    nextPoints.Add(currentPoints[currentPoints.Count - 1]);
+                }
+
+                currentPoints = nextPoints;
+            }
+
+            points?.Clear();
+            points.AddRange(currentPoints);
+        }
+
+        public static void ChaikinsSmooth(this List<vec2> points, int iterations, bool preserveEndPoints = true)
+        {
+            List<vec2> currentPoints = new List<vec2>(points);
+
+            for (int iter = 0; iter < iterations; iter++)
+            {
+                List<vec2> nextPoints = new List<vec2>();
+
+                // Optionally preserve the start point for non-closed polylines
+                if (preserveEndPoints && currentPoints.Count > 0)
+                {
+                    nextPoints.Add(currentPoints[0]);
+                }
+
+                for (int i = 0; i < currentPoints.Count - 1; i++)
+                {
+                    vec2 p0 = currentPoints[i];
+                    vec2 p1 = currentPoints[i + 1];
+
+                    // Calculate Q and R points, which are 25% and 75% along the segment
+                    nextPoints.Add(new vec2(0.75f * p0.easting + 0.25f * p1.easting, 0.75f * p0.northing + 0.25f * p1.northing));
+                    nextPoints.Add(new vec2(0.25f * p0.easting + 0.75f * p1.easting, 0.25f * p0.northing + 0.75f * p1.northing));
                 }
 
                 // Optionally preserve the end point for non-closed polylines

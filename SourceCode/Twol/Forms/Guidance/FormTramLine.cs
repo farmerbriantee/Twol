@@ -130,8 +130,9 @@ namespace Twol
                     //default side assuming built in ABLine Draw - isVisible is used for side to draw
                     gTemp.Add(new CTrk(track));
                     gTemp[gTemp.Count - 1].isVisible = true;
-                    gTemp[gTemp.Count - 1].curvePts.AddStartEndPoints(20, 50);
                     gTemp[gTemp.Count - 1].curvePts.GenerateEquidistantPoints(2, false);
+                    gTemp[gTemp.Count - 1].curvePts.AddStartEndPoints(100, 5);
+                    gTemp[gTemp.Count - 1].curvePts.AddStartEndPoints(20, 100);
                     gTemp[gTemp.Count - 1].curvePts.CalculateAverageHeadings(false);
                 }
             }
@@ -210,6 +211,8 @@ namespace Twol
 
         private void BuildTram()
         {
+            if (gTemp == null || gTemp.Count == 0) return;
+
             if (gTemp[indx].mode == TrackMode.PolyLine || gTemp[indx].mode == TrackMode.ABLine)
             {
                 BuildCurveTram();
@@ -246,6 +249,7 @@ namespace Twol
                     }
                 }
 
+                tramArr.ReducePointsByAngle(0.05, 50);
                 tramList.Add(tramArr);
             }
 
@@ -267,6 +271,9 @@ namespace Twol
                     }
                 }
 
+                tramArr.SmoothSegments(2);
+                tramArr.ChaikinsSmooth(2);
+                tramArr.ReducePointsByAngle(0.02, 50);
                 tramList.Add(tramArr);
             }
         }
@@ -691,6 +698,14 @@ namespace Twol
                     {
                         mf.tram.tramBndInnerArr.Add(new vec2(output2[i]));
                     }
+
+                    mf.tram.tramBndInnerArr.SmoothSegments(2);
+                    mf.tram.tramBndInnerArr.ChaikinsSmooth(2);
+                    mf.tram.tramBndInnerArr.ReducePointsByAngle(0.02, 50);
+
+                    mf.tram.tramBndOuterArr.SmoothSegments(2);
+                    mf.tram.tramBndOuterArr.ChaikinsSmooth(2);
+                    mf.tram.tramBndOuterArr.ReducePointsByAngle(0.02, 50);
                 }
             }
 

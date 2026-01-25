@@ -1050,6 +1050,8 @@ namespace Twol
                     }
                 }
 
+                GL.LineWidth(8);
+
                 if (tram.displayMode == 1 || tram.displayMode == 3)
                 {
                     //boundary tram list

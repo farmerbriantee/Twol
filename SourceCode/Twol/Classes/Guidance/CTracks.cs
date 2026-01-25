@@ -410,6 +410,8 @@ namespace Twol
 
                     //else
                     {
+                        newCurList.CalculateAverageHeadings(loops);
+                        newCurList.AddStartEndPoints(2, 1000);
 
                         //newCurList = track.curvePts.OffsetLine(distAway, step, false);
 
