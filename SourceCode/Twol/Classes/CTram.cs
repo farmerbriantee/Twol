@@ -53,27 +53,33 @@ namespace Twol
             if (mf.camera.camSetDistance > -500) GL.LineWidth(10);
             else GL.LineWidth(6);
 
-            GL.Color4(0, 0, 0, alpha);
+            #region background black
 
-            if (mf.tram.displayMode == 1 || mf.tram.displayMode == 2)
-            {
-                if (tramList.Count > 0)
-                {
-                    for (int i = 0; i < tramList.Count; i++)
-                    {
-                        tramList[i].DrawPolygon(PrimitiveType.LineStrip);
-                    }
-                }
-            }
+            //GL.Color4(0, 0, 0, alpha);
 
-            if (mf.tram.displayMode == 1 || mf.tram.displayMode == 3)
-            {
-                if (tramBndOuterArr.Count > 0)
-                {
-                    tramBndOuterArr.DrawPolygon(PrimitiveType.LineStrip);
-                    tramBndInnerArr.DrawPolygon(PrimitiveType.LineStrip);
-                }
-            }
+            //if (mf.tram.displayMode == 1 || mf.tram.displayMode == 2)
+            //{
+            //    if (tramList.Count > 0)
+            //    {
+            //        for (int i = 0; i < tramList.Count; i++)
+            //        {
+            //            tramList[i].DrawPolygon(PrimitiveType.Points);
+            //        }
+            //    }
+            //}
+
+            //if (mf.tram.displayMode == 1 || mf.tram.displayMode == 3)
+            //{
+            //    if (tramBndOuterArr.Count > 0)
+            //    {
+            //        tramBndOuterArr.DrawPolygon(PrimitiveType.LineStrip);
+            //        tramBndInnerArr.DrawPolygon(PrimitiveType.LineStrip);
+            //    }
+            //}
+
+            #endregion
+
+            #region Visible Tram
 
             if (mf.camera.camSetDistance > -500) GL.LineWidth(4);
             else GL.LineWidth(2);
@@ -86,7 +92,7 @@ namespace Twol
                 {
                     for (int i = 0; i < tramList.Count; i++)
                     {
-                        tramList[i].DrawPolygon(PrimitiveType.LineStrip);
+                        tramList[i].DrawPolygon(PrimitiveType.Points);
                     }
                 }
             }
@@ -95,10 +101,12 @@ namespace Twol
             {
                 if (tramBndOuterArr.Count > 0)
                 {
-                    tramBndOuterArr.DrawPolygon(PrimitiveType.LineStrip);
-                    tramBndInnerArr.DrawPolygon(PrimitiveType.LineStrip);
+                    tramBndOuterArr.DrawPolygon(PrimitiveType.Points);
+                    tramBndInnerArr.DrawPolygon(PrimitiveType.Points);
                 }
             }
+
+            #endregion
         }
     }
 }

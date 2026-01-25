@@ -467,7 +467,11 @@ namespace Twol
                         }
                     }
 
-                   if (tram.displayMode != 0) tram.DrawTram();
+                    #endregion
+
+                    #region Trams
+
+                    if (tram.displayMode != 0) tram.DrawTram();
 
                     GL.PolygonMode(MaterialFace.Front, PolygonMode.Fill);
 
