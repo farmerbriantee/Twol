@@ -8,10 +8,94 @@ namespace Twol
         public static void FixReferenceTrack(this List<vec3> points, bool isLoop)
         {
             points.SmoothSegments(4);
-            points.GenerateEquidistantPoints(2.1, isLoop);
+            points.CatmullFix(1);
+            points.GenerateEquidistantPoints(2, isLoop);
             points.CalculateAverageHeadings(isLoop);
-            points.ReducePointsByAngle(0.005, 2);
-            points.CalculateAverageHeadings(isLoop);
+            points.ReducePointsByAngle(0.005, 1.5);
+
+            if (!isLoop)
+            {
+                points.AddStartEndPoints(2, 4);
+                points.AddStartEndPoints(20, 10);
+            }
+        }
+
+        public static void CatmullFix(this List<vec3> points, double step = 2)
+        {
+            int cnt = points.Count;
+            if (cnt > 6)
+            {
+                vec3[] arr = new vec3[cnt];
+                points.CopyTo(arr);
+
+                points.Clear();
+
+                cnt = arr.Length;
+                double distance;
+
+                //add the first point of loop - it will be p1
+                points.Add(arr[0]);
+
+                for (int i = 0; i < cnt - 3; i++)
+                {
+                    // add p1
+                    points.Add(arr[i + 1]);
+
+                    distance = glm.Distance(arr[i + 1], arr[i + 2]);
+
+                    if (distance > step)
+                    {
+                        int loopTimes = (int)(distance / step + 1);
+                        for (int j = 1; j < loopTimes; j++)
+                        {
+                            vec3 pos = new vec3(glm.Catmull(j / (double)(loopTimes), arr[i], arr[i + 1], arr[i + 2], arr[i + 3]));
+                            points.Add(pos);
+                        }
+                    }
+                }
+
+                points.Add(arr[cnt - 2]);
+                points.Add(arr[cnt - 1]);
+            }
+        }
+
+        public static void CatmullFix(this List<vec2> points, double step = 2)
+        {
+            int cnt = points.Count;
+            if (cnt > 6)
+            {
+                vec2[] arr = new vec2[cnt];
+                points.CopyTo(arr);
+
+                points.Clear();
+
+                cnt = arr.Length;
+                double distance;
+
+                //add the first point of loop - it will be p1
+                points.Add(arr[0]);
+
+                for (int i = 0; i < cnt - 3; i++)
+                {
+                    // add p1
+                    points.Add(arr[i + 1]);
+
+                    distance = glm.Distance(arr[i + 1], arr[i + 2]);
+
+                    if (distance > step)
+                    {
+                        int loopTimes = (int)(distance / step + 1);
+                        for (int j = 1; j < loopTimes; j++)
+                        {
+                            vec2 pos = new vec2(glm.Catmull(j / (double)(loopTimes), arr[i], arr[i + 1], arr[i + 2], arr[i + 3]));
+                            points.Add(pos);
+                        }
+                    }
+                }
+
+                points.Add(arr[cnt - 2]);
+                points.Add(arr[cnt - 1]);
+            }
         }
 
         public static void CalculateAverageHeadings(this List<vec3> points, bool loop)
