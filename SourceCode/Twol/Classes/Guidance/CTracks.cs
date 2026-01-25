@@ -580,7 +580,6 @@ namespace Twol
         //    return newGuideLL;
         //}
 
-
         public void DrawNewABLine()
         {
             //ABLine Line currently being designed

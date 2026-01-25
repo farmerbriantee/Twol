@@ -130,6 +130,9 @@ namespace Twol
                     //default side assuming built in ABLine Draw - isVisible is used for side to draw
                     gTemp.Add(new CTrk(track));
                     gTemp[gTemp.Count - 1].isVisible = true;
+                    gTemp[gTemp.Count - 1].curvePts.AddStartEndPoints(20, 50);
+                    gTemp[gTemp.Count - 1].curvePts.GenerateEquidistantPoints(2, false);
+                    gTemp[gTemp.Count - 1].curvePts.CalculateAverageHeadings(false);
                 }
             }
 
