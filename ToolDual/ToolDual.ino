@@ -59,6 +59,7 @@ uint32_t gpsReadyTime = 0;       // Used for GGA timeout
 #include "PGNs.h"
 #include <NativeEthernet.h>
 #include <NativeEthernetUdp.h>
+//innclude "_Utils.ino"
 
 struct ConfigIP
 {
