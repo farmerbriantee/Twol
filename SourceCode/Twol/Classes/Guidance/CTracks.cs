@@ -434,7 +434,7 @@ namespace Twol
                         if (currentRefTrack.curvePts == null || currentRefTrack.curvePts.Count == 0) return;
 
                         GL.Enable(EnableCap.LineStipple);
-                        GL.LineStipple(4, 0xFF00);
+                        GL.LineStipple(8, 0x0F00);
                         GL.LineWidth(Settings.User.setDisplay_lineWidth * 2);
                         GL.Color3(0.96, 0.2f, 0.2f);
                         currentRefTrack.curvePts.DrawPolygonFifths(PrimitiveType.LineStrip);
