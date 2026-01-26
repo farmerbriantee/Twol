@@ -74,11 +74,17 @@
             this.label19 = new System.Windows.Forms.Label();
             this.lblLookAheadMult = new System.Windows.Forms.Label();
             this.tabPPAdv = new System.Windows.Forms.TabPage();
+            this.hsbarPassiveIntegralGain = new System.Windows.Forms.HScrollBar();
+            this.hsbarPassiveCurvature = new System.Windows.Forms.HScrollBar();
+            this.lblPassiveIntegralGain = new System.Windows.Forms.Label();
             this.label51 = new System.Windows.Forms.Label();
             this.label54 = new System.Windows.Forms.Label();
             this.label49 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.nudDeadZoneDelay = new Twol.NudlessNumericUpDown();
             this.nudDeadzoneWidth = new Twol.NudlessNumericUpDown();
+            this.lblCurvatureGain = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblPWMDisplay = new System.Windows.Forms.Label();
@@ -99,13 +105,7 @@
             this.nudNudge = new Twol.NudlessNumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
             this.tabPassive = new System.Windows.Forms.TabPage();
-            this.lblPassiveIntegralGain = new System.Windows.Forms.Label();
-            this.hsbarPassiveIntegralGain = new System.Windows.Forms.HScrollBar();
             this.label4 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.lblCurvatureGain = new System.Windows.Forms.Label();
-            this.hsbarPassiveCurvature = new System.Windows.Forms.HScrollBar();
-            this.label6 = new System.Windows.Forms.Label();
             this.cboxIsPassiveSteering = new System.Windows.Forms.CheckBox();
             this.tabSetup = new System.Windows.Forms.TabPage();
             this.cboxIsRecordToolLine = new System.Windows.Forms.CheckBox();
@@ -694,11 +694,17 @@
             // tabPPAdv
             // 
             this.tabPPAdv.BackColor = System.Drawing.Color.Gainsboro;
+            this.tabPPAdv.Controls.Add(this.hsbarPassiveIntegralGain);
+            this.tabPPAdv.Controls.Add(this.hsbarPassiveCurvature);
+            this.tabPPAdv.Controls.Add(this.lblPassiveIntegralGain);
             this.tabPPAdv.Controls.Add(this.label51);
             this.tabPPAdv.Controls.Add(this.label54);
             this.tabPPAdv.Controls.Add(this.label49);
+            this.tabPPAdv.Controls.Add(this.label7);
             this.tabPPAdv.Controls.Add(this.nudDeadZoneDelay);
             this.tabPPAdv.Controls.Add(this.nudDeadzoneWidth);
+            this.tabPPAdv.Controls.Add(this.lblCurvatureGain);
+            this.tabPPAdv.Controls.Add(this.label6);
             this.tabPPAdv.ImageIndex = 2;
             this.tabPPAdv.Location = new System.Drawing.Point(4, 52);
             this.tabPPAdv.Name = "tabPPAdv";
@@ -706,11 +712,44 @@
             this.tabPPAdv.Size = new System.Drawing.Size(365, 387);
             this.tabPPAdv.TabIndex = 17;
             // 
+            // hsbarPassiveIntegralGain
+            // 
+            this.hsbarPassiveIntegralGain.LargeChange = 1;
+            this.hsbarPassiveIntegralGain.Location = new System.Drawing.Point(51, 313);
+            this.hsbarPassiveIntegralGain.Maximum = 25;
+            this.hsbarPassiveIntegralGain.Name = "hsbarPassiveIntegralGain";
+            this.hsbarPassiveIntegralGain.Size = new System.Drawing.Size(308, 40);
+            this.hsbarPassiveIntegralGain.TabIndex = 563;
+            this.hsbarPassiveIntegralGain.Value = 4;
+            this.hsbarPassiveIntegralGain.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hsbarPassiveIntegralGain_Scroll);
+            // 
+            // hsbarPassiveCurvature
+            // 
+            this.hsbarPassiveCurvature.LargeChange = 1;
+            this.hsbarPassiveCurvature.Location = new System.Drawing.Point(51, 201);
+            this.hsbarPassiveCurvature.Maximum = 500;
+            this.hsbarPassiveCurvature.Name = "hsbarPassiveCurvature";
+            this.hsbarPassiveCurvature.Size = new System.Drawing.Size(308, 40);
+            this.hsbarPassiveCurvature.TabIndex = 560;
+            this.hsbarPassiveCurvature.Value = 4;
+            this.hsbarPassiveCurvature.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hsbarPassiveCurvature_Scroll);
+            // 
+            // lblPassiveIntegralGain
+            // 
+            this.lblPassiveIntegralGain.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPassiveIntegralGain.ForeColor = System.Drawing.Color.Black;
+            this.lblPassiveIntegralGain.Location = new System.Drawing.Point(2, 313);
+            this.lblPassiveIntegralGain.Name = "lblPassiveIntegralGain";
+            this.lblPassiveIntegralGain.Size = new System.Drawing.Size(50, 35);
+            this.lblPassiveIntegralGain.TabIndex = 564;
+            this.lblPassiveIntegralGain.Text = "2.5";
+            this.lblPassiveIntegralGain.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // label51
             // 
             this.label51.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label51.ForeColor = System.Drawing.Color.Black;
-            this.label51.Location = new System.Drawing.Point(20, 30);
+            this.label51.Location = new System.Drawing.Point(20, 5);
             this.label51.Name = "label51";
             this.label51.Size = new System.Drawing.Size(329, 25);
             this.label51.TabIndex = 541;
@@ -723,7 +762,7 @@
             this.label54.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label54.ForeColor = System.Drawing.Color.Black;
             this.label54.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label54.Location = new System.Drawing.Point(203, 112);
+            this.label54.Location = new System.Drawing.Point(203, 87);
             this.label54.Name = "label54";
             this.label54.Size = new System.Drawing.Size(149, 46);
             this.label54.TabIndex = 543;
@@ -736,16 +775,27 @@
             this.label49.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label49.ForeColor = System.Drawing.Color.Black;
             this.label49.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label49.Location = new System.Drawing.Point(53, 112);
+            this.label49.Location = new System.Drawing.Point(53, 87);
             this.label49.Name = "label49";
             this.label49.Size = new System.Drawing.Size(112, 28);
             this.label49.TabIndex = 539;
             this.label49.Text = "XTE";
             this.label49.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
+            // label7
+            // 
+            this.label7.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.Black;
+            this.label7.Location = new System.Drawing.Point(74, 285);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(262, 24);
+            this.label7.TabIndex = 565;
+            this.label7.Text = "Integral  Gain";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // nudDeadZoneDelay
             // 
-            this.nudDeadZoneDelay.Location = new System.Drawing.Point(224, 70);
+            this.nudDeadZoneDelay.Location = new System.Drawing.Point(224, 45);
             this.nudDeadZoneDelay.Maximum = 10D;
             this.nudDeadZoneDelay.Minimum = 1D;
             this.nudDeadZoneDelay.Name = "nudDeadZoneDelay";
@@ -755,7 +805,7 @@
             // 
             // nudDeadzoneWidth
             // 
-            this.nudDeadzoneWidth.Location = new System.Drawing.Point(56, 71);
+            this.nudDeadzoneWidth.Location = new System.Drawing.Point(56, 46);
             this.nudDeadzoneWidth.Maximum = 5D;
             this.nudDeadzoneWidth.Minimum = 0.1D;
             this.nudDeadzoneWidth.Mode = Twol.UnitMode.Small;
@@ -763,6 +813,28 @@
             this.nudDeadzoneWidth.Size = new System.Drawing.Size(107, 36);
             this.nudDeadzoneWidth.TabIndex = 538;
             this.nudDeadzoneWidth.ValueChanged += new System.EventHandler(this.nudDeadzoneWidth_ValueChanged);
+            // 
+            // lblCurvatureGain
+            // 
+            this.lblCurvatureGain.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCurvatureGain.ForeColor = System.Drawing.Color.Black;
+            this.lblCurvatureGain.Location = new System.Drawing.Point(2, 206);
+            this.lblCurvatureGain.Name = "lblCurvatureGain";
+            this.lblCurvatureGain.Size = new System.Drawing.Size(50, 35);
+            this.lblCurvatureGain.TabIndex = 561;
+            this.lblCurvatureGain.Text = "2.5";
+            this.lblCurvatureGain.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label6
+            // 
+            this.label6.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.Black;
+            this.label6.Location = new System.Drawing.Point(74, 173);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(262, 24);
+            this.label6.TabIndex = 562;
+            this.label6.Text = "Curvature Gain";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // imageList1
             // 
@@ -875,7 +947,7 @@
             "2",
             "3",
             "4"});
-            this.cboxPassesPerReference.Location = new System.Drawing.Point(87, 100);
+            this.cboxPassesPerReference.Location = new System.Drawing.Point(87, 94);
             this.cboxPassesPerReference.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.cboxPassesPerReference.MaxDropDownItems = 5;
             this.cboxPassesPerReference.Name = "cboxPassesPerReference";
@@ -887,7 +959,7 @@
             // 
             this.label12.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.Color.Firebrick;
-            this.label12.Location = new System.Drawing.Point(65, 161);
+            this.label12.Location = new System.Drawing.Point(65, 150);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(143, 23);
             this.label12.TabIndex = 601;
@@ -909,7 +981,7 @@
             // 
             this.label14.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label14.ForeColor = System.Drawing.Color.Black;
-            this.label14.Location = new System.Drawing.Point(36, 34);
+            this.label14.Location = new System.Drawing.Point(36, 28);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(201, 59);
             this.label14.TabIndex = 600;
@@ -937,7 +1009,7 @@
             // 
             this.label8.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.Black;
-            this.label8.Location = new System.Drawing.Point(306, 214);
+            this.label8.Location = new System.Drawing.Point(306, 200);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(262, 24);
             this.label8.TabIndex = 596;
@@ -954,7 +1026,7 @@
             this.cboxRecordSourceTool.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboxRecordSourceTool.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxRecordSourceTool.ForeColor = System.Drawing.Color.Black;
-            this.cboxRecordSourceTool.Location = new System.Drawing.Point(330, 242);
+            this.cboxRecordSourceTool.Location = new System.Drawing.Point(330, 228);
             this.cboxRecordSourceTool.Name = "cboxRecordSourceTool";
             this.cboxRecordSourceTool.Size = new System.Drawing.Size(215, 64);
             this.cboxRecordSourceTool.TabIndex = 595;
@@ -966,7 +1038,7 @@
             // nudToolGuidanceSpacing
             // 
             this.nudToolGuidanceSpacing.DecimalPlaces = 1;
-            this.nudToolGuidanceSpacing.Location = new System.Drawing.Point(29, 242);
+            this.nudToolGuidanceSpacing.Location = new System.Drawing.Point(29, 228);
             this.nudToolGuidanceSpacing.Maximum = 2000D;
             this.nudToolGuidanceSpacing.Mode = Twol.UnitMode.Small;
             this.nudToolGuidanceSpacing.Name = "nudToolGuidanceSpacing";
@@ -995,7 +1067,7 @@
             // 
             this.label10.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.Black;
-            this.label10.Location = new System.Drawing.Point(36, 198);
+            this.label10.Location = new System.Drawing.Point(36, 184);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(201, 41);
             this.label10.TabIndex = 590;
@@ -1004,7 +1076,7 @@
             // 
             // nudNudge
             // 
-            this.nudNudge.Location = new System.Drawing.Point(366, 94);
+            this.nudNudge.Location = new System.Drawing.Point(366, 88);
             this.nudNudge.Maximum = 500D;
             this.nudNudge.Minimum = -500D;
             this.nudNudge.Mode = Twol.UnitMode.Small;
@@ -1017,7 +1089,7 @@
             // 
             this.label5.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(358, 50);
+            this.label5.Location = new System.Drawing.Point(358, 44);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(158, 41);
             this.label5.TabIndex = 588;
@@ -1027,13 +1099,7 @@
             // tabPassive
             // 
             this.tabPassive.BackColor = System.Drawing.Color.LightGray;
-            this.tabPassive.Controls.Add(this.lblPassiveIntegralGain);
-            this.tabPassive.Controls.Add(this.hsbarPassiveIntegralGain);
             this.tabPassive.Controls.Add(this.label4);
-            this.tabPassive.Controls.Add(this.label7);
-            this.tabPassive.Controls.Add(this.lblCurvatureGain);
-            this.tabPassive.Controls.Add(this.hsbarPassiveCurvature);
-            this.tabPassive.Controls.Add(this.label6);
             this.tabPassive.Controls.Add(this.cboxIsPassiveSteering);
             this.tabPassive.ImageIndex = 3;
             this.tabPassive.Location = new System.Drawing.Point(4, 52);
@@ -1041,28 +1107,6 @@
             this.tabPassive.Size = new System.Drawing.Size(571, 446);
             this.tabPassive.TabIndex = 5;
             this.tabPassive.Enter += new System.EventHandler(this.tabPassive_Enter);
-            // 
-            // lblPassiveIntegralGain
-            // 
-            this.lblPassiveIntegralGain.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPassiveIntegralGain.ForeColor = System.Drawing.Color.Black;
-            this.lblPassiveIntegralGain.Location = new System.Drawing.Point(77, 368);
-            this.lblPassiveIntegralGain.Name = "lblPassiveIntegralGain";
-            this.lblPassiveIntegralGain.Size = new System.Drawing.Size(61, 35);
-            this.lblPassiveIntegralGain.TabIndex = 564;
-            this.lblPassiveIntegralGain.Text = "888";
-            this.lblPassiveIntegralGain.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // hsbarPassiveIntegralGain
-            // 
-            this.hsbarPassiveIntegralGain.LargeChange = 1;
-            this.hsbarPassiveIntegralGain.Location = new System.Drawing.Point(141, 367);
-            this.hsbarPassiveIntegralGain.Maximum = 25;
-            this.hsbarPassiveIntegralGain.Name = "hsbarPassiveIntegralGain";
-            this.hsbarPassiveIntegralGain.Size = new System.Drawing.Size(325, 40);
-            this.hsbarPassiveIntegralGain.TabIndex = 563;
-            this.hsbarPassiveIntegralGain.Value = 4;
-            this.hsbarPassiveIntegralGain.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hsbarPassiveIntegralGain_Scroll);
             // 
             // label4
             // 
@@ -1074,50 +1118,6 @@
             this.label4.TabIndex = 591;
             this.label4.Text = "Passive Mode";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label7
-            // 
-            this.label7.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.Black;
-            this.label7.Location = new System.Drawing.Point(172, 339);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(262, 24);
-            this.label7.TabIndex = 565;
-            this.label7.Text = "Integral  Gain";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblCurvatureGain
-            // 
-            this.lblCurvatureGain.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCurvatureGain.ForeColor = System.Drawing.Color.Black;
-            this.lblCurvatureGain.Location = new System.Drawing.Point(77, 256);
-            this.lblCurvatureGain.Name = "lblCurvatureGain";
-            this.lblCurvatureGain.Size = new System.Drawing.Size(61, 35);
-            this.lblCurvatureGain.TabIndex = 561;
-            this.lblCurvatureGain.Text = "888";
-            this.lblCurvatureGain.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // hsbarPassiveCurvature
-            // 
-            this.hsbarPassiveCurvature.LargeChange = 1;
-            this.hsbarPassiveCurvature.Location = new System.Drawing.Point(141, 255);
-            this.hsbarPassiveCurvature.Maximum = 200;
-            this.hsbarPassiveCurvature.Name = "hsbarPassiveCurvature";
-            this.hsbarPassiveCurvature.Size = new System.Drawing.Size(325, 40);
-            this.hsbarPassiveCurvature.TabIndex = 560;
-            this.hsbarPassiveCurvature.Value = 4;
-            this.hsbarPassiveCurvature.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hsbarPassiveCurvature_Scroll);
-            // 
-            // label6
-            // 
-            this.label6.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.Black;
-            this.label6.Location = new System.Drawing.Point(172, 227);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(262, 24);
-            this.label6.TabIndex = 562;
-            this.label6.Text = "Curvature Gain";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // cboxIsPassiveSteering
             // 
@@ -1379,7 +1379,7 @@
             this.btnRollOffsetUp.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRollOffsetUp.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnRollOffsetUp.Image = global::Twol.Properties.Resources.UpArrow64;
-            this.btnRollOffsetUp.Location = new System.Drawing.Point(294, 254);
+            this.btnRollOffsetUp.Location = new System.Drawing.Point(289, 271);
             this.btnRollOffsetUp.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnRollOffsetUp.Name = "btnRollOffsetUp";
             this.btnRollOffsetUp.Size = new System.Drawing.Size(59, 69);
@@ -1395,7 +1395,7 @@
             this.btnRollOffsetDown.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRollOffsetDown.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnRollOffsetDown.Image = global::Twol.Properties.Resources.DnArrow64;
-            this.btnRollOffsetDown.Location = new System.Drawing.Point(220, 255);
+            this.btnRollOffsetDown.Location = new System.Drawing.Point(217, 271);
             this.btnRollOffsetDown.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnRollOffsetDown.Name = "btnRollOffsetDown";
             this.btnRollOffsetDown.Size = new System.Drawing.Size(59, 69);
@@ -1416,15 +1416,15 @@
             // 
             // lblRollZeroOffset
             // 
-            this.lblRollZeroOffset.AutoSize = true;
             this.lblRollZeroOffset.Font = new System.Drawing.Font("Tahoma", 20.25F);
             this.lblRollZeroOffset.ForeColor = System.Drawing.Color.Black;
             this.lblRollZeroOffset.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblRollZeroOffset.Location = new System.Drawing.Point(211, 353);
+            this.lblRollZeroOffset.Location = new System.Drawing.Point(227, 354);
             this.lblRollZeroOffset.Name = "lblRollZeroOffset";
             this.lblRollZeroOffset.Size = new System.Drawing.Size(100, 33);
             this.lblRollZeroOffset.TabIndex = 529;
             this.lblRollZeroOffset.Text = "label11";
+            this.lblRollZeroOffset.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblZeroRoll
             // 
@@ -1580,7 +1580,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(953, 510);
+            this.ClientSize = new System.Drawing.Size(951, 510);
             this.Controls.Add(this.tabToolSetup);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.tabControl1);
@@ -1605,7 +1605,6 @@
             this.tabPassive.ResumeLayout(false);
             this.tabSetup.ResumeLayout(false);
             this.tabAntenna.ResumeLayout(false);
-            this.tabAntenna.PerformLayout();
             this.ResumeLayout(false);
 
         }

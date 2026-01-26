@@ -330,7 +330,7 @@ namespace Twol
                         else toolDistanceAvg += gain;
                         //toolDistanceAvg += (0.01 * toolDistance);                    
 
-                        mf.lblTest.Text = $" D: {toolDistanceAvg:F5}  Cu: {segAvg:F2}";
+                        mf.lblTest.Text = $" D: {(toolDistanceAvg *100):F2}  Cu: {(segAvg * 100):F2}";
                         if (toolDistanceAvg > 0.5) 
                             toolDistanceAvg = 0.5;
                         if (toolDistanceAvg < -0.5) 

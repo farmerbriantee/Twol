@@ -106,6 +106,13 @@ namespace Twol
             nudDeadzoneWidth.Value = Settings.Tool.setToolSteer.deadzoneWidth;
             nudDeadZoneDelay.Value = Settings.Tool.setToolSteer.deadzoneDelay;
 
+            hsbarPassiveCurvature.Value = (int)(Settings.Tool.setToolSteer.curvatureGain * 10);
+            lblCurvatureGain.Text = Settings.Tool.setToolSteer.curvatureGain.ToString("N1");
+
+            hsbarPassiveIntegralGain.Value = (int)(Settings.Tool.setToolSteer.passiveIntegralGain * 1000);
+            lblPassiveIntegralGain.Text = (Settings.Tool.setToolSteer.passiveIntegralGain * 1000).ToString("N0");
+
+
             //WAS Zero, CPD
 
             //hsbarIntegral_Tool.Value = (int)(Settings.Tool.stanleyIntegralGainAB * 100);
@@ -362,11 +369,6 @@ namespace Twol
         #region Passive
         private void tabPassive_Enter(object sender, EventArgs e)
         {
-            hsbarPassiveCurvature.Value = (int)(Settings.Tool.setToolSteer.curvatureGain * 10);
-            lblCurvatureGain.Text = Settings.Tool.setToolSteer.curvatureGain.ToString("N1");
-
-            hsbarPassiveIntegralGain.Value = (int)(Settings.Tool.setToolSteer.passiveIntegralGain * 1000);
-            lblPassiveIntegralGain.Text = (Settings.Tool.setToolSteer.passiveIntegralGain * 1000).ToString("N0");
         }
 
         private void hsbarPassiveCurvature_Scroll(object sender, ScrollEventArgs e)
