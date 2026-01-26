@@ -91,6 +91,8 @@
 
         public double antennaHeight = 0;
         public double antennaOffset = 0;
+        public double rollZero = 0.0;
+
         public double nudgeGlobal = 0;
         public double toolGuidanceSpacing = 0;
         public int passesPerReference = 0;
@@ -126,6 +128,8 @@
 
             antennaHeight = _setting.antennaHeight;
             antennaOffset = _setting.antennaOffset;
+            rollZero = _setting.antennaOffset;
+
             nudgeGlobal = _setting.nudgeGlobal;
 
             curvatureGain = _setting.curvatureGain;
