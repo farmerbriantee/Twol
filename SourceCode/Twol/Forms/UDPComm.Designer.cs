@@ -669,14 +669,14 @@ namespace Twol
 
                         if (pnTool.isDualGPSConnected)
                         {
-                            pnTool.headingTrueDual += Settings.Vehicle.setGPS_dualHeadingOffset;
+                            pnTool.headingTrueDual += Settings.Tool.setToolSteer.dualHeadingOffset;
                             if (pnTool.headingTrueDual >= 360) pnTool.headingTrueDual -= 360;
                             else if (pnTool.headingTrueDual < 0) pnTool.headingTrueDual += 360;
 
                             double rollK = pnTool.rollDual;
-                            if (Settings.Vehicle.setIMU_invertRoll) rollK *= -1;
-                            rollK -= Settings.Vehicle.setIMU_rollZero;
-                            ahrsTool.imuRoll = ahrsTool.imuRoll * Settings.Vehicle.setIMU_rollFilter + rollK * (1 - Settings.Vehicle.setIMU_rollFilter);
+                            if (Settings.Tool.setToolSteer.invertRoll) rollK *= -1;
+                            rollK -= Settings.Tool.setToolSteer.rollZero;
+                            ahrsTool.imuRoll = rollK;
                         }
                         else
                         {
@@ -684,10 +684,10 @@ namespace Twol
                             ahrsTool.imuHeading *= 0.1;
 
                             double rollK = pnTool.imuRoll;
-                            if (Settings.Vehicle.setIMU_invertRoll) rollK *= -0.1;
+                            if (Settings.Tool.setToolSteer.invertRoll) rollK *= -0.1;
                             else rollK *= 0.1;
-                            rollK -= Settings.Vehicle.setIMU_rollZero;
-                            ahrsTool.imuRoll = ahrsTool.imuRoll * Settings.Vehicle.setIMU_rollFilter + rollK * (1 - Settings.Vehicle.setIMU_rollFilter);
+                            rollK -= Settings.Tool.setToolSteer.rollZero;
+                            ahrsTool.imuRoll = rollK;
                         }
 
 

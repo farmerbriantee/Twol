@@ -91,7 +91,10 @@
 
         public double antennaHeight = 0;
         public double antennaOffset = 0;
+        public double dualHeadingOffset = 0;
+
         public double rollZero = 0.0;
+        public bool invertRoll = false;
 
         public double nudgeGlobal = 0;
         public double toolGuidanceSpacing = 0;
@@ -99,6 +102,9 @@
 
         public double curvatureGain = 5.0;
         public double passiveIntegralGain = 0.005;
+
+        public double deadzoneWidth = 0.0;
+        public int deadzoneDelay = 3;
 
         public byte manualSteerPWM = 125;
         public int manualSteerSeconds = 2;
@@ -128,12 +134,17 @@
 
             antennaHeight = _setting.antennaHeight;
             antennaOffset = _setting.antennaOffset;
+            dualHeadingOffset = _setting.dualHeadingOffset;
+
             rollZero = _setting.antennaOffset;
+            invertRoll = _setting.invertRoll;
 
             nudgeGlobal = _setting.nudgeGlobal;
 
             curvatureGain = _setting.curvatureGain;
             passiveIntegralGain = _setting.passiveIntegralGain;
+            deadzoneWidth = _setting.deadzoneWidth;
+            deadzoneDelay = _setting.deadzoneDelay;
 
             manualSteerPWM = _setting.manualSteerPWM;
             manualSteerSeconds = _setting.manualSteerSeconds;

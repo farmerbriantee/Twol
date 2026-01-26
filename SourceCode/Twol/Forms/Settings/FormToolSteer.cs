@@ -38,8 +38,8 @@ namespace Twol
             //lblIntegral_Tool.Text = ((int)(mf.vehicle.stanleyIntegralGainAB * 100)).ToString();
 
             //nudDeadZoneDistance.Value = (decimal)((double)(Properties.Settings.Default.setAS_deadZoneDistance)/10);
-            nudDeadZoneHeading.Value = Settings.Vehicle.setAS_deadZoneHeading * 0.01;
-            nudDeadZoneDelay.Value = mf.vehicle.deadZoneDelay;
+            nudDeadzoneWidth.Value = Settings.Tool.setToolSteer.deadzoneWidth * 0.01;
+            nudDeadZoneDelay.Value = Settings.Tool.setToolSteer.deadzoneDelay;
 
             if (!mf.IsOnScreen(Location, Size, 1))
             {
@@ -107,6 +107,13 @@ namespace Twol
             {
                 if (Settings.Tool.setToolSteer.passesPerReference % 2 == 0) nudToolGuidanceSpacing.Value = Settings.Tool.setToolSteer.toolGuidanceSpacing * 2.0;
             }
+
+            lblRollZeroOffset.Text = Settings.Tool.setToolSteer.rollZero.ToString("N2");
+            cboxDataInvertRoll.Checked = Settings.Tool.setToolSteer.invertRoll;
+
+            nudDeadzoneWidth.Value = Settings.Tool.setToolSteer.deadzoneWidth;
+            nudDeadZoneDelay.Value = Settings.Tool.setToolSteer.deadzoneDelay;
+
         }
 
         private void FormToolSteer_FormClosing(object sender, FormClosingEventArgs e)
@@ -287,11 +294,13 @@ namespace Twol
         }
 
         // DeadZone
-        private void nudDeadZoneHeading_ValueChanged(object sender, EventArgs e)
+        private void nudDeadzoneWidth_ValueChanged(object sender, EventArgs e)
         {
+            Settings.Tool.setToolSteer.deadzoneWidth = (double)(nudDeadzoneWidth.Value);
         }
         private void nudDeadZoneDelay_ValueChanged(object sender, EventArgs e)
         {
+            Settings.Tool.setToolSteer.deadzoneDelay = (int)(nudDeadZoneDelay.Value);
         }
 
         #endregion
@@ -450,6 +459,41 @@ namespace Twol
         {
             toolSend2 = true;
             toolCounterConfig = 0;
+        }
+
+        private void nudDualHeadingOffset_ValueChanged(object sender, EventArgs e)
+        {
+            Settings.Tool.setToolSteer.dualHeadingOffset = nudDualHeadingOffset.Value;
+
+        }
+
+        private void btnRemoveZeroOffset_Click(object sender, EventArgs e)
+        {
+            Settings.Tool.setToolSteer.rollZero = 0;
+            lblRollZeroOffset.Text = "0.00";
+            Log.EventWriter("Tool Roll Zero Offset Removed");
+
+        }
+
+        private void btnZeroRoll_Click(object sender, EventArgs e)
+        {
+            mf.ahrsTool.imuRoll += Settings.Tool.setToolSteer.rollZero;
+            Settings.Tool.setToolSteer.rollZero = mf.ahrsTool.imuRoll;
+            lblRollZeroOffset.Text = Settings.Tool.setToolSteer.rollZero.ToString("N2");
+            Log.EventWriter("Roll Zeroed with " + Settings.Tool.setToolSteer.rollZero.ToString());
+
+        }
+
+        private void btnRollOffsetDown_Click(object sender, EventArgs e)
+        {
+            Settings.Tool.setToolSteer.rollZero -= 0.1;
+            lblRollZeroOffset.Text = Settings.Tool.setToolSteer.rollZero.ToString("N2");
+        }
+
+        private void btnRollOffsetUp_Click(object sender, EventArgs e)
+        {
+            Settings.Tool.setToolSteer.rollZero += 0.1;
+            lblRollZeroOffset.Text = Settings.Tool.setToolSteer.rollZero.ToString("N2");
         }
 
         private void cboxInvertSteer_Tool_Click(object sender, EventArgs e)
