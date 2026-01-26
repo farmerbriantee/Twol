@@ -32,14 +32,6 @@ namespace Twol
         private void FormToolSteer_Load(object sender, EventArgs e)
         {
             Location = Settings.User.setWindow_steerSettingsLocation;
-            //WAS Zero, CPD
-
-            //hsbarIntegral_Tool.Value = (int)(Settings.Tool.stanleyIntegralGainAB * 100);
-            //lblIntegral_Tool.Text = ((int)(mf.vehicle.stanleyIntegralGainAB * 100)).ToString();
-
-            //nudDeadZoneDistance.Value = (decimal)((double)(Properties.Settings.Default.setAS_deadZoneDistance)/10);
-            nudDeadzoneWidth.Value = Settings.Tool.setToolSteer.deadzoneWidth * 0.01;
-            nudDeadZoneDelay.Value = Settings.Tool.setToolSteer.deadzoneDelay;
 
             if (!mf.IsOnScreen(Location, Size, 1))
             {
@@ -114,6 +106,10 @@ namespace Twol
             nudDeadzoneWidth.Value = Settings.Tool.setToolSteer.deadzoneWidth;
             nudDeadZoneDelay.Value = Settings.Tool.setToolSteer.deadzoneDelay;
 
+            //WAS Zero, CPD
+
+            //hsbarIntegral_Tool.Value = (int)(Settings.Tool.stanleyIntegralGainAB * 100);
+            //lblIntegral_Tool.Text = ((int)(mf.vehicle.stanleyIntegralGainAB * 100)).ToString();
         }
 
         private void FormToolSteer_FormClosing(object sender, FormClosingEventArgs e)

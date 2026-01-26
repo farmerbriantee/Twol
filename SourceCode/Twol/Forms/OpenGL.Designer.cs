@@ -567,22 +567,6 @@ namespace Twol
 
                     if (camera.camSetDistance > -550)
                     {
-                        //Draw Tool antenna
-                        if (Settings.Tool.setToolSteer.isGPSToolActive)
-                        {
-                            GL.PointSize(16);
-                            GL.Begin(PrimitiveType.Points);
-                            GL.Color3(0.0, 0.0, 0.0);
-                            GL.Vertex2(pnTool.fix.easting, pnTool.fix.northing);
-                            GL.End();
-
-                            GL.PointSize(10);
-                            GL.Begin(PrimitiveType.Points);
-                            GL.Color3(0.20, 0.78, 0.98);
-                            GL.Vertex2(pnTool.fix.easting, pnTool.fix.northing);
-                            GL.End();
-                        }
-
                         if (!Settings.Vehicle.setVehicle_isStanleyUsed && trks.currentGuidanceTrack.Count > 1)
                         {
                             GL.PointSize(16);
@@ -1770,6 +1754,12 @@ namespace Twol
             {
                 string head = Math.Round(ahrs.imuRoll, 1).ToString();
                 font.DrawText((int)(((head.Length) * -9)), -45, head, 1.2);
+            }
+
+            if (Settings.Tool.setToolSteer.isGPSToolActive )
+            {
+                string head = Math.Round(ahrsTool.imuRoll, 1).ToString();
+                font.DrawText((int)(((head.Length) * -9)), -85, head, 1.2);
             }
 
             GL.PopMatrix();
