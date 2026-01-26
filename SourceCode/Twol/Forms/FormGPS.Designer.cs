@@ -219,6 +219,7 @@ namespace Twol
             this.btnMachine = new System.Windows.Forms.Button();
             this.btnIMU = new System.Windows.Forms.Button();
             this.btnFieldStats = new System.Windows.Forms.Button();
+            this.lblTest = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStripFlag.SuspendLayout();
             this.statusStripLeft.SuspendLayout();
@@ -3233,12 +3234,26 @@ namespace Twol
             this.btnFieldStats.Visible = false;
             this.btnFieldStats.Click += new System.EventHandler(this.btnFieldStats_Click);
             // 
+            // lblTest
+            // 
+            this.lblTest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblTest.AutoSize = true;
+            this.lblTest.BackColor = System.Drawing.Color.Transparent;
+            this.lblTest.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTest.Location = new System.Drawing.Point(382, 4);
+            this.lblTest.Name = "lblTest";
+            this.lblTest.Size = new System.Drawing.Size(87, 19);
+            this.lblTest.TabIndex = 549;
+            this.lblTest.Text = "Fix       sec";
+            this.lblTest.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // FormGPS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(1277, 847);
+            this.Controls.Add(this.lblTest);
             this.Controls.Add(this.tlpNozzle);
             this.Controls.Add(this.flowLayoutPanelTop);
             this.Controls.Add(this.flp1);
@@ -3485,6 +3500,7 @@ namespace Twol
         private System.Windows.Forms.Button btnToolControl;
         private System.Windows.Forms.ToolStripMenuItem manualToolSteerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem buildToolTracksToolStripMenuItem;
+        public System.Windows.Forms.Label lblTest;
     }
 }
 

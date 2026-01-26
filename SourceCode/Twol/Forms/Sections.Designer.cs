@@ -112,12 +112,13 @@ namespace Twol
         public void SetControlButtonPositions()
         {
             if (controlButtons.Count == 0) return;
-            int top = oglMain.Height - (panelSim.Visible ? 100 : 40);
+            int top = Height - (panelSim.Visible ? 170 : 120);
+            if (isPanelBottomHidden) top += 70;
 
-            int oglButtonWidth = oglMain.Width * 3 / 4;
-            int oglCenter = oglMain.Width / 2;
+            int oglButtonWidth = Width * 3 / 5;
+            int oglCenter = Width / 2;
 
-            int buttonMaxWidth = 360, buttonHeight = 35;
+            int buttonMaxWidth = 360, buttonHeight = 25;
             int buttonWidth = oglButtonWidth / controlButtons.Count;
             if (buttonWidth > buttonMaxWidth) buttonWidth = buttonMaxWidth;
 
@@ -135,12 +136,13 @@ namespace Twol
         public void SetControlLabelPositions()
         {
             if (controlLbls.Count == 0) return;
-            int top = oglMain.Height - (panelSim.Visible ? 118 : 58);
+            int top = Height - (panelSim.Visible ? 145 : 95);
+            if (isPanelBottomHidden) top += 70;
 
-            int oglButtonWidth = oglMain.Width * 3 / 4;
-            int oglCenter = oglMain.Width / 2;
+            int oglButtonWidth = Width * 3 / 5;
+            int oglCenter = Width / 2;
 
-            int buttonMaxWidth = 360, buttonHeight = 35;
+            int buttonMaxWidth = 360, buttonHeight = 20;
             int buttonWidth = oglButtonWidth / controlLbls.Count;
             if (buttonWidth > buttonMaxWidth) buttonWidth = buttonMaxWidth;
 
