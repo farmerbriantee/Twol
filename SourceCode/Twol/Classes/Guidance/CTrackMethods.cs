@@ -1,5 +1,4 @@
-﻿using Clipper2Lib;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Twol
@@ -9,10 +8,94 @@ namespace Twol
         public static void FixReferenceTrack(this List<vec3> points, bool isLoop)
         {
             points.SmoothSegments(4);
-            points.GenerateEquidistantPoints(2.1, isLoop);
+            points.CatmullFix(1);
+            points.GenerateEquidistantPoints(2, isLoop);
             points.CalculateAverageHeadings(isLoop);
-            points.ReducePointsByAngle(0.005, 2);
-            points.CalculateAverageHeadings(isLoop);
+            points.ReducePointsByAngle(0.005, 1.5);
+
+            if (!isLoop)
+            {
+                points.AddStartEndPoints(2, 4);
+                points.AddStartEndPoints(20, 10);
+            }
+        }
+
+        public static void CatmullFix(this List<vec3> points, double step = 2)
+        {
+            int cnt = points.Count;
+            if (cnt > 6)
+            {
+                vec3[] arr = new vec3[cnt];
+                points.CopyTo(arr);
+
+                points.Clear();
+
+                cnt = arr.Length;
+                double distance;
+
+                //add the first point of loop - it will be p1
+                points.Add(arr[0]);
+
+                for (int i = 0; i < cnt - 3; i++)
+                {
+                    // add p1
+                    points.Add(arr[i + 1]);
+
+                    distance = glm.Distance(arr[i + 1], arr[i + 2]);
+
+                    if (distance > step)
+                    {
+                        int loopTimes = (int)(distance / step + 1);
+                        for (int j = 1; j < loopTimes; j++)
+                        {
+                            vec3 pos = new vec3(glm.Catmull(j / (double)(loopTimes), arr[i], arr[i + 1], arr[i + 2], arr[i + 3]));
+                            points.Add(pos);
+                        }
+                    }
+                }
+
+                points.Add(arr[cnt - 2]);
+                points.Add(arr[cnt - 1]);
+            }
+        }
+
+        public static void CatmullFix(this List<vec2> points, double step = 2)
+        {
+            int cnt = points.Count;
+            if (cnt > 6)
+            {
+                vec2[] arr = new vec2[cnt];
+                points.CopyTo(arr);
+
+                points.Clear();
+
+                cnt = arr.Length;
+                double distance;
+
+                //add the first point of loop - it will be p1
+                points.Add(arr[0]);
+
+                for (int i = 0; i < cnt - 3; i++)
+                {
+                    // add p1
+                    points.Add(arr[i + 1]);
+
+                    distance = glm.Distance(arr[i + 1], arr[i + 2]);
+
+                    if (distance > step)
+                    {
+                        int loopTimes = (int)(distance / step + 1);
+                        for (int j = 1; j < loopTimes; j++)
+                        {
+                            vec2 pos = new vec2(glm.Catmull(j / (double)(loopTimes), arr[i], arr[i + 1], arr[i + 2], arr[i + 3]));
+                            points.Add(pos);
+                        }
+                    }
+                }
+
+                points.Add(arr[cnt - 2]);
+                points.Add(arr[cnt - 1]);
+            }
         }
 
         public static void CalculateAverageHeadings(this List<vec3> points, bool loop)
@@ -239,6 +322,55 @@ namespace Twol
             }
         }
 
+        public static void ReducePointsByAngle(this List<vec2> points, double angleDelta = 0.005, double spread = 2)
+        {
+            if (points == null || points.Count < 6) return;
+
+            int cont = points.Count;
+            vec2[] smList = new vec2[cont];
+            cont--;
+            points.CopyTo(smList);
+            points.Clear();
+
+            double delta = 0;
+            double check;
+            double dist = 0;
+            vec2 lastPt = new vec2(smList[0]);
+            spread *= spread;
+            spread *= 0.95;
+
+            for (int i = 0; i < cont; i++)
+            {
+
+                if (i < 2 || i > cont - 3)
+                {
+                    points.Add(new vec2(smList[i]));
+                    continue;
+                }
+
+                double heading = Math.Atan2(smList[i - 2].easting - smList[i - 1].easting, smList[i - 2].northing - smList[i - 1].northing);
+                double heading2 = Math.Atan2(smList[i - 1].easting - smList[i].easting, smList[i - 1].northing - smList[i].northing);
+
+                check = heading - heading2;
+                if (check > Math.PI || check < -Math.PI)
+                {
+                    if (check > 0) check -= glm.twoPI;
+                    else check += glm.twoPI;
+                }
+
+                delta += check;
+                dist += glm.DistanceSquared(lastPt, smList[i]);
+                lastPt = smList[i];
+
+                if (Math.Abs(delta) > angleDelta || dist >= spread)
+                {
+                    points.Add(new vec2(smList[i]));
+                    delta = 0;
+                    dist = 0;
+                }
+            }
+        }
+
         public static List<vec2> ReducePointsByAngleToVec2(this List<vec3> points, double angleDelta = 0.02, double spread = 30)
         {
             List<vec2> smList = new List<vec2>();
@@ -338,363 +470,6 @@ namespace Twol
             return result;
         }
 
-        public static List<vec3> ClipperOffsetPolygon(this List<vec3> points, double distAway)
-        {
-            List<vec3> outputPts = new List<vec3>();
-
-            //convert to Clipper path
-            Path64 path = new Path64(points.Count);
-
-            for (int i = 0; i < points.Count; i++)
-            {
-                path.Add(new Point64(points[i].easting * 10000, points[i].northing * 10000));
-            }
-
-            bool isPos = Clipper.IsPositive(path);
-
-            ClipperOffset co = new ClipperOffset();
-            co.ReverseSolution = true;
-            co.AddPath(path, JoinType.Round, EndType.Polygon);
-
-            Paths64 solution = new Paths64();
-
-            co.Execute(distAway * -10000, solution);
-
-            if (solution.Count > 0)
-            {
-                //convert back to vec3 list
-                for (int i = solution[0].Count - 1; i >= 0; i--)
-                {
-                    outputPts.Add(new vec3((solution[0][i].X / 10000.0), (solution[0][i].Y / 10000.0), 0));
-                }
-            }
-
-            //outputPts.GenerateEquidistantPoints(2, true);
-
-            //outputPts.ChaikinsSmooth(2, true);
-
-            outputPts.CalculateAverageHeadings(true);
-
-            outputPts.ReducePointsByAngle(0.005);
-
-            outputPts.CalculateAverageHeadings(true);
-
-            return outputPts;
-        }
-
-        public static List<vec3> ClipperOffsetPolyline(this List<vec3> points, double distAway, vec2 steer)
-        {
-            List<vec3> outPts = new List<vec3>();
-
-            //convert to Clipper path
-            Path64 path = new Path64(points.Count + 2);
-
-            vec3 pt = new vec3(points[0].easting, points[0].northing);
-            pt.easting -= (Math.Sin(points[0].heading) * 3000);
-            pt.northing -= (Math.Cos(points[0].heading) * 3000);
-            path.Add(new Point64(pt.easting * 10000, pt.northing * 10000));
-
-            for (int i = 0; i < points.Count; i++)
-            {
-                path.Add(new Point64(points[i].easting * 10000, points[i].northing * 10000));
-            }
-
-            pt = new vec3(points[points.Count - 1].easting, points[points.Count - 1].northing);
-            pt.easting += (Math.Sin(points[points.Count - 1].heading) * 3000);
-            pt.northing += (Math.Cos(points[points.Count - 1].heading) * 3000);
-            path.Add(new Point64(pt.easting * 10000, pt.northing * 10000));
-
-            bool isPos = Clipper.IsPositive(path);
-
-            ClipperOffset co = new ClipperOffset();
-
-            if (distAway >= 0)
-                co.ReverseSolution = true;
-
-            co.AddPath(path, JoinType.Round, EndType.Round);
-
-            Paths64 solution = new Paths64();
-
-            co.Execute(distAway * 10000, solution);
-
-            if (solution.Count > 0)
-            {
-                //convert back to vec3 list
-                for (int i = solution[0].Count - 1; i >= 0; i--)
-                {
-                    outPts.Add(new vec3((solution[0][i].X / 10000.0), (solution[0][i].Y / 10000.0), 0));
-                }
-            }
-
-
-            double dist;
-            int AA = -1;
-            double minDistA = double.MaxValue;
-            for (int A = 0; A < outPts.Count - 1; A++)
-            {
-                dist = FindDistanceToSegment(steer, outPts[A], outPts[A + 1], out _, out _);
-
-                if (dist < minDistA)
-                {
-                    minDistA = dist;
-                    AA = A;
-                }
-            }
-
-
-            dist = FindDistanceToSegment(steer, outPts[AA], outPts[AA + 1], out _, out _, true);
-
-            //outPts.GenerateEquidistantPoints(4, false);  
-            //outPts.ReducePointsByAngle(0.01, 400);
-            //outPts.CalculateAverageHeadings(false);
-
-            List<vec3> pts = new List<vec3>();
-
-            if (AA == 0) AA = outPts.Count - 1;
-
-            for (int i = AA; i >= 0;)
-            {
-                if (Math.Abs(outPts[i].easting) < 1500 && Math.Abs(outPts[i].northing) < 1500)
-                {
-                    i--;
-                    if (i < 0) i = outPts.Count - 1;
-                }
-                else
-                {
-                    AA = i;
-                    break;
-                }
-            }
-
-            minDistA = 0;
-
-            AA++;
-            if (AA >= outPts.Count) AA = 0;
-
-
-            for (int i = AA; i < outPts.Count - 1;)
-            {
-                if (Math.Abs(outPts[i].easting) < 3000 && Math.Abs(outPts[i].northing) < 3000)
-                {
-                    pts.Add(new vec3(outPts[i]));
-                    i++;
-                    if (i >= outPts.Count) i = 0;
-                }
-                else
-                {
-                    break;
-                }
-            }
-
-            //pts.MinimumSpacingPointRemoval(1);
-
-            //return outPts;
-            pts.GenerateEquidistantPoints(2, false);
-
-            //pts.ChaikinsSmooth(2, false);
-
-            pts.CalculateAverageHeadings(false);
-            pts.ReducePointsByAngle(0.005, 30);
-
-            return pts;
-        }
-
-        public static List<vec3> ClipperOffsetCenterGuidance(this List<vec3> points, double distAway, vec2 lookPos, bool isZeroAway)
-        {
-            List<vec3> outPts = new List<vec3>();
-
-            //convert to Clipper path
-            Path64 path = new Path64(points.Count + 2);
-
-            vec3 pt = new vec3(points[0].easting, points[0].northing);
-            pt.easting -= (Math.Sin(points[0].heading) * 3000);
-            pt.northing -= (Math.Cos(points[0].heading) * 3000);
-            path.Add(new Point64(pt.easting * 10000, pt.northing * 10000));
-
-            for (int i = 0; i < points.Count; i++)
-            {
-                path.Add(new Point64(points[i].easting * 10000, points[i].northing * 10000));
-            }
-
-            pt = new vec3(points[points.Count - 1].easting, points[points.Count - 1].northing);
-            pt.easting += (Math.Sin(points[points.Count - 1].heading) * 3000);
-            pt.northing += (Math.Cos(points[points.Count - 1].heading) * 3000);
-            path.Add(new Point64(pt.easting * 10000, pt.northing * 10000));
-
-            bool isPos = Clipper.IsPositive(path);
-
-            ClipperOffset co = new ClipperOffset();
-
-            if (distAway >= 0)
-                co.ReverseSolution = true;
-
-            co.AddPath(path, JoinType.Round, EndType.Round);
-
-            Paths64 solution = new Paths64();
-
-            co.Execute(distAway * 10000, solution);
-
-            if (solution.Count > 0)
-            {
-                //convert back to vec3 list
-                for (int i = solution[0].Count - 1; i >= 0; i--)
-                {
-                    outPts.Add(new vec3((solution[0][i].X / 10000.0), (solution[0][i].Y / 10000.0), 0));
-                }
-            }
-
-            double dist;
-            int AA = -1;
-            double minDistA = double.MaxValue;
-            for (int A = 0; A < outPts.Count - 1; A++)
-            {
-                dist = FindDistanceToSegment(lookPos, outPts[A], outPts[A + 1], out _, out _);
-
-                if (dist < minDistA)
-                {
-                    minDistA = dist;
-                    AA = A;
-                }
-            }
-
-
-            dist = FindDistanceToSegment(lookPos, outPts[AA], outPts[AA + 1], out _, out _, true);
-
-            //outPts.GenerateEquidistantPoints(4, false);  
-            //outPts.ReducePointsByAngle(0.01, 400);
-            //outPts.CalculateAverageHeadings(false);
-
-            List<vec3> pts = new List<vec3>();
-
-            if (AA == 0) AA = outPts.Count - 1;
-
-            for (int i = AA; i >= 0;)
-            {
-                if (Math.Abs(outPts[i].easting) < 1500 && Math.Abs(outPts[i].northing) < 1500)
-                {
-                    i--;
-                    if (i < 0) i = outPts.Count - 1;
-                }
-                else
-                {
-                    AA = i;
-                    break;
-                }
-            }
-
-            minDistA = 0;
-
-            AA++;
-            if (AA >= outPts.Count) AA = 0;
-
-
-            for (int i = AA; i < outPts.Count - 1;)
-            {
-                if (Math.Abs(outPts[i].easting) < 3000 && Math.Abs(outPts[i].northing) < 3000)
-                {
-                    pts.Add(new vec3(outPts[i]));
-                    i++;
-                    if (i >= outPts.Count) i = 0;
-                }
-                else
-                {
-                    break;
-                }
-            }
-
-            //pts.MinimumSpacingPointRemoval(1);
-            if (isZeroAway)
-            {
-                pts.Reverse();
-                pts.CalculateAverageHeadings(false);
-            }
-
-            //return outPts;
-            pts.GenerateEquidistantPoints(2, false);
-
-            //pts.ChaikinsSmooth(2, false);
-
-            pts.CalculateAverageHeadings(false);
-            pts.ReducePointsByAngle(0.005, 30);
-
-            return pts;
-        }
-
-        public static bool FindClosestSegment(List<vec3> points, bool loop, vec2 point, out int AA, out int BB, int start = 0, int end = int.MaxValue)
-        {
-            AA = -1;
-            BB = -1;
-            double minDistA = double.MaxValue;
-            int A = -1;
-            if (start < 0) start = 0;
-            else A = start - 1;
-
-            for (int B = start; B < points.Count && B < end; A = B++)
-            {
-                if (B == 0)
-                {
-                    if (!loop)
-                        continue;
-                    A = points.Count - 1;
-                }
-
-                double dist = FindDistanceToSegment(point, points[A], points[B], out _, out _);
-
-                if (dist < minDistA)
-                {
-                    minDistA = dist;
-                    AA = A;
-                    BB = B;
-                }
-            }
-            return AA >= 0;
-        }
-
-        public static double FindDistanceToSegment(vec2 pt, vec3 p1, vec3 p2, out vec3 point, out double Time, bool signed = false, bool aa = true, bool bb = true)
-        {
-            double dx = p2.northing - p1.northing;
-            double dy = p2.easting - p1.easting;
-
-            if (Math.Abs(dx) < double.Epsilon && Math.Abs(dy) < double.Epsilon)
-            {
-                Time = 0;
-                dx = pt.northing - p1.northing;
-                dy = pt.easting - p1.easting;
-                point = p1;
-                return Math.Sqrt(dx * dx + dy * dy);
-            }
-
-            Time = ((pt.northing - p1.northing) * dx + (pt.easting - p1.easting) * dy) / (dx * dx + dy * dy);
-
-            if (aa && Time < 0)
-            {
-                point = p1;
-                dx = pt.northing - p1.northing;
-                dy = pt.easting - p1.easting;
-            }
-            else if (bb && Time > 1)
-            {
-                point = p2;
-                dx = pt.northing - p2.northing;
-                dy = pt.easting - p2.easting;
-            }
-            else
-            {
-                point = new vec3((p1.easting + Time * dy), (p1.northing + Time * dx), Math.Atan2(dy, dx));
-                dx = pt.northing - point.northing;
-                dy = pt.easting - point.easting;
-            }
-
-            if (signed)
-            {
-                double sign = Math.Sign((p2.northing - p1.northing) * (pt.easting - p1.easting) - (p2.easting - p1.easting) * (pt.northing - p1.northing));
-
-                return sign * Math.Sqrt(dx * dx + dy * dy);
-            }
-            else
-                return Math.Sqrt(dx * dx + dy * dy);
-        }
-
         public static void AddStartEndPoints(this List<vec3> xList, int ptsToAdd = 10, double distBetweenPoints = 50)
         {
             vec3 start = new vec3(xList[0]);
@@ -789,6 +564,50 @@ namespace Twol
             points.AddRange(arr);
         }
 
+        public static void SmoothSegments(this List<vec2> points, int smPts = 4)
+        {
+            int cnt = points.Count;
+            if (cnt == 0 || smPts <= 0) return;
+
+            vec2[] arr = new vec2[cnt];
+
+            // copy first smPts/2 (or all, if fewer)
+            for (int s = 0; s < smPts / 2 && s < cnt; s++)
+            {
+                arr[s].easting = points[s].easting;
+                arr[s].northing = points[s].northing;
+            }
+
+            // copy last smPts/2
+            for (int s = cnt - (smPts / 2); s < cnt; s++)
+            {
+                arr[s].easting = points[s].easting;
+                arr[s].northing = points[s].northing;
+            }
+
+            // average middle region
+            for (int i = smPts / 2; i < cnt - (smPts / 2); i++)
+            {
+                double sumEast = 0;
+                double sumNorth = 0;
+
+                for (int j = -smPts / 2; j < smPts / 2; j++)
+                {
+                    int idx = i + j;
+                    if (idx < 0 || idx >= cnt) continue;
+
+                    sumEast += points[idx].easting;
+                    sumNorth += points[idx].northing;
+                }
+
+                arr[i].easting = sumEast / smPts;
+                arr[i].northing = sumNorth / smPts;
+            }
+
+            points.Clear();
+            points.AddRange(arr);
+        }
+
         public static double TrackAverageHeading(this List<vec3> points)
         {
             //calculate average heading of line
@@ -829,6 +648,43 @@ namespace Twol
                     // Calculate Q and R points, which are 25% and 75% along the segment
                     nextPoints.Add(new vec3(0.75f * p0.easting + 0.25f * p1.easting, 0.75f * p0.northing + 0.25f * p1.northing, 0));
                     nextPoints.Add(new vec3(0.25f * p0.easting + 0.75f * p1.easting, 0.25f * p0.northing + 0.75f * p1.northing, 0));
+                }
+
+                // Optionally preserve the end point for non-closed polylines
+                if (preserveEndPoints && currentPoints.Count > 1)
+                {
+                    nextPoints.Add(currentPoints[currentPoints.Count - 1]);
+                }
+
+                currentPoints = nextPoints;
+            }
+
+            points?.Clear();
+            points.AddRange(currentPoints);
+        }
+
+        public static void ChaikinsSmooth(this List<vec2> points, int iterations, bool preserveEndPoints = true)
+        {
+            List<vec2> currentPoints = new List<vec2>(points);
+
+            for (int iter = 0; iter < iterations; iter++)
+            {
+                List<vec2> nextPoints = new List<vec2>();
+
+                // Optionally preserve the start point for non-closed polylines
+                if (preserveEndPoints && currentPoints.Count > 0)
+                {
+                    nextPoints.Add(currentPoints[0]);
+                }
+
+                for (int i = 0; i < currentPoints.Count - 1; i++)
+                {
+                    vec2 p0 = currentPoints[i];
+                    vec2 p1 = currentPoints[i + 1];
+
+                    // Calculate Q and R points, which are 25% and 75% along the segment
+                    nextPoints.Add(new vec2(0.75f * p0.easting + 0.25f * p1.easting, 0.75f * p0.northing + 0.25f * p1.northing));
+                    nextPoints.Add(new vec2(0.25f * p0.easting + 0.75f * p1.easting, 0.25f * p0.northing + 0.75f * p1.northing));
                 }
 
                 // Optionally preserve the end point for non-closed polylines

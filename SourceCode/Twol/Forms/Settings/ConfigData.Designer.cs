@@ -198,12 +198,6 @@ namespace Twol
             Log.EventWriter("Roll Zero Offset Removed");
         }
 
-        private void btnResetIMU_Click(object sender, EventArgs e)
-        {
-            mf.ahrs.imuHeading = 99999;
-            mf.ahrs.imuRoll = 88888;
-        }
-
         #endregion
 
         #region Features On Off

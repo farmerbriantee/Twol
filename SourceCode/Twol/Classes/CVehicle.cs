@@ -387,25 +387,25 @@ namespace Twol
                     GL.PointSize(16);
                     GL.Begin(PrimitiveType.Points);
                     GL.Color3(0, 0, 0);
-                    GL.Vertex2(-antennaOffset - 1, antennaPivot);
+                    GL.Vertex2(-antennaOffset - 0.6, antennaPivot);
                     GL.End();
 
                     GL.PointSize(10);
                     GL.Begin(PrimitiveType.Points);
                     GL.Color3(0.20, 0.98, 0.98);
-                    GL.Vertex2(-antennaOffset - 1, antennaPivot);
+                    GL.Vertex2(-antennaOffset - 0.6, antennaPivot);
                     GL.End();
 
                     GL.PointSize(16);
                     GL.Begin(PrimitiveType.Points);
                     GL.Color3(0, 0, 0);
-                    GL.Vertex2(-antennaOffset + 1, antennaPivot);
+                    GL.Vertex2(-antennaOffset + 0.6, antennaPivot);
                     GL.End();
 
                     GL.PointSize(10);
                     GL.Begin(PrimitiveType.Points);
                     GL.Color3(0.20, 0.98, 0.98);
-                    GL.Vertex2(-antennaOffset + 1, antennaPivot);
+                    GL.Vertex2(-antennaOffset + 0.6, antennaPivot);
                     GL.End();
 
 

@@ -1413,7 +1413,7 @@
             this.nudDeadZoneDelay.TabIndex = 542;
             this.nudDeadZoneDelay.ValueChanged += new System.EventHandler(this.nudDeadZoneDelay_ValueChanged);
             // 
-            // nudDeadZoneHeading
+            // nudDeadzoneWidth
             // 
             this.nudDeadZoneHeading.DecimalPlaces = 1;
             this.nudDeadZoneHeading.Location = new System.Drawing.Point(56, 38);

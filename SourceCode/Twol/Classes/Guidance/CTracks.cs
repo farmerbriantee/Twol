@@ -341,88 +341,24 @@ namespace Twol
 
                     if (track.mode != TrackMode.ABLine)
                     {
-                        int cnt = newCurList.Count;
-                        if (cnt > 6)
-                        {
-                            vec3[] arr = new vec3[cnt];
-                            newCurList.CopyTo(arr);
+                        newCurList.SmoothSegments(2);
+                        newCurList.CatmullFix(1);
 
-                            newCurList.Clear();
-
-                            for (int i = 0; i < (arr.Length - 1); i++)
-                            {
-                                arr[i].heading = Math.Atan2(arr[i + 1].easting - arr[i].easting, arr[i + 1].northing - arr[i].northing);
-                                if (arr[i].heading < 0) arr[i].heading += glm.twoPI;
-                            }
-
-                            arr[arr.Length - 1].heading = arr[arr.Length - 2].heading;
-
-                            cnt = arr.Length;
-                            double distance;
-
-                            //add the first point of loop - it will be p1
-                            newCurList.Add(arr[0]);
-
-                            for (int i = 0; i < cnt - 3; i++)
-                            {
-                                // add p1
-                                newCurList.Add(arr[i + 1]);
-
-                                distance = glm.Distance(arr[i + 1], arr[i + 2]);
-
-                                if (distance > step)
-                                {
-                                    int loopTimes = (int)(distance / step + 1);
-                                    for (int j = 1; j < loopTimes; j++)
-                                    {
-                                        vec3 pos = new vec3(glm.Catmull(j / (double)(loopTimes), arr[i], arr[i + 1], arr[i + 2], arr[i + 3]));
-                                        newCurList.Add(pos);
-                                    }
-                                }
-                            }
-
-                            newCurList.Add(arr[cnt - 2]);
-                            newCurList.Add(arr[cnt - 1]);
-                        }
-
-                        //designPtsList.ChaikinsSmooth(4, true);
-                        newCurList.SmoothSegments(4);
-                        //newCurList.ChaikinsSmooth(1, loops);
-                        //newCurList.MinimumSpacingPointRemoval();
                         if (Settings.Tool.setToolSteer.isPassiveSteering)
                         {
-                            newCurList.GenerateEquidistantPoints(1.1, loops);
+                            newCurList.GenerateEquidistantPoints(0.95, loops);
                             newCurList.CalculateAverageHeadings(loops);
-                            newCurList.ReducePointsByAngle(0.005, 20);
-
+                            newCurList.ReducePointsByAngle(0.005, 5);
                         }
                         else
                         {
-                            newCurList.GenerateEquidistantPoints(1.5, loops);
+                            newCurList.GenerateEquidistantPoints(1.8, loops);
                             newCurList.CalculateAverageHeadings(loops);
-                            newCurList.ReducePointsByAngle(0.01, 20);
+                            newCurList.ReducePointsByAngle(0.01, 40);
                         }
 
                         if (track.mode != TrackMode.Polygon)
                             newCurList.AddStartEndPoints(2, 1000);
-                    }
-
-
-                    //else
-                    {
-
-                        //newCurList = track.curvePts.OffsetLine(distAway, step, false);
-
-                        //newCurList = track.curvePts.ClipperOffsetPolygon(distAway);
-
-
-                        //newCurList.ChaikinsSmooth(3, true);
-
-                        //newCurList.GenerateEquidistantPoints(0.5, track.mode == TrackMode.Polygon);
-
-                        //newCurList.CalculateAverageHeadings(false);
-
-                        //newCurList.ReducePointsByAngle();
                     }
                 }
             }
@@ -481,7 +417,7 @@ namespace Twol
                 if (gArr != null && gArr.Count != 0)
                 {
                     GL.LineWidth(1);
-                    GL.PointSize(4);
+                    //GL.PointSize(4);
                     GL.Color3(0.95f, 0.5f, 0.5f);
 
                     for (int i = 0; i < gArr.Count; i++)
@@ -497,9 +433,12 @@ namespace Twol
                     {
                         if (currentRefTrack.curvePts == null || currentRefTrack.curvePts.Count == 0) return;
 
+                        GL.Enable(EnableCap.LineStipple);
+                        GL.LineStipple(8, 0x0F00);
                         GL.LineWidth(Settings.User.setDisplay_lineWidth * 2);
                         GL.Color3(0.96, 0.2f, 0.2f);
                         currentRefTrack.curvePts.DrawPolygonFifths(PrimitiveType.LineStrip);
+                        GL.Disable(EnableCap.LineStipple);
 
                         if (mf.font.isFontOn)
                         {
@@ -579,7 +518,6 @@ namespace Twol
 
         //    return newGuideLL;
         //}
-
 
         public void DrawNewABLine()
         {

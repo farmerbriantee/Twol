@@ -263,8 +263,6 @@ namespace Twol
             public bool setIMU_isHeadingCorrectionFromAutoSteer = false;
             public bool setIMU_isReverseOn = true;
 
-            public int setIMU_pitchZeroX16 = 0;
-
             public double setIMU_fusionWeight2 = 0.06;
             public double setIMU_rollFilter = 0.0;
             public double setIMU_rollZero = 0.0;

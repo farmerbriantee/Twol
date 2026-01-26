@@ -339,6 +339,7 @@ namespace Twol
                     }
                 }
 
+
                 GL.PopMatrix();
             }
             else //gpsTool Position
@@ -444,6 +445,53 @@ namespace Twol
 
                     GL.End();
                 }
+
+                //Draw Tool antenna
+                if (Settings.Tool.setToolSteer.isGPSToolActive)
+                {
+                    if (mf.pnTool.isDualGPSConnected && mf.camera.camSetDistance > -500)
+                    {
+                        GL.PointSize(16);
+                        GL.Begin(PrimitiveType.Points);
+                        GL.Color3(0.0, 0.0, 0.0);
+                        GL.Vertex2(0.6, 0);
+                        GL.End();
+
+                        GL.PointSize(16);
+                        GL.Begin(PrimitiveType.Points);
+                        GL.Color3(0.0, 0.0, 0.0);
+                        GL.Vertex2(-0.6, 0);
+                        GL.End();
+
+                        GL.PointSize(10);
+                        GL.Begin(PrimitiveType.Points);
+                        GL.Color3(0.20, 0.78, 0.98);
+                        GL.Vertex2(0.6, 0);
+                        GL.End();
+
+                        GL.PointSize(10);
+                        GL.Begin(PrimitiveType.Points);
+                        GL.Color3(0.20, 0.78, 0.98);
+                        GL.Vertex2(-0.6, 0);
+                        GL.End();
+                    }
+
+                    else if (mf.camera.camSetDistance > -500)
+                    {
+                        GL.PointSize(16);
+                        GL.Begin(PrimitiveType.Points);
+                        GL.Color3(0.0, 0.0, 0.0);
+                        GL.Vertex2(0, 0);
+                        GL.End();
+
+                        GL.PointSize(10);
+                        GL.Begin(PrimitiveType.Points);
+                        GL.Color3(0.20, 0.78, 0.98);
+                        GL.Vertex2(0, 0);
+                        GL.End();
+                    }
+                }
+
 
                 //tram Dots
                 if (Settings.Tool.isDisplayTramControl && mf.tram.displayMode != 0)

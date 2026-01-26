@@ -130,6 +130,8 @@ namespace Twol
                     //default side assuming built in ABLine Draw - isVisible is used for side to draw
                     gTemp.Add(new CTrk(track));
                     gTemp[gTemp.Count - 1].isVisible = true;
+                    gTemp[gTemp.Count - 1].curvePts.GenerateEquidistantPoints(2, false);
+                    gTemp[gTemp.Count - 1].curvePts.CalculateAverageHeadings(false);
                 }
             }
 
@@ -207,6 +209,8 @@ namespace Twol
 
         private void BuildTram()
         {
+            if (gTemp == null || gTemp.Count == 0) return;
+
             if (gTemp[indx].mode == TrackMode.PolyLine || gTemp[indx].mode == TrackMode.ABLine)
             {
                 BuildCurveTram();
@@ -232,6 +236,11 @@ namespace Twol
 
                 var temp = gTemp[indx].curvePts.OffsetLine(gTemp[indx].isVisible ? -widd : widd, 1.2, gTemp[indx].mode > TrackMode.PolyLine);
 
+                temp.SmoothSegments(2);
+                temp.CatmullFix(1);
+                //temp.ChaikinsSmooth(2);
+                temp.GenerateEquidistantPoints(0.8, false);
+
                 tramArr = new List<vec2>(temp.Count);
 
                 for (int j = 0; j < temp.Count; j++)
@@ -243,6 +252,7 @@ namespace Twol
                     }
                 }
 
+                tramArr.ReducePointsByAngle(0.02, 50);
                 tramList.Add(tramArr);
             }
 
@@ -251,9 +261,13 @@ namespace Twol
                 widd = (Settings.Tool.tram_Width * 0.5) + mf.tram.halfWheelTrack;
                 widd += (Settings.Tool.tram_Width * i);
 
-                var temp = gTemp[indx].curvePts.OffsetLine(gTemp[indx].isVisible ? -widd : widd, 1.2, gTemp[indx].mode > TrackMode.PolyLine);
+                var temp = gTemp[indx].curvePts.OffsetLine(gTemp[indx].isVisible ? -widd : widd, 1, gTemp[indx].mode > TrackMode.PolyLine);
 
                 tramArr = new List<vec2>(temp.Count);
+
+                temp.SmoothSegments(2);
+                temp.CatmullFix(1);
+                temp.GenerateEquidistantPoints(0.8, false);
 
                 for (int j = 0; j < temp.Count; j++)
                 {
@@ -264,6 +278,9 @@ namespace Twol
                     }
                 }
 
+                //tramArr.SmoothSegments(2);
+                //tramArr.ChaikinsSmooth(2);
+                tramArr.ReducePointsByAngle(0.02, 50);
                 tramList.Add(tramArr);
             }
         }
@@ -688,6 +705,14 @@ namespace Twol
                     {
                         mf.tram.tramBndInnerArr.Add(new vec2(output2[i]));
                     }
+
+                    mf.tram.tramBndInnerArr.SmoothSegments(2);
+                    mf.tram.tramBndInnerArr.ChaikinsSmooth(2);
+                    mf.tram.tramBndInnerArr.ReducePointsByAngle(0.02, 50);
+
+                    mf.tram.tramBndOuterArr.SmoothSegments(2);
+                    mf.tram.tramBndOuterArr.ChaikinsSmooth(2);
+                    mf.tram.tramBndOuterArr.ReducePointsByAngle(0.02, 50);
                 }
             }
 

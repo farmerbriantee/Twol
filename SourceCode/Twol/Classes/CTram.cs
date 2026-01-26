@@ -50,30 +50,37 @@ namespace Twol
 
         public void DrawTram()
         {
-            if (mf.camera.camSetDistance > -500) GL.LineWidth(10);
-            else GL.LineWidth(6);
+            #region background black
 
-            GL.Color4(0, 0, 0, alpha);
-
-            if (mf.tram.displayMode == 1 || mf.tram.displayMode == 2)
+            if (mf.camera.camSetDistance > -300)
             {
-                if (tramList.Count > 0)
+                GL.LineWidth(8);
+                GL.Color4(0, 0, 0, alpha);
+
+                if (mf.tram.displayMode == 1 || mf.tram.displayMode == 2)
                 {
-                    for (int i = 0; i < tramList.Count; i++)
+                    if (tramList.Count > 0)
                     {
-                        tramList[i].DrawPolygon(PrimitiveType.LineStrip);
+                        for (int i = 0; i < tramList.Count; i++)
+                        {
+                            tramList[i].DrawPolygon(PrimitiveType.LineStrip);
+                        }
+                    }
+                }
+
+                if (mf.tram.displayMode == 1 || mf.tram.displayMode == 3)
+                {
+                    if (tramBndOuterArr.Count > 0)
+                    {
+                        tramBndOuterArr.DrawPolygon(PrimitiveType.LineStrip);
+                        tramBndInnerArr.DrawPolygon(PrimitiveType.LineStrip);
                     }
                 }
             }
 
-            if (mf.tram.displayMode == 1 || mf.tram.displayMode == 3)
-            {
-                if (tramBndOuterArr.Count > 0)
-                {
-                    tramBndOuterArr.DrawPolygon(PrimitiveType.LineStrip);
-                    tramBndInnerArr.DrawPolygon(PrimitiveType.LineStrip);
-                }
-            }
+            #endregion
+
+            #region Visible Tram
 
             if (mf.camera.camSetDistance > -500) GL.LineWidth(4);
             else GL.LineWidth(2);
@@ -99,6 +106,8 @@ namespace Twol
                     tramBndInnerArr.DrawPolygon(PrimitiveType.LineStrip);
                 }
             }
+
+            #endregion
         }
     }
 }

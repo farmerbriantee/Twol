@@ -11,7 +11,7 @@ namespace Twol
 
         //private int rA, rB;
 
-        public double distanceFromCurrentLine, distanceFromCurrentLinePassiveTool;
+        public double distanceFromCurrentLine, distanceFromCurrentLineLast, distanceFromCurrentLinePassiveTool;
         public double steerAngle;
 
         public vec2 goalPoint = new vec2();
@@ -35,7 +35,7 @@ namespace Twol
         public double pivotDistanceErrorLast, pivotDerivative;
 
         //passive tool steering
-        private double segAvg = 0, toolDistance = 0, toolDistanceAvg = 0;
+        private double segAvg = 0, lastSegCurve, toolDistance = 0, toolDistanceAvg = 0;
 
         //passive tool steer trigger
         public bool isPassiveTriggered = false, isPassiveSteeringFlag = false;
@@ -297,6 +297,13 @@ namespace Twol
                         vec3 p1 = curList[A];
                         vec3 p2 = curList[B];
 
+                        //line crossing or too slow kill the integral
+                        if ((distanceFromCurrentLine > 0 != distanceFromCurrentLineLast > 0) || mf.avgSpeed < 2)
+                        {
+                            toolDistanceAvg = 0;
+                            distanceFromCurrentLineLast = distanceFromCurrentLine;
+                        }
+
                         double d = glm.Distance(p1, p2);
 
                         double theta = p2.heading - p1.heading;
@@ -310,12 +317,15 @@ namespace Twol
                         if (segCurv > 2.0) segCurv = 2.0;
                         if (segCurv < -2.0) segCurv = -2.0;
 
+                        double segDiff = segCurv - lastSegCurve;
+
                         segAvg = 0.9 * segAvg + 0.1 * segCurv;
 
                         double gain = (Math.Abs(toolDistance) - 0.5);
                         gain = 0.5 + gain;
                         gain *= (0.004 + Settings.Tool.setToolSteer.passiveIntegralGain);
 
+                        if (Settings.Tool.setToolSteer.passiveIntegralGain == 0) gain = 0;
                         if (toolDistance < 0) toolDistanceAvg -= gain;
                         else toolDistanceAvg += gain;
                         //toolDistanceAvg += (0.01 * toolDistance);                    

@@ -325,7 +325,6 @@
             this.lblRollFilterPercent = new System.Windows.Forms.Label();
             this.lblRollFilter = new System.Windows.Forms.Label();
             this.hsbarRollFilter = new System.Windows.Forms.HScrollBar();
-            this.btnResetIMU = new System.Windows.Forms.Button();
             this.btnZeroRoll = new System.Windows.Forms.Button();
             this.btnRemoveZeroOffset = new System.Windows.Forms.Button();
             this.cboxDataInvertRoll = new System.Windows.Forms.CheckBox();
@@ -504,6 +503,7 @@
             this.btnOK = new System.Windows.Forms.Button();
             this.label22 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.label10 = new System.Windows.Forms.Label();
             this.panelLeftSideMenu.SuspendLayout();
             this.panelArduinoSubMenu.SuspendLayout();
             this.panelDataSourcesSubMenu.SuspendLayout();
@@ -4668,6 +4668,7 @@
             // tabDRoll
             // 
             this.tabDRoll.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.tabDRoll.Controls.Add(this.label10);
             this.tabDRoll.Controls.Add(this.btnRollOffsetUp);
             this.tabDRoll.Controls.Add(this.btnRollOffsetDown);
             this.tabDRoll.Controls.Add(this.pictureBox9);
@@ -4680,7 +4681,6 @@
             this.tabDRoll.Controls.Add(this.lblRollFilterPercent);
             this.tabDRoll.Controls.Add(this.lblRollFilter);
             this.tabDRoll.Controls.Add(this.hsbarRollFilter);
-            this.tabDRoll.Controls.Add(this.btnResetIMU);
             this.tabDRoll.Controls.Add(this.btnZeroRoll);
             this.tabDRoll.Controls.Add(this.btnRemoveZeroOffset);
             this.tabDRoll.Controls.Add(this.cboxDataInvertRoll);
@@ -4729,7 +4729,7 @@
             this.pictureBox9.BackColor = System.Drawing.Color.White;
             this.pictureBox9.BackgroundImage = global::Twol.Properties.Resources.ConD_RollHelper;
             this.pictureBox9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox9.Location = new System.Drawing.Point(577, 343);
+            this.pictureBox9.Location = new System.Drawing.Point(579, 202);
             this.pictureBox9.Name = "pictureBox9";
             this.pictureBox9.Size = new System.Drawing.Size(154, 217);
             this.pictureBox9.TabIndex = 485;
@@ -4737,8 +4737,9 @@
             // 
             // lblInvertRoll
             // 
+            this.lblInvertRoll.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblInvertRoll.ForeColor = System.Drawing.Color.Black;
-            this.lblInvertRoll.Location = new System.Drawing.Point(584, 182);
+            this.lblInvertRoll.Location = new System.Drawing.Point(584, 27);
             this.lblInvertRoll.Name = "lblInvertRoll";
             this.lblInvertRoll.Size = new System.Drawing.Size(148, 16);
             this.lblInvertRoll.TabIndex = 484;
@@ -4747,6 +4748,7 @@
             // 
             // lblZeroRoll
             // 
+            this.lblZeroRoll.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblZeroRoll.ForeColor = System.Drawing.Color.Black;
             this.lblZeroRoll.Location = new System.Drawing.Point(77, 183);
             this.lblZeroRoll.Name = "lblZeroRoll";
@@ -4757,6 +4759,7 @@
             // 
             // lblRemoveOffset
             // 
+            this.lblRemoveOffset.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRemoveOffset.ForeColor = System.Drawing.Color.Black;
             this.lblRemoveOffset.Location = new System.Drawing.Point(77, 27);
             this.lblRemoveOffset.Name = "lblRemoveOffset";
@@ -4841,24 +4844,6 @@
             this.hsbarRollFilter.Value = 5;
             this.hsbarRollFilter.ValueChanged += new System.EventHandler(this.hsbarRollFilter_ValueChanged);
             // 
-            // btnResetIMU
-            // 
-            this.btnResetIMU.BackColor = System.Drawing.Color.White;
-            this.btnResetIMU.BackgroundImage = global::Twol.Properties.Resources.ConDa_ResetIMU;
-            this.btnResetIMU.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnResetIMU.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnResetIMU.FlatAppearance.CheckedBackColor = System.Drawing.Color.Teal;
-            this.btnResetIMU.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnResetIMU.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnResetIMU.ForeColor = System.Drawing.Color.Black;
-            this.btnResetIMU.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnResetIMU.Location = new System.Drawing.Point(593, 45);
-            this.btnResetIMU.Name = "btnResetIMU";
-            this.btnResetIMU.Size = new System.Drawing.Size(130, 95);
-            this.btnResetIMU.TabIndex = 85;
-            this.btnResetIMU.UseVisualStyleBackColor = false;
-            this.btnResetIMU.Click += new System.EventHandler(this.btnResetIMU_Click);
-            // 
             // btnZeroRoll
             // 
             this.btnZeroRoll.BackColor = System.Drawing.Color.White;
@@ -4903,7 +4888,7 @@
             this.cboxDataInvertRoll.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxDataInvertRoll.ForeColor = System.Drawing.Color.Black;
             this.cboxDataInvertRoll.Image = global::Twol.Properties.Resources.ConDa_InvertRoll;
-            this.cboxDataInvertRoll.Location = new System.Drawing.Point(593, 201);
+            this.cboxDataInvertRoll.Location = new System.Drawing.Point(593, 46);
             this.cboxDataInvertRoll.Name = "cboxDataInvertRoll";
             this.cboxDataInvertRoll.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.cboxDataInvertRoll.Size = new System.Drawing.Size(130, 95);
@@ -7951,6 +7936,17 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // label10
+            // 
+            this.label10.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.Black;
+            this.label10.Location = new System.Drawing.Point(584, 180);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(148, 19);
+            this.label10.TabIndex = 488;
+            this.label10.Text = "Help";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
             // FormConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -8160,7 +8156,6 @@
         private System.Windows.Forms.Label lblToolWidth;
         private System.Windows.Forms.Button btnRemoveZeroOffset;
         private System.Windows.Forms.Label lblRollZeroOffset;
-        private System.Windows.Forms.Button btnResetIMU;
         private NudlessNumericUpDown nudWheelbase;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btnUTurn;
@@ -8523,5 +8518,6 @@
         private System.Windows.Forms.CheckBox cboxFeatureHideContour;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.CheckBox chkDisplayMapping;
+        private System.Windows.Forms.Label label10;
     }
 }
