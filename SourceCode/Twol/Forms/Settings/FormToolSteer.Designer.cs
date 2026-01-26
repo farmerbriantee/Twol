@@ -1057,7 +1057,7 @@
             // 
             this.hsbarPassiveIntegralGain.LargeChange = 1;
             this.hsbarPassiveIntegralGain.Location = new System.Drawing.Point(141, 367);
-            this.hsbarPassiveIntegralGain.Maximum = 10;
+            this.hsbarPassiveIntegralGain.Maximum = 25;
             this.hsbarPassiveIntegralGain.Name = "hsbarPassiveIntegralGain";
             this.hsbarPassiveIntegralGain.Size = new System.Drawing.Size(325, 40);
             this.hsbarPassiveIntegralGain.TabIndex = 563;

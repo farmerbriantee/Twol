@@ -321,23 +321,22 @@ namespace Twol
 
                         segAvg = 0.9 * segAvg + 0.1 * segCurv;
 
-                        //double gain = (Math.Abs(toolDistance) - 0.5);
-                        //gain = 0.5 + gain;
-                        //gain *= (0.004 + Settings.Tool.setToolSteer.passiveIntegralGain);
+                        double gain = (Math.Abs(toolDistance) - 0.5);
+                        gain = 0.5 + gain;
+                        gain *= (0.004 + Settings.Tool.setToolSteer.passiveIntegralGain);
 
-                        //if (Settings.Tool.setToolSteer.passiveIntegralGain == 0) gain = 0;
-                        //if (toolDistance < 0) toolDistanceAvg -= gain;
-                        //else toolDistanceAvg += gain;
-                        ////toolDistanceAvg += (0.01 * toolDistance);    
-                        ///
-                        toolDistanceAvg = toolDistance;
+                        if (Settings.Tool.setToolSteer.passiveIntegralGain == 0) gain = 0;
+                        if (toolDistance < 0) toolDistanceAvg -= gain;
+                        else toolDistanceAvg += gain;
+                        //toolDistanceAvg += (0.01 * toolDistance);                    
 
-                        if (toolDistanceAvg > 0.5) toolDistanceAvg = 0.5;
-                        if (toolDistanceAvg < -0.5) toolDistanceAvg = -0.5;
+                        mf.lblTest.Text = $" D: {toolDistanceAvg:F5}  Cu: {segAvg:F2}";
+                        if (toolDistanceAvg > 0.5) 
+                            toolDistanceAvg = 0.5;
+                        if (toolDistanceAvg < -0.5) 
+                            toolDistanceAvg = -0.5;
 
-                        mf.lblTest.Text = $"D:  {toolDistanceAvg:F3}  Cu: {segAvg:F2}";
-                        
-                        double dist = (segAvg - (toolDistanceAvg*2));
+                        double dist = (segAvg - toolDistanceAvg);
                         if (dist > 2.0) dist = 2.0;
                         if (dist < -2.0) dist = -2.0;
 
@@ -383,7 +382,7 @@ namespace Twol
 
                     if (Settings.Tool.setToolSteer.isPassiveSteering && !isPassiveSteeringFlag && isPassiveTriggered)
                     {
-                        if (Math.Abs(mf.vehicle.modeActualHeadingError) < 2
+                        if (Math.Abs(mf.vehicle.modeActualHeadingError) < 1.5
                             && Math.Abs(distanceFromCurrentLine) < 0.10 && Math.Abs(distanceFromCurrentLinePassiveTool) < 0.20)
                             isPassiveSteeringFlag = true;
                     }
