@@ -77,6 +77,8 @@
             this.label51 = new System.Windows.Forms.Label();
             this.label54 = new System.Windows.Forms.Label();
             this.label49 = new System.Windows.Forms.Label();
+            this.nudDeadZoneDelay = new Twol.NudlessNumericUpDown();
+            this.nudDeadzoneWidth = new Twol.NudlessNumericUpDown();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblPWMDisplay = new System.Windows.Forms.Label();
@@ -91,8 +93,10 @@
             this.cboxIsFollowPivot = new System.Windows.Forms.CheckBox();
             this.label8 = new System.Windows.Forms.Label();
             this.cboxRecordSourceTool = new System.Windows.Forms.CheckBox();
+            this.nudToolGuidanceSpacing = new Twol.NudlessNumericUpDown();
             this.cboxIsFollowCurrent = new System.Windows.Forms.CheckBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.nudNudge = new Twol.NudlessNumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
             this.tabPassive = new System.Windows.Forms.TabPage();
             this.lblPassiveIntegralGain = new System.Windows.Forms.Label();
@@ -130,14 +134,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.btnRemoveZeroOffset = new System.Windows.Forms.Button();
-            this.imageList2 = new System.Windows.Forms.ImageList(this.components);
-            this.nudToolGuidanceSpacing = new Twol.NudlessNumericUpDown();
-            this.nudNudge = new Twol.NudlessNumericUpDown();
             this.nudDualHeadingOffset = new Twol.NudlessNumericUpDown();
             this.nudAntennaHeight_Tool = new Twol.NudlessNumericUpDown();
             this.nudAntennaOffset_Tool = new Twol.NudlessNumericUpDown();
-            this.nudDeadZoneDelay = new Twol.NudlessNumericUpDown();
-            this.nudDeadzoneWidth = new Twol.NudlessNumericUpDown();
+            this.imageList2 = new System.Windows.Forms.ImageList(this.components);
             this.tabControl1.SuspendLayout();
             this.tabGain.SuspendLayout();
             this.tabSteer.SuspendLayout();
@@ -743,13 +743,34 @@
             this.label49.Text = "XTE";
             this.label49.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
+            // nudDeadZoneDelay
+            // 
+            this.nudDeadZoneDelay.Location = new System.Drawing.Point(224, 70);
+            this.nudDeadZoneDelay.Maximum = 10D;
+            this.nudDeadZoneDelay.Minimum = 1D;
+            this.nudDeadZoneDelay.Name = "nudDeadZoneDelay";
+            this.nudDeadZoneDelay.Size = new System.Drawing.Size(107, 36);
+            this.nudDeadZoneDelay.TabIndex = 542;
+            this.nudDeadZoneDelay.ValueChanged += new System.EventHandler(this.nudDeadZoneDelay_ValueChanged);
+            // 
+            // nudDeadzoneWidth
+            // 
+            this.nudDeadzoneWidth.Location = new System.Drawing.Point(56, 71);
+            this.nudDeadzoneWidth.Maximum = 5D;
+            this.nudDeadzoneWidth.Minimum = 0.1D;
+            this.nudDeadzoneWidth.Mode = Twol.UnitMode.Small;
+            this.nudDeadzoneWidth.Name = "nudDeadzoneWidth";
+            this.nudDeadzoneWidth.Size = new System.Drawing.Size(107, 36);
+            this.nudDeadzoneWidth.TabIndex = 538;
+            this.nudDeadzoneWidth.ValueChanged += new System.EventHandler(this.nudDeadzoneWidth_ValueChanged);
+            // 
             // imageList1
             // 
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             this.imageList1.Images.SetKeyName(0, "Sf_PPTab.png");
             this.imageList1.Images.SetKeyName(1, "ST_GainTab.png");
-            this.imageList1.Images.SetKeyName(2, "ST_NerdAdv.png");
+            this.imageList1.Images.SetKeyName(2, "ConS_ImplementHitch.png");
             this.imageList1.Images.SetKeyName(3, "ST_StanleyTab.png");
             this.imageList1.Images.SetKeyName(4, "ST_SteerTab.png");
             // 
@@ -835,11 +856,11 @@
             this.tabActive.Controls.Add(this.label10);
             this.tabActive.Controls.Add(this.nudNudge);
             this.tabActive.Controls.Add(this.label5);
+            this.tabActive.ImageIndex = 2;
             this.tabActive.Location = new System.Drawing.Point(4, 52);
             this.tabActive.Name = "tabActive";
             this.tabActive.Size = new System.Drawing.Size(571, 446);
             this.tabActive.TabIndex = 7;
-            this.tabActive.Text = "Active";
             // 
             // cboxPassesPerReference
             // 
@@ -854,7 +875,7 @@
             "2",
             "3",
             "4"});
-            this.cboxPassesPerReference.Location = new System.Drawing.Point(87, 74);
+            this.cboxPassesPerReference.Location = new System.Drawing.Point(87, 100);
             this.cboxPassesPerReference.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.cboxPassesPerReference.MaxDropDownItems = 5;
             this.cboxPassesPerReference.Name = "cboxPassesPerReference";
@@ -866,7 +887,7 @@
             // 
             this.label12.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.Color.Firebrick;
-            this.label12.Location = new System.Drawing.Point(65, 135);
+            this.label12.Location = new System.Drawing.Point(65, 161);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(143, 23);
             this.label12.TabIndex = 601;
@@ -875,9 +896,9 @@
             // 
             // label1
             // 
-            this.label1.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Tahoma", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(166, 320);
+            this.label1.Location = new System.Drawing.Point(176, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(262, 24);
             this.label1.TabIndex = 590;
@@ -888,7 +909,7 @@
             // 
             this.label14.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label14.ForeColor = System.Drawing.Color.Black;
-            this.label14.Location = new System.Drawing.Point(36, 8);
+            this.label14.Location = new System.Drawing.Point(36, 34);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(201, 59);
             this.label14.TabIndex = 600;
@@ -916,7 +937,7 @@
             // 
             this.label8.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.Black;
-            this.label8.Location = new System.Drawing.Point(306, 188);
+            this.label8.Location = new System.Drawing.Point(306, 214);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(262, 24);
             this.label8.TabIndex = 596;
@@ -933,7 +954,7 @@
             this.cboxRecordSourceTool.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboxRecordSourceTool.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxRecordSourceTool.ForeColor = System.Drawing.Color.Black;
-            this.cboxRecordSourceTool.Location = new System.Drawing.Point(330, 216);
+            this.cboxRecordSourceTool.Location = new System.Drawing.Point(330, 242);
             this.cboxRecordSourceTool.Name = "cboxRecordSourceTool";
             this.cboxRecordSourceTool.Size = new System.Drawing.Size(215, 64);
             this.cboxRecordSourceTool.TabIndex = 595;
@@ -941,6 +962,17 @@
             this.cboxRecordSourceTool.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.cboxRecordSourceTool.UseVisualStyleBackColor = false;
             this.cboxRecordSourceTool.Click += new System.EventHandler(this.cboxRecordSourceTool_Click);
+            // 
+            // nudToolGuidanceSpacing
+            // 
+            this.nudToolGuidanceSpacing.DecimalPlaces = 1;
+            this.nudToolGuidanceSpacing.Location = new System.Drawing.Point(29, 242);
+            this.nudToolGuidanceSpacing.Maximum = 2000D;
+            this.nudToolGuidanceSpacing.Mode = Twol.UnitMode.Small;
+            this.nudToolGuidanceSpacing.Name = "nudToolGuidanceSpacing";
+            this.nudToolGuidanceSpacing.Size = new System.Drawing.Size(215, 64);
+            this.nudToolGuidanceSpacing.TabIndex = 589;
+            this.nudToolGuidanceSpacing.ValueChanged += new System.EventHandler(this.nudToolGuidanceSpacing_ValueChanged);
             // 
             // cboxIsFollowCurrent
             // 
@@ -963,18 +995,29 @@
             // 
             this.label10.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.Black;
-            this.label10.Location = new System.Drawing.Point(36, 172);
+            this.label10.Location = new System.Drawing.Point(36, 198);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(201, 41);
             this.label10.TabIndex = 590;
             this.label10.Text = "Tool Width";
             this.label10.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
+            // nudNudge
+            // 
+            this.nudNudge.Location = new System.Drawing.Point(366, 94);
+            this.nudNudge.Maximum = 500D;
+            this.nudNudge.Minimum = -500D;
+            this.nudNudge.Mode = Twol.UnitMode.Small;
+            this.nudNudge.Name = "nudNudge";
+            this.nudNudge.Size = new System.Drawing.Size(143, 56);
+            this.nudNudge.TabIndex = 587;
+            this.nudNudge.ValueChanged += new System.EventHandler(this.nudNudge_ValueChanged);
+            // 
             // label5
             // 
             this.label5.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(358, 24);
+            this.label5.Location = new System.Drawing.Point(358, 50);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(158, 41);
             this.label5.TabIndex = 588;
@@ -992,11 +1035,11 @@
             this.tabPassive.Controls.Add(this.hsbarPassiveCurvature);
             this.tabPassive.Controls.Add(this.label6);
             this.tabPassive.Controls.Add(this.cboxIsPassiveSteering);
+            this.tabPassive.ImageIndex = 3;
             this.tabPassive.Location = new System.Drawing.Point(4, 52);
             this.tabPassive.Name = "tabPassive";
             this.tabPassive.Size = new System.Drawing.Size(571, 446);
             this.tabPassive.TabIndex = 5;
-            this.tabPassive.Text = "Passive";
             this.tabPassive.Enter += new System.EventHandler(this.tabPassive_Enter);
             // 
             // lblPassiveIntegralGain
@@ -1023,9 +1066,9 @@
             // 
             // label4
             // 
-            this.label4.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Tahoma", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(172, 39);
+            this.label4.Location = new System.Drawing.Point(172, 9);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(262, 24);
             this.label4.TabIndex = 591;
@@ -1492,35 +1535,6 @@
             this.btnRemoveZeroOffset.UseVisualStyleBackColor = false;
             this.btnRemoveZeroOffset.Click += new System.EventHandler(this.btnRemoveZeroOffset_Click);
             // 
-            // imageList2
-            // 
-            this.imageList2.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList2.ImageStream")));
-            this.imageList2.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList2.Images.SetKeyName(0, "ConS_ImplementConfig.png");
-            this.imageList2.Images.SetKeyName(1, "ConS_ImplementAntenna.png");
-            // 
-            // nudToolGuidanceSpacing
-            // 
-            this.nudToolGuidanceSpacing.DecimalPlaces = 1;
-            this.nudToolGuidanceSpacing.Location = new System.Drawing.Point(29, 216);
-            this.nudToolGuidanceSpacing.Maximum = 2000D;
-            this.nudToolGuidanceSpacing.Mode = Twol.UnitMode.Small;
-            this.nudToolGuidanceSpacing.Name = "nudToolGuidanceSpacing";
-            this.nudToolGuidanceSpacing.Size = new System.Drawing.Size(215, 64);
-            this.nudToolGuidanceSpacing.TabIndex = 589;
-            this.nudToolGuidanceSpacing.ValueChanged += new System.EventHandler(this.nudToolGuidanceSpacing_ValueChanged);
-            // 
-            // nudNudge
-            // 
-            this.nudNudge.Location = new System.Drawing.Point(366, 68);
-            this.nudNudge.Maximum = 500D;
-            this.nudNudge.Minimum = -500D;
-            this.nudNudge.Mode = Twol.UnitMode.Small;
-            this.nudNudge.Name = "nudNudge";
-            this.nudNudge.Size = new System.Drawing.Size(143, 56);
-            this.nudNudge.TabIndex = 587;
-            this.nudNudge.ValueChanged += new System.EventHandler(this.nudNudge_ValueChanged);
-            // 
             // nudDualHeadingOffset
             // 
             this.nudDualHeadingOffset.DecimalPlaces = 1;
@@ -1552,26 +1566,14 @@
             this.nudAntennaOffset_Tool.TabIndex = 582;
             this.nudAntennaOffset_Tool.ValueChanged += new System.EventHandler(this.nudAntennaOffset_Tool_ValueChanged);
             // 
-            // nudDeadZoneDelay
+            // imageList2
             // 
-            this.nudDeadZoneDelay.Location = new System.Drawing.Point(224, 70);
-            this.nudDeadZoneDelay.Maximum = 10D;
-            this.nudDeadZoneDelay.Minimum = 1D;
-            this.nudDeadZoneDelay.Name = "nudDeadZoneDelay";
-            this.nudDeadZoneDelay.Size = new System.Drawing.Size(107, 36);
-            this.nudDeadZoneDelay.TabIndex = 542;
-            this.nudDeadZoneDelay.ValueChanged += new System.EventHandler(this.nudDeadZoneDelay_ValueChanged);
-            // 
-            // nudDeadzoneWidth
-            // 
-            this.nudDeadzoneWidth.Location = new System.Drawing.Point(56, 71);
-            this.nudDeadzoneWidth.Maximum = 5D;
-            this.nudDeadzoneWidth.Minimum = 0.1D;
-            this.nudDeadzoneWidth.Mode = Twol.UnitMode.Small;
-            this.nudDeadzoneWidth.Name = "nudDeadzoneWidth";
-            this.nudDeadzoneWidth.Size = new System.Drawing.Size(107, 36);
-            this.nudDeadzoneWidth.TabIndex = 538;
-            this.nudDeadzoneWidth.ValueChanged += new System.EventHandler(this.nudDeadzoneWidth_ValueChanged);
+            this.imageList2.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList2.ImageStream")));
+            this.imageList2.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList2.Images.SetKeyName(0, "ConS_ImplementConfig.png");
+            this.imageList2.Images.SetKeyName(1, "ConS_ImplementAntenna.png");
+            this.imageList2.Images.SetKeyName(2, "ModeActive.png");
+            this.imageList2.Images.SetKeyName(3, "ModePassive.png");
             // 
             // FormToolSteer
             // 
