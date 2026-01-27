@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using Twol.Classes;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
 
 namespace Twol
 {
@@ -234,7 +235,7 @@ namespace Twol
                 widd = (Settings.Tool.tram_Width * 0.5) - mf.tram.halfWheelTrack;
                 widd += (Settings.Tool.tram_Width * i);
 
-                var temp = gTemp[indx].curvePts.OffsetLine(gTemp[indx].isVisible ? -widd : widd, 1.2, gTemp[indx].mode > TrackMode.PolyLine);
+                var temp = gTemp[indx].curvePts.OffsetLine(gTemp[indx].isVisible ? -widd : widd, 1.2, gTemp[indx].mode > TrackMode.PolyLine, false);
 
                 temp.SmoothSegments(2);
                 temp.CatmullFix(1);
@@ -261,7 +262,7 @@ namespace Twol
                 widd = (Settings.Tool.tram_Width * 0.5) + mf.tram.halfWheelTrack;
                 widd += (Settings.Tool.tram_Width * i);
 
-                var temp = gTemp[indx].curvePts.OffsetLine(gTemp[indx].isVisible ? -widd : widd, 1, gTemp[indx].mode > TrackMode.PolyLine);
+                var temp = gTemp[indx].curvePts.OffsetLine(gTemp[indx].isVisible ? -widd : widd, 1, gTemp[indx].mode > TrackMode.PolyLine, false);
 
                 tramArr = new List<vec2>(temp.Count);
 
@@ -692,14 +693,14 @@ namespace Twol
 
                 if (mf.bnd.bndList.Count > 0)
                 {
-                    var output = mf.bnd.bndList[0].fenceLine.OffsetLine(Settings.Tool.tram_Width * 0.5 - mf.tram.halfWheelTrack, 1.2, true);
+                    var output = mf.bnd.bndList[0].fenceLine.OffsetLine(Settings.Tool.tram_Width * 0.5 - mf.tram.halfWheelTrack, 1.2, true, false);
 
                     for (int i = 0; i < output.Count; i++)
                     {
                         mf.tram.tramBndOuterArr.Add(new vec2(output[i]));
                     }
 
-                    var output2 = mf.bnd.bndList[0].fenceLine.OffsetLine(Settings.Tool.tram_Width * 0.5 + mf.tram.halfWheelTrack, 1.2, true);
+                    var output2 = mf.bnd.bndList[0].fenceLine.OffsetLine(Settings.Tool.tram_Width * 0.5 + mf.tram.halfWheelTrack, 1.2, true, false);
 
                     for (int i = 0; i < output2.Count; i++)
                     {

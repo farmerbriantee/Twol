@@ -599,7 +599,7 @@ namespace Twol
 
         private void SetLineDistance()
         {
-            sliceArr = sliceArr.OffsetLine(nudSetDistance.Value, 1, true);
+            sliceArr = sliceArr.OffsetLine(nudSetDistance.Value, 1, true, false);
         }
 
         public List<int> crossings = new List<int>(1);
@@ -622,7 +622,7 @@ namespace Twol
             {
                 double moveDist = nudSetDistance.Value;
 
-                var desList = mf.bnd.bndList[0].fenceLine.OffsetLine(moveDist, 1, true);
+                var desList = mf.bnd.bndList[0].fenceLine.OffsetLine(moveDist, 1, true, false);
 
                 int cnt = desList.Count;
                 if (cnt > 3)

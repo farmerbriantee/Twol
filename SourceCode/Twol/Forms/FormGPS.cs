@@ -868,6 +868,11 @@ namespace Twol
             toolRecordSaveList?.Clear();
         }
 
+        private void nudToolOffset_ValueChanged(object sender, EventArgs e)
+        {
+            sim.toolOffset = (double)nudToolOffset.Value * 0.001;
+        }
+
         private void btnProfiles_Click(object sender, EventArgs e)
         {
             if (RegistrySettings.IOFileName == "Default")

@@ -74,7 +74,7 @@ namespace Twol
             //determine how wide a headland space
             double totalHeadWidth = Settings.Vehicle.set_youTurnDistanceFromBoundary;
 
-            turnLine = fenceLine.OffsetLine(totalHeadWidth, 4, true);
+            turnLine = fenceLine.OffsetLine(totalHeadWidth, 4, true, false);
 
             for (int i = turnLine.Count - 1; i >= 0; i--)
             {

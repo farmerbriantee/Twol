@@ -425,11 +425,27 @@ namespace Twol
             }
         }
 
-        public static List<vec3> OffsetLine(this List<vec3> points, double distance, double minDist, bool loop)
+        public static List<vec3> OffsetLine(this List<vec3> points, double distance, double minDist, bool loop, bool isABLine)
         {
+            var result = new List<vec3>();
+            if (isABLine)
+            {
+                //simple shift of A and B points
+                for (int i = 0; i < points.Count; i++)
+                {
+
+
+                    vec3 pt = new vec3(points[i]);
+                    pt.easting += (Math.Sin(points[i].heading + glm.PIBy2) * distance);
+                    pt.northing += (Math.Cos(points[i].heading + glm.PIBy2) * distance);
+                    pt.heading = points[i].heading;
+                    result.Add(pt);
+                }
+                return result;
+            }
+
             points.CalculateAverageHeadings(loop);
 
-            var result = new List<vec3>();
             //countExit the points from the boundary
             int count = points.Count;
 

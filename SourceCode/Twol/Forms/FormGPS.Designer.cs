@@ -220,6 +220,7 @@ namespace Twol
             this.btnIMU = new System.Windows.Forms.Button();
             this.btnFieldStats = new System.Windows.Forms.Button();
             this.lblTest = new System.Windows.Forms.Label();
+            this.nudToolOffset = new System.Windows.Forms.NumericUpDown();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStripFlag.SuspendLayout();
             this.statusStripLeft.SuspendLayout();
@@ -234,6 +235,7 @@ namespace Twol
             this.tlpNozzle.SuspendLayout();
             this.panel_IO.SuspendLayout();
             this.flowLayoutPanelTop.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudToolOffset)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -1490,6 +1492,7 @@ namespace Twol
             this.lblCurrentField.TabIndex = 534;
             this.lblCurrentField.Text = "Current Field";
             this.lblCurrentField.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.lblCurrentField.Visible = false;
             this.lblCurrentField.Click += new System.EventHandler(this.lblCurrentField_Click);
             // 
             // lblGuidanceLine
@@ -3239,13 +3242,39 @@ namespace Twol
             this.lblTest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTest.AutoSize = true;
             this.lblTest.BackColor = System.Drawing.Color.Transparent;
-            this.lblTest.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTest.Location = new System.Drawing.Point(382, 4);
+            this.lblTest.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTest.Location = new System.Drawing.Point(304, 21);
             this.lblTest.Name = "lblTest";
-            this.lblTest.Size = new System.Drawing.Size(87, 19);
+            this.lblTest.Size = new System.Drawing.Size(106, 22);
             this.lblTest.TabIndex = 549;
             this.lblTest.Text = "Fix       sec";
             this.lblTest.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // nudToolOffset
+            // 
+            this.nudToolOffset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.nudToolOffset.DecimalPlaces = 1;
+            this.nudToolOffset.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudToolOffset.Increment = new decimal(new int[] {
+            2,
+            0,
+            0,
+            65536});
+            this.nudToolOffset.Location = new System.Drawing.Point(218, 15);
+            this.nudToolOffset.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.nudToolOffset.Minimum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            -2147483648});
+            this.nudToolOffset.Name = "nudToolOffset";
+            this.nudToolOffset.Size = new System.Drawing.Size(77, 33);
+            this.nudToolOffset.TabIndex = 550;
+            this.nudToolOffset.ValueChanged += new System.EventHandler(this.nudToolOffset_ValueChanged);
             // 
             // FormGPS
             // 
@@ -3264,6 +3293,7 @@ namespace Twol
             this.Controls.Add(this.panelBottom);
             this.Controls.Add(this.lblFix);
             this.Controls.Add(this.panelLeft);
+            this.Controls.Add(this.nudToolOffset);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.oglMain);
             this.Controls.Add(this.oglZoom);
@@ -3305,6 +3335,7 @@ namespace Twol
             this.panel_IO.ResumeLayout(false);
             this.panel_IO.PerformLayout();
             this.flowLayoutPanelTop.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nudToolOffset)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3501,6 +3532,7 @@ namespace Twol
         private System.Windows.Forms.ToolStripMenuItem manualToolSteerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem buildToolTracksToolStripMenuItem;
         public System.Windows.Forms.Label lblTest;
+        private System.Windows.Forms.NumericUpDown nudToolOffset;
     }
 }
 

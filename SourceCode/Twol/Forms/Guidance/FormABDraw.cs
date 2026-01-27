@@ -398,7 +398,8 @@ namespace Twol
             start = 99999; end = 99999;
 
             //write out the PolyLine Points
-            designPtsList.GenerateEquidistantPoints(50, false);
+            designPtsList.AddStartEndPoints(2, 500);
+
             track.curvePts = designPtsList;
 
 
@@ -461,7 +462,7 @@ namespace Twol
             track.curvePts.Add(new vec3(track.ptB, abHead));
 
             //build the tail extensions
-            track.curvePts.AddStartEndPoints(5, 300);
+            track.curvePts.AddStartEndPoints(2, 500);
 
             //create a name
             track.name = cboxFldOrBnd.Checked ? "A_Fld A+ " : "A_Bnd A+ " + Math.Round(glm.toDegrees(track.heading), 1).ToString(CultureInfo.InvariantCulture) + "\u00B0";
