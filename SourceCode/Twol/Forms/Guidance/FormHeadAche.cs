@@ -410,7 +410,7 @@ namespace Twol
                 double distAway = nudSetDistance.Value;
                 mf.hdl.tracksArr[mf.hdl.idx].moveDistance += distAway;
 
-                var desList = mf.hdl.tracksArr[mf.hdl.idx].trackPts.OffsetLine(distAway, 1, mf.hdl.tracksArr[mf.hdl.idx].mode > TrackMode.PolyLine);
+                var desList = mf.hdl.tracksArr[mf.hdl.idx].trackPts.OffsetLine(distAway, 1, mf.hdl.tracksArr[mf.hdl.idx].mode > TrackMode.PolyLine, false);
 
                 mf.hdl.tracksArr[mf.hdl.idx].trackPts = desList;
 

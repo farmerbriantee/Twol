@@ -256,7 +256,7 @@ namespace Twol
 
             for (int j = 0; j < mf.bnd.bndList.Count; j++)
             {
-                ptList = mf.bnd.bndList[j].fenceLine.OffsetLine(totalHeadWidth, 1, true);
+                ptList = mf.bnd.bndList[j].fenceLine.OffsetLine(totalHeadWidth, 1, true, false);
                 stripList.Add(ptList);
             }
 

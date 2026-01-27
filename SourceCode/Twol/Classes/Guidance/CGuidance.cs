@@ -35,7 +35,7 @@ namespace Twol
         public double pivotDistanceErrorLast, pivotDerivative;
 
         //passive tool steering
-        private double segAvg = 0, lastSegCurve, toolDistance = 0, toolDistanceAvg = 0;
+        private double segAvg = 0, toolDistance = 0, errorIntegral = 0, errorProp = 0;
 
         //passive tool steer trigger
         public bool isPassiveTriggered = false, isPassiveSteeringFlag = false;
@@ -284,25 +284,27 @@ namespace Twol
                                 toolDistance *= -1.0;
                             }
 
-                            if (toolDistance > 0.5) toolDistance = 0.5;
-                            else if (toolDistance < -0.5) toolDistance = -0.5;
+                            //if (toolDistance > 0.5) 
+                            //    toolDistance = 0.5;
+                            //else if (toolDistance < -0.5) 
+                            //    toolDistance = -0.5;
                         }
 
                         else
                         {
                             toolDistance = 0;
-                            toolDistanceAvg = 0;
+                            errorIntegral = 0;
                         }
 
                         vec3 p1 = curList[A];
                         vec3 p2 = curList[B];
 
                         //line crossing or too slow kill the integral
-                        if ((distanceFromCurrentLine > 0 != distanceFromCurrentLineLast > 0) || mf.avgSpeed < 2)
-                        {
-                            toolDistanceAvg = 0;
-                            distanceFromCurrentLineLast = distanceFromCurrentLine;
-                        }
+                        //if ((distanceFromCurrentLine > 0 != distanceFromCurrentLineLast > 0) || mf.avgSpeed < 2)
+                        //{
+                        //    errorIntegral = 0;
+                        //    distanceFromCurrentLineLast = distanceFromCurrentLine;
+                        //}
 
                         double d = glm.Distance(p1, p2);
 
@@ -317,30 +319,41 @@ namespace Twol
                         if (segCurv > 2.0) segCurv = 2.0;
                         if (segCurv < -2.0) segCurv = -2.0;
 
-                        double segDiff = segCurv - lastSegCurve;
-
                         segAvg = 0.9 * segAvg + 0.1 * segCurv;
 
-                        double gain = (Math.Abs(toolDistance) - 0.5);
-                        gain = 0.5 + gain;
+                        errorProp = toolDistance * 0.7;
+
+                        //if (Math.Abs(errorProp) > 0.25) 
+                        //    errorIntegral = 0;
+
+                        double gain = (Math.Abs(toolDistance) - 1);
+                        gain = 1.05 + gain;
                         gain *= (0.004 + Settings.Tool.setToolSteer.passiveIntegralGain);
 
-                        if (Settings.Tool.setToolSteer.passiveIntegralGain == 0) gain = 0;
-                        if (toolDistance < 0) toolDistanceAvg -= gain;
-                        else toolDistanceAvg += gain;
-                        //toolDistanceAvg += (0.01 * toolDistance);                    
+                        if (toolDistance < 0) errorIntegral -= gain;
+                        else errorIntegral += gain;
+                        //errorIntegral += (0.01 * toolDistance);                    
+                        if (Settings.Tool.setToolSteer.passiveIntegralGain == 0) errorIntegral = 0;
 
-                        if (toolDistanceAvg > 0.5) toolDistanceAvg = 0.5;
-                        if (toolDistanceAvg < -0.5) toolDistanceAvg = -0.5;
+                        if (errorIntegral > 1) 
+                            errorIntegral = 1;
+                        if (errorIntegral < -1) 
+                            errorIntegral = -1;
 
-                        double dist = (segAvg - toolDistanceAvg);
+                        double dist = (segAvg - errorIntegral);
+
+
+                        dist -= errorProp;
+
+                        mf.lblTest.Text = $" I: {(errorIntegral *100):F2}  P: {(errorProp * 100):F2}";
+
                         if (dist > 2.0) dist = 2.0;
                         if (dist < -2.0) dist = -2.0;
 
                         //disable passive and wait till tool is close to line again
                         if (Uturn)
                         {
-                            toolDistanceAvg = 0;
+                            errorIntegral = 0;
                             dist = 0;
                             isPassiveSteeringFlag = false;
                         }

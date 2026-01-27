@@ -337,7 +337,7 @@ namespace Twol
                 {
                     double step = 1;
 
-                    newCurList = track.curvePts.OffsetLine(distAway, step, loops);
+                    newCurList = track.curvePts.OffsetLine(distAway, step, loops, track.mode == TrackMode.ABLine);
 
                     if (track.mode != TrackMode.ABLine)
                     {
@@ -357,9 +357,10 @@ namespace Twol
                             newCurList.ReducePointsByAngle(0.01, 40);
                         }
 
-                        if (track.mode != TrackMode.Polygon)
-                            newCurList.AddStartEndPoints(2, 1000);
                     }
+
+                    if (track.mode != TrackMode.Polygon)
+                        newCurList.AddStartEndPoints(2, 1000);
                 }
             }
             catch (Exception e)
@@ -738,7 +739,7 @@ namespace Twol
         {
             isTrackValid = false;
 
-            var curList = track.curvePts.OffsetLine(distAway, 1, track.mode > TrackMode.PolyLine);
+            var curList = track.curvePts.OffsetLine(distAway, 1, track.mode > TrackMode.PolyLine, track.mode == TrackMode.ABLine);
 
             if (track.mode != TrackMode.ABLine)
             {
