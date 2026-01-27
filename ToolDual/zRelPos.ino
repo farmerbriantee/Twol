@@ -44,7 +44,7 @@ void relPosDecode() {
     //must be all ok
     if (!gnssFixOk || !diffSoln || !relPosValid) return;
 
-    if (carrSoln == 2)
+    if (carrSoln >= 1)
     {
         if (baseline == 0) baseline += 0.01; 
         rollDual = (asin(relPosD / baseline)) * -RAD_TO_DEG;
