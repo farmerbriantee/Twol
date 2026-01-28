@@ -35,7 +35,7 @@ namespace Twol
         public double pivotDistanceErrorLast, pivotDerivative;
 
         //passive tool steering
-        private double segAvg = 0, toolDistance = 0, errorIntegral = 0, errorProp = 0;
+        private double segAvg = 0, toolDistance = 0, distAvg = 0, errorIntegral = 0, errorProp = 0;
 
         //passive tool steer trigger
         public bool isPassiveTriggered = false, isPassiveSteeringFlag = false;
@@ -283,13 +283,7 @@ namespace Twol
                             {
                                 toolDistance *= -1.0;
                             }
-
-                            //if (toolDistance > 0.5) 
-                            //    toolDistance = 0.5;
-                            //else if (toolDistance < -0.5) 
-                            //    toolDistance = -0.5;
                         }
-
                         else
                         {
                             toolDistance = 0;
@@ -319,7 +313,7 @@ namespace Twol
                         if (segCurv > 2.0) segCurv = 2.0;
                         if (segCurv < -2.0) segCurv = -2.0;
 
-                        segAvg = 0.9 * segAvg + 0.1 * segCurv;
+                        segAvg = 0.8 * segAvg + 0.2 * segCurv;
 
                         errorProp = toolDistance * 0.7;
 
@@ -341,11 +335,10 @@ namespace Twol
                             errorIntegral = -1;
 
                         double dist = (segAvg - errorIntegral);
-
-
                         dist -= errorProp;
+                        distAvg = 0.7 * distAvg + 0.3 * dist;
 
-                        mf.lblTest.Text = $" I: {(errorIntegral *100):F2}  P: {(errorProp * 100):F2}";
+                        mf.lblTest.Text = $" I: {(errorIntegral *100):F2}  P: {(errorProp * 100):F2}  D: {(distAvg * 100):F2}";
 
                         if (dist > 2.0) dist = 2.0;
                         if (dist < -2.0) dist = -2.0;

@@ -142,7 +142,7 @@ namespace Twol
             int oglButtonWidth = Width * 3 / 5;
             int oglCenter = Width / 2;
 
-            int buttonMaxWidth = 360, buttonHeight = 20;
+            int buttonMaxWidth = 360, buttonHeight = 30;
             int buttonWidth = oglButtonWidth / controlLbls.Count;
             if (buttonWidth > buttonMaxWidth) buttonWidth = buttonMaxWidth;
 
@@ -163,9 +163,6 @@ namespace Twol
             for (int j = 0; j < controlButtons.Count; j++)
             {
                 controlButtons[j].Visible = visible;
-            }
-            for (int j = 0; j < controlLbls.Count; j++)
-            {
                 controlLbls[j].Visible = visible;
             }
         }
