@@ -1054,22 +1054,25 @@ namespace Twol
             }
         }
 
-        private void AddToolLineRecordPoints()
+        private void AddToolLineRecordPoints( )
         {
-            //record contour all the time
-            //Contour Base Track.... At least One section on, turn on if not
-            double toolDistanceSq = glm.DistanceSquared(toolPivotPos, prevToolRecPos);
+            vec3 recPosition;
+            
+            if (Settings.Tool.setToolSteer.isRecordSourceTool) recPosition = new vec3(toolPivotPos.easting, toolPivotPos.northing, toolPivotPos.heading);
+            else recPosition = new vec3(pivotAxlePos.easting, pivotAxlePos.northing, pivotAxlePos.heading);
+
+            double toolDistanceSq = glm.DistanceSquared(recPosition, prevToolRecPos);
 
             if (isJobStarted && toolDistanceSq > 2.0)
             {
                 if (patchCounter != 0)
                 {
                     //keep the line going, everything is on for recording path
-                    if (tRec.isToolRecordOn) tRec.AddPoint(toolPivotPos);
+                    if (tRec.isToolRecordOn) tRec.AddPoint(recPosition);
                     else
                     {
                         tRec.StartToolRecordLine();
-                        tRec.AddPoint(toolPivotPos);
+                        tRec.AddPoint(recPosition);
                     }
                 }
 
@@ -1081,8 +1084,8 @@ namespace Twol
                 }
 
                 //save the north & east as previous
-                prevToolRecPos.northing = toolPivotPos.northing;
-                prevToolRecPos.easting = toolPivotPos.easting;
+                prevToolRecPos.northing = recPosition.northing;
+                prevToolRecPos.easting = recPosition.easting;
             }
         }
 

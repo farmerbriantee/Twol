@@ -10,7 +10,7 @@ namespace Twol
 
         private bool toolSend = false, toolSend2 = false;
         private int counter = 0, toolCounterSettings = 0, toolCounterConfig = 0;
-        private int windowSizeState = 1;
+        private int windowSizeState = 0;
 
         //Form stuff
         public FormToolSteer(Form callingForm)
@@ -19,7 +19,7 @@ namespace Twol
             InitializeComponent();
 
             this.Text = gStr.Get(gs.gsToolSteerConfiguration);
-            this.Width = 970;
+            this.Width = 392;
             this.Height = 550;
 
             label19.Text = gStr.Get(gs.gsSpeedFactor);
@@ -55,11 +55,11 @@ namespace Twol
             cboxIsSteerNotSlide_Tool.Checked = (Settings.Tool.setToolSteer.isSteerNotSlide == 1);
 
             //settings
-            lblPGain_Tool.Text = hsbarPGain_Tool.Value.ToString();
-            lblIntegral_Tool.Text = hsbarIntegral_Tool.Value.ToString();
-            lblMinPWM_Tool.Text = hsbarMinPWM_Tool.Value.ToString();
-            lblHighPWM_Tool.Text = hsbarHighPWM_Tool.Value.ToString();
-            lblAckermann_Tool.Text = hsbarAckermann_Tool.Value.ToString();
+            lblPGain_Tool.Text = (hsbarPGain_Tool.Value * 100 / 254).ToString();
+            lblIntegral_Tool.Text = (hsbarIntegral_Tool.Value * 100 / 254).ToString();
+            lblMinPWM_Tool.Text = (hsbarMinPWM_Tool.Value * 100 / 200).ToString();
+            lblHighPWM_Tool.Text = (hsbarHighPWM_Tool.Value * 100 / 254).ToString();
+            //lblAckermann_Tool.Text = (hsbarAckermann_Tool.Value * 100 / 250).ToString();
             lblZeroWAS_Tool.Text = (hsbarZeroWAS_Tool.Value / (double)(hsbarCPD_Tool.Value)).ToString("N2");
             lblCPD_Tool.Text = hsbarCPD_Tool.Value.ToString();
 
@@ -83,6 +83,7 @@ namespace Twol
             lblManualSecondsOn.Text = hsbarManualSecondsOn.Value.ToString();
 
             cboxRecordSourceTool.Checked = Settings.Tool.setToolSteer.isRecordSourceTool;
+            cboxRecordSourceTool.Text = Settings.Tool.setToolSteer.isRecordSourceTool? "Tool GPS" : " Vehicle GPS";
             nudToolGuidanceSpacing.Value = (Settings.Tool.setToolSteer.toolGuidanceSpacing * 2);
 
             cboxPassesPerReference.SelectedIndexChanged -= cboxPassesPerReference_SelectedIndexChanged;
@@ -107,10 +108,10 @@ namespace Twol
             nudDeadZoneDelay.Value = Settings.Tool.setToolSteer.deadzoneDelay;
 
             hsbarPassiveCurvature.Value = (int)(Settings.Tool.setToolSteer.curvatureGain * 10);
-            lblCurvatureGain.Text = Settings.Tool.setToolSteer.curvatureGain.ToString("N1");
+            lblCurvatureGain.Text = (Settings.Tool.setToolSteer.curvatureGain * 2).ToString("N1");
 
             hsbarPassiveIntegralGain.Value = (int)(Settings.Tool.setToolSteer.passiveIntegralGain * 1000);
-            lblPassiveIntegralGain.Text = (Settings.Tool.setToolSteer.passiveIntegralGain * 1000).ToString("N0");
+            lblPassiveIntegralGain.Text = (Settings.Tool.setToolSteer.passiveIntegralGain * 1000 * 5).ToString("N0");
 
 
             //WAS Zero, CPD
@@ -229,19 +230,26 @@ namespace Twol
         // Gain
         private void hsbarPGain_Tool_Scroll(object sender, ScrollEventArgs e)
         {
-            lblPGain_Tool.Text = e.NewValue.ToString();
+            lblPGain_Tool.Text = (e.NewValue * 100 / 254).ToString();
             toolSend = true;
             toolCounterSettings = 0;
         }
         private void hsbarHighPWM_Tool_Scroll(object sender, ScrollEventArgs e)
         {
-            lblHighPWM_Tool.Text = e.NewValue.ToString();
+            lblHighPWM_Tool.Text = (e.NewValue * 100 / 254).ToString();
             toolSend = true;
             toolCounterSettings = 0;
         }
         private void hsbarMinPWM_Tool_Scroll(object sender, ScrollEventArgs e)
         {
-            lblMinPWM_Tool.Text = e.NewValue.ToString();
+            lblMinPWM_Tool.Text = (e.NewValue * 100 / 200).ToString();
+            toolSend = true;
+            toolCounterSettings = 0;
+        }
+
+        private void hsbarIntegral_Tool_Scroll(object sender, ScrollEventArgs e)
+        {
+            lblIntegral_Tool.Text = (e.NewValue * 100 / 254).ToString();
             toolSend = true;
             toolCounterSettings = 0;
         }
@@ -289,13 +297,6 @@ namespace Twol
             mf.vehicle.goalPointAcquireFactor = hsbarAcquireFactor.Value * 0.01;
             lblAcquireFactor.Text = mf.vehicle.goalPointAcquireFactor.ToString();
         }
-        private void hsbarIntegral_Tool_Scroll(object sender, ScrollEventArgs e)
-        {
-            lblIntegral_Tool.Text = e.NewValue.ToString();
-            toolSend = true;
-            toolCounterSettings = 0;
-        }
-
         // DeadZone
         private void nudDeadzoneWidth_ValueChanged(object sender, EventArgs e)
         {
@@ -375,14 +376,14 @@ namespace Twol
         {
             Settings.Tool.setToolSteer.curvatureGain = ((double)(e.NewValue) * 0.1);
 
-            lblCurvatureGain.Text = Settings.Tool.setToolSteer.curvatureGain.ToString("N1");
+            lblCurvatureGain.Text = (Settings.Tool.setToolSteer.curvatureGain * 2).ToString("N1");
         }
 
         private void hsbarPassiveIntegralGain_Scroll(object sender, ScrollEventArgs e)
         {
             Settings.Tool.setToolSteer.passiveIntegralGain = ((double)(e.NewValue) * 0.001);
 
-            lblPassiveIntegralGain.Text = (Settings.Tool.setToolSteer.passiveIntegralGain * 1000).ToString("N0");
+            lblPassiveIntegralGain.Text = (Settings.Tool.setToolSteer.passiveIntegralGain * 1000 * 4).ToString("N0");
         }
 
         #endregion
@@ -448,6 +449,7 @@ namespace Twol
         private void cboxRecordSourceTool_Click(object sender, EventArgs e)
         {
             Settings.Tool.setToolSteer.isRecordSourceTool = cboxRecordSourceTool.Checked;
+            cboxRecordSourceTool.Text = Settings.Tool.setToolSteer.isRecordSourceTool ? "Tool GPS" : " Vehicle GPS";
         }
 
         #endregion
@@ -492,6 +494,11 @@ namespace Twol
         {
             Settings.Tool.setToolSteer.rollZero += 0.1;
             lblRollZeroOffset.Text = Settings.Tool.setToolSteer.rollZero.ToString("N2");
+        }
+
+        private void tabModes_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void cboxInvertSteer_Tool_Click(object sender, EventArgs e)

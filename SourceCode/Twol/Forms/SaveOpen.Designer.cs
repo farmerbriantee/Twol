@@ -313,6 +313,30 @@ namespace Twol
 
                         pn.SetLocalMetersPerDegree(double.Parse(offs[0], CultureInfo.InvariantCulture), double.Parse(offs[1], CultureInfo.InvariantCulture));
                     }
+
+                    fileAndDirectory = Path.Combine(RegistrySettings.fieldsDirectory, currentFieldDirectory, "Jobs");
+
+                    if (!Directory.Exists(fileAndDirectory))
+                    {
+                        fileAndDirectory = Path.Combine(fileAndDirectory, "A_Field");
+
+                        Directory.CreateDirectory(fileAndDirectory);
+
+                        string fileToCopy = Path.Combine(RegistrySettings.fieldsDirectory, currentFieldDirectory, "Sections.txt");
+                        string destinationDirectory = Path.Combine(fileAndDirectory, "Sections.txt");
+                        if (File.Exists(fileToCopy))
+                            File.Copy(fileToCopy, destinationDirectory);
+
+                        fileToCopy = Path.Combine(RegistrySettings.fieldsDirectory, currentFieldDirectory, "Contour.txt");
+                        destinationDirectory = Path.Combine(fileAndDirectory, "Contour.txt");
+                        if (File.Exists(fileToCopy))
+                            File.Copy(fileToCopy, destinationDirectory);
+
+                        fileToCopy = Path.Combine(RegistrySettings.fieldsDirectory, currentFieldDirectory, "Elevation.txt");
+                        destinationDirectory = Path.Combine(fileAndDirectory, "Elevation.txt");
+                        if (File.Exists(fileToCopy))
+                            File.Copy(fileToCopy, destinationDirectory);
+                    }
                 }
 
                 catch (Exception e)

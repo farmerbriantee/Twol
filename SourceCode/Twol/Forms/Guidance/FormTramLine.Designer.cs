@@ -53,6 +53,7 @@
             this.btnUpStartTram = new System.Windows.Forms.Button();
             this.btnUpTrams = new System.Windows.Forms.Button();
             this.btnResize = new System.Windows.Forms.Button();
+            this.lblWait = new System.Windows.Forms.Label();
             this.tlp1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -107,7 +108,6 @@
             this.tlp1.Controls.Add(this.btnDeleteAllTrams, 1, 2);
             this.tlp1.Controls.Add(this.btnCancelTouch, 0, 3);
             this.tlp1.Controls.Add(this.btnSwapAB, 0, 2);
-            this.tlp1.Controls.Add(this.lblNumPasses, 1, 6);
             this.tlp1.Controls.Add(this.lblStartPass, 1, 5);
             this.tlp1.Controls.Add(this.btnSelectCurveBk, 0, 4);
             this.tlp1.Controls.Add(this.lblCurveSelected, 1, 4);
@@ -120,6 +120,8 @@
             this.tlp1.Controls.Add(this.btnUpStartTram, 2, 5);
             this.tlp1.Controls.Add(this.btnUpTrams, 2, 6);
             this.tlp1.Controls.Add(this.btnResize, 2, 2);
+            this.tlp1.Controls.Add(this.lblNumPasses, 1, 6);
+            this.tlp1.Controls.Add(this.lblWait, 0, 7);
             this.tlp1.Location = new System.Drawing.Point(703, 0);
             this.tlp1.Name = "tlp1";
             this.tlp1.RowCount = 9;
@@ -467,6 +469,19 @@
             this.btnResize.UseVisualStyleBackColor = false;
             this.btnResize.Click += new System.EventHandler(this.btnResize_Click);
             // 
+            // lblWait
+            // 
+            this.lblWait.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblWait.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWait.ForeColor = System.Drawing.Color.OrangeRed;
+            this.lblWait.Location = new System.Drawing.Point(0, 550);
+            this.lblWait.Margin = new System.Windows.Forms.Padding(0);
+            this.lblWait.Name = "lblWait";
+            this.lblWait.Size = new System.Drawing.Size(99, 63);
+            this.lblWait.TabIndex = 585;
+            this.lblWait.Text = "Waiting To Build";
+            this.lblWait.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // FormTramLine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -519,5 +534,6 @@
         private System.Windows.Forms.Button btnResize;
         private System.Windows.Forms.Button btnDnAlpha;
         private System.Windows.Forms.Button btnUpAlpha;
+        private System.Windows.Forms.Label lblWait;
     }
 }
