@@ -1337,7 +1337,6 @@ namespace Twol
             this.btnToolSteerConfig.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnToolSteerConfig.ForeColor = System.Drawing.Color.Black;
             this.btnToolSteerConfig.Image = global::Twol.Properties.Resources.AutoSteerConf;
-            this.btnToolSteerConfig.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnToolSteerConfig.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.btnToolSteerConfig.Location = new System.Drawing.Point(0, 627);
             this.btnToolSteerConfig.Margin = new System.Windows.Forms.Padding(0);
@@ -1345,7 +1344,7 @@ namespace Twol
             this.btnToolSteerConfig.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnToolSteerConfig.Size = new System.Drawing.Size(70, 100);
             this.btnToolSteerConfig.TabIndex = 467;
-            this.btnToolSteerConfig.Text = "12.3";
+            this.btnToolSteerConfig.Text = "---";
             this.btnToolSteerConfig.UseVisualStyleBackColor = false;
             this.btnToolSteerConfig.Click += new System.EventHandler(this.btnToolSteerConfig_Click);
             // 

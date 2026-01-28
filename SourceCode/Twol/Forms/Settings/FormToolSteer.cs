@@ -19,7 +19,7 @@ namespace Twol
             InitializeComponent();
 
             this.Text = gStr.Get(gs.gsToolSteerConfiguration);
-            this.Width = 970;
+            this.Width = 392;
             this.Height = 550;
 
             label19.Text = gStr.Get(gs.gsSpeedFactor);
