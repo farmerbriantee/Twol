@@ -449,17 +449,25 @@ namespace Twol
                 //Draw Tool antenna
                 if (Settings.Tool.setToolSteer.isGPSToolActive)
                 {
-                    if (mf.pnTool.isDualGPSConnected && mf.camera.camSetDistance > -500)
+                    if (mf.tRec.isToolRecordOn && mf.isFlashOnOff)
+                    {
+                        GL.PointSize(20);
+                        GL.Color3(1, 0.3, 0.3);
+                    }
+                    else
                     {
                         GL.PointSize(16);
+                        GL.Color3(0, 0, 0);
+                    }
+
+                    if (mf.pnTool.isDualGPSConnected && mf.camera.camSetDistance > -500)
+                    {
+
                         GL.Begin(PrimitiveType.Points);
-                        GL.Color3(0.0, 0.0, 0.0);
                         GL.Vertex2(0.6, 0);
                         GL.End();
 
-                        GL.PointSize(16);
                         GL.Begin(PrimitiveType.Points);
-                        GL.Color3(0.0, 0.0, 0.0);
                         GL.Vertex2(-0.6, 0);
                         GL.End();
 
@@ -478,9 +486,7 @@ namespace Twol
 
                     else if (mf.camera.camSetDistance > -500)
                     {
-                        GL.PointSize(16);
                         GL.Begin(PrimitiveType.Points);
-                        GL.Color3(0.0, 0.0, 0.0);
                         GL.Vertex2(0, 0);
                         GL.End();
 

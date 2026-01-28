@@ -53,7 +53,7 @@
             this.btnUpStartTram = new System.Windows.Forms.Button();
             this.btnUpTrams = new System.Windows.Forms.Button();
             this.btnResize = new System.Windows.Forms.Button();
-            this.nudNumPasses = new Twol.NudlessNumericUpDown();
+            this.lblWait = new System.Windows.Forms.Label();
             this.tlp1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -120,8 +120,8 @@
             this.tlp1.Controls.Add(this.btnUpStartTram, 2, 5);
             this.tlp1.Controls.Add(this.btnUpTrams, 2, 6);
             this.tlp1.Controls.Add(this.btnResize, 2, 2);
-            this.tlp1.Controls.Add(this.nudNumPasses, 0, 7);
             this.tlp1.Controls.Add(this.lblNumPasses, 1, 6);
+            this.tlp1.Controls.Add(this.lblWait, 0, 7);
             this.tlp1.Location = new System.Drawing.Point(703, 0);
             this.tlp1.Name = "tlp1";
             this.tlp1.RowCount = 9;
@@ -469,16 +469,18 @@
             this.btnResize.UseVisualStyleBackColor = false;
             this.btnResize.Click += new System.EventHandler(this.btnResize_Click);
             // 
-            // nudNumPasses
+            // lblWait
             // 
-            this.nudNumPasses.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.nudNumPasses.DecimalPlaces = 1;
-            this.nudNumPasses.Location = new System.Drawing.Point(3, 555);
-            this.nudNumPasses.Maximum = 50D;
-            this.nudNumPasses.Minimum = 1D;
-            this.nudNumPasses.Name = "nudNumPasses";
-            this.nudNumPasses.Size = new System.Drawing.Size(93, 52);
-            this.nudNumPasses.TabIndex = 585;
+            this.lblWait.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblWait.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWait.ForeColor = System.Drawing.Color.OrangeRed;
+            this.lblWait.Location = new System.Drawing.Point(0, 550);
+            this.lblWait.Margin = new System.Windows.Forms.Padding(0);
+            this.lblWait.Name = "lblWait";
+            this.lblWait.Size = new System.Drawing.Size(99, 63);
+            this.lblWait.TabIndex = 585;
+            this.lblWait.Text = "Waiting To Build";
+            this.lblWait.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // FormTramLine
             // 
@@ -532,6 +534,6 @@
         private System.Windows.Forms.Button btnResize;
         private System.Windows.Forms.Button btnDnAlpha;
         private System.Windows.Forms.Button btnUpAlpha;
-        private NudlessNumericUpDown nudNumPasses;
+        private System.Windows.Forms.Label lblWait;
     }
 }

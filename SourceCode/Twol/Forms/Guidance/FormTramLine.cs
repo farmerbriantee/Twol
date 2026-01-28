@@ -111,6 +111,11 @@ namespace Twol
                 mf.tram.displayMode = 0;
             }
 
+            for (int i = 0; i < mf.tram.tramList.Count; i++)
+            {
+                mf.tram.tramList[i].ReducePointsByAngle(0.02, 200);
+            }
+
             mf.FileSaveTram();
             mf.PanelUpdateRightAndBottom();
             mf.FixTramModeButton();
@@ -147,19 +152,20 @@ namespace Twol
                 indx = 0;
             }
 
-            for (indx = 0; indx < gTemp.Count; indx++)
-            {
-                BuildTram();
-                if (tramList[0].Count == 0)
-                {
-                    gTemp[indx].isVisible = !gTemp[indx].isVisible;
-                    tramList.Clear();
-                    tramArr.Clear();
-                }
-            }
+            //for (indx = 0; indx < gTemp.Count; indx++)
+            //{
+            //    BuildTram();
+            //    if (tramList[0].Count == 0)
+            //    {
+            //        gTemp[indx].isVisible = !gTemp[indx].isVisible;
+            //        tramList.Clear();
+            //        tramArr.Clear();
+            //    }
+            //}
 
             indx = 0;
             FixLabelsCurve();
+            isBuildTram = true;
             BuildTram();
         }
 
@@ -208,13 +214,17 @@ namespace Twol
             tramArr?.Clear();
         }
 
+        bool isBuildTram = false;
+        int buildTramCounter = 0;
+
         private void BuildTram()
         {
             if (gTemp == null || gTemp.Count == 0) return;
 
             if (gTemp[indx].mode == TrackMode.PolyLine || gTemp[indx].mode == TrackMode.ABLine)
             {
-                BuildCurveTram();
+                isBuildTram = true;
+                buildTramCounter = 1;
             }
             else
             {
@@ -253,7 +263,7 @@ namespace Twol
                     }
                 }
 
-                tramArr.ReducePointsByAngle(0.02, 50);
+                //tramArr.ReducePointsByAngle(0.02, 50);
                 tramList.Add(tramArr);
             }
 
@@ -281,7 +291,7 @@ namespace Twol
 
                 //tramArr.SmoothSegments(2);
                 //tramArr.ChaikinsSmooth(2);
-                tramArr.ReducePointsByAngle(0.02, 50);
+                //tramArr.ReducePointsByAngle(0.02, 50);
                 tramList.Add(tramArr);
             }
         }
@@ -435,6 +445,20 @@ namespace Twol
 
             GL.Flush();
             oglSelf.SwapBuffers();
+
+            if (isBuildTram && buildTramCounter++ > 2)
+            {
+                BuildCurveTram();
+                isBuildTram = false;
+                buildTramCounter = 0;
+            }
+            else
+            {
+                {
+                    lblWait.Text = (buildTramCounter != 0) ? "Pause To Build" : "";
+
+                }
+            }
         }
 
         private void DrawTrams()
