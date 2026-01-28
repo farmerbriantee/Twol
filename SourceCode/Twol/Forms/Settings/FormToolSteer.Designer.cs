@@ -86,7 +86,6 @@
             this.label9 = new System.Windows.Forms.Label();
             this.tabToolSetup = new System.Windows.Forms.TabControl();
             this.tabModes = new System.Windows.Forms.TabPage();
-            this.label15 = new System.Windows.Forms.Label();
             this.cboxIsRecordToolLine = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.cboxIsPassiveSteering = new System.Windows.Forms.CheckBox();
@@ -569,7 +568,7 @@
             // 
             this.label51.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label51.ForeColor = System.Drawing.Color.Black;
-            this.label51.Location = new System.Drawing.Point(20, 2);
+            this.label51.Location = new System.Drawing.Point(20, 22);
             this.label51.Name = "label51";
             this.label51.Size = new System.Drawing.Size(329, 25);
             this.label51.TabIndex = 541;
@@ -593,7 +592,7 @@
             this.label54.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label54.ForeColor = System.Drawing.Color.Black;
             this.label54.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label54.Location = new System.Drawing.Point(221, 75);
+            this.label54.Location = new System.Drawing.Point(221, 95);
             this.label54.Name = "label54";
             this.label54.Size = new System.Drawing.Size(112, 28);
             this.label54.TabIndex = 543;
@@ -606,7 +605,7 @@
             this.label49.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label49.ForeColor = System.Drawing.Color.Black;
             this.label49.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label49.Location = new System.Drawing.Point(53, 75);
+            this.label49.Location = new System.Drawing.Point(53, 95);
             this.label49.Name = "label49";
             this.label49.Size = new System.Drawing.Size(112, 28);
             this.label49.TabIndex = 539;
@@ -829,11 +828,12 @@
             // tabModes
             // 
             this.tabModes.BackColor = System.Drawing.Color.Gainsboro;
-            this.tabModes.Controls.Add(this.label15);
             this.tabModes.Controls.Add(this.cboxIsRecordToolLine);
             this.tabModes.Controls.Add(this.label4);
+            this.tabModes.Controls.Add(this.label8);
             this.tabModes.Controls.Add(this.cboxIsPassiveSteering);
             this.tabModes.Controls.Add(this.label1);
+            this.tabModes.Controls.Add(this.cboxRecordSourceTool);
             this.tabModes.Controls.Add(this.cboxIsFollowCurrent);
             this.tabModes.Controls.Add(this.cboxIsFollowPivot);
             this.tabModes.Location = new System.Drawing.Point(4, 52);
@@ -844,17 +844,6 @@
             this.tabModes.Click += new System.EventHandler(this.tabModes_Click);
             this.tabModes.Enter += new System.EventHandler(this.tabPassive_Enter);
             // 
-            // label15
-            // 
-            this.label15.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.ForeColor = System.Drawing.Color.Black;
-            this.label15.Location = new System.Drawing.Point(296, 321);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(262, 30);
-            this.label15.TabIndex = 593;
-            this.label15.Text = "Recording";
-            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // cboxIsRecordToolLine
             // 
             this.cboxIsRecordToolLine.Appearance = System.Windows.Forms.Appearance.Button;
@@ -863,11 +852,11 @@
             this.cboxIsRecordToolLine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboxIsRecordToolLine.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxIsRecordToolLine.ForeColor = System.Drawing.Color.Black;
-            this.cboxIsRecordToolLine.Location = new System.Drawing.Point(319, 361);
+            this.cboxIsRecordToolLine.Location = new System.Drawing.Point(332, 173);
             this.cboxIsRecordToolLine.Name = "cboxIsRecordToolLine";
             this.cboxIsRecordToolLine.Size = new System.Drawing.Size(217, 70);
             this.cboxIsRecordToolLine.TabIndex = 592;
-            this.cboxIsRecordToolLine.Text = "Record Tool Line";
+            this.cboxIsRecordToolLine.Text = "Record Tool Lines";
             this.cboxIsRecordToolLine.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.cboxIsRecordToolLine.UseVisualStyleBackColor = false;
             this.cboxIsRecordToolLine.Click += new System.EventHandler(this.cboxIsRecordToolLine_Click);
@@ -876,7 +865,7 @@
             // 
             this.label4.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(296, 32);
+            this.label4.Location = new System.Drawing.Point(28, 302);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(262, 30);
             this.label4.TabIndex = 591;
@@ -891,7 +880,7 @@
             this.cboxIsPassiveSteering.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboxIsPassiveSteering.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxIsPassiveSteering.ForeColor = System.Drawing.Color.Black;
-            this.cboxIsPassiveSteering.Location = new System.Drawing.Point(319, 72);
+            this.cboxIsPassiveSteering.Location = new System.Drawing.Point(51, 342);
             this.cboxIsPassiveSteering.Name = "cboxIsPassiveSteering";
             this.cboxIsPassiveSteering.Size = new System.Drawing.Size(217, 70);
             this.cboxIsPassiveSteering.TabIndex = 587;
@@ -951,8 +940,6 @@
             this.tabActive.Controls.Add(this.cboxPassesPerReference);
             this.tabActive.Controls.Add(this.label12);
             this.tabActive.Controls.Add(this.label14);
-            this.tabActive.Controls.Add(this.label8);
-            this.tabActive.Controls.Add(this.cboxRecordSourceTool);
             this.tabActive.Controls.Add(this.label10);
             this.tabActive.Controls.Add(this.label5);
             this.tabActive.Controls.Add(this.nudToolGuidanceSpacing);
@@ -1010,7 +997,7 @@
             // 
             this.label8.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.Black;
-            this.label8.Location = new System.Drawing.Point(306, 200);
+            this.label8.Location = new System.Drawing.Point(308, 45);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(262, 24);
             this.label8.TabIndex = 596;
@@ -1027,9 +1014,9 @@
             this.cboxRecordSourceTool.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboxRecordSourceTool.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxRecordSourceTool.ForeColor = System.Drawing.Color.Black;
-            this.cboxRecordSourceTool.Location = new System.Drawing.Point(330, 228);
+            this.cboxRecordSourceTool.Location = new System.Drawing.Point(332, 72);
             this.cboxRecordSourceTool.Name = "cboxRecordSourceTool";
-            this.cboxRecordSourceTool.Size = new System.Drawing.Size(215, 64);
+            this.cboxRecordSourceTool.Size = new System.Drawing.Size(217, 70);
             this.cboxRecordSourceTool.TabIndex = 595;
             this.cboxRecordSourceTool.Text = "Tool GPS";
             this.cboxRecordSourceTool.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1518,7 +1505,7 @@
             // 
             // nudDeadZoneDelay
             // 
-            this.nudDeadZoneDelay.Location = new System.Drawing.Point(224, 33);
+            this.nudDeadZoneDelay.Location = new System.Drawing.Point(224, 53);
             this.nudDeadZoneDelay.Maximum = 10D;
             this.nudDeadZoneDelay.Name = "nudDeadZoneDelay";
             this.nudDeadZoneDelay.Size = new System.Drawing.Size(107, 36);
@@ -1527,7 +1514,7 @@
             // 
             // nudDeadzoneWidth
             // 
-            this.nudDeadzoneWidth.Location = new System.Drawing.Point(56, 34);
+            this.nudDeadzoneWidth.Location = new System.Drawing.Point(56, 54);
             this.nudDeadzoneWidth.Maximum = 5D;
             this.nudDeadzoneWidth.Minimum = 0.1D;
             this.nudDeadzoneWidth.Mode = Twol.UnitMode.Small;
@@ -1684,6 +1671,5 @@
         private System.Windows.Forms.TabPage tabAntenna;
         private NudlessNumericUpDown nudDualHeadingOffset;
         private System.Windows.Forms.Label lblHeadingOffset;
-        private System.Windows.Forms.Label label15;
     }
 }

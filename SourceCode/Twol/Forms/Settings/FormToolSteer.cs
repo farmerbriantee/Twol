@@ -10,7 +10,7 @@ namespace Twol
 
         private bool toolSend = false, toolSend2 = false;
         private int counter = 0, toolCounterSettings = 0, toolCounterConfig = 0;
-        private int windowSizeState = 1;
+        private int windowSizeState = 0;
 
         //Form stuff
         public FormToolSteer(Form callingForm)
@@ -83,6 +83,7 @@ namespace Twol
             lblManualSecondsOn.Text = hsbarManualSecondsOn.Value.ToString();
 
             cboxRecordSourceTool.Checked = Settings.Tool.setToolSteer.isRecordSourceTool;
+            cboxRecordSourceTool.Text = Settings.Tool.setToolSteer.isRecordSourceTool? "Tool GPS" : " Vehicle GPS";
             nudToolGuidanceSpacing.Value = (Settings.Tool.setToolSteer.toolGuidanceSpacing * 2);
 
             cboxPassesPerReference.SelectedIndexChanged -= cboxPassesPerReference_SelectedIndexChanged;
@@ -448,6 +449,7 @@ namespace Twol
         private void cboxRecordSourceTool_Click(object sender, EventArgs e)
         {
             Settings.Tool.setToolSteer.isRecordSourceTool = cboxRecordSourceTool.Checked;
+            cboxRecordSourceTool.Text = Settings.Tool.setToolSteer.isRecordSourceTool ? "Tool GPS" : " Vehicle GPS";
         }
 
         #endregion
