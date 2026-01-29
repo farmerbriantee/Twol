@@ -284,7 +284,7 @@ namespace Twol
                     //direction marker width
                     double factor = 0.37;
 
-                    GL.LineWidth(2);
+                    GL.LineWidth(4);
 
                     //initialize the steps for mipmap of triangles (skipping detail while zooming out)
                     int mipmap = 0;
@@ -293,179 +293,112 @@ namespace Twol
                     if (camera.camSetDistance < -2400) mipmap = 8;
                     if (camera.camSetDistance < -5000) mipmap = 16;
 
-                    if (patchListLayer.Count > 0)
+                    //for every new chunk of patch
+                    foreach (var triList in patchSaveList)
                     {
+                        //check for even
+                        if (triList.Count % 2 == 0)
+                            break;
 
-                        //for every new chunk of patch
-                        foreach (var triList in patchListLayer)
+
+                        if (Settings.User.setDisplay_isDayMode) GL.Color4((byte)triList[0].easting, (byte)triList[0].northing, (byte)triList[0].heading, (byte)152);
+                        else GL.Color4((byte)triList[0].easting, (byte)triList[0].northing, (byte)triList[0].heading, (byte)(152 * 0.5));
+
+                        triList.DrawPolygon(mipmap, 1, PrimitiveType.TriangleStrip);
+
+                    }
+
+                    //for every new chunk of patch
+                    foreach (var triList in patchList)
+                    {
+                        if (Settings.User.setDisplay_isSectionLinesOn)
                         {
-                            //check for even
-                            if (triList.Count % 2 == 0)
-                                break;
+                            //highlight lines
+                            GL.Color4(0.2, 0.2, 0.2, 1.0);
 
-                            bool isDraw = false;
-                            int count2 = triList.Count;
-                            for (int i = 1; i < count2; i += 3)
-                            {
-                                //determine if point is in frustum or not, if < 0, its outside so abort, z always is 0                            
-                                if (frustum[0] * triList[i].easting + frustum[1] * triList[i].northing + frustum[3] <= 0)
-                                    continue;//right
-                                if (frustum[4] * triList[i].easting + frustum[5] * triList[i].northing + frustum[7] <= 0)
-                                    continue;//left
-                                if (frustum[16] * triList[i].easting + frustum[17] * triList[i].northing + frustum[19] <= 0)
-                                    continue;//bottom
-                                if (frustum[20] * triList[i].easting + frustum[21] * triList[i].northing + frustum[23] <= 0)
-                                    continue;//top
-                                if (frustum[8] * triList[i].easting + frustum[9] * triList[i].northing + frustum[11] <= 0)
-                                    continue;//far
-                                if (frustum[12] * triList[i].easting + frustum[13] * triList[i].northing + frustum[15] <= 0)
-                                    continue;//near
-
-                                //point is in frustum so draw the entire patch. The downside of triangle strips.
-                                isDraw = true;
-                                break;
-                            }
-
-                            if (isDraw)
-                            {
-                                if (Settings.User.setDisplay_isDayMode) GL.Color4((byte)triList[0].easting, (byte)triList[0].northing, (byte)triList[0].heading, (byte)70);
-                                else GL.Color4((byte)triList[0].easting, (byte)triList[0].northing, (byte)triList[0].heading, (byte)(35));
-
-                                triList.DrawPolygon(mipmap, 1, PrimitiveType.TriangleStrip);
-
-                                if (Settings.User.setDisplay_isSectionLinesOn)
-                                {
-                                    //highlight lines
-                                    GL.Color4(0.2, 0.2, 0.2, 1.0);
-
-                                    triList.DrawPolygon(mipmap, 1, PrimitiveType.LineStrip);
-                                    triList.DrawPolygon(mipmap, 2, PrimitiveType.LineStrip);
-                                }
-                            }
+                            triList.DrawPolygon(mipmap, 1, PrimitiveType.LineStrip);
+                            triList.DrawPolygon(mipmap, 2, PrimitiveType.LineStrip);
                         }
                     }
 
                     //for every new chunk of patch
-                    //foreach (var triList in patchList)
-                    //{
-                    //    //check for even
-                    //    if (triList.Count % 2 == 0)
-                    //        break;
+                    foreach (var triList in patchList)
+                    {
 
-                    //    bool isDraw = false;
-                    //    int count2 = triList.Count;
-                    //    for (int i = 1; i < count2; i += 3)
-                    //    {
-                    //        //determine if point is in frustum or not, if < 0, its outside so abort, z always is 0                            
-                    //        if (frustum[0] * triList[i].easting + frustum[1] * triList[i].northing + frustum[3] <= 0)
-                    //            continue;//right
-                    //        if (frustum[4] * triList[i].easting + frustum[5] * triList[i].northing + frustum[7] <= 0)
-                    //            continue;//left
-                    //        if (frustum[16] * triList[i].easting + frustum[17] * triList[i].northing + frustum[19] <= 0)
-                    //            continue;//bottom
-                    //        if (frustum[20] * triList[i].easting + frustum[21] * triList[i].northing + frustum[23] <= 0)
-                    //            continue;//top
-                    //        if (frustum[8] * triList[i].easting + frustum[9] * triList[i].northing + frustum[11] <= 0)
-                    //            continue;//far
-                    //        if (frustum[12] * triList[i].easting + frustum[13] * triList[i].northing + frustum[15] <= 0)
-                    //            continue;//near
+                        if (Settings.User.isDirectionMarkers)
+                        {
+                            if (triList.Count > 31)
+                            {
+                                double headz =
+                                    Math.Atan2(triList[29].easting - triList[27].easting, triList[29].northing - triList[27].northing);
 
-                    //        //point is in frustum so draw the entire patch. The downside of triangle strips.
-                    //        isDraw = true;
-                    //        break;
-                    //    }
+                                left = new vec2(
+                                    (triList[27].easting + factor * (triList[28].easting - triList[27].easting)),
+                                    (triList[27].northing + factor * (triList[28].northing - triList[27].northing)));
 
-                    //    if (isDraw)
-                    //    {
-                    //        if (Settings.User.setDisplay_isDayMode) GL.Color4((byte)triList[0].easting, (byte)triList[0].northing, (byte)triList[0].heading, (byte)152);
-                    //        else GL.Color4((byte)triList[0].easting, (byte)triList[0].northing, (byte)triList[0].heading, (byte)(152 * 0.5));
+                                factor = 1 - factor;
 
-                    //        triList.DrawPolygon(mipmap, 1, PrimitiveType.TriangleStrip);
+                                right = new vec2(
+                                    (triList[27].easting + factor * (triList[28].easting - triList[27].easting)),
+                                    (triList[27].northing + factor * (triList[28].northing - triList[27].northing)));
 
-                    //        if (Settings.User.setDisplay_isSectionLinesOn)
-                    //        {
-                    //            //highlight lines
-                    //            GL.Color4(0.2, 0.2, 0.2, 1.0);
+                                double disst = glm.Distance(left, right);
+                                disst *= 1.5;
 
-                    //            triList.DrawPolygon(mipmap, 1, PrimitiveType.LineStrip);
-                    //            triList.DrawPolygon(mipmap, 2, PrimitiveType.LineStrip);
-                    //        }
+                                ptTip = new vec2((left.easting + right.easting) / 2, (left.northing + right.northing) / 2);
 
-                    //        if (Settings.User.isDirectionMarkers)
-                    //        {
-                    //            if (triList.Count > 31)
-                    //            {
-                    //                double headz =
-                    //                    Math.Atan2(triList[29].easting - triList[27].easting, triList[29].northing - triList[27].northing);
+                                ptTip = new vec2(ptTip.easting + (Math.Sin(headz) * disst), ptTip.northing + (Math.Cos(headz) * disst));
 
-                    //                left = new vec2(
-                    //                    (triList[27].easting + factor * (triList[28].easting - triList[27].easting)),
-                    //                    (triList[27].northing + factor * (triList[28].northing - triList[27].northing)));
+                                GL.Color4((byte)(255 - triList[0].easting), (byte)(255 - triList[0].northing), (byte)(255 - triList[0].heading), (byte)150);
+                                //GL.LineWidth(3.0f);
 
-                    //                factor = 1 - factor;
+                                GL.Begin(PrimitiveType.Triangles);
+                                GL.Vertex2(left.easting, left.northing);
+                                GL.Vertex2(right.easting, right.northing);
 
-                    //                right = new vec2(
-                    //                    (triList[27].easting + factor * (triList[28].easting - triList[27].easting)),
-                    //                    (triList[27].northing + factor * (triList[28].northing - triList[27].northing)));
+                                GL.Color4(0.85, 0.85, 1, 1.0);
+                                GL.Vertex2(ptTip.easting, ptTip.northing);
+                                GL.End();
+                            }
+                        }
+                    }
 
-                    //                double disst = glm.Distance(left, right);
-                    //                disst *= 1.5;
+                    if (sectionOnCounter > 0)
+                    {
+                        foreach (var patch in triStrip)
+                        {
+                            if (patch.isDrawing)
+                            {
+                                try
+                                {
+                                    GL.Color4((byte)patch.triangleList[0].easting, (byte)patch.triangleList[0].northing, (byte)patch.triangleList[0].heading, (byte)(Settings.User.setDisplay_isDayMode ? 152 : 76));
 
-                    //                ptTip = new vec2((left.easting + right.easting) / 2, (left.northing + right.northing) / 2);
+                                    //draw the triangle in each triangle strip
+                                    GL.Begin(PrimitiveType.TriangleStrip);
 
-                    //                ptTip = new vec2(ptTip.easting + (Math.Sin(headz) * disst), ptTip.northing + (Math.Cos(headz) * disst));
+                                    for (int i = 1; i < patch.triangleList.Count; i++)
+                                        GL.Vertex2(patch.triangleList[i].easting, patch.triangleList[i].northing);
 
-                    //                GL.Color4((byte)(255 - triList[0].easting), (byte)(255 - triList[0].northing), (byte)(255 - triList[0].heading), (byte)150);
-                    //                //GL.LineWidth(3.0f);
+                                    //left side of triangle
+                                    vec2 pt = new vec2((cosSectionHeading * section[patch.currentStartSectionNum].positionLeft) + toolPos.easting,
+                                            (sinSectionHeading * section[patch.currentStartSectionNum].positionLeft) + toolPos.northing);
 
-                    //                GL.Begin(PrimitiveType.Triangles);
-                    //                GL.Vertex2(left.easting, left.northing);
-                    //                GL.Vertex2(right.easting, right.northing);
+                                    GL.Vertex2(pt.easting, pt.northing);
 
-                    //                GL.Color4(0.85, 0.85, 1, 1.0);
-                    //                GL.Vertex2(ptTip.easting, ptTip.northing);
-                    //                GL.End();
-                    //            }
-                    //        }
-                    //    }
-                    //}
+                                    //Right side of triangle
+                                    pt = new vec2((cosSectionHeading * section[patch.currentEndSectionNum].positionRight) + toolPos.easting,
+                                       (sinSectionHeading * section[patch.currentEndSectionNum].positionRight) + toolPos.northing);
 
-                    //if (patchCounter > 0)
-                    //{
-                    //    foreach (var patch in triStrip)
-                    //    {
-                    //        if (patch.isDrawing)
-                    //        {
-                    //            try
-                    //            {
-                    //                GL.Color4((byte)patch.triangleList[0].easting, (byte)patch.triangleList[0].northing, (byte)patch.triangleList[0].heading, (byte)(Settings.User.setDisplay_isDayMode ? 152 : 76));
+                                    GL.Vertex2(pt.easting, pt.northing);
 
-                    //                //draw the triangle in each triangle strip
-                    //                GL.Begin(PrimitiveType.TriangleStrip);
-
-                    //                for (int i = 1; i < patch.triangleList.Count; i++)
-                    //                    GL.Vertex2(patch.triangleList[i].easting, patch.triangleList[i].northing);
-
-                    //                //left side of triangle
-                    //                vec2 pt = new vec2((cosSectionHeading * section[patch.currentStartSectionNum].positionLeft) + toolPos.easting,
-                    //                        (sinSectionHeading * section[patch.currentStartSectionNum].positionLeft) + toolPos.northing);
-
-                    //                GL.Vertex2(pt.easting, pt.northing);
-
-                    //                //Right side of triangle
-                    //                pt = new vec2((cosSectionHeading * section[patch.currentEndSectionNum].positionRight) + toolPos.easting,
-                    //                   (sinSectionHeading * section[patch.currentEndSectionNum].positionRight) + toolPos.northing);
-
-                    //                GL.Vertex2(pt.easting, pt.northing);
-
-                    //                GL.End();
-                    //            }
-                    //            catch
-                    //            {
-                    //            }
-                    //        }
-                    //    }
-                    //}
+                                    GL.End();
+                                }
+                                catch
+                                {
+                                }
+                            }
+                        }
+                    }
 
                     //GL.Color4(0.85, 0.085, 1, 1.0);
                     //secTriList.DrawPolygon(PrimitiveType.Triangles);
@@ -977,24 +910,16 @@ namespace Twol
                 GL.DisableClientState(ArrayCap.VertexArray);
             }
 
-            //patch color
+            //sections color
             GL.ColorMask(false, true, false, false); //Draw only in green
             GL.Color3((byte)0, (byte)bbColors.section, (byte)0);
 
-            //GL.Color4(0.85, 0.085, 1, 1.0);
-            //secTriList.DrawPolygon(PrimitiveType.Triangles);
             GL.EnableClientState(ArrayCap.VertexArray);
-            //GL.EnableClientState(ArrayCap.ColorArray);
 
             GL.BindBuffer(BufferTarget.ArrayBuffer, patchID);
             GL.VertexPointer(2, VertexPointerType.Double, 0, 0);
-            //GL.BindBuffer(BufferTarget.ArrayBuffer, colorID);
-            //GL.ColorPointer(4, ColorPointerType.Double, 0, 0);
 
-            //GL.Color4(0.31, 0.3, 0.41, 0.5);
             GL.DrawArrays(PrimitiveType.Triangles, 0, secTriList.Count * 3);
-
-            //GL.DisableClientState(ArrayCap.ColorArray);
             GL.DisableClientState(ArrayCap.VertexArray);
 
             //double pivEplus = toolPos.easting + 50;
@@ -1025,7 +950,7 @@ namespace Twol
             //}
 
             ////Draw currently being made patch
-            //if (patchCounter > 0)
+            //if (sectionOnCounter > 0)
             //{
             //    foreach (var patch in triStrip)
             //    {

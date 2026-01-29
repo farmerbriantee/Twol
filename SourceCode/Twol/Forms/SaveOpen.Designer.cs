@@ -962,6 +962,8 @@ namespace Twol
                         CPolygon secPoly = new CPolygon();
                         secPoly.polygonPts = new vec2[3];
 
+                        List<vec3> colorList = new List<vec3>(128);
+
                         //read header
                         while (!reader.EndOfStream)
                         {
@@ -995,11 +997,14 @@ namespace Twol
                                 secPoly.polygonPts[1] = vArr[i + 1];
                                 secPoly.polygonPts[2] = vArr[i + 2];
                                 secTriList.Add(new Triangle(secPoly.polygonPts[0], secPoly.polygonPts[1], secPoly.polygonPts[2]));
+                                colorList.Add(new vec3(patchColor));
+
 
                                 secPoly.polygonPts[0] = vArr[i + 1];
                                 secPoly.polygonPts[1] = vArr[i + 3];
                                 secPoly.polygonPts[2] = vArr[i + 2];
                                 secTriList.Add(new Triangle(secPoly.polygonPts[0], secPoly.polygonPts[1], secPoly.polygonPts[2]));
+                                colorList.Add(new vec3(patchColor));
                             }
 
                             //calculate area of this patch - AbsoluteValue of (Ax(By-Cy) + Bx(Cy-Ay) + Cx(Ay-By)/2)
@@ -1037,7 +1042,6 @@ namespace Twol
                         }
 
                         GL.BufferData(BufferTarget.ArrayBuffer, triangleVertexData.Length * sizeof(double), triangleVertexData, BufferUsageHint.StaticDraw);
-                        Random random = new Random();
 
                         double[] colorVertexData = new double[secTriList.Count * 3 * 4];
                         colorID = GL.GenBuffer();
@@ -1045,21 +1049,23 @@ namespace Twol
 
                         for (int i = 0; i < secTriList.Count; i++)
                         {
-                            colorVertexData[i * 12 + 0] = patchColor.easting / 255;
-                            colorVertexData[i * 12 + 1] = patchColor.northing / 255;
-                            colorVertexData[i * 12 + 2] = patchColor.heading / 255;
+                            colorVertexData[i * 12 + 0] = colorList[i].easting / 255;
+                            colorVertexData[i * 12 + 1] = colorList[i].northing / 255;
+                            colorVertexData[i * 12 + 2] = colorList[i].heading / 255;
                             colorVertexData[i * 12 + 3] = 0.5;
-                            colorVertexData[i * 12 + 4] = patchColor.easting / 255;
-                            colorVertexData[i * 12 + 5] = patchColor.northing / 255;
-                            colorVertexData[i * 12 + 6] = patchColor.heading / 255;
+                            colorVertexData[i * 12 + 4] = colorList[i].easting / 255;
+                            colorVertexData[i * 12 + 5] = colorList[i].northing / 255;
+                            colorVertexData[i * 12 + 6] = colorList[i].heading / 255;
                             colorVertexData[i * 12 + 7] = 0.5;
-                            colorVertexData[i * 12 + 8] = patchColor.easting / 255;
-                            colorVertexData[i * 12 + 9] = patchColor.northing / 255;
-                            colorVertexData[i * 12 + 10] = patchColor.heading / 255;
+                            colorVertexData[i * 12 + 8] = colorList[i].easting / 255;
+                            colorVertexData[i * 12 + 9] = colorList[i].northing / 255;
+                            colorVertexData[i * 12 + 10] = colorList[i].heading / 255;
                             colorVertexData[i * 12 + 11] = 0.5;
                         }
 
                         GL.BufferData(BufferTarget.ArrayBuffer, colorVertexData.Length * sizeof(double), colorVertexData, BufferUsageHint.StaticDraw);
+
+                        //patchList.Clear();
                     }
                     catch (Exception e)
                     {

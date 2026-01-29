@@ -57,7 +57,7 @@ namespace Twol
         public vec2 prevContourPos = new vec2(0, 0);
         public vec2 prevToolRecPos = new vec2(0, 0);
         public vec2 prevGridPos = new vec2(0, 0);
-        public int patchCounter = 0;
+        public int sectionOnCounter = 0;
 
         public vec2 prevBoundaryPos = new vec2(0, 0);
 
@@ -1027,7 +1027,7 @@ namespace Twol
 
             if (isJobStarted && contourTriggerDistanceSq > distanceTriggerSq)
             {
-                if (patchCounter != 0)
+                if (sectionOnCounter != 0)
                 {
                     //keep the line going, everything is on for recording path
                     if (ct.isContourOn) ct.AddPoint(pivotAxlePos);
@@ -1065,7 +1065,7 @@ namespace Twol
 
             if (isJobStarted && toolDistanceSq > 2.0)
             {
-                if (patchCounter != 0)
+                if (sectionOnCounter != 0)
                 {
                     //keep the line going, everything is on for recording path
                     if (tRec.isToolRecordOn) tRec.AddPoint(recPosition);
@@ -1102,7 +1102,7 @@ namespace Twol
             prevPivotAxlePos.easting = pivotAxlePos.easting;
 
             // if non zero, at least one section is on.
-            patchCounter = 0;
+            sectionOnCounter = 0;
 
             //send the current and previous GPS fore/aft corrected fix to each section
             foreach (var patch in triStrip)
@@ -1116,7 +1116,7 @@ namespace Twol
                     }
 
                     patch.AddMappingPoint();
-                    patchCounter++;
+                    sectionOnCounter++;
                 }
             }
         }
@@ -1125,7 +1125,7 @@ namespace Twol
         {
             gridTriggerDistanceSq = glm.DistanceSquared(pivotAxlePos, prevGridPos);
 
-            if (gridTriggerDistanceSq > 2.0 && patchCounter != 0 && isFieldStarted)
+            if (gridTriggerDistanceSq > 2.0 && sectionOnCounter != 0 && isFieldStarted)
             {
                 //grab fix and elevation
                 sbElevationString.Append(

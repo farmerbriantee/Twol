@@ -59,7 +59,7 @@ namespace Twol
                 //Right side of triangle
                 triangleList.Add(new vec3(rightPoint.easting, rightPoint.northing, 0));
 
-                mf.patchCounter++;
+                mf.sectionOnCounter++;
             }
         }
 
@@ -75,6 +75,7 @@ namespace Twol
                 //save the triangle list in a patch list to add to saving file
                 mf.patchSaveList.Add(triangleList);
                 mf.patchList.Add(triangleList);
+
             }
             else
             {

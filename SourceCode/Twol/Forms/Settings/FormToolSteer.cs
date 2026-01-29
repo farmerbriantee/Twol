@@ -319,7 +319,7 @@ namespace Twol
 
         private void cboxIsRecordToolLine_Click(object sender, EventArgs e)
         {
-            if (mf.patchCounter > 0)
+            if (mf.sectionOnCounter > 0)
             {
                 mf.TimedMessageBox(2000, "Sections On", "Turn off Sections First");
                 return;
