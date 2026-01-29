@@ -1,0 +1,50 @@
+Upgrading to Vertex Buffer Objects (VBOs) moves your data from system RAM to the GPU's memory once, eliminating the need to resend the entire array every frame. For indexed drawing, you use an Element Buffer Object (EBO) for indices and a VBO for your vertex and color data. 
+Upgraded VBO Implementation (Legacy Context)
+In legacy OpenGL, you can still use the convenient VertexPointer and ColorPointer commands, but you point them to offsets within the GPU buffer instead of C# arrays. 
+csharp
+int vboId, eboId;
+float[] vertices = { /* Position and Color Interleaved: X, Y, Z, R, G, B */
+    -0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f, // V0
+     0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f, // V1
+     0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f  // V2
+};
+uint[] indices = { 0, 1, 2 };
+
+protected override void OnLoad()
+{
+    base.OnLoad();
+
+    // 1. Generate and Upload Vertex Data (VBO)
+    vboId = GL.GenBuffer();
+    GL.BindBuffer(BufferTarget.ArrayBuffer, vboId);
+    GL.BufferData(BufferTarget.ArrayBuffer, vertices.Length * sizeof(float), vertices, BufferUsageHint.StaticDraw);
+
+    // 2. Generate and Upload Index Data (EBO/IBO)
+    eboId = GL.GenBuffer();
+    GL.BindBuffer(BufferTarget.ElementArrayBuffer, eboId);
+    GL.BufferData(BufferTarget.ElementArrayBuffer, indices.Length * sizeof(uint), indices, BufferUsageHint.StaticDraw);
+}
+
+protected override void OnRenderFrame(FrameEventArgs e)
+{
+    base.OnRenderFrame(e);
+    GL.Clear(ClearBufferMask.ColorBufferBit);
+
+    // 3. Bind buffers to use them for drawing
+    GL.BindBuffer(BufferTarget.ArrayBuffer, vboId);
+    GL.BindBuffer(BufferTarget.ElementArrayBuffer, eboId);
+
+    GL.EnableClientState(ArrayCap.VertexArray);
+    GL.EnableClientState(ArrayCap.ColorArray);
+
+    // 4. Set Pointers using offsets (in bytes) instead of array references
+    int stride = 6 * sizeof(float); // 3 for Pos + 3 for Color
+    GL.VertexPointer(3, VertexPointerType.Float, stride, 0); // Pos starts at index 0
+    GL.ColorPointer(3, ColorPointerType.Float, stride, 3 * sizeof(float)); // Color starts after Pos
+
+    // 5. Draw! Indices are now pulled from the bound EBO
+    GL.DrawElements(PrimitiveType.Triangles, indices.Length, DrawElementsType.UnsignedInt, 0);
+
+    SwapBuffers();
+}
+Use code with caution.
