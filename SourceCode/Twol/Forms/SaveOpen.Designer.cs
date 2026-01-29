@@ -929,6 +929,9 @@ namespace Twol
             }
         }
 
+
+        public List<Triangle> secTriList = new List<Triangle>(128);
+
         public void FileLoadSections(string dir)
         {
             if (!File.Exists(dir))
@@ -943,6 +946,7 @@ namespace Twol
             }
             else
             {
+                secTriList?.Clear();
                 using (StreamReader reader = new StreamReader(dir))
                 {
                     try
@@ -951,13 +955,18 @@ namespace Twol
                         fd.distanceUser = 0;
                         vec3 vecFix = new vec3();
 
+                        CPolygon secPoly = new CPolygon();
+                        secPoly.polygonPts = new vec2[3];
+
                         //read header
                         while (!reader.EndOfStream)
                         {
                             string line = reader.ReadLine();
                             int verts = int.Parse(line);
 
-                            var triangleList = new List<vec3>(verts + 1);
+                            vec2 [] vArr = new vec2[verts-1];
+
+                            var triStripList = new List<vec3>(verts + 1);
 
                             for (int v = 0; v < verts; v++)
                             {
@@ -966,7 +975,23 @@ namespace Twol
                                 vecFix.easting = double.Parse(words[0], CultureInfo.InvariantCulture);
                                 vecFix.northing = double.Parse(words[1], CultureInfo.InvariantCulture);
                                 vecFix.heading = double.Parse(words[2], CultureInfo.InvariantCulture);
-                                triangleList.Add(vecFix);
+                                triStripList.Add(vecFix);
+
+                                if (v == 0) continue;
+                                vArr[v - 1] = new vec2(vecFix.easting, vecFix.northing);
+                            }
+
+                            for (int i = 0; i < vArr.Length - 2; i+=2)
+                            {
+                                secPoly.polygonPts[0] = vArr[i + 0];
+                                secPoly.polygonPts[1] = vArr[i + 1];
+                                secPoly.polygonPts[2] = vArr[i + 2];
+                                secTriList.Add(new Triangle(secPoly.polygonPts[0], secPoly.polygonPts[1], secPoly.polygonPts[2]));
+
+                                secPoly.polygonPts[0] = vArr[i + 1];
+                                secPoly.polygonPts[1] = vArr[i + 3];
+                                secPoly.polygonPts[2] = vArr[i + 2];
+                                secTriList.Add(new Triangle(secPoly.polygonPts[0], secPoly.polygonPts[1], secPoly.polygonPts[2]));
                             }
 
                             //calculate area of this patch - AbsoluteValue of (Ax(By-Cy) + Bx(Cy-Ay) + Cx(Ay-By)/2)
@@ -976,13 +1001,13 @@ namespace Twol
                                 for (int j = 1; j < verts; j++)
                                 {
                                     double temp = 0;
-                                    temp = triangleList[j].easting * (triangleList[j + 1].northing - triangleList[j + 2].northing) +
-                                              triangleList[j + 1].easting * (triangleList[j + 2].northing - triangleList[j].northing) +
-                                                  triangleList[j + 2].easting * (triangleList[j].northing - triangleList[j + 1].northing);
+                                    temp = triStripList[j].easting * (triStripList[j + 1].northing - triStripList[j + 2].northing) +
+                                              triStripList[j + 1].easting * (triStripList[j + 2].northing - triStripList[j].northing) +
+                                                  triStripList[j + 2].easting * (triStripList[j].northing - triStripList[j + 1].northing);
 
                                     fd.workedAreaTotal += Math.Abs((temp * 0.5));
                                 }
-                                patchList.Add(triangleList);
+                                patchList.Add(triStripList);
                             }
                         }
                     }

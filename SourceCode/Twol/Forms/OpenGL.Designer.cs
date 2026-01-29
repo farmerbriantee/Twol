@@ -380,7 +380,7 @@ namespace Twol
                             if (Settings.User.setDisplay_isDayMode) GL.Color4((byte)triList[0].easting, (byte)triList[0].northing, (byte)triList[0].heading, (byte)152);
                             else GL.Color4((byte)triList[0].easting, (byte)triList[0].northing, (byte)triList[0].heading, (byte)(152 * 0.5));
 
-                            triList.DrawPolygon(mipmap, 1, PrimitiveType.TriangleStrip);
+                            //triList.DrawPolygon(mipmap, 1, PrimitiveType.TriangleStrip);
 
                             if (Settings.User.setDisplay_isSectionLinesOn)
                             {
@@ -466,6 +466,9 @@ namespace Twol
                             }
                         }
                     }
+
+                    GL.Color4(0.85, 0.085, 1, 1.0);
+                    secTriList.DrawPolygon(PrimitiveType.Triangles);
 
                     #endregion
 
