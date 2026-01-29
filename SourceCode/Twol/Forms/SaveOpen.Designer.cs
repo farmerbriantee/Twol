@@ -931,6 +931,9 @@ namespace Twol
 
 
         public List<Triangle> secTriList = new List<Triangle>(128);
+        int patchID = 0;
+        int colorID = 0;
+
 
         public void FileLoadSections(string dir)
         {
@@ -954,6 +957,7 @@ namespace Twol
                         fd.workedAreaTotal = 0;
                         fd.distanceUser = 0;
                         vec3 vecFix = new vec3();
+                        vec3 patchColor = new vec3();
 
                         CPolygon secPoly = new CPolygon();
                         secPoly.polygonPts = new vec2[3];
@@ -977,7 +981,11 @@ namespace Twol
                                 vecFix.heading = double.Parse(words[2], CultureInfo.InvariantCulture);
                                 triStripList.Add(vecFix);
 
-                                if (v == 0) continue;
+                                if (v == 0)
+                                {
+                                    patchColor = new vec3 (vecFix);
+                                    continue;
+                                }
                                 vArr[v - 1] = new vec2(vecFix.easting, vecFix.northing);
                             }
 
@@ -1010,6 +1018,48 @@ namespace Twol
                                 patchList.Add(triStripList);
                             }
                         }
+
+                        patchID = GL.GenBuffer();
+                        GL.BindBuffer(BufferTarget.ArrayBuffer, patchID);
+                        double[] triangleVertexData = new double[secTriList.Count * 3 * 2];
+
+                        for (int i = 0; i < secTriList.Count; i++)
+                        {
+                            // Assuming Triangle has properties or fields: A, B, C of type vec3 with .x, .y, .z
+                            triangleVertexData[i * 6 + 0] = secTriList[i].polygonPts[0].easting;
+                            triangleVertexData[i * 6 + 1] = secTriList[i].polygonPts[0].northing;
+
+                            triangleVertexData[i * 6 + 2] = secTriList[i].polygonPts[1].easting;
+                            triangleVertexData[i * 6 + 3] = secTriList[i].polygonPts[1].northing;
+
+                            triangleVertexData[i * 6 + 4] = secTriList[i].polygonPts[2].easting;
+                            triangleVertexData[i * 6 + 5] = secTriList[i].polygonPts[2].northing;
+                        }
+
+                        GL.BufferData(BufferTarget.ArrayBuffer, triangleVertexData.Length * sizeof(double), triangleVertexData, BufferUsageHint.StaticDraw);
+                        Random random = new Random();
+
+                        double[] colorVertexData = new double[secTriList.Count * 3 * 4];
+                        colorID = GL.GenBuffer();
+                        GL.BindBuffer(BufferTarget.ArrayBuffer, colorID);
+
+                        for (int i = 0; i < secTriList.Count; i++)
+                        {
+                            colorVertexData[i * 12 + 0] = patchColor.easting / 255;
+                            colorVertexData[i * 12 + 1] = patchColor.northing / 255;
+                            colorVertexData[i * 12 + 2] = patchColor.heading / 255;
+                            colorVertexData[i * 12 + 3] = 0.5;
+                            colorVertexData[i * 12 + 4] = patchColor.easting / 255;
+                            colorVertexData[i * 12 + 5] = patchColor.northing / 255;
+                            colorVertexData[i * 12 + 6] = patchColor.heading / 255;
+                            colorVertexData[i * 12 + 7] = 0.5;
+                            colorVertexData[i * 12 + 8] = patchColor.easting / 255;
+                            colorVertexData[i * 12 + 9] = patchColor.northing / 255;
+                            colorVertexData[i * 12 + 10] = patchColor.heading / 255;
+                            colorVertexData[i * 12 + 11] = 0.5;
+                        }
+
+                        GL.BufferData(BufferTarget.ArrayBuffer, colorVertexData.Length * sizeof(double), colorVertexData, BufferUsageHint.StaticDraw);
                     }
                     catch (Exception e)
                     {
