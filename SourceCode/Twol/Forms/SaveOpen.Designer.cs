@@ -1288,15 +1288,15 @@ namespace Twol
                             colorVertexData[i * 12 + 0] = colorList[i].easting / 255;
                             colorVertexData[i * 12 + 1] = colorList[i].northing / 255;
                             colorVertexData[i * 12 + 2] = colorList[i].heading / 255;
-                            colorVertexData[i * 12 + 3] = 0.5;
+                            colorVertexData[i * 12 + 3] = 0.6;
                             colorVertexData[i * 12 + 4] = colorList[i].easting / 255;
                             colorVertexData[i * 12 + 5] = colorList[i].northing / 255;
                             colorVertexData[i * 12 + 6] = colorList[i].heading / 255;
-                            colorVertexData[i * 12 + 7] = 0.5;
+                            colorVertexData[i * 12 + 7] = 0.6;
                             colorVertexData[i * 12 + 8] = colorList[i].easting / 255;
                             colorVertexData[i * 12 + 9] = colorList[i].northing / 255;
                             colorVertexData[i * 12 + 10] = colorList[i].heading / 255;
-                            colorVertexData[i * 12 + 11] = 0.5;
+                            colorVertexData[i * 12 + 11] = 0.6;
                         }
 
                         colorID = GL.GenBuffer();
@@ -1419,15 +1419,15 @@ namespace Twol
                     colorVertexData[i * 12 + 0] = colorList[i].easting / 255;
                     colorVertexData[i * 12 + 1] = colorList[i].northing / 255;
                     colorVertexData[i * 12 + 2] = colorList[i].heading / 255;
-                    colorVertexData[i * 12 + 3] = 0.5;
+                    colorVertexData[i * 12 + 3] = 0.6;
                     colorVertexData[i * 12 + 4] = colorList[i].easting / 255;
                     colorVertexData[i * 12 + 5] = colorList[i].northing / 255;
                     colorVertexData[i * 12 + 6] = colorList[i].heading / 255;
-                    colorVertexData[i * 12 + 7] = 0.5;
+                    colorVertexData[i * 12 + 7] = 0.6;
                     colorVertexData[i * 12 + 8] = colorList[i].easting / 255;
                     colorVertexData[i * 12 + 9] = colorList[i].northing / 255;
                     colorVertexData[i * 12 + 10] = colorList[i].heading / 255;
-                    colorVertexData[i * 12 + 11] = 0.5;
+                    colorVertexData[i * 12 + 11] = 0.6;
                 }
 
                 offsetInBytes = sectionTriangleCount * sizeof(double) * 3 * 4;
