@@ -1280,7 +1280,7 @@ namespace Twol
 
                         patchID = GL.GenBuffer();
                         GL.BindBuffer(BufferTarget.ArrayBuffer, patchID);
-                        GL.BufferData(BufferTarget.ArrayBuffer, triangleVertexData.Length * sizeof(double), IntPtr.Zero, BufferUsageHint.DynamicDraw);
+                        GL.BufferData(BufferTarget.ArrayBuffer, triangleVertexData.Length * sizeof(double), IntPtr.Zero, BufferUsageHint.StaticDraw);
                         GL.BufferSubData(BufferTarget.ArrayBuffer, IntPtr.Zero, secTriList.Count * 6 * sizeof(double), triangleVertexData);
 
                         for (int i = 0; i < secTriList.Count; i++)
@@ -1301,7 +1301,7 @@ namespace Twol
 
                         colorID = GL.GenBuffer();
                         GL.BindBuffer(BufferTarget.ArrayBuffer, colorID);
-                        GL.BufferData(BufferTarget.ArrayBuffer, colorVertexData.Length * sizeof(double), IntPtr.Zero, BufferUsageHint.DynamicDraw);
+                        GL.BufferData(BufferTarget.ArrayBuffer, colorVertexData.Length * sizeof(double), IntPtr.Zero, BufferUsageHint.StaticDraw);
                         GL.BufferSubData(BufferTarget.ArrayBuffer, IntPtr.Zero, secTriList.Count * 12 * sizeof(double), colorVertexData);
 
                         sectionTriangleCount = secTriList.Count;
@@ -1403,7 +1403,7 @@ namespace Twol
                 {
                     patchID = GL.GenBuffer();
                     GL.BindBuffer(BufferTarget.ArrayBuffer, patchID);
-                    GL.BufferData(BufferTarget.ArrayBuffer, triangleVertexData.Length * sizeof(double), IntPtr.Zero, BufferUsageHint.DynamicDraw);
+                    GL.BufferData(BufferTarget.ArrayBuffer, triangleVertexData.Length * sizeof(double), IntPtr.Zero, BufferUsageHint.StaticDraw);
                     GL.BufferSubData(BufferTarget.ArrayBuffer, IntPtr.Zero, secTriList.Count * 6 * sizeof(double), triangleVertexData);
                 }
                 else
@@ -1436,7 +1436,7 @@ namespace Twol
                 {
                     colorID = GL.GenBuffer();
                     GL.BindBuffer(BufferTarget.ArrayBuffer, colorID);
-                    GL.BufferData(BufferTarget.ArrayBuffer, colorVertexData.Length * sizeof(double), IntPtr.Zero, BufferUsageHint.DynamicDraw);
+                    GL.BufferData(BufferTarget.ArrayBuffer, colorVertexData.Length * sizeof(double), IntPtr.Zero, BufferUsageHint.StaticDraw);
                     GL.BufferSubData(BufferTarget.ArrayBuffer, IntPtr.Zero, secTriList.Count * 12 * sizeof(double), colorVertexData);
                 }
                 else
