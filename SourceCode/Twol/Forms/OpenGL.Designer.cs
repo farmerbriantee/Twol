@@ -281,8 +281,7 @@ namespace Twol
                     #endregion
 
                     #region Draw patches of sections, section lines, section dir markers
-                    //GL.Color4(0.85, 0.085, 1, 1.0);
-                    //secTriList.DrawPolygon(PrimitiveType.Triangles);
+ 
                     GL.EnableClientState(ArrayCap.VertexArray);
                     GL.EnableClientState(ArrayCap.ColorArray);
 
@@ -291,15 +290,10 @@ namespace Twol
                     GL.BindBuffer(BufferTarget.ArrayBuffer, colorID);
                     GL.ColorPointer(4, ColorPointerType.Double, 0, 0);
 
-                    //GL.Color4(0.31, 0.3, 0.41, 0.5);
                     GL.DrawArrays(PrimitiveType.Triangles, 0, sectionTriangleCount * 3);
 
                     GL.DisableClientState(ArrayCap.ColorArray);
                     GL.DisableClientState(ArrayCap.VertexArray);
-
-                    double factor = 0.37;
-
-                    GL.LineWidth(4);
 
                     //initialize the steps for mipmap of triangles (skipping detail while zooming out)
                     int mipmap = 2;
@@ -321,12 +315,16 @@ namespace Twol
                         if (Settings.User.setDisplay_isDayMode) GL.Color4((byte)patchList[i][0].easting, (byte)patchList[i][0].northing, (byte)patchList[i][0].heading, (byte)152);
                         else GL.Color4((byte)patchList[i][0].easting, (byte)patchList[i][0].northing, (byte)patchList[i][0].heading, (byte)(152 * 0.5));
 
-                        patchList[i].DrawPolygon(PrimitiveType.TriangleStrip);
+                        patchSaveList[i].DrawSectionPolygon(PrimitiveType.TriangleStrip);
                     }
 
                     if (Settings.User.isDirectionMarkers || Settings.User.setDisplay_isSectionLinesOn)
                     {
-                        //for every new chunk of patch
+                        double factor = 0.37;
+
+                        GL.LineWidth(1);
+
+                        //for every patch
                         for (int i = 0; i < patchList.Count; i++)
                         {
                             if (patchList[i].Count %2 == 0)

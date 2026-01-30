@@ -122,6 +122,27 @@ namespace Twol
             }
         }
 
+        public static void DrawSectionPolygon(this List<vec3> polygon, PrimitiveType type = PrimitiveType.LineLoop)
+        {
+            try
+            {
+                if (polygon.Count > 1)
+                {
+                    GL.Begin(type);
+                    for (int i = 1; i < polygon.Count; i++)
+                    {
+                        GL.Vertex2(polygon[i].easting, polygon[i].northing);
+                    }
+                    GL.End();
+                }
+
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
         public static void DrawPolygonFifths(this List<vec3> polygon, PrimitiveType type = PrimitiveType.LineLoop)
         {
             try
