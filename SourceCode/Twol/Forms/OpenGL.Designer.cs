@@ -92,7 +92,6 @@ namespace Twol
 
             GL.ClearColor(0.1f, 0.1f, 0.3f, 1.0f);
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
-            GL.CullFace(CullFaceMode.Back);
             SetZoom();
             tmrWatchdog.Enabled = true;
         }

@@ -50,6 +50,10 @@ namespace Twol
         int colorID = 0;
         int sectionTriangleCount = 0;
 
+        //original buffer size
+        int maxTriangles = 65000;
+
+
         #region Create Files
 
         //Create contour file
@@ -934,25 +938,6 @@ namespace Twol
             }
         }
 
-        //delete section buffers
-        public void DeleteSectionBuffers()
-        {
-            if (patchID != 0)
-            {
-                GL.DeleteBuffer(patchID);
-                patchID = 0;
-            }
-            if (colorID != 0)
-            {
-                GL.DeleteBuffer(colorID);
-                colorID = 0;
-            }
-            
-            sectionTriangleCount = 0;
-        }
-
-        //original buffer size
-        int maxVertices = 50000;
 
         public void FileLoadTracks()
         {
@@ -1171,6 +1156,23 @@ namespace Twol
 
         }
 
+        //delete section buffers
+        public void DeleteSectionBuffers()
+        {
+            if (patchID != 0)
+            {
+                GL.DeleteBuffer(patchID);
+                patchID = 0;
+            }
+            if (colorID != 0)
+            {
+                GL.DeleteBuffer(colorID);
+                colorID = 0;
+            }
+
+            sectionTriangleCount = 0;
+        }
+
         public void FileLoadSections(string dir)
         {
             List<Triangle> secTriList = new List<Triangle>(128);
@@ -1262,8 +1264,8 @@ namespace Twol
                             }
                         }
 
-                        double[] triangleVertexData = new double[maxVertices * 3 * 2];
-                        double[] colorVertexData = new double[maxVertices * 3 * 4];
+                        double[] triangleVertexData = new double[maxTriangles * 3 * 2];
+                        double[] colorVertexData = new double[maxTriangles * 3 * 4];
 
                         for (int i = 0; i < secTriList.Count; i++)
                         {
@@ -1397,20 +1399,6 @@ namespace Twol
                     triangleVertexData[i * 6 + 5] = secTriList[i].polygonPts[2].northing;
                 }
 
-                int offsetInBytes = sectionTriangleCount * sizeof(double) * 3 * 2;
-
-                if (patchID == 0)
-                {
-                    patchID = GL.GenBuffer();
-                    GL.BindBuffer(BufferTarget.ArrayBuffer, patchID);
-                    GL.BufferData(BufferTarget.ArrayBuffer, triangleVertexData.Length * sizeof(double), IntPtr.Zero, BufferUsageHint.StaticDraw);
-                    GL.BufferSubData(BufferTarget.ArrayBuffer, IntPtr.Zero, secTriList.Count * 6 * sizeof(double), triangleVertexData);
-                }
-                else
-                {
-                    GL.BindBuffer(BufferTarget.ArrayBuffer, patchID);
-                    GL.BufferSubData(BufferTarget.ArrayBuffer, (IntPtr)offsetInBytes, triangleVertexData.Length * sizeof(double), triangleVertexData);
-                }
 
                 double[] colorVertexData = new double[secTriList.Count * 3 * 4];
 
@@ -1428,6 +1416,21 @@ namespace Twol
                     colorVertexData[i * 12 + 9] = colorList[i].northing / 255;
                     colorVertexData[i * 12 + 10] = colorList[i].heading / 255;
                     colorVertexData[i * 12 + 11] = 0.6;
+                }
+
+                int offsetInBytes = sectionTriangleCount * sizeof(double) * 3 * 2;
+
+                if (patchID == 0)
+                {
+                    patchID = GL.GenBuffer();
+                    GL.BindBuffer(BufferTarget.ArrayBuffer, patchID);
+                    GL.BufferData(BufferTarget.ArrayBuffer, triangleVertexData.Length * sizeof(double), IntPtr.Zero, BufferUsageHint.StaticDraw);
+                    GL.BufferSubData(BufferTarget.ArrayBuffer, IntPtr.Zero, secTriList.Count * 6 * sizeof(double), triangleVertexData);
+                }
+                else
+                {
+                    GL.BindBuffer(BufferTarget.ArrayBuffer, patchID);
+                    GL.BufferSubData(BufferTarget.ArrayBuffer, (IntPtr)offsetInBytes, triangleVertexData.Length * sizeof(double), triangleVertexData);
                 }
 
                 offsetInBytes = sectionTriangleCount * sizeof(double) * 3 * 4;
