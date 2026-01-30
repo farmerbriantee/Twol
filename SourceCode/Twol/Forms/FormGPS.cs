@@ -866,6 +866,9 @@ namespace Twol
             contourSaveList?.Clear();
             tRec.recList?.Clear();
             toolRecordSaveList?.Clear();
+
+            //delete vertex arrays
+            DeleteSectionBuffers();
         }
 
         private void nudToolOffset_ValueChanged(object sender, EventArgs e)

@@ -126,7 +126,7 @@ namespace Twol
                 }
             }
 
-            if (numTriangles > 29)
+            if (numTriangles >121)
             {
                 numTriangles = 0;
 
@@ -134,7 +134,7 @@ namespace Twol
                 mf.patchSaveList.Add(triangleList);
                 mf.patchList.Add(triangleList);
 
-                triangleList = new List<vec3>(32);
+                triangleList = new List<vec3>(16);
 
                 //Add Patch colour
                 if (Settings.Tool.setColor_isMultiColorSections && Settings.Tool.isSectionsNotZones)

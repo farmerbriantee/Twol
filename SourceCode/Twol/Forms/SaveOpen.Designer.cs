@@ -45,6 +45,11 @@ namespace Twol
 
         public CFieldFiles fieldFilesList = new CFieldFiles();
 
+        //section buffer variables
+        int patchID = 0;
+        int colorID = 0;
+        int sectionTriangleCount = 0;
+
         #region Create Files
 
         //Create contour file
@@ -929,14 +934,31 @@ namespace Twol
             }
         }
 
+        //delete section buffers
+        public void DeleteSectionBuffers()
+        {
+            if (patchID != 0)
+            {
+                GL.DeleteBuffer(patchID);
+                patchID = 0;
+            }
+            if (colorID != 0)
+            {
+                GL.DeleteBuffer(colorID);
+                colorID = 0;
+            }
+            
+            sectionTriangleCount = 0;
+        }
 
-        public List<Triangle> secTriList = new List<Triangle>(128);
-        int patchID = 0;
-        int colorID = 0;
-
+        //original buffer size
+        int maxVertices = 50000;
 
         public void FileLoadSections(string dir)
         {
+            List<Triangle> secTriList = new List<Triangle>(128);
+
+            DeleteSectionBuffers();
             if (!File.Exists(dir))
             {
                 //write out the file
@@ -950,6 +972,7 @@ namespace Twol
             else
             {
                 secTriList?.Clear();
+
                 using (StreamReader reader = new StreamReader(dir))
                 {
                     try
@@ -1024,9 +1047,8 @@ namespace Twol
                             }
                         }
 
-                        patchID = GL.GenBuffer();
-                        GL.BindBuffer(BufferTarget.ArrayBuffer, patchID);
-                        double[] triangleVertexData = new double[secTriList.Count * 3 * 2];
+                        double[] triangleVertexData = new double[maxVertices * 3 * 2];
+                        double[] colorVertexData = new double[maxVertices * 3 * 4];
 
                         for (int i = 0; i < secTriList.Count; i++)
                         {
@@ -1041,11 +1063,10 @@ namespace Twol
                             triangleVertexData[i * 6 + 5] = secTriList[i].polygonPts[2].northing;
                         }
 
-                        GL.BufferData(BufferTarget.ArrayBuffer, triangleVertexData.Length * sizeof(double), triangleVertexData, BufferUsageHint.StaticDraw);
-
-                        double[] colorVertexData = new double[secTriList.Count * 3 * 4];
-                        colorID = GL.GenBuffer();
-                        GL.BindBuffer(BufferTarget.ArrayBuffer, colorID);
+                        patchID = GL.GenBuffer();
+                        GL.BindBuffer(BufferTarget.ArrayBuffer, patchID);
+                        GL.BufferData(BufferTarget.ArrayBuffer, triangleVertexData.Length * sizeof(double), IntPtr.Zero, BufferUsageHint.DynamicDraw);
+                        GL.BufferSubData(BufferTarget.ArrayBuffer, IntPtr.Zero, secTriList.Count * 6 * sizeof(double), triangleVertexData);
 
                         for (int i = 0; i < secTriList.Count; i++)
                         {
@@ -1063,9 +1084,15 @@ namespace Twol
                             colorVertexData[i * 12 + 11] = 0.5;
                         }
 
-                        GL.BufferData(BufferTarget.ArrayBuffer, colorVertexData.Length * sizeof(double), colorVertexData, BufferUsageHint.StaticDraw);
+                        colorID = GL.GenBuffer();
+                        GL.BindBuffer(BufferTarget.ArrayBuffer, colorID);
+                        GL.BufferData(BufferTarget.ArrayBuffer, colorVertexData.Length * sizeof(double), IntPtr.Zero, BufferUsageHint.DynamicDraw);
+                        GL.BufferSubData(BufferTarget.ArrayBuffer, IntPtr.Zero, secTriList.Count * 12 * sizeof(double), colorVertexData);
 
-                        //patchList.Clear();
+                        sectionTriangleCount = secTriList.Count;
+
+                        secTriList.Clear();
+
                     }
                     catch (Exception e)
                     {
@@ -1626,40 +1653,123 @@ namespace Twol
 
                 // Clear immediately so new data can be collected without waiting for IO
                 patchSaveList.Clear();
-            }
 
-            System.Threading.Tasks.Task.Run(() =>
-            {
-                try
+                vec3 patchColor = new vec3();
+                CPolygon secPoly = new CPolygon();
+                secPoly.polygonPts = new vec2[3];
+
+                List<Triangle> secTriList = new List<Triangle>(128);
+                List<vec3> colorList = new List<vec3>(128);
+
+                for (int s = 0; s < toSave.Count; s++)
                 {
-                    string directory = Path.Combine(RegistrySettings.fieldsDirectory, currentFieldDirectory, currentJobDirectory);
-                    if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
-                        Directory.CreateDirectory(directory);
 
-                    string filePath = Path.Combine(directory, "Sections.txt");
-                    using (StreamWriter writer = new StreamWriter(filePath, true))
+                    vec2[] vArr = new vec2[toSave[s].Count - 1];
+
+                    for (int v = 0; v < toSave[s].Count; v++)
                     {
-                        foreach (var triList in toSave)
+                        if (v == 0)
                         {
-                            int count2 = triList.Count;
-                            writer.WriteLine(count2.ToString(CultureInfo.InvariantCulture));
-
-                            for (int i = 0; i < count2; i++)
-                            {
-                                writer.WriteLine(
-                                    Math.Round(triList[i].easting, 3).ToString(CultureInfo.InvariantCulture) + "," +
-                                    Math.Round(triList[i].northing, 3).ToString(CultureInfo.InvariantCulture) + "," +
-                                    Math.Round(triList[i].heading, 3).ToString(CultureInfo.InvariantCulture));
-                            }
+                            patchColor = new vec3(toSave[s][v]);
+                            continue;
                         }
+
+                        vArr[v - 1] = new vec2(toSave[s][v]);
+                    }
+
+                    for (int i = 0; i < vArr.Length - 2; i += 2)
+                    {
+                        secPoly.polygonPts[0] = vArr[i + 0];
+                        secPoly.polygonPts[1] = vArr[i + 1];
+                        secPoly.polygonPts[2] = vArr[i + 2];
+                        secTriList.Add(new Triangle(secPoly.polygonPts[0], secPoly.polygonPts[1], secPoly.polygonPts[2]));
+                        colorList.Add(new vec3(patchColor));
+
+
+                        secPoly.polygonPts[0] = vArr[i + 1];
+                        secPoly.polygonPts[1] = vArr[i + 3];
+                        secPoly.polygonPts[2] = vArr[i + 2];
+                        secTriList.Add(new Triangle(secPoly.polygonPts[0], secPoly.polygonPts[1], secPoly.polygonPts[2]));
+                        colorList.Add(new vec3(patchColor));
                     }
                 }
-                catch (Exception ex)
+
+                double[] triangleVertexData = new double[secTriList.Count * 3 * 2];
+
+                for (int i = 0; i < secTriList.Count; i++)
                 {
-                    // Log exception from background thread; don't throw.
-                    Log.EventWriter("FileSaveSections (async): " + ex.ToString());
+                    // Assuming Triangle has properties or fields: A, B, C of type vec3 with .x, .y, .z
+                    triangleVertexData[i * 6 + 0] = secTriList[i].polygonPts[0].easting;
+                    triangleVertexData[i * 6 + 1] = secTriList[i].polygonPts[0].northing;
+
+                    triangleVertexData[i * 6 + 2] = secTriList[i].polygonPts[1].easting;
+                    triangleVertexData[i * 6 + 3] = secTriList[i].polygonPts[1].northing;
+
+                    triangleVertexData[i * 6 + 4] = secTriList[i].polygonPts[2].easting;
+                    triangleVertexData[i * 6 + 5] = secTriList[i].polygonPts[2].northing;
                 }
-            });
+
+                int offsetInBytes = sectionTriangleCount * sizeof(double) * 3 * 2;
+                GL.BindBuffer(BufferTarget.ArrayBuffer, patchID);
+                GL.BufferSubData(BufferTarget.ArrayBuffer, (IntPtr)offsetInBytes, triangleVertexData.Length * sizeof(double), triangleVertexData);
+
+                double[] colorVertexData = new double[secTriList.Count * 3 * 4];
+
+                for (int i = 0; i < secTriList.Count; i++)
+                {
+                    colorVertexData[i * 12 + 0] = colorList[i].easting / 255;
+                    colorVertexData[i * 12 + 1] = colorList[i].northing / 255;
+                    colorVertexData[i * 12 + 2] = colorList[i].heading / 255;
+                    colorVertexData[i * 12 + 3] = 0.5;
+                    colorVertexData[i * 12 + 4] = colorList[i].easting / 255;
+                    colorVertexData[i * 12 + 5] = colorList[i].northing / 255;
+                    colorVertexData[i * 12 + 6] = colorList[i].heading / 255;
+                    colorVertexData[i * 12 + 7] = 0.5;
+                    colorVertexData[i * 12 + 8] = colorList[i].easting / 255;
+                    colorVertexData[i * 12 + 9] = colorList[i].northing / 255;
+                    colorVertexData[i * 12 + 10] = colorList[i].heading / 255;
+                    colorVertexData[i * 12 + 11] = 0.5;
+                }
+
+                offsetInBytes = sectionTriangleCount * sizeof(double) * 3 * 4;
+                GL.BindBuffer(BufferTarget.ArrayBuffer, colorID);
+                GL.BufferSubData(BufferTarget.ArrayBuffer, (IntPtr)offsetInBytes, colorVertexData.Length * sizeof(double), colorVertexData);
+
+                sectionTriangleCount += triangleVertexData.Length;
+
+                System.Threading.Tasks.Task.Run(() =>
+                    {
+                        try
+                        {
+                            string directory = Path.Combine(RegistrySettings.fieldsDirectory, currentFieldDirectory, currentJobDirectory);
+                            if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
+                                Directory.CreateDirectory(directory);
+
+                            string filePath = Path.Combine(directory, "Sections.txt");
+                            using (StreamWriter writer = new StreamWriter(filePath, true))
+                            {
+                                foreach (var triList in toSave)
+                                {
+                                    int count2 = triList.Count;
+                                    writer.WriteLine(count2.ToString(CultureInfo.InvariantCulture));
+
+                                    for (int i = 0; i < count2; i++)
+                                    {
+                                        writer.WriteLine(
+                                            Math.Round(triList[i].easting, 3).ToString(CultureInfo.InvariantCulture) + "," +
+                                            Math.Round(triList[i].northing, 3).ToString(CultureInfo.InvariantCulture) + "," +
+                                            Math.Round(triList[i].heading, 3).ToString(CultureInfo.InvariantCulture));
+                                    }
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            // Log exception from background thread; don't throw.
+                            Log.EventWriter("FileSaveSections (async): " + ex.ToString());
+                        }
+                    });
+            }
         }
 
         public void FileSaveSystemEvents()

@@ -281,88 +281,126 @@ namespace Twol
                     #endregion
 
                     #region Draw patches of sections, section lines, section dir markers
-                    //direction marker width
+                    //GL.Color4(0.85, 0.085, 1, 1.0);
+                    //secTriList.DrawPolygon(PrimitiveType.Triangles);
+                    GL.EnableClientState(ArrayCap.VertexArray);
+                    GL.EnableClientState(ArrayCap.ColorArray);
+
+                    GL.BindBuffer(BufferTarget.ArrayBuffer, patchID);
+                    GL.VertexPointer(2, VertexPointerType.Double, 0, 0);
+                    GL.BindBuffer(BufferTarget.ArrayBuffer, colorID);
+                    GL.ColorPointer(4, ColorPointerType.Double, 0, 0);
+
+                    //GL.Color4(0.31, 0.3, 0.41, 0.5);
+                    GL.DrawArrays(PrimitiveType.Triangles, 0, sectionTriangleCount * 3);
+
+                    GL.DisableClientState(ArrayCap.ColorArray);
+                    GL.DisableClientState(ArrayCap.VertexArray);
+
                     double factor = 0.37;
 
                     GL.LineWidth(4);
 
                     //initialize the steps for mipmap of triangles (skipping detail while zooming out)
-                    int mipmap = 0;
-                    if (camera.camSetDistance < -800) mipmap = 2;
-                    if (camera.camSetDistance < -1500) mipmap = 4;
-                    if (camera.camSetDistance < -2400) mipmap = 8;
-                    if (camera.camSetDistance < -5000) mipmap = 16;
+                    int mipmap = 2;
+                    if (camera.camSetDistance < -300) mipmap = 4;
+                    if (camera.camSetDistance < -600) mipmap = 8;
+                    if (camera.camSetDistance < -1200) mipmap = 16;
 
-                    //for every new chunk of patch
-                    foreach (var triList in patchSaveList)
+                    //for all new patches not in vertex buffer
+                    for (int i = 0; i < patchSaveList.Count; i++)
                     {
                         //check for even
-                        if (triList.Count % 2 == 0)
-                            break;
-
-
-                        if (Settings.User.setDisplay_isDayMode) GL.Color4((byte)triList[0].easting, (byte)triList[0].northing, (byte)triList[0].heading, (byte)152);
-                        else GL.Color4((byte)triList[0].easting, (byte)triList[0].northing, (byte)triList[0].heading, (byte)(152 * 0.5));
-
-                        triList.DrawPolygon(mipmap, 1, PrimitiveType.TriangleStrip);
-
-                    }
-
-                    //for every new chunk of patch
-                    foreach (var triList in patchList)
-                    {
-                        if (Settings.User.setDisplay_isSectionLinesOn)
+                        if (patchSaveList[i].Count % 2 == 0)
                         {
-                            //highlight lines
-                            GL.Color4(0.2, 0.2, 0.2, 1.0);
-
-                            triList.DrawPolygon(mipmap, 1, PrimitiveType.LineStrip);
-                            triList.DrawPolygon(mipmap, 2, PrimitiveType.LineStrip);
+                            patchSaveList[i].Clear();
+                            patchSaveList.RemoveAt(i);
+                            continue;
                         }
+
+                        if (Settings.User.setDisplay_isDayMode) GL.Color4((byte)patchList[i][0].easting, (byte)patchList[i][0].northing, (byte)patchList[i][0].heading, (byte)152);
+                        else GL.Color4((byte)patchList[i][0].easting, (byte)patchList[i][0].northing, (byte)patchList[i][0].heading, (byte)(152 * 0.5));
+
+                        patchList[i].DrawPolygon(PrimitiveType.TriangleStrip);
                     }
 
-                    //for every new chunk of patch
-                    foreach (var triList in patchList)
+                    if (Settings.User.isDirectionMarkers || Settings.User.setDisplay_isSectionLinesOn)
                     {
-
-                        if (Settings.User.isDirectionMarkers)
+                        //for every new chunk of patch
+                        for (int i = 0; i < patchList.Count; i++)
                         {
-                            if (triList.Count > 31)
+                            if (patchList[i].Count %2 == 0)
                             {
-                                double headz =
-                                    Math.Atan2(triList[29].easting - triList[27].easting, triList[29].northing - triList[27].northing);
+                                patchList[i].Clear();
+                                patchList.RemoveAt(i);
+                                continue;
+                            }
 
-                                left = new vec2(
-                                    (triList[27].easting + factor * (triList[28].easting - triList[27].easting)),
-                                    (triList[27].northing + factor * (triList[28].northing - triList[27].northing)));
+                            //highlight lines
+                            if (Settings.User.setDisplay_isSectionLinesOn && camera.camSetDistance > -2400)
+                            {
+                                GL.Color4(0.2, 0.2, 0.2, 1.0);
 
-                                factor = 1 - factor;
+                                GL.Begin(PrimitiveType.LineStrip);
+                                for (int j = 1; j < patchList[i].Count; j += mipmap)
+                                {
+                                    if (j >= patchList[i].Count - 1) j = patchList[i].Count - 2;
+                                    GL.Vertex2(patchList[i][j].easting, patchList[i][j].northing);
+                                }
+                                GL.End();
 
-                                right = new vec2(
-                                    (triList[27].easting + factor * (triList[28].easting - triList[27].easting)),
-                                    (triList[27].northing + factor * (triList[28].northing - triList[27].northing)));
-
-                                double disst = glm.Distance(left, right);
-                                disst *= 1.5;
-
-                                ptTip = new vec2((left.easting + right.easting) / 2, (left.northing + right.northing) / 2);
-
-                                ptTip = new vec2(ptTip.easting + (Math.Sin(headz) * disst), ptTip.northing + (Math.Cos(headz) * disst));
-
-                                GL.Color4((byte)(255 - triList[0].easting), (byte)(255 - triList[0].northing), (byte)(255 - triList[0].heading), (byte)150);
-                                //GL.LineWidth(3.0f);
-
-                                GL.Begin(PrimitiveType.Triangles);
-                                GL.Vertex2(left.easting, left.northing);
-                                GL.Vertex2(right.easting, right.northing);
-
-                                GL.Color4(0.85, 0.85, 1, 1.0);
-                                GL.Vertex2(ptTip.easting, ptTip.northing);
+                                GL.Begin(PrimitiveType.LineStrip);
+                                for (int j = 2; j < patchList[i].Count; j += mipmap)
+                                {
+                                    if (j >= patchList[i].Count) j = patchList[i].Count - 1;
+                                    GL.Vertex2(patchList[i][j].easting, patchList[i][j].northing);
+                                }
                                 GL.End();
                             }
-                        }
-                    }
 
+                            //direction marker width
+                            if (Settings.User.isDirectionMarkers)
+                            {
+                                if (patchList[i].Count > 31)
+                                {
+                                    double headz =
+                                        Math.Atan2(patchList[i][29].easting - patchList[i][27].easting, patchList[i][29].northing - patchList[i][27].northing);
+
+                                    left = new vec2(
+                                        (patchList[i][27].easting + factor * (patchList[i][28].easting - patchList[i][27].easting)),
+                                        (patchList[i][27].northing + factor * (patchList[i][28].northing - patchList[i][27].northing)));
+
+                                    factor = 1 - factor;
+
+                                    right = new vec2(
+                                        (patchList[i][27].easting + factor * (patchList[i][28].easting - patchList[i][27].easting)),
+                                        (patchList[i][27].northing + factor * (patchList[i][28].northing - patchList[i][27].northing)));
+
+                                    double disst = glm.Distance(left, right);
+                                    disst *= 1.5;
+
+                                    ptTip = new vec2((left.easting + right.easting) / 2, (left.northing + right.northing) / 2);
+
+                                    ptTip = new vec2(ptTip.easting + (Math.Sin(headz) * disst), ptTip.northing + (Math.Cos(headz) * disst));
+
+                                    GL.Color4((byte)(255 - patchList[i][0].easting), (byte)(255 - patchList[i][0].northing), (byte)(255 - patchList[i][0].heading), (byte)150);
+                                    //GL.LineWidth(3.0f);
+
+                                    GL.Begin(PrimitiveType.Triangles);
+                                    GL.Vertex2(left.easting, left.northing);
+                                    GL.Vertex2(right.easting, right.northing);
+
+                                    GL.Color4(0.85, 0.85, 1, 1.0);
+                                    GL.Vertex2(ptTip.easting, ptTip.northing);
+                                    GL.End();
+                                }
+                            }
+                        }
+
+                    }
+                        
+
+                    //the triangles right behind sections
                     if (sectionOnCounter > 0)
                     {
                         foreach (var patch in triStrip)
@@ -399,22 +437,6 @@ namespace Twol
                             }
                         }
                     }
-
-                    //GL.Color4(0.85, 0.085, 1, 1.0);
-                    //secTriList.DrawPolygon(PrimitiveType.Triangles);
-                    GL.EnableClientState(ArrayCap.VertexArray);
-                    GL.EnableClientState(ArrayCap.ColorArray);
-
-                    GL.BindBuffer(BufferTarget.ArrayBuffer, patchID);
-                    GL.VertexPointer(2, VertexPointerType.Double, 0, 0);
-                    GL.BindBuffer(BufferTarget.ArrayBuffer, colorID);
-                    GL.ColorPointer(4, ColorPointerType.Double, 0, 0);
-
-                    //GL.Color4(0.31, 0.3, 0.41, 0.5);
-                    GL.DrawArrays(PrimitiveType.Triangles, 0, secTriList.Count * 3);
-
-                    GL.DisableClientState(ArrayCap.ColorArray);
-                    GL.DisableClientState(ArrayCap.VertexArray);
 
                     #endregion
 
@@ -919,59 +941,39 @@ namespace Twol
             GL.BindBuffer(BufferTarget.ArrayBuffer, patchID);
             GL.VertexPointer(2, VertexPointerType.Double, 0, 0);
 
-            GL.DrawArrays(PrimitiveType.Triangles, 0, secTriList.Count * 3);
+            GL.DrawArrays(PrimitiveType.Triangles, 0, sectionTriangleCount * 3);
             GL.DisableClientState(ArrayCap.VertexArray);
 
-            //double pivEplus = toolPos.easting + 50;
-            //double pivEminus = toolPos.easting - 50;
-            //double pivNplus = toolPos.northing + 50;
-            //double pivNminus = toolPos.northing - 50;
+            //for every new chunk of patch not in vertexArray
+            foreach (var triList in patchSaveList)
+            {
+                //point is in frustum so draw the entire patch
+                triList.DrawPolygon(PrimitiveType.TriangleStrip);
+            }
 
-            ////for every new chunk of patch
-            //foreach (var triList in patchList)
-            //{
-            //    int count2 = triList.Count;
-            //    for (int i = 1; i < count2; i += 3)
-            //    {
-            //        //determine if point is in frustum or not
-            //        if (triList[i].easting > pivEplus)
-            //            continue;
-            //        if (triList[i].easting < pivEminus)
-            //            continue;
-            //        if (triList[i].northing > pivNplus)
-            //            continue;
-            //        if (triList[i].northing < pivNminus)
-            //            continue;
+            //Draw currently being made patch
+            if (sectionOnCounter > 0)
+            {
+                foreach (var patch in triStrip)
+                {
+                    if (patch.isDrawing)
+                    {
+                        try
+                        {
+                            //draw the triangle in each triangle strip
+                            GL.Begin(PrimitiveType.TriangleStrip);
 
-            //        //point is in frustum so draw the entire patch
-            //        triList.DrawPolygon(0, 1, PrimitiveType.TriangleStrip);
-            //        break;
-            //    }
-            //}
+                            for (int i = 1; i < patch.triangleList.Count; i++)
+                                GL.Vertex2(patch.triangleList[i].easting, patch.triangleList[i].northing);
 
-            ////Draw currently being made patch
-            //if (sectionOnCounter > 0)
-            //{
-            //    foreach (var patch in triStrip)
-            //    {
-            //        if (patch.isDrawing)
-            //        {
-            //            try
-            //            {
-            //                //draw the triangle in each triangle strip
-            //                GL.Begin(PrimitiveType.TriangleStrip);
-
-            //                for (int i = 1; i < patch.triangleList.Count; i++)
-            //                    GL.Vertex2(patch.triangleList[i].easting, patch.triangleList[i].northing);
-
-            //                GL.End();
-            //            }
-            //            catch
-            //            {
-            //            }
-            //        }
-            //    }
-            //}
+                            GL.End();
+                        }
+                        catch
+                        {
+                        }
+                    }
+                }
+            }
 
             //tram tracks
             GL.Color3((byte)0, (byte)bbColors.tram, (byte)0);

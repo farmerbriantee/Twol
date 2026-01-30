@@ -1996,6 +1996,9 @@ namespace Twol
                         patchList?.Clear();
                         patchSaveList?.Clear();
 
+                        //delete vertex arrays
+                        DeleteSectionBuffers();
+
                         FileCreateContour();
                         FileCreateSections();
 
