@@ -51,20 +51,20 @@ namespace Twol
 
             GL.BindBuffer(BufferTarget.ArrayBuffer, vboIndex);
 
-            double[] triangleVertexData = new double[fenceTriangleList.Count * 6];
+            float[] triangleVertexData = new float[fenceTriangleList.Count * 6];
 
             for (int i = 0; i < fenceTriangleList.Count; i++)
             {
                 // Assuming Triangle has properties or fields: A, B, C of type vec3 with .x, .y, .z
-                triangleVertexData[i * 6 + 0] = fenceTriangleList[i].polygonPts[0].easting;
-                triangleVertexData[i * 6 + 1] = fenceTriangleList[i].polygonPts[0].northing;
-                triangleVertexData[i * 6 + 2] = fenceTriangleList[i].polygonPts[1].easting;
-                triangleVertexData[i * 6 + 3] = fenceTriangleList[i].polygonPts[1].northing;
-                triangleVertexData[i * 6 + 4] = fenceTriangleList[i].polygonPts[2].easting;
-                triangleVertexData[i * 6 + 5] = fenceTriangleList[i].polygonPts[2].northing;
+                triangleVertexData[i * 6 + 0] = (float)fenceTriangleList[i].polygonPts[0].easting;
+                triangleVertexData[i * 6 + 1] = (float)fenceTriangleList[i].polygonPts[0].northing;
+                triangleVertexData[i * 6 + 2] = (float)fenceTriangleList[i].polygonPts[1].easting;
+                triangleVertexData[i * 6 + 3] = (float)fenceTriangleList[i].polygonPts[1].northing;
+                triangleVertexData[i * 6 + 4] = (float)fenceTriangleList[i].polygonPts[2].easting;
+                triangleVertexData[i * 6 + 5] = (float)fenceTriangleList[i].polygonPts[2].northing;
             }
 
-            GL.BufferData(BufferTarget.ArrayBuffer, triangleVertexData.Length * sizeof(double), triangleVertexData, BufferUsageHint.StaticDraw);
+            GL.BufferData(BufferTarget.ArrayBuffer, triangleVertexData.Length * sizeof(float), triangleVertexData, BufferUsageHint.StaticDraw);
 
             BuildTurnLine();
         }

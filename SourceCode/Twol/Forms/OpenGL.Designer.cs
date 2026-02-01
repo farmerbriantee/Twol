@@ -227,7 +227,7 @@ namespace Twol
                         {
                             //draw whole outer field polygon
                             GL.BindBuffer(BufferTarget.ArrayBuffer, bnd.vbo_FenceTriangles[0]);
-                            GL.VertexPointer(2, VertexPointerType.Double, 0, 0);
+                            GL.VertexPointer(2, VertexPointerType.Float, 0, 0);
 
                             GL.Color4(0.41, 0.41, 0.051, 0.25);
                             GL.DrawArrays(PrimitiveType.Triangles, 0, bnd.bndList[0].fenceTriangleList.Count * 3);
@@ -235,7 +235,7 @@ namespace Twol
                             //draw inner polygon
 
                             GL.BindBuffer(BufferTarget.ArrayBuffer, bnd.vbo_HeadTriangles[0]);
-                            GL.VertexPointer(2, VertexPointerType.Double, 0, 0);
+                            GL.VertexPointer(2, VertexPointerType.Float, 0, 0);
 
                             GL.Color4(0.031, 0.3, 0.51, 0.25);
                             GL.DrawArrays(PrimitiveType.Triangles, 0, bnd.bndList[0].hdLineTriangleList.Count * 3);
@@ -247,7 +247,7 @@ namespace Twol
                             //draw outer field polygon (fence)
 
                             GL.BindBuffer(BufferTarget.ArrayBuffer, bnd.vbo_FenceTriangles[0]);
-                            GL.VertexPointer(2, VertexPointerType.Double, 0, 0);
+                            GL.VertexPointer(2, VertexPointerType.Float, 0, 0);
 
                             GL.Color4(0.1, 0.3, 0.1, 0.25);
                             GL.DrawArrays(PrimitiveType.Triangles, 0, bnd.bndList[0].fenceTriangleList.Count * 3);
@@ -265,7 +265,7 @@ namespace Twol
                             {
                                 //bnd.bndList[a].fenceTriangleList.DrawPolygon(PrimitiveType.Triangles);
                                 GL.BindBuffer(BufferTarget.ArrayBuffer, bnd.vbo_FenceTriangles[a]);
-                                GL.VertexPointer(2, VertexPointerType.Double, 0, 0);
+                                GL.VertexPointer(2, VertexPointerType.Float, 0, 0);
 
                                 GL.DrawArrays(PrimitiveType.Triangles, 0, bnd.bndList[a].fenceTriangleList.Count * 3);
 
@@ -908,14 +908,14 @@ namespace Twol
                 {
                     //draw whole outer field polygon
                     GL.BindBuffer(BufferTarget.ArrayBuffer, bnd.vbo_FenceTriangles[0]);
-                    GL.VertexPointer(2, VertexPointerType.Double, 0, 0);
+                    GL.VertexPointer(2, VertexPointerType.Float, 0, 0);
 
                     GL.Color3((byte)bbColors.fence, (byte)0, (byte)0);
                     GL.DrawArrays(PrimitiveType.Triangles, 0, bnd.bndList[0].fenceTriangleList.Count * 3);
 
                     //draw inner polygon - headland
                     GL.BindBuffer(BufferTarget.ArrayBuffer, bnd.vbo_HeadTriangles[0]);
-                    GL.VertexPointer(2, VertexPointerType.Double, 0, 0);
+                    GL.VertexPointer(2, VertexPointerType.Float, 0, 0);
 
                     GL.Color3((byte)bbColors.headland, (byte)0, (byte)0);
                     GL.DrawArrays(PrimitiveType.Triangles, 0, bnd.bndList[0].hdLineTriangleList.Count * 3);
@@ -924,7 +924,7 @@ namespace Twol
                 {
                     //no headland exists
                     GL.BindBuffer(BufferTarget.ArrayBuffer, bnd.vbo_FenceTriangles[0]);
-                    GL.VertexPointer(2, VertexPointerType.Double, 0, 0);
+                    GL.VertexPointer(2, VertexPointerType.Float, 0, 0);
 
                     GL.Color3((byte)bbColors.headland, (byte)0, (byte)0);
                     GL.DrawArrays(PrimitiveType.Triangles, 0, bnd.bndList[0].fenceTriangleList.Count * 3);
@@ -938,7 +938,7 @@ namespace Twol
                     {
                         //bnd.bndList[a].fenceTriangleList.DrawPolygon(PrimitiveType.Triangles);
                         GL.BindBuffer(BufferTarget.ArrayBuffer, bnd.vbo_FenceTriangles[a]);
-                        GL.VertexPointer(2, VertexPointerType.Double, 0, 0);
+                        GL.VertexPointer(2, VertexPointerType.Float, 0, 0);
 
                         GL.DrawArrays(PrimitiveType.Triangles, 0, bnd.bndList[a].fenceTriangleList.Count * 3);
                     }
