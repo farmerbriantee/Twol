@@ -690,6 +690,8 @@ namespace Twol
                             ahrsTool.imuRoll = rollK;
                         }
 
+                        //new tool start
+
                         if (Settings.Tool.setToolSteer.antennaOffset != 0)
                         {
                             pnTool.fix.easting += Math.Cos(fixHeading) * Settings.Tool.setToolSteer.antennaOffset;
