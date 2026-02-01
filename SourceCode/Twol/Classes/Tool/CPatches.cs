@@ -59,7 +59,7 @@ namespace Twol
                 //Right side of triangle
                 triangleList.Add(new vec3(rightPoint.easting, rightPoint.northing, 0));
 
-                mf.patchCounter++;
+                mf.sectionOnCounter++;
             }
         }
 
@@ -75,6 +75,7 @@ namespace Twol
                 //save the triangle list in a patch list to add to saving file
                 mf.patchSaveList.Add(triangleList);
                 mf.patchList.Add(triangleList);
+
             }
             else
             {
@@ -125,7 +126,7 @@ namespace Twol
                 }
             }
 
-            if (numTriangles > 29)
+            if (numTriangles >121)
             {
                 numTriangles = 0;
 
@@ -133,7 +134,7 @@ namespace Twol
                 mf.patchSaveList.Add(triangleList);
                 mf.patchList.Add(triangleList);
 
-                triangleList = new List<vec3>(32);
+                triangleList = new List<vec3>(16);
 
                 //Add Patch colour
                 if (Settings.Tool.setColor_isMultiColorSections && Settings.Tool.isSectionsNotZones)

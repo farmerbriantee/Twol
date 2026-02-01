@@ -243,7 +243,7 @@ namespace Twol
                 return;
             }
 
-            if (mf.patchCounter != 0)
+            if (mf.sectionOnCounter != 0)
             {
                 mf.TimedMessageBox(1500, "Section Control On", "Turn Off Section Control");
                 return;

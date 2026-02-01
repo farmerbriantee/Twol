@@ -386,7 +386,7 @@ namespace Twol
                 //for every new chunk of patch
                 foreach (var triList in mf.patchList)
                 {
-                    triList.DrawPolygon(8, 1, PrimitiveType.TriangleStrip);
+                    triList.DrawPolygon(PrimitiveType.TriangleStrip);
                 }
             }
 

@@ -122,6 +122,27 @@ namespace Twol
             }
         }
 
+        public static void DrawSectionPolygon(this List<vec3> polygon, PrimitiveType type = PrimitiveType.LineLoop)
+        {
+            try
+            {
+                if (polygon.Count > 1)
+                {
+                    GL.Begin(type);
+                    for (int i = 1; i < polygon.Count; i++)
+                    {
+                        GL.Vertex2(polygon[i].easting, polygon[i].northing);
+                    }
+                    GL.End();
+                }
+
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
         public static void DrawPolygonFifths(this List<vec3> polygon, PrimitiveType type = PrimitiveType.LineLoop)
         {
             try
@@ -145,37 +166,37 @@ namespace Twol
             }
         }
 
-        public static void DrawPolygon(this List<vec3> polygon, int mipmap, int start, PrimitiveType type = PrimitiveType.TriangleStrip)
-        {
-            if (polygon.Count > 2)
-            {
-                int count2 = polygon.Count;
-                GL.Begin(type);
-                //if large enough patch and camera zoomed out, fake mipmap the patches, skip triangles
-                if (count2 >= (mipmap + 2))
-                {
-                    int step = mipmap;
-                    for (int i = start; i < count2; i += step)
-                    {
-                        GL.Vertex2(polygon[i].easting, polygon[i].northing);
-                        i++;
+        //public static void DrawPolygon(this List<vec3> polygon, int mipmap, int start, PrimitiveType type = PrimitiveType.TriangleStrip)
+        //{
+        //    if (polygon.Count > 4)
+        //    {
+        //        int count2 = polygon.Count;
+        //        GL.Begin(type);
+        //        //if large enough patch and camera zoomed out, fake mipmap the patches, skip triangles
+        //        if (count2 >= (mipmap + 2))
+        //        {
+        //            int step = mipmap;
+        //            for (int i = start; i < count2; i += step)
+        //            {
+        //                GL.Vertex2(polygon[i].easting, polygon[i].northing);
+        //                i++;
 
-                        if (type != PrimitiveType.LineStrip)
-                            GL.Vertex2(polygon[i].easting, polygon[i].northing);
-                        i++;
-                        if (count2 - i <= (mipmap + 2)) step = 0;//too small to mipmap it
-                    }
-                }
-                else
-                {
-                    if (type != PrimitiveType.LineStrip)
-                        for (int i = start; i < count2; i++) GL.Vertex2(polygon[i].easting, polygon[i].northing);
-                    else
-                        for (int i = start; i < count2; i += 2) GL.Vertex2(polygon[i].easting, polygon[i].northing);
-                }
-                GL.End();
-            }
-        }
+        //                if (type != PrimitiveType.LineStrip)
+        //                    GL.Vertex2(polygon[i].easting, polygon[i].northing);
+        //                i++;
+        //                if (count2 - i <= (mipmap + 2)) step = 0;//too small to mipmap it
+        //            }
+        //        }
+        //        else
+        //        {
+        //            if (type != PrimitiveType.LineStrip)
+        //                for (int i = start; i < count2; i++) GL.Vertex2(polygon[i].easting, polygon[i].northing);
+        //            else
+        //                for (int i = start; i < count2; i += 2) GL.Vertex2(polygon[i].easting, polygon[i].northing);
+        //        }
+        //        GL.End();
+        //    }
+        //}
 
         public static void DrawPolygon(this List<vec2> polygon, PrimitiveType type = PrimitiveType.LineLoop)
         {

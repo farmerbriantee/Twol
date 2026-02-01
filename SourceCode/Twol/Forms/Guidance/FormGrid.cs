@@ -148,7 +148,7 @@ namespace Twol
             //DrawSections
             foreach (var triList in mf.patchList)
             {
-                triList.DrawPolygon(8, 1, PrimitiveType.TriangleStrip);
+                triList.DrawPolygon(PrimitiveType.TriangleStrip);
             }
 
             GL.LineWidth(3);
