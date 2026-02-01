@@ -441,7 +441,7 @@ namespace Twol
 
                 for (int i = 0; i < recList[selectedLineIndex].Count; i += 5)
                 {
-                    GL.Vertex2(recList[selectedLineIndex][i].easting, recList[selectedLineIndex][i].northing);
+                    GL.Vertex3(recList[selectedLineIndex][i].easting, recList[selectedLineIndex][i].northing, 0);
                 }
                 GL.End();
 
@@ -452,7 +452,7 @@ namespace Twol
                 for (int i = 0; i < recList.Count; i++)
                 {
                     GL.Begin(PrimitiveType.Points);
-                    GL.Vertex2(recList[i][0].easting, recList[i][0].northing);
+                    GL.Vertex3(recList[i][0].easting, recList[i][0].northing, 0);
                     GL.End();
                 }
             }
@@ -461,13 +461,13 @@ namespace Twol
             //GL.PointSize(16.0f);
             //GL.Begin(PrimitiveType.Points);
             //GL.Color3(1.0f, 0.00f, 0.0f);
-            //GL.Vertex2(mf.pivotAxlePos.easting, mf.pivotAxlePos.northing);
+            //GL.Vertex3(mf.pivotAxlePos.easting, mf.pivotAxlePos.northing);
             //GL.End();
 
             //GL.PointSize(8.0f);
             //GL.Begin(PrimitiveType.Points);
             //GL.Color3(0.00f, 0.0f, 0.0f);
-            //GL.Vertex2(mf.pivotAxlePos.easting, mf.pivotAxlePos.northing);
+            //GL.Vertex3(mf.pivotAxlePos.easting, mf.pivotAxlePos.northing);
             //GL.End();
 
             //draw the line building graphics

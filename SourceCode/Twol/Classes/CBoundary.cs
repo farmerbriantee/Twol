@@ -237,34 +237,34 @@ namespace Twol
                 {
                     if (isDrawRightSide)
                     {
-                        GL.Vertex2(fenceBeingMadePts[0].easting, fenceBeingMadePts[0].northing);
+                        GL.Vertex3(fenceBeingMadePts[0].easting, fenceBeingMadePts[0].northing, 0);
 
-                        GL.Vertex2(pivot.easting + (Math.Sin(pivot.heading - glm.PIBy2) * -createFenceOffset),
-                                pivot.northing + (Math.Cos(pivot.heading - glm.PIBy2) * -createFenceOffset));
-                        GL.Vertex2(fenceBeingMadePts[fenceBeingMadePts.Count - 1].easting, fenceBeingMadePts[fenceBeingMadePts.Count - 1].northing);
+                        GL.Vertex3(pivot.easting + (Math.Sin(pivot.heading - glm.PIBy2) * -createFenceOffset),
+                                pivot.northing + (Math.Cos(pivot.heading - glm.PIBy2) * -createFenceOffset), 0);
+                        GL.Vertex3(fenceBeingMadePts[fenceBeingMadePts.Count - 1].easting, fenceBeingMadePts[fenceBeingMadePts.Count - 1].northing, 0);
                     }
                     else
                     {
-                        GL.Vertex2(fenceBeingMadePts[0].easting, fenceBeingMadePts[0].northing);
+                        GL.Vertex3(fenceBeingMadePts[0].easting, fenceBeingMadePts[0].northing, 0);
 
-                        GL.Vertex2(pivot.easting + (Math.Sin(pivot.heading - glm.PIBy2) * createFenceOffset),
-                                pivot.northing + (Math.Cos(pivot.heading - glm.PIBy2) * createFenceOffset));
-                        GL.Vertex2(fenceBeingMadePts[fenceBeingMadePts.Count - 1].easting, fenceBeingMadePts[fenceBeingMadePts.Count - 1].northing);
+                        GL.Vertex3(pivot.easting + (Math.Sin(pivot.heading - glm.PIBy2) * createFenceOffset),
+                                pivot.northing + (Math.Cos(pivot.heading - glm.PIBy2) * createFenceOffset), 0);
+                        GL.Vertex3(fenceBeingMadePts[fenceBeingMadePts.Count - 1].easting, fenceBeingMadePts[fenceBeingMadePts.Count - 1].northing, 0);
                     }
                 }
                 else if (mf.section.Count > 0) //draw from tool
                 {
                     if (isDrawRightSide)
                     {
-                        GL.Vertex2(fenceBeingMadePts[0].easting, fenceBeingMadePts[0].northing);
-                        GL.Vertex2(mf.section[mf.section.Count - 1].rightPoint.easting, mf.section[mf.section.Count - 1].rightPoint.northing);
-                        GL.Vertex2(fenceBeingMadePts[fenceBeingMadePts.Count - 1].easting, fenceBeingMadePts[fenceBeingMadePts.Count - 1].northing);
+                        GL.Vertex3(fenceBeingMadePts[0].easting, fenceBeingMadePts[0].northing, 0);
+                        GL.Vertex3(mf.section[mf.section.Count - 1].rightPoint.easting, mf.section[mf.section.Count - 1].rightPoint.northing, 0);
+                        GL.Vertex3(fenceBeingMadePts[fenceBeingMadePts.Count - 1].easting, fenceBeingMadePts[fenceBeingMadePts.Count - 1].northing, 0);
                     }
                     else
                     {
-                        GL.Vertex2(fenceBeingMadePts[0].easting, fenceBeingMadePts[0].northing);
-                        GL.Vertex2(mf.section[0].leftPoint.easting, mf.section[0].leftPoint.northing);
-                        GL.Vertex2(fenceBeingMadePts[fenceBeingMadePts.Count - 1].easting, fenceBeingMadePts[fenceBeingMadePts.Count - 1].northing);
+                        GL.Vertex3(fenceBeingMadePts[0].easting, fenceBeingMadePts[0].northing, 0);
+                        GL.Vertex3(mf.section[0].leftPoint.easting, mf.section[0].leftPoint.northing, 0);
+                        GL.Vertex3(fenceBeingMadePts[fenceBeingMadePts.Count - 1].easting, fenceBeingMadePts[fenceBeingMadePts.Count - 1].northing, 0);
                     }
                 }
                 GL.End();

@@ -208,7 +208,7 @@ namespace Twol
                                 GL.Color3(0.3, 0.9, 0.3);
                                 GL.Begin(PrimitiveType.Points);
 
-                                GL.Vertex2(field.start.easting, field.start.northing);
+                                GL.Vertex3(field.start.easting, field.start.northing, 0);
                                 GL.End();
 
                                 font.DrawText3D(field.start.easting, field.start.northing, field.name, true, 2);
@@ -326,19 +326,19 @@ namespace Twol
                                     GL.Begin(PrimitiveType.TriangleStrip);
 
                                     for (int i = 1; i < patch.triangleList.Count; i++)
-                                        GL.Vertex2(patch.triangleList[i].easting, patch.triangleList[i].northing);
+                                        GL.Vertex3(patch.triangleList[i].easting, patch.triangleList[i].northing, 0);
 
                                     //left side of triangle
                                     vec2 pt = new vec2((cosSectionHeading * section[patch.currentStartSectionNum].positionLeft) + toolPos.easting,
                                             (sinSectionHeading * section[patch.currentStartSectionNum].positionLeft) + toolPos.northing);
 
-                                    GL.Vertex2(pt.easting, pt.northing);
+                                    GL.Vertex3(pt.easting, pt.northing, 0);
 
                                     //Right side of triangle
                                     pt = new vec2((cosSectionHeading * section[patch.currentEndSectionNum].positionRight) + toolPos.easting,
                                        (sinSectionHeading * section[patch.currentEndSectionNum].positionRight) + toolPos.northing);
 
-                                    GL.Vertex2(pt.easting, pt.northing);
+                                    GL.Vertex3(pt.easting, pt.northing, 0);
 
                                     GL.End();
                                 }
@@ -400,7 +400,7 @@ namespace Twol
                                     for (int j = 1; j < triList.Count; j += mipmap)
                                     {
                                         if (j >= triList.Count - 1) j = triList.Count - 2;
-                                        GL.Vertex2(triList[j].easting, triList[j].northing);
+                                        GL.Vertex3(triList[j].easting, triList[j].northing, 0);
                                     }
                                     GL.End();
 
@@ -408,7 +408,7 @@ namespace Twol
                                     for (int j = 2; j < triList.Count; j += mipmap)
                                     {
                                         if (j >= triList.Count) j = triList.Count - 1;
-                                        GL.Vertex2(triList[j].easting, triList[j].northing);
+                                        GL.Vertex3(triList[j].easting, triList[j].northing, 0);
                                     }
                                     GL.End();
                                 }
@@ -443,11 +443,9 @@ namespace Twol
                                         //GL.LineWidth(3.0f);
 
                                         GL.Begin(PrimitiveType.Triangles);
-                                        GL.Vertex2(left.easting, left.northing);
-                                        GL.Vertex2(right.easting, right.northing);
-
-                                        GL.Color4(0.85, 0.85, 1, 1.0);
-                                        GL.Vertex2(ptTip.easting, ptTip.northing);
+                                        GL.Vertex3(left.easting, left.northing, 0);
+                                        GL.Vertex3(right.easting, right.northing, 0);
+                                        GL.Vertex3(ptTip.easting, ptTip.northing, 0);
                                         GL.End();
                                     }
                                 }
@@ -519,8 +517,8 @@ namespace Twol
                             GL.LineStipple(1, 0x0707);
                             GL.Begin(PrimitiveType.Lines);
                             GL.Color3(0.930f, 0.72f, 0.32f);
-                            GL.Vertex2(pivotAxlePos.easting, pivotAxlePos.northing);
-                            GL.Vertex2(flagPts[flagNumberPicked - 1].easting, flagPts[flagNumberPicked - 1].northing);
+                            GL.Vertex3(pivotAxlePos.easting, pivotAxlePos.northing, 0);
+                            GL.Vertex3(flagPts[flagNumberPicked - 1].easting, flagPts[flagNumberPicked - 1].northing, 0);
                             GL.End();
                             GL.Disable(EnableCap.LineStipple);
                         }
@@ -548,7 +546,7 @@ namespace Twol
                         GL.Color3(1.0, 1.0, 0.0);
                         for (int i = 0; i < followPivotPoints.Count; i++)
                         {
-                            GL.Vertex2(followPivotPoints[i].easting, followPivotPoints[i].northing);
+                            GL.Vertex3(followPivotPoints[i].easting, followPivotPoints[i].northing, 0);
                         }
                         GL.End();
                     }
@@ -560,13 +558,13 @@ namespace Twol
                             GL.PointSize(16);
                             GL.Begin(PrimitiveType.Points);
                             GL.Color3(0, 0, 0);
-                            GL.Vertex2(gyd.goalPoint.easting, gyd.goalPoint.northing);
+                            GL.Vertex3(gyd.goalPoint.easting, gyd.goalPoint.northing, 0);
                             GL.End();
 
                             GL.PointSize(10);
                             GL.Begin(PrimitiveType.Points);
                             GL.Color3(0.98, 0.98, 0.098);
-                            GL.Vertex2(gyd.goalPoint.easting, gyd.goalPoint.northing);
+                            GL.Vertex3(gyd.goalPoint.easting, gyd.goalPoint.northing, 0);
                             GL.End();
                         }
 
@@ -575,13 +573,13 @@ namespace Twol
                             GL.PointSize(16);
                             GL.Begin(PrimitiveType.Points);
                             GL.Color3(0.0, 0.0, 0.0);
-                            GL.Vertex2(steerAxlePos.easting, steerAxlePos.northing);
+                            GL.Vertex3(steerAxlePos.easting, steerAxlePos.northing, 0);
                             GL.End();
 
                             GL.PointSize(10);
                             GL.Begin(PrimitiveType.Points);
                             GL.Color3(0.920, 0.978, 0.2);
-                            GL.Vertex2(steerAxlePos.easting, steerAxlePos.northing);
+                            GL.Vertex3(steerAxlePos.easting, steerAxlePos.northing, 0);
                             GL.End();
                         }
                     }
@@ -679,10 +677,10 @@ namespace Twol
                         //GL.Rotate(deadCam, 0.0f, 1.0f, 0.0f);
                         //deadCam += 5;
                         GL.Begin(PrimitiveType.TriangleStrip);              // Build Quad From A Triangle Strip
-                        GL.TexCoord2(1, 0); GL.Vertex2(size, -size); // Top Right
-                        GL.TexCoord2(0, 0); GL.Vertex2(-size, -size); // Top Left
-                        GL.TexCoord2(1, 1); GL.Vertex2(size, size); // Bottom Right
-                        GL.TexCoord2(0, 1); GL.Vertex2(-size, size); // Bottom Left
+                        GL.TexCoord2(1, 0); GL.Vertex3(size, -size, 0); // Top Right
+                        GL.TexCoord2(0, 0); GL.Vertex3(-size, -size, 0); // Top Left
+                        GL.TexCoord2(1, 1); GL.Vertex3(size, size, 0); // Bottom Right
+                        GL.TexCoord2(0, 1); GL.Vertex3(-size, size, 0); // Bottom Left
                         GL.End();                       // Done Building Triangle Strip
                         GL.PopMatrix();
 
@@ -697,10 +695,10 @@ namespace Twol
                         GL.Color4(1, 1, 1, 0.75);
                         GL.BindTexture(TextureTarget.Texture2D, texture[(int)FormGPS.textures.QuestionMark]);        // Select Our Texture
                         GL.Begin(PrimitiveType.TriangleStrip);              // Build Quad From A Triangle Strip
-                        GL.TexCoord2(1, 0); GL.Vertex2(leftPos + size, topPos - size); // Top Right
-                        GL.TexCoord2(0, 0); GL.Vertex2(leftPos - size, topPos - size); // Top Left
-                        GL.TexCoord2(1, 1); GL.Vertex2(leftPos + size, topPos + size); // Bottom Right
-                        GL.TexCoord2(0, 1); GL.Vertex2(leftPos - size, topPos + size); // Bottom Left
+                        GL.TexCoord2(1, 0); GL.Vertex3(leftPos + size, topPos - size, 0); // Top Right
+                        GL.TexCoord2(0, 0); GL.Vertex3(leftPos - size, topPos - size, 0); // Top Left
+                        GL.TexCoord2(1, 1); GL.Vertex3(leftPos + size, topPos + size, 0); // Bottom Right
+                        GL.TexCoord2(0, 1); GL.Vertex3(leftPos - size, topPos + size, 0); // Bottom Left
                         GL.End();                       // Done Building Triangle Strip
                         GL.Disable(EnableCap.Texture2D);
                     }
@@ -732,10 +730,10 @@ namespace Twol
 
                     GL.Begin(PrimitiveType.LineLoop);
 
-                    GL.Vertex2(-oglMain.Width / 2, 0);
-                    GL.Vertex2(oglMain.Width / 2, 0);
-                    GL.Vertex2(oglMain.Width / 2, oglMain.Height);
-                    GL.Vertex2(-oglMain.Width / 2, oglMain.Height);
+                    GL.Vertex3(-oglMain.Width / 2, 0, 0);
+                    GL.Vertex3(oglMain.Width / 2, 0, 0);
+                    GL.Vertex3(oglMain.Width / 2, oglMain.Height, 0);
+                    GL.Vertex3(-oglMain.Width / 2, oglMain.Height, 0);
 
                     GL.End();
 
@@ -812,10 +810,10 @@ namespace Twol
                 GL.Color4(1.25f, 1.25f, 1.275f, 0.75);
                 GL.BindTexture(TextureTarget.Texture2D, texture[(int)FormGPS.textures.NoGPS]);        // Select Our Texture
                 GL.Begin(PrimitiveType.TriangleStrip);              // Build Quad From A Triangle Strip
-                GL.TexCoord2(1, 0); GL.Vertex2(2.5, 2.5); // Top Right
-                GL.TexCoord2(0, 0); GL.Vertex2(-2.5, 2.5); // Top Left
-                GL.TexCoord2(1, 1); GL.Vertex2(2.5, -2.5); // Bottom Right
-                GL.TexCoord2(0, 1); GL.Vertex2(-2.5, -2.5); // Bottom Left
+                GL.TexCoord2(1, 0); GL.Vertex3(2.5, 2.5, 0); // Top Right
+                GL.TexCoord2(0, 0); GL.Vertex3(-2.5, 2.5, 0); // Top Left
+                GL.TexCoord2(1, 1); GL.Vertex3(2.5, -2.5, 0); // Bottom Right
+                GL.TexCoord2(0, 1); GL.Vertex3(-2.5, -2.5, 0); // Bottom Left
                 GL.End();                       // Done Building Triangle Strip
 
                 GL.Disable(EnableCap.Texture2D);
@@ -981,7 +979,7 @@ namespace Twol
                             GL.Begin(PrimitiveType.TriangleStrip);
 
                             for (int i = 1; i < patch.triangleList.Count; i++)
-                                GL.Vertex2(patch.triangleList[i].easting, patch.triangleList[i].northing);
+                                GL.Vertex3(patch.triangleList[i].easting, patch.triangleList[i].northing, 0);
 
                             GL.End();
                         }
@@ -1005,7 +1003,7 @@ namespace Twol
                     {
                         GL.Begin(PrimitiveType.LineStrip);
                         for (int h = 0; h < tram.tramList[i].Count; h++)
-                            GL.Vertex2(tram.tramList[i][h].easting, tram.tramList[i][h].northing);
+                            GL.Vertex3(tram.tramList[i][h].easting, tram.tramList[i][h].northing, 0);
                         GL.End();
                     }
                 }
@@ -1484,8 +1482,8 @@ namespace Twol
                         int step = mipmap;
                         for (int i = 1; i < count2; i += step)
                         {
-                            GL.Vertex2(triList[i].easting, triList[i].northing); i++;
-                            GL.Vertex2(triList[i].easting, triList[i].northing); i++;
+                            GL.Vertex3(triList[i].easting, triList[i].northing, 0); i++;
+                            GL.Vertex3(triList[i].easting, triList[i].northing, 0); i++;
 
                             //too small to mipmap it
                             if (count2 - i <= (mipmap))
@@ -1495,7 +1493,7 @@ namespace Twol
 
                     else
                     {
-                        for (int i = 1; i < count2; i++) GL.Vertex2(triList[i].easting, triList[i].northing);
+                        for (int i = 1; i < count2; i++) GL.Vertex3(triList[i].easting, triList[i].northing, 0);
                     }
                     GL.End();
                 }
@@ -1567,15 +1565,15 @@ namespace Twol
                 int two3 = oglMain.Width / 4;
                 GL.Begin(PrimitiveType.TriangleStrip);              // Build Quad From A Triangle Strip
                 {
-                    //GL.TexCoord2(0, 0); GL.Vertex2(-82 - two3, bottomSide); // TL
-                    //GL.TexCoord2(1, 0); GL.Vertex2(82 - two3,  bottomSide); // TR
-                    //GL.TexCoord2(1, 1); GL.Vertex2(82 - two3,  bottomSide+60); // BR
-                    //GL.TexCoord2(0, 1); GL.Vertex2(-82 - two3, bottomSide+60); // BL
+                    //GL.TexCoord2(0, 0); GL.Vertex3(-82 - two3, bottomSide); // TL
+                    //GL.TexCoord2(1, 0); GL.Vertex3(82 - two3,  bottomSide); // TR
+                    //GL.TexCoord2(1, 1); GL.Vertex3(82 - two3,  bottomSide+60); // BR
+                    //GL.TexCoord2(0, 1); GL.Vertex3(-82 - two3, bottomSide+60); // BL
 
-                    GL.TexCoord2(1, 0); GL.Vertex2(82 - two3, bottomSide); // Top Right
-                    GL.TexCoord2(0, 0); GL.Vertex2(-82 - two3, bottomSide); // Top Left
-                    GL.TexCoord2(1, 1); GL.Vertex2(82 - two3, bottomSide + 60); // Bottom Right
-                    GL.TexCoord2(0, 1); GL.Vertex2(-82 - two3, bottomSide + 60); // Bottom Left
+                    GL.TexCoord2(1, 0); GL.Vertex3(82 - two3, bottomSide, 0); // Top Right
+                    GL.TexCoord2(0, 0); GL.Vertex3(-82 - two3, bottomSide, 0); // Top Left
+                    GL.TexCoord2(1, 1); GL.Vertex3(82 - two3, bottomSide + 60, 0); // Bottom Right
+                    GL.TexCoord2(0, 1); GL.Vertex3(-82 - two3, bottomSide + 60, 0); // Bottom Left
 
                 }
                 GL.End();
@@ -1591,10 +1589,10 @@ namespace Twol
                 int two3 = oglMain.Width / 4;
                 GL.Begin(PrimitiveType.TriangleStrip);              // Build Quad From A Triangle Strip
                 {
-                    GL.TexCoord2(1, 0); GL.Vertex2(100 - two3, bottomSide); // 
-                    GL.TexCoord2(0, 0); GL.Vertex2(-100 - two3, bottomSide); // 
-                    GL.TexCoord2(1, 1); GL.Vertex2(100 - two3, bottomSide + 60); // 
-                    GL.TexCoord2(0, 1); GL.Vertex2(-100 - two3, bottomSide + 60); //
+                    GL.TexCoord2(1, 0); GL.Vertex3(100 - two3, bottomSide, 0); // 
+                    GL.TexCoord2(0, 0); GL.Vertex3(-100 - two3, bottomSide, 0); // 
+                    GL.TexCoord2(1, 1); GL.Vertex3(100 - two3, bottomSide + 60, 0); // 
+                    GL.TexCoord2(0, 1); GL.Vertex3(-100 - two3, bottomSide + 60, 0); //
                 }
                 GL.End();
             }
@@ -1627,17 +1625,17 @@ namespace Twol
             GL.Begin(PrimitiveType.TriangleStrip);              // Build Quad From A Triangle Strip
             if (!yt.isTurnLeft)
             {
-                GL.TexCoord2(1, 0); GL.Vertex2(62 + two3, bottom); // 
-                GL.TexCoord2(0, 0); GL.Vertex2(-62 + two3, bottom); // 
-                GL.TexCoord2(1, 1); GL.Vertex2(62 + two3, bottom + 60); // 
-                GL.TexCoord2(0, 1); GL.Vertex2(-62 + two3, bottom + 60); //
+                GL.TexCoord2(1, 0); GL.Vertex3(62 + two3, bottom, 0); // 
+                GL.TexCoord2(0, 0); GL.Vertex3(-62 + two3, bottom, 0); // 
+                GL.TexCoord2(1, 1); GL.Vertex3(62 + two3, bottom + 60, 0); // 
+                GL.TexCoord2(0, 1); GL.Vertex3(-62 + two3, bottom + 60, 0); //
             }
             else
             {
-                GL.TexCoord2(0, 0); GL.Vertex2(62 + two3, bottom); // 
-                GL.TexCoord2(1, 0); GL.Vertex2(-62 + two3, bottom); // 
-                GL.TexCoord2(0, 1); GL.Vertex2(62 + two3, bottom + 60); // 
-                GL.TexCoord2(1, 1); GL.Vertex2(-62 + two3, bottom + 60); //
+                GL.TexCoord2(0, 0); GL.Vertex3(62 + two3, bottom, 0); // 
+                GL.TexCoord2(1, 0); GL.Vertex3(-62 + two3, bottom, 0); // 
+                GL.TexCoord2(0, 1); GL.Vertex3(62 + two3, bottom + 60, 0); // 
+                GL.TexCoord2(1, 1); GL.Vertex3(-62 + two3, bottom + 60, 0); //
             }
             //
             GL.End();
@@ -1657,10 +1655,10 @@ namespace Twol
 
             GL.Begin(PrimitiveType.TriangleStrip);              // Build Quad From A Triangle Strip
             {
-                GL.TexCoord2(1, 0); GL.Vertex2(32 + two3, 100); // 
-                GL.TexCoord2(0, 0); GL.Vertex2(-32 + two3, 100); // 
-                GL.TexCoord2(1, 1); GL.Vertex2(32 + two3, 160); // 
-                GL.TexCoord2(0, 1); GL.Vertex2(-32 + two3, 160); //
+                GL.TexCoord2(1, 0); GL.Vertex3(32 + two3, 100, 0); // 
+                GL.TexCoord2(0, 0); GL.Vertex3(-32 + two3, 100, 0); // 
+                GL.TexCoord2(1, 1); GL.Vertex3(32 + two3, 160, 0); // 
+                GL.TexCoord2(0, 1); GL.Vertex3(-32 + two3, 160, 0); //
             }
             GL.End();
 
@@ -1719,10 +1717,10 @@ namespace Twol
 
             GL.Begin(PrimitiveType.TriangleStrip);              // Build Quad From A Triangle Strip
             {
-                GL.TexCoord2(1, 0); GL.Vertex2(sizer, -sizer); // 
-                GL.TexCoord2(0, 0); GL.Vertex2(-sizer, -sizer); // 
-                GL.TexCoord2(1, 1); GL.Vertex2(sizer, sizer); // 
-                GL.TexCoord2(0, 1); GL.Vertex2(-sizer, sizer); //
+                GL.TexCoord2(1, 0); GL.Vertex3(sizer, -sizer, 0); // 
+                GL.TexCoord2(0, 0); GL.Vertex3(-sizer, -sizer, 0); // 
+                GL.TexCoord2(1, 1); GL.Vertex3(sizer, sizer, 0); // 
+                GL.TexCoord2(0, 1); GL.Vertex3(-sizer, sizer, 0); //
             }
             GL.End();
 
@@ -1749,10 +1747,10 @@ namespace Twol
 
             GL.Begin(PrimitiveType.TriangleStrip);              // Build Quad From A Triangle Strip
             {
-                GL.TexCoord2(1, 0); GL.Vertex2(sizer, -sizer); // 
-                GL.TexCoord2(0, 0); GL.Vertex2(-sizer, -sizer); // 
-                GL.TexCoord2(1, 1); GL.Vertex2(sizer, sizer); // 
-                GL.TexCoord2(0, 1); GL.Vertex2(-sizer, sizer); //
+                GL.TexCoord2(1, 0); GL.Vertex3(sizer, -sizer, 0); // 
+                GL.TexCoord2(0, 0); GL.Vertex3(-sizer, -sizer, 0); // 
+                GL.TexCoord2(1, 1); GL.Vertex3(sizer, sizer, 0); // 
+                GL.TexCoord2(0, 1); GL.Vertex3(-sizer, sizer, 0); //
             }
             GL.End();
 
@@ -1782,10 +1780,10 @@ namespace Twol
 
             GL.Begin(PrimitiveType.TriangleStrip);              // Build Quad From A Triangle Strip
             {
-                GL.TexCoord2(1, 0); GL.Vertex2(center + 24, bottomSide - 24); // 
-                GL.TexCoord2(0, 0); GL.Vertex2(center - 24, bottomSide - 24); // 
-                GL.TexCoord2(1, 1); GL.Vertex2(center + 24, bottomSide + 24); // 
-                GL.TexCoord2(0, 1); GL.Vertex2(center - 24, bottomSide + 24); //
+                GL.TexCoord2(1, 0); GL.Vertex3(center + 24, bottomSide - 24, 0); // 
+                GL.TexCoord2(0, 0); GL.Vertex3(center - 24, bottomSide - 24, 0); // 
+                GL.TexCoord2(1, 1); GL.Vertex3(center + 24, bottomSide + 24, 0); // 
+                GL.TexCoord2(0, 1); GL.Vertex3(center - 24, bottomSide + 24, 0); //
             }
             GL.End();
 
@@ -1802,10 +1800,10 @@ namespace Twol
 
             GL.Begin(PrimitiveType.TriangleStrip);              // Build Quad From A Triangle Strip
             {
-                GL.TexCoord2(1, 0); GL.Vertex2(center + 24, bottomSide - 24); // 
-                GL.TexCoord2(0, 0); GL.Vertex2(center - 24, bottomSide - 24); // 
-                GL.TexCoord2(1, 1); GL.Vertex2(center + 24, bottomSide + 24); // 
-                GL.TexCoord2(0, 1); GL.Vertex2(center - 24, bottomSide + 24); //
+                GL.TexCoord2(1, 0); GL.Vertex3(center + 24, bottomSide - 24, 0); // 
+                GL.TexCoord2(0, 0); GL.Vertex3(center - 24, bottomSide - 24, 0); // 
+                GL.TexCoord2(1, 1); GL.Vertex3(center + 24, bottomSide + 24, 0); // 
+                GL.TexCoord2(0, 1); GL.Vertex3(center - 24, bottomSide + 24, 0); //
             }
             GL.End();
 
@@ -1827,12 +1825,12 @@ namespace Twol
             //            //right side
             //            if (((mf.tram.controlByte) & 1) == 1) GL.Color3(0.0f, 0.900f, 0.39630f);
             //            else GL.Color3(0, 0, 0);
-            //            GL.Vertex2(farRightPosition - mf.tram.halfWheelTrack, trailingTool, 0);
+            //            GL.Vertex3(farRightPosition - mf.tram.halfWheelTrack, trailingTool, 0);
 
             //            //left side
             //            if ((mf.tram.controlByte & 2) == 2) GL.Color3(0.0f, 0.900f, 0.3930f);
             //            else GL.Color3(0, 0, 0);
-            //            GL.Vertex2(farLeftPosition + mf.tram.halfWheelTrack, trailingTool, 0);
+            //            GL.Vertex3(farLeftPosition + mf.tram.halfWheelTrack, trailingTool, 0);
             //            GL.End();
             //        }
             //        else
@@ -1842,12 +1840,12 @@ namespace Twol
             //            //right side
             //            if (((mf.tram.controlByte) & 1) == 1) GL.Color3(0.0f, 0.900f, 0.39630f);
             //            else GL.Color3(0, 0, 0);
-            //            GL.Vertex2(mf.tram.halfWheelTrack, trailingTool, 0);
+            //            GL.Vertex3(mf.tram.halfWheelTrack, trailingTool, 0);
 
             //            //left side
             //            if ((mf.tram.controlByte & 2) == 2) GL.Color3(0.0f, 0.900f, 0.3930f);
             //            else GL.Color3(0, 0, 0);
-            //            GL.Vertex2(-mf.tram.halfWheelTrack, trailingTool, 0);
+            //            GL.Vertex3(-mf.tram.halfWheelTrack, trailingTool, 0);
             //            GL.End();
             //        }
             //    }
@@ -1926,7 +1924,7 @@ namespace Twol
                         flagColor = "~";
                     }
 
-                    GL.Vertex2(flagPts[f].easting, flagPts[f].northing);
+                    GL.Vertex3(flagPts[f].easting, flagPts[f].northing, 0);
                     GL.End();
 
                     font.DrawText3D(flagPts[f].easting, flagPts[f].northing, flagColor + flagPts[f].notes, true);
@@ -1941,18 +1939,18 @@ namespace Twol
                     GL.LineWidth(4);
                     GL.Color3(0.980f, 0.0f, 0.980f);
                     GL.Begin(PrimitiveType.LineStrip);
-                    GL.Vertex2(flagPts[flagNumberPicked - 1].easting, flagPts[flagNumberPicked - 1].northing + offSet);
-                    GL.Vertex2(flagPts[flagNumberPicked - 1].easting - offSet, flagPts[flagNumberPicked - 1].northing);
-                    GL.Vertex2(flagPts[flagNumberPicked - 1].easting, flagPts[flagNumberPicked - 1].northing - offSet);
-                    GL.Vertex2(flagPts[flagNumberPicked - 1].easting + offSet, flagPts[flagNumberPicked - 1].northing);
-                    GL.Vertex2(flagPts[flagNumberPicked - 1].easting, flagPts[flagNumberPicked - 1].northing + offSet);
+                    GL.Vertex3(flagPts[flagNumberPicked - 1].easting, flagPts[flagNumberPicked - 1].northing + offSet, 0);
+                    GL.Vertex3(flagPts[flagNumberPicked - 1].easting - offSet, flagPts[flagNumberPicked - 1].northing, 0);
+                    GL.Vertex3(flagPts[flagNumberPicked - 1].easting, flagPts[flagNumberPicked - 1].northing - offSet, 0);
+                    GL.Vertex3(flagPts[flagNumberPicked - 1].easting + offSet, flagPts[flagNumberPicked - 1].northing, 0);
+                    GL.Vertex3(flagPts[flagNumberPicked - 1].easting, flagPts[flagNumberPicked - 1].northing + offSet, 0);
                     GL.End();
 
                     //draw the flag with a black dot inside
                     //GL.PointSize(4.0f);
                     //GL.Color3(0, 0, 0);
                     //GL.Begin(PrimitiveType.Points);
-                    //GL.Vertex2(flagPts[flagNumberPicked - 1].easting, flagPts[flagNumberPicked - 1].northing, 0);
+                    //GL.Vertex3(flagPts[flagNumberPicked - 1].easting, flagPts[flagNumberPicked - 1].northing, 0);
                     //GL.End();
                 }
             }
@@ -1978,8 +1976,8 @@ namespace Twol
             GL.PointSize(8.0f);
             GL.Color3(0.00f, 0.0f, 0.0f);
             GL.Begin(PrimitiveType.Points);
-            for (int i = -8; i < -1; i++) GL.Vertex2((i * 32), down);
-            for (int i = 2; i < 9; i++) GL.Vertex2((i * 32), down);
+            for (int i = -8; i < -1; i++) GL.Vertex3((i * 32), down, 0);
+            for (int i = 2; i < 9; i++) GL.Vertex3((i * 32), down, 0);
             GL.End();
 
             GL.PointSize(4.0f);
@@ -1988,11 +1986,11 @@ namespace Twol
             //red left side
             GL.Color3(0.750f, 0.0f, 0.0f);
             GL.Begin(PrimitiveType.Points);
-            for (int i = -8; i < -1; i++) GL.Vertex2((i * 32), down);
+            for (int i = -8; i < -1; i++) GL.Vertex3((i * 32), down, 0);
 
             //green right side
             GL.Color3(0.0f, 0.750f, 0.0f);
-            for (int i = 2; i < 9; i++) GL.Vertex2((i * 32), down);
+            for (int i = 2; i < 9; i++) GL.Vertex3((i * 32), down, 0);
             GL.End();
 
             //Are you on the right side of line? So its green.
@@ -2003,13 +2001,13 @@ namespace Twol
                 GL.PointSize(24.0f);
                 GL.Color3(0.0f, 0.0f, 0.0f);
                 GL.Begin(PrimitiveType.Points);
-                for (int i = 2; i < dots + 1; i++) GL.Vertex2((i * 32), down);
+                for (int i = 2; i < dots + 1; i++) GL.Vertex3((i * 32), down, 0);
                 GL.End();
 
                 GL.PointSize(16.0f);
                 GL.Color3(0.0f, 0.980f, 0.0f);
                 GL.Begin(PrimitiveType.Points);
-                for (int i = 1; i < dots; i++) GL.Vertex2((i * 32 + 32), down);
+                for (int i = 1; i < dots; i++) GL.Vertex3((i * 32 + 32), down, 0);
                 GL.End();
                 //return;
             }
@@ -2021,13 +2019,13 @@ namespace Twol
                 GL.PointSize(24.0f);
                 GL.Color3(0.0f, 0.0f, 0.0f);
                 GL.Begin(PrimitiveType.Points);
-                for (int i = 2; i < dots + 1; i++) GL.Vertex2((i * -32), down);
+                for (int i = 2; i < dots + 1; i++) GL.Vertex3((i * -32), down, 0);
                 GL.End();
 
                 GL.PointSize(16.0f);
                 GL.Color3(0.980f, 0.30f, 0.0f);
                 GL.Begin(PrimitiveType.Points);
-                for (int i = 1; i < dots; i++) GL.Vertex2((i * -32 - 32), down);
+                for (int i = 1; i < dots; i++) GL.Vertex3((i * -32 - 32), down, 0);
                 GL.End();
                 //return;
             }
@@ -2080,10 +2078,10 @@ namespace Twol
                 //if (wide < 75) wide = 75;
                 int wide = 50;
 
-                GL.TexCoord2(1, 1); GL.Vertex2(wide, 50); // 
-                GL.TexCoord2(0, 1); GL.Vertex2(-wide, 50); // 
-                GL.TexCoord2(1, 0); GL.Vertex2(wide, 2); // 
-                GL.TexCoord2(0, 0); GL.Vertex2(-wide, 2); //
+                GL.TexCoord2(1, 1); GL.Vertex3(wide, 50, 0); // 
+                GL.TexCoord2(0, 1); GL.Vertex3(-wide, 50, 0); // 
+                GL.TexCoord2(1, 0); GL.Vertex3(wide, 2, 0); // 
+                GL.TexCoord2(0, 0); GL.Vertex3(-wide, 2, 0); //
 
                 GL.End();
                 GL.Disable(EnableCap.Texture2D);
@@ -2156,14 +2154,14 @@ namespace Twol
                     GL.Color4(0, 0, 0, alphaBar);
                     GL.LineWidth(line);
                     GL.Begin(PrimitiveType.Lines);
-                    GL.Vertex2(0, down);
-                    GL.Vertex2(errLine, down);
+                    GL.Vertex3(0, down, 0);
+                    GL.Vertex3(errLine, down, 0);
                     GL.End();
                     GL.Color4(0.950f, 0.986530f, 0.40f, alphaBar);
                     GL.LineWidth(line2);
                     GL.Begin(PrimitiveType.Lines);
-                    GL.Vertex2(0, down);
-                    GL.Vertex2(errLine, down);
+                    GL.Vertex3(0, down, 0);
+                    GL.Vertex3(errLine, down, 0);
                     GL.End();
 
                     if ((err) > 0.0)
@@ -2175,32 +2173,32 @@ namespace Twol
 
                     GL.Color4(0, 0.99, 0, alphaBar);
                     GL.Begin(PrimitiveType.TriangleStrip);
-                    GL.Vertex2((errLine), down - offset);
-                    GL.Vertex2((errLine + offset + pointy), down);
-                    GL.Vertex2((errLine), down + offset);
+                    GL.Vertex3((errLine), down - offset, 0);
+                    GL.Vertex3((errLine + offset + pointy), down, 0);
+                    GL.Vertex3((errLine), down + offset, 0);
                     GL.End();
 
                     GL.Color4(0.79, 0.79, 0, alphaBar);
 
                     GL.Begin(PrimitiveType.TriangleStrip);
-                    GL.Vertex2((0), down - offset);
-                    GL.Vertex2((0 + offset + pointy), down);
-                    GL.Vertex2((0), down + offset);
+                    GL.Vertex3((0), down - offset, 0);
+                    GL.Vertex3((0 + offset + pointy), down, 0);
+                    GL.Vertex3((0), down + offset, 0);
                     GL.End();
 
                     GL.LineWidth(3);
                     GL.Color4(0, 0, 0, alphaBar);
 
                     GL.Begin(PrimitiveType.LineLoop);
-                    GL.Vertex2((errLine), down - offset);
-                    GL.Vertex2((errLine + offset + pointy), down);
-                    GL.Vertex2((errLine), down + offset);
+                    GL.Vertex3((errLine), down - offset, 0);
+                    GL.Vertex3((errLine + offset + pointy), down, 0);
+                    GL.Vertex3((errLine), down + offset, 0);
                     GL.End();
 
                     GL.Begin(PrimitiveType.LineLoop);
-                    GL.Vertex2((0), down - offset);
-                    GL.Vertex2((0 + offset + pointy), down);
-                    GL.Vertex2((0), down + offset);
+                    GL.Vertex3((0), down - offset, 0);
+                    GL.Vertex3((0 + offset + pointy), down, 0);
+                    GL.Vertex3((0), down + offset, 0);
                     GL.End();
                 }
 
@@ -2245,10 +2243,10 @@ namespace Twol
                 GL.Color4(red, green, 0.13, 1.0);
 
                 GL.Begin(PrimitiveType.TriangleStrip);              // Build Quad From A Triangle Strip
-                GL.TexCoord2(1, 1); GL.Vertex2(-10, 3); // 
-                GL.TexCoord2(0, 1); GL.Vertex2(-160, 3); // 
-                GL.TexCoord2(1, 0); GL.Vertex2(-10, 55); // 
-                GL.TexCoord2(0, 0); GL.Vertex2(-160, 55); //
+                GL.TexCoord2(1, 1); GL.Vertex3(-10, 3, 0); // 
+                GL.TexCoord2(0, 1); GL.Vertex3(-160, 3, 0); // 
+                GL.TexCoord2(1, 0); GL.Vertex3(-10, 55, 0); // 
+                GL.TexCoord2(0, 0); GL.Vertex3(-160, 55, 0); //
                 GL.End();
 
                 GL.Disable(EnableCap.Texture2D);
@@ -2301,10 +2299,10 @@ namespace Twol
                     GL.Color4(red, green, 0.3, 1.0);
 
                     GL.Begin(PrimitiveType.TriangleStrip);              // Build Quad From A Triangle Strip
-                    GL.TexCoord2(1, 1); GL.Vertex2(10, 3); // 
-                    GL.TexCoord2(0, 1); GL.Vertex2(160, 3); // 
-                    GL.TexCoord2(1, 0); GL.Vertex2(10, 55); // 
-                    GL.TexCoord2(0, 0); GL.Vertex2(160, 55); //
+                    GL.TexCoord2(1, 1); GL.Vertex3(10, 3, 0); // 
+                    GL.TexCoord2(0, 1); GL.Vertex3(160, 3, 0); // 
+                    GL.TexCoord2(1, 0); GL.Vertex3(10, 55, 0); // 
+                    GL.TexCoord2(0, 0); GL.Vertex3(160, 55, 0); //
                     GL.End();
 
                     GL.Disable(EnableCap.Texture2D);
@@ -2318,8 +2316,8 @@ namespace Twol
                         GL.Color4(0.512f, 0.770f, 0.995120f, 1);
                         GL.LineWidth(8);
                         GL.Begin(PrimitiveType.Lines);
-                        GL.Vertex2(20,60);
-                        GL.Vertex2(150,60);
+                        GL.Vertex3(20,60, 0);
+                        GL.Vertex3(150,60, 0);
                         GL.End();
                     }
                 }
@@ -2329,8 +2327,8 @@ namespace Twol
                     GL.Color4(0.512f, 0.9712770f, 0.5120f, 1);
                     GL.LineWidth(8);
                     GL.Begin(PrimitiveType.Lines);
-                    GL.Vertex2(-150,60);
-                    GL.Vertex2(-20, 60);
+                    GL.Vertex3(-150,60, 0);
+                    GL.Vertex3(-20, 60, 0);
                     GL.End();
                 }
 
@@ -2374,40 +2372,40 @@ namespace Twol
 
             GL.Begin(PrimitiveType.TriangleStrip);             // Build Quad From A Triangle Strip
             {
-                GL.TexCoord2(1, 0); GL.Vertex2(center + 32, 50); // 
-                GL.TexCoord2(0, 0); GL.Vertex2(center, 50); // 
-                GL.TexCoord2(1, 1); GL.Vertex2(center + 32, 82); // 
-                GL.TexCoord2(0, 1); GL.Vertex2(center, 82); //
+                GL.TexCoord2(1, 0); GL.Vertex3(center + 32, 50, 0); // 
+                GL.TexCoord2(0, 0); GL.Vertex3(center, 50, 0); // 
+                GL.TexCoord2(1, 1); GL.Vertex3(center + 32, 82, 0); // 
+                GL.TexCoord2(0, 1); GL.Vertex3(center, 82, 0); //
             }
             GL.End();
 
             GL.BindTexture(TextureTarget.Texture2D, texture[(int)FormGPS.textures.ZoomOut48]);        // Select Our Texture
             GL.Begin(PrimitiveType.TriangleStrip);             // Build Quad From A Triangle Strip
             {
-                GL.TexCoord2(1, 0); GL.Vertex2(center + 32, 200); // 
-                GL.TexCoord2(0, 0); GL.Vertex2(center, 200); // 
-                GL.TexCoord2(1, 1); GL.Vertex2(center + 32, 232); // 
-                GL.TexCoord2(0, 1); GL.Vertex2(center, 232); //
+                GL.TexCoord2(1, 0); GL.Vertex3(center + 32, 200, 0); // 
+                GL.TexCoord2(0, 0); GL.Vertex3(center, 200, 0); // 
+                GL.TexCoord2(1, 1); GL.Vertex3(center + 32, 232, 0); // 
+                GL.TexCoord2(0, 1); GL.Vertex3(center, 232, 0); //
             }
             GL.End();
 
             GL.BindTexture(TextureTarget.Texture2D, texture[(int)FormGPS.textures.PanUp]);        // Select Our Texture
             GL.Begin(PrimitiveType.TriangleStrip);             // Build Quad From A Triangle Strip
             {
-                GL.TexCoord2(1, 0); GL.Vertex2(center + 40, 350); // 
-                GL.TexCoord2(0, 0); GL.Vertex2(center, 350); // 
-                GL.TexCoord2(1, 1); GL.Vertex2(center + 40, 390); // 
-                GL.TexCoord2(0, 1); GL.Vertex2(center, 390); //
+                GL.TexCoord2(1, 0); GL.Vertex3(center + 40, 350, 0); // 
+                GL.TexCoord2(0, 0); GL.Vertex3(center, 350, 0); // 
+                GL.TexCoord2(1, 1); GL.Vertex3(center + 40, 390, 0); // 
+                GL.TexCoord2(0, 1); GL.Vertex3(center, 390, 0); //
             }
             GL.End();
 
             GL.BindTexture(TextureTarget.Texture2D, texture[(int)FormGPS.textures.PanDn]);        // Select Our Texture
             GL.Begin(PrimitiveType.TriangleStrip);             // Build Quad From A Triangle Strip
             {
-                GL.TexCoord2(1, 0); GL.Vertex2(center + 40, 420); // 
-                GL.TexCoord2(0, 0); GL.Vertex2(center, 420); // 
-                GL.TexCoord2(1, 1); GL.Vertex2(center + 40, 460); // 
-                GL.TexCoord2(0, 1); GL.Vertex2(center, 460); //
+                GL.TexCoord2(1, 0); GL.Vertex3(center + 40, 420, 0); // 
+                GL.TexCoord2(0, 0); GL.Vertex3(center, 420, 0); // 
+                GL.TexCoord2(1, 1); GL.Vertex3(center + 40, 460, 0); // 
+                GL.TexCoord2(0, 1); GL.Vertex3(center, 460, 0); //
             }
             GL.End();
 
@@ -2420,10 +2418,10 @@ namespace Twol
                     GL.BindTexture(TextureTarget.Texture2D, texture[(int)FormGPS.textures.Pan]);        // Select Our Texture
                     GL.Begin(PrimitiveType.TriangleStrip);             // Build Quad From A Triangle Strip
                     {
-                        GL.TexCoord2(1, 0); GL.Vertex2(center + 32, 50); // 
-                        GL.TexCoord2(0, 0); GL.Vertex2(center, 50); // 
-                        GL.TexCoord2(1, 1); GL.Vertex2(center + 32, 82); // 
-                        GL.TexCoord2(0, 1); GL.Vertex2(center, 82); //
+                        GL.TexCoord2(1, 0); GL.Vertex3(center + 32, 50, 0); // 
+                        GL.TexCoord2(0, 0); GL.Vertex3(center, 50, 0); // 
+                        GL.TexCoord2(1, 1); GL.Vertex3(center + 32, 82, 0); // 
+                        GL.TexCoord2(0, 1); GL.Vertex3(center, 82, 0); //
                     }
                     GL.End();
                 }
@@ -2433,10 +2431,10 @@ namespace Twol
                 GL.BindTexture(TextureTarget.Texture2D, texture[(int)FormGPS.textures.MenuHideShow]);        // Select Our Texture
                 GL.Begin(PrimitiveType.TriangleStrip);             // Build Quad From A Triangle Strip
                 {
-                    GL.TexCoord2(1, 0); GL.Vertex2(center + 32, hite - 32); // 
-                    GL.TexCoord2(0, 0); GL.Vertex2(center, hite - 32); // 
-                    GL.TexCoord2(1, 1); GL.Vertex2(center + 32, hite); // 
-                    GL.TexCoord2(0, 1); GL.Vertex2(center, hite); //
+                    GL.TexCoord2(1, 0); GL.Vertex3(center + 32, hite - 32, 0); // 
+                    GL.TexCoord2(0, 0); GL.Vertex3(center, hite - 32, 0); // 
+                    GL.TexCoord2(1, 1); GL.Vertex3(center + 32, hite, 0); // 
+                    GL.TexCoord2(0, 1); GL.Vertex3(center, hite, 0); //
                 }
                 GL.End();
 
@@ -2497,10 +2495,10 @@ namespace Twol
             GL.Rotate(camHeading, 0, 0, -1);
             GL.Begin(PrimitiveType.TriangleStrip);              // Build Quad From A Triangle Strip
             {
-                GL.TexCoord2(1, 0); GL.Vertex2(42, -42.0); // 
-                GL.TexCoord2(0, 0); GL.Vertex2(-42, -42); // 
-                GL.TexCoord2(1, 1); GL.Vertex2(42, 42); // 
-                GL.TexCoord2(0, 1); GL.Vertex2(-42, 42); //
+                GL.TexCoord2(1, 0); GL.Vertex3(42, -42.0, 0); // 
+                GL.TexCoord2(0, 0); GL.Vertex3(-42, -42, 0); // 
+                GL.TexCoord2(1, 1); GL.Vertex3(42, 42, 0); // 
+                GL.TexCoord2(0, 1); GL.Vertex3(-42, 42, 0); //
             }
             GL.End();
             GL.Disable(EnableCap.Texture2D);
@@ -2524,10 +2522,10 @@ namespace Twol
 
             GL.Begin(PrimitiveType.TriangleStrip);              // Build Quad From A Triangle Strip
             {
-                GL.TexCoord2(1, 0.15); GL.Vertex2(32, -32.0); // 
-                GL.TexCoord2(0, 0.15); GL.Vertex2(-32, -32); // 
-                GL.TexCoord2(1, 1); GL.Vertex2(32, 32); // 
-                GL.TexCoord2(0, 1); GL.Vertex2(-32, 32); //
+                GL.TexCoord2(1, 0.15); GL.Vertex3(32, -32.0, 0); // 
+                GL.TexCoord2(0, 0.15); GL.Vertex3(-32, -32, 0); // 
+                GL.TexCoord2(1, 1); GL.Vertex3(32, 32, 0); // 
+                GL.TexCoord2(0, 1); GL.Vertex3(-32, 32, 0); //
             }
             GL.End();
 
@@ -2547,10 +2545,10 @@ namespace Twol
 
             GL.Begin(PrimitiveType.TriangleStrip);              // Build Quad From A Triangle Strip
             {
-                GL.TexCoord2(1, 0); GL.Vertex2(58, -58.0); // 
-                GL.TexCoord2(0, 0); GL.Vertex2(-58, -58); // 
-                GL.TexCoord2(1, 1); GL.Vertex2(58, 58); // 
-                GL.TexCoord2(0, 1); GL.Vertex2(-58, 58); //
+                GL.TexCoord2(1, 0); GL.Vertex3(58, -58.0, 0); // 
+                GL.TexCoord2(0, 0); GL.Vertex3(-58, -58, 0); // 
+                GL.TexCoord2(1, 1); GL.Vertex3(58, 58, 0); // 
+                GL.TexCoord2(0, 1); GL.Vertex3(-58, 58, 0); //
             }
             GL.End();
             GL.BindTexture(TextureTarget.Texture2D, texture[(int)FormGPS.textures.SpeedoNeedle]);        // Select Our Texture
@@ -2565,10 +2563,10 @@ namespace Twol
             GL.Rotate(angle, 0, 0, 1);
             GL.Begin(PrimitiveType.TriangleStrip);              // Build Quad From A Triangle Strip
             {
-                GL.TexCoord2(1, 0); GL.Vertex2(48, -48.0); // 
-                GL.TexCoord2(0, 0); GL.Vertex2(-48, -48); // 
-                GL.TexCoord2(1, 1); GL.Vertex2(48, 48); // 
-                GL.TexCoord2(0, 1); GL.Vertex2(-48, 48); //
+                GL.TexCoord2(1, 0); GL.Vertex3(48, -48.0, 0); // 
+                GL.TexCoord2(0, 0); GL.Vertex3(-48, -48, 0); // 
+                GL.TexCoord2(1, 1); GL.Vertex3(48, 48, 0); // 
+                GL.TexCoord2(0, 1); GL.Vertex3(-48, 48, 0); //
             }
             GL.End();
 

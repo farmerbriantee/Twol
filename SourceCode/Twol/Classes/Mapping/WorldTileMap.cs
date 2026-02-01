@@ -340,13 +340,13 @@ namespace Twol.Mapping
                         double bitt = metersPerTile / 2;
                         GL.Begin(PrimitiveType.TriangleStrip);
                         GL.TexCoord2(0.0, 0.0);
-                        GL.Vertex2(ii - bitt, jj + bitt);
+                        GL.Vertex3(ii - bitt, jj + bitt, 0);
                         GL.TexCoord2(1.0, 0.0);
-                        GL.Vertex2(ii + bitt, jj + bitt);
+                        GL.Vertex3(ii + bitt, jj + bitt, 0);
                         GL.TexCoord2(0.0, 1.0);
-                        GL.Vertex2(ii - bitt, jj - bitt);
+                        GL.Vertex3(ii - bitt, jj - bitt, 0);
                         GL.TexCoord2(1.0, 1.0);
-                        GL.Vertex2(ii + bitt, jj - bitt);
+                        GL.Vertex3(ii + bitt, jj - bitt, 0);
                         GL.End();
                         tex++;
                     }
@@ -504,15 +504,15 @@ namespace Twol.Mapping
             {
                 if (num < eastingMin) continue;
 
-                GL.Vertex2(num, northingMax);
-                GL.Vertex2(num, northingMin);
+                GL.Vertex3(num, northingMax, 0);
+                GL.Vertex3(num, northingMin, 0);
             }
             for (double num2 = Math.Round(northingMin / _gridZoom, MidpointRounding.AwayFromZero) * _gridZoom; num2 < northingMax; num2 += _gridZoom)
             {
                 if (num2 < northingMin) continue;
 
-                GL.Vertex2(eastingMax, num2);
-                GL.Vertex2(eastingMin, num2);
+                GL.Vertex3(eastingMax, num2, 0);
+                GL.Vertex3(eastingMin, num2, 0);
             }
             GL.End();
 
