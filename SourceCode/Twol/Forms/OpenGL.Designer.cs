@@ -287,7 +287,7 @@ namespace Twol
                     GL.BindBuffer(BufferTarget.ArrayBuffer, patchID);
                     GL.VertexPointer(2, VertexPointerType.Float, 0, 0);
                     GL.BindBuffer(BufferTarget.ArrayBuffer, colorID);
-                    GL.ColorPointer(4, ColorPointerType.Float, 0, 0);
+                    GL.ColorPointer(4, ColorPointerType.UnsignedByte, 0, 0);
 
                     GL.DrawArrays(PrimitiveType.Triangles, 0, sectionTriangleCount * 3);
 

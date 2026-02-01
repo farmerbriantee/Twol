@@ -1264,8 +1264,8 @@ namespace Twol
                             }
                         }
 
+                        //vertices
                         float[] triangleVertexData = new float[maxTriangles * 3 * 2];
-                        float[] colorVertexData = new float[maxTriangles * 3 * 4];
 
                         for (int i = 0; i < secTriList.Count; i++)
                         {
@@ -1285,26 +1285,30 @@ namespace Twol
                         GL.BufferData(BufferTarget.ArrayBuffer, triangleVertexData.Length * sizeof(float), IntPtr.Zero, BufferUsageHint.StaticDraw);
                         GL.BufferSubData(BufferTarget.ArrayBuffer, IntPtr.Zero, secTriList.Count * 6 * sizeof(float), triangleVertexData);
 
+
+                        //color vertices
+                        byte[] colorVertexData = new byte[maxTriangles * 3 * 4];
+
                         for (int i = 0; i < secTriList.Count; i++)
                         {
-                            colorVertexData[i * 12 + 0] = (float)colorList[i].easting / 255;
-                            colorVertexData[i * 12 + 1] = (float)colorList[i].northing / 255;
-                            colorVertexData[i * 12 + 2] = (float)colorList[i].heading / 255;
-                            colorVertexData[i * 12 + 3] = 0.6f;
-                            colorVertexData[i * 12 + 4] = (float)colorList[i].easting / 255;
-                            colorVertexData[i * 12 + 5] = (float)colorList[i].northing / 255;
-                            colorVertexData[i * 12 + 6] = (float)colorList[i].heading / 255;
-                            colorVertexData[i * 12 + 7] = 0.6f;
-                            colorVertexData[i * 12 + 8] = (float)colorList[i].easting / 255;
-                            colorVertexData[i * 12 + 9] = (float)colorList[i].northing / 255;
-                            colorVertexData[i * 12 + 10] =(float)colorList[i].heading / 255;
-                            colorVertexData[i * 12 + 11] = 0.6f;
+                            colorVertexData[i * 12 + 0] = (byte)colorList[i].easting;
+                            colorVertexData[i * 12 + 1] = (byte)colorList[i].northing;
+                            colorVertexData[i * 12 + 2] = (byte)colorList[i].heading;
+                            colorVertexData[i * 12 + 3] = (byte)152;
+                            colorVertexData[i * 12 + 4] = (byte)colorList[i].easting;
+                            colorVertexData[i * 12 + 5] = (byte)colorList[i].northing;
+                            colorVertexData[i * 12 + 6] = (byte)colorList[i].heading;
+                            colorVertexData[i * 12 + 7] = (byte)152;
+                            colorVertexData[i * 12 + 8] = (byte)colorList[i].easting;
+                            colorVertexData[i * 12 + 9] = (byte)colorList[i].northing;
+                            colorVertexData[i * 12 + 10] = (byte)colorList[i].heading;
+                            colorVertexData[i * 12 + 11] = (byte)152;
                         }
 
                         colorID = GL.GenBuffer();
                         GL.BindBuffer(BufferTarget.ArrayBuffer, colorID);
-                        GL.BufferData(BufferTarget.ArrayBuffer, colorVertexData.Length * sizeof(float), IntPtr.Zero, BufferUsageHint.StaticDraw);
-                        GL.BufferSubData(BufferTarget.ArrayBuffer, IntPtr.Zero, secTriList.Count * 12 * sizeof(float), colorVertexData);
+                        GL.BufferData(BufferTarget.ArrayBuffer, colorVertexData.Length * sizeof(byte), IntPtr.Zero, BufferUsageHint.StaticDraw);
+                        GL.BufferSubData(BufferTarget.ArrayBuffer, IntPtr.Zero, secTriList.Count * 12 * sizeof(byte), colorVertexData);
 
                         sectionTriangleCount = secTriList.Count;
 
@@ -1397,25 +1401,6 @@ namespace Twol
                     triangleVertexData[i * 6 + 5] = (float)secTriList[i].polygonPts[2].northing;
                 }
 
-
-                float[] colorVertexData = new float[secTriList.Count * 3 * 4];
-
-                for (int i = 0; i < secTriList.Count; i++)
-                {
-                    colorVertexData[i * 12 + 0] = (float)colorList[i].easting / 255;
-                    colorVertexData[i * 12 + 1] = (float)colorList[i].northing / 255;
-                    colorVertexData[i * 12 + 2] = (float)colorList[i].heading / 255;
-                    colorVertexData[i * 12 + 3] = 0.6f;
-                    colorVertexData[i * 12 + 4] = (float)colorList[i].easting / 255;
-                    colorVertexData[i * 12 + 5] = (float)colorList[i].northing / 255;
-                    colorVertexData[i * 12 + 6] = (float)colorList[i].heading / 255;
-                    colorVertexData[i * 12 + 7] = 0.6f;
-                    colorVertexData[i * 12 + 8] = (float)colorList[i].easting / 255;
-                    colorVertexData[i * 12 + 9] = (float)colorList[i].northing / 255;
-                    colorVertexData[i * 12 + 10] = (float)colorList[i].heading / 255;
-                    colorVertexData[i * 12 + 11] = 0.6f;
-                }
-
                 int offsetInBytes = sectionTriangleCount * sizeof(float) * 3 * 2;
 
                 if (patchID == 0)
@@ -1431,19 +1416,37 @@ namespace Twol
                     GL.BufferSubData(BufferTarget.ArrayBuffer, (IntPtr)offsetInBytes, triangleVertexData.Length * sizeof(float), triangleVertexData);
                 }
 
-                offsetInBytes = sectionTriangleCount * sizeof(float) * 3 * 4;
+                byte[] colorVertexData = new byte[secTriList.Count * 3 * 4];
+
+                for (int i = 0; i < secTriList.Count; i++)
+                {
+                    colorVertexData[i * 12 + 0] = (byte)colorList[i].easting;
+                    colorVertexData[i * 12 + 1] = (byte)colorList[i].northing;
+                    colorVertexData[i * 12 + 2] = (byte)colorList[i].heading;
+                    colorVertexData[i * 12 + 3] = 152;
+                    colorVertexData[i * 12 + 4] = (byte)colorList[i].easting;
+                    colorVertexData[i * 12 + 5] = (byte)colorList[i].northing;
+                    colorVertexData[i * 12 + 6] = (byte)colorList[i].heading;
+                    colorVertexData[i * 12 + 7] = 152;
+                    colorVertexData[i * 12 + 8] = (byte)colorList[i].easting;
+                    colorVertexData[i * 12 + 9] = (byte)colorList[i].northing;
+                    colorVertexData[i * 12 + 10] = (byte)colorList[i].heading;
+                    colorVertexData[i * 12 + 11] = 152;
+                }
+
+                offsetInBytes = sectionTriangleCount * sizeof(byte) * 3 * 4;
 
                 if (colorID == 0)
                 {
                     colorID = GL.GenBuffer();
                     GL.BindBuffer(BufferTarget.ArrayBuffer, colorID);
-                    GL.BufferData(BufferTarget.ArrayBuffer, colorVertexData.Length * sizeof(float), IntPtr.Zero, BufferUsageHint.StaticDraw);
-                    GL.BufferSubData(BufferTarget.ArrayBuffer, IntPtr.Zero, secTriList.Count * 12 * sizeof(float), colorVertexData);
+                    GL.BufferData(BufferTarget.ArrayBuffer, colorVertexData.Length * sizeof(byte), IntPtr.Zero, BufferUsageHint.StaticDraw);
+                    GL.BufferSubData(BufferTarget.ArrayBuffer, IntPtr.Zero, secTriList.Count * 12 * sizeof(byte), colorVertexData);
                 }
                 else
                 {
                     GL.BindBuffer(BufferTarget.ArrayBuffer, colorID);
-                    GL.BufferSubData(BufferTarget.ArrayBuffer, (IntPtr)offsetInBytes, colorVertexData.Length * sizeof(float), colorVertexData);
+                    GL.BufferSubData(BufferTarget.ArrayBuffer, (IntPtr)offsetInBytes, colorVertexData.Length * sizeof(byte), colorVertexData);
                 }
 
                 sectionTriangleCount += secTriList.Count;
