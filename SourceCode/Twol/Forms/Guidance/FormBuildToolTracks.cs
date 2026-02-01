@@ -86,8 +86,10 @@ namespace Twol
                             {
                                 vec3 vecFix = new vec3(0, 0, 0);
 
-                                var ptList = new List<vec3>();
-                                ptList.Capacity = verts + 1;
+                                var ptList = new List<vec3>
+                                {
+                                    Capacity = verts + 1
+                                };
 
                                 for (int v = 0; v < verts; v++)
                                 {
