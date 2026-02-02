@@ -314,7 +314,7 @@ namespace Twol
                             if (pn.headingTrueDual >= 360) pn.headingTrueDual -= 360;
                             else if (pn.headingTrueDual < 0) pn.headingTrueDual += 360;
 
-                            double rollK = pn.rollDual;
+                            double rollK = pn.dualRoll;
                             if (Settings.Vehicle.setIMU_invertRoll) rollK *= -1;
                             rollK -= Settings.Vehicle.setIMU_rollZero;
                             ahrs.imuRoll = ahrs.imuRoll * Settings.Vehicle.setIMU_rollFilter + rollK * (1 - Settings.Vehicle.setIMU_rollFilter);
@@ -673,10 +673,10 @@ namespace Twol
                             if (pnTool.headingTrueDual >= 360) pnTool.headingTrueDual -= 360;
                             else if (pnTool.headingTrueDual < 0) pnTool.headingTrueDual += 360;
 
-                            double rollK = pnTool.rollDual;
+                            double rollK = pnTool.dualRoll;
                             if (Settings.Tool.setToolSteer.invertRoll) rollK *= -1;
                             rollK -= Settings.Tool.setToolSteer.rollZero;
-                            ahrsTool.imuRoll = rollK;
+                            pnTool.dualRoll = rollK;
                         }
                         else
                         {
@@ -688,29 +688,17 @@ namespace Twol
                             else rollK *= 0.1;
                             rollK -= Settings.Tool.setToolSteer.rollZero;
                             ahrsTool.imuRoll = rollK;
+
+                            ahrsTool.imuPitch = pnTool.imuPitch;
+
+                            ahrsTool.imuYawRate = pnTool.imuYawRate;
                         }
 
                         //new tool start
 
-                        if (Settings.Tool.setToolSteer.antennaOffset != 0)
-                        {
-                            pnTool.fix.easting += Math.Cos(fixHeading) * Settings.Tool.setToolSteer.antennaOffset;
-                            pnTool.fix.northing -= Math.Sin(fixHeading) * Settings.Tool.setToolSteer.antennaOffset;
-                        }
-
-                        if (ahrsTool.imuRoll != 0 && Settings.Tool.setToolSteer.antennaHeight != 0)
-                        {
-                            rollCorrectionDistance = Math.Sin(glm.toRadians((ahrsTool.imuRoll))) * -Settings.Tool.setToolSteer.antennaHeight;
-                            pnTool.fix.easting = (Math.Cos(-fixHeading) * rollCorrectionDistance) + pnTool.fix.easting;
-                            pnTool.fix.northing = (Math.Sin(-fixHeading) * rollCorrectionDistance) + pnTool.fix.northing;
-                        }
-
-                        ahrsTool.imuPitch = pnTool.imuPitch;
-
-                        ahrsTool.imuYawRate = pnTool.imuYawRate;
                         if (isUDPMonitorOn)
                         {
-                            logUDPSentence.Append(DateTime.Now.ToString("ss.fff\tTool: ") + $"Lat/Lon: {pnTool.latitude}, {pnTool.longitude} Heading: {pnTool.headingTrueDual} Roll: {pnTool.rollDual}\r\n");
+                            logUDPSentence.Append(DateTime.Now.ToString("ss.fff\tTool: ") + $"Lat/Lon: {pnTool.latitude}, {pnTool.longitude} Heading: {pnTool.headingTrueDual} Roll: {pnTool.dualRoll}\r\n");
                         }
                     }
                 }

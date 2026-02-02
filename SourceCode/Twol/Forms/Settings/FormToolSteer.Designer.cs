@@ -119,6 +119,10 @@
             this.label83 = new System.Windows.Forms.Label();
             this.hsbarManualSecondsOn = new System.Windows.Forms.HScrollBar();
             this.tabAntenna = new System.Windows.Forms.TabPage();
+            this.label17 = new System.Windows.Forms.Label();
+            this.nudPivotToTool = new Twol.NudlessNumericUpDown();
+            this.label16 = new System.Windows.Forms.Label();
+            this.nudPivotToAntenna = new Twol.NudlessNumericUpDown();
             this.btnRollOffsetUp = new Twol.RepeatButton();
             this.btnRollOffsetDown = new Twol.RepeatButton();
             this.lblInvertRoll = new System.Windows.Forms.Label();
@@ -351,7 +355,7 @@
             this.tabSteer.ImageIndex = 4;
             this.tabSteer.Location = new System.Drawing.Point(4, 52);
             this.tabSteer.Name = "tabSteer";
-            this.tabSteer.Size = new System.Drawing.Size(365, 387);
+            this.tabSteer.Size = new System.Drawing.Size(365, 394);
             this.tabSteer.TabIndex = 5;
             // 
             // lblAV_Set
@@ -550,7 +554,7 @@
             this.tabDeadzone.Location = new System.Drawing.Point(4, 52);
             this.tabDeadzone.Name = "tabDeadzone";
             this.tabDeadzone.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDeadzone.Size = new System.Drawing.Size(365, 387);
+            this.tabDeadzone.Size = new System.Drawing.Size(365, 394);
             this.tabDeadzone.TabIndex = 17;
             // 
             // hsbarPassiveIntegralGain
@@ -876,8 +880,6 @@
             this.tabModes.Size = new System.Drawing.Size(571, 447);
             this.tabModes.TabIndex = 5;
             this.tabModes.Text = "Modes";
-            this.tabModes.Click += new System.EventHandler(this.tabModes_Click);
-            this.tabModes.Enter += new System.EventHandler(this.tabPassive_Enter);
             // 
             // cboxIsRecordToolLine
             // 
@@ -1011,7 +1013,7 @@
             this.tabActive.Controls.Add(this.nudNudge);
             this.tabActive.Location = new System.Drawing.Point(4, 52);
             this.tabActive.Name = "tabActive";
-            this.tabActive.Size = new System.Drawing.Size(571, 446);
+            this.tabActive.Size = new System.Drawing.Size(571, 447);
             this.tabActive.TabIndex = 7;
             this.tabActive.Text = "Active";
             // 
@@ -1122,7 +1124,7 @@
             this.tabSetup.Location = new System.Drawing.Point(4, 52);
             this.tabSetup.Name = "tabSetup";
             this.tabSetup.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSetup.Size = new System.Drawing.Size(571, 446);
+            this.tabSetup.Size = new System.Drawing.Size(571, 447);
             this.tabSetup.TabIndex = 4;
             // 
             // lblManualPWM_Percent
@@ -1298,6 +1300,10 @@
             // tabAntenna
             // 
             this.tabAntenna.BackColor = System.Drawing.Color.Gainsboro;
+            this.tabAntenna.Controls.Add(this.label17);
+            this.tabAntenna.Controls.Add(this.nudPivotToTool);
+            this.tabAntenna.Controls.Add(this.label16);
+            this.tabAntenna.Controls.Add(this.nudPivotToAntenna);
             this.tabAntenna.Controls.Add(this.btnRollOffsetUp);
             this.tabAntenna.Controls.Add(this.btnRollOffsetDown);
             this.tabAntenna.Controls.Add(this.lblInvertRoll);
@@ -1316,8 +1322,52 @@
             this.tabAntenna.ImageIndex = 1;
             this.tabAntenna.Location = new System.Drawing.Point(4, 52);
             this.tabAntenna.Name = "tabAntenna";
-            this.tabAntenna.Size = new System.Drawing.Size(571, 446);
+            this.tabAntenna.Size = new System.Drawing.Size(571, 447);
             this.tabAntenna.TabIndex = 9;
+            // 
+            // label17
+            // 
+            this.label17.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.ForeColor = System.Drawing.Color.Black;
+            this.label17.Location = new System.Drawing.Point(406, 233);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(144, 23);
+            this.label17.TabIndex = 587;
+            this.label17.Text = "Pivot To Tool";
+            this.label17.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // nudPivotToTool
+            // 
+            this.nudPivotToTool.Location = new System.Drawing.Point(406, 259);
+            this.nudPivotToTool.Maximum = 10D;
+            this.nudPivotToTool.Minimum = -10D;
+            this.nudPivotToTool.Mode = Twol.UnitMode.Small;
+            this.nudPivotToTool.Name = "nudPivotToTool";
+            this.nudPivotToTool.Size = new System.Drawing.Size(144, 52);
+            this.nudPivotToTool.TabIndex = 586;
+            this.nudPivotToTool.ValueChanged += new System.EventHandler(this.nudPivotToTool_ValueChanged);
+            // 
+            // label16
+            // 
+            this.label16.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.ForeColor = System.Drawing.Color.Black;
+            this.label16.Location = new System.Drawing.Point(204, 233);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(152, 23);
+            this.label16.TabIndex = 585;
+            this.label16.Text = "Pivot To Antenna";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // nudPivotToAntenna
+            // 
+            this.nudPivotToAntenna.Location = new System.Drawing.Point(208, 259);
+            this.nudPivotToAntenna.Maximum = 10D;
+            this.nudPivotToAntenna.Minimum = -10D;
+            this.nudPivotToAntenna.Mode = Twol.UnitMode.Small;
+            this.nudPivotToAntenna.Name = "nudPivotToAntenna";
+            this.nudPivotToAntenna.Size = new System.Drawing.Size(144, 52);
+            this.nudPivotToAntenna.TabIndex = 584;
+            this.nudPivotToAntenna.ValueChanged += new System.EventHandler(this.nudPivotToAntenna_ValueChanged);
             // 
             // btnRollOffsetUp
             // 
@@ -1327,7 +1377,7 @@
             this.btnRollOffsetUp.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRollOffsetUp.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnRollOffsetUp.Image = global::Twol.Properties.Resources.UpArrow64;
-            this.btnRollOffsetUp.Location = new System.Drawing.Point(289, 271);
+            this.btnRollOffsetUp.Location = new System.Drawing.Point(98, 366);
             this.btnRollOffsetUp.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnRollOffsetUp.Name = "btnRollOffsetUp";
             this.btnRollOffsetUp.Size = new System.Drawing.Size(59, 69);
@@ -1343,7 +1393,7 @@
             this.btnRollOffsetDown.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRollOffsetDown.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnRollOffsetDown.Image = global::Twol.Properties.Resources.DnArrow64;
-            this.btnRollOffsetDown.Location = new System.Drawing.Point(217, 271);
+            this.btnRollOffsetDown.Location = new System.Drawing.Point(13, 366);
             this.btnRollOffsetDown.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnRollOffsetDown.Name = "btnRollOffsetDown";
             this.btnRollOffsetDown.Size = new System.Drawing.Size(59, 69);
@@ -1353,11 +1403,11 @@
             // 
             // lblInvertRoll
             // 
-            this.lblInvertRoll.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInvertRoll.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblInvertRoll.ForeColor = System.Drawing.Color.Black;
-            this.lblInvertRoll.Location = new System.Drawing.Point(69, 28);
+            this.lblInvertRoll.Location = new System.Drawing.Point(26, 10);
             this.lblInvertRoll.Name = "lblInvertRoll";
-            this.lblInvertRoll.Size = new System.Drawing.Size(148, 23);
+            this.lblInvertRoll.Size = new System.Drawing.Size(115, 23);
             this.lblInvertRoll.TabIndex = 538;
             this.lblInvertRoll.Text = "Invert Roll";
             this.lblInvertRoll.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1367,7 +1417,7 @@
             this.lblRollZeroOffset.Font = new System.Drawing.Font("Tahoma", 20.25F);
             this.lblRollZeroOffset.ForeColor = System.Drawing.Color.Black;
             this.lblRollZeroOffset.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblRollZeroOffset.Location = new System.Drawing.Point(227, 354);
+            this.lblRollZeroOffset.Location = new System.Drawing.Point(33, 324);
             this.lblRollZeroOffset.Name = "lblRollZeroOffset";
             this.lblRollZeroOffset.Size = new System.Drawing.Size(100, 33);
             this.lblRollZeroOffset.TabIndex = 529;
@@ -1376,9 +1426,9 @@
             // 
             // lblZeroRoll
             // 
-            this.lblZeroRoll.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblZeroRoll.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblZeroRoll.ForeColor = System.Drawing.Color.Black;
-            this.lblZeroRoll.Location = new System.Drawing.Point(70, 314);
+            this.lblZeroRoll.Location = new System.Drawing.Point(9, 232);
             this.lblZeroRoll.Name = "lblZeroRoll";
             this.lblZeroRoll.Size = new System.Drawing.Size(148, 23);
             this.lblZeroRoll.TabIndex = 537;
@@ -1388,23 +1438,23 @@
             // lblHeadingOffset
             // 
             this.lblHeadingOffset.BackColor = System.Drawing.Color.Transparent;
-            this.lblHeadingOffset.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold);
+            this.lblHeadingOffset.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHeadingOffset.ForeColor = System.Drawing.Color.Black;
             this.lblHeadingOffset.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblHeadingOffset.Location = new System.Drawing.Point(380, 4);
+            this.lblHeadingOffset.Location = new System.Drawing.Point(296, 115);
             this.lblHeadingOffset.Name = "lblHeadingOffset";
-            this.lblHeadingOffset.Size = new System.Drawing.Size(186, 54);
+            this.lblHeadingOffset.Size = new System.Drawing.Size(161, 27);
             this.lblHeadingOffset.TabIndex = 539;
-            this.lblHeadingOffset.Text = "Heading Offset (Degree)";
+            this.lblHeadingOffset.Text = "Heading Offset";
             this.lblHeadingOffset.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // lblRemoveOffset
             // 
-            this.lblRemoveOffset.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRemoveOffset.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRemoveOffset.ForeColor = System.Drawing.Color.Black;
-            this.lblRemoveOffset.Location = new System.Drawing.Point(18, 155);
+            this.lblRemoveOffset.Location = new System.Drawing.Point(4, 119);
             this.lblRemoveOffset.Name = "lblRemoveOffset";
-            this.lblRemoveOffset.Size = new System.Drawing.Size(243, 40);
+            this.lblRemoveOffset.Size = new System.Drawing.Size(158, 25);
             this.lblRemoveOffset.TabIndex = 536;
             this.lblRemoveOffset.Text = "Remove Offset";
             this.lblRemoveOffset.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1419,10 +1469,10 @@
             this.cboxDataInvertRoll.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxDataInvertRoll.ForeColor = System.Drawing.Color.Black;
             this.cboxDataInvertRoll.Image = global::Twol.Properties.Resources.ConDa_InvertRoll;
-            this.cboxDataInvertRoll.Location = new System.Drawing.Point(74, 55);
+            this.cboxDataInvertRoll.Location = new System.Drawing.Point(20, 36);
             this.cboxDataInvertRoll.Name = "cboxDataInvertRoll";
             this.cboxDataInvertRoll.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.cboxDataInvertRoll.Size = new System.Drawing.Size(130, 72);
+            this.cboxDataInvertRoll.Size = new System.Drawing.Size(126, 61);
             this.cboxDataInvertRoll.TabIndex = 532;
             this.cboxDataInvertRoll.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.cboxDataInvertRoll.UseVisualStyleBackColor = false;
@@ -1437,31 +1487,31 @@
             this.btnZeroRoll.ForeColor = System.Drawing.Color.Black;
             this.btnZeroRoll.Image = global::Twol.Properties.Resources.ConDa_RollSetZero;
             this.btnZeroRoll.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnZeroRoll.Location = new System.Drawing.Point(75, 339);
+            this.btnZeroRoll.Location = new System.Drawing.Point(20, 258);
             this.btnZeroRoll.Name = "btnZeroRoll";
-            this.btnZeroRoll.Size = new System.Drawing.Size(130, 72);
+            this.btnZeroRoll.Size = new System.Drawing.Size(126, 61);
             this.btnZeroRoll.TabIndex = 530;
             this.btnZeroRoll.UseVisualStyleBackColor = false;
             this.btnZeroRoll.Click += new System.EventHandler(this.btnZeroRoll_Click);
             // 
             // label3
             // 
-            this.label3.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(394, 302);
+            this.label3.Location = new System.Drawing.Point(392, 13);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(158, 41);
+            this.label3.Size = new System.Drawing.Size(172, 23);
             this.label3.TabIndex = 583;
             this.label3.Text = "Antenna Offset";
             this.label3.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // label2
             // 
-            this.label2.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(394, 143);
+            this.label2.Location = new System.Drawing.Point(194, 13);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(158, 58);
+            this.label2.Size = new System.Drawing.Size(172, 23);
             this.label2.TabIndex = 581;
             this.label2.Text = "Antenna Height";
             this.label2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1476,9 +1526,9 @@
             this.btnRemoveZeroOffset.ForeColor = System.Drawing.Color.Black;
             this.btnRemoveZeroOffset.Image = global::Twol.Properties.Resources.ConDa_RemoveOffset;
             this.btnRemoveZeroOffset.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnRemoveZeroOffset.Location = new System.Drawing.Point(75, 197);
+            this.btnRemoveZeroOffset.Location = new System.Drawing.Point(20, 147);
             this.btnRemoveZeroOffset.Name = "btnRemoveZeroOffset";
-            this.btnRemoveZeroOffset.Size = new System.Drawing.Size(130, 72);
+            this.btnRemoveZeroOffset.Size = new System.Drawing.Size(126, 61);
             this.btnRemoveZeroOffset.TabIndex = 531;
             this.btnRemoveZeroOffset.UseVisualStyleBackColor = false;
             this.btnRemoveZeroOffset.Click += new System.EventHandler(this.btnRemoveZeroOffset_Click);
@@ -1486,16 +1536,16 @@
             // nudDualHeadingOffset
             // 
             this.nudDualHeadingOffset.DecimalPlaces = 1;
-            this.nudDualHeadingOffset.Location = new System.Drawing.Point(402, 63);
+            this.nudDualHeadingOffset.Location = new System.Drawing.Point(302, 145);
             this.nudDualHeadingOffset.Minimum = -100D;
             this.nudDualHeadingOffset.Name = "nudDualHeadingOffset";
-            this.nudDualHeadingOffset.Size = new System.Drawing.Size(143, 56);
+            this.nudDualHeadingOffset.Size = new System.Drawing.Size(148, 56);
             this.nudDualHeadingOffset.TabIndex = 540;
             this.nudDualHeadingOffset.ValueChanged += new System.EventHandler(this.nudDualHeadingOffset_ValueChanged);
             // 
             // nudAntennaHeight_Tool
             // 
-            this.nudAntennaHeight_Tool.Location = new System.Drawing.Point(402, 205);
+            this.nudAntennaHeight_Tool.Location = new System.Drawing.Point(209, 40);
             this.nudAntennaHeight_Tool.Maximum = 5D;
             this.nudAntennaHeight_Tool.Mode = Twol.UnitMode.Small;
             this.nudAntennaHeight_Tool.Name = "nudAntennaHeight_Tool";
@@ -1505,7 +1555,7 @@
             // 
             // nudAntennaOffset_Tool
             // 
-            this.nudAntennaOffset_Tool.Location = new System.Drawing.Point(402, 347);
+            this.nudAntennaOffset_Tool.Location = new System.Drawing.Point(407, 40);
             this.nudAntennaOffset_Tool.Maximum = 5D;
             this.nudAntennaOffset_Tool.Minimum = -5D;
             this.nudAntennaOffset_Tool.Mode = Twol.UnitMode.Small;
@@ -1671,5 +1721,9 @@
         private System.Windows.Forms.TabPage tabAntenna;
         private NudlessNumericUpDown nudDualHeadingOffset;
         private System.Windows.Forms.Label lblHeadingOffset;
+        private System.Windows.Forms.Label label17;
+        private NudlessNumericUpDown nudPivotToTool;
+        private System.Windows.Forms.Label label16;
+        private NudlessNumericUpDown nudPivotToAntenna;
     }
 }

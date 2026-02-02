@@ -247,7 +247,7 @@ namespace Twol
                             if (ahrs.imuHeading != 99999)
                                 IMUFusion(1);
 
-                            //change for rollDual to the right is positive times -1
+                            //change for dualRoll to the right is positive times -1
                             rollCorrectionDistance = Math.Tan(glm.toRadians((ahrs.imuRoll))) * -vehicle.antennaHeight;
 
                             for (int i = 0; i < 3; i++)
@@ -300,8 +300,25 @@ namespace Twol
                 }
 
                 #endregion
-            }            
-            
+            }
+
+            //dual antenna tool position adjustments
+            if (pnTool.isDualGPSConnected)
+            {
+                if (Settings.Tool.setToolSteer.antennaOffset != 0)
+                {
+                    pnTool.fix.easting += Math.Cos(fixHeading) * Settings.Tool.setToolSteer.antennaOffset;
+                    pnTool.fix.northing -= Math.Sin(fixHeading) * Settings.Tool.setToolSteer.antennaOffset;
+                }
+
+                if (pnTool.dualRoll != 0 && Settings.Tool.setToolSteer.antennaHeight != 0)
+                {
+                    rollCorrectionDistance = Math.Sin(glm.toRadians((pnTool.dualRoll))) * -Settings.Tool.setToolSteer.antennaHeight;
+                    pnTool.fix.easting = (Math.Cos(-fixHeading) * rollCorrectionDistance) + pnTool.fix.easting;
+                    pnTool.fix.northing = (Math.Sin(-fixHeading) * rollCorrectionDistance) + pnTool.fix.northing;
+                }
+            }
+
             SmoothCamera();
             TheRest();
 
@@ -660,7 +677,57 @@ namespace Twol
 
         private void TheRest()
         {
-            CalculateTrailingAndTBTHitch();
+            //translate from pivot position to steer axle and pivot axle position
+            //translate world to the pivot axle
+            pivotAxlePos.easting = pn.fix.easting - (Math.Sin(fixHeading) * vehicle.antennaPivot);
+            pivotAxlePos.northing = pn.fix.northing - (Math.Cos(fixHeading) * vehicle.antennaPivot);
+            pivotAxlePos.heading = fixHeading;
+
+            if (vehicle.antennaOffset != 0)
+            {
+                pivotAxlePos.easting += Math.Cos(fixHeading) * vehicle.antennaOffset;
+                pivotAxlePos.northing -= Math.Sin(fixHeading) * vehicle.antennaOffset;
+            }
+
+            steerAxlePos.easting = pivotAxlePos.easting + (Math.Sin(fixHeading) * vehicle.wheelbase * 0.6);
+            steerAxlePos.northing = pivotAxlePos.northing + (Math.Cos(fixHeading) * vehicle.wheelbase * 0.6);
+            steerAxlePos.heading = fixHeading;
+
+            //guidance look ahead distance based on time or tool width at least 
+
+            double guidanceLookDist = (Math.Max(Settings.Tool.toolWidth * 0.5, avgSpeed * 0.277777 * Settings.Vehicle.setAS_guidanceLookAheadTime));
+            guidanceLookPos.easting = pivotAxlePos.easting + (Math.Sin(fixHeading + glm.toRadians(mc.actualSteerAngleDegrees)) * guidanceLookDist);
+            guidanceLookPos.northing = pivotAxlePos.northing + (Math.Cos(fixHeading + glm.toRadians(mc.actualSteerAngleDegrees)) * guidanceLookDist);
+
+            if (pnTool.isDualGPSConnected)
+            {
+                toolPivotPos.easting = pnTool.fix.easting - (Math.Sin(glm.toRadians(pnTool.headingTrueDual)) * Settings.Tool.setToolSteer.pivotToAntennaDistance);
+                toolPivotPos.northing = pnTool.fix.northing - (Math.Cos(glm.toRadians(pnTool.headingTrueDual)) * Settings.Tool.setToolSteer.pivotToAntennaDistance);
+                toolPivotPos.heading = glm.toRadians(pnTool.headingTrueDual);
+
+                toolPos.easting = toolPivotPos.easting - (Math.Sin(glm.toRadians(pnTool.headingTrueDual)) * Settings.Tool.setToolSteer.PivotToToolDistance);
+                toolPos.northing = toolPivotPos.northing - (Math.Cos(glm.toRadians(pnTool.headingTrueDual)) * Settings.Tool.setToolSteer.PivotToToolDistance);
+                toolPos.heading = glm.toRadians(pnTool.headingTrueDual);
+
+                toolPivotPos.easting = pnTool.fix.easting * 0.5 + toolPivotPos.easting * 0.5;
+                toolPivotPos.northing = pnTool.fix.northing * 0.5 + toolPivotPos.northing * 0.5;
+
+                //if (Settings.Tool.setToolSteer.isSteerNotSlide == 1)
+                //{
+                //    toolPivotPos.heading = Math.Atan2(tankPos.easting - toolPivotPos.easting, tankPos.northing - toolPivotPos.northing);
+
+                //    if (toolPivotPos.heading < 0) toolPivotPos.heading += glm.twoPI;
+                //}
+                //else
+                //{
+                //    toolPivotPos.heading = fixHeading;
+                //}
+
+            }
+            else
+            {
+                CalculateTrailingAndTBTHitch();
+            }
 
             //positions and headings 
             CalculateTriggerDistance();
@@ -715,28 +782,6 @@ namespace Twol
         //all the hitch, pivot, section, trailing hitch, headings and fixes
         private void CalculateTrailingAndTBTHitch()
         {
-            //translate from pivot position to steer axle and pivot axle position
-            //translate world to the pivot axle
-            pivotAxlePos.easting = pn.fix.easting - (Math.Sin(fixHeading) * vehicle.antennaPivot);
-            pivotAxlePos.northing = pn.fix.northing - (Math.Cos(fixHeading) * vehicle.antennaPivot);
-            pivotAxlePos.heading = fixHeading;
-
-            if (vehicle.antennaOffset != 0)
-            {
-                pivotAxlePos.easting += Math.Cos(fixHeading) * vehicle.antennaOffset;
-                pivotAxlePos.northing -= Math.Sin(fixHeading) * vehicle.antennaOffset;
-            }
-
-            steerAxlePos.easting = pivotAxlePos.easting + (Math.Sin(fixHeading) * vehicle.wheelbase*0.6);
-            steerAxlePos.northing = pivotAxlePos.northing + (Math.Cos(fixHeading) * vehicle.wheelbase*0.6);
-            steerAxlePos.heading = fixHeading;
-
-            //guidance look ahead distance based on time or tool width at least 
-            
-            double guidanceLookDist = (Math.Max(Settings.Tool.toolWidth * 0.5, avgSpeed * 0.277777 * Settings.Vehicle.setAS_guidanceLookAheadTime));
-            guidanceLookPos.easting = pivotAxlePos.easting + (Math.Sin(fixHeading + glm.toRadians(mc.actualSteerAngleDegrees)) * guidanceLookDist);
-            guidanceLookPos.northing = pivotAxlePos.northing + (Math.Cos(fixHeading + glm.toRadians(mc.actualSteerAngleDegrees)) * guidanceLookDist);
-
             //determine where the rigid vehicle hitch ends - Tractor and Harvestor
             if (vehicle.vehicleType != 2)
             {
@@ -753,35 +798,8 @@ namespace Twol
             }
 
             //tool attached via a trailing hitch
-            if (Settings.Tool.setToolSteer.isGPSToolActive && Settings.Tool.isToolTrailing && !Settings.Tool.isToolTBT && !timerSim.Enabled)
-            {
-                tankPos.heading = fixHeading;
-                tankPos.easting = hitchPos.easting;
-                tankPos.northing = hitchPos.northing;
 
-                toolPivotPos.easting = pnTool.fix.easting * 0.5 + toolPivotPos.easting * 0.5;
-                toolPivotPos.northing = pnTool.fix.northing * 0.5 + toolPivotPos.northing * 0.5;
-
-                if (Settings.Tool.setToolSteer.isSteerNotSlide == 1)
-                {
-                    toolPivotPos.heading = Math.Atan2(tankPos.easting - toolPivotPos.easting, tankPos.northing - toolPivotPos.northing);
-
-                    if (toolPivotPos.heading < 0) toolPivotPos.heading += glm.twoPI;
-                }
-                else
-                {
-                    toolPivotPos.heading = fixHeading;
-                }
-
-                toolPos.heading = toolPivotPos.heading;
-
-                toolPos.easting = toolPivotPos.easting +
-                    (Math.Sin(toolPivotPos.heading) * (Settings.Tool.trailingToolToPivotLength));
-                toolPos.northing = toolPivotPos.northing +
-                    (Math.Cos(toolPivotPos.heading) * (Settings.Tool.trailingToolToPivotLength));
-            }
-
-            else if (Settings.Tool.isToolTrailing)
+            if (Settings.Tool.isToolTrailing)
             {
                 double over;
                 if (Settings.Tool.isToolTBT)

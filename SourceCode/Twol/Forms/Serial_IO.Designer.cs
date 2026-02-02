@@ -1076,7 +1076,7 @@ namespace Twol
                         if (pn.headingTrueDual >= 360) pn.headingTrueDual -= 360;
                         else if (pn.headingTrueDual < 0) pn.headingTrueDual += 360;
 
-                        double rollK = pn.rollDual;
+                        double rollK = pn.dualRoll;
                         if (Settings.Vehicle.setIMU_invertRoll) rollK *= -1;
                         rollK -= Settings.Vehicle.setIMU_rollZero;
                         ahrs.imuRoll = ahrs.imuRoll * Settings.Vehicle.setIMU_rollFilter + rollK * (1 - Settings.Vehicle.setIMU_rollFilter);

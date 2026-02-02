@@ -314,10 +314,10 @@ namespace Twol
             //nmea simulator built in.
             sim = new CSim(this);
 
-            ////all the attitude, heading, rollDual, pitch reference system
+            ////all the attitude, heading, dualRoll, pitch reference system
             ahrs = new CAHRS();
 
-            ////all the attitude, heading, rollDual, pitch reference system GPS2
+            ////all the attitude, heading, dualRoll, pitch reference system GPS2
             ahrsTool = new CAHRS();
 
             //fieldData all in one place

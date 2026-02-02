@@ -31,7 +31,7 @@ namespace Twol
             hpdSentence, rmcSentence, pandaSentence, ksxtSentence;
 
         public double elevation = float.MaxValue, headingTrue = float.MaxValue,
-            headingTrueDual = float.MaxValue, rollDual = 0;
+            headingTrueDual = float.MaxValue, dualRoll = 0;
 
         public double hdop, latitude, longitude;
         public int satellitesTracked;
@@ -331,7 +331,7 @@ namespace Twol
 
                 double.TryParse(words[5], NumberStyles.Float, CultureInfo.InvariantCulture, out headingTrueDual);
 
-                double.TryParse(words[6], NumberStyles.Float, CultureInfo.InvariantCulture, out rollDual);
+                double.TryParse(words[6], NumberStyles.Float, CultureInfo.InvariantCulture, out dualRoll);
 
                 double.TryParse(words[8], NumberStyles.Float, CultureInfo.InvariantCulture, out vtgSpeed);
 
@@ -339,9 +339,9 @@ namespace Twol
 
                 int.TryParse(words[11], NumberStyles.Float, CultureInfo.InvariantCulture, out int headingQuality);
 
-                if (headingQuality != 3)   // rollDual only when rtk 
+                if (headingQuality != 3)   // dualRoll only when rtk 
                 {
-                    rollDual = 0;
+                    dualRoll = 0;
                 }
 
                 int.TryParse(words[13], NumberStyles.Float, CultureInfo.InvariantCulture, out satellitesTracked);
@@ -507,7 +507,7 @@ namespace Twol
                 Zp = Xp;
                 XeRoll = (G * (rollK - Zp)) + Xp;
 
-                rollDual = XeRoll;
+                dualRoll = XeRoll;
             }
         }
 
@@ -518,13 +518,13 @@ namespace Twol
                 //Dual heading
                 double.TryParse(words[3], NumberStyles.Float, CultureInfo.InvariantCulture, out headingTrueDual);
 
-                double.TryParse(words[4], NumberStyles.Float, CultureInfo.InvariantCulture, out rollDual);
+                double.TryParse(words[4], NumberStyles.Float, CultureInfo.InvariantCulture, out dualRoll);
 
                 double.TryParse(words[18], NumberStyles.Float, CultureInfo.InvariantCulture, out double baseline);
 
-                if (baseline <= 0)   // rollDual only when rtk and baseline - above zero
+                if (baseline <= 0)   // dualRoll only when rtk and baseline - above zero
                 {
-                    rollDual = 0;
+                    dualRoll = 0;
                 }
 
                 isDualGPSConnected = true;
@@ -561,7 +561,7 @@ namespace Twol
 
             FROM AHRS:
             (12) Heading in degrees
-            (13) Roll angle in degrees(positive rollDual = right leaning - right down, left up)
+            (13) Roll angle in degrees(positive dualRoll = right leaning - right down, left up)
             (14) Pitch angle in degrees(Positive pitch = nose up)
             (15) Yaw Rate in Degrees / second
 
@@ -595,8 +595,8 @@ namespace Twol
                 //Dual antenna derived heading
                 double.TryParse(words[12], NumberStyles.Float, CultureInfo.InvariantCulture, out headingTrueDual);
 
-                //rollDual
-                double.TryParse(words[13], NumberStyles.Float, CultureInfo.InvariantCulture, out rollDual);
+                //dualRoll
+                double.TryParse(words[13], NumberStyles.Float, CultureInfo.InvariantCulture, out dualRoll);
 
                 //get latitude and convert to decimal degrees
                 int decim = words[2].IndexOf(".", StringComparison.Ordinal);
@@ -668,7 +668,7 @@ namespace Twol
 
             FROM IMU:
             (12) Heading in degrees
-            (13) Roll angle in degrees(positive rollDual = right leaning - right down, left up)
+            (13) Roll angle in degrees(positive dualRoll = right leaning - right down, left up)
             
             (14) Pitch angle in degrees(Positive pitch = nose up)
             (15) Yaw Rate in Degrees / second
@@ -738,7 +738,7 @@ namespace Twol
                 //imu heading
                 double.TryParse(words[12], NumberStyles.Float, CultureInfo.InvariantCulture, out imuHeading);
 
-                //rollDual
+                //dualRoll
                 double.TryParse(words[13], NumberStyles.Float, CultureInfo.InvariantCulture, out imuRoll);
 
                 //Pitch
@@ -774,18 +774,18 @@ namespace Twol
             }
         }
 
-        private void ParseTRA()  //tra contains hdt and rollDual for the ub482 receiver
+        private void ParseTRA()  //tra contains hdt and dualRoll for the ub482 receiver
         {
             if (!string.IsNullOrEmpty(words[1]))
             {
                 double.TryParse(words[2], NumberStyles.Float, CultureInfo.InvariantCulture, out age);
 
                 //  Console.WriteLine(HeadingForced);
-                double.TryParse(words[3], NumberStyles.Float, CultureInfo.InvariantCulture, out rollDual);
+                double.TryParse(words[3], NumberStyles.Float, CultureInfo.InvariantCulture, out dualRoll);
                 // Console.WriteLine(nRoll);
 
                 int.TryParse(words[5], NumberStyles.Float, CultureInfo.InvariantCulture, out int trasolution);
-                if (trasolution != 4) rollDual = 0;
+                if (trasolution != 4) dualRoll = 0;
             }
         }
 
