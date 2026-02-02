@@ -75,8 +75,6 @@ namespace Twol
         //tally counters for display
         //public double totalSquareMetersWorked = 0, totalUserSquareMeters = 0, userSquareMetersAlarm = 0;
 
-        public double avgSpeed, previousSpeed;//for average speed
-
         //youturn
         public double distancePivotToTurnLine = -2222;
         public double distanceToolToTurnLine = -2222;
@@ -381,8 +379,8 @@ namespace Twol
             if (!vehicle.isInFreeDriveMode)
             {
                 //fill up0 the appropriate arrays with new values
-                PGN_254.pgn[PGN_254.speedHi] = unchecked((byte)((int)(Math.Abs(avgSpeed) * 10.0) >> 8));
-                PGN_254.pgn[PGN_254.speedLo] = unchecked((byte)((int)(Math.Abs(avgSpeed) * 10.0)));
+                PGN_254.pgn[PGN_254.speedHi] = unchecked((byte)((int)(Math.Abs(pn.avgSpeed) * 10.0) >> 8));
+                PGN_254.pgn[PGN_254.speedLo] = unchecked((byte)((int)(Math.Abs(pn.avgSpeed) * 10.0)));
                 //mc.machineControlData[mc.cnSpeed] = mc.autoSteerData[mc.sdSpeed];
 
                 //convert to cm from mm and divide by 2 - lightbar
@@ -406,12 +404,12 @@ namespace Twol
 
                 if (!timerSim.Enabled)
                 {
-                    if (isBtnAutoSteerOn && avgSpeed > Settings.Vehicle.setAS_maxSteerSpeed)
+                    if (isBtnAutoSteerOn && pn.avgSpeed > Settings.Vehicle.setAS_maxSteerSpeed)
                     {
                         SetAutoSteerButton(false, "Above Maximum Safe Steering Speed: " + (Settings.Vehicle.setAS_maxSteerSpeed * glm.kmhToMphOrKmh).ToString("N1") + glm.unitsKmhMph);
                     }
 
-                    if (isBtnAutoSteerOn && avgSpeed < Settings.Vehicle.setAS_minSteerSpeed)
+                    if (isBtnAutoSteerOn && pn.avgSpeed < Settings.Vehicle.setAS_minSteerSpeed)
                     {
                         minSteerSpeedTimer++;
                         if (minSteerSpeedTimer > 80)
@@ -458,7 +456,7 @@ namespace Twol
                 // is active mode for tool steer
                 if (Settings.Tool.setToolSteer.isFollowCurrent|| Settings.Tool.setToolSteer.isFollowPivot)
                 {
-                    PGN_233.pgn[PGN_233.speed10] = unchecked((byte)((int)(Math.Abs(avgSpeed) * 10.0)));
+                    PGN_233.pgn[PGN_233.speed10] = unchecked((byte)((int)(Math.Abs(pn.avgSpeed) * 10.0)));
 
                     var distX1000 = (Int16)(guidanceToolXTE * 1000);
                     PGN_233.pgn[PGN_233.xteHi] = unchecked((byte)(distX1000 >> 8));
@@ -693,7 +691,7 @@ namespace Twol
             steerAxlePos.heading = fixHeading;
 
             //guidance look ahead distance based on time or tool width at least 
-            double guidanceLookDist = (Math.Max(Settings.Tool.toolWidth * 0.5, avgSpeed * 0.277777 * Settings.Vehicle.setAS_guidanceLookAheadTime));
+            double guidanceLookDist = (Math.Max(Settings.Tool.toolWidth * 0.5, pn.avgSpeed * 0.277777 * Settings.Vehicle.setAS_guidanceLookAheadTime));
             guidanceLookPos.easting = pivotAxlePos.easting + (Math.Sin(fixHeading + glm.toRadians(mc.actualSteerAngleDegrees)) * guidanceLookDist);
             guidanceLookPos.northing = pivotAxlePos.northing + (Math.Cos(fixHeading + glm.toRadians(mc.actualSteerAngleDegrees)) * guidanceLookDist);
 
@@ -709,8 +707,8 @@ namespace Twol
                 toolPos.northing = toolPivotPos.northing - (Math.Cos(glm.toRadians(pnTool.headingTrueDual)) * Settings.Tool.setToolSteer.PivotToToolDistance);
                 toolPos.heading = glm.toRadians(pnTool.headingTrueDual);
 
-                toolPivotPos.easting = pnTool.fix.easting * 0.5 + toolPivotPos.easting * 0.5;
-                toolPivotPos.northing = pnTool.fix.northing * 0.5 + toolPivotPos.northing * 0.5;
+                //toolPivotPos.easting = pnTool.fix.easting * 0.5 + toolPivotPos.easting * 0.5;
+                //toolPivotPos.northing = pnTool.fix.northing * 0.5 + toolPivotPos.northing * 0.5;
 
                 //if (Settings.Tool.setToolSteer.isSteerNotSlide == 1)
                 //{
@@ -920,94 +918,103 @@ namespace Twol
             double leftSpeed = 0, rightSpeed = 0;
 
             //speed max for section kmh*0.277 to m/s * 10 cm per pixel * 1.7 max speed
-            double meterPerSecPerPixel = Math.Abs(avgSpeed) * 4.5;
+            double meterPerSecPerPixel;
+
+            if (!pnTool.isDualGPSConnected)
+            {
+                meterPerSecPerPixel = Math.Abs(pn.avgSpeed) * 4.5;
+            }
+            else
+            {
+                meterPerSecPerPixel = Math.Abs(pnTool.vtgSpeed) * 4.5;
+            }
 
             //now loop all the section rights and the one extreme left
             for (int j = 0; j < section.Count; j++)
-            {
-                if (j == 0)
                 {
-                    //only one first left point, the rest are all rights moved over to left
-                    section[j].leftPoint = new vec2(cosHeading * (section[j].positionLeft) + easting,
-                                       sinHeading * (section[j].positionLeft) + northing);
+                    if (j == 0)
+                    {
+                        //only one first left point, the rest are all rights moved over to left
+                        section[j].leftPoint = new vec2(cosHeading * (section[j].positionLeft) + easting,
+                                           sinHeading * (section[j].positionLeft) + northing);
 
-                    left = section[j].leftPoint - section[j].lastLeftPoint;
+                        left = section[j].leftPoint - section[j].lastLeftPoint;
+
+                        //save a copy for next time
+                        section[j].lastLeftPoint = section[j].leftPoint;
+
+                        //get the speed for left side only once
+
+                        leftSpeed = left.GetLength() * gpsHz * 10;
+                        if (leftSpeed > meterPerSecPerPixel) leftSpeed = meterPerSecPerPixel;
+                    }
+                    else
+                    {
+                        //right point from last section becomes this left one
+                        section[j].leftPoint = section[j - 1].rightPoint;
+                        left = section[j].leftPoint - section[j].lastLeftPoint;
+
+                        //save a copy for next time
+                        section[j].lastLeftPoint = section[j].leftPoint;
+
+                        //Save the slower of the 2
+                        if (leftSpeed > rightSpeed) leftSpeed = rightSpeed;
+                    }
+
+                    section[j].rightPoint = new vec2(cosHeading * (section[j].positionRight) + easting,
+                                        sinHeading * (section[j].positionRight) + northing);
+
+                    //now we have left and right for this section
+                    right = section[j].rightPoint - section[j].lastRightPoint;
 
                     //save a copy for next time
-                    section[j].lastLeftPoint = section[j].leftPoint;
+                    section[j].lastRightPoint = section[j].rightPoint;
 
-                    //get the speed for left side only once
+                    //grab vector length and convert to meters/sec/10 pixels per meter                
+                    rightSpeed = right.GetLength() * gpsHz * 10;
+                    if (rightSpeed > meterPerSecPerPixel) rightSpeed = meterPerSecPerPixel;
 
-                    leftSpeed = left.GetLength() * gpsHz * 10;
-                    if (leftSpeed > meterPerSecPerPixel) leftSpeed = meterPerSecPerPixel;
+                    //Is section outer going forward or backward
+                    double head = left.HeadingXZ();
+
+                    if (head < 0) head += glm.twoPI;
+
+                    if (Math.PI - Math.Abs(Math.Abs(head - toolPivotPos.heading) - Math.PI) > glm.PIBy2)
+                    {
+                        if (leftSpeed > 0) leftSpeed *= -1;
+                    }
+
+                    head = right.HeadingXZ();
+                    if (head < 0) head += glm.twoPI;
+                    if (Math.PI - Math.Abs(Math.Abs(head - toolPivotPos.heading) - Math.PI) > glm.PIBy2)
+                    {
+                        if (rightSpeed > 0) rightSpeed *= -1;
+                    }
+
+                    double sped = 0;
+                    //save the far left and right speed in m/sec averaged over 20%
+                    if (j == 0)
+                    {
+                        sped = (leftSpeed * 0.1);
+                        if (sped < 0.1) sped = 0.1;
+                        tool.farLeftSpeed = tool.farLeftSpeed * 0.85 + sped * 0.15;
+                    }
+                    if (j == section.Count - 1)
+                    {
+                        sped = (rightSpeed * 0.1);
+                        if (sped < 0.1) sped = 0.1;
+                        tool.farRightSpeed = tool.farRightSpeed * 0.85 + sped * 0.15;
+                    }
+
+                    //choose fastest speed and filter
+                    if (leftSpeed > rightSpeed)
+                    {
+                        sped = leftSpeed;
+                        leftSpeed = rightSpeed;
+                    }
+                    else sped = rightSpeed;
+                    section[j].speedPixels = section[j].speedPixels * 0.7 + sped * 0.3;
                 }
-                else
-                {
-                    //right point from last section becomes this left one
-                    section[j].leftPoint = section[j - 1].rightPoint;
-                    left = section[j].leftPoint - section[j].lastLeftPoint;
-
-                    //save a copy for next time
-                    section[j].lastLeftPoint = section[j].leftPoint;
-                    
-                    //Save the slower of the 2
-                    if (leftSpeed > rightSpeed) leftSpeed = rightSpeed;                    
-                }
-
-                section[j].rightPoint = new vec2(cosHeading * (section[j].positionRight) + easting,
-                                    sinHeading * (section[j].positionRight) + northing);
-
-                //now we have left and right for this section
-                right = section[j].rightPoint - section[j].lastRightPoint;
-
-                //save a copy for next time
-                section[j].lastRightPoint = section[j].rightPoint;
-
-                //grab vector length and convert to meters/sec/10 pixels per meter                
-                rightSpeed = right.GetLength() * gpsHz * 10;
-                if (rightSpeed > meterPerSecPerPixel) rightSpeed = meterPerSecPerPixel;
-
-                //Is section outer going forward or backward
-                double head = left.HeadingXZ();
-
-                if (head < 0) head += glm.twoPI;
-
-                if (Math.PI - Math.Abs(Math.Abs(head - toolPivotPos.heading) - Math.PI) > glm.PIBy2)
-                {
-                    if (leftSpeed > 0) leftSpeed *= -1;
-                }
-
-                head = right.HeadingXZ();
-                if (head < 0) head += glm.twoPI;
-                if (Math.PI - Math.Abs(Math.Abs(head - toolPivotPos.heading) - Math.PI) > glm.PIBy2)
-                {
-                    if (rightSpeed > 0) rightSpeed *= -1;
-                }
-
-                double sped = 0;
-                //save the far left and right speed in m/sec averaged over 20%
-                if (j==0)
-                {
-                    sped = (leftSpeed * 0.1);
-                    if (sped < 0.1) sped = 0.1;
-                    tool.farLeftSpeed = tool.farLeftSpeed * 0.85 + sped * 0.15;
-                }
-                if (j == section.Count - 1)
-                {
-                    sped = (rightSpeed * 0.1);
-                    if (sped < 0.1) sped = 0.1;
-                    tool.farRightSpeed = tool.farRightSpeed * 0.85 + sped * 0.15;
-                }
-
-                //choose fastest speed and filter
-                if (leftSpeed > rightSpeed)
-                {
-                    sped = leftSpeed;
-                    leftSpeed = rightSpeed;
-                }
-                else sped = rightSpeed;
-                section[j].speedPixels = section[j].speedPixels * 0.7 + sped * 0.3;
-            }
         }
 
         //perimeter and boundary point generation
@@ -1096,7 +1103,7 @@ namespace Twol
                 //All sections OFF so if on, turn off
                 else
                 {
-                    if (tRec.isToolRecordOn && avgSpeed > 1)
+                    if (tRec.isToolRecordOn && pn.avgSpeed > 1)
                     { tRec.StopToolRecordLine(); }
                 }
 

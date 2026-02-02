@@ -69,7 +69,7 @@ namespace Twol
 
         public void DrawTool()
         {
-            if (!Settings.Tool.setToolSteer.isGPSToolActive)
+            if (!mf.pnTool.isDualGPSConnected)
             {
                 GL.Translate(mf.pivotAxlePos.easting, mf.pivotAxlePos.northing, 0);
 
@@ -342,14 +342,15 @@ namespace Twol
 
                 GL.PopMatrix();
             }
-            else //gpsTool Position
+
+            else //gpsTool Position active
             {
                 //translate and rotate at pivot axle
                 GL.PushMatrix();
 
                 //move to Tool and rotate
-                GL.Translate(mf.toolPos.easting, mf.toolPos.northing, 0);
-                GL.Rotate(glm.toDegrees(-mf.toolPos.heading), 0.0, 0.0, 1.0);
+                GL.Translate(mf.toolPivotPos.easting, mf.toolPivotPos.northing, 0);
+                GL.Rotate(glm.toDegrees(-mf.toolPivotPos.heading), 0.0, 0.0, 1.0);
 
                 //draw the sections.
 
@@ -447,56 +448,54 @@ namespace Twol
                 }
 
                 //Draw Tool antenna
-                if (Settings.Tool.setToolSteer.isGPSToolActive)
+                if (mf.tRec.isToolRecordOn && mf.isFlashOnOff)
                 {
-                    if (mf.tRec.isToolRecordOn && mf.isFlashOnOff)
-                    {
-                        GL.PointSize(20);
-                        GL.Color3(1, 0.3, 0.3);
-                    }
-                    else
-                    {
-                        GL.PointSize(16);
-                        GL.Color3(0, 0, 0);
-                    }
-
-                    if (mf.pnTool.isDualGPSConnected && mf.camera.camSetDistance > -500)
-                    {
-
-                        GL.Begin(PrimitiveType.Points);
-                        GL.Vertex3(0.6, 0, 0);
-                        GL.End();
-
-                        GL.Begin(PrimitiveType.Points);
-                        GL.Vertex3(-0.6, 0, 0);
-                        GL.End();
-
-                        GL.PointSize(10);
-                        GL.Begin(PrimitiveType.Points);
-                        GL.Color3(0.20, 0.78, 0.98);
-                        GL.Vertex3(0.6, 0, 0);
-                        GL.End();
-
-                        GL.PointSize(10);
-                        GL.Begin(PrimitiveType.Points);
-                        GL.Color3(0.20, 0.78, 0.98);
-                        GL.Vertex3(-0.6, 0, 0);
-                        GL.End();
-                    }
-
-                    else if (mf.camera.camSetDistance > -500)
-                    {
-                        GL.Begin(PrimitiveType.Points);
-                        GL.Vertex3(0, 0, 0);
-                        GL.End();
-
-                        GL.PointSize(10);
-                        GL.Begin(PrimitiveType.Points);
-                        GL.Color3(0.20, 0.78, 0.98);
-                        GL.Vertex3(0, 0, 0);
-                        GL.End();
-                    }
+                    GL.PointSize(20);
+                    GL.Color3(1, 0.3, 0.3);
                 }
+                else
+                {
+                    GL.PointSize(16);
+                    GL.Color3(0, 0, 0);
+                }
+
+                double offs = Settings.Tool.setToolSteer.pivotToAntennaDistance;
+                if (mf.pnTool.isDualGPSConnected && mf.camera.camSetDistance > -500)
+                {
+                    GL.Begin(PrimitiveType.Points);
+                    GL.Vertex3(0.6, offs, 0);
+                    GL.End();
+
+                    GL.Begin(PrimitiveType.Points);
+                    GL.Vertex3(-0.6, offs, 0);
+                    GL.End();
+
+                    GL.PointSize(10);
+                    GL.Begin(PrimitiveType.Points);
+                    GL.Color3(0.20, 0.78, 0.98);
+                    GL.Vertex3(0.6, offs, 0);
+                    GL.End();
+
+                    GL.PointSize(10);
+                    GL.Begin(PrimitiveType.Points);
+                    GL.Color3(0.20, 0.78, 0.98);
+                    GL.Vertex3(-0.6, offs, 0);
+                    GL.End();
+                }
+
+                else if (mf.camera.camSetDistance > -500)
+                {
+                    GL.Begin(PrimitiveType.Points);
+                    GL.Vertex3(0, offs, 0);
+                    GL.End();
+
+                    GL.PointSize(10);
+                    GL.Begin(PrimitiveType.Points);
+                    GL.Color3(0.20, 0.78, 0.98);
+                    GL.Vertex3(0, offs, 0);
+                    GL.End();
+                }
+
 
 
                 //tram Dots

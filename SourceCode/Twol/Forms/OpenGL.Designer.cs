@@ -1131,7 +1131,7 @@ namespace Twol
                     }
 
                     //Off or too slow or going backwards
-                    if (section[j].sectionBtnState == btnStates.Off || avgSpeed < Settings.Tool.slowSpeedCutoff || section[j].speedPixels < 0)
+                    if (section[j].sectionBtnState == btnStates.Off || pn.avgSpeed < Settings.Tool.slowSpeedCutoff || section[j].speedPixels < 0)
                     {
                         section[j].sectionOnRequest = false;
                         continue;
@@ -2456,7 +2456,7 @@ namespace Twol
             if (!Settings.User.isSpeedoOn) font.DrawText(oglMain.Width / 2 - 250, 10, Speed + " " + glm.unitsKmhMph, 1);
 
             //angular velocity
-            ahrs.angularVehicleVelocity = glm.twoPI * 0.277777 * avgSpeed * (Math.Tan(glm.toRadians(mc.actualSteerAngleDegrees))) / vehicle.wheelbase;
+            ahrs.angularVehicleVelocity = glm.twoPI * 0.277777 * pn.avgSpeed * (Math.Tan(glm.toRadians(mc.actualSteerAngleDegrees))) / vehicle.wheelbase;
 
             strHeading = ahrs.angularVehicleVelocity.ToString("N1");
             font.DrawText(center, 90, strHeading, 1);
@@ -2553,11 +2553,11 @@ namespace Twol
             GL.End();
             GL.BindTexture(TextureTarget.Texture2D, texture[(int)FormGPS.textures.SpeedoNeedle]);        // Select Our Texture
 
-            double aveSpd = Math.Abs(avgSpeed * glm.kmhToMphOrKmh);
+            double aveSpd = Math.Abs(pn.avgSpeed * glm.kmhToMphOrKmh);
             if (aveSpd > 20) aveSpd = 20;
             double angle = (aveSpd - 10) * 15;
 
-            if (avgSpeed > -0.1) GL.Color3(0.850f, 0.950f, 0.30f);
+            if (pn.avgSpeed > -0.1) GL.Color3(0.850f, 0.950f, 0.30f);
             else GL.Color3(0.952f, 0.0f, 0.0f);
 
             GL.Rotate(angle, 0, 0, 1);

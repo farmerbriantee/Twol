@@ -74,17 +74,17 @@ namespace Twol
         {
             get
             {
-                if (mf.avgSpeed > 2)
+                if (mf.pn.avgSpeed > 2)
                 {
                     TimeSpan timeSpan = TimeSpan.FromHours(((areaBoundaryOuterLessInner - workedAreaTotal) * glm.m2ha
-                        / (Settings.Tool.toolWidth * mf.avgSpeed * 0.1)));
+                        / (Settings.Tool.toolWidth * mf.pn.avgSpeed * 0.1)));
                     return timeSpan.Hours.ToString("00:") + timeSpan.Minutes.ToString("00") + '"';
                 }
                 else return "\u221E Hrs";
             }
         }
 
-        public string WorkRateHour => (Settings.Tool.toolWidth * mf.avgSpeed * glm.m22HaOrAc * 1000).ToString("N1") + glm.unitsHaOrAcHr;
+        public string WorkRateHour => (Settings.Tool.toolWidth * mf.pn.avgSpeed * glm.m22HaOrAc * 1000).ToString("N1") + glm.unitsHaOrAcHr;
 
         //constructor
         public CFieldData(FormGPS _f)

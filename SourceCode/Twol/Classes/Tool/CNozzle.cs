@@ -62,13 +62,13 @@
                 {
                     //Liters * 0.00167 𝑥 𝑠𝑤𝑎𝑡ℎ 𝑤𝑖𝑑𝑡ℎ 𝑥 𝐾mh * ( to send as integer x100)
                     rateSet =
-                        (int)(rateSetSelected * 0.167 * currentWidthMeters * mf.avgSpeed);
+                        (int)(rateSetSelected * 0.167 * currentWidthMeters * mf.pn.avgSpeed);
                 }
                 else
                 {
                     //calculate gallons per minute - GPM = GPA X MPH X Width (in inches)/ 5,940
                     rateSet = (int)(rateSetSelected *
-                                                    (mf.avgSpeed * glm.kmhToMphOrKmh) * currentWidthMeters * glm.m2InchOrCm / 5940 * 100);
+                                                    (mf.pn.avgSpeed * glm.kmhToMphOrKmh) * currentWidthMeters * glm.m2InchOrCm / 5940 * 100);
                 }
 
                 PGN_227.pgn[PGN_227.volumePerMinuteSetLo] = (byte)(rateSet);
@@ -87,7 +87,7 @@
             PGN_227.pgn[PGN_227.sec1to8] = PGN_254.pgn[PGN_254.sc1to8];
             PGN_227.pgn[PGN_227.sec9to16] = PGN_254.pgn[PGN_254.sc9to16];
 
-            PGN_227.pgn[PGN_227.speed] = (byte)(mf.avgSpeed * 10);
+            PGN_227.pgn[PGN_227.speed] = (byte)(mf.pn.avgSpeed * 10);
 
 
             mf.SendUDPMessage(PGN_227.pgn, mf.epModule);

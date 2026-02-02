@@ -41,6 +41,7 @@ namespace Twol
         public double imuRoll = short.MaxValue, imuPitch = short.MaxValue, imuYawRate = short.MaxValue;
 
         public byte fixQuality = byte.MaxValue;
+        public double avgSpeed = 0;
 
         private double rollK, Pc, G, Xp, Zp, XeRoll, P = 1.0f;
         private readonly double varRoll = 0.1f, varProcess = 0.0003f;
@@ -59,9 +60,7 @@ namespace Twol
 
         public void AverageTheSpeed()
         {
-            //average the vtgSpeed
-            //if (vtgSpeed > 70) vtgSpeed = 70;
-            mf.avgSpeed = (mf.avgSpeed * 0.75) + (vtgSpeed * 0.25);
+            avgSpeed = (avgSpeed * 0.75) + (vtgSpeed * 0.25);
         }
 
         public void SetLocalMetersPerDegree(double lat, double lon)

@@ -78,7 +78,7 @@ namespace Twol
         public double UpdateGoalPointDistance()
         {
             double xTE = Math.Abs(modeActualXTE);
-            double goalPointDistance = mf.avgSpeed * 0.05 * goalPointLookAheadMult;
+            double goalPointDistance = mf.pn.avgSpeed * 0.05 * goalPointLookAheadMult;
 
             double LoekiAheadHold = goalPointLookAheadHold;
             double LoekiAheadAcquire = goalPointLookAheadHold * goalPointAcquireFactor;
@@ -381,25 +381,33 @@ namespace Twol
 
             if (mf.camera.camSetDistance > -500)
             {
+                //draw the bright antenna dot
+                if (!Settings.Tool.setToolSteer.isRecordSourceTool && mf.tRec.isToolRecordOn && mf.isFlashOnOff)
+                {
+                    GL.PointSize(24);
+                    GL.Color3(1, 0.3, 0.3);
+                }
+                else
+                {
+                    GL.PointSize(16);
+                    GL.Color3(0, 0, 0);
+                }
+
                 if (mf.pn.isDualGPSConnected)
                 {
-                    //draw the bright antenna dot
-                    GL.PointSize(16);
+
                     GL.Begin(PrimitiveType.Points);
-                    GL.Color3(0, 0, 0);
                     GL.Vertex3(-antennaOffset - 0.6, antennaPivot, 0);
+                    GL.End();
+
+                    GL.Begin(PrimitiveType.Points);
+                    GL.Vertex3(-antennaOffset + 0.6, antennaPivot, 0);
                     GL.End();
 
                     GL.PointSize(10);
                     GL.Begin(PrimitiveType.Points);
                     GL.Color3(0.20, 0.98, 0.98);
                     GL.Vertex3(-antennaOffset - 0.6, antennaPivot, 0);
-                    GL.End();
-
-                    GL.PointSize(16);
-                    GL.Begin(PrimitiveType.Points);
-                    GL.Color3(0, 0, 0);
-                    GL.Vertex3(-antennaOffset + 0.6, antennaPivot, 0);
                     GL.End();
 
                     GL.PointSize(10);
@@ -407,16 +415,11 @@ namespace Twol
                     GL.Color3(0.20, 0.98, 0.98);
                     GL.Vertex3(-antennaOffset + 0.6, antennaPivot, 0);
                     GL.End();
-
-
-
                 }
                 else
                 {
                     //draw the bright antenna dot
-                    GL.PointSize(16);
                     GL.Begin(PrimitiveType.Points);
-                    GL.Color3(0, 0, 0);
                     GL.Vertex3(-antennaOffset, antennaPivot, 0);
                     GL.End();
 
