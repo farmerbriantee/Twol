@@ -51,12 +51,12 @@ namespace Twol
         public double cosSectionHeading = 1.0, sinSectionHeading = 0.0;
 
         //how far travelled since last section was added, section points
-        double sectionTriggerDistanceSq = 0, distanceTriggerSq = 0, gridTriggerDistanceSq = 0;
+        double pivotDistanceToLastTriggerPosSq = 0, sectionTriggerDistanceTwistSq = 0, currentElevationTriggerDistanceSq = 0;
 
-        public vec2 prevPivotAxlePos = new vec2(0, 0);
+        public vec2 prevPivotAxleTriggeredPosition = new vec2(0, 0);
         public vec2 prevContourPos = new vec2(0, 0);
         public vec2 prevToolRecPos = new vec2(0, 0);
-        public vec2 prevGridPos = new vec2(0, 0);
+        public vec2 prevElevationTriggerPos = new vec2(0, 0);
         public int sectionOnCounter = 0;
 
         public vec2 prevBoundaryPos = new vec2(0, 0);
@@ -69,8 +69,8 @@ namespace Twol
 
         //todo
         public List<vec3> followPivotPoints = new List<vec3>(64);
-        double toolPivotTriggerDistanceSq = 0;
-        public vec2 prevToolPivotPos = new vec2(0, 0);
+        double toolPivotDistanceToLastTriggerSq = 0;
+        public vec2 prevToolPivotTriggeredPosition = new vec2(0, 0);
 
         //tally counters for display
         //public double totalSquareMetersWorked = 0, totalUserSquareMeters = 0, userSquareMetersAlarm = 0;
@@ -677,7 +677,6 @@ namespace Twol
 
         private void TheRest()
         {
-            //translate from pivot position to steer axle and pivot axle position
             //translate world to the pivot axle
             pivotAxlePos.easting = pn.fix.easting - (Math.Sin(fixHeading) * vehicle.antennaPivot);
             pivotAxlePos.northing = pn.fix.northing - (Math.Cos(fixHeading) * vehicle.antennaPivot);
@@ -694,11 +693,12 @@ namespace Twol
             steerAxlePos.heading = fixHeading;
 
             //guidance look ahead distance based on time or tool width at least 
-
             double guidanceLookDist = (Math.Max(Settings.Tool.toolWidth * 0.5, avgSpeed * 0.277777 * Settings.Vehicle.setAS_guidanceLookAheadTime));
             guidanceLookPos.easting = pivotAxlePos.easting + (Math.Sin(fixHeading + glm.toRadians(mc.actualSteerAngleDegrees)) * guidanceLookDist);
             guidanceLookPos.northing = pivotAxlePos.northing + (Math.Cos(fixHeading + glm.toRadians(mc.actualSteerAngleDegrees)) * guidanceLookDist);
 
+
+            //translate Tool GPS world to tool pivot and tool position
             if (pnTool.isDualGPSConnected)
             {
                 toolPivotPos.easting = pnTool.fix.easting - (Math.Sin(glm.toRadians(pnTool.headingTrueDual)) * Settings.Tool.setToolSteer.pivotToAntennaDistance);
@@ -722,27 +722,32 @@ namespace Twol
                 //{
                 //    toolPivotPos.heading = fixHeading;
                 //}
-
             }
             else
             {
-                CalculateTrailingAndTBTHitch();
+                CalculateHitchAndToolPivotPosition();
             }
 
-            //positions and headings 
-            CalculateTriggerDistance();
+            //how far to travel before new points for sectionmapping
+            CalculateSectionTriggerDistance();
+
+            //Determine if trigger distances have been exceeded
+            DetermineIfSectionTriggerExceeded();
 
             //calculate lookahead at full speed, no sentence misses
             CalculateSectionLookAhead(toolPos.northing, toolPos.easting, cosSectionHeading, sinSectionHeading);
+        }
 
-            //To prevent drawing high numbers of triangles, determine and test before drawing vertex
-            sectionTriggerDistanceSq = glm.DistanceSquared(pivotAxlePos, prevPivotAxlePos);
-            toolPivotTriggerDistanceSq = glm.DistanceSquared(toolPivotPos, prevToolPivotPos);
+        private void DetermineIfSectionTriggerExceeded()
+        {
+            //measure the distance since last trigger
+            pivotDistanceToLastTriggerPosSq = glm.DistanceSquared(pivotAxlePos, prevPivotAxleTriggeredPosition);
+            toolPivotDistanceToLastTriggerSq = glm.DistanceSquared(toolPivotPos, prevToolPivotTriggeredPosition);
 
             if (isJobStarted)
             {
                 //tool track recording
-                if (Settings.Tool.setToolSteer.isFollowPivot && toolPivotTriggerDistanceSq > 0.5)
+                if (Settings.Tool.setToolSteer.isFollowPivot && toolPivotDistanceToLastTriggerSq > 0.5)
                 {
                     //followPivotPoints.Add(new vec2(toolPivotPos.easting, toolPivotPos.northing));
                     followPivotPoints.Add(new vec3(pivotAxlePos.easting, pivotAxlePos.northing, 0));
@@ -750,37 +755,31 @@ namespace Twol
                     if (followPivotPoints.Count > 20) { followPivotPoints.RemoveRange(0, 5); }
 
                     //save the north & east as previous
-                    prevToolPivotPos.northing = toolPivotPos.northing;
-                    prevToolPivotPos.easting = toolPivotPos.easting;
+                    prevToolPivotTriggeredPosition.northing = toolPivotPos.northing;
+                    prevToolPivotTriggeredPosition.easting = toolPivotPos.easting;
                 }
 
                 //section on off and points
-                if (sectionTriggerDistanceSq > distanceTriggerSq)
-                {
-                    AddSectionOrPathPoints();
-                }
+                if (pivotDistanceToLastTriggerPosSq > sectionTriggerDistanceTwistSq) AddSectionOrPathPoints();
 
                 //record tool path for guidance lines
                 if (Settings.Tool.setToolSteer.isRecordToolLine) AddToolLineRecordPoints();
 
-                if (Settings.User.isLogElevation)
-                {
-                    AddElevationPoints();
-                }
+                if (Settings.User.isLogElevation) AddElevationPoints();
             }
 
             //test if travelled far enough for new boundary point
             if (bnd.isOkToAddPoints)
             {
                 double boundaryDistance = glm.DistanceSquared(pivotAxlePos, prevBoundaryPos);
-                
-                if (boundaryDistance > 1) 
+
+                if (boundaryDistance > 1)
                     AddBoundaryPoint();
-            }            
+            }
         }
 
         //all the hitch, pivot, section, trailing hitch, headings and fixes
-        private void CalculateTrailingAndTBTHitch()
+        private void CalculateHitchAndToolPivotPosition()
         {
             //determine where the rigid vehicle hitch ends - Tractor and Harvestor
             if (vehicle.vehicleType != 2)
@@ -881,7 +880,7 @@ namespace Twol
         }
 
         //used to increase triangle countExit when going around corners, less on straight
-        private void CalculateTriggerDistance()
+        private void CalculateSectionTriggerDistance()
         {
             double distance = Settings.Tool.toolWidth*0.75;
             if (distance > 5) distance = 5;
@@ -899,13 +898,13 @@ namespace Twol
 
             twist *= twist;
             if (twist < 0.15) twist = 0.15;
-            distanceTriggerSq = distance * twist;
+            sectionTriggerDistanceTwistSq = distance * twist;
 
-            if (distanceTriggerSq < 1.0) distanceTriggerSq = 1.0;
-            distanceTriggerSq *= distanceTriggerSq;
+            if (sectionTriggerDistanceTwistSq < 1.0) sectionTriggerDistanceTwistSq = 1.0;
+            sectionTriggerDistanceTwistSq *= sectionTriggerDistanceTwistSq;
 
             //finally fixed distance for making a curve line
-            if (trks.isRecordingCurveTrack) distanceTriggerSq *= 0.5;
+            if (trks.isRecordingCurveTrack) sectionTriggerDistanceTwistSq *= 0.5;
 
             //precalc the sin and cos of heading * -1
             sinSectionHeading = Math.Sin(-toolPivotPos.heading);
@@ -1043,7 +1042,7 @@ namespace Twol
             //Contour Base Track.... At least One section on, turn on if not
             double contourTriggerDistanceSq = glm.DistanceSquared(pivotAxlePos, prevContourPos);
 
-            if (isJobStarted && contourTriggerDistanceSq > distanceTriggerSq)
+            if (isJobStarted && contourTriggerDistanceSq > sectionTriggerDistanceTwistSq)
             {
                 if (sectionOnCounter != 0)
                 {
@@ -1116,8 +1115,8 @@ namespace Twol
             }
 
             //save the north & east as previous
-            prevPivotAxlePos.northing = pivotAxlePos.northing;
-            prevPivotAxlePos.easting = pivotAxlePos.easting;
+            prevPivotAxleTriggeredPosition.northing = pivotAxlePos.northing;
+            prevPivotAxleTriggeredPosition.easting = pivotAxlePos.easting;
 
             // if non zero, at least one section is on.
             sectionOnCounter = 0;
@@ -1141,9 +1140,9 @@ namespace Twol
 
         private void AddElevationPoints()
         {
-            gridTriggerDistanceSq = glm.DistanceSquared(pivotAxlePos, prevGridPos);
+            currentElevationTriggerDistanceSq = glm.DistanceSquared(pivotAxlePos, prevElevationTriggerPos);
 
-            if (gridTriggerDistanceSq > 2.0 && sectionOnCounter != 0 && isFieldStarted)
+            if (currentElevationTriggerDistanceSq > 2.0 && sectionOnCounter != 0 && isFieldStarted)
             {
                 //grab fix and elevation
                 sbElevationString.Append(
@@ -1157,8 +1156,8 @@ namespace Twol
                     + Math.Round(ahrs.imuRoll, 3).ToString(CultureInfo.InvariantCulture) +
                     "\r\n");
 
-                prevGridPos.easting = pivotAxlePos.easting;
-                prevGridPos.northing = pivotAxlePos.northing;
+                prevElevationTriggerPos.easting = pivotAxlePos.easting;
+                prevElevationTriggerPos.northing = pivotAxlePos.northing;
             }
         }
     }//end class
