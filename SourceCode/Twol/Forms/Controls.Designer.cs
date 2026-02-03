@@ -2200,6 +2200,11 @@ namespace Twol
             sim.stepDistance = 0;
         }
 
+        private void cboxEnableToolDualGPS_Click(object sender, EventArgs e)
+        {
+            Settings.User.isSimDualOn = cboxEnableToolDualGPS.Checked;
+        }
+
         #endregion
 
         public void FixTramModeButton()

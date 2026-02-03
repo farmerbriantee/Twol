@@ -340,6 +340,7 @@ namespace Twol
             nozzleAppToolStripMenuItem.Checked = Settings.Tool.setApp_isNozzleApp;
 
             panelSim.Visible = timerSim.Enabled = simulatorOnToolStripMenuItem.Checked = Settings.User.isSimulatorOn;
+            cboxEnableToolDualGPS.Checked = Settings.User.isSimDualOn;
 
             SetFeatureSettings();
 
