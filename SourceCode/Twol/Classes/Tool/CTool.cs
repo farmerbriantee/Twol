@@ -352,6 +352,8 @@ namespace Twol
                 GL.Translate(mf.toolPivotPos.easting, mf.toolPivotPos.northing, 0);
                 GL.Rotate(glm.toDegrees(-mf.toolPivotPos.heading), 0.0, 0.0, 1.0);
 
+                GL.Translate(0, Settings.Tool.setToolSteer.PivotToToolDistance, 0);
+
                 //draw the sections.
 
                 GL.LineWidth(3);
@@ -446,6 +448,9 @@ namespace Twol
 
                     GL.End();
                 }
+
+                GL.Translate(0, -Settings.Tool.setToolSteer.PivotToToolDistance, 0);
+
 
                 //Draw Tool antenna
                 if (mf.tRec.isToolRecordOn && mf.isFlashOnOff)

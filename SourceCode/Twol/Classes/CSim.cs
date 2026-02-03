@@ -115,16 +115,18 @@ namespace Twol
 
             mf.sentenceCounter = 0;
 
-            if (Settings.Tool.setToolSteer.isGPSToolActive)
-            {
-                mf.pnTool.fix.easting = mf.toolPivotPos.easting;
-                mf.pnTool.fix.northing = mf.toolPivotPos.northing;
+            //if (Settings.Tool.setToolSteer.isGPSToolActive)
+            //{
+            //    //mf.pnTool.isDualGPSConnected = true;
 
-                //mf.pnTool.fix.easting += (Math.Cos(-mf.fixHeading) * toolOffset);
-                //mf.pnTool.fix.northing += (Math.Sin(-mf.fixHeading) * toolOffset);
+            //    mf.pnTool.fix.easting = mf.toolPivotPos.easting;
+            //    mf.pnTool.fix.northing = mf.toolPivotPos.northing;
 
-                mf.pnTool.ConvertLocalToWGS84(mf.pnTool.fix.northing, mf.pnTool.fix.easting, out mf.pnTool.latitude, out mf.pnTool.longitude);
-            }
+            //    //mf.pnTool.fix.easting += (Math.Cos(-mf.fixHeading) * toolOffset);
+            //    //mf.pnTool.fix.northing += (Math.Sin(-mf.fixHeading) * toolOffset);
+
+            //    mf.pnTool.ConvertLocalToWGS84(mf.pnTool.fix.northing, mf.pnTool.fix.easting, out mf.pnTool.latitude, out mf.pnTool.longitude);
+            //}
 
             mf.UpdateFixPosition();
 

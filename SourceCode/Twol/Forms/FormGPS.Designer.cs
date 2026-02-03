@@ -3298,8 +3298,8 @@ namespace Twol
             this.Controls.Add(this.oglZoom);
             this.Controls.Add(this.lblCurrentField);
             this.Controls.Add(this.lblGuidanceLine);
-            this.Controls.Add(this.oglBack);
             this.Controls.Add(this.lblHardwareMessage);
+            this.Controls.Add(this.oglBack);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Tahoma", 12F);
             this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;

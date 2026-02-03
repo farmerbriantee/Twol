@@ -51,12 +51,15 @@ namespace Twol
         public double cosSectionHeading = 1.0, sinSectionHeading = 0.0;
 
         //how far travelled since last section was added, section points
-        double pivotDistanceToLastTriggerPosSq = 0, sectionTriggerDistanceTwistSq = 0, currentElevationTriggerDistanceSq = 0;
+        double sectionToTriggerSpacingSq = 0, currentElevationTriggerDistanceSq = 0;
+        double prevToolPivotDistanceToLastTriggerPosSq = 0;
 
         public vec2 prevPivotAxleTriggeredPosition = new vec2(0, 0);
         public vec2 prevContourPos = new vec2(0, 0);
         public vec2 prevToolRecPos = new vec2(0, 0);
         public vec2 prevElevationTriggerPos = new vec2(0, 0);
+        public vec2 prevRecordingCurveTrackPos = new vec2(0, 0);
+        
         public int sectionOnCounter = 0;
 
         public vec2 prevBoundaryPos = new vec2(0, 0);
@@ -69,8 +72,8 @@ namespace Twol
 
         //todo
         public List<vec3> followPivotPoints = new List<vec3>(64);
-        double toolPivotDistanceToLastTriggerSq = 0;
-        public vec2 prevToolPivotTriggeredPosition = new vec2(0, 0);
+        public vec2 prevToolFollowPivotTriggeredPosition = new vec2(0, 0);
+        public vec2 prevToolPivotSectionTriggeredPosition = new vec2(0, 0);
 
         //tally counters for display
         //public double totalSquareMetersWorked = 0, totalUserSquareMeters = 0, userSquareMetersAlarm = 0;
@@ -738,14 +741,13 @@ namespace Twol
 
         private void DetermineIfSectionTriggerExceeded()
         {
-            //measure the distance since last trigger
-            pivotDistanceToLastTriggerPosSq = glm.DistanceSquared(pivotAxlePos, prevPivotAxleTriggeredPosition);
-            toolPivotDistanceToLastTriggerSq = glm.DistanceSquared(toolPivotPos, prevToolPivotTriggeredPosition);
+
 
             if (isJobStarted)
             {
                 //tool track recording
-                if (Settings.Tool.setToolSteer.isFollowPivot && toolPivotDistanceToLastTriggerSq > 0.5)
+                double toolFollowPivotDistanceToLastTriggerSq = glm.DistanceSquared(toolPivotPos, prevToolFollowPivotTriggeredPosition);
+                if (Settings.Tool.setToolSteer.isFollowPivot && toolFollowPivotDistanceToLastTriggerSq > 0.5)
                 {
                     //followPivotPoints.Add(new vec2(toolPivotPos.easting, toolPivotPos.northing));
                     followPivotPoints.Add(new vec3(pivotAxlePos.easting, pivotAxlePos.northing, 0));
@@ -753,26 +755,48 @@ namespace Twol
                     if (followPivotPoints.Count > 20) { followPivotPoints.RemoveRange(0, 5); }
 
                     //save the north & east as previous
-                    prevToolPivotTriggeredPosition.northing = toolPivotPos.northing;
-                    prevToolPivotTriggeredPosition.easting = toolPivotPos.easting;
+                    prevToolFollowPivotTriggeredPosition.northing = toolPivotPos.northing;
+                    prevToolFollowPivotTriggeredPosition.easting = toolPivotPos.easting;
                 }
 
-                //section on off and points
-                if (pivotDistanceToLastTriggerPosSq > sectionTriggerDistanceTwistSq) AddSectionOrPathPoints();
+                //measure the distance since last trigger
+                double pivotDistanceToLastTriggerPosSq = glm.DistanceSquared(pivotAxlePos, prevPivotAxleTriggeredPosition);
+                double toolPivotSectionTriggeredPosition = glm.DistanceSquared(toolPivotPos, prevToolPivotSectionTriggeredPosition);
+
+                if (pnTool.isDualGPSConnected && toolPivotSectionTriggeredPosition > sectionToTriggerSpacingSq)
+                {
+                    AddSectionOrPathPoints();
+                    prevToolPivotSectionTriggeredPosition.northing = toolPivotPos.northing;
+                    prevToolPivotSectionTriggeredPosition.easting = toolPivotPos.easting;
+                }
+                else if (pivotDistanceToLastTriggerPosSq > sectionToTriggerSpacingSq)
+                {
+                    AddSectionOrPathPoints();
+                    prevPivotAxleTriggeredPosition.northing = pivotAxlePos.northing;
+                    prevPivotAxleTriggeredPosition.easting = pivotAxlePos.easting;
+                }
 
                 //record tool path for guidance lines
                 if (Settings.Tool.setToolSteer.isRecordToolLine) AddToolLineRecordPoints();
 
                 if (Settings.User.isLogElevation) AddElevationPoints();
-            }
 
-            //test if travelled far enough for new boundary point
-            if (bnd.isOkToAddPoints)
-            {
-                double boundaryDistance = glm.DistanceSquared(pivotAxlePos, prevBoundaryPos);
 
-                if (boundaryDistance > 1)
-                    AddBoundaryPoint();
+                if (trks.isRecordingCurveTrack)
+                {
+                    double curveDist = glm.DistanceSquared(pivotAxlePos, prevRecordingCurveTrackPos);
+                    if (curveDist > 1)
+                        trks.designPtsList.Add(new vec3(pivotAxlePos.easting, pivotAxlePos.northing, pivotAxlePos.heading));
+                }
+
+                //test if travelled far enough for new boundary point
+                if (bnd.isOkToAddPoints)
+                {
+                    double boundaryDistance = glm.DistanceSquared(pivotAxlePos, prevBoundaryPos);
+
+                    if (boundaryDistance > 1)
+                        AddBoundaryPoint();
+                }
             }
         }
 
@@ -896,13 +920,13 @@ namespace Twol
 
             twist *= twist;
             if (twist < 0.15) twist = 0.15;
-            sectionTriggerDistanceTwistSq = distance * twist;
+            sectionToTriggerSpacingSq = distance * twist;
 
-            if (sectionTriggerDistanceTwistSq < 1.0) sectionTriggerDistanceTwistSq = 1.0;
-            sectionTriggerDistanceTwistSq *= sectionTriggerDistanceTwistSq;
+            if (sectionToTriggerSpacingSq < 1.0) sectionToTriggerSpacingSq = 1.0;
+            sectionToTriggerSpacingSq *= sectionToTriggerSpacingSq;
 
             //finally fixed distance for making a curve line
-            if (trks.isRecordingCurveTrack) sectionTriggerDistanceTwistSq *= 0.5;
+            if (trks.isRecordingCurveTrack) sectionToTriggerSpacingSq *= 0.5;
 
             //precalc the sin and cos of heading * -1
             sinSectionHeading = Math.Sin(-toolPivotPos.heading);
@@ -1049,7 +1073,7 @@ namespace Twol
             //Contour Base Track.... At least One section on, turn on if not
             double contourTriggerDistanceSq = glm.DistanceSquared(pivotAxlePos, prevContourPos);
 
-            if (isJobStarted && contourTriggerDistanceSq > sectionTriggerDistanceTwistSq)
+            if (isJobStarted && contourTriggerDistanceSq > sectionToTriggerSpacingSq)
             {
                 if (sectionOnCounter != 0)
                 {
@@ -1116,19 +1140,9 @@ namespace Twol
         //add the points for section, contour line points, Area Calc feature
         private void AddSectionOrPathPoints()
         {
-            if (trks.isRecordingCurveTrack)
-            {
-                trks.designPtsList.Add(new vec3(pivotAxlePos.easting, pivotAxlePos.northing, pivotAxlePos.heading));
-            }
-
-            //save the north & east as previous
-            prevPivotAxleTriggeredPosition.northing = pivotAxlePos.northing;
-            prevPivotAxleTriggeredPosition.easting = pivotAxlePos.easting;
-
             // if non zero, at least one section is on.
             sectionOnCounter = 0;
 
-            //send the current and previous GPS fore/aft corrected fix to each section
             foreach (var patch in triStrip)
             {
                 if (patch.isDrawing)
