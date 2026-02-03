@@ -924,10 +924,10 @@ namespace Twol
             this.cboxEnableToolDualGPS.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboxEnableToolDualGPS.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxEnableToolDualGPS.ForeColor = System.Drawing.Color.Black;
-            this.cboxEnableToolDualGPS.Location = new System.Drawing.Point(260, 4);
+            this.cboxEnableToolDualGPS.Location = new System.Drawing.Point(263, 4);
             this.cboxEnableToolDualGPS.Name = "cboxEnableToolDualGPS";
             this.cboxEnableToolDualGPS.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.cboxEnableToolDualGPS.Size = new System.Drawing.Size(53, 37);
+            this.cboxEnableToolDualGPS.Size = new System.Drawing.Size(48, 37);
             this.cboxEnableToolDualGPS.TabIndex = 583;
             this.cboxEnableToolDualGPS.Text = "T";
             this.cboxEnableToolDualGPS.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
