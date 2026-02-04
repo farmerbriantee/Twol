@@ -2202,7 +2202,7 @@ namespace Twol
 
         private void cboxEnableToolDualGPS_Click(object sender, EventArgs e)
         {
-            Settings.User.isSimDualOn = cboxEnableToolDualGPS.Checked;
+            Settings.User.isSimToolDualOn = cboxEnableToolDualGPS.Checked;
         }
 
         #endregion

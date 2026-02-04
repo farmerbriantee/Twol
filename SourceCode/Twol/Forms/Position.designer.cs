@@ -741,8 +741,6 @@ namespace Twol
 
         private void DetermineIfSectionTriggerExceeded()
         {
-
-
             if (isJobStarted)
             {
                 //tool track recording
@@ -763,17 +761,22 @@ namespace Twol
                 double pivotDistanceToLastTriggerPosSq = glm.DistanceSquared(pivotAxlePos, prevPivotAxleTriggeredPosition);
                 double toolPivotSectionTriggeredPosition = glm.DistanceSquared(toolPivotPos, prevToolPivotSectionTriggeredPosition);
 
-                if (pnTool.isDualGPSConnected && toolPivotSectionTriggeredPosition > sectionToTriggerSpacingSq)
-                {
-                    AddSectionOrPathPoints();
-                    prevToolPivotSectionTriggeredPosition.northing = toolPivotPos.northing;
-                    prevToolPivotSectionTriggeredPosition.easting = toolPivotPos.easting;
-                }
-                else if (pivotDistanceToLastTriggerPosSq > sectionToTriggerSpacingSq)
+
+                if (!pnTool.isDualGPSConnected && pivotDistanceToLastTriggerPosSq > sectionToTriggerSpacingSq)
                 {
                     AddSectionOrPathPoints();
                     prevPivotAxleTriggeredPosition.northing = pivotAxlePos.northing;
                     prevPivotAxleTriggeredPosition.easting = pivotAxlePos.easting;
+
+                }
+                else
+                {
+                    if (pnTool.isDualGPSConnected && toolPivotSectionTriggeredPosition > sectionToTriggerSpacingSq)
+                    {
+                        AddSectionOrPathPoints();
+                        prevToolPivotSectionTriggeredPosition.northing = toolPivotPos.northing;
+                        prevToolPivotSectionTriggeredPosition.easting = toolPivotPos.easting;
+                    }
                 }
 
                 //record tool path for guidance lines

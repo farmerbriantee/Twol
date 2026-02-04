@@ -135,7 +135,7 @@ namespace Twol
             public bool isMetric = true;
             public bool isSideGuideLines = false;
             public bool isSimulatorOn = true;
-            public bool isSimDualOn = false;
+            public bool isSimToolDualOn = false;
             public bool isSkyOn = true;
             public bool isSpeedoOn = false;
             public bool isWorldMapOn = false;
