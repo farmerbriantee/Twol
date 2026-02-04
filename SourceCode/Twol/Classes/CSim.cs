@@ -134,6 +134,9 @@ namespace Twol
                 head += toolOffset;
                 if (head < 0) head += glm.twoPI;
 
+                double over = Math.Abs(Math.PI - Math.Abs(Math.Abs(head - mf.fixHeading) - Math.PI));
+                if (over > 1.6) head = mf.fixHeading;
+
                 mf.pnTool.headingTrueDual = glm.toDegrees(head);
 
                 mf.pnTool.fix.easting = mf.hitchPos.easting + (Math.Sin(head) * (Settings.Tool.toolTrailingHitchLength));
