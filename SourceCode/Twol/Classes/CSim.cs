@@ -142,8 +142,7 @@ namespace Twol
                 mf.pnTool.fix.easting = mf.hitchPos.easting + (Math.Sin(head) * (Settings.Tool.toolTrailingHitchLength));
                 mf.pnTool.fix.northing = mf.hitchPos.northing + (Math.Cos(head) * (Settings.Tool.toolTrailingHitchLength));
 
-                mf.pnTool.avgSpeed = mf.pn.avgSpeed;
-
+                mf.pnTool.vtgSpeed = mf.pn.vtgSpeed;
                 //mf.pnTool.ConvertLocalToWGS84(mf.pnTool.fix.northing, mf.pnTool.fix.easting, out mf.pnTool.latitude, out mf.pnTool.longitude);
             }
 
