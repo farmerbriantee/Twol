@@ -352,7 +352,28 @@ namespace Twol
                 GL.Translate(mf.toolPivotPos.easting, mf.toolPivotPos.northing, 0);
                 GL.Rotate(glm.toDegrees(-mf.toolPivotPos.heading), 0.0, 0.0, 1.0);
 
-                GL.Translate(0, Settings.Tool.setToolSteer.PivotToToolDistance, 0);
+                //if (Math.Abs(Settings.Tool.trailingToolToPivotLength) > 1 && mf.camera.camSetDistance > -100)
+                {
+                    textRotate += (mf.pnTool.vtgSpeed * 0.02);
+                    GL.Enable(EnableCap.Texture2D);
+                    GL.Color4(1, 1, 1, 0.55);
+                    GL.BindTexture(TextureTarget.Texture2D, mf.texture[(int)FormGPS.textures.Tire]);        // Select Our Texture
+                    GL.Begin(PrimitiveType.TriangleStrip);              // Build Quad From A Triangle Strip
+                    GL.TexCoord2(1, 0 + textRotate); GL.Vertex3(1 + Settings.Tool.offset, 0.31, 0); // Top Right
+                    GL.TexCoord2(0, 0 + textRotate); GL.Vertex3(0.5 + Settings.Tool.offset, 0.31, 0); // Top Left
+                    GL.TexCoord2(1, 1 + textRotate); GL.Vertex3(1 + Settings.Tool.offset, -0.31, 0); // Bottom Right
+                    GL.TexCoord2(0, 1 + textRotate); GL.Vertex3(0.5 + Settings.Tool.offset, -0.31, 0); // Bottom Left
+                    GL.End();                       // Done Building Triangle Strip
+                    GL.Begin(PrimitiveType.TriangleStrip);              // Build Quad From A Triangle Strip
+                    GL.TexCoord2(1, 0 + textRotate); GL.Vertex3(-1 + Settings.Tool.offset, 0.31, 0); // Top Right
+                    GL.TexCoord2(0, 0 + textRotate); GL.Vertex3(-0.5 + Settings.Tool.offset, 0.31, 0); // Top Left
+                    GL.TexCoord2(1, 1 + textRotate); GL.Vertex3(-1 + Settings.Tool.offset, -0.31, 0); // Bottom Right
+                    GL.TexCoord2(0, 1 + textRotate); GL.Vertex3(-0.5 + Settings.Tool.offset, -0.31, 0); // Bottom Left
+                    GL.End();                       // Done Building Triangle Strip
+                    GL.Disable(EnableCap.Texture2D);
+                }
+
+                GL.Translate(0, -Settings.Tool.setToolSteer.PivotToToolDistance, 0);
 
                 //draw the sections.
 
@@ -389,15 +410,15 @@ namespace Twol
                         if (mf.section[j].sectionBtnState == btnStates.Auto)
                         {
                             //GL.Color3(0.0f, 0.9f, 0.0f);
-                            if (mf.section[j].isMappingOn) GL.Color3(0.0f, 0.95f, 0.0f);
-                            else GL.Color3(0.970f, 0.30f, 0.970f);
+                            if (mf.section[j].isMappingOn) GL.Color4(0.0f, 0.95f, 0.0f, 0.6f);
+                            else GL.Color4(0.970f, 0.30f, 0.970f, 0.6f);
                         }
-                        else GL.Color3(0.97, 0.97, 0);
+                        else GL.Color4(0.97, 0.97, 0, 0.6f);
                     }
                     else
                     {
-                        if (!mf.section[j].isMappingOn) GL.Color3(0.950f, 0.2f, 0.2f);
-                        else GL.Color3(0.00f, 0.250f, 0.97f);
+                        if (!mf.section[j].isMappingOn) GL.Color4(0.950f, 0.2f, 0.2f, 0.6f);
+                        else GL.Color4(0.00f, 0.250f, 0.97f, 0.6f);
                         //GL.Color3(0.7f, 0.2f, 0.2f);
                     }
 
@@ -449,7 +470,7 @@ namespace Twol
                     GL.End();
                 }
 
-                GL.Translate(0, -Settings.Tool.setToolSteer.PivotToToolDistance, 0);
+                GL.Translate(0, Settings.Tool.setToolSteer.PivotToToolDistance, 0);
 
 
                 //Draw Tool antenna
@@ -545,7 +566,6 @@ namespace Twol
                         }
                     }
                 }
-
 
                 GL.PopMatrix();
 

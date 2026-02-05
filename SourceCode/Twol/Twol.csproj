@@ -932,6 +932,8 @@
     <None Include="btnImages\FileSaveRecordedTool.png" />
     <None Include="btnImages\FileExportToolTracks.png" />
     <None Include="btnImages\AutoSteerConfTool.png" />
+    <None Include="btnImages\Config\Tool_Fore_Aft.png" />
+    <None Include="btnImages\Config\ToolAntenna_Fore_Aft.png" />
     <Content Include="btnImages\ZoomOut.png" />
     <Content Include="License.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

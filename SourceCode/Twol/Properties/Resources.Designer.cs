@@ -3584,9 +3584,29 @@ namespace Twol.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Tool_Fore_Aft {
+            get {
+                object obj = ResourceManager.GetObject("Tool_Fore_Aft", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ToolAcceptChange {
             get {
                 object obj = ResourceManager.GetObject("ToolAcceptChange", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ToolAntenna_Fore_Aft {
+            get {
+                object obj = ResourceManager.GetObject("ToolAntenna_Fore_Aft", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
