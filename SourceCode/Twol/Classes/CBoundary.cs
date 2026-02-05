@@ -52,20 +52,20 @@ namespace Twol
 
             GL.BindBuffer(BufferTarget.ArrayBuffer, vbo_HeadTriangles[bndNum]);
 
-            double[] triangleVertexData = new double[bndList[bndNum].hdLineTriangleList.Count * 6];
+            float[] triangleVertexData = new float[bndList[bndNum].hdLineTriangleList.Count * 6];
 
             for (int i = 0; i < bndList[bndNum].hdLineTriangleList.Count; i++)
             {
                 // Assuming Triangle has properties or fields: A, B, C of type vec3 with .x, .y, .z
-                triangleVertexData[i * 6 + 0] = bndList[0].hdLineTriangleList[i].polygonPts[0].easting;
-                triangleVertexData[i * 6 + 1] = bndList[0].hdLineTriangleList[i].polygonPts[0].northing;
-                triangleVertexData[i * 6 + 2] = bndList[0].hdLineTriangleList[i].polygonPts[1].easting;
-                triangleVertexData[i * 6 + 3] = bndList[0].hdLineTriangleList[i].polygonPts[1].northing;
-                triangleVertexData[i * 6 + 4] = bndList[0].hdLineTriangleList[i].polygonPts[2].easting;
-                triangleVertexData[i * 6 + 5] = bndList[0].hdLineTriangleList[i].polygonPts[2].northing;
+                triangleVertexData[i * 6 + 0] = (float)bndList[0].hdLineTriangleList[i].polygonPts[0].easting;
+                triangleVertexData[i * 6 + 1] = (float)bndList[0].hdLineTriangleList[i].polygonPts[0].northing;
+                triangleVertexData[i * 6 + 2] = (float)bndList[0].hdLineTriangleList[i].polygonPts[1].easting;
+                triangleVertexData[i * 6 + 3] = (float)bndList[0].hdLineTriangleList[i].polygonPts[1].northing;
+                triangleVertexData[i * 6 + 4] = (float)bndList[0].hdLineTriangleList[i].polygonPts[2].easting;
+                triangleVertexData[i * 6 + 5] = (float)bndList[0].hdLineTriangleList[i].polygonPts[2].northing;
             }
 
-            GL.BufferData(BufferTarget.ArrayBuffer, triangleVertexData.Length * sizeof(double), triangleVertexData, BufferUsageHint.StaticDraw);
+            GL.BufferData(BufferTarget.ArrayBuffer, triangleVertexData.Length * sizeof(float), triangleVertexData, BufferUsageHint.StaticDraw);
         }
 
         public void DeleteHeadLineVertexArray(int bndNum)
@@ -237,34 +237,34 @@ namespace Twol
                 {
                     if (isDrawRightSide)
                     {
-                        GL.Vertex2(fenceBeingMadePts[0].easting, fenceBeingMadePts[0].northing);
+                        GL.Vertex3(fenceBeingMadePts[0].easting, fenceBeingMadePts[0].northing, 0);
 
-                        GL.Vertex2(pivot.easting + (Math.Sin(pivot.heading - glm.PIBy2) * -createFenceOffset),
-                                pivot.northing + (Math.Cos(pivot.heading - glm.PIBy2) * -createFenceOffset));
-                        GL.Vertex2(fenceBeingMadePts[fenceBeingMadePts.Count - 1].easting, fenceBeingMadePts[fenceBeingMadePts.Count - 1].northing);
+                        GL.Vertex3(pivot.easting + (Math.Sin(pivot.heading - glm.PIBy2) * -createFenceOffset),
+                                pivot.northing + (Math.Cos(pivot.heading - glm.PIBy2) * -createFenceOffset), 0);
+                        GL.Vertex3(fenceBeingMadePts[fenceBeingMadePts.Count - 1].easting, fenceBeingMadePts[fenceBeingMadePts.Count - 1].northing, 0);
                     }
                     else
                     {
-                        GL.Vertex2(fenceBeingMadePts[0].easting, fenceBeingMadePts[0].northing);
+                        GL.Vertex3(fenceBeingMadePts[0].easting, fenceBeingMadePts[0].northing, 0);
 
-                        GL.Vertex2(pivot.easting + (Math.Sin(pivot.heading - glm.PIBy2) * createFenceOffset),
-                                pivot.northing + (Math.Cos(pivot.heading - glm.PIBy2) * createFenceOffset));
-                        GL.Vertex2(fenceBeingMadePts[fenceBeingMadePts.Count - 1].easting, fenceBeingMadePts[fenceBeingMadePts.Count - 1].northing);
+                        GL.Vertex3(pivot.easting + (Math.Sin(pivot.heading - glm.PIBy2) * createFenceOffset),
+                                pivot.northing + (Math.Cos(pivot.heading - glm.PIBy2) * createFenceOffset), 0);
+                        GL.Vertex3(fenceBeingMadePts[fenceBeingMadePts.Count - 1].easting, fenceBeingMadePts[fenceBeingMadePts.Count - 1].northing, 0);
                     }
                 }
                 else if (mf.section.Count > 0) //draw from tool
                 {
                     if (isDrawRightSide)
                     {
-                        GL.Vertex2(fenceBeingMadePts[0].easting, fenceBeingMadePts[0].northing);
-                        GL.Vertex2(mf.section[mf.section.Count - 1].rightPoint.easting, mf.section[mf.section.Count - 1].rightPoint.northing);
-                        GL.Vertex2(fenceBeingMadePts[fenceBeingMadePts.Count - 1].easting, fenceBeingMadePts[fenceBeingMadePts.Count - 1].northing);
+                        GL.Vertex3(fenceBeingMadePts[0].easting, fenceBeingMadePts[0].northing, 0);
+                        GL.Vertex3(mf.section[mf.section.Count - 1].rightPoint.easting, mf.section[mf.section.Count - 1].rightPoint.northing, 0);
+                        GL.Vertex3(fenceBeingMadePts[fenceBeingMadePts.Count - 1].easting, fenceBeingMadePts[fenceBeingMadePts.Count - 1].northing, 0);
                     }
                     else
                     {
-                        GL.Vertex2(fenceBeingMadePts[0].easting, fenceBeingMadePts[0].northing);
-                        GL.Vertex2(mf.section[0].leftPoint.easting, mf.section[0].leftPoint.northing);
-                        GL.Vertex2(fenceBeingMadePts[fenceBeingMadePts.Count - 1].easting, fenceBeingMadePts[fenceBeingMadePts.Count - 1].northing);
+                        GL.Vertex3(fenceBeingMadePts[0].easting, fenceBeingMadePts[0].northing, 0);
+                        GL.Vertex3(mf.section[0].leftPoint.easting, mf.section[0].leftPoint.northing, 0);
+                        GL.Vertex3(fenceBeingMadePts[fenceBeingMadePts.Count - 1].easting, fenceBeingMadePts[fenceBeingMadePts.Count - 1].northing, 0);
                     }
                 }
                 GL.End();

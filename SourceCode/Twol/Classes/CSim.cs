@@ -20,10 +20,16 @@ namespace Twol
         public double toolOffset = 0;
 
         #endregion properties sim
+        vec3 toolPosition = new vec3();
 
         public CSim(FormGPS _f)
         {
             mf = _f;
+            mf.pnTool.headingTrueDual = 0;
+
+            mf.pnTool.fix.easting = mf.pivotAxlePos.easting + Math.Sin(0) * Settings.Tool.toolTrailingHitchLength;
+            mf.pnTool.fix.northing = mf.pivotAxlePos.northing + Math.Cos(0) * Settings.Tool.toolTrailingHitchLength;
+
         }
 
         public void DoSimTick(double steerAngle)
@@ -88,7 +94,6 @@ namespace Twol
                 northing += cosH * tickdist;
             }
 
-
             mf.pn.fix.northing = northing + cosH * mf.vehicle.antennaPivot + sinH * mf.vehicle.antennaOffset;
             mf.pn.fix.easting = easting + sinH * mf.vehicle.antennaPivot - cosH * mf.vehicle.antennaOffset;
 
@@ -115,15 +120,31 @@ namespace Twol
 
             mf.sentenceCounter = 0;
 
-            if (Settings.Tool.setToolSteer.isGPSToolActive)
+            mf.pnTool.isDualGPSConnected = false;
+
+            //build a tool gps based on vehicle position and direction
+            if (Settings.User.isSimToolDualOn)
             {
-                mf.pnTool.fix.easting = mf.toolPivotPos.easting;
-                mf.pnTool.fix.northing = mf.toolPivotPos.northing;
+                mf.pnTool.isDualGPSConnected = true;
 
-                //mf.pnTool.fix.easting += (Math.Cos(-mf.fixHeading) * toolOffset);
-                //mf.pnTool.fix.northing += (Math.Sin(-mf.fixHeading) * toolOffset);
+                mf.hitchPos.easting = mf.pivotAxlePos.easting + Math.Sin(mf.fixHeading) * Settings.Tool.hitchLength;
+                mf.hitchPos.northing = mf.pivotAxlePos.northing + Math.Cos(mf.fixHeading) * Settings.Tool.hitchLength;
 
-                mf.pnTool.ConvertLocalToWGS84(mf.pnTool.fix.northing, mf.pnTool.fix.easting, out mf.pnTool.latitude, out mf.pnTool.longitude);
+                double head = Math.Atan2(mf.hitchPos.easting - mf.pnTool.fix.easting, mf.hitchPos.northing - mf.pnTool.fix.northing);
+                head += toolOffset;
+                if (head < 0) head += glm.twoPI;
+
+                double over = Math.Abs(Math.PI - Math.Abs(Math.Abs(head - mf.fixHeading) - Math.PI));
+                if (over > 1.6) head = mf.fixHeading;
+
+                mf.pnTool.headingTrueDual = glm.toDegrees(head);
+
+                mf.pnTool.fix.easting = mf.hitchPos.easting + (Math.Sin(head) * (Settings.Tool.toolTrailingHitchLength));
+                mf.pnTool.fix.northing = mf.hitchPos.northing + (Math.Cos(head) * (Settings.Tool.toolTrailingHitchLength));
+
+                mf.pnTool.vtgSpeed = mf.pn.vtgSpeed;
+                mf.pnTool.avgSpeed = mf.pn.avgSpeed;
+                //mf.pnTool.ConvertLocalToWGS84(mf.pnTool.fix.northing, mf.pnTool.fix.easting, out mf.pnTool.latitude, out mf.pnTool.longitude);
             }
 
             mf.UpdateFixPosition();

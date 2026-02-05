@@ -425,9 +425,9 @@ namespace Twol
 
             GL.Begin(PrimitiveType.Points);
             GL.Color3(1.0, 0, 0);
-            GL.Vertex2(ptA.easting, ptA.northing);
+            GL.Vertex3(ptA.easting, ptA.northing, 0);
             GL.Color3(0, 1.0, 0);
-            GL.Vertex2(ptB.easting, ptB.northing);
+            GL.Vertex3(ptB.easting, ptB.northing, 0);
             GL.End();
 
             if (step == 2)
@@ -436,9 +436,9 @@ namespace Twol
 
                 GL.Begin(PrimitiveType.Lines);
                 GL.Color3(1.0, 0, 0);
-                GL.Vertex2(ptA.easting, ptA.northing);
+                GL.Vertex3(ptA.easting, ptA.northing, 0);
                 GL.Color3(0, 1.0, 0);
-                GL.Vertex2(ptB.easting, ptB.northing);
+                GL.Vertex3(ptB.easting, ptB.northing, 0);
 
                 GL.End();
             }
@@ -523,7 +523,7 @@ namespace Twol
                 GL.Begin(PrimitiveType.LineStrip);
                 foreach (vec3 pts in gTemp[i].curvePts)
                 {
-                    GL.Vertex2(pts.easting, pts.northing);
+                    GL.Vertex3(pts.easting, pts.northing, 0);
                 }
                 GL.End();
 
@@ -535,12 +535,12 @@ namespace Twol
                 GL.Color3(1.0f, 0.75f, 0.350f);
                 GL.Begin(PrimitiveType.Points);
 
-                GL.Vertex2(gTemp[i].curvePts[0].easting,
-                            gTemp[i].curvePts[0].northing);
+                GL.Vertex3(gTemp[i].curvePts[0].easting,
+                            gTemp[i].curvePts[0].northing, 0);
 
                 GL.Color3(0.5f, 0.5f, 1.0f);
-                GL.Vertex2(gTemp[i].curvePts[gTemp[i].curvePts.Count - 1].easting,
-                            gTemp[i].curvePts[gTemp[i].curvePts.Count - 1].northing);
+                GL.Vertex3(gTemp[i].curvePts[gTemp[i].curvePts.Count - 1].easting,
+                            gTemp[i].curvePts[gTemp[i].curvePts.Count - 1].northing, 0);
                 GL.End();
             }
         }

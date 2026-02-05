@@ -492,7 +492,7 @@ namespace Twol
                 reason = gStr.Get(gs.gsTurnOnContourOrMakeABLine);
             }
 
-            if (state && !timerSim.Enabled && avgSpeed > Settings.Vehicle.setAS_maxSteerSpeed)
+            if (state && !timerSim.Enabled && pn.avgSpeed > Settings.Vehicle.setAS_maxSteerSpeed)
             {
                 state = false;
                 reason = "Above Maximum Safe Steering Speed: " + (Settings.Vehicle.setAS_maxSteerSpeed * glm.kmhToMphOrKmh).ToString("N1") + glm.unitsKmhMph;
@@ -2198,6 +2198,11 @@ namespace Twol
         private void btnSimSetSpeedToZero_Click(object sender, EventArgs e)
         {
             sim.stepDistance = 0;
+        }
+
+        private void cboxEnableToolDualGPS_Click(object sender, EventArgs e)
+        {
+            Settings.User.isSimToolDualOn = cboxEnableToolDualGPS.Checked;
         }
 
         #endregion

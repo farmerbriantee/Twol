@@ -340,6 +340,7 @@ namespace Twol
             nozzleAppToolStripMenuItem.Checked = Settings.Tool.setApp_isNozzleApp;
 
             panelSim.Visible = timerSim.Enabled = simulatorOnToolStripMenuItem.Checked = Settings.User.isSimulatorOn;
+            cboxEnableToolDualGPS.Checked = Settings.User.isSimToolDualOn;
 
             SetFeatureSettings();
 
@@ -668,13 +669,13 @@ namespace Twol
                 {
                     //(Liters per minute * 600) / (𝑠𝑤𝑎𝑡ℎ 𝑤𝑖𝑑𝑡ℎ in meter 𝑥 𝐾mh)
                     nozz.rateActualFiltered = (nozz.rateActualFiltered * 0.6)
-                        + (nozz.rateActual * 6 / (nozz.currentWidthMeters * avgSpeed + 0.01)) * 0.4;
+                        + (nozz.rateActual * 6 / (nozz.currentWidthMeters * pn.avgSpeed + 0.01)) * 0.4;
                 }
                 else
                 {
                     //(GPM x 5,940) / (MPH x Width in inches)
                     nozz.rateActualFiltered = (nozz.rateActualFiltered * 0.6)
-                        + ((nozz.rateActual * 59.4) / (nozz.currentWidthMeters * glm.m2InchOrCm * avgSpeed * glm.kmhToMphOrKmh + 0.01) * 0.4);
+                        + ((nozz.rateActual * 59.4) / (nozz.currentWidthMeters * glm.m2InchOrCm * pn.avgSpeed * glm.kmhToMphOrKmh + 0.01) * 0.4);
                 }
 
                 //display actual rate
@@ -1164,7 +1165,7 @@ namespace Twol
                                     }
                                     else
                                     {
-                                        if (Settings.Vehicle.setAS_functionSpeedLimit > avgSpeed)
+                                        if (Settings.Vehicle.setAS_functionSpeedLimit > pn.avgSpeed)
                                         {
                                             yt.BuildManualYouTurn(point.X > middle);
                                         }
@@ -1184,7 +1185,7 @@ namespace Twol
                             int middle = centerX - oglMain.Width / 4;
                             if (point.X > middle - 100 && point.X < middle + 100)
                             {
-                                if (Settings.Vehicle.setAS_functionSpeedLimit > avgSpeed)
+                                if (Settings.Vehicle.setAS_functionSpeedLimit > pn.avgSpeed)
                                 {
                                     yt.BuildManualYouLateral(point.X > middle);
                                 }
@@ -1443,10 +1444,10 @@ namespace Twol
         {
             get
             {
-                if (avgSpeed > 2)
-                    return (avgSpeed * glm.kmhToMphOrKmh).ToString("N1");
+                if (pn.avgSpeed > 2)
+                    return (pn.avgSpeed * glm.kmhToMphOrKmh).ToString("N1");
                 else
-                    return (avgSpeed * glm.kmhToMphOrKmh).ToString("N2");
+                    return (pn.avgSpeed * glm.kmhToMphOrKmh).ToString("N2");
             }
         }
 

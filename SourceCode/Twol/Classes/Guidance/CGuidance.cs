@@ -124,7 +124,7 @@ namespace Twol
                     if (Uturn)
                         steerHeadingError *= mf.vehicle.uturnCompensation;
 
-                    double sped = Math.Abs(mf.avgSpeed);
+                    double sped = Math.Abs(mf.pn.avgSpeed);
                     if (sped > 1) sped = 1 + 0.277 * (sped - 1);
                     else sped = 1;
                     double XTEc = Math.Atan((distanceFromCurrentLine * mf.vehicle.stanleyDistanceErrorGain)
@@ -177,7 +177,7 @@ namespace Twol
                             pivotDerivative *= 2;
                         }
 
-                        if (mf.isBtnAutoSteerOn && mf.avgSpeed > 2.5 && Math.Abs(pivotDerivative) < 0.1 && !Uturn)
+                        if (mf.isBtnAutoSteerOn && mf.pn.avgSpeed > 2.5 && Math.Abs(pivotDerivative) < 0.1 && !Uturn)
                         {
                             //if over the line heading wrong way, rapidly decrease integral
                             if ((inty < 0 && distanceFromCurrentLine < 0) || (inty > 0 && distanceFromCurrentLine > 0))

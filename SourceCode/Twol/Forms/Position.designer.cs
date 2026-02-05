@@ -51,12 +51,15 @@ namespace Twol
         public double cosSectionHeading = 1.0, sinSectionHeading = 0.0;
 
         //how far travelled since last section was added, section points
-        double sectionTriggerDistanceSq = 0, distanceTriggerSq = 0, gridTriggerDistanceSq = 0;
+        double sectionToTriggerSpacingSq = 0, currentElevationTriggerDistanceSq = 0;
+        double prevToolPivotDistanceToLastTriggerPosSq = 0;
 
-        public vec2 prevPivotAxlePos = new vec2(0, 0);
+        public vec2 prevPivotAxleTriggeredPosition = new vec2(0, 0);
         public vec2 prevContourPos = new vec2(0, 0);
         public vec2 prevToolRecPos = new vec2(0, 0);
-        public vec2 prevGridPos = new vec2(0, 0);
+        public vec2 prevElevationTriggerPos = new vec2(0, 0);
+        public vec2 prevRecordingCurveTrackPos = new vec2(0, 0);
+        
         public int sectionOnCounter = 0;
 
         public vec2 prevBoundaryPos = new vec2(0, 0);
@@ -69,13 +72,11 @@ namespace Twol
 
         //todo
         public List<vec3> followPivotPoints = new List<vec3>(64);
-        double toolPivotTriggerDistanceSq = 0;
-        public vec2 prevToolPivotPos = new vec2(0, 0);
+        public vec2 prevToolFollowPivotTriggeredPosition = new vec2(0, 0);
+        public vec2 prevToolPivotSectionTriggeredPosition = new vec2(0, 0);
 
         //tally counters for display
         //public double totalSquareMetersWorked = 0, totalUserSquareMeters = 0, userSquareMetersAlarm = 0;
-
-        public double avgSpeed, previousSpeed;//for average speed
 
         //youturn
         public double distancePivotToTurnLine = -2222;
@@ -247,7 +248,7 @@ namespace Twol
                             if (ahrs.imuHeading != 99999)
                                 IMUFusion(1);
 
-                            //change for rollDual to the right is positive times -1
+                            //change for dualRoll to the right is positive times -1
                             rollCorrectionDistance = Math.Tan(glm.toRadians((ahrs.imuRoll))) * -vehicle.antennaHeight;
 
                             for (int i = 0; i < 3; i++)
@@ -300,8 +301,25 @@ namespace Twol
                 }
 
                 #endregion
-            }            
-            
+            }
+
+            //dual antenna tool position adjustments
+            if (pnTool.isDualGPSConnected)
+            {
+                if (Settings.Tool.setToolSteer.antennaOffset != 0)
+                {
+                    pnTool.fix.easting += Math.Cos(fixHeading) * Settings.Tool.setToolSteer.antennaOffset;
+                    pnTool.fix.northing -= Math.Sin(fixHeading) * Settings.Tool.setToolSteer.antennaOffset;
+                }
+
+                if (pnTool.dualRoll != 0 && Settings.Tool.setToolSteer.antennaHeight != 0)
+                {
+                    rollCorrectionDistance = Math.Sin(glm.toRadians((pnTool.dualRoll))) * -Settings.Tool.setToolSteer.antennaHeight;
+                    pnTool.fix.easting = (Math.Cos(-fixHeading) * rollCorrectionDistance) + pnTool.fix.easting;
+                    pnTool.fix.northing = (Math.Sin(-fixHeading) * rollCorrectionDistance) + pnTool.fix.northing;
+                }
+            }
+
             SmoothCamera();
             TheRest();
 
@@ -364,8 +382,8 @@ namespace Twol
             if (!vehicle.isInFreeDriveMode)
             {
                 //fill up0 the appropriate arrays with new values
-                PGN_254.pgn[PGN_254.speedHi] = unchecked((byte)((int)(Math.Abs(avgSpeed) * 10.0) >> 8));
-                PGN_254.pgn[PGN_254.speedLo] = unchecked((byte)((int)(Math.Abs(avgSpeed) * 10.0)));
+                PGN_254.pgn[PGN_254.speedHi] = unchecked((byte)((int)(Math.Abs(pn.avgSpeed) * 10.0) >> 8));
+                PGN_254.pgn[PGN_254.speedLo] = unchecked((byte)((int)(Math.Abs(pn.avgSpeed) * 10.0)));
                 //mc.machineControlData[mc.cnSpeed] = mc.autoSteerData[mc.sdSpeed];
 
                 //convert to cm from mm and divide by 2 - lightbar
@@ -389,12 +407,12 @@ namespace Twol
 
                 if (!timerSim.Enabled)
                 {
-                    if (isBtnAutoSteerOn && avgSpeed > Settings.Vehicle.setAS_maxSteerSpeed)
+                    if (isBtnAutoSteerOn && pn.avgSpeed > Settings.Vehicle.setAS_maxSteerSpeed)
                     {
                         SetAutoSteerButton(false, "Above Maximum Safe Steering Speed: " + (Settings.Vehicle.setAS_maxSteerSpeed * glm.kmhToMphOrKmh).ToString("N1") + glm.unitsKmhMph);
                     }
 
-                    if (isBtnAutoSteerOn && avgSpeed < Settings.Vehicle.setAS_minSteerSpeed)
+                    if (isBtnAutoSteerOn && pn.avgSpeed < Settings.Vehicle.setAS_minSteerSpeed)
                     {
                         minSteerSpeedTimer++;
                         if (minSteerSpeedTimer > 80)
@@ -441,7 +459,7 @@ namespace Twol
                 // is active mode for tool steer
                 if (Settings.Tool.setToolSteer.isFollowCurrent|| Settings.Tool.setToolSteer.isFollowPivot)
                 {
-                    PGN_233.pgn[PGN_233.speed10] = unchecked((byte)((int)(Math.Abs(avgSpeed) * 10.0)));
+                    PGN_233.pgn[PGN_233.speed10] = unchecked((byte)((int)(Math.Abs(pn.avgSpeed) * 10.0)));
 
                     var distX1000 = (Int16)(guidanceToolXTE * 1000);
                     PGN_233.pgn[PGN_233.xteHi] = unchecked((byte)(distX1000 >> 8));
@@ -660,62 +678,6 @@ namespace Twol
 
         private void TheRest()
         {
-            CalculateTrailingAndTBTHitch();
-
-            //positions and headings 
-            CalculateTriggerDistance();
-
-            //calculate lookahead at full speed, no sentence misses
-            CalculateSectionLookAhead(toolPos.northing, toolPos.easting, cosSectionHeading, sinSectionHeading);
-
-            //To prevent drawing high numbers of triangles, determine and test before drawing vertex
-            sectionTriggerDistanceSq = glm.DistanceSquared(pivotAxlePos, prevPivotAxlePos);
-            toolPivotTriggerDistanceSq = glm.DistanceSquared(toolPivotPos, prevToolPivotPos);
-
-            if (isJobStarted)
-            {
-                //tool track recording
-                if (Settings.Tool.setToolSteer.isFollowPivot && toolPivotTriggerDistanceSq > 0.5)
-                {
-                    //followPivotPoints.Add(new vec2(toolPivotPos.easting, toolPivotPos.northing));
-                    followPivotPoints.Add(new vec3(pivotAxlePos.easting, pivotAxlePos.northing, 0));
-
-                    if (followPivotPoints.Count > 20) { followPivotPoints.RemoveRange(0, 5); }
-
-                    //save the north & east as previous
-                    prevToolPivotPos.northing = toolPivotPos.northing;
-                    prevToolPivotPos.easting = toolPivotPos.easting;
-                }
-
-                //section on off and points
-                if (sectionTriggerDistanceSq > distanceTriggerSq)
-                {
-                    AddSectionOrPathPoints();
-                }
-
-                //record tool path for guidance lines
-                if (Settings.Tool.setToolSteer.isRecordToolLine) AddToolLineRecordPoints();
-
-                if (Settings.User.isLogElevation)
-                {
-                    AddElevationPoints();
-                }
-            }
-
-            //test if travelled far enough for new boundary point
-            if (bnd.isOkToAddPoints)
-            {
-                double boundaryDistance = glm.DistanceSquared(pivotAxlePos, prevBoundaryPos);
-                
-                if (boundaryDistance > 1) 
-                    AddBoundaryPoint();
-            }            
-        }
-
-        //all the hitch, pivot, section, trailing hitch, headings and fixes
-        private void CalculateTrailingAndTBTHitch()
-        {
-            //translate from pivot position to steer axle and pivot axle position
             //translate world to the pivot axle
             pivotAxlePos.easting = pn.fix.easting - (Math.Sin(fixHeading) * vehicle.antennaPivot);
             pivotAxlePos.northing = pn.fix.northing - (Math.Cos(fixHeading) * vehicle.antennaPivot);
@@ -727,16 +689,123 @@ namespace Twol
                 pivotAxlePos.northing -= Math.Sin(fixHeading) * vehicle.antennaOffset;
             }
 
-            steerAxlePos.easting = pivotAxlePos.easting + (Math.Sin(fixHeading) * vehicle.wheelbase*0.6);
-            steerAxlePos.northing = pivotAxlePos.northing + (Math.Cos(fixHeading) * vehicle.wheelbase*0.6);
+            steerAxlePos.easting = pivotAxlePos.easting + (Math.Sin(fixHeading) * vehicle.wheelbase * 0.6);
+            steerAxlePos.northing = pivotAxlePos.northing + (Math.Cos(fixHeading) * vehicle.wheelbase * 0.6);
             steerAxlePos.heading = fixHeading;
 
             //guidance look ahead distance based on time or tool width at least 
-            
-            double guidanceLookDist = (Math.Max(Settings.Tool.toolWidth * 0.5, avgSpeed * 0.277777 * Settings.Vehicle.setAS_guidanceLookAheadTime));
+            double guidanceLookDist = (Math.Max(Settings.Tool.toolWidth * 0.5, pn.avgSpeed * 0.277777 * Settings.Vehicle.setAS_guidanceLookAheadTime));
             guidanceLookPos.easting = pivotAxlePos.easting + (Math.Sin(fixHeading + glm.toRadians(mc.actualSteerAngleDegrees)) * guidanceLookDist);
             guidanceLookPos.northing = pivotAxlePos.northing + (Math.Cos(fixHeading + glm.toRadians(mc.actualSteerAngleDegrees)) * guidanceLookDist);
 
+
+            //translate Tool GPS world to tool pivot and tool position
+            if (pnTool.isDualGPSConnected)
+            {
+                toolPivotPos.easting = pnTool.fix.easting - (Math.Sin(glm.toRadians(pnTool.headingTrueDual)) * Settings.Tool.setToolSteer.pivotToAntennaDistance);
+                toolPivotPos.northing = pnTool.fix.northing - (Math.Cos(glm.toRadians(pnTool.headingTrueDual)) * Settings.Tool.setToolSteer.pivotToAntennaDistance);
+                toolPivotPos.heading = glm.toRadians(pnTool.headingTrueDual);
+
+                toolPos.easting = toolPivotPos.easting - (Math.Sin(glm.toRadians(pnTool.headingTrueDual)) * Settings.Tool.setToolSteer.PivotToToolDistance);
+                toolPos.northing = toolPivotPos.northing - (Math.Cos(glm.toRadians(pnTool.headingTrueDual)) * Settings.Tool.setToolSteer.PivotToToolDistance);
+                toolPos.heading = glm.toRadians(pnTool.headingTrueDual);
+
+                //toolPivotPos.easting = pnTool.fix.easting * 0.5 + toolPivotPos.easting * 0.5;
+                //toolPivotPos.northing = pnTool.fix.northing * 0.5 + toolPivotPos.northing * 0.5;
+
+                //if (Settings.Tool.setToolSteer.isSteerNotSlide == 1)
+                //{
+                //    toolPivotPos.heading = Math.Atan2(tankPos.easting - toolPivotPos.easting, tankPos.northing - toolPivotPos.northing);
+
+                //    if (toolPivotPos.heading < 0) toolPivotPos.heading += glm.twoPI;
+                //}
+                //else
+                //{
+                //    toolPivotPos.heading = fixHeading;
+                //}
+            }
+            else
+            {
+                CalculateHitchAndToolPivotPosition();
+            }
+
+            //how far to travel before new points for sectionmapping
+            CalculateSectionTriggerDistance();
+
+            //Determine if trigger distances have been exceeded
+            DetermineIfSectionTriggerExceeded();
+
+            //calculate lookahead at full speed, no sentence misses
+            CalculateSectionLookAhead(toolPos.northing, toolPos.easting, cosSectionHeading, sinSectionHeading);
+        }
+
+        private void DetermineIfSectionTriggerExceeded()
+        {
+            if (isJobStarted)
+            {
+                //tool track recording
+                double toolFollowPivotDistanceToLastTriggerSq = glm.DistanceSquared(toolPivotPos, prevToolFollowPivotTriggeredPosition);
+                if (Settings.Tool.setToolSteer.isFollowPivot && toolFollowPivotDistanceToLastTriggerSq > 0.5)
+                {
+                    //followPivotPoints.Add(new vec2(toolPivotPos.easting, toolPivotPos.northing));
+                    followPivotPoints.Add(new vec3(pivotAxlePos.easting, pivotAxlePos.northing, 0));
+
+                    if (followPivotPoints.Count > 20) { followPivotPoints.RemoveRange(0, 5); }
+
+                    //save the north & east as previous
+                    prevToolFollowPivotTriggeredPosition.northing = toolPivotPos.northing;
+                    prevToolFollowPivotTriggeredPosition.easting = toolPivotPos.easting;
+                }
+
+                //measure the distance since last trigger
+                double pivotDistanceToLastTriggerPosSq = glm.DistanceSquared(pivotAxlePos, prevPivotAxleTriggeredPosition);
+                double toolPivotSectionTriggeredPosition = glm.DistanceSquared(toolPivotPos, prevToolPivotSectionTriggeredPosition);
+
+
+                if (!pnTool.isDualGPSConnected && pivotDistanceToLastTriggerPosSq > sectionToTriggerSpacingSq)
+                {
+                    AddSectionOrPathPoints();
+                    prevPivotAxleTriggeredPosition.northing = pivotAxlePos.northing;
+                    prevPivotAxleTriggeredPosition.easting = pivotAxlePos.easting;
+
+                }
+                else
+                {
+                    if (pnTool.isDualGPSConnected && toolPivotSectionTriggeredPosition > sectionToTriggerSpacingSq)
+                    {
+                        AddSectionOrPathPoints();
+                        prevToolPivotSectionTriggeredPosition.northing = toolPivotPos.northing;
+                        prevToolPivotSectionTriggeredPosition.easting = toolPivotPos.easting;
+                    }
+                }
+
+                //record tool path for guidance lines
+                if (Settings.Tool.setToolSteer.isRecordToolLine) AddToolLineRecordPoints();
+
+                if (Settings.User.isLogElevation) AddElevationPoints();
+
+
+                if (trks.isRecordingCurveTrack)
+                {
+                    double curveDist = glm.DistanceSquared(pivotAxlePos, prevRecordingCurveTrackPos);
+                    if (curveDist > 1)
+                        trks.designPtsList.Add(new vec3(pivotAxlePos.easting, pivotAxlePos.northing, pivotAxlePos.heading));
+                }
+
+                //test if travelled far enough for new boundary point
+                if (bnd.isOkToAddPoints)
+                {
+                    double boundaryDistance = glm.DistanceSquared(pivotAxlePos, prevBoundaryPos);
+
+                    if (boundaryDistance > 1)
+                        AddBoundaryPoint();
+                }
+            }
+        }
+
+        //all the hitch, pivot, section, trailing hitch, headings and fixes
+        private void CalculateHitchAndToolPivotPosition()
+        {
             //determine where the rigid vehicle hitch ends - Tractor and Harvestor
             if (vehicle.vehicleType != 2)
             {
@@ -753,35 +822,8 @@ namespace Twol
             }
 
             //tool attached via a trailing hitch
-            if (Settings.Tool.setToolSteer.isGPSToolActive && Settings.Tool.isToolTrailing && !Settings.Tool.isToolTBT && !timerSim.Enabled)
-            {
-                tankPos.heading = fixHeading;
-                tankPos.easting = hitchPos.easting;
-                tankPos.northing = hitchPos.northing;
 
-                toolPivotPos.easting = pnTool.fix.easting * 0.5 + toolPivotPos.easting * 0.5;
-                toolPivotPos.northing = pnTool.fix.northing * 0.5 + toolPivotPos.northing * 0.5;
-
-                if (Settings.Tool.setToolSteer.isSteerNotSlide == 1)
-                {
-                    toolPivotPos.heading = Math.Atan2(tankPos.easting - toolPivotPos.easting, tankPos.northing - toolPivotPos.northing);
-
-                    if (toolPivotPos.heading < 0) toolPivotPos.heading += glm.twoPI;
-                }
-                else
-                {
-                    toolPivotPos.heading = fixHeading;
-                }
-
-                toolPos.heading = toolPivotPos.heading;
-
-                toolPos.easting = toolPivotPos.easting +
-                    (Math.Sin(toolPivotPos.heading) * (Settings.Tool.trailingToolToPivotLength));
-                toolPos.northing = toolPivotPos.northing +
-                    (Math.Cos(toolPivotPos.heading) * (Settings.Tool.trailingToolToPivotLength));
-            }
-
-            else if (Settings.Tool.isToolTrailing)
+            if (Settings.Tool.isToolTrailing)
             {
                 double over;
                 if (Settings.Tool.isToolTBT)
@@ -863,7 +905,7 @@ namespace Twol
         }
 
         //used to increase triangle countExit when going around corners, less on straight
-        private void CalculateTriggerDistance()
+        private void CalculateSectionTriggerDistance()
         {
             double distance = Settings.Tool.toolWidth*0.75;
             if (distance > 5) distance = 5;
@@ -881,13 +923,13 @@ namespace Twol
 
             twist *= twist;
             if (twist < 0.15) twist = 0.15;
-            distanceTriggerSq = distance * twist;
+            sectionToTriggerSpacingSq = distance * twist;
 
-            if (distanceTriggerSq < 1.0) distanceTriggerSq = 1.0;
-            distanceTriggerSq *= distanceTriggerSq;
+            if (sectionToTriggerSpacingSq < 1.0) sectionToTriggerSpacingSq = 1.0;
+            sectionToTriggerSpacingSq *= sectionToTriggerSpacingSq;
 
             //finally fixed distance for making a curve line
-            if (trks.isRecordingCurveTrack) distanceTriggerSq *= 0.5;
+            if (trks.isRecordingCurveTrack) sectionToTriggerSpacingSq *= 0.5;
 
             //precalc the sin and cos of heading * -1
             sinSectionHeading = Math.Sin(-toolPivotPos.heading);
@@ -903,94 +945,103 @@ namespace Twol
             double leftSpeed = 0, rightSpeed = 0;
 
             //speed max for section kmh*0.277 to m/s * 10 cm per pixel * 1.7 max speed
-            double meterPerSecPerPixel = Math.Abs(avgSpeed) * 4.5;
+            double meterPerSecPerPixel;
+
+            if (!pnTool.isDualGPSConnected)
+            {
+                meterPerSecPerPixel = Math.Abs(pn.avgSpeed) * 4.5;
+            }
+            else
+            {
+                meterPerSecPerPixel = Math.Abs(pnTool.vtgSpeed) * 4.5;
+            }
 
             //now loop all the section rights and the one extreme left
             for (int j = 0; j < section.Count; j++)
-            {
-                if (j == 0)
                 {
-                    //only one first left point, the rest are all rights moved over to left
-                    section[j].leftPoint = new vec2(cosHeading * (section[j].positionLeft) + easting,
-                                       sinHeading * (section[j].positionLeft) + northing);
+                    if (j == 0)
+                    {
+                        //only one first left point, the rest are all rights moved over to left
+                        section[j].leftPoint = new vec2(cosHeading * (section[j].positionLeft) + easting,
+                                           sinHeading * (section[j].positionLeft) + northing);
 
-                    left = section[j].leftPoint - section[j].lastLeftPoint;
+                        left = section[j].leftPoint - section[j].lastLeftPoint;
+
+                        //save a copy for next time
+                        section[j].lastLeftPoint = section[j].leftPoint;
+
+                        //get the speed for left side only once
+
+                        leftSpeed = left.GetLength() * gpsHz * 10;
+                        if (leftSpeed > meterPerSecPerPixel) leftSpeed = meterPerSecPerPixel;
+                    }
+                    else
+                    {
+                        //right point from last section becomes this left one
+                        section[j].leftPoint = section[j - 1].rightPoint;
+                        left = section[j].leftPoint - section[j].lastLeftPoint;
+
+                        //save a copy for next time
+                        section[j].lastLeftPoint = section[j].leftPoint;
+
+                        //Save the slower of the 2
+                        if (leftSpeed > rightSpeed) leftSpeed = rightSpeed;
+                    }
+
+                    section[j].rightPoint = new vec2(cosHeading * (section[j].positionRight) + easting,
+                                        sinHeading * (section[j].positionRight) + northing);
+
+                    //now we have left and right for this section
+                    right = section[j].rightPoint - section[j].lastRightPoint;
 
                     //save a copy for next time
-                    section[j].lastLeftPoint = section[j].leftPoint;
+                    section[j].lastRightPoint = section[j].rightPoint;
 
-                    //get the speed for left side only once
+                    //grab vector length and convert to meters/sec/10 pixels per meter                
+                    rightSpeed = right.GetLength() * gpsHz * 10;
+                    if (rightSpeed > meterPerSecPerPixel) rightSpeed = meterPerSecPerPixel;
 
-                    leftSpeed = left.GetLength() * gpsHz * 10;
-                    if (leftSpeed > meterPerSecPerPixel) leftSpeed = meterPerSecPerPixel;
+                    //Is section outer going forward or backward
+                    double head = left.HeadingXZ();
+
+                    if (head < 0) head += glm.twoPI;
+
+                    if (Math.PI - Math.Abs(Math.Abs(head - toolPivotPos.heading) - Math.PI) > glm.PIBy2)
+                    {
+                        if (leftSpeed > 0) leftSpeed *= -1;
+                    }
+
+                    head = right.HeadingXZ();
+                    if (head < 0) head += glm.twoPI;
+                    if (Math.PI - Math.Abs(Math.Abs(head - toolPivotPos.heading) - Math.PI) > glm.PIBy2)
+                    {
+                        if (rightSpeed > 0) rightSpeed *= -1;
+                    }
+
+                    double sped = 0;
+                    //save the far left and right speed in m/sec averaged over 20%
+                    if (j == 0)
+                    {
+                        sped = (leftSpeed * 0.1);
+                        if (sped < 0.1) sped = 0.1;
+                        tool.farLeftSpeed = tool.farLeftSpeed * 0.85 + sped * 0.15;
+                    }
+                    if (j == section.Count - 1)
+                    {
+                        sped = (rightSpeed * 0.1);
+                        if (sped < 0.1) sped = 0.1;
+                        tool.farRightSpeed = tool.farRightSpeed * 0.85 + sped * 0.15;
+                    }
+
+                    //choose fastest speed and filter
+                    if (leftSpeed > rightSpeed)
+                    {
+                        sped = leftSpeed;
+                        leftSpeed = rightSpeed;
+                    }
+                    else sped = rightSpeed;
+                    section[j].speedPixels = section[j].speedPixels * 0.7 + sped * 0.3;
                 }
-                else
-                {
-                    //right point from last section becomes this left one
-                    section[j].leftPoint = section[j - 1].rightPoint;
-                    left = section[j].leftPoint - section[j].lastLeftPoint;
-
-                    //save a copy for next time
-                    section[j].lastLeftPoint = section[j].leftPoint;
-                    
-                    //Save the slower of the 2
-                    if (leftSpeed > rightSpeed) leftSpeed = rightSpeed;                    
-                }
-
-                section[j].rightPoint = new vec2(cosHeading * (section[j].positionRight) + easting,
-                                    sinHeading * (section[j].positionRight) + northing);
-
-                //now we have left and right for this section
-                right = section[j].rightPoint - section[j].lastRightPoint;
-
-                //save a copy for next time
-                section[j].lastRightPoint = section[j].rightPoint;
-
-                //grab vector length and convert to meters/sec/10 pixels per meter                
-                rightSpeed = right.GetLength() * gpsHz * 10;
-                if (rightSpeed > meterPerSecPerPixel) rightSpeed = meterPerSecPerPixel;
-
-                //Is section outer going forward or backward
-                double head = left.HeadingXZ();
-
-                if (head < 0) head += glm.twoPI;
-
-                if (Math.PI - Math.Abs(Math.Abs(head - toolPivotPos.heading) - Math.PI) > glm.PIBy2)
-                {
-                    if (leftSpeed > 0) leftSpeed *= -1;
-                }
-
-                head = right.HeadingXZ();
-                if (head < 0) head += glm.twoPI;
-                if (Math.PI - Math.Abs(Math.Abs(head - toolPivotPos.heading) - Math.PI) > glm.PIBy2)
-                {
-                    if (rightSpeed > 0) rightSpeed *= -1;
-                }
-
-                double sped = 0;
-                //save the far left and right speed in m/sec averaged over 20%
-                if (j==0)
-                {
-                    sped = (leftSpeed * 0.1);
-                    if (sped < 0.1) sped = 0.1;
-                    tool.farLeftSpeed = tool.farLeftSpeed * 0.85 + sped * 0.15;
-                }
-                if (j == section.Count - 1)
-                {
-                    sped = (rightSpeed * 0.1);
-                    if (sped < 0.1) sped = 0.1;
-                    tool.farRightSpeed = tool.farRightSpeed * 0.85 + sped * 0.15;
-                }
-
-                //choose fastest speed and filter
-                if (leftSpeed > rightSpeed)
-                {
-                    sped = leftSpeed;
-                    leftSpeed = rightSpeed;
-                }
-                else sped = rightSpeed;
-                section[j].speedPixels = section[j].speedPixels * 0.7 + sped * 0.3;
-            }
         }
 
         //perimeter and boundary point generation
@@ -1025,7 +1076,7 @@ namespace Twol
             //Contour Base Track.... At least One section on, turn on if not
             double contourTriggerDistanceSq = glm.DistanceSquared(pivotAxlePos, prevContourPos);
 
-            if (isJobStarted && contourTriggerDistanceSq > distanceTriggerSq)
+            if (isJobStarted && contourTriggerDistanceSq > sectionToTriggerSpacingSq)
             {
                 if (sectionOnCounter != 0)
                 {
@@ -1079,7 +1130,7 @@ namespace Twol
                 //All sections OFF so if on, turn off
                 else
                 {
-                    if (tRec.isToolRecordOn && avgSpeed > 1)
+                    if (tRec.isToolRecordOn && pn.avgSpeed > 1)
                     { tRec.StopToolRecordLine(); }
                 }
 
@@ -1092,19 +1143,9 @@ namespace Twol
         //add the points for section, contour line points, Area Calc feature
         private void AddSectionOrPathPoints()
         {
-            if (trks.isRecordingCurveTrack)
-            {
-                trks.designPtsList.Add(new vec3(pivotAxlePos.easting, pivotAxlePos.northing, pivotAxlePos.heading));
-            }
-
-            //save the north & east as previous
-            prevPivotAxlePos.northing = pivotAxlePos.northing;
-            prevPivotAxlePos.easting = pivotAxlePos.easting;
-
             // if non zero, at least one section is on.
             sectionOnCounter = 0;
 
-            //send the current and previous GPS fore/aft corrected fix to each section
             foreach (var patch in triStrip)
             {
                 if (patch.isDrawing)
@@ -1123,9 +1164,9 @@ namespace Twol
 
         private void AddElevationPoints()
         {
-            gridTriggerDistanceSq = glm.DistanceSquared(pivotAxlePos, prevGridPos);
+            currentElevationTriggerDistanceSq = glm.DistanceSquared(pivotAxlePos, prevElevationTriggerPos);
 
-            if (gridTriggerDistanceSq > 2.0 && sectionOnCounter != 0 && isFieldStarted)
+            if (currentElevationTriggerDistanceSq > 2.0 && sectionOnCounter != 0 && isFieldStarted)
             {
                 //grab fix and elevation
                 sbElevationString.Append(
@@ -1139,8 +1180,8 @@ namespace Twol
                     + Math.Round(ahrs.imuRoll, 3).ToString(CultureInfo.InvariantCulture) +
                     "\r\n");
 
-                prevGridPos.easting = pivotAxlePos.easting;
-                prevGridPos.northing = pivotAxlePos.northing;
+                prevElevationTriggerPos.easting = pivotAxlePos.easting;
+                prevElevationTriggerPos.northing = pivotAxlePos.northing;
             }
         }
     }//end class

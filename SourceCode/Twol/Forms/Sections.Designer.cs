@@ -390,7 +390,7 @@ namespace Twol
             PGN_229.pgn[PGN_229.toolLSpeed] = unchecked((byte)(tool.farLeftSpeed * 10));
             PGN_229.pgn[PGN_229.toolRSpeed] = unchecked((byte)(tool.farRightSpeed * 10));
 
-            PGN_239.pgn[PGN_239.speed] = unchecked((byte)(avgSpeed * 10));
+            PGN_239.pgn[PGN_239.speed] = unchecked((byte)(pn.avgSpeed * 10));
             PGN_239.pgn[PGN_239.tram] = unchecked((byte)tram.controlByte);
             PGN_239.pgn[PGN_239.sc1to8] = PGN_229.pgn[PGN_229.sc1to8];
             PGN_239.pgn[PGN_239.sc9to16] = PGN_229.pgn[PGN_229.sc9to16];

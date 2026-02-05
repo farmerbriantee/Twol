@@ -110,7 +110,7 @@ namespace Twol
                     GL.Begin(type);
                     for (int i = 0; i < polygon.Count; i++)
                     {
-                        GL.Vertex2(polygon[i].easting, polygon[i].northing);
+                        GL.Vertex3(polygon[i].easting, polygon[i].northing,0);
                     }
                     GL.End();
                 }
@@ -131,7 +131,7 @@ namespace Twol
                     GL.Begin(type);
                     for (int i = 1; i < polygon.Count; i++)
                     {
-                        GL.Vertex2(polygon[i].easting, polygon[i].northing);
+                        GL.Vertex3(polygon[i].easting, polygon[i].northing, 0);
                     }
                     GL.End();
                 }
@@ -152,9 +152,9 @@ namespace Twol
                     GL.Begin(type);
                     for (int i = 0; i < polygon.Count; i += 5)
                     {
-                        GL.Vertex2(polygon[i].easting, polygon[i].northing);
+                        GL.Vertex3(polygon[i].easting, polygon[i].northing,0);
                     }
-                    GL.Vertex2(polygon[polygon.Count - 1].easting, polygon[polygon.Count - 1].northing);
+                    GL.Vertex3(polygon[polygon.Count - 1].easting, polygon[polygon.Count - 1].northing,0);
 
                     GL.End();
                 }
@@ -178,11 +178,11 @@ namespace Twol
         //            int step = mipmap;
         //            for (int i = start; i < count2; i += step)
         //            {
-        //                GL.Vertex2(polygon[i].easting, polygon[i].northing);
+        //                GL.Vertex3(polygon[i].easting, polygon[i].northing);
         //                i++;
 
         //                if (type != PrimitiveType.LineStrip)
-        //                    GL.Vertex2(polygon[i].easting, polygon[i].northing);
+        //                    GL.Vertex3(polygon[i].easting, polygon[i].northing);
         //                i++;
         //                if (count2 - i <= (mipmap + 2)) step = 0;//too small to mipmap it
         //            }
@@ -190,9 +190,9 @@ namespace Twol
         //        else
         //        {
         //            if (type != PrimitiveType.LineStrip)
-        //                for (int i = start; i < count2; i++) GL.Vertex2(polygon[i].easting, polygon[i].northing);
+        //                for (int i = start; i < count2; i++) GL.Vertex3(polygon[i].easting, polygon[i].northing);
         //            else
-        //                for (int i = start; i < count2; i += 2) GL.Vertex2(polygon[i].easting, polygon[i].northing);
+        //                for (int i = start; i < count2; i += 2) GL.Vertex3(polygon[i].easting, polygon[i].northing);
         //        }
         //        GL.End();
         //    }
@@ -205,7 +205,7 @@ namespace Twol
                 GL.Begin(type);
                 for (int i = 0; i < polygon.Count; i++)
                 {
-                    GL.Vertex2(polygon[i].easting, polygon[i].northing);
+                    GL.Vertex3(polygon[i].easting, polygon[i].northing, 0);
                 }
                 GL.End();
 
@@ -214,7 +214,7 @@ namespace Twol
                 //GL.Color3(1.0f, 1.0f, 0.50f);
                 //for (int i = 0; i < polygon.Count; i++)
                 //{
-                //    GL.Vertex2(polygon[i].easting, polygon[i].northing, 0);
+                //    GL.Vertex3(polygon[i].easting, polygon[i].northing, 0);
                 //}
                 //GL.End();
                 //GL.PointSize(1.0f);
@@ -228,9 +228,9 @@ namespace Twol
                 GL.Begin(type);
                 for (int i = 0; i < polygon.Count; i++)
                 {
-                    GL.Vertex2(polygon[i].polygonPts[0].easting, polygon[i].polygonPts[0].northing);
-                    GL.Vertex2(polygon[i].polygonPts[1].easting, polygon[i].polygonPts[1].northing);
-                    GL.Vertex2(polygon[i].polygonPts[2].easting, polygon[i].polygonPts[2].northing);
+                    GL.Vertex3(polygon[i].polygonPts[0].easting, polygon[i].polygonPts[0].northing, 0);
+                    GL.Vertex3(polygon[i].polygonPts[1].easting, polygon[i].polygonPts[1].northing, 0);
+                    GL.Vertex3(polygon[i].polygonPts[2].easting, polygon[i].polygonPts[2].northing, 0);
                 }
                 GL.End();
             }

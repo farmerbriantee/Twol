@@ -92,6 +92,8 @@
         public double antennaHeight = 0;
         public double antennaOffset = 0;
         public double dualHeadingOffset = 0;
+        public double pivotToAntennaDistance = 0;
+        public double PivotToToolDistance = 0;
 
         public double rollZero = 0.0;
         public bool invertRoll = false;
