@@ -714,8 +714,6 @@ namespace Twol
             if (bnd.bndList.Count > 0 && bnd.bndList[0].hdLine.Count > 0)
             {
                 //Triangulate headland polygon
-                CPolygon hdLinePolygon = new CPolygon(bnd.bndList[0].hdLine.ToArray());
-                bnd.bndList[0].hdLineTriangleList = hdLinePolygon.Triangulate();
                 bnd.bndList[0].CreateHdLineVertexArray();
 
                 bnd.isHeadlandOn = true;

@@ -587,8 +587,6 @@ namespace Twol
                 mf.bnd.bndList[0].hdLine.Add(ptEnd);
 
                 //triangulate headland area
-                CPolygon hdLinePolygon = new CPolygon(mf.bnd.bndList[0].hdLine.ToArray());
-                mf.bnd.bndList[0].hdLineTriangleList = hdLinePolygon.Triangulate();
                 mf.bnd.bndList[0].CreateHdLineVertexArray();
                 mf.bnd.isHeadlandOn = true;
             }
@@ -827,7 +825,6 @@ namespace Twol
         private void btnHeadlandOff_Click(object sender, EventArgs e)
         {
             mf.bnd.bndList[0].hdLine?.Clear();
-            mf.bnd.bndList[0].hdLineTriangleList?.Clear();
             mf.bnd.bndList[0].DeleteHeadLineVertexArray();
 
             mf.FileSaveHeadland();

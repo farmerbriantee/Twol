@@ -8,10 +8,8 @@ namespace Twol
     {
         public List<vec3> fenceLine = new List<vec3>(128);
         public List<vec2> fenceLineEar = new List<vec2>(128);
-        public List<Triangle> fenceTriangleList = new List<Triangle>(128);
 
         public List<vec3> hdLine = new List<vec3>(128);
-        public List<Triangle> hdLineTriangleList = new List<Triangle>(128);
 
         public List<vec3> turnLine = new List<vec3>(128);
 
@@ -19,7 +17,10 @@ namespace Twol
         //public CPolygon hdLinePolygon = new CPolygon();
 
         public int vbo_FenceTriangles = -1;
+        public int vbo_FenceTrianglesCount = 0;
+
         public int vbo_HeadTriangles = -1;
+        public int vbo_HeadTrianglesCount = 0;
 
         //boundary variables
         public double area;
@@ -50,7 +51,7 @@ namespace Twol
 
             //Triangulate the bundary polygon
             CPolygon bndPolygon = new CPolygon(fenceLineEar.ToArray());
-            fenceTriangleList = bndPolygon.Triangulate();
+            var fenceTriangleList = bndPolygon.Triangulate();
 
             GL.BindBuffer(BufferTarget.ArrayBuffer, vboIndex);
 
@@ -68,6 +69,7 @@ namespace Twol
             }
 
             GL.BufferData(BufferTarget.ArrayBuffer, triangleVertexData.Length * sizeof(float), triangleVertexData, BufferUsageHint.StaticDraw);
+            vbo_FenceTrianglesCount = fenceTriangleList.Count * 3;
 
             BuildTurnLine();
         }
@@ -177,6 +179,9 @@ namespace Twol
         {
             DeleteHeadLineVertexArray();
 
+            CPolygon hdLinePolygon = new CPolygon(hdLine.ToArray());
+            var hdLineTriangleList = hdLinePolygon.Triangulate();
+
             vbo_HeadTriangles = GL.GenBuffer();
 
             GL.BindBuffer(BufferTarget.ArrayBuffer, vbo_HeadTriangles);
@@ -195,6 +200,8 @@ namespace Twol
             }
 
             GL.BufferData(BufferTarget.ArrayBuffer, triangleVertexData.Length * sizeof(float), triangleVertexData, BufferUsageHint.StaticDraw);
+
+            vbo_HeadTrianglesCount = hdLineTriangleList.Count * 3;
         }
 
         public void DeleteHeadLineVertexArray()
