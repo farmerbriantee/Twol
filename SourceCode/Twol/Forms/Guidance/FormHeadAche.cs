@@ -26,7 +26,9 @@ namespace Twol
 
         private bool isLinesVisible = true;
 
-        private CHeadLine hdl = new CHeadLine();
+        private List<CHeadPath> tracksArr = new List<CHeadPath>();
+
+        private int idx;
 
         public FormHeadAche(Form callingForm)
         {
@@ -40,9 +42,9 @@ namespace Twol
         {
             this.Text = "1: Set distance, 2: Tap Build, 3: Create Clip Lines";
 
-            hdl.idx = -1;
+            idx = -1;
             nudSetDistance.Value = 0;
-            mf.FileLoadHeadLines(hdl);
+            mf.FileLoadHeadLines(tracksArr);
             FixLabelsCurve();
 
             lblToolWidth.Text = "( " + glm.unitsFtM + " )      Tool: "
@@ -68,13 +70,13 @@ namespace Twol
 
         private void FormHeadLine_FormClosing(object sender, FormClosingEventArgs e)
         {
-            mf.FileSaveHeadLines(hdl);
+            mf.FileSaveHeadLines(tracksArr);
 
-            if (hdl.tracksArr.Count > 0)
+            if (tracksArr.Count > 0)
             {
-                hdl.idx = 0;
+                idx = 0;
             }
-            else hdl.idx = -1;
+            else idx = -1;
 
             Settings.User.setWindow_HeadAcheSize = Size;
         }
@@ -117,14 +119,14 @@ namespace Twol
         {
             mf.bnd.bndList[0].hdLine?.Clear();
 
-            if (hdl.tracksArr.Count > 0)
+            if (tracksArr.Count > 0)
             {
-                hdl.idx++;
-                if (hdl.idx > (hdl.tracksArr.Count - 1)) hdl.idx = 0;
+                idx++;
+                if (idx > (tracksArr.Count - 1)) idx = 0;
             }
             else
             {
-                hdl.idx = -1;
+                idx = -1;
             }
 
             FixLabelsCurve();
@@ -134,14 +136,14 @@ namespace Twol
         {
             mf.bnd.bndList[0].hdLine?.Clear();
 
-            if (hdl.tracksArr.Count > 0)
+            if (tracksArr.Count > 0)
             {
-                hdl.idx--;
-                if (hdl.idx < 0) hdl.idx = (hdl.tracksArr.Count - 1);
+                idx--;
+                if (idx < 0) idx = (tracksArr.Count - 1);
             }
             else
             {
-                hdl.idx = -1;
+                idx = -1;
             }
 
             FixLabelsCurve();
@@ -151,20 +153,20 @@ namespace Twol
         {
             //mf.bnd.buildList[0].hdLine?.Clear();
 
-            if (hdl.tracksArr.Count > 0 && hdl.idx > -1)
+            if (tracksArr.Count > 0 && idx > -1)
             {
-                hdl.tracksArr.RemoveAt(hdl.idx);
-                hdl.idx--;
+                tracksArr.RemoveAt(idx);
+                idx--;
             }
 
-            if (hdl.tracksArr.Count > 0)
+            if (tracksArr.Count > 0)
             {
-                if (hdl.idx == -1)
+                if (idx == -1)
                 {
-                    hdl.idx++;
+                    idx++;
                 }
             }
-            else hdl.idx = -1;
+            else idx = -1;
 
             FixLabelsCurve();
         }
@@ -211,7 +213,7 @@ namespace Twol
             sY = 0;
 
             mf.bnd.bndList[0].hdLine?.Clear();
-            hdl.idx = -1;
+            idx = -1;
 
             if (isA)
             {
@@ -263,8 +265,8 @@ namespace Twol
                 //build the lines
                 if (rbtnCurve.Checked)
                 {
-                    hdl.tracksArr.Add(new CHeadPath());
-                    hdl.idx = hdl.tracksArr.Count - 1;
+                    tracksArr.Add(new CHeadPath());
+                    idx = tracksArr.Count - 1;
 
                     bool isLoop = false;
                     int limit = end;
@@ -296,15 +298,15 @@ namespace Twol
                         }
                     }
 
-                    hdl.tracksArr[hdl.idx].a_point = start;
-                    hdl.tracksArr[hdl.idx].trackPts?.Clear();
+                    tracksArr[idx].a_point = start;
+                    tracksArr[idx].trackPts?.Clear();
 
                     if (start < end)
                     {
                         for (int i = start; i <= end; i++)
                         {
                             //calculate the point inside the boundary
-                            hdl.tracksArr[hdl.idx].trackPts.Add(new vec3(mf.bnd.bndList[bndSelect].fenceLine[i]));
+                            tracksArr[idx].trackPts.Add(new vec3(mf.bnd.bndList[bndSelect].fenceLine[i]));
 
                             if (isLoop && i == mf.bnd.bndList[bndSelect].fenceLine.Count - 1)
                             {
@@ -319,7 +321,7 @@ namespace Twol
                         for (int i = start; i >= end; i--)
                         {
                             //calculate the point inside the boundary
-                            hdl.tracksArr[hdl.idx].trackPts.Add(new vec3(mf.bnd.bndList[bndSelect].fenceLine[i]));
+                            tracksArr[idx].trackPts.Add(new vec3(mf.bnd.bndList[bndSelect].fenceLine[i]));
 
                             if (isLoop && i == 0)
                             {
@@ -331,12 +333,12 @@ namespace Twol
                     }
 
                     //who knows which way it actually goes
-                    hdl.tracksArr[hdl.idx].trackPts.CalculateAverageHeadings(false);
+                    tracksArr[idx].trackPts.CalculateAverageHeadings(false);
 
                     //create a name
-                    hdl.tracksArr[hdl.idx].name = hdl.idx.ToString() + " Cu " + DateTime.Now.ToString("mm:ss", CultureInfo.InvariantCulture);
+                    tracksArr[idx].name = idx.ToString() + " Cu " + DateTime.Now.ToString("mm:ss", CultureInfo.InvariantCulture);
 
-                    hdl.tracksArr[hdl.idx].mode = TrackMode.PolyLine;
+                    tracksArr[idx].mode = TrackMode.PolyLine;
 
                     btnExit.Focus();
                 }
@@ -366,19 +368,19 @@ namespace Twol
                         mf.bnd.bndList[bndSelect].fenceLine[end].northing - mf.bnd.bndList[bndSelect].fenceLine[start].northing);
                     if (abHead < 0) abHead += glm.twoPI;
 
-                    if (hdl.idx < hdl.tracksArr.Count - 1)
+                    if (idx < tracksArr.Count - 1)
                     {
-                        hdl.idx++;
-                        hdl.tracksArr.Insert(hdl.idx, new CHeadPath());
+                        idx++;
+                        tracksArr.Insert(idx, new CHeadPath());
                     }
                     else
                     {
-                        hdl.tracksArr.Add(new CHeadPath());
-                        hdl.idx = hdl.tracksArr.Count - 1;
+                        tracksArr.Add(new CHeadPath());
+                        idx = tracksArr.Count - 1;
                     }
 
-                    hdl.tracksArr[hdl.idx].a_point = start;
-                    hdl.tracksArr[hdl.idx].trackPts?.Clear();
+                    tracksArr[idx].a_point = start;
+                    tracksArr[idx].trackPts?.Clear();
 
                     ptA.heading = abHead;
                     ptB.heading = abHead;
@@ -391,32 +393,32 @@ namespace Twol
                             northing = (Math.Cos(abHead) * i) + ptA.northing,
                             heading = abHead
                         };
-                        hdl.tracksArr[hdl.idx].trackPts.Add(ptC);
+                        tracksArr[idx].trackPts.Add(ptC);
                     }
 
                     //create a name
-                    hdl.tracksArr[hdl.idx].name = hdl.idx.ToString() + " AB " + DateTime.Now.ToString("hh:mm:ss", CultureInfo.InvariantCulture);
+                    tracksArr[idx].name = idx.ToString() + " AB " + DateTime.Now.ToString("hh:mm:ss", CultureInfo.InvariantCulture);
 
-                    hdl.tracksArr[hdl.idx].mode = TrackMode.ABLine;
+                    tracksArr[idx].mode = TrackMode.ABLine;
                 }
 
-                hdl.tracksArr[hdl.idx].trackPts.AddStartEndPoints(30, 2);
-                hdl.tracksArr[hdl.idx].moveDistance = 0;
+                tracksArr[idx].trackPts.AddStartEndPoints(30, 2);
+                tracksArr[idx].moveDistance = 0;
 
                 //update the arrays
                 start = 99999; end = 99999;
                 //mf.bnd.buildList[0].hdLine?.Clear();
 
-                if (hdl.tracksArr.Count < 1 || hdl.idx == -1) return;
+                if (tracksArr.Count < 1 || idx == -1) return;
 
                 double distAway = nudSetDistance.Value;
-                hdl.tracksArr[hdl.idx].moveDistance += distAway;
+                tracksArr[idx].moveDistance += distAway;
 
-                var desList = hdl.tracksArr[hdl.idx].trackPts.OffsetLine(distAway, 1, hdl.tracksArr[hdl.idx].mode > TrackMode.PolyLine, false);
+                var desList = tracksArr[idx].trackPts.OffsetLine(distAway, 1, tracksArr[idx].mode > TrackMode.PolyLine, false);
 
-                hdl.tracksArr[hdl.idx].trackPts = desList;
+                tracksArr[idx].trackPts = desList;
 
-                mf.FileSaveHeadLines(hdl);
+                mf.FileSaveHeadLines(tracksArr);
 
                 FixLabelsCurve();
             }
@@ -487,15 +489,15 @@ namespace Twol
 
         private void DrawBuiltLines()
         {
-            if (isLinesVisible && hdl.tracksArr.Count > 0)
+            if (isLinesVisible && tracksArr.Count > 0)
             {
                 //GL.Enable(EnableCap.LineStipple);
                 GL.LineStipple(1, 0x7070);
                 GL.PointSize(3);
 
-                for (int i = 0; i < hdl.tracksArr.Count; i++)
+                for (int i = 0; i < tracksArr.Count; i++)
                 {
-                    if (hdl.tracksArr[i].mode == TrackMode.ABLine)
+                    if (tracksArr[i].mode == TrackMode.ABLine)
                     {
                         GL.Color3(0.973f, 0.9f, 0.10f);
                     }
@@ -503,32 +505,32 @@ namespace Twol
                     {
                         GL.Color3(0.3f, 0.99f, 0.20f);
                     }
-                    hdl.tracksArr[i].trackPts.DrawPolygon(PrimitiveType.Points);
+                    tracksArr[i].trackPts.DrawPolygon(PrimitiveType.Points);
                 }
 
                 //GL.Disable(EnableCap.LineStipple);
 
-                if (hdl.idx > -1)
+                if (idx > -1)
                 {
                     GL.LineWidth(6);
                     GL.Color3(1.0f, 0.0f, 1.0f);
 
-                    hdl.tracksArr[hdl.idx].trackPts.DrawPolygon(PrimitiveType.LineStrip);
+                    tracksArr[idx].trackPts.DrawPolygon(PrimitiveType.LineStrip);
 
-                    int cnt = hdl.tracksArr[hdl.idx].trackPts.Count - 1;
+                    int cnt = tracksArr[idx].trackPts.Count - 1;
                     GL.PointSize(28);
                     GL.Color3(0, 0, 0);
                     GL.Begin(PrimitiveType.Points);
-                    GL.Vertex3(hdl.tracksArr[hdl.idx].trackPts[0].easting, hdl.tracksArr[hdl.idx].trackPts[0].northing, 0);
-                    GL.Vertex3(hdl.tracksArr[hdl.idx].trackPts[cnt].easting, hdl.tracksArr[hdl.idx].trackPts[cnt].northing, 0);
+                    GL.Vertex3(tracksArr[idx].trackPts[0].easting, tracksArr[idx].trackPts[0].northing, 0);
+                    GL.Vertex3(tracksArr[idx].trackPts[cnt].easting, tracksArr[idx].trackPts[cnt].northing, 0);
                     GL.End();
 
                     GL.PointSize(20);
                     GL.Color3(1.0f, 0.7f, 0.35f);
                     GL.Begin(PrimitiveType.Points);
-                    GL.Vertex3(hdl.tracksArr[hdl.idx].trackPts[0].easting, hdl.tracksArr[hdl.idx].trackPts[0].northing, 0);
+                    GL.Vertex3(tracksArr[idx].trackPts[0].easting, tracksArr[idx].trackPts[0].northing, 0);
                     GL.Color3(0.6f, 0.75f, 0.99f);
-                    GL.Vertex3(hdl.tracksArr[hdl.idx].trackPts[cnt].easting, hdl.tracksArr[hdl.idx].trackPts[cnt].northing, 0);
+                    GL.Vertex3(tracksArr[idx].trackPts[cnt].easting, tracksArr[idx].trackPts[cnt].northing, 0);
                     GL.End();
                 }
             }
@@ -575,7 +577,7 @@ namespace Twol
                 mf.bnd.CreateHdLineVertexArray(0);
                 mf.bnd.isHeadlandOn = true;
 
-                mf.FileSaveHeadLines(hdl);
+                mf.FileSaveHeadLines(tracksArr);
                 //does headland control sections
                 mf.bnd.isSectionControlledByHeadland = true;
             }
@@ -609,10 +611,10 @@ namespace Twol
         private void btnBndLooPGN_Click(object sender, EventArgs e)
         {
             //sort the lines
-            hdl.tracksArr.Sort((p, q) => p.a_point.CompareTo(q.a_point));
-            mf.FileSaveHeadLines(hdl);
+            tracksArr.Sort((p, q) => p.a_point.CompareTo(q.a_point));
+            mf.FileSaveHeadLines(tracksArr);
 
-            hdl.idx = -1;
+            idx = -1;
 
             //build the headland
             mf.bnd.bndList[0].hdLine?.Clear();
@@ -623,10 +625,10 @@ namespace Twol
 
             int isStart = 0;
 
-            for (int lineNum = 0; lineNum < hdl.tracksArr.Count; lineNum++)
+            for (int lineNum = 0; lineNum < tracksArr.Count; lineNum++)
             {
                 nextLine = lineNum - 1;
-                if (nextLine < 0) nextLine = hdl.tracksArr.Count - 1;
+                if (nextLine < 0) nextLine = tracksArr.Count - 1;
 
                 if (nextLine == lineNum)
                 {
@@ -636,16 +638,16 @@ namespace Twol
                     return;
                 }
 
-                for (int i = 0; i < hdl.tracksArr[lineNum].trackPts.Count - 2; i++)
+                for (int i = 0; i < tracksArr[lineNum].trackPts.Count - 2; i++)
                 {
-                    for (int k = 0; k < hdl.tracksArr[nextLine].trackPts.Count - 2; k++)
+                    for (int k = 0; k < tracksArr[nextLine].trackPts.Count - 2; k++)
                     {
                         bool res = glm.GetLineIntersection(
-                        hdl.tracksArr[lineNum].trackPts[i],
-                        hdl.tracksArr[lineNum].trackPts[i + 1],
+                        tracksArr[lineNum].trackPts[i],
+                        tracksArr[lineNum].trackPts[i + 1],
 
-                        hdl.tracksArr[nextLine].trackPts[k],
-                        hdl.tracksArr[nextLine].trackPts[k + 1], out _, out _, out _);
+                        tracksArr[nextLine].trackPts[k],
+                        tracksArr[nextLine].trackPts[k + 1], out _, out _, out _);
                         if (res)
                         {
                             if (isStart == 0) i++;
@@ -654,7 +656,7 @@ namespace Twol
                             if (isStart == 2) goto again;
                             nextLine = lineNum + 1;
 
-                            if (nextLine > hdl.tracksArr.Count - 1) nextLine = 0;
+                            if (nextLine > tracksArr.Count - 1) nextLine = 0;
                         }
                     }
                 }
@@ -663,7 +665,7 @@ namespace Twol
                 isStart = 0;
             }
 
-            if (crossings.Count != hdl.tracksArr.Count * 2)
+            if (crossings.Count != tracksArr.Count * 2)
             {
                 mf.TimedMessageBox(2000, "Crosings Error", "Make sure all ends cross and only once");
                 Log.EventWriter("Headache, All ends cross and only once");
@@ -672,17 +674,17 @@ namespace Twol
                 return;
             }
 
-            for (int i = 0; i < hdl.tracksArr.Count; i++)
+            for (int i = 0; i < tracksArr.Count; i++)
             {
                 int low = crossings[i * 2];
                 int high = crossings[i * 2 + 1];
                 for (int k = low; k < high; k++)
                 {
-                    mf.bnd.bndList[0].hdLine.Add(hdl.tracksArr[i].trackPts[k]);
+                    mf.bnd.bndList[0].hdLine.Add(tracksArr[i].trackPts[k]);
                 }
             }
 
-            //for (int i = 0; i < hdl.tracksArr.Count; i++)
+            //for (int i = 0; i < tracksArr.Count; i++)
             //{
             //    hdl.designPtsList?.Clear();
 
@@ -690,14 +692,14 @@ namespace Twol
             //    int high = crossings[i * 2 + 1];
             //    for (int k = low; k < high; k++)
             //    {
-            //        hdl.designPtsList.Add(hdl.tracksArr[i].trackPts[k]);
+            //        hdl.designPtsList.Add(tracksArr[i].trackPts[k]);
             //    }
 
-            //    hdl.tracksArr[i].trackPts?.Clear();
+            //    tracksArr[i].trackPts?.Clear();
 
             //    foreach (var item in hdl.designPtsList)
             //    {
-            //        hdl.tracksArr[i].trackPts.Add(new vec3(item));
+            //        tracksArr[i].trackPts.Add(new vec3(item));
             //    }
             //}
 
@@ -764,52 +766,52 @@ namespace Twol
 
         private void btnBLength_Click(object sender, EventArgs e)
         {
-            if (hdl.idx > -1)
+            if (idx > -1)
             {
-                int ptCnt = hdl.tracksArr[hdl.idx].trackPts.Count - 1;
+                int ptCnt = tracksArr[idx].trackPts.Count - 1;
 
                 for (int i = 1; i < 10; i++)
                 {
-                    vec3 pt = new vec3(hdl.tracksArr[hdl.idx].trackPts[ptCnt]);
+                    vec3 pt = new vec3(tracksArr[idx].trackPts[ptCnt]);
                     pt.easting += (Math.Sin(pt.heading) * i);
                     pt.northing += (Math.Cos(pt.heading) * i);
-                    hdl.tracksArr[hdl.idx].trackPts.Add(pt);
+                    tracksArr[idx].trackPts.Add(pt);
                 }
             }
         }
 
         private void btnBShrink_Click(object sender, EventArgs e)
         {
-            if (hdl.idx > -1)
+            if (idx > -1)
             {
-                if (hdl.tracksArr[hdl.idx].trackPts.Count > 8)
-                    hdl.tracksArr[hdl.idx].trackPts.RemoveRange(hdl.tracksArr[hdl.idx].trackPts.Count - 5, 5);
+                if (tracksArr[idx].trackPts.Count > 8)
+                    tracksArr[idx].trackPts.RemoveRange(tracksArr[idx].trackPts.Count - 5, 5);
             }
         }
 
         private void btnALength_Click(object sender, EventArgs e)
         {
-            if (hdl.idx > -1)
+            if (idx > -1)
             {
                 //and the beginning
-                vec3 start = new vec3(hdl.tracksArr[hdl.idx].trackPts[0]);
+                vec3 start = new vec3(tracksArr[idx].trackPts[0]);
 
                 for (int i = 1; i < 10; i++)
                 {
                     vec3 pt = new vec3(start);
                     pt.easting -= (Math.Sin(pt.heading) * i);
                     pt.northing -= (Math.Cos(pt.heading) * i);
-                    hdl.tracksArr[hdl.idx].trackPts.Insert(0, pt);
+                    tracksArr[idx].trackPts.Insert(0, pt);
                 }
             }
         }
 
         private void btnAShrink_Click(object sender, EventArgs e)
         {
-            if (hdl.idx > -1)
+            if (idx > -1)
             {
-                if (hdl.tracksArr[hdl.idx].trackPts.Count > 8)
-                    hdl.tracksArr[hdl.idx].trackPts.RemoveRange(0, 5);
+                if (tracksArr[idx].trackPts.Count > 8)
+                    tracksArr[idx].trackPts.RemoveRange(0, 5);
             }
         }
 

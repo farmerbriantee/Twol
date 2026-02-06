@@ -731,9 +731,9 @@ namespace Twol
             }
         }
 
-        public void FileLoadHeadLines(CHeadLine hdl)
+        public void FileLoadHeadLines(List<CHeadPath> tracksArr)
         {
-            hdl.tracksArr?.Clear();
+            tracksArr.Clear();
 
             //get the directory and make sure it exists, create if not
             string directoryName = Path.Combine(RegistrySettings.fieldsDirectory, currentFieldDirectory);
@@ -798,14 +798,14 @@ namespace Twol
                                     headPath.trackPts.Add(vecPt);
                                 }
 
-                                hdl.tracksArr.Add(headPath);
+                                tracksArr.Add(headPath);
                             }
                         }
                     }
                 }
                 catch (Exception er)
                 {
-                    hdl.tracksArr?.Clear();
+                    tracksArr.Clear();
 
                     TimedMessageBox(2000, "Headline Error", "Lines Deleted");
 
@@ -1745,7 +1745,7 @@ namespace Twol
             }
         }
 
-        public void FileSaveHeadLines(CHeadLine hdl)
+        public void FileSaveHeadLines(List<CHeadPath> tracksArr)
         {
             string directoryName = Path.Combine(RegistrySettings.fieldsDirectory, currentFieldDirectory);
 
@@ -1760,7 +1760,7 @@ namespace Twol
                 {
                     writer.WriteLine("$HeadLines");
 
-                    foreach (var headPath in hdl.tracksArr)
+                    foreach (var headPath in tracksArr)
                     {
                         //write out the name
                         writer.WriteLine(headPath.name);
