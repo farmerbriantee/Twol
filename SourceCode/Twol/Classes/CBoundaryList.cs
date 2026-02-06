@@ -6,12 +6,12 @@ namespace Twol
 {
     public class CBoundaryList
     {
-        public List<vec3> fenceLine = new List<vec3>(128);
+        public Polyline fenceLine = new Polyline();
         public List<vec2> fenceLineEar = new List<vec2>(128);
 
-        public List<vec3> hdLine = new List<vec3>(128);
+        public Polyline hdLine = new Polyline();
 
-        public List<vec3> turnLine = new List<vec3>(128);
+        public Polyline turnLine = new Polyline();
 
         private int vbo_FenceTriangles = 0;
         private int vbo_FenceTrianglesCount = 0;

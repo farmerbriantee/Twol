@@ -104,11 +104,11 @@ namespace Twol
                 GL.LineWidth(Settings.User.setDisplay_lineWidth * 4);
 
                 GL.Color4(0, 0, 0, 0.80f);
-                mf.bnd.bndList[0].hdLine.DrawPolygon();
+                mf.bnd.bndList[0].hdLine.DrawPolygon(PrimitiveType.LineLoop);
 
                 GL.LineWidth(Settings.User.setDisplay_lineWidth);
                 GL.Color4(0.960f, 0.96232f, 0.30f, 1.0f);
-                mf.bnd.bndList[0].hdLine.DrawPolygon();
+                mf.bnd.bndList[0].hdLine.DrawPolygon(PrimitiveType.LineLoop);
             }
         }
 
@@ -122,14 +122,14 @@ namespace Twol
 
                 for (int i = 0; i < mf.bnd.bndList.Count; i++)
                 {
-                    mf.bnd.bndList[i].turnLine.DrawPolygon();
+                    mf.bnd.bndList[i].turnLine.DrawPolygon(PrimitiveType.LineLoop);
                 }
 
                 GL.Color3(0.76f, 0.6f, 0.95f);
                 GL.LineWidth(Settings.User.setDisplay_lineWidth);
                 for (int i = 0; i < mf.bnd.bndList.Count; i++)
                 {
-                    mf.bnd.bndList[i].turnLine.DrawPolygon();
+                    mf.bnd.bndList[i].turnLine.DrawPolygon(PrimitiveType.LineLoop);
                 }
             }
         }
@@ -141,7 +141,7 @@ namespace Twol
 
             for (int i = 0; i < bndList.Count; i++)
             {
-                bndList[i].fenceLineEar.DrawPolygon();
+                bndList[i].fenceLine.DrawPolygon(PrimitiveType.LineLoop);
             }
 
             GL.Color4(0.95f, 0.5f, 0.50f, 1.0f);
@@ -150,7 +150,7 @@ namespace Twol
             for (int i = 0; i < bndList.Count; i++)
             {
                 if (i > 0) GL.Color4(0.85f, 0.34f, 0.3f, 1.0f);
-                bndList[i].fenceLineEar.DrawPolygon();
+                bndList[i].fenceLine.DrawPolygon(PrimitiveType.LineLoop);
             }
 
             //for (int i = 0; i < bndList.Count; i++)

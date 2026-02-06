@@ -1,9 +1,81 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using OpenTK.Graphics.OpenGL;
 
 namespace Twol
 {
+    public class Polyline : List<vec3>, IDisposable
+    {
+        public int VBO = 0, VBOCount = 0;
+        public bool reset = true;
+
+        public virtual void DrawPolygon(PrimitiveType type)
+        {
+            if (this.Count > 0)
+            {
+                if (reset)
+                {
+                    if (VBO == 0)
+                        VBO = GL.GenBuffer();
+
+                    GL.BindBuffer(BufferTarget.ArrayBuffer, VBO);
+
+                    float[] vertexData = new float[this.Count * 2];
+
+                    for (int i = 0; i < this.Count; i++)
+                    {
+                        vertexData[i * 2 + 0] = (float)this[i].easting;
+                        vertexData[i * 2 + 1] = (float)this[i].northing;
+                    }
+
+                    GL.BufferData(BufferTarget.ArrayBuffer, vertexData.Length * sizeof(float), vertexData, BufferUsageHint.StaticDraw);
+                    VBOCount = this.Count;
+                    reset = false;
+                }
+
+                if (VBO > 0 && VBOCount > 0)
+                {
+                    GL.EnableClientState(ArrayCap.VertexArray);
+
+
+
+                    GL.BindBuffer(BufferTarget.ArrayBuffer, VBO);
+                    GL.VertexPointer(2, VertexPointerType.Float, 0, 0);
+                    GL.DrawArrays(type, 0, VBOCount);
+
+
+
+                    GL.DisableClientState(ArrayCap.VertexArray);
+                }
+            }
+        }
+
+        public new void Clear()
+        {
+            base.Clear();
+            //reset = true;
+            VBOCount = 0;
+        }
+
+        public new void Add(vec3 item)
+        {
+            base.Add(item);
+            reset = true;
+        }
+
+
+        public void Dispose()
+        {
+            if (VBO != 0)
+            {
+                GL.DeleteBuffer(VBO);
+                VBO = 0;
+            }
+            GC.SuppressFinalize(this); // Prevents the finalizer from running twice
+        }
+    }
+
     public class Triangle : CPolygon
     {
         public Triangle(vec2 p0, vec2 p1, vec2 p2)

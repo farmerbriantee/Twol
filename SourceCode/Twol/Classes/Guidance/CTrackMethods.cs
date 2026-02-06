@@ -425,9 +425,9 @@ namespace Twol
             }
         }
 
-        public static List<vec3> OffsetLine(this List<vec3> points, double distance, double minDist, bool loop, bool isABLine)
+        public static T OffsetLine<T>(this T points, double distance, double minDist, bool loop, bool isABLine) where T : List<vec3>, new()
         {
-            var result = new List<vec3>();
+            var result = new T();
             if (isABLine)
             {
                 //simple shift of A and B points

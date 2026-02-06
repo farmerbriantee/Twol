@@ -417,7 +417,7 @@ namespace Twol
             for (int j = 0; j < mf.bnd.bndList.Count; j++)
             {
                 GL.Color3(0.62f, 0.635f, 0.635f);
-                mf.bnd.bndList[j].fenceLineEar.DrawPolygon(PrimitiveType.LineLoop);
+                mf.bnd.bndList[j].fenceLine.DrawPolygon(PrimitiveType.LineLoop);
             }
 
             if (recList.Count > 0 && selectedLineIndex >= 0 && selectedLineIndex < recList.Count)

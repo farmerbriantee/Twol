@@ -685,7 +685,7 @@ namespace Twol
                 return;
             }
 
-            var desList = new List<vec3>();
+            var desList = new Polyline();
 
             //overlaps start finish
             if ((Math.Abs(startBnd - endBnd)) > (mf.bnd.bndList[bndSelect].fenceLine.Count * 0.5))

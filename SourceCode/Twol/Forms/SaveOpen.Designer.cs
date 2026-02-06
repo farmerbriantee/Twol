@@ -444,8 +444,6 @@ namespace Twol
                                 filename = Path.Combine(dir, "Boundary.txt");
                                 if (File.Exists(filename))
                                 {
-                                    var bndPts = new List<vec3>();
-
                                     using (StreamReader reader2 = new StreamReader(filename))
                                     {
                                         try
