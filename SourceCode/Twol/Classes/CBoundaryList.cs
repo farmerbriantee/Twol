@@ -13,14 +13,11 @@ namespace Twol
 
         public List<vec3> turnLine = new List<vec3>(128);
 
-        //public CPolygon bndPolygon = new CPolygon();
-        //public CPolygon hdLinePolygon = new CPolygon();
+        private int vbo_FenceTriangles = 0;
+        private int vbo_FenceTrianglesCount = 0;
 
-        public int vbo_FenceTriangles = -1;
-        public int vbo_FenceTrianglesCount = 0;
-
-        public int vbo_HeadTriangles = -1;
-        public int vbo_HeadTrianglesCount = 0;
+        private int vbo_HeadTriangles = 0;
+        private int vbo_HeadTrianglesCount = 0;
 
         //boundary variables
         public double area;
@@ -35,7 +32,7 @@ namespace Twol
             isDriveThru = false;
         }
 
-        public void FixFenceLine(int bndNum, int vboIndex, bool add)
+        public void FixFenceLine(int bndNum, bool add)
         {
             CalculateFenceArea(bndNum);
 
@@ -53,7 +50,13 @@ namespace Twol
             CPolygon bndPolygon = new CPolygon(fenceLineEar.ToArray());
             var fenceTriangleList = bndPolygon.Triangulate();
 
-            GL.BindBuffer(BufferTarget.ArrayBuffer, vboIndex);
+
+            if (add)
+            {
+                vbo_FenceTriangles = GL.GenBuffer();
+            }
+
+            GL.BindBuffer(BufferTarget.ArrayBuffer, vbo_FenceTriangles);
 
             float[] triangleVertexData = new float[fenceTriangleList.Count * 6];
 
@@ -72,6 +75,26 @@ namespace Twol
             vbo_FenceTrianglesCount = fenceTriangleList.Count * 3;
 
             BuildTurnLine();
+        }
+
+        public void DrawBoundary()
+        {
+            if (vbo_FenceTriangles > 0)
+            {
+                GL.BindBuffer(BufferTarget.ArrayBuffer, vbo_FenceTriangles);
+                GL.VertexPointer(2, VertexPointerType.Float, 0, 0);
+                GL.DrawArrays(PrimitiveType.Triangles, 0, vbo_FenceTrianglesCount);
+            }
+        }
+
+        public void DrawHeadland()
+        {
+            if (vbo_HeadTriangles > 0)
+            {
+                GL.BindBuffer(BufferTarget.ArrayBuffer, vbo_HeadTriangles);
+                GL.VertexPointer(2, VertexPointerType.Float, 0, 0);
+                GL.DrawArrays(PrimitiveType.Triangles, 0, vbo_HeadTrianglesCount);
+            }
         }
 
         public void BuildTurnLine()
@@ -168,10 +191,11 @@ namespace Twol
         {
             GL.BindBuffer(BufferTarget.ArrayBuffer, 0);//not sure if this matters
 
-            if (vbo_FenceTriangles != -1)
+            if (vbo_FenceTriangles > 0)
             {
                 GL.DeleteBuffer(vbo_FenceTriangles);
-                vbo_FenceTriangles = -1; // Set the handle to -1 (null/invalid) after deletion
+                vbo_FenceTriangles = 0; // Set the handle to 0 (null/invalid) after deletion
+                vbo_FenceTrianglesCount = 0;
             }
         }
 
@@ -206,10 +230,11 @@ namespace Twol
 
         public void DeleteHeadLineVertexArray()
         {
-            if (vbo_HeadTriangles != -1)
+            if (vbo_HeadTriangles > 0)
             {
                 GL.DeleteBuffer(vbo_HeadTriangles);
-                vbo_HeadTriangles = -1; // Set the handle to -1 (null/invalid) after deletion
+                vbo_HeadTriangles = 0; // Set the handle to 0 (null/invalid) after deletion
+                vbo_HeadTrianglesCount = 0;
             }
         }
     }

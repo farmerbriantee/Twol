@@ -45,21 +45,8 @@ namespace Twol
 
         public void AddToBoundList(CBoundaryList bound, int bndNum, bool add = true)
         {
-            if (add)
-            {
-                GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
-
-                if (bound.vbo_FenceTriangles != -1)
-                {
-                    GL.DeleteBuffer(bound.vbo_FenceTriangles);
-                    bound.vbo_FenceTriangles = -1; // Set the handle to 0 (null/invalid) after deletion
-                }
-
-                bound.vbo_FenceTriangles = GL.GenBuffer();
-            }
-
             //build the boundary, make sure is clockwise for outer counter clockwise for inner
-            bound.FixFenceLine(bndNum, bound.vbo_FenceTriangles, add);
+            bound.FixFenceLine(bndNum, add);
 
             if (add)
                 bndList.Add(bound);

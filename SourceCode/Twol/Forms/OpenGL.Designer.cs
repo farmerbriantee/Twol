@@ -226,35 +226,21 @@ namespace Twol
                         if (bnd.isHeadlandOn)
                         {
                             //draw whole outer field polygon
-                            GL.BindBuffer(BufferTarget.ArrayBuffer, bnd.bndList[0].vbo_FenceTriangles);
-                            GL.VertexPointer(2, VertexPointerType.Float, 0, 0);
-
                             GL.Color4(0.41, 0.41, 0.051, 0.25);
-                            GL.DrawArrays(PrimitiveType.Triangles, 0, bnd.bndList[0].vbo_FenceTrianglesCount);
+                            bnd.bndList[0].DrawBoundary();
 
                             //draw inner polygon
 
-                            GL.BindBuffer(BufferTarget.ArrayBuffer, bnd.bndList[0].vbo_HeadTriangles);
-                            GL.VertexPointer(2, VertexPointerType.Float, 0, 0);
-
                             GL.Color4(0.031, 0.3, 0.51, 0.25);
-                            GL.DrawArrays(PrimitiveType.Triangles, 0, bnd.bndList[0].vbo_HeadTrianglesCount);
-
+                            bnd.bndList[0].DrawHeadland();
                             //if we would have inner boundary headline draw them here
                         }
                         else //no headland excists
                         {
                             //draw outer field polygon (fence)
-
-                            GL.BindBuffer(BufferTarget.ArrayBuffer, bnd.bndList[0].vbo_FenceTriangles);
-                            GL.VertexPointer(2, VertexPointerType.Float, 0, 0);
-
                             GL.Color4(0.1, 0.3, 0.1, 0.25);
-                            GL.DrawArrays(PrimitiveType.Triangles, 0, bnd.bndList[0].vbo_FenceTrianglesCount);
-
-                            //bnd.bndList[0].fenceTriangleList.DrawPolygon(PrimitiveType.Triangles);
+                            bnd.bndList[0].DrawBoundary();
                         }
-
 
                         //draw red in inner boundary of field
                         if (bnd.bndList.Count > 1)
@@ -263,18 +249,11 @@ namespace Twol
                             GL.Color4(0.351, 0.1, 0.1, 0.32);
                             for (int a = 1; a < bnd.bndList.Count; a++)
                             {
-                                //bnd.bndList[a].fenceTriangleList.DrawPolygon(PrimitiveType.Triangles);
-                                GL.BindBuffer(BufferTarget.ArrayBuffer, bnd.bndList[a].vbo_FenceTriangles);
-                                GL.VertexPointer(2, VertexPointerType.Float, 0, 0);
-
-                                GL.DrawArrays(PrimitiveType.Triangles, 0, bnd.bndList[a].vbo_FenceTrianglesCount);
-
+                                bnd.bndList[a].DrawBoundary();
                             }
-
                         }
 
                         GL.DisableClientState(ArrayCap.VertexArray);
-
                     }
 
                     #endregion
@@ -903,32 +882,21 @@ namespace Twol
             if (bnd.bndList.Count > 0)
             {
                 GL.EnableClientState(ArrayCap.VertexArray);
-                if (bnd.isHeadlandOn && bnd.isSectionControlledByHeadland && bnd.bndList[0].vbo_HeadTrianglesCount > 0)
+                if (bnd.isHeadlandOn && bnd.isSectionControlledByHeadland && bnd.bndList[0].hdLine.Count > 0)
                 {
-                    GL.Color3((byte)bbColors.fence, (byte)0, (byte)0);
-
                     //draw whole outer field polygon
-                    GL.BindBuffer(BufferTarget.ArrayBuffer, bnd.bndList[0].vbo_FenceTriangles);
-                    GL.VertexPointer(2, VertexPointerType.Float, 0, 0);
-                    GL.DrawArrays(PrimitiveType.Triangles, 0, bnd.bndList[0].vbo_FenceTrianglesCount);
-
+                    GL.Color3((byte)bbColors.fence, (byte)0, (byte)0);
+                    bnd.bndList[0].DrawBoundary();
 
                     //draw inner polygon - headland
                     GL.Color3((byte)bbColors.headland, (byte)0, (byte)0);
-
-                    GL.BindBuffer(BufferTarget.ArrayBuffer, bnd.bndList[0].vbo_HeadTriangles);
-                    GL.VertexPointer(2, VertexPointerType.Float, 0, 0);
-                    GL.DrawArrays(PrimitiveType.Triangles, 0, bnd.bndList[0].vbo_HeadTrianglesCount);
+                    bnd.bndList[0].DrawHeadland();
                 }
                 else
                 {
-                    GL.Color3((byte)bbColors.headland, (byte)0, (byte)0);
-
-
                     //no headland exists
-                    GL.BindBuffer(BufferTarget.ArrayBuffer, bnd.bndList[0].vbo_FenceTriangles);
-                    GL.VertexPointer(2, VertexPointerType.Float, 0, 0);
-                    GL.DrawArrays(PrimitiveType.Triangles, 0, bnd.bndList[0].vbo_FenceTrianglesCount);
+                    GL.Color3((byte)bbColors.headland, (byte)0, (byte)0);
+                    bnd.bndList[0].DrawBoundary();
                 }
 
                 //draw red in inner boundaries of field
@@ -937,11 +905,7 @@ namespace Twol
                     GL.Color3((byte)bbColors.innerFence, (byte)0, (byte)0);
                     for (int a = 1; a < bnd.bndList.Count; a++)
                     {
-                        //bnd.bndList[a].fenceTriangleList.DrawPolygon(PrimitiveType.Triangles);
-                        GL.BindBuffer(BufferTarget.ArrayBuffer, bnd.bndList[0].vbo_FenceTriangles);
-                        GL.VertexPointer(2, VertexPointerType.Float, 0, 0);
-
-                        GL.DrawArrays(PrimitiveType.Triangles, 0, bnd.bndList[a].vbo_FenceTrianglesCount);
+                        bnd.bndList[a].DrawBoundary();
                     }
                 }
 
