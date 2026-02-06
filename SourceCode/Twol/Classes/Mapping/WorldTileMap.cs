@@ -44,7 +44,7 @@ namespace Twol.Mapping
 
         //cam z height to map zoom level mapping 2D
         private readonly (int threshold, int zoom)[] camToZoomMapping = new (int threshold, int zoom)[]
-        {(530, 9), (400, 10), (320, 11), (225, 12), (150, 13), (100, 14), (68, 15), (46, 16), (28, 17), (16, 18)};
+        {(530, 9), (400, 10), (320, 11), (225, 12), (150, 13), (100, 14), (68, 15), (46, 16), (28, 17), (16, 18), (1,18)};
 
         //cam z height to map zoom level mapping 3D
         private readonly (int threshold, int zoom)[] camToZoomMapping3D = new (int threshold, int zoom)[]

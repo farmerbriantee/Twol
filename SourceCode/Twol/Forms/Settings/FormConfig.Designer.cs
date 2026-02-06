@@ -313,6 +313,7 @@
             this.lblIMUFusion = new System.Windows.Forms.Label();
             this.cboxIsRTK = new System.Windows.Forms.CheckBox();
             this.tabDRoll = new System.Windows.Forms.TabPage();
+            this.label10 = new System.Windows.Forms.Label();
             this.btnRollOffsetUp = new Twol.RepeatButton();
             this.btnRollOffsetDown = new Twol.RepeatButton();
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
@@ -503,7 +504,6 @@
             this.btnOK = new System.Windows.Forms.Button();
             this.label22 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.label10 = new System.Windows.Forms.Label();
             this.panelLeftSideMenu.SuspendLayout();
             this.panelArduinoSubMenu.SuspendLayout();
             this.panelDataSourcesSubMenu.SuspendLayout();
@@ -4691,6 +4691,17 @@
             this.tabDRoll.TabIndex = 16;
             this.tabDRoll.Text = "dRoll";
             // 
+            // label10
+            // 
+            this.label10.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.Black;
+            this.label10.Location = new System.Drawing.Point(584, 180);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(148, 19);
+            this.label10.TabIndex = 488;
+            this.label10.Text = "Help";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
             // btnRollOffsetUp
             // 
             this.btnRollOffsetUp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
@@ -7322,6 +7333,7 @@
             this.chkDisplayMapping.TabIndex = 542;
             this.chkDisplayMapping.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.chkDisplayMapping.UseVisualStyleBackColor = false;
+            this.chkDisplayMapping.Click += new System.EventHandler(this.chkDisplayMapping_Click);
             // 
             // lblLineSmooth
             // 
@@ -7681,6 +7693,7 @@
             this.chkDisplayFloor.TabIndex = 524;
             this.chkDisplayFloor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.chkDisplayFloor.UseVisualStyleBackColor = false;
+            this.chkDisplayFloor.Click += new System.EventHandler(this.chkDisplayFloor_Click);
             // 
             // chkDisplayKeyboard
             // 
@@ -7935,17 +7948,6 @@
             this.timer1.Enabled = true;
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // label10
-            // 
-            this.label10.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.ForeColor = System.Drawing.Color.Black;
-            this.label10.Location = new System.Drawing.Point(584, 180);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(148, 19);
-            this.label10.TabIndex = 488;
-            this.label10.Text = "Help";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // FormConfig
             // 

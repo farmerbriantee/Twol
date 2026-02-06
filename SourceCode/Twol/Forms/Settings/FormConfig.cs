@@ -317,5 +317,27 @@ namespace Twol
         {
             Settings.Vehicle.setAS_numGuideLines = (int)nudNumGuideLines.Value;
         }
+
+        private void chkDisplayMapping_Click(object sender, EventArgs e)
+        {
+            if (chkDisplayMapping.Checked)
+            {
+                if (chkDisplayFloor.Checked)
+                {
+                    chkDisplayFloor.Checked = false;
+                }
+            }
+        }
+
+        private void chkDisplayFloor_Click(object sender, EventArgs e)
+        {
+            if (chkDisplayFloor.Checked)
+            {
+                if (chkDisplayMapping.Checked)
+                {
+                    chkDisplayMapping.Checked = false;
+                }
+            }
+        }
     }
 }
