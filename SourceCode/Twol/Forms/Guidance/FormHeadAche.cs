@@ -574,7 +574,7 @@ namespace Twol
                 //triangulate headland area
                 CPolygon hdLinePolygon = new CPolygon(mf.bnd.bndList[0].hdLine.ToArray());
                 mf.bnd.bndList[0].hdLineTriangleList = hdLinePolygon.Triangulate();
-                mf.bnd.CreateHdLineVertexArray(0);
+                mf.bnd.bndList[0].CreateHdLineVertexArray();
                 mf.bnd.isHeadlandOn = true;
 
                 mf.FileSaveHeadLines(tracksArr);
@@ -598,7 +598,7 @@ namespace Twol
             start = 99999; end = 99999;
             isA = true;
             mf.bnd.bndList[0].hdLine?.Clear();
-            mf.bnd.DeleteHeadLineVertexArray(0);
+            mf.bnd.bndList[0].DeleteHeadLineVertexArray();
 
             //int ptCount = mf.bnd.buildList[0].fenceLine.Count;
 
@@ -618,7 +618,7 @@ namespace Twol
 
             //build the headland
             mf.bnd.bndList[0].hdLine?.Clear();
-            mf.bnd.DeleteHeadLineVertexArray(0);
+            mf.bnd.bndList[0].DeleteHeadLineVertexArray();
 
             int nextLine = 0;
             crossings.Clear();
@@ -670,7 +670,7 @@ namespace Twol
                 mf.TimedMessageBox(2000, "Crosings Error", "Make sure all ends cross and only once");
                 Log.EventWriter("Headache, All ends cross and only once");
                 mf.bnd.bndList[0].hdLine?.Clear();
-                mf.bnd.DeleteHeadLineVertexArray(0);
+                mf.bnd.bndList[0].DeleteHeadLineVertexArray();
                 return;
             }
 
@@ -710,12 +710,12 @@ namespace Twol
                 hdArr = new vec3[mf.bnd.bndList[0].hdLine.Count];
                 mf.bnd.bndList[0].hdLine.CopyTo(hdArr);
                 mf.bnd.bndList[0].hdLine?.Clear();
-                mf.bnd.DeleteHeadLineVertexArray(0);
+                mf.bnd.bndList[0].DeleteHeadLineVertexArray();
             }
             else
             {
                 mf.bnd.bndList[0].hdLine?.Clear();
-                mf.bnd.DeleteHeadLineVertexArray(0);
+                mf.bnd.bndList[0].DeleteHeadLineVertexArray();
                 return;
             }
 
@@ -757,7 +757,7 @@ namespace Twol
         {
             mf.bnd.bndList[0].hdLine?.Clear();
             mf.bnd.bndList[0].hdLineTriangleList?.Clear();
-            mf.bnd.DeleteHeadLineVertexArray(0);
+            mf.bnd.bndList[0].DeleteHeadLineVertexArray();
 
             mf.FileSaveHeadland();
             mf.bnd.isHeadlandOn = false;

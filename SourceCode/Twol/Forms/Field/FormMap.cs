@@ -261,10 +261,10 @@ namespace Twol
             if (result3 == DialogResult.Yes)
             {
                 int cnt = mf.bnd.bndList.Count;
-                mf.bnd.bndList[cnt - 1].hdLine?.Clear();
+                mf.bnd.bndList[cnt - 1].hdLine?.Clear();//do we need to clear it?
+                mf.bnd.bndList[cnt - 1].DeleteHeadLineVertexArray();
+                mf.bnd.bndList[cnt - 1].DeleteFenceTriangleVertexArray();
                 mf.bnd.bndList.RemoveAt(cnt - 1);
-                mf.bnd.DeleteHeadLineVertexArray(0);
-                mf.bnd.DeleteFenceTriangleVertexArray(cnt - 1);
 
                 mf.FileSaveBoundary();
                 mf.FileSaveHeadland();

@@ -18,6 +18,9 @@ namespace Twol
         //public CPolygon bndPolygon = new CPolygon();
         //public CPolygon hdLinePolygon = new CPolygon();
 
+        public int vbo_FenceTriangles = -1;
+        public int vbo_HeadTriangles = -1;
+
         //boundary variables
         public double area;
 
@@ -157,6 +160,50 @@ namespace Twol
             }
 
             return isClockwise;
+        }
+
+        public void DeleteFenceTriangleVertexArray()
+        {
+            GL.BindBuffer(BufferTarget.ArrayBuffer, 0);//not sure if this matters
+
+            if (vbo_FenceTriangles != -1)
+            {
+                GL.DeleteBuffer(vbo_FenceTriangles);
+                vbo_FenceTriangles = -1; // Set the handle to -1 (null/invalid) after deletion
+            }
+        }
+
+        public void CreateHdLineVertexArray()
+        {
+            DeleteHeadLineVertexArray();
+
+            vbo_HeadTriangles = GL.GenBuffer();
+
+            GL.BindBuffer(BufferTarget.ArrayBuffer, vbo_HeadTriangles);
+
+            float[] triangleVertexData = new float[hdLineTriangleList.Count * 6];
+
+            for (int i = 0; i < hdLineTriangleList.Count; i++)
+            {
+                // Assuming Triangle has properties or fields: A, B, C of type vec3 with .x, .y, .z
+                triangleVertexData[i * 6 + 0] = (float)hdLineTriangleList[i].polygonPts[0].easting;
+                triangleVertexData[i * 6 + 1] = (float)hdLineTriangleList[i].polygonPts[0].northing;
+                triangleVertexData[i * 6 + 2] = (float)hdLineTriangleList[i].polygonPts[1].easting;
+                triangleVertexData[i * 6 + 3] = (float)hdLineTriangleList[i].polygonPts[1].northing;
+                triangleVertexData[i * 6 + 4] = (float)hdLineTriangleList[i].polygonPts[2].easting;
+                triangleVertexData[i * 6 + 5] = (float)hdLineTriangleList[i].polygonPts[2].northing;
+            }
+
+            GL.BufferData(BufferTarget.ArrayBuffer, triangleVertexData.Length * sizeof(float), triangleVertexData, BufferUsageHint.StaticDraw);
+        }
+
+        public void DeleteHeadLineVertexArray()
+        {
+            if (vbo_HeadTriangles != -1)
+            {
+                GL.DeleteBuffer(vbo_HeadTriangles);
+                vbo_HeadTriangles = -1; // Set the handle to -1 (null/invalid) after deletion
+            }
         }
     }
 }

@@ -929,8 +929,8 @@ namespace Twol
 
             for (int i = 0; i < bnd.bndList.Count; i++)
             {
-                bnd.DeleteHeadLineVertexArray(i);
-                bnd.DeleteFenceTriangleVertexArray(i);
+                bnd.bndList[i].DeleteHeadLineVertexArray();
+                bnd.bndList[i].DeleteFenceTriangleVertexArray();
             }
 
             //clean all the lines

@@ -198,10 +198,10 @@ namespace Twol
 
                 if (mf.bnd.bndList.Count > fenceSelected)
                 {
-                    mf.bnd.bndList[fenceSelected].hdLine?.Clear();
+                    mf.bnd.bndList[fenceSelected].hdLine?.Clear();//do we need to clear it?
+                    mf.bnd.bndList[fenceSelected].DeleteHeadLineVertexArray();
+                    mf.bnd.bndList[fenceSelected].DeleteFenceTriangleVertexArray();
                     mf.bnd.bndList.RemoveAt(fenceSelected);
-                    mf.bnd.DeleteHeadLineVertexArray(0);
-                    mf.bnd.DeleteFenceTriangleVertexArray(fenceSelected);
                 }
                 fenceSelected = -1;
 
