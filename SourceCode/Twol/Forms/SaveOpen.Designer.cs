@@ -731,7 +731,7 @@ namespace Twol
             }
         }
 
-        public void FileLoadHeadLines()
+        public void FileLoadHeadLines(CHeadLine hdl)
         {
             hdl.tracksArr?.Clear();
 
@@ -1745,7 +1745,7 @@ namespace Twol
             }
         }
 
-        public void FileSaveHeadLines()
+        public void FileSaveHeadLines(CHeadLine hdl)
         {
             string directoryName = Path.Combine(RegistrySettings.fieldsDirectory, currentFieldDirectory);
 

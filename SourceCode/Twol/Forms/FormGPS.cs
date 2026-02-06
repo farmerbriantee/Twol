@@ -165,11 +165,6 @@ namespace Twol
         public CBoundary bnd;
 
         /// <summary>
-        /// Building a headland instance
-        /// </summary>
-        public CHeadLine hdl;
-
-        /// <summary>
         /// The internal simulator
         /// </summary>
         public CSim sim;
@@ -298,9 +293,6 @@ namespace Twol
 
             //new track instance
             trks = new CTracks(this);
-
-            //new instance of contour mode
-            hdl = new CHeadLine(this);
 
             ////new instance of auto headland turn
             yt = new CYouTurn(this);

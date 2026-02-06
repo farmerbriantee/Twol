@@ -4,17 +4,12 @@ namespace Twol
 {
     public class CHeadLine
     {
-        //pointers to mainform controls
-        private readonly FormGPS mf;
-
         public List<CHeadPath> tracksArr = new List<CHeadPath>();
 
         public int idx;
 
-        public CHeadLine(FormGPS _f)
+        public CHeadLine()
         {
-            //constructor
-            mf = _f;
         }
 
         //for calculating for display the averaged new line
