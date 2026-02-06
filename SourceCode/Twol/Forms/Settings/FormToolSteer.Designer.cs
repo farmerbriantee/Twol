@@ -107,7 +107,6 @@
             this.nudNudge = new Twol.NudlessNumericUpDown();
             this.tabSetup = new System.Windows.Forms.TabPage();
             this.lblManualPWM_Percent = new System.Windows.Forms.Label();
-            this.label74 = new System.Windows.Forms.Label();
             this.hsbarManualPWM_Percent = new System.Windows.Forms.HScrollBar();
             this.label13 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
@@ -115,7 +114,6 @@
             this.lblManualSecondsOn = new System.Windows.Forms.Label();
             this.label83 = new System.Windows.Forms.Label();
             this.hsbarManualSecondsOn = new System.Windows.Forms.HScrollBar();
-            this.cboxIsSteerNotSlide_Tool = new System.Windows.Forms.CheckBox();
             this.cboxInvertWAS_Tool = new System.Windows.Forms.CheckBox();
             this.cboxInvertSteer_Tool = new System.Windows.Forms.CheckBox();
             this.tabAntenna = new System.Windows.Forms.TabPage();
@@ -1113,7 +1111,6 @@
             this.tabSetup.BackColor = System.Drawing.Color.Gainsboro;
             this.tabSetup.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.tabSetup.Controls.Add(this.lblManualPWM_Percent);
-            this.tabSetup.Controls.Add(this.label74);
             this.tabSetup.Controls.Add(this.hsbarManualPWM_Percent);
             this.tabSetup.Controls.Add(this.label13);
             this.tabSetup.Controls.Add(this.label11);
@@ -1121,7 +1118,6 @@
             this.tabSetup.Controls.Add(this.lblManualSecondsOn);
             this.tabSetup.Controls.Add(this.label83);
             this.tabSetup.Controls.Add(this.hsbarManualSecondsOn);
-            this.tabSetup.Controls.Add(this.cboxIsSteerNotSlide_Tool);
             this.tabSetup.Controls.Add(this.cboxInvertWAS_Tool);
             this.tabSetup.Controls.Add(this.cboxInvertSteer_Tool);
             this.tabSetup.ImageIndex = 0;
@@ -1142,17 +1138,6 @@
             this.lblManualPWM_Percent.TabIndex = 586;
             this.lblManualPWM_Percent.Text = "888";
             this.lblManualPWM_Percent.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label74
-            // 
-            this.label74.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label74.ForeColor = System.Drawing.Color.Black;
-            this.label74.Location = new System.Drawing.Point(407, 307);
-            this.label74.Name = "label74";
-            this.label74.Size = new System.Drawing.Size(158, 48);
-            this.label74.TabIndex = 579;
-            this.label74.Text = "Steering Not Sliding";
-            this.label74.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // hsbarManualPWM_Percent
             // 
@@ -1236,28 +1221,6 @@
             this.hsbarManualSecondsOn.TabIndex = 582;
             this.hsbarManualSecondsOn.Value = 2;
             this.hsbarManualSecondsOn.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hsbarManualSecondsOn_Scroll);
-            // 
-            // cboxIsSteerNotSlide_Tool
-            // 
-            this.cboxIsSteerNotSlide_Tool.Appearance = System.Windows.Forms.Appearance.Button;
-            this.cboxIsSteerNotSlide_Tool.BackColor = System.Drawing.Color.White;
-            this.cboxIsSteerNotSlide_Tool.BackgroundImage = global::Twol.Properties.Resources.ConS_ModulesSteer;
-            this.cboxIsSteerNotSlide_Tool.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.cboxIsSteerNotSlide_Tool.Checked = true;
-            this.cboxIsSteerNotSlide_Tool.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cboxIsSteerNotSlide_Tool.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.cboxIsSteerNotSlide_Tool.FlatAppearance.CheckedBackColor = System.Drawing.Color.MediumAquamarine;
-            this.cboxIsSteerNotSlide_Tool.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cboxIsSteerNotSlide_Tool.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboxIsSteerNotSlide_Tool.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.cboxIsSteerNotSlide_Tool.Location = new System.Drawing.Point(437, 358);
-            this.cboxIsSteerNotSlide_Tool.Name = "cboxIsSteerNotSlide_Tool";
-            this.cboxIsSteerNotSlide_Tool.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.cboxIsSteerNotSlide_Tool.Size = new System.Drawing.Size(99, 69);
-            this.cboxIsSteerNotSlide_Tool.TabIndex = 578;
-            this.cboxIsSteerNotSlide_Tool.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.cboxIsSteerNotSlide_Tool.UseVisualStyleBackColor = false;
-            this.cboxIsSteerNotSlide_Tool.Click += new System.EventHandler(this.cboxIsSteerNotSlide_Click);
             // 
             // cboxInvertWAS_Tool
             // 
@@ -1700,8 +1663,6 @@
         private System.Windows.Forms.Label lblCPD_Tool;
         private System.Windows.Forms.HScrollBar hsbarZeroWAS_Tool;
         private System.Windows.Forms.Label lblZeroWAS_Tool;
-        private System.Windows.Forms.Label label74;
-        private System.Windows.Forms.CheckBox cboxIsSteerNotSlide_Tool;
         private System.Windows.Forms.Label label2;
         private NudlessNumericUpDown nudAntennaHeight_Tool;
         private System.Windows.Forms.Label label3;

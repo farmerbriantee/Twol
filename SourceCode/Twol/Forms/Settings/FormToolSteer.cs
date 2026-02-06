@@ -52,7 +52,6 @@ namespace Twol
             hsbarMaxSteerAngle_Tool.Value = Settings.Tool.setToolSteer.maxSteerAngle;
             cboxInvertSteer_Tool.Checked = (Settings.Tool.setToolSteer.isInvertSteer == 1);
             cboxInvertWAS_Tool.Checked = (Settings.Tool.setToolSteer.isInvertWAS == 1);
-            cboxIsSteerNotSlide_Tool.Checked = (Settings.Tool.setToolSteer.isSteerNotSlide == 1);
 
             //settings
             lblPGain_Tool.Text = (hsbarPGain_Tool.Value * 100 / 254).ToString();
@@ -142,10 +141,7 @@ namespace Twol
 
             if (cboxInvertWAS_Tool.Checked) Settings.Tool.setToolSteer.isInvertSteer = 1;
             else Settings.Tool.setToolSteer.isInvertSteer = 0;
-
-            if (cboxIsSteerNotSlide_Tool.Checked) Settings.Tool.setToolSteer.isSteerNotSlide = 1;
-            else Settings.Tool.setToolSteer.isSteerNotSlide = 0;
-
+            
             PGN_232.pgn[PGN_232.gainP] = Settings.Tool.setToolSteer.gainP;
             PGN_232.pgn[PGN_232.integral] = Settings.Tool.setToolSteer.integral;
             PGN_232.pgn[PGN_232.minPWM] = Settings.Tool.setToolSteer.minPWM;
@@ -160,7 +156,7 @@ namespace Twol
             PGN_231.pgn[PGN_231.maxSteerAngle] = Settings.Tool.setToolSteer.maxSteerAngle;
             PGN_231.pgn[PGN_231.invertWAS] = Settings.Tool.setToolSteer.isInvertWAS;
             PGN_231.pgn[PGN_231.invertSteer] = Settings.Tool.setToolSteer.isInvertSteer;
-            PGN_231.pgn[PGN_231.isSteer] = Settings.Tool.setToolSteer.isSteerNotSlide;
+            PGN_231.pgn[PGN_231.isSteer] = 1;
 
             //save current vehicle
             Settings.Tool.Save();
@@ -204,8 +200,7 @@ namespace Twol
                 if (cboxInvertWAS_Tool.Checked) PGN_231.pgn[PGN_231.invertWAS] = 1;
                 else PGN_231.pgn[PGN_231.invertWAS] = 0;
 
-                if (cboxIsSteerNotSlide_Tool.Checked) PGN_231.pgn[PGN_231.isSteer] = 1;
-                else PGN_231.pgn[PGN_231.isSteer] = 0;
+                PGN_231.pgn[PGN_231.isSteer] = 1;
 
                 mf.SendUDPMessageTool(PGN_231.pgn, mf.epModuleTool);
 
@@ -428,11 +423,6 @@ namespace Twol
         #endregion
 
         #region Tab Config
-        private void cboxIsSteerNotSlide_Click(object sender, EventArgs e)
-        {
-            toolSend2 = true;
-            toolCounterConfig = 0;
-        }
 
         private void hsbarManualPWM_Percent_Scroll(object sender, ScrollEventArgs e)
         {

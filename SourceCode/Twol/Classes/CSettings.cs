@@ -81,7 +81,6 @@
 
         public byte isInvertWAS = 0;
         public byte isInvertSteer = 0;
-        public byte isSteerNotSlide = 1;
 
         public bool isFollowCurrent = false;
         public bool isPassiveSteering = false;
@@ -117,7 +116,6 @@
 
             isInvertWAS = _setting.isInvertWAS;
             isInvertSteer = _setting.isInvertSteer;
-            isSteerNotSlide = _setting.isSteerNotSlide;
 
             isFollowCurrent = _setting.isFollowCurrent;
             isPassiveSteering = _setting.isPassiveSteering;
