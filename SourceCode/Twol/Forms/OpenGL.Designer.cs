@@ -280,19 +280,21 @@ namespace Twol
                     #endregion
 
                     #region Draw patches of sections
- 
-                    GL.EnableClientState(ArrayCap.VertexArray);
-                    GL.EnableClientState(ArrayCap.ColorArray);
+                    if (patchID > 0)
+                    {
+                        GL.EnableClientState(ArrayCap.VertexArray);
+                        GL.EnableClientState(ArrayCap.ColorArray);
 
-                    GL.BindBuffer(BufferTarget.ArrayBuffer, patchID);
-                    GL.VertexPointer(2, VertexPointerType.Float, 0, 0);
-                    GL.BindBuffer(BufferTarget.ArrayBuffer, colorID);
-                    GL.ColorPointer(4, ColorPointerType.UnsignedByte, 0, 0);
+                        GL.BindBuffer(BufferTarget.ArrayBuffer, patchID);
+                        GL.VertexPointer(2, VertexPointerType.Float, 0, 0);
+                        GL.BindBuffer(BufferTarget.ArrayBuffer, colorID);
+                        GL.ColorPointer(4, ColorPointerType.UnsignedByte, 0, 0);
 
-                    GL.DrawArrays(PrimitiveType.Triangles, 0, sectionTriangleCount * 3);
+                        GL.DrawArrays(PrimitiveType.Triangles, 0, sectionTriangleCount);
 
-                    GL.DisableClientState(ArrayCap.ColorArray);
-                    GL.DisableClientState(ArrayCap.VertexArray);
+                        GL.DisableClientState(ArrayCap.ColorArray);
+                        GL.DisableClientState(ArrayCap.VertexArray);
+                    }
 
                     //for all new patches not in vertex buffer
                     for (int i = 0; i < patchSaveList.Count; i++)
@@ -950,13 +952,16 @@ namespace Twol
             GL.ColorMask(false, true, false, false); //Draw only in green
             GL.Color3((byte)0, (byte)bbColors.section, (byte)0);
 
-            GL.EnableClientState(ArrayCap.VertexArray);
+            if (patchID > 0)
+            {
+                GL.EnableClientState(ArrayCap.VertexArray);
 
-            GL.BindBuffer(BufferTarget.ArrayBuffer, patchID);
-            GL.VertexPointer(2, VertexPointerType.Float, 0, 0);
+                GL.BindBuffer(BufferTarget.ArrayBuffer, patchID);
+                GL.VertexPointer(2, VertexPointerType.Float, 0, 0);
 
-            GL.DrawArrays(PrimitiveType.Triangles, 0, sectionTriangleCount * 3);
-            GL.DisableClientState(ArrayCap.VertexArray);
+                GL.DrawArrays(PrimitiveType.Triangles, 0, sectionTriangleCount);
+                GL.DisableClientState(ArrayCap.VertexArray);
+            }
 
             //for every new chunk of patch not in vertexArray
             foreach (var triList in patchSaveList)
