@@ -931,7 +931,7 @@ namespace Twol
             foreach (var triList in patchSaveList)
             {
                 //point is in frustum so draw the entire patch
-                triList.DrawPolygon(PrimitiveType.TriangleStrip);
+                triList.DrawSectionPolygon(PrimitiveType.TriangleStrip);
             }
 
             //Draw currently being made patch
