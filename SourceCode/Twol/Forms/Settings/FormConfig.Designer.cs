@@ -579,7 +579,7 @@
             this.panelLeftSideMenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelLeftSideMenu.Location = new System.Drawing.Point(4, 4);
             this.panelLeftSideMenu.Name = "panelLeftSideMenu";
-            this.panelLeftSideMenu.Size = new System.Drawing.Size(120, 707);
+            this.panelLeftSideMenu.Size = new System.Drawing.Size(120, 719);
             this.panelLeftSideMenu.TabIndex = 110;
             // 
             // btnFeatureHides
@@ -1129,7 +1129,7 @@
             this.tab1.Name = "tab1";
             this.tab1.Padding = new System.Drawing.Point(0, 0);
             this.tab1.SelectedIndex = 0;
-            this.tab1.Size = new System.Drawing.Size(915, 632);
+            this.tab1.Size = new System.Drawing.Size(915, 647);
             this.tab1.TabIndex = 0;
             // 
             // tabSummary
@@ -7296,7 +7296,7 @@
             this.tabDisplay.Location = new System.Drawing.Point(4, 44);
             this.tabDisplay.Name = "tabDisplay";
             this.tabDisplay.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDisplay.Size = new System.Drawing.Size(907, 584);
+            this.tabDisplay.Size = new System.Drawing.Size(907, 599);
             this.tabDisplay.TabIndex = 25;
             this.tabDisplay.Text = "fDisp";
             // 
@@ -7305,11 +7305,11 @@
             this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label12.BackColor = System.Drawing.Color.Transparent;
             this.label12.ForeColor = System.Drawing.Color.Black;
-            this.label12.Location = new System.Drawing.Point(27, 445);
+            this.label12.Location = new System.Drawing.Point(14, 460);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(120, 16);
+            this.label12.Size = new System.Drawing.Size(147, 16);
             this.label12.TabIndex = 543;
-            this.label12.Text = "Mapping";
+            this.label12.Text = "Field Google Earth Tiles";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // chkDisplayMapping
@@ -7317,16 +7317,14 @@
             this.chkDisplayMapping.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkDisplayMapping.Appearance = System.Windows.Forms.Appearance.Button;
             this.chkDisplayMapping.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.chkDisplayMapping.Checked = true;
-            this.chkDisplayMapping.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkDisplayMapping.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.chkDisplayMapping.FlatAppearance.BorderSize = 2;
             this.chkDisplayMapping.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
             this.chkDisplayMapping.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkDisplayMapping.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkDisplayMapping.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.chkDisplayMapping.Image = global::Twol.Properties.Resources.FieldStats;
-            this.chkDisplayMapping.Location = new System.Drawing.Point(37, 373);
+            this.chkDisplayMapping.Image = global::Twol.Properties.Resources.GoogleEarth;
+            this.chkDisplayMapping.Location = new System.Drawing.Point(37, 388);
             this.chkDisplayMapping.Name = "chkDisplayMapping";
             this.chkDisplayMapping.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.chkDisplayMapping.Size = new System.Drawing.Size(100, 69);
@@ -7340,7 +7338,7 @@
             this.lblLineSmooth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblLineSmooth.BackColor = System.Drawing.Color.Transparent;
             this.lblLineSmooth.ForeColor = System.Drawing.Color.Black;
-            this.lblLineSmooth.Location = new System.Drawing.Point(27, 565);
+            this.lblLineSmooth.Location = new System.Drawing.Point(27, 580);
             this.lblLineSmooth.Name = "lblLineSmooth";
             this.lblLineSmooth.Size = new System.Drawing.Size(120, 16);
             this.lblLineSmooth.TabIndex = 539;
@@ -7360,7 +7358,7 @@
             this.chkLineSmooth.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkLineSmooth.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkLineSmooth.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.chkLineSmooth.Location = new System.Drawing.Point(37, 493);
+            this.chkLineSmooth.Location = new System.Drawing.Point(37, 508);
             this.chkLineSmooth.Name = "chkLineSmooth";
             this.chkLineSmooth.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.chkLineSmooth.Size = new System.Drawing.Size(100, 69);
@@ -7373,7 +7371,7 @@
             this.lblSectionLines.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblSectionLines.BackColor = System.Drawing.Color.Transparent;
             this.lblSectionLines.ForeColor = System.Drawing.Color.Black;
-            this.lblSectionLines.Location = new System.Drawing.Point(415, 445);
+            this.lblSectionLines.Location = new System.Drawing.Point(415, 460);
             this.lblSectionLines.Name = "lblSectionLines";
             this.lblSectionLines.Size = new System.Drawing.Size(120, 16);
             this.lblSectionLines.TabIndex = 537;
@@ -7393,7 +7391,7 @@
             this.chkSectionLines.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkSectionLines.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkSectionLines.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.chkSectionLines.Location = new System.Drawing.Point(425, 373);
+            this.chkSectionLines.Location = new System.Drawing.Point(425, 388);
             this.chkSectionLines.Name = "chkSectionLines";
             this.chkSectionLines.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.chkSectionLines.Size = new System.Drawing.Size(100, 69);
@@ -7406,7 +7404,7 @@
             this.lblDirectionMarkers.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblDirectionMarkers.BackColor = System.Drawing.Color.Transparent;
             this.lblDirectionMarkers.ForeColor = System.Drawing.Color.Black;
-            this.lblDirectionMarkers.Location = new System.Drawing.Point(221, 445);
+            this.lblDirectionMarkers.Location = new System.Drawing.Point(221, 460);
             this.lblDirectionMarkers.Name = "lblDirectionMarkers";
             this.lblDirectionMarkers.Size = new System.Drawing.Size(120, 16);
             this.lblDirectionMarkers.TabIndex = 533;
@@ -7428,7 +7426,7 @@
             this.chkDirectionMarkers.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkDirectionMarkers.ForeColor = System.Drawing.SystemColors.ControlText;
             this.chkDirectionMarkers.Image = global::Twol.Properties.Resources.ConD_DirectionMarker;
-            this.chkDirectionMarkers.Location = new System.Drawing.Point(234, 373);
+            this.chkDirectionMarkers.Location = new System.Drawing.Point(234, 388);
             this.chkDirectionMarkers.Name = "chkDirectionMarkers";
             this.chkDirectionMarkers.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.chkDirectionMarkers.Size = new System.Drawing.Size(100, 69);
@@ -7441,7 +7439,7 @@
             this.label79.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label79.BackColor = System.Drawing.Color.Transparent;
             this.label79.ForeColor = System.Drawing.Color.Black;
-            this.label79.Location = new System.Drawing.Point(694, 81);
+            this.label79.Location = new System.Drawing.Point(694, 96);
             this.label79.Name = "label79";
             this.label79.Size = new System.Drawing.Size(120, 16);
             this.label79.TabIndex = 531;
@@ -7456,7 +7454,7 @@
             this.unitsGroupBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.unitsGroupBox.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.unitsGroupBox.ForeColor = System.Drawing.Color.Black;
-            this.unitsGroupBox.Location = new System.Drawing.Point(649, 418);
+            this.unitsGroupBox.Location = new System.Drawing.Point(649, 433);
             this.unitsGroupBox.Name = "unitsGroupBox";
             this.unitsGroupBox.Size = new System.Drawing.Size(250, 129);
             this.unitsGroupBox.TabIndex = 513;
@@ -7508,7 +7506,7 @@
             this.lblSvennArrow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblSvennArrow.BackColor = System.Drawing.Color.Transparent;
             this.lblSvennArrow.ForeColor = System.Drawing.Color.Black;
-            this.lblSvennArrow.Location = new System.Drawing.Point(221, 202);
+            this.lblSvennArrow.Location = new System.Drawing.Point(221, 217);
             this.lblSvennArrow.Name = "lblSvennArrow";
             this.lblSvennArrow.Size = new System.Drawing.Size(120, 16);
             this.lblSvennArrow.TabIndex = 529;
@@ -7520,7 +7518,7 @@
             this.lblBrightness.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblBrightness.BackColor = System.Drawing.Color.Transparent;
             this.lblBrightness.ForeColor = System.Drawing.Color.Black;
-            this.lblBrightness.Location = new System.Drawing.Point(27, 202);
+            this.lblBrightness.Location = new System.Drawing.Point(27, 217);
             this.lblBrightness.Name = "lblBrightness";
             this.lblBrightness.Size = new System.Drawing.Size(120, 16);
             this.lblBrightness.TabIndex = 527;
@@ -7532,7 +7530,7 @@
             this.lblFieldTexture.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblFieldTexture.BackColor = System.Drawing.Color.Transparent;
             this.lblFieldTexture.ForeColor = System.Drawing.Color.Black;
-            this.lblFieldTexture.Location = new System.Drawing.Point(27, 324);
+            this.lblFieldTexture.Location = new System.Drawing.Point(27, 339);
             this.lblFieldTexture.Name = "lblFieldTexture";
             this.lblFieldTexture.Size = new System.Drawing.Size(120, 16);
             this.lblFieldTexture.TabIndex = 525;
@@ -7544,7 +7542,7 @@
             this.lblPolygons.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblPolygons.BackColor = System.Drawing.Color.Transparent;
             this.lblPolygons.ForeColor = System.Drawing.Color.Black;
-            this.lblPolygons.Location = new System.Drawing.Point(27, 81);
+            this.lblPolygons.Location = new System.Drawing.Point(27, 96);
             this.lblPolygons.Name = "lblPolygons";
             this.lblPolygons.Size = new System.Drawing.Size(120, 16);
             this.lblPolygons.TabIndex = 523;
@@ -7556,7 +7554,7 @@
             this.lblKeyboard.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblKeyboard.BackColor = System.Drawing.Color.Transparent;
             this.lblKeyboard.ForeColor = System.Drawing.Color.Black;
-            this.lblKeyboard.Location = new System.Drawing.Point(415, 81);
+            this.lblKeyboard.Location = new System.Drawing.Point(415, 96);
             this.lblKeyboard.Name = "lblKeyboard";
             this.lblKeyboard.Size = new System.Drawing.Size(120, 16);
             this.lblKeyboard.TabIndex = 521;
@@ -7568,7 +7566,7 @@
             this.lblStartFullScreen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblStartFullScreen.BackColor = System.Drawing.Color.Transparent;
             this.lblStartFullScreen.ForeColor = System.Drawing.Color.Black;
-            this.lblStartFullScreen.Location = new System.Drawing.Point(415, 202);
+            this.lblStartFullScreen.Location = new System.Drawing.Point(415, 217);
             this.lblStartFullScreen.Name = "lblStartFullScreen";
             this.lblStartFullScreen.Size = new System.Drawing.Size(120, 16);
             this.lblStartFullScreen.TabIndex = 518;
@@ -7580,7 +7578,7 @@
             this.lblSpeedo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblSpeedo.BackColor = System.Drawing.Color.Transparent;
             this.lblSpeedo.ForeColor = System.Drawing.Color.Black;
-            this.lblSpeedo.Location = new System.Drawing.Point(221, 82);
+            this.lblSpeedo.Location = new System.Drawing.Point(221, 97);
             this.lblSpeedo.Name = "lblSpeedo";
             this.lblSpeedo.Size = new System.Drawing.Size(120, 16);
             this.lblSpeedo.TabIndex = 516;
@@ -7592,7 +7590,7 @@
             this.lblExtraGuides.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblExtraGuides.BackColor = System.Drawing.Color.Transparent;
             this.lblExtraGuides.ForeColor = System.Drawing.Color.Black;
-            this.lblExtraGuides.Location = new System.Drawing.Point(415, 320);
+            this.lblExtraGuides.Location = new System.Drawing.Point(415, 335);
             this.lblExtraGuides.Name = "lblExtraGuides";
             this.lblExtraGuides.Size = new System.Drawing.Size(120, 16);
             this.lblExtraGuides.TabIndex = 519;
@@ -7604,7 +7602,7 @@
             this.lblGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblGrid.BackColor = System.Drawing.Color.Transparent;
             this.lblGrid.ForeColor = System.Drawing.Color.Black;
-            this.lblGrid.Location = new System.Drawing.Point(221, 324);
+            this.lblGrid.Location = new System.Drawing.Point(221, 339);
             this.lblGrid.Name = "lblGrid";
             this.lblGrid.Size = new System.Drawing.Size(120, 16);
             this.lblGrid.TabIndex = 515;
@@ -7623,7 +7621,7 @@
             this.chkDisplayLogElevation.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkDisplayLogElevation.ForeColor = System.Drawing.SystemColors.ControlText;
             this.chkDisplayLogElevation.Image = global::Twol.Properties.Resources.ConD_LogElevation;
-            this.chkDisplayLogElevation.Location = new System.Drawing.Point(704, 9);
+            this.chkDisplayLogElevation.Location = new System.Drawing.Point(704, 24);
             this.chkDisplayLogElevation.Name = "chkDisplayLogElevation";
             this.chkDisplayLogElevation.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.chkDisplayLogElevation.Size = new System.Drawing.Size(100, 69);
@@ -7643,7 +7641,7 @@
             this.chkSvennArrow.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkSvennArrow.ForeColor = System.Drawing.SystemColors.ControlText;
             this.chkSvennArrow.Image = global::Twol.Properties.Resources.SvennArrow;
-            this.chkSvennArrow.Location = new System.Drawing.Point(231, 130);
+            this.chkSvennArrow.Location = new System.Drawing.Point(231, 145);
             this.chkSvennArrow.Name = "chkSvennArrow";
             this.chkSvennArrow.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.chkSvennArrow.Size = new System.Drawing.Size(100, 69);
@@ -7664,7 +7662,7 @@
             this.chkDisplayBrightness.ForeColor = System.Drawing.SystemColors.ControlText;
             this.chkDisplayBrightness.Image = global::Twol.Properties.Resources.BrightnessUp;
             this.chkDisplayBrightness.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.chkDisplayBrightness.Location = new System.Drawing.Point(37, 130);
+            this.chkDisplayBrightness.Location = new System.Drawing.Point(37, 145);
             this.chkDisplayBrightness.Name = "chkDisplayBrightness";
             this.chkDisplayBrightness.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.chkDisplayBrightness.Size = new System.Drawing.Size(100, 69);
@@ -7686,7 +7684,7 @@
             this.chkDisplayFloor.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkDisplayFloor.ForeColor = System.Drawing.SystemColors.ControlText;
             this.chkDisplayFloor.Image = global::Twol.Properties.Resources.ConD_FloorTexture;
-            this.chkDisplayFloor.Location = new System.Drawing.Point(37, 252);
+            this.chkDisplayFloor.Location = new System.Drawing.Point(37, 267);
             this.chkDisplayFloor.Name = "chkDisplayFloor";
             this.chkDisplayFloor.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.chkDisplayFloor.Size = new System.Drawing.Size(100, 69);
@@ -7707,7 +7705,7 @@
             this.chkDisplayKeyboard.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkDisplayKeyboard.ForeColor = System.Drawing.SystemColors.ControlText;
             this.chkDisplayKeyboard.Image = global::Twol.Properties.Resources.ConD_KeyBoard;
-            this.chkDisplayKeyboard.Location = new System.Drawing.Point(425, 9);
+            this.chkDisplayKeyboard.Location = new System.Drawing.Point(425, 24);
             this.chkDisplayKeyboard.Name = "chkDisplayKeyboard";
             this.chkDisplayKeyboard.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.chkDisplayKeyboard.Size = new System.Drawing.Size(100, 69);
@@ -7727,7 +7725,7 @@
             this.chkDisplayPolygons.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkDisplayPolygons.ForeColor = System.Drawing.SystemColors.ControlText;
             this.chkDisplayPolygons.Image = global::Twol.Properties.Resources.ConD_Poligons;
-            this.chkDisplayPolygons.Location = new System.Drawing.Point(37, 9);
+            this.chkDisplayPolygons.Location = new System.Drawing.Point(37, 24);
             this.chkDisplayPolygons.Name = "chkDisplayPolygons";
             this.chkDisplayPolygons.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.chkDisplayPolygons.Size = new System.Drawing.Size(100, 69);
@@ -7749,7 +7747,7 @@
             this.chkDisplayStartFullScreen.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkDisplayStartFullScreen.ForeColor = System.Drawing.SystemColors.ControlText;
             this.chkDisplayStartFullScreen.Image = global::Twol.Properties.Resources.ConD_FullScreenBegin;
-            this.chkDisplayStartFullScreen.Location = new System.Drawing.Point(425, 130);
+            this.chkDisplayStartFullScreen.Location = new System.Drawing.Point(425, 145);
             this.chkDisplayStartFullScreen.Name = "chkDisplayStartFullScreen";
             this.chkDisplayStartFullScreen.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.chkDisplayStartFullScreen.Size = new System.Drawing.Size(100, 69);
@@ -7771,7 +7769,7 @@
             this.chkDisplayGrid.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkDisplayGrid.ForeColor = System.Drawing.SystemColors.ControlText;
             this.chkDisplayGrid.Image = global::Twol.Properties.Resources.ConD_Grid;
-            this.chkDisplayGrid.Location = new System.Drawing.Point(231, 252);
+            this.chkDisplayGrid.Location = new System.Drawing.Point(231, 267);
             this.chkDisplayGrid.Name = "chkDisplayGrid";
             this.chkDisplayGrid.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.chkDisplayGrid.Size = new System.Drawing.Size(100, 69);
@@ -7791,7 +7789,7 @@
             this.chkDisplaySpeedo.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkDisplaySpeedo.ForeColor = System.Drawing.SystemColors.ControlText;
             this.chkDisplaySpeedo.Image = global::Twol.Properties.Resources.ConD_Speedometer;
-            this.chkDisplaySpeedo.Location = new System.Drawing.Point(231, 9);
+            this.chkDisplaySpeedo.Location = new System.Drawing.Point(231, 24);
             this.chkDisplaySpeedo.Name = "chkDisplaySpeedo";
             this.chkDisplaySpeedo.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.chkDisplaySpeedo.Size = new System.Drawing.Size(100, 69);
@@ -7804,6 +7802,7 @@
             this.chkDisplayExtraGuides.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkDisplayExtraGuides.Appearance = System.Windows.Forms.Appearance.Button;
             this.chkDisplayExtraGuides.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.chkDisplayExtraGuides.Enabled = false;
             this.chkDisplayExtraGuides.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.chkDisplayExtraGuides.FlatAppearance.BorderSize = 2;
             this.chkDisplayExtraGuides.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
@@ -7811,7 +7810,7 @@
             this.chkDisplayExtraGuides.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkDisplayExtraGuides.ForeColor = System.Drawing.SystemColors.ControlText;
             this.chkDisplayExtraGuides.Image = global::Twol.Properties.Resources.ConD_ExtraGuides;
-            this.chkDisplayExtraGuides.Location = new System.Drawing.Point(425, 248);
+            this.chkDisplayExtraGuides.Location = new System.Drawing.Point(425, 263);
             this.chkDisplayExtraGuides.Name = "chkDisplayExtraGuides";
             this.chkDisplayExtraGuides.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.chkDisplayExtraGuides.Size = new System.Drawing.Size(100, 69);
@@ -7822,7 +7821,8 @@
             // nudNumGuideLines
             // 
             this.nudNumGuideLines.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudNumGuideLines.Location = new System.Drawing.Point(531, 255);
+            this.nudNumGuideLines.Enabled = false;
+            this.nudNumGuideLines.Location = new System.Drawing.Point(531, 270);
             this.nudNumGuideLines.Maximum = 500D;
             this.nudNumGuideLines.Minimum = 1D;
             this.nudNumGuideLines.Name = "nudNumGuideLines";
@@ -7881,7 +7881,7 @@
             this.panelBottom.Controls.Add(this.label22);
             this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelBottom.ForeColor = System.Drawing.Color.Lime;
-            this.panelBottom.Location = new System.Drawing.Point(124, 645);
+            this.panelBottom.Location = new System.Drawing.Point(124, 657);
             this.panelBottom.Name = "panelBottom";
             this.panelBottom.Size = new System.Drawing.Size(915, 66);
             this.panelBottom.TabIndex = 112;
@@ -7954,7 +7954,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.ClientSize = new System.Drawing.Size(1043, 715);
+            this.ClientSize = new System.Drawing.Size(1043, 727);
             this.ControlBox = false;
             this.Controls.Add(this.tab1);
             this.Controls.Add(this.panelBottom);
