@@ -294,46 +294,44 @@ void toolsteerLoop()
         switchByte |= (steerSwitch << 1);   //put steerswitch status in bit 1 position
         switchByte |= workSwitch;
 
-        if (toolConfig.isSteer) //is slide not steer
+        //get steering position
+        if (steerConfig.SingleInputWAS)   //Single Input ADS
         {
-            //get steering position
-            if (steerConfig.SingleInputWAS)   //Single Input ADS
-            {
-                adc.setMux(ADS1115_REG_CONFIG_MUX_SINGLE_0);
-                steeringPosition = adc.getConversion();
-                adc.triggerConversion();//ADS1115 Single Mode
+            adc.setMux(ADS1115_REG_CONFIG_MUX_SINGLE_0);
+            steeringPosition = adc.getConversion();
+            adc.triggerConversion();//ADS1115 Single Mode
 
-                steeringPosition = (steeringPosition >> 1); //bit shift by 2  0 to 13610 is 0 to 5v
-                helloSteerPosition = steeringPosition - 6800;
-            }
-            else    //ADS1115 Differential Mode
-            {
-                adc.setMux(ADS1115_REG_CONFIG_MUX_DIFF_0_1);
-                steeringPosition = adc.getConversion();
-                adc.triggerConversion();
-
-                steeringPosition = (steeringPosition >> 1); //bit shift by 2  0 to 13610 is 0 to 5v
-                helloSteerPosition = steeringPosition - 6800;
-            }
-
-            //DETERMINE ACTUAL STEERING POSITION
-
-            //convert position to steer angle. 32 counts per degree of steer pot position in my case
-            //  ***** make sure that negative steer angle makes a left turn and positive value is a right turn *****
-            if (toolConfig.invertWAS)
-            {
-                steeringPosition = (steeringPosition - 6805 - toolSettings.wasOffset);   // 1/2 of full scale
-                steerAngleActual = (float)(steeringPosition) / -toolSettings.steerSensorCounts;
-            }
-            else
-            {
-                steeringPosition = (steeringPosition - 6805 + toolSettings.wasOffset);   // 1/2 of full scale
-                steerAngleActual = (float)(steeringPosition) / toolSettings.steerSensorCounts;
-            }
-
-            //Ackerman fix
-            if (steerAngleActual < 0) steerAngleActual = (steerAngleActual * toolSettings.AckermanFix);
+            steeringPosition = (steeringPosition >> 1); //bit shift by 2  0 to 13610 is 0 to 5v
+            helloSteerPosition = steeringPosition - 6800;
         }
+        else    //ADS1115 Differential Mode
+        {
+            adc.setMux(ADS1115_REG_CONFIG_MUX_DIFF_0_1);
+            steeringPosition = adc.getConversion();
+            adc.triggerConversion();
+
+            steeringPosition = (steeringPosition >> 1); //bit shift by 2  0 to 13610 is 0 to 5v
+            helloSteerPosition = steeringPosition - 6800;
+        }
+
+        //DETERMINE ACTUAL STEERING POSITION
+
+        //convert position to steer angle. 32 counts per degree of steer pot position in my case
+        //  ***** make sure that negative steer angle makes a left turn and positive value is a right turn *****
+        if (toolConfig.invertWAS)
+        {
+            steeringPosition = (steeringPosition - 6805 - toolSettings.wasOffset);   // 1/2 of full scale
+            steerAngleActual = (float)(steeringPosition) / -toolSettings.steerSensorCounts;
+        }
+        else
+        {
+            steeringPosition = (steeringPosition - 6805 + toolSettings.wasOffset);   // 1/2 of full scale
+            steerAngleActual = (float)(steeringPosition) / toolSettings.steerSensorCounts;
+        }
+
+        //Ackerman fix
+        if (steerAngleActual < 0) steerAngleActual = (steerAngleActual * toolSettings.AckermanFix);
+    
 
         if (watchdogTimer < WATCHDOG_THRESHOLD && guidanceStatus == 1)
         {
@@ -351,11 +349,8 @@ void toolsteerLoop()
             }
             else digitalWrite(DIR1_RL_ENABLE, 1);
 
-            toolCorrectionError = ((float)(toolXTE_Set) * 0.1);   //calculate the error
-
-            if (toolConfig.isSteer) //is slide not steer
-              toolCorrectionError = steerAngleActual - toolCorrectionError;
-
+            toolCorrectionError = steerAngleActual - ((float)(toolXTE_Set) * 0.1);   //calculate the error
+ 
             calcSteeringPID();  //do the pid
             motorDrive();       //out to motors the pwm value
             // Autosteer Led goes GREEN if autosteering
@@ -449,15 +444,8 @@ void ReceiveUdp()
                 //----------------------------------------------------------------------------
                 //Serial Send to Twol
                 int16_t sa;
-                if (toolConfig.isSteer) //is slide not steer
-                {
-                    sa = (int16_t)(steerAngleActual * 100);
-                }
-                else
-                {
-                    sa = toolCorrectionError * 100;
-                }
-
+                sa = (int16_t)(steerAngleActual * 100);
+                
                 PGN_230[5] = (uint8_t)sa;
                 PGN_230[6] = sa >> 8;
 
@@ -529,11 +517,6 @@ void ReceiveUdp()
 
             else if (udpPacket.MinorPGN == PGNs::ToolSteerConfig)  //Tool Steer Config
             {
-                // invertWAS = 5;
-                // invertSteer = 6;
-                // maxSteerAngle = 7;
-                // isSteer = 8;
-
                 toolConfig.invertWAS = udpPacket.udpData[toolSteerConfig::invertWAS];
 
                 toolConfig.invertSteer = udpPacket.udpData[toolSteerConfig::invertSteer];
