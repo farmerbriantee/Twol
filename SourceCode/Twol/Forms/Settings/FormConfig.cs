@@ -129,6 +129,8 @@ namespace Twol
             SetTab(null);
 
             UpdateSummary();
+
+            btnVehicle.PerformClick();
         }
 
         private void FormConfig_FormClosing(object sender, FormClosingEventArgs e)
