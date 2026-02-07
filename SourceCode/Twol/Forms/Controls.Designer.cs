@@ -1115,25 +1115,7 @@ namespace Twol
 
         }
 
-        private void toolSteerToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //check if window already exists
-            Form fc = Application.OpenForms["FormToolSteer"];
-
-            if (fc != null)
-            {
-                fc.Focus();
-                fc.Close();
-                return;
-            }
-
-            Form form = new FormToolSteer(this);
-            form.Show(this);
-            this.Activate();
-        }
-
-
-        private void btnConfig_Click(object sender, EventArgs e)
+        private void btnConfiguration_Click(object sender, EventArgs e)
         {
             using (FormConfig form = new FormConfig(this))
             {
@@ -1141,6 +1123,7 @@ namespace Twol
             }
 
             lbl_IO_Profile.Text = RegistrySettings.IOFileName;
+
         }
 
         #endregion
@@ -1425,31 +1408,7 @@ namespace Twol
                 this.Activate();
             }
         }
-        private void setWorkingDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (isFieldStarted)
-            {
-                TimedMessageBox(2000, gStr.Get(gs.gsFieldIsOpen), gStr.Get(gs.gsCloseFieldFirst));
-                return;
-            }
 
-            FolderBrowserDialog fbd = new FolderBrowserDialog();
-            fbd.ShowNewFolderButton = true;
-            fbd.Description = "Currently: " + RegistrySettings.workingDirectory;
-
-            if (RegistrySettings.workingDirectory == "Default") fbd.SelectedPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            else fbd.SelectedPath = RegistrySettings.workingDirectory;
-
-            if (fbd.ShowDialog(this) == DialogResult.OK)
-            {
-                RegistrySettings.Save("WorkingDirectory", fbd.SelectedPath);
-                //RegistrySettings.CreateDirectories();
-
-                //restart program
-                MessageBox.Show(gStr.Get(gs.gsProgramWillExitPleaseRestart));
-                Close();
-            }
-        }
         private void enterSimCoordsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (var form = new FormSimCoords(this))
@@ -1457,13 +1416,6 @@ namespace Twol
                 form.ShowDialog(this);
             }
         }                
-        private void hotKeysToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using (var form = new Form_Keys(this))
-            {
-                form.ShowDialog(this);
-            }
-        }
 
         private void nozzleAppToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1523,27 +1475,6 @@ namespace Twol
             SetControlLabelPositions();
 
             Settings.User.isSimulatorOn = simulatorOnToolStripMenuItem.Checked;
-        }
-        private void colorsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using (var form = new FormColor(this))
-            {
-                form.ShowDialog(this);
-            }
-        }
-        private void colorsSectionToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (Settings.Tool.isSectionsNotZones)
-            {
-                using (var form = new FormColorSection(this))
-                {
-                    form.ShowDialog(this);
-                }
-            }
-            else
-            {
-                TimedMessageBox(2000, "Cannot use with zones", "Only for Sections");
-            }
         }
 
         //Languages

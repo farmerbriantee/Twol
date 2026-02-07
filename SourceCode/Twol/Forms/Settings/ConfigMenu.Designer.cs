@@ -10,55 +10,33 @@ namespace Twol
 {
     public partial class FormConfig
     {
-        private TabPage oldTabPage = null;
-        private Button oldbutton = null;
-        private Panel oldPanel = null;
-
-
         #region menu Buttons
 
         private void btnVehicle_Click(object sender, EventArgs e)
         {
             flpTop.Controls?.Clear();
             flpTop.Controls?.Add(btnOK);
+            flpTop.Controls?.Add(btnSubRoll);
+            flpTop.Controls?.Add(btnSubHeading);
+            flpTop.Controls?.Add(btnSubAntenna);
             flpTop.Controls?.Add(btnSubDimensions);
             flpTop.Controls?.Add(btnSubVehicleType);
-            flpTop.Controls?.Add(btnSubAntenna);
-            flpTop.Controls?.Add(btnSubHeading);
-            flpTop.Controls?.Add(btnSubRoll);
 
-            for (int i = 0; i < flpTop.Controls.Count; i++)
-            {
-                if (flpTop.Controls[i].Visible && flpTop.Controls[i] is Button)
-                {
-                    flpTop.Controls[i].Width = 130;
-                }
-            }
-
-            SetTab(tabSummary);
+            SetTab(tabSummary, 140);
         }
-
         private void btnTool_Click(object sender, EventArgs e)
         {
             flpTop.Controls?.Clear();
             flpTop.Controls?.Add(btnOK);
-            flpTop.Controls?.Add(btnSubToolType);
-            flpTop.Controls?.Add(btnSubHitch);
-            flpTop.Controls?.Add(btnSubSections);
-            flpTop.Controls?.Add(btnSubPivot);
-            flpTop.Controls?.Add(btnSubToolOffset);
             flpTop.Controls?.Add(btnSubSwitches);
             flpTop.Controls?.Add(btnSubToolSettings);
+            flpTop.Controls?.Add(btnSubPivot);
+            flpTop.Controls?.Add(btnSubToolOffset);
+            flpTop.Controls?.Add(btnSubSections);
+            flpTop.Controls?.Add(btnSubHitch);
+            flpTop.Controls?.Add(btnSubToolType);
 
-            for (int i = 0; i < flpTop.Controls.Count; i++)
-            {
-                if (flpTop.Controls[i].Visible && flpTop.Controls[i] is Button)
-                {
-                    flpTop.Controls[i].Width = 130;
-                }
-            }
-
-            SetTab(tabTSections);
+            SetTab(tabTSections, 110);
         }
         private void btnArduino_Click(object sender, EventArgs e)
         {
@@ -67,15 +45,7 @@ namespace Twol
             flpTop.Controls?.Add(btnSubMachineRelay);
             flpTop.Controls?.Add(btnSubMachineModule);
 
-            for (int i = 0; i < flpTop.Controls.Count; i++)
-            {
-                if (flpTop.Controls[i].Visible && flpTop.Controls[i] is Button)
-                {
-                    flpTop.Controls[i].Width = 130;
-                }
-            }
-
-            SetTab(tabAMachine);
+            SetTab(tabAMachine, 150);
         }
         private void btnField_Click(object sender, EventArgs e)
         {
@@ -84,33 +54,46 @@ namespace Twol
             flpTop.Controls?.Add(btnSubTram);
             flpTop.Controls?.Add(btnSubUTurn);
 
-            for (int i = 0; i < flpTop.Controls.Count; i++)
-            {
-                if (flpTop.Controls[i].Visible && flpTop.Controls[i] is Button)
-                {
-                    flpTop.Controls[i].Width = 130;
-                }
-            }
-
-            SetTab(tabTram);
+            SetTab(tabTram, 150);
         }
-        private void btnDisplay_Click(object sender, EventArgs e)
+        private void btnUser_Click(object sender, EventArgs e)
         {
             flpTop.Controls?.Clear();
             flpTop.Controls?.Add(btnOK);
-            flpTop.Controls?.Add(btnSubDisplay);
             flpTop.Controls?.Add(btnSubFeatureHides);
+            flpTop.Controls?.Add(btnSubColors);
+            flpTop.Controls?.Add(btnSubUser);
+            flpTop.Controls?.Add(btnSubDisplay);
+
+            SetTab(tabDisplay, 150);
+        }
+
+        #endregion
+        private void SetTab(TabPage newTabPage, int width)
+        {
+            if (newTabPage != null)
+            {
+                tab1.SelectedTab = newTabPage;
+            }
 
             for (int i = 0; i < flpTop.Controls.Count; i++)
             {
                 if (flpTop.Controls[i].Visible && flpTop.Controls[i] is Button)
                 {
-                    flpTop.Controls[i].Width = 130;
+                    flpTop.Controls[i].Width = width;
                 }
             }
-
-            SetTab(tabDisplay);
         }
+
+        private void SetTab(TabPage newTabPage)
+        {
+            if (newTabPage != null)
+            {
+                tab1.SelectedTab = newTabPage;
+            }
+        }   
+
+        #region subs
 
         private void btnSubTram_Click(object sender, EventArgs e)
         {
@@ -131,7 +114,15 @@ namespace Twol
         {
             SetTab(tabBtns);
         }
+        private void btnSubColors_Click(object sender, EventArgs e)
+        {
+            SetTab(tabColors);
+        }
 
+        private void btnSubUser_Click(object sender, EventArgs e)
+        {
+            SetTab(tabUser);
+        }
         #endregion
 
         #region Vehicle Sub Menu Btns
@@ -217,95 +208,7 @@ namespace Twol
             SetTab(tabRelay);
         }
 
-
-        private void SetTab(TabPage newTabPage)
-        {
-            if (newTabPage != null)
-            {
-                tab1.SelectedTab = newTabPage;
-
-                if (newTabPage == tabSummary)
-                {
-                    tabSummary_Enter(null, null);
-                }
-                else if (newTabPage == tabDHeading)
-                {
-                    tabDHeading_Enter(null, null);
-                }
-                else if (newTabPage == tabVConfig)
-                {
-                    tabVConfig_Enter(null, null);
-                }
-                else if (newTabPage == tabDisplay)
-                {
-                    tabDisplay_Enter(null, null);
-                }
-                else if (newTabPage == tabBtns)
-                {
-                    tabBtns_Enter(null, null);
-                }
-                else if (newTabPage == tabTram)
-                {
-                    tabTram_Enter(null, null);
-                }
-                else if (newTabPage == tabAMachine)
-                {
-                    tabAMachine_Enter(null, null);
-                }
-                else if (newTabPage == tabRelay)
-                {
-                    tabRelay_Enter(null, null);
-                }
-                else if (newTabPage == tabUTurn)
-                {
-                    tabUTurn_Enter(null, null);
-                }
-                else if (newTabPage == tabDRoll)
-                {
-                    tabDRoll_Enter(null, null);
-                }
-                else if (newTabPage == tabTSettings)
-                {
-                    tabTSettings_Enter(null, null);
-                }
-                else if (newTabPage == tabTSwitches)
-                {
-                    tabTSwitches_Enter(null, null);
-                }
-                else if (newTabPage == tabTSections)
-                {
-                    tabTSections_Enter(null, null);
-                }
-                else if (newTabPage == tabToolPivot)
-                {
-                    tabToolPivot_Enter(null, null);
-                }
-                else if (newTabPage == tabToolOffset)
-                {
-                    tabToolOffset_Enter(null, null);
-                }
-                else if (newTabPage == tabTHitch)
-                {
-                    tabTHitch_Enter(null, null);
-                }
-                else if (newTabPage == tabTConfig)
-                {
-                    tabTConfig_Enter(null, null);
-                }
-                else if (newTabPage == tabVDimensions)
-                {
-                    tabVDimensions_Enter(null, null);
-                }
-                else if (newTabPage == tabVAntenna)
-                {
-                    tabVAntenna_Enter(null, null);
-                }
-                else
-                {
-                    throw new Exception($"Unknown tab entered: {newTabPage.Text}");
-                }
-            }
-        }
         #endregion
+
     }
 }

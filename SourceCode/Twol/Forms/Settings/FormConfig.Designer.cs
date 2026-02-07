@@ -101,6 +101,8 @@
             this.pboxAlpha = new System.Windows.Forms.PictureBox();
             this.cboxIsImage = new System.Windows.Forms.CheckBox();
             this.tabVAntenna = new System.Windows.Forms.TabPage();
+            this.nudAntennaHeight = new Twol.NudlessNumericUpDown();
+            this.nudAntennaOffset = new Twol.NudlessNumericUpDown();
             this.lblPivotDistance = new System.Windows.Forms.Label();
             this.lblAntennaHeight = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
@@ -115,7 +117,11 @@
             this.label99 = new System.Windows.Forms.Label();
             this.label98 = new System.Windows.Forms.Label();
             this.pboxAntenna = new System.Windows.Forms.PictureBox();
+            this.nudAntennaPivot = new Twol.NudlessNumericUpDown();
             this.tabVDimensions = new System.Windows.Forms.TabPage();
+            this.nudWheelbase = new Twol.NudlessNumericUpDown();
+            this.nudTractorHitchLength = new Twol.NudlessNumericUpDown();
+            this.nudVehicleTrack = new Twol.NudlessNumericUpDown();
             this.label97 = new System.Windows.Forms.Label();
             this.label95 = new System.Windows.Forms.Label();
             this.label94 = new System.Windows.Forms.Label();
@@ -131,6 +137,9 @@
             this.rbtnFront = new System.Windows.Forms.RadioButton();
             this.rbtnTrailing = new System.Windows.Forms.RadioButton();
             this.tabTHitch = new System.Windows.Forms.TabPage();
+            this.nudTrailingHitchLength = new Twol.NudlessNumericUpDown();
+            this.nudDrawbarLength = new Twol.NudlessNumericUpDown();
+            this.nudTankHitch = new Twol.NudlessNumericUpDown();
             this.label112 = new System.Windows.Forms.Label();
             this.lblUnitsHitch = new System.Windows.Forms.Label();
             this.picboxToolHitch = new System.Windows.Forms.PictureBox();
@@ -149,19 +158,30 @@
             this.rbtnLeftNegative = new System.Windows.Forms.RadioButton();
             this.rbtnToolRightPositive = new System.Windows.Forms.RadioButton();
             this.label65 = new System.Windows.Forms.Label();
+            this.nudOverlap = new Twol.NudlessNumericUpDown();
+            this.nudOffset = new Twol.NudlessNumericUpDown();
             this.tabToolPivot = new System.Windows.Forms.TabPage();
             this.btnPivotOffsetZero = new System.Windows.Forms.Button();
             this.label177 = new System.Windows.Forms.Label();
             this.rbtnPivotBehindPos = new System.Windows.Forms.RadioButton();
             this.rbtnPivotAheadNeg = new System.Windows.Forms.RadioButton();
+            this.nudTrailingToolToPivotLength = new Twol.NudlessNumericUpDown();
             this.tabTSections = new System.Windows.Forms.TabPage();
             this.panelSymmetricSections = new System.Windows.Forms.Panel();
+            this.nudZone8To = new Twol.NudlessNumericUpDown();
             this.lblZoneStart8 = new System.Windows.Forms.Label();
             this.label157 = new System.Windows.Forms.Label();
             this.label158 = new System.Windows.Forms.Label();
+            this.nudZone7To = new Twol.NudlessNumericUpDown();
             this.lblZoneStart7 = new System.Windows.Forms.Label();
             this.label154 = new System.Windows.Forms.Label();
             this.label155 = new System.Windows.Forms.Label();
+            this.nudZone6To = new Twol.NudlessNumericUpDown();
+            this.nudZone4To = new Twol.NudlessNumericUpDown();
+            this.nudZone1To = new Twol.NudlessNumericUpDown();
+            this.nudZone5To = new Twol.NudlessNumericUpDown();
+            this.nudZone3To = new Twol.NudlessNumericUpDown();
+            this.nudZone2To = new Twol.NudlessNumericUpDown();
             this.lblZoneStart6 = new System.Windows.Forms.Label();
             this.lblZoneStart5 = new System.Windows.Forms.Label();
             this.lblZoneStart4 = new System.Windows.Forms.Label();
@@ -209,6 +229,26 @@
             this.label48 = new System.Windows.Forms.Label();
             this.pictureBox11 = new System.Windows.Forms.PictureBox();
             this.cboxIsUnique = new System.Windows.Forms.CheckBox();
+            this.nudCutoffSpeed = new Twol.NudlessNumericUpDown();
+            this.nudDefaultSectionWidth = new Twol.NudlessNumericUpDown();
+            this.nudMinCoverage = new Twol.NudlessNumericUpDown();
+            this.nudSection16 = new Twol.NudlessNumericUpDown();
+            this.nudSection15 = new Twol.NudlessNumericUpDown();
+            this.nudSection14 = new Twol.NudlessNumericUpDown();
+            this.nudSection13 = new Twol.NudlessNumericUpDown();
+            this.nudSection12 = new Twol.NudlessNumericUpDown();
+            this.nudSection11 = new Twol.NudlessNumericUpDown();
+            this.nudSection10 = new Twol.NudlessNumericUpDown();
+            this.nudSection09 = new Twol.NudlessNumericUpDown();
+            this.nudSection08 = new Twol.NudlessNumericUpDown();
+            this.nudSection07 = new Twol.NudlessNumericUpDown();
+            this.nudSection06 = new Twol.NudlessNumericUpDown();
+            this.nudSection05 = new Twol.NudlessNumericUpDown();
+            this.nudSection04 = new Twol.NudlessNumericUpDown();
+            this.nudSection03 = new Twol.NudlessNumericUpDown();
+            this.nudSection02 = new Twol.NudlessNumericUpDown();
+            this.nudSection01 = new Twol.NudlessNumericUpDown();
+            this.nudNumberOfSections = new Twol.NudlessNumericUpDown();
             this.tabTSwitches = new System.Windows.Forms.TabPage();
             this.grpControls = new System.Windows.Forms.GroupBox();
             this.chkSetAutoSectionsSteer = new System.Windows.Forms.CheckBox();
@@ -229,6 +269,11 @@
             this.pictureBox18 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.nudLookAheadDistanceOff = new Twol.NudlessNumericUpDown();
+            this.nudLookAheadDistanceOn = new Twol.NudlessNumericUpDown();
+            this.nudLookAheadOff = new Twol.NudlessNumericUpDown();
+            this.nudTurnOffDelay = new Twol.NudlessNumericUpDown();
+            this.nudLookAhead = new Twol.NudlessNumericUpDown();
             this.tabDHeading = new System.Windows.Forms.TabPage();
             this.lblAlarmStopsAutoSteer = new System.Windows.Forms.Label();
             this.label118 = new System.Windows.Forms.Label();
@@ -238,8 +283,10 @@
             this.lblRTKFixAlarm = new System.Windows.Forms.Label();
             this.lblIMU = new System.Windows.Forms.Label();
             this.gboxDual = new System.Windows.Forms.GroupBox();
+            this.nudDualReverseDistance = new Twol.NudlessNumericUpDown();
             this.lblReverseDistance = new System.Windows.Forms.Label();
             this.pictureBox13 = new System.Windows.Forms.PictureBox();
+            this.nudDualHeadingOffset = new Twol.NudlessNumericUpDown();
             this.lblHeadingOffset = new System.Windows.Forms.Label();
             this.lblGPS = new System.Windows.Forms.Label();
             this.gboxSingle = new System.Windows.Forms.GroupBox();
@@ -268,6 +315,8 @@
             this.btnZeroRoll = new System.Windows.Forms.Button();
             this.btnRemoveZeroOffset = new System.Windows.Forms.Button();
             this.cboxDataInvertRoll = new System.Windows.Forms.CheckBox();
+            this.btnRollOffsetUp = new Twol.RepeatButton();
+            this.btnRollOffsetDown = new Twol.RepeatButton();
             this.tabUTurn = new System.Windows.Forms.TabPage();
             this.lblUturnExtension = new System.Windows.Forms.Label();
             this.lblFtMTurnRadius = new System.Windows.Forms.Label();
@@ -276,6 +325,10 @@
             this.label64 = new System.Windows.Forms.Label();
             this.label58 = new System.Windows.Forms.Label();
             this.lblWhenTrig = new System.Windows.Forms.Label();
+            this.btnDistanceUp = new Twol.RepeatButton();
+            this.btnDistanceDn = new Twol.RepeatButton();
+            this.nudYouTurnRadius = new Twol.NudlessNumericUpDown();
+            this.nudTurnDistanceFromBoundary = new Twol.NudlessNumericUpDown();
             this.tabRelay = new System.Windows.Forms.TabPage();
             this.cboxPin23 = new System.Windows.Forms.ComboBox();
             this.cboxPin22 = new System.Windows.Forms.ComboBox();
@@ -336,19 +389,26 @@
             this.lblUser2 = new System.Windows.Forms.Label();
             this.lblUser1 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.nudHydLiftLookAhead = new Twol.NudlessNumericUpDown();
             this.lblHydLookAhead = new System.Windows.Forms.Label();
             this.lblRaiseTime = new System.Windows.Forms.Label();
             this.lblEnable = new System.Windows.Forms.Label();
             this.lblHydLowerTime = new System.Windows.Forms.Label();
             this.cboxIsHydOn = new System.Windows.Forms.CheckBox();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.nudLowerTime = new Twol.NudlessNumericUpDown();
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
+            this.nudRaiseTime = new Twol.NudlessNumericUpDown();
             this.lblHydInvertRelays = new System.Windows.Forms.Label();
             this.lblSendAndSave = new System.Windows.Forms.Label();
             this.lblMachineModule = new System.Windows.Forms.Label();
             this.pboxSendMachine = new System.Windows.Forms.PictureBox();
             this.cboxMachInvertRelays = new System.Windows.Forms.CheckBox();
             this.btnSendMachinePGN = new System.Windows.Forms.Button();
+            this.nudUser4 = new Twol.NudlessNumericUpDown();
+            this.nudUser3 = new Twol.NudlessNumericUpDown();
+            this.nudUser2 = new Twol.NudlessNumericUpDown();
+            this.nudUser1 = new Twol.NudlessNumericUpDown();
             this.tabTram = new System.Windows.Forms.TabPage();
             this.lblDisplay = new System.Windows.Forms.Label();
             this.lblOveride = new System.Windows.Forms.Label();
@@ -357,6 +417,7 @@
             this.cboxDisplayTramControl = new System.Windows.Forms.CheckBox();
             this.chkBoxOverrideTramControlPos = new System.Windows.Forms.CheckBox();
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
+            this.nudTramWidth = new Twol.NudlessNumericUpDown();
             this.tabBtns = new System.Windows.Forms.TabPage();
             this.label8 = new System.Windows.Forms.Label();
             this.lblPowerLoss = new System.Windows.Forms.Label();
@@ -398,107 +459,56 @@
             this.chkSectionLines = new System.Windows.Forms.CheckBox();
             this.lblDirectionMarkers = new System.Windows.Forms.Label();
             this.chkDirectionMarkers = new System.Windows.Forms.CheckBox();
+            this.lblSvennArrow = new System.Windows.Forms.Label();
+            this.lblFieldTexture = new System.Windows.Forms.Label();
+            this.lblSpeedo = new System.Windows.Forms.Label();
+            this.lblGrid = new System.Windows.Forms.Label();
+            this.chkSvennArrow = new System.Windows.Forms.CheckBox();
+            this.chkDisplayFloor = new System.Windows.Forms.CheckBox();
+            this.chkDisplayGrid = new System.Windows.Forms.CheckBox();
+            this.chkDisplaySpeedo = new System.Windows.Forms.CheckBox();
+            this.tabColors = new System.Windows.Forms.TabPage();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.btnSectionColors = new System.Windows.Forms.Button();
+            this.btnColors = new System.Windows.Forms.Button();
+            this.tabUser = new System.Windows.Forms.TabPage();
+            this.label18 = new System.Windows.Forms.Label();
+            this.btnLogViewer = new System.Windows.Forms.Button();
+            this.btnSetDirectories = new System.Windows.Forms.Button();
+            this.lblBrightness = new System.Windows.Forms.Label();
+            this.chkDisplayStartFullScreen = new System.Windows.Forms.CheckBox();
+            this.chkDisplayBrightness = new System.Windows.Forms.CheckBox();
+            this.lblStartFullScreen = new System.Windows.Forms.Label();
+            this.chkDisplayKeyboard = new System.Windows.Forms.CheckBox();
+            this.lblKeyboard = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.btnHotkeys = new System.Windows.Forms.Button();
+            this.chkDisplayLogElevation = new System.Windows.Forms.CheckBox();
+            this.chkDisplayPolygons = new System.Windows.Forms.CheckBox();
+            this.lblPolygons = new System.Windows.Forms.Label();
             this.label79 = new System.Windows.Forms.Label();
+            this.nudNumGuideLines = new Twol.NudlessNumericUpDown();
+            this.chkDisplayExtraGuides = new System.Windows.Forms.CheckBox();
             this.unitsGroupBox = new System.Windows.Forms.GroupBox();
             this.rbtnDisplayImperial = new System.Windows.Forms.RadioButton();
             this.rbtnDisplayMetric = new System.Windows.Forms.RadioButton();
-            this.lblSvennArrow = new System.Windows.Forms.Label();
-            this.lblBrightness = new System.Windows.Forms.Label();
-            this.lblFieldTexture = new System.Windows.Forms.Label();
-            this.lblPolygons = new System.Windows.Forms.Label();
-            this.lblKeyboard = new System.Windows.Forms.Label();
-            this.lblStartFullScreen = new System.Windows.Forms.Label();
-            this.lblSpeedo = new System.Windows.Forms.Label();
             this.lblExtraGuides = new System.Windows.Forms.Label();
-            this.lblGrid = new System.Windows.Forms.Label();
-            this.chkDisplayLogElevation = new System.Windows.Forms.CheckBox();
-            this.chkSvennArrow = new System.Windows.Forms.CheckBox();
-            this.chkDisplayBrightness = new System.Windows.Forms.CheckBox();
-            this.chkDisplayFloor = new System.Windows.Forms.CheckBox();
-            this.chkDisplayKeyboard = new System.Windows.Forms.CheckBox();
-            this.chkDisplayPolygons = new System.Windows.Forms.CheckBox();
-            this.chkDisplayStartFullScreen = new System.Windows.Forms.CheckBox();
-            this.chkDisplayGrid = new System.Windows.Forms.CheckBox();
-            this.chkDisplaySpeedo = new System.Windows.Forms.CheckBox();
-            this.chkDisplayExtraGuides = new System.Windows.Forms.CheckBox();
-            this.lblCurrentVehicle = new System.Windows.Forms.Label();
-            this.lblSecTotalWidthMeters = new System.Windows.Forms.Label();
-            this.lblToolWidth = new System.Windows.Forms.Label();
-            this.lblCurrentTool = new System.Windows.Forms.Label();
-            this.lblUnits = new System.Windows.Forms.Label();
             this.btnOK = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.btnSubUTurn = new System.Windows.Forms.Button();
             this.btnArduino = new System.Windows.Forms.Button();
             this.btnField = new System.Windows.Forms.Button();
-            this.btnDisplay = new System.Windows.Forms.Button();
+            this.btnUser = new System.Windows.Forms.Button();
             this.btnSubFeatureHides = new System.Windows.Forms.Button();
             this.flpSide = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnBlankTop = new System.Windows.Forms.Button();
             this.flpTop = new System.Windows.Forms.FlowLayoutPanel();
             this.btnSubTram = new System.Windows.Forms.Button();
             this.btnSubDisplay = new System.Windows.Forms.Button();
-            this.nudAntennaHeight = new Twol.NudlessNumericUpDown();
-            this.nudAntennaOffset = new Twol.NudlessNumericUpDown();
-            this.nudAntennaPivot = new Twol.NudlessNumericUpDown();
-            this.nudWheelbase = new Twol.NudlessNumericUpDown();
-            this.nudTractorHitchLength = new Twol.NudlessNumericUpDown();
-            this.nudVehicleTrack = new Twol.NudlessNumericUpDown();
-            this.nudTrailingHitchLength = new Twol.NudlessNumericUpDown();
-            this.nudDrawbarLength = new Twol.NudlessNumericUpDown();
-            this.nudTankHitch = new Twol.NudlessNumericUpDown();
-            this.nudOverlap = new Twol.NudlessNumericUpDown();
-            this.nudOffset = new Twol.NudlessNumericUpDown();
-            this.nudTrailingToolToPivotLength = new Twol.NudlessNumericUpDown();
-            this.nudZone8To = new Twol.NudlessNumericUpDown();
-            this.nudZone7To = new Twol.NudlessNumericUpDown();
-            this.nudZone6To = new Twol.NudlessNumericUpDown();
-            this.nudZone4To = new Twol.NudlessNumericUpDown();
-            this.nudZone1To = new Twol.NudlessNumericUpDown();
-            this.nudZone5To = new Twol.NudlessNumericUpDown();
-            this.nudZone3To = new Twol.NudlessNumericUpDown();
-            this.nudZone2To = new Twol.NudlessNumericUpDown();
-            this.nudCutoffSpeed = new Twol.NudlessNumericUpDown();
-            this.nudDefaultSectionWidth = new Twol.NudlessNumericUpDown();
-            this.nudMinCoverage = new Twol.NudlessNumericUpDown();
-            this.nudSection16 = new Twol.NudlessNumericUpDown();
-            this.nudSection15 = new Twol.NudlessNumericUpDown();
-            this.nudSection14 = new Twol.NudlessNumericUpDown();
-            this.nudSection13 = new Twol.NudlessNumericUpDown();
-            this.nudSection12 = new Twol.NudlessNumericUpDown();
-            this.nudSection11 = new Twol.NudlessNumericUpDown();
-            this.nudSection10 = new Twol.NudlessNumericUpDown();
-            this.nudSection09 = new Twol.NudlessNumericUpDown();
-            this.nudSection08 = new Twol.NudlessNumericUpDown();
-            this.nudSection07 = new Twol.NudlessNumericUpDown();
-            this.nudSection06 = new Twol.NudlessNumericUpDown();
-            this.nudSection05 = new Twol.NudlessNumericUpDown();
-            this.nudSection04 = new Twol.NudlessNumericUpDown();
-            this.nudSection03 = new Twol.NudlessNumericUpDown();
-            this.nudSection02 = new Twol.NudlessNumericUpDown();
-            this.nudSection01 = new Twol.NudlessNumericUpDown();
-            this.nudNumberOfSections = new Twol.NudlessNumericUpDown();
-            this.nudLookAheadDistanceOff = new Twol.NudlessNumericUpDown();
-            this.nudLookAheadDistanceOn = new Twol.NudlessNumericUpDown();
-            this.nudLookAheadOff = new Twol.NudlessNumericUpDown();
-            this.nudTurnOffDelay = new Twol.NudlessNumericUpDown();
-            this.nudLookAhead = new Twol.NudlessNumericUpDown();
-            this.nudDualReverseDistance = new Twol.NudlessNumericUpDown();
-            this.nudDualHeadingOffset = new Twol.NudlessNumericUpDown();
-            this.btnRollOffsetUp = new Twol.RepeatButton();
-            this.btnRollOffsetDown = new Twol.RepeatButton();
-            this.btnDistanceUp = new Twol.RepeatButton();
-            this.btnDistanceDn = new Twol.RepeatButton();
-            this.nudYouTurnRadius = new Twol.NudlessNumericUpDown();
-            this.nudTurnDistanceFromBoundary = new Twol.NudlessNumericUpDown();
-            this.nudHydLiftLookAhead = new Twol.NudlessNumericUpDown();
-            this.nudLowerTime = new Twol.NudlessNumericUpDown();
-            this.nudRaiseTime = new Twol.NudlessNumericUpDown();
-            this.nudUser4 = new Twol.NudlessNumericUpDown();
-            this.nudUser3 = new Twol.NudlessNumericUpDown();
-            this.nudUser2 = new Twol.NudlessNumericUpDown();
-            this.nudUser1 = new Twol.NudlessNumericUpDown();
-            this.nudTramWidth = new Twol.NudlessNumericUpDown();
-            this.nudNumGuideLines = new Twol.NudlessNumericUpDown();
+            this.btnSubColors = new System.Windows.Forms.Button();
+            this.btnSubUser = new System.Windows.Forms.Button();
             this.tab1.SuspendLayout();
             this.tabSummary.SuspendLayout();
             this.tabVConfig.SuspendLayout();
@@ -547,6 +557,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             this.tabBtns.SuspendLayout();
             this.tabDisplay.SuspendLayout();
+            this.tabColors.SuspendLayout();
+            this.tabUser.SuspendLayout();
             this.unitsGroupBox.SuspendLayout();
             this.flpSide.SuspendLayout();
             this.flpTop.SuspendLayout();
@@ -561,7 +573,7 @@
             this.btnSubMachineRelay.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubMachineRelay.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnSubMachineRelay.Image = global::Twol.Properties.Resources.ConS_Pins;
-            this.btnSubMachineRelay.Location = new System.Drawing.Point(310, 3);
+            this.btnSubMachineRelay.Location = new System.Drawing.Point(263, 3);
             this.btnSubMachineRelay.Name = "btnSubMachineRelay";
             this.btnSubMachineRelay.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
             this.btnSubMachineRelay.Size = new System.Drawing.Size(42, 64);
@@ -579,7 +591,7 @@
             this.btnSubMachineModule.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubMachineModule.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnSubMachineModule.Image = global::Twol.Properties.Resources.ConS_ModulesMachine;
-            this.btnSubMachineModule.Location = new System.Drawing.Point(262, 3);
+            this.btnSubMachineModule.Location = new System.Drawing.Point(215, 3);
             this.btnSubMachineModule.Name = "btnSubMachineModule";
             this.btnSubMachineModule.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
             this.btnSubMachineModule.Size = new System.Drawing.Size(42, 64);
@@ -597,7 +609,7 @@
             this.btnSubRoll.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubRoll.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnSubRoll.Image = global::Twol.Properties.Resources.ConS_SourcesRoll;
-            this.btnSubRoll.Location = new System.Drawing.Point(646, 3);
+            this.btnSubRoll.Location = new System.Drawing.Point(647, 3);
             this.btnSubRoll.Name = "btnSubRoll";
             this.btnSubRoll.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
             this.btnSubRoll.Size = new System.Drawing.Size(42, 64);
@@ -615,7 +627,7 @@
             this.btnSubHeading.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubHeading.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnSubHeading.Image = global::Twol.Properties.Resources.ConS_SourcesHeading;
-            this.btnSubHeading.Location = new System.Drawing.Point(694, 3);
+            this.btnSubHeading.Location = new System.Drawing.Point(695, 3);
             this.btnSubHeading.Name = "btnSubHeading";
             this.btnSubHeading.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
             this.btnSubHeading.Size = new System.Drawing.Size(42, 64);
@@ -626,17 +638,17 @@
             // 
             // btnSubSwitches
             // 
-            this.btnSubSwitches.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.btnSubSwitches.BackColor = System.Drawing.Color.Transparent;
             this.btnSubSwitches.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.btnSubSwitches.FlatAppearance.BorderSize = 0;
             this.btnSubSwitches.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubSwitches.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubSwitches.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnSubSwitches.Image = global::Twol.Properties.Resources.ConS_ImplementSwitch;
-            this.btnSubSwitches.Location = new System.Drawing.Point(1122, 700);
+            this.btnSubSwitches.Location = new System.Drawing.Point(407, 3);
             this.btnSubSwitches.Name = "btnSubSwitches";
             this.btnSubSwitches.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
-            this.btnSubSwitches.Size = new System.Drawing.Size(100, 72);
+            this.btnSubSwitches.Size = new System.Drawing.Size(42, 64);
             this.btnSubSwitches.TabIndex = 1;
             this.btnSubSwitches.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSubSwitches.UseVisualStyleBackColor = false;
@@ -651,7 +663,7 @@
             this.btnSubToolSettings.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubToolSettings.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnSubToolSettings.Image = global::Twol.Properties.Resources.ConS_ImplementSettings;
-            this.btnSubToolSettings.Location = new System.Drawing.Point(406, 3);
+            this.btnSubToolSettings.Location = new System.Drawing.Point(359, 3);
             this.btnSubToolSettings.Name = "btnSubToolSettings";
             this.btnSubToolSettings.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
             this.btnSubToolSettings.Size = new System.Drawing.Size(42, 64);
@@ -669,7 +681,7 @@
             this.btnSubSections.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubSections.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnSubSections.Image = global::Twol.Properties.Resources.ConS_ImplementSection;
-            this.btnSubSections.Location = new System.Drawing.Point(454, 3);
+            this.btnSubSections.Location = new System.Drawing.Point(455, 3);
             this.btnSubSections.Name = "btnSubSections";
             this.btnSubSections.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
             this.btnSubSections.Size = new System.Drawing.Size(42, 64);
@@ -687,7 +699,7 @@
             this.btnSubToolOffset.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubToolOffset.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnSubToolOffset.Image = global::Twol.Properties.Resources.ConS_ImplementOffset;
-            this.btnSubToolOffset.Location = new System.Drawing.Point(358, 3);
+            this.btnSubToolOffset.Location = new System.Drawing.Point(311, 3);
             this.btnSubToolOffset.Name = "btnSubToolOffset";
             this.btnSubToolOffset.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
             this.btnSubToolOffset.Size = new System.Drawing.Size(42, 64);
@@ -705,7 +717,7 @@
             this.btnSubPivot.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubPivot.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnSubPivot.Image = global::Twol.Properties.Resources.ConS_ImplementPivot;
-            this.btnSubPivot.Location = new System.Drawing.Point(502, 3);
+            this.btnSubPivot.Location = new System.Drawing.Point(503, 3);
             this.btnSubPivot.Name = "btnSubPivot";
             this.btnSubPivot.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
             this.btnSubPivot.Size = new System.Drawing.Size(42, 64);
@@ -723,7 +735,7 @@
             this.btnSubHitch.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubHitch.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnSubHitch.Image = global::Twol.Properties.Resources.ConS_ImplementHitch;
-            this.btnSubHitch.Location = new System.Drawing.Point(550, 3);
+            this.btnSubHitch.Location = new System.Drawing.Point(551, 3);
             this.btnSubHitch.Name = "btnSubHitch";
             this.btnSubHitch.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
             this.btnSubHitch.Size = new System.Drawing.Size(42, 64);
@@ -741,7 +753,7 @@
             this.btnSubToolType.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubToolType.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnSubToolType.Image = global::Twol.Properties.Resources.ConS_ImplementConfig;
-            this.btnSubToolType.Location = new System.Drawing.Point(598, 3);
+            this.btnSubToolType.Location = new System.Drawing.Point(599, 3);
             this.btnSubToolType.Name = "btnSubToolType";
             this.btnSubToolType.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
             this.btnSubToolType.Size = new System.Drawing.Size(42, 64);
@@ -760,7 +772,7 @@
             this.btnTool.ForeColor = System.Drawing.Color.Black;
             this.btnTool.Image = global::Twol.Properties.Resources.Con_ImplementMenu;
             this.btnTool.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnTool.Location = new System.Drawing.Point(3, 105);
+            this.btnTool.Location = new System.Drawing.Point(3, 156);
             this.btnTool.Name = "btnTool";
             this.btnTool.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
             this.btnTool.Size = new System.Drawing.Size(72, 96);
@@ -779,7 +791,7 @@
             this.btnSubAntenna.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubAntenna.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnSubAntenna.Image = global::Twol.Properties.Resources.ConS_ImplementAntenna;
-            this.btnSubAntenna.Location = new System.Drawing.Point(790, 3);
+            this.btnSubAntenna.Location = new System.Drawing.Point(791, 3);
             this.btnSubAntenna.Name = "btnSubAntenna";
             this.btnSubAntenna.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
             this.btnSubAntenna.Size = new System.Drawing.Size(42, 64);
@@ -797,7 +809,7 @@
             this.btnSubDimensions.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubDimensions.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnSubDimensions.Image = global::Twol.Properties.Resources.ConS_ImplementHitch;
-            this.btnSubDimensions.Location = new System.Drawing.Point(742, 3);
+            this.btnSubDimensions.Location = new System.Drawing.Point(743, 3);
             this.btnSubDimensions.Name = "btnSubDimensions";
             this.btnSubDimensions.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
             this.btnSubDimensions.Size = new System.Drawing.Size(42, 64);
@@ -815,7 +827,7 @@
             this.btnSubVehicleType.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubVehicleType.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnSubVehicleType.Image = global::Twol.Properties.Resources.ConS_VehicleConfig;
-            this.btnSubVehicleType.Location = new System.Drawing.Point(838, 3);
+            this.btnSubVehicleType.Location = new System.Drawing.Point(839, 3);
             this.btnSubVehicleType.Name = "btnSubVehicleType";
             this.btnSubVehicleType.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
             this.btnSubVehicleType.Size = new System.Drawing.Size(42, 64);
@@ -834,7 +846,7 @@
             this.btnVehicle.ForeColor = System.Drawing.Color.Black;
             this.btnVehicle.Image = global::Twol.Properties.Resources.Con_VehicleMenu;
             this.btnVehicle.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnVehicle.Location = new System.Drawing.Point(3, 3);
+            this.btnVehicle.Location = new System.Drawing.Point(3, 54);
             this.btnVehicle.Name = "btnVehicle";
             this.btnVehicle.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
             this.btnVehicle.Size = new System.Drawing.Size(72, 96);
@@ -866,12 +878,14 @@
             this.tab1.Controls.Add(this.tabTram);
             this.tab1.Controls.Add(this.tabBtns);
             this.tab1.Controls.Add(this.tabDisplay);
+            this.tab1.Controls.Add(this.tabColors);
+            this.tab1.Controls.Add(this.tabUser);
             this.tab1.ItemSize = new System.Drawing.Size(60, 40);
-            this.tab1.Location = new System.Drawing.Point(89, 74);
+            this.tab1.Location = new System.Drawing.Point(86, 75);
             this.tab1.Name = "tab1";
             this.tab1.Padding = new System.Drawing.Point(0, 0);
             this.tab1.SelectedIndex = 0;
-            this.tab1.Size = new System.Drawing.Size(922, 647);
+            this.tab1.Size = new System.Drawing.Size(926, 644);
             this.tab1.TabIndex = 0;
             // 
             // tabSummary
@@ -919,9 +933,10 @@
             this.tabSummary.Location = new System.Drawing.Point(4, 44);
             this.tabSummary.Name = "tabSummary";
             this.tabSummary.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSummary.Size = new System.Drawing.Size(914, 599);
+            this.tabSummary.Size = new System.Drawing.Size(918, 596);
             this.tabSummary.TabIndex = 0;
             this.tabSummary.Text = "tSum";
+            this.tabSummary.Enter += new System.EventHandler(this.tabSummary_Enter);
             // 
             // label11
             // 
@@ -1476,9 +1491,11 @@
             this.tabVConfig.Controls.Add(this.cboxIsImage);
             this.tabVConfig.Location = new System.Drawing.Point(4, 44);
             this.tabVConfig.Name = "tabVConfig";
-            this.tabVConfig.Size = new System.Drawing.Size(914, 599);
+            this.tabVConfig.Size = new System.Drawing.Size(918, 596);
             this.tabVConfig.TabIndex = 4;
             this.tabVConfig.Text = "vConfig";
+            this.tabVConfig.Enter += new System.EventHandler(this.tabVConfig_Enter);
+            this.tabVConfig.Leave += new System.EventHandler(this.tabVConfig_Leave);
             // 
             // btnOpacityUp
             // 
@@ -1674,9 +1691,30 @@
             this.tabVAntenna.Controls.Add(this.nudAntennaPivot);
             this.tabVAntenna.Location = new System.Drawing.Point(4, 44);
             this.tabVAntenna.Name = "tabVAntenna";
-            this.tabVAntenna.Size = new System.Drawing.Size(914, 599);
+            this.tabVAntenna.Size = new System.Drawing.Size(918, 596);
             this.tabVAntenna.TabIndex = 12;
             this.tabVAntenna.Text = "vAnt";
+            this.tabVAntenna.Enter += new System.EventHandler(this.tabVAntenna_Enter);
+            // 
+            // nudAntennaHeight
+            // 
+            this.nudAntennaHeight.Location = new System.Drawing.Point(392, 208);
+            this.nudAntennaHeight.Maximum = 10D;
+            this.nudAntennaHeight.Mode = Twol.UnitMode.Small;
+            this.nudAntennaHeight.Name = "nudAntennaHeight";
+            this.nudAntennaHeight.Size = new System.Drawing.Size(144, 52);
+            this.nudAntennaHeight.TabIndex = 3;
+            this.nudAntennaHeight.ValueChanged += new System.EventHandler(this.nudAntennaHeight_ValueChanged);
+            // 
+            // nudAntennaOffset
+            // 
+            this.nudAntennaOffset.Location = new System.Drawing.Point(474, 352);
+            this.nudAntennaOffset.Maximum = 10D;
+            this.nudAntennaOffset.Mode = Twol.UnitMode.Small;
+            this.nudAntennaOffset.Name = "nudAntennaOffset";
+            this.nudAntennaOffset.Size = new System.Drawing.Size(144, 52);
+            this.nudAntennaOffset.TabIndex = 2;
+            this.nudAntennaOffset.ValueChanged += new System.EventHandler(this.nudAntennaOffset_ValueChanged);
             // 
             // lblPivotDistance
             // 
@@ -1857,6 +1895,16 @@
             this.pboxAntenna.TabIndex = 48;
             this.pboxAntenna.TabStop = false;
             // 
+            // nudAntennaPivot
+            // 
+            this.nudAntennaPivot.Location = new System.Drawing.Point(126, 43);
+            this.nudAntennaPivot.Maximum = 10D;
+            this.nudAntennaPivot.Mode = Twol.UnitMode.Small;
+            this.nudAntennaPivot.Name = "nudAntennaPivot";
+            this.nudAntennaPivot.Size = new System.Drawing.Size(144, 52);
+            this.nudAntennaPivot.TabIndex = 1;
+            this.nudAntennaPivot.ValueChanged += new System.EventHandler(this.nudAntennaPivot_ValueChanged);
+            // 
             // tabVDimensions
             // 
             this.tabVDimensions.BackColor = System.Drawing.Color.Azure;
@@ -1872,9 +1920,43 @@
             this.tabVDimensions.Controls.Add(this.pictureBox1);
             this.tabVDimensions.Location = new System.Drawing.Point(4, 44);
             this.tabVDimensions.Name = "tabVDimensions";
-            this.tabVDimensions.Size = new System.Drawing.Size(914, 599);
+            this.tabVDimensions.Size = new System.Drawing.Size(918, 596);
             this.tabVDimensions.TabIndex = 13;
             this.tabVDimensions.Text = "vDim";
+            this.tabVDimensions.Enter += new System.EventHandler(this.tabVDimensions_Enter);
+            this.tabVDimensions.Leave += new System.EventHandler(this.tabVDimensions_Leave);
+            // 
+            // nudWheelbase
+            // 
+            this.nudWheelbase.Location = new System.Drawing.Point(179, 397);
+            this.nudWheelbase.Maximum = 20D;
+            this.nudWheelbase.Minimum = 0.5D;
+            this.nudWheelbase.Mode = Twol.UnitMode.Small;
+            this.nudWheelbase.Name = "nudWheelbase";
+            this.nudWheelbase.Size = new System.Drawing.Size(152, 52);
+            this.nudWheelbase.TabIndex = 52;
+            this.nudWheelbase.ValueChanged += new System.EventHandler(this.nudWheelbase_ValueChanged);
+            // 
+            // nudTractorHitchLength
+            // 
+            this.nudTractorHitchLength.Location = new System.Drawing.Point(37, 272);
+            this.nudTractorHitchLength.Maximum = 40D;
+            this.nudTractorHitchLength.Mode = Twol.UnitMode.Small;
+            this.nudTractorHitchLength.Name = "nudTractorHitchLength";
+            this.nudTractorHitchLength.Size = new System.Drawing.Size(152, 52);
+            this.nudTractorHitchLength.TabIndex = 478;
+            this.nudTractorHitchLength.ValueChanged += new System.EventHandler(this.nudTractorHitchLength_ValueChanged);
+            // 
+            // nudVehicleTrack
+            // 
+            this.nudVehicleTrack.Location = new System.Drawing.Point(700, 165);
+            this.nudVehicleTrack.Maximum = 20D;
+            this.nudVehicleTrack.Minimum = 0.2D;
+            this.nudVehicleTrack.Mode = Twol.UnitMode.Small;
+            this.nudVehicleTrack.Name = "nudVehicleTrack";
+            this.nudVehicleTrack.Size = new System.Drawing.Size(133, 52);
+            this.nudVehicleTrack.TabIndex = 53;
+            this.nudVehicleTrack.ValueChanged += new System.EventHandler(this.nudVehicleTrack_ValueChanged);
             // 
             // label97
             // 
@@ -1962,9 +2044,11 @@
             this.tabTConfig.Controls.Add(this.gboxAttachment);
             this.tabTConfig.Location = new System.Drawing.Point(4, 44);
             this.tabTConfig.Name = "tabTConfig";
-            this.tabTConfig.Size = new System.Drawing.Size(914, 599);
+            this.tabTConfig.Size = new System.Drawing.Size(918, 596);
             this.tabTConfig.TabIndex = 11;
             this.tabTConfig.Text = "tConfig";
+            this.tabTConfig.Enter += new System.EventHandler(this.tabTConfig_Enter);
+            this.tabTConfig.Leave += new System.EventHandler(this.tabTConfig_Leave);
             // 
             // gboxAttachment
             // 
@@ -2066,9 +2150,42 @@
             this.tabTHitch.Controls.Add(this.picboxToolHitch);
             this.tabTHitch.Location = new System.Drawing.Point(4, 44);
             this.tabTHitch.Name = "tabTHitch";
-            this.tabTHitch.Size = new System.Drawing.Size(914, 599);
+            this.tabTHitch.Size = new System.Drawing.Size(918, 596);
             this.tabTHitch.TabIndex = 5;
             this.tabTHitch.Text = "tHitch";
+            this.tabTHitch.Enter += new System.EventHandler(this.tabTHitch_Enter);
+            // 
+            // nudTrailingHitchLength
+            // 
+            this.nudTrailingHitchLength.Location = new System.Drawing.Point(456, 407);
+            this.nudTrailingHitchLength.Maximum = 30D;
+            this.nudTrailingHitchLength.Minimum = 0.1D;
+            this.nudTrailingHitchLength.Mode = Twol.UnitMode.Small;
+            this.nudTrailingHitchLength.Name = "nudTrailingHitchLength";
+            this.nudTrailingHitchLength.Size = new System.Drawing.Size(124, 52);
+            this.nudTrailingHitchLength.TabIndex = 3;
+            this.nudTrailingHitchLength.ValueChanged += new System.EventHandler(this.nudTrailingHitchLength_ValueChanged);
+            // 
+            // nudDrawbarLength
+            // 
+            this.nudDrawbarLength.Location = new System.Drawing.Point(401, 407);
+            this.nudDrawbarLength.Maximum = 30D;
+            this.nudDrawbarLength.Mode = Twol.UnitMode.Small;
+            this.nudDrawbarLength.Name = "nudDrawbarLength";
+            this.nudDrawbarLength.Size = new System.Drawing.Size(124, 52);
+            this.nudDrawbarLength.TabIndex = 1;
+            this.nudDrawbarLength.ValueChanged += new System.EventHandler(this.nudDrawbarLength_ValueChanged);
+            // 
+            // nudTankHitch
+            // 
+            this.nudTankHitch.Location = new System.Drawing.Point(643, 407);
+            this.nudTankHitch.Maximum = 30D;
+            this.nudTankHitch.Minimum = 0.1D;
+            this.nudTankHitch.Mode = Twol.UnitMode.Small;
+            this.nudTankHitch.Name = "nudTankHitch";
+            this.nudTankHitch.Size = new System.Drawing.Size(124, 52);
+            this.nudTankHitch.TabIndex = 2;
+            this.nudTankHitch.ValueChanged += new System.EventHandler(this.nudTankHitch_ValueChanged);
             // 
             // label112
             // 
@@ -2119,9 +2236,11 @@
             this.tabToolOffset.Controls.Add(this.nudOffset);
             this.tabToolOffset.Location = new System.Drawing.Point(4, 44);
             this.tabToolOffset.Name = "tabToolOffset";
-            this.tabToolOffset.Size = new System.Drawing.Size(914, 599);
+            this.tabToolOffset.Size = new System.Drawing.Size(918, 596);
             this.tabToolOffset.TabIndex = 26;
             this.tabToolOffset.Text = "tOffs";
+            this.tabToolOffset.Enter += new System.EventHandler(this.tabToolOffset_Enter);
+            this.tabToolOffset.Leave += new System.EventHandler(this.tabToolOffset_Leave);
             // 
             // btnZeroOverlap
             // 
@@ -2323,6 +2442,26 @@
             this.label65.TabIndex = 476;
             this.label65.Text = "Tool Left";
             // 
+            // nudOverlap
+            // 
+            this.nudOverlap.Location = new System.Drawing.Point(656, 109);
+            this.nudOverlap.Maximum = 10D;
+            this.nudOverlap.Mode = Twol.UnitMode.Small;
+            this.nudOverlap.Name = "nudOverlap";
+            this.nudOverlap.Size = new System.Drawing.Size(114, 52);
+            this.nudOverlap.TabIndex = 116;
+            this.nudOverlap.ValueChanged += new System.EventHandler(this.nudOverlaPGN_ValueChanged);
+            // 
+            // nudOffset
+            // 
+            this.nudOffset.Location = new System.Drawing.Point(233, 109);
+            this.nudOffset.Maximum = 25D;
+            this.nudOffset.Mode = Twol.UnitMode.Small;
+            this.nudOffset.Name = "nudOffset";
+            this.nudOffset.Size = new System.Drawing.Size(114, 52);
+            this.nudOffset.TabIndex = 115;
+            this.nudOffset.ValueChanged += new System.EventHandler(this.nudOffset_ValueChanged);
+            // 
             // tabToolPivot
             // 
             this.tabToolPivot.BackColor = System.Drawing.Color.Azure;
@@ -2334,9 +2473,10 @@
             this.tabToolPivot.Location = new System.Drawing.Point(4, 44);
             this.tabToolPivot.Name = "tabToolPivot";
             this.tabToolPivot.Padding = new System.Windows.Forms.Padding(3);
-            this.tabToolPivot.Size = new System.Drawing.Size(914, 599);
+            this.tabToolPivot.Size = new System.Drawing.Size(918, 596);
             this.tabToolPivot.TabIndex = 27;
             this.tabToolPivot.Text = "tPivot";
+            this.tabToolPivot.Enter += new System.EventHandler(this.tabToolPivot_Enter);
             // 
             // btnPivotOffsetZero
             // 
@@ -2399,6 +2539,16 @@
             this.rbtnPivotAheadNeg.UseVisualStyleBackColor = false;
             this.rbtnPivotAheadNeg.Click += new System.EventHandler(this.rbtnPivotBehindPos_Click);
             // 
+            // nudTrailingToolToPivotLength
+            // 
+            this.nudTrailingToolToPivotLength.Location = new System.Drawing.Point(320, 337);
+            this.nudTrailingToolToPivotLength.Maximum = 20D;
+            this.nudTrailingToolToPivotLength.Mode = Twol.UnitMode.Small;
+            this.nudTrailingToolToPivotLength.Name = "nudTrailingToolToPivotLength";
+            this.nudTrailingToolToPivotLength.Size = new System.Drawing.Size(205, 52);
+            this.nudTrailingToolToPivotLength.TabIndex = 214;
+            this.nudTrailingToolToPivotLength.ValueChanged += new System.EventHandler(this.nudTrailingToolToPivotLength_ValueChanged);
+            // 
             // tabTSections
             // 
             this.tabTSections.BackColor = System.Drawing.Color.Azure;
@@ -2455,9 +2605,11 @@
             this.tabTSections.ForeColor = System.Drawing.Color.Black;
             this.tabTSections.Location = new System.Drawing.Point(4, 44);
             this.tabTSections.Name = "tabTSections";
-            this.tabTSections.Size = new System.Drawing.Size(914, 599);
+            this.tabTSections.Size = new System.Drawing.Size(918, 596);
             this.tabTSections.TabIndex = 7;
             this.tabTSections.Text = "tSect";
+            this.tabTSections.Enter += new System.EventHandler(this.tabTSections_Enter);
+            this.tabTSections.Leave += new System.EventHandler(this.tabTSections_Leave);
             // 
             // panelSymmetricSections
             // 
@@ -2499,6 +2651,15 @@
             this.panelSymmetricSections.Size = new System.Drawing.Size(900, 274);
             this.panelSymmetricSections.TabIndex = 495;
             // 
+            // nudZone8To
+            // 
+            this.nudZone8To.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudZone8To.Location = new System.Drawing.Point(809, 190);
+            this.nudZone8To.Name = "nudZone8To";
+            this.nudZone8To.Size = new System.Drawing.Size(90, 40);
+            this.nudZone8To.TabIndex = 509;
+            this.nudZone8To.ValueChanged += new System.EventHandler(this.nudZone8To_ValueChanged);
+            // 
             // lblZoneStart8
             // 
             this.lblZoneStart8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -2539,6 +2700,16 @@
             this.label158.Text = "->";
             this.label158.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // nudZone7To
+            // 
+            this.nudZone7To.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudZone7To.Location = new System.Drawing.Point(581, 190);
+            this.nudZone7To.Minimum = 1D;
+            this.nudZone7To.Name = "nudZone7To";
+            this.nudZone7To.Size = new System.Drawing.Size(90, 40);
+            this.nudZone7To.TabIndex = 505;
+            this.nudZone7To.ValueChanged += new System.EventHandler(this.nudZone7To_ValueChanged);
+            // 
             // lblZoneStart7
             // 
             this.lblZoneStart7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -2578,6 +2749,66 @@
             this.label155.TabIndex = 508;
             this.label155.Text = "->";
             this.label155.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // nudZone6To
+            // 
+            this.nudZone6To.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudZone6To.Location = new System.Drawing.Point(348, 190);
+            this.nudZone6To.Minimum = 1D;
+            this.nudZone6To.Name = "nudZone6To";
+            this.nudZone6To.Size = new System.Drawing.Size(90, 40);
+            this.nudZone6To.TabIndex = 480;
+            this.nudZone6To.ValueChanged += new System.EventHandler(this.nudZone6To_ValueChanged);
+            // 
+            // nudZone4To
+            // 
+            this.nudZone4To.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudZone4To.Location = new System.Drawing.Point(809, 75);
+            this.nudZone4To.Minimum = 1D;
+            this.nudZone4To.Name = "nudZone4To";
+            this.nudZone4To.Size = new System.Drawing.Size(90, 40);
+            this.nudZone4To.TabIndex = 476;
+            this.nudZone4To.ValueChanged += new System.EventHandler(this.nudZone4To_ValueChanged);
+            // 
+            // nudZone1To
+            // 
+            this.nudZone1To.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudZone1To.Location = new System.Drawing.Point(110, 75);
+            this.nudZone1To.Minimum = 1D;
+            this.nudZone1To.Name = "nudZone1To";
+            this.nudZone1To.Size = new System.Drawing.Size(90, 40);
+            this.nudZone1To.TabIndex = 461;
+            this.nudZone1To.ValueChanged += new System.EventHandler(this.nudZone1To_ValueChanged);
+            // 
+            // nudZone5To
+            // 
+            this.nudZone5To.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudZone5To.Location = new System.Drawing.Point(110, 190);
+            this.nudZone5To.Minimum = 1D;
+            this.nudZone5To.Name = "nudZone5To";
+            this.nudZone5To.Size = new System.Drawing.Size(90, 40);
+            this.nudZone5To.TabIndex = 478;
+            this.nudZone5To.ValueChanged += new System.EventHandler(this.nudZone5To_ValueChanged);
+            // 
+            // nudZone3To
+            // 
+            this.nudZone3To.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudZone3To.Location = new System.Drawing.Point(581, 75);
+            this.nudZone3To.Minimum = 1D;
+            this.nudZone3To.Name = "nudZone3To";
+            this.nudZone3To.Size = new System.Drawing.Size(90, 40);
+            this.nudZone3To.TabIndex = 467;
+            this.nudZone3To.ValueChanged += new System.EventHandler(this.nudZone3To_ValueChanged);
+            // 
+            // nudZone2To
+            // 
+            this.nudZone2To.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudZone2To.Location = new System.Drawing.Point(348, 75);
+            this.nudZone2To.Minimum = 1D;
+            this.nudZone2To.Name = "nudZone2To";
+            this.nudZone2To.Size = new System.Drawing.Size(90, 40);
+            this.nudZone2To.TabIndex = 464;
+            this.nudZone2To.ValueChanged += new System.EventHandler(this.nudZone2To_ValueChanged);
             // 
             // lblZoneStart6
             // 
@@ -3241,6 +3472,241 @@
             this.cboxIsUnique.UseVisualStyleBackColor = false;
             this.cboxIsUnique.Click += new System.EventHandler(this.cboxIsUnique_Click);
             // 
+            // nudCutoffSpeed
+            // 
+            this.nudCutoffSpeed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudCutoffSpeed.DecimalPlaces = 1;
+            this.nudCutoffSpeed.Location = new System.Drawing.Point(700, 508);
+            this.nudCutoffSpeed.Maximum = 30D;
+            this.nudCutoffSpeed.Mode = Twol.UnitMode.Speed;
+            this.nudCutoffSpeed.Name = "nudCutoffSpeed";
+            this.nudCutoffSpeed.Size = new System.Drawing.Size(127, 52);
+            this.nudCutoffSpeed.TabIndex = 499;
+            this.nudCutoffSpeed.ValueChanged += new System.EventHandler(this.nudCutoffSpeed_ValueChanged);
+            // 
+            // nudDefaultSectionWidth
+            // 
+            this.nudDefaultSectionWidth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudDefaultSectionWidth.Location = new System.Drawing.Point(249, 353);
+            this.nudDefaultSectionWidth.Maximum = 10D;
+            this.nudDefaultSectionWidth.Minimum = 0.1D;
+            this.nudDefaultSectionWidth.Mode = Twol.UnitMode.Small;
+            this.nudDefaultSectionWidth.Name = "nudDefaultSectionWidth";
+            this.nudDefaultSectionWidth.Size = new System.Drawing.Size(179, 52);
+            this.nudDefaultSectionWidth.TabIndex = 296;
+            this.nudDefaultSectionWidth.ValueChanged += new System.EventHandler(this.nudDefaultSectionWidth_ValueChanged);
+            // 
+            // nudMinCoverage
+            // 
+            this.nudMinCoverage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudMinCoverage.Location = new System.Drawing.Point(501, 508);
+            this.nudMinCoverage.Name = "nudMinCoverage";
+            this.nudMinCoverage.Size = new System.Drawing.Size(132, 52);
+            this.nudMinCoverage.TabIndex = 292;
+            this.nudMinCoverage.ValueChanged += new System.EventHandler(this.nudMinCoverage_ValueChanged);
+            // 
+            // nudSection16
+            // 
+            this.nudSection16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudSection16.Location = new System.Drawing.Point(792, 104);
+            this.nudSection16.Maximum = 50D;
+            this.nudSection16.Minimum = 0.01D;
+            this.nudSection16.Mode = Twol.UnitMode.Small;
+            this.nudSection16.Name = "nudSection16";
+            this.nudSection16.Size = new System.Drawing.Size(104, 44);
+            this.nudSection16.TabIndex = 289;
+            this.nudSection16.ValueChanged += new System.EventHandler(this.NudSection_ValueChanged);
+            // 
+            // nudSection15
+            // 
+            this.nudSection15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudSection15.Location = new System.Drawing.Point(680, 104);
+            this.nudSection15.Maximum = 50D;
+            this.nudSection15.Minimum = 0.01D;
+            this.nudSection15.Mode = Twol.UnitMode.Small;
+            this.nudSection15.Name = "nudSection15";
+            this.nudSection15.Size = new System.Drawing.Size(104, 44);
+            this.nudSection15.TabIndex = 285;
+            this.nudSection15.ValueChanged += new System.EventHandler(this.NudSection_ValueChanged);
+            // 
+            // nudSection14
+            // 
+            this.nudSection14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudSection14.Location = new System.Drawing.Point(568, 104);
+            this.nudSection14.Maximum = 50D;
+            this.nudSection14.Minimum = 0.01D;
+            this.nudSection14.Mode = Twol.UnitMode.Small;
+            this.nudSection14.Name = "nudSection14";
+            this.nudSection14.Size = new System.Drawing.Size(104, 44);
+            this.nudSection14.TabIndex = 284;
+            this.nudSection14.ValueChanged += new System.EventHandler(this.NudSection_ValueChanged);
+            // 
+            // nudSection13
+            // 
+            this.nudSection13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudSection13.Location = new System.Drawing.Point(456, 104);
+            this.nudSection13.Maximum = 50D;
+            this.nudSection13.Minimum = 0.01D;
+            this.nudSection13.Mode = Twol.UnitMode.Small;
+            this.nudSection13.Name = "nudSection13";
+            this.nudSection13.Size = new System.Drawing.Size(104, 44);
+            this.nudSection13.TabIndex = 283;
+            this.nudSection13.ValueChanged += new System.EventHandler(this.NudSection_ValueChanged);
+            // 
+            // nudSection12
+            // 
+            this.nudSection12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudSection12.Location = new System.Drawing.Point(344, 104);
+            this.nudSection12.Maximum = 50D;
+            this.nudSection12.Minimum = 0.01D;
+            this.nudSection12.Mode = Twol.UnitMode.Small;
+            this.nudSection12.Name = "nudSection12";
+            this.nudSection12.Size = new System.Drawing.Size(104, 44);
+            this.nudSection12.TabIndex = 270;
+            this.nudSection12.ValueChanged += new System.EventHandler(this.NudSection_ValueChanged);
+            // 
+            // nudSection11
+            // 
+            this.nudSection11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudSection11.Location = new System.Drawing.Point(232, 104);
+            this.nudSection11.Maximum = 50D;
+            this.nudSection11.Minimum = 0.01D;
+            this.nudSection11.Mode = Twol.UnitMode.Small;
+            this.nudSection11.Name = "nudSection11";
+            this.nudSection11.Size = new System.Drawing.Size(104, 44);
+            this.nudSection11.TabIndex = 269;
+            this.nudSection11.ValueChanged += new System.EventHandler(this.NudSection_ValueChanged);
+            // 
+            // nudSection10
+            // 
+            this.nudSection10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudSection10.Location = new System.Drawing.Point(120, 104);
+            this.nudSection10.Maximum = 50D;
+            this.nudSection10.Minimum = 0.01D;
+            this.nudSection10.Mode = Twol.UnitMode.Small;
+            this.nudSection10.Name = "nudSection10";
+            this.nudSection10.Size = new System.Drawing.Size(104, 44);
+            this.nudSection10.TabIndex = 268;
+            this.nudSection10.ValueChanged += new System.EventHandler(this.NudSection_ValueChanged);
+            // 
+            // nudSection09
+            // 
+            this.nudSection09.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudSection09.Location = new System.Drawing.Point(8, 104);
+            this.nudSection09.Maximum = 50D;
+            this.nudSection09.Minimum = 0.01D;
+            this.nudSection09.Mode = Twol.UnitMode.Small;
+            this.nudSection09.Name = "nudSection09";
+            this.nudSection09.Size = new System.Drawing.Size(104, 44);
+            this.nudSection09.TabIndex = 267;
+            this.nudSection09.ValueChanged += new System.EventHandler(this.NudSection_ValueChanged);
+            // 
+            // nudSection08
+            // 
+            this.nudSection08.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudSection08.Location = new System.Drawing.Point(792, 233);
+            this.nudSection08.Maximum = 50D;
+            this.nudSection08.Minimum = 0.01D;
+            this.nudSection08.Mode = Twol.UnitMode.Small;
+            this.nudSection08.Name = "nudSection08";
+            this.nudSection08.Size = new System.Drawing.Size(104, 44);
+            this.nudSection08.TabIndex = 266;
+            this.nudSection08.ValueChanged += new System.EventHandler(this.NudSection_ValueChanged);
+            // 
+            // nudSection07
+            // 
+            this.nudSection07.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudSection07.Location = new System.Drawing.Point(680, 233);
+            this.nudSection07.Maximum = 50D;
+            this.nudSection07.Minimum = 0.01D;
+            this.nudSection07.Mode = Twol.UnitMode.Small;
+            this.nudSection07.Name = "nudSection07";
+            this.nudSection07.Size = new System.Drawing.Size(104, 44);
+            this.nudSection07.TabIndex = 265;
+            this.nudSection07.ValueChanged += new System.EventHandler(this.NudSection_ValueChanged);
+            // 
+            // nudSection06
+            // 
+            this.nudSection06.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudSection06.Location = new System.Drawing.Point(568, 233);
+            this.nudSection06.Maximum = 50D;
+            this.nudSection06.Minimum = 0.01D;
+            this.nudSection06.Mode = Twol.UnitMode.Small;
+            this.nudSection06.Name = "nudSection06";
+            this.nudSection06.Size = new System.Drawing.Size(104, 44);
+            this.nudSection06.TabIndex = 264;
+            this.nudSection06.ValueChanged += new System.EventHandler(this.NudSection_ValueChanged);
+            // 
+            // nudSection05
+            // 
+            this.nudSection05.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudSection05.Location = new System.Drawing.Point(456, 233);
+            this.nudSection05.Maximum = 50D;
+            this.nudSection05.Minimum = 0.01D;
+            this.nudSection05.Mode = Twol.UnitMode.Small;
+            this.nudSection05.Name = "nudSection05";
+            this.nudSection05.Size = new System.Drawing.Size(104, 44);
+            this.nudSection05.TabIndex = 263;
+            this.nudSection05.ValueChanged += new System.EventHandler(this.NudSection_ValueChanged);
+            // 
+            // nudSection04
+            // 
+            this.nudSection04.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudSection04.Location = new System.Drawing.Point(344, 233);
+            this.nudSection04.Maximum = 50D;
+            this.nudSection04.Minimum = 0.01D;
+            this.nudSection04.Mode = Twol.UnitMode.Small;
+            this.nudSection04.Name = "nudSection04";
+            this.nudSection04.Size = new System.Drawing.Size(104, 44);
+            this.nudSection04.TabIndex = 262;
+            this.nudSection04.ValueChanged += new System.EventHandler(this.NudSection_ValueChanged);
+            // 
+            // nudSection03
+            // 
+            this.nudSection03.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudSection03.Location = new System.Drawing.Point(232, 233);
+            this.nudSection03.Maximum = 50D;
+            this.nudSection03.Minimum = 0.01D;
+            this.nudSection03.Mode = Twol.UnitMode.Small;
+            this.nudSection03.Name = "nudSection03";
+            this.nudSection03.Size = new System.Drawing.Size(104, 44);
+            this.nudSection03.TabIndex = 261;
+            this.nudSection03.ValueChanged += new System.EventHandler(this.NudSection_ValueChanged);
+            // 
+            // nudSection02
+            // 
+            this.nudSection02.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudSection02.Location = new System.Drawing.Point(120, 233);
+            this.nudSection02.Maximum = 50D;
+            this.nudSection02.Minimum = 0.01D;
+            this.nudSection02.Mode = Twol.UnitMode.Small;
+            this.nudSection02.Name = "nudSection02";
+            this.nudSection02.Size = new System.Drawing.Size(104, 44);
+            this.nudSection02.TabIndex = 260;
+            this.nudSection02.ValueChanged += new System.EventHandler(this.NudSection_ValueChanged);
+            // 
+            // nudSection01
+            // 
+            this.nudSection01.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudSection01.Location = new System.Drawing.Point(8, 233);
+            this.nudSection01.Maximum = 50D;
+            this.nudSection01.Minimum = 0.01D;
+            this.nudSection01.Mode = Twol.UnitMode.Small;
+            this.nudSection01.Name = "nudSection01";
+            this.nudSection01.Size = new System.Drawing.Size(104, 44);
+            this.nudSection01.TabIndex = 259;
+            this.nudSection01.ValueChanged += new System.EventHandler(this.NudSection_ValueChanged);
+            // 
+            // nudNumberOfSections
+            // 
+            this.nudNumberOfSections.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudNumberOfSections.Location = new System.Drawing.Point(540, 355);
+            this.nudNumberOfSections.Minimum = 1D;
+            this.nudNumberOfSections.Name = "nudNumberOfSections";
+            this.nudNumberOfSections.Size = new System.Drawing.Size(108, 52);
+            this.nudNumberOfSections.TabIndex = 458;
+            this.nudNumberOfSections.ValueChanged += new System.EventHandler(this.nudNumberOfSections_ValueChanged);
+            // 
             // tabTSwitches
             // 
             this.tabTSwitches.BackColor = System.Drawing.Color.Azure;
@@ -3248,9 +3714,11 @@
             this.tabTSwitches.Controls.Add(this.grpSwitch);
             this.tabTSwitches.Location = new System.Drawing.Point(4, 44);
             this.tabTSwitches.Name = "tabTSwitches";
-            this.tabTSwitches.Size = new System.Drawing.Size(914, 599);
+            this.tabTSwitches.Size = new System.Drawing.Size(918, 596);
             this.tabTSwitches.TabIndex = 9;
             this.tabTSwitches.Text = "tSwit";
+            this.tabTSwitches.Enter += new System.EventHandler(this.tabTSwitches_Enter);
+            this.tabTSwitches.Leave += new System.EventHandler(this.tabTSwitches_Leave);
             // 
             // grpControls
             // 
@@ -3435,9 +3903,10 @@
             this.tabTSettings.Controls.Add(this.nudLookAhead);
             this.tabTSettings.Location = new System.Drawing.Point(4, 44);
             this.tabTSettings.Name = "tabTSettings";
-            this.tabTSettings.Size = new System.Drawing.Size(914, 599);
+            this.tabTSettings.Size = new System.Drawing.Size(918, 596);
             this.tabTSettings.TabIndex = 10;
             this.tabTSettings.Text = "TSettings";
+            this.tabTSettings.Enter += new System.EventHandler(this.tabTSettings_Enter);
             // 
             // label5
             // 
@@ -3556,6 +4025,63 @@
             this.pictureBox3.TabIndex = 127;
             this.pictureBox3.TabStop = false;
             // 
+            // nudLookAheadDistanceOff
+            // 
+            this.nudLookAheadDistanceOff.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudLookAheadDistanceOff.DecimalPlaces = 1;
+            this.nudLookAheadDistanceOff.Location = new System.Drawing.Point(393, 526);
+            this.nudLookAheadDistanceOff.Maximum = 500D;
+            this.nudLookAheadDistanceOff.Mode = Twol.UnitMode.Small;
+            this.nudLookAheadDistanceOff.Name = "nudLookAheadDistanceOff";
+            this.nudLookAheadDistanceOff.Size = new System.Drawing.Size(114, 52);
+            this.nudLookAheadDistanceOff.TabIndex = 136;
+            this.nudLookAheadDistanceOff.ValueChanged += new System.EventHandler(this.nudLookAheadDistanceOff_ValueChanged);
+            // 
+            // nudLookAheadDistanceOn
+            // 
+            this.nudLookAheadDistanceOn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudLookAheadDistanceOn.DecimalPlaces = 1;
+            this.nudLookAheadDistanceOn.Location = new System.Drawing.Point(108, 526);
+            this.nudLookAheadDistanceOn.Maximum = 500D;
+            this.nudLookAheadDistanceOn.Mode = Twol.UnitMode.Small;
+            this.nudLookAheadDistanceOn.Name = "nudLookAheadDistanceOn";
+            this.nudLookAheadDistanceOn.Size = new System.Drawing.Size(114, 52);
+            this.nudLookAheadDistanceOn.TabIndex = 135;
+            this.nudLookAheadDistanceOn.ValueChanged += new System.EventHandler(this.nudLookAheadDistanceOn_ValueChanged);
+            // 
+            // nudLookAheadOff
+            // 
+            this.nudLookAheadOff.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudLookAheadOff.DecimalPlaces = 1;
+            this.nudLookAheadOff.Location = new System.Drawing.Point(393, 404);
+            this.nudLookAheadOff.Maximum = 20D;
+            this.nudLookAheadOff.Name = "nudLookAheadOff";
+            this.nudLookAheadOff.Size = new System.Drawing.Size(114, 52);
+            this.nudLookAheadOff.TabIndex = 124;
+            this.nudLookAheadOff.ValueChanged += new System.EventHandler(this.nudLookAheadOff_ValueChanged);
+            // 
+            // nudTurnOffDelay
+            // 
+            this.nudTurnOffDelay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudTurnOffDelay.DecimalPlaces = 1;
+            this.nudTurnOffDelay.Location = new System.Drawing.Point(679, 404);
+            this.nudTurnOffDelay.Maximum = 10D;
+            this.nudTurnOffDelay.Name = "nudTurnOffDelay";
+            this.nudTurnOffDelay.Size = new System.Drawing.Size(114, 52);
+            this.nudTurnOffDelay.TabIndex = 119;
+            this.nudTurnOffDelay.ValueChanged += new System.EventHandler(this.nudTurnOffDelay_ValueChanged);
+            // 
+            // nudLookAhead
+            // 
+            this.nudLookAhead.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudLookAhead.DecimalPlaces = 1;
+            this.nudLookAhead.Location = new System.Drawing.Point(108, 404);
+            this.nudLookAhead.Maximum = 22D;
+            this.nudLookAhead.Name = "nudLookAhead";
+            this.nudLookAhead.Size = new System.Drawing.Size(114, 52);
+            this.nudLookAhead.TabIndex = 117;
+            this.nudLookAhead.ValueChanged += new System.EventHandler(this.nudLookAhead_ValueChanged);
+            // 
             // tabDHeading
             // 
             this.tabDHeading.BackColor = System.Drawing.Color.Azure;
@@ -3576,9 +4102,11 @@
             this.tabDHeading.Controls.Add(this.cboxIsRTK);
             this.tabDHeading.Location = new System.Drawing.Point(4, 44);
             this.tabDHeading.Name = "tabDHeading";
-            this.tabDHeading.Size = new System.Drawing.Size(914, 599);
+            this.tabDHeading.Size = new System.Drawing.Size(918, 596);
             this.tabDHeading.TabIndex = 15;
             this.tabDHeading.Text = "dHead";
+            this.tabDHeading.Enter += new System.EventHandler(this.tabDHeading_Enter);
+            this.tabDHeading.Leave += new System.EventHandler(this.tabDHeading_Leave);
             // 
             // lblAlarmStopsAutoSteer
             // 
@@ -3587,7 +4115,7 @@
             this.lblAlarmStopsAutoSteer.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.lblAlarmStopsAutoSteer.ForeColor = System.Drawing.Color.Black;
             this.lblAlarmStopsAutoSteer.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblAlarmStopsAutoSteer.Location = new System.Drawing.Point(640, 458);
+            this.lblAlarmStopsAutoSteer.Location = new System.Drawing.Point(60, 328);
             this.lblAlarmStopsAutoSteer.Name = "lblAlarmStopsAutoSteer";
             this.lblAlarmStopsAutoSteer.Size = new System.Drawing.Size(228, 27);
             this.lblAlarmStopsAutoSteer.TabIndex = 478;
@@ -3610,10 +4138,11 @@
             // 
             // label167
             // 
+            this.label167.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label167.AutoSize = true;
             this.label167.Font = new System.Drawing.Font("Tahoma", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label167.ForeColor = System.Drawing.Color.Black;
-            this.label167.Location = new System.Drawing.Point(186, 411);
+            this.label167.Location = new System.Drawing.Point(429, 470);
             this.label167.Name = "label167";
             this.label167.Size = new System.Drawing.Size(122, 23);
             this.label167.TabIndex = 479;
@@ -3636,10 +4165,11 @@
             // 
             // lblFusionIMU
             // 
+            this.lblFusionIMU.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblFusionIMU.AutoSize = true;
             this.lblFusionIMU.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFusionIMU.ForeColor = System.Drawing.Color.Black;
-            this.lblFusionIMU.Location = new System.Drawing.Point(191, 352);
+            this.lblFusionIMU.Location = new System.Drawing.Point(434, 411);
             this.lblFusionIMU.Name = "lblFusionIMU";
             this.lblFusionIMU.Size = new System.Drawing.Size(95, 39);
             this.lblFusionIMU.TabIndex = 476;
@@ -3652,7 +4182,7 @@
             this.lblRTKFixAlarm.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.lblRTKFixAlarm.ForeColor = System.Drawing.Color.Black;
             this.lblRTKFixAlarm.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblRTKFixAlarm.Location = new System.Drawing.Point(465, 458);
+            this.lblRTKFixAlarm.Location = new System.Drawing.Point(112, 454);
             this.lblRTKFixAlarm.Name = "lblRTKFixAlarm";
             this.lblRTKFixAlarm.Size = new System.Drawing.Size(127, 29);
             this.lblRTKFixAlarm.TabIndex = 471;
@@ -3661,9 +4191,10 @@
             // 
             // lblIMU
             // 
+            this.lblIMU.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblIMU.Font = new System.Drawing.Font("Tahoma", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblIMU.ForeColor = System.Drawing.Color.ForestGreen;
-            this.lblIMU.Location = new System.Drawing.Point(238, 315);
+            this.lblIMU.Location = new System.Drawing.Point(481, 374);
             this.lblIMU.Name = "lblIMU";
             this.lblIMU.Size = new System.Drawing.Size(76, 23);
             this.lblIMU.TabIndex = 475;
@@ -3685,6 +4216,17 @@
             this.gboxDual.TabIndex = 471;
             this.gboxDual.TabStop = false;
             this.gboxDual.Text = "Dual Antenna Settings";
+            // 
+            // nudDualReverseDistance
+            // 
+            this.nudDualReverseDistance.Location = new System.Drawing.Point(195, 208);
+            this.nudDualReverseDistance.Maximum = 0.9D;
+            this.nudDualReverseDistance.Minimum = 0.1D;
+            this.nudDualReverseDistance.Mode = Twol.UnitMode.Small;
+            this.nudDualReverseDistance.Name = "nudDualReverseDistance";
+            this.nudDualReverseDistance.Size = new System.Drawing.Size(144, 52);
+            this.nudDualReverseDistance.TabIndex = 472;
+            this.nudDualReverseDistance.ValueChanged += new System.EventHandler(this.nudDualReverseDistance_ValueChanged);
             // 
             // lblReverseDistance
             // 
@@ -3709,6 +4251,16 @@
             this.pictureBox13.TabIndex = 471;
             this.pictureBox13.TabStop = false;
             // 
+            // nudDualHeadingOffset
+            // 
+            this.nudDualHeadingOffset.DecimalPlaces = 1;
+            this.nudDualHeadingOffset.Location = new System.Drawing.Point(195, 110);
+            this.nudDualHeadingOffset.Minimum = -100D;
+            this.nudDualHeadingOffset.Name = "nudDualHeadingOffset";
+            this.nudDualHeadingOffset.Size = new System.Drawing.Size(144, 52);
+            this.nudDualHeadingOffset.TabIndex = 470;
+            this.nudDualHeadingOffset.ValueChanged += new System.EventHandler(this.nudDualHeadingOffset_ValueChanged);
+            // 
             // lblHeadingOffset
             // 
             this.lblHeadingOffset.BackColor = System.Drawing.Color.Transparent;
@@ -3724,9 +4276,10 @@
             // 
             // lblGPS
             // 
+            this.lblGPS.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblGPS.Font = new System.Drawing.Font("Tahoma", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblGPS.ForeColor = System.Drawing.Color.Red;
-            this.lblGPS.Location = new System.Drawing.Point(498, 315);
+            this.lblGPS.Location = new System.Drawing.Point(741, 374);
             this.lblGPS.Name = "lblGPS";
             this.lblGPS.Size = new System.Drawing.Size(69, 23);
             this.lblGPS.TabIndex = 474;
@@ -3825,8 +4378,9 @@
             // 
             // hsbarFusion
             // 
+            this.hsbarFusion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.hsbarFusion.LargeChange = 1;
-            this.hsbarFusion.Location = new System.Drawing.Point(288, 345);
+            this.hsbarFusion.Location = new System.Drawing.Point(531, 404);
             this.hsbarFusion.Maximum = 60;
             this.hsbarFusion.Minimum = 5;
             this.hsbarFusion.Name = "hsbarFusion";
@@ -3837,10 +4391,11 @@
             // 
             // lblFusion
             // 
+            this.lblFusion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblFusion.AutoSize = true;
             this.lblFusion.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFusion.ForeColor = System.Drawing.Color.Black;
-            this.lblFusion.Location = new System.Drawing.Point(528, 352);
+            this.lblFusion.Location = new System.Drawing.Point(771, 411);
             this.lblFusion.Name = "lblFusion";
             this.lblFusion.Size = new System.Drawing.Size(95, 39);
             this.lblFusion.TabIndex = 473;
@@ -3856,7 +4411,7 @@
             this.cboxIsRTK_KillAutoSteer.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxIsRTK_KillAutoSteer.ForeColor = System.Drawing.Color.Black;
             this.cboxIsRTK_KillAutoSteer.Image = global::Twol.Properties.Resources.AutoSteerOff;
-            this.cboxIsRTK_KillAutoSteer.Location = new System.Drawing.Point(704, 491);
+            this.cboxIsRTK_KillAutoSteer.Location = new System.Drawing.Point(124, 361);
             this.cboxIsRTK_KillAutoSteer.Name = "cboxIsRTK_KillAutoSteer";
             this.cboxIsRTK_KillAutoSteer.Size = new System.Drawing.Size(103, 69);
             this.cboxIsRTK_KillAutoSteer.TabIndex = 477;
@@ -3865,9 +4420,10 @@
             // 
             // lblIMUFusion
             // 
+            this.lblIMUFusion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblIMUFusion.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblIMUFusion.ForeColor = System.Drawing.Color.Black;
-            this.lblIMUFusion.Location = new System.Drawing.Point(315, 315);
+            this.lblIMUFusion.Location = new System.Drawing.Point(558, 374);
             this.lblIMUFusion.Name = "lblIMUFusion";
             this.lblIMUFusion.Size = new System.Drawing.Size(181, 25);
             this.lblIMUFusion.TabIndex = 472;
@@ -3884,7 +4440,7 @@
             this.cboxIsRTK.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxIsRTK.ForeColor = System.Drawing.Color.Black;
             this.cboxIsRTK.Image = global::Twol.Properties.Resources.Con_SourcesRTKAlarm;
-            this.cboxIsRTK.Location = new System.Drawing.Point(477, 491);
+            this.cboxIsRTK.Location = new System.Drawing.Point(124, 487);
             this.cboxIsRTK.Name = "cboxIsRTK";
             this.cboxIsRTK.Size = new System.Drawing.Size(103, 69);
             this.cboxIsRTK.TabIndex = 309;
@@ -3913,9 +4469,10 @@
             this.tabDRoll.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.tabDRoll.Location = new System.Drawing.Point(4, 44);
             this.tabDRoll.Name = "tabDRoll";
-            this.tabDRoll.Size = new System.Drawing.Size(914, 599);
+            this.tabDRoll.Size = new System.Drawing.Size(918, 596);
             this.tabDRoll.TabIndex = 16;
             this.tabDRoll.Text = "dRoll";
+            this.tabDRoll.Enter += new System.EventHandler(this.tabDRoll_Enter);
             // 
             // label10
             // 
@@ -4102,6 +4659,38 @@
             this.cboxDataInvertRoll.UseVisualStyleBackColor = false;
             this.cboxDataInvertRoll.Click += new System.EventHandler(this.cboxDataInvertRoll_Click);
             // 
+            // btnRollOffsetUp
+            // 
+            this.btnRollOffsetUp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnRollOffsetUp.FlatAppearance.BorderSize = 0;
+            this.btnRollOffsetUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRollOffsetUp.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRollOffsetUp.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnRollOffsetUp.Image = global::Twol.Properties.Resources.UpArrow64;
+            this.btnRollOffsetUp.Location = new System.Drawing.Point(416, 214);
+            this.btnRollOffsetUp.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.btnRollOffsetUp.Name = "btnRollOffsetUp";
+            this.btnRollOffsetUp.Size = new System.Drawing.Size(59, 69);
+            this.btnRollOffsetUp.TabIndex = 487;
+            this.btnRollOffsetUp.UseVisualStyleBackColor = true;
+            this.btnRollOffsetUp.Click += new System.EventHandler(this.btnRollOffsetUPGN_Click);
+            // 
+            // btnRollOffsetDown
+            // 
+            this.btnRollOffsetDown.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnRollOffsetDown.FlatAppearance.BorderSize = 0;
+            this.btnRollOffsetDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRollOffsetDown.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRollOffsetDown.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnRollOffsetDown.Image = global::Twol.Properties.Resources.DnArrow64;
+            this.btnRollOffsetDown.Location = new System.Drawing.Point(342, 215);
+            this.btnRollOffsetDown.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.btnRollOffsetDown.Name = "btnRollOffsetDown";
+            this.btnRollOffsetDown.Size = new System.Drawing.Size(59, 69);
+            this.btnRollOffsetDown.TabIndex = 486;
+            this.btnRollOffsetDown.UseVisualStyleBackColor = true;
+            this.btnRollOffsetDown.Click += new System.EventHandler(this.btnRollOffsetDown_Click);
+            // 
             // tabUTurn
             // 
             this.tabUTurn.BackColor = System.Drawing.Color.Azure;
@@ -4118,9 +4707,11 @@
             this.tabUTurn.Controls.Add(this.nudTurnDistanceFromBoundary);
             this.tabUTurn.Location = new System.Drawing.Point(4, 44);
             this.tabUTurn.Name = "tabUTurn";
-            this.tabUTurn.Size = new System.Drawing.Size(914, 599);
+            this.tabUTurn.Size = new System.Drawing.Size(918, 596);
             this.tabUTurn.TabIndex = 18;
             this.tabUTurn.Text = "uTurn";
+            this.tabUTurn.Enter += new System.EventHandler(this.tabUTurn_Enter);
+            this.tabUTurn.Leave += new System.EventHandler(this.tabUTurn_Leave);
             // 
             // lblUturnExtension
             // 
@@ -4206,6 +4797,59 @@
             this.lblWhenTrig.TabIndex = 458;
             this.lblWhenTrig.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
+            // btnDistanceUp
+            // 
+            this.btnDistanceUp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnDistanceUp.FlatAppearance.BorderSize = 0;
+            this.btnDistanceUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDistanceUp.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDistanceUp.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnDistanceUp.Image = global::Twol.Properties.Resources.UpArrow64;
+            this.btnDistanceUp.Location = new System.Drawing.Point(160, 317);
+            this.btnDistanceUp.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.btnDistanceUp.Name = "btnDistanceUp";
+            this.btnDistanceUp.Size = new System.Drawing.Size(59, 69);
+            this.btnDistanceUp.TabIndex = 457;
+            this.btnDistanceUp.UseVisualStyleBackColor = true;
+            this.btnDistanceUp.Click += new System.EventHandler(this.btnDistanceUPGN_Click);
+            // 
+            // btnDistanceDn
+            // 
+            this.btnDistanceDn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnDistanceDn.FlatAppearance.BorderSize = 0;
+            this.btnDistanceDn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDistanceDn.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDistanceDn.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnDistanceDn.Image = global::Twol.Properties.Resources.DnArrow64;
+            this.btnDistanceDn.Location = new System.Drawing.Point(67, 317);
+            this.btnDistanceDn.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.btnDistanceDn.Name = "btnDistanceDn";
+            this.btnDistanceDn.Size = new System.Drawing.Size(59, 69);
+            this.btnDistanceDn.TabIndex = 456;
+            this.btnDistanceDn.UseVisualStyleBackColor = true;
+            this.btnDistanceDn.Click += new System.EventHandler(this.btnDistanceDn_Click);
+            // 
+            // nudYouTurnRadius
+            // 
+            this.nudYouTurnRadius.DecimalPlaces = 2;
+            this.nudYouTurnRadius.Location = new System.Drawing.Point(381, 318);
+            this.nudYouTurnRadius.Minimum = 0.02D;
+            this.nudYouTurnRadius.Mode = Twol.UnitMode.Large;
+            this.nudYouTurnRadius.Name = "nudYouTurnRadius";
+            this.nudYouTurnRadius.Size = new System.Drawing.Size(160, 52);
+            this.nudYouTurnRadius.TabIndex = 471;
+            this.nudYouTurnRadius.ValueChanged += new System.EventHandler(this.nudYouTurnRadius_ValueChanged);
+            // 
+            // nudTurnDistanceFromBoundary
+            // 
+            this.nudTurnDistanceFromBoundary.DecimalPlaces = 2;
+            this.nudTurnDistanceFromBoundary.Location = new System.Drawing.Point(650, 317);
+            this.nudTurnDistanceFromBoundary.Mode = Twol.UnitMode.Large;
+            this.nudTurnDistanceFromBoundary.Name = "nudTurnDistanceFromBoundary";
+            this.nudTurnDistanceFromBoundary.Size = new System.Drawing.Size(160, 52);
+            this.nudTurnDistanceFromBoundary.TabIndex = 468;
+            this.nudTurnDistanceFromBoundary.ValueChanged += new System.EventHandler(this.nudTurnDistanceFromBoundary_ValueChanged);
+            // 
             // tabRelay
             // 
             this.tabRelay.BackColor = System.Drawing.Color.Azure;
@@ -4266,9 +4910,11 @@
             this.tabRelay.Location = new System.Drawing.Point(4, 44);
             this.tabRelay.Name = "tabRelay";
             this.tabRelay.Padding = new System.Windows.Forms.Padding(3);
-            this.tabRelay.Size = new System.Drawing.Size(914, 599);
+            this.tabRelay.Size = new System.Drawing.Size(918, 596);
             this.tabRelay.TabIndex = 24;
             this.tabRelay.Text = "aRelay";
+            this.tabRelay.Enter += new System.EventHandler(this.tabRelay_Enter);
+            this.tabRelay.Leave += new System.EventHandler(this.tabRelay_Leave);
             // 
             // cboxPin23
             // 
@@ -5408,9 +6054,11 @@
             this.tabAMachine.Controls.Add(this.nudUser1);
             this.tabAMachine.Location = new System.Drawing.Point(4, 44);
             this.tabAMachine.Name = "tabAMachine";
-            this.tabAMachine.Size = new System.Drawing.Size(914, 599);
+            this.tabAMachine.Size = new System.Drawing.Size(918, 596);
             this.tabAMachine.TabIndex = 20;
             this.tabAMachine.Text = "aMach";
+            this.tabAMachine.Enter += new System.EventHandler(this.tabAMachine_Enter);
+            this.tabAMachine.Leave += new System.EventHandler(this.tabAMachine_Leave);
             // 
             // lblUser4
             // 
@@ -5480,6 +6128,17 @@
             this.groupBox4.TabIndex = 484;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Hydraulic Lift Config";
+            // 
+            // nudHydLiftLookAhead
+            // 
+            this.nudHydLiftLookAhead.DecimalPlaces = 1;
+            this.nudHydLiftLookAhead.Location = new System.Drawing.Point(34, 278);
+            this.nudHydLiftLookAhead.Maximum = 20D;
+            this.nudHydLiftLookAhead.Minimum = 1D;
+            this.nudHydLiftLookAhead.Name = "nudHydLiftLookAhead";
+            this.nudHydLiftLookAhead.Size = new System.Drawing.Size(148, 52);
+            this.nudHydLiftLookAhead.TabIndex = 117;
+            this.nudHydLiftLookAhead.ValueChanged += new System.EventHandler(this.nudUser_ValueChanged);
             // 
             // lblHydLookAhead
             // 
@@ -5556,6 +6215,16 @@
             this.pictureBox6.TabIndex = 456;
             this.pictureBox6.TabStop = false;
             // 
+            // nudLowerTime
+            // 
+            this.nudLowerTime.Location = new System.Drawing.Point(258, 279);
+            this.nudLowerTime.Maximum = 255D;
+            this.nudLowerTime.Minimum = 1D;
+            this.nudLowerTime.Name = "nudLowerTime";
+            this.nudLowerTime.Size = new System.Drawing.Size(114, 52);
+            this.nudLowerTime.TabIndex = 4;
+            this.nudLowerTime.ValueChanged += new System.EventHandler(this.nudUser_ValueChanged);
+            // 
             // pictureBox7
             // 
             this.pictureBox7.BackgroundImage = global::Twol.Properties.Resources.ConMa_LiftRaiseTime;
@@ -5565,6 +6234,16 @@
             this.pictureBox7.Size = new System.Drawing.Size(177, 154);
             this.pictureBox7.TabIndex = 457;
             this.pictureBox7.TabStop = false;
+            // 
+            // nudRaiseTime
+            // 
+            this.nudRaiseTime.Location = new System.Drawing.Point(258, 75);
+            this.nudRaiseTime.Maximum = 255D;
+            this.nudRaiseTime.Minimum = 1D;
+            this.nudRaiseTime.Name = "nudRaiseTime";
+            this.nudRaiseTime.Size = new System.Drawing.Size(114, 52);
+            this.nudRaiseTime.TabIndex = 3;
+            this.nudRaiseTime.ValueChanged += new System.EventHandler(this.nudUser_ValueChanged);
             // 
             // lblHydInvertRelays
             // 
@@ -5654,6 +6333,46 @@
             this.btnSendMachinePGN.UseVisualStyleBackColor = false;
             this.btnSendMachinePGN.Click += new System.EventHandler(this.btnSendMachinePGN_Click);
             // 
+            // nudUser4
+            // 
+            this.nudUser4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudUser4.Location = new System.Drawing.Point(714, 342);
+            this.nudUser4.Maximum = 255D;
+            this.nudUser4.Name = "nudUser4";
+            this.nudUser4.Size = new System.Drawing.Size(114, 52);
+            this.nudUser4.TabIndex = 488;
+            this.nudUser4.ValueChanged += new System.EventHandler(this.nudUser_ValueChanged);
+            // 
+            // nudUser3
+            // 
+            this.nudUser3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudUser3.Location = new System.Drawing.Point(714, 253);
+            this.nudUser3.Maximum = 255D;
+            this.nudUser3.Name = "nudUser3";
+            this.nudUser3.Size = new System.Drawing.Size(114, 52);
+            this.nudUser3.TabIndex = 487;
+            this.nudUser3.ValueChanged += new System.EventHandler(this.nudUser_ValueChanged);
+            // 
+            // nudUser2
+            // 
+            this.nudUser2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudUser2.Location = new System.Drawing.Point(714, 164);
+            this.nudUser2.Maximum = 255D;
+            this.nudUser2.Name = "nudUser2";
+            this.nudUser2.Size = new System.Drawing.Size(114, 52);
+            this.nudUser2.TabIndex = 486;
+            this.nudUser2.ValueChanged += new System.EventHandler(this.nudUser_ValueChanged);
+            // 
+            // nudUser1
+            // 
+            this.nudUser1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudUser1.Location = new System.Drawing.Point(714, 75);
+            this.nudUser1.Maximum = 255D;
+            this.nudUser1.Name = "nudUser1";
+            this.nudUser1.Size = new System.Drawing.Size(114, 52);
+            this.nudUser1.TabIndex = 485;
+            this.nudUser1.ValueChanged += new System.EventHandler(this.nudUser_ValueChanged);
+            // 
             // tabTram
             // 
             this.tabTram.BackColor = System.Drawing.Color.Azure;
@@ -5668,9 +6387,11 @@
             this.tabTram.ForeColor = System.Drawing.Color.Black;
             this.tabTram.Location = new System.Drawing.Point(4, 44);
             this.tabTram.Name = "tabTram";
-            this.tabTram.Size = new System.Drawing.Size(914, 599);
+            this.tabTram.Size = new System.Drawing.Size(918, 596);
             this.tabTram.TabIndex = 21;
             this.tabTram.Text = "tTram";
+            this.tabTram.Enter += new System.EventHandler(this.tabTram_Enter);
+            this.tabTram.Leave += new System.EventHandler(this.tabTram_Leave);
             // 
             // lblDisplay
             // 
@@ -5773,6 +6494,18 @@
             this.pictureBox8.TabIndex = 119;
             this.pictureBox8.TabStop = false;
             // 
+            // nudTramWidth
+            // 
+            this.nudTramWidth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudTramWidth.Location = new System.Drawing.Point(291, 105);
+            this.nudTramWidth.Maximum = 50D;
+            this.nudTramWidth.Minimum = 1D;
+            this.nudTramWidth.Mode = Twol.UnitMode.Small;
+            this.nudTramWidth.Name = "nudTramWidth";
+            this.nudTramWidth.Size = new System.Drawing.Size(157, 52);
+            this.nudTramWidth.TabIndex = 1;
+            this.nudTramWidth.ValueChanged += new System.EventHandler(this.nudTramWidth_ValueChanged);
+            // 
             // tabBtns
             // 
             this.tabBtns.BackColor = System.Drawing.Color.Azure;
@@ -5809,9 +6542,11 @@
             this.tabBtns.Controls.Add(this.cboxFeatureTram);
             this.tabBtns.Location = new System.Drawing.Point(4, 44);
             this.tabBtns.Name = "tabBtns";
-            this.tabBtns.Size = new System.Drawing.Size(914, 599);
+            this.tabBtns.Size = new System.Drawing.Size(918, 596);
             this.tabBtns.TabIndex = 22;
             this.tabBtns.Text = "fBtns";
+            this.tabBtns.Enter += new System.EventHandler(this.tabBtns_Enter);
+            this.tabBtns.Leave += new System.EventHandler(this.tabBtns_Leave);
             // 
             // label8
             // 
@@ -6329,41 +7064,30 @@
             this.tabDisplay.Controls.Add(this.chkSectionLines);
             this.tabDisplay.Controls.Add(this.lblDirectionMarkers);
             this.tabDisplay.Controls.Add(this.chkDirectionMarkers);
-            this.tabDisplay.Controls.Add(this.label79);
-            this.tabDisplay.Controls.Add(this.unitsGroupBox);
             this.tabDisplay.Controls.Add(this.lblSvennArrow);
-            this.tabDisplay.Controls.Add(this.lblBrightness);
             this.tabDisplay.Controls.Add(this.lblFieldTexture);
-            this.tabDisplay.Controls.Add(this.lblPolygons);
-            this.tabDisplay.Controls.Add(this.lblKeyboard);
-            this.tabDisplay.Controls.Add(this.lblStartFullScreen);
             this.tabDisplay.Controls.Add(this.lblSpeedo);
-            this.tabDisplay.Controls.Add(this.lblExtraGuides);
             this.tabDisplay.Controls.Add(this.lblGrid);
-            this.tabDisplay.Controls.Add(this.chkDisplayLogElevation);
             this.tabDisplay.Controls.Add(this.chkSvennArrow);
-            this.tabDisplay.Controls.Add(this.chkDisplayBrightness);
             this.tabDisplay.Controls.Add(this.chkDisplayFloor);
-            this.tabDisplay.Controls.Add(this.chkDisplayKeyboard);
-            this.tabDisplay.Controls.Add(this.chkDisplayPolygons);
-            this.tabDisplay.Controls.Add(this.chkDisplayStartFullScreen);
             this.tabDisplay.Controls.Add(this.chkDisplayGrid);
             this.tabDisplay.Controls.Add(this.chkDisplaySpeedo);
-            this.tabDisplay.Controls.Add(this.chkDisplayExtraGuides);
-            this.tabDisplay.Controls.Add(this.nudNumGuideLines);
             this.tabDisplay.Location = new System.Drawing.Point(4, 44);
             this.tabDisplay.Name = "tabDisplay";
             this.tabDisplay.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDisplay.Size = new System.Drawing.Size(914, 599);
+            this.tabDisplay.Size = new System.Drawing.Size(918, 596);
             this.tabDisplay.TabIndex = 25;
             this.tabDisplay.Text = "fDisp";
+            this.tabDisplay.Click += new System.EventHandler(this.tabDisplay_Click);
+            this.tabDisplay.Enter += new System.EventHandler(this.tabDisplay_Enter);
+            this.tabDisplay.Leave += new System.EventHandler(this.tabDisplay_Leave);
             // 
             // label12
             // 
             this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label12.BackColor = System.Drawing.Color.Transparent;
             this.label12.ForeColor = System.Drawing.Color.Black;
-            this.label12.Location = new System.Drawing.Point(14, 460);
+            this.label12.Location = new System.Drawing.Point(198, 445);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(147, 16);
             this.label12.TabIndex = 543;
@@ -6382,7 +7106,7 @@
             this.chkDisplayMapping.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkDisplayMapping.ForeColor = System.Drawing.SystemColors.ControlText;
             this.chkDisplayMapping.Image = global::Twol.Properties.Resources.GoogleEarth;
-            this.chkDisplayMapping.Location = new System.Drawing.Point(37, 388);
+            this.chkDisplayMapping.Location = new System.Drawing.Point(221, 374);
             this.chkDisplayMapping.Name = "chkDisplayMapping";
             this.chkDisplayMapping.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.chkDisplayMapping.Size = new System.Drawing.Size(100, 69);
@@ -6396,7 +7120,7 @@
             this.lblLineSmooth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblLineSmooth.BackColor = System.Drawing.Color.Transparent;
             this.lblLineSmooth.ForeColor = System.Drawing.Color.Black;
-            this.lblLineSmooth.Location = new System.Drawing.Point(27, 580);
+            this.lblLineSmooth.Location = new System.Drawing.Point(483, 446);
             this.lblLineSmooth.Name = "lblLineSmooth";
             this.lblLineSmooth.Size = new System.Drawing.Size(120, 16);
             this.lblLineSmooth.TabIndex = 539;
@@ -6416,7 +7140,7 @@
             this.chkLineSmooth.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkLineSmooth.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkLineSmooth.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.chkLineSmooth.Location = new System.Drawing.Point(37, 508);
+            this.chkLineSmooth.Location = new System.Drawing.Point(493, 374);
             this.chkLineSmooth.Name = "chkLineSmooth";
             this.chkLineSmooth.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.chkLineSmooth.Size = new System.Drawing.Size(100, 69);
@@ -6429,7 +7153,7 @@
             this.lblSectionLines.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblSectionLines.BackColor = System.Drawing.Color.Transparent;
             this.lblSectionLines.ForeColor = System.Drawing.Color.Black;
-            this.lblSectionLines.Location = new System.Drawing.Point(415, 460);
+            this.lblSectionLines.Location = new System.Drawing.Point(742, 319);
             this.lblSectionLines.Name = "lblSectionLines";
             this.lblSectionLines.Size = new System.Drawing.Size(120, 16);
             this.lblSectionLines.TabIndex = 537;
@@ -6449,7 +7173,7 @@
             this.chkSectionLines.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkSectionLines.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkSectionLines.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.chkSectionLines.Location = new System.Drawing.Point(425, 388);
+            this.chkSectionLines.Location = new System.Drawing.Point(752, 248);
             this.chkSectionLines.Name = "chkSectionLines";
             this.chkSectionLines.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.chkSectionLines.Size = new System.Drawing.Size(100, 69);
@@ -6462,7 +7186,7 @@
             this.lblDirectionMarkers.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblDirectionMarkers.BackColor = System.Drawing.Color.Transparent;
             this.lblDirectionMarkers.ForeColor = System.Drawing.Color.Black;
-            this.lblDirectionMarkers.Location = new System.Drawing.Point(221, 460);
+            this.lblDirectionMarkers.Location = new System.Drawing.Point(743, 190);
             this.lblDirectionMarkers.Name = "lblDirectionMarkers";
             this.lblDirectionMarkers.Size = new System.Drawing.Size(120, 16);
             this.lblDirectionMarkers.TabIndex = 533;
@@ -6484,7 +7208,7 @@
             this.chkDirectionMarkers.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkDirectionMarkers.ForeColor = System.Drawing.SystemColors.ControlText;
             this.chkDirectionMarkers.Image = global::Twol.Properties.Resources.ConD_DirectionMarker;
-            this.chkDirectionMarkers.Location = new System.Drawing.Point(234, 388);
+            this.chkDirectionMarkers.Location = new System.Drawing.Point(753, 119);
             this.chkDirectionMarkers.Name = "chkDirectionMarkers";
             this.chkDirectionMarkers.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.chkDirectionMarkers.Size = new System.Drawing.Size(100, 69);
@@ -6492,17 +7216,539 @@
             this.chkDirectionMarkers.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.chkDirectionMarkers.UseVisualStyleBackColor = false;
             // 
+            // lblSvennArrow
+            // 
+            this.lblSvennArrow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblSvennArrow.BackColor = System.Drawing.Color.Transparent;
+            this.lblSvennArrow.ForeColor = System.Drawing.Color.Black;
+            this.lblSvennArrow.Location = new System.Drawing.Point(483, 320);
+            this.lblSvennArrow.Name = "lblSvennArrow";
+            this.lblSvennArrow.Size = new System.Drawing.Size(120, 16);
+            this.lblSvennArrow.TabIndex = 529;
+            this.lblSvennArrow.Text = "Svenn Arrow";
+            this.lblSvennArrow.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblFieldTexture
+            // 
+            this.lblFieldTexture.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblFieldTexture.BackColor = System.Drawing.Color.Transparent;
+            this.lblFieldTexture.ForeColor = System.Drawing.Color.Black;
+            this.lblFieldTexture.Location = new System.Drawing.Point(211, 320);
+            this.lblFieldTexture.Name = "lblFieldTexture";
+            this.lblFieldTexture.Size = new System.Drawing.Size(120, 16);
+            this.lblFieldTexture.TabIndex = 525;
+            this.lblFieldTexture.Text = "Field Texture";
+            this.lblFieldTexture.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblSpeedo
+            // 
+            this.lblSpeedo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblSpeedo.BackColor = System.Drawing.Color.Transparent;
+            this.lblSpeedo.ForeColor = System.Drawing.Color.Black;
+            this.lblSpeedo.Location = new System.Drawing.Point(483, 191);
+            this.lblSpeedo.Name = "lblSpeedo";
+            this.lblSpeedo.Size = new System.Drawing.Size(120, 16);
+            this.lblSpeedo.TabIndex = 516;
+            this.lblSpeedo.Text = "Speedo";
+            this.lblSpeedo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblGrid
+            // 
+            this.lblGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblGrid.BackColor = System.Drawing.Color.Transparent;
+            this.lblGrid.ForeColor = System.Drawing.Color.Black;
+            this.lblGrid.Location = new System.Drawing.Point(211, 191);
+            this.lblGrid.Name = "lblGrid";
+            this.lblGrid.Size = new System.Drawing.Size(120, 16);
+            this.lblGrid.TabIndex = 515;
+            this.lblGrid.Text = "Grid";
+            this.lblGrid.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // chkSvennArrow
+            // 
+            this.chkSvennArrow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkSvennArrow.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkSvennArrow.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.chkSvennArrow.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.chkSvennArrow.FlatAppearance.BorderSize = 2;
+            this.chkSvennArrow.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
+            this.chkSvennArrow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chkSvennArrow.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkSvennArrow.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.chkSvennArrow.Image = global::Twol.Properties.Resources.SvennArrow;
+            this.chkSvennArrow.Location = new System.Drawing.Point(493, 248);
+            this.chkSvennArrow.Name = "chkSvennArrow";
+            this.chkSvennArrow.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.chkSvennArrow.Size = new System.Drawing.Size(100, 69);
+            this.chkSvennArrow.TabIndex = 528;
+            this.chkSvennArrow.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chkSvennArrow.UseVisualStyleBackColor = false;
+            // 
+            // chkDisplayFloor
+            // 
+            this.chkDisplayFloor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkDisplayFloor.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkDisplayFloor.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.chkDisplayFloor.Checked = true;
+            this.chkDisplayFloor.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkDisplayFloor.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.chkDisplayFloor.FlatAppearance.BorderSize = 2;
+            this.chkDisplayFloor.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
+            this.chkDisplayFloor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chkDisplayFloor.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkDisplayFloor.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.chkDisplayFloor.Image = global::Twol.Properties.Resources.ConD_FloorTexture;
+            this.chkDisplayFloor.Location = new System.Drawing.Point(221, 248);
+            this.chkDisplayFloor.Name = "chkDisplayFloor";
+            this.chkDisplayFloor.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.chkDisplayFloor.Size = new System.Drawing.Size(100, 69);
+            this.chkDisplayFloor.TabIndex = 524;
+            this.chkDisplayFloor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chkDisplayFloor.UseVisualStyleBackColor = false;
+            this.chkDisplayFloor.Click += new System.EventHandler(this.chkDisplayFloor_Click);
+            // 
+            // chkDisplayGrid
+            // 
+            this.chkDisplayGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkDisplayGrid.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkDisplayGrid.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.chkDisplayGrid.Checked = true;
+            this.chkDisplayGrid.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkDisplayGrid.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.chkDisplayGrid.FlatAppearance.BorderSize = 2;
+            this.chkDisplayGrid.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
+            this.chkDisplayGrid.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chkDisplayGrid.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkDisplayGrid.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.chkDisplayGrid.Image = global::Twol.Properties.Resources.ConD_Grid;
+            this.chkDisplayGrid.Location = new System.Drawing.Point(221, 119);
+            this.chkDisplayGrid.Name = "chkDisplayGrid";
+            this.chkDisplayGrid.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.chkDisplayGrid.Size = new System.Drawing.Size(100, 69);
+            this.chkDisplayGrid.TabIndex = 506;
+            this.chkDisplayGrid.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chkDisplayGrid.UseVisualStyleBackColor = false;
+            // 
+            // chkDisplaySpeedo
+            // 
+            this.chkDisplaySpeedo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkDisplaySpeedo.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkDisplaySpeedo.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.chkDisplaySpeedo.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.chkDisplaySpeedo.FlatAppearance.BorderSize = 2;
+            this.chkDisplaySpeedo.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
+            this.chkDisplaySpeedo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chkDisplaySpeedo.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkDisplaySpeedo.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.chkDisplaySpeedo.Image = global::Twol.Properties.Resources.ConD_Speedometer;
+            this.chkDisplaySpeedo.Location = new System.Drawing.Point(493, 119);
+            this.chkDisplaySpeedo.Name = "chkDisplaySpeedo";
+            this.chkDisplaySpeedo.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.chkDisplaySpeedo.Size = new System.Drawing.Size(100, 69);
+            this.chkDisplaySpeedo.TabIndex = 504;
+            this.chkDisplaySpeedo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chkDisplaySpeedo.UseVisualStyleBackColor = false;
+            // 
+            // tabColors
+            // 
+            this.tabColors.Controls.Add(this.label15);
+            this.tabColors.Controls.Add(this.label14);
+            this.tabColors.Controls.Add(this.btnSectionColors);
+            this.tabColors.Controls.Add(this.btnColors);
+            this.tabColors.Location = new System.Drawing.Point(4, 44);
+            this.tabColors.Name = "tabColors";
+            this.tabColors.Padding = new System.Windows.Forms.Padding(3);
+            this.tabColors.Size = new System.Drawing.Size(918, 596);
+            this.tabColors.TabIndex = 28;
+            this.tabColors.Text = "dColors";
+            this.tabColors.UseVisualStyleBackColor = true;
+            // 
+            // label15
+            // 
+            this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label15.BackColor = System.Drawing.Color.Transparent;
+            this.label15.ForeColor = System.Drawing.Color.Black;
+            this.label15.Location = new System.Drawing.Point(657, 326);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(120, 47);
+            this.label15.TabIndex = 521;
+            this.label15.Text = "Multi-Section Colors";
+            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label14
+            // 
+            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label14.BackColor = System.Drawing.Color.Transparent;
+            this.label14.ForeColor = System.Drawing.Color.Black;
+            this.label14.Location = new System.Drawing.Point(657, 182);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(120, 16);
+            this.label14.TabIndex = 520;
+            this.label14.Text = "Screen Colors";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnSectionColors
+            // 
+            this.btnSectionColors.BackColor = System.Drawing.Color.Transparent;
+            this.btnSectionColors.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnSectionColors.FlatAppearance.BorderSize = 0;
+            this.btnSectionColors.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSectionColors.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSectionColors.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnSectionColors.Image = global::Twol.Properties.Resources.SectionMapping;
+            this.btnSectionColors.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSectionColors.Location = new System.Drawing.Point(682, 256);
+            this.btnSectionColors.Name = "btnSectionColors";
+            this.btnSectionColors.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.btnSectionColors.Size = new System.Drawing.Size(71, 64);
+            this.btnSectionColors.TabIndex = 4;
+            this.btnSectionColors.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSectionColors.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSectionColors.UseVisualStyleBackColor = false;
+            this.btnSectionColors.Click += new System.EventHandler(this.btnSectionColors_Click);
+            // 
+            // btnColors
+            // 
+            this.btnColors.BackColor = System.Drawing.Color.Transparent;
+            this.btnColors.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnColors.FlatAppearance.BorderSize = 0;
+            this.btnColors.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnColors.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnColors.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnColors.Image = global::Twol.Properties.Resources.ColourPick;
+            this.btnColors.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnColors.Location = new System.Drawing.Point(682, 117);
+            this.btnColors.Name = "btnColors";
+            this.btnColors.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.btnColors.Size = new System.Drawing.Size(71, 64);
+            this.btnColors.TabIndex = 4;
+            this.btnColors.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnColors.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnColors.UseVisualStyleBackColor = false;
+            this.btnColors.Click += new System.EventHandler(this.btnSetColors_Click);
+            // 
+            // tabUser
+            // 
+            this.tabUser.Controls.Add(this.label18);
+            this.tabUser.Controls.Add(this.btnLogViewer);
+            this.tabUser.Controls.Add(this.btnSetDirectories);
+            this.tabUser.Controls.Add(this.lblBrightness);
+            this.tabUser.Controls.Add(this.chkDisplayStartFullScreen);
+            this.tabUser.Controls.Add(this.chkDisplayBrightness);
+            this.tabUser.Controls.Add(this.lblStartFullScreen);
+            this.tabUser.Controls.Add(this.chkDisplayKeyboard);
+            this.tabUser.Controls.Add(this.lblKeyboard);
+            this.tabUser.Controls.Add(this.label13);
+            this.tabUser.Controls.Add(this.label16);
+            this.tabUser.Controls.Add(this.btnHotkeys);
+            this.tabUser.Controls.Add(this.chkDisplayLogElevation);
+            this.tabUser.Controls.Add(this.chkDisplayPolygons);
+            this.tabUser.Controls.Add(this.lblPolygons);
+            this.tabUser.Controls.Add(this.label79);
+            this.tabUser.Controls.Add(this.nudNumGuideLines);
+            this.tabUser.Controls.Add(this.chkDisplayExtraGuides);
+            this.tabUser.Controls.Add(this.unitsGroupBox);
+            this.tabUser.Controls.Add(this.lblExtraGuides);
+            this.tabUser.Location = new System.Drawing.Point(4, 44);
+            this.tabUser.Name = "tabUser";
+            this.tabUser.Size = new System.Drawing.Size(918, 596);
+            this.tabUser.TabIndex = 29;
+            this.tabUser.Text = "uUser";
+            this.tabUser.UseVisualStyleBackColor = true;
+            this.tabUser.Enter += new System.EventHandler(this.tabUser_Enter);
+            this.tabUser.Leave += new System.EventHandler(this.tabUser_Leave);
+            // 
+            // label18
+            // 
+            this.label18.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label18.BackColor = System.Drawing.Color.Transparent;
+            this.label18.ForeColor = System.Drawing.Color.Black;
+            this.label18.Location = new System.Drawing.Point(82, 396);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(120, 16);
+            this.label18.TabIndex = 525;
+            this.label18.Text = "Log Viewer";
+            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnLogViewer
+            // 
+            this.btnLogViewer.BackColor = System.Drawing.Color.Transparent;
+            this.btnLogViewer.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnLogViewer.FlatAppearance.BorderSize = 0;
+            this.btnLogViewer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLogViewer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogViewer.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnLogViewer.Image = global::Twol.Properties.Resources.ABTracks;
+            this.btnLogViewer.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnLogViewer.Location = new System.Drawing.Point(80, 312);
+            this.btnLogViewer.Name = "btnLogViewer";
+            this.btnLogViewer.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.btnLogViewer.Size = new System.Drawing.Size(124, 81);
+            this.btnLogViewer.TabIndex = 524;
+            this.btnLogViewer.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnLogViewer.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnLogViewer.UseVisualStyleBackColor = false;
+            this.btnLogViewer.Click += new System.EventHandler(this.btnLogViewer_Click);
+            // 
+            // btnSetDirectories
+            // 
+            this.btnSetDirectories.BackColor = System.Drawing.Color.Transparent;
+            this.btnSetDirectories.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnSetDirectories.FlatAppearance.BorderSize = 0;
+            this.btnSetDirectories.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSetDirectories.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSetDirectories.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnSetDirectories.Image = global::Twol.Properties.Resources.FileExplorerWindows;
+            this.btnSetDirectories.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSetDirectories.Location = new System.Drawing.Point(107, 193);
+            this.btnSetDirectories.Name = "btnSetDirectories";
+            this.btnSetDirectories.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.btnSetDirectories.Size = new System.Drawing.Size(71, 64);
+            this.btnSetDirectories.TabIndex = 5;
+            this.btnSetDirectories.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSetDirectories.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSetDirectories.UseVisualStyleBackColor = false;
+            this.btnSetDirectories.Click += new System.EventHandler(this.btnSetDirectories_Click);
+            // 
+            // lblBrightness
+            // 
+            this.lblBrightness.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblBrightness.BackColor = System.Drawing.Color.Transparent;
+            this.lblBrightness.ForeColor = System.Drawing.Color.Black;
+            this.lblBrightness.Location = new System.Drawing.Point(376, 263);
+            this.lblBrightness.Name = "lblBrightness";
+            this.lblBrightness.Size = new System.Drawing.Size(120, 16);
+            this.lblBrightness.TabIndex = 527;
+            this.lblBrightness.Text = "Brightness";
+            this.lblBrightness.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // chkDisplayStartFullScreen
+            // 
+            this.chkDisplayStartFullScreen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkDisplayStartFullScreen.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkDisplayStartFullScreen.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.chkDisplayStartFullScreen.Checked = true;
+            this.chkDisplayStartFullScreen.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkDisplayStartFullScreen.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.chkDisplayStartFullScreen.FlatAppearance.BorderSize = 2;
+            this.chkDisplayStartFullScreen.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
+            this.chkDisplayStartFullScreen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chkDisplayStartFullScreen.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkDisplayStartFullScreen.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.chkDisplayStartFullScreen.Image = global::Twol.Properties.Resources.ConD_FullScreenBegin;
+            this.chkDisplayStartFullScreen.Location = new System.Drawing.Point(676, 318);
+            this.chkDisplayStartFullScreen.Name = "chkDisplayStartFullScreen";
+            this.chkDisplayStartFullScreen.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.chkDisplayStartFullScreen.Size = new System.Drawing.Size(100, 69);
+            this.chkDisplayStartFullScreen.TabIndex = 509;
+            this.chkDisplayStartFullScreen.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chkDisplayStartFullScreen.UseVisualStyleBackColor = false;
+            // 
+            // chkDisplayBrightness
+            // 
+            this.chkDisplayBrightness.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkDisplayBrightness.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkDisplayBrightness.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.chkDisplayBrightness.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.chkDisplayBrightness.FlatAppearance.BorderSize = 2;
+            this.chkDisplayBrightness.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
+            this.chkDisplayBrightness.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chkDisplayBrightness.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkDisplayBrightness.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.chkDisplayBrightness.Image = global::Twol.Properties.Resources.BrightnessUp;
+            this.chkDisplayBrightness.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.chkDisplayBrightness.Location = new System.Drawing.Point(386, 191);
+            this.chkDisplayBrightness.Name = "chkDisplayBrightness";
+            this.chkDisplayBrightness.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.chkDisplayBrightness.Size = new System.Drawing.Size(100, 69);
+            this.chkDisplayBrightness.TabIndex = 526;
+            this.chkDisplayBrightness.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chkDisplayBrightness.UseVisualStyleBackColor = false;
+            // 
+            // lblStartFullScreen
+            // 
+            this.lblStartFullScreen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblStartFullScreen.BackColor = System.Drawing.Color.Transparent;
+            this.lblStartFullScreen.ForeColor = System.Drawing.Color.Black;
+            this.lblStartFullScreen.Location = new System.Drawing.Point(666, 388);
+            this.lblStartFullScreen.Name = "lblStartFullScreen";
+            this.lblStartFullScreen.Size = new System.Drawing.Size(120, 16);
+            this.lblStartFullScreen.TabIndex = 518;
+            this.lblStartFullScreen.Text = "Start Fullscreen";
+            this.lblStartFullScreen.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // chkDisplayKeyboard
+            // 
+            this.chkDisplayKeyboard.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkDisplayKeyboard.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkDisplayKeyboard.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.chkDisplayKeyboard.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.chkDisplayKeyboard.FlatAppearance.BorderSize = 2;
+            this.chkDisplayKeyboard.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
+            this.chkDisplayKeyboard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chkDisplayKeyboard.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkDisplayKeyboard.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.chkDisplayKeyboard.Image = global::Twol.Properties.Resources.ConD_KeyBoard;
+            this.chkDisplayKeyboard.Location = new System.Drawing.Point(669, 191);
+            this.chkDisplayKeyboard.Name = "chkDisplayKeyboard";
+            this.chkDisplayKeyboard.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.chkDisplayKeyboard.Size = new System.Drawing.Size(115, 69);
+            this.chkDisplayKeyboard.TabIndex = 511;
+            this.chkDisplayKeyboard.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chkDisplayKeyboard.UseVisualStyleBackColor = false;
+            // 
+            // lblKeyboard
+            // 
+            this.lblKeyboard.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblKeyboard.BackColor = System.Drawing.Color.Transparent;
+            this.lblKeyboard.ForeColor = System.Drawing.Color.Black;
+            this.lblKeyboard.Location = new System.Drawing.Point(666, 263);
+            this.lblKeyboard.Name = "lblKeyboard";
+            this.lblKeyboard.Size = new System.Drawing.Size(120, 16);
+            this.lblKeyboard.TabIndex = 521;
+            this.lblKeyboard.Text = "Keyboard";
+            this.lblKeyboard.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label13
+            // 
+            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label13.BackColor = System.Drawing.Color.Transparent;
+            this.label13.ForeColor = System.Drawing.Color.Black;
+            this.label13.Location = new System.Drawing.Point(82, 260);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(120, 16);
+            this.label13.TabIndex = 519;
+            this.label13.Text = "Set Directories";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label16
+            // 
+            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label16.BackColor = System.Drawing.Color.Transparent;
+            this.label16.ForeColor = System.Drawing.Color.Black;
+            this.label16.Location = new System.Drawing.Point(82, 124);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(120, 16);
+            this.label16.TabIndex = 523;
+            this.label16.Text = "Hotkeys";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnHotkeys
+            // 
+            this.btnHotkeys.BackColor = System.Drawing.Color.Transparent;
+            this.btnHotkeys.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnHotkeys.FlatAppearance.BorderSize = 0;
+            this.btnHotkeys.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHotkeys.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHotkeys.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnHotkeys.Image = global::Twol.Properties.Resources.ConD_KeyBoard;
+            this.btnHotkeys.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnHotkeys.Location = new System.Drawing.Point(80, 65);
+            this.btnHotkeys.Name = "btnHotkeys";
+            this.btnHotkeys.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.btnHotkeys.Size = new System.Drawing.Size(124, 64);
+            this.btnHotkeys.TabIndex = 522;
+            this.btnHotkeys.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnHotkeys.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnHotkeys.UseVisualStyleBackColor = false;
+            this.btnHotkeys.Click += new System.EventHandler(this.btnHotkeys_Click);
+            // 
+            // chkDisplayLogElevation
+            // 
+            this.chkDisplayLogElevation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkDisplayLogElevation.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkDisplayLogElevation.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.chkDisplayLogElevation.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.chkDisplayLogElevation.FlatAppearance.BorderSize = 2;
+            this.chkDisplayLogElevation.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
+            this.chkDisplayLogElevation.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chkDisplayLogElevation.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkDisplayLogElevation.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.chkDisplayLogElevation.Image = global::Twol.Properties.Resources.ConD_LogElevation;
+            this.chkDisplayLogElevation.Location = new System.Drawing.Point(386, 63);
+            this.chkDisplayLogElevation.Name = "chkDisplayLogElevation";
+            this.chkDisplayLogElevation.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.chkDisplayLogElevation.Size = new System.Drawing.Size(100, 69);
+            this.chkDisplayLogElevation.TabIndex = 530;
+            this.chkDisplayLogElevation.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chkDisplayLogElevation.UseVisualStyleBackColor = false;
+            // 
+            // chkDisplayPolygons
+            // 
+            this.chkDisplayPolygons.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkDisplayPolygons.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkDisplayPolygons.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.chkDisplayPolygons.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.chkDisplayPolygons.FlatAppearance.BorderSize = 2;
+            this.chkDisplayPolygons.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
+            this.chkDisplayPolygons.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chkDisplayPolygons.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkDisplayPolygons.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.chkDisplayPolygons.Image = global::Twol.Properties.Resources.ConD_Poligons;
+            this.chkDisplayPolygons.Location = new System.Drawing.Point(386, 318);
+            this.chkDisplayPolygons.Name = "chkDisplayPolygons";
+            this.chkDisplayPolygons.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.chkDisplayPolygons.Size = new System.Drawing.Size(100, 69);
+            this.chkDisplayPolygons.TabIndex = 510;
+            this.chkDisplayPolygons.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chkDisplayPolygons.UseVisualStyleBackColor = false;
+            // 
+            // lblPolygons
+            // 
+            this.lblPolygons.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblPolygons.BackColor = System.Drawing.Color.Transparent;
+            this.lblPolygons.ForeColor = System.Drawing.Color.Black;
+            this.lblPolygons.Location = new System.Drawing.Point(376, 389);
+            this.lblPolygons.Name = "lblPolygons";
+            this.lblPolygons.Size = new System.Drawing.Size(120, 16);
+            this.lblPolygons.TabIndex = 523;
+            this.lblPolygons.Text = "Polygons";
+            this.lblPolygons.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // label79
             // 
             this.label79.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label79.BackColor = System.Drawing.Color.Transparent;
             this.label79.ForeColor = System.Drawing.Color.Black;
-            this.label79.Location = new System.Drawing.Point(694, 96);
+            this.label79.Location = new System.Drawing.Point(376, 134);
             this.label79.Name = "label79";
             this.label79.Size = new System.Drawing.Size(120, 16);
             this.label79.TabIndex = 531;
             this.label79.Text = "Elevation";
             this.label79.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // nudNumGuideLines
+            // 
+            this.nudNumGuideLines.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudNumGuideLines.Enabled = false;
+            this.nudNumGuideLines.Location = new System.Drawing.Point(786, 71);
+            this.nudNumGuideLines.Maximum = 4D;
+            this.nudNumGuideLines.Minimum = 1D;
+            this.nudNumGuideLines.Name = "nudNumGuideLines";
+            this.nudNumGuideLines.Size = new System.Drawing.Size(100, 52);
+            this.nudNumGuideLines.TabIndex = 534;
+            this.nudNumGuideLines.ValueChanged += new System.EventHandler(this.nudNumGuideLines_ValueChanged);
+            // 
+            // chkDisplayExtraGuides
+            // 
+            this.chkDisplayExtraGuides.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkDisplayExtraGuides.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkDisplayExtraGuides.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.chkDisplayExtraGuides.Enabled = false;
+            this.chkDisplayExtraGuides.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.chkDisplayExtraGuides.FlatAppearance.BorderSize = 2;
+            this.chkDisplayExtraGuides.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
+            this.chkDisplayExtraGuides.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chkDisplayExtraGuides.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkDisplayExtraGuides.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.chkDisplayExtraGuides.Image = global::Twol.Properties.Resources.ConD_ExtraGuides;
+            this.chkDisplayExtraGuides.Location = new System.Drawing.Point(676, 63);
+            this.chkDisplayExtraGuides.Name = "chkDisplayExtraGuides";
+            this.chkDisplayExtraGuides.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.chkDisplayExtraGuides.Size = new System.Drawing.Size(100, 69);
+            this.chkDisplayExtraGuides.TabIndex = 503;
+            this.chkDisplayExtraGuides.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chkDisplayExtraGuides.UseVisualStyleBackColor = false;
             // 
             // unitsGroupBox
             // 
@@ -6512,7 +7758,7 @@
             this.unitsGroupBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.unitsGroupBox.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.unitsGroupBox.ForeColor = System.Drawing.Color.Black;
-            this.unitsGroupBox.Location = new System.Drawing.Point(649, 433);
+            this.unitsGroupBox.Location = new System.Drawing.Point(656, 455);
             this.unitsGroupBox.Name = "unitsGroupBox";
             this.unitsGroupBox.Size = new System.Drawing.Size(250, 129);
             this.unitsGroupBox.TabIndex = 513;
@@ -6559,389 +7805,17 @@
             this.rbtnDisplayMetric.UseVisualStyleBackColor = false;
             this.rbtnDisplayMetric.Click += new System.EventHandler(this.rbtnDisplayMetric_Click);
             // 
-            // lblSvennArrow
-            // 
-            this.lblSvennArrow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblSvennArrow.BackColor = System.Drawing.Color.Transparent;
-            this.lblSvennArrow.ForeColor = System.Drawing.Color.Black;
-            this.lblSvennArrow.Location = new System.Drawing.Point(221, 217);
-            this.lblSvennArrow.Name = "lblSvennArrow";
-            this.lblSvennArrow.Size = new System.Drawing.Size(120, 16);
-            this.lblSvennArrow.TabIndex = 529;
-            this.lblSvennArrow.Text = "Svenn Arrow";
-            this.lblSvennArrow.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblBrightness
-            // 
-            this.lblBrightness.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblBrightness.BackColor = System.Drawing.Color.Transparent;
-            this.lblBrightness.ForeColor = System.Drawing.Color.Black;
-            this.lblBrightness.Location = new System.Drawing.Point(27, 217);
-            this.lblBrightness.Name = "lblBrightness";
-            this.lblBrightness.Size = new System.Drawing.Size(120, 16);
-            this.lblBrightness.TabIndex = 527;
-            this.lblBrightness.Text = "Brightness";
-            this.lblBrightness.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblFieldTexture
-            // 
-            this.lblFieldTexture.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblFieldTexture.BackColor = System.Drawing.Color.Transparent;
-            this.lblFieldTexture.ForeColor = System.Drawing.Color.Black;
-            this.lblFieldTexture.Location = new System.Drawing.Point(27, 339);
-            this.lblFieldTexture.Name = "lblFieldTexture";
-            this.lblFieldTexture.Size = new System.Drawing.Size(120, 16);
-            this.lblFieldTexture.TabIndex = 525;
-            this.lblFieldTexture.Text = "Field Texture";
-            this.lblFieldTexture.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblPolygons
-            // 
-            this.lblPolygons.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblPolygons.BackColor = System.Drawing.Color.Transparent;
-            this.lblPolygons.ForeColor = System.Drawing.Color.Black;
-            this.lblPolygons.Location = new System.Drawing.Point(27, 96);
-            this.lblPolygons.Name = "lblPolygons";
-            this.lblPolygons.Size = new System.Drawing.Size(120, 16);
-            this.lblPolygons.TabIndex = 523;
-            this.lblPolygons.Text = "Polygons";
-            this.lblPolygons.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblKeyboard
-            // 
-            this.lblKeyboard.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblKeyboard.BackColor = System.Drawing.Color.Transparent;
-            this.lblKeyboard.ForeColor = System.Drawing.Color.Black;
-            this.lblKeyboard.Location = new System.Drawing.Point(415, 96);
-            this.lblKeyboard.Name = "lblKeyboard";
-            this.lblKeyboard.Size = new System.Drawing.Size(120, 16);
-            this.lblKeyboard.TabIndex = 521;
-            this.lblKeyboard.Text = "Keyboard";
-            this.lblKeyboard.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblStartFullScreen
-            // 
-            this.lblStartFullScreen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblStartFullScreen.BackColor = System.Drawing.Color.Transparent;
-            this.lblStartFullScreen.ForeColor = System.Drawing.Color.Black;
-            this.lblStartFullScreen.Location = new System.Drawing.Point(415, 217);
-            this.lblStartFullScreen.Name = "lblStartFullScreen";
-            this.lblStartFullScreen.Size = new System.Drawing.Size(120, 16);
-            this.lblStartFullScreen.TabIndex = 518;
-            this.lblStartFullScreen.Text = "Start Fullscreen";
-            this.lblStartFullScreen.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblSpeedo
-            // 
-            this.lblSpeedo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblSpeedo.BackColor = System.Drawing.Color.Transparent;
-            this.lblSpeedo.ForeColor = System.Drawing.Color.Black;
-            this.lblSpeedo.Location = new System.Drawing.Point(221, 97);
-            this.lblSpeedo.Name = "lblSpeedo";
-            this.lblSpeedo.Size = new System.Drawing.Size(120, 16);
-            this.lblSpeedo.TabIndex = 516;
-            this.lblSpeedo.Text = "Speedo";
-            this.lblSpeedo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // lblExtraGuides
             // 
             this.lblExtraGuides.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblExtraGuides.BackColor = System.Drawing.Color.Transparent;
             this.lblExtraGuides.ForeColor = System.Drawing.Color.Black;
-            this.lblExtraGuides.Location = new System.Drawing.Point(415, 335);
+            this.lblExtraGuides.Location = new System.Drawing.Point(666, 135);
             this.lblExtraGuides.Name = "lblExtraGuides";
             this.lblExtraGuides.Size = new System.Drawing.Size(120, 16);
             this.lblExtraGuides.TabIndex = 519;
             this.lblExtraGuides.Text = "Guidelines";
             this.lblExtraGuides.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblGrid
-            // 
-            this.lblGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblGrid.BackColor = System.Drawing.Color.Transparent;
-            this.lblGrid.ForeColor = System.Drawing.Color.Black;
-            this.lblGrid.Location = new System.Drawing.Point(221, 339);
-            this.lblGrid.Name = "lblGrid";
-            this.lblGrid.Size = new System.Drawing.Size(120, 16);
-            this.lblGrid.TabIndex = 515;
-            this.lblGrid.Text = "Grid";
-            this.lblGrid.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // chkDisplayLogElevation
-            // 
-            this.chkDisplayLogElevation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkDisplayLogElevation.Appearance = System.Windows.Forms.Appearance.Button;
-            this.chkDisplayLogElevation.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.chkDisplayLogElevation.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.chkDisplayLogElevation.FlatAppearance.BorderSize = 2;
-            this.chkDisplayLogElevation.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
-            this.chkDisplayLogElevation.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkDisplayLogElevation.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkDisplayLogElevation.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.chkDisplayLogElevation.Image = global::Twol.Properties.Resources.ConD_LogElevation;
-            this.chkDisplayLogElevation.Location = new System.Drawing.Point(704, 24);
-            this.chkDisplayLogElevation.Name = "chkDisplayLogElevation";
-            this.chkDisplayLogElevation.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.chkDisplayLogElevation.Size = new System.Drawing.Size(100, 69);
-            this.chkDisplayLogElevation.TabIndex = 530;
-            this.chkDisplayLogElevation.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.chkDisplayLogElevation.UseVisualStyleBackColor = false;
-            // 
-            // chkSvennArrow
-            // 
-            this.chkSvennArrow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkSvennArrow.Appearance = System.Windows.Forms.Appearance.Button;
-            this.chkSvennArrow.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.chkSvennArrow.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.chkSvennArrow.FlatAppearance.BorderSize = 2;
-            this.chkSvennArrow.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
-            this.chkSvennArrow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkSvennArrow.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkSvennArrow.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.chkSvennArrow.Image = global::Twol.Properties.Resources.SvennArrow;
-            this.chkSvennArrow.Location = new System.Drawing.Point(231, 145);
-            this.chkSvennArrow.Name = "chkSvennArrow";
-            this.chkSvennArrow.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.chkSvennArrow.Size = new System.Drawing.Size(100, 69);
-            this.chkSvennArrow.TabIndex = 528;
-            this.chkSvennArrow.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.chkSvennArrow.UseVisualStyleBackColor = false;
-            // 
-            // chkDisplayBrightness
-            // 
-            this.chkDisplayBrightness.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkDisplayBrightness.Appearance = System.Windows.Forms.Appearance.Button;
-            this.chkDisplayBrightness.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.chkDisplayBrightness.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.chkDisplayBrightness.FlatAppearance.BorderSize = 2;
-            this.chkDisplayBrightness.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
-            this.chkDisplayBrightness.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkDisplayBrightness.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkDisplayBrightness.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.chkDisplayBrightness.Image = global::Twol.Properties.Resources.BrightnessUp;
-            this.chkDisplayBrightness.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.chkDisplayBrightness.Location = new System.Drawing.Point(37, 145);
-            this.chkDisplayBrightness.Name = "chkDisplayBrightness";
-            this.chkDisplayBrightness.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.chkDisplayBrightness.Size = new System.Drawing.Size(100, 69);
-            this.chkDisplayBrightness.TabIndex = 526;
-            this.chkDisplayBrightness.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.chkDisplayBrightness.UseVisualStyleBackColor = false;
-            // 
-            // chkDisplayFloor
-            // 
-            this.chkDisplayFloor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkDisplayFloor.Appearance = System.Windows.Forms.Appearance.Button;
-            this.chkDisplayFloor.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.chkDisplayFloor.Checked = true;
-            this.chkDisplayFloor.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkDisplayFloor.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.chkDisplayFloor.FlatAppearance.BorderSize = 2;
-            this.chkDisplayFloor.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
-            this.chkDisplayFloor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkDisplayFloor.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkDisplayFloor.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.chkDisplayFloor.Image = global::Twol.Properties.Resources.ConD_FloorTexture;
-            this.chkDisplayFloor.Location = new System.Drawing.Point(37, 267);
-            this.chkDisplayFloor.Name = "chkDisplayFloor";
-            this.chkDisplayFloor.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.chkDisplayFloor.Size = new System.Drawing.Size(100, 69);
-            this.chkDisplayFloor.TabIndex = 524;
-            this.chkDisplayFloor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.chkDisplayFloor.UseVisualStyleBackColor = false;
-            this.chkDisplayFloor.Click += new System.EventHandler(this.chkDisplayFloor_Click);
-            // 
-            // chkDisplayKeyboard
-            // 
-            this.chkDisplayKeyboard.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkDisplayKeyboard.Appearance = System.Windows.Forms.Appearance.Button;
-            this.chkDisplayKeyboard.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.chkDisplayKeyboard.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.chkDisplayKeyboard.FlatAppearance.BorderSize = 2;
-            this.chkDisplayKeyboard.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
-            this.chkDisplayKeyboard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkDisplayKeyboard.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkDisplayKeyboard.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.chkDisplayKeyboard.Image = global::Twol.Properties.Resources.ConD_KeyBoard;
-            this.chkDisplayKeyboard.Location = new System.Drawing.Point(425, 24);
-            this.chkDisplayKeyboard.Name = "chkDisplayKeyboard";
-            this.chkDisplayKeyboard.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.chkDisplayKeyboard.Size = new System.Drawing.Size(100, 69);
-            this.chkDisplayKeyboard.TabIndex = 511;
-            this.chkDisplayKeyboard.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.chkDisplayKeyboard.UseVisualStyleBackColor = false;
-            // 
-            // chkDisplayPolygons
-            // 
-            this.chkDisplayPolygons.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkDisplayPolygons.Appearance = System.Windows.Forms.Appearance.Button;
-            this.chkDisplayPolygons.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.chkDisplayPolygons.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.chkDisplayPolygons.FlatAppearance.BorderSize = 2;
-            this.chkDisplayPolygons.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
-            this.chkDisplayPolygons.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkDisplayPolygons.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkDisplayPolygons.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.chkDisplayPolygons.Image = global::Twol.Properties.Resources.ConD_Poligons;
-            this.chkDisplayPolygons.Location = new System.Drawing.Point(37, 24);
-            this.chkDisplayPolygons.Name = "chkDisplayPolygons";
-            this.chkDisplayPolygons.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.chkDisplayPolygons.Size = new System.Drawing.Size(100, 69);
-            this.chkDisplayPolygons.TabIndex = 510;
-            this.chkDisplayPolygons.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.chkDisplayPolygons.UseVisualStyleBackColor = false;
-            // 
-            // chkDisplayStartFullScreen
-            // 
-            this.chkDisplayStartFullScreen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkDisplayStartFullScreen.Appearance = System.Windows.Forms.Appearance.Button;
-            this.chkDisplayStartFullScreen.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.chkDisplayStartFullScreen.Checked = true;
-            this.chkDisplayStartFullScreen.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkDisplayStartFullScreen.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.chkDisplayStartFullScreen.FlatAppearance.BorderSize = 2;
-            this.chkDisplayStartFullScreen.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
-            this.chkDisplayStartFullScreen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkDisplayStartFullScreen.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkDisplayStartFullScreen.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.chkDisplayStartFullScreen.Image = global::Twol.Properties.Resources.ConD_FullScreenBegin;
-            this.chkDisplayStartFullScreen.Location = new System.Drawing.Point(425, 145);
-            this.chkDisplayStartFullScreen.Name = "chkDisplayStartFullScreen";
-            this.chkDisplayStartFullScreen.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.chkDisplayStartFullScreen.Size = new System.Drawing.Size(100, 69);
-            this.chkDisplayStartFullScreen.TabIndex = 509;
-            this.chkDisplayStartFullScreen.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.chkDisplayStartFullScreen.UseVisualStyleBackColor = false;
-            // 
-            // chkDisplayGrid
-            // 
-            this.chkDisplayGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkDisplayGrid.Appearance = System.Windows.Forms.Appearance.Button;
-            this.chkDisplayGrid.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.chkDisplayGrid.Checked = true;
-            this.chkDisplayGrid.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkDisplayGrid.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.chkDisplayGrid.FlatAppearance.BorderSize = 2;
-            this.chkDisplayGrid.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
-            this.chkDisplayGrid.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkDisplayGrid.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkDisplayGrid.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.chkDisplayGrid.Image = global::Twol.Properties.Resources.ConD_Grid;
-            this.chkDisplayGrid.Location = new System.Drawing.Point(231, 267);
-            this.chkDisplayGrid.Name = "chkDisplayGrid";
-            this.chkDisplayGrid.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.chkDisplayGrid.Size = new System.Drawing.Size(100, 69);
-            this.chkDisplayGrid.TabIndex = 506;
-            this.chkDisplayGrid.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.chkDisplayGrid.UseVisualStyleBackColor = false;
-            // 
-            // chkDisplaySpeedo
-            // 
-            this.chkDisplaySpeedo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkDisplaySpeedo.Appearance = System.Windows.Forms.Appearance.Button;
-            this.chkDisplaySpeedo.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.chkDisplaySpeedo.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.chkDisplaySpeedo.FlatAppearance.BorderSize = 2;
-            this.chkDisplaySpeedo.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
-            this.chkDisplaySpeedo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkDisplaySpeedo.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkDisplaySpeedo.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.chkDisplaySpeedo.Image = global::Twol.Properties.Resources.ConD_Speedometer;
-            this.chkDisplaySpeedo.Location = new System.Drawing.Point(231, 24);
-            this.chkDisplaySpeedo.Name = "chkDisplaySpeedo";
-            this.chkDisplaySpeedo.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.chkDisplaySpeedo.Size = new System.Drawing.Size(100, 69);
-            this.chkDisplaySpeedo.TabIndex = 504;
-            this.chkDisplaySpeedo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.chkDisplaySpeedo.UseVisualStyleBackColor = false;
-            // 
-            // chkDisplayExtraGuides
-            // 
-            this.chkDisplayExtraGuides.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkDisplayExtraGuides.Appearance = System.Windows.Forms.Appearance.Button;
-            this.chkDisplayExtraGuides.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.chkDisplayExtraGuides.Enabled = false;
-            this.chkDisplayExtraGuides.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.chkDisplayExtraGuides.FlatAppearance.BorderSize = 2;
-            this.chkDisplayExtraGuides.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
-            this.chkDisplayExtraGuides.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkDisplayExtraGuides.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkDisplayExtraGuides.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.chkDisplayExtraGuides.Image = global::Twol.Properties.Resources.ConD_ExtraGuides;
-            this.chkDisplayExtraGuides.Location = new System.Drawing.Point(425, 263);
-            this.chkDisplayExtraGuides.Name = "chkDisplayExtraGuides";
-            this.chkDisplayExtraGuides.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.chkDisplayExtraGuides.Size = new System.Drawing.Size(100, 69);
-            this.chkDisplayExtraGuides.TabIndex = 503;
-            this.chkDisplayExtraGuides.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.chkDisplayExtraGuides.UseVisualStyleBackColor = false;
-            // 
-            // lblCurrentVehicle
-            // 
-            this.lblCurrentVehicle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblCurrentVehicle.AutoSize = true;
-            this.lblCurrentVehicle.BackColor = System.Drawing.Color.Transparent;
-            this.lblCurrentVehicle.Font = new System.Drawing.Font("Tahoma", 14.25F);
-            this.lblCurrentVehicle.ForeColor = System.Drawing.Color.Black;
-            this.lblCurrentVehicle.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblCurrentVehicle.Location = new System.Drawing.Point(1228, 17);
-            this.lblCurrentVehicle.Name = "lblCurrentVehicle";
-            this.lblCurrentVehicle.Size = new System.Drawing.Size(138, 23);
-            this.lblCurrentVehicle.TabIndex = 450;
-            this.lblCurrentVehicle.Text = "Current Vehicle";
-            this.lblCurrentVehicle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblSecTotalWidthMeters
-            // 
-            this.lblSecTotalWidthMeters.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSecTotalWidthMeters.ForeColor = System.Drawing.Color.Black;
-            this.lblSecTotalWidthMeters.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblSecTotalWidthMeters.Location = new System.Drawing.Point(1252, 215);
-            this.lblSecTotalWidthMeters.Name = "lblSecTotalWidthMeters";
-            this.lblSecTotalWidthMeters.Size = new System.Drawing.Size(130, 25);
-            this.lblSecTotalWidthMeters.TabIndex = 302;
-            this.lblSecTotalWidthMeters.Text = "II";
-            this.lblSecTotalWidthMeters.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblToolWidth
-            // 
-            this.lblToolWidth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblToolWidth.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblToolWidth.ForeColor = System.Drawing.Color.Black;
-            this.lblToolWidth.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblToolWidth.Location = new System.Drawing.Point(1283, -35);
-            this.lblToolWidth.Name = "lblToolWidth";
-            this.lblToolWidth.Size = new System.Drawing.Size(83, 18);
-            this.lblToolWidth.TabIndex = 301;
-            this.lblToolWidth.Text = "Tool Width:";
-            this.lblToolWidth.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // lblCurrentTool
-            // 
-            this.lblCurrentTool.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblCurrentTool.AutoSize = true;
-            this.lblCurrentTool.BackColor = System.Drawing.Color.Transparent;
-            this.lblCurrentTool.Font = new System.Drawing.Font("Tahoma", 14.25F);
-            this.lblCurrentTool.ForeColor = System.Drawing.Color.Black;
-            this.lblCurrentTool.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblCurrentTool.Location = new System.Drawing.Point(1243, 59);
-            this.lblCurrentTool.Name = "lblCurrentTool";
-            this.lblCurrentTool.Size = new System.Drawing.Size(114, 23);
-            this.lblCurrentTool.TabIndex = 455;
-            this.lblCurrentTool.Text = "Current Tool";
-            this.lblCurrentTool.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblUnits
-            // 
-            this.lblUnits.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUnits.ForeColor = System.Drawing.Color.DarkGreen;
-            this.lblUnits.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblUnits.Location = new System.Drawing.Point(1297, 183);
-            this.lblUnits.Name = "lblUnits";
-            this.lblUnits.Size = new System.Drawing.Size(85, 25);
-            this.lblUnits.TabIndex = 453;
-            this.lblUnits.Text = "Metric";
-            this.lblUnits.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnOK
             // 
@@ -6951,7 +7825,7 @@
             this.btnOK.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnOK.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnOK.Image = global::Twol.Properties.Resources.OK64;
-            this.btnOK.Location = new System.Drawing.Point(885, 3);
+            this.btnOK.Location = new System.Drawing.Point(886, 3);
             this.btnOK.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(42, 64);
@@ -6975,7 +7849,7 @@
             this.btnSubUTurn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubUTurn.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnSubUTurn.Image = global::Twol.Properties.Resources.Con_UTurnMenu;
-            this.btnSubUTurn.Location = new System.Drawing.Point(166, 3);
+            this.btnSubUTurn.Location = new System.Drawing.Point(119, 3);
             this.btnSubUTurn.Name = "btnSubUTurn";
             this.btnSubUTurn.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
             this.btnSubUTurn.Size = new System.Drawing.Size(42, 64);
@@ -6995,7 +7869,7 @@
             this.btnArduino.ForeColor = System.Drawing.Color.Black;
             this.btnArduino.Image = global::Twol.Properties.Resources.Con_ModulesMenu;
             this.btnArduino.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnArduino.Location = new System.Drawing.Point(3, 411);
+            this.btnArduino.Location = new System.Drawing.Point(3, 462);
             this.btnArduino.Name = "btnArduino";
             this.btnArduino.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
             this.btnArduino.Size = new System.Drawing.Size(72, 96);
@@ -7015,7 +7889,7 @@
             this.btnField.ForeColor = System.Drawing.Color.Black;
             this.btnField.Image = global::Twol.Properties.Resources.Con_TramMenu;
             this.btnField.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnField.Location = new System.Drawing.Point(3, 309);
+            this.btnField.Location = new System.Drawing.Point(3, 360);
             this.btnField.Name = "btnField";
             this.btnField.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
             this.btnField.Size = new System.Drawing.Size(72, 96);
@@ -7025,25 +7899,25 @@
             this.btnField.UseVisualStyleBackColor = false;
             this.btnField.Click += new System.EventHandler(this.btnField_Click);
             // 
-            // btnDisplay
+            // btnUser
             // 
-            this.btnDisplay.BackColor = System.Drawing.Color.Transparent;
-            this.btnDisplay.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.btnDisplay.FlatAppearance.BorderSize = 0;
-            this.btnDisplay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDisplay.ForeColor = System.Drawing.Color.Black;
-            this.btnDisplay.Image = global::Twol.Properties.Resources.Con_Display;
-            this.btnDisplay.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnDisplay.Location = new System.Drawing.Point(3, 207);
-            this.btnDisplay.Name = "btnDisplay";
-            this.btnDisplay.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
-            this.btnDisplay.Size = new System.Drawing.Size(72, 96);
-            this.btnDisplay.TabIndex = 2;
-            this.btnDisplay.Text = "Display";
-            this.btnDisplay.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnDisplay.UseVisualStyleBackColor = false;
-            this.btnDisplay.Click += new System.EventHandler(this.btnDisplay_Click);
+            this.btnUser.BackColor = System.Drawing.Color.Transparent;
+            this.btnUser.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnUser.FlatAppearance.BorderSize = 0;
+            this.btnUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUser.ForeColor = System.Drawing.Color.Black;
+            this.btnUser.Image = global::Twol.Properties.Resources.ConU_User;
+            this.btnUser.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnUser.Location = new System.Drawing.Point(3, 258);
+            this.btnUser.Name = "btnUser";
+            this.btnUser.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
+            this.btnUser.Size = new System.Drawing.Size(72, 96);
+            this.btnUser.TabIndex = 2;
+            this.btnUser.Text = "User";
+            this.btnUser.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnUser.UseVisualStyleBackColor = false;
+            this.btnUser.Click += new System.EventHandler(this.btnUser_Click);
             // 
             // btnSubFeatureHides
             // 
@@ -7055,7 +7929,7 @@
             this.btnSubFeatureHides.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnSubFeatureHides.Image = global::Twol.Properties.Resources.Con_FeatureMenu;
             this.btnSubFeatureHides.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSubFeatureHides.Location = new System.Drawing.Point(70, 3);
+            this.btnSubFeatureHides.Location = new System.Drawing.Point(23, 3);
             this.btnSubFeatureHides.Name = "btnSubFeatureHides";
             this.btnSubFeatureHides.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
             this.btnSubFeatureHides.Size = new System.Drawing.Size(42, 64);
@@ -7067,21 +7941,39 @@
             // 
             // flpSide
             // 
-            this.flpSide.BackColor = System.Drawing.Color.LightCyan;
+            this.flpSide.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
+            this.flpSide.Controls.Add(this.btnBlankTop);
             this.flpSide.Controls.Add(this.btnVehicle);
             this.flpSide.Controls.Add(this.btnTool);
-            this.flpSide.Controls.Add(this.btnDisplay);
+            this.flpSide.Controls.Add(this.btnUser);
             this.flpSide.Controls.Add(this.btnField);
             this.flpSide.Controls.Add(this.btnArduino);
             this.flpSide.Dock = System.Windows.Forms.DockStyle.Left;
             this.flpSide.Location = new System.Drawing.Point(4, 4);
             this.flpSide.Name = "flpSide";
-            this.flpSide.Size = new System.Drawing.Size(79, 715);
+            this.flpSide.Size = new System.Drawing.Size(79, 716);
             this.flpSide.TabIndex = 456;
+            // 
+            // btnBlankTop
+            // 
+            this.btnBlankTop.BackColor = System.Drawing.Color.Transparent;
+            this.btnBlankTop.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnBlankTop.FlatAppearance.BorderSize = 0;
+            this.btnBlankTop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBlankTop.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBlankTop.ForeColor = System.Drawing.Color.Black;
+            this.btnBlankTop.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnBlankTop.Location = new System.Drawing.Point(3, 3);
+            this.btnBlankTop.Name = "btnBlankTop";
+            this.btnBlankTop.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
+            this.btnBlankTop.Size = new System.Drawing.Size(72, 45);
+            this.btnBlankTop.TabIndex = 116;
+            this.btnBlankTop.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnBlankTop.UseVisualStyleBackColor = false;
             // 
             // flpTop
             // 
-            this.flpTop.BackColor = System.Drawing.Color.LightCyan;
+            this.flpTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
             this.flpTop.Controls.Add(this.btnOK);
             this.flpTop.Controls.Add(this.btnSubVehicleType);
             this.flpTop.Controls.Add(this.btnSubAntenna);
@@ -7092,6 +7984,7 @@
             this.flpTop.Controls.Add(this.btnSubHitch);
             this.flpTop.Controls.Add(this.btnSubPivot);
             this.flpTop.Controls.Add(this.btnSubSections);
+            this.flpTop.Controls.Add(this.btnSubSwitches);
             this.flpTop.Controls.Add(this.btnSubToolSettings);
             this.flpTop.Controls.Add(this.btnSubToolOffset);
             this.flpTop.Controls.Add(this.btnSubMachineRelay);
@@ -7100,11 +7993,13 @@
             this.flpTop.Controls.Add(this.btnSubUTurn);
             this.flpTop.Controls.Add(this.btnSubDisplay);
             this.flpTop.Controls.Add(this.btnSubFeatureHides);
+            this.flpTop.Controls.Add(this.btnSubColors);
+            this.flpTop.Controls.Add(this.btnSubUser);
             this.flpTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.flpTop.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.flpTop.Location = new System.Drawing.Point(83, 4);
             this.flpTop.Name = "flpTop";
-            this.flpTop.Size = new System.Drawing.Size(929, 68);
+            this.flpTop.Size = new System.Drawing.Size(930, 68);
             this.flpTop.TabIndex = 457;
             // 
             // btnSubTram
@@ -7116,7 +8011,7 @@
             this.btnSubTram.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubTram.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnSubTram.Image = global::Twol.Properties.Resources.Con_TramMenu;
-            this.btnSubTram.Location = new System.Drawing.Point(214, 3);
+            this.btnSubTram.Location = new System.Drawing.Point(167, 3);
             this.btnSubTram.Name = "btnSubTram";
             this.btnSubTram.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
             this.btnSubTram.Size = new System.Drawing.Size(42, 64);
@@ -7135,7 +8030,7 @@
             this.btnSubDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubDisplay.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnSubDisplay.Image = global::Twol.Properties.Resources.Con_Display;
-            this.btnSubDisplay.Location = new System.Drawing.Point(118, 3);
+            this.btnSubDisplay.Location = new System.Drawing.Point(71, 3);
             this.btnSubDisplay.Name = "btnSubDisplay";
             this.btnSubDisplay.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
             this.btnSubDisplay.Size = new System.Drawing.Size(42, 64);
@@ -7145,718 +8040,56 @@
             this.btnSubDisplay.UseVisualStyleBackColor = false;
             this.btnSubDisplay.Click += new System.EventHandler(this.btnSubDisplay_Click);
             // 
-            // nudAntennaHeight
-            // 
-            this.nudAntennaHeight.Location = new System.Drawing.Point(392, 208);
-            this.nudAntennaHeight.Maximum = 10D;
-            this.nudAntennaHeight.Mode = Twol.UnitMode.Small;
-            this.nudAntennaHeight.Name = "nudAntennaHeight";
-            this.nudAntennaHeight.Size = new System.Drawing.Size(144, 52);
-            this.nudAntennaHeight.TabIndex = 3;
-            this.nudAntennaHeight.ValueChanged += new System.EventHandler(this.nudAntennaHeight_ValueChanged);
-            // 
-            // nudAntennaOffset
-            // 
-            this.nudAntennaOffset.Location = new System.Drawing.Point(474, 352);
-            this.nudAntennaOffset.Maximum = 10D;
-            this.nudAntennaOffset.Mode = Twol.UnitMode.Small;
-            this.nudAntennaOffset.Name = "nudAntennaOffset";
-            this.nudAntennaOffset.Size = new System.Drawing.Size(144, 52);
-            this.nudAntennaOffset.TabIndex = 2;
-            this.nudAntennaOffset.ValueChanged += new System.EventHandler(this.nudAntennaOffset_ValueChanged);
-            // 
-            // nudAntennaPivot
-            // 
-            this.nudAntennaPivot.Location = new System.Drawing.Point(126, 43);
-            this.nudAntennaPivot.Maximum = 10D;
-            this.nudAntennaPivot.Mode = Twol.UnitMode.Small;
-            this.nudAntennaPivot.Name = "nudAntennaPivot";
-            this.nudAntennaPivot.Size = new System.Drawing.Size(144, 52);
-            this.nudAntennaPivot.TabIndex = 1;
-            this.nudAntennaPivot.ValueChanged += new System.EventHandler(this.nudAntennaPivot_ValueChanged);
-            // 
-            // nudWheelbase
-            // 
-            this.nudWheelbase.Location = new System.Drawing.Point(179, 397);
-            this.nudWheelbase.Maximum = 20D;
-            this.nudWheelbase.Minimum = 0.5D;
-            this.nudWheelbase.Mode = Twol.UnitMode.Small;
-            this.nudWheelbase.Name = "nudWheelbase";
-            this.nudWheelbase.Size = new System.Drawing.Size(152, 52);
-            this.nudWheelbase.TabIndex = 52;
-            this.nudWheelbase.ValueChanged += new System.EventHandler(this.nudWheelbase_ValueChanged);
-            // 
-            // nudTractorHitchLength
-            // 
-            this.nudTractorHitchLength.Location = new System.Drawing.Point(37, 272);
-            this.nudTractorHitchLength.Maximum = 40D;
-            this.nudTractorHitchLength.Mode = Twol.UnitMode.Small;
-            this.nudTractorHitchLength.Name = "nudTractorHitchLength";
-            this.nudTractorHitchLength.Size = new System.Drawing.Size(152, 52);
-            this.nudTractorHitchLength.TabIndex = 478;
-            this.nudTractorHitchLength.ValueChanged += new System.EventHandler(this.nudTractorHitchLength_ValueChanged);
-            // 
-            // nudVehicleTrack
-            // 
-            this.nudVehicleTrack.Location = new System.Drawing.Point(700, 165);
-            this.nudVehicleTrack.Maximum = 20D;
-            this.nudVehicleTrack.Minimum = 0.2D;
-            this.nudVehicleTrack.Mode = Twol.UnitMode.Small;
-            this.nudVehicleTrack.Name = "nudVehicleTrack";
-            this.nudVehicleTrack.Size = new System.Drawing.Size(133, 52);
-            this.nudVehicleTrack.TabIndex = 53;
-            this.nudVehicleTrack.ValueChanged += new System.EventHandler(this.nudVehicleTrack_ValueChanged);
-            // 
-            // nudTrailingHitchLength
-            // 
-            this.nudTrailingHitchLength.Location = new System.Drawing.Point(456, 407);
-            this.nudTrailingHitchLength.Maximum = 30D;
-            this.nudTrailingHitchLength.Minimum = 0.1D;
-            this.nudTrailingHitchLength.Mode = Twol.UnitMode.Small;
-            this.nudTrailingHitchLength.Name = "nudTrailingHitchLength";
-            this.nudTrailingHitchLength.Size = new System.Drawing.Size(124, 52);
-            this.nudTrailingHitchLength.TabIndex = 3;
-            this.nudTrailingHitchLength.ValueChanged += new System.EventHandler(this.nudTrailingHitchLength_ValueChanged);
-            // 
-            // nudDrawbarLength
-            // 
-            this.nudDrawbarLength.Location = new System.Drawing.Point(401, 407);
-            this.nudDrawbarLength.Maximum = 30D;
-            this.nudDrawbarLength.Mode = Twol.UnitMode.Small;
-            this.nudDrawbarLength.Name = "nudDrawbarLength";
-            this.nudDrawbarLength.Size = new System.Drawing.Size(124, 52);
-            this.nudDrawbarLength.TabIndex = 1;
-            this.nudDrawbarLength.ValueChanged += new System.EventHandler(this.nudDrawbarLength_ValueChanged);
-            // 
-            // nudTankHitch
-            // 
-            this.nudTankHitch.Location = new System.Drawing.Point(643, 407);
-            this.nudTankHitch.Maximum = 30D;
-            this.nudTankHitch.Minimum = 0.1D;
-            this.nudTankHitch.Mode = Twol.UnitMode.Small;
-            this.nudTankHitch.Name = "nudTankHitch";
-            this.nudTankHitch.Size = new System.Drawing.Size(124, 52);
-            this.nudTankHitch.TabIndex = 2;
-            this.nudTankHitch.ValueChanged += new System.EventHandler(this.nudTankHitch_ValueChanged);
-            // 
-            // nudOverlap
-            // 
-            this.nudOverlap.Location = new System.Drawing.Point(656, 109);
-            this.nudOverlap.Maximum = 10D;
-            this.nudOverlap.Mode = Twol.UnitMode.Small;
-            this.nudOverlap.Name = "nudOverlap";
-            this.nudOverlap.Size = new System.Drawing.Size(114, 52);
-            this.nudOverlap.TabIndex = 116;
-            this.nudOverlap.ValueChanged += new System.EventHandler(this.nudOverlaPGN_ValueChanged);
-            // 
-            // nudOffset
-            // 
-            this.nudOffset.Location = new System.Drawing.Point(233, 109);
-            this.nudOffset.Maximum = 25D;
-            this.nudOffset.Mode = Twol.UnitMode.Small;
-            this.nudOffset.Name = "nudOffset";
-            this.nudOffset.Size = new System.Drawing.Size(114, 52);
-            this.nudOffset.TabIndex = 115;
-            this.nudOffset.ValueChanged += new System.EventHandler(this.nudOffset_ValueChanged);
-            // 
-            // nudTrailingToolToPivotLength
-            // 
-            this.nudTrailingToolToPivotLength.Location = new System.Drawing.Point(320, 337);
-            this.nudTrailingToolToPivotLength.Maximum = 20D;
-            this.nudTrailingToolToPivotLength.Mode = Twol.UnitMode.Small;
-            this.nudTrailingToolToPivotLength.Name = "nudTrailingToolToPivotLength";
-            this.nudTrailingToolToPivotLength.Size = new System.Drawing.Size(205, 52);
-            this.nudTrailingToolToPivotLength.TabIndex = 214;
-            this.nudTrailingToolToPivotLength.ValueChanged += new System.EventHandler(this.nudTrailingToolToPivotLength_ValueChanged);
-            // 
-            // nudZone8To
-            // 
-            this.nudZone8To.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudZone8To.Location = new System.Drawing.Point(809, 190);
-            this.nudZone8To.Name = "nudZone8To";
-            this.nudZone8To.Size = new System.Drawing.Size(90, 40);
-            this.nudZone8To.TabIndex = 509;
-            this.nudZone8To.ValueChanged += new System.EventHandler(this.nudZone8To_ValueChanged);
-            // 
-            // nudZone7To
-            // 
-            this.nudZone7To.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudZone7To.Location = new System.Drawing.Point(581, 190);
-            this.nudZone7To.Minimum = 1D;
-            this.nudZone7To.Name = "nudZone7To";
-            this.nudZone7To.Size = new System.Drawing.Size(90, 40);
-            this.nudZone7To.TabIndex = 505;
-            this.nudZone7To.ValueChanged += new System.EventHandler(this.nudZone7To_ValueChanged);
-            // 
-            // nudZone6To
-            // 
-            this.nudZone6To.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudZone6To.Location = new System.Drawing.Point(348, 190);
-            this.nudZone6To.Minimum = 1D;
-            this.nudZone6To.Name = "nudZone6To";
-            this.nudZone6To.Size = new System.Drawing.Size(90, 40);
-            this.nudZone6To.TabIndex = 480;
-            this.nudZone6To.ValueChanged += new System.EventHandler(this.nudZone6To_ValueChanged);
-            // 
-            // nudZone4To
-            // 
-            this.nudZone4To.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudZone4To.Location = new System.Drawing.Point(809, 75);
-            this.nudZone4To.Minimum = 1D;
-            this.nudZone4To.Name = "nudZone4To";
-            this.nudZone4To.Size = new System.Drawing.Size(90, 40);
-            this.nudZone4To.TabIndex = 476;
-            this.nudZone4To.ValueChanged += new System.EventHandler(this.nudZone4To_ValueChanged);
-            // 
-            // nudZone1To
-            // 
-            this.nudZone1To.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudZone1To.Location = new System.Drawing.Point(110, 75);
-            this.nudZone1To.Minimum = 1D;
-            this.nudZone1To.Name = "nudZone1To";
-            this.nudZone1To.Size = new System.Drawing.Size(90, 40);
-            this.nudZone1To.TabIndex = 461;
-            this.nudZone1To.ValueChanged += new System.EventHandler(this.nudZone1To_ValueChanged);
-            // 
-            // nudZone5To
-            // 
-            this.nudZone5To.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudZone5To.Location = new System.Drawing.Point(110, 190);
-            this.nudZone5To.Minimum = 1D;
-            this.nudZone5To.Name = "nudZone5To";
-            this.nudZone5To.Size = new System.Drawing.Size(90, 40);
-            this.nudZone5To.TabIndex = 478;
-            this.nudZone5To.ValueChanged += new System.EventHandler(this.nudZone5To_ValueChanged);
-            // 
-            // nudZone3To
-            // 
-            this.nudZone3To.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudZone3To.Location = new System.Drawing.Point(581, 75);
-            this.nudZone3To.Minimum = 1D;
-            this.nudZone3To.Name = "nudZone3To";
-            this.nudZone3To.Size = new System.Drawing.Size(90, 40);
-            this.nudZone3To.TabIndex = 467;
-            this.nudZone3To.ValueChanged += new System.EventHandler(this.nudZone3To_ValueChanged);
-            // 
-            // nudZone2To
-            // 
-            this.nudZone2To.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudZone2To.Location = new System.Drawing.Point(348, 75);
-            this.nudZone2To.Minimum = 1D;
-            this.nudZone2To.Name = "nudZone2To";
-            this.nudZone2To.Size = new System.Drawing.Size(90, 40);
-            this.nudZone2To.TabIndex = 464;
-            this.nudZone2To.ValueChanged += new System.EventHandler(this.nudZone2To_ValueChanged);
-            // 
-            // nudCutoffSpeed
-            // 
-            this.nudCutoffSpeed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudCutoffSpeed.DecimalPlaces = 1;
-            this.nudCutoffSpeed.Location = new System.Drawing.Point(700, 508);
-            this.nudCutoffSpeed.Maximum = 30D;
-            this.nudCutoffSpeed.Mode = Twol.UnitMode.Speed;
-            this.nudCutoffSpeed.Name = "nudCutoffSpeed";
-            this.nudCutoffSpeed.Size = new System.Drawing.Size(127, 52);
-            this.nudCutoffSpeed.TabIndex = 499;
-            this.nudCutoffSpeed.ValueChanged += new System.EventHandler(this.nudCutoffSpeed_ValueChanged);
-            // 
-            // nudDefaultSectionWidth
-            // 
-            this.nudDefaultSectionWidth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudDefaultSectionWidth.Location = new System.Drawing.Point(249, 353);
-            this.nudDefaultSectionWidth.Maximum = 10D;
-            this.nudDefaultSectionWidth.Minimum = 0.1D;
-            this.nudDefaultSectionWidth.Mode = Twol.UnitMode.Small;
-            this.nudDefaultSectionWidth.Name = "nudDefaultSectionWidth";
-            this.nudDefaultSectionWidth.Size = new System.Drawing.Size(179, 52);
-            this.nudDefaultSectionWidth.TabIndex = 296;
-            this.nudDefaultSectionWidth.ValueChanged += new System.EventHandler(this.nudDefaultSectionWidth_ValueChanged);
-            // 
-            // nudMinCoverage
-            // 
-            this.nudMinCoverage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudMinCoverage.Location = new System.Drawing.Point(501, 508);
-            this.nudMinCoverage.Name = "nudMinCoverage";
-            this.nudMinCoverage.Size = new System.Drawing.Size(132, 52);
-            this.nudMinCoverage.TabIndex = 292;
-            this.nudMinCoverage.ValueChanged += new System.EventHandler(this.nudMinCoverage_ValueChanged);
-            // 
-            // nudSection16
-            // 
-            this.nudSection16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudSection16.Location = new System.Drawing.Point(792, 104);
-            this.nudSection16.Maximum = 50D;
-            this.nudSection16.Minimum = 0.01D;
-            this.nudSection16.Mode = Twol.UnitMode.Small;
-            this.nudSection16.Name = "nudSection16";
-            this.nudSection16.Size = new System.Drawing.Size(104, 44);
-            this.nudSection16.TabIndex = 289;
-            this.nudSection16.ValueChanged += new System.EventHandler(this.NudSection_ValueChanged);
-            // 
-            // nudSection15
-            // 
-            this.nudSection15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudSection15.Location = new System.Drawing.Point(680, 104);
-            this.nudSection15.Maximum = 50D;
-            this.nudSection15.Minimum = 0.01D;
-            this.nudSection15.Mode = Twol.UnitMode.Small;
-            this.nudSection15.Name = "nudSection15";
-            this.nudSection15.Size = new System.Drawing.Size(104, 44);
-            this.nudSection15.TabIndex = 285;
-            this.nudSection15.ValueChanged += new System.EventHandler(this.NudSection_ValueChanged);
-            // 
-            // nudSection14
-            // 
-            this.nudSection14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudSection14.Location = new System.Drawing.Point(568, 104);
-            this.nudSection14.Maximum = 50D;
-            this.nudSection14.Minimum = 0.01D;
-            this.nudSection14.Mode = Twol.UnitMode.Small;
-            this.nudSection14.Name = "nudSection14";
-            this.nudSection14.Size = new System.Drawing.Size(104, 44);
-            this.nudSection14.TabIndex = 284;
-            this.nudSection14.ValueChanged += new System.EventHandler(this.NudSection_ValueChanged);
-            // 
-            // nudSection13
-            // 
-            this.nudSection13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudSection13.Location = new System.Drawing.Point(456, 104);
-            this.nudSection13.Maximum = 50D;
-            this.nudSection13.Minimum = 0.01D;
-            this.nudSection13.Mode = Twol.UnitMode.Small;
-            this.nudSection13.Name = "nudSection13";
-            this.nudSection13.Size = new System.Drawing.Size(104, 44);
-            this.nudSection13.TabIndex = 283;
-            this.nudSection13.ValueChanged += new System.EventHandler(this.NudSection_ValueChanged);
-            // 
-            // nudSection12
-            // 
-            this.nudSection12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudSection12.Location = new System.Drawing.Point(344, 104);
-            this.nudSection12.Maximum = 50D;
-            this.nudSection12.Minimum = 0.01D;
-            this.nudSection12.Mode = Twol.UnitMode.Small;
-            this.nudSection12.Name = "nudSection12";
-            this.nudSection12.Size = new System.Drawing.Size(104, 44);
-            this.nudSection12.TabIndex = 270;
-            this.nudSection12.ValueChanged += new System.EventHandler(this.NudSection_ValueChanged);
-            // 
-            // nudSection11
-            // 
-            this.nudSection11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudSection11.Location = new System.Drawing.Point(232, 104);
-            this.nudSection11.Maximum = 50D;
-            this.nudSection11.Minimum = 0.01D;
-            this.nudSection11.Mode = Twol.UnitMode.Small;
-            this.nudSection11.Name = "nudSection11";
-            this.nudSection11.Size = new System.Drawing.Size(104, 44);
-            this.nudSection11.TabIndex = 269;
-            this.nudSection11.ValueChanged += new System.EventHandler(this.NudSection_ValueChanged);
-            // 
-            // nudSection10
-            // 
-            this.nudSection10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudSection10.Location = new System.Drawing.Point(120, 104);
-            this.nudSection10.Maximum = 50D;
-            this.nudSection10.Minimum = 0.01D;
-            this.nudSection10.Mode = Twol.UnitMode.Small;
-            this.nudSection10.Name = "nudSection10";
-            this.nudSection10.Size = new System.Drawing.Size(104, 44);
-            this.nudSection10.TabIndex = 268;
-            this.nudSection10.ValueChanged += new System.EventHandler(this.NudSection_ValueChanged);
-            // 
-            // nudSection09
-            // 
-            this.nudSection09.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudSection09.Location = new System.Drawing.Point(8, 104);
-            this.nudSection09.Maximum = 50D;
-            this.nudSection09.Minimum = 0.01D;
-            this.nudSection09.Mode = Twol.UnitMode.Small;
-            this.nudSection09.Name = "nudSection09";
-            this.nudSection09.Size = new System.Drawing.Size(104, 44);
-            this.nudSection09.TabIndex = 267;
-            this.nudSection09.ValueChanged += new System.EventHandler(this.NudSection_ValueChanged);
-            // 
-            // nudSection08
-            // 
-            this.nudSection08.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudSection08.Location = new System.Drawing.Point(792, 233);
-            this.nudSection08.Maximum = 50D;
-            this.nudSection08.Minimum = 0.01D;
-            this.nudSection08.Mode = Twol.UnitMode.Small;
-            this.nudSection08.Name = "nudSection08";
-            this.nudSection08.Size = new System.Drawing.Size(104, 44);
-            this.nudSection08.TabIndex = 266;
-            this.nudSection08.ValueChanged += new System.EventHandler(this.NudSection_ValueChanged);
-            // 
-            // nudSection07
-            // 
-            this.nudSection07.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudSection07.Location = new System.Drawing.Point(680, 233);
-            this.nudSection07.Maximum = 50D;
-            this.nudSection07.Minimum = 0.01D;
-            this.nudSection07.Mode = Twol.UnitMode.Small;
-            this.nudSection07.Name = "nudSection07";
-            this.nudSection07.Size = new System.Drawing.Size(104, 44);
-            this.nudSection07.TabIndex = 265;
-            this.nudSection07.ValueChanged += new System.EventHandler(this.NudSection_ValueChanged);
-            // 
-            // nudSection06
-            // 
-            this.nudSection06.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudSection06.Location = new System.Drawing.Point(568, 233);
-            this.nudSection06.Maximum = 50D;
-            this.nudSection06.Minimum = 0.01D;
-            this.nudSection06.Mode = Twol.UnitMode.Small;
-            this.nudSection06.Name = "nudSection06";
-            this.nudSection06.Size = new System.Drawing.Size(104, 44);
-            this.nudSection06.TabIndex = 264;
-            this.nudSection06.ValueChanged += new System.EventHandler(this.NudSection_ValueChanged);
-            // 
-            // nudSection05
-            // 
-            this.nudSection05.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudSection05.Location = new System.Drawing.Point(456, 233);
-            this.nudSection05.Maximum = 50D;
-            this.nudSection05.Minimum = 0.01D;
-            this.nudSection05.Mode = Twol.UnitMode.Small;
-            this.nudSection05.Name = "nudSection05";
-            this.nudSection05.Size = new System.Drawing.Size(104, 44);
-            this.nudSection05.TabIndex = 263;
-            this.nudSection05.ValueChanged += new System.EventHandler(this.NudSection_ValueChanged);
-            // 
-            // nudSection04
-            // 
-            this.nudSection04.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudSection04.Location = new System.Drawing.Point(344, 233);
-            this.nudSection04.Maximum = 50D;
-            this.nudSection04.Minimum = 0.01D;
-            this.nudSection04.Mode = Twol.UnitMode.Small;
-            this.nudSection04.Name = "nudSection04";
-            this.nudSection04.Size = new System.Drawing.Size(104, 44);
-            this.nudSection04.TabIndex = 262;
-            this.nudSection04.ValueChanged += new System.EventHandler(this.NudSection_ValueChanged);
-            // 
-            // nudSection03
-            // 
-            this.nudSection03.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudSection03.Location = new System.Drawing.Point(232, 233);
-            this.nudSection03.Maximum = 50D;
-            this.nudSection03.Minimum = 0.01D;
-            this.nudSection03.Mode = Twol.UnitMode.Small;
-            this.nudSection03.Name = "nudSection03";
-            this.nudSection03.Size = new System.Drawing.Size(104, 44);
-            this.nudSection03.TabIndex = 261;
-            this.nudSection03.ValueChanged += new System.EventHandler(this.NudSection_ValueChanged);
-            // 
-            // nudSection02
-            // 
-            this.nudSection02.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudSection02.Location = new System.Drawing.Point(120, 233);
-            this.nudSection02.Maximum = 50D;
-            this.nudSection02.Minimum = 0.01D;
-            this.nudSection02.Mode = Twol.UnitMode.Small;
-            this.nudSection02.Name = "nudSection02";
-            this.nudSection02.Size = new System.Drawing.Size(104, 44);
-            this.nudSection02.TabIndex = 260;
-            this.nudSection02.ValueChanged += new System.EventHandler(this.NudSection_ValueChanged);
-            // 
-            // nudSection01
-            // 
-            this.nudSection01.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudSection01.Location = new System.Drawing.Point(8, 233);
-            this.nudSection01.Maximum = 50D;
-            this.nudSection01.Minimum = 0.01D;
-            this.nudSection01.Mode = Twol.UnitMode.Small;
-            this.nudSection01.Name = "nudSection01";
-            this.nudSection01.Size = new System.Drawing.Size(104, 44);
-            this.nudSection01.TabIndex = 259;
-            this.nudSection01.ValueChanged += new System.EventHandler(this.NudSection_ValueChanged);
-            // 
-            // nudNumberOfSections
-            // 
-            this.nudNumberOfSections.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudNumberOfSections.Location = new System.Drawing.Point(540, 355);
-            this.nudNumberOfSections.Minimum = 1D;
-            this.nudNumberOfSections.Name = "nudNumberOfSections";
-            this.nudNumberOfSections.Size = new System.Drawing.Size(108, 52);
-            this.nudNumberOfSections.TabIndex = 458;
-            this.nudNumberOfSections.ValueChanged += new System.EventHandler(this.nudNumberOfSections_ValueChanged);
-            // 
-            // nudLookAheadDistanceOff
-            // 
-            this.nudLookAheadDistanceOff.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudLookAheadDistanceOff.DecimalPlaces = 1;
-            this.nudLookAheadDistanceOff.Location = new System.Drawing.Point(393, 526);
-            this.nudLookAheadDistanceOff.Maximum = 500D;
-            this.nudLookAheadDistanceOff.Mode = Twol.UnitMode.Small;
-            this.nudLookAheadDistanceOff.Name = "nudLookAheadDistanceOff";
-            this.nudLookAheadDistanceOff.Size = new System.Drawing.Size(114, 52);
-            this.nudLookAheadDistanceOff.TabIndex = 136;
-            this.nudLookAheadDistanceOff.ValueChanged += new System.EventHandler(this.nudLookAheadDistanceOff_ValueChanged);
-            // 
-            // nudLookAheadDistanceOn
-            // 
-            this.nudLookAheadDistanceOn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudLookAheadDistanceOn.DecimalPlaces = 1;
-            this.nudLookAheadDistanceOn.Location = new System.Drawing.Point(108, 526);
-            this.nudLookAheadDistanceOn.Maximum = 500D;
-            this.nudLookAheadDistanceOn.Mode = Twol.UnitMode.Small;
-            this.nudLookAheadDistanceOn.Name = "nudLookAheadDistanceOn";
-            this.nudLookAheadDistanceOn.Size = new System.Drawing.Size(114, 52);
-            this.nudLookAheadDistanceOn.TabIndex = 135;
-            this.nudLookAheadDistanceOn.ValueChanged += new System.EventHandler(this.nudLookAheadDistanceOn_ValueChanged);
-            // 
-            // nudLookAheadOff
-            // 
-            this.nudLookAheadOff.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudLookAheadOff.DecimalPlaces = 1;
-            this.nudLookAheadOff.Location = new System.Drawing.Point(393, 404);
-            this.nudLookAheadOff.Maximum = 20D;
-            this.nudLookAheadOff.Name = "nudLookAheadOff";
-            this.nudLookAheadOff.Size = new System.Drawing.Size(114, 52);
-            this.nudLookAheadOff.TabIndex = 124;
-            this.nudLookAheadOff.ValueChanged += new System.EventHandler(this.nudLookAheadOff_ValueChanged);
-            // 
-            // nudTurnOffDelay
-            // 
-            this.nudTurnOffDelay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudTurnOffDelay.DecimalPlaces = 1;
-            this.nudTurnOffDelay.Location = new System.Drawing.Point(679, 404);
-            this.nudTurnOffDelay.Maximum = 10D;
-            this.nudTurnOffDelay.Name = "nudTurnOffDelay";
-            this.nudTurnOffDelay.Size = new System.Drawing.Size(114, 52);
-            this.nudTurnOffDelay.TabIndex = 119;
-            this.nudTurnOffDelay.ValueChanged += new System.EventHandler(this.nudTurnOffDelay_ValueChanged);
-            // 
-            // nudLookAhead
-            // 
-            this.nudLookAhead.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudLookAhead.DecimalPlaces = 1;
-            this.nudLookAhead.Location = new System.Drawing.Point(108, 404);
-            this.nudLookAhead.Maximum = 22D;
-            this.nudLookAhead.Name = "nudLookAhead";
-            this.nudLookAhead.Size = new System.Drawing.Size(114, 52);
-            this.nudLookAhead.TabIndex = 117;
-            this.nudLookAhead.ValueChanged += new System.EventHandler(this.nudLookAhead_ValueChanged);
-            // 
-            // nudDualReverseDistance
-            // 
-            this.nudDualReverseDistance.Location = new System.Drawing.Point(195, 208);
-            this.nudDualReverseDistance.Maximum = 0.9D;
-            this.nudDualReverseDistance.Minimum = 0.1D;
-            this.nudDualReverseDistance.Mode = Twol.UnitMode.Small;
-            this.nudDualReverseDistance.Name = "nudDualReverseDistance";
-            this.nudDualReverseDistance.Size = new System.Drawing.Size(144, 52);
-            this.nudDualReverseDistance.TabIndex = 472;
-            this.nudDualReverseDistance.ValueChanged += new System.EventHandler(this.nudDualReverseDistance_ValueChanged);
-            // 
-            // nudDualHeadingOffset
-            // 
-            this.nudDualHeadingOffset.DecimalPlaces = 1;
-            this.nudDualHeadingOffset.Location = new System.Drawing.Point(195, 110);
-            this.nudDualHeadingOffset.Minimum = -100D;
-            this.nudDualHeadingOffset.Name = "nudDualHeadingOffset";
-            this.nudDualHeadingOffset.Size = new System.Drawing.Size(144, 52);
-            this.nudDualHeadingOffset.TabIndex = 470;
-            this.nudDualHeadingOffset.ValueChanged += new System.EventHandler(this.nudDualHeadingOffset_ValueChanged);
-            // 
-            // btnRollOffsetUp
-            // 
-            this.btnRollOffsetUp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnRollOffsetUp.FlatAppearance.BorderSize = 0;
-            this.btnRollOffsetUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRollOffsetUp.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRollOffsetUp.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnRollOffsetUp.Image = global::Twol.Properties.Resources.UpArrow64;
-            this.btnRollOffsetUp.Location = new System.Drawing.Point(416, 214);
-            this.btnRollOffsetUp.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.btnRollOffsetUp.Name = "btnRollOffsetUp";
-            this.btnRollOffsetUp.Size = new System.Drawing.Size(59, 69);
-            this.btnRollOffsetUp.TabIndex = 487;
-            this.btnRollOffsetUp.UseVisualStyleBackColor = true;
-            this.btnRollOffsetUp.Click += new System.EventHandler(this.btnRollOffsetUPGN_Click);
-            // 
-            // btnRollOffsetDown
-            // 
-            this.btnRollOffsetDown.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnRollOffsetDown.FlatAppearance.BorderSize = 0;
-            this.btnRollOffsetDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRollOffsetDown.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRollOffsetDown.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnRollOffsetDown.Image = global::Twol.Properties.Resources.DnArrow64;
-            this.btnRollOffsetDown.Location = new System.Drawing.Point(342, 215);
-            this.btnRollOffsetDown.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.btnRollOffsetDown.Name = "btnRollOffsetDown";
-            this.btnRollOffsetDown.Size = new System.Drawing.Size(59, 69);
-            this.btnRollOffsetDown.TabIndex = 486;
-            this.btnRollOffsetDown.UseVisualStyleBackColor = true;
-            this.btnRollOffsetDown.Click += new System.EventHandler(this.btnRollOffsetDown_Click);
-            // 
-            // btnDistanceUp
-            // 
-            this.btnDistanceUp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnDistanceUp.FlatAppearance.BorderSize = 0;
-            this.btnDistanceUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDistanceUp.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDistanceUp.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnDistanceUp.Image = global::Twol.Properties.Resources.UpArrow64;
-            this.btnDistanceUp.Location = new System.Drawing.Point(160, 317);
-            this.btnDistanceUp.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.btnDistanceUp.Name = "btnDistanceUp";
-            this.btnDistanceUp.Size = new System.Drawing.Size(59, 69);
-            this.btnDistanceUp.TabIndex = 457;
-            this.btnDistanceUp.UseVisualStyleBackColor = true;
-            this.btnDistanceUp.Click += new System.EventHandler(this.btnDistanceUPGN_Click);
-            // 
-            // btnDistanceDn
-            // 
-            this.btnDistanceDn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnDistanceDn.FlatAppearance.BorderSize = 0;
-            this.btnDistanceDn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDistanceDn.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDistanceDn.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnDistanceDn.Image = global::Twol.Properties.Resources.DnArrow64;
-            this.btnDistanceDn.Location = new System.Drawing.Point(67, 317);
-            this.btnDistanceDn.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.btnDistanceDn.Name = "btnDistanceDn";
-            this.btnDistanceDn.Size = new System.Drawing.Size(59, 69);
-            this.btnDistanceDn.TabIndex = 456;
-            this.btnDistanceDn.UseVisualStyleBackColor = true;
-            this.btnDistanceDn.Click += new System.EventHandler(this.btnDistanceDn_Click);
-            // 
-            // nudYouTurnRadius
-            // 
-            this.nudYouTurnRadius.DecimalPlaces = 2;
-            this.nudYouTurnRadius.Location = new System.Drawing.Point(381, 318);
-            this.nudYouTurnRadius.Minimum = 0.02D;
-            this.nudYouTurnRadius.Mode = Twol.UnitMode.Large;
-            this.nudYouTurnRadius.Name = "nudYouTurnRadius";
-            this.nudYouTurnRadius.Size = new System.Drawing.Size(160, 52);
-            this.nudYouTurnRadius.TabIndex = 471;
-            this.nudYouTurnRadius.ValueChanged += new System.EventHandler(this.nudYouTurnRadius_ValueChanged);
-            // 
-            // nudTurnDistanceFromBoundary
-            // 
-            this.nudTurnDistanceFromBoundary.DecimalPlaces = 2;
-            this.nudTurnDistanceFromBoundary.Location = new System.Drawing.Point(650, 317);
-            this.nudTurnDistanceFromBoundary.Mode = Twol.UnitMode.Large;
-            this.nudTurnDistanceFromBoundary.Name = "nudTurnDistanceFromBoundary";
-            this.nudTurnDistanceFromBoundary.Size = new System.Drawing.Size(160, 52);
-            this.nudTurnDistanceFromBoundary.TabIndex = 468;
-            this.nudTurnDistanceFromBoundary.ValueChanged += new System.EventHandler(this.nudTurnDistanceFromBoundary_ValueChanged);
-            // 
-            // nudHydLiftLookAhead
-            // 
-            this.nudHydLiftLookAhead.DecimalPlaces = 1;
-            this.nudHydLiftLookAhead.Location = new System.Drawing.Point(34, 278);
-            this.nudHydLiftLookAhead.Maximum = 20D;
-            this.nudHydLiftLookAhead.Minimum = 1D;
-            this.nudHydLiftLookAhead.Name = "nudHydLiftLookAhead";
-            this.nudHydLiftLookAhead.Size = new System.Drawing.Size(148, 52);
-            this.nudHydLiftLookAhead.TabIndex = 117;
-            this.nudHydLiftLookAhead.ValueChanged += new System.EventHandler(this.nudUser_ValueChanged);
-            // 
-            // nudLowerTime
-            // 
-            this.nudLowerTime.Location = new System.Drawing.Point(258, 279);
-            this.nudLowerTime.Maximum = 255D;
-            this.nudLowerTime.Minimum = 1D;
-            this.nudLowerTime.Name = "nudLowerTime";
-            this.nudLowerTime.Size = new System.Drawing.Size(114, 52);
-            this.nudLowerTime.TabIndex = 4;
-            this.nudLowerTime.ValueChanged += new System.EventHandler(this.nudUser_ValueChanged);
-            // 
-            // nudRaiseTime
-            // 
-            this.nudRaiseTime.Location = new System.Drawing.Point(258, 75);
-            this.nudRaiseTime.Maximum = 255D;
-            this.nudRaiseTime.Minimum = 1D;
-            this.nudRaiseTime.Name = "nudRaiseTime";
-            this.nudRaiseTime.Size = new System.Drawing.Size(114, 52);
-            this.nudRaiseTime.TabIndex = 3;
-            this.nudRaiseTime.ValueChanged += new System.EventHandler(this.nudUser_ValueChanged);
-            // 
-            // nudUser4
-            // 
-            this.nudUser4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudUser4.Location = new System.Drawing.Point(714, 342);
-            this.nudUser4.Maximum = 255D;
-            this.nudUser4.Name = "nudUser4";
-            this.nudUser4.Size = new System.Drawing.Size(114, 52);
-            this.nudUser4.TabIndex = 488;
-            this.nudUser4.ValueChanged += new System.EventHandler(this.nudUser_ValueChanged);
-            // 
-            // nudUser3
-            // 
-            this.nudUser3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudUser3.Location = new System.Drawing.Point(714, 253);
-            this.nudUser3.Maximum = 255D;
-            this.nudUser3.Name = "nudUser3";
-            this.nudUser3.Size = new System.Drawing.Size(114, 52);
-            this.nudUser3.TabIndex = 487;
-            this.nudUser3.ValueChanged += new System.EventHandler(this.nudUser_ValueChanged);
-            // 
-            // nudUser2
-            // 
-            this.nudUser2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudUser2.Location = new System.Drawing.Point(714, 164);
-            this.nudUser2.Maximum = 255D;
-            this.nudUser2.Name = "nudUser2";
-            this.nudUser2.Size = new System.Drawing.Size(114, 52);
-            this.nudUser2.TabIndex = 486;
-            this.nudUser2.ValueChanged += new System.EventHandler(this.nudUser_ValueChanged);
-            // 
-            // nudUser1
-            // 
-            this.nudUser1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudUser1.Location = new System.Drawing.Point(714, 75);
-            this.nudUser1.Maximum = 255D;
-            this.nudUser1.Name = "nudUser1";
-            this.nudUser1.Size = new System.Drawing.Size(114, 52);
-            this.nudUser1.TabIndex = 485;
-            this.nudUser1.ValueChanged += new System.EventHandler(this.nudUser_ValueChanged);
-            // 
-            // nudTramWidth
-            // 
-            this.nudTramWidth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudTramWidth.Location = new System.Drawing.Point(291, 105);
-            this.nudTramWidth.Maximum = 50D;
-            this.nudTramWidth.Minimum = 1D;
-            this.nudTramWidth.Mode = Twol.UnitMode.Small;
-            this.nudTramWidth.Name = "nudTramWidth";
-            this.nudTramWidth.Size = new System.Drawing.Size(157, 52);
-            this.nudTramWidth.TabIndex = 1;
-            this.nudTramWidth.ValueChanged += new System.EventHandler(this.nudTramWidth_ValueChanged);
-            // 
-            // nudNumGuideLines
-            // 
-            this.nudNumGuideLines.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudNumGuideLines.Enabled = false;
-            this.nudNumGuideLines.Location = new System.Drawing.Point(531, 270);
-            this.nudNumGuideLines.Maximum = 500D;
-            this.nudNumGuideLines.Minimum = 1D;
-            this.nudNumGuideLines.Name = "nudNumGuideLines";
-            this.nudNumGuideLines.Size = new System.Drawing.Size(100, 52);
-            this.nudNumGuideLines.TabIndex = 534;
-            this.nudNumGuideLines.ValueChanged += new System.EventHandler(this.nudNumGuideLines_ValueChanged);
+            // btnSubColors
+            // 
+            this.btnSubColors.BackColor = System.Drawing.Color.Transparent;
+            this.btnSubColors.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnSubColors.FlatAppearance.BorderSize = 0;
+            this.btnSubColors.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSubColors.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSubColors.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnSubColors.Image = global::Twol.Properties.Resources.ColourPick;
+            this.btnSubColors.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSubColors.Location = new System.Drawing.Point(885, 73);
+            this.btnSubColors.Name = "btnSubColors";
+            this.btnSubColors.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.btnSubColors.Size = new System.Drawing.Size(42, 64);
+            this.btnSubColors.TabIndex = 459;
+            this.btnSubColors.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSubColors.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSubColors.UseVisualStyleBackColor = false;
+            this.btnSubColors.Click += new System.EventHandler(this.btnSubColors_Click);
+            // 
+            // btnSubUser
+            // 
+            this.btnSubUser.BackColor = System.Drawing.Color.Transparent;
+            this.btnSubUser.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnSubUser.FlatAppearance.BorderSize = 0;
+            this.btnSubUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSubUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSubUser.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnSubUser.Image = global::Twol.Properties.Resources.ConU_User;
+            this.btnSubUser.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSubUser.Location = new System.Drawing.Point(837, 73);
+            this.btnSubUser.Name = "btnSubUser";
+            this.btnSubUser.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.btnSubUser.Size = new System.Drawing.Size(42, 64);
+            this.btnSubUser.TabIndex = 460;
+            this.btnSubUser.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSubUser.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSubUser.UseVisualStyleBackColor = false;
+            this.btnSubUser.Click += new System.EventHandler(this.btnSubUser_Click);
             // 
             // FormConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.BackColor = System.Drawing.Color.Azure;
-            this.ClientSize = new System.Drawing.Size(1016, 723);
+            this.BackColor = System.Drawing.Color.SlateBlue;
+            this.ClientSize = new System.Drawing.Size(1017, 724);
             this.ControlBox = false;
             this.Controls.Add(this.flpTop);
             this.Controls.Add(this.flpSide);
-            this.Controls.Add(this.btnSubSwitches);
-            this.Controls.Add(this.lblCurrentTool);
             this.Controls.Add(this.tab1);
-            this.Controls.Add(this.lblUnits);
-            this.Controls.Add(this.lblToolWidth);
-            this.Controls.Add(this.lblSecTotalWidthMeters);
-            this.Controls.Add(this.lblCurrentVehicle);
             this.Font = new System.Drawing.Font("Tahoma", 9.75F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.HelpButton = true;
@@ -7934,11 +8167,12 @@
             this.tabBtns.ResumeLayout(false);
             this.tabBtns.PerformLayout();
             this.tabDisplay.ResumeLayout(false);
+            this.tabColors.ResumeLayout(false);
+            this.tabUser.ResumeLayout(false);
             this.unitsGroupBox.ResumeLayout(false);
             this.flpSide.ResumeLayout(false);
             this.flpTop.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -7999,7 +8233,6 @@
         private System.Windows.Forms.ListView lvVehicles;
         private System.Windows.Forms.ColumnHeader chVehicle;
         private System.Windows.Forms.TextBox tboxVehicleNameSave;
-        private System.Windows.Forms.Label lblCurrentVehicle;
         private System.Windows.Forms.GroupBox gboxAttachment;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Label label1;
@@ -8041,8 +8274,6 @@
         private System.Windows.Forms.Label lblCoverage;
         private NudlessNumericUpDown nudMinCoverage;
         private System.Windows.Forms.Label lblSections;
-        private System.Windows.Forms.Label lblSecTotalWidthMeters;
-        private System.Windows.Forms.Label lblToolWidth;
         private System.Windows.Forms.Button btnRemoveZeroOffset;
         private System.Windows.Forms.Label lblRollZeroOffset;
         private NudlessNumericUpDown nudWheelbase;
@@ -8089,7 +8320,6 @@
         private NudlessNumericUpDown nudTurnDistanceFromBoundary;
         private System.Windows.Forms.Label lblFtMUTurn;
         private System.Windows.Forms.Label lblTramWidthUnits;
-        private System.Windows.Forms.Label lblUnits;
         private System.Windows.Forms.Label lblEnable;
         private System.Windows.Forms.GroupBox gboxSingle;
         private System.Windows.Forms.CheckBox cboxIsRTK;
@@ -8372,7 +8602,6 @@
         private System.Windows.Forms.TextBox tboxToolNameSave;
         private System.Windows.Forms.Label lblSaveAsTool;
         private System.Windows.Forms.Label lblSummaryToolName;
-        private System.Windows.Forms.Label lblCurrentTool;
         private System.Windows.Forms.Label label2;
         private NudlessNumericUpDown nudLookAheadDistanceOff;
         private NudlessNumericUpDown nudLookAheadDistanceOn;
@@ -8404,11 +8633,26 @@
         private System.Windows.Forms.Button btnSubUTurn;
         private System.Windows.Forms.Button btnArduino;
         private System.Windows.Forms.Button btnField;
-        private System.Windows.Forms.Button btnDisplay;
+        private System.Windows.Forms.Button btnUser;
         private System.Windows.Forms.Button btnSubFeatureHides;
         private System.Windows.Forms.FlowLayoutPanel flpSide;
         private System.Windows.Forms.FlowLayoutPanel flpTop;
         private System.Windows.Forms.Button btnSubTram;
         private System.Windows.Forms.Button btnSubDisplay;
+        private System.Windows.Forms.TabPage tabColors;
+        private System.Windows.Forms.Button btnSectionColors;
+        private System.Windows.Forms.Button btnColors;
+        private System.Windows.Forms.Button btnSubColors;
+        private System.Windows.Forms.Button btnSetDirectories;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Button btnHotkeys;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Button btnLogViewer;
+        private System.Windows.Forms.Button btnBlankTop;
+        private System.Windows.Forms.TabPage tabUser;
+        private System.Windows.Forms.Button btnSubUser;
     }
 }

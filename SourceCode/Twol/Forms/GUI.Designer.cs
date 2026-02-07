@@ -468,7 +468,7 @@ namespace Twol
             recordedPathStripMenu.Visible = Settings.User.setFeatures.isRecPathOn;
 
             //tools menu
-            deleteContourPathsToolStripMenuItem.Visible = Settings.User.setFeatures.isHideContourOn;
+            //deleteContourPathsToolStripMenuItem.Visible = Settings.User.setFeatures.isHideContourOn;
 
             //left side
             btnToolSteerConfig.Visible = true;
@@ -554,11 +554,11 @@ namespace Twol
             simulatorOnToolStripMenuItem.Text = gStr.Get(gs.gsSimulatorOn);
             resetALLToolStripMenuItem.Text = gStr.Get(gs.gsResetAll);
 
-            toolStripColors.Text = gStr.Get(gs.gsColors);
-            toolStripSectionColors.Text = "Section " + gStr.Get(gs.gsColors);
-            toolStripConfig.Text = gStr.Get(gs.gsConfiguration);
-            toolStripSteerSettings.Text = gStr.Get(gs.gsAutoSteer);
-            toolStripWorkingDirectories.Text = gStr.Get(gs.gsDirectories);
+            //toolStripColors.Text = gStr.Get(gs.gsColors);
+            //toolStripSectionColors.Text = "Section " + gStr.Get(gs.gsColors);
+            //toolStripConfig.Text = gStr.Get(gs.gsConfiguration);
+            //toolStripSteerSettings.Text = gStr.Get(gs.gsAutoSteer);
+            //toolStripWorkingDirectories.Text = gStr.Get(gs.gsDirectories);
 
             resetEverythingToolStripMenuItem.Text = gStr.Get(gs.gsResetAllForSure);
 
@@ -566,7 +566,7 @@ namespace Twol
             boundariesToolStripMenuItem.Text = gStr.Get(gs.gsBoundary);
             headlandToolStripMenuItem.Text = gStr.Get(gs.gsHeadland);
             headlandBuildToolStripMenuItem.Text = gStr.Get(gs.gsHeadland) + " Builder";
-            deleteContourPathsToolStripMenuItem.Text = gStr.Get(gs.gsDeleteContourPaths);
+            //deleteContourPathsToolStripMenuItem.Text = gStr.Get(gs.gsDeleteContourPaths);
             deleteAppliedToolStripMenuItem.Text = gStr.Get(gs.gsDeleteAppliedArea);
             tramsMultiMenuField.Text = gStr.Get(gs.gsTramLines) + " Multi";
 

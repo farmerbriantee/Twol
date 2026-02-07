@@ -1015,7 +1015,7 @@ namespace Twol
 
         public void FieldMenuButtonEnableDisable(bool isOn)
         {
-            deleteContourPathsToolStripMenuItem.Enabled = isOn;
+            //deleteContourPathsToolStripMenuItem.Enabled = isOn;
             boundaryToolToolStripMenu.Enabled = isOn;
 
             boundariesToolStripMenuItem.Enabled = isOn;

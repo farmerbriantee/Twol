@@ -2,6 +2,7 @@
 
 using System;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 using Twol.Classes;
 
@@ -31,7 +32,7 @@ namespace Twol
             lblNew.Text = gStr.Get(gs.gsNewDefaultVehicle);
             lblSaveAsTool.Text = gStr.Get(gs.gsCopyCurrentToolAs);
             lblNewTool.Text = gStr.Get(gs.gsNewDefaultTool);
-            lblToolWidth.Text = gStr.Get(gs.gsWidth);
+            //lblToolWidth.Text = gStr.Get(gs.gsWidth);
             //lblOpen.Text = gStr.Get(gs.gsOpen);
             //lblDelete.Text = gStr.Get(gs.gsDelete);
             lblPivotDistance.Text = gStr.Get(gs.gsPivotDistance);
@@ -148,6 +149,7 @@ namespace Twol
         {
             Close();
         }
+
         private void UpdateSummary()
         {
             lblSumWheelbase.Text = (Settings.User.isMetric ?
@@ -162,7 +164,7 @@ namespace Twol
                 (Settings.Vehicle.setAS_snapDistance * glm.cm2CmOrIn).ToString("N1");
 
             lblNudgeDistance.Text = snapDist + glm.unitsInCm.ToString();
-            lblUnits.Text = Settings.User.isMetric ? "Metric" : "Imperial";
+            //lblUnits.Text = Settings.User.isMetric ? "Metric" : "Imperial";
 
             //labelCurrentVehicle.Text = gStr.gsCurrent + ": " + RegistrySettings.vehicleFileName;
             //lblSummaryVehicleName.Text = labelCurrentVehicle.Text;
@@ -205,11 +207,8 @@ namespace Twol
             //lblNudgeDistance.Text = snapDist + glm.unitsInCm.ToString();
             //lblUnits.Text = mf.isMetric ? "Metric" : "Imperial";
 
-            lblCurrentVehicle.Text = "Vehicle" + ": " + RegistrySettings.vehicleFileName;
-            lblSummaryVehicleName.Text = lblCurrentVehicle.Text;
-
-            lblCurrentTool.Text = "Tool" + ": " + RegistrySettings.toolFileName;
-            lblSummaryToolName.Text = lblCurrentTool.Text;
+            lblSummaryVehicleName.Text = "Vehicle" + ": " + RegistrySettings.vehicleFileName;
+            lblSummaryToolName.Text = "Tool" + ": " + RegistrySettings.toolFileName;
 
             //lblSumTramWidth.Text = mf.isMetric ?
             //    ((Settings.Tool.tram_Width).ToString() + " m") :
@@ -229,10 +228,6 @@ namespace Twol
             double temp = Math.Round((toFeet - Math.Truncate(toFeet)) * 12, 0);
             feetInch += Convert.ToString(temp) + '"';
             return feetInch;
-        }
-
-        private void tabSummary_Leave(object sender, EventArgs e)
-        {
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -260,87 +255,9 @@ namespace Twol
             }
         }
 
-        private void tabDisplay_Enter(object sender, EventArgs e)
+        private void tabDisplay_Click(object sender, EventArgs e)
         {
-            chkDisplayBrightness.Checked = Settings.User.setDisplay_isBrightnessOn;
-            chkDisplayFloor.Checked = Settings.User.setDisplay_isTextureOn;
-            chkDisplayMapping.Checked = Settings.User.isWorldMapOn;
 
-            chkDisplayGrid.Checked = Settings.User.isGridOn;
-            chkDisplaySpeedo.Checked = Settings.User.isSpeedoOn;
-
-            chkSvennArrow.Checked = Settings.User.setDisplay_isSvennArrowOn;
-            chkDisplayExtraGuides.Checked = Settings.User.isSideGuideLines;
-            chkDisplayPolygons.Checked = mf.isDrawPolygons;
-            chkDisplayKeyboard.Checked = Settings.User.setDisplay_isKeyboardOn;
-            chkDisplayLogElevation.Checked = Settings.User.isLogElevation;
-
-            chkDisplayStartFullScreen.Checked = Settings.User.setDisplay_isStartFullScreen;
-            chkDirectionMarkers.Checked = Settings.User.isDirectionMarkers;
-            chkSectionLines.Checked = Settings.User.setDisplay_isSectionLinesOn;
-            chkLineSmooth.Checked = Settings.User.setDisplay_isLineSmooth;
-
-            rbtnDisplayMetric.Checked = Settings.User.isMetric;
-            rbtnDisplayImperial.Checked = !rbtnDisplayMetric.Checked;
-
-            nudNumGuideLines.Value = Settings.Vehicle.setAS_numGuideLines;
         }
-
-        private void tabDisplay_Leave(object sender, EventArgs e)
-        {
-            SaveDisplaySettings();
-        }
-
-        private void rbtnDisplayImperial_Click(object sender, EventArgs e)
-        {
-            mf.TimedMessageBox(2000, "Units Set", "Imperial");
-            Log.EventWriter("Units To Imperial");
-
-            Settings.User.isMetric = false;
-            mf.ChangeMetricImperial();
-
-            lblVehicleToolWidth.Text = Convert.ToString((int)(Settings.Tool.toolWidth * glm.m2InchOrCm));
-            SectionFeetInchesTotalWidthLabelUpdate();
-        }
-
-        private void rbtnDisplayMetric_Click(object sender, EventArgs e)
-        {
-            mf.TimedMessageBox(2000, "Units Set", "Metric");
-            Log.EventWriter("Units to Metric");
-
-            Settings.User.isMetric = true;
-            mf.ChangeMetricImperial();
-
-            lblVehicleToolWidth.Text = Convert.ToString((int)(Settings.Tool.toolWidth * glm.m2InchOrCm));
-            SectionFeetInchesTotalWidthLabelUpdate();
-        }
-
-        private void nudNumGuideLines_ValueChanged(object sender, EventArgs e)
-        {
-            Settings.Vehicle.setAS_numGuideLines = (int)nudNumGuideLines.Value;
-        }
-
-        private void chkDisplayMapping_Click(object sender, EventArgs e)
-        {
-            if (chkDisplayMapping.Checked)
-            {
-                if (chkDisplayFloor.Checked)
-                {
-                    chkDisplayFloor.Checked = false;
-                }
-            }
-        }
-
-        private void chkDisplayFloor_Click(object sender, EventArgs e)
-        {
-            if (chkDisplayFloor.Checked)
-            {
-                if (chkDisplayMapping.Checked)
-                {
-                    chkDisplayMapping.Checked = false;
-                }
-            }
-        }
-
     }
 }

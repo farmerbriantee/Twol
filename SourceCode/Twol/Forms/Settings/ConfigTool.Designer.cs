@@ -169,11 +169,6 @@ namespace Twol
             nudTankHitch.Value = Math.Abs(Settings.Tool.tankTrailingHitchLength);
         }
 
-        private void tabTHitch_Leave(object sender, EventArgs e)
-        {
-            
-        }
-
         private void nudDrawbarLength_ValueChanged(object sender, EventArgs e)
         {
             Settings.Tool.hitchLength = nudDrawbarLength.Value;
@@ -204,24 +199,8 @@ namespace Twol
             nudTurnOffDelay.Value = Settings.Tool.offDelay;
             nudLookAheadDistanceOn.Value = Settings.Tool.lookAheadDistanceOn;
             nudLookAheadDistanceOff.Value = Settings.Tool.lookAheadDistanceOff;
-
-            //pictureBox3.Image = Resources.ToolLookaheadOn;
-            //pictureBox4.Image = Resources.ToolLookaheadOff;
         }
 
-        private void tabTSettings_Leave(object sender, EventArgs e)
-        {
-            ////line up manual buttons based on # of sections
-            //mf.LineUpManualBtns();
-
-            ////update the sections to newly configured widths and positions in main
-            //mf.SectionSetPosition();
-
-            ////update the widths of sections and tool width in main
-            //mf.SectionCalcWidths();
-
-            
-        }
         private void nudLookAhead_ValueChanged(object sender, EventArgs e)
         {
             Settings.Tool.lookAheadOn = nudLookAhead.Value;
@@ -367,12 +346,6 @@ namespace Twol
             label177.Text = glm.unitsInCm;
         }
 
-        private void tabToolPivot_Leave(object sender, EventArgs e)
-        {
-            
-        }
-
-
         private void btnPivotOffsetZero_Click(object sender, EventArgs e)
         {
             nudTrailingToolToPivotLength.Value = 0;
@@ -381,7 +354,6 @@ namespace Twol
 
             Settings.Tool.trailingToolToPivotLength = 0;
         }
-
 
         private void rbtnPivotBehindPos_Click(object sender, EventArgs e)
         {
@@ -411,7 +383,6 @@ namespace Twol
             rbtnPivotBehindPos.Checked = Settings.Tool.trailingToolToPivotLength > 0;
             rbtnPivotAheadNeg.Checked = Settings.Tool.trailingToolToPivotLength < 0;
         }
-
 
         #endregion
 
@@ -1014,20 +985,20 @@ namespace Twol
         //update tool width label at bottom of window
         private void SectionFeetInchesTotalWidthLabelUpdate()
         {
-            if (Settings.User.isMetric)
-            {
-                lblUnits.Text = "Metric";
-                lblSecTotalWidthMeters.Text = (Settings.Tool.toolWidth * 100).ToString("0") + " cm";
-                lblSummaryWidth.Text = Settings.Tool.toolWidth.ToString("N2") + " m";
-            }
-            else
-            {
-                lblUnits.Text = "Imperial";
-                double toFeet = (Settings.Tool.toolWidth * glm.m2InchOrCm) * 0.08334;
-                double temp = Math.Round((toFeet - Math.Truncate(toFeet)) * 12, 0);
-                lblSecTotalWidthMeters.Text = Convert.ToString((int)toFeet) + "'   " + Convert.ToString(temp) + '"';
-                lblSummaryWidth.Text = lblSecTotalWidthMeters.Text;
-            }
+            //if (Settings.User.isMetric)
+            //{
+            //    lblUnits.Text = "Metric";
+            //    lblSecTotalWidthMeters.Text = (Settings.Tool.toolWidth * 100).ToString("0") + " cm";
+            //    lblSummaryWidth.Text = Settings.Tool.toolWidth.ToString("N2") + " m";
+            //}
+            //else
+            //{
+            //    lblUnits.Text = "Imperial";
+            //    double toFeet = (Settings.Tool.toolWidth * glm.m2InchOrCm) * 0.08334;
+            //    double temp = Math.Round((toFeet - Math.Truncate(toFeet)) * 12, 0);
+            //    lblSecTotalWidthMeters.Text = Convert.ToString((int)toFeet) + "'   " + Convert.ToString(temp) + '"';
+            //    lblSummaryWidth.Text = lblSecTotalWidthMeters.Text;
+            //}
         }
 
         //Convert section width to positions along toolbar

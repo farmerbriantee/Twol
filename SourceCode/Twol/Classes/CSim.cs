@@ -20,7 +20,6 @@ namespace Twol
         public double toolOffset = 0;
 
         #endregion properties sim
-        vec3 toolPosition = new vec3();
 
         public CSim(FormGPS _f)
         {

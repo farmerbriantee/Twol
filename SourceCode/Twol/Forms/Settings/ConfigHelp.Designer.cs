@@ -11,8 +11,6 @@ using System.Windows.Forms;
 using Twol.Properties;
 using OpenTK.Graphics.OpenGL;
 
-//                MessageBox.Show(gs, gStr.Get(gs.gsHelp);
-
 namespace Twol
 {
     public partial class FormConfig
