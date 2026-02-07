@@ -126,7 +126,7 @@ namespace Twol
                 Top = 0;
                 Left = 0;
             }
-            SetTab(null, null, true);
+            SetTab(null);
 
             UpdateSummary();
         }
@@ -134,7 +134,7 @@ namespace Twol
         private void FormConfig_FormClosing(object sender, FormClosingEventArgs e)
         {
             tab1.SelectedTab = null;// make sure tabPage_Leave is called!
-            SelectedTabChanged();
+            SetTab(tab1.SelectedTab);
 
             //save current vehicle
             Settings.Vehicle.Save();
@@ -339,5 +339,6 @@ namespace Twol
                 }
             }
         }
+
     }
 }
