@@ -444,8 +444,6 @@ namespace Twol
                                 filename = Path.Combine(dir, "Boundary.txt");
                                 if (File.Exists(filename))
                                 {
-                                    var bndPts = new List<vec3>();
-
                                     using (StreamReader reader2 = new StreamReader(filename))
                                     {
                                         try
@@ -714,9 +712,7 @@ namespace Twol
             if (bnd.bndList.Count > 0 && bnd.bndList[0].hdLine.Count > 0)
             {
                 //Triangulate headland polygon
-                CPolygon hdLinePolygon = new CPolygon(bnd.bndList[0].hdLine.ToArray());
-                bnd.bndList[0].hdLineTriangleList = hdLinePolygon.Triangulate();
-                bnd.CreateHdLineVertexArray(0);
+                bnd.bndList[0].CreateHdLineVertexArray();
 
                 bnd.isHeadlandOn = true;
                 btnHeadlandOnOff.Image = Properties.Resources.HeadlandOn;
@@ -727,13 +723,12 @@ namespace Twol
                 bnd.isHeadlandOn = false;
                 btnHeadlandOnOff.Image = Properties.Resources.HeadlandOff;
                 btnHeadlandOnOff.Visible = false;
-                bnd.DeleteHeadLineVertexArray(0);
             }
         }
 
-        public void FileLoadHeadLines()
+        public void FileLoadHeadLines(List<CHeadPath> tracksArr)
         {
-            hdl.tracksArr?.Clear();
+            tracksArr.Clear();
 
             //get the directory and make sure it exists, create if not
             string directoryName = Path.Combine(RegistrySettings.fieldsDirectory, currentFieldDirectory);
@@ -798,14 +793,14 @@ namespace Twol
                                     headPath.trackPts.Add(vecPt);
                                 }
 
-                                hdl.tracksArr.Add(headPath);
+                                tracksArr.Add(headPath);
                             }
                         }
                     }
                 }
                 catch (Exception er)
                 {
-                    hdl.tracksArr?.Clear();
+                    tracksArr.Clear();
 
                     TimedMessageBox(2000, "Headline Error", "Lines Deleted");
 
@@ -1210,7 +1205,7 @@ namespace Twol
                             string line = reader.ReadLine();
                             int verts = int.Parse(line);
 
-                            vec2 [] vArr = new vec2[verts-1];
+                            vec2[] vArr = new vec2[verts - 1];
 
                             var triStripList = new List<vec3>(verts + 1);
 
@@ -1225,13 +1220,13 @@ namespace Twol
 
                                 if (v == 0)
                                 {
-                                    patchColor = new vec3 (vecFix);
+                                    patchColor = new vec3(vecFix);
                                     continue;
                                 }
                                 vArr[v - 1] = new vec2(vecFix.easting, vecFix.northing);
                             }
 
-                            for (int i = 0; i < vArr.Length - 2; i+=2)
+                            for (int i = 0; i < vArr.Length - 2; i += 2)
                             {
                                 secPoly.polygonPts[0] = vArr[i + 0];
                                 secPoly.polygonPts[1] = vArr[i + 1];
@@ -1255,8 +1250,8 @@ namespace Twol
                                 {
                                     double temp = 0;
                                     temp = triStripList[j].easting * (triStripList[j + 1].northing - triStripList[j + 2].northing) +
-                                              triStripList[j + 1].easting * (triStripList[j + 2].northing - triStripList[j].northing) +
-                                                  triStripList[j + 2].easting * (triStripList[j].northing - triStripList[j + 1].northing);
+                                                triStripList[j + 1].easting * (triStripList[j + 2].northing - triStripList[j].northing) +
+                                                    triStripList[j + 2].easting * (triStripList[j].northing - triStripList[j + 1].northing);
 
                                     fd.workedAreaTotal += Math.Abs((temp * 0.5));
                                 }
@@ -1264,54 +1259,7 @@ namespace Twol
                             }
                         }
 
-                        //vertices
-                        float[] triangleVertexData = new float[maxTriangles * 3 * 2];
-
-                        for (int i = 0; i < secTriList.Count; i++)
-                        {
-                            // Assuming Triangle has properties or fields: A, B, C of type vec3 with .x, .y, .z
-                            triangleVertexData[i * 6 + 0] = (float)secTriList[i].polygonPts[0].easting;
-                            triangleVertexData[i * 6 + 1] = (float)secTriList[i].polygonPts[0].northing;
-                                                            
-                            triangleVertexData[i * 6 + 2] = (float)secTriList[i].polygonPts[1].easting;
-                            triangleVertexData[i * 6 + 3] = (float)secTriList[i].polygonPts[1].northing;
-                                                            
-                            triangleVertexData[i * 6 + 4] = (float)secTriList[i].polygonPts[2].easting;
-                            triangleVertexData[i * 6 + 5] = (float)secTriList[i].polygonPts[2].northing;
-                        }
-
-                        patchID = GL.GenBuffer();
-                        GL.BindBuffer(BufferTarget.ArrayBuffer, patchID);
-                        GL.BufferData(BufferTarget.ArrayBuffer, triangleVertexData.Length * sizeof(float), IntPtr.Zero, BufferUsageHint.StaticDraw);
-                        GL.BufferSubData(BufferTarget.ArrayBuffer, IntPtr.Zero, secTriList.Count * 6 * sizeof(float), triangleVertexData);
-
-
-                        //color vertices
-                        byte[] colorVertexData = new byte[maxTriangles * 3 * 4];
-
-                        for (int i = 0; i < secTriList.Count; i++)
-                        {
-                            colorVertexData[i * 12 + 0] = (byte)colorList[i].easting;
-                            colorVertexData[i * 12 + 1] = (byte)colorList[i].northing;
-                            colorVertexData[i * 12 + 2] = (byte)colorList[i].heading;
-                            colorVertexData[i * 12 + 3] = (byte)152;
-                            colorVertexData[i * 12 + 4] = (byte)colorList[i].easting;
-                            colorVertexData[i * 12 + 5] = (byte)colorList[i].northing;
-                            colorVertexData[i * 12 + 6] = (byte)colorList[i].heading;
-                            colorVertexData[i * 12 + 7] = (byte)152;
-                            colorVertexData[i * 12 + 8] = (byte)colorList[i].easting;
-                            colorVertexData[i * 12 + 9] = (byte)colorList[i].northing;
-                            colorVertexData[i * 12 + 10] = (byte)colorList[i].heading;
-                            colorVertexData[i * 12 + 11] = (byte)152;
-                        }
-
-                        colorID = GL.GenBuffer();
-                        GL.BindBuffer(BufferTarget.ArrayBuffer, colorID);
-                        GL.BufferData(BufferTarget.ArrayBuffer, colorVertexData.Length * sizeof(byte), IntPtr.Zero, BufferUsageHint.StaticDraw);
-                        GL.BufferSubData(BufferTarget.ArrayBuffer, IntPtr.Zero, secTriList.Count * 12 * sizeof(byte), colorVertexData);
-
-                        sectionTriangleCount = secTriList.Count;
-
+                        BufferSubData(secTriList, colorList);
                         secTriList.Clear();
 
                     }
@@ -1388,68 +1336,7 @@ namespace Twol
                     }
                 }
 
-                float[] triangleVertexData = new float[secTriList.Count * 3 * 2];
-
-                for (int i = 0; i < secTriList.Count; i++)
-                {
-                    // Assuming Triangle has properties or fields: A, B, C of type vec3 with .x, .y, .z
-                    triangleVertexData[i * 6 + 0] = (float)secTriList[i].polygonPts[0].easting;
-                    triangleVertexData[i * 6 + 1] = (float)secTriList[i].polygonPts[0].northing;
-                    triangleVertexData[i * 6 + 2] = (float)secTriList[i].polygonPts[1].easting;
-                    triangleVertexData[i * 6 + 3] = (float)secTriList[i].polygonPts[1].northing;
-                    triangleVertexData[i * 6 + 4] = (float)secTriList[i].polygonPts[2].easting;
-                    triangleVertexData[i * 6 + 5] = (float)secTriList[i].polygonPts[2].northing;
-                }
-
-                int offsetInBytes = sectionTriangleCount * sizeof(float) * 3 * 2;
-
-                if (patchID == 0)
-                {
-                    patchID = GL.GenBuffer();
-                    GL.BindBuffer(BufferTarget.ArrayBuffer, patchID);
-                    GL.BufferData(BufferTarget.ArrayBuffer, triangleVertexData.Length * sizeof(float), IntPtr.Zero, BufferUsageHint.StaticDraw);
-                    GL.BufferSubData(BufferTarget.ArrayBuffer, IntPtr.Zero, secTriList.Count * 6 * sizeof(float), triangleVertexData);
-                }
-                else
-                {
-                    GL.BindBuffer(BufferTarget.ArrayBuffer, patchID);
-                    GL.BufferSubData(BufferTarget.ArrayBuffer, (IntPtr)offsetInBytes, triangleVertexData.Length * sizeof(float), triangleVertexData);
-                }
-
-                byte[] colorVertexData = new byte[secTriList.Count * 3 * 4];
-
-                for (int i = 0; i < secTriList.Count; i++)
-                {
-                    colorVertexData[i * 12 + 0] = (byte)colorList[i].easting;
-                    colorVertexData[i * 12 + 1] = (byte)colorList[i].northing;
-                    colorVertexData[i * 12 + 2] = (byte)colorList[i].heading;
-                    colorVertexData[i * 12 + 3] = 152;
-                    colorVertexData[i * 12 + 4] = (byte)colorList[i].easting;
-                    colorVertexData[i * 12 + 5] = (byte)colorList[i].northing;
-                    colorVertexData[i * 12 + 6] = (byte)colorList[i].heading;
-                    colorVertexData[i * 12 + 7] = 152;
-                    colorVertexData[i * 12 + 8] = (byte)colorList[i].easting;
-                    colorVertexData[i * 12 + 9] = (byte)colorList[i].northing;
-                    colorVertexData[i * 12 + 10] = (byte)colorList[i].heading;
-                    colorVertexData[i * 12 + 11] = 152;
-                }
-
-                offsetInBytes = sectionTriangleCount * sizeof(byte) * 3 * 4;
-
-                if (colorID == 0)
-                {
-                    colorID = GL.GenBuffer();
-                    GL.BindBuffer(BufferTarget.ArrayBuffer, colorID);
-                    GL.BufferData(BufferTarget.ArrayBuffer, colorVertexData.Length * sizeof(byte), IntPtr.Zero, BufferUsageHint.StaticDraw);
-                    GL.BufferSubData(BufferTarget.ArrayBuffer, IntPtr.Zero, secTriList.Count * 12 * sizeof(byte), colorVertexData);
-                }
-                else
-                {
-                    GL.BindBuffer(BufferTarget.ArrayBuffer, colorID);
-                    GL.BufferSubData(BufferTarget.ArrayBuffer, (IntPtr)offsetInBytes, colorVertexData.Length * sizeof(byte), colorVertexData);
-                }
-
-                sectionTriangleCount += secTriList.Count;
+                BufferSubData(secTriList, colorList);
 
                 System.Threading.Tasks.Task.Run(() =>
                 {
@@ -1486,6 +1373,77 @@ namespace Twol
             }
         }
 
+        private void BufferSubData(List<Triangle> secTriList, List<vec3> colorList)
+        {
+            int max = Math.Min(maxTriangles - (sectionTriangleCount / 3), secTriList.Count);
+
+            if (max > 0)
+            {
+                //vertices
+                float[] triangleVertexData = new float[max * 3 * 2];
+
+                for (int i = 0; i < max; i++)
+                {
+                    triangleVertexData[i * 6 + 0] = (float)secTriList[i].polygonPts[0].easting;
+                    triangleVertexData[i * 6 + 1] = (float)secTriList[i].polygonPts[0].northing;
+                    triangleVertexData[i * 6 + 2] = (float)secTriList[i].polygonPts[1].easting;
+                    triangleVertexData[i * 6 + 3] = (float)secTriList[i].polygonPts[1].northing;
+                    triangleVertexData[i * 6 + 4] = (float)secTriList[i].polygonPts[2].easting;
+                    triangleVertexData[i * 6 + 5] = (float)secTriList[i].polygonPts[2].northing;
+                }
+
+                if (patchID == 0)
+                {
+                    patchID = GL.GenBuffer();
+                    GL.BindBuffer(BufferTarget.ArrayBuffer, patchID);
+                    GL.BufferData(BufferTarget.ArrayBuffer, maxTriangles * 6 * sizeof(float), IntPtr.Zero, BufferUsageHint.StaticDraw);
+                }
+                else
+                {
+                    GL.BindBuffer(BufferTarget.ArrayBuffer, patchID);
+                }
+
+                int offsetInBytes = sectionTriangleCount * 2 * sizeof(float);
+                GL.BufferSubData(BufferTarget.ArrayBuffer, (IntPtr)offsetInBytes, triangleVertexData.Length * sizeof(float), triangleVertexData);
+
+
+
+                //color vertices
+                byte[] colorVertexData = new byte[max * 3 * 4];
+
+                for (int i = 0; i < max; i++)
+                {
+                    colorVertexData[i * 12 + 0] = (byte)colorList[i].easting;
+                    colorVertexData[i * 12 + 1] = (byte)colorList[i].northing;
+                    colorVertexData[i * 12 + 2] = (byte)colorList[i].heading;
+                    colorVertexData[i * 12 + 3] = (byte)152;
+                    colorVertexData[i * 12 + 4] = (byte)colorList[i].easting;
+                    colorVertexData[i * 12 + 5] = (byte)colorList[i].northing;
+                    colorVertexData[i * 12 + 6] = (byte)colorList[i].heading;
+                    colorVertexData[i * 12 + 7] = (byte)152;
+                    colorVertexData[i * 12 + 8] = (byte)colorList[i].easting;
+                    colorVertexData[i * 12 + 9] = (byte)colorList[i].northing;
+                    colorVertexData[i * 12 + 10] = (byte)colorList[i].heading;
+                    colorVertexData[i * 12 + 11] = (byte)152;
+                }
+
+                if (colorID == 0)
+                {
+                    colorID = GL.GenBuffer();
+                    GL.BindBuffer(BufferTarget.ArrayBuffer, colorID);
+                    GL.BufferData(BufferTarget.ArrayBuffer, maxTriangles * 12 * sizeof(byte), IntPtr.Zero, BufferUsageHint.StaticDraw);
+                }
+                else
+                {
+                    GL.BindBuffer(BufferTarget.ArrayBuffer, colorID);
+                }
+
+                offsetInBytes = sectionTriangleCount * 4 * sizeof(byte);
+                GL.BufferSubData(BufferTarget.ArrayBuffer, (IntPtr)offsetInBytes, colorVertexData.Length * sizeof(byte), colorVertexData);
+
+                sectionTriangleCount += max * 3;
+            }
+        }
 
         //save the boundary
         public void FileSaveBoundary()
@@ -1745,7 +1703,7 @@ namespace Twol
             }
         }
 
-        public void FileSaveHeadLines()
+        public void FileSaveHeadLines(List<CHeadPath> tracksArr)
         {
             string directoryName = Path.Combine(RegistrySettings.fieldsDirectory, currentFieldDirectory);
 
@@ -1760,7 +1718,7 @@ namespace Twol
                 {
                     writer.WriteLine("$HeadLines");
 
-                    foreach (var headPath in hdl.tracksArr)
+                    foreach (var headPath in tracksArr)
                     {
                         //write out the name
                         writer.WriteLine(headPath.name);

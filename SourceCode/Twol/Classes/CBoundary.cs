@@ -15,9 +15,6 @@ namespace Twol
         //create a new fence and show it
         public List<vec2> fenceBeingMadePts = new List<vec2>(128);
 
-        public int[] vbo_FenceTriangles = new int[5] { 0, 0, 0, 0, 0 };
-        public int[] vbo_HeadTriangles = new int[5] { 0, 0, 0, 0, 0 };
-
         //boundary record properties
         public double createFenceOffset;
 
@@ -44,67 +41,12 @@ namespace Twol
             isSectionControlledByHeadland = true;
         }
 
-        public void CreateHdLineVertexArray(int bndNum)
-        {
-            DeleteHeadLineVertexArray(bndNum);
 
-            vbo_HeadTriangles[bndNum] = GL.GenBuffer();
-
-            GL.BindBuffer(BufferTarget.ArrayBuffer, vbo_HeadTriangles[bndNum]);
-
-            float[] triangleVertexData = new float[bndList[bndNum].hdLineTriangleList.Count * 6];
-
-            for (int i = 0; i < bndList[bndNum].hdLineTriangleList.Count; i++)
-            {
-                // Assuming Triangle has properties or fields: A, B, C of type vec3 with .x, .y, .z
-                triangleVertexData[i * 6 + 0] = (float)bndList[0].hdLineTriangleList[i].polygonPts[0].easting;
-                triangleVertexData[i * 6 + 1] = (float)bndList[0].hdLineTriangleList[i].polygonPts[0].northing;
-                triangleVertexData[i * 6 + 2] = (float)bndList[0].hdLineTriangleList[i].polygonPts[1].easting;
-                triangleVertexData[i * 6 + 3] = (float)bndList[0].hdLineTriangleList[i].polygonPts[1].northing;
-                triangleVertexData[i * 6 + 4] = (float)bndList[0].hdLineTriangleList[i].polygonPts[2].easting;
-                triangleVertexData[i * 6 + 5] = (float)bndList[0].hdLineTriangleList[i].polygonPts[2].northing;
-            }
-
-            GL.BufferData(BufferTarget.ArrayBuffer, triangleVertexData.Length * sizeof(float), triangleVertexData, BufferUsageHint.StaticDraw);
-        }
-
-        public void DeleteHeadLineVertexArray(int bndNum)
-        {
-            if (vbo_HeadTriangles[bndNum] != 0)
-            {
-                GL.DeleteBuffer(vbo_HeadTriangles[bndNum]);
-                vbo_HeadTriangles[bndNum] = 0; // Set the handle to 0 (null/invalid) after deletion
-            }
-        }
-
-        public void DeleteFenceTriangleVertexArray(int bndNum)
-        {
-            GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
-
-            if (vbo_FenceTriangles[bndNum] != 0)
-            {
-                GL.DeleteBuffer(vbo_FenceTriangles[bndNum]);
-                vbo_FenceTriangles[bndNum] = 0; // Set the handle to 0 (null/invalid) after deletion
-            }
-        }
 
         public void AddToBoundList(CBoundaryList bound, int bndNum, bool add = true)
         {
-            if (add)
-            {
-                GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
-
-                if (vbo_FenceTriangles[bndNum] != 0)
-                {
-                    GL.DeleteBuffer(vbo_FenceTriangles[bndNum]);
-                    vbo_FenceTriangles[bndNum] = 0; // Set the handle to 0 (null/invalid) after deletion
-                }
-
-                vbo_FenceTriangles[bndNum] = GL.GenBuffer();
-            }
-
             //build the boundary, make sure is clockwise for outer counter clockwise for inner
-            bound.FixFenceLine(bndNum, vbo_FenceTriangles[bndNum], add);
+            bound.FixFenceLine(bndNum, add);
 
             if (add)
                 bndList.Add(bound);
@@ -162,11 +104,11 @@ namespace Twol
                 GL.LineWidth(Settings.User.setDisplay_lineWidth * 4);
 
                 GL.Color4(0, 0, 0, 0.80f);
-                mf.bnd.bndList[0].hdLine.DrawPolygon();
+                mf.bnd.bndList[0].hdLine.DrawPolygon(PrimitiveType.LineLoop);
 
                 GL.LineWidth(Settings.User.setDisplay_lineWidth);
                 GL.Color4(0.960f, 0.96232f, 0.30f, 1.0f);
-                mf.bnd.bndList[0].hdLine.DrawPolygon();
+                mf.bnd.bndList[0].hdLine.DrawPolygon(PrimitiveType.LineLoop);
             }
         }
 
@@ -180,14 +122,14 @@ namespace Twol
 
                 for (int i = 0; i < mf.bnd.bndList.Count; i++)
                 {
-                    mf.bnd.bndList[i].turnLine.DrawPolygon();
+                    mf.bnd.bndList[i].turnLine.DrawPolygon(PrimitiveType.LineLoop);
                 }
 
                 GL.Color3(0.76f, 0.6f, 0.95f);
                 GL.LineWidth(Settings.User.setDisplay_lineWidth);
                 for (int i = 0; i < mf.bnd.bndList.Count; i++)
                 {
-                    mf.bnd.bndList[i].turnLine.DrawPolygon();
+                    mf.bnd.bndList[i].turnLine.DrawPolygon(PrimitiveType.LineLoop);
                 }
             }
         }
@@ -199,7 +141,7 @@ namespace Twol
 
             for (int i = 0; i < bndList.Count; i++)
             {
-                bndList[i].fenceLineEar.DrawPolygon();
+                bndList[i].fenceLine.DrawPolygon(PrimitiveType.LineLoop);
             }
 
             GL.Color4(0.95f, 0.5f, 0.50f, 1.0f);
@@ -208,7 +150,7 @@ namespace Twol
             for (int i = 0; i < bndList.Count; i++)
             {
                 if (i > 0) GL.Color4(0.85f, 0.34f, 0.3f, 1.0f);
-                bndList[i].fenceLineEar.DrawPolygon();
+                bndList[i].fenceLine.DrawPolygon(PrimitiveType.LineLoop);
             }
 
             //for (int i = 0; i < bndList.Count; i++)

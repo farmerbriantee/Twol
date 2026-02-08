@@ -1,6 +1,8 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using Twol.Classes;
 
 namespace Twol
 {
@@ -113,30 +115,6 @@ namespace Twol
             Settings.Vehicle.setIMU_fusionWeight2 = (double)hsbarFusion.Value * 0.002;
         }
 
-        //private void nudForwardComPGN_Click(object sender, EventArgs e)
-        //{
-        //    if (mf.KeypadToNUD((NudlessNumericUpDown)sender, this))
-        //    {
-        //        Properties.Settings.Default.setGPS_forwardComp = (double)nudForwardComp.Value;
-        //    }
-        //}
-
-        //private void nudReverseComPGN_Click(object sender, EventArgs e)
-        //{
-        //    if (mf.KeypadToNUD((NudlessNumericUpDown)sender, this))
-        //    {
-        //        Properties.Settings.Default.setGPS_reverseComp = (double)nudReverseComp.Value;
-        //    }
-        //}
-
-        //private void nudAgeAlarm_Click(object sender, EventArgs e)
-        //{
-        //    if (mf.KeypadToNUD((NudlessNumericUpDown)sender, this))
-        //    {
-        //        Properties.Settings.Default.setGPS_ageAlarm = (int)nudAgeAlarm.Value;
-        //    }
-        //}
-
         #endregion
 
         #region Roll
@@ -147,10 +125,6 @@ namespace Twol
             lblRollZeroOffset.Text = Settings.Vehicle.setIMU_rollZero.ToString("N2");
             hsbarRollFilter.Value = (int)(Settings.Vehicle.setIMU_rollFilter * 100);
             cboxDataInvertRoll.Checked = Settings.Vehicle.setIMU_invertRoll;
-        }
-
-        private void tabDRoll_Leave(object sender, EventArgs e)
-        {
         }
 
         private void cboxDataInvertRoll_Click(object sender, EventArgs e)
@@ -247,6 +221,206 @@ namespace Twol
 
             Settings.User.setDisplay_isShutdownWhenNoPower = cboxShutdownWhenNoPower.Checked;
             Settings.User.setDisplay_isHardwareMessages = cboxHardwareMessages.Checked;            
+        }
+
+        #endregion
+
+        #region Tab Display
+        private void tabDisplay_Enter(object sender, EventArgs e)
+        {
+            chkDisplayFloor.Checked = Settings.User.setDisplay_isTextureOn;
+            chkDisplayMapping.Checked = Settings.User.isWorldMapOn;
+
+            chkDisplayGrid.Checked = Settings.User.isGridOn;
+            chkDisplaySpeedo.Checked = Settings.User.isSpeedoOn;
+
+            chkSvennArrow.Checked = Settings.User.setDisplay_isSvennArrowOn;
+            chkDisplayExtraGuides.Checked = Settings.User.isSideGuideLines;
+
+            chkDirectionMarkers.Checked = Settings.User.isDirectionMarkers;
+            chkSectionLines.Checked = Settings.User.setDisplay_isSectionLinesOn;
+            chkLineSmooth.Checked = Settings.User.setDisplay_isLineSmooth;
+        }
+
+        private void tabDisplay_Leave(object sender, EventArgs e)
+        {
+            SaveDisplaySettings();
+        }
+
+        private void chkDisplayMapping_Click(object sender, EventArgs e)
+        {
+            if (chkDisplayMapping.Checked)
+            {
+                if (chkDisplayFloor.Checked)
+                {
+                    chkDisplayFloor.Checked = false;
+                }
+            }
+        }
+
+        private void chkDisplayFloor_Click(object sender, EventArgs e)
+        {
+            if (chkDisplayFloor.Checked)
+            {
+                if (chkDisplayMapping.Checked)
+                {
+                    chkDisplayMapping.Checked = false;
+                }
+            }
+        }
+
+        private void SaveDisplaySettings()
+        {
+
+            Settings.User.setDisplay_isTextureOn = chkDisplayFloor.Checked;
+
+            Settings.User.isWorldMapOn = chkDisplayMapping.Checked;
+            if (Settings.User.isWorldMapOn) Settings.User.setDisplay_isTextureOn = false;
+
+            Settings.User.isGridOn = chkDisplayGrid.Checked;
+            Settings.User.isSpeedoOn = chkDisplaySpeedo.Checked;
+
+            Settings.User.setDisplay_isSvennArrowOn = chkSvennArrow.Checked;
+
+            Settings.User.isDirectionMarkers = chkDirectionMarkers.Checked;
+            Settings.User.setDisplay_isSectionLinesOn = chkSectionLines.Checked;
+            Settings.User.setDisplay_isLineSmooth = chkLineSmooth.Checked;
+        }
+
+        private void SaveUserSettings()
+        {
+            Settings.User.isMetric = rbtnDisplayMetric.Checked;
+            Settings.User.isSideGuideLines = chkDisplayExtraGuides.Checked;
+
+            Settings.User.setDisplay_isBrightnessOn = chkDisplayBrightness.Checked;
+            mf.isDrawPolygons = chkDisplayPolygons.Checked;
+
+            Settings.User.setDisplay_isStartFullScreen = chkDisplayStartFullScreen.Checked;
+            Settings.User.isLogElevation = chkDisplayLogElevation.Checked;
+
+            Settings.User.setDisplay_isKeyboardOn = chkDisplayKeyboard.Checked;
+        }
+
+        #endregion
+
+        #region User Tab
+
+        private void tabUser_Enter(object sender, EventArgs e)
+        {
+            chkDisplayLogElevation.Checked = Settings.User.isLogElevation;
+            rbtnDisplayMetric.Checked = Settings.User.isMetric;
+            rbtnDisplayImperial.Checked = !rbtnDisplayMetric.Checked;
+            nudNumGuideLines.Value = Settings.Vehicle.setAS_numGuideLines;
+
+            chkDisplayBrightness.Checked = Settings.User.setDisplay_isBrightnessOn;
+            chkDisplayPolygons.Checked = mf.isDrawPolygons;
+            chkDisplayStartFullScreen.Checked = Settings.User.setDisplay_isStartFullScreen;
+            chkDisplayKeyboard.Checked = Settings.User.setDisplay_isKeyboardOn;
+
+        }
+
+        private void tabUser_Leave(object sender, EventArgs e)
+        {
+            SaveUserSettings();
+        }
+
+        private void rbtnDisplayImperial_Click(object sender, EventArgs e)
+        {
+            mf.TimedMessageBox(2000, "Units Set", "Imperial");
+            Log.EventWriter("Units To Imperial");
+
+            Settings.User.isMetric = false;
+            mf.ChangeMetricImperial();
+
+            lblVehicleToolWidth.Text = Convert.ToString((int)(Settings.Tool.toolWidth * glm.m2InchOrCm));
+            SectionFeetInchesTotalWidthLabelUpdate();
+        }
+
+        private void rbtnDisplayMetric_Click(object sender, EventArgs e)
+        {
+            mf.TimedMessageBox(2000, "Units Set", "Metric");
+            Log.EventWriter("Units to Metric");
+
+            Settings.User.isMetric = true;
+            mf.ChangeMetricImperial();
+
+            lblVehicleToolWidth.Text = Convert.ToString((int)(Settings.Tool.toolWidth * glm.m2InchOrCm));
+            SectionFeetInchesTotalWidthLabelUpdate();
+        }
+
+        private void nudNumGuideLines_ValueChanged(object sender, EventArgs e)
+        {
+            Settings.Vehicle.setAS_numGuideLines = (int)nudNumGuideLines.Value;
+        }
+
+        private void btnSetDirectories_Click(object sender, EventArgs e)
+        {
+            if (mf.isFieldStarted)
+            {
+                mf.TimedMessageBox(2000, gStr.Get(gs.gsFieldIsOpen), gStr.Get(gs.gsCloseFieldFirst));
+                return;
+            }
+
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            fbd.ShowNewFolderButton = true;
+            fbd.Description = "Currently: " + RegistrySettings.workingDirectory;
+
+            if (RegistrySettings.workingDirectory == "Default") fbd.SelectedPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            else fbd.SelectedPath = RegistrySettings.workingDirectory;
+
+            if (fbd.ShowDialog(this) == DialogResult.OK)
+            {
+                RegistrySettings.Save("WorkingDirectory", fbd.SelectedPath);
+                //RegistrySettings.CreateDirectories();
+
+                //restart program
+                MessageBox.Show(gStr.Get(gs.gsProgramWillExitPleaseRestart));
+                Close();
+            }
+        }
+
+        private void btnHotkeys_Click(object sender, EventArgs e)
+        {
+            using (var form = new Form_Keys(mf))
+            {
+                form.ShowDialog(this);
+            }
+
+        }
+
+        private void btnLogViewer_Click(object sender, EventArgs e)
+        {
+            Form form = new FormEventViewer(Path.Combine(RegistrySettings.logsDirectory, "TWOL_Events_Log.txt"));
+            form.Show(this);
+        }
+
+        #endregion
+
+        #region Tab Colors
+
+        private void btnSetColors_Click(object sender, EventArgs e)
+        {
+            using (var form = new FormColor(mf))
+            {
+                form.ShowDialog(this);
+            }
+
+        }
+
+        private void btnSectionColors_Click(object sender, EventArgs e)
+        {
+            if (Settings.Tool.isSectionsNotZones)
+            {
+                using (var form = new FormColorSection(mf))
+                {
+                    form.ShowDialog(this);
+                }
+            }
+            else
+            {
+                mf.TimedMessageBox(2000, "Cannot use with zones", "Only for Sections");
+            }
+
         }
 
         #endregion

@@ -84,7 +84,18 @@ namespace Twol
         private bool isOn;
         private void btnHideShow_Click(object sender, EventArgs e)
         {
-            isOn = !isOn;
+            int vizzy = 0;
+
+            for (int i = 0; i < mf.trks.gArr.Count; i++)
+            {
+                if (mf.trks.gArr[i].isVisible)
+                {
+                    vizzy++;
+                    break;
+                }
+            }
+
+            isOn = vizzy == 0;
 
             for (int i = 0; i < mf.trks.gArr.Count; i++)
             {

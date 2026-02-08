@@ -284,41 +284,10 @@ namespace Twol
             //deselect everything
             lvVehicles.SelectedItems.Clear();
 
-            lblCurrentVehicle.Text = "Vehicle" + ": " + RegistrySettings.vehicleFileName;
-            lblSummaryVehicleName.Text = lblCurrentVehicle.Text;
-
-            lblCurrentTool.Text = "Tool" + ": " + RegistrySettings.toolFileName;
-            lblSummaryToolName.Text = lblCurrentTool.Text;
+            lblSummaryVehicleName.Text = "Vehicle" + ": " + RegistrySettings.vehicleFileName;
+            lblSummaryToolName.Text = "Tool" + ": " + RegistrySettings.toolFileName;
 
             UpdateSummary();
-        }
-
-        private void SaveDisplaySettings()
-        {
-            mf.isDrawPolygons = chkDisplayPolygons.Checked;
-
-            Settings.User.setDisplay_isTextureOn = chkDisplayFloor.Checked;
-
-            Settings.User.isWorldMapOn = chkDisplayMapping.Checked;
-            if (Settings.User.isWorldMapOn) Settings.User.setDisplay_isTextureOn = false;
-
-            Settings.User.isGridOn = chkDisplayGrid.Checked;
-            Settings.User.isSpeedoOn = chkDisplaySpeedo.Checked;
-            Settings.User.isSideGuideLines = chkDisplayExtraGuides.Checked;
-
-            Settings.User.setDisplay_isKeyboardOn = chkDisplayKeyboard.Checked;
-            Settings.User.setDisplay_isBrightnessOn = chkDisplayBrightness.Checked;
-            Settings.User.setDisplay_isSvennArrowOn = chkSvennArrow.Checked;
-            Settings.User.isLogElevation = chkDisplayLogElevation.Checked;
-
-            Settings.User.isDirectionMarkers = chkDirectionMarkers.Checked;
-            Settings.User.setDisplay_isSectionLinesOn = chkSectionLines.Checked;
-            Settings.User.setDisplay_isLineSmooth = chkLineSmooth.Checked;
-
-
-            Settings.User.isLightbarOn = Settings.User.isLightbarOn;
-            Settings.User.isMetric = rbtnDisplayMetric.Checked;
-            Settings.User.setDisplay_isStartFullScreen = chkDisplayStartFullScreen.Checked;
         }
 
         #endregion
@@ -341,11 +310,8 @@ namespace Twol
             lvTools.SelectedItems.Clear();
             lblSummaryToolName.Text = RegistrySettings.workingDirectory;
 
-            lblCurrentVehicle.Text = "Vehicle" + ": " + RegistrySettings.vehicleFileName;
-            lblSummaryVehicleName.Text = lblCurrentVehicle.Text;
-
-            lblCurrentTool.Text = "Tool" + ": " + RegistrySettings.toolFileName;
-            lblSummaryToolName.Text = lblCurrentTool.Text;
+            lblSummaryVehicleName.Text = "Vehicle" + ": " + RegistrySettings.vehicleFileName;
+            lblSummaryToolName.Text = "Tool" + ": " + RegistrySettings.toolFileName;
 
             UpdateSummary();
         }
@@ -541,6 +507,7 @@ namespace Twol
         #endregion
 
         #region Antenna Enter/Leave
+
         private void tabVAntenna_Enter(object sender, EventArgs e)
         {
             nudAntennaHeight.Value = Settings.Vehicle.setVehicle_antennaHeight;
@@ -564,10 +531,6 @@ namespace Twol
             label98.Text = glm.unitsInCm;
             label99.Text = glm.unitsInCm;
             label100.Text = glm.unitsInCm;
-        }
-
-        private void tabVAntenna_Leave(object sender, EventArgs e)
-        {
         }
 
         private void rbtnAntennaLeft_Click(object sender, EventArgs e)

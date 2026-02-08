@@ -961,7 +961,7 @@ namespace Twol
 
             if ((char)keyData == (hotkeys[9])) //open the vehicle Settings
             {
-                toolStripConfig.PerformClick();
+                //toolStripConfig.PerformClick();
                 return true;    // indicate that you handled this keystroke
             }
 

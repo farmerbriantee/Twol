@@ -1,0 +1,109 @@
+using System;
+using System.Diagnostics;
+using System.Linq;
+
+namespace AgOpenGPS_Fusion
+{
+    public class AgFusionEngine
+    {
+        // --- Configuration (Tractor Physical Dimensions in Meters) ---
+        private const double AntennaHeight = 3.2;         // Ground to antenna base
+        private const double AntennaPivotDistance = 1.1;  // Distance forward (+) or back (-) from axle to antenna
+        private const double AntennaSideOffset = 0.05;    // Distance right (+) or left (-) from centerline to antenna
+        
+        // --- Tuning Parameters ---
+        private const double PosGain = 0.6;               // Fusion weight for GPS position
+        private const double HeadingGain = 0.15;          // Fusion weight for GPS Course Over Ground
+        private const double MinSpeedForHeading = 0.8;    // m/s threshold to trust GPS COG
+        private const int SpeedWindowSize = 5;            // Samples for speed smoothing
+
+        // --- State Variables ---
+        public double PosX { get; private set; }          // Pivot Point Easting (m)
+        public double PosY { get; private set; }          // Pivot Point Northing (m)
+        public double Heading { get; private set; }       // True North Radians
+        private double _smoothedSpeed;
+        
+        private double _lastGpsX, _lastGpsY;
+        private bool _isInitialized = false;
+
+        // --- High-Resolution Timing & Smoothing ---
+        private long _lastTicks;
+        private static readonly double TicksToSec = 1.0 / Stopwatch.Frequency;
+        private readonly double[] _speedBuffer = new double[SpeedWindowSize];
+        private int _bufferIndex = 0;
+
+        /// <summary>
+        /// Update IMU: Called at 25 Hz.
+        /// Extrapolates the pivot point position using high-precision timing.
+        /// </summary>
+        public void UpdateImu(double imuHeadingRad)
+        {
+            long currentTicks = Stopwatch.GetTimestamp();
+            if (_lastTicks == 0) { _lastTicks = currentTicks; Heading = imuHeadingRad; return; }
+
+            double dt = (currentTicks - _lastTicks) * TicksToSec;
+            _lastTicks = currentTicks;
+
+            Heading = imuHeadingRad;
+
+            // Forward Dead Reckoning of the Pivot Point
+            double distance = _smoothedSpeed * dt;
+            PosX += Math.Sin(Heading) * distance;
+            PosY += Math.Cos(Heading) * distance;
+        }
+
+        /// <summary>
+        /// Update GPS: Called at 10 Hz.
+        /// Translates raw Antenna GPS to Ground-Pivot coordinates before fusion.
+        /// </summary>
+        public void UpdateGps(double rawGpsX, double rawGpsY, double rawGpsSpeedMps, double rollRad, double pitchRad)
+        {
+            // 1. Terrain Compensation (Antenna to ground level)
+            double rollDist = Math.Sin(rollRad) * AntennaHeight;
+            double pitchDist = Math.Sin(pitchRad) * AntennaHeight;
+
+            // 2. Physical Offsets (Antenna to Pivot Point)
+            // Combine terrain tilt with physical mounting offsets
+            // Longitudinal: AntennaPivotDistance is forward/back
+            // Lateral: AntennaSideOffset is right/left
+            double totalLongitudinalOffset = pitchDist + AntennaPivotDistance;
+            double totalLateralOffset = rollDist + AntennaSideOffset;
+
+            // 3. Translation to Pivot Point (Ground Center)
+            // Translates the GPS coordinate to the rear axle center using vehicle heading
+            double correctedGpsX = rawGpsX - (Math.Cos(Heading) * totalLateralOffset) - (Math.Sin(Heading) * totalLongitudinalOffset);
+            double correctedGpsY = rawGpsY + (Math.Sin(Heading) * totalLateralOffset) - (Math.Cos(Heading) * totalLongitudinalOffset);
+
+            // 4. Speed Smoothing
+            _speedBuffer[_bufferIndex] = rawGpsSpeedMps;
+            _bufferIndex = (_bufferIndex + 1) % _speedBuffer.Length;
+            _smoothedSpeed = _speedBuffer.Average();
+
+            if (!_isInitialized)
+            {
+                PosX = correctedGpsX; PosY = correctedGpsY;
+                _lastGpsX = correctedGpsX; _lastGpsY = correctedGpsY;
+                _isInitialized = true;
+                return;
+            }
+
+            // 5. Position Fusion
+            PosX = (1.0 - PosGain) * PosX + (PosGain * correctedGpsX);
+            PosY = (1.0 - PosGain) * PosY + (PosGain * correctedGpsY);
+
+            // 6. Heading Correction (GPS COG)
+            if (_smoothedSpeed > MinSpeedForHeading)
+            {
+                double gpsCourse = Math.Atan2(correctedGpsX - _lastGpsX, correctedGpsY - _lastGpsY);
+                double diff = (gpsCourse - Heading + Math.PI) % (2 * Math.PI) - Math.PI;
+                if (diff < -Math.PI) diff += 2 * Math.PI;
+                Heading += diff * HeadingGain;
+            }
+
+            _lastGpsX = correctedGpsX;
+            _lastGpsY = correctedGpsY;
+
+            if (_smoothedSpeed < 0.1) _smoothedSpeed = 0; // Zero Velocity Update
+        }
+    }
+}

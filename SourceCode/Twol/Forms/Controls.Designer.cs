@@ -462,8 +462,6 @@ namespace Twol
                 //ref nudge
                 flp1.Controls[5].Visible = tracksVisible > 0;
 
-                flp1.Controls[6].Visible = true;
-
                 for (int i = 0; i < flp1.Controls.Count; i++)
                 {
                     if (flp1.Controls[i].Visible) btnCount++;
@@ -613,51 +611,6 @@ namespace Twol
         #endregion
 
         #region Track Flyout
-
-        private void btnToolControl_Click(object sender, EventArgs e)
-        {
-            Form fcc = Application.OpenForms["FormTrackFilter"];
-
-            if (fcc != null)
-            {
-                fcc.Focus();
-                fcc.Close();
-                return;
-            }
-
-            Form form = new FormTrackFilter(this);
-            form.Show(this);
-
-            if (flp1.Visible)
-            {
-                flp1.Visible = false;
-            }
-
-            this.Activate();
-        }
-
-        private void btnToolLineRecord_Click(object sender, EventArgs e)
-        {
-            Form fcc = Application.OpenForms["FormToolPathRec"];
-
-            if (fcc != null)
-            {
-                fcc.Focus();
-                fcc.Close();
-                return;
-            }
-
-            Form form = new FormToolPathRec(this);
-            form.Show(this);
-
-            if (flp1.Visible)
-            {
-                flp1.Visible = false;
-            }
-
-            this.Activate();
-        }
-
 
         private void btnRefNudge_Click(object sender, EventArgs e)
         {
@@ -1115,25 +1068,7 @@ namespace Twol
 
         }
 
-        private void toolSteerToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //check if window already exists
-            Form fc = Application.OpenForms["FormToolSteer"];
-
-            if (fc != null)
-            {
-                fc.Focus();
-                fc.Close();
-                return;
-            }
-
-            Form form = new FormToolSteer(this);
-            form.Show(this);
-            this.Activate();
-        }
-
-
-        private void btnConfig_Click(object sender, EventArgs e)
+        private void btnConfiguration_Click(object sender, EventArgs e)
         {
             using (FormConfig form = new FormConfig(this))
             {
@@ -1141,6 +1076,7 @@ namespace Twol
             }
 
             lbl_IO_Profile.Text = RegistrySettings.IOFileName;
+
         }
 
         #endregion
@@ -1425,31 +1361,7 @@ namespace Twol
                 this.Activate();
             }
         }
-        private void setWorkingDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (isFieldStarted)
-            {
-                TimedMessageBox(2000, gStr.Get(gs.gsFieldIsOpen), gStr.Get(gs.gsCloseFieldFirst));
-                return;
-            }
 
-            FolderBrowserDialog fbd = new FolderBrowserDialog();
-            fbd.ShowNewFolderButton = true;
-            fbd.Description = "Currently: " + RegistrySettings.workingDirectory;
-
-            if (RegistrySettings.workingDirectory == "Default") fbd.SelectedPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            else fbd.SelectedPath = RegistrySettings.workingDirectory;
-
-            if (fbd.ShowDialog(this) == DialogResult.OK)
-            {
-                RegistrySettings.Save("WorkingDirectory", fbd.SelectedPath);
-                //RegistrySettings.CreateDirectories();
-
-                //restart program
-                MessageBox.Show(gStr.Get(gs.gsProgramWillExitPleaseRestart));
-                Close();
-            }
-        }
         private void enterSimCoordsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (var form = new FormSimCoords(this))
@@ -1457,13 +1369,6 @@ namespace Twol
                 form.ShowDialog(this);
             }
         }                
-        private void hotKeysToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using (var form = new Form_Keys(this))
-            {
-                form.ShowDialog(this);
-            }
-        }
 
         private void nozzleAppToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1523,27 +1428,6 @@ namespace Twol
             SetControlLabelPositions();
 
             Settings.User.isSimulatorOn = simulatorOnToolStripMenuItem.Checked;
-        }
-        private void colorsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using (var form = new FormColor(this))
-            {
-                form.ShowDialog(this);
-            }
-        }
-        private void colorsSectionToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (Settings.Tool.isSectionsNotZones)
-            {
-                using (var form = new FormColorSection(this))
-                {
-                    form.ShowDialog(this);
-                }
-            }
-            else
-            {
-                TimedMessageBox(2000, "Cannot use with zones", "Only for Sections");
-            }
         }
 
         //Languages
@@ -1925,6 +1809,28 @@ namespace Twol
             }
         }
 
+        private void FormTrackFilterStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form fcc = Application.OpenForms["FormTrackFilter"];
+
+            if (fcc != null)
+            {
+                fcc.Focus();
+                fcc.Close();
+                return;
+            }
+
+            Form form = new FormTrackFilter(this);
+            form.Show(this);
+
+            if (flp1.Visible)
+            {
+                flp1.Visible = false;
+            }
+
+            this.Activate();
+        }
+
        private void manualToolSteerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //check if window already exists
@@ -1953,23 +1859,7 @@ namespace Twol
             }
         }
 
-        private void layersToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using (FormLayer form = new FormLayer(this))
-            {
-                //returns full field.txt file dir name
-                form.ShowDialog(this);
-            }
-        }
-
-        private void deleteContourPathsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ct.stripList?.Clear();
-            ct.ptList?.Clear();
-            ct.ctList?.Clear();
-            contourSaveList?.Clear();
-        }
-        private void toolStripAreYouSure_Click(object sender, EventArgs e)
+        private void deleteAppliedToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (isFieldStarted && isJobStarted)
             {
@@ -2014,13 +1904,6 @@ namespace Twol
                    TimedMessageBox(1500, "Sections are on", "Turn Auto or Manual Off First");
                 }
             }
-        }
-
-        private void eventViewerToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Form form = new FormEventViewer(Path.Combine(RegistrySettings.logsDirectory, "TWOL_Events_Log.txt"));
-            form.Show(this);
-            this.Activate();
         }
 
         #endregion

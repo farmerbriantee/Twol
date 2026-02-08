@@ -217,12 +217,6 @@
     <Compile Include="Forms\Guidance\FormToolManual.designer.cs">
       <DependentUpon>FormToolManual.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Guidance\FormToolPathRec.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Guidance\FormToolPathRec.designer.cs">
-      <DependentUpon>FormToolPathRec.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\IO\FormCommSetGPS.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -652,9 +646,6 @@
     <EmbeddedResource Include="Forms\Guidance\FormToolManual.resx">
       <DependentUpon>FormToolManual.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Guidance\FormToolPathRec.resx">
-      <DependentUpon>FormToolPathRec.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Guidance\FormTramLine.resx">
       <DependentUpon>FormTramLine.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -934,6 +925,7 @@
     <None Include="btnImages\AutoSteerConfTool.png" />
     <None Include="btnImages\Config\Tool_Fore_Aft.png" />
     <None Include="btnImages\Config\ToolAntenna_Fore_Aft.png" />
+    <None Include="btnImages\Config\ConU_User.png" />
     <Content Include="btnImages\ZoomOut.png" />
     <Content Include="License.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

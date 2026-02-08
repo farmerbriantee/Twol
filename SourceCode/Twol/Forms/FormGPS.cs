@@ -165,11 +165,6 @@ namespace Twol
         public CBoundary bnd;
 
         /// <summary>
-        /// Building a headland instance
-        /// </summary>
-        public CHeadLine hdl;
-
-        /// <summary>
         /// The internal simulator
         /// </summary>
         public CSim sim;
@@ -298,9 +293,6 @@ namespace Twol
 
             //new track instance
             trks = new CTracks(this);
-
-            //new instance of contour mode
-            hdl = new CHeadLine(this);
 
             ////new instance of auto headland turn
             yt = new CYouTurn(this);
@@ -568,14 +560,6 @@ namespace Twol
                 f.Close();
             }
 
-            f = Application.OpenForms["FormToolPathRec"];
-
-            if (f != null)
-            {
-                f.Focus();
-                f.Close();
-            }
-
             f = Application.OpenForms["FormToolManual"];
 
             if (f != null)
@@ -736,17 +720,10 @@ namespace Twol
             {
                 f.Top += delta.Y - lastThisLocation.Y;
                 f.Left += delta.X - lastThisLocation.X;
+                if (f.Top < 20) f.Top = 20;
+                if (f.Left < 20) f.Left = 20;
                 Settings.User.setWindow_FormToolManualLocation.Y = f.Top;
                 Settings.User.setWindow_FormToolManualLocation.X = f.Left;
-            }
-
-            f = Application.OpenForms["FormToolPathRec"];
-            if (f != null)
-            {
-                f.Top += delta.Y - lastThisLocation.Y;
-                f.Left += delta.X - lastThisLocation.X;
-                Settings.User.setWindow_recordToolTracksLocation.Y = f.Top;
-                Settings.User.setWindow_recordToolTracksLocation.X = f.Left;
             }
 
             f = Application.OpenForms["FormTrackFilter"];
@@ -754,6 +731,8 @@ namespace Twol
             {
                 f.Top += delta.Y - lastThisLocation.Y;
                 f.Left += delta.X - lastThisLocation.X;
+                if (f.Top < 20) f.Top = 20;
+                if (f.Left < 20) f.Left = 20;
                 Settings.User.setWindow_formToolControlLocation.Y = f.Top;
                 Settings.User.setWindow_formToolControlLocation.X = f.Left;
             }
@@ -818,12 +797,6 @@ namespace Twol
             SetSectionButtonVisible(true);
 
             PanelsAndOGLSize();
-
-            //else if (Settings.Tool.setToolSteer.isFollowCurrent && Settings.Tool.setToolSteer.isRecordToolLine)
-            //{
-            //    Form form = new FormToolPathRec(this);
-            //    form.Show(this);
-            //}
         }
 
         public void JobClose()
@@ -937,8 +910,8 @@ namespace Twol
 
             for (int i = 0; i < bnd.bndList.Count; i++)
             {
-                bnd.DeleteHeadLineVertexArray(i);
-                bnd.DeleteFenceTriangleVertexArray(i);
+                bnd.bndList[i].DeleteHeadLineVertexArray();
+                bnd.bndList[i].DeleteFenceTriangleVertexArray();
             }
 
             //clean all the lines
@@ -1023,7 +996,7 @@ namespace Twol
 
         public void FieldMenuButtonEnableDisable(bool isOn)
         {
-            deleteContourPathsToolStripMenuItem.Enabled = isOn;
+            //deleteContourPathsToolStripMenuItem.Enabled = isOn;
             boundaryToolToolStripMenu.Enabled = isOn;
 
             boundariesToolStripMenuItem.Enabled = isOn;

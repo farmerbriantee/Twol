@@ -159,7 +159,7 @@ namespace Twol
                     GL.Color3(1.0f, 1.0f, 1.0f);
                 else
                     GL.Color3(0.62f, 0.635f, 0.635f);
-                mf.bnd.bndList[j].fenceLineEar.DrawPolygon(PrimitiveType.LineLoop);
+                mf.bnd.bndList[j].fenceLine.DrawPolygon(PrimitiveType.LineLoop);
             }
 
             //the vehicle

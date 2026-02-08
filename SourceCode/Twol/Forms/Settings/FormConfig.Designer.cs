@@ -29,20 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.panelLeftSideMenu = new System.Windows.Forms.Panel();
-            this.btnFeatureHides = new System.Windows.Forms.Button();
-            this.btnDisplay = new System.Windows.Forms.Button();
-            this.btnTram = new System.Windows.Forms.Button();
-            this.panelArduinoSubMenu = new System.Windows.Forms.Panel();
-            this.btnMachineRelay = new System.Windows.Forms.Button();
-            this.btnMachineModule = new System.Windows.Forms.Button();
-            this.btnArduino = new System.Windows.Forms.Button();
-            this.btnUTurn = new System.Windows.Forms.Button();
-            this.panelDataSourcesSubMenu = new System.Windows.Forms.Panel();
+            this.btnSubMachineRelay = new System.Windows.Forms.Button();
+            this.btnSubMachineModule = new System.Windows.Forms.Button();
             this.btnSubRoll = new System.Windows.Forms.Button();
             this.btnSubHeading = new System.Windows.Forms.Button();
-            this.btnDataSources = new System.Windows.Forms.Button();
-            this.panelToolSubMenu = new System.Windows.Forms.Panel();
             this.btnSubSwitches = new System.Windows.Forms.Button();
             this.btnSubToolSettings = new System.Windows.Forms.Button();
             this.btnSubSections = new System.Windows.Forms.Button();
@@ -51,8 +41,6 @@
             this.btnSubHitch = new System.Windows.Forms.Button();
             this.btnSubToolType = new System.Windows.Forms.Button();
             this.btnTool = new System.Windows.Forms.Button();
-            this.panelVehicleSubMenu = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
             this.btnSubAntenna = new System.Windows.Forms.Button();
             this.btnSubDimensions = new System.Windows.Forms.Button();
             this.btnSubVehicleType = new System.Windows.Forms.Button();
@@ -314,8 +302,6 @@
             this.cboxIsRTK = new System.Windows.Forms.CheckBox();
             this.tabDRoll = new System.Windows.Forms.TabPage();
             this.label10 = new System.Windows.Forms.Label();
-            this.btnRollOffsetUp = new Twol.RepeatButton();
-            this.btnRollOffsetDown = new Twol.RepeatButton();
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.lblInvertRoll = new System.Windows.Forms.Label();
             this.lblZeroRoll = new System.Windows.Forms.Label();
@@ -329,6 +315,8 @@
             this.btnZeroRoll = new System.Windows.Forms.Button();
             this.btnRemoveZeroOffset = new System.Windows.Forms.Button();
             this.cboxDataInvertRoll = new System.Windows.Forms.CheckBox();
+            this.btnRollOffsetUp = new Twol.RepeatButton();
+            this.btnRollOffsetDown = new Twol.RepeatButton();
             this.tabUTurn = new System.Windows.Forms.TabPage();
             this.lblUturnExtension = new System.Windows.Forms.Label();
             this.lblFtMTurnRadius = new System.Windows.Forms.Label();
@@ -471,44 +459,56 @@
             this.chkSectionLines = new System.Windows.Forms.CheckBox();
             this.lblDirectionMarkers = new System.Windows.Forms.Label();
             this.chkDirectionMarkers = new System.Windows.Forms.CheckBox();
+            this.lblSvennArrow = new System.Windows.Forms.Label();
+            this.lblFieldTexture = new System.Windows.Forms.Label();
+            this.lblSpeedo = new System.Windows.Forms.Label();
+            this.lblGrid = new System.Windows.Forms.Label();
+            this.chkSvennArrow = new System.Windows.Forms.CheckBox();
+            this.chkDisplayFloor = new System.Windows.Forms.CheckBox();
+            this.chkDisplayGrid = new System.Windows.Forms.CheckBox();
+            this.chkDisplaySpeedo = new System.Windows.Forms.CheckBox();
+            this.tabColors = new System.Windows.Forms.TabPage();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.btnSectionColors = new System.Windows.Forms.Button();
+            this.btnColors = new System.Windows.Forms.Button();
+            this.tabUser = new System.Windows.Forms.TabPage();
+            this.label18 = new System.Windows.Forms.Label();
+            this.btnLogViewer = new System.Windows.Forms.Button();
+            this.btnSetDirectories = new System.Windows.Forms.Button();
+            this.lblBrightness = new System.Windows.Forms.Label();
+            this.chkDisplayStartFullScreen = new System.Windows.Forms.CheckBox();
+            this.chkDisplayBrightness = new System.Windows.Forms.CheckBox();
+            this.lblStartFullScreen = new System.Windows.Forms.Label();
+            this.chkDisplayKeyboard = new System.Windows.Forms.CheckBox();
+            this.lblKeyboard = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.btnHotkeys = new System.Windows.Forms.Button();
+            this.chkDisplayLogElevation = new System.Windows.Forms.CheckBox();
+            this.chkDisplayPolygons = new System.Windows.Forms.CheckBox();
+            this.lblPolygons = new System.Windows.Forms.Label();
             this.label79 = new System.Windows.Forms.Label();
+            this.nudNumGuideLines = new Twol.NudlessNumericUpDown();
+            this.chkDisplayExtraGuides = new System.Windows.Forms.CheckBox();
             this.unitsGroupBox = new System.Windows.Forms.GroupBox();
             this.rbtnDisplayImperial = new System.Windows.Forms.RadioButton();
             this.rbtnDisplayMetric = new System.Windows.Forms.RadioButton();
-            this.lblSvennArrow = new System.Windows.Forms.Label();
-            this.lblBrightness = new System.Windows.Forms.Label();
-            this.lblFieldTexture = new System.Windows.Forms.Label();
-            this.lblPolygons = new System.Windows.Forms.Label();
-            this.lblKeyboard = new System.Windows.Forms.Label();
-            this.lblStartFullScreen = new System.Windows.Forms.Label();
-            this.lblSpeedo = new System.Windows.Forms.Label();
             this.lblExtraGuides = new System.Windows.Forms.Label();
-            this.lblGrid = new System.Windows.Forms.Label();
-            this.chkDisplayLogElevation = new System.Windows.Forms.CheckBox();
-            this.chkSvennArrow = new System.Windows.Forms.CheckBox();
-            this.chkDisplayBrightness = new System.Windows.Forms.CheckBox();
-            this.chkDisplayFloor = new System.Windows.Forms.CheckBox();
-            this.chkDisplayKeyboard = new System.Windows.Forms.CheckBox();
-            this.chkDisplayPolygons = new System.Windows.Forms.CheckBox();
-            this.chkDisplayStartFullScreen = new System.Windows.Forms.CheckBox();
-            this.chkDisplayGrid = new System.Windows.Forms.CheckBox();
-            this.chkDisplaySpeedo = new System.Windows.Forms.CheckBox();
-            this.chkDisplayExtraGuides = new System.Windows.Forms.CheckBox();
-            this.nudNumGuideLines = new Twol.NudlessNumericUpDown();
-            this.lblCurrentVehicle = new System.Windows.Forms.Label();
-            this.lblSecTotalWidthMeters = new System.Windows.Forms.Label();
-            this.lblToolWidth = new System.Windows.Forms.Label();
-            this.panelBottom = new System.Windows.Forms.Panel();
-            this.lblCurrentTool = new System.Windows.Forms.Label();
-            this.lblUnits = new System.Windows.Forms.Label();
             this.btnOK = new System.Windows.Forms.Button();
-            this.label22 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.panelLeftSideMenu.SuspendLayout();
-            this.panelArduinoSubMenu.SuspendLayout();
-            this.panelDataSourcesSubMenu.SuspendLayout();
-            this.panelToolSubMenu.SuspendLayout();
-            this.panelVehicleSubMenu.SuspendLayout();
+            this.btnSubUTurn = new System.Windows.Forms.Button();
+            this.btnArduino = new System.Windows.Forms.Button();
+            this.btnField = new System.Windows.Forms.Button();
+            this.btnUser = new System.Windows.Forms.Button();
+            this.btnSubFeatureHides = new System.Windows.Forms.Button();
+            this.flpSide = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnBlankTop = new System.Windows.Forms.Button();
+            this.flpTop = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnSubTram = new System.Windows.Forms.Button();
+            this.btnSubDisplay = new System.Windows.Forms.Button();
+            this.btnSubColors = new System.Windows.Forms.Button();
+            this.btnSubUser = new System.Windows.Forms.Button();
             this.tab1.SuspendLayout();
             this.tabSummary.SuspendLayout();
             this.tabVConfig.SuspendLayout();
@@ -557,215 +557,62 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             this.tabBtns.SuspendLayout();
             this.tabDisplay.SuspendLayout();
+            this.tabColors.SuspendLayout();
+            this.tabUser.SuspendLayout();
             this.unitsGroupBox.SuspendLayout();
-            this.panelBottom.SuspendLayout();
+            this.flpSide.SuspendLayout();
+            this.flpTop.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panelLeftSideMenu
+            // btnSubMachineRelay
             // 
-            this.panelLeftSideMenu.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.panelLeftSideMenu.Controls.Add(this.btnFeatureHides);
-            this.panelLeftSideMenu.Controls.Add(this.btnDisplay);
-            this.panelLeftSideMenu.Controls.Add(this.btnTram);
-            this.panelLeftSideMenu.Controls.Add(this.panelArduinoSubMenu);
-            this.panelLeftSideMenu.Controls.Add(this.btnArduino);
-            this.panelLeftSideMenu.Controls.Add(this.btnUTurn);
-            this.panelLeftSideMenu.Controls.Add(this.panelDataSourcesSubMenu);
-            this.panelLeftSideMenu.Controls.Add(this.btnDataSources);
-            this.panelLeftSideMenu.Controls.Add(this.panelToolSubMenu);
-            this.panelLeftSideMenu.Controls.Add(this.btnTool);
-            this.panelLeftSideMenu.Controls.Add(this.panelVehicleSubMenu);
-            this.panelLeftSideMenu.Controls.Add(this.btnVehicle);
-            this.panelLeftSideMenu.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panelLeftSideMenu.Location = new System.Drawing.Point(4, 4);
-            this.panelLeftSideMenu.Name = "panelLeftSideMenu";
-            this.panelLeftSideMenu.Size = new System.Drawing.Size(120, 719);
-            this.panelLeftSideMenu.TabIndex = 110;
+            this.btnSubMachineRelay.BackColor = System.Drawing.Color.Transparent;
+            this.btnSubMachineRelay.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnSubMachineRelay.FlatAppearance.BorderSize = 0;
+            this.btnSubMachineRelay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSubMachineRelay.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSubMachineRelay.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnSubMachineRelay.Image = global::Twol.Properties.Resources.ConS_Pins;
+            this.btnSubMachineRelay.Location = new System.Drawing.Point(263, 3);
+            this.btnSubMachineRelay.Name = "btnSubMachineRelay";
+            this.btnSubMachineRelay.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
+            this.btnSubMachineRelay.Size = new System.Drawing.Size(42, 64);
+            this.btnSubMachineRelay.TabIndex = 3;
+            this.btnSubMachineRelay.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSubMachineRelay.UseVisualStyleBackColor = false;
+            this.btnSubMachineRelay.Click += new System.EventHandler(this.btnSubMachineRelay_Click);
             // 
-            // btnFeatureHides
+            // btnSubMachineModule
             // 
-            this.btnFeatureHides.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.btnFeatureHides.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnFeatureHides.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.btnFeatureHides.FlatAppearance.BorderSize = 0;
-            this.btnFeatureHides.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFeatureHides.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFeatureHides.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnFeatureHides.Image = global::Twol.Properties.Resources.Con_FeatureMenu;
-            this.btnFeatureHides.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnFeatureHides.Location = new System.Drawing.Point(0, 1596);
-            this.btnFeatureHides.Name = "btnFeatureHides";
-            this.btnFeatureHides.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
-            this.btnFeatureHides.Size = new System.Drawing.Size(120, 80);
-            this.btnFeatureHides.TabIndex = 4;
-            this.btnFeatureHides.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnFeatureHides.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnFeatureHides.UseVisualStyleBackColor = false;
-            this.btnFeatureHides.Click += new System.EventHandler(this.btnFeatureHides_Click);
-            // 
-            // btnDisplay
-            // 
-            this.btnDisplay.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.btnDisplay.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnDisplay.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.btnDisplay.FlatAppearance.BorderSize = 0;
-            this.btnDisplay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDisplay.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnDisplay.Image = global::Twol.Properties.Resources.Con_Display;
-            this.btnDisplay.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDisplay.Location = new System.Drawing.Point(0, 1516);
-            this.btnDisplay.Name = "btnDisplay";
-            this.btnDisplay.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
-            this.btnDisplay.Size = new System.Drawing.Size(120, 80);
-            this.btnDisplay.TabIndex = 2;
-            this.btnDisplay.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDisplay.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnDisplay.UseVisualStyleBackColor = false;
-            this.btnDisplay.Click += new System.EventHandler(this.btnDisplay_Click);
-            // 
-            // btnTram
-            // 
-            this.btnTram.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.btnTram.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnTram.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.btnTram.FlatAppearance.BorderSize = 0;
-            this.btnTram.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTram.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTram.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnTram.Image = global::Twol.Properties.Resources.Con_TramMenu;
-            this.btnTram.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTram.Location = new System.Drawing.Point(0, 1436);
-            this.btnTram.Name = "btnTram";
-            this.btnTram.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
-            this.btnTram.Size = new System.Drawing.Size(120, 80);
-            this.btnTram.TabIndex = 3;
-            this.btnTram.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTram.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnTram.UseVisualStyleBackColor = false;
-            this.btnTram.Click += new System.EventHandler(this.btnTram_Click);
-            // 
-            // panelArduinoSubMenu
-            // 
-            this.panelArduinoSubMenu.BackColor = System.Drawing.Color.RosyBrown;
-            this.panelArduinoSubMenu.Controls.Add(this.btnMachineRelay);
-            this.panelArduinoSubMenu.Controls.Add(this.btnMachineModule);
-            this.panelArduinoSubMenu.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelArduinoSubMenu.Location = new System.Drawing.Point(0, 1276);
-            this.panelArduinoSubMenu.Name = "panelArduinoSubMenu";
-            this.panelArduinoSubMenu.Size = new System.Drawing.Size(120, 160);
-            this.panelArduinoSubMenu.TabIndex = 116;
-            this.panelArduinoSubMenu.Visible = false;
-            // 
-            // btnMachineRelay
-            // 
-            this.btnMachineRelay.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.btnMachineRelay.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnMachineRelay.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.btnMachineRelay.FlatAppearance.BorderSize = 0;
-            this.btnMachineRelay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMachineRelay.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMachineRelay.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnMachineRelay.Image = global::Twol.Properties.Resources.ConS_Pins;
-            this.btnMachineRelay.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnMachineRelay.Location = new System.Drawing.Point(0, 80);
-            this.btnMachineRelay.Name = "btnMachineRelay";
-            this.btnMachineRelay.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
-            this.btnMachineRelay.Size = new System.Drawing.Size(120, 80);
-            this.btnMachineRelay.TabIndex = 3;
-            this.btnMachineRelay.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnMachineRelay.UseVisualStyleBackColor = false;
-            this.btnMachineRelay.Click += new System.EventHandler(this.btnMachineRelay_Click);
-            // 
-            // btnMachineModule
-            // 
-            this.btnMachineModule.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.btnMachineModule.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnMachineModule.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.btnMachineModule.FlatAppearance.BorderSize = 0;
-            this.btnMachineModule.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMachineModule.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMachineModule.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnMachineModule.Image = global::Twol.Properties.Resources.ConS_ModulesMachine;
-            this.btnMachineModule.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnMachineModule.Location = new System.Drawing.Point(0, 0);
-            this.btnMachineModule.Name = "btnMachineModule";
-            this.btnMachineModule.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
-            this.btnMachineModule.Size = new System.Drawing.Size(120, 80);
-            this.btnMachineModule.TabIndex = 1;
-            this.btnMachineModule.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnMachineModule.UseVisualStyleBackColor = false;
-            this.btnMachineModule.Click += new System.EventHandler(this.btnMachineModule_Click);
-            // 
-            // btnArduino
-            // 
-            this.btnArduino.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.btnArduino.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnArduino.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.btnArduino.FlatAppearance.BorderSize = 0;
-            this.btnArduino.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnArduino.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnArduino.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnArduino.Image = global::Twol.Properties.Resources.Con_ModulesMenu;
-            this.btnArduino.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnArduino.Location = new System.Drawing.Point(0, 1196);
-            this.btnArduino.Name = "btnArduino";
-            this.btnArduino.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
-            this.btnArduino.Size = new System.Drawing.Size(120, 80);
-            this.btnArduino.TabIndex = 115;
-            this.btnArduino.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnArduino.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnArduino.UseVisualStyleBackColor = false;
-            this.btnArduino.Click += new System.EventHandler(this.btnArduino_Click);
-            // 
-            // btnUTurn
-            // 
-            this.btnUTurn.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.btnUTurn.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnUTurn.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.btnUTurn.FlatAppearance.BorderSize = 0;
-            this.btnUTurn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUTurn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUTurn.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnUTurn.Image = global::Twol.Properties.Resources.Con_UTurnMenu;
-            this.btnUTurn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnUTurn.Location = new System.Drawing.Point(0, 1121);
-            this.btnUTurn.Name = "btnUTurn";
-            this.btnUTurn.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
-            this.btnUTurn.Size = new System.Drawing.Size(120, 75);
-            this.btnUTurn.TabIndex = 116;
-            this.btnUTurn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnUTurn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnUTurn.UseVisualStyleBackColor = false;
-            this.btnUTurn.Click += new System.EventHandler(this.btnUTurn_Click);
-            // 
-            // panelDataSourcesSubMenu
-            // 
-            this.panelDataSourcesSubMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(32)))), ((int)(((byte)(39)))));
-            this.panelDataSourcesSubMenu.Controls.Add(this.btnSubRoll);
-            this.panelDataSourcesSubMenu.Controls.Add(this.btnSubHeading);
-            this.panelDataSourcesSubMenu.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelDataSourcesSubMenu.Location = new System.Drawing.Point(0, 961);
-            this.panelDataSourcesSubMenu.Name = "panelDataSourcesSubMenu";
-            this.panelDataSourcesSubMenu.Size = new System.Drawing.Size(120, 160);
-            this.panelDataSourcesSubMenu.TabIndex = 7;
-            this.panelDataSourcesSubMenu.Visible = false;
+            this.btnSubMachineModule.BackColor = System.Drawing.Color.Transparent;
+            this.btnSubMachineModule.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnSubMachineModule.FlatAppearance.BorderSize = 0;
+            this.btnSubMachineModule.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSubMachineModule.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSubMachineModule.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnSubMachineModule.Image = global::Twol.Properties.Resources.ConS_ModulesMachine;
+            this.btnSubMachineModule.Location = new System.Drawing.Point(215, 3);
+            this.btnSubMachineModule.Name = "btnSubMachineModule";
+            this.btnSubMachineModule.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
+            this.btnSubMachineModule.Size = new System.Drawing.Size(42, 64);
+            this.btnSubMachineModule.TabIndex = 1;
+            this.btnSubMachineModule.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSubMachineModule.UseVisualStyleBackColor = false;
+            this.btnSubMachineModule.Click += new System.EventHandler(this.btnSubMachineModule_Click);
             // 
             // btnSubRoll
             // 
-            this.btnSubRoll.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.btnSubRoll.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnSubRoll.BackColor = System.Drawing.Color.Transparent;
             this.btnSubRoll.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.btnSubRoll.FlatAppearance.BorderSize = 0;
             this.btnSubRoll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubRoll.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubRoll.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnSubRoll.Image = global::Twol.Properties.Resources.ConS_SourcesRoll;
-            this.btnSubRoll.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSubRoll.Location = new System.Drawing.Point(0, 80);
+            this.btnSubRoll.Location = new System.Drawing.Point(647, 3);
             this.btnSubRoll.Name = "btnSubRoll";
             this.btnSubRoll.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
-            this.btnSubRoll.Size = new System.Drawing.Size(120, 80);
+            this.btnSubRoll.Size = new System.Drawing.Size(42, 64);
             this.btnSubRoll.TabIndex = 0;
             this.btnSubRoll.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSubRoll.UseVisualStyleBackColor = false;
@@ -773,77 +620,35 @@
             // 
             // btnSubHeading
             // 
-            this.btnSubHeading.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.btnSubHeading.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnSubHeading.BackColor = System.Drawing.Color.Transparent;
             this.btnSubHeading.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.btnSubHeading.FlatAppearance.BorderSize = 0;
             this.btnSubHeading.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubHeading.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubHeading.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnSubHeading.Image = global::Twol.Properties.Resources.ConS_SourcesHeading;
-            this.btnSubHeading.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSubHeading.Location = new System.Drawing.Point(0, 0);
+            this.btnSubHeading.Location = new System.Drawing.Point(695, 3);
             this.btnSubHeading.Name = "btnSubHeading";
             this.btnSubHeading.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
-            this.btnSubHeading.Size = new System.Drawing.Size(120, 80);
+            this.btnSubHeading.Size = new System.Drawing.Size(42, 64);
             this.btnSubHeading.TabIndex = 1;
             this.btnSubHeading.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSubHeading.UseVisualStyleBackColor = false;
             this.btnSubHeading.Click += new System.EventHandler(this.btnSubHeading_Click);
             // 
-            // btnDataSources
-            // 
-            this.btnDataSources.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.btnDataSources.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnDataSources.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.btnDataSources.FlatAppearance.BorderSize = 0;
-            this.btnDataSources.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDataSources.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDataSources.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnDataSources.Image = global::Twol.Properties.Resources.Con_SourcesMenu;
-            this.btnDataSources.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDataSources.Location = new System.Drawing.Point(0, 881);
-            this.btnDataSources.Name = "btnDataSources";
-            this.btnDataSources.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
-            this.btnDataSources.Size = new System.Drawing.Size(120, 80);
-            this.btnDataSources.TabIndex = 114;
-            this.btnDataSources.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDataSources.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnDataSources.UseVisualStyleBackColor = false;
-            this.btnDataSources.Click += new System.EventHandler(this.btnDataSources_Click);
-            // 
-            // panelToolSubMenu
-            // 
-            this.panelToolSubMenu.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.panelToolSubMenu.Controls.Add(this.btnSubSwitches);
-            this.panelToolSubMenu.Controls.Add(this.btnSubToolSettings);
-            this.panelToolSubMenu.Controls.Add(this.btnSubSections);
-            this.panelToolSubMenu.Controls.Add(this.btnSubToolOffset);
-            this.panelToolSubMenu.Controls.Add(this.btnSubPivot);
-            this.panelToolSubMenu.Controls.Add(this.btnSubHitch);
-            this.panelToolSubMenu.Controls.Add(this.btnSubToolType);
-            this.panelToolSubMenu.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelToolSubMenu.Location = new System.Drawing.Point(0, 375);
-            this.panelToolSubMenu.Name = "panelToolSubMenu";
-            this.panelToolSubMenu.Size = new System.Drawing.Size(120, 506);
-            this.panelToolSubMenu.TabIndex = 4;
-            this.panelToolSubMenu.Visible = false;
-            // 
             // btnSubSwitches
             // 
-            this.btnSubSwitches.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.btnSubSwitches.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnSubSwitches.BackColor = System.Drawing.Color.Transparent;
             this.btnSubSwitches.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.btnSubSwitches.FlatAppearance.BorderSize = 0;
             this.btnSubSwitches.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubSwitches.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubSwitches.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnSubSwitches.Image = global::Twol.Properties.Resources.ConS_ImplementSwitch;
-            this.btnSubSwitches.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSubSwitches.Location = new System.Drawing.Point(0, 432);
+            this.btnSubSwitches.Location = new System.Drawing.Point(407, 3);
             this.btnSubSwitches.Name = "btnSubSwitches";
             this.btnSubSwitches.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
-            this.btnSubSwitches.Size = new System.Drawing.Size(120, 72);
+            this.btnSubSwitches.Size = new System.Drawing.Size(42, 64);
             this.btnSubSwitches.TabIndex = 1;
             this.btnSubSwitches.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSubSwitches.UseVisualStyleBackColor = false;
@@ -851,19 +656,17 @@
             // 
             // btnSubToolSettings
             // 
-            this.btnSubToolSettings.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.btnSubToolSettings.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnSubToolSettings.BackColor = System.Drawing.Color.Transparent;
             this.btnSubToolSettings.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.btnSubToolSettings.FlatAppearance.BorderSize = 0;
             this.btnSubToolSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubToolSettings.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubToolSettings.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnSubToolSettings.Image = global::Twol.Properties.Resources.ConS_ImplementSettings;
-            this.btnSubToolSettings.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSubToolSettings.Location = new System.Drawing.Point(0, 360);
+            this.btnSubToolSettings.Location = new System.Drawing.Point(359, 3);
             this.btnSubToolSettings.Name = "btnSubToolSettings";
             this.btnSubToolSettings.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
-            this.btnSubToolSettings.Size = new System.Drawing.Size(120, 72);
+            this.btnSubToolSettings.Size = new System.Drawing.Size(42, 64);
             this.btnSubToolSettings.TabIndex = 4;
             this.btnSubToolSettings.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSubToolSettings.UseVisualStyleBackColor = false;
@@ -871,19 +674,17 @@
             // 
             // btnSubSections
             // 
-            this.btnSubSections.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.btnSubSections.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnSubSections.BackColor = System.Drawing.Color.Transparent;
             this.btnSubSections.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.btnSubSections.FlatAppearance.BorderSize = 0;
             this.btnSubSections.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubSections.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubSections.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnSubSections.Image = global::Twol.Properties.Resources.ConS_ImplementSection;
-            this.btnSubSections.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSubSections.Location = new System.Drawing.Point(0, 288);
+            this.btnSubSections.Location = new System.Drawing.Point(455, 3);
             this.btnSubSections.Name = "btnSubSections";
             this.btnSubSections.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
-            this.btnSubSections.Size = new System.Drawing.Size(120, 72);
+            this.btnSubSections.Size = new System.Drawing.Size(42, 64);
             this.btnSubSections.TabIndex = 0;
             this.btnSubSections.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSubSections.UseVisualStyleBackColor = false;
@@ -891,19 +692,17 @@
             // 
             // btnSubToolOffset
             // 
-            this.btnSubToolOffset.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.btnSubToolOffset.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnSubToolOffset.BackColor = System.Drawing.Color.Transparent;
             this.btnSubToolOffset.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.btnSubToolOffset.FlatAppearance.BorderSize = 0;
             this.btnSubToolOffset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubToolOffset.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubToolOffset.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnSubToolOffset.Image = global::Twol.Properties.Resources.ConS_ImplementOffset;
-            this.btnSubToolOffset.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSubToolOffset.Location = new System.Drawing.Point(0, 216);
+            this.btnSubToolOffset.Location = new System.Drawing.Point(311, 3);
             this.btnSubToolOffset.Name = "btnSubToolOffset";
             this.btnSubToolOffset.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
-            this.btnSubToolOffset.Size = new System.Drawing.Size(120, 72);
+            this.btnSubToolOffset.Size = new System.Drawing.Size(42, 64);
             this.btnSubToolOffset.TabIndex = 1;
             this.btnSubToolOffset.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSubToolOffset.UseVisualStyleBackColor = false;
@@ -911,19 +710,17 @@
             // 
             // btnSubPivot
             // 
-            this.btnSubPivot.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.btnSubPivot.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnSubPivot.BackColor = System.Drawing.Color.Transparent;
             this.btnSubPivot.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.btnSubPivot.FlatAppearance.BorderSize = 0;
             this.btnSubPivot.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubPivot.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubPivot.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnSubPivot.Image = global::Twol.Properties.Resources.ConS_ImplementPivot;
-            this.btnSubPivot.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSubPivot.Location = new System.Drawing.Point(0, 144);
+            this.btnSubPivot.Location = new System.Drawing.Point(503, 3);
             this.btnSubPivot.Name = "btnSubPivot";
             this.btnSubPivot.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
-            this.btnSubPivot.Size = new System.Drawing.Size(120, 72);
+            this.btnSubPivot.Size = new System.Drawing.Size(42, 64);
             this.btnSubPivot.TabIndex = 217;
             this.btnSubPivot.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSubPivot.UseVisualStyleBackColor = false;
@@ -931,19 +728,17 @@
             // 
             // btnSubHitch
             // 
-            this.btnSubHitch.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.btnSubHitch.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnSubHitch.BackColor = System.Drawing.Color.Transparent;
             this.btnSubHitch.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.btnSubHitch.FlatAppearance.BorderSize = 0;
             this.btnSubHitch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubHitch.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubHitch.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnSubHitch.Image = global::Twol.Properties.Resources.ConS_ImplementHitch;
-            this.btnSubHitch.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSubHitch.Location = new System.Drawing.Point(0, 72);
+            this.btnSubHitch.Location = new System.Drawing.Point(551, 3);
             this.btnSubHitch.Name = "btnSubHitch";
             this.btnSubHitch.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
-            this.btnSubHitch.Size = new System.Drawing.Size(120, 72);
+            this.btnSubHitch.Size = new System.Drawing.Size(42, 64);
             this.btnSubHitch.TabIndex = 5;
             this.btnSubHitch.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSubHitch.UseVisualStyleBackColor = false;
@@ -951,90 +746,55 @@
             // 
             // btnSubToolType
             // 
-            this.btnSubToolType.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.btnSubToolType.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnSubToolType.BackColor = System.Drawing.Color.Transparent;
             this.btnSubToolType.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.btnSubToolType.FlatAppearance.BorderSize = 0;
             this.btnSubToolType.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSubToolType.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSubToolType.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnSubToolType.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSubToolType.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnSubToolType.Image = global::Twol.Properties.Resources.ConS_ImplementConfig;
-            this.btnSubToolType.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSubToolType.Location = new System.Drawing.Point(0, 0);
+            this.btnSubToolType.Location = new System.Drawing.Point(599, 3);
             this.btnSubToolType.Name = "btnSubToolType";
             this.btnSubToolType.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
-            this.btnSubToolType.Size = new System.Drawing.Size(120, 72);
+            this.btnSubToolType.Size = new System.Drawing.Size(42, 64);
             this.btnSubToolType.TabIndex = 6;
-            this.btnSubToolType.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSubToolType.Text = "T";
             this.btnSubToolType.UseVisualStyleBackColor = false;
             this.btnSubToolType.Click += new System.EventHandler(this.btnSubToolType_Click);
             // 
             // btnTool
             // 
-            this.btnTool.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.btnTool.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnTool.BackColor = System.Drawing.Color.Transparent;
             this.btnTool.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.btnTool.FlatAppearance.BorderSize = 0;
             this.btnTool.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTool.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTool.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnTool.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTool.ForeColor = System.Drawing.Color.Black;
             this.btnTool.Image = global::Twol.Properties.Resources.Con_ImplementMenu;
-            this.btnTool.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTool.Location = new System.Drawing.Point(0, 295);
+            this.btnTool.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnTool.Location = new System.Drawing.Point(3, 156);
             this.btnTool.Name = "btnTool";
-            this.btnTool.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            this.btnTool.Size = new System.Drawing.Size(120, 80);
+            this.btnTool.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
+            this.btnTool.Size = new System.Drawing.Size(72, 96);
             this.btnTool.TabIndex = 3;
-            this.btnTool.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTool.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnTool.Text = "Tool";
+            this.btnTool.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnTool.UseVisualStyleBackColor = false;
             this.btnTool.Click += new System.EventHandler(this.btnTool_Click);
             // 
-            // panelVehicleSubMenu
-            // 
-            this.panelVehicleSubMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(32)))), ((int)(((byte)(39)))));
-            this.panelVehicleSubMenu.Controls.Add(this.button1);
-            this.panelVehicleSubMenu.Controls.Add(this.btnSubAntenna);
-            this.panelVehicleSubMenu.Controls.Add(this.btnSubDimensions);
-            this.panelVehicleSubMenu.Controls.Add(this.btnSubVehicleType);
-            this.panelVehicleSubMenu.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelVehicleSubMenu.Location = new System.Drawing.Point(0, 80);
-            this.panelVehicleSubMenu.Name = "panelVehicleSubMenu";
-            this.panelVehicleSubMenu.Size = new System.Drawing.Size(120, 215);
-            this.panelVehicleSubMenu.TabIndex = 2;
-            this.panelVehicleSubMenu.Visible = false;
-            // 
-            // button1
-            // 
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(38)))), ((int)(((byte)(46)))));
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(38)))), ((int)(((byte)(46)))));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.ForeColor = System.Drawing.Color.Silver;
-            this.button1.Location = new System.Drawing.Point(-36, -370);
-            this.button1.Name = "button1";
-            this.button1.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.button1.Size = new System.Drawing.Size(231, 40);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Type";
-            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.UseVisualStyleBackColor = true;
-            // 
             // btnSubAntenna
             // 
-            this.btnSubAntenna.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.btnSubAntenna.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnSubAntenna.BackColor = System.Drawing.Color.Transparent;
             this.btnSubAntenna.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.btnSubAntenna.FlatAppearance.BorderSize = 0;
             this.btnSubAntenna.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubAntenna.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubAntenna.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnSubAntenna.Image = global::Twol.Properties.Resources.ConS_ImplementAntenna;
-            this.btnSubAntenna.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSubAntenna.Location = new System.Drawing.Point(0, 144);
+            this.btnSubAntenna.Location = new System.Drawing.Point(791, 3);
             this.btnSubAntenna.Name = "btnSubAntenna";
             this.btnSubAntenna.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
-            this.btnSubAntenna.Size = new System.Drawing.Size(120, 72);
+            this.btnSubAntenna.Size = new System.Drawing.Size(42, 64);
             this.btnSubAntenna.TabIndex = 2;
             this.btnSubAntenna.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSubAntenna.UseVisualStyleBackColor = false;
@@ -1042,19 +802,17 @@
             // 
             // btnSubDimensions
             // 
-            this.btnSubDimensions.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.btnSubDimensions.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnSubDimensions.BackColor = System.Drawing.Color.Transparent;
             this.btnSubDimensions.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.btnSubDimensions.FlatAppearance.BorderSize = 0;
             this.btnSubDimensions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubDimensions.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubDimensions.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnSubDimensions.Image = global::Twol.Properties.Resources.ConS_ImplementHitch;
-            this.btnSubDimensions.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSubDimensions.Location = new System.Drawing.Point(0, 72);
+            this.btnSubDimensions.Location = new System.Drawing.Point(743, 3);
             this.btnSubDimensions.Name = "btnSubDimensions";
             this.btnSubDimensions.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
-            this.btnSubDimensions.Size = new System.Drawing.Size(120, 72);
+            this.btnSubDimensions.Size = new System.Drawing.Size(42, 64);
             this.btnSubDimensions.TabIndex = 1;
             this.btnSubDimensions.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSubDimensions.UseVisualStyleBackColor = false;
@@ -1062,19 +820,17 @@
             // 
             // btnSubVehicleType
             // 
-            this.btnSubVehicleType.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.btnSubVehicleType.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnSubVehicleType.BackColor = System.Drawing.Color.Transparent;
             this.btnSubVehicleType.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.btnSubVehicleType.FlatAppearance.BorderSize = 0;
             this.btnSubVehicleType.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubVehicleType.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubVehicleType.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnSubVehicleType.Image = global::Twol.Properties.Resources.ConS_VehicleConfig;
-            this.btnSubVehicleType.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSubVehicleType.Location = new System.Drawing.Point(0, 0);
+            this.btnSubVehicleType.Location = new System.Drawing.Point(839, 3);
             this.btnSubVehicleType.Name = "btnSubVehicleType";
             this.btnSubVehicleType.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
-            this.btnSubVehicleType.Size = new System.Drawing.Size(120, 72);
+            this.btnSubVehicleType.Size = new System.Drawing.Size(42, 64);
             this.btnSubVehicleType.TabIndex = 0;
             this.btnSubVehicleType.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSubVehicleType.UseVisualStyleBackColor = false;
@@ -1082,22 +838,21 @@
             // 
             // btnVehicle
             // 
-            this.btnVehicle.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.btnVehicle.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnVehicle.BackColor = System.Drawing.Color.Transparent;
             this.btnVehicle.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.btnVehicle.FlatAppearance.BorderSize = 0;
             this.btnVehicle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnVehicle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVehicle.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnVehicle.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVehicle.ForeColor = System.Drawing.Color.Black;
             this.btnVehicle.Image = global::Twol.Properties.Resources.Con_VehicleMenu;
-            this.btnVehicle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnVehicle.Location = new System.Drawing.Point(0, 0);
+            this.btnVehicle.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnVehicle.Location = new System.Drawing.Point(3, 54);
             this.btnVehicle.Name = "btnVehicle";
-            this.btnVehicle.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            this.btnVehicle.Size = new System.Drawing.Size(120, 80);
+            this.btnVehicle.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
+            this.btnVehicle.Size = new System.Drawing.Size(72, 96);
             this.btnVehicle.TabIndex = 113;
-            this.btnVehicle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnVehicle.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnVehicle.Text = "Vehicle";
+            this.btnVehicle.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnVehicle.UseVisualStyleBackColor = false;
             this.btnVehicle.Click += new System.EventHandler(this.btnVehicle_Click);
             // 
@@ -1123,18 +878,19 @@
             this.tab1.Controls.Add(this.tabTram);
             this.tab1.Controls.Add(this.tabBtns);
             this.tab1.Controls.Add(this.tabDisplay);
-            this.tab1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tab1.Controls.Add(this.tabColors);
+            this.tab1.Controls.Add(this.tabUser);
             this.tab1.ItemSize = new System.Drawing.Size(60, 40);
-            this.tab1.Location = new System.Drawing.Point(124, 4);
+            this.tab1.Location = new System.Drawing.Point(86, 75);
             this.tab1.Name = "tab1";
             this.tab1.Padding = new System.Drawing.Point(0, 0);
             this.tab1.SelectedIndex = 0;
-            this.tab1.Size = new System.Drawing.Size(915, 647);
+            this.tab1.Size = new System.Drawing.Size(926, 644);
             this.tab1.TabIndex = 0;
             // 
             // tabSummary
             // 
-            this.tabSummary.BackColor = System.Drawing.Color.Gainsboro;
+            this.tabSummary.BackColor = System.Drawing.Color.Azure;
             this.tabSummary.Controls.Add(this.label11);
             this.tabSummary.Controls.Add(this.lblSumLookAheadOff);
             this.tabSummary.Controls.Add(this.labelWidth);
@@ -1173,20 +929,21 @@
             this.tabSummary.Controls.Add(this.lblSaveAs);
             this.tabSummary.Controls.Add(this.lblNudgeDistance);
             this.tabSummary.Controls.Add(this.lblSumWheelbase);
-            this.tabSummary.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.tabSummary.ForeColor = System.Drawing.Color.Gainsboro;
             this.tabSummary.Location = new System.Drawing.Point(4, 44);
             this.tabSummary.Name = "tabSummary";
             this.tabSummary.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSummary.Size = new System.Drawing.Size(907, 584);
+            this.tabSummary.Size = new System.Drawing.Size(918, 596);
             this.tabSummary.TabIndex = 0;
             this.tabSummary.Text = "tSum";
+            this.tabSummary.Enter += new System.EventHandler(this.tabSummary_Enter);
             // 
             // label11
             // 
             this.label11.BackColor = System.Drawing.Color.Transparent;
             this.label11.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.Color.DimGray;
-            this.label11.Location = new System.Drawing.Point(427, 529);
+            this.label11.Location = new System.Drawing.Point(427, 540);
             this.label11.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(133, 23);
@@ -1199,7 +956,7 @@
             this.lblSumLookAheadOff.BackColor = System.Drawing.Color.Transparent;
             this.lblSumLookAheadOff.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSumLookAheadOff.ForeColor = System.Drawing.Color.Black;
-            this.lblSumLookAheadOff.Location = new System.Drawing.Point(561, 529);
+            this.lblSumLookAheadOff.Location = new System.Drawing.Point(561, 540);
             this.lblSumLookAheadOff.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblSumLookAheadOff.Name = "lblSumLookAheadOff";
             this.lblSumLookAheadOff.Size = new System.Drawing.Size(80, 23);
@@ -1212,7 +969,7 @@
             this.labelWidth.BackColor = System.Drawing.Color.Transparent;
             this.labelWidth.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelWidth.ForeColor = System.Drawing.Color.DimGray;
-            this.labelWidth.Location = new System.Drawing.Point(451, 472);
+            this.labelWidth.Location = new System.Drawing.Point(451, 483);
             this.labelWidth.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.labelWidth.Name = "labelWidth";
             this.labelWidth.Size = new System.Drawing.Size(109, 23);
@@ -1225,7 +982,7 @@
             this.labelOverlap.BackColor = System.Drawing.Color.Transparent;
             this.labelOverlap.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelOverlap.ForeColor = System.Drawing.Color.DimGray;
-            this.labelOverlap.Location = new System.Drawing.Point(678, 499);
+            this.labelOverlap.Location = new System.Drawing.Point(678, 510);
             this.labelOverlap.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.labelOverlap.Name = "labelOverlap";
             this.labelOverlap.Size = new System.Drawing.Size(109, 23);
@@ -1238,7 +995,7 @@
             this.lblSumOverlap.BackColor = System.Drawing.Color.Transparent;
             this.lblSumOverlap.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSumOverlap.ForeColor = System.Drawing.Color.Black;
-            this.lblSumOverlap.Location = new System.Drawing.Point(789, 500);
+            this.lblSumOverlap.Location = new System.Drawing.Point(789, 511);
             this.lblSumOverlap.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblSumOverlap.Name = "lblSumOverlap";
             this.lblSumOverlap.Size = new System.Drawing.Size(109, 23);
@@ -1251,7 +1008,7 @@
             this.lblLookAheadOn.BackColor = System.Drawing.Color.Transparent;
             this.lblLookAheadOn.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLookAheadOn.ForeColor = System.Drawing.Color.DimGray;
-            this.lblLookAheadOn.Location = new System.Drawing.Point(427, 499);
+            this.lblLookAheadOn.Location = new System.Drawing.Point(427, 510);
             this.lblLookAheadOn.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblLookAheadOn.Name = "lblLookAheadOn";
             this.lblLookAheadOn.Size = new System.Drawing.Size(133, 23);
@@ -1264,7 +1021,7 @@
             this.lblSumLookaheadOn.BackColor = System.Drawing.Color.Transparent;
             this.lblSumLookaheadOn.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSumLookaheadOn.ForeColor = System.Drawing.Color.Black;
-            this.lblSumLookaheadOn.Location = new System.Drawing.Point(561, 499);
+            this.lblSumLookaheadOn.Location = new System.Drawing.Point(561, 510);
             this.lblSumLookaheadOn.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblSumLookaheadOn.Name = "lblSumLookaheadOn";
             this.lblSumLookaheadOn.Size = new System.Drawing.Size(80, 23);
@@ -1277,7 +1034,7 @@
             this.labelOffset.BackColor = System.Drawing.Color.Transparent;
             this.labelOffset.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelOffset.ForeColor = System.Drawing.Color.DimGray;
-            this.labelOffset.Location = new System.Drawing.Point(678, 527);
+            this.labelOffset.Location = new System.Drawing.Point(678, 538);
             this.labelOffset.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.labelOffset.Name = "labelOffset";
             this.labelOffset.Size = new System.Drawing.Size(109, 23);
@@ -1290,7 +1047,7 @@
             this.lblSumToolOffset.BackColor = System.Drawing.Color.Transparent;
             this.lblSumToolOffset.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSumToolOffset.ForeColor = System.Drawing.Color.Black;
-            this.lblSumToolOffset.Location = new System.Drawing.Point(789, 528);
+            this.lblSumToolOffset.Location = new System.Drawing.Point(789, 539);
             this.lblSumToolOffset.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblSumToolOffset.Name = "lblSumToolOffset";
             this.lblSumToolOffset.Size = new System.Drawing.Size(109, 23);
@@ -1303,7 +1060,7 @@
             this.labelWheelBase.BackColor = System.Drawing.Color.Transparent;
             this.labelWheelBase.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelWheelBase.ForeColor = System.Drawing.Color.DimGray;
-            this.labelWheelBase.Location = new System.Drawing.Point(5, 474);
+            this.labelWheelBase.Location = new System.Drawing.Point(5, 485);
             this.labelWheelBase.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.labelWheelBase.Name = "labelWheelBase";
             this.labelWheelBase.Size = new System.Drawing.Size(109, 23);
@@ -1316,7 +1073,7 @@
             this.labelTramW.BackColor = System.Drawing.Color.Transparent;
             this.labelTramW.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTramW.ForeColor = System.Drawing.Color.DimGray;
-            this.labelTramW.Location = new System.Drawing.Point(678, 555);
+            this.labelTramW.Location = new System.Drawing.Point(678, 566);
             this.labelTramW.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.labelTramW.Name = "labelTramW";
             this.labelTramW.Size = new System.Drawing.Size(109, 23);
@@ -1329,7 +1086,7 @@
             this.lblSumTramWidth.BackColor = System.Drawing.Color.Transparent;
             this.lblSumTramWidth.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSumTramWidth.ForeColor = System.Drawing.Color.Black;
-            this.lblSumTramWidth.Location = new System.Drawing.Point(789, 556);
+            this.lblSumTramWidth.Location = new System.Drawing.Point(789, 567);
             this.lblSumTramWidth.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblSumTramWidth.Name = "lblSumTramWidth";
             this.lblSumTramWidth.Size = new System.Drawing.Size(109, 23);
@@ -1342,7 +1099,7 @@
             this.lblSumNumSections.BackColor = System.Drawing.Color.Transparent;
             this.lblSumNumSections.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSumNumSections.ForeColor = System.Drawing.Color.Black;
-            this.lblSumNumSections.Location = new System.Drawing.Point(789, 471);
+            this.lblSumNumSections.Location = new System.Drawing.Point(789, 482);
             this.lblSumNumSections.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblSumNumSections.Name = "lblSumNumSections";
             this.lblSumNumSections.Size = new System.Drawing.Size(109, 23);
@@ -1355,7 +1112,7 @@
             this.labelNudge.BackColor = System.Drawing.Color.Transparent;
             this.labelNudge.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelNudge.ForeColor = System.Drawing.Color.DimGray;
-            this.labelNudge.Location = new System.Drawing.Point(5, 502);
+            this.labelNudge.Location = new System.Drawing.Point(5, 513);
             this.labelNudge.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.labelNudge.Name = "labelNudge";
             this.labelNudge.Size = new System.Drawing.Size(109, 23);
@@ -1368,7 +1125,7 @@
             this.labelSections.BackColor = System.Drawing.Color.Transparent;
             this.labelSections.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelSections.ForeColor = System.Drawing.Color.DimGray;
-            this.labelSections.Location = new System.Drawing.Point(678, 471);
+            this.labelSections.Location = new System.Drawing.Point(678, 482);
             this.labelSections.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.labelSections.Name = "labelSections";
             this.labelSections.Size = new System.Drawing.Size(109, 23);
@@ -1381,7 +1138,7 @@
             this.lblSummaryWidth.BackColor = System.Drawing.Color.Transparent;
             this.lblSummaryWidth.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSummaryWidth.ForeColor = System.Drawing.Color.Black;
-            this.lblSummaryWidth.Location = new System.Drawing.Point(561, 472);
+            this.lblSummaryWidth.Location = new System.Drawing.Point(561, 483);
             this.lblSummaryWidth.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblSummaryWidth.Name = "lblSummaryWidth";
             this.lblSummaryWidth.Size = new System.Drawing.Size(109, 23);
@@ -1394,7 +1151,7 @@
             this.lblSummaryToolName.BackColor = System.Drawing.Color.Transparent;
             this.lblSummaryToolName.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSummaryToolName.ForeColor = System.Drawing.Color.Black;
-            this.lblSummaryToolName.Location = new System.Drawing.Point(461, 439);
+            this.lblSummaryToolName.Location = new System.Drawing.Point(461, 450);
             this.lblSummaryToolName.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblSummaryToolName.Name = "lblSummaryToolName";
             this.lblSummaryToolName.Size = new System.Drawing.Size(440, 23);
@@ -1413,7 +1170,7 @@
             this.lvTools.HideSelection = false;
             this.lvTools.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.lvTools.LabelWrap = false;
-            this.lvTools.Location = new System.Drawing.Point(468, 164);
+            this.lvTools.Location = new System.Drawing.Point(468, 175);
             this.lvTools.Margin = new System.Windows.Forms.Padding(0);
             this.lvTools.MultiSelect = false;
             this.lvTools.Name = "lvTools";
@@ -1437,7 +1194,7 @@
             this.btnToolNewSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnToolNewSave.Font = new System.Drawing.Font("Tahoma", 15.75F);
             this.btnToolNewSave.Image = global::Twol.Properties.Resources.FileSave;
-            this.btnToolNewSave.Location = new System.Drawing.Point(833, 88);
+            this.btnToolNewSave.Location = new System.Drawing.Point(833, 99);
             this.btnToolNewSave.Name = "btnToolNewSave";
             this.btnToolNewSave.Size = new System.Drawing.Size(60, 52);
             this.btnToolNewSave.TabIndex = 530;
@@ -1448,7 +1205,7 @@
             // 
             this.tboxCreateNewTool.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.tboxCreateNewTool.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tboxCreateNewTool.Location = new System.Drawing.Point(468, 99);
+            this.tboxCreateNewTool.Location = new System.Drawing.Point(468, 110);
             this.tboxCreateNewTool.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.tboxCreateNewTool.Name = "tboxCreateNewTool";
             this.tboxCreateNewTool.Size = new System.Drawing.Size(355, 33);
@@ -1461,7 +1218,7 @@
             this.lblNewTool.BackColor = System.Drawing.Color.Transparent;
             this.lblNewTool.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNewTool.ForeColor = System.Drawing.Color.Black;
-            this.lblNewTool.Location = new System.Drawing.Point(461, 70);
+            this.lblNewTool.Location = new System.Drawing.Point(461, 81);
             this.lblNewTool.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblNewTool.Name = "lblNewTool";
             this.lblNewTool.Size = new System.Drawing.Size(363, 23);
@@ -1478,7 +1235,7 @@
             this.btnToolSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnToolSave.Font = new System.Drawing.Font("Tahoma", 15.75F);
             this.btnToolSave.Image = global::Twol.Properties.Resources.FileSaveAs;
-            this.btnToolSave.Location = new System.Drawing.Point(833, 15);
+            this.btnToolSave.Location = new System.Drawing.Point(833, 26);
             this.btnToolSave.Name = "btnToolSave";
             this.btnToolSave.Size = new System.Drawing.Size(60, 52);
             this.btnToolSave.TabIndex = 527;
@@ -1494,7 +1251,7 @@
             this.btnToolLoad.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnToolLoad.Font = new System.Drawing.Font("Tahoma", 15.75F);
             this.btnToolLoad.Image = global::Twol.Properties.Resources.FileUse;
-            this.btnToolLoad.Location = new System.Drawing.Point(832, 205);
+            this.btnToolLoad.Location = new System.Drawing.Point(832, 216);
             this.btnToolLoad.Name = "btnToolLoad";
             this.btnToolLoad.Size = new System.Drawing.Size(60, 64);
             this.btnToolLoad.TabIndex = 526;
@@ -1509,7 +1266,7 @@
             this.btnToolDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnToolDelete.Font = new System.Drawing.Font("Tahoma", 15.75F);
             this.btnToolDelete.Image = global::Twol.Properties.Resources.Trash;
-            this.btnToolDelete.Location = new System.Drawing.Point(832, 318);
+            this.btnToolDelete.Location = new System.Drawing.Point(832, 329);
             this.btnToolDelete.Name = "btnToolDelete";
             this.btnToolDelete.Size = new System.Drawing.Size(60, 52);
             this.btnToolDelete.TabIndex = 525;
@@ -1520,7 +1277,7 @@
             // 
             this.tboxToolNameSave.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.tboxToolNameSave.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tboxToolNameSave.Location = new System.Drawing.Point(468, 26);
+            this.tboxToolNameSave.Location = new System.Drawing.Point(468, 37);
             this.tboxToolNameSave.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.tboxToolNameSave.Name = "tboxToolNameSave";
             this.tboxToolNameSave.Size = new System.Drawing.Size(355, 33);
@@ -1534,7 +1291,7 @@
             this.lblSaveAsTool.BackColor = System.Drawing.Color.Transparent;
             this.lblSaveAsTool.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSaveAsTool.ForeColor = System.Drawing.Color.Black;
-            this.lblSaveAsTool.Location = new System.Drawing.Point(461, -2);
+            this.lblSaveAsTool.Location = new System.Drawing.Point(461, 9);
             this.lblSaveAsTool.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblSaveAsTool.Name = "lblSaveAsTool";
             this.lblSaveAsTool.Size = new System.Drawing.Size(366, 23);
@@ -1553,7 +1310,7 @@
             this.lvVehicles.HideSelection = false;
             this.lvVehicles.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.lvVehicles.LabelWrap = false;
-            this.lvVehicles.Location = new System.Drawing.Point(13, 165);
+            this.lvVehicles.Location = new System.Drawing.Point(13, 176);
             this.lvVehicles.Margin = new System.Windows.Forms.Padding(0);
             this.lvVehicles.MultiSelect = false;
             this.lvVehicles.Name = "lvVehicles";
@@ -1577,7 +1334,7 @@
             this.btnVehicleNewSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnVehicleNewSave.Font = new System.Drawing.Font("Tahoma", 15.75F);
             this.btnVehicleNewSave.Image = global::Twol.Properties.Resources.FileSave;
-            this.btnVehicleNewSave.Location = new System.Drawing.Point(351, 88);
+            this.btnVehicleNewSave.Location = new System.Drawing.Point(351, 99);
             this.btnVehicleNewSave.Name = "btnVehicleNewSave";
             this.btnVehicleNewSave.Size = new System.Drawing.Size(60, 52);
             this.btnVehicleNewSave.TabIndex = 521;
@@ -1588,7 +1345,7 @@
             // 
             this.tboxCreateNewVehicle.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.tboxCreateNewVehicle.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tboxCreateNewVehicle.Location = new System.Drawing.Point(13, 99);
+            this.tboxCreateNewVehicle.Location = new System.Drawing.Point(13, 110);
             this.tboxCreateNewVehicle.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.tboxCreateNewVehicle.Name = "tboxCreateNewVehicle";
             this.tboxCreateNewVehicle.Size = new System.Drawing.Size(334, 33);
@@ -1601,7 +1358,7 @@
             this.lblNew.BackColor = System.Drawing.Color.Transparent;
             this.lblNew.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNew.ForeColor = System.Drawing.Color.Black;
-            this.lblNew.Location = new System.Drawing.Point(13, 70);
+            this.lblNew.Location = new System.Drawing.Point(13, 81);
             this.lblNew.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblNew.Name = "lblNew";
             this.lblNew.Size = new System.Drawing.Size(344, 23);
@@ -1618,7 +1375,7 @@
             this.btnVehicleSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnVehicleSave.Font = new System.Drawing.Font("Tahoma", 15.75F);
             this.btnVehicleSave.Image = global::Twol.Properties.Resources.FileSaveAs;
-            this.btnVehicleSave.Location = new System.Drawing.Point(351, 15);
+            this.btnVehicleSave.Location = new System.Drawing.Point(351, 26);
             this.btnVehicleSave.Name = "btnVehicleSave";
             this.btnVehicleSave.Size = new System.Drawing.Size(60, 52);
             this.btnVehicleSave.TabIndex = 457;
@@ -1630,7 +1387,7 @@
             this.lblSummaryVehicleName.BackColor = System.Drawing.Color.Transparent;
             this.lblSummaryVehicleName.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSummaryVehicleName.ForeColor = System.Drawing.Color.Black;
-            this.lblSummaryVehicleName.Location = new System.Drawing.Point(8, 439);
+            this.lblSummaryVehicleName.Location = new System.Drawing.Point(8, 450);
             this.lblSummaryVehicleName.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblSummaryVehicleName.Name = "lblSummaryVehicleName";
             this.lblSummaryVehicleName.Size = new System.Drawing.Size(405, 23);
@@ -1647,7 +1404,7 @@
             this.btnVehicleLoad.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnVehicleLoad.Font = new System.Drawing.Font("Tahoma", 15.75F);
             this.btnVehicleLoad.Image = global::Twol.Properties.Resources.FileUse;
-            this.btnVehicleLoad.Location = new System.Drawing.Point(351, 205);
+            this.btnVehicleLoad.Location = new System.Drawing.Point(351, 216);
             this.btnVehicleLoad.Name = "btnVehicleLoad";
             this.btnVehicleLoad.Size = new System.Drawing.Size(60, 64);
             this.btnVehicleLoad.TabIndex = 456;
@@ -1662,7 +1419,7 @@
             this.btnVehicleDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnVehicleDelete.Font = new System.Drawing.Font("Tahoma", 15.75F);
             this.btnVehicleDelete.Image = global::Twol.Properties.Resources.Trash;
-            this.btnVehicleDelete.Location = new System.Drawing.Point(351, 318);
+            this.btnVehicleDelete.Location = new System.Drawing.Point(351, 329);
             this.btnVehicleDelete.Name = "btnVehicleDelete";
             this.btnVehicleDelete.Size = new System.Drawing.Size(60, 52);
             this.btnVehicleDelete.TabIndex = 455;
@@ -1673,7 +1430,7 @@
             // 
             this.tboxVehicleNameSave.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.tboxVehicleNameSave.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tboxVehicleNameSave.Location = new System.Drawing.Point(13, 26);
+            this.tboxVehicleNameSave.Location = new System.Drawing.Point(13, 37);
             this.tboxVehicleNameSave.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.tboxVehicleNameSave.Name = "tboxVehicleNameSave";
             this.tboxVehicleNameSave.Size = new System.Drawing.Size(334, 33);
@@ -1687,7 +1444,7 @@
             this.lblSaveAs.BackColor = System.Drawing.Color.Transparent;
             this.lblSaveAs.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSaveAs.ForeColor = System.Drawing.Color.Black;
-            this.lblSaveAs.Location = new System.Drawing.Point(13, -2);
+            this.lblSaveAs.Location = new System.Drawing.Point(13, 9);
             this.lblSaveAs.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblSaveAs.Name = "lblSaveAs";
             this.lblSaveAs.Size = new System.Drawing.Size(344, 23);
@@ -1700,7 +1457,7 @@
             this.lblNudgeDistance.BackColor = System.Drawing.Color.Transparent;
             this.lblNudgeDistance.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNudgeDistance.ForeColor = System.Drawing.Color.Black;
-            this.lblNudgeDistance.Location = new System.Drawing.Point(111, 503);
+            this.lblNudgeDistance.Location = new System.Drawing.Point(111, 514);
             this.lblNudgeDistance.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblNudgeDistance.Name = "lblNudgeDistance";
             this.lblNudgeDistance.Size = new System.Drawing.Size(109, 23);
@@ -1713,7 +1470,7 @@
             this.lblSumWheelbase.BackColor = System.Drawing.Color.Transparent;
             this.lblSumWheelbase.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSumWheelbase.ForeColor = System.Drawing.Color.Black;
-            this.lblSumWheelbase.Location = new System.Drawing.Point(111, 475);
+            this.lblSumWheelbase.Location = new System.Drawing.Point(111, 486);
             this.lblSumWheelbase.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblSumWheelbase.Name = "lblSumWheelbase";
             this.lblSumWheelbase.Size = new System.Drawing.Size(109, 23);
@@ -1723,7 +1480,7 @@
             // 
             // tabVConfig
             // 
-            this.tabVConfig.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.tabVConfig.BackColor = System.Drawing.Color.Azure;
             this.tabVConfig.Controls.Add(this.btnOpacityUp);
             this.tabVConfig.Controls.Add(this.btnOpacityDn);
             this.tabVConfig.Controls.Add(this.lblOpacityPercent);
@@ -1734,9 +1491,11 @@
             this.tabVConfig.Controls.Add(this.cboxIsImage);
             this.tabVConfig.Location = new System.Drawing.Point(4, 44);
             this.tabVConfig.Name = "tabVConfig";
-            this.tabVConfig.Size = new System.Drawing.Size(907, 584);
+            this.tabVConfig.Size = new System.Drawing.Size(918, 596);
             this.tabVConfig.TabIndex = 4;
             this.tabVConfig.Text = "vConfig";
+            this.tabVConfig.Enter += new System.EventHandler(this.tabVConfig_Enter);
+            this.tabVConfig.Leave += new System.EventHandler(this.tabVConfig_Leave);
             // 
             // btnOpacityUp
             // 
@@ -1746,7 +1505,7 @@
             this.btnOpacityUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOpacityUp.Image = global::Twol.Properties.Resources.UpArrow64;
             this.btnOpacityUp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnOpacityUp.Location = new System.Drawing.Point(769, 438);
+            this.btnOpacityUp.Location = new System.Drawing.Point(769, 458);
             this.btnOpacityUp.Name = "btnOpacityUp";
             this.btnOpacityUp.Size = new System.Drawing.Size(73, 72);
             this.btnOpacityUp.TabIndex = 533;
@@ -1761,7 +1520,7 @@
             this.btnOpacityDn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOpacityDn.Image = global::Twol.Properties.Resources.DnArrow64;
             this.btnOpacityDn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnOpacityDn.Location = new System.Drawing.Point(551, 438);
+            this.btnOpacityDn.Location = new System.Drawing.Point(551, 458);
             this.btnOpacityDn.Name = "btnOpacityDn";
             this.btnOpacityDn.Size = new System.Drawing.Size(73, 72);
             this.btnOpacityDn.TabIndex = 534;
@@ -1773,7 +1532,7 @@
             this.lblOpacityPercent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblOpacityPercent.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblOpacityPercent.ForeColor = System.Drawing.Color.Black;
-            this.lblOpacityPercent.Location = new System.Drawing.Point(631, 453);
+            this.lblOpacityPercent.Location = new System.Drawing.Point(631, 473);
             this.lblOpacityPercent.Name = "lblOpacityPercent";
             this.lblOpacityPercent.Size = new System.Drawing.Size(139, 45);
             this.lblOpacityPercent.TabIndex = 479;
@@ -1789,7 +1548,7 @@
             this.groupBox1.Controls.Add(this.rbtn4WD);
             this.groupBox1.Controls.Add(this.rbtnTractor);
             this.groupBox1.ForeColor = System.Drawing.Color.Black;
-            this.groupBox1.Location = new System.Drawing.Point(26, 36);
+            this.groupBox1.Location = new System.Drawing.Point(26, 56);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(516, 474);
             this.groupBox1.TabIndex = 112;
@@ -1851,7 +1610,7 @@
             this.label70.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label70.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label70.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label70.Location = new System.Drawing.Point(576, 422);
+            this.label70.Location = new System.Drawing.Point(576, 442);
             this.label70.Name = "label70";
             this.label70.Size = new System.Drawing.Size(245, 19);
             this.label70.TabIndex = 478;
@@ -1864,7 +1623,7 @@
             this.label105.AutoSize = true;
             this.label105.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label105.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label105.Location = new System.Drawing.Point(653, -9);
+            this.label105.Location = new System.Drawing.Point(653, 15);
             this.label105.Name = "label105";
             this.label105.Size = new System.Drawing.Size(88, 19);
             this.label105.TabIndex = 485;
@@ -1876,7 +1635,7 @@
             this.panelOpacity.BackColor = System.Drawing.Color.MistyRose;
             this.panelOpacity.BackgroundImage = global::Twol.Properties.Resources.VehicleOpacity;
             this.panelOpacity.Controls.Add(this.pboxAlpha);
-            this.panelOpacity.Location = new System.Drawing.Point(571, 144);
+            this.panelOpacity.Location = new System.Drawing.Point(571, 164);
             this.panelOpacity.Name = "panelOpacity";
             this.panelOpacity.Size = new System.Drawing.Size(256, 256);
             this.panelOpacity.TabIndex = 535;
@@ -1904,7 +1663,7 @@
             this.cboxIsImage.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxIsImage.ForeColor = System.Drawing.SystemColors.ControlText;
             this.cboxIsImage.Image = global::Twol.Properties.Resources.TriangleVehicle;
-            this.cboxIsImage.Location = new System.Drawing.Point(651, 17);
+            this.cboxIsImage.Location = new System.Drawing.Point(651, 37);
             this.cboxIsImage.Name = "cboxIsImage";
             this.cboxIsImage.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.cboxIsImage.Size = new System.Drawing.Size(96, 96);
@@ -1915,7 +1674,7 @@
             // 
             // tabVAntenna
             // 
-            this.tabVAntenna.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.tabVAntenna.BackColor = System.Drawing.Color.Azure;
             this.tabVAntenna.Controls.Add(this.nudAntennaHeight);
             this.tabVAntenna.Controls.Add(this.nudAntennaOffset);
             this.tabVAntenna.Controls.Add(this.lblPivotDistance);
@@ -1932,9 +1691,10 @@
             this.tabVAntenna.Controls.Add(this.nudAntennaPivot);
             this.tabVAntenna.Location = new System.Drawing.Point(4, 44);
             this.tabVAntenna.Name = "tabVAntenna";
-            this.tabVAntenna.Size = new System.Drawing.Size(907, 584);
+            this.tabVAntenna.Size = new System.Drawing.Size(918, 596);
             this.tabVAntenna.TabIndex = 12;
             this.tabVAntenna.Text = "vAnt";
+            this.tabVAntenna.Enter += new System.EventHandler(this.tabVAntenna_Enter);
             // 
             // nudAntennaHeight
             // 
@@ -2147,7 +1907,7 @@
             // 
             // tabVDimensions
             // 
-            this.tabVDimensions.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.tabVDimensions.BackColor = System.Drawing.Color.Azure;
             this.tabVDimensions.Controls.Add(this.nudWheelbase);
             this.tabVDimensions.Controls.Add(this.nudTractorHitchLength);
             this.tabVDimensions.Controls.Add(this.nudVehicleTrack);
@@ -2160,9 +1920,11 @@
             this.tabVDimensions.Controls.Add(this.pictureBox1);
             this.tabVDimensions.Location = new System.Drawing.Point(4, 44);
             this.tabVDimensions.Name = "tabVDimensions";
-            this.tabVDimensions.Size = new System.Drawing.Size(907, 584);
+            this.tabVDimensions.Size = new System.Drawing.Size(918, 596);
             this.tabVDimensions.TabIndex = 13;
             this.tabVDimensions.Text = "vDim";
+            this.tabVDimensions.Enter += new System.EventHandler(this.tabVDimensions_Enter);
+            this.tabVDimensions.Leave += new System.EventHandler(this.tabVDimensions_Leave);
             // 
             // nudWheelbase
             // 
@@ -2278,13 +2040,15 @@
             // 
             // tabTConfig
             // 
-            this.tabTConfig.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.tabTConfig.BackColor = System.Drawing.Color.Azure;
             this.tabTConfig.Controls.Add(this.gboxAttachment);
             this.tabTConfig.Location = new System.Drawing.Point(4, 44);
             this.tabTConfig.Name = "tabTConfig";
-            this.tabTConfig.Size = new System.Drawing.Size(907, 584);
+            this.tabTConfig.Size = new System.Drawing.Size(918, 596);
             this.tabTConfig.TabIndex = 11;
             this.tabTConfig.Text = "tConfig";
+            this.tabTConfig.Enter += new System.EventHandler(this.tabTConfig_Enter);
+            this.tabTConfig.Leave += new System.EventHandler(this.tabTConfig_Leave);
             // 
             // gboxAttachment
             // 
@@ -2377,7 +2141,7 @@
             // 
             // tabTHitch
             // 
-            this.tabTHitch.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.tabTHitch.BackColor = System.Drawing.Color.Azure;
             this.tabTHitch.Controls.Add(this.nudTrailingHitchLength);
             this.tabTHitch.Controls.Add(this.nudDrawbarLength);
             this.tabTHitch.Controls.Add(this.nudTankHitch);
@@ -2386,9 +2150,10 @@
             this.tabTHitch.Controls.Add(this.picboxToolHitch);
             this.tabTHitch.Location = new System.Drawing.Point(4, 44);
             this.tabTHitch.Name = "tabTHitch";
-            this.tabTHitch.Size = new System.Drawing.Size(907, 584);
+            this.tabTHitch.Size = new System.Drawing.Size(918, 596);
             this.tabTHitch.TabIndex = 5;
             this.tabTHitch.Text = "tHitch";
+            this.tabTHitch.Enter += new System.EventHandler(this.tabTHitch_Enter);
             // 
             // nudTrailingHitchLength
             // 
@@ -2460,7 +2225,7 @@
             // 
             // tabToolOffset
             // 
-            this.tabToolOffset.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.tabToolOffset.BackColor = System.Drawing.Color.Azure;
             this.tabToolOffset.Controls.Add(this.btnZeroOverlap);
             this.tabToolOffset.Controls.Add(this.btnZeroToolOffset);
             this.tabToolOffset.Controls.Add(this.label176);
@@ -2471,9 +2236,11 @@
             this.tabToolOffset.Controls.Add(this.nudOffset);
             this.tabToolOffset.Location = new System.Drawing.Point(4, 44);
             this.tabToolOffset.Name = "tabToolOffset";
-            this.tabToolOffset.Size = new System.Drawing.Size(907, 584);
+            this.tabToolOffset.Size = new System.Drawing.Size(918, 596);
             this.tabToolOffset.TabIndex = 26;
             this.tabToolOffset.Text = "tOffs";
+            this.tabToolOffset.Enter += new System.EventHandler(this.tabToolOffset_Enter);
+            this.tabToolOffset.Leave += new System.EventHandler(this.tabToolOffset_Leave);
             // 
             // btnZeroOverlap
             // 
@@ -2697,7 +2464,7 @@
             // 
             // tabToolPivot
             // 
-            this.tabToolPivot.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.tabToolPivot.BackColor = System.Drawing.Color.Azure;
             this.tabToolPivot.Controls.Add(this.btnPivotOffsetZero);
             this.tabToolPivot.Controls.Add(this.label177);
             this.tabToolPivot.Controls.Add(this.rbtnPivotBehindPos);
@@ -2706,9 +2473,10 @@
             this.tabToolPivot.Location = new System.Drawing.Point(4, 44);
             this.tabToolPivot.Name = "tabToolPivot";
             this.tabToolPivot.Padding = new System.Windows.Forms.Padding(3);
-            this.tabToolPivot.Size = new System.Drawing.Size(907, 584);
+            this.tabToolPivot.Size = new System.Drawing.Size(918, 596);
             this.tabToolPivot.TabIndex = 27;
             this.tabToolPivot.Text = "tPivot";
+            this.tabToolPivot.Enter += new System.EventHandler(this.tabToolPivot_Enter);
             // 
             // btnPivotOffsetZero
             // 
@@ -2783,7 +2551,7 @@
             // 
             // tabTSections
             // 
-            this.tabTSections.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.tabTSections.BackColor = System.Drawing.Color.Azure;
             this.tabTSections.Controls.Add(this.panelSymmetricSections);
             this.tabTSections.Controls.Add(this.label178);
             this.tabTSections.Controls.Add(this.lblTurnOffBelowUnits);
@@ -2837,9 +2605,11 @@
             this.tabTSections.ForeColor = System.Drawing.Color.Black;
             this.tabTSections.Location = new System.Drawing.Point(4, 44);
             this.tabTSections.Name = "tabTSections";
-            this.tabTSections.Size = new System.Drawing.Size(907, 584);
+            this.tabTSections.Size = new System.Drawing.Size(918, 596);
             this.tabTSections.TabIndex = 7;
             this.tabTSections.Text = "tSect";
+            this.tabTSections.Enter += new System.EventHandler(this.tabTSections_Enter);
+            this.tabTSections.Leave += new System.EventHandler(this.tabTSections_Leave);
             // 
             // panelSymmetricSections
             // 
@@ -3939,14 +3709,16 @@
             // 
             // tabTSwitches
             // 
-            this.tabTSwitches.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.tabTSwitches.BackColor = System.Drawing.Color.Azure;
             this.tabTSwitches.Controls.Add(this.grpControls);
             this.tabTSwitches.Controls.Add(this.grpSwitch);
             this.tabTSwitches.Location = new System.Drawing.Point(4, 44);
             this.tabTSwitches.Name = "tabTSwitches";
-            this.tabTSwitches.Size = new System.Drawing.Size(907, 584);
+            this.tabTSwitches.Size = new System.Drawing.Size(918, 596);
             this.tabTSwitches.TabIndex = 9;
             this.tabTSwitches.Text = "tSwit";
+            this.tabTSwitches.Enter += new System.EventHandler(this.tabTSwitches_Enter);
+            this.tabTSwitches.Leave += new System.EventHandler(this.tabTSwitches_Leave);
             // 
             // grpControls
             // 
@@ -4114,7 +3886,7 @@
             // 
             // tabTSettings
             // 
-            this.tabTSettings.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.tabTSettings.BackColor = System.Drawing.Color.Azure;
             this.tabTSettings.Controls.Add(this.label5);
             this.tabTSettings.Controls.Add(this.label2);
             this.tabTSettings.Controls.Add(this.lblLookAheadTimeSettings);
@@ -4131,9 +3903,10 @@
             this.tabTSettings.Controls.Add(this.nudLookAhead);
             this.tabTSettings.Location = new System.Drawing.Point(4, 44);
             this.tabTSettings.Name = "tabTSettings";
-            this.tabTSettings.Size = new System.Drawing.Size(907, 584);
+            this.tabTSettings.Size = new System.Drawing.Size(918, 596);
             this.tabTSettings.TabIndex = 10;
             this.tabTSettings.Text = "TSettings";
+            this.tabTSettings.Enter += new System.EventHandler(this.tabTSettings_Enter);
             // 
             // label5
             // 
@@ -4311,7 +4084,7 @@
             // 
             // tabDHeading
             // 
-            this.tabDHeading.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.tabDHeading.BackColor = System.Drawing.Color.Azure;
             this.tabDHeading.Controls.Add(this.lblAlarmStopsAutoSteer);
             this.tabDHeading.Controls.Add(this.label118);
             this.tabDHeading.Controls.Add(this.label167);
@@ -4329,9 +4102,11 @@
             this.tabDHeading.Controls.Add(this.cboxIsRTK);
             this.tabDHeading.Location = new System.Drawing.Point(4, 44);
             this.tabDHeading.Name = "tabDHeading";
-            this.tabDHeading.Size = new System.Drawing.Size(907, 584);
+            this.tabDHeading.Size = new System.Drawing.Size(918, 596);
             this.tabDHeading.TabIndex = 15;
             this.tabDHeading.Text = "dHead";
+            this.tabDHeading.Enter += new System.EventHandler(this.tabDHeading_Enter);
+            this.tabDHeading.Leave += new System.EventHandler(this.tabDHeading_Leave);
             // 
             // lblAlarmStopsAutoSteer
             // 
@@ -4340,7 +4115,7 @@
             this.lblAlarmStopsAutoSteer.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.lblAlarmStopsAutoSteer.ForeColor = System.Drawing.Color.Black;
             this.lblAlarmStopsAutoSteer.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblAlarmStopsAutoSteer.Location = new System.Drawing.Point(640, 458);
+            this.lblAlarmStopsAutoSteer.Location = new System.Drawing.Point(60, 328);
             this.lblAlarmStopsAutoSteer.Name = "lblAlarmStopsAutoSteer";
             this.lblAlarmStopsAutoSteer.Size = new System.Drawing.Size(228, 27);
             this.lblAlarmStopsAutoSteer.TabIndex = 478;
@@ -4363,10 +4138,11 @@
             // 
             // label167
             // 
+            this.label167.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label167.AutoSize = true;
             this.label167.Font = new System.Drawing.Font("Tahoma", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label167.ForeColor = System.Drawing.Color.Black;
-            this.label167.Location = new System.Drawing.Point(186, 411);
+            this.label167.Location = new System.Drawing.Point(429, 470);
             this.label167.Name = "label167";
             this.label167.Size = new System.Drawing.Size(122, 23);
             this.label167.TabIndex = 479;
@@ -4389,10 +4165,11 @@
             // 
             // lblFusionIMU
             // 
+            this.lblFusionIMU.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblFusionIMU.AutoSize = true;
             this.lblFusionIMU.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFusionIMU.ForeColor = System.Drawing.Color.Black;
-            this.lblFusionIMU.Location = new System.Drawing.Point(191, 352);
+            this.lblFusionIMU.Location = new System.Drawing.Point(434, 411);
             this.lblFusionIMU.Name = "lblFusionIMU";
             this.lblFusionIMU.Size = new System.Drawing.Size(95, 39);
             this.lblFusionIMU.TabIndex = 476;
@@ -4405,7 +4182,7 @@
             this.lblRTKFixAlarm.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.lblRTKFixAlarm.ForeColor = System.Drawing.Color.Black;
             this.lblRTKFixAlarm.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblRTKFixAlarm.Location = new System.Drawing.Point(465, 458);
+            this.lblRTKFixAlarm.Location = new System.Drawing.Point(112, 454);
             this.lblRTKFixAlarm.Name = "lblRTKFixAlarm";
             this.lblRTKFixAlarm.Size = new System.Drawing.Size(127, 29);
             this.lblRTKFixAlarm.TabIndex = 471;
@@ -4414,9 +4191,10 @@
             // 
             // lblIMU
             // 
+            this.lblIMU.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblIMU.Font = new System.Drawing.Font("Tahoma", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblIMU.ForeColor = System.Drawing.Color.ForestGreen;
-            this.lblIMU.Location = new System.Drawing.Point(238, 315);
+            this.lblIMU.Location = new System.Drawing.Point(481, 374);
             this.lblIMU.Name = "lblIMU";
             this.lblIMU.Size = new System.Drawing.Size(76, 23);
             this.lblIMU.TabIndex = 475;
@@ -4498,9 +4276,10 @@
             // 
             // lblGPS
             // 
+            this.lblGPS.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblGPS.Font = new System.Drawing.Font("Tahoma", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblGPS.ForeColor = System.Drawing.Color.Red;
-            this.lblGPS.Location = new System.Drawing.Point(498, 315);
+            this.lblGPS.Location = new System.Drawing.Point(741, 374);
             this.lblGPS.Name = "lblGPS";
             this.lblGPS.Size = new System.Drawing.Size(69, 23);
             this.lblGPS.TabIndex = 474;
@@ -4599,8 +4378,9 @@
             // 
             // hsbarFusion
             // 
+            this.hsbarFusion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.hsbarFusion.LargeChange = 1;
-            this.hsbarFusion.Location = new System.Drawing.Point(288, 345);
+            this.hsbarFusion.Location = new System.Drawing.Point(531, 404);
             this.hsbarFusion.Maximum = 60;
             this.hsbarFusion.Minimum = 5;
             this.hsbarFusion.Name = "hsbarFusion";
@@ -4611,10 +4391,11 @@
             // 
             // lblFusion
             // 
+            this.lblFusion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblFusion.AutoSize = true;
             this.lblFusion.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFusion.ForeColor = System.Drawing.Color.Black;
-            this.lblFusion.Location = new System.Drawing.Point(528, 352);
+            this.lblFusion.Location = new System.Drawing.Point(771, 411);
             this.lblFusion.Name = "lblFusion";
             this.lblFusion.Size = new System.Drawing.Size(95, 39);
             this.lblFusion.TabIndex = 473;
@@ -4630,7 +4411,7 @@
             this.cboxIsRTK_KillAutoSteer.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxIsRTK_KillAutoSteer.ForeColor = System.Drawing.Color.Black;
             this.cboxIsRTK_KillAutoSteer.Image = global::Twol.Properties.Resources.AutoSteerOff;
-            this.cboxIsRTK_KillAutoSteer.Location = new System.Drawing.Point(704, 491);
+            this.cboxIsRTK_KillAutoSteer.Location = new System.Drawing.Point(124, 361);
             this.cboxIsRTK_KillAutoSteer.Name = "cboxIsRTK_KillAutoSteer";
             this.cboxIsRTK_KillAutoSteer.Size = new System.Drawing.Size(103, 69);
             this.cboxIsRTK_KillAutoSteer.TabIndex = 477;
@@ -4639,9 +4420,10 @@
             // 
             // lblIMUFusion
             // 
+            this.lblIMUFusion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblIMUFusion.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblIMUFusion.ForeColor = System.Drawing.Color.Black;
-            this.lblIMUFusion.Location = new System.Drawing.Point(315, 315);
+            this.lblIMUFusion.Location = new System.Drawing.Point(558, 374);
             this.lblIMUFusion.Name = "lblIMUFusion";
             this.lblIMUFusion.Size = new System.Drawing.Size(181, 25);
             this.lblIMUFusion.TabIndex = 472;
@@ -4658,7 +4440,7 @@
             this.cboxIsRTK.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxIsRTK.ForeColor = System.Drawing.Color.Black;
             this.cboxIsRTK.Image = global::Twol.Properties.Resources.Con_SourcesRTKAlarm;
-            this.cboxIsRTK.Location = new System.Drawing.Point(477, 491);
+            this.cboxIsRTK.Location = new System.Drawing.Point(124, 487);
             this.cboxIsRTK.Name = "cboxIsRTK";
             this.cboxIsRTK.Size = new System.Drawing.Size(103, 69);
             this.cboxIsRTK.TabIndex = 309;
@@ -4667,10 +4449,8 @@
             // 
             // tabDRoll
             // 
-            this.tabDRoll.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.tabDRoll.BackColor = System.Drawing.Color.Azure;
             this.tabDRoll.Controls.Add(this.label10);
-            this.tabDRoll.Controls.Add(this.btnRollOffsetUp);
-            this.tabDRoll.Controls.Add(this.btnRollOffsetDown);
             this.tabDRoll.Controls.Add(this.pictureBox9);
             this.tabDRoll.Controls.Add(this.lblInvertRoll);
             this.tabDRoll.Controls.Add(this.lblZeroRoll);
@@ -4684,12 +4464,15 @@
             this.tabDRoll.Controls.Add(this.btnZeroRoll);
             this.tabDRoll.Controls.Add(this.btnRemoveZeroOffset);
             this.tabDRoll.Controls.Add(this.cboxDataInvertRoll);
+            this.tabDRoll.Controls.Add(this.btnRollOffsetUp);
+            this.tabDRoll.Controls.Add(this.btnRollOffsetDown);
             this.tabDRoll.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.tabDRoll.Location = new System.Drawing.Point(4, 44);
             this.tabDRoll.Name = "tabDRoll";
-            this.tabDRoll.Size = new System.Drawing.Size(907, 584);
+            this.tabDRoll.Size = new System.Drawing.Size(918, 596);
             this.tabDRoll.TabIndex = 16;
             this.tabDRoll.Text = "dRoll";
+            this.tabDRoll.Enter += new System.EventHandler(this.tabDRoll_Enter);
             // 
             // label10
             // 
@@ -4701,38 +4484,6 @@
             this.label10.TabIndex = 488;
             this.label10.Text = "Help";
             this.label10.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            // 
-            // btnRollOffsetUp
-            // 
-            this.btnRollOffsetUp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnRollOffsetUp.FlatAppearance.BorderSize = 0;
-            this.btnRollOffsetUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRollOffsetUp.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRollOffsetUp.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnRollOffsetUp.Image = global::Twol.Properties.Resources.UpArrow64;
-            this.btnRollOffsetUp.Location = new System.Drawing.Point(416, 214);
-            this.btnRollOffsetUp.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.btnRollOffsetUp.Name = "btnRollOffsetUp";
-            this.btnRollOffsetUp.Size = new System.Drawing.Size(59, 69);
-            this.btnRollOffsetUp.TabIndex = 487;
-            this.btnRollOffsetUp.UseVisualStyleBackColor = true;
-            this.btnRollOffsetUp.Click += new System.EventHandler(this.btnRollOffsetUPGN_Click);
-            // 
-            // btnRollOffsetDown
-            // 
-            this.btnRollOffsetDown.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnRollOffsetDown.FlatAppearance.BorderSize = 0;
-            this.btnRollOffsetDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRollOffsetDown.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRollOffsetDown.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnRollOffsetDown.Image = global::Twol.Properties.Resources.DnArrow64;
-            this.btnRollOffsetDown.Location = new System.Drawing.Point(342, 215);
-            this.btnRollOffsetDown.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.btnRollOffsetDown.Name = "btnRollOffsetDown";
-            this.btnRollOffsetDown.Size = new System.Drawing.Size(59, 69);
-            this.btnRollOffsetDown.TabIndex = 486;
-            this.btnRollOffsetDown.UseVisualStyleBackColor = true;
-            this.btnRollOffsetDown.Click += new System.EventHandler(this.btnRollOffsetDown_Click);
             // 
             // pictureBox9
             // 
@@ -4908,9 +4659,41 @@
             this.cboxDataInvertRoll.UseVisualStyleBackColor = false;
             this.cboxDataInvertRoll.Click += new System.EventHandler(this.cboxDataInvertRoll_Click);
             // 
+            // btnRollOffsetUp
+            // 
+            this.btnRollOffsetUp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnRollOffsetUp.FlatAppearance.BorderSize = 0;
+            this.btnRollOffsetUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRollOffsetUp.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRollOffsetUp.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnRollOffsetUp.Image = global::Twol.Properties.Resources.UpArrow64;
+            this.btnRollOffsetUp.Location = new System.Drawing.Point(416, 214);
+            this.btnRollOffsetUp.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.btnRollOffsetUp.Name = "btnRollOffsetUp";
+            this.btnRollOffsetUp.Size = new System.Drawing.Size(59, 69);
+            this.btnRollOffsetUp.TabIndex = 487;
+            this.btnRollOffsetUp.UseVisualStyleBackColor = true;
+            this.btnRollOffsetUp.Click += new System.EventHandler(this.btnRollOffsetUPGN_Click);
+            // 
+            // btnRollOffsetDown
+            // 
+            this.btnRollOffsetDown.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnRollOffsetDown.FlatAppearance.BorderSize = 0;
+            this.btnRollOffsetDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRollOffsetDown.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRollOffsetDown.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnRollOffsetDown.Image = global::Twol.Properties.Resources.DnArrow64;
+            this.btnRollOffsetDown.Location = new System.Drawing.Point(342, 215);
+            this.btnRollOffsetDown.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.btnRollOffsetDown.Name = "btnRollOffsetDown";
+            this.btnRollOffsetDown.Size = new System.Drawing.Size(59, 69);
+            this.btnRollOffsetDown.TabIndex = 486;
+            this.btnRollOffsetDown.UseVisualStyleBackColor = true;
+            this.btnRollOffsetDown.Click += new System.EventHandler(this.btnRollOffsetDown_Click);
+            // 
             // tabUTurn
             // 
-            this.tabUTurn.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.tabUTurn.BackColor = System.Drawing.Color.Azure;
             this.tabUTurn.Controls.Add(this.lblUturnExtension);
             this.tabUTurn.Controls.Add(this.lblFtMTurnRadius);
             this.tabUTurn.Controls.Add(this.lblFtMUTurn);
@@ -4924,9 +4707,11 @@
             this.tabUTurn.Controls.Add(this.nudTurnDistanceFromBoundary);
             this.tabUTurn.Location = new System.Drawing.Point(4, 44);
             this.tabUTurn.Name = "tabUTurn";
-            this.tabUTurn.Size = new System.Drawing.Size(907, 584);
+            this.tabUTurn.Size = new System.Drawing.Size(918, 596);
             this.tabUTurn.TabIndex = 18;
             this.tabUTurn.Text = "uTurn";
+            this.tabUTurn.Enter += new System.EventHandler(this.tabUTurn_Enter);
+            this.tabUTurn.Leave += new System.EventHandler(this.tabUTurn_Leave);
             // 
             // lblUturnExtension
             // 
@@ -5067,7 +4852,7 @@
             // 
             // tabRelay
             // 
-            this.tabRelay.BackColor = System.Drawing.Color.Gainsboro;
+            this.tabRelay.BackColor = System.Drawing.Color.Azure;
             this.tabRelay.Controls.Add(this.cboxPin23);
             this.tabRelay.Controls.Add(this.cboxPin22);
             this.tabRelay.Controls.Add(this.cboxPin21);
@@ -5125,9 +4910,11 @@
             this.tabRelay.Location = new System.Drawing.Point(4, 44);
             this.tabRelay.Name = "tabRelay";
             this.tabRelay.Padding = new System.Windows.Forms.Padding(3);
-            this.tabRelay.Size = new System.Drawing.Size(907, 584);
+            this.tabRelay.Size = new System.Drawing.Size(918, 596);
             this.tabRelay.TabIndex = 24;
             this.tabRelay.Text = "aRelay";
+            this.tabRelay.Enter += new System.EventHandler(this.tabRelay_Enter);
+            this.tabRelay.Leave += new System.EventHandler(this.tabRelay_Leave);
             // 
             // cboxPin23
             // 
@@ -6249,7 +6036,7 @@
             // 
             // tabAMachine
             // 
-            this.tabAMachine.BackColor = System.Drawing.Color.Gainsboro;
+            this.tabAMachine.BackColor = System.Drawing.Color.Azure;
             this.tabAMachine.Controls.Add(this.lblUser4);
             this.tabAMachine.Controls.Add(this.lblUser3);
             this.tabAMachine.Controls.Add(this.lblUser2);
@@ -6267,9 +6054,11 @@
             this.tabAMachine.Controls.Add(this.nudUser1);
             this.tabAMachine.Location = new System.Drawing.Point(4, 44);
             this.tabAMachine.Name = "tabAMachine";
-            this.tabAMachine.Size = new System.Drawing.Size(907, 584);
+            this.tabAMachine.Size = new System.Drawing.Size(918, 596);
             this.tabAMachine.TabIndex = 20;
             this.tabAMachine.Text = "aMach";
+            this.tabAMachine.Enter += new System.EventHandler(this.tabAMachine_Enter);
+            this.tabAMachine.Leave += new System.EventHandler(this.tabAMachine_Leave);
             // 
             // lblUser4
             // 
@@ -6586,7 +6375,7 @@
             // 
             // tabTram
             // 
-            this.tabTram.BackColor = System.Drawing.Color.Gainsboro;
+            this.tabTram.BackColor = System.Drawing.Color.Azure;
             this.tabTram.Controls.Add(this.lblDisplay);
             this.tabTram.Controls.Add(this.lblOveride);
             this.tabTram.Controls.Add(this.lblTramWidthUnits);
@@ -6598,9 +6387,11 @@
             this.tabTram.ForeColor = System.Drawing.Color.Black;
             this.tabTram.Location = new System.Drawing.Point(4, 44);
             this.tabTram.Name = "tabTram";
-            this.tabTram.Size = new System.Drawing.Size(907, 584);
+            this.tabTram.Size = new System.Drawing.Size(918, 596);
             this.tabTram.TabIndex = 21;
             this.tabTram.Text = "tTram";
+            this.tabTram.Enter += new System.EventHandler(this.tabTram_Enter);
+            this.tabTram.Leave += new System.EventHandler(this.tabTram_Leave);
             // 
             // lblDisplay
             // 
@@ -6717,7 +6508,7 @@
             // 
             // tabBtns
             // 
-            this.tabBtns.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.tabBtns.BackColor = System.Drawing.Color.Azure;
             this.tabBtns.Controls.Add(this.label8);
             this.tabBtns.Controls.Add(this.lblPowerLoss);
             this.tabBtns.Controls.Add(this.label91);
@@ -6751,9 +6542,11 @@
             this.tabBtns.Controls.Add(this.cboxFeatureTram);
             this.tabBtns.Location = new System.Drawing.Point(4, 44);
             this.tabBtns.Name = "tabBtns";
-            this.tabBtns.Size = new System.Drawing.Size(907, 584);
+            this.tabBtns.Size = new System.Drawing.Size(918, 596);
             this.tabBtns.TabIndex = 22;
             this.tabBtns.Text = "fBtns";
+            this.tabBtns.Enter += new System.EventHandler(this.tabBtns_Enter);
+            this.tabBtns.Leave += new System.EventHandler(this.tabBtns_Leave);
             // 
             // label8
             // 
@@ -7262,7 +7055,7 @@
             // 
             // tabDisplay
             // 
-            this.tabDisplay.BackColor = System.Drawing.Color.Gainsboro;
+            this.tabDisplay.BackColor = System.Drawing.Color.Azure;
             this.tabDisplay.Controls.Add(this.label12);
             this.tabDisplay.Controls.Add(this.chkDisplayMapping);
             this.tabDisplay.Controls.Add(this.lblLineSmooth);
@@ -7271,41 +7064,30 @@
             this.tabDisplay.Controls.Add(this.chkSectionLines);
             this.tabDisplay.Controls.Add(this.lblDirectionMarkers);
             this.tabDisplay.Controls.Add(this.chkDirectionMarkers);
-            this.tabDisplay.Controls.Add(this.label79);
-            this.tabDisplay.Controls.Add(this.unitsGroupBox);
             this.tabDisplay.Controls.Add(this.lblSvennArrow);
-            this.tabDisplay.Controls.Add(this.lblBrightness);
             this.tabDisplay.Controls.Add(this.lblFieldTexture);
-            this.tabDisplay.Controls.Add(this.lblPolygons);
-            this.tabDisplay.Controls.Add(this.lblKeyboard);
-            this.tabDisplay.Controls.Add(this.lblStartFullScreen);
             this.tabDisplay.Controls.Add(this.lblSpeedo);
-            this.tabDisplay.Controls.Add(this.lblExtraGuides);
             this.tabDisplay.Controls.Add(this.lblGrid);
-            this.tabDisplay.Controls.Add(this.chkDisplayLogElevation);
             this.tabDisplay.Controls.Add(this.chkSvennArrow);
-            this.tabDisplay.Controls.Add(this.chkDisplayBrightness);
             this.tabDisplay.Controls.Add(this.chkDisplayFloor);
-            this.tabDisplay.Controls.Add(this.chkDisplayKeyboard);
-            this.tabDisplay.Controls.Add(this.chkDisplayPolygons);
-            this.tabDisplay.Controls.Add(this.chkDisplayStartFullScreen);
             this.tabDisplay.Controls.Add(this.chkDisplayGrid);
             this.tabDisplay.Controls.Add(this.chkDisplaySpeedo);
-            this.tabDisplay.Controls.Add(this.chkDisplayExtraGuides);
-            this.tabDisplay.Controls.Add(this.nudNumGuideLines);
             this.tabDisplay.Location = new System.Drawing.Point(4, 44);
             this.tabDisplay.Name = "tabDisplay";
             this.tabDisplay.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDisplay.Size = new System.Drawing.Size(907, 599);
+            this.tabDisplay.Size = new System.Drawing.Size(918, 596);
             this.tabDisplay.TabIndex = 25;
             this.tabDisplay.Text = "fDisp";
+            this.tabDisplay.Click += new System.EventHandler(this.tabDisplay_Click);
+            this.tabDisplay.Enter += new System.EventHandler(this.tabDisplay_Enter);
+            this.tabDisplay.Leave += new System.EventHandler(this.tabDisplay_Leave);
             // 
             // label12
             // 
             this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label12.BackColor = System.Drawing.Color.Transparent;
             this.label12.ForeColor = System.Drawing.Color.Black;
-            this.label12.Location = new System.Drawing.Point(14, 460);
+            this.label12.Location = new System.Drawing.Point(198, 445);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(147, 16);
             this.label12.TabIndex = 543;
@@ -7324,7 +7106,7 @@
             this.chkDisplayMapping.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkDisplayMapping.ForeColor = System.Drawing.SystemColors.ControlText;
             this.chkDisplayMapping.Image = global::Twol.Properties.Resources.GoogleEarth;
-            this.chkDisplayMapping.Location = new System.Drawing.Point(37, 388);
+            this.chkDisplayMapping.Location = new System.Drawing.Point(221, 374);
             this.chkDisplayMapping.Name = "chkDisplayMapping";
             this.chkDisplayMapping.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.chkDisplayMapping.Size = new System.Drawing.Size(100, 69);
@@ -7338,7 +7120,7 @@
             this.lblLineSmooth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblLineSmooth.BackColor = System.Drawing.Color.Transparent;
             this.lblLineSmooth.ForeColor = System.Drawing.Color.Black;
-            this.lblLineSmooth.Location = new System.Drawing.Point(27, 580);
+            this.lblLineSmooth.Location = new System.Drawing.Point(483, 446);
             this.lblLineSmooth.Name = "lblLineSmooth";
             this.lblLineSmooth.Size = new System.Drawing.Size(120, 16);
             this.lblLineSmooth.TabIndex = 539;
@@ -7358,7 +7140,7 @@
             this.chkLineSmooth.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkLineSmooth.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkLineSmooth.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.chkLineSmooth.Location = new System.Drawing.Point(37, 508);
+            this.chkLineSmooth.Location = new System.Drawing.Point(493, 374);
             this.chkLineSmooth.Name = "chkLineSmooth";
             this.chkLineSmooth.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.chkLineSmooth.Size = new System.Drawing.Size(100, 69);
@@ -7371,7 +7153,7 @@
             this.lblSectionLines.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblSectionLines.BackColor = System.Drawing.Color.Transparent;
             this.lblSectionLines.ForeColor = System.Drawing.Color.Black;
-            this.lblSectionLines.Location = new System.Drawing.Point(415, 460);
+            this.lblSectionLines.Location = new System.Drawing.Point(742, 319);
             this.lblSectionLines.Name = "lblSectionLines";
             this.lblSectionLines.Size = new System.Drawing.Size(120, 16);
             this.lblSectionLines.TabIndex = 537;
@@ -7391,7 +7173,7 @@
             this.chkSectionLines.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkSectionLines.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkSectionLines.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.chkSectionLines.Location = new System.Drawing.Point(425, 388);
+            this.chkSectionLines.Location = new System.Drawing.Point(752, 248);
             this.chkSectionLines.Name = "chkSectionLines";
             this.chkSectionLines.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.chkSectionLines.Size = new System.Drawing.Size(100, 69);
@@ -7404,7 +7186,7 @@
             this.lblDirectionMarkers.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblDirectionMarkers.BackColor = System.Drawing.Color.Transparent;
             this.lblDirectionMarkers.ForeColor = System.Drawing.Color.Black;
-            this.lblDirectionMarkers.Location = new System.Drawing.Point(221, 460);
+            this.lblDirectionMarkers.Location = new System.Drawing.Point(743, 190);
             this.lblDirectionMarkers.Name = "lblDirectionMarkers";
             this.lblDirectionMarkers.Size = new System.Drawing.Size(120, 16);
             this.lblDirectionMarkers.TabIndex = 533;
@@ -7426,7 +7208,7 @@
             this.chkDirectionMarkers.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkDirectionMarkers.ForeColor = System.Drawing.SystemColors.ControlText;
             this.chkDirectionMarkers.Image = global::Twol.Properties.Resources.ConD_DirectionMarker;
-            this.chkDirectionMarkers.Location = new System.Drawing.Point(234, 388);
+            this.chkDirectionMarkers.Location = new System.Drawing.Point(753, 119);
             this.chkDirectionMarkers.Name = "chkDirectionMarkers";
             this.chkDirectionMarkers.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.chkDirectionMarkers.Size = new System.Drawing.Size(100, 69);
@@ -7434,17 +7216,539 @@
             this.chkDirectionMarkers.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.chkDirectionMarkers.UseVisualStyleBackColor = false;
             // 
+            // lblSvennArrow
+            // 
+            this.lblSvennArrow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblSvennArrow.BackColor = System.Drawing.Color.Transparent;
+            this.lblSvennArrow.ForeColor = System.Drawing.Color.Black;
+            this.lblSvennArrow.Location = new System.Drawing.Point(483, 320);
+            this.lblSvennArrow.Name = "lblSvennArrow";
+            this.lblSvennArrow.Size = new System.Drawing.Size(120, 16);
+            this.lblSvennArrow.TabIndex = 529;
+            this.lblSvennArrow.Text = "Svenn Arrow";
+            this.lblSvennArrow.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblFieldTexture
+            // 
+            this.lblFieldTexture.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblFieldTexture.BackColor = System.Drawing.Color.Transparent;
+            this.lblFieldTexture.ForeColor = System.Drawing.Color.Black;
+            this.lblFieldTexture.Location = new System.Drawing.Point(211, 320);
+            this.lblFieldTexture.Name = "lblFieldTexture";
+            this.lblFieldTexture.Size = new System.Drawing.Size(120, 16);
+            this.lblFieldTexture.TabIndex = 525;
+            this.lblFieldTexture.Text = "Field Texture";
+            this.lblFieldTexture.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblSpeedo
+            // 
+            this.lblSpeedo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblSpeedo.BackColor = System.Drawing.Color.Transparent;
+            this.lblSpeedo.ForeColor = System.Drawing.Color.Black;
+            this.lblSpeedo.Location = new System.Drawing.Point(483, 191);
+            this.lblSpeedo.Name = "lblSpeedo";
+            this.lblSpeedo.Size = new System.Drawing.Size(120, 16);
+            this.lblSpeedo.TabIndex = 516;
+            this.lblSpeedo.Text = "Speedo";
+            this.lblSpeedo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblGrid
+            // 
+            this.lblGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblGrid.BackColor = System.Drawing.Color.Transparent;
+            this.lblGrid.ForeColor = System.Drawing.Color.Black;
+            this.lblGrid.Location = new System.Drawing.Point(211, 191);
+            this.lblGrid.Name = "lblGrid";
+            this.lblGrid.Size = new System.Drawing.Size(120, 16);
+            this.lblGrid.TabIndex = 515;
+            this.lblGrid.Text = "Grid";
+            this.lblGrid.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // chkSvennArrow
+            // 
+            this.chkSvennArrow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkSvennArrow.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkSvennArrow.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.chkSvennArrow.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.chkSvennArrow.FlatAppearance.BorderSize = 2;
+            this.chkSvennArrow.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
+            this.chkSvennArrow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chkSvennArrow.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkSvennArrow.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.chkSvennArrow.Image = global::Twol.Properties.Resources.SvennArrow;
+            this.chkSvennArrow.Location = new System.Drawing.Point(493, 248);
+            this.chkSvennArrow.Name = "chkSvennArrow";
+            this.chkSvennArrow.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.chkSvennArrow.Size = new System.Drawing.Size(100, 69);
+            this.chkSvennArrow.TabIndex = 528;
+            this.chkSvennArrow.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chkSvennArrow.UseVisualStyleBackColor = false;
+            // 
+            // chkDisplayFloor
+            // 
+            this.chkDisplayFloor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkDisplayFloor.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkDisplayFloor.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.chkDisplayFloor.Checked = true;
+            this.chkDisplayFloor.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkDisplayFloor.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.chkDisplayFloor.FlatAppearance.BorderSize = 2;
+            this.chkDisplayFloor.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
+            this.chkDisplayFloor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chkDisplayFloor.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkDisplayFloor.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.chkDisplayFloor.Image = global::Twol.Properties.Resources.ConD_FloorTexture;
+            this.chkDisplayFloor.Location = new System.Drawing.Point(221, 248);
+            this.chkDisplayFloor.Name = "chkDisplayFloor";
+            this.chkDisplayFloor.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.chkDisplayFloor.Size = new System.Drawing.Size(100, 69);
+            this.chkDisplayFloor.TabIndex = 524;
+            this.chkDisplayFloor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chkDisplayFloor.UseVisualStyleBackColor = false;
+            this.chkDisplayFloor.Click += new System.EventHandler(this.chkDisplayFloor_Click);
+            // 
+            // chkDisplayGrid
+            // 
+            this.chkDisplayGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkDisplayGrid.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkDisplayGrid.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.chkDisplayGrid.Checked = true;
+            this.chkDisplayGrid.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkDisplayGrid.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.chkDisplayGrid.FlatAppearance.BorderSize = 2;
+            this.chkDisplayGrid.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
+            this.chkDisplayGrid.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chkDisplayGrid.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkDisplayGrid.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.chkDisplayGrid.Image = global::Twol.Properties.Resources.ConD_Grid;
+            this.chkDisplayGrid.Location = new System.Drawing.Point(221, 119);
+            this.chkDisplayGrid.Name = "chkDisplayGrid";
+            this.chkDisplayGrid.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.chkDisplayGrid.Size = new System.Drawing.Size(100, 69);
+            this.chkDisplayGrid.TabIndex = 506;
+            this.chkDisplayGrid.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chkDisplayGrid.UseVisualStyleBackColor = false;
+            // 
+            // chkDisplaySpeedo
+            // 
+            this.chkDisplaySpeedo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkDisplaySpeedo.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkDisplaySpeedo.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.chkDisplaySpeedo.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.chkDisplaySpeedo.FlatAppearance.BorderSize = 2;
+            this.chkDisplaySpeedo.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
+            this.chkDisplaySpeedo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chkDisplaySpeedo.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkDisplaySpeedo.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.chkDisplaySpeedo.Image = global::Twol.Properties.Resources.ConD_Speedometer;
+            this.chkDisplaySpeedo.Location = new System.Drawing.Point(493, 119);
+            this.chkDisplaySpeedo.Name = "chkDisplaySpeedo";
+            this.chkDisplaySpeedo.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.chkDisplaySpeedo.Size = new System.Drawing.Size(100, 69);
+            this.chkDisplaySpeedo.TabIndex = 504;
+            this.chkDisplaySpeedo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chkDisplaySpeedo.UseVisualStyleBackColor = false;
+            // 
+            // tabColors
+            // 
+            this.tabColors.Controls.Add(this.label15);
+            this.tabColors.Controls.Add(this.label14);
+            this.tabColors.Controls.Add(this.btnSectionColors);
+            this.tabColors.Controls.Add(this.btnColors);
+            this.tabColors.Location = new System.Drawing.Point(4, 44);
+            this.tabColors.Name = "tabColors";
+            this.tabColors.Padding = new System.Windows.Forms.Padding(3);
+            this.tabColors.Size = new System.Drawing.Size(918, 596);
+            this.tabColors.TabIndex = 28;
+            this.tabColors.Text = "dColors";
+            this.tabColors.UseVisualStyleBackColor = true;
+            // 
+            // label15
+            // 
+            this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label15.BackColor = System.Drawing.Color.Transparent;
+            this.label15.ForeColor = System.Drawing.Color.Black;
+            this.label15.Location = new System.Drawing.Point(657, 326);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(120, 47);
+            this.label15.TabIndex = 521;
+            this.label15.Text = "Multi-Section Colors";
+            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label14
+            // 
+            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label14.BackColor = System.Drawing.Color.Transparent;
+            this.label14.ForeColor = System.Drawing.Color.Black;
+            this.label14.Location = new System.Drawing.Point(657, 182);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(120, 16);
+            this.label14.TabIndex = 520;
+            this.label14.Text = "Screen Colors";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnSectionColors
+            // 
+            this.btnSectionColors.BackColor = System.Drawing.Color.Transparent;
+            this.btnSectionColors.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnSectionColors.FlatAppearance.BorderSize = 0;
+            this.btnSectionColors.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSectionColors.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSectionColors.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnSectionColors.Image = global::Twol.Properties.Resources.SectionMapping;
+            this.btnSectionColors.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSectionColors.Location = new System.Drawing.Point(682, 256);
+            this.btnSectionColors.Name = "btnSectionColors";
+            this.btnSectionColors.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.btnSectionColors.Size = new System.Drawing.Size(71, 64);
+            this.btnSectionColors.TabIndex = 4;
+            this.btnSectionColors.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSectionColors.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSectionColors.UseVisualStyleBackColor = false;
+            this.btnSectionColors.Click += new System.EventHandler(this.btnSectionColors_Click);
+            // 
+            // btnColors
+            // 
+            this.btnColors.BackColor = System.Drawing.Color.Transparent;
+            this.btnColors.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnColors.FlatAppearance.BorderSize = 0;
+            this.btnColors.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnColors.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnColors.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnColors.Image = global::Twol.Properties.Resources.ColourPick;
+            this.btnColors.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnColors.Location = new System.Drawing.Point(682, 117);
+            this.btnColors.Name = "btnColors";
+            this.btnColors.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.btnColors.Size = new System.Drawing.Size(71, 64);
+            this.btnColors.TabIndex = 4;
+            this.btnColors.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnColors.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnColors.UseVisualStyleBackColor = false;
+            this.btnColors.Click += new System.EventHandler(this.btnSetColors_Click);
+            // 
+            // tabUser
+            // 
+            this.tabUser.Controls.Add(this.label18);
+            this.tabUser.Controls.Add(this.btnLogViewer);
+            this.tabUser.Controls.Add(this.btnSetDirectories);
+            this.tabUser.Controls.Add(this.lblBrightness);
+            this.tabUser.Controls.Add(this.chkDisplayStartFullScreen);
+            this.tabUser.Controls.Add(this.chkDisplayBrightness);
+            this.tabUser.Controls.Add(this.lblStartFullScreen);
+            this.tabUser.Controls.Add(this.chkDisplayKeyboard);
+            this.tabUser.Controls.Add(this.lblKeyboard);
+            this.tabUser.Controls.Add(this.label13);
+            this.tabUser.Controls.Add(this.label16);
+            this.tabUser.Controls.Add(this.btnHotkeys);
+            this.tabUser.Controls.Add(this.chkDisplayLogElevation);
+            this.tabUser.Controls.Add(this.chkDisplayPolygons);
+            this.tabUser.Controls.Add(this.lblPolygons);
+            this.tabUser.Controls.Add(this.label79);
+            this.tabUser.Controls.Add(this.nudNumGuideLines);
+            this.tabUser.Controls.Add(this.chkDisplayExtraGuides);
+            this.tabUser.Controls.Add(this.unitsGroupBox);
+            this.tabUser.Controls.Add(this.lblExtraGuides);
+            this.tabUser.Location = new System.Drawing.Point(4, 44);
+            this.tabUser.Name = "tabUser";
+            this.tabUser.Size = new System.Drawing.Size(918, 596);
+            this.tabUser.TabIndex = 29;
+            this.tabUser.Text = "uUser";
+            this.tabUser.UseVisualStyleBackColor = true;
+            this.tabUser.Enter += new System.EventHandler(this.tabUser_Enter);
+            this.tabUser.Leave += new System.EventHandler(this.tabUser_Leave);
+            // 
+            // label18
+            // 
+            this.label18.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label18.BackColor = System.Drawing.Color.Transparent;
+            this.label18.ForeColor = System.Drawing.Color.Black;
+            this.label18.Location = new System.Drawing.Point(82, 396);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(120, 16);
+            this.label18.TabIndex = 525;
+            this.label18.Text = "Log Viewer";
+            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnLogViewer
+            // 
+            this.btnLogViewer.BackColor = System.Drawing.Color.Transparent;
+            this.btnLogViewer.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnLogViewer.FlatAppearance.BorderSize = 0;
+            this.btnLogViewer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLogViewer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogViewer.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnLogViewer.Image = global::Twol.Properties.Resources.ABTracks;
+            this.btnLogViewer.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnLogViewer.Location = new System.Drawing.Point(80, 312);
+            this.btnLogViewer.Name = "btnLogViewer";
+            this.btnLogViewer.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.btnLogViewer.Size = new System.Drawing.Size(124, 81);
+            this.btnLogViewer.TabIndex = 524;
+            this.btnLogViewer.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnLogViewer.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnLogViewer.UseVisualStyleBackColor = false;
+            this.btnLogViewer.Click += new System.EventHandler(this.btnLogViewer_Click);
+            // 
+            // btnSetDirectories
+            // 
+            this.btnSetDirectories.BackColor = System.Drawing.Color.Transparent;
+            this.btnSetDirectories.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnSetDirectories.FlatAppearance.BorderSize = 0;
+            this.btnSetDirectories.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSetDirectories.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSetDirectories.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnSetDirectories.Image = global::Twol.Properties.Resources.FileExplorerWindows;
+            this.btnSetDirectories.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSetDirectories.Location = new System.Drawing.Point(107, 193);
+            this.btnSetDirectories.Name = "btnSetDirectories";
+            this.btnSetDirectories.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.btnSetDirectories.Size = new System.Drawing.Size(71, 64);
+            this.btnSetDirectories.TabIndex = 5;
+            this.btnSetDirectories.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSetDirectories.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSetDirectories.UseVisualStyleBackColor = false;
+            this.btnSetDirectories.Click += new System.EventHandler(this.btnSetDirectories_Click);
+            // 
+            // lblBrightness
+            // 
+            this.lblBrightness.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblBrightness.BackColor = System.Drawing.Color.Transparent;
+            this.lblBrightness.ForeColor = System.Drawing.Color.Black;
+            this.lblBrightness.Location = new System.Drawing.Point(376, 263);
+            this.lblBrightness.Name = "lblBrightness";
+            this.lblBrightness.Size = new System.Drawing.Size(120, 16);
+            this.lblBrightness.TabIndex = 527;
+            this.lblBrightness.Text = "Brightness";
+            this.lblBrightness.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // chkDisplayStartFullScreen
+            // 
+            this.chkDisplayStartFullScreen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkDisplayStartFullScreen.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkDisplayStartFullScreen.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.chkDisplayStartFullScreen.Checked = true;
+            this.chkDisplayStartFullScreen.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkDisplayStartFullScreen.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.chkDisplayStartFullScreen.FlatAppearance.BorderSize = 2;
+            this.chkDisplayStartFullScreen.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
+            this.chkDisplayStartFullScreen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chkDisplayStartFullScreen.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkDisplayStartFullScreen.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.chkDisplayStartFullScreen.Image = global::Twol.Properties.Resources.ConD_FullScreenBegin;
+            this.chkDisplayStartFullScreen.Location = new System.Drawing.Point(676, 318);
+            this.chkDisplayStartFullScreen.Name = "chkDisplayStartFullScreen";
+            this.chkDisplayStartFullScreen.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.chkDisplayStartFullScreen.Size = new System.Drawing.Size(100, 69);
+            this.chkDisplayStartFullScreen.TabIndex = 509;
+            this.chkDisplayStartFullScreen.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chkDisplayStartFullScreen.UseVisualStyleBackColor = false;
+            // 
+            // chkDisplayBrightness
+            // 
+            this.chkDisplayBrightness.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkDisplayBrightness.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkDisplayBrightness.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.chkDisplayBrightness.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.chkDisplayBrightness.FlatAppearance.BorderSize = 2;
+            this.chkDisplayBrightness.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
+            this.chkDisplayBrightness.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chkDisplayBrightness.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkDisplayBrightness.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.chkDisplayBrightness.Image = global::Twol.Properties.Resources.BrightnessUp;
+            this.chkDisplayBrightness.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.chkDisplayBrightness.Location = new System.Drawing.Point(386, 191);
+            this.chkDisplayBrightness.Name = "chkDisplayBrightness";
+            this.chkDisplayBrightness.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.chkDisplayBrightness.Size = new System.Drawing.Size(100, 69);
+            this.chkDisplayBrightness.TabIndex = 526;
+            this.chkDisplayBrightness.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chkDisplayBrightness.UseVisualStyleBackColor = false;
+            // 
+            // lblStartFullScreen
+            // 
+            this.lblStartFullScreen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblStartFullScreen.BackColor = System.Drawing.Color.Transparent;
+            this.lblStartFullScreen.ForeColor = System.Drawing.Color.Black;
+            this.lblStartFullScreen.Location = new System.Drawing.Point(666, 388);
+            this.lblStartFullScreen.Name = "lblStartFullScreen";
+            this.lblStartFullScreen.Size = new System.Drawing.Size(120, 16);
+            this.lblStartFullScreen.TabIndex = 518;
+            this.lblStartFullScreen.Text = "Start Fullscreen";
+            this.lblStartFullScreen.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // chkDisplayKeyboard
+            // 
+            this.chkDisplayKeyboard.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkDisplayKeyboard.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkDisplayKeyboard.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.chkDisplayKeyboard.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.chkDisplayKeyboard.FlatAppearance.BorderSize = 2;
+            this.chkDisplayKeyboard.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
+            this.chkDisplayKeyboard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chkDisplayKeyboard.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkDisplayKeyboard.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.chkDisplayKeyboard.Image = global::Twol.Properties.Resources.ConD_KeyBoard;
+            this.chkDisplayKeyboard.Location = new System.Drawing.Point(669, 191);
+            this.chkDisplayKeyboard.Name = "chkDisplayKeyboard";
+            this.chkDisplayKeyboard.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.chkDisplayKeyboard.Size = new System.Drawing.Size(115, 69);
+            this.chkDisplayKeyboard.TabIndex = 511;
+            this.chkDisplayKeyboard.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chkDisplayKeyboard.UseVisualStyleBackColor = false;
+            // 
+            // lblKeyboard
+            // 
+            this.lblKeyboard.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblKeyboard.BackColor = System.Drawing.Color.Transparent;
+            this.lblKeyboard.ForeColor = System.Drawing.Color.Black;
+            this.lblKeyboard.Location = new System.Drawing.Point(666, 263);
+            this.lblKeyboard.Name = "lblKeyboard";
+            this.lblKeyboard.Size = new System.Drawing.Size(120, 16);
+            this.lblKeyboard.TabIndex = 521;
+            this.lblKeyboard.Text = "Keyboard";
+            this.lblKeyboard.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label13
+            // 
+            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label13.BackColor = System.Drawing.Color.Transparent;
+            this.label13.ForeColor = System.Drawing.Color.Black;
+            this.label13.Location = new System.Drawing.Point(82, 260);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(120, 16);
+            this.label13.TabIndex = 519;
+            this.label13.Text = "Set Directories";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label16
+            // 
+            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label16.BackColor = System.Drawing.Color.Transparent;
+            this.label16.ForeColor = System.Drawing.Color.Black;
+            this.label16.Location = new System.Drawing.Point(82, 124);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(120, 16);
+            this.label16.TabIndex = 523;
+            this.label16.Text = "Hotkeys";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnHotkeys
+            // 
+            this.btnHotkeys.BackColor = System.Drawing.Color.Transparent;
+            this.btnHotkeys.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnHotkeys.FlatAppearance.BorderSize = 0;
+            this.btnHotkeys.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHotkeys.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHotkeys.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnHotkeys.Image = global::Twol.Properties.Resources.ConD_KeyBoard;
+            this.btnHotkeys.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnHotkeys.Location = new System.Drawing.Point(80, 65);
+            this.btnHotkeys.Name = "btnHotkeys";
+            this.btnHotkeys.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.btnHotkeys.Size = new System.Drawing.Size(124, 64);
+            this.btnHotkeys.TabIndex = 522;
+            this.btnHotkeys.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnHotkeys.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnHotkeys.UseVisualStyleBackColor = false;
+            this.btnHotkeys.Click += new System.EventHandler(this.btnHotkeys_Click);
+            // 
+            // chkDisplayLogElevation
+            // 
+            this.chkDisplayLogElevation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkDisplayLogElevation.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkDisplayLogElevation.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.chkDisplayLogElevation.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.chkDisplayLogElevation.FlatAppearance.BorderSize = 2;
+            this.chkDisplayLogElevation.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
+            this.chkDisplayLogElevation.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chkDisplayLogElevation.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkDisplayLogElevation.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.chkDisplayLogElevation.Image = global::Twol.Properties.Resources.ConD_LogElevation;
+            this.chkDisplayLogElevation.Location = new System.Drawing.Point(386, 63);
+            this.chkDisplayLogElevation.Name = "chkDisplayLogElevation";
+            this.chkDisplayLogElevation.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.chkDisplayLogElevation.Size = new System.Drawing.Size(100, 69);
+            this.chkDisplayLogElevation.TabIndex = 530;
+            this.chkDisplayLogElevation.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chkDisplayLogElevation.UseVisualStyleBackColor = false;
+            // 
+            // chkDisplayPolygons
+            // 
+            this.chkDisplayPolygons.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkDisplayPolygons.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkDisplayPolygons.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.chkDisplayPolygons.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.chkDisplayPolygons.FlatAppearance.BorderSize = 2;
+            this.chkDisplayPolygons.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
+            this.chkDisplayPolygons.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chkDisplayPolygons.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkDisplayPolygons.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.chkDisplayPolygons.Image = global::Twol.Properties.Resources.ConD_Poligons;
+            this.chkDisplayPolygons.Location = new System.Drawing.Point(386, 318);
+            this.chkDisplayPolygons.Name = "chkDisplayPolygons";
+            this.chkDisplayPolygons.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.chkDisplayPolygons.Size = new System.Drawing.Size(100, 69);
+            this.chkDisplayPolygons.TabIndex = 510;
+            this.chkDisplayPolygons.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chkDisplayPolygons.UseVisualStyleBackColor = false;
+            // 
+            // lblPolygons
+            // 
+            this.lblPolygons.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblPolygons.BackColor = System.Drawing.Color.Transparent;
+            this.lblPolygons.ForeColor = System.Drawing.Color.Black;
+            this.lblPolygons.Location = new System.Drawing.Point(376, 389);
+            this.lblPolygons.Name = "lblPolygons";
+            this.lblPolygons.Size = new System.Drawing.Size(120, 16);
+            this.lblPolygons.TabIndex = 523;
+            this.lblPolygons.Text = "Polygons";
+            this.lblPolygons.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // label79
             // 
             this.label79.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label79.BackColor = System.Drawing.Color.Transparent;
             this.label79.ForeColor = System.Drawing.Color.Black;
-            this.label79.Location = new System.Drawing.Point(694, 96);
+            this.label79.Location = new System.Drawing.Point(376, 134);
             this.label79.Name = "label79";
             this.label79.Size = new System.Drawing.Size(120, 16);
             this.label79.TabIndex = 531;
             this.label79.Text = "Elevation";
             this.label79.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // nudNumGuideLines
+            // 
+            this.nudNumGuideLines.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudNumGuideLines.Enabled = false;
+            this.nudNumGuideLines.Location = new System.Drawing.Point(786, 71);
+            this.nudNumGuideLines.Maximum = 4D;
+            this.nudNumGuideLines.Minimum = 1D;
+            this.nudNumGuideLines.Name = "nudNumGuideLines";
+            this.nudNumGuideLines.Size = new System.Drawing.Size(100, 52);
+            this.nudNumGuideLines.TabIndex = 534;
+            this.nudNumGuideLines.ValueChanged += new System.EventHandler(this.nudNumGuideLines_ValueChanged);
+            // 
+            // chkDisplayExtraGuides
+            // 
+            this.chkDisplayExtraGuides.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkDisplayExtraGuides.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkDisplayExtraGuides.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.chkDisplayExtraGuides.Enabled = false;
+            this.chkDisplayExtraGuides.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.chkDisplayExtraGuides.FlatAppearance.BorderSize = 2;
+            this.chkDisplayExtraGuides.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
+            this.chkDisplayExtraGuides.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chkDisplayExtraGuides.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkDisplayExtraGuides.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.chkDisplayExtraGuides.Image = global::Twol.Properties.Resources.ConD_ExtraGuides;
+            this.chkDisplayExtraGuides.Location = new System.Drawing.Point(676, 63);
+            this.chkDisplayExtraGuides.Name = "chkDisplayExtraGuides";
+            this.chkDisplayExtraGuides.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.chkDisplayExtraGuides.Size = new System.Drawing.Size(100, 69);
+            this.chkDisplayExtraGuides.TabIndex = 503;
+            this.chkDisplayExtraGuides.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chkDisplayExtraGuides.UseVisualStyleBackColor = false;
             // 
             // unitsGroupBox
             // 
@@ -7454,7 +7758,7 @@
             this.unitsGroupBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.unitsGroupBox.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.unitsGroupBox.ForeColor = System.Drawing.Color.Black;
-            this.unitsGroupBox.Location = new System.Drawing.Point(649, 433);
+            this.unitsGroupBox.Location = new System.Drawing.Point(656, 455);
             this.unitsGroupBox.Name = "unitsGroupBox";
             this.unitsGroupBox.Size = new System.Drawing.Size(250, 129);
             this.unitsGroupBox.TabIndex = 513;
@@ -7501,447 +7805,34 @@
             this.rbtnDisplayMetric.UseVisualStyleBackColor = false;
             this.rbtnDisplayMetric.Click += new System.EventHandler(this.rbtnDisplayMetric_Click);
             // 
-            // lblSvennArrow
-            // 
-            this.lblSvennArrow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblSvennArrow.BackColor = System.Drawing.Color.Transparent;
-            this.lblSvennArrow.ForeColor = System.Drawing.Color.Black;
-            this.lblSvennArrow.Location = new System.Drawing.Point(221, 217);
-            this.lblSvennArrow.Name = "lblSvennArrow";
-            this.lblSvennArrow.Size = new System.Drawing.Size(120, 16);
-            this.lblSvennArrow.TabIndex = 529;
-            this.lblSvennArrow.Text = "Svenn Arrow";
-            this.lblSvennArrow.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblBrightness
-            // 
-            this.lblBrightness.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblBrightness.BackColor = System.Drawing.Color.Transparent;
-            this.lblBrightness.ForeColor = System.Drawing.Color.Black;
-            this.lblBrightness.Location = new System.Drawing.Point(27, 217);
-            this.lblBrightness.Name = "lblBrightness";
-            this.lblBrightness.Size = new System.Drawing.Size(120, 16);
-            this.lblBrightness.TabIndex = 527;
-            this.lblBrightness.Text = "Brightness";
-            this.lblBrightness.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblFieldTexture
-            // 
-            this.lblFieldTexture.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblFieldTexture.BackColor = System.Drawing.Color.Transparent;
-            this.lblFieldTexture.ForeColor = System.Drawing.Color.Black;
-            this.lblFieldTexture.Location = new System.Drawing.Point(27, 339);
-            this.lblFieldTexture.Name = "lblFieldTexture";
-            this.lblFieldTexture.Size = new System.Drawing.Size(120, 16);
-            this.lblFieldTexture.TabIndex = 525;
-            this.lblFieldTexture.Text = "Field Texture";
-            this.lblFieldTexture.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblPolygons
-            // 
-            this.lblPolygons.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblPolygons.BackColor = System.Drawing.Color.Transparent;
-            this.lblPolygons.ForeColor = System.Drawing.Color.Black;
-            this.lblPolygons.Location = new System.Drawing.Point(27, 96);
-            this.lblPolygons.Name = "lblPolygons";
-            this.lblPolygons.Size = new System.Drawing.Size(120, 16);
-            this.lblPolygons.TabIndex = 523;
-            this.lblPolygons.Text = "Polygons";
-            this.lblPolygons.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblKeyboard
-            // 
-            this.lblKeyboard.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblKeyboard.BackColor = System.Drawing.Color.Transparent;
-            this.lblKeyboard.ForeColor = System.Drawing.Color.Black;
-            this.lblKeyboard.Location = new System.Drawing.Point(415, 96);
-            this.lblKeyboard.Name = "lblKeyboard";
-            this.lblKeyboard.Size = new System.Drawing.Size(120, 16);
-            this.lblKeyboard.TabIndex = 521;
-            this.lblKeyboard.Text = "Keyboard";
-            this.lblKeyboard.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblStartFullScreen
-            // 
-            this.lblStartFullScreen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblStartFullScreen.BackColor = System.Drawing.Color.Transparent;
-            this.lblStartFullScreen.ForeColor = System.Drawing.Color.Black;
-            this.lblStartFullScreen.Location = new System.Drawing.Point(415, 217);
-            this.lblStartFullScreen.Name = "lblStartFullScreen";
-            this.lblStartFullScreen.Size = new System.Drawing.Size(120, 16);
-            this.lblStartFullScreen.TabIndex = 518;
-            this.lblStartFullScreen.Text = "Start Fullscreen";
-            this.lblStartFullScreen.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblSpeedo
-            // 
-            this.lblSpeedo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblSpeedo.BackColor = System.Drawing.Color.Transparent;
-            this.lblSpeedo.ForeColor = System.Drawing.Color.Black;
-            this.lblSpeedo.Location = new System.Drawing.Point(221, 97);
-            this.lblSpeedo.Name = "lblSpeedo";
-            this.lblSpeedo.Size = new System.Drawing.Size(120, 16);
-            this.lblSpeedo.TabIndex = 516;
-            this.lblSpeedo.Text = "Speedo";
-            this.lblSpeedo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // lblExtraGuides
             // 
             this.lblExtraGuides.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblExtraGuides.BackColor = System.Drawing.Color.Transparent;
             this.lblExtraGuides.ForeColor = System.Drawing.Color.Black;
-            this.lblExtraGuides.Location = new System.Drawing.Point(415, 335);
+            this.lblExtraGuides.Location = new System.Drawing.Point(666, 135);
             this.lblExtraGuides.Name = "lblExtraGuides";
             this.lblExtraGuides.Size = new System.Drawing.Size(120, 16);
             this.lblExtraGuides.TabIndex = 519;
             this.lblExtraGuides.Text = "Guidelines";
             this.lblExtraGuides.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lblGrid
-            // 
-            this.lblGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblGrid.BackColor = System.Drawing.Color.Transparent;
-            this.lblGrid.ForeColor = System.Drawing.Color.Black;
-            this.lblGrid.Location = new System.Drawing.Point(221, 339);
-            this.lblGrid.Name = "lblGrid";
-            this.lblGrid.Size = new System.Drawing.Size(120, 16);
-            this.lblGrid.TabIndex = 515;
-            this.lblGrid.Text = "Grid";
-            this.lblGrid.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // chkDisplayLogElevation
-            // 
-            this.chkDisplayLogElevation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkDisplayLogElevation.Appearance = System.Windows.Forms.Appearance.Button;
-            this.chkDisplayLogElevation.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.chkDisplayLogElevation.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.chkDisplayLogElevation.FlatAppearance.BorderSize = 2;
-            this.chkDisplayLogElevation.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
-            this.chkDisplayLogElevation.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkDisplayLogElevation.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkDisplayLogElevation.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.chkDisplayLogElevation.Image = global::Twol.Properties.Resources.ConD_LogElevation;
-            this.chkDisplayLogElevation.Location = new System.Drawing.Point(704, 24);
-            this.chkDisplayLogElevation.Name = "chkDisplayLogElevation";
-            this.chkDisplayLogElevation.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.chkDisplayLogElevation.Size = new System.Drawing.Size(100, 69);
-            this.chkDisplayLogElevation.TabIndex = 530;
-            this.chkDisplayLogElevation.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.chkDisplayLogElevation.UseVisualStyleBackColor = false;
-            // 
-            // chkSvennArrow
-            // 
-            this.chkSvennArrow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkSvennArrow.Appearance = System.Windows.Forms.Appearance.Button;
-            this.chkSvennArrow.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.chkSvennArrow.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.chkSvennArrow.FlatAppearance.BorderSize = 2;
-            this.chkSvennArrow.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
-            this.chkSvennArrow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkSvennArrow.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkSvennArrow.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.chkSvennArrow.Image = global::Twol.Properties.Resources.SvennArrow;
-            this.chkSvennArrow.Location = new System.Drawing.Point(231, 145);
-            this.chkSvennArrow.Name = "chkSvennArrow";
-            this.chkSvennArrow.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.chkSvennArrow.Size = new System.Drawing.Size(100, 69);
-            this.chkSvennArrow.TabIndex = 528;
-            this.chkSvennArrow.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.chkSvennArrow.UseVisualStyleBackColor = false;
-            // 
-            // chkDisplayBrightness
-            // 
-            this.chkDisplayBrightness.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkDisplayBrightness.Appearance = System.Windows.Forms.Appearance.Button;
-            this.chkDisplayBrightness.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.chkDisplayBrightness.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.chkDisplayBrightness.FlatAppearance.BorderSize = 2;
-            this.chkDisplayBrightness.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
-            this.chkDisplayBrightness.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkDisplayBrightness.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkDisplayBrightness.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.chkDisplayBrightness.Image = global::Twol.Properties.Resources.BrightnessUp;
-            this.chkDisplayBrightness.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.chkDisplayBrightness.Location = new System.Drawing.Point(37, 145);
-            this.chkDisplayBrightness.Name = "chkDisplayBrightness";
-            this.chkDisplayBrightness.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.chkDisplayBrightness.Size = new System.Drawing.Size(100, 69);
-            this.chkDisplayBrightness.TabIndex = 526;
-            this.chkDisplayBrightness.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.chkDisplayBrightness.UseVisualStyleBackColor = false;
-            // 
-            // chkDisplayFloor
-            // 
-            this.chkDisplayFloor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkDisplayFloor.Appearance = System.Windows.Forms.Appearance.Button;
-            this.chkDisplayFloor.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.chkDisplayFloor.Checked = true;
-            this.chkDisplayFloor.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkDisplayFloor.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.chkDisplayFloor.FlatAppearance.BorderSize = 2;
-            this.chkDisplayFloor.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
-            this.chkDisplayFloor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkDisplayFloor.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkDisplayFloor.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.chkDisplayFloor.Image = global::Twol.Properties.Resources.ConD_FloorTexture;
-            this.chkDisplayFloor.Location = new System.Drawing.Point(37, 267);
-            this.chkDisplayFloor.Name = "chkDisplayFloor";
-            this.chkDisplayFloor.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.chkDisplayFloor.Size = new System.Drawing.Size(100, 69);
-            this.chkDisplayFloor.TabIndex = 524;
-            this.chkDisplayFloor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.chkDisplayFloor.UseVisualStyleBackColor = false;
-            this.chkDisplayFloor.Click += new System.EventHandler(this.chkDisplayFloor_Click);
-            // 
-            // chkDisplayKeyboard
-            // 
-            this.chkDisplayKeyboard.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkDisplayKeyboard.Appearance = System.Windows.Forms.Appearance.Button;
-            this.chkDisplayKeyboard.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.chkDisplayKeyboard.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.chkDisplayKeyboard.FlatAppearance.BorderSize = 2;
-            this.chkDisplayKeyboard.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
-            this.chkDisplayKeyboard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkDisplayKeyboard.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkDisplayKeyboard.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.chkDisplayKeyboard.Image = global::Twol.Properties.Resources.ConD_KeyBoard;
-            this.chkDisplayKeyboard.Location = new System.Drawing.Point(425, 24);
-            this.chkDisplayKeyboard.Name = "chkDisplayKeyboard";
-            this.chkDisplayKeyboard.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.chkDisplayKeyboard.Size = new System.Drawing.Size(100, 69);
-            this.chkDisplayKeyboard.TabIndex = 511;
-            this.chkDisplayKeyboard.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.chkDisplayKeyboard.UseVisualStyleBackColor = false;
-            // 
-            // chkDisplayPolygons
-            // 
-            this.chkDisplayPolygons.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkDisplayPolygons.Appearance = System.Windows.Forms.Appearance.Button;
-            this.chkDisplayPolygons.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.chkDisplayPolygons.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.chkDisplayPolygons.FlatAppearance.BorderSize = 2;
-            this.chkDisplayPolygons.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
-            this.chkDisplayPolygons.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkDisplayPolygons.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkDisplayPolygons.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.chkDisplayPolygons.Image = global::Twol.Properties.Resources.ConD_Poligons;
-            this.chkDisplayPolygons.Location = new System.Drawing.Point(37, 24);
-            this.chkDisplayPolygons.Name = "chkDisplayPolygons";
-            this.chkDisplayPolygons.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.chkDisplayPolygons.Size = new System.Drawing.Size(100, 69);
-            this.chkDisplayPolygons.TabIndex = 510;
-            this.chkDisplayPolygons.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.chkDisplayPolygons.UseVisualStyleBackColor = false;
-            // 
-            // chkDisplayStartFullScreen
-            // 
-            this.chkDisplayStartFullScreen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkDisplayStartFullScreen.Appearance = System.Windows.Forms.Appearance.Button;
-            this.chkDisplayStartFullScreen.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.chkDisplayStartFullScreen.Checked = true;
-            this.chkDisplayStartFullScreen.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkDisplayStartFullScreen.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.chkDisplayStartFullScreen.FlatAppearance.BorderSize = 2;
-            this.chkDisplayStartFullScreen.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
-            this.chkDisplayStartFullScreen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkDisplayStartFullScreen.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkDisplayStartFullScreen.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.chkDisplayStartFullScreen.Image = global::Twol.Properties.Resources.ConD_FullScreenBegin;
-            this.chkDisplayStartFullScreen.Location = new System.Drawing.Point(425, 145);
-            this.chkDisplayStartFullScreen.Name = "chkDisplayStartFullScreen";
-            this.chkDisplayStartFullScreen.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.chkDisplayStartFullScreen.Size = new System.Drawing.Size(100, 69);
-            this.chkDisplayStartFullScreen.TabIndex = 509;
-            this.chkDisplayStartFullScreen.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.chkDisplayStartFullScreen.UseVisualStyleBackColor = false;
-            // 
-            // chkDisplayGrid
-            // 
-            this.chkDisplayGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkDisplayGrid.Appearance = System.Windows.Forms.Appearance.Button;
-            this.chkDisplayGrid.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.chkDisplayGrid.Checked = true;
-            this.chkDisplayGrid.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkDisplayGrid.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.chkDisplayGrid.FlatAppearance.BorderSize = 2;
-            this.chkDisplayGrid.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
-            this.chkDisplayGrid.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkDisplayGrid.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkDisplayGrid.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.chkDisplayGrid.Image = global::Twol.Properties.Resources.ConD_Grid;
-            this.chkDisplayGrid.Location = new System.Drawing.Point(231, 267);
-            this.chkDisplayGrid.Name = "chkDisplayGrid";
-            this.chkDisplayGrid.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.chkDisplayGrid.Size = new System.Drawing.Size(100, 69);
-            this.chkDisplayGrid.TabIndex = 506;
-            this.chkDisplayGrid.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.chkDisplayGrid.UseVisualStyleBackColor = false;
-            // 
-            // chkDisplaySpeedo
-            // 
-            this.chkDisplaySpeedo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkDisplaySpeedo.Appearance = System.Windows.Forms.Appearance.Button;
-            this.chkDisplaySpeedo.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.chkDisplaySpeedo.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.chkDisplaySpeedo.FlatAppearance.BorderSize = 2;
-            this.chkDisplaySpeedo.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
-            this.chkDisplaySpeedo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkDisplaySpeedo.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkDisplaySpeedo.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.chkDisplaySpeedo.Image = global::Twol.Properties.Resources.ConD_Speedometer;
-            this.chkDisplaySpeedo.Location = new System.Drawing.Point(231, 24);
-            this.chkDisplaySpeedo.Name = "chkDisplaySpeedo";
-            this.chkDisplaySpeedo.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.chkDisplaySpeedo.Size = new System.Drawing.Size(100, 69);
-            this.chkDisplaySpeedo.TabIndex = 504;
-            this.chkDisplaySpeedo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.chkDisplaySpeedo.UseVisualStyleBackColor = false;
-            // 
-            // chkDisplayExtraGuides
-            // 
-            this.chkDisplayExtraGuides.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkDisplayExtraGuides.Appearance = System.Windows.Forms.Appearance.Button;
-            this.chkDisplayExtraGuides.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.chkDisplayExtraGuides.Enabled = false;
-            this.chkDisplayExtraGuides.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.chkDisplayExtraGuides.FlatAppearance.BorderSize = 2;
-            this.chkDisplayExtraGuides.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
-            this.chkDisplayExtraGuides.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkDisplayExtraGuides.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkDisplayExtraGuides.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.chkDisplayExtraGuides.Image = global::Twol.Properties.Resources.ConD_ExtraGuides;
-            this.chkDisplayExtraGuides.Location = new System.Drawing.Point(425, 263);
-            this.chkDisplayExtraGuides.Name = "chkDisplayExtraGuides";
-            this.chkDisplayExtraGuides.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.chkDisplayExtraGuides.Size = new System.Drawing.Size(100, 69);
-            this.chkDisplayExtraGuides.TabIndex = 503;
-            this.chkDisplayExtraGuides.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.chkDisplayExtraGuides.UseVisualStyleBackColor = false;
-            // 
-            // nudNumGuideLines
-            // 
-            this.nudNumGuideLines.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudNumGuideLines.Enabled = false;
-            this.nudNumGuideLines.Location = new System.Drawing.Point(531, 270);
-            this.nudNumGuideLines.Maximum = 500D;
-            this.nudNumGuideLines.Minimum = 1D;
-            this.nudNumGuideLines.Name = "nudNumGuideLines";
-            this.nudNumGuideLines.Size = new System.Drawing.Size(100, 52);
-            this.nudNumGuideLines.TabIndex = 534;
-            this.nudNumGuideLines.ValueChanged += new System.EventHandler(this.nudNumGuideLines_ValueChanged);
-            // 
-            // lblCurrentVehicle
-            // 
-            this.lblCurrentVehicle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCurrentVehicle.AutoSize = true;
-            this.lblCurrentVehicle.BackColor = System.Drawing.Color.Transparent;
-            this.lblCurrentVehicle.Font = new System.Drawing.Font("Tahoma", 14.25F);
-            this.lblCurrentVehicle.ForeColor = System.Drawing.Color.Black;
-            this.lblCurrentVehicle.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblCurrentVehicle.Location = new System.Drawing.Point(64, 4);
-            this.lblCurrentVehicle.Name = "lblCurrentVehicle";
-            this.lblCurrentVehicle.Size = new System.Drawing.Size(138, 23);
-            this.lblCurrentVehicle.TabIndex = 450;
-            this.lblCurrentVehicle.Text = "Current Vehicle";
-            this.lblCurrentVehicle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblSecTotalWidthMeters
-            // 
-            this.lblSecTotalWidthMeters.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSecTotalWidthMeters.ForeColor = System.Drawing.Color.Black;
-            this.lblSecTotalWidthMeters.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblSecTotalWidthMeters.Location = new System.Drawing.Point(580, 30);
-            this.lblSecTotalWidthMeters.Name = "lblSecTotalWidthMeters";
-            this.lblSecTotalWidthMeters.Size = new System.Drawing.Size(170, 25);
-            this.lblSecTotalWidthMeters.TabIndex = 302;
-            this.lblSecTotalWidthMeters.Text = "II";
-            this.lblSecTotalWidthMeters.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblToolWidth
-            // 
-            this.lblToolWidth.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblToolWidth.ForeColor = System.Drawing.Color.Black;
-            this.lblToolWidth.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblToolWidth.Location = new System.Drawing.Point(580, 5);
-            this.lblToolWidth.Name = "lblToolWidth";
-            this.lblToolWidth.Size = new System.Drawing.Size(170, 25);
-            this.lblToolWidth.TabIndex = 301;
-            this.lblToolWidth.Text = "Tool Width:";
-            this.lblToolWidth.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // panelBottom
-            // 
-            this.panelBottom.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.panelBottom.Controls.Add(this.lblCurrentTool);
-            this.panelBottom.Controls.Add(this.lblUnits);
-            this.panelBottom.Controls.Add(this.lblToolWidth);
-            this.panelBottom.Controls.Add(this.btnOK);
-            this.panelBottom.Controls.Add(this.lblSecTotalWidthMeters);
-            this.panelBottom.Controls.Add(this.lblCurrentVehicle);
-            this.panelBottom.Controls.Add(this.label22);
-            this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelBottom.ForeColor = System.Drawing.Color.Lime;
-            this.panelBottom.Location = new System.Drawing.Point(124, 657);
-            this.panelBottom.Name = "panelBottom";
-            this.panelBottom.Size = new System.Drawing.Size(915, 66);
-            this.panelBottom.TabIndex = 112;
-            // 
-            // lblCurrentTool
-            // 
-            this.lblCurrentTool.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCurrentTool.AutoSize = true;
-            this.lblCurrentTool.BackColor = System.Drawing.Color.Transparent;
-            this.lblCurrentTool.Font = new System.Drawing.Font("Tahoma", 14.25F);
-            this.lblCurrentTool.ForeColor = System.Drawing.Color.Black;
-            this.lblCurrentTool.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblCurrentTool.Location = new System.Drawing.Point(64, 37);
-            this.lblCurrentTool.Name = "lblCurrentTool";
-            this.lblCurrentTool.Size = new System.Drawing.Size(114, 23);
-            this.lblCurrentTool.TabIndex = 455;
-            this.lblCurrentTool.Text = "Current Tool";
-            this.lblCurrentTool.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblUnits
-            // 
-            this.lblUnits.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUnits.ForeColor = System.Drawing.Color.DarkGreen;
-            this.lblUnits.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblUnits.Location = new System.Drawing.Point(455, 5);
-            this.lblUnits.Name = "lblUnits";
-            this.lblUnits.Size = new System.Drawing.Size(100, 25);
-            this.lblUnits.TabIndex = 453;
-            this.lblUnits.Text = "Metric";
-            // 
             // btnOK
             // 
-            this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOK.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnOK.FlatAppearance.BorderSize = 0;
             this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOK.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnOK.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnOK.Image = global::Twol.Properties.Resources.OK64;
-            this.btnOK.Location = new System.Drawing.Point(823, 1);
+            this.btnOK.Location = new System.Drawing.Point(886, 3);
             this.btnOK.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(80, 62);
+            this.btnOK.Size = new System.Drawing.Size(42, 64);
             this.btnOK.TabIndex = 452;
             this.btnOK.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
-            // 
-            // label22
-            // 
-            this.label22.BackColor = System.Drawing.Color.Transparent;
-            this.label22.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.ForeColor = System.Drawing.Color.Black;
-            this.label22.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label22.Location = new System.Drawing.Point(369, 5);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(85, 25);
-            this.label22.TabIndex = 454;
-            this.label22.Text = "Units:";
-            this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // timer1
             // 
@@ -7949,16 +7840,256 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // btnSubUTurn
+            // 
+            this.btnSubUTurn.BackColor = System.Drawing.Color.Transparent;
+            this.btnSubUTurn.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnSubUTurn.FlatAppearance.BorderSize = 0;
+            this.btnSubUTurn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSubUTurn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSubUTurn.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnSubUTurn.Image = global::Twol.Properties.Resources.Con_UTurnMenu;
+            this.btnSubUTurn.Location = new System.Drawing.Point(119, 3);
+            this.btnSubUTurn.Name = "btnSubUTurn";
+            this.btnSubUTurn.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.btnSubUTurn.Size = new System.Drawing.Size(42, 64);
+            this.btnSubUTurn.TabIndex = 116;
+            this.btnSubUTurn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSubUTurn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSubUTurn.UseVisualStyleBackColor = false;
+            this.btnSubUTurn.Click += new System.EventHandler(this.btnSubUTurn_Click);
+            // 
+            // btnArduino
+            // 
+            this.btnArduino.BackColor = System.Drawing.Color.Transparent;
+            this.btnArduino.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnArduino.FlatAppearance.BorderSize = 0;
+            this.btnArduino.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnArduino.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnArduino.ForeColor = System.Drawing.Color.Black;
+            this.btnArduino.Image = global::Twol.Properties.Resources.Con_ModulesMenu;
+            this.btnArduino.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnArduino.Location = new System.Drawing.Point(3, 462);
+            this.btnArduino.Name = "btnArduino";
+            this.btnArduino.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
+            this.btnArduino.Size = new System.Drawing.Size(72, 96);
+            this.btnArduino.TabIndex = 115;
+            this.btnArduino.Text = "Module";
+            this.btnArduino.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnArduino.UseVisualStyleBackColor = false;
+            this.btnArduino.Click += new System.EventHandler(this.btnArduino_Click);
+            // 
+            // btnField
+            // 
+            this.btnField.BackColor = System.Drawing.Color.Transparent;
+            this.btnField.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnField.FlatAppearance.BorderSize = 0;
+            this.btnField.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnField.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnField.ForeColor = System.Drawing.Color.Black;
+            this.btnField.Image = global::Twol.Properties.Resources.Con_TramMenu;
+            this.btnField.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnField.Location = new System.Drawing.Point(3, 360);
+            this.btnField.Name = "btnField";
+            this.btnField.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
+            this.btnField.Size = new System.Drawing.Size(72, 96);
+            this.btnField.TabIndex = 3;
+            this.btnField.Text = "Field";
+            this.btnField.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnField.UseVisualStyleBackColor = false;
+            this.btnField.Click += new System.EventHandler(this.btnField_Click);
+            // 
+            // btnUser
+            // 
+            this.btnUser.BackColor = System.Drawing.Color.Transparent;
+            this.btnUser.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnUser.FlatAppearance.BorderSize = 0;
+            this.btnUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUser.ForeColor = System.Drawing.Color.Black;
+            this.btnUser.Image = global::Twol.Properties.Resources.ConU_User;
+            this.btnUser.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnUser.Location = new System.Drawing.Point(3, 258);
+            this.btnUser.Name = "btnUser";
+            this.btnUser.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
+            this.btnUser.Size = new System.Drawing.Size(72, 96);
+            this.btnUser.TabIndex = 2;
+            this.btnUser.Text = "User";
+            this.btnUser.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnUser.UseVisualStyleBackColor = false;
+            this.btnUser.Click += new System.EventHandler(this.btnUser_Click);
+            // 
+            // btnSubFeatureHides
+            // 
+            this.btnSubFeatureHides.BackColor = System.Drawing.Color.Transparent;
+            this.btnSubFeatureHides.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnSubFeatureHides.FlatAppearance.BorderSize = 0;
+            this.btnSubFeatureHides.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSubFeatureHides.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSubFeatureHides.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnSubFeatureHides.Image = global::Twol.Properties.Resources.Con_FeatureMenu;
+            this.btnSubFeatureHides.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSubFeatureHides.Location = new System.Drawing.Point(23, 3);
+            this.btnSubFeatureHides.Name = "btnSubFeatureHides";
+            this.btnSubFeatureHides.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.btnSubFeatureHides.Size = new System.Drawing.Size(42, 64);
+            this.btnSubFeatureHides.TabIndex = 4;
+            this.btnSubFeatureHides.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSubFeatureHides.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSubFeatureHides.UseVisualStyleBackColor = false;
+            this.btnSubFeatureHides.Click += new System.EventHandler(this.btnSubFeatureHides_Click);
+            // 
+            // flpSide
+            // 
+            this.flpSide.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
+            this.flpSide.Controls.Add(this.btnBlankTop);
+            this.flpSide.Controls.Add(this.btnVehicle);
+            this.flpSide.Controls.Add(this.btnTool);
+            this.flpSide.Controls.Add(this.btnUser);
+            this.flpSide.Controls.Add(this.btnField);
+            this.flpSide.Controls.Add(this.btnArduino);
+            this.flpSide.Dock = System.Windows.Forms.DockStyle.Left;
+            this.flpSide.Location = new System.Drawing.Point(4, 4);
+            this.flpSide.Name = "flpSide";
+            this.flpSide.Size = new System.Drawing.Size(79, 716);
+            this.flpSide.TabIndex = 456;
+            // 
+            // btnBlankTop
+            // 
+            this.btnBlankTop.BackColor = System.Drawing.Color.Transparent;
+            this.btnBlankTop.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnBlankTop.FlatAppearance.BorderSize = 0;
+            this.btnBlankTop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBlankTop.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBlankTop.ForeColor = System.Drawing.Color.Black;
+            this.btnBlankTop.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnBlankTop.Location = new System.Drawing.Point(3, 3);
+            this.btnBlankTop.Name = "btnBlankTop";
+            this.btnBlankTop.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
+            this.btnBlankTop.Size = new System.Drawing.Size(72, 45);
+            this.btnBlankTop.TabIndex = 116;
+            this.btnBlankTop.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnBlankTop.UseVisualStyleBackColor = false;
+            // 
+            // flpTop
+            // 
+            this.flpTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
+            this.flpTop.Controls.Add(this.btnOK);
+            this.flpTop.Controls.Add(this.btnSubVehicleType);
+            this.flpTop.Controls.Add(this.btnSubAntenna);
+            this.flpTop.Controls.Add(this.btnSubDimensions);
+            this.flpTop.Controls.Add(this.btnSubHeading);
+            this.flpTop.Controls.Add(this.btnSubRoll);
+            this.flpTop.Controls.Add(this.btnSubToolType);
+            this.flpTop.Controls.Add(this.btnSubHitch);
+            this.flpTop.Controls.Add(this.btnSubPivot);
+            this.flpTop.Controls.Add(this.btnSubSections);
+            this.flpTop.Controls.Add(this.btnSubSwitches);
+            this.flpTop.Controls.Add(this.btnSubToolSettings);
+            this.flpTop.Controls.Add(this.btnSubToolOffset);
+            this.flpTop.Controls.Add(this.btnSubMachineRelay);
+            this.flpTop.Controls.Add(this.btnSubMachineModule);
+            this.flpTop.Controls.Add(this.btnSubTram);
+            this.flpTop.Controls.Add(this.btnSubUTurn);
+            this.flpTop.Controls.Add(this.btnSubDisplay);
+            this.flpTop.Controls.Add(this.btnSubFeatureHides);
+            this.flpTop.Controls.Add(this.btnSubColors);
+            this.flpTop.Controls.Add(this.btnSubUser);
+            this.flpTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.flpTop.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flpTop.Location = new System.Drawing.Point(83, 4);
+            this.flpTop.Name = "flpTop";
+            this.flpTop.Size = new System.Drawing.Size(930, 68);
+            this.flpTop.TabIndex = 457;
+            // 
+            // btnSubTram
+            // 
+            this.btnSubTram.BackColor = System.Drawing.Color.Transparent;
+            this.btnSubTram.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnSubTram.FlatAppearance.BorderSize = 0;
+            this.btnSubTram.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSubTram.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSubTram.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnSubTram.Image = global::Twol.Properties.Resources.Con_TramMenu;
+            this.btnSubTram.Location = new System.Drawing.Point(167, 3);
+            this.btnSubTram.Name = "btnSubTram";
+            this.btnSubTram.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.btnSubTram.Size = new System.Drawing.Size(42, 64);
+            this.btnSubTram.TabIndex = 458;
+            this.btnSubTram.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSubTram.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSubTram.UseVisualStyleBackColor = false;
+            this.btnSubTram.Click += new System.EventHandler(this.btnSubTram_Click);
+            // 
+            // btnSubDisplay
+            // 
+            this.btnSubDisplay.BackColor = System.Drawing.Color.Transparent;
+            this.btnSubDisplay.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnSubDisplay.FlatAppearance.BorderSize = 0;
+            this.btnSubDisplay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSubDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSubDisplay.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnSubDisplay.Image = global::Twol.Properties.Resources.Con_Display;
+            this.btnSubDisplay.Location = new System.Drawing.Point(71, 3);
+            this.btnSubDisplay.Name = "btnSubDisplay";
+            this.btnSubDisplay.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.btnSubDisplay.Size = new System.Drawing.Size(42, 64);
+            this.btnSubDisplay.TabIndex = 116;
+            this.btnSubDisplay.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSubDisplay.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSubDisplay.UseVisualStyleBackColor = false;
+            this.btnSubDisplay.Click += new System.EventHandler(this.btnSubDisplay_Click);
+            // 
+            // btnSubColors
+            // 
+            this.btnSubColors.BackColor = System.Drawing.Color.Transparent;
+            this.btnSubColors.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnSubColors.FlatAppearance.BorderSize = 0;
+            this.btnSubColors.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSubColors.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSubColors.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnSubColors.Image = global::Twol.Properties.Resources.ColourPick;
+            this.btnSubColors.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSubColors.Location = new System.Drawing.Point(885, 73);
+            this.btnSubColors.Name = "btnSubColors";
+            this.btnSubColors.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.btnSubColors.Size = new System.Drawing.Size(42, 64);
+            this.btnSubColors.TabIndex = 459;
+            this.btnSubColors.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSubColors.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSubColors.UseVisualStyleBackColor = false;
+            this.btnSubColors.Click += new System.EventHandler(this.btnSubColors_Click);
+            // 
+            // btnSubUser
+            // 
+            this.btnSubUser.BackColor = System.Drawing.Color.Transparent;
+            this.btnSubUser.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnSubUser.FlatAppearance.BorderSize = 0;
+            this.btnSubUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSubUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSubUser.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnSubUser.Image = global::Twol.Properties.Resources.ConU_User;
+            this.btnSubUser.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSubUser.Location = new System.Drawing.Point(837, 73);
+            this.btnSubUser.Name = "btnSubUser";
+            this.btnSubUser.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.btnSubUser.Size = new System.Drawing.Size(42, 64);
+            this.btnSubUser.TabIndex = 460;
+            this.btnSubUser.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSubUser.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSubUser.UseVisualStyleBackColor = false;
+            this.btnSubUser.Click += new System.EventHandler(this.btnSubUser_Click);
+            // 
             // FormConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.ClientSize = new System.Drawing.Size(1043, 727);
+            this.BackColor = System.Drawing.Color.SlateBlue;
+            this.ClientSize = new System.Drawing.Size(1017, 724);
             this.ControlBox = false;
+            this.Controls.Add(this.flpTop);
+            this.Controls.Add(this.flpSide);
             this.Controls.Add(this.tab1);
-            this.Controls.Add(this.panelBottom);
-            this.Controls.Add(this.panelLeftSideMenu);
             this.Font = new System.Drawing.Font("Tahoma", 9.75F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.HelpButton = true;
@@ -7971,11 +8102,6 @@
             this.Text = "Configuration";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormConfig_FormClosing);
             this.Load += new System.EventHandler(this.FormConfig_Load);
-            this.panelLeftSideMenu.ResumeLayout(false);
-            this.panelArduinoSubMenu.ResumeLayout(false);
-            this.panelDataSourcesSubMenu.ResumeLayout(false);
-            this.panelToolSubMenu.ResumeLayout(false);
-            this.panelVehicleSubMenu.ResumeLayout(false);
             this.tab1.ResumeLayout(false);
             this.tabSummary.ResumeLayout(false);
             this.tabSummary.PerformLayout();
@@ -8041,29 +8167,26 @@
             this.tabBtns.ResumeLayout(false);
             this.tabBtns.PerformLayout();
             this.tabDisplay.ResumeLayout(false);
+            this.tabColors.ResumeLayout(false);
+            this.tabUser.ResumeLayout(false);
             this.unitsGroupBox.ResumeLayout(false);
-            this.panelBottom.ResumeLayout(false);
-            this.panelBottom.PerformLayout();
+            this.flpSide.ResumeLayout(false);
+            this.flpTop.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.Panel panelLeftSideMenu;
-        private System.Windows.Forms.Panel panelDataSourcesSubMenu;
         private System.Windows.Forms.Button btnSubHeading;
         private System.Windows.Forms.Button btnSubRoll;
-        private System.Windows.Forms.Panel panelToolSubMenu;
         private System.Windows.Forms.Button btnSubSwitches;
         private System.Windows.Forms.Button btnSubSections;
         private System.Windows.Forms.Button btnTool;
-        private System.Windows.Forms.Panel panelVehicleSubMenu;
         private System.Windows.Forms.Button btnSubAntenna;
         private System.Windows.Forms.Button btnSubDimensions;
         private System.Windows.Forms.Button btnSubVehicleType;
         private System.Windows.Forms.TabControl tab1;
         private System.Windows.Forms.TabPage tabSummary;
-        private System.Windows.Forms.Panel panelBottom;
         private System.Windows.Forms.TabPage tabVConfig;
         private System.Windows.Forms.TabPage tabTHitch;
         private System.Windows.Forms.TabPage tabTSections;
@@ -8075,11 +8198,9 @@
         private System.Windows.Forms.TabPage tabDHeading;
         private System.Windows.Forms.TabPage tabDRoll;
         private System.Windows.Forms.Button btnVehicle;
-        private System.Windows.Forms.Button btnDataSources;
         private System.Windows.Forms.Button btnSubHitch;
         private System.Windows.Forms.Button btnSubToolSettings;
         private System.Windows.Forms.Button btnSubToolType;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label lblRollFilterPercent;
@@ -8112,7 +8233,6 @@
         private System.Windows.Forms.ListView lvVehicles;
         private System.Windows.Forms.ColumnHeader chVehicle;
         private System.Windows.Forms.TextBox tboxVehicleNameSave;
-        private System.Windows.Forms.Label lblCurrentVehicle;
         private System.Windows.Forms.GroupBox gboxAttachment;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Label label1;
@@ -8154,16 +8274,11 @@
         private System.Windows.Forms.Label lblCoverage;
         private NudlessNumericUpDown nudMinCoverage;
         private System.Windows.Forms.Label lblSections;
-        private System.Windows.Forms.Label lblSecTotalWidthMeters;
-        private System.Windows.Forms.Label lblToolWidth;
         private System.Windows.Forms.Button btnRemoveZeroOffset;
         private System.Windows.Forms.Label lblRollZeroOffset;
         private NudlessNumericUpDown nudWheelbase;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button btnUTurn;
-        private System.Windows.Forms.Button btnArduino;
-        private System.Windows.Forms.Panel panelArduinoSubMenu;
-        private System.Windows.Forms.Button btnMachineModule;
+        private System.Windows.Forms.Button btnSubMachineModule;
         private System.Windows.Forms.TabPage tabUTurn;
         private System.Windows.Forms.TabPage tabAMachine;
         private System.Windows.Forms.Label lblMachineModule;
@@ -8189,7 +8304,6 @@
         private System.Windows.Forms.Label lblOnSecs;
         private System.Windows.Forms.Label lblOffSecs;
         private System.Windows.Forms.Label lblTurnOffDelay;
-        private System.Windows.Forms.Button btnTram;
         private System.Windows.Forms.TabPage tabTram;
         private NudlessNumericUpDown nudTramWidth;
         private System.Windows.Forms.PictureBox pictureBox8;
@@ -8206,14 +8320,11 @@
         private NudlessNumericUpDown nudTurnDistanceFromBoundary;
         private System.Windows.Forms.Label lblFtMUTurn;
         private System.Windows.Forms.Label lblTramWidthUnits;
-        private System.Windows.Forms.Label lblUnits;
-        private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label lblEnable;
         private System.Windows.Forms.GroupBox gboxSingle;
         private System.Windows.Forms.CheckBox cboxIsRTK;
         private System.Windows.Forms.PictureBox pboxSendMachine;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.Button btnFeatureHides;
         private System.Windows.Forms.TabPage tabBtns;
         private System.Windows.Forms.CheckBox cboxFeatureTram;
         private System.Windows.Forms.CheckBox cboxFeatureHeadland;
@@ -8243,7 +8354,7 @@
         private System.Windows.Forms.CheckBox cboxSteerSound;
         private System.Windows.Forms.Label label119;
         private System.Windows.Forms.Label label120;
-        private System.Windows.Forms.Button btnMachineRelay;
+        private System.Windows.Forms.Button btnSubMachineRelay;
         private System.Windows.Forms.TabPage tabRelay;
         private System.Windows.Forms.Label label122;
         private System.Windows.Forms.ComboBox cboxPin0;
@@ -8401,7 +8512,6 @@
         private System.Windows.Forms.CheckBox chkDisplayExtraGuides;
         private System.Windows.Forms.Label lblExtraGuides;
         private System.Windows.Forms.Label lblGrid;
-        private System.Windows.Forms.Button btnDisplay;
         private System.Windows.Forms.Button btnSubToolOffset;
         private System.Windows.Forms.TabPage tabToolOffset;
         private System.Windows.Forms.Label label65;
@@ -8492,7 +8602,6 @@
         private System.Windows.Forms.TextBox tboxToolNameSave;
         private System.Windows.Forms.Label lblSaveAsTool;
         private System.Windows.Forms.Label lblSummaryToolName;
-        private System.Windows.Forms.Label lblCurrentTool;
         private System.Windows.Forms.Label label2;
         private NudlessNumericUpDown nudLookAheadDistanceOff;
         private NudlessNumericUpDown nudLookAheadDistanceOn;
@@ -8521,5 +8630,29 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.CheckBox chkDisplayMapping;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button btnSubUTurn;
+        private System.Windows.Forms.Button btnArduino;
+        private System.Windows.Forms.Button btnField;
+        private System.Windows.Forms.Button btnUser;
+        private System.Windows.Forms.Button btnSubFeatureHides;
+        private System.Windows.Forms.FlowLayoutPanel flpSide;
+        private System.Windows.Forms.FlowLayoutPanel flpTop;
+        private System.Windows.Forms.Button btnSubTram;
+        private System.Windows.Forms.Button btnSubDisplay;
+        private System.Windows.Forms.TabPage tabColors;
+        private System.Windows.Forms.Button btnSectionColors;
+        private System.Windows.Forms.Button btnColors;
+        private System.Windows.Forms.Button btnSubColors;
+        private System.Windows.Forms.Button btnSetDirectories;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Button btnHotkeys;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Button btnLogViewer;
+        private System.Windows.Forms.Button btnBlankTop;
+        private System.Windows.Forms.TabPage tabUser;
+        private System.Windows.Forms.Button btnSubUser;
     }
 }
