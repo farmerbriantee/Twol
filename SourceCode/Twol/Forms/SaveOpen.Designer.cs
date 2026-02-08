@@ -45,11 +45,10 @@ namespace Twol
         //section buffer variables
         int patchID = 0;
         int colorID = 0;
-        int sectionTriangleCount = 0;
+        int sectionMapTriangleVerticlesCount = 0;
 
         //original buffer size
-        int maxTriangles = 65000;
-
+        int currentTriangleVerticesBufferSize = 0;
 
         #region Create Files
 
@@ -1162,7 +1161,8 @@ namespace Twol
                 colorID = 0;
             }
 
-            sectionTriangleCount = 0;
+            sectionMapTriangleVerticlesCount = 0;
+            currentTriangleVerticesBufferSize = 0;
         }
 
         public void FileLoadSections(string dir)
@@ -1372,14 +1372,12 @@ namespace Twol
 
         private void BufferSubData(List<Triangle> secTriList, List<vec3> colorList)
         {
-            int max = Math.Min(maxTriangles - (sectionTriangleCount / 3), secTriList.Count);
-
-            if (max > 0)
+            if (secTriList.Count > 0)
             {
                 //vertices
-                float[] triangleVertexData = new float[max * 3 * 2];
+                float[] triangleVertexData = new float[secTriList.Count * 3 * 2];
 
-                for (int i = 0; i < max; i++)
+                for (int i = 0; i < secTriList.Count; i++)
                 {
                     triangleVertexData[i * 6 + 0] = (float)secTriList[i].polygonPts[0].easting;
                     triangleVertexData[i * 6 + 1] = (float)secTriList[i].polygonPts[0].northing;
@@ -1389,26 +1387,37 @@ namespace Twol
                     triangleVertexData[i * 6 + 5] = (float)secTriList[i].polygonPts[2].northing;
                 }
 
-                if (patchID == 0)
+                int requiredVertices = secTriList.Count * 3;
+                bool needToRecreateBuffer = sectionMapTriangleVerticlesCount + requiredVertices > currentTriangleVerticesBufferSize;
+
+                if (needToRecreateBuffer)
                 {
-                    patchID = GL.GenBuffer();
-                    GL.BindBuffer(BufferTarget.ArrayBuffer, patchID);
-                    GL.BufferData(BufferTarget.ArrayBuffer, maxTriangles * 6 * sizeof(float), IntPtr.Zero, BufferUsageHint.StaticDraw);
-                }
-                else
-                {
-                    GL.BindBuffer(BufferTarget.ArrayBuffer, patchID);
+                    int newCapacity = Math.Max(currentTriangleVerticesBufferSize * 2, sectionMapTriangleVerticlesCount + requiredVertices);
+                    int newPatchId = GL.GenBuffer();
+                    GL.BindBuffer(BufferTarget.ArrayBuffer, newPatchId);
+                    GL.BufferData(BufferTarget.ArrayBuffer, newCapacity * 2 * sizeof(float), IntPtr.Zero, BufferUsageHint.StaticDraw);
+
+                    if (patchID != 0 && sectionMapTriangleVerticlesCount > 0)
+                    {
+                        GL.BindBuffer(BufferTarget.CopyReadBuffer, patchID);
+                        GL.BindBuffer(BufferTarget.CopyWriteBuffer, newPatchId);
+                        int bytesToCopy = sectionMapTriangleVerticlesCount * 2 * sizeof(float);
+                        GL.CopyBufferSubData(BufferTarget.CopyReadBuffer, BufferTarget.CopyWriteBuffer, IntPtr.Zero, IntPtr.Zero, bytesToCopy);
+                        GL.DeleteBuffer(patchID);
+                    }
+
+                    patchID = newPatchId;
+                    currentTriangleVerticesBufferSize = newCapacity;
                 }
 
-                int offsetInBytes = sectionTriangleCount * 2 * sizeof(float);
+                GL.BindBuffer(BufferTarget.ArrayBuffer, patchID);
+                int offsetInBytes = sectionMapTriangleVerticlesCount * 2 * sizeof(float);
                 GL.BufferSubData(BufferTarget.ArrayBuffer, (IntPtr)offsetInBytes, triangleVertexData.Length * sizeof(float), triangleVertexData);
 
-
-
                 //color vertices
-                byte[] colorVertexData = new byte[max * 3 * 4];
+                byte[] colorVertexData = new byte[secTriList.Count * 3 * 4];
 
-                for (int i = 0; i < max; i++)
+                for (int i = 0; i < secTriList.Count; i++)
                 {
                     colorVertexData[i * 12 + 0] = (byte)colorList[i].easting;
                     colorVertexData[i * 12 + 1] = (byte)colorList[i].northing;
@@ -1424,21 +1433,32 @@ namespace Twol
                     colorVertexData[i * 12 + 11] = (byte)152;
                 }
 
-                if (colorID == 0)
+                if (colorID == 0 || needToRecreateBuffer)
                 {
-                    colorID = GL.GenBuffer();
-                    GL.BindBuffer(BufferTarget.ArrayBuffer, colorID);
-                    GL.BufferData(BufferTarget.ArrayBuffer, maxTriangles * 12 * sizeof(byte), IntPtr.Zero, BufferUsageHint.StaticDraw);
+                    int newColorId = GL.GenBuffer();
+                    GL.BindBuffer(BufferTarget.ArrayBuffer, newColorId);
+                    GL.BufferData(BufferTarget.ArrayBuffer, currentTriangleVerticesBufferSize * 4 * sizeof(byte), IntPtr.Zero, BufferUsageHint.StaticDraw);
+
+                    if (colorID != 0 && sectionMapTriangleVerticlesCount > 0)
+                    {
+                        GL.BindBuffer(BufferTarget.CopyReadBuffer, colorID);
+                        GL.BindBuffer(BufferTarget.CopyWriteBuffer, newColorId);
+                        int bytesToCopy = sectionMapTriangleVerticlesCount * 4 * sizeof(byte);
+                        GL.CopyBufferSubData(BufferTarget.CopyReadBuffer, BufferTarget.CopyWriteBuffer, IntPtr.Zero, IntPtr.Zero, bytesToCopy);
+                        GL.DeleteBuffer(colorID);
+                    }
+
+                    colorID = newColorId;
                 }
                 else
                 {
                     GL.BindBuffer(BufferTarget.ArrayBuffer, colorID);
                 }
 
-                offsetInBytes = sectionTriangleCount * 4 * sizeof(byte);
+                offsetInBytes = sectionMapTriangleVerticlesCount * 4 * sizeof(byte);
                 GL.BufferSubData(BufferTarget.ArrayBuffer, (IntPtr)offsetInBytes, colorVertexData.Length * sizeof(byte), colorVertexData);
 
-                sectionTriangleCount += max * 3;
+                sectionMapTriangleVerticlesCount += secTriList.Count * 3;
             }
         }
 

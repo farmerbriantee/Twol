@@ -269,7 +269,7 @@ namespace Twol
                         GL.BindBuffer(BufferTarget.ArrayBuffer, colorID);
                         GL.ColorPointer(4, ColorPointerType.UnsignedByte, 0, 0);
 
-                        GL.DrawArrays(PrimitiveType.Triangles, 0, sectionTriangleCount);
+                        GL.DrawArrays(PrimitiveType.Triangles, 0, sectionMapTriangleVerticlesCount);
 
                         GL.DisableClientState(ArrayCap.ColorArray);
                         GL.DisableClientState(ArrayCap.VertexArray);
@@ -923,7 +923,7 @@ namespace Twol
                 GL.BindBuffer(BufferTarget.ArrayBuffer, patchID);
                 GL.VertexPointer(2, VertexPointerType.Float, 0, 0);
 
-                GL.DrawArrays(PrimitiveType.Triangles, 0, sectionTriangleCount);
+                GL.DrawArrays(PrimitiveType.Triangles, 0, sectionMapTriangleVerticlesCount);
                 GL.DisableClientState(ArrayCap.VertexArray);
             }
 

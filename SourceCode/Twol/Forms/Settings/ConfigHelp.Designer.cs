@@ -15,8 +15,5 @@ namespace Twol
 {
     public partial class FormConfig
     {
-        private NudlessNumericUpDown nudCutoffSpeed;
-        private Label lblTurnOffBelowUnits;
-        private PictureBox pictureBox11;
     }
 }

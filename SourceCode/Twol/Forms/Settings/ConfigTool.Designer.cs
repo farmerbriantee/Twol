@@ -392,16 +392,6 @@ namespace Twol
         {
             mf.TurnOffSectionsSafely();
 
-            //cboxSectionBoundaryControl.Checked = Settings.Tool.isSectionOffWhenOut;
-            //if (cboxSectionBoundaryControl.Checked)
-            //{
-            //    cboxSectionBoundaryControl.BackgroundImage = Properties.Resources.SectionOffBoundary;
-            //}
-            //else
-            //{
-            //    cboxSectionBoundaryControl.BackgroundImage = Properties.Resources.SectionOnBoundary;
-            //}
-
             nudCutoffSpeed.Value = Settings.Tool.slowSpeedCutoff;
 
             nudNumberOfSections.Maximum = FormGPS.MAXSECTIONS;
