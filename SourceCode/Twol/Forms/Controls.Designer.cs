@@ -982,6 +982,53 @@ namespace Twol
             PanelUpdateRightAndBottom();
         }
 
+        private void deleteAppliedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (isFieldStarted && isJobStarted)
+            {
+                if (workState == btnStates.Off)
+                {
+
+                    DialogResult result3 = MessageBox.Show(gStr.Get(gs.gsDeleteAllContoursAndSections),
+                        gStr.Get(gs.gsDeleteForSure),
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question,
+                        MessageBoxDefaultButton.Button2);
+                    if (result3 == DialogResult.Yes)
+                    {
+                        //FileCreateElevation();
+                        TurnOffSectionsSafely();
+
+                        //clear out the contour Lists
+                        ct.StopContourLine();
+                        ct.ResetContour();
+                        fd.workedAreaTotal = 0;
+
+                        //clear the section lists
+                        triStrip?.Clear();
+                        patchList?.Clear();
+                        patchSaveList?.Clear();
+
+                        //delete vertex arrays
+                        DeleteSectionBuffers();
+
+                        FileCreateContour();
+                        FileCreateSections();
+
+                        Log.EventWriter("All Section Mapping Deleted");
+                    }
+                    else
+                    {
+                        TimedMessageBox(1500, gStr.Get(gs.gsNothingDeleted), gStr.Get(gs.gsActionHasBeenCancelled));
+                    }
+                }
+                else
+                {
+                   TimedMessageBox(1500, "Sections are on", "Turn Auto or Manual Off First");
+                }
+            }
+        }
+
         #endregion
 
         #region Left Panel Menu
@@ -1859,51 +1906,53 @@ namespace Twol
             }
         }
 
-        private void deleteAppliedToolStripMenuItem_Click(object sender, EventArgs e)
+        //charts
+        private void steerChartToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (isFieldStarted && isJobStarted)
+            //check if window already exists
+            Form fcg = Application.OpenForms["FormSteerGraph"];
+
+            if (fcg != null)
             {
-                if (workState == btnStates.Off)
-                {
-
-                    DialogResult result3 = MessageBox.Show(gStr.Get(gs.gsDeleteAllContoursAndSections),
-                        gStr.Get(gs.gsDeleteForSure),
-                        MessageBoxButtons.YesNo,
-                        MessageBoxIcon.Question,
-                        MessageBoxDefaultButton.Button2);
-                    if (result3 == DialogResult.Yes)
-                    {
-                        //FileCreateElevation();
-                        TurnOffSectionsSafely();
-
-                        //clear out the contour Lists
-                        ct.StopContourLine();
-                        ct.ResetContour();
-                        fd.workedAreaTotal = 0;
-
-                        //clear the section lists
-                        triStrip?.Clear();
-                        patchList?.Clear();
-                        patchSaveList?.Clear();
-
-                        //delete vertex arrays
-                        DeleteSectionBuffers();
-
-                        FileCreateContour();
-                        FileCreateSections();
-
-                        Log.EventWriter("All Section Mapping Deleted");
-                    }
-                    else
-                    {
-                        TimedMessageBox(1500, gStr.Get(gs.gsNothingDeleted), gStr.Get(gs.gsActionHasBeenCancelled));
-                    }
-                }
-                else
-                {
-                   TimedMessageBox(1500, "Sections are on", "Turn Auto or Manual Off First");
-                }
+                fcg.Focus();
+                return;
             }
+
+            //
+            Form formG = new FormGraphSteer(this);
+            formG.Show(this);
+        }
+
+        private void xTEChartToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //check if window already exists
+            Form fx = Application.OpenForms["FormGraphXTE"];
+
+            if (fx != null)
+            {
+                fx.Focus();
+                return;
+            }
+
+            //
+            Form formX = new FormGraphXTE(this);
+            formX.Show(this);
+        }
+
+        private void toolXTEChartToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //check if window already exists
+            Form fx = Application.OpenForms["FormGraphToolXTE"];
+
+            if (fx != null)
+            {
+                fx.Focus();
+                return;
+            }
+
+            //
+            Form formX = new FormGraphToolXTE(this);
+            formX.Show(this);
         }
 
         #endregion

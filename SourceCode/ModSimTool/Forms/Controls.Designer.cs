@@ -120,15 +120,15 @@ namespace ModSimTool
         {
             stepDistance = tbarSpeed.Value * 0.027777777777 * (0.1);
 
-            if (guidanceStatus == 0)
+            //if (guidanceStatus == 0)
                 steerAngle = tbarSteerAngleWAS.Value * 0.01;
-            else
-            {
-                //steerAngle = steerAngleSetPoint;
-                //tbarSteerAngleWAS.Value = (int)(steerAngleSetPoint);
-                steerAngleActual = steerAngle;
-                lblWAS.Text = "Steer: " + (steerAngleActual).ToString("N2") + "°";
-            }
+            //else
+            //{
+            //    //steerAngle = steerAngleSetPoint;
+            //    //tbarSteerAngleWAS.Value = (int)(steerAngleSetPoint);
+            //    steerAngleActual = steerAngle;
+            //    lblWAS.Text = "Steer: " + (steerAngleActual).ToString("N2") + "°";
+            //}
 
             double temp = (stepDistance * Math.Tan(steerAngle * 0.02) / 2.5);
             headingTrue += temp;

@@ -265,6 +265,24 @@
     <Compile Include="Forms\IO\FormUDPMonitor.designer.cs">
       <DependentUpon>FormUDPMonitor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Settings\FormGraphSteer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Settings\FormGraphSteer.Designer.cs">
+      <DependentUpon>FormGraphSteer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Settings\FormGraphToolXTE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Settings\FormGraphToolXTE.Designer.cs">
+      <DependentUpon>FormGraphToolXTE.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Settings\FormGraphXTE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Settings\FormGraphXTE.Designer.cs">
+      <DependentUpon>FormGraphXTE.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Settings\FormToolSteer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -759,6 +777,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Field\FormSaveOrNot.resx">
       <DependentUpon>FormSaveOrNot.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Settings\FormGraphSteer.resx">
+      <DependentUpon>FormGraphSteer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Settings\FormGraphToolXTE.resx">
+      <DependentUpon>FormGraphToolXTE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Settings\FormGraphXTE.resx">
+      <DependentUpon>FormGraphXTE.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Settings\FormNozConfig.resx">
       <DependentUpon>FormNozConfig.cs</DependentUpon>

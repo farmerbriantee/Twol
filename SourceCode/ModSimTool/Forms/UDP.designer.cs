@@ -156,7 +156,7 @@ namespace ModSimTool
 
                                 //tool XTE
                                 short bob = (short)(data[5] | (data[6] << 8));
-                                XTE = (double)bob * 0.01;
+                                XTE = (double)bob * 0.1;
                                 //Bit 5,6    set xte * 1000 is sent 
                                 lblXTE.Text = XTE.ToString();
 
