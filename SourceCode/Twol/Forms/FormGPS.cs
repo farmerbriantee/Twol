@@ -560,14 +560,6 @@ namespace Twol
                 f.Close();
             }
 
-            f = Application.OpenForms["FormToolPathRec"];
-
-            if (f != null)
-            {
-                f.Focus();
-                f.Close();
-            }
-
             f = Application.OpenForms["FormToolManual"];
 
             if (f != null)
@@ -728,17 +720,10 @@ namespace Twol
             {
                 f.Top += delta.Y - lastThisLocation.Y;
                 f.Left += delta.X - lastThisLocation.X;
+                if (f.Top < 20) f.Top = 20;
+                if (f.Left < 20) f.Left = 20;
                 Settings.User.setWindow_FormToolManualLocation.Y = f.Top;
                 Settings.User.setWindow_FormToolManualLocation.X = f.Left;
-            }
-
-            f = Application.OpenForms["FormToolPathRec"];
-            if (f != null)
-            {
-                f.Top += delta.Y - lastThisLocation.Y;
-                f.Left += delta.X - lastThisLocation.X;
-                Settings.User.setWindow_recordToolTracksLocation.Y = f.Top;
-                Settings.User.setWindow_recordToolTracksLocation.X = f.Left;
             }
 
             f = Application.OpenForms["FormTrackFilter"];
@@ -746,6 +731,8 @@ namespace Twol
             {
                 f.Top += delta.Y - lastThisLocation.Y;
                 f.Left += delta.X - lastThisLocation.X;
+                if (f.Top < 20) f.Top = 20;
+                if (f.Left < 20) f.Left = 20;
                 Settings.User.setWindow_formToolControlLocation.Y = f.Top;
                 Settings.User.setWindow_formToolControlLocation.X = f.Left;
             }
@@ -810,12 +797,6 @@ namespace Twol
             SetSectionButtonVisible(true);
 
             PanelsAndOGLSize();
-
-            //else if (Settings.Tool.setToolSteer.isFollowCurrent && Settings.Tool.setToolSteer.isRecordToolLine)
-            //{
-            //    Form form = new FormToolPathRec(this);
-            //    form.Show(this);
-            //}
         }
 
         public void JobClose()

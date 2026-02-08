@@ -976,13 +976,13 @@ namespace Twol
             {
                 guideLineCounter = 20;
                 lblGuidanceLine.Visible = true;
-                lblGuidanceLine.Text = trks.currentRefTrack.name + " " + trks.gArr.Count.ToString() + " Tracks ";
+                lblGuidanceLine.Text = trks.currentRefTrack.name + "     " + trks.gArr.Count.ToString() + " Tracks     " + trks.GetVisibleTracks().ToString() + " Visible"; ;
             }
             else
             {
                 guideLineCounter = 12;
                 lblGuidanceLine.Visible = true;
-                lblGuidanceLine.Text = trks.gArr.Count.ToString() + " Tracks, " + trks.GetVisibleTracks().ToString() + " Visible";
+                lblGuidanceLine.Text = trks.gArr.Count.ToString() + " Tracks,     " + trks.GetVisibleTracks().ToString() + " Visible";
             }
         }
 

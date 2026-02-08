@@ -462,8 +462,6 @@ namespace Twol
                 //ref nudge
                 flp1.Controls[5].Visible = tracksVisible > 0;
 
-                flp1.Controls[6].Visible = true;
-
                 for (int i = 0; i < flp1.Controls.Count; i++)
                 {
                     if (flp1.Controls[i].Visible) btnCount++;
@@ -613,51 +611,6 @@ namespace Twol
         #endregion
 
         #region Track Flyout
-
-        private void btnToolControl_Click(object sender, EventArgs e)
-        {
-            Form fcc = Application.OpenForms["FormTrackFilter"];
-
-            if (fcc != null)
-            {
-                fcc.Focus();
-                fcc.Close();
-                return;
-            }
-
-            Form form = new FormTrackFilter(this);
-            form.Show(this);
-
-            if (flp1.Visible)
-            {
-                flp1.Visible = false;
-            }
-
-            this.Activate();
-        }
-
-        private void btnToolLineRecord_Click(object sender, EventArgs e)
-        {
-            Form fcc = Application.OpenForms["FormToolPathRec"];
-
-            if (fcc != null)
-            {
-                fcc.Focus();
-                fcc.Close();
-                return;
-            }
-
-            Form form = new FormToolPathRec(this);
-            form.Show(this);
-
-            if (flp1.Visible)
-            {
-                flp1.Visible = false;
-            }
-
-            this.Activate();
-        }
-
 
         private void btnRefNudge_Click(object sender, EventArgs e)
         {
@@ -1856,6 +1809,28 @@ namespace Twol
             }
         }
 
+        private void FormTrackFilterStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form fcc = Application.OpenForms["FormTrackFilter"];
+
+            if (fcc != null)
+            {
+                fcc.Focus();
+                fcc.Close();
+                return;
+            }
+
+            Form form = new FormTrackFilter(this);
+            form.Show(this);
+
+            if (flp1.Visible)
+            {
+                flp1.Visible = false;
+            }
+
+            this.Activate();
+        }
+
        private void manualToolSteerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //check if window already exists
@@ -1884,23 +1859,7 @@ namespace Twol
             }
         }
 
-        private void layersToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using (FormLayer form = new FormLayer(this))
-            {
-                //returns full field.txt file dir name
-                form.ShowDialog(this);
-            }
-        }
-
-        private void deleteContourPathsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ct.stripList?.Clear();
-            ct.ptList?.Clear();
-            ct.ctList?.Clear();
-            contourSaveList?.Clear();
-        }
-        private void toolStripAreYouSure_Click(object sender, EventArgs e)
+        private void deleteAppliedToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (isFieldStarted && isJobStarted)
             {
@@ -1945,13 +1904,6 @@ namespace Twol
                    TimedMessageBox(1500, "Sections are on", "Turn Auto or Manual Off First");
                 }
             }
-        }
-
-        private void eventViewerToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Form form = new FormEventViewer(Path.Combine(RegistrySettings.logsDirectory, "TWOL_Events_Log.txt"));
-            form.Show(this);
-            this.Activate();
         }
 
         #endregion
