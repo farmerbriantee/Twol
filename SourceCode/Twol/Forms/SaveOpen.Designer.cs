@@ -1393,6 +1393,7 @@ namespace Twol
                 if (needToRecreateBuffer)
                 {
                     int newCapacity = Math.Max(currentTriangleVerticesBufferSize * 2, sectionMapTriangleVerticlesCount + requiredVertices);
+                    if (newCapacity < 10000) newCapacity = 10000;
                     int newPatchId = GL.GenBuffer();
                     GL.BindBuffer(BufferTarget.ArrayBuffer, newPatchId);
                     GL.BufferData(BufferTarget.ArrayBuffer, newCapacity * 2 * sizeof(float), IntPtr.Zero, BufferUsageHint.StaticDraw);
