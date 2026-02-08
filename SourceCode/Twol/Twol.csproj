@@ -175,12 +175,6 @@
     <Compile Include="Classes\Tool\CNozzle.cs" />
     <Compile Include="Classes\CPolygon.cs" />
     <Compile Include="Classes\Tool\CPatches.cs" />
-    <Compile Include="Forms\Field\FormLayer.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Field\FormLayer.Designer.cs">
-      <DependentUpon>FormLayer.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Field\FormMap.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -609,9 +603,6 @@
     <EmbeddedResource Include="Forms\Field\FormBndTool.resx">
       <DependentUpon>FormBndTool.cs</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Field\FormLayer.resx">
-      <DependentUpon>FormLayer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Field\FormJobNew.resx">
       <DependentUpon>FormJobNew.cs</DependentUpon>
