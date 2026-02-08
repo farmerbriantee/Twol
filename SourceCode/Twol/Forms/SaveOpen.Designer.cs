@@ -1256,7 +1256,7 @@ namespace Twol
                             }
                         }
 
-                        BufferSubData(secTriList, colorList);
+                        AddTrianglesToSectionBufferArray(secTriList, colorList);
                         secTriList.Clear();
 
                     }
@@ -1333,7 +1333,7 @@ namespace Twol
                     }
                 }
 
-                BufferSubData(secTriList, colorList);
+                AddTrianglesToSectionBufferArray(secTriList, colorList);
 
                 System.Threading.Tasks.Task.Run(() =>
                 {
@@ -1370,7 +1370,7 @@ namespace Twol
             }
         }
 
-        private void BufferSubData(List<Triangle> secTriList, List<vec3> colorList)
+        private void AddTrianglesToSectionBufferArray(List<Triangle> secTriList, List<vec3> colorList)
         {
             if (secTriList.Count > 0)
             {
