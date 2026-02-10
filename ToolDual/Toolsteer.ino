@@ -272,7 +272,7 @@ void toolsteerLoop()
             actuatorPositionPercent = (float)(actuatorPosition) / 68;
         }    
 
-        if (watchdogTimer < WATCHDOG_THRESHOLD && guidanceStatus == 1)
+        if ((watchdogTimer < WATCHDOG_THRESHOLD && guidanceStatus == 1) || manualPWM != 0)
         {
             //Enable H Bridge for IBT2, hyd aux, etc for cytron
             if (toolSettings.CytronDriver)
