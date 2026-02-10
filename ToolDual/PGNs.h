@@ -13,7 +13,7 @@ enum PGNs {
 };
 
 
-enum toolDataIDs {
+enum dataIDs {
 	xteLo = 5,
 	xteHi = 6,
 	status = 7,
@@ -24,19 +24,15 @@ enum toolDataIDs {
 	manualHi = 12,
 };
 
-enum pidSettingIDs {
-	 gainP = 5,
-	 integral = 6,
-	 minPWM = 7,
-	 highPWM = 8,
-	 wasOffsetLo = 10,
-	 wasOffsetHi = 11,
-	 lowHighSetDistance = 12,
-};
-
-enum boardConfigIDs {
-	cytronDriver = 7,
-	invertAPOS = 8,
-	maxActuatorLimit = 9,
-	lowHighDistanceSet = 10,
+enum settingIDs {
+	gainP = 5,
+	integral = 6,
+	minPWM = 7,
+	highPWM = 8,
+	wasOffsetLo = 9,
+	wasOffsetHi = 10,
+	lowHighSetDistance = 11,
+	cytronDriver = 12,
+	invertAPOS = 13,
+	maxActuatorLimit = 14,
 };
