@@ -91,7 +91,7 @@ namespace Twol
             }
             else
             {
-                this.Height = 57;
+                //this.Height = 57;
             }
 
             mf.Activate();

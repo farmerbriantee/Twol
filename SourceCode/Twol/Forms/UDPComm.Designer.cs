@@ -625,7 +625,7 @@ namespace Twol
                             {
                                 if (length != 14) break;
                                 mc.actualToolAngleChart = (Int16)((data[6] << 8) + data[5]);
-                                mc.actualToolAngleDegrees = (double)mc.actualToolAngleChart * 0.01;
+                                mc.actualActuatorPositionPercent = (double)mc.actualToolAngleChart * 0.01;
                                 mc.pwmToolDisplay = data[12];
                                 break;
                             }

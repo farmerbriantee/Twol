@@ -31,7 +31,7 @@
         public double actualSteerAngleDegrees = 0;
         public int actualSteerAngleChart = 0, sensorData = -1;
 
-        public double actualToolAngleDegrees = 0;
+        public double actualActuatorPositionPercent = 0;
         public int actualToolAngleChart = 0;
 
         //for the workswitch
