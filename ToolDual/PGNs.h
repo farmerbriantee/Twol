@@ -13,7 +13,7 @@ enum PGNs {
 };
 
 
-enum toolIDs {
+enum toolDataIDs {
 	xteLo = 5,
 	xteHi = 6,
 	status = 7,
@@ -40,6 +40,5 @@ enum boardConfigIDs {
 	singleInputAPOS = 6,
 	cytronDriver = 7,
 	invertAPOS = 11,
-	invertActuator = 12,
-
+	maxActuatorPosition = 12
 };

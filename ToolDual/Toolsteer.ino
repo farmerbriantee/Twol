@@ -8,9 +8,6 @@
 
 ////////////////// User Settings /////////////////////////
 
-//How many degrees before decreasing Max PWM
-#define LOW_HIGH_DEGREES 1.0
-
 /*  PWM Frequency ->
      490hz (default) = 0
      122hz = 1
@@ -85,68 +82,35 @@ int8_t PGN_230_Size = sizeof(PGN_230) - 1;
 //EEPROM
 int16_t EEread = 0;
 
-//Switches
-uint8_t remoteSwitch = 0, workSwitch = 0, steerSwitch = 1, switchByte = 0;
-
-//On Off
-uint8_t guidanceStatus = 0;
-
-//speed sent as *10
-float gpsSpeed = 0;
+uint8_t remoteSwitch = 0, workSwitch = 0, steerSwitch = 1, switchByte = 0;//Switches
+uint8_t guidanceStatus = 0;//On Off
+float gpsSpeed = 0;//speed sent as *10
 
 //steering variables
-float steerAngleActual = 0;
+float actuatorPositionPercent = 0;
 
-
-//from AgOpen
-float toolXTE_Set = 0; //tool XTE from Twol
+//from Twol
+float toolXTE = 0; //tool XTE from Twol
 float vehicleXTE = 0; //vehicle XTE from Twol
 
 int16_t manualPWM = 0; //manual PWM from Twol
 
-int16_t steeringPosition = 0; //from steering sensor
+int16_t actuatorPosition = 0; //from steering sensor
 float toolCorrectionError = 0; //setpoint - actual
 
 //pwm variables
 int16_t pwmDrive = 0, pwmDisplay = 0;
 float pValue = 0;
 float errorAbs = 0;
-float highLowPerDeg = 0;
-
-////Variables for settings
-//struct Storage {
-//  uint8_t Kp = 40;              // proportional gain
-//  uint8_t lowPWM = 10;          // band of no action
-//  int16_t wasOffset = 0;
-//  uint8_t minPWM = 9;
-//  uint8_t highPWM = 60;         // max PWM value
-//  float steerSensorCounts = 30;
-//  float AckermanFix = 1;        // sent as percent
-//};  Storage steerSettings;      // 11 bytes
-
-//Variables for settings - 0 is false
-struct Setup {
-    //uint8_t InvertWAS = 0;
-    uint8_t IsRelayActiveHigh = 0;    // if zero, active low (default)
-    //uint8_t MotorDriveDirection = 0;
-    uint8_t SingleInputWAS = 1;
-    uint8_t CytronDriver = 1;
-    uint8_t SteerSwitch = 0;          // 1 if switch selected
-    uint8_t SteerButton = 1;          // 1 if button selected
-    //uint8_t ShaftEncoder = 0;
-    //uint8_t PressureSensor = 0;
-    //uint8_t CurrentSensor = 0;
-    //uint8_t PulseCountMax = 5;
-    uint8_t IsDanfoss = 0;
-    //uint8_t IsUseY_Axis = 0;     //Set to 0 to use X Axis, 1 to use Y avis
-}; Setup steerConfig;               // 9 bytes
+float lowHighPerCM = 0;
 
 //Variables for settings - 0 is false
 struct Tool_Config {
-    uint8_t invertWAS = 0;
-    uint8_t invertSteer = 0; // if zero, active low (default)
-    uint8_t maxSteerAngle = 30;
-    uint8_t isSteer = 1;
+    uint8_t IsRelayActiveHigh = 0;    // if zero, active low (default)
+    uint8_t SingleInputAPOS = 1;
+    uint8_t CytronDriver = 1;
+    uint8_t invertAPOS = 0;
+    uint8_t maxActuatorPosition = 60;
 }; Tool_Config toolConfig;
 
 //Variables for settings
@@ -156,11 +120,12 @@ struct Tool_Settings {
     uint8_t minPWM = 9;
     uint8_t lowPWM = 15;          // band of no action
     uint8_t highPWM = 60;         // max PWM value
-    float steerSensorCounts = 30;
-    int16_t wasOffset = 0;
-    float AckermanFix = 1;        // sent as percent
+    float lowHighDistance = 10;
+    int16_t zeroOffset_APOS = 0;
 };  Tool_Settings toolSettings;      // 11 bytes
 
+
+//receive buffer
 union _udpPacket {
     byte udpData[512];    // Incoming Buffer
     struct {
@@ -187,7 +152,7 @@ void steerConfigInit()
 void toolSettingsInit()
 {
   // for PWM High to Low interpolator
-  highLowPerDeg = ((float)(toolSettings.highPWM - toolSettings.minPWM)) / LOW_HIGH_DEGREES;
+  lowHighPerCM = ((float)(toolSettings.highPWM - toolSettings.minPWM)) / toolSettings.lowHighDistance;
 }
 
 void ToolsteerSetup()
@@ -295,50 +260,43 @@ void toolsteerLoop()
         switchByte |= workSwitch;
 
         //get steering position
-        if (steerConfig.SingleInputWAS)   //Single Input ADS
+        if (toolConfig.SingleInputAPOS)   //Single Input ADS
         {
             adc.setMux(ADS1115_REG_CONFIG_MUX_SINGLE_0);
-            steeringPosition = adc.getConversion();
+            actuatorPosition = adc.getConversion();
             adc.triggerConversion();//ADS1115 Single Mode
 
-            steeringPosition = (steeringPosition >> 1); //bit shift by 2  0 to 13610 is 0 to 5v
-            helloSteerPosition = steeringPosition - 6800;
+            actuatorPosition = (actuatorPosition >> 1); //bit shift by 2  0 to 13610 is 0 to 5v
+            helloSteerPosition = actuatorPosition - 6805;
         }
         else    //ADS1115 Differential Mode
         {
             adc.setMux(ADS1115_REG_CONFIG_MUX_DIFF_0_1);
-            steeringPosition = adc.getConversion();
+            actuatorPosition = adc.getConversion();
             adc.triggerConversion();
 
-            steeringPosition = (steeringPosition >> 1); //bit shift by 2  0 to 13610 is 0 to 5v
-            helloSteerPosition = steeringPosition - 6800;
+            actuatorPosition = (actuatorPosition >> 1); //bit shift by 2  0 to 13610 is 0 to 5v
+            helloSteerPosition = actuatorPosition - 6805;
         }
 
-        //DETERMINE ACTUAL STEERING POSITION
-
-        //convert position to steer angle. 32 counts per degree of steer pot position in my case
-        //  ***** make sure that negative steer angle makes a left turn and positive value is a right turn *****
-        if (toolConfig.invertWAS)
+        //DETERMINE ACTUATOR POSITION
+        if (toolConfig.invertAPOS)
         {
-            steeringPosition = (steeringPosition - 6805 - toolSettings.wasOffset);   // 1/2 of full scale
-            steerAngleActual = (float)(steeringPosition) / -toolSettings.steerSensorCounts;
+            actuatorPosition = (actuatorPosition - 6805 - toolSettings.zeroOffset_APOS);   // 1/2 of full scale
+            actuatorPositionPercent = (float)(actuatorPosition) / -68;
         }
         else
         {
-            steeringPosition = (steeringPosition - 6805 + toolSettings.wasOffset);   // 1/2 of full scale
-            steerAngleActual = (float)(steeringPosition) / toolSettings.steerSensorCounts;
-        }
-
-        //Ackerman fix
-        if (steerAngleActual < 0) steerAngleActual = (steerAngleActual * toolSettings.AckermanFix);
-    
+            actuatorPosition = (actuatorPosition - 6805 + toolSettings.zeroOffset_APOS);   // 1/2 of full scale
+            actuatorPositionPercent = (float)(actuatorPosition) / 68;
+        }    
 
         if (watchdogTimer < WATCHDOG_THRESHOLD && guidanceStatus == 1)
         {
             //Enable H Bridge for IBT2, hyd aux, etc for cytron
-            if (steerConfig.CytronDriver)
+            if (toolConfig.CytronDriver)
             {
-                if (steerConfig.IsRelayActiveHigh)
+                if (toolConfig.IsRelayActiveHigh)
                 {
                     digitalWrite(PWM2_RPWM, 0);
                 }
@@ -349,7 +307,7 @@ void toolsteerLoop()
             }
             else digitalWrite(DIR1_RL_ENABLE, 1);
 
-            toolCorrectionError = steerAngleActual - ((float)(toolXTE_Set) * 0.1);   //calculate the error
+            toolCorrectionError = (toolXTE) * 0.1;   //calculate the error
  
             calcSteeringPID();  //do the pid
             motorDrive();       //out to motors the pwm value
@@ -362,9 +320,9 @@ void toolsteerLoop()
         {
             //we've lost the comm to Twol, or just stop request
             //Disable H Bridge for IBT2, hyd aux, etc for cytron
-            if (steerConfig.CytronDriver)
+            if (toolConfig.CytronDriver)
             {
-                if (steerConfig.IsRelayActiveHigh)
+                if (toolConfig.IsRelayActiveHigh)
                 {
                     digitalWrite(PWM2_RPWM, 1);
                 }
@@ -417,18 +375,18 @@ void ReceiveUdp()
             if (udpPacket.MinorPGN == PGNs::ToolSteerData)  //tool steer data
             {
                 //Bit 5,6   Tool XTE from Twol * 1000 (mm)is sent
-                toolXTE_Set = ((float)(udpPacket.udpData[toolIDs::xteLo] | ((int8_t)udpPacket.udpData[toolIDs::xteHi]) << 8)) * 0.1; //low high bytes
+                toolXTE = ((float)(udpPacket.udpData[toolDataIDs::xteLo] | ((int8_t)udpPacket.udpData[toolDataIDs::xteHi]) << 8)) * 0.1; //low high bytes
                 
-                guidanceStatus = udpPacket.udpData[toolIDs::status];
+                guidanceStatus = udpPacket.udpData[toolDataIDs::status];
 
                 //Bit 8,9   Tool XTE from Twol * 1000 (mm) is sent
-                vehicleXTE = ((float)(udpPacket.udpData[toolIDs::xteVehLo] | ((int8_t)udpPacket.udpData[toolIDs::xteVehHi]) << 8)) * 0.1; //low high bytes
+                vehicleXTE = ((float)(udpPacket.udpData[toolDataIDs::xteVehLo] | ((int8_t)udpPacket.udpData[toolDataIDs::xteVehHi]) << 8)) * 0.1; //low high bytes
 
                 ////Bit 10 is 10 x speed
-                gpsSpeed = ((float)(udpPacket.udpData[toolIDs::speed10])) * 0.1;
+                gpsSpeed = ((float)(udpPacket.udpData[toolDataIDs::speed10])) * 0.1;
 
                 //Bit 11,12   Tool XTE from Twol * 100 is sent
-                manualPWM = ((float)(udpPacket.udpData[toolIDs::manualLo] | ((int8_t)udpPacket.udpData[toolIDs::manualHi]) << 8)) * 0.01; //low high bytes
+                manualPWM = ((float)(udpPacket.udpData[toolDataIDs::manualLo] | ((int8_t)udpPacket.udpData[toolDataIDs::manualHi]) << 8)) * 0.01; //low high bytes
 
                 //Serial.print("steerAngleSetPoint: ");//Serial.println(steerAngleSetPoint); //Serial.println(gpsSpeed);
 
@@ -445,7 +403,7 @@ void ReceiveUdp()
                 //----------------------------------------------------------------------------
                 //Serial Send to Twol
                 int16_t sa;
-                sa = (int16_t)(steerAngleActual * 100);
+                sa = (int16_t)(actuatorPositionPercent * 100);
                 
                 PGN_230[5] = (uint8_t)sa;
                 PGN_230[6] = sa >> 8;
@@ -499,8 +457,8 @@ void ReceiveUdp()
 
                 toolSettings.highPWM = udpPacket.udpData[pidSettingIDs::highPWM]; // read high pwm
 
-                toolSettings.wasOffset = udpPacket.udpData[pidSettingIDs::wasOffsetLo];  //read was zero offset Lo
-                toolSettings.wasOffset |= (udpPacket.udpData[pidSettingIDs::wasOffsetHi] << 8);  //read was zero offset Hi
+                toolSettings.zeroOffset_APOS = udpPacket.udpData[pidSettingIDs::wasOffsetLo];  //read was zero offset Lo
+                toolSettings.zeroOffset_APOS |= (udpPacket.udpData[pidSettingIDs::wasOffsetHi] << 8);  //read was zero offset Hi
 
                 //crc
                 //autoSteerUdpData[13];
@@ -514,16 +472,15 @@ void ReceiveUdp()
 
             else if (udpPacket.MinorPGN == PGNs::ToolSteerConfig)  //Tool Steer Config
             {
-                toolConfig.invertWAS = udpPacket.udpData[boardConfigIDs::invertAPOS];
+                toolConfig.invertAPOS = udpPacket.udpData[boardConfigIDs::invertAPOS];
 
-                toolConfig.invertSteer = udpPacket.udpData[boardConfigIDs::invertActuator];
 
                 //toolConfig.maxSteerAngle = udpPacket.udpData[boardConfigIDs::maxSteerAngle];
 
                 //for steering or sliding, not sure if it is needes
                 //toolConfig.isSteer = udpPacket.udpData[boardConfigIDs::isSteer];
                 
-                EEPROM.put(40, steerConfig);
+                EEPROM.put(40, toolConfig);
 
                 // Re-Init
                 steerConfigInit();
@@ -531,7 +488,7 @@ void ReceiveUdp()
             }//end FB
             else if (udpPacket.MinorPGN == PGNs::AgIOHello) // Hello from AgIO
             {
-                int16_t sa = (int16_t)(steerAngleActual * 100);
+                int16_t sa = (int16_t)(actuatorPositionPercent * 100);
 
                 helloFromAutoSteer[5] = (uint8_t)sa;
                 helloFromAutoSteer[6] = sa >> 8;
