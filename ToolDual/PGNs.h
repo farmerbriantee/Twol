@@ -32,13 +32,11 @@ enum pidSettingIDs {
 	 wasOffsetLo = 10,
 	 wasOffsetHi = 11,
 	 lowHighSetDistance = 12,
-	 maxActuatorPosition = 13,
 };
 
 enum boardConfigIDs {
-	isrelayActiveHigh = 5,
-	singleInputAPOS = 6,
 	cytronDriver = 7,
-	invertAPOS = 11,
-	maxActuatorPosition = 12
+	invertAPOS = 8,
+	maxActuatorLimit = 9,
+	lowHighDistanceSet = 10,
 };

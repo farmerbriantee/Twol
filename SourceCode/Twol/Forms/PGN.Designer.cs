@@ -371,10 +371,9 @@ namespace Twol
         public static int integral = 6;
         public static int minPWM = 7;
         public static int highPWM = 8;
-        public static int countsPerDegree = 9;
-        public static int wasOffsetLo = 10;
-        public static int wasOffsetHi = 11;
-        public static int ackerman = 12;
+        public static int wasOffsetLo = 9;
+        public static int wasOffsetHi = 10;
+        public static int lowHighDistance = 11;
     }
 
     //Toolsteer Config
@@ -386,10 +385,9 @@ namespace Twol
         /// invWas = 5 invSteer = 6 maxSteer = 7
         /// </summary>
         public static byte[] pgn = new byte[] { 0x80, 0x81, 0x7f, 231, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0xCC };
-        public static int invertWAS = 5;
+        public static int invertAPOS = 5;
         public static int invertSteer = 6;
         public static int maxSteerAngle = 7;
-        public static int isSteer = 8;
     }
 
     //From Tool Steer Board
