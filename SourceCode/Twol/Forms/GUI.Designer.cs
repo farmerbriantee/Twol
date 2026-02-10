@@ -293,9 +293,9 @@ namespace Twol
 
                 //Nozzz
 
-                if (mc.actualToolAngleDegrees != double.MaxValue)
+                if (mc.actualActuatorPositionPercent != double.MaxValue)
                 {
-                    btnToolSteerConfig.Text = mc.actualToolAngleDegrees.ToString("N1") + "°";
+                    btnToolSteerConfig.Text = mc.actualActuatorPositionPercent.ToString("N1") + "°";
                 }
 
                 for (int j = 0; j < controlLbls.Count; j++)
@@ -534,14 +534,14 @@ namespace Twol
                 PGN_232.pgn[PGN_232.gainP] = Settings.Tool.setToolSteer.gainP;
                 PGN_232.pgn[PGN_232.integral] = Settings.Tool.setToolSteer.integral;
                 PGN_232.pgn[PGN_232.minPWM] = Settings.Tool.setToolSteer.minPWM;
-                PGN_232.pgn[PGN_232.countsPerDegree] = Settings.Tool.setToolSteer.countsPerDegree;
-                PGN_232.pgn[PGN_232.ackerman] = Settings.Tool.setToolSteer.ackermann;
+                PGN_232.pgn[PGN_232.countsPerDegree] = Settings.Tool.setToolSteer.lowHighDistance;
+                PGN_232.pgn[PGN_232.ackerman] = Settings.Tool.setToolSteer.maxActuatorLimitPercent;
 
-                PGN_232.pgn[PGN_232.wasOffsetHi] = unchecked((byte)(Settings.Tool.setToolSteer.wasOffset >> 8));
-                PGN_232.pgn[PGN_232.wasOffsetLo] = unchecked((byte)(Settings.Tool.setToolSteer.wasOffset));
+                PGN_232.pgn[PGN_232.wasOffsetHi] = unchecked((byte)(Settings.Tool.setToolSteer.offsetAPOS >> 8));
+                PGN_232.pgn[PGN_232.wasOffsetLo] = unchecked((byte)(Settings.Tool.setToolSteer.offsetAPOS));
 
-                PGN_231.pgn[PGN_231.invertAPOS] = Settings.Tool.setToolSteer.isInvertWAS;
-                PGN_231.pgn[PGN_231.invertSteer] = Settings.Tool.setToolSteer.isInvertSteer;
+                PGN_231.pgn[PGN_231.invertAPOS] = Settings.Tool.setToolSteer.isInvertAPOS;
+                PGN_231.pgn[PGN_231.invertSteer] = Settings.Tool.setToolSteer.isInvertActuator;
                 PGN_231.pgn[PGN_231.maxSteerAngle] = Settings.Tool.setToolSteer.maxSteerAngle;
             }
         }

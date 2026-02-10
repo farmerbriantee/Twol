@@ -20,7 +20,7 @@ namespace Twol
             set(PGN_252.pgn, PGN_252.minPWM, vehicle.setAS_minSteerPWM);
             set(PGN_252.pgn, PGN_252.countsPerDegree, vehicle.setAS_countsPerDegree);
 
-            // wasOffset is a multi-byte value: store high and low bytes explicitly
+            // offsetAPOS is a multi-byte value: store high and low bytes explicitly
             set(PGN_252.pgn, PGN_252.wasOffsetHi, (vehicle.setAS_wasOffset >> 8) & 0xFF);
             set(PGN_252.pgn, PGN_252.wasOffsetLo, vehicle.setAS_wasOffset & 0xFF);
             set(PGN_252.pgn, PGN_252.ackerman, vehicle.setAS_ackerman);
@@ -361,11 +361,7 @@ namespace Twol
 
     //ToolSteer Settings
     public static class PGN_232
-    {
-        /// <summary>
-        /// PGN - 232_E8 gainP=5 integral=6  MinPWM = 7 hiPWM = 8
-        /// CountsPerDegree = 9 wasOffsetLo = 10 wasOffsetHi = 11 
-        /// </summary>
+    {  
         public static byte[] pgn = new byte[] { 0x80, 0x81, 0x7f, 232, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0xCC };
         public static int gainP = 5;
         public static int integral = 6;
@@ -374,21 +370,22 @@ namespace Twol
         public static int wasOffsetLo = 9;
         public static int wasOffsetHi = 10;
         public static int lowHighDistance = 11;
+        public static int cytronDriver = 12;
+        public static int invertAPOS = 13;
+        public static int invertActuator = 14;
+        public static int maxActuatorLimit = 15; 
     }
 
     //Toolsteer Config
-    public static class PGN_231
-    {
-        /// <summary>
-        /// 
-        /// PGN - 231 - E7 
-        /// invWas = 5 invSteer = 6 maxSteer = 7
-        /// </summary>
-        public static byte[] pgn = new byte[] { 0x80, 0x81, 0x7f, 231, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0xCC };
-        public static int invertAPOS = 5;
-        public static int invertSteer = 6;
-        public static int maxSteerAngle = 7;
-    }
+    //public static class PGN_231
+    //{
+    //    /// <summary>
+    //    /// 
+    //    /// PGN - 231 - E7 
+    //    /// invWas = 5 invSteer = 6 maxSteer = 7
+    //    /// </summary>
+    //    public static byte[] pgn = new byte[] { 0x80, 0x81, 0x7f, 231, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0xCC };
+    //}
 
     //From Tool Steer Board
     public static class PGN_230
