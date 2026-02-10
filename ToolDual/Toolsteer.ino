@@ -108,13 +108,14 @@ float lowHighPerCM = 0;
 struct Tool_Settings {
     uint8_t Kp = 40;              // proportional gain
     uint8_t Ki = 0;
-    uint8_t minPWM = 9;
-    uint8_t lowPWM = 15;          // band of no action
-    uint8_t highPWM = 60;         // max PWM value
+    uint8_t minPWM = 20;
+    uint8_t lowPWM = 25;          // band of no action
+    uint8_t highPWM = 100;         // max PWM value
     int16_t zeroOffset_APOS = 0;
     float lowHighDistance = 10;
     uint8_t CytronDriver = 1;
     uint8_t invertAPOS = 0;
+    uint8_t invertActuator = 0; 
     uint8_t maxActuatorLimit = 60;
 };  Tool_Settings toolSettings;      // 11 bytes
 
@@ -393,15 +394,6 @@ void ReceiveUdp()
             //steer settings
             else if (udpPacket.MinorPGN == PGNs::ToolSteerSettings)
             {
-                // gainP = 5;
-                // integral = 6;
-                // minPWM = 7;
-                // highPWM = 8;
-                // countsPerDegree = 9;
-                // wasOffsetLo = 10;
-                // wasOffsetHi = 11;
-                // ackerman = 12;
-
                 //PID values
                 toolSettings.Kp = ((float)udpPacket.udpData[settingIDs::gainP]);   // read Kp from Twol
 
@@ -414,13 +406,17 @@ void ReceiveUdp()
 
                 toolSettings.highPWM = udpPacket.udpData[settingIDs::highPWM]; // read high pwm
 
+                //settings
                 toolSettings.zeroOffset_APOS = udpPacket.udpData[settingIDs::wasOffsetLo];  //read was zero offset Lo
                 toolSettings.zeroOffset_APOS |= (udpPacket.udpData[settingIDs::wasOffsetHi] << 8);  //read was zero offset Hi
 
-                toolSettings.lowHighDistance = udpPacket.udpData[settingIDs::lowHighSetDistance];
                 toolSettings.CytronDriver = udpPacket.udpData[settingIDs::cytronDriver];
                 toolSettings.invertAPOS = udpPacket.udpData[settingIDs::invertAPOS];
                 toolSettings.maxActuatorLimit = udpPacket.udpData[settingIDs::maxActuatorLimit];
+
+                toolSettings.lowHighDistance = udpPacket.udpData[settingIDs::lowHighSetDistance];
+
+				toolSettingsInit(); //recalculate the low high per cm for pwm
 
                 //crc
                 //autoSteerUdpData[13];
@@ -434,7 +430,7 @@ void ReceiveUdp()
 
             else if (udpPacket.MinorPGN == PGNs::AgIOHello) // Hello from AgIO
             {
-                int16_t sa = (int16_t)(actuatorPositionPercent * 100);
+                int16_t sa = (int16_t)(actuatorPositionPercent);
 
                 helloFromAutoSteer[5] = (uint8_t)sa;
                 helloFromAutoSteer[6] = sa >> 8;

@@ -1,15 +1,15 @@
 void calcSteeringPID(void)
 {
     //Proportional only
-    pValue = toolSettings.Kp * toolCorrectionError * 10;
+    pValue = toolSettings.Kp * toolCorrectionError;
     pwmDrive = (int16_t)pValue;
 
     errorAbs = abs(toolCorrectionError);
     int16_t newMax = 0;
 
-    if (errorAbs < LOW_HIGH_DEGREES)
+    if (errorAbs < toolSettings.lowHighDistance)
     {
-        newMax = (errorAbs * highLowPerDeg) + toolSettings.lowPWM;
+        newMax = (errorAbs * lowHighPerCM) + toolSettings.lowPWM;
     }
     else newMax = toolSettings.highPWM;
 
@@ -24,7 +24,7 @@ void calcSteeringPID(void)
     if (pwmDrive > newMax) pwmDrive = newMax;
     if (pwmDrive < -newMax) pwmDrive = -newMax;
 
-    if (toolConfig.invertSteer) pwmDrive *= -1;
+    if (toolSettings.inver.invertSteer) pwmDrive *= -1;
 
     if (steerConfig.IsDanfoss)
     {
@@ -61,10 +61,10 @@ void motorDrive(void)
     if (manualPWM != 0)
     {
         pwmDrive = manualPWM;
-		if (toolConfig.invertSteer) pwmDrive *= -1;
+		if (toolSettings.invertAPOS) pwmDrive *= -1;
     }
 
-    if (steerConfig.CytronDriver)
+    if (toolSettings.CytronDriver)
     {
         // Cytron MD30C Driver Dir + PWM Signal
         if (pwmDrive >= 0)

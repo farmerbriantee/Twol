@@ -34,5 +34,6 @@ enum settingIDs {
 	lowHighSetDistance = 11,
 	cytronDriver = 12,
 	invertAPOS = 13,
-	maxActuatorLimit = 14,
+	invertActuator = 14,	
+	maxActuatorLimit = 15,
 };
