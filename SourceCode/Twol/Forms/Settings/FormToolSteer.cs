@@ -25,8 +25,6 @@ namespace Twol
             label19.Text = gStr.Get(gs.gsSpeedFactor);
             label82.Text = gStr.Get(gs.gsAquireFactor);
             label51.Text = gStr.Get(gs.gsDeadzone);
-            label49.Text = gStr.Get(gs.gsHeading);
-            label54.Text = gStr.Get(gs.gsOnDelay);
         }
 
         private void FormToolSteer_Load(object sender, EventArgs e)
@@ -102,7 +100,6 @@ namespace Twol
             cboxDataInvertRoll.Checked = Settings.Tool.setToolSteer.invertRoll;
 
             nudDeadzoneWidth.Value = Settings.Tool.setToolSteer.deadzoneWidth;
-            nudDeadZoneDelay.Value = Settings.Tool.setToolSteer.deadzoneDelay;
 
             hsbarPassiveCurvature.Value = (int)(Settings.Tool.setToolSteer.curvatureGain * 10);
             lblCurvatureGain.Text = (Settings.Tool.setToolSteer.curvatureGain * 2).ToString("N1");
@@ -273,11 +270,6 @@ namespace Twol
         private void nudDeadzoneWidth_ValueChanged(object sender, EventArgs e)
         {
             Settings.Tool.setToolSteer.deadzoneWidth = (double)(nudDeadzoneWidth.Value);
-        }
-
-        private void nudDeadZoneDelay_ValueChanged(object sender, EventArgs e)
-        {
-            Settings.Tool.setToolSteer.deadzoneDelay = (int)(nudDeadZoneDelay.Value);
         }
 
         private void hsbarPassiveCurvature_Scroll(object sender, ScrollEventArgs e)

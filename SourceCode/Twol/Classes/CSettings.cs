@@ -104,8 +104,6 @@
         public double passiveIntegralGain = 0.005;
 
         public double deadzoneWidth = 0.0;
-        public int deadzoneDelay = 3;
-
         public byte manualSteerPWM = 125;
         public int manualSteerSeconds = 2;
 
@@ -142,7 +140,6 @@
             curvatureGain = _setting.curvatureGain;
             passiveIntegralGain = _setting.passiveIntegralGain;
             deadzoneWidth = _setting.deadzoneWidth;
-            deadzoneDelay = _setting.deadzoneDelay;
 
             manualSteerPWM = _setting.manualSteerPWM;
             manualSteerSeconds = _setting.manualSteerSeconds;
