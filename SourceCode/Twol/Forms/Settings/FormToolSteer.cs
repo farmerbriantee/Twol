@@ -154,7 +154,7 @@ namespace Twol
 
             //config
             PGN_231.pgn[PGN_231.maxSteerAngle] = Settings.Tool.setToolSteer.maxSteerAngle;
-            PGN_231.pgn[PGN_231.invertWAS] = Settings.Tool.setToolSteer.isInvertWAS;
+            PGN_231.pgn[PGN_231.invertAPOS] = Settings.Tool.setToolSteer.isInvertWAS;
             PGN_231.pgn[PGN_231.invertSteer] = Settings.Tool.setToolSteer.isInvertSteer;
             PGN_231.pgn[PGN_231.isSteer] = 1;
 
@@ -197,8 +197,8 @@ namespace Twol
                 if (cboxInvertSteer_Tool.Checked) PGN_231.pgn[PGN_231.invertSteer] = 1;
                 else PGN_231.pgn[PGN_231.invertSteer] = 0;
 
-                if (cboxInvertWAS_Tool.Checked) PGN_231.pgn[PGN_231.invertWAS] = 1;
-                else PGN_231.pgn[PGN_231.invertWAS] = 0;
+                if (cboxInvertWAS_Tool.Checked) PGN_231.pgn[PGN_231.invertAPOS] = 1;
+                else PGN_231.pgn[PGN_231.invertAPOS] = 0;
 
                 PGN_231.pgn[PGN_231.isSteer] = 1;
 
