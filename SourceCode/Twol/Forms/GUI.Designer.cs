@@ -292,7 +292,7 @@ namespace Twol
                 btnAutoSteerConfig.Text = SetSteerAngle + "\r\n" + ActualSteerAngle;
                 //Nozzz
 
-                btnToolSteerConfig.Text = ActualActuatorPositionPercent;
+                btnToolSteerConfig.Text = ActualActuatorPositionPercent + "\r\n" + mc.pwmToolDisplay.ToString("N0") ;
 
                 for (int j = 0; j < controlLbls.Count; j++)
                 {

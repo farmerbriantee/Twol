@@ -154,17 +154,17 @@ namespace ModSimTool
                                 guidanceStatus = data[7];
                                 lblStatus.Text = guidanceStatus.ToString();
 
+                                //vehicle XTE
+                                //Bit 8,9    set xte * 1000 is sent
+                                short bob = (short)(data[8] | data[9] << 8);
+                                XTE = (double)bob * 0.1;
+                                lblVehXTE.Text = XTE.ToString();
+
                                 //tool XTE
-                                short bob = (short)(data[5] | (data[6] << 8));
+                                bob = (short)(data[5] | (data[6] << 8));
                                 XTE = (double)bob * 0.1;
                                 //Bit 5,6    set xte * 1000 is sent 
                                 lblXTE.Text = XTE.ToString();
-
-                                //vehicle XTE
-                                //Bit 8,9    set xte * 1000 is sent
-                                bob = (short)(data[8] | data[9] << 8);
-                                XTE = (double)bob * 0.1;
-                                lblVehXTE.Text = XTE.ToString();
 
                                 //Manual PWM
                                 bob = (short)(data[11] | data[12] << 8);
@@ -178,11 +178,11 @@ namespace ModSimTool
                                 PGN_230[5] = unchecked((byte)((int)(sa)));
                                 PGN_230[6] = unchecked((byte)((int)(sa) >> 8));
 
-                                //roll         
-                                PGN_230[7] = unchecked((byte)((int)(rollIMU)));
-                                PGN_230[8] = unchecked((byte)((int)(rollIMU) >> 8));
-
                                 //pwm
+                                sa = (int)(XTE*0.5);
+                                PGN_230[7] = unchecked((byte)((int)(sa)));
+                                PGN_230[8] = unchecked((byte)((int)(sa) >> 8));
+
                                 PGN_230[9] = unchecked((byte)((int)(9)));
 
                                 //status

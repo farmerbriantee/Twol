@@ -21,8 +21,6 @@ namespace Twol
             mf = callingForm as FormGPS;
             InitializeComponent();
 
-            this.label1.Text = "XTE";
-
             this.Text = "Tool XTE Chart";
         }
 
@@ -44,7 +42,8 @@ namespace Twol
                 //dataSteerAngle = (Math.Round(mf.vehicle.modeActualHeadingError, 1)).ToString(CultureInfo.InvariantCulture);
                 dataSteerAngle = "0";
 
-            lblPWM.Text = dataPWM + " cm";
+            lblXTE.Text = dataPWM + " cm";
+            lblPWM.Text = mf.mc.pwmDisplay.ToString();
 
             //chart data
             Series s = unoChart.Series["S"];

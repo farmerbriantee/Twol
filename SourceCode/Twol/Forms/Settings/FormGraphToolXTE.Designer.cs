@@ -42,6 +42,8 @@
             this.lblMin = new System.Windows.Forms.Label();
             this.lblMax = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.lblXTE = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.unoChart)).BeginInit();
             this.SuspendLayout();
             // 
@@ -115,8 +117,8 @@
             this.lblPWM.AutoSize = true;
             this.lblPWM.BackColor = System.Drawing.SystemColors.ControlText;
             this.lblPWM.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPWM.ForeColor = System.Drawing.Color.Lime;
-            this.lblPWM.Location = new System.Drawing.Point(271, 201);
+            this.lblPWM.ForeColor = System.Drawing.Color.Yellow;
+            this.lblPWM.Location = new System.Drawing.Point(97, 200);
             this.lblPWM.Name = "lblPWM";
             this.lblPWM.Size = new System.Drawing.Size(85, 29);
             this.lblPWM.TabIndex = 194;
@@ -210,12 +212,42 @@
             this.label2.Text = "<";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // lblXTE
+            // 
+            this.lblXTE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblXTE.AutoSize = true;
+            this.lblXTE.BackColor = System.Drawing.SystemColors.ControlText;
+            this.lblXTE.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblXTE.ForeColor = System.Drawing.Color.Lime;
+            this.lblXTE.Location = new System.Drawing.Point(270, 200);
+            this.lblXTE.Name = "lblXTE";
+            this.lblXTE.Size = new System.Drawing.Size(75, 29);
+            this.lblXTE.TabIndex = 203;
+            this.lblXTE.Text = "PWM";
+            this.lblXTE.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label4.AutoEllipsis = true;
+            this.label4.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label4.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label4.Location = new System.Drawing.Point(31, 205);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(71, 23);
+            this.label4.TabIndex = 204;
+            this.label4.Text = "PWM:";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // FormGraphToolXTE
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.ClientSize = new System.Drawing.Size(460, 231);
+            this.Controls.Add(this.lblXTE);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.lblPWM);
             this.Controls.Add(this.lblMax);
             this.Controls.Add(this.lblMin);
@@ -251,5 +283,7 @@
         private System.Windows.Forms.Label lblMin;
         private System.Windows.Forms.Label lblMax;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblXTE;
+        private System.Windows.Forms.Label label4;
     }
 }
