@@ -290,13 +290,9 @@ namespace Twol
                 //status strip values
                 distanceToolBtn.Text = fd.DistanceUser + "\r\n" + fd.WorkedUserArea;
                 btnAutoSteerConfig.Text = SetSteerAngle + "\r\n" + ActualSteerAngle;
-
                 //Nozzz
 
-                if (mc.actualToolAngleDegrees != double.MaxValue)
-                {
-                    btnToolSteerConfig.Text = mc.actualToolAngleDegrees.ToString("N1") + "°";
-                }
+                btnToolSteerConfig.Text = ActualActuatorPositionPercent + "\r\n" + mc.pwmToolDisplay.ToString("N0") ;
 
                 for (int j = 0; j < controlLbls.Count; j++)
                 {
@@ -534,15 +530,18 @@ namespace Twol
                 PGN_232.pgn[PGN_232.gainP] = Settings.Tool.setToolSteer.gainP;
                 PGN_232.pgn[PGN_232.integral] = Settings.Tool.setToolSteer.integral;
                 PGN_232.pgn[PGN_232.minPWM] = Settings.Tool.setToolSteer.minPWM;
-                PGN_232.pgn[PGN_232.countsPerDegree] = Settings.Tool.setToolSteer.countsPerDegree;
-                PGN_232.pgn[PGN_232.ackerman] = Settings.Tool.setToolSteer.ackermann;
+                PGN_232.pgn[PGN_232.highPWM] = Settings.Tool.setToolSteer.highPWM;
 
-                PGN_232.pgn[PGN_232.wasOffsetHi] = unchecked((byte)(Settings.Tool.setToolSteer.wasOffset >> 8));
-                PGN_232.pgn[PGN_232.wasOffsetLo] = unchecked((byte)(Settings.Tool.setToolSteer.wasOffset));
+                PGN_232.pgn[PGN_232.offsetAPOSHi] = unchecked((byte)(Settings.Tool.setToolSteer.offsetAPOS >> 8));
+                PGN_232.pgn[PGN_232.offsetAPOSLo] = unchecked((byte)(Settings.Tool.setToolSteer.offsetAPOS));
 
-                PGN_231.pgn[PGN_231.invertWAS] = Settings.Tool.setToolSteer.isInvertWAS;
-                PGN_231.pgn[PGN_231.invertSteer] = Settings.Tool.setToolSteer.isInvertSteer;
-                PGN_231.pgn[PGN_231.maxSteerAngle] = Settings.Tool.setToolSteer.maxSteerAngle;
+                PGN_232.pgn[PGN_232.lowHighDistance] = Settings.Tool.setToolSteer.lowHighDistance;
+
+                PGN_232.pgn[PGN_232.cytronDriver] = 1;
+                PGN_232.pgn[PGN_232.invertAPOS] = Settings.Tool.setToolSteer.isInvertAPOS;
+                PGN_232.pgn[PGN_232.invertActuator] = Settings.Tool.setToolSteer.isInvertActuator;
+
+                PGN_232.pgn[PGN_232.maxActuatorLimit] = Settings.Tool.setToolSteer.maxActuatorLimitPercent;
             }
         }
 
@@ -1438,6 +1437,7 @@ namespace Twol
         }
         public string SetSteerAngle { get { return (guidanceVehicleSteerAngle).ToString("N1"); } }
         public string ActualSteerAngle { get { return (mc.actualSteerAngleDegrees).ToString("N1"); } }
+        public string ActualActuatorPositionPercent { get { return (mc.actualActuatorPositionPercent).ToString("N0") + "%"; } }
 
         //Metric and Imperial Properties
         public string Speed

@@ -8,7 +8,7 @@ namespace Twol
     {
         private readonly FormGPS mf = null;
 
-        private bool toolSend = false, toolSend2 = false;
+        private bool toolSend = false;
         private int toolCounterSettings = 0, toolCounterConfig = 0;
         private int windowSizeState = 0;
 
@@ -22,11 +22,7 @@ namespace Twol
             this.Width = 392;
             this.Height = 550;
 
-            label19.Text = gStr.Get(gs.gsSpeedFactor);
-            label82.Text = gStr.Get(gs.gsAquireFactor);
             label51.Text = gStr.Get(gs.gsDeadzone);
-            label49.Text = gStr.Get(gs.gsHeading);
-            label54.Text = gStr.Get(gs.gsOnDelay);
         }
 
         private void FormToolSteer_Load(object sender, EventArgs e)
@@ -44,26 +40,24 @@ namespace Twol
             hsbarIntegral_Tool.Value = Settings.Tool.setToolSteer.integral;
             hsbarMinPWM_Tool.Value = Settings.Tool.setToolSteer.minPWM;
             hsbarHighPWM_Tool.Value = Settings.Tool.setToolSteer.highPWM;
-            hsbarAckermann_Tool.Value = Settings.Tool.setToolSteer.ackermann;
-            hsbarCPD_Tool.Value = Settings.Tool.setToolSteer.countsPerDegree;
-            hsbarZeroWAS_Tool.Value = Settings.Tool.setToolSteer.wasOffset;
+            hsbarLowHighDistance.Value = Settings.Tool.setToolSteer.lowHighDistance;
+            hsbarZeroWAS_Tool.Value = Settings.Tool.setToolSteer.offsetAPOS;
 
             //config
-            hsbarMaxSteerAngle_Tool.Value = Settings.Tool.setToolSteer.maxSteerAngle;
-            cboxInvertSteer_Tool.Checked = (Settings.Tool.setToolSteer.isInvertSteer == 1);
-            cboxInvertWAS_Tool.Checked = (Settings.Tool.setToolSteer.isInvertWAS == 1);
+            hsbarActuatorLimitsPercent.Value = Settings.Tool.setToolSteer.maxActuatorLimitPercent;
+            cboxInvertActuator.Checked = (Settings.Tool.setToolSteer.isInvertActuator == 1);
+            cboxInvertAPOS.Checked = (Settings.Tool.setToolSteer.isInvertAPOS == 1);
 
             //settings
-            lblPGain_Tool.Text = (hsbarPGain_Tool.Value * 100 / 254).ToString();
-            lblIntegral_Tool.Text = (hsbarIntegral_Tool.Value * 100 / 254).ToString();
-            lblMinPWM_Tool.Text = (hsbarMinPWM_Tool.Value * 100 / 200).ToString();
-            lblHighPWM_Tool.Text = (hsbarHighPWM_Tool.Value * 100 / 254).ToString();
-            //lblAckermann_Tool.Text = (hsbarAckermann_Tool.Value * 100 / 250).ToString();
-            lblZeroWAS_Tool.Text = (hsbarZeroWAS_Tool.Value / (double)(hsbarCPD_Tool.Value)).ToString("N2");
-            lblCPD_Tool.Text = hsbarCPD_Tool.Value.ToString();
+            lblPGain_Tool.Text = (hsbarPGain_Tool.Value).ToString();
+            lblIntegral_Tool.Text = (hsbarIntegral_Tool.Value).ToString();
+            lblMinPWM_Tool.Text = (hsbarMinPWM_Tool.Value).ToString();
+            lblHighPWM_Tool.Text = (hsbarHighPWM_Tool.Value).ToString();
+            lblZeroWAS_Tool.Text = (hsbarZeroWAS_Tool.Value).ToString("N2");
+            lblLowHighDistance.Text = hsbarLowHighDistance.Value.ToString();
 
             //config
-            lblMaxSteerAngle_Tool.Text = hsbarMaxSteerAngle_Tool.Value.ToString();
+            lblActuatorLimitsPercent.Text = hsbarActuatorLimitsPercent.Value.ToString();
 
             //antenna
             nudAntennaHeight_Tool.Value = Settings.Tool.setToolSteer.antennaHeight;
@@ -104,7 +98,6 @@ namespace Twol
             cboxDataInvertRoll.Checked = Settings.Tool.setToolSteer.invertRoll;
 
             nudDeadzoneWidth.Value = Settings.Tool.setToolSteer.deadzoneWidth;
-            nudDeadZoneDelay.Value = Settings.Tool.setToolSteer.deadzoneDelay;
 
             hsbarPassiveCurvature.Value = (int)(Settings.Tool.setToolSteer.curvatureGain * 10);
             lblCurvatureGain.Text = (Settings.Tool.setToolSteer.curvatureGain * 2).ToString("N1");
@@ -129,34 +122,27 @@ namespace Twol
             Settings.Tool.setToolSteer.integral = (byte)hsbarIntegral_Tool.Value;
             Settings.Tool.setToolSteer.minPWM = (byte)hsbarMinPWM_Tool.Value;
             Settings.Tool.setToolSteer.highPWM = (byte)hsbarHighPWM_Tool.Value;
-            Settings.Tool.setToolSteer.countsPerDegree = (byte)hsbarCPD_Tool.Value;
-            Settings.Tool.setToolSteer.ackermann = (byte)hsbarAckermann_Tool.Value;
-            Settings.Tool.setToolSteer.wasOffset = hsbarZeroWAS_Tool.Value;
+            Settings.Tool.setToolSteer.offsetAPOS = hsbarZeroWAS_Tool.Value;
 
             //config
-            Settings.Tool.setToolSteer.maxSteerAngle = (byte)hsbarMaxSteerAngle_Tool.Value;
+            Settings.Tool.setToolSteer.lowHighDistance = (byte)hsbarLowHighDistance.Value;
+            Settings.Tool.setToolSteer.maxActuatorLimitPercent = (byte)hsbarActuatorLimitsPercent.Value;
 
-            if (cboxInvertSteer_Tool.Checked) Settings.Tool.setToolSteer.isInvertWAS = 1;
-            else Settings.Tool.setToolSteer.isInvertWAS = 0;
+            if (cboxInvertActuator.Checked) Settings.Tool.setToolSteer.isInvertAPOS = 1;
+            else Settings.Tool.setToolSteer.isInvertAPOS = 0;
 
-            if (cboxInvertWAS_Tool.Checked) Settings.Tool.setToolSteer.isInvertSteer = 1;
-            else Settings.Tool.setToolSteer.isInvertSteer = 0;
+            if (cboxInvertAPOS.Checked) Settings.Tool.setToolSteer.isInvertActuator = 1;
+            else Settings.Tool.setToolSteer.isInvertActuator = 0;
             
             PGN_232.pgn[PGN_232.gainP] = Settings.Tool.setToolSteer.gainP;
             PGN_232.pgn[PGN_232.integral] = Settings.Tool.setToolSteer.integral;
             PGN_232.pgn[PGN_232.minPWM] = Settings.Tool.setToolSteer.minPWM;
             PGN_232.pgn[PGN_232.highPWM] = Settings.Tool.setToolSteer.highPWM;
-            PGN_232.pgn[PGN_232.countsPerDegree] = Settings.Tool.setToolSteer.countsPerDegree;
-            PGN_232.pgn[PGN_232.ackerman] = Settings.Tool.setToolSteer.ackermann;
+            PGN_232.pgn[PGN_232.lowHighDistance] = Settings.Tool.setToolSteer.lowHighDistance;
+            PGN_232.pgn[PGN_232.maxActuatorLimit] = Settings.Tool.setToolSteer.maxActuatorLimitPercent;
 
-            PGN_232.pgn[PGN_232.wasOffsetHi] = unchecked((byte)(Settings.Tool.setToolSteer.wasOffset >> 8));
-            PGN_232.pgn[PGN_232.wasOffsetLo] = unchecked((byte)(Settings.Tool.setToolSteer.wasOffset));
-
-            //config
-            PGN_231.pgn[PGN_231.maxSteerAngle] = Settings.Tool.setToolSteer.maxSteerAngle;
-            PGN_231.pgn[PGN_231.invertWAS] = Settings.Tool.setToolSteer.isInvertWAS;
-            PGN_231.pgn[PGN_231.invertSteer] = Settings.Tool.setToolSteer.isInvertSteer;
-            PGN_231.pgn[PGN_231.isSteer] = 1;
+            PGN_232.pgn[PGN_232.offsetAPOSHi] = unchecked((byte)(Settings.Tool.setToolSteer.offsetAPOS >> 8));
+            PGN_232.pgn[PGN_232.offsetAPOSLo] = unchecked((byte)(Settings.Tool.setToolSteer.offsetAPOS));
 
             //save current vehicle
             Settings.Tool.Save();
@@ -178,34 +164,23 @@ namespace Twol
                 PGN_232.pgn[PGN_232.integral] = (byte)hsbarIntegral_Tool.Value;
                 PGN_232.pgn[PGN_232.minPWM] = (byte)hsbarMinPWM_Tool.Value;
                 PGN_232.pgn[PGN_232.highPWM] = (byte)hsbarHighPWM_Tool.Value;
-                PGN_232.pgn[PGN_232.countsPerDegree] = (byte)hsbarCPD_Tool.Value;
-                PGN_232.pgn[PGN_232.ackerman] = (byte)hsbarAckermann_Tool.Value;
+                PGN_232.pgn[PGN_232.offsetAPOSHi] = unchecked((byte)(hsbarZeroWAS_Tool.Value >> 8));
+                PGN_232.pgn[PGN_232.offsetAPOSLo] = unchecked((byte)(hsbarZeroWAS_Tool.Value));
 
-                PGN_232.pgn[PGN_232.wasOffsetHi] = unchecked((byte)(hsbarZeroWAS_Tool.Value >> 8));
-                PGN_232.pgn[PGN_232.wasOffsetLo] = unchecked((byte)(hsbarZeroWAS_Tool.Value));
+                PGN_232.pgn[PGN_232.lowHighDistance] = (byte)hsbarLowHighDistance.Value;
+                PGN_232.pgn[PGN_232.cytronDriver] = (byte)1;
+
+                if (cboxInvertAPOS.Checked) PGN_232.pgn[PGN_232.invertAPOS] = 1;
+                else PGN_232.pgn[PGN_232.invertAPOS] = 0;
+
+                if (cboxInvertActuator.Checked) PGN_232.pgn[PGN_232.invertActuator] = 1;
+                else PGN_232.pgn[PGN_232.invertActuator] = 0;
+
+                PGN_232.pgn[PGN_232.maxActuatorLimit] = unchecked((byte)hsbarActuatorLimitsPercent.Value);
 
                 mf.SendUDPMessageTool(PGN_232.pgn, mf.epModuleTool);
                 toolCounterSettings = 0;
                 toolSend = false;
-            }
-
-            //tool config
-            if (toolSend2 && toolCounterConfig > 4)
-            {
-                PGN_231.pgn[PGN_231.maxSteerAngle] = unchecked((byte)hsbarMaxSteerAngle_Tool.Value);
-
-                if (cboxInvertSteer_Tool.Checked) PGN_231.pgn[PGN_231.invertSteer] = 1;
-                else PGN_231.pgn[PGN_231.invertSteer] = 0;
-
-                if (cboxInvertWAS_Tool.Checked) PGN_231.pgn[PGN_231.invertWAS] = 1;
-                else PGN_231.pgn[PGN_231.invertWAS] = 0;
-
-                PGN_231.pgn[PGN_231.isSteer] = 1;
-
-                mf.SendUDPMessageTool(PGN_231.pgn, mf.epModuleTool);
-
-                toolCounterConfig = 0;
-                toolSend2 = false;
             }
         }
 
@@ -227,26 +202,37 @@ namespace Twol
         // Gain
         private void hsbarPGain_Tool_Scroll(object sender, ScrollEventArgs e)
         {
-            lblPGain_Tool.Text = (e.NewValue * 100 / 254).ToString();
+            lblPGain_Tool.Text = (e.NewValue).ToString();
             toolSend = true;
             toolCounterSettings = 0;
         }
         private void hsbarHighPWM_Tool_Scroll(object sender, ScrollEventArgs e)
         {
-            lblHighPWM_Tool.Text = (e.NewValue * 100 / 254).ToString();
+            lblHighPWM_Tool.Text = (e.NewValue).ToString();
+
+            if (e.NewValue < hsbarMinPWM_Tool.Value)
+            {
+                hsbarMinPWM_Tool.Value = e.NewValue;
+                lblMinPWM_Tool.Text = (hsbarMinPWM_Tool.Value).ToString();
+            }
             toolSend = true;
             toolCounterSettings = 0;
         }
         private void hsbarMinPWM_Tool_Scroll(object sender, ScrollEventArgs e)
         {
-            lblMinPWM_Tool.Text = (e.NewValue * 100 / 200).ToString();
+            lblMinPWM_Tool.Text = (e.NewValue ).ToString();
+            if (e.NewValue > hsbarHighPWM_Tool.Value)
+            {
+                hsbarHighPWM_Tool.Value = e.NewValue;
+                lblHighPWM_Tool.Text = (hsbarHighPWM_Tool.Value).ToString();
+            }
             toolSend = true;
             toolCounterSettings = 0;
         }
 
         private void hsbarIntegral_Tool_Scroll(object sender, ScrollEventArgs e)
         {
-            lblIntegral_Tool.Text = (e.NewValue * 100 / 254).ToString();
+            lblIntegral_Tool.Text = (e.NewValue).ToString();
             toolSend = true;
             toolCounterSettings = 0;
         }
@@ -254,44 +240,29 @@ namespace Twol
         // WAS_CPD
         private void btnZeroWAS_Tool_Click(object sender, EventArgs e)
         {
-            hsbarZeroWAS_Tool.Value += (int)(hsbarCPD_Tool.Value * -mf.mc.actualToolAngleDegrees);
-            lblZeroWAS_Tool.Text = (hsbarZeroWAS_Tool.Value / (double)(hsbarCPD_Tool.Value)).ToString("N2");
+            hsbarZeroWAS_Tool.Value = 0;
+            lblZeroWAS_Tool.Text = (hsbarZeroWAS_Tool.Value).ToString("N2");
             toolSend = true;
             toolCounterSettings = 0;
         }
         private void hsbarZeroWAS_Tool_Scroll(object sender, ScrollEventArgs e)
         {
-            lblZeroWAS_Tool.Text = (e.NewValue / (double)(hsbarCPD_Tool.Value)).ToString("N2");
+            lblZeroWAS_Tool.Text = (((double)(e.NewValue)) *0.01).ToString("N2");
             toolSend = true;
             toolCounterSettings = 0;
         }
-        private void hsbarCPD_Tool_Scroll(object sender, ScrollEventArgs e)
+        private void hsbarLowHighDistance_Scroll(object sender, ScrollEventArgs e)
         {
-            lblCPD_Tool.Text = e.NewValue.ToString();
+            lblLowHighDistance.Text = e.NewValue.ToString();
 
-            lblCPD_Tool.Text = hsbarCPD_Tool.Value.ToString();
-
-            lblZeroWAS_Tool.Text = (hsbarZeroWAS_Tool.Value / (double)(hsbarCPD_Tool.Value)).ToString("N2");
             toolSend = true;
             toolCounterSettings = 0;
         }
-        private void hsbarAckermann_Tool_Scroll(object sender, ScrollEventArgs e)
+        private void hsbarActuatorLimitsPercent_Scroll(object sender, ScrollEventArgs e)
         {
-            lblAckermann_Tool.Text = e.NewValue.ToString();
+            lblActuatorLimitsPercent.Text = e.NewValue.ToString();
             toolSend = true;
-            toolCounterSettings = 0;
-        }
-        private void hsbarMaxSteerAngle_Tool_Scroll(object sender, ScrollEventArgs e)
-        {
-            lblMaxSteerAngle_Tool.Text = e.NewValue.ToString();
-            toolSend2 = true;
             toolCounterConfig = 0;
-        }
-
-        private void hsbarAcquireFactor_ValueChanged(object sender, EventArgs e)
-        {
-            mf.vehicle.goalPointAcquireFactor = hsbarAcquireFactor.Value * 0.01;
-            lblAcquireFactor.Text = mf.vehicle.goalPointAcquireFactor.ToString();
         }
 
         #endregion
@@ -302,11 +273,6 @@ namespace Twol
         private void nudDeadzoneWidth_ValueChanged(object sender, EventArgs e)
         {
             Settings.Tool.setToolSteer.deadzoneWidth = (double)(nudDeadzoneWidth.Value);
-        }
-
-        private void nudDeadZoneDelay_ValueChanged(object sender, EventArgs e)
-        {
-            Settings.Tool.setToolSteer.deadzoneDelay = (int)(nudDeadZoneDelay.Value);
         }
 
         private void hsbarPassiveCurvature_Scroll(object sender, ScrollEventArgs e)
@@ -436,15 +402,15 @@ namespace Twol
             lblManualSecondsOn.Text = hsbarManualSecondsOn.Value.ToString();
         }
 
-        private void cboxInvertSteer_Tool_Click(object sender, EventArgs e)
+        private void cboxInvertActuator_Click(object sender, EventArgs e)
         {
-            toolSend2 = true;
+            toolSend = true;
             toolCounterConfig = 0;
         }
 
-        private void cboxInvertWAS_Tool_Click(object sender, EventArgs e)
+        private void cboxInvertAPOS_Click(object sender, EventArgs e)
         {
-            toolSend2 = true;
+            toolSend = true;
             toolCounterConfig = 0;
         }
 

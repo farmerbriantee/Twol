@@ -499,8 +499,8 @@ namespace Twol
                         case 253:
                             {
                                 if (length != 14) break;
-                                mc.actualSteerAngleChart = (Int16)((data[6] << 8) + data[5]);
-                                mc.actualSteerAngleDegrees = (double)mc.actualSteerAngleChart * 0.01;
+                                mc.actualSteerAngleDegrees = (Int16)((data[6] << 8) + data[5]);
+                                mc.actualSteerAngleDegrees = (double)mc.actualSteerAngleDegrees * 0.01;
 
                                 double head253 = (Int16)((data[8] << 8) + data[7]);
                                 if (head253 != 9999) ahrs.imuHeading = head253 * 0.1;

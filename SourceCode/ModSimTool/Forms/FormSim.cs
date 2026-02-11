@@ -102,6 +102,7 @@ namespace ModSimTool
                 btn10Hz.Text = "20 Hz";
             }
         }
+
     }
 }
 

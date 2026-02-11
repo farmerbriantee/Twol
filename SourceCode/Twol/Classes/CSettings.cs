@@ -73,14 +73,13 @@
         public byte integral = 0;
         public byte minPWM = 30;
         public byte highPWM = 200;
-        public byte countsPerDegree = 100;
+        public byte lowHighDistance = 100;
 
-        public int wasOffset = 0;
-        public byte ackermann = 100;
-        public byte maxSteerAngle = 20;
+        public int offsetAPOS = 0;
+        public byte maxActuatorLimitPercent = 80;
 
-        public byte isInvertWAS = 0;
-        public byte isInvertSteer = 0;
+        public byte isInvertAPOS = 0;
+        public byte isInvertActuator = 0;
 
         public bool isFollowCurrent = false;
         public bool isPassiveSteering = false;
@@ -105,8 +104,6 @@
         public double passiveIntegralGain = 0.005;
 
         public double deadzoneWidth = 0.0;
-        public int deadzoneDelay = 3;
-
         public byte manualSteerPWM = 125;
         public int manualSteerSeconds = 2;
 
@@ -114,8 +111,8 @@
         {
             isGPSToolActive = _setting.isGPSToolActive;
 
-            isInvertWAS = _setting.isInvertWAS;
-            isInvertSteer = _setting.isInvertSteer;
+            isInvertAPOS = _setting.isInvertAPOS;
+            isInvertActuator = _setting.isInvertActuator;
 
             isFollowCurrent = _setting.isFollowCurrent;
             isPassiveSteering = _setting.isPassiveSteering;
@@ -127,10 +124,9 @@
             minPWM = _setting.minPWM;
             highPWM = _setting.highPWM;
 
-            countsPerDegree = _setting.countsPerDegree;
-            maxSteerAngle = _setting.maxSteerAngle;
-            wasOffset = _setting.wasOffset;
-            ackermann = _setting.ackermann;
+            lowHighDistance = _setting.lowHighDistance;
+            offsetAPOS = _setting.offsetAPOS;
+            maxActuatorLimitPercent = _setting.maxActuatorLimitPercent;
 
             antennaHeight = _setting.antennaHeight;
             antennaOffset = _setting.antennaOffset;
@@ -144,7 +140,6 @@
             curvatureGain = _setting.curvatureGain;
             passiveIntegralGain = _setting.passiveIntegralGain;
             deadzoneWidth = _setting.deadzoneWidth;
-            deadzoneDelay = _setting.deadzoneDelay;
 
             manualSteerPWM = _setting.manualSteerPWM;
             manualSteerSeconds = _setting.manualSteerSeconds;

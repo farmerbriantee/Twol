@@ -87,6 +87,10 @@ namespace Twol
             this.manualToolSteerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.trackFilterControlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buildToolTracksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.chartsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.steerChartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.xTEChartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolXTEChartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelSim = new System.Windows.Forms.TableLayoutPanel();
             this.btnSimReverseDirection = new System.Windows.Forms.Button();
             this.btnSpeedDn = new System.Windows.Forms.Button();
@@ -567,7 +571,7 @@ namespace Twol
             this.toolStripMenuFlagForm.Image = global::Twol.Properties.Resources.FileEditName;
             this.toolStripMenuFlagForm.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripMenuFlagForm.Name = "toolStripMenuFlagForm";
-            this.toolStripMenuFlagForm.Size = new System.Drawing.Size(267, 70);
+            this.toolStripMenuFlagForm.Size = new System.Drawing.Size(259, 70);
             this.toolStripMenuFlagForm.Text = "toolStripMenuItem3";
             this.toolStripMenuFlagForm.Click += new System.EventHandler(this.toolStripMenuFlagForm_Click);
             // 
@@ -618,7 +622,7 @@ namespace Twol
             this.btnResetSim.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.btnResetSim.Location = new System.Drawing.Point(4, 4);
             this.btnResetSim.Name = "btnResetSim";
-            this.btnResetSim.Size = new System.Drawing.Size(46, 37);
+            this.btnResetSim.Size = new System.Drawing.Size(45, 37);
             this.btnResetSim.TabIndex = 164;
             this.btnResetSim.Text = "Reset";
             this.btnResetSim.UseVisualStyleBackColor = false;
@@ -630,9 +634,9 @@ namespace Twol
             this.btnResetSteerAngle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnResetSteerAngle.Font = new System.Drawing.Font("Tahoma", 9.75F);
             this.btnResetSteerAngle.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnResetSteerAngle.Location = new System.Drawing.Point(57, 4);
+            this.btnResetSteerAngle.Location = new System.Drawing.Point(56, 4);
             this.btnResetSteerAngle.Name = "btnResetSteerAngle";
-            this.btnResetSteerAngle.Size = new System.Drawing.Size(46, 37);
+            this.btnResetSteerAngle.Size = new System.Drawing.Size(45, 37);
             this.btnResetSteerAngle.TabIndex = 162;
             this.btnResetSteerAngle.Text = ">0<";
             this.btnResetSteerAngle.UseVisualStyleBackColor = false;
@@ -654,10 +658,10 @@ namespace Twol
             this.hsbarSteerAngle.Dock = System.Windows.Forms.DockStyle.Fill;
             this.hsbarSteerAngle.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.hsbarSteerAngle.LargeChange = 20;
-            this.hsbarSteerAngle.Location = new System.Drawing.Point(119, 1);
+            this.hsbarSteerAngle.Location = new System.Drawing.Point(116, 1);
             this.hsbarSteerAngle.Maximum = 819;
             this.hsbarSteerAngle.Name = "hsbarSteerAngle";
-            this.hsbarSteerAngle.Size = new System.Drawing.Size(100, 43);
+            this.hsbarSteerAngle.Size = new System.Drawing.Size(96, 43);
             this.hsbarSteerAngle.TabIndex = 179;
             this.hsbarSteerAngle.Value = 400;
             this.hsbarSteerAngle.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hsbarSteerAngle_Scroll);
@@ -736,7 +740,8 @@ namespace Twol
             this.guidelinesToolStripMenuItem,
             this.manualToolSteerToolStripMenuItem,
             this.trackFilterControlToolStripMenuItem,
-            this.buildToolTracksToolStripMenuItem});
+            this.buildToolTracksToolStripMenuItem,
+            this.chartsToolStripMenuItem});
             this.toolStripDropDownButton4.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripDropDownButton4.Image = global::Twol.Properties.Resources.SpecialFunctions;
             this.toolStripDropDownButton4.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
@@ -751,7 +756,7 @@ namespace Twol
             // 
             this.boundaryToolToolStripMenu.Image = global::Twol.Properties.Resources.Boundary;
             this.boundaryToolToolStripMenu.Name = "boundaryToolToolStripMenu";
-            this.boundaryToolToolStripMenu.Size = new System.Drawing.Size(417, 44);
+            this.boundaryToolToolStripMenu.Size = new System.Drawing.Size(461, 66);
             this.boundaryToolToolStripMenu.Text = "Boundary Tool";
             this.boundaryToolToolStripMenu.Click += new System.EventHandler(this.boundaryToolToolStripMenu_Click);
             // 
@@ -759,30 +764,64 @@ namespace Twol
             // 
             this.guidelinesToolStripMenuItem.Image = global::Twol.Properties.Resources.ConD_ExtraGuides;
             this.guidelinesToolStripMenuItem.Name = "guidelinesToolStripMenuItem";
-            this.guidelinesToolStripMenuItem.Size = new System.Drawing.Size(417, 44);
+            this.guidelinesToolStripMenuItem.Size = new System.Drawing.Size(461, 66);
             this.guidelinesToolStripMenuItem.Text = "Extra Guides";
             this.guidelinesToolStripMenuItem.Click += new System.EventHandler(this.guidelinesToolStripMenuItem_Click);
             // 
             // manualToolSteerToolStripMenuItem
             // 
             this.manualToolSteerToolStripMenuItem.Name = "manualToolSteerToolStripMenuItem";
-            this.manualToolSteerToolStripMenuItem.Size = new System.Drawing.Size(417, 44);
+            this.manualToolSteerToolStripMenuItem.Size = new System.Drawing.Size(461, 66);
             this.manualToolSteerToolStripMenuItem.Text = "Manual Tool Control";
             this.manualToolSteerToolStripMenuItem.Click += new System.EventHandler(this.manualToolSteerToolStripMenuItem_Click);
             // 
             // trackFilterControlToolStripMenuItem
             // 
             this.trackFilterControlToolStripMenuItem.Name = "trackFilterControlToolStripMenuItem";
-            this.trackFilterControlToolStripMenuItem.Size = new System.Drawing.Size(417, 44);
+            this.trackFilterControlToolStripMenuItem.Size = new System.Drawing.Size(461, 66);
             this.trackFilterControlToolStripMenuItem.Text = "Track Filter Control";
             this.trackFilterControlToolStripMenuItem.Click += new System.EventHandler(this.FormTrackFilterStripMenuItem_Click);
             // 
             // buildToolTracksToolStripMenuItem
             // 
             this.buildToolTracksToolStripMenuItem.Name = "buildToolTracksToolStripMenuItem";
-            this.buildToolTracksToolStripMenuItem.Size = new System.Drawing.Size(417, 44);
+            this.buildToolTracksToolStripMenuItem.Size = new System.Drawing.Size(461, 66);
             this.buildToolTracksToolStripMenuItem.Text = "Build Tool Tracks";
             this.buildToolTracksToolStripMenuItem.Click += new System.EventHandler(this.buildToolTracksToolStripMenuItem_Click);
+            // 
+            // chartsToolStripMenuItem
+            // 
+            this.chartsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.steerChartToolStripMenuItem,
+            this.xTEChartToolStripMenuItem,
+            this.toolXTEChartToolStripMenuItem});
+            this.chartsToolStripMenuItem.Name = "chartsToolStripMenuItem";
+            this.chartsToolStripMenuItem.Size = new System.Drawing.Size(461, 66);
+            this.chartsToolStripMenuItem.Text = "Charts";
+            // 
+            // steerChartToolStripMenuItem
+            // 
+            this.steerChartToolStripMenuItem.Image = global::Twol.Properties.Resources.AutoSteerOn;
+            this.steerChartToolStripMenuItem.Name = "steerChartToolStripMenuItem";
+            this.steerChartToolStripMenuItem.Size = new System.Drawing.Size(375, 66);
+            this.steerChartToolStripMenuItem.Text = "Steer Chart";
+            this.steerChartToolStripMenuItem.Click += new System.EventHandler(this.steerChartToolStripMenuItem_Click);
+            // 
+            // xTEChartToolStripMenuItem
+            // 
+            this.xTEChartToolStripMenuItem.Image = global::Twol.Properties.Resources.SnapToPivot;
+            this.xTEChartToolStripMenuItem.Name = "xTEChartToolStripMenuItem";
+            this.xTEChartToolStripMenuItem.Size = new System.Drawing.Size(375, 66);
+            this.xTEChartToolStripMenuItem.Text = "XTE Chart";
+            this.xTEChartToolStripMenuItem.Click += new System.EventHandler(this.xTEChartToolStripMenuItem_Click);
+            // 
+            // toolXTEChartToolStripMenuItem
+            // 
+            this.toolXTEChartToolStripMenuItem.Image = global::Twol.Properties.Resources.SteerZero;
+            this.toolXTEChartToolStripMenuItem.Name = "toolXTEChartToolStripMenuItem";
+            this.toolXTEChartToolStripMenuItem.Size = new System.Drawing.Size(375, 66);
+            this.toolXTEChartToolStripMenuItem.Text = "Tool XTE Chart";
+            this.toolXTEChartToolStripMenuItem.Click += new System.EventHandler(this.toolXTEChartToolStripMenuItem_Click);
             // 
             // panelSim
             // 
@@ -799,7 +838,7 @@ namespace Twol
             this.panelSim.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.94559F));
             this.panelSim.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.50844F));
             this.panelSim.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.69369F));
-            this.panelSim.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 108F));
+            this.panelSim.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 125F));
             this.panelSim.Controls.Add(this.btnResetSteerAngle, 1, 0);
             this.panelSim.Controls.Add(this.btnResetSim, 0, 0);
             this.panelSim.Controls.Add(this.hsbarSteerAngle, 3, 0);
@@ -825,7 +864,7 @@ namespace Twol
             this.btnSimReverseDirection.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSimReverseDirection.Font = new System.Drawing.Font("Tahoma", 9.75F);
             this.btnSimReverseDirection.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSimReverseDirection.Location = new System.Drawing.Point(512, 5);
+            this.btnSimReverseDirection.Location = new System.Drawing.Point(504, 5);
             this.btnSimReverseDirection.Name = "btnSimReverseDirection";
             this.btnSimReverseDirection.Size = new System.Drawing.Size(52, 34);
             this.btnSimReverseDirection.TabIndex = 537;
@@ -841,7 +880,7 @@ namespace Twol
             this.btnSpeedDn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSpeedDn.Font = new System.Drawing.Font("Tahoma", 9.75F);
             this.btnSpeedDn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSpeedDn.Location = new System.Drawing.Point(423, 5);
+            this.btnSpeedDn.Location = new System.Drawing.Point(409, 5);
             this.btnSpeedDn.Name = "btnSpeedDn";
             this.btnSpeedDn.Size = new System.Drawing.Size(50, 34);
             this.btnSpeedDn.TabIndex = 538;
@@ -857,7 +896,7 @@ namespace Twol
             this.btnSimSetSpeedToZero.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSimSetSpeedToZero.Font = new System.Drawing.Font("Tahoma", 9.75F);
             this.btnSimSetSpeedToZero.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSimSetSpeedToZero.Location = new System.Drawing.Point(355, 5);
+            this.btnSimSetSpeedToZero.Location = new System.Drawing.Point(343, 5);
             this.btnSimSetSpeedToZero.Name = "btnSimSetSpeedToZero";
             this.btnSimSetSpeedToZero.Size = new System.Drawing.Size(56, 34);
             this.btnSimSetSpeedToZero.TabIndex = 453;
@@ -873,7 +912,7 @@ namespace Twol
             this.btnSpeedUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSpeedUp.Font = new System.Drawing.Font("Tahoma", 9.75F);
             this.btnSpeedUp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSpeedUp.Location = new System.Drawing.Point(294, 5);
+            this.btnSpeedUp.Location = new System.Drawing.Point(284, 5);
             this.btnSpeedUp.Name = "btnSpeedUp";
             this.btnSpeedUp.Size = new System.Drawing.Size(50, 34);
             this.btnSpeedUp.TabIndex = 539;
@@ -892,7 +931,7 @@ namespace Twol
             this.cboxEnableToolDualGPS.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboxEnableToolDualGPS.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxEnableToolDualGPS.ForeColor = System.Drawing.Color.Black;
-            this.cboxEnableToolDualGPS.Location = new System.Drawing.Point(235, 4);
+            this.cboxEnableToolDualGPS.Location = new System.Drawing.Point(227, 4);
             this.cboxEnableToolDualGPS.Name = "cboxEnableToolDualGPS";
             this.cboxEnableToolDualGPS.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.cboxEnableToolDualGPS.Size = new System.Drawing.Size(48, 37);
@@ -3407,6 +3446,10 @@ namespace Twol
         private System.Windows.Forms.CheckBox cboxEnableToolDualGPS;
         public System.Windows.Forms.Button btnConfiguration;
         private System.Windows.Forms.ToolStripMenuItem trackFilterControlToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem chartsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem steerChartToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem xTEChartToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolXTEChartToolStripMenuItem;
     }
 }
 

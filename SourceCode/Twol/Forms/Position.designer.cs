@@ -318,6 +318,8 @@ namespace Twol
                     pnTool.fix.easting = (Math.Cos(-fixHeading) * rollCorrectionDistance) + pnTool.fix.easting;
                     pnTool.fix.northing = (Math.Sin(-fixHeading) * rollCorrectionDistance) + pnTool.fix.northing;
                 }
+
+                pnTool.AverageTheSpeed();
             }
 
             SmoothCamera();
@@ -456,19 +458,22 @@ namespace Twol
                     PGN_254.pgn[PGN_254.steerAngleLo] = unchecked((byte)(angleX100));
                 }
 
-                // is active mode for tool steer
+                // is active mode for tool steer ******************************************************************************
                 if (Settings.Tool.setToolSteer.isFollowCurrent|| Settings.Tool.setToolSteer.isFollowPivot)
                 {
-                    PGN_233.pgn[PGN_233.speed10] = unchecked((byte)((int)(Math.Abs(pn.avgSpeed) * 10.0)));
+                    PGN_233.pgn[PGN_233.speed10] = unchecked((byte)((int)(Math.Abs(pnTool.avgSpeed) * 10.0)));
 
+                    //sent as mm
                     var distX1000 = (Int16)(guidanceToolXTE * 1000);
                     PGN_233.pgn[PGN_233.xteHi] = unchecked((byte)(distX1000 >> 8));
                     PGN_233.pgn[PGN_233.xteLo] = unchecked((byte)(distX1000));
 
+                    //sent as mm
                     distX1000 = (Int16)(gyd.distanceFromCurrentLine * 1000);
                     PGN_233.pgn[PGN_233.xteVehHi] = unchecked((byte)(distX1000 >> 8));
                     PGN_233.pgn[PGN_233.xteVehLo] = unchecked((byte)(distX1000));
 
+                    //manual control
                     distX1000 = 0;
                     if (gydTool.manualSteerTimer > 0)
                     {
@@ -478,9 +483,9 @@ namespace Twol
 
                     if (gydTool.isZeroToolSteer) 
                     {
-                            distX1000 = (Int16)(mc.actualToolAngleDegrees < 0 ? Settings.Tool.setToolSteer.manualSteerPWM : -Settings.Tool.setToolSteer.manualSteerPWM);
+                            distX1000 = (Int16)(mc.actualActuatorPositionPercent < 0 ? Settings.Tool.setToolSteer.manualSteerPWM : -Settings.Tool.setToolSteer.manualSteerPWM);
 
-                        if (Math.Abs(mc.actualToolAngleDegrees) < 2) gydTool.isZeroToolSteer = false;
+                        if (Math.Abs(mc.actualActuatorPositionPercent) < 5) gydTool.isZeroToolSteer = false;
                     }
 
                     PGN_233.pgn[PGN_233.manualHi] = unchecked((byte)(distX1000 >> 8));
