@@ -626,7 +626,8 @@ namespace Twol
                                 if (length != 14) break;
                                 mc.actualActuatorPositionPercent = (Int16)((data[6] << 8) + data[5]);
                                 mc.actualActuatorPositionPercentChart = (int)mc.actualActuatorPositionPercent;
-                                mc.pwmToolDisplay = data[12];
+                                mc.pwmToolDisplay = (Int16)((data[8] << 8) + data[7]);
+
                                 break;
                             }
 

@@ -168,7 +168,7 @@
             // tabGain
             // 
             this.tabGain.AutoScroll = true;
-            this.tabGain.BackColor = System.Drawing.Color.LightGray;
+            this.tabGain.BackColor = System.Drawing.Color.PaleTurquoise;
             this.tabGain.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.tabGain.Controls.Add(this.hsbarMinPWM_Tool);
             this.tabGain.Controls.Add(this.hsbarHighPWM_Tool);
@@ -325,7 +325,7 @@
             // tabSteer
             // 
             this.tabSteer.AutoScroll = true;
-            this.tabSteer.BackColor = System.Drawing.Color.LightGray;
+            this.tabSteer.BackColor = System.Drawing.Color.PaleTurquoise;
             this.tabSteer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.tabSteer.Controls.Add(this.lblAV_Set);
             this.tabSteer.Controls.Add(this.lblAV_Act);
@@ -414,7 +414,7 @@
             // 
             this.label96.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label96.ForeColor = System.Drawing.Color.Black;
-            this.label96.Location = new System.Drawing.Point(116, 299);
+            this.label96.Location = new System.Drawing.Point(116, 298);
             this.label96.Name = "label96";
             this.label96.Size = new System.Drawing.Size(200, 24);
             this.label96.TabIndex = 577;
@@ -448,7 +448,7 @@
             // 
             this.label101.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label101.ForeColor = System.Drawing.Color.Black;
-            this.label101.Location = new System.Drawing.Point(116, 68);
+            this.label101.Location = new System.Drawing.Point(116, 67);
             this.label101.Name = "label101";
             this.label101.Size = new System.Drawing.Size(200, 24);
             this.label101.TabIndex = 566;
@@ -512,22 +512,23 @@
             // 
             // btnZeroWAS_Tool
             // 
+            this.btnZeroWAS_Tool.BackColor = System.Drawing.Color.MintCream;
             this.btnZeroWAS_Tool.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnZeroWAS_Tool.FlatAppearance.BorderSize = 0;
             this.btnZeroWAS_Tool.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnZeroWAS_Tool.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnZeroWAS_Tool.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnZeroWAS_Tool.Image = global::Twol.Properties.Resources.SteerZero;
-            this.btnZeroWAS_Tool.Location = new System.Drawing.Point(170, 27);
+            this.btnZeroWAS_Tool.Location = new System.Drawing.Point(167, 18);
             this.btnZeroWAS_Tool.Name = "btnZeroWAS_Tool";
             this.btnZeroWAS_Tool.Size = new System.Drawing.Size(98, 30);
             this.btnZeroWAS_Tool.TabIndex = 572;
-            this.btnZeroWAS_Tool.UseVisualStyleBackColor = true;
+            this.btnZeroWAS_Tool.UseVisualStyleBackColor = false;
             this.btnZeroWAS_Tool.Click += new System.EventHandler(this.btnZeroWAS_Tool_Click);
             // 
             // tabDeadzone
             // 
-            this.tabDeadzone.BackColor = System.Drawing.Color.Gainsboro;
+            this.tabDeadzone.BackColor = System.Drawing.Color.PaleTurquoise;
             this.tabDeadzone.Controls.Add(this.hsbarPassiveIntegralGain);
             this.tabDeadzone.Controls.Add(this.hsbarPassiveCurvature);
             this.tabDeadzone.Controls.Add(this.lblManualPWM_Percent);
@@ -587,12 +588,12 @@
             // 
             this.label51.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label51.ForeColor = System.Drawing.Color.Black;
-            this.label51.Location = new System.Drawing.Point(16, 9);
+            this.label51.Location = new System.Drawing.Point(13, 9);
             this.label51.Name = "label51";
-            this.label51.Size = new System.Drawing.Size(124, 25);
+            this.label51.Size = new System.Drawing.Size(164, 25);
             this.label51.TabIndex = 541;
             this.label51.Text = "Dead Zone";
-            this.label51.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label51.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // hsbarManualPWM_Percent
             // 
@@ -701,7 +702,7 @@
             // 
             // nudDeadzoneWidth
             // 
-            this.nudDeadzoneWidth.Location = new System.Drawing.Point(142, 4);
+            this.nudDeadzoneWidth.Location = new System.Drawing.Point(186, 4);
             this.nudDeadzoneWidth.Maximum = 5D;
             this.nudDeadzoneWidth.Minimum = 0.1D;
             this.nudDeadzoneWidth.Mode = Twol.UnitMode.Small;
@@ -738,7 +739,7 @@
             this.lblPWMDisplay.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.lblPWMDisplay.Location = new System.Drawing.Point(64, 11);
             this.lblPWMDisplay.Name = "lblPWMDisplay";
-            this.lblPWMDisplay.Size = new System.Drawing.Size(182, 37);
+            this.lblPWMDisplay.Size = new System.Drawing.Size(92, 37);
             this.lblPWMDisplay.TabIndex = 330;
             this.lblPWMDisplay.Text = "255";
             this.lblPWMDisplay.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;

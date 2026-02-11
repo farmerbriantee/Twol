@@ -49,10 +49,10 @@ namespace Twol
             cboxInvertAPOS.Checked = (Settings.Tool.setToolSteer.isInvertAPOS == 1);
 
             //settings
-            lblPGain_Tool.Text = (hsbarPGain_Tool.Value * 100 / 254).ToString();
-            lblIntegral_Tool.Text = (hsbarIntegral_Tool.Value * 100 / 254).ToString();
-            lblMinPWM_Tool.Text = (hsbarMinPWM_Tool.Value * 100 / 200).ToString();
-            lblHighPWM_Tool.Text = (hsbarHighPWM_Tool.Value * 100 / 254).ToString();
+            lblPGain_Tool.Text = (hsbarPGain_Tool.Value).ToString();
+            lblIntegral_Tool.Text = (hsbarIntegral_Tool.Value).ToString();
+            lblMinPWM_Tool.Text = (hsbarMinPWM_Tool.Value).ToString();
+            lblHighPWM_Tool.Text = (hsbarHighPWM_Tool.Value).ToString();
             lblZeroWAS_Tool.Text = (hsbarZeroWAS_Tool.Value).ToString("N2");
             lblLowHighDistance.Text = hsbarLowHighDistance.Value.ToString();
 
@@ -202,26 +202,37 @@ namespace Twol
         // Gain
         private void hsbarPGain_Tool_Scroll(object sender, ScrollEventArgs e)
         {
-            lblPGain_Tool.Text = (e.NewValue * 100 / 254).ToString();
+            lblPGain_Tool.Text = (e.NewValue).ToString();
             toolSend = true;
             toolCounterSettings = 0;
         }
         private void hsbarHighPWM_Tool_Scroll(object sender, ScrollEventArgs e)
         {
-            lblHighPWM_Tool.Text = (e.NewValue * 100 / 254).ToString();
+            lblHighPWM_Tool.Text = (e.NewValue).ToString();
+
+            if (e.NewValue < hsbarMinPWM_Tool.Value)
+            {
+                hsbarMinPWM_Tool.Value = e.NewValue;
+                lblMinPWM_Tool.Text = (hsbarMinPWM_Tool.Value).ToString();
+            }
             toolSend = true;
             toolCounterSettings = 0;
         }
         private void hsbarMinPWM_Tool_Scroll(object sender, ScrollEventArgs e)
         {
-            lblMinPWM_Tool.Text = (e.NewValue * 100 / 200).ToString();
+            lblMinPWM_Tool.Text = (e.NewValue ).ToString();
+            if (e.NewValue > hsbarHighPWM_Tool.Value)
+            {
+                hsbarHighPWM_Tool.Value = e.NewValue;
+                lblHighPWM_Tool.Text = (hsbarHighPWM_Tool.Value).ToString();
+            }
             toolSend = true;
             toolCounterSettings = 0;
         }
 
         private void hsbarIntegral_Tool_Scroll(object sender, ScrollEventArgs e)
         {
-            lblIntegral_Tool.Text = (e.NewValue * 100 / 254).ToString();
+            lblIntegral_Tool.Text = (e.NewValue).ToString();
             toolSend = true;
             toolCounterSettings = 0;
         }
