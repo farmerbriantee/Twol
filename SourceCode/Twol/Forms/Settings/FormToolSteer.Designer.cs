@@ -63,20 +63,20 @@
             this.btnZeroWAS_Tool = new System.Windows.Forms.Button();
             this.tabDeadzone = new System.Windows.Forms.TabPage();
             this.hsbarPassiveIntegralGain = new System.Windows.Forms.HScrollBar();
-            this.label51 = new System.Windows.Forms.Label();
             this.hsbarPassiveCurvature = new System.Windows.Forms.HScrollBar();
+            this.lblManualPWM_Percent = new System.Windows.Forms.Label();
+            this.label51 = new System.Windows.Forms.Label();
+            this.hsbarManualPWM_Percent = new System.Windows.Forms.HScrollBar();
             this.label6 = new System.Windows.Forms.Label();
-            this.lblPassiveIntegralGain = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.lblCurvatureGain = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.hsbarManualSecondsOn = new System.Windows.Forms.HScrollBar();
+            this.lblPassiveIntegralGain = new System.Windows.Forms.Label();
+            this.lblManualSecondsOn = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.nudDeadzoneWidth = new Twol.NudlessNumericUpDown();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.label82 = new System.Windows.Forms.Label();
-            this.hsbarAcquireFactor = new System.Windows.Forms.HScrollBar();
-            this.lblAcquireFactor = new System.Windows.Forms.Label();
-            this.hsbarLookAheadMult = new System.Windows.Forms.HScrollBar();
-            this.label19 = new System.Windows.Forms.Label();
-            this.lblLookAheadMult = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblPWMDisplay = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -100,25 +100,15 @@
             this.nudToolGuidanceSpacing = new Twol.NudlessNumericUpDown();
             this.nudNudge = new Twol.NudlessNumericUpDown();
             this.tabSetup = new System.Windows.Forms.TabPage();
-            this.lblManualPWM_Percent = new System.Windows.Forms.Label();
-            this.hsbarManualPWM_Percent = new System.Windows.Forms.HScrollBar();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
-            this.lblManualSecondsOn = new System.Windows.Forms.Label();
             this.label83 = new System.Windows.Forms.Label();
-            this.hsbarManualSecondsOn = new System.Windows.Forms.HScrollBar();
             this.cboxInvertAPOS = new System.Windows.Forms.CheckBox();
             this.cboxInvertActuator = new System.Windows.Forms.CheckBox();
             this.tabAntenna = new System.Windows.Forms.TabPage();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label17 = new System.Windows.Forms.Label();
-            this.nudPivotToTool = new Twol.NudlessNumericUpDown();
             this.label16 = new System.Windows.Forms.Label();
-            this.nudPivotToAntenna = new Twol.NudlessNumericUpDown();
-            this.btnRollOffsetUp = new Twol.RepeatButton();
-            this.btnRollOffsetDown = new Twol.RepeatButton();
             this.lblInvertRoll = new System.Windows.Forms.Label();
             this.lblRollZeroOffset = new System.Windows.Forms.Label();
             this.lblZeroRoll = new System.Windows.Forms.Label();
@@ -129,6 +119,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.btnRemoveZeroOffset = new System.Windows.Forms.Button();
+            this.nudPivotToTool = new Twol.NudlessNumericUpDown();
+            this.nudPivotToAntenna = new Twol.NudlessNumericUpDown();
+            this.btnRollOffsetUp = new Twol.RepeatButton();
+            this.btnRollOffsetDown = new Twol.RepeatButton();
             this.nudDualHeadingOffset = new Twol.NudlessNumericUpDown();
             this.nudAntennaHeight_Tool = new Twol.NudlessNumericUpDown();
             this.nudAntennaOffset_Tool = new Twol.NudlessNumericUpDown();
@@ -465,7 +459,6 @@
             // 
             this.hsbarLowHighDistance.LargeChange = 1;
             this.hsbarLowHighDistance.Location = new System.Drawing.Point(76, 212);
-            this.hsbarLowHighDistance.Maximum = 30;
             this.hsbarLowHighDistance.Minimum = 1;
             this.hsbarLowHighDistance.Name = "hsbarLowHighDistance";
             this.hsbarLowHighDistance.Size = new System.Drawing.Size(281, 40);
@@ -544,11 +537,11 @@
             this.tabDeadzone.Controls.Add(this.label13);
             this.tabDeadzone.Controls.Add(this.lblCurvatureGain);
             this.tabDeadzone.Controls.Add(this.label11);
-            this.tabDeadzone.Controls.Add(this.nudDeadzoneWidth);
             this.tabDeadzone.Controls.Add(this.hsbarManualSecondsOn);
             this.tabDeadzone.Controls.Add(this.lblPassiveIntegralGain);
             this.tabDeadzone.Controls.Add(this.lblManualSecondsOn);
             this.tabDeadzone.Controls.Add(this.label7);
+            this.tabDeadzone.Controls.Add(this.nudDeadzoneWidth);
             this.tabDeadzone.ImageIndex = 2;
             this.tabDeadzone.Location = new System.Drawing.Point(4, 52);
             this.tabDeadzone.Name = "tabDeadzone";
@@ -567,6 +560,29 @@
             this.hsbarPassiveIntegralGain.Value = 4;
             this.hsbarPassiveIntegralGain.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hsbarPassiveIntegralGain_Scroll);
             // 
+            // hsbarPassiveCurvature
+            // 
+            this.hsbarPassiveCurvature.LargeChange = 1;
+            this.hsbarPassiveCurvature.Location = new System.Drawing.Point(78, 87);
+            this.hsbarPassiveCurvature.Maximum = 500;
+            this.hsbarPassiveCurvature.Name = "hsbarPassiveCurvature";
+            this.hsbarPassiveCurvature.Size = new System.Drawing.Size(281, 40);
+            this.hsbarPassiveCurvature.TabIndex = 560;
+            this.hsbarPassiveCurvature.Value = 4;
+            this.hsbarPassiveCurvature.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hsbarPassiveCurvature_Scroll);
+            // 
+            // lblManualPWM_Percent
+            // 
+            this.lblManualPWM_Percent.Enabled = false;
+            this.lblManualPWM_Percent.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblManualPWM_Percent.ForeColor = System.Drawing.Color.Black;
+            this.lblManualPWM_Percent.Location = new System.Drawing.Point(3, 346);
+            this.lblManualPWM_Percent.Name = "lblManualPWM_Percent";
+            this.lblManualPWM_Percent.Size = new System.Drawing.Size(60, 35);
+            this.lblManualPWM_Percent.TabIndex = 586;
+            this.lblManualPWM_Percent.Text = "888";
+            this.lblManualPWM_Percent.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // label51
             // 
             this.label51.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -578,16 +594,16 @@
             this.label51.Text = "Dead Zone";
             this.label51.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // hsbarPassiveCurvature
+            // hsbarManualPWM_Percent
             // 
-            this.hsbarPassiveCurvature.LargeChange = 1;
-            this.hsbarPassiveCurvature.Location = new System.Drawing.Point(78, 87);
-            this.hsbarPassiveCurvature.Maximum = 500;
-            this.hsbarPassiveCurvature.Name = "hsbarPassiveCurvature";
-            this.hsbarPassiveCurvature.Size = new System.Drawing.Size(281, 40);
-            this.hsbarPassiveCurvature.TabIndex = 560;
-            this.hsbarPassiveCurvature.Value = 4;
-            this.hsbarPassiveCurvature.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hsbarPassiveCurvature_Scroll);
+            this.hsbarManualPWM_Percent.LargeChange = 1;
+            this.hsbarManualPWM_Percent.Location = new System.Drawing.Point(67, 344);
+            this.hsbarManualPWM_Percent.Minimum = 10;
+            this.hsbarManualPWM_Percent.Name = "hsbarManualPWM_Percent";
+            this.hsbarManualPWM_Percent.Size = new System.Drawing.Size(292, 40);
+            this.hsbarManualPWM_Percent.TabIndex = 585;
+            this.hsbarManualPWM_Percent.Value = 50;
+            this.hsbarManualPWM_Percent.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hsbarManualPWM_Percent_Scroll);
             // 
             // label6
             // 
@@ -600,27 +616,18 @@
             this.label6.Text = "Passive Curve Gain";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lblPassiveIntegralGain
+            // label13
             // 
-            this.lblPassiveIntegralGain.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPassiveIntegralGain.ForeColor = System.Drawing.Color.Black;
-            this.lblPassiveIntegralGain.Location = new System.Drawing.Point(8, 170);
-            this.lblPassiveIntegralGain.Name = "lblPassiveIntegralGain";
-            this.lblPassiveIntegralGain.Size = new System.Drawing.Size(67, 35);
-            this.lblPassiveIntegralGain.TabIndex = 564;
-            this.lblPassiveIntegralGain.Text = "2.5";
-            this.lblPassiveIntegralGain.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label7
-            // 
-            this.label7.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.Black;
-            this.label7.Location = new System.Drawing.Point(74, 140);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(262, 24);
-            this.label7.TabIndex = 565;
-            this.label7.Text = "Passive Integral Gain";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label13.Enabled = false;
+            this.label13.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.ForeColor = System.Drawing.Color.Black;
+            this.label13.Location = new System.Drawing.Point(97, 315);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(273, 26);
+            this.label13.TabIndex = 584;
+            this.label13.Text = "Manual Steer PWM %";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label13.UseCompatibleTextRendering = true;
             // 
             // lblCurvatureGain
             // 
@@ -632,6 +639,65 @@
             this.lblCurvatureGain.TabIndex = 561;
             this.lblCurvatureGain.Text = "28.8";
             this.lblCurvatureGain.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label11
+            // 
+            this.label11.Enabled = false;
+            this.label11.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.Color.Black;
+            this.label11.Location = new System.Drawing.Point(97, 229);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(273, 26);
+            this.label11.TabIndex = 581;
+            this.label11.Text = "Manual Steer Seconds On";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label11.UseCompatibleTextRendering = true;
+            // 
+            // hsbarManualSecondsOn
+            // 
+            this.hsbarManualSecondsOn.LargeChange = 1;
+            this.hsbarManualSecondsOn.Location = new System.Drawing.Point(67, 258);
+            this.hsbarManualSecondsOn.Maximum = 10;
+            this.hsbarManualSecondsOn.Minimum = 1;
+            this.hsbarManualSecondsOn.Name = "hsbarManualSecondsOn";
+            this.hsbarManualSecondsOn.Size = new System.Drawing.Size(292, 40);
+            this.hsbarManualSecondsOn.TabIndex = 582;
+            this.hsbarManualSecondsOn.Value = 2;
+            this.hsbarManualSecondsOn.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hsbarManualSecondsOn_Scroll);
+            // 
+            // lblPassiveIntegralGain
+            // 
+            this.lblPassiveIntegralGain.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPassiveIntegralGain.ForeColor = System.Drawing.Color.Black;
+            this.lblPassiveIntegralGain.Location = new System.Drawing.Point(8, 170);
+            this.lblPassiveIntegralGain.Name = "lblPassiveIntegralGain";
+            this.lblPassiveIntegralGain.Size = new System.Drawing.Size(67, 35);
+            this.lblPassiveIntegralGain.TabIndex = 564;
+            this.lblPassiveIntegralGain.Text = "2.5";
+            this.lblPassiveIntegralGain.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lblManualSecondsOn
+            // 
+            this.lblManualSecondsOn.Enabled = false;
+            this.lblManualSecondsOn.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblManualSecondsOn.ForeColor = System.Drawing.Color.Black;
+            this.lblManualSecondsOn.Location = new System.Drawing.Point(4, 260);
+            this.lblManualSecondsOn.Name = "lblManualSecondsOn";
+            this.lblManualSecondsOn.Size = new System.Drawing.Size(60, 35);
+            this.lblManualSecondsOn.TabIndex = 583;
+            this.lblManualSecondsOn.Text = "888";
+            this.lblManualSecondsOn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label7
+            // 
+            this.label7.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.Black;
+            this.label7.Location = new System.Drawing.Point(74, 140);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(262, 24);
+            this.label7.TabIndex = 565;
+            this.label7.Text = "Passive Integral Gain";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // nudDeadzoneWidth
             // 
@@ -653,79 +719,6 @@
             this.imageList1.Images.SetKeyName(2, "ConS_ImplementHitch.png");
             this.imageList1.Images.SetKeyName(3, "ST_StanleyTab.png");
             this.imageList1.Images.SetKeyName(4, "ST_SteerTab.png");
-            // 
-            // label82
-            // 
-            this.label82.Enabled = false;
-            this.label82.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label82.ForeColor = System.Drawing.Color.Black;
-            this.label82.Location = new System.Drawing.Point(508, 666);
-            this.label82.Name = "label82";
-            this.label82.Size = new System.Drawing.Size(273, 26);
-            this.label82.TabIndex = 548;
-            this.label82.Text = "Acquire Factor";
-            this.label82.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // hsbarAcquireFactor
-            // 
-            this.hsbarAcquireFactor.Enabled = false;
-            this.hsbarAcquireFactor.LargeChange = 1;
-            this.hsbarAcquireFactor.Location = new System.Drawing.Point(498, 696);
-            this.hsbarAcquireFactor.Maximum = 300;
-            this.hsbarAcquireFactor.Minimum = 20;
-            this.hsbarAcquireFactor.Name = "hsbarAcquireFactor";
-            this.hsbarAcquireFactor.Size = new System.Drawing.Size(292, 40);
-            this.hsbarAcquireFactor.TabIndex = 508;
-            this.hsbarAcquireFactor.Value = 75;
-            this.hsbarAcquireFactor.ValueChanged += new System.EventHandler(this.hsbarAcquireFactor_ValueChanged);
-            // 
-            // lblAcquireFactor
-            // 
-            this.lblAcquireFactor.Enabled = false;
-            this.lblAcquireFactor.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAcquireFactor.ForeColor = System.Drawing.Color.Black;
-            this.lblAcquireFactor.Location = new System.Drawing.Point(433, 698);
-            this.lblAcquireFactor.Name = "lblAcquireFactor";
-            this.lblAcquireFactor.Size = new System.Drawing.Size(60, 35);
-            this.lblAcquireFactor.TabIndex = 509;
-            this.lblAcquireFactor.Text = "888";
-            this.lblAcquireFactor.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // hsbarLookAheadMult
-            // 
-            this.hsbarLookAheadMult.Enabled = false;
-            this.hsbarLookAheadMult.LargeChange = 1;
-            this.hsbarLookAheadMult.Location = new System.Drawing.Point(498, 626);
-            this.hsbarLookAheadMult.Maximum = 60;
-            this.hsbarLookAheadMult.Minimum = 5;
-            this.hsbarLookAheadMult.Name = "hsbarLookAheadMult";
-            this.hsbarLookAheadMult.Size = new System.Drawing.Size(292, 40);
-            this.hsbarLookAheadMult.TabIndex = 298;
-            this.hsbarLookAheadMult.Value = 6;
-            // 
-            // label19
-            // 
-            this.label19.Enabled = false;
-            this.label19.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.ForeColor = System.Drawing.Color.Black;
-            this.label19.Location = new System.Drawing.Point(508, 601);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(273, 26);
-            this.label19.TabIndex = 301;
-            this.label19.Text = "Speed Factor";
-            this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblLookAheadMult
-            // 
-            this.lblLookAheadMult.Enabled = false;
-            this.lblLookAheadMult.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLookAheadMult.ForeColor = System.Drawing.Color.Black;
-            this.lblLookAheadMult.Location = new System.Drawing.Point(433, 628);
-            this.lblLookAheadMult.Name = "lblLookAheadMult";
-            this.lblLookAheadMult.Size = new System.Drawing.Size(60, 35);
-            this.lblLookAheadMult.TabIndex = 299;
-            this.lblLookAheadMult.Text = "888";
-            this.lblLookAheadMult.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // panel2
             // 
@@ -1049,55 +1042,6 @@
             this.tabSetup.Size = new System.Drawing.Size(571, 448);
             this.tabSetup.TabIndex = 4;
             // 
-            // lblManualPWM_Percent
-            // 
-            this.lblManualPWM_Percent.Enabled = false;
-            this.lblManualPWM_Percent.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblManualPWM_Percent.ForeColor = System.Drawing.Color.Black;
-            this.lblManualPWM_Percent.Location = new System.Drawing.Point(3, 346);
-            this.lblManualPWM_Percent.Name = "lblManualPWM_Percent";
-            this.lblManualPWM_Percent.Size = new System.Drawing.Size(60, 35);
-            this.lblManualPWM_Percent.TabIndex = 586;
-            this.lblManualPWM_Percent.Text = "888";
-            this.lblManualPWM_Percent.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // hsbarManualPWM_Percent
-            // 
-            this.hsbarManualPWM_Percent.LargeChange = 1;
-            this.hsbarManualPWM_Percent.Location = new System.Drawing.Point(67, 344);
-            this.hsbarManualPWM_Percent.Minimum = 10;
-            this.hsbarManualPWM_Percent.Name = "hsbarManualPWM_Percent";
-            this.hsbarManualPWM_Percent.Size = new System.Drawing.Size(292, 40);
-            this.hsbarManualPWM_Percent.TabIndex = 585;
-            this.hsbarManualPWM_Percent.Value = 50;
-            this.hsbarManualPWM_Percent.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hsbarManualPWM_Percent_Scroll);
-            // 
-            // label13
-            // 
-            this.label13.Enabled = false;
-            this.label13.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.ForeColor = System.Drawing.Color.Black;
-            this.label13.Location = new System.Drawing.Point(97, 315);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(273, 26);
-            this.label13.TabIndex = 584;
-            this.label13.Text = "Manual Steer PWM %";
-            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label13.UseCompatibleTextRendering = true;
-            // 
-            // label11
-            // 
-            this.label11.Enabled = false;
-            this.label11.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.ForeColor = System.Drawing.Color.Black;
-            this.label11.Location = new System.Drawing.Point(97, 229);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(273, 26);
-            this.label11.TabIndex = 581;
-            this.label11.Text = "Manual Steer Seconds On";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label11.UseCompatibleTextRendering = true;
-            // 
             // label31
             // 
             this.label31.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1109,18 +1053,6 @@
             this.label31.Text = "Invert APOS";
             this.label31.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
-            // lblManualSecondsOn
-            // 
-            this.lblManualSecondsOn.Enabled = false;
-            this.lblManualSecondsOn.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblManualSecondsOn.ForeColor = System.Drawing.Color.Black;
-            this.lblManualSecondsOn.Location = new System.Drawing.Point(4, 260);
-            this.lblManualSecondsOn.Name = "lblManualSecondsOn";
-            this.lblManualSecondsOn.Size = new System.Drawing.Size(60, 35);
-            this.lblManualSecondsOn.TabIndex = 583;
-            this.lblManualSecondsOn.Text = "888";
-            this.lblManualSecondsOn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // label83
             // 
             this.label83.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1131,18 +1063,6 @@
             this.label83.TabIndex = 518;
             this.label83.Text = "Invert Actuator Direction";
             this.label83.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            // 
-            // hsbarManualSecondsOn
-            // 
-            this.hsbarManualSecondsOn.LargeChange = 1;
-            this.hsbarManualSecondsOn.Location = new System.Drawing.Point(67, 258);
-            this.hsbarManualSecondsOn.Maximum = 10;
-            this.hsbarManualSecondsOn.Minimum = 1;
-            this.hsbarManualSecondsOn.Name = "hsbarManualSecondsOn";
-            this.hsbarManualSecondsOn.Size = new System.Drawing.Size(292, 40);
-            this.hsbarManualSecondsOn.TabIndex = 582;
-            this.hsbarManualSecondsOn.Value = 2;
-            this.hsbarManualSecondsOn.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hsbarManualSecondsOn_Scroll);
             // 
             // cboxInvertAPOS
             // 
@@ -1192,11 +1112,7 @@
             this.tabAntenna.Controls.Add(this.pictureBox2);
             this.tabAntenna.Controls.Add(this.pictureBox1);
             this.tabAntenna.Controls.Add(this.label17);
-            this.tabAntenna.Controls.Add(this.nudPivotToTool);
             this.tabAntenna.Controls.Add(this.label16);
-            this.tabAntenna.Controls.Add(this.nudPivotToAntenna);
-            this.tabAntenna.Controls.Add(this.btnRollOffsetUp);
-            this.tabAntenna.Controls.Add(this.btnRollOffsetDown);
             this.tabAntenna.Controls.Add(this.lblInvertRoll);
             this.tabAntenna.Controls.Add(this.lblRollZeroOffset);
             this.tabAntenna.Controls.Add(this.lblZeroRoll);
@@ -1207,6 +1123,10 @@
             this.tabAntenna.Controls.Add(this.label3);
             this.tabAntenna.Controls.Add(this.label2);
             this.tabAntenna.Controls.Add(this.btnRemoveZeroOffset);
+            this.tabAntenna.Controls.Add(this.nudPivotToTool);
+            this.tabAntenna.Controls.Add(this.nudPivotToAntenna);
+            this.tabAntenna.Controls.Add(this.btnRollOffsetUp);
+            this.tabAntenna.Controls.Add(this.btnRollOffsetDown);
             this.tabAntenna.Controls.Add(this.nudDualHeadingOffset);
             this.tabAntenna.Controls.Add(this.nudAntennaHeight_Tool);
             this.tabAntenna.Controls.Add(this.nudAntennaOffset_Tool);
@@ -1247,17 +1167,6 @@
             this.label17.Text = "Pivot To Tool";
             this.label17.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
-            // nudPivotToTool
-            // 
-            this.nudPivotToTool.Location = new System.Drawing.Point(406, 256);
-            this.nudPivotToTool.Maximum = 10D;
-            this.nudPivotToTool.Minimum = -10D;
-            this.nudPivotToTool.Mode = Twol.UnitMode.Small;
-            this.nudPivotToTool.Name = "nudPivotToTool";
-            this.nudPivotToTool.Size = new System.Drawing.Size(144, 52);
-            this.nudPivotToTool.TabIndex = 586;
-            this.nudPivotToTool.ValueChanged += new System.EventHandler(this.nudPivotToTool_ValueChanged);
-            // 
             // label16
             // 
             this.label16.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1268,49 +1177,6 @@
             this.label16.TabIndex = 585;
             this.label16.Text = "Pivot To Antenna";
             this.label16.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            // 
-            // nudPivotToAntenna
-            // 
-            this.nudPivotToAntenna.Location = new System.Drawing.Point(208, 255);
-            this.nudPivotToAntenna.Maximum = 10D;
-            this.nudPivotToAntenna.Minimum = -10D;
-            this.nudPivotToAntenna.Mode = Twol.UnitMode.Small;
-            this.nudPivotToAntenna.Name = "nudPivotToAntenna";
-            this.nudPivotToAntenna.Size = new System.Drawing.Size(144, 52);
-            this.nudPivotToAntenna.TabIndex = 584;
-            this.nudPivotToAntenna.ValueChanged += new System.EventHandler(this.nudPivotToAntenna_ValueChanged);
-            // 
-            // btnRollOffsetUp
-            // 
-            this.btnRollOffsetUp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnRollOffsetUp.FlatAppearance.BorderSize = 0;
-            this.btnRollOffsetUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRollOffsetUp.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRollOffsetUp.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnRollOffsetUp.Image = global::Twol.Properties.Resources.UpArrow64;
-            this.btnRollOffsetUp.Location = new System.Drawing.Point(98, 375);
-            this.btnRollOffsetUp.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.btnRollOffsetUp.Name = "btnRollOffsetUp";
-            this.btnRollOffsetUp.Size = new System.Drawing.Size(59, 69);
-            this.btnRollOffsetUp.TabIndex = 534;
-            this.btnRollOffsetUp.UseVisualStyleBackColor = true;
-            this.btnRollOffsetUp.Click += new System.EventHandler(this.btnRollOffsetUp_Click);
-            // 
-            // btnRollOffsetDown
-            // 
-            this.btnRollOffsetDown.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnRollOffsetDown.FlatAppearance.BorderSize = 0;
-            this.btnRollOffsetDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRollOffsetDown.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRollOffsetDown.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnRollOffsetDown.Image = global::Twol.Properties.Resources.DnArrow64;
-            this.btnRollOffsetDown.Location = new System.Drawing.Point(13, 375);
-            this.btnRollOffsetDown.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.btnRollOffsetDown.Name = "btnRollOffsetDown";
-            this.btnRollOffsetDown.Size = new System.Drawing.Size(59, 69);
-            this.btnRollOffsetDown.TabIndex = 533;
-            this.btnRollOffsetDown.UseVisualStyleBackColor = true;
-            this.btnRollOffsetDown.Click += new System.EventHandler(this.btnRollOffsetDown_Click);
             // 
             // lblInvertRoll
             // 
@@ -1444,6 +1310,60 @@
             this.btnRemoveZeroOffset.UseVisualStyleBackColor = false;
             this.btnRemoveZeroOffset.Click += new System.EventHandler(this.btnRemoveZeroOffset_Click);
             // 
+            // nudPivotToTool
+            // 
+            this.nudPivotToTool.Location = new System.Drawing.Point(406, 256);
+            this.nudPivotToTool.Maximum = 10D;
+            this.nudPivotToTool.Minimum = -10D;
+            this.nudPivotToTool.Mode = Twol.UnitMode.Small;
+            this.nudPivotToTool.Name = "nudPivotToTool";
+            this.nudPivotToTool.Size = new System.Drawing.Size(144, 52);
+            this.nudPivotToTool.TabIndex = 586;
+            this.nudPivotToTool.ValueChanged += new System.EventHandler(this.nudPivotToTool_ValueChanged);
+            // 
+            // nudPivotToAntenna
+            // 
+            this.nudPivotToAntenna.Location = new System.Drawing.Point(208, 255);
+            this.nudPivotToAntenna.Maximum = 10D;
+            this.nudPivotToAntenna.Minimum = -10D;
+            this.nudPivotToAntenna.Mode = Twol.UnitMode.Small;
+            this.nudPivotToAntenna.Name = "nudPivotToAntenna";
+            this.nudPivotToAntenna.Size = new System.Drawing.Size(144, 52);
+            this.nudPivotToAntenna.TabIndex = 584;
+            this.nudPivotToAntenna.ValueChanged += new System.EventHandler(this.nudPivotToAntenna_ValueChanged);
+            // 
+            // btnRollOffsetUp
+            // 
+            this.btnRollOffsetUp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnRollOffsetUp.FlatAppearance.BorderSize = 0;
+            this.btnRollOffsetUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRollOffsetUp.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRollOffsetUp.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnRollOffsetUp.Image = global::Twol.Properties.Resources.UpArrow64;
+            this.btnRollOffsetUp.Location = new System.Drawing.Point(98, 375);
+            this.btnRollOffsetUp.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.btnRollOffsetUp.Name = "btnRollOffsetUp";
+            this.btnRollOffsetUp.Size = new System.Drawing.Size(59, 69);
+            this.btnRollOffsetUp.TabIndex = 534;
+            this.btnRollOffsetUp.UseVisualStyleBackColor = true;
+            this.btnRollOffsetUp.Click += new System.EventHandler(this.btnRollOffsetUp_Click);
+            // 
+            // btnRollOffsetDown
+            // 
+            this.btnRollOffsetDown.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnRollOffsetDown.FlatAppearance.BorderSize = 0;
+            this.btnRollOffsetDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRollOffsetDown.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRollOffsetDown.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnRollOffsetDown.Image = global::Twol.Properties.Resources.DnArrow64;
+            this.btnRollOffsetDown.Location = new System.Drawing.Point(13, 375);
+            this.btnRollOffsetDown.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.btnRollOffsetDown.Name = "btnRollOffsetDown";
+            this.btnRollOffsetDown.Size = new System.Drawing.Size(59, 69);
+            this.btnRollOffsetDown.TabIndex = 533;
+            this.btnRollOffsetDown.UseVisualStyleBackColor = true;
+            this.btnRollOffsetDown.Click += new System.EventHandler(this.btnRollOffsetDown_Click);
+            // 
             // nudDualHeadingOffset
             // 
             this.nudDualHeadingOffset.DecimalPlaces = 1;
@@ -1489,15 +1409,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(951, 719);
-            this.Controls.Add(this.label82);
+            this.ClientSize = new System.Drawing.Size(951, 512);
             this.Controls.Add(this.tabToolSetup);
-            this.Controls.Add(this.hsbarAcquireFactor);
-            this.Controls.Add(this.lblAcquireFactor);
-            this.Controls.Add(this.hsbarLookAheadMult);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.label19);
-            this.Controls.Add(this.lblLookAheadMult);
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MaximizeBox = false;
@@ -1526,12 +1440,9 @@
         }
 
         #endregion
-        private System.Windows.Forms.HScrollBar hsbarLookAheadMult;
-        private System.Windows.Forms.Label lblLookAheadMult;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabGain;
-        private System.Windows.Forms.Label label19;
         private System.Windows.Forms.TabPage tabSteer;
         private System.Windows.Forms.Label lblActualSteerAngleUpper;
         private System.Windows.Forms.Label label27;
@@ -1547,10 +1458,7 @@
         private NudlessNumericUpDown nudDeadzoneWidth;
         private System.Windows.Forms.TabPage tabSetup;
         private System.Windows.Forms.Label label51;
-        private System.Windows.Forms.Label lblAcquireFactor;
-        private System.Windows.Forms.HScrollBar hsbarAcquireFactor;
         private System.Windows.Forms.TabPage tabDeadzone;
-        private System.Windows.Forms.Label label82;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.ImageList imageList2;
         private System.Windows.Forms.Label label87;

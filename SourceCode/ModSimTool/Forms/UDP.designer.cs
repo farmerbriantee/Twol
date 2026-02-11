@@ -163,7 +163,7 @@ namespace ModSimTool
                                 //vehicle XTE
                                 //Bit 8,9    set xte * 1000 is sent
                                 bob = (short)(data[8] | data[9] << 8);
-                                XTE = (double)bob * 0.01;
+                                XTE = (double)bob * 0.1;
                                 lblVehXTE.Text = XTE.ToString();
 
                                 //Manual PWM
@@ -173,7 +173,7 @@ namespace ModSimTool
                                 //----------------------------------------------------------------------------
                                 //Serial Send to agopenGPS
 
-                                int sa = (int)(steerAngleActual * 100);
+                                int sa = (int)(APOS);
 
                                 PGN_230[5] = unchecked((byte)((int)(sa)));
                                 PGN_230[6] = unchecked((byte)((int)(sa) >> 8));
@@ -218,40 +218,31 @@ namespace ModSimTool
                                 toolSettings.highPWM = data[8]; // read high pwm
                                 lblHighPWM.Text = toolSettings.highPWM.ToString();
 
-                                toolSettings.CountsPerDegree = data[9]; //sent as setting displayed in AOG
-                                lblWAS_CPD.Text = toolSettings.CountsPerDegree.ToString();
+                                short bob = (short)(data[9] | (data[10] << 8));
+                                toolSettings.offsetAPOS = bob;
+                                lblAPOS_Offset.Text = toolSettings.offsetAPOS.ToString();
 
-                                toolSettings.wasOffset = (data[10]);  //read was zero offset Lo
+                                toolSettings.lowHighDistance = data[11]; //sent as setting displayed in AOG
+                                lblLoHiDistance.Text = toolSettings.lowHighDistance.ToString();
 
-                                toolSettings.wasOffset |= (data[11] << 8);  //read was zero offset Hi
-                                lblWAS_Offset.Text = toolSettings.wasOffset.ToString();
+                                toolSettings.cytronDriver = data[12];
+                                lblCytron.Text = toolSettings.cytronDriver.ToString();
 
-                                toolSettings.AckermanFix = (float)data[12] * 0.01;
-                                lblAckerman.Text = (toolSettings.AckermanFix * 100).ToString("N0") + "%";
+                                toolSettings.InvertAPOS = data[13];
+                                lblInvertAPOS.Text = toolSettings.InvertAPOS.ToString();
 
-                                break;
-                            }
+                                toolSettings.InvertActuator = data[14];
+                                lblInvertActuator.Text = toolSettings.InvertActuator.ToString();
 
-                        case 231: //config
-                            {
-                                toolConfig.InvertWAS = data[5];   // read Kp from AgOpenGPS
-                                lblInvertWAS_Tool.Text = toolConfig.InvertWAS.ToString();
-
-                                toolConfig.InvertSteerMotor = data[6]; //read the minimum amount of PWM for instant on\
-                                lblInvertSteer_Tool.Text = toolConfig.InvertSteerMotor.ToString();
-
-                                toolConfig.MaxSteerAngle = data[7];   // read lowPWM from AgOpenGPS              
-                                lblMaxAngle_Tool.Text = toolConfig.MaxSteerAngle.ToString();
-
-                                toolConfig.IsSteerNotSlide = data[8];   // read lowPWM from AgOpenGPS              
-                                lblIsSteer.Text = toolConfig.IsSteerNotSlide.ToString();
+                                toolSettings.maxActuatorLimit = data[15];
+                                lblMaxActLimit.Text = toolSettings.maxActuatorLimit.ToString() + "%";
 
                                 break;
                             }
 
                         case 200: // Hello from Modules
                             {
-                                int sa = (int)(steerAngleActual * 100);
+                                int sa = (int)(APOS);
 
                                 helloFromAutoSteer[5] = unchecked((byte)((int)(sa)));
                                 helloFromAutoSteer[6] = unchecked((byte)((int)(sa) >> 8));
@@ -450,25 +441,19 @@ namespace ModSimTool
 
     }
 
-
-
-    public static class toolConfig
-    {            
-        public static byte InvertWAS = 0;
-        public static byte InvertSteerMotor = 0;
-        public static byte MaxSteerAngle = 20;
-        public static byte IsSteerNotSlide = 20;
-
-    }
-
     public static class toolSettings
     {
         public static byte Kp = 120;  //proportional gain
         public static byte Integral = 120;  //proportional gain
-        public static int wasOffset = 0;
         public static byte minPWM = 25;
         public static byte highPWM = 160;//max PWM value
-        public static double CountsPerDegree = 30;
-        public static double AckermanFix = 100;     //sent as percent
+        public static int offsetAPOS = 0;
+
+        public static byte lowHighDistance = 1;
+        public static byte cytronDriver = 1;
+        public static byte InvertAPOS = 0;
+        public static byte InvertActuator = 0;
+
+        public static byte maxActuatorLimit = 19;
     }
 }

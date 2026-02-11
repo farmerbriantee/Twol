@@ -22,8 +22,6 @@ namespace Twol
             this.Width = 392;
             this.Height = 550;
 
-            label19.Text = gStr.Get(gs.gsSpeedFactor);
-            label82.Text = gStr.Get(gs.gsAquireFactor);
             label51.Text = gStr.Get(gs.gsDeadzone);
         }
 
@@ -143,8 +141,8 @@ namespace Twol
             PGN_232.pgn[PGN_232.lowHighDistance] = Settings.Tool.setToolSteer.lowHighDistance;
             PGN_232.pgn[PGN_232.maxActuatorLimit] = Settings.Tool.setToolSteer.maxActuatorLimitPercent;
 
-            PGN_232.pgn[PGN_232.wasOffsetHi] = unchecked((byte)(Settings.Tool.setToolSteer.offsetAPOS >> 8));
-            PGN_232.pgn[PGN_232.wasOffsetLo] = unchecked((byte)(Settings.Tool.setToolSteer.offsetAPOS));
+            PGN_232.pgn[PGN_232.offsetAPOSHi] = unchecked((byte)(Settings.Tool.setToolSteer.offsetAPOS >> 8));
+            PGN_232.pgn[PGN_232.offsetAPOSLo] = unchecked((byte)(Settings.Tool.setToolSteer.offsetAPOS));
 
             //save current vehicle
             Settings.Tool.Save();
@@ -166,8 +164,8 @@ namespace Twol
                 PGN_232.pgn[PGN_232.integral] = (byte)hsbarIntegral_Tool.Value;
                 PGN_232.pgn[PGN_232.minPWM] = (byte)hsbarMinPWM_Tool.Value;
                 PGN_232.pgn[PGN_232.highPWM] = (byte)hsbarHighPWM_Tool.Value;
-                PGN_232.pgn[PGN_232.wasOffsetHi] = unchecked((byte)(hsbarZeroWAS_Tool.Value >> 8));
-                PGN_232.pgn[PGN_232.wasOffsetLo] = unchecked((byte)(hsbarZeroWAS_Tool.Value));
+                PGN_232.pgn[PGN_232.offsetAPOSHi] = unchecked((byte)(hsbarZeroWAS_Tool.Value >> 8));
+                PGN_232.pgn[PGN_232.offsetAPOSLo] = unchecked((byte)(hsbarZeroWAS_Tool.Value));
 
                 PGN_232.pgn[PGN_232.lowHighDistance] = (byte)hsbarLowHighDistance.Value;
                 PGN_232.pgn[PGN_232.cytronDriver] = (byte)1;
@@ -231,14 +229,14 @@ namespace Twol
         // WAS_CPD
         private void btnZeroWAS_Tool_Click(object sender, EventArgs e)
         {
-            hsbarZeroWAS_Tool.Value += (int)(hsbarLowHighDistance.Value * -mf.mc.actualActuatorPositionPercent);
-            lblZeroWAS_Tool.Text = (hsbarZeroWAS_Tool.Value / (double)(hsbarLowHighDistance.Value)).ToString("N2");
+            hsbarZeroWAS_Tool.Value = 0;
+            lblZeroWAS_Tool.Text = (hsbarZeroWAS_Tool.Value).ToString("N2");
             toolSend = true;
             toolCounterSettings = 0;
         }
         private void hsbarZeroWAS_Tool_Scroll(object sender, ScrollEventArgs e)
         {
-            lblZeroWAS_Tool.Text = (e.NewValue / (double)(hsbarLowHighDistance.Value)).ToString("N2");
+            lblZeroWAS_Tool.Text = (((double)(e.NewValue)) *0.01).ToString("N2");
             toolSend = true;
             toolCounterSettings = 0;
         }
@@ -254,12 +252,6 @@ namespace Twol
             lblActuatorLimitsPercent.Text = e.NewValue.ToString();
             toolSend = true;
             toolCounterConfig = 0;
-        }
-
-        private void hsbarAcquireFactor_ValueChanged(object sender, EventArgs e)
-        {
-            mf.vehicle.goalPointAcquireFactor = hsbarAcquireFactor.Value * 0.01;
-            lblAcquireFactor.Text = mf.vehicle.goalPointAcquireFactor.ToString();
         }
 
         #endregion

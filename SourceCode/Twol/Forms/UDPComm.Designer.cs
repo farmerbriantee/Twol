@@ -624,8 +624,8 @@ namespace Twol
                         case 230:
                             {
                                 if (length != 14) break;
-                                mc.actualToolAngleChart = (Int16)((data[6] << 8) + data[5]);
-                                mc.actualActuatorPositionPercent = (double)mc.actualToolAngleChart * 0.01;
+                                mc.actualActuatorPositionPercent = (Int16)((data[6] << 8) + data[5]);
+                                mc.actualActuatorPositionPercentChart = (int)mc.actualActuatorPositionPercent;
                                 mc.pwmToolDisplay = data[12];
                                 break;
                             }

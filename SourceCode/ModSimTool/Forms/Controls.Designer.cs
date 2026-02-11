@@ -64,7 +64,20 @@ namespace ModSimTool
             tbarRoll.Value = 0;
         }
 
-        public void TimedMessageBox(int timeout, string title, string message)
+
+        private void tbarAPOS_Scroll(object sender, EventArgs e)
+        {
+            APOS = tbarAPOS.Value;
+            lblAPOS.Text = "APOS: " + APOS.ToString() + "%";
+        }
+         private void lblAPOS_Click(object sender, EventArgs e)
+        {
+            APOS = 0;
+            lblAPOS.Text = "APOS: 0";
+            tbarAPOS.Value = 0;
+        }
+
+       public void TimedMessageBox(int timeout, string title, string message)
         {
             var form = new FormTimedMessage(timeout, title, message);
             form.Show();
@@ -108,6 +121,7 @@ namespace ModSimTool
         private double latDeg, latMinu, longDeg, longMinu, latNMEA, longNMEA;
         public double speed = 0.6, headingTrue, stepDistance = 0.05, steerAngle;
         private double degrees, roll = 0;
+        public int APOS = 0;
 
         private int rollIMU = 0, headingIMU = 0;
 

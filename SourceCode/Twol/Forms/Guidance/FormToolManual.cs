@@ -66,35 +66,5 @@ namespace Twol
                 SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
             }
         }
-
-        private void hsbarManualPWM_Percent_Scroll(object sender, ScrollEventArgs e)
-        {
-            Settings.Tool.setToolSteer.manualSteerPWM = (byte)((double)(hsbarManualPWM_Percent.Value) * 2.5);
-            lblManualPWM_Percent.Text = hsbarManualPWM_Percent.Value.ToString();
-        }
-
-        private void hsbarManualSecondsOn_Scroll(object sender, ScrollEventArgs e)
-        {
-            Settings.Tool.setToolSteer.manualSteerSeconds = (int)hsbarManualSecondsOn.Value;
-            lblManualSecondsOn.Text = hsbarManualSecondsOn.Value.ToString();
-        }
-
-
-        private void pictureBox2_Click(object sender, EventArgs e)
-        {
-            lblManualPWM_Percent.Text = hsbarManualPWM_Percent.Value.ToString();
-            lblManualSecondsOn.Text = hsbarManualSecondsOn.Value.ToString();
-
-            if (this.Height < 60)
-            {
-                this.Height = 240;
-            }
-            else
-            {
-                //this.Height = 57;
-            }
-
-            mf.Activate();
-        }
     }
 }
