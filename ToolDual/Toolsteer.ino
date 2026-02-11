@@ -90,16 +90,15 @@ float gpsSpeed = 0;//speed sent as *10
 float actuatorPositionPercent = 0;
 
 //from Twol
-float toolXTE = 0; //tool XTE from Twol
-float vehicleXTE = 0; //vehicle XTE from Twol
+float toolXTE_cm = 0; //tool XTE from Twol
+float vehicleXTE_cm = 0; //vehicle XTE from Twol
 
 int16_t manualPWM = 0; //manual PWM from Twol
+int16_t pwmDrive = 0, pwmDisplay = 0;
 
-int16_t actuatorPosition = 0; //from steering sensor
-float toolCorrectionError = 0; //setpoint - actual
+int16_t actuatorPosition = 0; //from sensor
 
 //pwm variables
-int16_t pwmDrive = 0, pwmDisplay = 0;
 float pValue = 0;
 float errorAbs = 0;
 float lowHighPerCM = 0;
@@ -280,8 +279,6 @@ void toolsteerLoop()
                     digitalWrite(PWM2_RPWM, 0);
             }
             else digitalWrite(DIR1_RL_ENABLE, 1);
-
-            toolCorrectionError = (toolXTE) * 0.1;   //calculate the error
  
             calcSteeringPID();  //do the pid
             motorDrive();       //out to motors the pwm value
@@ -336,18 +333,20 @@ void ReceiveUdp()
             if (udpPacket.MinorPGN == PGNs::ToolSteerData)  //tool steer data
             {
                 //Bit 5,6   Tool XTE from Twol meters * 1000 (mm)is sent
-                toolXTE = ((float)(udpPacket.udpData[dataIDs::xteLo] | ((int8_t)udpPacket.udpData[dataIDs::xteHi]) << 8)); //low high bytes
-                
+                toolXTE_cm = ((float)(udpPacket.udpData[dataIDs::xteLo] | ((int8_t)udpPacket.udpData[dataIDs::xteHi]) << 8)); //low high bytes
+                toolXTE_cm *= 0.1;
+
                 guidanceStatus = udpPacket.udpData[dataIDs::status];
 
                 //Bit 8,9   vehicle XTE from Twol * 1000 (mm) is sent
-                vehicleXTE = ((float)(udpPacket.udpData[dataIDs::xteVehLo] | ((int8_t)udpPacket.udpData[dataIDs::xteVehHi]) << 8)); //low high bytes
+                vehicleXTE_cm = ((float)(udpPacket.udpData[dataIDs::xteVehLo] | ((int8_t)udpPacket.udpData[dataIDs::xteVehHi]) << 8)); //low high bytes
+				vehicleXTE_cm *= 0.1;
 
                 ////Bit 10 is 10 x speed
                 gpsSpeed = ((float)(udpPacket.udpData[dataIDs::speed10])) * 0.1;
 
-                //Bit 11,12   Tool XTE from Twol * 100 is sent as percentage
-                manualPWM = ((float)(udpPacket.udpData[dataIDs::manualLo] | ((int8_t)udpPacket.udpData[dataIDs::manualHi]) << 8)) * 0.01; //low high bytes
+                //Bit 11,12   Sent as +- 255
+                manualPWM = ((float)(udpPacket.udpData[dataIDs::manualLo] | ((int8_t)udpPacket.udpData[dataIDs::manualHi]) << 8)); //low high bytes
 
                 if ( (bitRead(guidanceStatus, 0) == 0) || (gpsSpeed < 0.1) )
                     {
@@ -360,22 +359,24 @@ void ReceiveUdp()
 
                 //----------------------------------------------------------------------------
                 //Serial Send to Twol
+
+                //APOS Percent Position
                 int16_t sa;
-                sa = (int16_t)(actuatorPositionPercent * 100);
-                
+                sa = (int16_t)(actuatorPositionPercent);                
                 PGN_230[5] = (uint8_t)sa;
                 PGN_230[6] = sa >> 8;
 
-                // heading
-                PGN_230[7] = (uint8_t)9999;
-                PGN_230[8] = 9999 >> 8;
+                //pwmDisplay
+                sa = (int16_t)(pwmDisplay);
+                PGN_230[7] = (uint8_t)sa;
+                PGN_230[8] = sa >> 8;
 
-                // roll
-                PGN_230[9] = (uint8_t)8888;
-                PGN_230[10] = 8888 >> 8;
+				//switches
+                PGN_230[9] = switchByte;
 
-                PGN_230[11] = switchByte;
-                PGN_230[12] = (uint8_t)pwmDisplay;
+                PGN_230[10] = 0;
+                PGN_230[9] = 0;
+                PGN_230[12] = 0;
 
                 //checksum
                 int16_t CK_A = 0;
@@ -418,14 +419,8 @@ void ReceiveUdp()
 
 				toolSettingsInit(); //recalculate the low high per cm for pwm
 
-                //crc
-                //autoSteerUdpData[13];
-
                 //store in EEPROM
                 EEPROM.put(10, toolSettings);
-
-                // Re-Init steer settings
-                toolSettingsInit();
             }
 
             else if (udpPacket.MinorPGN == PGNs::AgIOHello) // Hello from AgIO

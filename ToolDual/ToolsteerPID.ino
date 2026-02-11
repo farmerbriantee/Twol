@@ -1,10 +1,10 @@
 void calcSteeringPID(void)
 {
     //Proportional only
-    pValue = toolSettings.Kp * toolCorrectionError;
+    pValue = toolSettings.Kp * toolXTE_cm * 0.2;
     pwmDrive = (int16_t)pValue;
 
-    errorAbs = abs(toolCorrectionError);
+    errorAbs = abs(toolXTE_cm);
     int16_t newMax = 0;
 
     if (errorAbs < toolSettings.lowHighDistance)
