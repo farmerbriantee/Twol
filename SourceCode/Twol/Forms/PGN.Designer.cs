@@ -93,7 +93,7 @@ namespace Twol
     {
         /// <summary>
         /// PGN - 252 - FC gainProportional=5 HighPWM=6  LowPWM = 7 MinPWM = 8 
-        /// CountsPerDegree = 9 wasOffsetHi = 10 wasOffsetLo = 11 
+        /// CountsPerDegree = 9 offsetAPOSHi = 10 offsetAPOSLo = 11 
         /// </summary>
         public static byte[] pgn = new byte[] { 0x80, 0x81, 0x7f, 252, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0xCC };
         public static int gainProportional = 5;
@@ -362,13 +362,13 @@ namespace Twol
     //ToolSteer Settings
     public static class PGN_232
     {  
-        public static byte[] pgn = new byte[] { 0x80, 0x81, 0x7f, 232, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0xCC };
+        public static byte[] pgn = new byte[] { 0x80, 0x81, 0x7f, 232, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0xCC };
         public static int gainP = 5;
         public static int integral = 6;
         public static int minPWM = 7;
         public static int highPWM = 8;
-        public static int wasOffsetLo = 9;
-        public static int wasOffsetHi = 10;
+        public static int offsetAPOSLo = 9;
+        public static int offsetAPOSHi = 10;
         public static int lowHighDistance = 11;
         public static int cytronDriver = 12;
         public static int invertAPOS = 13;

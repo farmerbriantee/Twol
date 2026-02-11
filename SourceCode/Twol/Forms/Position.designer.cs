@@ -318,6 +318,8 @@ namespace Twol
                     pnTool.fix.easting = (Math.Cos(-fixHeading) * rollCorrectionDistance) + pnTool.fix.easting;
                     pnTool.fix.northing = (Math.Sin(-fixHeading) * rollCorrectionDistance) + pnTool.fix.northing;
                 }
+
+                pnTool.AverageTheSpeed();
             }
 
             SmoothCamera();
