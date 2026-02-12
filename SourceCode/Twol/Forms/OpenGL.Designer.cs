@@ -473,7 +473,7 @@ namespace Twol
                         GL.LineWidth(1);
                         for (int i = 0; i < tRec.recList.Count; i++)
                         {
-                            tRec.recList[i].DrawPolygonFifths(PrimitiveType.LineStrip);
+                            tRec.recList[i].DrawPolygonThirds(PrimitiveType.LineStrip);
                         }
                     }
 

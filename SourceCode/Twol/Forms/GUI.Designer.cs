@@ -331,6 +331,10 @@ namespace Twol
 
         public void LoadSettings()
         {
+            panelNavigation.BringToFront();
+
+            panel_IO.BringToFront();
+
             guidelinesToolStripMenuItem.Checked = Settings.User.isSideGuideLines;
 
             nozzleAppToolStripMenuItem.Checked = Settings.Tool.setApp_isNozzleApp;
