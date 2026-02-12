@@ -283,7 +283,7 @@ void loop()
     // GGA timeout, turn off GPS LED's etc
     if ((systick_millis_count - gpsReadyTime) > 10000) // GGA age over 10sec
     {
-        Serial.println("GGA Timeout");
+        //Serial.println("GGA Timeout");
         digitalWrite(GPSRED_LED, LOW);
         digitalWrite(GPSGREEN_LED, LOW);
         useDual = false;

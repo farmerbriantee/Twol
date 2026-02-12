@@ -348,7 +348,7 @@ void ReceiveUdp()
                 //Bit 11,12   Sent as +- 255
                 manualPWM = ((float)(udpPacket.udpData[dataIDs::manualLo] | ((int8_t)udpPacket.udpData[dataIDs::manualHi]) << 8)); //low high bytes
 
-                if ( (bitRead(guidanceStatus, 0) == 0) || (gpsSpeed < 0.1) )
+                if ( (bitRead(guidanceStatus, 0) == 0) )//|| (gpsSpeed < 0.1) )
                     {
                     watchdogTimer = WATCHDOG_FORCE_VALUE; //turn off steering motor
                 }
@@ -413,6 +413,7 @@ void ReceiveUdp()
 
                 toolSettings.CytronDriver = udpPacket.udpData[settingIDs::cytronDriver];
                 toolSettings.invertAPOS = udpPacket.udpData[settingIDs::invertAPOS];
+                toolSettings.invertActuator = udpPacket.udpData[settingIDs::invertActuator];
                 toolSettings.maxActuatorLimit = udpPacket.udpData[settingIDs::maxActuatorLimit];
 
                 toolSettings.lowHighDistance = udpPacket.udpData[settingIDs::lowHighSetDistance];

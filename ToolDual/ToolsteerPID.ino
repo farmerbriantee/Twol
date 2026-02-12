@@ -58,8 +58,12 @@ void motorDrive(void)
     if (manualPWM != 0)
     {
         pwmDrive = manualPWM;
-		if (toolSettings.invertAPOS) pwmDrive *= -1;
+		if (toolSettings.invertActuator) pwmDrive *= -1;
     }
+
+    if (abs(actuatorPositionPercent) > toolSettings.maxActuatorLimit) pwmDrive = 0;
+
+    pwmDisplay = pwmDrive;
 
     if (toolSettings.CytronDriver)
     {
@@ -76,7 +80,6 @@ void motorDrive(void)
 
         //write out the 0 to 255 value
         analogWrite(PWM1_LPWM, pwmDrive);
-        pwmDisplay = pwmDrive;
     }
     else
     {
