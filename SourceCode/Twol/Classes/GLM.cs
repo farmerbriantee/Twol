@@ -143,14 +143,14 @@ namespace Twol
             }
         }
 
-        public static void DrawPolygonFifths(this List<vec3> polygon, PrimitiveType type = PrimitiveType.LineLoop)
+        public static void DrawPolygonThirds(this List<vec3> polygon, PrimitiveType type = PrimitiveType.LineLoop)
         {
             try
             {
                 if (polygon.Count > 1)
                 {
                     GL.Begin(type);
-                    for (int i = 0; i < polygon.Count; i += 5)
+                    for (int i = 0; i < polygon.Count; i += 3)
                     {
                         GL.Vertex3(polygon[i].easting, polygon[i].northing,0);
                     }
