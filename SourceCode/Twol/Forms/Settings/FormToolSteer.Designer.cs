@@ -459,6 +459,7 @@
             // 
             this.hsbarLowHighDistance.LargeChange = 1;
             this.hsbarLowHighDistance.Location = new System.Drawing.Point(76, 212);
+            this.hsbarLowHighDistance.Maximum = 30;
             this.hsbarLowHighDistance.Minimum = 1;
             this.hsbarLowHighDistance.Name = "hsbarLowHighDistance";
             this.hsbarLowHighDistance.Size = new System.Drawing.Size(281, 40);

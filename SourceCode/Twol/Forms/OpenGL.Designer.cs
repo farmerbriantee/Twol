@@ -1708,9 +1708,9 @@ namespace Twol
                 font.DrawText((int)(((head.Length) * -9)), -45, head, 1.2);
             }
 
-            if (Settings.Tool.setToolSteer.isGPSToolActive )
+            if (pnTool.isDualGPSConnected )
             {
-                string head = Math.Round(ahrsTool.imuRoll, 1).ToString();
+                string head = Math.Round(pnTool.dualRoll, 1).ToString();
                 font.DrawText((int)(((head.Length) * -9)), -85, head, 1.2);
             }
 

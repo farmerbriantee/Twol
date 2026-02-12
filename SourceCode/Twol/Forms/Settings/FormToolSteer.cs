@@ -40,11 +40,14 @@ namespace Twol
             hsbarIntegral_Tool.Value = Settings.Tool.setToolSteer.integral;
             hsbarMinPWM_Tool.Value = Settings.Tool.setToolSteer.minPWM;
             hsbarHighPWM_Tool.Value = Settings.Tool.setToolSteer.highPWM;
+            
+            if (Settings.Tool.setToolSteer.lowHighDistance > 30) Settings.Tool.setToolSteer.lowHighDistance = 30;
             hsbarLowHighDistance.Value = Settings.Tool.setToolSteer.lowHighDistance;
             hsbarZeroWAS_Tool.Value = Settings.Tool.setToolSteer.offsetAPOS;
 
-            //config
+            if (Settings.Tool.setToolSteer.maxActuatorLimitPercent > 100) Settings.Tool.setToolSteer.maxActuatorLimitPercent = 100;
             hsbarActuatorLimitsPercent.Value = Settings.Tool.setToolSteer.maxActuatorLimitPercent;
+
             cboxInvertActuator.Checked = (Settings.Tool.setToolSteer.isInvertActuator == 1);
             cboxInvertAPOS.Checked = (Settings.Tool.setToolSteer.isInvertAPOS == 1);
 
@@ -55,8 +58,6 @@ namespace Twol
             lblHighPWM_Tool.Text = (hsbarHighPWM_Tool.Value).ToString();
             lblZeroWAS_Tool.Text = (hsbarZeroWAS_Tool.Value).ToString("N2");
             lblLowHighDistance.Text = hsbarLowHighDistance.Value.ToString();
-
-            //config
             lblActuatorLimitsPercent.Text = hsbarActuatorLimitsPercent.Value.ToString();
 
             //antenna

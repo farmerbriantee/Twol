@@ -116,12 +116,12 @@ namespace ModSimTool
             // 
             this.label49.AutoSize = true;
             this.label49.BackColor = System.Drawing.Color.Transparent;
-            this.label49.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label49.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label49.ForeColor = System.Drawing.Color.Black;
-            this.label49.Location = new System.Drawing.Point(163, 453);
+            this.label49.Location = new System.Drawing.Point(183, 419);
             this.label49.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label49.Name = "label49";
-            this.label49.Size = new System.Drawing.Size(86, 19);
+            this.label49.Size = new System.Drawing.Size(79, 18);
             this.label49.TabIndex = 571;
             this.label49.Text = "MaxActLim";
             // 
@@ -129,12 +129,12 @@ namespace ModSimTool
             // 
             this.label36.AutoSize = true;
             this.label36.BackColor = System.Drawing.Color.Transparent;
-            this.label36.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label36.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label36.ForeColor = System.Drawing.Color.Black;
-            this.label36.Location = new System.Drawing.Point(14, 481);
+            this.label36.Location = new System.Drawing.Point(15, 439);
             this.label36.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(83, 19);
+            this.label36.Size = new System.Drawing.Size(75, 18);
             this.label36.TabIndex = 593;
             this.label36.Text = "APOS_Ofs";
             // 
@@ -142,12 +142,12 @@ namespace ModSimTool
             // 
             this.lblMaxActLimit.AutoSize = true;
             this.lblMaxActLimit.BackColor = System.Drawing.Color.Transparent;
-            this.lblMaxActLimit.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMaxActLimit.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMaxActLimit.ForeColor = System.Drawing.Color.Black;
-            this.lblMaxActLimit.Location = new System.Drawing.Point(249, 453);
+            this.lblMaxActLimit.Location = new System.Drawing.Point(264, 419);
             this.lblMaxActLimit.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblMaxActLimit.Name = "lblMaxActLimit";
-            this.lblMaxActLimit.Size = new System.Drawing.Size(14, 19);
+            this.lblMaxActLimit.Size = new System.Drawing.Size(13, 18);
             this.lblMaxActLimit.TabIndex = 572;
             this.lblMaxActLimit.Text = ".";
             // 
@@ -155,12 +155,12 @@ namespace ModSimTool
             // 
             this.label41.AutoSize = true;
             this.label41.BackColor = System.Drawing.Color.Transparent;
-            this.label41.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label41.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label41.ForeColor = System.Drawing.Color.Black;
-            this.label41.Location = new System.Drawing.Point(70, 369);
+            this.label41.Location = new System.Drawing.Point(65, 351);
             this.label41.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(27, 19);
+            this.label41.Size = new System.Drawing.Size(25, 18);
             this.label41.TabIndex = 596;
             this.label41.Text = "Kp";
             // 
@@ -168,12 +168,12 @@ namespace ModSimTool
             // 
             this.label25.AutoSize = true;
             this.label25.BackColor = System.Drawing.Color.Transparent;
-            this.label25.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label25.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label25.ForeColor = System.Drawing.Color.Black;
-            this.label25.Location = new System.Drawing.Point(157, 397);
+            this.label25.Location = new System.Drawing.Point(178, 375);
             this.label25.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(92, 19);
+            this.label25.Size = new System.Drawing.Size(84, 18);
             this.label25.TabIndex = 575;
             this.label25.Text = "InvertAPOS";
             // 
@@ -181,12 +181,12 @@ namespace ModSimTool
             // 
             this.label40.AutoSize = true;
             this.label40.BackColor = System.Drawing.Color.Transparent;
-            this.label40.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label40.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label40.ForeColor = System.Drawing.Color.Black;
-            this.label40.Location = new System.Drawing.Point(20, 453);
+            this.label40.Location = new System.Drawing.Point(20, 417);
             this.label40.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(77, 19);
+            this.label40.Size = new System.Drawing.Size(70, 18);
             this.label40.TabIndex = 595;
             this.label40.Text = "HighPWM";
             // 
@@ -194,12 +194,12 @@ namespace ModSimTool
             // 
             this.lblInvertAPOS.AutoSize = true;
             this.lblInvertAPOS.BackColor = System.Drawing.Color.Transparent;
-            this.lblInvertAPOS.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInvertAPOS.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblInvertAPOS.ForeColor = System.Drawing.Color.Black;
-            this.lblInvertAPOS.Location = new System.Drawing.Point(249, 397);
+            this.lblInvertAPOS.Location = new System.Drawing.Point(264, 375);
             this.lblInvertAPOS.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblInvertAPOS.Name = "lblInvertAPOS";
-            this.lblInvertAPOS.Size = new System.Drawing.Size(14, 19);
+            this.lblInvertAPOS.Size = new System.Drawing.Size(13, 18);
             this.lblInvertAPOS.TabIndex = 576;
             this.lblInvertAPOS.Text = ".";
             // 
@@ -207,12 +207,12 @@ namespace ModSimTool
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(33, 397);
+            this.label1.Location = new System.Drawing.Point(32, 373);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(64, 19);
+            this.label1.Size = new System.Drawing.Size(58, 18);
             this.label1.TabIndex = 578;
             this.label1.Text = "Integral";
             // 
@@ -220,12 +220,12 @@ namespace ModSimTool
             // 
             this.label38.AutoSize = true;
             this.label38.BackColor = System.Drawing.Color.Transparent;
-            this.label38.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label38.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label38.ForeColor = System.Drawing.Color.Black;
-            this.label38.Location = new System.Drawing.Point(28, 425);
+            this.label38.Location = new System.Drawing.Point(26, 395);
             this.label38.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(69, 19);
+            this.label38.Size = new System.Drawing.Size(64, 18);
             this.label38.TabIndex = 591;
             this.label38.Text = "MinPWM";
             // 
@@ -233,12 +233,12 @@ namespace ModSimTool
             // 
             this.label23.AutoSize = true;
             this.label23.BackColor = System.Drawing.Color.Transparent;
-            this.label23.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label23.ForeColor = System.Drawing.Color.Black;
-            this.label23.Location = new System.Drawing.Point(175, 425);
+            this.label23.Location = new System.Drawing.Point(193, 397);
             this.label23.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(74, 19);
+            this.label23.Size = new System.Drawing.Size(69, 18);
             this.label23.TabIndex = 573;
             this.label23.Text = "InvertAct";
             // 
@@ -246,12 +246,12 @@ namespace ModSimTool
             // 
             this.lblIntegral.AutoSize = true;
             this.lblIntegral.BackColor = System.Drawing.Color.Transparent;
-            this.lblIntegral.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblIntegral.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblIntegral.ForeColor = System.Drawing.Color.Black;
-            this.lblIntegral.Location = new System.Drawing.Point(104, 397);
+            this.lblIntegral.Location = new System.Drawing.Point(93, 373);
             this.lblIntegral.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblIntegral.Name = "lblIntegral";
-            this.lblIntegral.Size = new System.Drawing.Size(14, 19);
+            this.lblIntegral.Size = new System.Drawing.Size(13, 18);
             this.lblIntegral.TabIndex = 577;
             this.lblIntegral.Text = ".";
             // 
@@ -259,12 +259,12 @@ namespace ModSimTool
             // 
             this.lblInvertActuator.AutoSize = true;
             this.lblInvertActuator.BackColor = System.Drawing.Color.Transparent;
-            this.lblInvertActuator.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInvertActuator.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblInvertActuator.ForeColor = System.Drawing.Color.Black;
-            this.lblInvertActuator.Location = new System.Drawing.Point(249, 425);
+            this.lblInvertActuator.Location = new System.Drawing.Point(264, 397);
             this.lblInvertActuator.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblInvertActuator.Name = "lblInvertActuator";
-            this.lblInvertActuator.Size = new System.Drawing.Size(14, 19);
+            this.lblInvertActuator.Size = new System.Drawing.Size(13, 18);
             this.lblInvertActuator.TabIndex = 574;
             this.lblInvertActuator.Text = ".";
             // 
@@ -272,12 +272,12 @@ namespace ModSimTool
             // 
             this.lblMinPWM.AutoSize = true;
             this.lblMinPWM.BackColor = System.Drawing.Color.Transparent;
-            this.lblMinPWM.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMinPWM.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMinPWM.ForeColor = System.Drawing.Color.Black;
-            this.lblMinPWM.Location = new System.Drawing.Point(104, 425);
+            this.lblMinPWM.Location = new System.Drawing.Point(93, 395);
             this.lblMinPWM.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblMinPWM.Name = "lblMinPWM";
-            this.lblMinPWM.Size = new System.Drawing.Size(14, 19);
+            this.lblMinPWM.Size = new System.Drawing.Size(13, 18);
             this.lblMinPWM.TabIndex = 588;
             this.lblMinPWM.Text = ".";
             // 
@@ -285,12 +285,12 @@ namespace ModSimTool
             // 
             this.lblAPOS_Offset.AutoSize = true;
             this.lblAPOS_Offset.BackColor = System.Drawing.Color.Transparent;
-            this.lblAPOS_Offset.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAPOS_Offset.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAPOS_Offset.ForeColor = System.Drawing.Color.Black;
-            this.lblAPOS_Offset.Location = new System.Drawing.Point(104, 481);
+            this.lblAPOS_Offset.Location = new System.Drawing.Point(93, 439);
             this.lblAPOS_Offset.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblAPOS_Offset.Name = "lblAPOS_Offset";
-            this.lblAPOS_Offset.Size = new System.Drawing.Size(14, 19);
+            this.lblAPOS_Offset.Size = new System.Drawing.Size(13, 18);
             this.lblAPOS_Offset.TabIndex = 584;
             this.lblAPOS_Offset.Text = ".";
             // 
@@ -298,12 +298,12 @@ namespace ModSimTool
             // 
             this.lblKp.AutoSize = true;
             this.lblKp.BackColor = System.Drawing.Color.Transparent;
-            this.lblKp.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblKp.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblKp.ForeColor = System.Drawing.Color.Black;
-            this.lblKp.Location = new System.Drawing.Point(104, 369);
+            this.lblKp.Location = new System.Drawing.Point(93, 351);
             this.lblKp.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblKp.Name = "lblKp";
-            this.lblKp.Size = new System.Drawing.Size(14, 19);
+            this.lblKp.Size = new System.Drawing.Size(13, 18);
             this.lblKp.TabIndex = 587;
             this.lblKp.Text = ".";
             // 
@@ -311,12 +311,12 @@ namespace ModSimTool
             // 
             this.lblHighPWM.AutoSize = true;
             this.lblHighPWM.BackColor = System.Drawing.Color.Transparent;
-            this.lblHighPWM.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHighPWM.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHighPWM.ForeColor = System.Drawing.Color.Black;
-            this.lblHighPWM.Location = new System.Drawing.Point(104, 453);
+            this.lblHighPWM.Location = new System.Drawing.Point(93, 417);
             this.lblHighPWM.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblHighPWM.Name = "lblHighPWM";
-            this.lblHighPWM.Size = new System.Drawing.Size(14, 19);
+            this.lblHighPWM.Size = new System.Drawing.Size(13, 18);
             this.lblHighPWM.TabIndex = 585;
             this.lblHighPWM.Text = ".";
             // 
@@ -326,7 +326,7 @@ namespace ModSimTool
             this.lblScanReply.BackColor = System.Drawing.Color.Transparent;
             this.lblScanReply.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblScanReply.ForeColor = System.Drawing.Color.Black;
-            this.lblScanReply.Location = new System.Drawing.Point(56, 346);
+            this.lblScanReply.Location = new System.Drawing.Point(138, 325);
             this.lblScanReply.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblScanReply.Name = "lblScanReply";
             this.lblScanReply.Size = new System.Drawing.Size(31, 19);
@@ -442,7 +442,7 @@ namespace ModSimTool
             this.lblKmh.BackColor = System.Drawing.Color.White;
             this.lblKmh.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblKmh.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblKmh.Location = new System.Drawing.Point(155, 86);
+            this.lblKmh.Location = new System.Drawing.Point(155, 89);
             this.lblKmh.Name = "lblKmh";
             this.lblKmh.Size = new System.Drawing.Size(103, 24);
             this.lblKmh.TabIndex = 529;
@@ -454,7 +454,7 @@ namespace ModSimTool
             // 
             this.mSec.AutoSize = true;
             this.mSec.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mSec.Location = new System.Drawing.Point(260, 91);
+            this.mSec.Location = new System.Drawing.Point(260, 94);
             this.mSec.Name = "mSec";
             this.mSec.Size = new System.Drawing.Size(60, 16);
             this.mSec.TabIndex = 528;
@@ -493,7 +493,7 @@ namespace ModSimTool
             // tbarSpeed
             // 
             this.tbarSpeed.LargeChange = 10;
-            this.tbarSpeed.Location = new System.Drawing.Point(149, 117);
+            this.tbarSpeed.Location = new System.Drawing.Point(149, 120);
             this.tbarSpeed.Maximum = 500;
             this.tbarSpeed.Minimum = -200;
             this.tbarSpeed.Name = "tbarSpeed";
@@ -528,7 +528,7 @@ namespace ModSimTool
             // tbarRoll
             // 
             this.tbarRoll.LargeChange = 10;
-            this.tbarRoll.Location = new System.Drawing.Point(157, 190);
+            this.tbarRoll.Location = new System.Drawing.Point(157, 196);
             this.tbarRoll.Maximum = 200;
             this.tbarRoll.Minimum = -200;
             this.tbarRoll.Name = "tbarRoll";
@@ -542,7 +542,7 @@ namespace ModSimTool
             this.lblRoll.BackColor = System.Drawing.Color.White;
             this.lblRoll.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblRoll.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRoll.Location = new System.Drawing.Point(187, 161);
+            this.lblRoll.Location = new System.Drawing.Point(187, 167);
             this.lblRoll.Name = "lblRoll";
             this.lblRoll.Size = new System.Drawing.Size(114, 21);
             this.lblRoll.TabIndex = 559;
@@ -664,12 +664,12 @@ namespace ModSimTool
             // 
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(208, 292);
+            this.label3.Location = new System.Drawing.Point(227, 287);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(37, 19);
+            this.label3.Size = new System.Drawing.Size(35, 18);
             this.label3.TabIndex = 581;
             this.label3.Text = "XTE";
             // 
@@ -677,12 +677,12 @@ namespace ModSimTool
             // 
             this.lblXTE.AutoSize = true;
             this.lblXTE.BackColor = System.Drawing.Color.Transparent;
-            this.lblXTE.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblXTE.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblXTE.ForeColor = System.Drawing.Color.Black;
-            this.lblXTE.Location = new System.Drawing.Point(248, 292);
+            this.lblXTE.Location = new System.Drawing.Point(264, 287);
             this.lblXTE.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblXTE.Name = "lblXTE";
-            this.lblXTE.Size = new System.Drawing.Size(14, 19);
+            this.lblXTE.Size = new System.Drawing.Size(13, 18);
             this.lblXTE.TabIndex = 582;
             this.lblXTE.Text = ".";
             // 
@@ -690,12 +690,12 @@ namespace ModSimTool
             // 
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.Transparent;
-            this.label5.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(193, 317);
+            this.label5.Location = new System.Drawing.Point(213, 309);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(52, 19);
+            this.label5.Size = new System.Drawing.Size(49, 18);
             this.label5.TabIndex = 579;
             this.label5.Text = "Status";
             // 
@@ -703,12 +703,12 @@ namespace ModSimTool
             // 
             this.lblStatus.AutoSize = true;
             this.lblStatus.BackColor = System.Drawing.Color.Transparent;
-            this.lblStatus.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStatus.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblStatus.ForeColor = System.Drawing.Color.Black;
-            this.lblStatus.Location = new System.Drawing.Point(248, 317);
+            this.lblStatus.Location = new System.Drawing.Point(264, 312);
             this.lblStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(14, 19);
+            this.lblStatus.Size = new System.Drawing.Size(13, 18);
             this.lblStatus.TabIndex = 580;
             this.lblStatus.Text = ".";
             // 
@@ -716,12 +716,12 @@ namespace ModSimTool
             // 
             this.label8.AutoSize = true;
             this.label8.BackColor = System.Drawing.Color.Transparent;
-            this.label8.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.Black;
-            this.label8.Location = new System.Drawing.Point(193, 237);
+            this.label8.Location = new System.Drawing.Point(214, 243);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(52, 19);
+            this.label8.Size = new System.Drawing.Size(48, 18);
             this.label8.TabIndex = 577;
             this.label8.Text = "Speed";
             // 
@@ -729,12 +729,12 @@ namespace ModSimTool
             // 
             this.lblSpeed.AutoSize = true;
             this.lblSpeed.BackColor = System.Drawing.Color.Transparent;
-            this.lblSpeed.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSpeed.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSpeed.ForeColor = System.Drawing.Color.Black;
-            this.lblSpeed.Location = new System.Drawing.Point(248, 237);
+            this.lblSpeed.Location = new System.Drawing.Point(264, 243);
             this.lblSpeed.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSpeed.Name = "lblSpeed";
-            this.lblSpeed.Size = new System.Drawing.Size(14, 19);
+            this.lblSpeed.Size = new System.Drawing.Size(13, 18);
             this.lblSpeed.TabIndex = 578;
             this.lblSpeed.Text = ".";
             // 
@@ -752,12 +752,12 @@ namespace ModSimTool
             // 
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(186, 343);
+            this.label4.Location = new System.Drawing.Point(208, 331);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(59, 19);
+            this.label4.Size = new System.Drawing.Size(54, 18);
             this.label4.TabIndex = 600;
             this.label4.Text = "Manual";
             // 
@@ -765,12 +765,12 @@ namespace ModSimTool
             // 
             this.lblManualPWM.AutoSize = true;
             this.lblManualPWM.BackColor = System.Drawing.Color.Transparent;
-            this.lblManualPWM.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblManualPWM.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblManualPWM.ForeColor = System.Drawing.Color.Black;
-            this.lblManualPWM.Location = new System.Drawing.Point(248, 343);
+            this.lblManualPWM.Location = new System.Drawing.Point(264, 331);
             this.lblManualPWM.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblManualPWM.Name = "lblManualPWM";
-            this.lblManualPWM.Size = new System.Drawing.Size(14, 19);
+            this.lblManualPWM.Size = new System.Drawing.Size(13, 18);
             this.lblManualPWM.TabIndex = 601;
             this.lblManualPWM.Text = ".";
             // 
@@ -778,12 +778,12 @@ namespace ModSimTool
             // 
             this.label7.AutoSize = true;
             this.label7.BackColor = System.Drawing.Color.Transparent;
-            this.label7.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.Black;
-            this.label7.Location = new System.Drawing.Point(172, 264);
+            this.label7.Location = new System.Drawing.Point(194, 265);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(73, 19);
+            this.label7.Size = new System.Drawing.Size(68, 18);
             this.label7.TabIndex = 602;
             this.label7.Text = "XTE_Veh";
             // 
@@ -791,12 +791,12 @@ namespace ModSimTool
             // 
             this.lblVehXTE.AutoSize = true;
             this.lblVehXTE.BackColor = System.Drawing.Color.Transparent;
-            this.lblVehXTE.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblVehXTE.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblVehXTE.ForeColor = System.Drawing.Color.Black;
-            this.lblVehXTE.Location = new System.Drawing.Point(248, 264);
+            this.lblVehXTE.Location = new System.Drawing.Point(264, 265);
             this.lblVehXTE.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVehXTE.Name = "lblVehXTE";
-            this.lblVehXTE.Size = new System.Drawing.Size(14, 19);
+            this.lblVehXTE.Size = new System.Drawing.Size(13, 18);
             this.lblVehXTE.TabIndex = 603;
             this.lblVehXTE.Text = ".";
             // 
@@ -804,12 +804,12 @@ namespace ModSimTool
             // 
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.Color.Transparent;
-            this.label6.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.Black;
-            this.label6.Location = new System.Drawing.Point(195, 369);
+            this.label6.Location = new System.Drawing.Point(211, 353);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(56, 19);
+            this.label6.Size = new System.Drawing.Size(51, 18);
             this.label6.TabIndex = 604;
             this.label6.Text = "Cytron";
             // 
@@ -817,23 +817,23 @@ namespace ModSimTool
             // 
             this.lblCytron.AutoSize = true;
             this.lblCytron.BackColor = System.Drawing.Color.Transparent;
-            this.lblCytron.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCytron.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCytron.ForeColor = System.Drawing.Color.Black;
-            this.lblCytron.Location = new System.Drawing.Point(249, 369);
+            this.lblCytron.Location = new System.Drawing.Point(264, 353);
             this.lblCytron.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCytron.Name = "lblCytron";
-            this.lblCytron.Size = new System.Drawing.Size(14, 19);
+            this.lblCytron.Size = new System.Drawing.Size(13, 18);
             this.lblCytron.TabIndex = 605;
             this.lblCytron.Text = ".";
             // 
             // tbarAPOS
             // 
             this.tbarAPOS.LargeChange = 10;
-            this.tbarAPOS.Location = new System.Drawing.Point(17, 530);
+            this.tbarAPOS.Location = new System.Drawing.Point(14, 469);
             this.tbarAPOS.Maximum = 100;
             this.tbarAPOS.Minimum = -100;
             this.tbarAPOS.Name = "tbarAPOS";
-            this.tbarAPOS.Size = new System.Drawing.Size(186, 64);
+            this.tbarAPOS.Size = new System.Drawing.Size(131, 64);
             this.tbarAPOS.TabIndex = 606;
             this.tbarAPOS.TickFrequency = 50;
             this.tbarAPOS.Scroll += new System.EventHandler(this.tbarAPOS_Scroll);
@@ -843,9 +843,9 @@ namespace ModSimTool
             this.lblAPOS.BackColor = System.Drawing.Color.White;
             this.lblAPOS.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblAPOS.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAPOS.Location = new System.Drawing.Point(37, 573);
+            this.lblAPOS.Location = new System.Drawing.Point(178, 480);
             this.lblAPOS.Name = "lblAPOS";
-            this.lblAPOS.Size = new System.Drawing.Size(147, 21);
+            this.lblAPOS.Size = new System.Drawing.Size(123, 21);
             this.lblAPOS.TabIndex = 607;
             this.lblAPOS.Text = "APOS: 0%";
             this.lblAPOS.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -855,12 +855,12 @@ namespace ModSimTool
             // 
             this.label10.AutoSize = true;
             this.label10.BackColor = System.Drawing.Color.Transparent;
-            this.label10.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.Black;
-            this.label10.Location = new System.Drawing.Point(181, 481);
+            this.label10.Location = new System.Drawing.Point(203, 441);
             this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(68, 19);
+            this.label10.Size = new System.Drawing.Size(59, 18);
             this.label10.TabIndex = 608;
             this.label10.Text = "LoHiDist";
             // 
@@ -868,12 +868,12 @@ namespace ModSimTool
             // 
             this.lblLoHiDistance.AutoSize = true;
             this.lblLoHiDistance.BackColor = System.Drawing.Color.Transparent;
-            this.lblLoHiDistance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLoHiDistance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLoHiDistance.ForeColor = System.Drawing.Color.Black;
-            this.lblLoHiDistance.Location = new System.Drawing.Point(249, 481);
+            this.lblLoHiDistance.Location = new System.Drawing.Point(264, 441);
             this.lblLoHiDistance.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblLoHiDistance.Name = "lblLoHiDistance";
-            this.lblLoHiDistance.Size = new System.Drawing.Size(14, 19);
+            this.lblLoHiDistance.Size = new System.Drawing.Size(13, 18);
             this.lblLoHiDistance.TabIndex = 609;
             this.lblLoHiDistance.Text = ".";
             // 
@@ -883,7 +883,7 @@ namespace ModSimTool
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Azure;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ClientSize = new System.Drawing.Size(346, 601);
+            this.ClientSize = new System.Drawing.Size(346, 365);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.lblLoHiDistance);
             this.Controls.Add(this.lblAPOS);
