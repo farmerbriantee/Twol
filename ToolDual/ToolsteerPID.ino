@@ -58,11 +58,23 @@ void motorDrive(void)
     if (manualPWM != 0)
     {
         pwmDrive = manualPWM;
-		if (toolSettings.invertActuator) pwmDrive *= -1;
+
     }
 
-    if (abs(actuatorPositionPercent) > toolSettings.maxActuatorLimit) pwmDrive = 0;
+    if (abs(actuatorPositionPercent) > toolSettings.maxActuatorLimit) 
+    {
+      if (actuatorPositionPercent > 0 && pwmDrive > 0)
+      {
+          pwmDrive = 0;
+      }
+      else if (actuatorPositionPercent < 0 && pwmDrive < 0)
+      {
+          pwmDrive = 0;
+      }
+    }
 
+    if (toolSettings.invertActuator) pwmDrive *= -1;
+ 
     pwmDisplay = pwmDrive;
 
     if (toolSettings.CytronDriver)
