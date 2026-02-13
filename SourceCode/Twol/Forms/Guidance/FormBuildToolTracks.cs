@@ -42,6 +42,9 @@ namespace Twol
 
         private void FormBuildToolTracks_Load(object sender, EventArgs e)
         {
+            if (mf.toolRecordSaveList != null && mf.toolRecordSaveList.Count != 0) 
+                mf.FileSaveToolRecordList(true);
+
             Size = Settings.User.setWindow_BuildToolTracksSize;
 
             if (!mf.IsOnScreen(Location, Size, 1))
