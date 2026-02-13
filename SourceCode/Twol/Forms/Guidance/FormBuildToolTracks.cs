@@ -128,18 +128,15 @@ namespace Twol
             {
             }
             Settings.User.setWindow_BuildToolTracksSize = Size;
+
+            mf.trks.GetNextTrack(true);
+            mf.trks.GetNextTrack(false);
+
         }
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            using (var form = new FormYesNo("Have You Saved Lines and Exported Tracks?"))
-            {
-                form.ShowDialog(this);
-                if (form.DialogResult == DialogResult.OK)
-                {
-                    Close();
-                }
-            }
+            Close();
         }
 
         private void btnSaveTracks_Click(object sender, EventArgs e)
@@ -156,7 +153,7 @@ namespace Twol
         }
         private void btnSaveToolRecordTxtFile_Click(object sender, EventArgs e)
         {
-            using (var form = new FormYesNo("Save the Tool Record Text File?"))
+            using (var form = new FormYesNo("Save the ToolRecord.Txt File?"))
             {
                 form.ShowDialog(this);
                 if (form.DialogResult == DialogResult.OK)

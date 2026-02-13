@@ -747,6 +747,9 @@ namespace Twol
                 form.ShowDialog(this);
             }
 
+            trks.GetNextTrack(true);
+            trks.GetNextTrack(false);
+
             PanelUpdateRightAndBottom();
         }
 
@@ -1856,45 +1859,6 @@ namespace Twol
             }
         }
 
-        private void FormTrackFilterStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Form fcc = Application.OpenForms["FormTrackFilter"];
-
-            if (fcc != null)
-            {
-                fcc.Focus();
-                fcc.Close();
-                return;
-            }
-
-            Form form = new FormTrackFilter(this);
-            form.Show(this);
-
-            if (flp1.Visible)
-            {
-                flp1.Visible = false;
-            }
-
-            this.Activate();
-        }
-
-       private void manualToolSteerToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //check if window already exists
-            Form fc = Application.OpenForms["FormToolManual"];
-
-            if (fc != null)
-            {
-                fc.Focus();
-                fc.Close();
-                return;
-            }
-
-            Form form = new FormToolManual(this);
-            form.Show(this);
-            this.Activate();
-        }
-
         private void boundaryToolToolStripMenu_Click(object sender, EventArgs e)
         {
             if (isFieldStarted)
@@ -2051,6 +2015,51 @@ namespace Twol
         {
             SwapDayNightMode();
             navPanelCounter = 0;
+        }
+
+        private void btnTrackFilter_Click(object sender, EventArgs e)
+        {
+            if (isJobStarted)
+            {
+                Form fcc = Application.OpenForms["FormTrackFilter"];
+
+                if (fcc != null)
+                {
+                    fcc.Focus();
+                    fcc.Close();
+                    return;
+                }
+
+                Form form = new FormTrackFilter(this);
+                form.Show(this);
+
+                if (flp1.Visible)
+                {
+                    flp1.Visible = false;
+                }
+            }
+
+            panelNavigation.Hide();
+            this.Activate();
+        }
+
+        private void btnToolControl_Click(object sender, EventArgs e)
+        {
+            //check if window already exists
+            Form fc = Application.OpenForms["FormToolManual"];
+
+            if (fc != null)
+            {
+                fc.Focus();
+                fc.Close();
+                return;
+            }
+            panelNavigation.Hide();
+
+            Form form = new FormToolManual(this);
+            form.Show(this);
+            this.Activate();
+
         }
 
         #endregion

@@ -139,6 +139,9 @@ namespace Twol
                 Settings.User.setWindow_buildTracksLocation = Location;
 
             mf.PanelUpdateRightAndBottom();
+
+            mf.trks.GetNextTrack(true);
+            mf.trks.GetNextTrack(false);
         }
 
         private void btnCancelMain_Click(object sender, EventArgs e)

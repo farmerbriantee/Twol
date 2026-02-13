@@ -24,11 +24,6 @@ namespace Twol
             }
         }
 
-        //protected override void OnPaintBackground(PaintEventArgs e)
-        //{
-        //   // e.Graphics.FillRectangle(Brushes.Black, e.ClipRectangle);
-        //}
-
         public FormTrackFilter(Form callingForm)
         {
             //get copy of the calling main form
@@ -50,6 +45,11 @@ namespace Twol
                 Left = 0;
             }
 
+            SetButtons();
+        }
+
+        private void SetButtons()
+        {
             bool isToolTrksPresent = false;
 
             foreach (CTrk item in mf.trks.gArr)
@@ -58,17 +58,16 @@ namespace Twol
                 {
                     isToolTrksPresent = true;
                     break;
-
                 }
             }
 
             if (isToolTrksPresent)
             {
-                Size = new System.Drawing.Size(68, 420);
+                Size = new System.Drawing.Size(60, 353);
             }
             else
             {
-                Size = new System.Drawing.Size(68, 270);
+                Size = new System.Drawing.Size(60, 229);
             }
         }
 
@@ -104,6 +103,8 @@ namespace Twol
             mf.trks.GetNextTrack();
             mf.NotifyTrackChange();
             mf.PanelUpdateRightAndBottom();
+            SetButtons();
+            mf.Activate();
         }
 
         private void btnField_Click(object sender, EventArgs e)
@@ -116,6 +117,8 @@ namespace Twol
             mf.trks.GetNextTrack();
             mf.NotifyTrackChange();
             mf.PanelUpdateRightAndBottom();
+            SetButtons();
+            mf.Activate();
         }
 
         private void btnBnd_Click(object sender, EventArgs e)
@@ -127,6 +130,8 @@ namespace Twol
             mf.trks.GetNextTrack();
             mf.NotifyTrackChange();
             mf.PanelUpdateRightAndBottom();
+            SetButtons();
+            mf.Activate();
         }
 
         private void btnToolInner_Click(object sender, EventArgs e)
@@ -138,6 +143,8 @@ namespace Twol
             mf.trks.GetNextTrack();
             mf.NotifyTrackChange();
             mf.PanelUpdateRightAndBottom();
+            SetButtons();
+            mf.Activate();
         }
 
         private void btnToolOuter_Click(object sender, EventArgs e)
@@ -149,6 +156,8 @@ namespace Twol
             mf.trks.GetNextTrack();
             mf.NotifyTrackChange();
             mf.PanelUpdateRightAndBottom();
+            SetButtons();
+            mf.Activate();
         }
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
