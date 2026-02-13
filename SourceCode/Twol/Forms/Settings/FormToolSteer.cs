@@ -109,7 +109,6 @@ namespace Twol
             nudPivotToAntenna.Value = Settings.Tool.setToolSteer.pivotToAntennaDistance;
             nudPivotToTool.Value = Settings.Tool.setToolSteer.PivotToToolDistance;
 
-
             //WAS Zero, CPD
 
             //hsbarIntegral_Tool.Value = (int)(Settings.Tool.stanleyIntegralGainAB * 100);
@@ -129,10 +128,10 @@ namespace Twol
             Settings.Tool.setToolSteer.lowHighDistance = (byte)hsbarLowHighDistance.Value;
             Settings.Tool.setToolSteer.maxActuatorLimitPercent = (byte)hsbarActuatorLimitsPercent.Value;
 
-            if (cboxInvertActuator.Checked) Settings.Tool.setToolSteer.isInvertAPOS = 1;
+            if (cboxInvertAPOS.Checked) Settings.Tool.setToolSteer.isInvertAPOS = 1;
             else Settings.Tool.setToolSteer.isInvertAPOS = 0;
 
-            if (cboxInvertAPOS.Checked) Settings.Tool.setToolSteer.isInvertActuator = 1;
+            if (cboxInvertActuator.Checked) Settings.Tool.setToolSteer.isInvertActuator = 1;
             else Settings.Tool.setToolSteer.isInvertActuator = 0;
             
             PGN_232.pgn[PGN_232.gainP] = Settings.Tool.setToolSteer.gainP;

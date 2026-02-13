@@ -493,7 +493,7 @@
             // 
             this.hsbarActuatorLimitsPercent.LargeChange = 1;
             this.hsbarActuatorLimitsPercent.Location = new System.Drawing.Point(76, 325);
-            this.hsbarActuatorLimitsPercent.Minimum = 20;
+            this.hsbarActuatorLimitsPercent.Minimum = 2;
             this.hsbarActuatorLimitsPercent.Name = "hsbarActuatorLimitsPercent";
             this.hsbarActuatorLimitsPercent.Size = new System.Drawing.Size(281, 40);
             this.hsbarActuatorLimitsPercent.TabIndex = 568;
