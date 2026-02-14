@@ -1,6 +1,6 @@
 ﻿namespace Twol
 {
-    partial class FormNMEA_Data
+    partial class FormNMEA_ToolData
     {
         /// <summary>
         /// Required designer variable.
@@ -695,8 +695,8 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "System Data";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormNMEA_Data_FormClosing);
-            this.Load += new System.EventHandler(this.FormNMEA_Data_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormNMEA_ToolData_FormClosing);
+            this.Load += new System.EventHandler(this.FormNMEA_ToolData_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

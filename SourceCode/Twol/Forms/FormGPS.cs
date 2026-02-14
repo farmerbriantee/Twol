@@ -80,14 +80,11 @@ namespace Twol
         //used by filePicker Form to return picked file and directory
         public string filePickerFileAndDirectory, jobPickerFileAndDirectory;
 
-        //the position of the GPS Data window within the FormGPS window
-        public int GPSDataWindowLeft = 80, GPSDataWindowTopOffset = 180;
-
         //the autoManual drive button. Assume in Auto
         public bool isInAutoDrive = true;
 
         //isGPSData form up
-        public bool isGPSSentencesOn = false, isKeepOffsetsOn = false;
+        public bool isKeepOffsetsOn = false;
 
         /// <summary>
         /// create the scene camera
@@ -519,7 +516,16 @@ namespace Twol
 
         private void FormGPS_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Form f = Application.OpenForms["FormGPSData"];
+            Form f = Application.OpenForms["FormNMEA_Data"];
+
+            if (f != null)
+            {
+                f.Focus();
+                f.Close();
+            }
+
+            f = null;
+            f = Application.OpenForms["FormNMEA_ToolData"];
 
             if (f != null)
             {
@@ -665,21 +671,7 @@ namespace Twol
         {
             PanelsAndOGLSize();
 
-            Form f = Application.OpenForms["FormGPSData"];
-            if (f != null)
-            {
-                f.Top = this.Top + this.Height / 2 - GPSDataWindowTopOffset;
-                f.Left = this.Left + GPSDataWindowLeft;
-            }
-
-            f = Application.OpenForms["FormFieldData"];
-            if (f != null)
-            {
-                f.Top = this.Top + this.Height / 2 - GPSDataWindowTopOffset;
-                f.Left = this.Left + GPSDataWindowLeft;
-            }
-
-            f = Application.OpenForms["FormPan"];
+            Form f = Application.OpenForms["FormPan"];
             if (f != null)
             {
                 f.Top = this.Height / 3 + this.Top;
@@ -691,21 +683,7 @@ namespace Twol
 
         private void FormGPS_Move(object sender, EventArgs e)
         {
-            Form f = Application.OpenForms["FormGPSData"];
-            if (f != null)
-            {
-                f.Top = this.Top + this.Height / 2 - GPSDataWindowTopOffset;
-                f.Left = this.Left + GPSDataWindowLeft;
-            }
-
-            f = Application.OpenForms["FormFieldData"];
-            if (f != null)
-            {
-                f.Top = this.Top + this.Height / 2 - GPSDataWindowTopOffset;
-                f.Left = this.Left + GPSDataWindowLeft;
-            }
-
-            f = Application.OpenForms["FormPan"];
+            Form f = Application.OpenForms["FormPan"];
             if (f != null)
             {
                 f.Top = this.Top + 75;

@@ -220,6 +220,12 @@
     <Compile Include="Forms\IO\FormEthernet.designer.cs">
       <DependentUpon>FormEthernet.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\IO\FormNMEA_ToolData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IO\FormNMEA_ToolData.Designer.cs">
+      <DependentUpon>FormNMEA_ToolData.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\IO\FormNMEA_Data.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -668,6 +674,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\IO\FormEthernet.resx">
       <DependentUpon>FormEthernet.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IO\FormNMEA_ToolData.resx">
+      <DependentUpon>FormNMEA_ToolData.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\IO\FormNMEA_Data.resx">

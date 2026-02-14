@@ -929,7 +929,6 @@ namespace Twol
                     if (panelBottom.Controls[i].Visible && panelBottom.Controls[i] is CheckBox)
                         panelBottom.Controls[i].Width = sizer;
                 }
-
             }
 
             btnFlag.Text = Settings.Vehicle.setVehicle_isStanleyUsed ? "S" : "P";
@@ -945,8 +944,6 @@ namespace Twol
                 tlpNozzle.Visible = isJobStarted && Settings.Tool.setApp_isNozzleApp;
                 tlpWidth = tlpNozzle.Width;
             }
-
-            GPSDataWindowLeft = (isPanelBottomHidden ? 10 : 85) + tlpWidth;
 
             oglMain.Left = (isPanelBottomHidden ? 5 : 80) + tlpWidth;
             oglMain.Width = this.Width - (oglMain.Left + (isJobStarted ? 75 : 5));

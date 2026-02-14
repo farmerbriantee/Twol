@@ -30,6 +30,8 @@ namespace Twol
             //lblFrameTime.Text = mf.frameTime.ToString("N1");
             //lblTimeSlice.Text = (1 / mf.timeSliceOfLastFix).ToString("N1");
             lblHz.Text = mf.gpsHz.ToString("N1");
+            lblIMUHeading.Text = mf.GyroInDegrees;
+            lblFix2FixHeading.Text = mf.GPSHeading;
 
             lblEastingField.Text = Math.Round(mf.pivotAxlePos.easting, 2).ToString();
             lblNorthingField.Text = Math.Round(mf.pivotAxlePos.northing, 2).ToString();
@@ -45,8 +47,6 @@ namespace Twol
             //lblUturnByte.Text = Convert.ToString(mf.mc.machineData[mf.mc.mdUTurn], 2).PadLeft(6, '0');
 
             //lblRoll.Text = mf.RollInDegrees;
-            lblIMUHeading.Text = mf.GyroInDegrees;
-            lblFix2FixHeading.Text = mf.GPSHeading;
             //lblFuzeHeading.Text = glm.toDegrees(mf.fixHeading).ToString("N1");
 
             //lblAngularVelocity.Text = mf.ahrs.imuYawRate.ToString("N2");
@@ -78,7 +78,7 @@ namespace Twol
 
         private void FormGPSData_FormClosing(object sender, FormClosingEventArgs e)
         {
-            mf.isGPSSentencesOn = false;
+            mf.pn.isGPSSentencesOn = false;
         }
     }
 }

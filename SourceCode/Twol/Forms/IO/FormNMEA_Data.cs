@@ -21,6 +21,13 @@ namespace Twol
             lblLatitude.Text = mf.pn.latitude.ToString("N7");
             lblLongitude.Text = mf.pn.longitude.ToString("N7");
 
+            lblEastingField.Text = Math.Round(mf.pivotAxlePos.easting, 2).ToString();
+            lblNorthingField.Text = Math.Round(mf.pivotAxlePos.northing, 2).ToString();
+
+            lblHz.Text = mf.gpsHz.ToString("N1");
+            lblIMUHeading.Text = mf.GyroInDegrees;
+            lblFix2FixHeading.Text = mf.GPSHeading;
+
             //////other sat and GPS info
             lblFixQuality.Text = mf.pn.FixQuality;
             lblSatsTracked.Text = mf.pn.satellitesTracked.ToString();
@@ -39,10 +46,12 @@ namespace Twol
             tboxHPD.Text = mf.pn.hpdSentence;
             tboxPANDA.Text = mf.pn.pandaSentence;
             tboxKSXT.Text = mf.pn.ksxtSentence;
+            tboxRMC.Text = mf.pn.rmcSentence;
         }
 
-        private void FormGPSData_Load(object sender, EventArgs e)
+        private void FormNMEA_Data_Load(object sender, EventArgs e)
         {
+            mf.pn.isGPSSentencesOn = true;
             tboxGGA.Text = "";
             tboxVTG.Text = "";
             tboxHDT.Text = "";
@@ -53,9 +62,9 @@ namespace Twol
             tboxKSXT.Text = "";
         }
 
-        private void FormGPSData_FormClosing(object sender, FormClosingEventArgs e)
+        private void FormNMEA_Data_FormClosing(object sender, FormClosingEventArgs e)
         {
-            mf.isGPSSentencesOn = false;
+            mf.pn.isGPSSentencesOn = false;
         }
     }
 }
