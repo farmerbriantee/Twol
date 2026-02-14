@@ -568,12 +568,6 @@
       <SubType>Form</SubType>
       <DependentUpon>FormGPS.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormGPSData.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FormGPSData.Designer.cs">
-      <DependentUpon>FormGPSData.cs</DependentUpon>
-    </Compile>
     <Compile Include="Classes\GLM.cs" />
     <Compile Include="Forms\OpenGL.Designer.cs">
       <SubType>Form</SubType>
@@ -770,10 +764,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Field\FormFieldNew.resx">
       <DependentUpon>FormFieldNew.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormGPSData.resx">
-      <DependentUpon>FormGPSData.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormGPS.resx">
       <DependentUpon>FormGPS.cs</DependentUpon>

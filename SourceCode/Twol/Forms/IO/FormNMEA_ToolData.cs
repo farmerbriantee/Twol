@@ -21,10 +21,10 @@ namespace Twol
             lblLatitude.Text = mf.pnTool.latitude.ToString("N7");
             lblLongitude.Text = mf.pnTool.longitude.ToString("N7");
 
-            lblEastingField.Text = Math.Round(mf.toolPivotPos.easting, 2).ToString();
-            lblNorthingField.Text = Math.Round(mf.toolPivotPos.northing, 2).ToString();
+            lblEastingField.Text = Math.Round(mf.toolPivotPos.easting, 2).ToString() + ","
+                + Math.Round(mf.toolPivotPos.northing, 2).ToString();
 
-            lblHz.Text = mf.gpsHz.ToString("N1");
+            //lblHz.Text = mf.gpsHz.ToString("N1");
             lblIMUHeading.Text = mf.GyroInDegrees;
             lblFix2FixHeading.Text = mf.GPSHeading;
 
