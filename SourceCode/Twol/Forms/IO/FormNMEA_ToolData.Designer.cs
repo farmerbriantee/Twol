@@ -639,7 +639,7 @@
             this.label2.TabIndex = 8;
             this.label2.Text = "Quality";
             // 
-            // FormNMEA_Data
+            // FormNMEA_ToolData
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Gainsboro;
@@ -691,10 +691,10 @@
             this.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.MinimizeBox = false;
-            this.Name = "FormNMEA_Data";
+            this.Name = "FormNMEA_ToolData";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "System Data";
+            this.Text = "Tool GPS Data";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormNMEA_ToolData_FormClosing);
             this.Load += new System.EventHandler(this.FormNMEA_ToolData_Load);
             this.ResumeLayout(false);

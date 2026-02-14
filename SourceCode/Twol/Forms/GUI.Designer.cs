@@ -178,7 +178,12 @@ namespace Twol
                 }
 
                 //fix
-                if (timerSim.Enabled && pn.fixQuality++ > 5) pn.fixQuality = 2;
+
+                if (timerSim.Enabled)
+                {
+                    if (pn.fixQuality++ > 5) pn.fixQuality = 2;
+                    if (pnTool.fixQuality++ > 6) pnTool.fixQuality = 2;
+                }
 
                 counterCheckInternet += 3;
 
@@ -262,6 +267,22 @@ namespace Twol
                         break;
                     default:
                         btnGPSData.BackColor = Color.Red;
+                        break;
+                }
+
+                switch (pnTool.fixQuality)
+                {
+                    case 4:
+                        btnGPSToolData.BackColor = Color.PaleGreen;
+                        break;
+                    case 5:
+                        btnGPSToolData.BackColor = Color.Orange;
+                        break;
+                    case 2:
+                        btnGPSToolData.BackColor = Color.Yellow;
+                        break;
+                    default:
+                        btnGPSToolData.BackColor = Color.Red;
                         break;
                 }
 
@@ -356,9 +377,6 @@ namespace Twol
 
             vehicleOpacity = ((double)(Settings.Vehicle.vehicleOpacity) * 0.01);
             vehicleOpacityByte = (byte)(255 * ((double)(Settings.Vehicle.vehicleOpacity) * 0.01));
-
-            if (Settings.Tool.setToolSteer.isGPSToolActive) btnGPSTool.Enabled = true;
-            else btnGPSTool.Enabled = false;
 
             //set the flag mark button to red dot
             btnFlag.Image = Properties.Resources.FlagRed;
@@ -1026,7 +1044,7 @@ namespace Twol
                     c.ForeColor = foreColor;
                 }
             }
-            foreach (Control c in flowLayoutPanelTop.Controls)
+            foreach (Control c in flpTopMenu.Controls)
             {
                 //if (c is Label || c is Button)
                 {

@@ -81,6 +81,7 @@ namespace Twol
             }
 
             btnGPSTool.Visible = Settings.Tool.setToolSteer.isGPSToolActive;
+            btnGPSToolData.Visible = Settings.Tool.setToolSteer.isGPSToolActive;
         }
 
         private void btnBringUpSerialComm(object sender, EventArgs e)
@@ -794,7 +795,6 @@ namespace Twol
                 f.Close();
             }
 
-
             f = null;
             f = Application.OpenForms["FormFieldData"];
 
@@ -823,6 +823,7 @@ namespace Twol
                 f.Close();
             }
 
+            f = null;
             f = Application.OpenForms["FormTrackFilter"];
 
             if (f != null)
@@ -831,17 +832,19 @@ namespace Twol
                 f.Close();
             }
 
+            f = null;
+            f = Application.OpenForms["FormToolManual"];
+
+            if (f != null)
+            {
+                f.Focus();
+                f.Close();
+            }
 
             if (this.OwnedForms.Any())
             {
-                f = null;
-                f = Application.OpenForms["FormToolManual"];
-
-                if (f == null)
-                {
                     TimedMessageBox(1000, gStr.Get(gs.gsWindowsStillOpen), gStr.Get(gs.gsCloseAllWindowsFirst));
                     return;
-                }
             }
 
             using (var form = new FormField(this))

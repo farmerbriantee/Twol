@@ -951,6 +951,7 @@
     <None Include="btnImages\Config\Tool_Fore_Aft.png" />
     <None Include="btnImages\Config\ToolAntenna_Fore_Aft.png" />
     <None Include="btnImages\Config\ConU_User.png" />
+    <None Include="btnImages\GPSQualityTool.png" />
     <Content Include="btnImages\ZoomOut.png" />
     <Content Include="License.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

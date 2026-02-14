@@ -694,7 +694,7 @@
             this.Name = "FormNMEA_Data";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "System Data";
+            this.Text = "Vehicle GPS Data";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormNMEA_Data_FormClosing);
             this.Load += new System.EventHandler(this.FormNMEA_Data_Load);
             this.ResumeLayout(false);
