@@ -494,6 +494,10 @@ namespace Twol
                     if (!vehicle.isInFreeDriveMode)
                     {
                         PGN_233.pgn[PGN_233.status] = PGN_254.pgn[PGN_254.status];
+
+                        // if Tool XTE is in the deadzone send 0 to disable PWM
+                        if (Math.Abs(guidanceToolXTE) < Settings.Tool.setToolSteer.deadzoneWidth)
+                            PGN_233.pgn[PGN_233.status] = 0;
                     }
                     else
                     {

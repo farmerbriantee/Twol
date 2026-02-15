@@ -286,10 +286,10 @@
     <Compile Include="Forms\Settings\FormGraphXTE.Designer.cs">
       <DependentUpon>FormGraphXTE.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Settings\FormToolSteer.cs">
+    <Compile Include="Forms\Guidance\FormToolSteer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Settings\FormToolSteer.Designer.cs">
+    <Compile Include="Forms\Guidance\FormToolSteer.Designer.cs">
       <DependentUpon>FormToolSteer.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\Mapping\WorldTileMap.cs" />
@@ -544,10 +544,10 @@
     <Compile Include="Forms\Settings\FormSimCoords.Designer.cs">
       <DependentUpon>FormSimCoords.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Settings\FormSteer.cs">
+    <Compile Include="Forms\Guidance\FormSteer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Settings\FormSteer.Designer.cs">
+    <Compile Include="Forms\Guidance\FormSteer.Designer.cs">
       <DependentUpon>FormSteer.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormTimedMessage.cs">
@@ -796,10 +796,10 @@
     <EmbeddedResource Include="Forms\FormtimedMessage.resx">
       <DependentUpon>FormTimedMessage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Settings\FormToolSteer.resx">
+    <EmbeddedResource Include="Forms\Guidance\FormToolSteer.resx">
       <DependentUpon>FormToolSteer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Settings\FormSteer.resx">
+    <EmbeddedResource Include="Forms\Guidance\FormSteer.resx">
       <DependentUpon>FormSteer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
