@@ -105,6 +105,16 @@ namespace ModSim
             }
 
         }
+
+        private void lblCurrentLat_Click(object sender, EventArgs e)
+        {
+            nudLat.Value = decimal.Parse(lblCurrentLat.Text);
+        }
+
+        private void lblCurrentLon_Click(object sender, EventArgs e)
+        {
+            nudLon.Value = decimal.Parse(lblCurrentLon.Text);
+        }
     }
 }
 

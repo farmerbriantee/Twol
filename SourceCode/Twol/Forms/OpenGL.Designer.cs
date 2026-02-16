@@ -601,6 +601,8 @@ namespace Twol
                     if (Settings.User.isCompassOn) DrawCompass();
                     DrawCompassText();
 
+                    DrawToolSteerAngle();
+
                     if (Settings.User.isSpeedoOn) DrawSpeedo();
 
                     DrawSteerCircle();
@@ -2483,6 +2485,31 @@ namespace Twol
             GL.PopMatrix();
         }
 
+        private void DrawToolSteerAngle()
+        {
+            GL.Color3(1.0f, 1.0f, 1.0f);
+
+            GL.PushMatrix();
+            GL.Enable(EnableCap.Texture2D);
+
+            GL.BindTexture(TextureTarget.Texture2D, texture[(int)FormGPS.textures.Lift]);        // Select Our Texture
+
+            GL.Translate(-oglMain.Width / 12, oglMain.Height - 100, 0);
+            GL.Rotate(double.Parse(ActualActuatorPositionPercent.Replace("%", "")), 0, 0, 1);
+            //GL.Rotate(0, 0, 0, 1);
+
+            GL.Begin(PrimitiveType.TriangleStrip);              // Build Quad From A Triangle Strip
+            {
+                GL.TexCoord2(1, 0.15); GL.Vertex3(32, -32.0, 0); // 
+                GL.TexCoord2(0, 0.15); GL.Vertex3(-32, -32, 0); // 
+                GL.TexCoord2(1, 1); GL.Vertex3(32, 32, 0); // 
+                GL.TexCoord2(0, 1); GL.Vertex3(-32, 32, 0); //
+            }
+            GL.End();
+
+            GL.Disable(EnableCap.Texture2D);
+            GL.PopMatrix();
+        }
         private void DrawReverse()
         {
             //if (isReverse)// && ahrs.imuHeading != 99999)
