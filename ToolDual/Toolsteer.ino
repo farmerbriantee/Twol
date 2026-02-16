@@ -190,11 +190,11 @@ void ToolsteerSetup()
     // Check ADC 
     if (adc.testConnection())
     {
-        Serial.println("ADC Connecton OK");
+        Serial.println("ADC Connection OK");
     }
     else
     {
-        Serial.println("ADC Connecton FAILED!");
+        Serial.println("ADC Connection FAILED!");
     }
 
     //50Khz I2C

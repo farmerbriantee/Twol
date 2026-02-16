@@ -13,10 +13,10 @@
 3. **NMEA parser setup**
    - Sets the parser error handler (`errorHandler`).
    - Registers handlers for NMEA sentences:
-     - `G-GGA` ? `GGA_Handler`
-     - `G-VTG` ? `VTG_Handler`
-     - `G-HPR` ? `HPR_Handler`
-
+     - `G-GGA` -> `GGA_Handler`
+     - `G-VTG` -> `VTG_Handler`
+     - `G-HPR` -> `HPR_Handler`
+ 
 4. **USB serial (Twol) initialization**
    - Starts `Serial` at `baudTwol` with a short `10 ms` delay before and after `begin()`.
    - Logs status messages to USB.

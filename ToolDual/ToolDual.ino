@@ -39,9 +39,9 @@ const int32_t baudRTK = 9600; // most are using Xbee radios with default of 1152
 #define ImuWire Wire // SCL=19:A5 SDA=18:A4
 #define RAD_TO_DEG_X_10 572.95779513082320876798154814105
 
-#define baseLineLimit 5 // Max CM differance in baseline
+#define baseLineLimit 5 // Max CM difference in baseline
 
-#define REPORT_INTERVAL 20 // BNO report time, we want to keep reading it quick & offen. Its not timmed to anything just give constant data.
+#define REPORT_INTERVAL 20 // BNO report time, we want to keep reading it quick & often. Its not timed to anything just give constant data.
 
 // Status LED's
 #define GGAReceivedLED 13        // Teensy onboard LED
@@ -220,7 +220,7 @@ void loop()
         }
         else
         {
-            // Reset the counter, becaues the start sequence was broken
+            // Reset the counter, because the start sequence was broken
             relposnedByteCount = 0;
         }
     }

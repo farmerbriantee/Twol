@@ -13,7 +13,7 @@
 2. **Read RELPOSNED from the heading GPS (`SerialGPS2`)**
    - If `SerialGPS2.available()` is non-zero, one byte is read.
    - Bytes are accumulated into `ackPacket` once the 4-byte UBX header has been matched.
-   - `relposnedByteCount` tracks progress and resets if the header sequence breaks.
+   - `relposnedByteCount` tracks progress and resets if the header sequence is broken.
 
 3. **Send combined dual-antenna output (gated)**
    - If **both** `dualReadyGGA == true` **and** `dualReadyRelPos == true`, `BuildNmea()` is called and both flags are reset to `false`.
