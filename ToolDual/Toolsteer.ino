@@ -396,16 +396,11 @@ void ReceiveUdp()
             else if (udpPacket.MinorPGN == PGNs::ToolSteerSettings)
             {
                 //PID values
-                toolSettings.Kp = ((float)udpPacket.udpData[settingIDs::gainP]);   // read Kp from Twol
-
-                toolSettings.Ki = udpPacket.udpData[settingIDs::integral]; // read high pwm
 
                 toolSettings.minPWM = udpPacket.udpData[settingIDs::minPWM]; //read the minimum amount of PWM for instant on
 
                 float temp = (float)toolSettings.minPWM * 1.1;
                 toolSettings.lowPWM = (byte)temp;
-
-                toolSettings.highPWM = udpPacket.udpData[settingIDs::highPWM]; // read high pwm
 
                 //settings
                 toolSettings.zeroOffset_APOS = udpPacket.udpData[settingIDs::wasOffsetLo];  //read was zero offset Lo
@@ -417,7 +412,17 @@ void ReceiveUdp()
                 toolSettings.maxActuatorLimit = udpPacket.udpData[settingIDs::maxActuatorLimit];
 				toolSettings.isBangBang = udpPacket.udpData[settingIDs::isBangBang]; //bang bang mode is bit 7 of max actuator limit
                 toolSettings.lowHighDistance = udpPacket.udpData[settingIDs::lowHighSetDistance];
-
+                if (toolSettings.isBangBang) {
+                    toolSettings.highPWM = udpPacket.udpData[settingIDs::highPWM] / 10; // read high pwm scaled
+                    toolSettings.Kp = ((float)udpPacket.udpData[settingIDs::gainP]) / 10;   // read Kp from Twol
+                    toolSettings.Ki = udpPacket.udpData[settingIDs::integral] / 10; // read high pwm
+                }
+                else {
+                    toolSettings.highPWM = udpPacket.udpData[settingIDs::highPWM]; // read high pwm
+                    toolSettings.Kp = ((float)udpPacket.udpData[settingIDs::gainP]);   // read Kp from Twol
+                    toolSettings.Ki = udpPacket.udpData[settingIDs::integral]; // read high pwm
+                }
+                Serial.println("KP is " + String(toolSettings.Kp));
 				toolSettingsInit(); //recalculate the low high per cm for pwm
 
                 //store in EEPROM

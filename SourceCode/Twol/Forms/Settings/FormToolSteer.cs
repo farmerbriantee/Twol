@@ -469,6 +469,18 @@ namespace Twol
         private void cbBangBang_CheckedChanged(object sender, EventArgs e)
         {
             Settings.Tool.setToolSteer.isBangBang = cbBangBang.Checked;
+            if (cbBangBang.Checked )
+            {
+                label89.Text = "SteeringGain * 10";
+                label27.Text = "Low XTE zone * 10";
+                label88.Text = "Deg allowed near center * 10";
+            }
+            else
+            {
+                label89.Text = "Proportional Gain";
+                label27.Text = "Integral Gain";
+                label88.Text = "Maximum PWM";
+            }
             toolSend = true;
         }
 
