@@ -143,6 +143,7 @@ namespace Twol
 
             PGN_232.pgn[PGN_232.offsetAPOSHi] = unchecked((byte)(Settings.Tool.setToolSteer.offsetAPOS >> 8));
             PGN_232.pgn[PGN_232.offsetAPOSLo] = unchecked((byte)(Settings.Tool.setToolSteer.offsetAPOS));
+            PGN_232.pgn[PGN_232.isBangBang] = Settings.Tool.setToolSteer.isBangBang ? (byte)1 : (byte)0;
 
             //save current vehicle
             Settings.Tool.Save();
@@ -177,6 +178,7 @@ namespace Twol
                 else PGN_232.pgn[PGN_232.invertActuator] = 0;
 
                 PGN_232.pgn[PGN_232.maxActuatorLimit] = unchecked((byte)hsbarActuatorLimitsPercent.Value);
+                PGN_232.pgn[PGN_232.isBangBang] = Settings.Tool.setToolSteer.isBangBang ? (byte)1 : (byte)0;
 
                 mf.SendUDPMessageTool(PGN_232.pgn, mf.epModuleTool);
                 toolCounterSettings = 0;
@@ -462,6 +464,12 @@ namespace Twol
         {
             Settings.Tool.setToolSteer.rollZero -= 0.1;
             lblRollZeroOffset.Text = Settings.Tool.setToolSteer.rollZero.ToString("N2");
+        }
+
+        private void cbBangBang_CheckedChanged(object sender, EventArgs e)
+        {
+            Settings.Tool.setToolSteer.isBangBang = cbBangBang.Checked;
+            toolSend = true;
         }
 
         private void btnRollOffsetUp_Click(object sender, EventArgs e)

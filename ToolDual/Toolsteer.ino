@@ -116,6 +116,7 @@ struct Tool_Settings {
     uint8_t invertAPOS = 0;
     uint8_t invertActuator = 0; 
     uint8_t maxActuatorLimit = 60;
+	bool isBangBang = false;
 };  Tool_Settings toolSettings;      // 11 bytes
 
 
@@ -320,7 +321,6 @@ void ReceiveUdp()
     {
         return;
     }
-
     uint16_t len = Eth_udpToolSteer.parsePacket();
 
     // Check for len > 4, because we check byte 0, 1, 3 and 3
@@ -415,7 +415,7 @@ void ReceiveUdp()
                 toolSettings.invertAPOS = udpPacket.udpData[settingIDs::invertAPOS];
                 toolSettings.invertActuator = udpPacket.udpData[settingIDs::invertActuator];
                 toolSettings.maxActuatorLimit = udpPacket.udpData[settingIDs::maxActuatorLimit];
-
+				toolSettings.isBangBang = udpPacket.udpData[settingIDs::isBangBang]; //bang bang mode is bit 7 of max actuator limit
                 toolSettings.lowHighDistance = udpPacket.udpData[settingIDs::lowHighSetDistance];
 
 				toolSettingsInit(); //recalculate the low high per cm for pwm
