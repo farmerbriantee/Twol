@@ -277,6 +277,7 @@ void toolsteerLoop()
             if (toolSettings.CytronDriver)
             {
                     digitalWrite(PWM2_RPWM, 0);
+                    digitalWrite(AIO_LOCKPIN, 1);
             }
             else digitalWrite(DIR1_RL_ENABLE, 1);
  
@@ -294,6 +295,7 @@ void toolsteerLoop()
             if (toolSettings.CytronDriver)
             {
                     digitalWrite(PWM2_RPWM, 1);
+                    digitalWrite(AIO_LOCKPIN, 0);
             }
             else digitalWrite(DIR1_RL_ENABLE, 0); //IBT2
 

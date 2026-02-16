@@ -51,6 +51,7 @@ const int32_t baudRTK = 9600; // most are using Xbee radios with default of 1152
 #define GPSGREEN_LED 10          // Green (Flashing = Dual bad, ON = Dual good)
 #define AUTOSTEER_STANDBY_LED 11 // Red
 #define AUTOSTEER_ACTIVE_LED 12  // Green
+#define AIO_LOCKPIN 3
 uint32_t gpsReadyTime = 0;       // Used for GGA timeout
 
 /*****************************************************************/
