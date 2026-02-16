@@ -86,6 +86,7 @@
         public bool isFollowPivot = false;
         public bool isRecordToolLine = false;
         public bool isRecordSourceTool = true;
+        public bool isBangBang = false;
 
         public double antennaHeight = 0;
         public double antennaOffset = 0;
@@ -118,6 +119,7 @@
             isPassiveSteering = _setting.isPassiveSteering;
             isFollowPivot = _setting.isFollowPivot;
             isRecordToolLine = _setting.isRecordToolLine;
+            isBangBang = _setting.isBangBang;
 
             gainP = _setting.gainP;
             integral = _setting.integral;

@@ -116,6 +116,7 @@ struct Tool_Settings {
     uint8_t invertAPOS = 0;
     uint8_t invertActuator = 0; 
     uint8_t maxActuatorLimit = 60;
+	bool isBangBang = false;
 };  Tool_Settings toolSettings;      // 11 bytes
 
 
@@ -320,7 +321,6 @@ void ReceiveUdp()
     {
         return;
     }
-
     uint16_t len = Eth_udpToolSteer.parsePacket();
 
     // Check for len > 4, because we check byte 0, 1, 3 and 3
@@ -396,16 +396,11 @@ void ReceiveUdp()
             else if (udpPacket.MinorPGN == PGNs::ToolSteerSettings)
             {
                 //PID values
-                toolSettings.Kp = ((float)udpPacket.udpData[settingIDs::gainP]);   // read Kp from Twol
-
-                toolSettings.Ki = udpPacket.udpData[settingIDs::integral]; // read high pwm
 
                 toolSettings.minPWM = udpPacket.udpData[settingIDs::minPWM]; //read the minimum amount of PWM for instant on
 
                 float temp = (float)toolSettings.minPWM * 1.1;
                 toolSettings.lowPWM = (byte)temp;
-
-                toolSettings.highPWM = udpPacket.udpData[settingIDs::highPWM]; // read high pwm
 
                 //settings
                 toolSettings.zeroOffset_APOS = udpPacket.udpData[settingIDs::wasOffsetLo];  //read was zero offset Lo
@@ -415,9 +410,19 @@ void ReceiveUdp()
                 toolSettings.invertAPOS = udpPacket.udpData[settingIDs::invertAPOS];
                 toolSettings.invertActuator = udpPacket.udpData[settingIDs::invertActuator];
                 toolSettings.maxActuatorLimit = udpPacket.udpData[settingIDs::maxActuatorLimit];
-
+				toolSettings.isBangBang = udpPacket.udpData[settingIDs::isBangBang]; //bang bang mode is bit 7 of max actuator limit
                 toolSettings.lowHighDistance = udpPacket.udpData[settingIDs::lowHighSetDistance];
-
+                if (toolSettings.isBangBang) {
+                    toolSettings.highPWM = udpPacket.udpData[settingIDs::highPWM] / 10; // read high pwm scaled
+                    toolSettings.Kp = ((float)udpPacket.udpData[settingIDs::gainP]) / 10;   // read Kp from Twol
+                    toolSettings.Ki = udpPacket.udpData[settingIDs::integral] / 10; // read high pwm
+                }
+                else {
+                    toolSettings.highPWM = udpPacket.udpData[settingIDs::highPWM]; // read high pwm
+                    toolSettings.Kp = ((float)udpPacket.udpData[settingIDs::gainP]);   // read Kp from Twol
+                    toolSettings.Ki = udpPacket.udpData[settingIDs::integral]; // read high pwm
+                }
+                Serial.println("KP is " + String(toolSettings.Kp));
 				toolSettingsInit(); //recalculate the low high per cm for pwm
 
                 //store in EEPROM

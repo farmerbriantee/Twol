@@ -127,6 +127,7 @@
             this.nudAntennaHeight_Tool = new Twol.NudlessNumericUpDown();
             this.nudAntennaOffset_Tool = new Twol.NudlessNumericUpDown();
             this.imageList2 = new System.Windows.Forms.ImageList(this.components);
+            this.cbBangBang = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabGain.SuspendLayout();
             this.tabSteer.SuspendLayout();
@@ -1033,6 +1034,7 @@
             // 
             this.tabSetup.BackColor = System.Drawing.Color.Gainsboro;
             this.tabSetup.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.tabSetup.Controls.Add(this.cbBangBang);
             this.tabSetup.Controls.Add(this.label31);
             this.tabSetup.Controls.Add(this.label83);
             this.tabSetup.Controls.Add(this.cboxInvertAPOS);
@@ -1406,6 +1408,17 @@
             this.imageList2.Images.SetKeyName(2, "ModeActive.png");
             this.imageList2.Images.SetKeyName(3, "ModePassive.png");
             // 
+            // cbBangBang
+            // 
+            this.cbBangBang.AutoSize = true;
+            this.cbBangBang.Location = new System.Drawing.Point(211, 210);
+            this.cbBangBang.Name = "cbBangBang";
+            this.cbBangBang.Size = new System.Drawing.Size(154, 37);
+            this.cbBangBang.TabIndex = 521;
+            this.cbBangBang.Text = "BangBang";
+            this.cbBangBang.UseVisualStyleBackColor = true;
+            this.cbBangBang.CheckedChanged += new System.EventHandler(this.cbBangBang_CheckedChanged);
+            // 
             // FormToolSteer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -1434,6 +1447,7 @@
             this.tabModes.ResumeLayout(false);
             this.tabActive.ResumeLayout(false);
             this.tabSetup.ResumeLayout(false);
+            this.tabSetup.PerformLayout();
             this.tabAntenna.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -1539,5 +1553,6 @@
         private NudlessNumericUpDown nudPivotToAntenna;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.CheckBox cbBangBang;
     }
 }

@@ -373,7 +373,8 @@ namespace Twol
         public static int cytronDriver = 12;
         public static int invertAPOS = 13;
         public static int invertActuator = 14;
-        public static int maxActuatorLimit = 15; 
+        public static int maxActuatorLimit = 15;
+        public static int isBangBang = 16;
     }
 
     //Toolsteer Config
