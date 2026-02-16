@@ -27,6 +27,8 @@ namespace Twol
 
         public bool isNMEAToSend = false;
 
+        public bool isGPSSentencesOn = false;
+
         public string ggaSentence, vtgSentence, hdtSentence, avrSentence, paogiSentence,
             hpdSentence, rmcSentence, pandaSentence, ksxtSentence;
 
@@ -220,63 +222,63 @@ namespace Twol
                 //parse them accordingly
                 if (words.Length < 3) break;
 
-                if ((words[0] == "$GPGGA" || words[0] == "$GNGGA") && words.Length > 13)
+                if (words[0] == "$PANDA" && words.Length > 14)
+                {
+                    ParsePANDA();
+                    if (isGPSSentencesOn) pandaSentence = nextNMEASentence;
+                }
+
+                else if (words[0] == "$PAOGI" && words.Length > 14)
+                {
+                    ParseOGI();
+                    if (isGPSSentencesOn) paogiSentence = nextNMEASentence;
+                }
+
+                else if ((words[0] == "$GPGGA" || words[0] == "$GNGGA") && words.Length > 13)
                 {
                     ParseGGA();
-                    if (mf.isGPSSentencesOn) ggaSentence = nextNMEASentence;
+                    if (isGPSSentencesOn) ggaSentence = nextNMEASentence;
                 }
 
                 else if ((words[0] == "$GPVTG" || words[0] == "$GNVTG") && words.Length > 7)
                 {
                     ParseVTG();
-                    if (mf.isGPSSentencesOn) vtgSentence = nextNMEASentence;
-                }
-
-                else if (words[0] == "$PAOGI" && words.Length > 14)
-                {
-                    ParseOGI();
-                    if (mf.isGPSSentencesOn) paogiSentence = nextNMEASentence;
+                    if (isGPSSentencesOn) vtgSentence = nextNMEASentence;
                 }
 
                 else if (words[0] == "$KSXT")
                 {
                     ParseKSXT();
-                    if (mf.isGPSSentencesOn) ksxtSentence = nextNMEASentence;
+                    if (isGPSSentencesOn) ksxtSentence = nextNMEASentence;
                 }
 
                 else if (words[0] == "$GPHPD")
                 {
                     ParseHPD();
-                    if (mf.isGPSSentencesOn) hpdSentence = nextNMEASentence;
-                }
-
-                else if (words[0] == "$PAOGI" && words.Length > 14)
-                {
-                    ParseOGI();
-                    if (mf.isGPSSentencesOn) paogiSentence = nextNMEASentence;
-                }
-
-                else if (words[0] == "$PANDA" && words.Length > 14)
-                {
-                    ParsePANDA();
-                    if (mf.isGPSSentencesOn) pandaSentence = nextNMEASentence;
+                    if (isGPSSentencesOn) hpdSentence = nextNMEASentence;
                 }
 
                 else if (words[0] == "$GPHDT" || words[0] == "$GNHDT")
                 {
                     ParseHDT();
-                    if (mf.isGPSSentencesOn) hdtSentence = nextNMEASentence;
+                    if (isGPSSentencesOn) hdtSentence = nextNMEASentence;
                 }
 
                 else if (words[0] == "$PTNL" && words.Length > 8)
                 {
                     ParseAVR();
-                    if (mf.isGPSSentencesOn) avrSentence = nextNMEASentence;
+                    if (isGPSSentencesOn) avrSentence = nextNMEASentence;
                 }
 
                 else if (words[0] == "$GNTRA")
                 {
                     ParseTRA();
+                }
+
+                else if (words[0] == "$GPRMC")
+                {
+                    ParseRMC();
+                    if (isGPSSentencesOn) rmcSentence = nextNMEASentence;
                 }
 
             }// while still data
@@ -785,6 +787,70 @@ namespace Twol
 
                 int.TryParse(words[5], NumberStyles.Float, CultureInfo.InvariantCulture, out int trasolution);
                 if (trasolution != 4) dualRoll = 0;
+            }
+        }
+
+        private void ParseRMC()
+        {
+            #region RMC Message
+            //$GPRMC,123519,A,4807.038,N,01131.000,E,022.4,084.4,230394,003.1,W*6A
+
+            //RMC          Recommended Minimum sentence C
+            //123519       Fix taken at 12:35:19 UTC
+            //A            Status A=active or V=Void.
+            //4807.038,N   Latitude 48 deg 07.038' N
+            //01131.000,E  Longitude 11 deg 31.000' E
+            //022.4        Speed over the ground in knots
+            //084.4        Track angle in degrees True
+            //230394       Date - 23rd of March 1994
+            //003.1,W      Magnetic Variation
+            //*6A          * Checksum
+            #endregion RMC Message
+
+            if (!string.IsNullOrEmpty(words[1]) && !string.IsNullOrEmpty(words[3]) && !string.IsNullOrEmpty(words[4])
+                && !string.IsNullOrEmpty(words[5]) && !string.IsNullOrEmpty(words[6]))
+            {
+                //Convert from knots to kph for speed
+                double.TryParse(words[7], NumberStyles.Float, CultureInfo.InvariantCulture, out vtgSpeed);
+                vtgSpeed *= 1.852f;
+
+                //True heading
+                double.TryParse(words[8], NumberStyles.Float, CultureInfo.InvariantCulture, out headingTrue);
+
+                double.TryParse(words[1], NumberStyles.Float, CultureInfo.InvariantCulture, out double UTC);
+
+                //get latitude and convert to decimal degrees
+                int decim = words[3].IndexOf(".", StringComparison.Ordinal);
+                if (decim == -1)
+                {
+                    words[3] += ".00";
+                    decim = words[3].IndexOf(".", StringComparison.Ordinal);
+                }
+
+                decim -= 2;
+                double.TryParse(words[3].Substring(0, decim), NumberStyles.Float, CultureInfo.InvariantCulture, out latitude);
+                double.TryParse(words[3].Substring(decim), NumberStyles.Float, CultureInfo.InvariantCulture, out double temp);
+                latitude += temp * 0.01666666666666666666666666666667;
+
+                if (words[4] == "S")
+                    latitude *= -1;
+
+                //get longitude and convert to decimal degrees
+                decim = words[5].IndexOf(".", StringComparison.Ordinal);
+                if (decim == -1)
+                {
+                    words[5] += ".00";
+                    decim = words[5].IndexOf(".", StringComparison.Ordinal);
+                }
+
+                decim -= 2;
+                double.TryParse(words[5].Substring(0, decim), NumberStyles.Float, CultureInfo.InvariantCulture, out longitude);
+                double.TryParse(words[5].Substring(decim), NumberStyles.Float, CultureInfo.InvariantCulture, out temp);
+                longitude += temp * 0.01666666666666666666666666666667;
+
+                if (words[6] == "W") longitude *= -1;
+
+                isNMEAToSend = true;
             }
         }
 

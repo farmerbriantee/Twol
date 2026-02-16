@@ -3,6 +3,7 @@ void calcSteeringPID(void)
     //Proportional only
     pValue = toolSettings.Kp * toolXTE_cm * 0.2;
     pwmDrive = (int16_t)pValue;
+    float f_Ki = (float)(toolSettings.Ki) * 0.1;
 
     errorAbs = abs(toolXTE_cm);
     int16_t newMax = 0;
@@ -13,6 +14,17 @@ void calcSteeringPID(void)
     }
     else newMax = toolSettings.highPWM;
 
+    //if within 1/2 the lowHighDistance begin integral
+    if (errorAbs < (0.5 * toolSettings.lowHighDistance)) iValue += (f_Ki * toolXTE_cm * 0.01);
+    else iValue = 0;
+
+    //check if 0 crossing
+    if ((lastXTE_Error > 0 && toolXTE_cm < 0) || (lastXTE_Error < 0 && toolXTE_cm > 0)) iValue = 0;
+    lastXTE_Error = toolXTE_cm;
+
+    //add the integral value;
+    pwmDrive += iValue;
+    
     //add min throttle factor so no delay from motor resistance.
     if (pwmDrive < 0) pwmDrive -= toolSettings.minPWM;
     else if (pwmDrive > 0) pwmDrive += toolSettings.minPWM;

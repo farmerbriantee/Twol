@@ -198,7 +198,7 @@ namespace Twol
             this.btnUDP = new System.Windows.Forms.Button();
             this.btnNMEA_Data = new System.Windows.Forms.Button();
             this.btnProfiles = new System.Windows.Forms.Button();
-            this.flowLayoutPanelTop = new System.Windows.Forms.FlowLayoutPanel();
+            this.flpTopMenu = new System.Windows.Forms.FlowLayoutPanel();
             this.btnShutdown = new System.Windows.Forms.Button();
             this.btnMaximizeMainForm = new System.Windows.Forms.Button();
             this.btnMinimizeMainForm = new System.Windows.Forms.Button();
@@ -207,10 +207,11 @@ namespace Twol
             this.btnGPSData = new System.Windows.Forms.Button();
             this.btnRTCM_Top = new System.Windows.Forms.Button();
             this.btnGPS = new System.Windows.Forms.Button();
-            this.btnGPSTool = new System.Windows.Forms.Button();
             this.btnSteer = new System.Windows.Forms.Button();
             this.btnMachine = new System.Windows.Forms.Button();
             this.btnIMU = new System.Windows.Forms.Button();
+            this.btnGPSToolData = new System.Windows.Forms.Button();
+            this.btnGPSTool = new System.Windows.Forms.Button();
             this.btnFieldStats = new System.Windows.Forms.Button();
             this.lblTest = new System.Windows.Forms.Label();
             this.nudToolOffset = new System.Windows.Forms.NumericUpDown();
@@ -226,7 +227,7 @@ namespace Twol
             this.panelRight.SuspendLayout();
             this.tlpNozzle.SuspendLayout();
             this.panel_IO.SuspendLayout();
-            this.flowLayoutPanelTop.SuspendLayout();
+            this.flpTopMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudToolOffset)).BeginInit();
             this.SuspendLayout();
             // 
@@ -571,7 +572,7 @@ namespace Twol
             this.toolStripMenuFlagForm.Image = global::Twol.Properties.Resources.FileEditName;
             this.toolStripMenuFlagForm.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripMenuFlagForm.Name = "toolStripMenuFlagForm";
-            this.toolStripMenuFlagForm.Size = new System.Drawing.Size(259, 70);
+            this.toolStripMenuFlagForm.Size = new System.Drawing.Size(267, 70);
             this.toolStripMenuFlagForm.Text = "toolStripMenuItem3";
             this.toolStripMenuFlagForm.Click += new System.EventHandler(this.toolStripMenuFlagForm_Click);
             // 
@@ -622,7 +623,7 @@ namespace Twol
             this.btnResetSim.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.btnResetSim.Location = new System.Drawing.Point(4, 4);
             this.btnResetSim.Name = "btnResetSim";
-            this.btnResetSim.Size = new System.Drawing.Size(54, 37);
+            this.btnResetSim.Size = new System.Drawing.Size(51, 37);
             this.btnResetSim.TabIndex = 164;
             this.btnResetSim.Text = "Reset";
             this.btnResetSim.UseVisualStyleBackColor = false;
@@ -634,7 +635,7 @@ namespace Twol
             this.btnResetSteerAngle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnResetSteerAngle.Font = new System.Drawing.Font("Tahoma", 9.75F);
             this.btnResetSteerAngle.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnResetSteerAngle.Location = new System.Drawing.Point(65, 4);
+            this.btnResetSteerAngle.Location = new System.Drawing.Point(62, 4);
             this.btnResetSteerAngle.Name = "btnResetSteerAngle";
             this.btnResetSteerAngle.Size = new System.Drawing.Size(43, 37);
             this.btnResetSteerAngle.TabIndex = 162;
@@ -658,10 +659,10 @@ namespace Twol
             this.hsbarSteerAngle.Dock = System.Windows.Forms.DockStyle.Fill;
             this.hsbarSteerAngle.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.hsbarSteerAngle.LargeChange = 20;
-            this.hsbarSteerAngle.Location = new System.Drawing.Point(130, 1);
+            this.hsbarSteerAngle.Location = new System.Drawing.Point(123, 1);
             this.hsbarSteerAngle.Maximum = 819;
             this.hsbarSteerAngle.Name = "hsbarSteerAngle";
-            this.hsbarSteerAngle.Size = new System.Drawing.Size(109, 43);
+            this.hsbarSteerAngle.Size = new System.Drawing.Size(104, 43);
             this.hsbarSteerAngle.TabIndex = 179;
             this.hsbarSteerAngle.Value = 400;
             this.hsbarSteerAngle.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hsbarSteerAngle_Scroll);
@@ -675,7 +676,7 @@ namespace Twol
             this.oglMain.Location = new System.Drawing.Point(236, 50);
             this.oglMain.Margin = new System.Windows.Forms.Padding(0);
             this.oglMain.Name = "oglMain";
-            this.oglMain.Size = new System.Drawing.Size(704, 625);
+            this.oglMain.Size = new System.Drawing.Size(917, 625);
             this.oglMain.TabIndex = 180;
             this.oglMain.VSync = true;
             this.oglMain.Load += new System.EventHandler(this.oglMain_Load);
@@ -754,14 +755,14 @@ namespace Twol
             // 
             this.boundaryToolToolStripMenu.Image = global::Twol.Properties.Resources.Boundary;
             this.boundaryToolToolStripMenu.Name = "boundaryToolToolStripMenu";
-            this.boundaryToolToolStripMenu.Size = new System.Drawing.Size(413, 66);
+            this.boundaryToolToolStripMenu.Size = new System.Drawing.Size(369, 44);
             this.boundaryToolToolStripMenu.Text = "Boundary Tool";
             this.boundaryToolToolStripMenu.Click += new System.EventHandler(this.boundaryToolToolStripMenu_Click);
             // 
             // buildToolTracksToolStripMenuItem
             // 
             this.buildToolTracksToolStripMenuItem.Name = "buildToolTracksToolStripMenuItem";
-            this.buildToolTracksToolStripMenuItem.Size = new System.Drawing.Size(413, 66);
+            this.buildToolTracksToolStripMenuItem.Size = new System.Drawing.Size(369, 44);
             this.buildToolTracksToolStripMenuItem.Text = "Build Tool Tracks";
             this.buildToolTracksToolStripMenuItem.Click += new System.EventHandler(this.buildToolTracksToolStripMenuItem_Click);
             // 
@@ -769,7 +770,7 @@ namespace Twol
             // 
             this.guidelinesToolStripMenuItem.Image = global::Twol.Properties.Resources.ConD_ExtraGuides;
             this.guidelinesToolStripMenuItem.Name = "guidelinesToolStripMenuItem";
-            this.guidelinesToolStripMenuItem.Size = new System.Drawing.Size(413, 66);
+            this.guidelinesToolStripMenuItem.Size = new System.Drawing.Size(369, 44);
             this.guidelinesToolStripMenuItem.Text = "Extra Guides";
             this.guidelinesToolStripMenuItem.Click += new System.EventHandler(this.guidelinesToolStripMenuItem_Click);
             // 
@@ -780,7 +781,7 @@ namespace Twol
             this.xTEChartToolStripMenuItem,
             this.toolXTEChartToolStripMenuItem});
             this.chartsToolStripMenuItem.Name = "chartsToolStripMenuItem";
-            this.chartsToolStripMenuItem.Size = new System.Drawing.Size(413, 66);
+            this.chartsToolStripMenuItem.Size = new System.Drawing.Size(369, 44);
             this.chartsToolStripMenuItem.Text = "Charts";
             // 
             // steerChartToolStripMenuItem
@@ -822,7 +823,7 @@ namespace Twol
             this.panelSim.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.94559F));
             this.panelSim.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.50844F));
             this.panelSim.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.69369F));
-            this.panelSim.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 68F));
+            this.panelSim.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 91F));
             this.panelSim.Controls.Add(this.btnResetSteerAngle, 1, 0);
             this.panelSim.Controls.Add(this.btnResetSim, 0, 0);
             this.panelSim.Controls.Add(this.hsbarSteerAngle, 3, 0);
@@ -831,7 +832,7 @@ namespace Twol
             this.panelSim.Controls.Add(this.btnSimSetSpeedToZero, 7, 0);
             this.panelSim.Controls.Add(this.btnSpeedUp, 6, 0);
             this.panelSim.Controls.Add(this.cboxEnableToolDualGPS, 5, 0);
-            this.panelSim.Location = new System.Drawing.Point(339, 626);
+            this.panelSim.Location = new System.Drawing.Point(446, 626);
             this.panelSim.Name = "panelSim";
             this.panelSim.RowCount = 1;
             this.panelSim.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -848,7 +849,7 @@ namespace Twol
             this.btnSimReverseDirection.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSimReverseDirection.Font = new System.Drawing.Font("Tahoma", 9.75F);
             this.btnSimReverseDirection.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSimReverseDirection.Location = new System.Drawing.Point(533, 5);
+            this.btnSimReverseDirection.Location = new System.Drawing.Point(520, 5);
             this.btnSimReverseDirection.Name = "btnSimReverseDirection";
             this.btnSimReverseDirection.Size = new System.Drawing.Size(52, 34);
             this.btnSimReverseDirection.TabIndex = 537;
@@ -864,7 +865,7 @@ namespace Twol
             this.btnSpeedDn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSpeedDn.Font = new System.Drawing.Font("Tahoma", 9.75F);
             this.btnSpeedDn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSpeedDn.Location = new System.Drawing.Point(462, 5);
+            this.btnSpeedDn.Location = new System.Drawing.Point(438, 5);
             this.btnSpeedDn.Name = "btnSpeedDn";
             this.btnSpeedDn.Size = new System.Drawing.Size(50, 34);
             this.btnSpeedDn.TabIndex = 538;
@@ -880,7 +881,7 @@ namespace Twol
             this.btnSimSetSpeedToZero.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSimSetSpeedToZero.Font = new System.Drawing.Font("Tahoma", 9.75F);
             this.btnSimSetSpeedToZero.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSimSetSpeedToZero.Location = new System.Drawing.Point(390, 5);
+            this.btnSimSetSpeedToZero.Location = new System.Drawing.Point(369, 5);
             this.btnSimSetSpeedToZero.Name = "btnSimSetSpeedToZero";
             this.btnSimSetSpeedToZero.Size = new System.Drawing.Size(53, 34);
             this.btnSimSetSpeedToZero.TabIndex = 453;
@@ -896,7 +897,7 @@ namespace Twol
             this.btnSpeedUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSpeedUp.Font = new System.Drawing.Font("Tahoma", 9.75F);
             this.btnSpeedUp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSpeedUp.Location = new System.Drawing.Point(323, 5);
+            this.btnSpeedUp.Location = new System.Drawing.Point(305, 5);
             this.btnSpeedUp.Name = "btnSpeedUp";
             this.btnSpeedUp.Size = new System.Drawing.Size(50, 34);
             this.btnSpeedUp.TabIndex = 539;
@@ -915,7 +916,7 @@ namespace Twol
             this.cboxEnableToolDualGPS.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboxEnableToolDualGPS.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxEnableToolDualGPS.ForeColor = System.Drawing.Color.Black;
-            this.cboxEnableToolDualGPS.Location = new System.Drawing.Point(258, 4);
+            this.cboxEnableToolDualGPS.Location = new System.Drawing.Point(244, 4);
             this.cboxEnableToolDualGPS.Name = "cboxEnableToolDualGPS";
             this.cboxEnableToolDualGPS.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.cboxEnableToolDualGPS.Size = new System.Drawing.Size(48, 37);
@@ -1473,7 +1474,7 @@ namespace Twol
             this.lblGuidanceLine.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblGuidanceLine.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblGuidanceLine.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblGuidanceLine.Location = new System.Drawing.Point(115, 66);
+            this.lblGuidanceLine.Location = new System.Drawing.Point(222, 66);
             this.lblGuidanceLine.Name = "lblGuidanceLine";
             this.lblGuidanceLine.Size = new System.Drawing.Size(882, 83);
             this.lblGuidanceLine.TabIndex = 538;
@@ -1647,7 +1648,7 @@ namespace Twol
             this.panelBottom.Controls.Add(this.btnYouSkipEnable);
             this.panelBottom.Controls.Add(this.cboxpRowWidth);
             this.panelBottom.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.panelBottom.Location = new System.Drawing.Point(42, 677);
+            this.panelBottom.Location = new System.Drawing.Point(255, 677);
             this.panelBottom.Name = "panelBottom";
             this.panelBottom.Size = new System.Drawing.Size(896, 62);
             this.panelBottom.TabIndex = 540;
@@ -1914,7 +1915,7 @@ namespace Twol
             this.panelRight.Controls.Add(this.btnContourLock);
             this.panelRight.Controls.Add(this.lblNumCu);
             this.panelRight.FlowDirection = System.Windows.Forms.FlowDirection.BottomUp;
-            this.panelRight.Location = new System.Drawing.Point(941, 75);
+            this.panelRight.Location = new System.Drawing.Point(1154, 75);
             this.panelRight.Name = "panelRight";
             this.panelRight.Size = new System.Drawing.Size(70, 644);
             this.panelRight.TabIndex = 541;
@@ -2140,7 +2141,7 @@ namespace Twol
             this.lblHardwareMessage.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblHardwareMessage.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHardwareMessage.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
-            this.lblHardwareMessage.Location = new System.Drawing.Point(68, 87);
+            this.lblHardwareMessage.Location = new System.Drawing.Point(175, 87);
             this.lblHardwareMessage.Name = "lblHardwareMessage";
             this.lblHardwareMessage.Size = new System.Drawing.Size(888, 43);
             this.lblHardwareMessage.TabIndex = 543;
@@ -2910,29 +2911,30 @@ namespace Twol
             this.btnProfiles.UseVisualStyleBackColor = false;
             this.btnProfiles.Click += new System.EventHandler(this.btnProfiles_Click);
             // 
-            // flowLayoutPanelTop
+            // flpTopMenu
             // 
-            this.flowLayoutPanelTop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.flowLayoutPanelTop.AutoSize = true;
-            this.flowLayoutPanelTop.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.flowLayoutPanelTop.Controls.Add(this.btnShutdown);
-            this.flowLayoutPanelTop.Controls.Add(this.btnMaximizeMainForm);
-            this.flowLayoutPanelTop.Controls.Add(this.btnMinimizeMainForm);
-            this.flowLayoutPanelTop.Controls.Add(this.btnChargeStatus);
-            this.flowLayoutPanelTop.Controls.Add(this.btnInternetConnection);
-            this.flowLayoutPanelTop.Controls.Add(this.btnGPSData);
-            this.flowLayoutPanelTop.Controls.Add(this.btnRTCM_Top);
-            this.flowLayoutPanelTop.Controls.Add(this.btnGPS);
-            this.flowLayoutPanelTop.Controls.Add(this.btnGPSTool);
-            this.flowLayoutPanelTop.Controls.Add(this.btnSteer);
-            this.flowLayoutPanelTop.Controls.Add(this.btnMachine);
-            this.flowLayoutPanelTop.Controls.Add(this.btnIMU);
-            this.flowLayoutPanelTop.Controls.Add(this.btnFieldStats);
-            this.flowLayoutPanelTop.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanelTop.Location = new System.Drawing.Point(211, 4);
-            this.flowLayoutPanelTop.Name = "flowLayoutPanelTop";
-            this.flowLayoutPanelTop.Size = new System.Drawing.Size(794, 46);
-            this.flowLayoutPanelTop.TabIndex = 548;
+            this.flpTopMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.flpTopMenu.AutoSize = true;
+            this.flpTopMenu.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flpTopMenu.Controls.Add(this.btnShutdown);
+            this.flpTopMenu.Controls.Add(this.btnMaximizeMainForm);
+            this.flpTopMenu.Controls.Add(this.btnMinimizeMainForm);
+            this.flpTopMenu.Controls.Add(this.btnChargeStatus);
+            this.flpTopMenu.Controls.Add(this.btnRTCM_Top);
+            this.flpTopMenu.Controls.Add(this.btnInternetConnection);
+            this.flpTopMenu.Controls.Add(this.btnGPSData);
+            this.flpTopMenu.Controls.Add(this.btnGPS);
+            this.flpTopMenu.Controls.Add(this.btnSteer);
+            this.flpTopMenu.Controls.Add(this.btnMachine);
+            this.flpTopMenu.Controls.Add(this.btnIMU);
+            this.flpTopMenu.Controls.Add(this.btnGPSToolData);
+            this.flpTopMenu.Controls.Add(this.btnGPSTool);
+            this.flpTopMenu.Controls.Add(this.btnFieldStats);
+            this.flpTopMenu.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flpTopMenu.Location = new System.Drawing.Point(372, 4);
+            this.flpTopMenu.Name = "flpTopMenu";
+            this.flpTopMenu.Size = new System.Drawing.Size(846, 46);
+            this.flpTopMenu.TabIndex = 548;
             // 
             // btnShutdown
             // 
@@ -2945,7 +2947,7 @@ namespace Twol
             this.btnShutdown.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnShutdown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnShutdown.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnShutdown.Location = new System.Drawing.Point(739, 3);
+            this.btnShutdown.Location = new System.Drawing.Point(791, 3);
             this.btnShutdown.Name = "btnShutdown";
             this.btnShutdown.Size = new System.Drawing.Size(52, 38);
             this.btnShutdown.TabIndex = 447;
@@ -2965,7 +2967,7 @@ namespace Twol
             this.btnMaximizeMainForm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMaximizeMainForm.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMaximizeMainForm.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnMaximizeMainForm.Location = new System.Drawing.Point(670, 3);
+            this.btnMaximizeMainForm.Location = new System.Drawing.Point(722, 3);
             this.btnMaximizeMainForm.Name = "btnMaximizeMainForm";
             this.btnMaximizeMainForm.Size = new System.Drawing.Size(63, 38);
             this.btnMaximizeMainForm.TabIndex = 482;
@@ -2985,7 +2987,7 @@ namespace Twol
             this.btnMinimizeMainForm.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMinimizeMainForm.ForeColor = System.Drawing.Color.DimGray;
             this.btnMinimizeMainForm.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnMinimizeMainForm.Location = new System.Drawing.Point(603, 3);
+            this.btnMinimizeMainForm.Location = new System.Drawing.Point(655, 3);
             this.btnMinimizeMainForm.Name = "btnMinimizeMainForm";
             this.btnMinimizeMainForm.Size = new System.Drawing.Size(61, 38);
             this.btnMinimizeMainForm.TabIndex = 481;
@@ -3004,7 +3006,7 @@ namespace Twol
             this.btnChargeStatus.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnChargeStatus.Image = global::Twol.Properties.Resources.ChargeIndicator;
             this.btnChargeStatus.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnChargeStatus.Location = new System.Drawing.Point(568, 3);
+            this.btnChargeStatus.Location = new System.Drawing.Point(620, 3);
             this.btnChargeStatus.Name = "btnChargeStatus";
             this.btnChargeStatus.Size = new System.Drawing.Size(29, 38);
             this.btnChargeStatus.TabIndex = 537;
@@ -3022,7 +3024,7 @@ namespace Twol
             this.btnInternetConnection.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnInternetConnection.Image = global::Twol.Properties.Resources.InternetOn;
             this.btnInternetConnection.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnInternetConnection.Location = new System.Drawing.Point(522, 3);
+            this.btnInternetConnection.Location = new System.Drawing.Point(526, 3);
             this.btnInternetConnection.Name = "btnInternetConnection";
             this.btnInternetConnection.Size = new System.Drawing.Size(40, 38);
             this.btnInternetConnection.TabIndex = 539;
@@ -3040,9 +3042,9 @@ namespace Twol
             this.btnGPSData.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGPSData.Image = global::Twol.Properties.Resources.GPSQuality;
             this.btnGPSData.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnGPSData.Location = new System.Drawing.Point(456, 3);
+            this.btnGPSData.Location = new System.Drawing.Point(465, 3);
             this.btnGPSData.Name = "btnGPSData";
-            this.btnGPSData.Size = new System.Drawing.Size(60, 38);
+            this.btnGPSData.Size = new System.Drawing.Size(55, 38);
             this.btnGPSData.TabIndex = 536;
             this.btnGPSData.UseVisualStyleBackColor = false;
             this.btnGPSData.Click += new System.EventHandler(this.btnGPSData_Click);
@@ -3058,7 +3060,7 @@ namespace Twol
             this.btnRTCM_Top.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRTCM_Top.ForeColor = System.Drawing.Color.White;
             this.btnRTCM_Top.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnRTCM_Top.Location = new System.Drawing.Point(409, 4);
+            this.btnRTCM_Top.Location = new System.Drawing.Point(573, 4);
             this.btnRTCM_Top.Margin = new System.Windows.Forms.Padding(4);
             this.btnRTCM_Top.Name = "btnRTCM_Top";
             this.btnRTCM_Top.Size = new System.Drawing.Size(40, 38);
@@ -3078,33 +3080,13 @@ namespace Twol
             this.btnGPS.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGPS.ForeColor = System.Drawing.Color.White;
             this.btnGPS.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnGPS.Location = new System.Drawing.Point(341, 4);
+            this.btnGPS.Location = new System.Drawing.Point(402, 4);
             this.btnGPS.Margin = new System.Windows.Forms.Padding(4);
             this.btnGPS.Name = "btnGPS";
-            this.btnGPS.Size = new System.Drawing.Size(60, 38);
+            this.btnGPS.Size = new System.Drawing.Size(56, 38);
             this.btnGPS.TabIndex = 516;
             this.btnGPS.UseVisualStyleBackColor = false;
             this.btnGPS.Click += new System.EventHandler(this.ShowHide_Panel_IO_Click);
-            // 
-            // btnGPSTool
-            // 
-            this.btnGPSTool.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGPSTool.BackColor = System.Drawing.Color.Transparent;
-            this.btnGPSTool.BackgroundImage = global::Twol.Properties.Resources.B_GPSTool;
-            this.btnGPSTool.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnGPSTool.FlatAppearance.BorderColor = System.Drawing.SystemColors.HotTrack;
-            this.btnGPSTool.FlatAppearance.BorderSize = 0;
-            this.btnGPSTool.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGPSTool.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGPSTool.ForeColor = System.Drawing.Color.White;
-            this.btnGPSTool.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnGPSTool.Location = new System.Drawing.Point(277, 4);
-            this.btnGPSTool.Margin = new System.Windows.Forms.Padding(4);
-            this.btnGPSTool.Name = "btnGPSTool";
-            this.btnGPSTool.Size = new System.Drawing.Size(56, 38);
-            this.btnGPSTool.TabIndex = 531;
-            this.btnGPSTool.UseVisualStyleBackColor = false;
-            this.btnGPSTool.Click += new System.EventHandler(this.ShowHide_Panel_IO_Click);
             // 
             // btnSteer
             // 
@@ -3118,7 +3100,7 @@ namespace Twol
             this.btnSteer.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSteer.ForeColor = System.Drawing.Color.White;
             this.btnSteer.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSteer.Location = new System.Drawing.Point(213, 4);
+            this.btnSteer.Location = new System.Drawing.Point(338, 4);
             this.btnSteer.Margin = new System.Windows.Forms.Padding(4);
             this.btnSteer.Name = "btnSteer";
             this.btnSteer.Size = new System.Drawing.Size(56, 38);
@@ -3138,7 +3120,7 @@ namespace Twol
             this.btnMachine.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMachine.ForeColor = System.Drawing.Color.White;
             this.btnMachine.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnMachine.Location = new System.Drawing.Point(149, 4);
+            this.btnMachine.Location = new System.Drawing.Point(274, 4);
             this.btnMachine.Margin = new System.Windows.Forms.Padding(4);
             this.btnMachine.Name = "btnMachine";
             this.btnMachine.Size = new System.Drawing.Size(56, 38);
@@ -3158,13 +3140,52 @@ namespace Twol
             this.btnIMU.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnIMU.ForeColor = System.Drawing.Color.White;
             this.btnIMU.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnIMU.Location = new System.Drawing.Point(85, 4);
+            this.btnIMU.Location = new System.Drawing.Point(210, 4);
             this.btnIMU.Margin = new System.Windows.Forms.Padding(4);
             this.btnIMU.Name = "btnIMU";
             this.btnIMU.Size = new System.Drawing.Size(56, 38);
             this.btnIMU.TabIndex = 515;
             this.btnIMU.UseVisualStyleBackColor = false;
             this.btnIMU.Click += new System.EventHandler(this.ShowHide_Panel_IO_Click);
+            // 
+            // btnGPSToolData
+            // 
+            this.btnGPSToolData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGPSToolData.BackColor = System.Drawing.Color.Yellow;
+            this.btnGPSToolData.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnGPSToolData.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnGPSToolData.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnGPSToolData.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnGPSToolData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGPSToolData.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGPSToolData.Image = global::Twol.Properties.Resources.GPSQualityTool;
+            this.btnGPSToolData.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnGPSToolData.Location = new System.Drawing.Point(148, 3);
+            this.btnGPSToolData.Name = "btnGPSToolData";
+            this.btnGPSToolData.Size = new System.Drawing.Size(55, 38);
+            this.btnGPSToolData.TabIndex = 540;
+            this.btnGPSToolData.UseVisualStyleBackColor = false;
+            this.btnGPSToolData.Click += new System.EventHandler(this.btnGPSToolData_Click);
+            // 
+            // btnGPSTool
+            // 
+            this.btnGPSTool.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGPSTool.BackColor = System.Drawing.Color.Transparent;
+            this.btnGPSTool.BackgroundImage = global::Twol.Properties.Resources.B_GPSTool;
+            this.btnGPSTool.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnGPSTool.FlatAppearance.BorderColor = System.Drawing.SystemColors.HotTrack;
+            this.btnGPSTool.FlatAppearance.BorderSize = 0;
+            this.btnGPSTool.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGPSTool.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGPSTool.ForeColor = System.Drawing.Color.White;
+            this.btnGPSTool.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnGPSTool.Location = new System.Drawing.Point(85, 4);
+            this.btnGPSTool.Margin = new System.Windows.Forms.Padding(4);
+            this.btnGPSTool.Name = "btnGPSTool";
+            this.btnGPSTool.Size = new System.Drawing.Size(56, 38);
+            this.btnGPSTool.TabIndex = 531;
+            this.btnGPSTool.UseVisualStyleBackColor = false;
+            this.btnGPSTool.Click += new System.EventHandler(this.ShowHide_Panel_IO_Click);
             // 
             // btnFieldStats
             // 
@@ -3194,7 +3215,7 @@ namespace Twol
             this.lblTest.AutoSize = true;
             this.lblTest.BackColor = System.Drawing.Color.Transparent;
             this.lblTest.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTest.Location = new System.Drawing.Point(40, 21);
+            this.lblTest.Location = new System.Drawing.Point(253, 21);
             this.lblTest.Name = "lblTest";
             this.lblTest.Size = new System.Drawing.Size(106, 22);
             this.lblTest.TabIndex = 549;
@@ -3211,7 +3232,7 @@ namespace Twol
             0,
             0,
             65536});
-            this.nudToolOffset.Location = new System.Drawing.Point(-46, 15);
+            this.nudToolOffset.Location = new System.Drawing.Point(167, 15);
             this.nudToolOffset.Maximum = new decimal(new int[] {
             20,
             0,
@@ -3232,11 +3253,11 @@ namespace Twol
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(1013, 744);
+            this.ClientSize = new System.Drawing.Size(1226, 744);
             this.Controls.Add(this.panelNavigation);
             this.Controls.Add(this.lblTest);
             this.Controls.Add(this.tlpNozzle);
-            this.Controls.Add(this.flowLayoutPanelTop);
+            this.Controls.Add(this.flpTopMenu);
             this.Controls.Add(this.flp1);
             this.Controls.Add(this.panelSim);
             this.Controls.Add(this.panelRight);
@@ -3283,7 +3304,7 @@ namespace Twol
             this.tlpNozzle.PerformLayout();
             this.panel_IO.ResumeLayout(false);
             this.panel_IO.PerformLayout();
-            this.flowLayoutPanelTop.ResumeLayout(false);
+            this.flpTopMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nudToolOffset)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -3448,7 +3469,7 @@ namespace Twol
         private System.Windows.Forms.Panel panel_IO;
         private System.Windows.Forms.Button btnShowHideIO;
         public System.Windows.Forms.Button btnRTCM_Top;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelTop;
+        private System.Windows.Forms.FlowLayoutPanel flpTopMenu;
         public System.Windows.Forms.Button btnMachineSet;
         public System.Windows.Forms.Button btnIMUSet;
         private System.Windows.Forms.CheckBox cboxIsSteerModule;
@@ -3475,6 +3496,7 @@ namespace Twol
         private System.Windows.Forms.ToolStripMenuItem toolXTEChartToolStripMenuItem;
         public System.Windows.Forms.Button btnToolControl;
         public System.Windows.Forms.Button btnTrackFilter;
+        private System.Windows.Forms.Button btnGPSToolData;
     }
 }
 

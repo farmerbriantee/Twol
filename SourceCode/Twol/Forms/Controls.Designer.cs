@@ -81,6 +81,7 @@ namespace Twol
             }
 
             btnGPSTool.Visible = Settings.Tool.setToolSteer.isGPSToolActive;
+            btnGPSToolData.Visible = Settings.Tool.setToolSteer.isGPSToolActive;
         }
 
         private void btnBringUpSerialComm(object sender, EventArgs e)
@@ -96,11 +97,8 @@ namespace Twol
             {
                 existing.Focus();
                 existing.Close();
-                isGPSSentencesOn = false;
                 return;
             }
-
-            isGPSSentencesOn = true;
 
             Form form = new FormNMEA_Data(this);
             form.Show(this);
@@ -780,7 +778,16 @@ namespace Twol
                 return;
             }
 
-            Form f = Application.OpenForms["FormGPSData"];
+            Form f = Application.OpenForms["FormNMEA_Data"];
+
+            if (f != null)
+            {
+                f.Focus();
+                f.Close();
+            }
+
+            f = null;
+            f = Application.OpenForms["FormNMEA_ToolData"];
 
             if (f != null)
             {
@@ -816,6 +823,7 @@ namespace Twol
                 f.Close();
             }
 
+            f = null;
             f = Application.OpenForms["FormTrackFilter"];
 
             if (f != null)
@@ -824,17 +832,19 @@ namespace Twol
                 f.Close();
             }
 
+            f = null;
+            f = Application.OpenForms["FormToolManual"];
+
+            if (f != null)
+            {
+                f.Focus();
+                f.Close();
+            }
 
             if (this.OwnedForms.Any())
             {
-                f = null;
-                f = Application.OpenForms["FormToolManual"];
-
-                if (f == null)
-                {
                     TimedMessageBox(1000, gStr.Get(gs.gsWindowsStillOpen), gStr.Get(gs.gsCloseAllWindowsFirst));
                     return;
-                }
             }
 
             using (var form = new FormField(this))
@@ -1042,15 +1052,6 @@ namespace Twol
         }          
         private void btnNavigationSettings_Click(object sender, EventArgs e)
         {
-            //buttonPanelCounter = 0;
-            Form f = Application.OpenForms["FormGPSData"];
-
-            if (f != null)
-            {
-                f.Focus();
-                f.Close();
-            }
-
             Form f1 = Application.OpenForms["FormFieldData"];
 
             if (f1 != null)
@@ -1066,7 +1067,7 @@ namespace Twol
             else
             {
                 panelNavigation.Visible = true;
-                panelNavigation.Left = GPSDataWindowLeft;
+                panelNavigation.Left = 70;
 
                 navPanelCounter = 2;
                 if (displayBrightness.isWmiMonitor) btnBrightnessDn.Text = (displayBrightness.GetBrightness().ToString()) + "%";
@@ -1244,16 +1245,7 @@ namespace Twol
 
         private void btnFieldStats_Click(object sender, EventArgs e)
         {
-            Form f = Application.OpenForms["FormGPSData"];
-
-            if (f != null)
-            {
-                f.Focus();
-                f.Close();
-            }
-
-            f = null;
-            f = Application.OpenForms["FormFieldData"];
+            Form f = Application.OpenForms["FormFieldData"];
 
             if (f != null)
             {
@@ -1267,8 +1259,8 @@ namespace Twol
             Form form = new FormFieldData(this);
             form.Show(this);
 
-            form.Top = this.Top + this.Height / 2 - GPSDataWindowTopOffset;
-            form.Left = this.Left + GPSDataWindowLeft;
+            form.Top = this.Top + 40;
+            form.Left = this.Left + 40;
 
 
             Form ff = Application.OpenForms["FormGPS"];
@@ -1277,9 +1269,9 @@ namespace Twol
             btnAutoSteerConfig.Focus();
         }
 
-        private void btnGPSData_Click(object sender, EventArgs e)
-        {            
-            Form f = Application.OpenForms["FormGPSData"];
+        private void btnGPSToolData_Click(object sender, EventArgs e)
+        {
+            Form f = Application.OpenForms["FormNMEA_ToolData"];
 
             if (f != null)
             {
@@ -1288,20 +1280,32 @@ namespace Twol
                 return;
             }
 
-            f = null;
-            f = Application.OpenForms["FormFieldData"];
+            Form form = new FormNMEA_ToolData(this);
+            form.Show(this);
+
+            form.Top = this.Top + 100;
+            form.Left = this.Left + 100;
+
+            Form ff = Application.OpenForms["FormGPS"];
+            ff.Focus();
+        }
+
+        private void btnGPSData_Click(object sender, EventArgs e)
+        {            
+            Form f = Application.OpenForms["FormNMEA_Data"];
 
             if (f != null)
             {
                 f.Focus();
                 f.Close();
+                return;
             }
 
-            Form form = new FormGPSData(this);
+            Form form = new FormNMEA_Data(this);
             form.Show(this);
 
-            form.Top = this.Top + this.Height / 2 - GPSDataWindowTopOffset;
-            form.Left = this.Left + GPSDataWindowLeft;
+            form.Top = this.Top + 10;
+            form.Left = this.Left + 10;
 
             Form ff = Application.OpenForms["FormGPS"];
             ff.Focus();
@@ -1309,7 +1313,16 @@ namespace Twol
 
         public void ExitShutdown()
         {
-            Form f = Application.OpenForms["FormGPSData"];
+            Form f = Application.OpenForms["FormNMEA_Data"];
+
+            if (f != null)
+            {
+                f.Focus();
+                f.Close();
+            }
+
+            f = null;
+            f = Application.OpenForms["FormNMEA_ToolData"];
 
             if (f != null)
             {
@@ -1716,7 +1729,7 @@ namespace Twol
                 fc.Close();
             }
 
-            fc = Application.OpenForms["FormGPSData"];
+            fc = Application.OpenForms["FormNMEA_Data"];
 
             if (fc != null)
             {
@@ -1724,6 +1737,13 @@ namespace Twol
                 fc.Close();
             }
 
+            fc = Application.OpenForms["FormNMEA_ToolData"];
+
+            if (fc != null)
+            {
+                fc.Focus();
+                fc.Close();
+            }
         }
 
         private void btnResetToolHeading_Click(object sender, EventArgs e)

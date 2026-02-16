@@ -100,6 +100,8 @@ int16_t actuatorPosition = 0; //from sensor
 
 //pwm variables
 float pValue = 0;
+float iValue = 0;
+float lastXTE_Error = 0;
 float errorAbs = 0;
 float lowHighPerCM = 0;
 
@@ -416,6 +418,7 @@ void ReceiveUdp()
                 toolSettings.invertActuator = udpPacket.udpData[settingIDs::invertActuator];
                 toolSettings.maxActuatorLimit = udpPacket.udpData[settingIDs::maxActuatorLimit];
 
+                //0 to 255 cm
                 toolSettings.lowHighDistance = udpPacket.udpData[settingIDs::lowHighSetDistance];
 
 				toolSettingsInit(); //recalculate the low high per cm for pwm

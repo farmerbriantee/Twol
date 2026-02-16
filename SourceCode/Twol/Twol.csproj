@@ -220,6 +220,12 @@
     <Compile Include="Forms\IO\FormEthernet.designer.cs">
       <DependentUpon>FormEthernet.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\IO\FormNMEA_ToolData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IO\FormNMEA_ToolData.Designer.cs">
+      <DependentUpon>FormNMEA_ToolData.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\IO\FormNMEA_Data.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -280,10 +286,10 @@
     <Compile Include="Forms\Settings\FormGraphXTE.Designer.cs">
       <DependentUpon>FormGraphXTE.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Settings\FormToolSteer.cs">
+    <Compile Include="Forms\Guidance\FormToolSteer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Settings\FormToolSteer.Designer.cs">
+    <Compile Include="Forms\Guidance\FormToolSteer.Designer.cs">
       <DependentUpon>FormToolSteer.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\Mapping\WorldTileMap.cs" />
@@ -538,10 +544,10 @@
     <Compile Include="Forms\Settings\FormSimCoords.Designer.cs">
       <DependentUpon>FormSimCoords.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Settings\FormSteer.cs">
+    <Compile Include="Forms\Guidance\FormSteer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Settings\FormSteer.Designer.cs">
+    <Compile Include="Forms\Guidance\FormSteer.Designer.cs">
       <DependentUpon>FormSteer.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormTimedMessage.cs">
@@ -561,12 +567,6 @@
     <Compile Include="Forms\SaveOpen.Designer.cs">
       <SubType>Form</SubType>
       <DependentUpon>FormGPS.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\FormGPSData.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FormGPSData.Designer.cs">
-      <DependentUpon>FormGPSData.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\GLM.cs" />
     <Compile Include="Forms\OpenGL.Designer.cs">
@@ -670,6 +670,10 @@
       <DependentUpon>FormEthernet.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IO\FormNMEA_ToolData.resx">
+      <DependentUpon>FormNMEA_ToolData.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\IO\FormNMEA_Data.resx">
       <DependentUpon>FormNMEA_Data.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -761,10 +765,6 @@
     <EmbeddedResource Include="Forms\Field\FormFieldNew.resx">
       <DependentUpon>FormFieldNew.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormGPSData.resx">
-      <DependentUpon>FormGPSData.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormGPS.resx">
       <DependentUpon>FormGPS.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -796,10 +796,10 @@
     <EmbeddedResource Include="Forms\FormtimedMessage.resx">
       <DependentUpon>FormTimedMessage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Settings\FormToolSteer.resx">
+    <EmbeddedResource Include="Forms\Guidance\FormToolSteer.resx">
       <DependentUpon>FormToolSteer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Settings\FormSteer.resx">
+    <EmbeddedResource Include="Forms\Guidance\FormSteer.resx">
       <DependentUpon>FormSteer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -941,6 +941,7 @@
     <None Include="btnImages\Config\Tool_Fore_Aft.png" />
     <None Include="btnImages\Config\ToolAntenna_Fore_Aft.png" />
     <None Include="btnImages\Config\ConU_User.png" />
+    <None Include="btnImages\GPSQualityTool.png" />
     <Content Include="btnImages\ZoomOut.png" />
     <Content Include="License.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

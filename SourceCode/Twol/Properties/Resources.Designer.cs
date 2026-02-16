@@ -2272,6 +2272,16 @@ namespace Twol.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap GPSQualityTool {
+            get {
+                object obj = ResourceManager.GetObject("GPSQualityTool", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap GridRotate {
             get {
                 object obj = ResourceManager.GetObject("GridRotate", resourceCulture);
