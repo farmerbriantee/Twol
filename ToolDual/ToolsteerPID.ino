@@ -1,5 +1,12 @@
 void calcSteeringPID(void)
 {
+
+    // what do we know here - we know the actuator/WAS position from the sensor
+    // and we know how far off the line we are (toolXTE_cm)
+    // so, given we're on a slow-steering valve, we want to limit the amount of turning we do
+    // and start backing it off (aka straightening up) as we approach the line
+    // 
+    // 
     //Proportional only
     pValue = toolSettings.Kp * toolXTE_cm * 0.2;
     pwmDrive = (int16_t)pValue;
