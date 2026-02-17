@@ -471,9 +471,9 @@ namespace Twol
             Settings.Tool.setToolSteer.isBangBang = cbBangBang.Checked;
             if (cbBangBang.Checked )
             {
-                label89.Text = "SteeringGain * 10";
-                label27.Text = "Low XTE zone * 10";
-                label88.Text = "Deg allowed near center * 10";
+                label89.Text = "steerGapTime(ms*10)";
+                label27.Text = "steerMaxTime(ms*10)";
+                label88.Text = "Deadzone(cm/10)";
             }
             else
             {

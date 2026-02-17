@@ -5,10 +5,12 @@
 elapsedMillis steerStarted = 0;
 elapsedMillis steerPaused = 0;
 
-float steerGapTime = toolSettings.kp * 50; // kp/pgain * ms between steering changes
-float steerMaxTime = toolSettings.ki * 50; // ki/integral * ms maximum time to hold a steer
+float steerGapTime = toolSettings.kp * 10; // kp/pgain * ms between steering changes
+float steerMaxTime = toolSettings.ki * 10; // ki/integral * ms maximum time to hold a steer
 
-float deadZone = toolSettings.minPWM;	   // cm of XTE where we do not steer
+// so 500/500 will be half second on/off, pulses, 50% duty. PWM, in effect
+
+float deadZone = toolSettings.minPWM / 10; // cm of XTE where we do not steer
 
 // float kP = toolSettings.Kp / 10;					  	// (prop gain in TWOL) steering gain (deg per cm - start at 0.25)
 // float maxSteer = toolSettings.maxActuatorLimit;     	// (obv) absolute steering limit (eg 5)
@@ -22,22 +24,47 @@ float deadZone = toolSettings.minPWM;	   // cm of XTE where we do not steer
 
 void calcSteeringPID(void)
 {
-	// actuatorPositionPercent
+
 	if (toolSettings.isBangBang)
 	{
-		if (toolXTE_cm > deadZone && steerStarted < steerMaxTime && steerPaused < steerGapTime)
-		{
-			pwmDrive = steerLeft;
-		}
-		else if (toolXTE_cm < -deadZone && steerStarted < steerMaxTime && steerPaused < steerGapTime)
-		{
-			pwmDrive = steerRight;
-		}
-		else if (toolXTE_cm > -deadZone && toolXTE_cm < deadZone && steerPaused >= steerGapTime)
+		static bool isPausing = false;
+
+		// inside deadzone: stop and reset cycle
+		if (toolXTE_cm > -deadZone && toolXTE_cm < deadZone)
 		{
 			pwmDrive = steerStop;
 			steerStarted = 0;
 			steerPaused = 0;
+			isPausing = false;
+		}
+		else
+		{
+			// pause phase
+			if (isPausing)
+			{
+				pwmDrive = steerStop;
+
+				if (steerPaused >= steerGapTime)
+				{
+					isPausing = false;
+					steerStarted = 0; // start a fresh steer pulse
+				}
+			}
+
+			// steer phase
+			if (!isPausing)
+			{
+				if (steerStarted < steerMaxTime)
+				{
+					pwmDrive = (toolXTE_cm > deadZone) ? steerLeft : steerRight;
+				}
+				else
+				{
+					pwmDrive = steerStop;
+					steerPaused = 0; // begin pause timer
+					isPausing = true;
+				}
+			}
 		}
 	}
 
