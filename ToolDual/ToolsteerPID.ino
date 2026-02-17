@@ -10,7 +10,7 @@ float steerMaxTime = toolSettings.ki * 10; // ki/integral * ms maximum time to h
 
 // so 500/500 will be half second on/off, pulses, 50% duty. PWM, in effect
 
-float deadZone = toolSettings.minPWM / 10; // cm of XTE where we do not steer
+float deadZone = toolSettings.maxPWM / 10; // cm of XTE where we do not steer
 
 // float kP = toolSettings.Kp / 10;					  	// (prop gain in TWOL) steering gain (deg per cm - start at 0.25)
 // float maxSteer = toolSettings.maxActuatorLimit;     	// (obv) absolute steering limit (eg 5)
