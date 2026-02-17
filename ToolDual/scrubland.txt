@@ -1,0 +1,53 @@
+
+float localActuatorLimit = toolSettings.maxActuatorLimit; // we'll change this to move our actuator based on distance from XTE
+
+//float kP = toolSettings.Kp / 10;					  	// steering gain (deg per cm - start at 0.25)
+//float maxSteer = toolSettings.maxActuatorLimit;     	// absolute steering limit (eg 5)
+//float lowXteZone = toolSettings.Ki / 10;			  	// cm where we soften response (eg 5)
+//float minAuthority = toolSettings.highPWM / 10;		// deg allowed near center
+
+float computeSteer(float xte_cm)
+{
+	// proportional steering
+	float steer = toolSettings.Kp * xte_cm;
+
+	// soft authority reduction near center
+	float ax = abs(xte_cm);
+
+	if (ax < toolSettings.Ki)
+	{
+		float scale = ax / toolSettings.Ki;   // 0 to 1
+		float allowed = toolSettings.highPWM + scale * (toolSettings.maxActuatorLimit - toolSettings.highPWM);
+
+		steer = constrain(steer, -allowed, allowed);
+	}
+	else
+	{
+		steer = constrain(steer, -toolSettings.maxActuatorLimit, toolSettings.maxActuatorLimit);
+	}
+
+	return steer;
+}
+
+int updateBangBangSteering(float desired, float actual)
+{
+	static int lastDrive = 0;
+
+	const float engage = 0.7;
+	const float release = 0.3;
+
+	float error = desired - actual;
+
+	if (lastDrive == 0)
+	{
+		if (error > engage) lastDrive = 255;
+		else if (error < -engage) lastDrive = -255;
+	}
+	else
+	{
+		if (abs(error) < release)
+			lastDrive = 0;
+	}
+
+	return lastDrive;
+}

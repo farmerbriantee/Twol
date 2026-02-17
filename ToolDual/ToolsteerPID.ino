@@ -1,72 +1,46 @@
 
-float localActuatorLimit = toolSettings.maxActuatorLimit; // we'll change this to move our actuator based on distance from XTE
+#define steerLeft -255
+#define steerRight 255
+#define steerStop 0
+elapsedMillis steerStarted = 0;
+elapsedMillis steerPaused = 0;
 
-//float kP = toolSettings.Kp / 10;							// steering gain (deg per cm - start at 0.25)
-//float maxSteer = toolSettings.maxActuatorLimit;     // absolute steering limit (eg 5)
-//float lowXteZone = toolSettings.Ki / 10;					// cm where we soften response (eg 5)
-//float minAuthority = toolSettings.highPWM / 10;			// deg allowed near center
+float steerGapTime = toolSettings.kp * 50; // kp/pgain * ms between steering changes
+float steerMaxTime = toolSettings.ki * 50; // ki/integral * ms maximum time to hold a steer
 
-float computeSteer(float xte_cm)
-{
-	// proportional steering
-	float steer = toolSettings.Kp * xte_cm;
+float deadZone = toolSettings.minPWM;	   // cm of XTE where we do not steer
 
-	// soft authority reduction near center
-	float ax = abs(xte_cm);
+// float kP = toolSettings.Kp / 10;					  	// (prop gain in TWOL) steering gain (deg per cm - start at 0.25)
+// float maxSteer = toolSettings.maxActuatorLimit;     	// (obv) absolute steering limit (eg 5)
+// float lowXteZone = toolSettings.Ki / 10;			  	// (Integral in TWOL) cm where we soften response (eg 5)
+// float minAuthority = toolSettings.highPWM / 10;		// deg allowed near center
 
-	if (ax < toolSettings.Ki)
-	{
-		float scale = ax / toolSettings.Ki;   // 0 to 1
-		float allowed = toolSettings.highPWM + scale * (toolSettings.maxActuatorLimit - toolSettings.highPWM);
-
-		steer = constrain(steer, -allowed, allowed);
-	}
-	else
-	{
-		steer = constrain(steer, -toolSettings.maxActuatorLimit, toolSettings.maxActuatorLimit);
-	}
-
-	return steer;
-}
-
-int updateBangBangSteering(float desired, float actual)
-{
-	static int lastDrive = 0;
-
-	const float engage = 0.7;
-	const float release = 0.3;
-
-	float error = desired - actual;
-
-	if (lastDrive == 0)
-	{
-		if (error > engage) lastDrive = 255;
-		else if (error < -engage) lastDrive = -255;
-	}
-	else
-	{
-		if (abs(error) < release)
-			lastDrive = 0;
-	}
-
-	return lastDrive;
-}
+// float kP = toolSettings.Kp / 10;					  	// (prop gain in TWOL) steering gain (deg per cm - start at 0.25)
+// float maxSteer = toolSettings.maxActuatorLimit;     	// (obv) absolute steering limit (eg 5)
+// float lowXteZone = toolSettings.Ki / 10;			  	// (Integral in TWOL) cm where we soften response (eg 5)
+// float minAuthority = toolSettings.highPWM / 10;		// deg allowed near center
 
 void calcSteeringPID(void)
 {
-
-	// Things we can corrupt and abuse from the form - basically all of them as BB doesn't care about gain etc
-	// Proportional gain - "XTE to full steer ahead"
-	// Integral gain - "XTE to steer to half the limit"
-	// MaxPWM - 
-
+	// actuatorPositionPercent
 	if (toolSettings.isBangBang)
 	{
-
-		float desired = computeSteer(toolXTE_cm);
-		pwmDrive = updateBangBangSteering(desired, actuatorPosition);
-
+		if (toolXTE_cm > deadZone && steerStarted < steerMaxTime && steerPaused < steerGapTime)
+		{
+			pwmDrive = steerLeft;
+		}
+		else if (toolXTE_cm < -deadZone && steerStarted < steerMaxTime && steerPaused < steerGapTime)
+		{
+			pwmDrive = steerRight;
+		}
+		else if (toolXTE_cm > -deadZone && toolXTE_cm < deadZone && steerPaused >= steerGapTime)
+		{
+			pwmDrive = steerStop;
+			steerStarted = 0;
+			steerPaused = 0;
+		}
 	}
+
 	else
 	{
 		pValue = toolSettings.Kp * toolXTE_cm * 0.2;
@@ -93,7 +67,6 @@ void calcSteeringPID(void)
 			pwmDrive = newMax;
 		if (pwmDrive < -newMax)
 			pwmDrive = -newMax;
-
 	}
 	if (toolSettings.invertActuator)
 		pwmDrive *= -1;
