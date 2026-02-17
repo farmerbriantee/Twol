@@ -5,22 +5,9 @@
 elapsedMillis steerStarted = 0;
 elapsedMillis steerPaused = 0;
 
-float steerGapTime = toolSettings.kp * 10; // kp/pgain * ms between steering changes
-float steerMaxTime = toolSettings.ki * 10; // ki/integral * ms maximum time to hold a steer
-
-// so 500/500 will be half second on/off, pulses, 50% duty. PWM, in effect
-
-float deadZone = toolSettings.maxPWM / 10; // cm of XTE where we do not steer
-
-// float kP = toolSettings.Kp / 10;					  	// (prop gain in TWOL) steering gain (deg per cm - start at 0.25)
-// float maxSteer = toolSettings.maxActuatorLimit;     	// (obv) absolute steering limit (eg 5)
-// float lowXteZone = toolSettings.Ki / 10;			  	// (Integral in TWOL) cm where we soften response (eg 5)
-// float minAuthority = toolSettings.highPWM / 10;		// deg allowed near center
-
-// float kP = toolSettings.Kp / 10;					  	// (prop gain in TWOL) steering gain (deg per cm - start at 0.25)
-// float maxSteer = toolSettings.maxActuatorLimit;     	// (obv) absolute steering limit (eg 5)
-// float lowXteZone = toolSettings.Ki / 10;			  	// (Integral in TWOL) cm where we soften response (eg 5)
-// float minAuthority = toolSettings.highPWM / 10;		// deg allowed near center
+float steerGapTime	= toolSettings.kp * 10; // kp/pgain * ms between steering changes
+float steerMaxTime	= toolSettings.ki * 10; // ki/integral * ms maximum time to hold a steer
+float deadZone		= toolSettings.maxPWM / 10; // cm of XTE where we do not steer
 
 void calcSteeringPID(void)
 {
@@ -28,8 +15,12 @@ void calcSteeringPID(void)
 	if (toolSettings.isBangBang)
 	{
 		static bool isPausing = false;
-
+		// do we want to scale the steerMaxTime if way off the line, and lower it when close?
+		// Maybe steerMaxTime = (toolSettings.ki * 10) * (abs(toolXTE_cm) / 100);
+		// so at 100cm off, max time is full, but at 50cm off, max time is half, etc.
+		// This would make it more responsive when far off the line, and less twitchy when close.
 		// inside deadzone: stop and reset cycle
+		// by making small turns, the delay allows the machine to drive towards the line
 		if (toolXTE_cm > -deadZone && toolXTE_cm < deadZone)
 		{
 			pwmDrive = steerStop;
@@ -54,18 +45,22 @@ void calcSteeringPID(void)
 			// steer phase
 			if (!isPausing)
 			{
-				if (steerStarted < steerMaxTime)
+				if (steerStarted < steerMaxTime && 
+						actuatorPositionPercent < toolSettings.maxActuatorLimit && 
+						actuatorPositionPercent > -toolSettings.maxActuatorLimit)
 				{
 					pwmDrive = (toolXTE_cm > deadZone) ? steerLeft : steerRight;
 				}
 				else
 				{
+					// this could also kick in if we hit the actuator limit, which would be good to prevent damage or clamp wild oscillations
 					pwmDrive = steerStop;
 					steerPaused = 0; // begin pause timer
 					isPausing = true;
 				}
 			}
 		}
+		pwmDisplay = pwmDrive;
 	}
 
 	else
@@ -95,6 +90,7 @@ void calcSteeringPID(void)
 		if (pwmDrive < -newMax)
 			pwmDrive = -newMax;
 	}
+	// final correction, if steering is inverted
 	if (toolSettings.invertActuator)
 		pwmDrive *= -1;
 }
