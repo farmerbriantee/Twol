@@ -330,6 +330,7 @@
             this.tabSteer.Controls.Add(this.lblAV_Set);
             this.tabSteer.Controls.Add(this.lblAV_Act);
             this.tabSteer.Controls.Add(this.label36);
+            this.tabSteer.Controls.Add(this.label51);
             this.tabSteer.Controls.Add(this.label38);
             this.tabSteer.Controls.Add(this.lblActualSteerAngleUpper);
             this.tabSteer.Controls.Add(this.label96);
@@ -341,6 +342,7 @@
             this.tabSteer.Controls.Add(this.lblZeroWAS_Tool);
             this.tabSteer.Controls.Add(this.hsbarActuatorLimitsPercent);
             this.tabSteer.Controls.Add(this.label99);
+            this.tabSteer.Controls.Add(this.nudDeadzoneWidth);
             this.tabSteer.Controls.Add(this.btnZeroWAS_Tool);
             this.tabSteer.ImageIndex = 4;
             this.tabSteer.Location = new System.Drawing.Point(4, 52);
@@ -414,7 +416,7 @@
             // 
             this.label96.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label96.ForeColor = System.Drawing.Color.Black;
-            this.label96.Location = new System.Drawing.Point(116, 298);
+            this.label96.Location = new System.Drawing.Point(116, 309);
             this.label96.Name = "label96";
             this.label96.Size = new System.Drawing.Size(200, 24);
             this.label96.TabIndex = 577;
@@ -424,7 +426,7 @@
             // hsbarZeroWAS_Tool
             // 
             this.hsbarZeroWAS_Tool.LargeChange = 20;
-            this.hsbarZeroWAS_Tool.Location = new System.Drawing.Point(76, 96);
+            this.hsbarZeroWAS_Tool.Location = new System.Drawing.Point(76, 126);
             this.hsbarZeroWAS_Tool.Maximum = 4000;
             this.hsbarZeroWAS_Tool.Minimum = -4000;
             this.hsbarZeroWAS_Tool.Name = "hsbarZeroWAS_Tool";
@@ -437,7 +439,7 @@
             // 
             this.lblActuatorLimitsPercent.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblActuatorLimitsPercent.ForeColor = System.Drawing.Color.Black;
-            this.lblActuatorLimitsPercent.Location = new System.Drawing.Point(19, 322);
+            this.lblActuatorLimitsPercent.Location = new System.Drawing.Point(19, 333);
             this.lblActuatorLimitsPercent.Name = "lblActuatorLimitsPercent";
             this.lblActuatorLimitsPercent.Size = new System.Drawing.Size(52, 35);
             this.lblActuatorLimitsPercent.TabIndex = 569;
@@ -448,9 +450,9 @@
             // 
             this.label101.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label101.ForeColor = System.Drawing.Color.Black;
-            this.label101.Location = new System.Drawing.Point(116, 67);
+            this.label101.Location = new System.Drawing.Point(170, 88);
             this.label101.Name = "label101";
-            this.label101.Size = new System.Drawing.Size(200, 24);
+            this.label101.Size = new System.Drawing.Size(166, 24);
             this.label101.TabIndex = 566;
             this.label101.Text = "Actuator Center";
             this.label101.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -458,7 +460,7 @@
             // hsbarLowHighDistance
             // 
             this.hsbarLowHighDistance.LargeChange = 1;
-            this.hsbarLowHighDistance.Location = new System.Drawing.Point(76, 212);
+            this.hsbarLowHighDistance.Location = new System.Drawing.Point(76, 235);
             this.hsbarLowHighDistance.Maximum = 30;
             this.hsbarLowHighDistance.Minimum = 1;
             this.hsbarLowHighDistance.Name = "hsbarLowHighDistance";
@@ -471,7 +473,7 @@
             // 
             this.lblLowHighDistance.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLowHighDistance.ForeColor = System.Drawing.Color.Black;
-            this.lblLowHighDistance.Location = new System.Drawing.Point(19, 209);
+            this.lblLowHighDistance.Location = new System.Drawing.Point(19, 232);
             this.lblLowHighDistance.Name = "lblLowHighDistance";
             this.lblLowHighDistance.Size = new System.Drawing.Size(52, 35);
             this.lblLowHighDistance.TabIndex = 571;
@@ -482,7 +484,7 @@
             // 
             this.lblZeroWAS_Tool.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblZeroWAS_Tool.ForeColor = System.Drawing.Color.Black;
-            this.lblZeroWAS_Tool.Location = new System.Drawing.Point(6, 96);
+            this.lblZeroWAS_Tool.Location = new System.Drawing.Point(6, 126);
             this.lblZeroWAS_Tool.Name = "lblZeroWAS_Tool";
             this.lblZeroWAS_Tool.Size = new System.Drawing.Size(70, 35);
             this.lblZeroWAS_Tool.TabIndex = 567;
@@ -492,7 +494,7 @@
             // hsbarActuatorLimitsPercent
             // 
             this.hsbarActuatorLimitsPercent.LargeChange = 1;
-            this.hsbarActuatorLimitsPercent.Location = new System.Drawing.Point(76, 325);
+            this.hsbarActuatorLimitsPercent.Location = new System.Drawing.Point(76, 336);
             this.hsbarActuatorLimitsPercent.Minimum = 2;
             this.hsbarActuatorLimitsPercent.Name = "hsbarActuatorLimitsPercent";
             this.hsbarActuatorLimitsPercent.Size = new System.Drawing.Size(281, 40);
@@ -504,7 +506,7 @@
             // 
             this.label99.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label99.ForeColor = System.Drawing.Color.Black;
-            this.label99.Location = new System.Drawing.Point(76, 184);
+            this.label99.Location = new System.Drawing.Point(76, 207);
             this.label99.Name = "label99";
             this.label99.Size = new System.Drawing.Size(281, 24);
             this.label99.TabIndex = 575;
@@ -520,7 +522,7 @@
             this.btnZeroWAS_Tool.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnZeroWAS_Tool.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnZeroWAS_Tool.Image = global::Twol.Properties.Resources.SteerZero;
-            this.btnZeroWAS_Tool.Location = new System.Drawing.Point(167, 18);
+            this.btnZeroWAS_Tool.Location = new System.Drawing.Point(56, 85);
             this.btnZeroWAS_Tool.Name = "btnZeroWAS_Tool";
             this.btnZeroWAS_Tool.Size = new System.Drawing.Size(98, 30);
             this.btnZeroWAS_Tool.TabIndex = 572;
@@ -533,7 +535,6 @@
             this.tabDeadzone.Controls.Add(this.hsbarPassiveIntegralGain);
             this.tabDeadzone.Controls.Add(this.hsbarPassiveCurvature);
             this.tabDeadzone.Controls.Add(this.lblManualPWM_Percent);
-            this.tabDeadzone.Controls.Add(this.label51);
             this.tabDeadzone.Controls.Add(this.hsbarManualPWM_Percent);
             this.tabDeadzone.Controls.Add(this.label6);
             this.tabDeadzone.Controls.Add(this.label13);
@@ -543,7 +544,6 @@
             this.tabDeadzone.Controls.Add(this.lblPassiveIntegralGain);
             this.tabDeadzone.Controls.Add(this.lblManualSecondsOn);
             this.tabDeadzone.Controls.Add(this.label7);
-            this.tabDeadzone.Controls.Add(this.nudDeadzoneWidth);
             this.tabDeadzone.ImageIndex = 2;
             this.tabDeadzone.Location = new System.Drawing.Point(4, 52);
             this.tabDeadzone.Name = "tabDeadzone";
@@ -554,7 +554,7 @@
             // hsbarPassiveIntegralGain
             // 
             this.hsbarPassiveIntegralGain.LargeChange = 1;
-            this.hsbarPassiveIntegralGain.Location = new System.Drawing.Point(78, 168);
+            this.hsbarPassiveIntegralGain.Location = new System.Drawing.Point(78, 144);
             this.hsbarPassiveIntegralGain.Maximum = 25;
             this.hsbarPassiveIntegralGain.Name = "hsbarPassiveIntegralGain";
             this.hsbarPassiveIntegralGain.Size = new System.Drawing.Size(281, 40);
@@ -565,7 +565,7 @@
             // hsbarPassiveCurvature
             // 
             this.hsbarPassiveCurvature.LargeChange = 1;
-            this.hsbarPassiveCurvature.Location = new System.Drawing.Point(78, 87);
+            this.hsbarPassiveCurvature.Location = new System.Drawing.Point(81, 53);
             this.hsbarPassiveCurvature.Maximum = 500;
             this.hsbarPassiveCurvature.Name = "hsbarPassiveCurvature";
             this.hsbarPassiveCurvature.Size = new System.Drawing.Size(281, 40);
@@ -578,7 +578,7 @@
             this.lblManualPWM_Percent.Enabled = false;
             this.lblManualPWM_Percent.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblManualPWM_Percent.ForeColor = System.Drawing.Color.Black;
-            this.lblManualPWM_Percent.Location = new System.Drawing.Point(3, 346);
+            this.lblManualPWM_Percent.Location = new System.Drawing.Point(3, 340);
             this.lblManualPWM_Percent.Name = "lblManualPWM_Percent";
             this.lblManualPWM_Percent.Size = new System.Drawing.Size(60, 35);
             this.lblManualPWM_Percent.TabIndex = 586;
@@ -589,9 +589,9 @@
             // 
             this.label51.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label51.ForeColor = System.Drawing.Color.Black;
-            this.label51.Location = new System.Drawing.Point(13, 9);
+            this.label51.Location = new System.Drawing.Point(56, 22);
             this.label51.Name = "label51";
-            this.label51.Size = new System.Drawing.Size(164, 25);
+            this.label51.Size = new System.Drawing.Size(130, 25);
             this.label51.TabIndex = 541;
             this.label51.Text = "Dead Zone";
             this.label51.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -599,7 +599,7 @@
             // hsbarManualPWM_Percent
             // 
             this.hsbarManualPWM_Percent.LargeChange = 1;
-            this.hsbarManualPWM_Percent.Location = new System.Drawing.Point(67, 344);
+            this.hsbarManualPWM_Percent.Location = new System.Drawing.Point(67, 338);
             this.hsbarManualPWM_Percent.Minimum = 10;
             this.hsbarManualPWM_Percent.Name = "hsbarManualPWM_Percent";
             this.hsbarManualPWM_Percent.Size = new System.Drawing.Size(292, 40);
@@ -611,7 +611,7 @@
             // 
             this.label6.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.Black;
-            this.label6.Location = new System.Drawing.Point(74, 59);
+            this.label6.Location = new System.Drawing.Point(77, 25);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(262, 24);
             this.label6.TabIndex = 562;
@@ -623,7 +623,7 @@
             this.label13.Enabled = false;
             this.label13.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.ForeColor = System.Drawing.Color.Black;
-            this.label13.Location = new System.Drawing.Point(97, 315);
+            this.label13.Location = new System.Drawing.Point(97, 309);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(273, 26);
             this.label13.TabIndex = 584;
@@ -635,7 +635,7 @@
             // 
             this.lblCurvatureGain.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCurvatureGain.ForeColor = System.Drawing.Color.Black;
-            this.lblCurvatureGain.Location = new System.Drawing.Point(8, 89);
+            this.lblCurvatureGain.Location = new System.Drawing.Point(11, 55);
             this.lblCurvatureGain.Name = "lblCurvatureGain";
             this.lblCurvatureGain.Size = new System.Drawing.Size(67, 35);
             this.lblCurvatureGain.TabIndex = 561;
@@ -647,7 +647,7 @@
             this.label11.Enabled = false;
             this.label11.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.Color.Black;
-            this.label11.Location = new System.Drawing.Point(97, 229);
+            this.label11.Location = new System.Drawing.Point(97, 223);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(273, 26);
             this.label11.TabIndex = 581;
@@ -658,7 +658,7 @@
             // hsbarManualSecondsOn
             // 
             this.hsbarManualSecondsOn.LargeChange = 1;
-            this.hsbarManualSecondsOn.Location = new System.Drawing.Point(67, 258);
+            this.hsbarManualSecondsOn.Location = new System.Drawing.Point(67, 252);
             this.hsbarManualSecondsOn.Maximum = 10;
             this.hsbarManualSecondsOn.Minimum = 1;
             this.hsbarManualSecondsOn.Name = "hsbarManualSecondsOn";
@@ -671,7 +671,7 @@
             // 
             this.lblPassiveIntegralGain.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPassiveIntegralGain.ForeColor = System.Drawing.Color.Black;
-            this.lblPassiveIntegralGain.Location = new System.Drawing.Point(8, 170);
+            this.lblPassiveIntegralGain.Location = new System.Drawing.Point(8, 146);
             this.lblPassiveIntegralGain.Name = "lblPassiveIntegralGain";
             this.lblPassiveIntegralGain.Size = new System.Drawing.Size(67, 35);
             this.lblPassiveIntegralGain.TabIndex = 564;
@@ -683,7 +683,7 @@
             this.lblManualSecondsOn.Enabled = false;
             this.lblManualSecondsOn.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblManualSecondsOn.ForeColor = System.Drawing.Color.Black;
-            this.lblManualSecondsOn.Location = new System.Drawing.Point(4, 260);
+            this.lblManualSecondsOn.Location = new System.Drawing.Point(4, 254);
             this.lblManualSecondsOn.Name = "lblManualSecondsOn";
             this.lblManualSecondsOn.Size = new System.Drawing.Size(60, 35);
             this.lblManualSecondsOn.TabIndex = 583;
@@ -694,7 +694,7 @@
             // 
             this.label7.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.Black;
-            this.label7.Location = new System.Drawing.Point(74, 140);
+            this.label7.Location = new System.Drawing.Point(74, 116);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(262, 24);
             this.label7.TabIndex = 565;
@@ -703,7 +703,7 @@
             // 
             // nudDeadzoneWidth
             // 
-            this.nudDeadzoneWidth.Location = new System.Drawing.Point(186, 4);
+            this.nudDeadzoneWidth.Location = new System.Drawing.Point(195, 17);
             this.nudDeadzoneWidth.Maximum = 5D;
             this.nudDeadzoneWidth.Minimum = 0.1D;
             this.nudDeadzoneWidth.Mode = Twol.UnitMode.Small;
