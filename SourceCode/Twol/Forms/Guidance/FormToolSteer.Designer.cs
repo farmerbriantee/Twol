@@ -49,6 +49,7 @@
             this.lblAV_Set = new System.Windows.Forms.Label();
             this.lblAV_Act = new System.Windows.Forms.Label();
             this.label36 = new System.Windows.Forms.Label();
+            this.label51 = new System.Windows.Forms.Label();
             this.label38 = new System.Windows.Forms.Label();
             this.lblActualSteerAngleUpper = new System.Windows.Forms.Label();
             this.label96 = new System.Windows.Forms.Label();
@@ -60,12 +61,12 @@
             this.lblZeroWAS_Tool = new System.Windows.Forms.Label();
             this.hsbarActuatorLimitsPercent = new System.Windows.Forms.HScrollBar();
             this.label99 = new System.Windows.Forms.Label();
+            this.nudDeadzoneWidth = new Twol.NudlessNumericUpDown();
             this.btnZeroWAS_Tool = new System.Windows.Forms.Button();
             this.tabDeadzone = new System.Windows.Forms.TabPage();
             this.hsbarPassiveIntegralGain = new System.Windows.Forms.HScrollBar();
             this.hsbarPassiveCurvature = new System.Windows.Forms.HScrollBar();
             this.lblManualPWM_Percent = new System.Windows.Forms.Label();
-            this.label51 = new System.Windows.Forms.Label();
             this.hsbarManualPWM_Percent = new System.Windows.Forms.HScrollBar();
             this.label6 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
@@ -75,7 +76,6 @@
             this.lblPassiveIntegralGain = new System.Windows.Forms.Label();
             this.lblManualSecondsOn = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.nudDeadzoneWidth = new Twol.NudlessNumericUpDown();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblPWMDisplay = new System.Windows.Forms.Label();
@@ -127,6 +127,12 @@
             this.nudAntennaHeight_Tool = new Twol.NudlessNumericUpDown();
             this.nudAntennaOffset_Tool = new Twol.NudlessNumericUpDown();
             this.imageList2 = new System.Windows.Forms.ImageList(this.components);
+            this.nudDirectionalValveOffTime = new Twol.NudlessNumericUpDown();
+            this.nudDirectionalValveOnTime = new Twol.NudlessNumericUpDown();
+            this.cboxDirectionalValveEnable = new System.Windows.Forms.CheckBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabGain.SuspendLayout();
             this.tabSteer.SuspendLayout();
@@ -386,6 +392,17 @@
             this.label36.Text = "AV Act:";
             this.label36.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // label51
+            // 
+            this.label51.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label51.ForeColor = System.Drawing.Color.Black;
+            this.label51.Location = new System.Drawing.Point(56, 22);
+            this.label51.Name = "label51";
+            this.label51.Size = new System.Drawing.Size(130, 25);
+            this.label51.TabIndex = 541;
+            this.label51.Text = "Dead Zone";
+            this.label51.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // label38
             // 
             this.label38.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -513,6 +530,17 @@
             this.label99.Text = "Low High Distance (cm)";
             this.label99.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // nudDeadzoneWidth
+            // 
+            this.nudDeadzoneWidth.Location = new System.Drawing.Point(195, 17);
+            this.nudDeadzoneWidth.Maximum = 5D;
+            this.nudDeadzoneWidth.Minimum = 0.1D;
+            this.nudDeadzoneWidth.Mode = Twol.UnitMode.Small;
+            this.nudDeadzoneWidth.Name = "nudDeadzoneWidth";
+            this.nudDeadzoneWidth.Size = new System.Drawing.Size(107, 36);
+            this.nudDeadzoneWidth.TabIndex = 538;
+            this.nudDeadzoneWidth.ValueChanged += new System.EventHandler(this.nudDeadzoneWidth_ValueChanged);
+            // 
             // btnZeroWAS_Tool
             // 
             this.btnZeroWAS_Tool.BackColor = System.Drawing.Color.MintCream;
@@ -584,17 +612,6 @@
             this.lblManualPWM_Percent.TabIndex = 586;
             this.lblManualPWM_Percent.Text = "888";
             this.lblManualPWM_Percent.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label51
-            // 
-            this.label51.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label51.ForeColor = System.Drawing.Color.Black;
-            this.label51.Location = new System.Drawing.Point(56, 22);
-            this.label51.Name = "label51";
-            this.label51.Size = new System.Drawing.Size(130, 25);
-            this.label51.TabIndex = 541;
-            this.label51.Text = "Dead Zone";
-            this.label51.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // hsbarManualPWM_Percent
             // 
@@ -700,17 +717,6 @@
             this.label7.TabIndex = 565;
             this.label7.Text = "Passive Integral Gain";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // nudDeadzoneWidth
-            // 
-            this.nudDeadzoneWidth.Location = new System.Drawing.Point(195, 17);
-            this.nudDeadzoneWidth.Maximum = 5D;
-            this.nudDeadzoneWidth.Minimum = 0.1D;
-            this.nudDeadzoneWidth.Mode = Twol.UnitMode.Small;
-            this.nudDeadzoneWidth.Name = "nudDeadzoneWidth";
-            this.nudDeadzoneWidth.Size = new System.Drawing.Size(107, 36);
-            this.nudDeadzoneWidth.TabIndex = 538;
-            this.nudDeadzoneWidth.ValueChanged += new System.EventHandler(this.nudDeadzoneWidth_ValueChanged);
             // 
             // imageList1
             // 
@@ -1033,6 +1039,12 @@
             // 
             this.tabSetup.BackColor = System.Drawing.Color.Gainsboro;
             this.tabSetup.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.tabSetup.Controls.Add(this.label19);
+            this.tabSetup.Controls.Add(this.label18);
+            this.tabSetup.Controls.Add(this.label15);
+            this.tabSetup.Controls.Add(this.cboxDirectionalValveEnable);
+            this.tabSetup.Controls.Add(this.nudDirectionalValveOnTime);
+            this.tabSetup.Controls.Add(this.nudDirectionalValveOffTime);
             this.tabSetup.Controls.Add(this.label31);
             this.tabSetup.Controls.Add(this.label83);
             this.tabSetup.Controls.Add(this.cboxInvertAPOS);
@@ -1406,6 +1418,80 @@
             this.imageList2.Images.SetKeyName(2, "ModeActive.png");
             this.imageList2.Images.SetKeyName(3, "ModePassive.png");
             // 
+            // nudDirectionalValveOffTime
+            // 
+            this.nudDirectionalValveOffTime.DecimalPlaces = 1;
+            this.nudDirectionalValveOffTime.Location = new System.Drawing.Point(414, 381);
+            this.nudDirectionalValveOffTime.Maximum = 5D;
+            this.nudDirectionalValveOffTime.Minimum = 0.1D;
+            this.nudDirectionalValveOffTime.Name = "nudDirectionalValveOffTime";
+            this.nudDirectionalValveOffTime.Size = new System.Drawing.Size(148, 56);
+            this.nudDirectionalValveOffTime.TabIndex = 541;
+            this.nudDirectionalValveOffTime.ValueChanged += new System.EventHandler(this.nudDirectionalValveOffTime_ValueChanged);
+            // 
+            // nudDirectionalValveOnTime
+            // 
+            this.nudDirectionalValveOnTime.DecimalPlaces = 1;
+            this.nudDirectionalValveOnTime.Location = new System.Drawing.Point(211, 381);
+            this.nudDirectionalValveOnTime.Minimum = -100D;
+            this.nudDirectionalValveOnTime.Name = "nudDirectionalValveOnTime";
+            this.nudDirectionalValveOnTime.Size = new System.Drawing.Size(148, 56);
+            this.nudDirectionalValveOnTime.TabIndex = 542;
+            this.nudDirectionalValveOnTime.ValueChanged += new System.EventHandler(this.nudDirectionalValveOnTime_ValueChanged);
+            // 
+            // cboxDirectionalValveEnable
+            // 
+            this.cboxDirectionalValveEnable.Appearance = System.Windows.Forms.Appearance.Button;
+            this.cboxDirectionalValveEnable.BackColor = System.Drawing.Color.White;
+            this.cboxDirectionalValveEnable.BackgroundImage = global::Twol.Properties.Resources.ConS_Pins;
+            this.cboxDirectionalValveEnable.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.cboxDirectionalValveEnable.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.cboxDirectionalValveEnable.FlatAppearance.CheckedBackColor = System.Drawing.Color.MediumAquamarine;
+            this.cboxDirectionalValveEnable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cboxDirectionalValveEnable.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboxDirectionalValveEnable.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.cboxDirectionalValveEnable.Location = new System.Drawing.Point(62, 368);
+            this.cboxDirectionalValveEnable.Name = "cboxDirectionalValveEnable";
+            this.cboxDirectionalValveEnable.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.cboxDirectionalValveEnable.Size = new System.Drawing.Size(99, 69);
+            this.cboxDirectionalValveEnable.TabIndex = 543;
+            this.cboxDirectionalValveEnable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.cboxDirectionalValveEnable.UseVisualStyleBackColor = false;
+            this.cboxDirectionalValveEnable.Click += new System.EventHandler(this.cboxDirectionalValveEnable_Click);
+            // 
+            // label15
+            // 
+            this.label15.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.ForeColor = System.Drawing.Color.Black;
+            this.label15.Location = new System.Drawing.Point(14, 311);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(195, 54);
+            this.label15.TabIndex = 544;
+            this.label15.Text = "Directional Valve Type (Bang Bang)";
+            this.label15.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // label18
+            // 
+            this.label18.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.ForeColor = System.Drawing.Color.Black;
+            this.label18.Location = new System.Drawing.Point(207, 340);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(158, 36);
+            this.label18.TabIndex = 545;
+            this.label18.Text = "On Time";
+            this.label18.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // label19
+            // 
+            this.label19.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.ForeColor = System.Drawing.Color.Black;
+            this.label19.Location = new System.Drawing.Point(404, 340);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(158, 36);
+            this.label19.TabIndex = 546;
+            this.label19.Text = "Off Time";
+            this.label19.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
             // FormToolSteer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -1539,5 +1625,11 @@
         private NudlessNumericUpDown nudPivotToAntenna;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.CheckBox cboxDirectionalValveEnable;
+        private NudlessNumericUpDown nudDirectionalValveOnTime;
+        private NudlessNumericUpDown nudDirectionalValveOffTime;
     }
 }

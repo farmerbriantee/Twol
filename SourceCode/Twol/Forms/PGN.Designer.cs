@@ -362,7 +362,11 @@ namespace Twol
     //ToolSteer Settings
     public static class PGN_232
     {  
-        public static byte[] pgn = new byte[] { 0x80, 0x81, 0x7f, 232, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0xCC };
+        public static byte[] pgn = new byte[] { 0x80, 0x81, 0x7f, 232, 
+            15, 0, 0, 0, 0, 0, 
+            0, 0, 0, 0, 0, 
+            0, 0, 0, 0, 0, 
+            0xCC };
         public static int gainP = 5;
         public static int integral = 6;
         public static int minPWM = 7;
@@ -373,7 +377,10 @@ namespace Twol
         public static int cytronDriver = 12;
         public static int invertAPOS = 13;
         public static int invertActuator = 14;
-        public static int maxActuatorLimit = 15; 
+        public static int maxActuatorLimit = 15;
+        public static int isDirectionalValve = 16;
+        public static int directionalValveOffTime = 17;
+        public static int directionalValveOnTime = 18;
     }
 
     //Toolsteer Config

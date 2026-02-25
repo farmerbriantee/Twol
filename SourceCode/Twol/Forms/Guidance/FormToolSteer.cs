@@ -109,6 +109,11 @@ namespace Twol
             nudPivotToAntenna.Value = Settings.Tool.setToolSteer.pivotToAntennaDistance;
             nudPivotToTool.Value = Settings.Tool.setToolSteer.PivotToToolDistance;
 
+            nudDirectionalValveOffTime.Value = Settings.Tool.setToolSteer.directionalValveOffTime;
+            nudDirectionalValveOnTime.Value = Settings.Tool.setToolSteer.directionalValveOnTime;
+
+            cboxDirectionalValveEnable.Checked = Settings.Tool.setToolSteer.isDirectionalValve;
+
             //WAS Zero, CPD
 
             //hsbarIntegral_Tool.Value = (int)(Settings.Tool.stanleyIntegralGainAB * 100);
@@ -133,7 +138,13 @@ namespace Twol
 
             if (cboxInvertActuator.Checked) Settings.Tool.setToolSteer.isInvertActuator = 1;
             else Settings.Tool.setToolSteer.isInvertActuator = 0;
-            
+
+            Settings.Tool.setToolSteer.directionalValveOffTime = nudDirectionalValveOffTime.Value;
+            Settings.Tool.setToolSteer.directionalValveOnTime = nudDirectionalValveOnTime.Value;
+
+            Settings.Tool.setToolSteer.isDirectionalValve = cboxDirectionalValveEnable.Checked;
+
+
             PGN_232.pgn[PGN_232.gainP] = Settings.Tool.setToolSteer.gainP;
             PGN_232.pgn[PGN_232.integral] = Settings.Tool.setToolSteer.integral;
             PGN_232.pgn[PGN_232.minPWM] = Settings.Tool.setToolSteer.minPWM;
@@ -178,7 +189,16 @@ namespace Twol
 
                 PGN_232.pgn[PGN_232.maxActuatorLimit] = unchecked((byte)hsbarActuatorLimitsPercent.Value);
 
+                //Bang Bang Directional Valve
+                PGN_232.pgn[PGN_232.directionalValveOffTime] = unchecked((byte)(nudDirectionalValveOffTime.Value * 10));
+                PGN_232.pgn[PGN_232.directionalValveOnTime] = unchecked((byte)(nudDirectionalValveOnTime.Value * 10));
+
+                if (cboxDirectionalValveEnable.Checked) PGN_232.pgn[PGN_232.isDirectionalValve] = 1;
+                else PGN_232.pgn[PGN_232.isDirectionalValve] = 0;
+
+                //send to board
                 mf.SendUDPMessageTool(PGN_232.pgn, mf.epModuleTool);
+
                 toolCounterSettings = 0;
                 toolSend = false;
             }
@@ -409,6 +429,25 @@ namespace Twol
         }
 
         private void cboxInvertAPOS_Click(object sender, EventArgs e)
+        {
+            toolSend = true;
+            toolCounterConfig = 0;
+        }
+
+        private void cboxDirectionalValveEnable_Click(object sender, EventArgs e)
+        {
+            toolSend = true;
+            toolCounterConfig = 0;
+        }
+
+        private void nudDirectionalValveOnTime_ValueChanged(object sender, EventArgs e)
+        {
+            toolSend = true;
+            toolCounterConfig = 0;
+
+        }
+
+        private void nudDirectionalValveOffTime_ValueChanged(object sender, EventArgs e)
         {
             toolSend = true;
             toolCounterConfig = 0;

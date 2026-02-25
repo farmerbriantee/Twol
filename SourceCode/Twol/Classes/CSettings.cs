@@ -93,6 +93,10 @@
         public double pivotToAntennaDistance = 0;
         public double PivotToToolDistance = 0;
 
+        public double directionalValveOnTime = 0.5;
+        public double directionalValveOffTime = 1.5;
+        public bool isDirectionalValve = false;
+
         public double rollZero = 0.0;
         public bool invertRoll = false;
 
@@ -147,6 +151,10 @@
             toolGuidanceSpacing = _setting.toolGuidanceSpacing;
             isRecordSourceTool = _setting.isRecordSourceTool;
             passesPerReference = _setting.passesPerReference;
+
+            isDirectionalValve = _setting.isDirectionalValve;
+            directionalValveOffTime = _setting.directionalValveOffTime;
+            directionalValveOnTime = _setting.directionalValveOnTime;
         }
     }
 }
