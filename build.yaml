@@ -10,4 +10,10 @@ jobs:
       - name: Restore Packages
         run: nuget restore Twol.sln
       - name: Build Solution
-        run: msbuild Twol.sln /p:Configuration=Release
+      run: msbuild YourSolution.sln /p:Configuration=Release /p:OutputPath=./build-output
+    - name: Upload Zipped Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: LegacyWinForms-Release
+        path: ./build-output
+
