@@ -29,8 +29,8 @@
 // Serial Ports
 #define SerialTwol Serial   // AgIO USB conection
 #define SerialRTK Serial3  // RTK radio
-#define SerialGPS Serial7  // Main postion receiver (GGA) (Serial2 must be used here with T4.0 / Basic Panda boards - Should auto swap)
-#define SerialGPS2 Serial2 // Dual heading receiver
+#define SerialGPS Serial2  // Main postion receiver (GGA) (Serial2 must be used here with T4.0 / Basic Panda boards - Should auto swap)
+#define SerialGPS2 Serial7 // Dual heading receiver
 
 const int32_t baudTwol = 115200;
 const int32_t baudGPS = 460800;
@@ -51,6 +51,7 @@ const int32_t baudRTK = 9600; // most are using Xbee radios with default of 1152
 #define GPSGREEN_LED 10          // Green (Flashing = Dual bad, ON = Dual good)
 #define AUTOSTEER_STANDBY_LED 11 // Red
 #define AUTOSTEER_ACTIVE_LED 12  // Green
+#define AIO_LOCKPIN 3
 uint32_t gpsReadyTime = 0;       // Used for GGA timeout
 
 /*****************************************************************/

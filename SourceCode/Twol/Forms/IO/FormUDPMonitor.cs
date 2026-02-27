@@ -95,5 +95,16 @@ namespace Twol
             if (mf.isGPSLogOn) btnLogNMEA.BackColor = Color.LightGreen;
             else btnLogNMEA.BackColor = Color.Salmon;
         }
+
+        public void AppendMessage(string message)
+        {
+            if (InvokeRequired)
+            {
+                BeginInvoke(new Action<string>(AppendMessage), message);
+                return;
+            }
+
+            textBoxRcv.AppendText(message + Environment.NewLine);
+        }
     }
 }

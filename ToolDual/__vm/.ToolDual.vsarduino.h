@@ -19,6 +19,7 @@
 #include "..\ToolDual.ino"
 #include "..\Toolsteer.ino"
 #include "..\ToolsteerPID.ino"
+#include "..\_Utils.ino"
 #include "..\zEthernet.ino"
 #include "..\zHandlers.ino"
 #include "..\zRelPos.ino"

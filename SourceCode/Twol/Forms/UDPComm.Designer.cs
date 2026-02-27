@@ -455,6 +455,27 @@ namespace Twol
                                 break;
                             }
 
+                        case 223: // hardware message stream, where we gonna put this??
+                            {
+                                String tmp;
+                                if (length < 9) break;
+                                if (isHardwareMessages)
+                                {
+                                    int textLen = Math.Max(0, data[4] - 2);
+                                    if (7 + textLen <= length)
+                                        tmp = Encoding.UTF8.GetString(data, 7, textLen);
+                                    else
+                                        tmp = Encoding.UTF8.GetString(data, 7, Math.Max(0, length - 9));
+                                    // Push to monitor window if it's open
+                                    if (Application.OpenForms["FormUDPMonitor"] is FormUDPMonitor mon)
+                                    {
+                                        mon.AppendMessage(tmp);
+                                    }
+
+                                }
+                                break;
+                            }
+
                         case 234:
                             {
                                 if (length != 14) break;

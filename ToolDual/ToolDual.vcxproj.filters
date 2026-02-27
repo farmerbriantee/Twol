@@ -34,6 +34,7 @@
     </ClCompile>
     <ClCompile Include="zRelPos.ino" />
     <ClCompile Include="zUdpNtrip.ino" />
+    <ClCompile Include="_Utils.ino" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="__vm\.ToolDual.vsarduino.h">

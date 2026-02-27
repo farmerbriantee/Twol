@@ -211,11 +211,13 @@ namespace Twol
         private void hsbarHighPWM_Tool_Scroll(object sender, ScrollEventArgs e)
         {
             lblHighPWM_Tool.Text = (e.NewValue).ToString();
-
-            if (e.NewValue < hsbarMinPWM_Tool.Value)
+            if (!cbBangBang.Checked)
             {
-                hsbarMinPWM_Tool.Value = e.NewValue;
-                lblMinPWM_Tool.Text = (hsbarMinPWM_Tool.Value).ToString();
+                if (e.NewValue < hsbarMinPWM_Tool.Value)
+                {
+                    hsbarMinPWM_Tool.Value = e.NewValue;
+                    lblMinPWM_Tool.Text = (hsbarMinPWM_Tool.Value).ToString();
+                }
             }
             toolSend = true;
             toolCounterSettings = 0;
@@ -223,10 +225,13 @@ namespace Twol
         private void hsbarMinPWM_Tool_Scroll(object sender, ScrollEventArgs e)
         {
             lblMinPWM_Tool.Text = (e.NewValue ).ToString();
-            if (e.NewValue > hsbarHighPWM_Tool.Value)
+            if (!cbBangBang.Checked)
             {
-                hsbarHighPWM_Tool.Value = e.NewValue;
-                lblHighPWM_Tool.Text = (hsbarHighPWM_Tool.Value).ToString();
+                if (e.NewValue > hsbarHighPWM_Tool.Value)
+                {
+                    hsbarHighPWM_Tool.Value = e.NewValue;
+                    lblHighPWM_Tool.Text = (hsbarHighPWM_Tool.Value).ToString();
+                }
             }
             toolSend = true;
             toolCounterSettings = 0;

@@ -5,9 +5,9 @@
 elapsedMillis steerStarted = 0;
 elapsedMillis steerPaused = 0;
 
-float steerGapTime	= toolSettings.kp * 10; // kp/pgain * ms between steering changes
-float steerMaxTime	= toolSettings.ki * 10; // ki/integral * ms maximum time to hold a steer
-float deadZone		= toolSettings.maxPWM / 10; // cm of XTE where we do not steer
+float steerGapTime	= toolSettings.Kp * 10; // kp/pgain * ms between steering changes
+float steerMaxTime	= toolSettings.Ki * 10; // ki/integral * ms maximum time to hold a steer
+float deadZone		= toolSettings.highPWM / 10; // cm of XTE where we do not steer
 
 void calcSteeringPID(void)
 {
@@ -23,6 +23,7 @@ void calcSteeringPID(void)
 		// by making small turns, the delay allows the machine to drive towards the line
 		if (toolXTE_cm > -deadZone && toolXTE_cm < deadZone)
 		{
+			sendHardwareMessageStream("Inside deadzone of " + String(deadZone) + " so stopping steering");
 			pwmDrive = steerStop;
 			steerStarted = 0;
 			steerPaused = 0;
@@ -30,14 +31,17 @@ void calcSteeringPID(void)
 		}
 		else
 		{
+			// outside deadzone, so let's steer!
 			// pause phase
 			if (isPausing)
 			{
+				sendHardwareMessageStream("Pausing steering for " + String(steerMaxTime));
 				pwmDrive = steerStop;
 
 				if (steerPaused >= steerGapTime)
 				{
 					isPausing = false;
+					sendHardwareMessageStream("Pause time expired after " + String(steerGapTime) + " so resuming");
 					steerStarted = 0; // start a fresh steer pulse
 				}
 			}
@@ -50,10 +54,13 @@ void calcSteeringPID(void)
 						actuatorPositionPercent > -toolSettings.maxActuatorLimit)
 				{
 					pwmDrive = (toolXTE_cm > deadZone) ? steerLeft : steerRight;
+					sendHardwareMessageStream("Setting pwmDrive to " + String(pwmDrive));
+
 				}
 				else
 				{
 					// this could also kick in if we hit the actuator limit, which would be good to prevent damage or clamp wild oscillations
+					sendHardwareMessageStream("Actuator limit hit at " + String(toolSettings.maxActuatorLimit));
 					pwmDrive = steerStop;
 					steerPaused = 0; // begin pause timer
 					isPausing = true;
@@ -120,9 +127,6 @@ void motorDrive(void)
 			pwmDrive = 0;
 		}
 	}
-
-	if (toolSettings.invertActuator)
-		pwmDrive *= -1;
 
 	pwmDisplay = pwmDrive;
 

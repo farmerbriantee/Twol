@@ -118,7 +118,7 @@ struct Tool_Settings {
     uint8_t maxActuatorLimit = 60;
 	bool isBangBang = false;
 };  Tool_Settings toolSettings;      // 11 bytes
-
+bool lastBangBang = false;
 
 //receive buffer
 union _udpPacket {
@@ -278,6 +278,7 @@ void toolsteerLoop()
             if (toolSettings.CytronDriver)
             {
                     digitalWrite(PWM2_RPWM, 0);
+                    digitalWrite(AIO_LOCKPIN, 1);
             }
             else digitalWrite(DIR1_RL_ENABLE, 1);
  
@@ -295,6 +296,7 @@ void toolsteerLoop()
             if (toolSettings.CytronDriver)
             {
                     digitalWrite(PWM2_RPWM, 1);
+                    digitalWrite(AIO_LOCKPIN, 0);
             }
             else digitalWrite(DIR1_RL_ENABLE, 0); //IBT2
 
@@ -411,6 +413,10 @@ void ReceiveUdp()
                 toolSettings.invertActuator = udpPacket.udpData[settingIDs::invertActuator];
                 toolSettings.maxActuatorLimit = udpPacket.udpData[settingIDs::maxActuatorLimit];
 				toolSettings.isBangBang = udpPacket.udpData[settingIDs::isBangBang]; //bang bang mode is bit 7 of max actuator limit
+                if (lastBangBang != toolSettings.isBangBang) {
+                    lastBangBang = toolSettings.isBangBang;
+                    sendHardwareMessage("Bang Bang mode is now " + String(toolSettings.isBangBang), 1);
+                }
                 toolSettings.lowHighDistance = udpPacket.udpData[settingIDs::lowHighSetDistance];
                 if (toolSettings.isBangBang) {
                     toolSettings.highPWM = udpPacket.udpData[settingIDs::highPWM] / 10; // read high pwm scaled
