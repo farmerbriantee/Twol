@@ -105,6 +105,9 @@ float lastXTE_Error = 0;
 float errorAbs = 0;
 float lowHighPerCM = 0;
 
+uint8_t valveOnCounter = 0;
+uint8_t valveOffCounter = 0;
+
 //Variables for settings
 struct Tool_Settings {
     uint8_t Kp = 40;              // proportional gain
@@ -118,8 +121,11 @@ struct Tool_Settings {
     uint8_t invertAPOS = 0;
     uint8_t invertActuator = 0; 
     uint8_t maxActuatorLimit = 60;
-};  Tool_Settings toolSettings;      // 11 bytes
+    uint8_t isDirectionalValve = 0;   
+    uint8_t valveOnTime = 5;   
+    uint8_t valveOffTime = 15;
 
+};  Tool_Settings toolSettings;    // 11 bytes
 
 //receive buffer
 union _udpPacket {
@@ -352,9 +358,14 @@ void ReceiveUdp()
                 //Bit 11,12   Sent as +- 255
                 manualPWM = ((float)(udpPacket.udpData[dataIDs::manualLo] | ((int8_t)udpPacket.udpData[dataIDs::manualHi]) << 8)); //low high bytes
 
+                valveOffCounter++;
+                valveOnCounter++;
+
                 if ( (bitRead(guidanceStatus, 0) == 0) )//|| (gpsSpeed < 0.1) )
                     {
                     watchdogTimer = WATCHDOG_FORCE_VALUE; //turn off steering motor
+                    valveOnCounter = 0;
+                    valveOffCounter = 0;
                 }
                 else          //valid conditions to turn on autosteer
                 {
@@ -422,6 +433,11 @@ void ReceiveUdp()
 
                 //0 to 255 cm
                 toolSettings.lowHighDistance = udpPacket.udpData[settingIDs::lowHighSetDistance];
+
+                //bang bang Directional Type Valve Settings
+                toolSettings.isDirectionalValve = udpPacket.udpData[settingIDs::isDirectionalValve];
+                toolSettings.valveOffTime = udpPacket.udpData[settingIDs::valveOffTime];
+                toolSettings.valveOnTime = udpPacket.udpData[settingIDs::valveOnTime];
 
 				toolSettingsInit(); //recalculate the low high per cm for pwm
 

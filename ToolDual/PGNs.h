@@ -36,4 +36,7 @@ enum settingIDs {
 	invertAPOS = 13,
 	invertActuator = 14,	
 	maxActuatorLimit = 15,
+	isDirectionalValve = 16,
+	valveOffTime = 17,
+	valveOnTime = 18,
 };

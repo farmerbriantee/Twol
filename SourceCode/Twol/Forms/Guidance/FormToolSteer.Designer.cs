@@ -100,6 +100,12 @@
             this.nudToolGuidanceSpacing = new Twol.NudlessNumericUpDown();
             this.nudNudge = new Twol.NudlessNumericUpDown();
             this.tabSetup = new System.Windows.Forms.TabPage();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.cboxDirectionalValveEnable = new System.Windows.Forms.CheckBox();
+            this.nudDirectionalValveOnTime = new Twol.NudlessNumericUpDown();
+            this.nudDirectionalValveOffTime = new Twol.NudlessNumericUpDown();
             this.label31 = new System.Windows.Forms.Label();
             this.label83 = new System.Windows.Forms.Label();
             this.cboxInvertAPOS = new System.Windows.Forms.CheckBox();
@@ -127,12 +133,6 @@
             this.nudAntennaHeight_Tool = new Twol.NudlessNumericUpDown();
             this.nudAntennaOffset_Tool = new Twol.NudlessNumericUpDown();
             this.imageList2 = new System.Windows.Forms.ImageList(this.components);
-            this.nudDirectionalValveOffTime = new Twol.NudlessNumericUpDown();
-            this.nudDirectionalValveOnTime = new Twol.NudlessNumericUpDown();
-            this.cboxDirectionalValveEnable = new System.Windows.Forms.CheckBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabGain.SuspendLayout();
             this.tabSteer.SuspendLayout();
@@ -1056,6 +1056,81 @@
             this.tabSetup.Size = new System.Drawing.Size(571, 448);
             this.tabSetup.TabIndex = 4;
             // 
+            // label19
+            // 
+            this.label19.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.ForeColor = System.Drawing.Color.Black;
+            this.label19.Location = new System.Drawing.Point(404, 340);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(158, 36);
+            this.label19.TabIndex = 546;
+            this.label19.Text = "Off Time";
+            this.label19.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // label18
+            // 
+            this.label18.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.ForeColor = System.Drawing.Color.Black;
+            this.label18.Location = new System.Drawing.Point(207, 340);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(158, 36);
+            this.label18.TabIndex = 545;
+            this.label18.Text = "On Time";
+            this.label18.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // label15
+            // 
+            this.label15.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.ForeColor = System.Drawing.Color.Black;
+            this.label15.Location = new System.Drawing.Point(14, 311);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(195, 54);
+            this.label15.TabIndex = 544;
+            this.label15.Text = "Directional Valve Type (Bang Bang)";
+            this.label15.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // cboxDirectionalValveEnable
+            // 
+            this.cboxDirectionalValveEnable.Appearance = System.Windows.Forms.Appearance.Button;
+            this.cboxDirectionalValveEnable.BackColor = System.Drawing.Color.White;
+            this.cboxDirectionalValveEnable.BackgroundImage = global::Twol.Properties.Resources.ConS_Pins;
+            this.cboxDirectionalValveEnable.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.cboxDirectionalValveEnable.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.cboxDirectionalValveEnable.FlatAppearance.CheckedBackColor = System.Drawing.Color.MediumAquamarine;
+            this.cboxDirectionalValveEnable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cboxDirectionalValveEnable.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboxDirectionalValveEnable.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.cboxDirectionalValveEnable.Location = new System.Drawing.Point(62, 368);
+            this.cboxDirectionalValveEnable.Name = "cboxDirectionalValveEnable";
+            this.cboxDirectionalValveEnable.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.cboxDirectionalValveEnable.Size = new System.Drawing.Size(99, 69);
+            this.cboxDirectionalValveEnable.TabIndex = 543;
+            this.cboxDirectionalValveEnable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.cboxDirectionalValveEnable.UseVisualStyleBackColor = false;
+            this.cboxDirectionalValveEnable.Click += new System.EventHandler(this.cboxDirectionalValveEnable_Click);
+            // 
+            // nudDirectionalValveOnTime
+            // 
+            this.nudDirectionalValveOnTime.DecimalPlaces = 1;
+            this.nudDirectionalValveOnTime.Location = new System.Drawing.Point(211, 381);
+            this.nudDirectionalValveOnTime.Maximum = 2D;
+            this.nudDirectionalValveOnTime.Minimum = 0.1D;
+            this.nudDirectionalValveOnTime.Name = "nudDirectionalValveOnTime";
+            this.nudDirectionalValveOnTime.Size = new System.Drawing.Size(148, 56);
+            this.nudDirectionalValveOnTime.TabIndex = 542;
+            this.nudDirectionalValveOnTime.ValueChanged += new System.EventHandler(this.nudDirectionalValveOnTime_ValueChanged);
+            // 
+            // nudDirectionalValveOffTime
+            // 
+            this.nudDirectionalValveOffTime.DecimalPlaces = 1;
+            this.nudDirectionalValveOffTime.Location = new System.Drawing.Point(414, 381);
+            this.nudDirectionalValveOffTime.Maximum = 10D;
+            this.nudDirectionalValveOffTime.Minimum = 0.1D;
+            this.nudDirectionalValveOffTime.Name = "nudDirectionalValveOffTime";
+            this.nudDirectionalValveOffTime.Size = new System.Drawing.Size(148, 56);
+            this.nudDirectionalValveOffTime.TabIndex = 541;
+            this.nudDirectionalValveOffTime.ValueChanged += new System.EventHandler(this.nudDirectionalValveOffTime_ValueChanged);
+            // 
             // label31
             // 
             this.label31.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1417,80 +1492,6 @@
             this.imageList2.Images.SetKeyName(1, "ConS_ImplementAntenna.png");
             this.imageList2.Images.SetKeyName(2, "ModeActive.png");
             this.imageList2.Images.SetKeyName(3, "ModePassive.png");
-            // 
-            // nudDirectionalValveOffTime
-            // 
-            this.nudDirectionalValveOffTime.DecimalPlaces = 1;
-            this.nudDirectionalValveOffTime.Location = new System.Drawing.Point(414, 381);
-            this.nudDirectionalValveOffTime.Maximum = 5D;
-            this.nudDirectionalValveOffTime.Minimum = 0.1D;
-            this.nudDirectionalValveOffTime.Name = "nudDirectionalValveOffTime";
-            this.nudDirectionalValveOffTime.Size = new System.Drawing.Size(148, 56);
-            this.nudDirectionalValveOffTime.TabIndex = 541;
-            this.nudDirectionalValveOffTime.ValueChanged += new System.EventHandler(this.nudDirectionalValveOffTime_ValueChanged);
-            // 
-            // nudDirectionalValveOnTime
-            // 
-            this.nudDirectionalValveOnTime.DecimalPlaces = 1;
-            this.nudDirectionalValveOnTime.Location = new System.Drawing.Point(211, 381);
-            this.nudDirectionalValveOnTime.Minimum = -100D;
-            this.nudDirectionalValveOnTime.Name = "nudDirectionalValveOnTime";
-            this.nudDirectionalValveOnTime.Size = new System.Drawing.Size(148, 56);
-            this.nudDirectionalValveOnTime.TabIndex = 542;
-            this.nudDirectionalValveOnTime.ValueChanged += new System.EventHandler(this.nudDirectionalValveOnTime_ValueChanged);
-            // 
-            // cboxDirectionalValveEnable
-            // 
-            this.cboxDirectionalValveEnable.Appearance = System.Windows.Forms.Appearance.Button;
-            this.cboxDirectionalValveEnable.BackColor = System.Drawing.Color.White;
-            this.cboxDirectionalValveEnable.BackgroundImage = global::Twol.Properties.Resources.ConS_Pins;
-            this.cboxDirectionalValveEnable.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.cboxDirectionalValveEnable.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.cboxDirectionalValveEnable.FlatAppearance.CheckedBackColor = System.Drawing.Color.MediumAquamarine;
-            this.cboxDirectionalValveEnable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cboxDirectionalValveEnable.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboxDirectionalValveEnable.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.cboxDirectionalValveEnable.Location = new System.Drawing.Point(62, 368);
-            this.cboxDirectionalValveEnable.Name = "cboxDirectionalValveEnable";
-            this.cboxDirectionalValveEnable.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.cboxDirectionalValveEnable.Size = new System.Drawing.Size(99, 69);
-            this.cboxDirectionalValveEnable.TabIndex = 543;
-            this.cboxDirectionalValveEnable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.cboxDirectionalValveEnable.UseVisualStyleBackColor = false;
-            this.cboxDirectionalValveEnable.Click += new System.EventHandler(this.cboxDirectionalValveEnable_Click);
-            // 
-            // label15
-            // 
-            this.label15.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.ForeColor = System.Drawing.Color.Black;
-            this.label15.Location = new System.Drawing.Point(14, 311);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(195, 54);
-            this.label15.TabIndex = 544;
-            this.label15.Text = "Directional Valve Type (Bang Bang)";
-            this.label15.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            // 
-            // label18
-            // 
-            this.label18.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.ForeColor = System.Drawing.Color.Black;
-            this.label18.Location = new System.Drawing.Point(207, 340);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(158, 36);
-            this.label18.TabIndex = 545;
-            this.label18.Text = "On Time";
-            this.label18.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            // 
-            // label19
-            // 
-            this.label19.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.ForeColor = System.Drawing.Color.Black;
-            this.label19.Location = new System.Drawing.Point(404, 340);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(158, 36);
-            this.label19.TabIndex = 546;
-            this.label19.Text = "Off Time";
-            this.label19.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // FormToolSteer
             // 

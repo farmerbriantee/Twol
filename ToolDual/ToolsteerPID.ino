@@ -1,61 +1,73 @@
 void calcSteeringPID(void)
 {
-    //Proportional only
-    pValue = toolSettings.Kp * toolXTE_cm * 0.2;
-    pwmDrive = (int16_t)pValue;
-    float f_Ki = (float)(toolSettings.Ki) * 0.1;
-
-    errorAbs = abs(toolXTE_cm);
-    int16_t newMax = 0;
-
-    if (errorAbs < toolSettings.lowHighDistance)
+    //proportional type valve
+    if (toolSettings.isDirectionalValve == 0)
     {
-        newMax = (errorAbs * lowHighPerCM) + toolSettings.lowPWM;
+        pValue = toolSettings.Kp * toolXTE_cm * 0.2;
+        pwmDrive = (int16_t)pValue;
+
+        errorAbs = abs(toolXTE_cm);
+        float f_Ki = (float)(toolSettings.Ki) * 0.1;
+
+        int16_t newMax = 0;
+
+        if (errorAbs < toolSettings.lowHighDistance)
+        {
+            newMax = (errorAbs * lowHighPerCM) + toolSettings.lowPWM;
+        }
+        else newMax = toolSettings.highPWM;
+
+        //if within 1/2 the lowHighDistance begin integral
+        if (errorAbs < (0.5 * toolSettings.lowHighDistance)) iValue += (f_Ki * toolXTE_cm * 0.01);
+        else iValue = 0;
+
+        //check if 0 crossing
+        if ((lastXTE_Error > 0 && toolXTE_cm < 0) || (lastXTE_Error < 0 && toolXTE_cm > 0)) iValue = 0;
+        lastXTE_Error = toolXTE_cm;
+
+        //add the integral value;
+        pwmDrive += iValue;
+        
+        //add min throttle factor so no delay from motor resistance.
+        if (pwmDrive < 0) pwmDrive -= toolSettings.minPWM;
+        else if (pwmDrive > 0) pwmDrive += toolSettings.minPWM;
+
+        //limit the pwm drive
+        if (pwmDrive > newMax) pwmDrive = newMax;
+        if (pwmDrive < -newMax) pwmDrive = -newMax;
+
+        if (toolSettings.invertActuator) pwmDrive *= -1;
     }
-    else newMax = toolSettings.highPWM;
+    else //Directional valve
+    {
+        pwmDrive = 0;
+        if (guidanceStatus != 0)
+        {
+            if (errorAbs > toolSettings.lowHighDistance)
+            {
+                if (toolXTE_cm > 0) pwmDrive = 255;
+                else pwmDrive = -255;
+            }
+            else
+            {
+                if (valveOnCounter < toolSettings.valveOnTime) 
+                {
+                    pwmDrive = 255;
+                }
+                else if (valveOffCounter < toolSettings.valveOffTime) 
+                {
+                    pwmDrive = 0;
+                }
+                else if (valveOffCounter > toolSettings.valveOffTime)
+                {
+                    valveOnCounter = 0;
+                    valveOffCounter = 0;
+                }
 
-    //if within 1/2 the lowHighDistance begin integral
-    if (errorAbs < (0.5 * toolSettings.lowHighDistance)) iValue += (f_Ki * toolXTE_cm * 0.01);
-    else iValue = 0;
-
-    //check if 0 crossing
-    if ((lastXTE_Error > 0 && toolXTE_cm < 0) || (lastXTE_Error < 0 && toolXTE_cm > 0)) iValue = 0;
-    lastXTE_Error = toolXTE_cm;
-
-    //add the integral value;
-    pwmDrive += iValue;
-    
-    //add min throttle factor so no delay from motor resistance.
-    if (pwmDrive < 0) pwmDrive -= toolSettings.minPWM;
-    else if (pwmDrive > 0) pwmDrive += toolSettings.minPWM;
-
-    //limit the pwm drive
-    if (pwmDrive > newMax) pwmDrive = newMax;
-    if (pwmDrive < -newMax) pwmDrive = -newMax;
-
-    if (toolSettings.invertActuator) pwmDrive *= -1;
-
-    //if (toolSettings.IsDanfoss)
-    //{
-    //    // Danfoss: PWM 25% On = Left Position max  (below Valve=Center)
-    //    // Danfoss: PWM 50% On = Center Position
-    //    // Danfoss: PWM 75% On = Right Position max (above Valve=Center)
-    //    pwmDrive = (constrain(pwmDrive, -250, 250));
-
-    //    // Calculations below make sure pwmDrive values are between 65 and 190
-    //    // This means they are always positive, so in motorDrive, no need to check for
-    //    // steerConfig.isDanfoss anymore
-    //    pwmDrive = pwmDrive >> 2; // Devide by 4
-    //    pwmDrive += 128;          // add Center Pos.
-
-    //    // pwmDrive now lies in the range [65 ... 190], which would be great for an ideal opamp
-    //    // However the TLC081IP is not ideal. Approximating from fig 4, 5 TI datasheet, @Vdd=12v, T=@40Celcius, 0 current
-    //    // Voh=11.08 volts, Vol=0.185v
-    //    // (11.08/12)*255=235.45
-    //    // (0.185/12)*255=3.93
-    //    // output now lies in the range [67 ... 205], the center position is now 136
-    //    //pwmDrive = (map(pwmDrive, 4, 235, 0, 255));
-    //}
+                if (toolXTE_cm < 0) pwmDrive *= -1;
+            }
+        }
+    }
 }
 
 //#########################################################################################
