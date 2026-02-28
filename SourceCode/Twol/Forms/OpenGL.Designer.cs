@@ -1734,6 +1734,50 @@ namespace Twol
 
             GL.Disable(EnableCap.Texture2D);
 
+            if (pnTool.isDualGPSConnected)
+            {
+                //   btnToolSteerConfig.Text = mc.actualActuatorPositionPercent + "\r\n" + mc.pwmToolDisplay.ToString("N0");
+
+                GL.LineWidth(16);
+                GL.Color3(0.21f, 0.321f, 0.421f);
+                GL.Translate(-20, -140, 0);
+                GL.Begin(PrimitiveType.Lines);
+                GL.Vertex3(-102, 0, 0);
+                GL.Vertex3(102, 0, 0);
+                GL.Vertex3(-102, -30, 0);
+                GL.Vertex3(102, -30, 0);
+                GL.End();
+
+                GL.Color3(1.0f, 1.0f, 0.4f);
+                string head = mc.pwmToolDisplay.ToString();
+                font.DrawText((int)(((head.Length) * -7)), 7, head, 1.0);
+                head = (mc.actualActuatorPositionPercent).ToString() + "%";
+                font.DrawText((int)(((head.Length) * -7)), -70, head, 1.0);
+
+                GL.LineWidth(2);
+                GL.Begin(PrimitiveType.Lines);
+                GL.Vertex3(0, 7, 0);
+                GL.Vertex3(0, -38, 0);
+                GL.End();
+
+                //mc.pwmToolDisplay = 255;
+                GL.LineWidth(12);
+                if (mc.pwmToolDisplay < 0) GL.Color3(1.0f, 0.3f, 0.3f);
+                else GL.Color3(0.3f, 1.0f, 0.3f);
+                GL.Begin(PrimitiveType.LineStrip);
+                GL.Vertex3(0, 0, 0);
+                GL.Vertex3((double)mc.pwmToolDisplay / 2.55, 0, 0);
+                GL.End();
+
+                //mc.actualActuatorPositionPercent = 3;
+                if (mc.actualActuatorPositionPercent < 0) GL.Color3(1.0f, 0.3f, 0.3f);
+                else GL.Color3(0.3f, 1.0f, 0.3f);
+                GL.Begin(PrimitiveType.LineStrip);
+                GL.Vertex3(0, -30, 0);
+                GL.Vertex3((double)mc.actualActuatorPositionPercent, -30, 0);
+                GL.End();
+            }
+
             GL.PopMatrix();
         }
 
