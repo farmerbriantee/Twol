@@ -61,4 +61,9 @@ void EthernetStart()
         Serial.print("Ethernet AutoSteer UDP listening to & send from port: ");
         Serial.println(Twol_AutoSteerPort);
     }
+    if (Eth_updateComm.begin(UpdateReceivePort))
+    {
+        Serial.print("Ethernet Update UDP listening to port: ");
+        Serial.println(UpdateReceivePort);
+    }
 }
