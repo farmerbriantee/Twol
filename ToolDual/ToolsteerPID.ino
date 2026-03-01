@@ -130,10 +130,10 @@ void calcSteeringPID(void)
 
                 if (toolXTE_cm < 0) pwmDrive *= -1;
 
-                if (abs(toolXTE_cm) < 4 && approachSide != 0)
+                if (abs(toolXTE_cm) < 2 && approachSide != 0)
                 {
-                    sendHardwareMessageStream("Within 4cm, using approach side for directional valve"); 
-                    pwmDrive = (int16_t)(-approachSide * 255);
+                    sendHardwareMessageStream("Within 4cm, countersteering!!"); 
+                    pwmDrive = pwmDrive * -1; //(int16_t)(-approachSide * 255);
                 }
 
             }

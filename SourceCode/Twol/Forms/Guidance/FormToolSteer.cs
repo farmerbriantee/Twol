@@ -46,7 +46,7 @@ namespace Twol
             hsbarZeroWAS_Tool.Value = Settings.Tool.setToolSteer.offsetAPOS;
 
             if (Settings.Tool.setToolSteer.maxActuatorLimitPercent > 100) Settings.Tool.setToolSteer.maxActuatorLimitPercent = 100;
-            hsbarActuatorLimitsPercent.Value = Settings.Tool.setToolSteer.maxActuatorLimitPercent;
+            hsbarActuatorLimitsPercent.Value = 20; // Settings.Tool.setToolSteer.maxActuatorLimitPercent;
 
             cboxInvertActuator.Checked = (Settings.Tool.setToolSteer.isInvertActuator == 1);
             cboxInvertAPOS.Checked = (Settings.Tool.setToolSteer.isInvertAPOS == 1);
