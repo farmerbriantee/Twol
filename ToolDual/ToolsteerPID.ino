@@ -1,60 +1,5 @@
-float historicalXTE[30];
-uint8_t hxte = 0;
-int8_t approachSide = 0;
-unsigned long lastApproachEvalMs = 0;
-
-int8_t inferApproachSideFromHistory(uint8_t window)
-{
-    if (window < 4) window = 4;
-    if (window > 30) window = 30;
-
-    uint8_t half = window / 2;
-    float oldMean = 0;
-    float newMean = 0;
-
-    for (uint8_t i = 0; i < window; i++)
-    {
-        uint8_t idx = (hxte + 30 - window + i) % 30;
-        float value = historicalXTE[idx];
-
-        if (i < half) oldMean += value;
-        else newMean += value;
-    }
-
-    oldMean /= half;
-    newMean /= (window - half);
-
-    float oldAbs = fabs(oldMean);
-    float newAbs = fabs(newMean);
-    float deadband = 0.5;
-
-    if ((newAbs + deadband) < oldAbs)
-    {
-        if (oldMean < -deadband) return -1;
-        if (oldMean > deadband) return 1;
-    }
-
-    if (oldMean < -deadband && newMean > deadband) return -1;
-    if (oldMean > deadband && newMean < -deadband) return 1;
-    return 0;
-}
-
 void calcSteeringPID(void)
 {
-    historicalXTE[hxte++] = toolXTE_cm;
-    if (hxte == 30) hxte = 0;
-
-    if ((millis() - lastApproachEvalMs) >= 1000UL)
-    {
-        approachSide = inferApproachSideFromHistory(10);
-
-        if (approachSide < 0) sendHardwareMessageStream("Approaching from left");
-        else if (approachSide > 0) sendHardwareMessageStream("Approaching from right");
-        else sendHardwareMessageStream("Approach unclear");
-
-        lastApproachEvalMs = millis();
-    }
-    
     //proportional type valve
     if (toolSettings.isDirectionalValve == 0)
     {
@@ -129,13 +74,6 @@ void calcSteeringPID(void)
                 }
 
                 if (toolXTE_cm < 0) pwmDrive *= -1;
-
-                if (abs(toolXTE_cm) < 2 && approachSide != 0)
-                {
-                    sendHardwareMessageStream("Within 4cm, countersteering!!"); 
-                    pwmDrive = pwmDrive * -1; //(int16_t)(-approachSide * 255);
-                }
-
             }
         }
     }
