@@ -478,7 +478,7 @@
             // 
             this.hsbarLowHighDistance.LargeChange = 1;
             this.hsbarLowHighDistance.Location = new System.Drawing.Point(76, 235);
-            this.hsbarLowHighDistance.Maximum = 30;
+            this.hsbarLowHighDistance.Maximum = 200;
             this.hsbarLowHighDistance.Minimum = 1;
             this.hsbarLowHighDistance.Name = "hsbarLowHighDistance";
             this.hsbarLowHighDistance.Size = new System.Drawing.Size(281, 40);
@@ -533,8 +533,6 @@
             // nudDeadzoneWidth
             // 
             this.nudDeadzoneWidth.Location = new System.Drawing.Point(195, 17);
-            this.nudDeadzoneWidth.Maximum = 5D;
-            this.nudDeadzoneWidth.Minimum = 0.1D;
             this.nudDeadzoneWidth.Mode = Twol.UnitMode.Small;
             this.nudDeadzoneWidth.Name = "nudDeadzoneWidth";
             this.nudDeadzoneWidth.Size = new System.Drawing.Size(107, 36);
@@ -603,7 +601,6 @@
             // 
             // lblManualPWM_Percent
             // 
-            this.lblManualPWM_Percent.Enabled = false;
             this.lblManualPWM_Percent.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblManualPWM_Percent.ForeColor = System.Drawing.Color.Black;
             this.lblManualPWM_Percent.Location = new System.Drawing.Point(3, 340);
@@ -637,7 +634,6 @@
             // 
             // label13
             // 
-            this.label13.Enabled = false;
             this.label13.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.ForeColor = System.Drawing.Color.Black;
             this.label13.Location = new System.Drawing.Point(97, 309);
@@ -661,7 +657,6 @@
             // 
             // label11
             // 
-            this.label11.Enabled = false;
             this.label11.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.Color.Black;
             this.label11.Location = new System.Drawing.Point(97, 223);
@@ -697,7 +692,6 @@
             // 
             // lblManualSecondsOn
             // 
-            this.lblManualSecondsOn.Enabled = false;
             this.lblManualSecondsOn.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblManualSecondsOn.ForeColor = System.Drawing.Color.Black;
             this.lblManualSecondsOn.Location = new System.Drawing.Point(4, 254);
@@ -1060,7 +1054,7 @@
             // 
             this.label19.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label19.ForeColor = System.Drawing.Color.Black;
-            this.label19.Location = new System.Drawing.Point(404, 340);
+            this.label19.Location = new System.Drawing.Point(404, 318);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(158, 36);
             this.label19.TabIndex = 546;
@@ -1071,7 +1065,7 @@
             // 
             this.label18.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label18.ForeColor = System.Drawing.Color.Black;
-            this.label18.Location = new System.Drawing.Point(207, 340);
+            this.label18.Location = new System.Drawing.Point(207, 318);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(158, 36);
             this.label18.TabIndex = 545;
@@ -1082,7 +1076,7 @@
             // 
             this.label15.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.ForeColor = System.Drawing.Color.Black;
-            this.label15.Location = new System.Drawing.Point(14, 311);
+            this.label15.Location = new System.Drawing.Point(14, 289);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(195, 54);
             this.label15.TabIndex = 544;
@@ -1100,7 +1094,7 @@
             this.cboxDirectionalValveEnable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboxDirectionalValveEnable.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxDirectionalValveEnable.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.cboxDirectionalValveEnable.Location = new System.Drawing.Point(62, 368);
+            this.cboxDirectionalValveEnable.Location = new System.Drawing.Point(62, 346);
             this.cboxDirectionalValveEnable.Name = "cboxDirectionalValveEnable";
             this.cboxDirectionalValveEnable.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.cboxDirectionalValveEnable.Size = new System.Drawing.Size(99, 69);
@@ -1112,8 +1106,8 @@
             // nudDirectionalValveOnTime
             // 
             this.nudDirectionalValveOnTime.DecimalPlaces = 1;
-            this.nudDirectionalValveOnTime.Location = new System.Drawing.Point(211, 381);
-            this.nudDirectionalValveOnTime.Maximum = 2D;
+            this.nudDirectionalValveOnTime.Location = new System.Drawing.Point(211, 359);
+            this.nudDirectionalValveOnTime.Maximum = 5D;
             this.nudDirectionalValveOnTime.Minimum = 0.1D;
             this.nudDirectionalValveOnTime.Name = "nudDirectionalValveOnTime";
             this.nudDirectionalValveOnTime.Size = new System.Drawing.Size(148, 56);
@@ -1123,8 +1117,8 @@
             // nudDirectionalValveOffTime
             // 
             this.nudDirectionalValveOffTime.DecimalPlaces = 1;
-            this.nudDirectionalValveOffTime.Location = new System.Drawing.Point(414, 381);
-            this.nudDirectionalValveOffTime.Maximum = 10D;
+            this.nudDirectionalValveOffTime.Location = new System.Drawing.Point(414, 359);
+            this.nudDirectionalValveOffTime.Maximum = 20D;
             this.nudDirectionalValveOffTime.Minimum = 0.1D;
             this.nudDirectionalValveOffTime.Name = "nudDirectionalValveOffTime";
             this.nudDirectionalValveOffTime.Size = new System.Drawing.Size(148, 56);

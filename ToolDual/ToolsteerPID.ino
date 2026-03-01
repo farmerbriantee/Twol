@@ -7,6 +7,7 @@ void calcSteeringPID(void)
         pwmDrive = (int16_t)pValue;
 
         errorAbs = abs(toolXTE_cm);
+
         float f_Ki = (float)(toolSettings.Ki) * 0.1;
 
         int16_t newMax = 0;
@@ -18,15 +19,23 @@ void calcSteeringPID(void)
         else newMax = toolSettings.highPWM;
 
         //if within 1/2 the lowHighDistance begin integral
-        if (errorAbs < (0.5 * toolSettings.lowHighDistance)) iValue += (f_Ki * toolXTE_cm * 0.01);
+        if (errorAbs < (toolSettings.lowHighDistance)) iValue += (f_Ki * toolXTE_cm * 0.01);
         else iValue = 0;
 
         //check if 0 crossing
-        if ((lastXTE_Error > 0 && toolXTE_cm < 0) || (lastXTE_Error < 0 && toolXTE_cm > 0)) iValue = 0;
+        if ((lastXTE_Error >= 0 && toolXTE_cm <= 0) || (lastXTE_Error <= 0 && toolXTE_cm >= 0))
+        {
+            iValue = 0;   
+        }
+        
         lastXTE_Error = toolXTE_cm;
 
+        //limit integral
+        if (iValue > 30) iValue = 30;
+        if (iValue < -30) iValue = -30;
+
         //add the integral value;
-        pwmDrive += iValue;
+        pwmDrive += iValue;  
         
         //add min throttle factor so no delay from motor resistance.
         if (pwmDrive < 0) pwmDrive -= toolSettings.minPWM;
@@ -35,14 +44,14 @@ void calcSteeringPID(void)
         //limit the pwm drive
         if (pwmDrive > newMax) pwmDrive = newMax;
         if (pwmDrive < -newMax) pwmDrive = -newMax;
-
-        if (toolSettings.invertActuator) pwmDrive *= -1;
     }
     else //Directional valve
     {
         pwmDrive = 0;
         if (guidanceStatus != 0)
         {
+            errorAbs = abs(toolXTE_cm);
+
             if (errorAbs > toolSettings.lowHighDistance)
             {
                 if (toolXTE_cm > 0) pwmDrive = 255;
@@ -82,8 +91,9 @@ void motorDrive(void)
     if (manualPWM != 0)
     {
         pwmDrive = manualPWM;
-
     }
+
+    if (toolSettings.invertActuator) pwmDrive *= -1;
 
     if (abs(actuatorPositionPercent) > toolSettings.maxActuatorLimit) 
     {
@@ -97,7 +107,6 @@ void motorDrive(void)
       }
     }
 
-    if (toolSettings.invertActuator) pwmDrive *= -1;
  
     pwmDisplay = pwmDrive;
 

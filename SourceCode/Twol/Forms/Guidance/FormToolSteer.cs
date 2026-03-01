@@ -424,12 +424,18 @@ namespace Twol
 
         private void cboxInvertActuator_Click(object sender, EventArgs e)
         {
+            if (cboxInvertActuator.Checked) Settings.Tool.setToolSteer.isInvertActuator = 1;
+            else Settings.Tool.setToolSteer.isInvertActuator = 0;
+
             toolSend = true;
             toolCounterConfig = 0;
         }
 
         private void cboxInvertAPOS_Click(object sender, EventArgs e)
         {
+            if (cboxInvertAPOS.Checked) Settings.Tool.setToolSteer.isInvertAPOS = 1;
+            else Settings.Tool.setToolSteer.isInvertAPOS = 0;
+
             toolSend = true;
             toolCounterConfig = 0;
         }

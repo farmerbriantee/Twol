@@ -479,11 +479,13 @@ namespace Twol
                     {
                         gydTool.isZeroToolSteer = false;
                         distX1000 = (Int16)(gydTool.isManualSteerRight ? Settings.Tool.setToolSteer.manualSteerPWM : -Settings.Tool.setToolSteer.manualSteerPWM);
+                        if (Settings.Tool.setToolSteer.isInvertActuator == 1) distX1000 *= -1;
                     }
 
-                    if (gydTool.isZeroToolSteer) 
+                    if (gydTool.isZeroToolSteer)
                     {
-                            distX1000 = (Int16)(mc.actualActuatorPositionPercent < 0 ? Settings.Tool.setToolSteer.manualSteerPWM : -Settings.Tool.setToolSteer.manualSteerPWM);
+                        distX1000 = (Int16)(mc.actualActuatorPositionPercent < 0 ? Settings.Tool.setToolSteer.manualSteerPWM : -Settings.Tool.setToolSteer.manualSteerPWM);
+                        if (Settings.Tool.setToolSteer.isInvertActuator == 1) distX1000 *= -1;
 
                         if (Math.Abs(mc.actualActuatorPositionPercent) < 5) gydTool.isZeroToolSteer = false;
                     }
