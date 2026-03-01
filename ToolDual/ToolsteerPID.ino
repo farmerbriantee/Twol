@@ -1,6 +1,7 @@
 float historicalXTE[30];
 uint8_t hxte = 0;
 int8_t approachSide = 0;
+unsigned long lastApproachEvalMs = 0;
 
 int8_t inferApproachSideFromHistory(uint8_t window)
 {
@@ -35,7 +36,6 @@ int8_t inferApproachSideFromHistory(uint8_t window)
 
     if (oldMean < -deadband && newMean > deadband) return -1;
     if (oldMean > deadband && newMean < -deadband) return 1;
-
     return 0;
 }
 
@@ -44,8 +44,16 @@ void calcSteeringPID(void)
     historicalXTE[hxte++] = toolXTE_cm;
     if (hxte == 30) hxte = 0;
 
-    int8_t inferredApproach = inferApproachSideFromHistory(10);
-    if (inferredApproach != 0) approachSide = inferredApproach;
+    if ((millis() - lastApproachEvalMs) >= 1000UL)
+    {
+        approachSide = inferApproachSideFromHistory(10);
+
+        if (approachSide < 0) sendHardwareMessageStream("Approaching from left");
+        else if (approachSide > 0) sendHardwareMessageStream("Approaching from right");
+        else sendHardwareMessageStream("Approach unclear");
+
+        lastApproachEvalMs = millis();
+    }
     
     //proportional type valve
     if (toolSettings.isDirectionalValve == 0)
@@ -122,8 +130,9 @@ void calcSteeringPID(void)
 
                 if (toolXTE_cm < 0) pwmDrive *= -1;
 
-                if (abs(toolXTE_cm) < 2 && approachSide != 0)
+                if (abs(toolXTE_cm) < 4 && approachSide != 0)
                 {
+                    sendHardwareMessageStream("Within 4cm, using approach side for directional valve"); 
                     pwmDrive = (int16_t)(-approachSide * 255);
                 }
 
