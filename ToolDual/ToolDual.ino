@@ -29,8 +29,8 @@
 // Serial Ports
 #define SerialTwol Serial   // AgIO USB conection
 #define SerialRTK Serial3  // RTK radio
-#define SerialGPS Serial7  // Main postion receiver (GGA) (Serial2 must be used here with T4.0 / Basic Panda boards - Should auto swap)
-#define SerialGPS2 Serial2 // Dual heading receiver
+#define SerialGPS Serial2  // Main postion receiver (GGA) (Serial2 must be used here with T4.0 / Basic Panda boards - Should auto swap)
+#define SerialGPS2 Serial7 // Dual heading receiver // Andy's hack for his UM982/AIO - UM982 doesn't power up in Right fsr...
 
 const int32_t baudTwol = 115200;
 const int32_t baudGPS = 460800;
@@ -84,6 +84,9 @@ char Eth_NTRIP_packetBuffer[512];      // buffer for receiving ntrip data
 EthernetUDP Eth_udpPAOGI;     // Out port 5544
 EthernetUDP Eth_udpNtrip;     // In port 2233
 EthernetUDP Eth_udpToolSteer; // In & Out Port 18888
+EthernetUDP Eth_updateComm;   // Connection for firmware updates
+uint16_t UpdateReceivePort = 29100;
+uint16_t UpdateSendPort = 29000;
 
 IPAddress Eth_ipDestination;
 
@@ -145,6 +148,44 @@ float roll = 0;
 float pitch = 0;
 float yaw = 0;
 
+//******************************************************************************
+// hex_info_t struct for hex record and hex file info
+//******************************************************************************
+typedef struct {  //
+    char* data;   // pointer to array allocated elsewhere
+    unsigned int addr;  // address in intel hex record
+    unsigned int code;  // intel hex record type (0=data, etc.)
+    unsigned int num; // number of data bytes in intel hex record
+
+    uint32_t base;  // base address to be added to intel hex 16-bit addr
+    uint32_t min;   // min address in hex file
+    uint32_t max;   // max address in hex file
+
+    int eof;    // set true on intel hex EOF (code = 1)
+    int lines;    // number of hex records received
+} hex_info_t;
+#define ModuleID 0
+#define InoType 0
+#define MaxReadBuffer 100	// bytes
+
+static char data[16];// buffer for hex data
+
+hex_info_t hex =
+{ // intel hex info struct
+  data, 0, 0, 0,        //   data,addr,num,code
+  0, 0xFFFFFFFF, 0,     //   base,min,max,
+  0, 0					//   eof,lines
+};
+
+#define ModuleID 0
+
+#include "FXUtil.h"		// read_ascii_line(), hex file support
+extern "C" {
+#include "FlashTxx.h"		// TLC/T3x/T4x/TMM flash primitives
+}
+bool UpdateMode = false;
+
+
 // Setup procedure ------------------------
 void setup()
 {
@@ -196,6 +237,8 @@ void setup()
 
 void loop()
 {
+    ReceiveUpdate();
+
     // Read incoming nmea from GPS
     if (SerialGPS.available())
     {
@@ -305,4 +348,30 @@ bool calcChecksum()
     }
 
     return (CK_A == ackPacket[70] && CK_B == ackPacket[71]);
+}
+
+
+bool GoodCRC(byte Data[], byte Length)
+{
+    byte ck = CRC(Data, Length - 1, 0);
+    bool Result = (ck == Data[Length - 1]);
+    return Result;
+}
+
+byte CRC(byte Chk[], byte Length, byte Start)
+{
+    byte Result = 0;
+    int CK = 0;
+    for (int i = Start; i < Length; i++)
+    {
+        CK += Chk[i];
+    }
+    Result = (byte)CK;
+    return Result;
+}
+
+byte ParseModID(byte ID)
+{
+    // top 4 bits
+    return ID >> 4;
 }
