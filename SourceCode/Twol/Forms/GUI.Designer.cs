@@ -819,19 +819,19 @@ namespace Twol
 
                 PanelSizeRightAndBottom();
 
+                //if (fcc == null && trks.gArr.Count > 0)
+                //{
+                //    Form form = new FormTrackFilter(this);
+                //    form.Show(this);
+                //}
+                //else
+                //{
+                //}
 
-                if (fcc == null && trks.gArr.Count > 0)
+                if (fcc != null && trks.gArr.Count == 0)
                 {
-                    Form form = new FormTrackFilter(this);
-                    form.Show(this);
-                }
-                else
-                {
-                    if (fcc != null && trks.gArr.Count == 0)
-                    {
-                        fcc.Focus();
-                        fcc.Close();
-                    }
+                    fcc.Focus();
+                    fcc.Close();
                 }
             }
             else

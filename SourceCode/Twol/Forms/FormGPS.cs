@@ -825,6 +825,8 @@ namespace Twol
         private void nudToolOffset_ValueChanged(object sender, EventArgs e)
         {
             sim.toolOffset = (double)nudToolOffset.Value * 0.001;
+            navPanelCounter = 2;
+
         }
 
         private void btnProfiles_Click(object sender, EventArgs e)
