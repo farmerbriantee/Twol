@@ -324,7 +324,7 @@
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(273, 26);
             this.label27.TabIndex = 350;
-            this.label27.Text = "Integral Gain";
+            this.label27.Text = "Deriative Gain";
             this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label27.UseCompatibleTextRendering = true;
             // 
