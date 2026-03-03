@@ -45,7 +45,6 @@ void calcSteeringPID(void)
         //add min throttle factor so no delay from motor resistance.
         if (pwmDrive < 0) pwmDrive -= toolSettings.minPWM;
         else if (pwmDrive > 0) pwmDrive += toolSettings.minPWM;
-
     }
     else //Directional valve
     {
