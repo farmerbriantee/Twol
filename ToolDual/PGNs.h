@@ -26,7 +26,7 @@ enum dataIDs {
 
 enum settingIDs {
 	gainP = 5,
-	integral = 6,
+	deriative = 6,
 	minPWM = 7,
 	highPWM = 8,
 	wasOffsetLo = 9,

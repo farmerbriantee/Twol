@@ -3,12 +3,11 @@ void calcSteeringPID(void)
     //proportional type valve
     if (toolSettings.isDirectionalValve == 0)
     {
-        pValue = toolSettings.Kp * toolXTE_cm * 0.2;
+        pValue = toolSettings.kP * toolXTE_cm * 0.2;
         pwmDrive = (int16_t)pValue;
 
         errorAbs = abs(toolXTE_cm);
 
-        float f_Ki = (float)(toolSettings.Ki) * 0.1;
 
         int16_t newMax = 0;
 
@@ -17,33 +16,36 @@ void calcSteeringPID(void)
             newMax = (errorAbs * lowHighPerCM) + toolSettings.lowPWM;
         }
         else newMax = toolSettings.highPWM;
-
-        //if within 1/2 the lowHighDistance begin integral
-        if (errorAbs < (toolSettings.lowHighDistance)) iValue += (f_Ki * toolXTE_cm * 0.01);
-        else iValue = 0;
-
-        //check if 0 crossing
-        if ((lastXTE_Error >= 0 && toolXTE_cm <= 0) || (lastXTE_Error <= 0 && toolXTE_cm >= 0))
-        {
-            iValue = 0;   
-        }
         
-        lastXTE_Error = toolXTE_cm;
+        //limit the pwm drive
+        if (pwmDrive > newMax) pwmDrive = newMax;
+        if (pwmDrive < -newMax) pwmDrive = -newMax;
 
-        //limit integral
-        if (iValue > 30) iValue = 30;
-        if (iValue < -30) iValue = -30;
+        if (dCounter++ > 10)
+        {
+            float f_kD = (float)(toolSettings.kD) * 0.1;
+            dValue = (toolXTE_cm - lastXTE_Error) * 30 * f_kD;
+            lastXTE_Error = toolXTE_cm;
+            dCounter = 0;
+        }
 
-        //add the integral value;
-        pwmDrive += iValue;  
+        if (dValue > toolSettings.highPWM) dValue = toolSettings.highPWM;
+        if (dValue < -toolSettings.highPWM) dValue = -toolSettings.highPWM;
+
+       /* Serial.print(dValue);
+        Serial.print("\t");
+        Serial.println(pwmDrive);*/
+
+        //add the derivative value;
+        pwmDrive += dValue;  
+
+        if (pwmDrive > toolSettings.highPWM)  pwmDrive = toolSettings.highPWM;
+        if (pwmDrive < -toolSettings.highPWM) pwmDrive = -toolSettings.highPWM;
         
         //add min throttle factor so no delay from motor resistance.
         if (pwmDrive < 0) pwmDrive -= toolSettings.minPWM;
         else if (pwmDrive > 0) pwmDrive += toolSettings.minPWM;
 
-        //limit the pwm drive
-        if (pwmDrive > newMax) pwmDrive = newMax;
-        if (pwmDrive < -newMax) pwmDrive = -newMax;
     }
     else //Directional valve
     {

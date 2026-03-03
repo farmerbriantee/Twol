@@ -18,7 +18,7 @@
 /////////////////////////////////////////////
 
 // if not in eeprom, overwrite
-#define EEP_Ident 2400
+#define EEP_Ident 2402
 
 //   ***********  Motor drive connections  **************888
 //Connect ground only for cytron, Connect Ground and +5v for IBT2
@@ -100,8 +100,9 @@ int16_t actuatorPosition = 0; //from sensor
 
 //pwm variables
 float pValue = 0;
-float iValue = 0;
+float dValue = 0;
 float lastXTE_Error = 0;
+uint8_t dCounter = 0;
 float errorAbs = 0;
 float lowHighPerCM = 0;
 
@@ -110,8 +111,8 @@ uint8_t valveOffCounter = 0;
 
 //Variables for settings
 struct Tool_Settings {
-    uint8_t Kp = 40;              // proportional gain
-    uint8_t Ki = 0;
+    uint8_t kP = 40;              // proportional gain
+    uint8_t kD = 0;
     uint8_t minPWM = 20;
     uint8_t lowPWM = 25;          // band of no action
     uint8_t highPWM = 100;         // max PWM value
@@ -125,7 +126,7 @@ struct Tool_Settings {
     uint8_t valveOnTime = 5;   
     uint8_t valveOffTime = 15;
 
-};  Tool_Settings toolSettings;    // 11 bytes
+};  Tool_Settings toolSettings;    // 17 bytes
 
 //receive buffer
 union _udpPacket {
@@ -139,9 +140,6 @@ union _udpPacket {
 };
 
 _udpPacket udpPacket;
-
-
-// 9 bytes
 
 void steerConfigInit()
 {
@@ -411,9 +409,9 @@ void ReceiveUdp()
             else if (udpPacket.MinorPGN == PGNs::ToolSteerSettings)
             {
                 //PID values
-                toolSettings.Kp = ((float)udpPacket.udpData[settingIDs::gainP]);   // read Kp from Twol
+                toolSettings.kP = ((float)udpPacket.udpData[settingIDs::gainP]);   // read kp from Twol
 
-                toolSettings.Ki = udpPacket.udpData[settingIDs::integral]; // read high pwm
+                toolSettings.kD = udpPacket.udpData[settingIDs::deriative]; // read derivative
 
                 toolSettings.minPWM = udpPacket.udpData[settingIDs::minPWM]; //read the minimum amount of PWM for instant on
 
