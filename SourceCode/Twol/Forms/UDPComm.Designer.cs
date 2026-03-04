@@ -241,16 +241,16 @@ namespace Twol
 
         #region Send UDP
 
-        public void SendUDPMessage(byte[] byteData, IPEndPoint endPoint)
+        public void SendUDPMessage(byte[] data, IPEndPoint endPoint)
         {
             if (isUDPNetworkConnected)
             {
                 try
                 {
                     // Send packet to the zero
-                    if (byteData.Length != 0)
+                    if (data.Length != 0)
                     {
-                        UDPSocket.BeginSendTo(byteData, 0, byteData.Length, SocketFlags.None,
+                        UDPSocket.BeginSendTo(data, 0, data.Length, SocketFlags.None,
                            endPoint, new AsyncCallback(SendDataUDPAsync), null);
                     }
                 }
@@ -260,13 +260,79 @@ namespace Twol
 
                 if (Settings.IO.setUDP_isLoopBack)
                 {
-                    SendToPlugins(byteData);
+                    SendToPlugins(data);
                 }
 
                 if (isUDPMonitorOn)
                 {
-                    string code = byteData.Length > 3 ? byteData[3].ToString() : "N/A";
-                    logUDPSentence.Append(DateTime.Now.ToString("ss.fff\t >  ") + (byteData.Length > 3 ? byteData[3].ToString() : "N/A") + " \t" + endPoint + "\r\n");
+                    string code = data.Length > 3 ? data[3].ToString() : "N/A";
+                    logUDPSentence.Append(DateTime.Now.ToString("ss.fff\t >  ") + (data.Length > 3 ? data[3].ToString() : "N/A") + " \t" + endPoint + "\r\n");
+                }
+            }
+
+            if (spMachineModule.IsOpen || spSteerModule.IsOpen)
+            {
+                if (data[0] == 0x80 && data[1] == 0x81)
+                {
+                    switch (data[3])
+                    {
+                        case 254: //254 AutoSteer Data
+                            {
+                                SendSteerModulePort(data, data.Length);
+                                //SendMachineModulePort(data, data.Length);
+                                break;
+                            }
+                        case 227: //nozzle data
+                            {
+                                SendMachineModulePort(data, data.Length);
+                                break;
+                            }
+                        case 239: //239 machine pgn
+                            {
+                                SendMachineModulePort(data, data.Length);
+                                //SendSteerModulePort(data, data.Length);
+                                break;
+                            }
+                        case 229: //229 Symmetric Sections - Zones
+                            {
+                                SendMachineModulePort(data, data.Length);
+                                //SendSteerModulePort(data, data.Length);
+                                break;
+                            }
+                        case 252: //252 steer settings
+                            {
+                                SendSteerModulePort(data, data.Length);
+                                break;
+                            }
+                        case 251: //251 steer config
+                            {
+                                SendSteerModulePort(data, data.Length);
+                                break;
+                            }
+
+                        case 238: //238 machine config
+                            {
+                                SendMachineModulePort(data, data.Length);
+                                SendSteerModulePort(data, data.Length);
+                                break;
+                            }
+                        case 236: //236 machine config
+                            {
+                                SendMachineModulePort(data, data.Length);
+                                SendSteerModulePort(data, data.Length);
+                                break;
+                            }
+                        case 226: //nozzle settings
+                            {
+                                SendMachineModulePort(data, data.Length);
+                                break;
+                            }
+                        case 225: //nozzle config
+                            {
+                                SendMachineModulePort(data, data.Length);
+                                break;
+                            }
+                    }
                 }
             }
         }

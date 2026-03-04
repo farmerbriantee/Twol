@@ -507,7 +507,7 @@ namespace Twol
 
             RescanPorts();
 
-            if (!Settings.IO.setUDP_isOn) ReconnectSerialPorts();
+            ReconnectSerialPorts();
 
             lastThisLocation = this.Location;
         }

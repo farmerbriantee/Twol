@@ -244,6 +244,8 @@ namespace Twol
             //SendToLoopBackMessageTWOL(Data);
             try
             {
+                traffic.helloFromIMU = 0;
+
                 int length = data.Length;
                 if (length < 2) return;
 
@@ -488,6 +490,8 @@ namespace Twol
         {
             try
             {
+                traffic.helloFromAutoSteer = 0;
+
                 int length = data.Length;
                 if (length < 2) return;
 
@@ -744,6 +748,7 @@ namespace Twol
         {
             try
             {
+                traffic.helloFromMachine = 0;
                 int length = data.Length;
                 if (length < 2) return;
 
