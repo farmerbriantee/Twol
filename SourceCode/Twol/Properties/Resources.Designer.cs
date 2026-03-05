@@ -502,6 +502,26 @@ namespace Twol.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap AutoToolSteerOff {
+            get {
+                object obj = ResourceManager.GetObject("AutoToolSteerOff", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap AutoToolSteerOn {
+            get {
+                object obj = ResourceManager.GetObject("AutoToolSteerOn", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap AutoTrack {
             get {
                 object obj = ResourceManager.GetObject("AutoTrack", resourceCulture);

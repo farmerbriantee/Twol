@@ -38,7 +38,7 @@ namespace Twol
         public int flagNumberPicked = 0;
 
         //bool for whether or not a Field and job is active
-        public bool isFieldStarted = false, isJobStarted = false, isBtnAutoSteerOn;
+        public bool isFieldStarted = false, isJobStarted = false, isBtnAutoSteerOn = false, isBtnToolSteerOn = false;
 
         //texture holders
         public uint[] texture;
@@ -741,6 +741,7 @@ namespace Twol
             btnCycleLinesBk.Image = Properties.Resources.ABLineCycleBk;
 
             btnAutoSteer.Enabled = true;
+            btnToolSteer.Enabled = true;
 
             btnFlag.Enabled = true;
 
@@ -918,6 +919,8 @@ namespace Twol
 
             //AutoSteer
             btnAutoSteer.Enabled = false;
+            btnToolSteer.Enabled = false;
+
             SetAutoSteerButton(false, "Field Closed");
 
             //tracks

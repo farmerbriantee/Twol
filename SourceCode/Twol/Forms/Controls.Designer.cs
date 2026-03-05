@@ -474,6 +474,19 @@ namespace Twol
             PanelUpdateRightAndBottom();
         }
 
+        private void btnToolSteer_Click(object sender, EventArgs e)
+        {
+            isBtnToolSteerOn = !isBtnToolSteerOn;
+            if (isBtnToolSteerOn)
+            {
+                btnToolSteer.Image = Properties.Resources.AutoToolSteerOn;
+            }
+            else
+            {
+                btnToolSteer.Image = Properties.Resources.AutoToolSteerOff;   
+            }
+        }
+
         private void btnAutoSteer_Click(object sender, EventArgs e)
         {
             SetAutoSteerButton(!isBtnAutoSteerOn, "");
@@ -533,6 +546,11 @@ namespace Twol
                     gyd.isPassiveTriggered = false;
                     gyd.isPassiveSteeringFlag = false;
                 }
+            }
+
+            if ((isBtnAutoSteerOn && !isBtnToolSteerOn) || (!isBtnAutoSteerOn && isBtnToolSteerOn))
+            {
+                btnToolSteer.PerformClick();
             }
         }
 
