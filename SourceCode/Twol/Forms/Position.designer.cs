@@ -52,7 +52,6 @@ namespace Twol
 
         //how far travelled since last section was added, section points
         double sectionToTriggerSpacingSq = 0, currentElevationTriggerDistanceSq = 0;
-        double prevToolPivotDistanceToLastTriggerPosSq = 0;
 
         public vec2 prevPivotAxleTriggeredPosition = new vec2(0, 0);
         public vec2 prevContourPos = new vec2(0, 0);

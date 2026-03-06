@@ -434,6 +434,7 @@ namespace Twol
             bnd.isSectionControlledByHeadland = true;
             cboxIsSectionControlled.Image = Properties.Resources.HeadlandSectionOn;
 
+            Settings.User.setDisplay_buttonOrder = "0,1,2,3,4,5,6,7,8";
             //right side build
             PanelBuildRightMenu(Settings.User.setDisplay_buttonOrder.Split(','));
 
@@ -796,6 +797,8 @@ namespace Twol
                 btnContourLock.Visible = ct.isContourBtnOn;
 
                 btnAutoSteer.Enabled = trks.currentRefTrack != null || ct.isContourBtnOn;
+                btnToolSteer.Visible = Settings.Tool.setToolSteer.isFollowCurrent || Settings.Tool.setToolSteer.isFollowPivot;
+                btnToolSteer.Enabled = btnToolSteer.Visible;
 
                 bool validTrk = trks.currentRefTrack != null && !ct.isContourBtnOn;
 
@@ -861,26 +864,30 @@ namespace Twol
                         break;
 
                     case "2":
-                        panelRight.Controls.Add(btnSectionMasterAuto);
+                        panelRight.Controls.Add(btnToolSteer);
                         break;
 
                     case "3":
-                        panelRight.Controls.Add(btnSectionMasterManual);
+                        panelRight.Controls.Add(btnSectionMasterAuto);
                         break;
 
                     case "4":
-                        panelRight.Controls.Add(btnAutoTrack);
+                        panelRight.Controls.Add(btnSectionMasterManual);
                         break;
 
                     case "5":
-                        panelRight.Controls.Add(btnCycleLinesBk);
+                        panelRight.Controls.Add(btnAutoTrack);
                         break;
 
                     case "6":
-                        panelRight.Controls.Add(btnCycleLines);
+                        panelRight.Controls.Add(btnCycleLinesBk);
                         break;
 
                     case "7":
+                        panelRight.Controls.Add(btnCycleLines);
+                        break;
+
+                    case "8":
                         panelRight.Controls.Add(btnContour);
                         panelRight.Controls.Add(btnContourLock);
                         break;
