@@ -424,6 +424,14 @@ namespace Twol
                     for (int i = 0; i < gArr.Count; i++)
                     {
                         if (!gArr[i].isVisible) continue;
+
+                        if (Settings.Tool.setToolSteer.isRecordToolLine)
+                        {
+                            if (gArr[i].mode == TrackMode.toolLineInner || gArr[i].mode == TrackMode.toolLineOuter)
+                            {
+                                continue;
+                            }
+                        }
                         gArr[i].curvePts.DrawPolygonThirds(PrimitiveType.LineStrip);
                     }
                 }

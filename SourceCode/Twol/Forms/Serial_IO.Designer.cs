@@ -774,6 +774,22 @@ namespace Twol
                                 if (length == 11) traffic.helloFromMachine = 0;
                                 break;
                             }
+
+                        #region Remote Switches
+                        case 234://MTZ8302 Feb 2020
+                            {
+                                //Steer angle actual
+                                if (data.Length != 14)
+                                    break;
+
+                                Buffer.BlockCopy(data, 5, mc.ss, 1, 8);
+
+                                DoRemoteSwitches();
+
+                                break;
+                            }
+                        #endregion
+
                     }
                 }
             }

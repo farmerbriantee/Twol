@@ -480,10 +480,12 @@ namespace Twol
             if (isBtnToolSteerOn)
             {
                 btnToolSteer.Image = Properties.Resources.AutoToolSteerOn;
+                if (gydTool.isZeroToolSteer) gydTool.isZeroToolSteer = false;
             }
             else
             {
-                btnToolSteer.Image = Properties.Resources.AutoToolSteerOff;   
+                btnToolSteer.Image = Properties.Resources.AutoToolSteerOff;
+                if (!gydTool.isZeroToolSteer) gydTool.isZeroToolSteer = true;
             }
         }
 
