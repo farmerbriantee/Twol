@@ -279,7 +279,7 @@ namespace Twol
                         case 254: //254 AutoSteer Data
                             {
                                 SendSteerModulePort(data, data.Length);
-                                //SendMachineModulePort(data, data.Length);
+                                SendMachineModulePort(data, data.Length);
                                 break;
                             }
                         case 227: //nozzle data
