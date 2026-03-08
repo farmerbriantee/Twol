@@ -647,6 +647,19 @@ namespace Twol
                 }
                 finally { UDPSocketTool.Close(); }
             }
+
+            if (choice == 2)
+            {
+                try
+                {
+                    var psi = new ProcessStartInfo("shutdown", "/s /t 0");
+                    psi.CreateNoWindow = true; // Prevents a command prompt window from appearing
+                    psi.UseShellExecute = false; // Required for CreateNoWindow to work in some contexts
+
+                    Process.Start(psi);
+                }
+                catch { }
+            }
         }
 
         #endregion
