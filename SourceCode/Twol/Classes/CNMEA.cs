@@ -498,17 +498,7 @@ namespace Twol
 
             if (!string.IsNullOrEmpty(words[1]))
             {
-                double.TryParse(words[8] == "Roll" ? words[7] : words[5], NumberStyles.Float, CultureInfo.InvariantCulture, out rollK);
-
-                //Kalman filter
-                Pc = P + varProcess;
-                G = Pc / (Pc + varRoll);
-                P = (1 - G) * Pc;
-                Xp = XeRoll;
-                Zp = Xp;
-                XeRoll = (G * (rollK - Zp)) + Xp;
-
-                dualRoll = XeRoll;
+                double.TryParse(words[8] == "Roll" ? words[7] : words[5], NumberStyles.Float, CultureInfo.InvariantCulture, out dualRoll);
             }
         }
 
