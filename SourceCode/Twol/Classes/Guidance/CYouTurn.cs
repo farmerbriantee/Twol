@@ -273,7 +273,8 @@ namespace Twol
 
                 double distAway = widthMinusOverlap * (mf.trks.howManyPathsAway + (isTurnLeft ^ mf.trks.isHeadingSameWay ? rowSkipsWidth : -rowSkipsWidth)) + (mf.trks.isHeadingSameWay ? Settings.Tool.offset : -Settings.Tool.offset) + track.nudgeDistance;
 
-                distAway += 0.5 * widthMinusOverlap;
+                if (track.mode > 0)
+                    distAway += 0.5 * widthMinusOverlap;
 
                 //create the next line
                 nextCurve = mf.trks.BuildCurrentGuidanceTrack(distAway, track);
