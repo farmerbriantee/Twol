@@ -268,6 +268,12 @@
     <Compile Include="Forms\IO\FormUDPMonitor.designer.cs">
       <DependentUpon>FormUDPMonitor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\OverlayForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\OverlayForm.Designer.cs">
+      <DependentUpon>OverlayForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Settings\FormGraphSteer.cs">
       <SubType>Form</SubType>
     </Compile>
