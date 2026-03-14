@@ -64,6 +64,8 @@ namespace Twol
             nudAntennaHeight_Tool.Value = Settings.Tool.setToolSteer.antennaHeight;
             nudAntennaOffset_Tool.Value = Settings.Tool.setToolSteer.antennaOffset;
             nudNudge.Value = Settings.Tool.setToolSteer.nudgeGlobal;
+            nudDualHeadingOffset.Value = Settings.Tool.setToolSteer.dualHeadingOffset;
+
 
             cboxIsFollowCurrent.Checked = Settings.Tool.setToolSteer.isFollowCurrent;
             cboxIsPassiveSteering.Checked = Settings.Tool.setToolSteer.isPassiveSteering;
