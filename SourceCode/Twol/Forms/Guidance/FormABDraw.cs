@@ -136,6 +136,10 @@ namespace Twol
                 cboxIsVisible.Visible = true;
                 cboxIsVisible.Checked = selectedLine.isVisible;
                 cboxIsVisible.Image = selectedLine.isVisible ? Properties.Resources.TrackVisible : Properties.Resources.TracksInvisible;
+
+                cboxIsOuter.Visible = true;
+                cboxIsOuter.Checked = selectedLine.isOuter;
+                cboxIsOuter.Image = cboxIsOuter.Checked ? Properties.Resources.FilterOuterLines : Properties.Resources.FilterInnerLines;
             }
             else
             {
@@ -143,6 +147,7 @@ namespace Twol
                 tboxNameCurve.Enabled = false;
                 lblCurveSelected.Text = "*";
                 cboxIsVisible.Visible = false;
+                cboxIsOuter.Visible = false;
             }
         }
 
@@ -236,6 +241,9 @@ namespace Twol
 
                     track.heading = 0;
 
+                    track.isOuter = true;
+                    track.halfToolWidth = 0;
+
                     //write out the PolyLine Points
                     track.curvePts = designPtsList;
 
@@ -310,8 +318,10 @@ namespace Twol
 
                 track.heading = designPtsList.TrackAverageHeading();
 
+                track.isOuter = cboxIsOuter.Checked;
+                track.halfToolWidth = 0;
+
                 //create a name
-                track.isOuter = cboxFldOrBnd.Checked;
                 track.name += (Math.Round(glm.toDegrees(track.heading), 1)).ToString(CultureInfo.InvariantCulture)
                     + "\u00B0";
 
@@ -385,8 +395,10 @@ namespace Twol
             designPtsList.Add(new vec3(track.ptA, abHead));
             designPtsList.Add(new vec3(track.ptB, abHead));
 
+            track.isOuter = cboxIsOuter.Checked;
+            track.halfToolWidth = 0;
+
             //create a name
-            track.isOuter = cboxFldOrBnd.Checked;
             track.name += Math.Round(glm.toDegrees(track.heading), 1).ToString(CultureInfo.InvariantCulture) + "\u00B0";
 
             //clean up gui
@@ -465,7 +477,7 @@ namespace Twol
             track.curvePts.AddStartEndPoints(2, 500);
 
             //create a name
-            track.isOuter = cboxFldOrBnd.Checked;
+            track.isOuter = cboxIsOuter.Checked;
             track.name = Math.Round(glm.toDegrees(track.heading), 1).ToString(CultureInfo.InvariantCulture) + "\u00B0";
 
             //clean up gui
@@ -877,9 +889,11 @@ namespace Twol
             }
         }
 
-        private void cboxFldOrBnd_Click(object sender, EventArgs e)
+        private void cboxIsOuter_Click(object sender, EventArgs e)
         {
-            cboxFldOrBnd.Image = cboxFldOrBnd.Checked ? Properties.Resources.FilterInnerLines : Properties.Resources.FilterOuterLines;
+            selectedLine.isOuter = cboxIsOuter.Checked;
+
+            cboxIsOuter.Image = cboxIsOuter.Checked ? Properties.Resources.FilterOuterLines : Properties.Resources.FilterInnerLines;
         }
 
         private void FormABDraw_ResizeEnd(object sender, EventArgs e)
