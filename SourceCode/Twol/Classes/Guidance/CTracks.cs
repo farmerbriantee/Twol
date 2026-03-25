@@ -882,6 +882,7 @@ namespace Twol
         public TrackMode mode;
         public double nudgeDistance;
         public bool isOuter;
+        public double halfToolWidth;
 
         public CTrk(TrackMode _mode = TrackMode.None)
         {
@@ -894,6 +895,7 @@ namespace Twol
             mode = _mode;
             nudgeDistance = 0;
             isOuter = true;
+            halfToolWidth = 0;
         }
 
         public CTrk(CTrk _trk)
@@ -907,6 +909,7 @@ namespace Twol
             mode = _trk.mode;
             nudgeDistance = _trk.nudgeDistance;
             isOuter = _trk.isOuter;
+            halfToolWidth = _trk.halfToolWidth;
         }
 
         public static bool operator ==(CTrk a, CTrk b)

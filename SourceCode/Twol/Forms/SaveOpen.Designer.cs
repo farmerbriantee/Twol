@@ -1037,6 +1037,9 @@ namespace Twol
                             {
                                 line = reader.ReadLine();
                                 track.isOuter = bool.Parse(line);
+
+                                line = reader.ReadLine();
+                                track.halfToolWidth = double.Parse(line, CultureInfo.InvariantCulture);
                             }
 
                             trks.AddTrack(track);
@@ -1839,7 +1842,11 @@ namespace Twol
                                                  Math.Round(track.curvePts[j].heading, 5).ToString(CultureInfo.InvariantCulture));
                         }
 
+                        //is in field tracks or used for boundary
                         writer.WriteLine(track.isOuter.ToString(CultureInfo.InvariantCulture));
+
+                        //half tool width used to remake the original track ref
+                        writer.WriteLine(track.halfToolWidth.ToString(CultureInfo.InvariantCulture));
                     }
                 }
                 catch (Exception er)
