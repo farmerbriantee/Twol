@@ -111,7 +111,7 @@ namespace Twol
         {
             foreach (CTrk item in mf.trks.gArr)
             {
-                item.isVisible = item.name.Contains("A_Fld");
+                item.isVisible = !item.isOuter;
             }
 
             mf.trks.GetNextTrack();
@@ -125,7 +125,7 @@ namespace Twol
         {
             foreach (CTrk item in mf.trks.gArr)
             {
-                item.isVisible = item.name.Contains("A_Bnd") || item.mode == TrackMode.Polygon;
+                item.isVisible = item.isOuter || item.mode == TrackMode.Polygon;
             }
             mf.trks.GetNextTrack();
             mf.NotifyTrackChange();

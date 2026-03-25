@@ -8,7 +8,8 @@ using Twol.Classes;
 namespace Twol
 {
     public enum TrackMode
-    { toolLineInner = -2, toolLineOuter = -1, None = 0, ABLine = 2, PolyLine = 4, Polygon = 32, waterPivot = 64 };//, Heading, Circle, Spiral
+    { toolLineInner = -2, toolLineOuter = -1, None = 0, ABLine = 2, 
+        PolyLine = 4, Polygon = 32, waterPivot = 64 };
 
     public class CTracks
     {
@@ -578,7 +579,8 @@ namespace Twol
             //make a new tool track
             var track = new CTrk(TrackMode.toolLineInner)
             {
-                name = (mf.gydTool.isboundaryLine ? "T_Bnd " : "T_Fld ") + (mf.trks.gArr.Count + 1).ToString("000")
+                name = (mf.gydTool.isboundaryLine ? "T_Bnd " : "T_Fld ") + (mf.trks.gArr.Count + 1).ToString("000"),
+                isOuter = mf.gydTool.isboundaryLine
             };
 
             if (mf.gydTool.isboundaryLine) track.mode = TrackMode.toolLineOuter;
@@ -879,6 +881,7 @@ namespace Twol
         public vec2 ptB;
         public TrackMode mode;
         public double nudgeDistance;
+        public bool isOuter;
 
         public CTrk(TrackMode _mode = TrackMode.None)
         {
@@ -890,6 +893,7 @@ namespace Twol
             ptB = new vec2();
             mode = _mode;
             nudgeDistance = 0;
+            isOuter = true;
         }
 
         public CTrk(CTrk _trk)
@@ -902,6 +906,7 @@ namespace Twol
             ptB = _trk.ptB;
             mode = _trk.mode;
             nudgeDistance = _trk.nudgeDistance;
+            isOuter = _trk.isOuter;
         }
 
         public static bool operator ==(CTrk a, CTrk b)

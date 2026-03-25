@@ -1136,7 +1136,7 @@ namespace Twol
         {
             foreach (CTrk item in mf.trks.gArr)
             {
-                item.isVisible = item.name.Contains("A_Bnd");
+                item.isVisible = item.isOuter;
                 UpdateTable();
             }
 
@@ -1146,7 +1146,7 @@ namespace Twol
         {
             foreach (CTrk item in mf.trks.gArr)
             {
-                item.isVisible = item.name.Contains("A_Fld");
+                item.isVisible = !item.isOuter;
                 UpdateTable();
             }
         }
@@ -1155,7 +1155,7 @@ namespace Twol
         {
             foreach (CTrk item in mf.trks.gArr)
             {
-                item.isVisible = item.name.Contains("T_Fld");
+                item.isVisible = !item.isOuter;
                 UpdateTable();
             }
         }
@@ -1164,7 +1164,7 @@ namespace Twol
         {
             foreach (CTrk item in mf.trks.gArr)
             {
-                item.isVisible = item.name.Contains("T_Bnd");
+                item.isVisible = item.isOuter;
                 UpdateTable();
             }
         }
@@ -1176,27 +1176,22 @@ namespace Twol
         }
 
         private void BtnAddA_Bnd_Click(object sender, EventArgs e)
-        {
-            textBox1.Text = "A_Bnd " + textBox1.Text;
+        {            
             mf.Activate();
         }
 
         private void btnAddA_Fld_Click(object sender, EventArgs e)
         {
-            textBox1.Text = "A_Fld " + textBox1.Text;
             mf.Activate();
         }
 
         private void btnEditAddAFld_Click(object sender, EventArgs e)
         {
-            textBox2.Text = "A_Fld " + textBox2.Text;
             mf.Activate();
         }
         private void btnEditAddABnd_Click(object sender, EventArgs e)
         {
-            textBox2.Text = "A_Bnd " + textBox2.Text;
             mf.Activate();
         }
-
     }
 }

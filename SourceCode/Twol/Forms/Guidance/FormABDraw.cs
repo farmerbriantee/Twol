@@ -311,7 +311,7 @@ namespace Twol
                 track.heading = designPtsList.TrackAverageHeading();
 
                 //create a name
-                track.name = cboxFldOrBnd.Checked ? "A_Fld Cu " : "A_Bnd Cu ";
+                track.isOuter = cboxFldOrBnd.Checked;
                 track.name += (Math.Round(glm.toDegrees(track.heading), 1)).ToString(CultureInfo.InvariantCulture)
                     + "\u00B0";
 
@@ -386,7 +386,7 @@ namespace Twol
             designPtsList.Add(new vec3(track.ptB, abHead));
 
             //create a name
-            track.name = cboxFldOrBnd.Checked ? "A_Fld AB " : "A_Bnd AB ";
+            track.isOuter = cboxFldOrBnd.Checked;
             track.name += Math.Round(glm.toDegrees(track.heading), 1).ToString(CultureInfo.InvariantCulture) + "\u00B0";
 
             //clean up gui
@@ -465,7 +465,8 @@ namespace Twol
             track.curvePts.AddStartEndPoints(2, 500);
 
             //create a name
-            track.name = cboxFldOrBnd.Checked ? "A_Fld A+ " : "A_Bnd A+ " + Math.Round(glm.toDegrees(track.heading), 1).ToString(CultureInfo.InvariantCulture) + "\u00B0";
+            track.isOuter = cboxFldOrBnd.Checked;
+            track.name = Math.Round(glm.toDegrees(track.heading), 1).ToString(CultureInfo.InvariantCulture) + "\u00B0";
 
             //clean up gui
             btnMakeABLine.Enabled = false;

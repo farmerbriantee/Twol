@@ -960,8 +960,10 @@ namespace Twol
                     {
                         string line;
 
-                        //read header $CurveLine
+                        //read header $TrackLines or $TwolTracks
                         line = reader.ReadLine();
+
+                        bool isNewTrackFile = (line.Trim() == "$TwolTracks");
 
                         while (!reader.EndOfStream)
                         {
@@ -1029,6 +1031,12 @@ namespace Twol
                                 track.curvePts.Add(new vec3(track.ptB, designHeading));
 
                                 track.curvePts.AddStartEndPoints(5, 300);
+                            }
+
+                            if (isNewTrackFile)
+                            {
+                                line = reader.ReadLine();
+                                track.isOuter = bool.Parse(line);
                             }
 
                             trks.AddTrack(track);
@@ -1794,7 +1802,7 @@ namespace Twol
             {
                 try
                 {
-                    writer.WriteLine("$TrackLines");
+                    writer.WriteLine("$TwolTracks");
 
                     foreach (var track in trks.gArr)
                     {
@@ -1830,6 +1838,8 @@ namespace Twol
                                                  Math.Round(track.curvePts[j].northing, 3).ToString(CultureInfo.InvariantCulture) + "," +
                                                  Math.Round(track.curvePts[j].heading, 5).ToString(CultureInfo.InvariantCulture));
                         }
+
+                        writer.WriteLine(track.isOuter.ToString(CultureInfo.InvariantCulture));
                     }
                 }
                 catch (Exception er)

@@ -11,7 +11,7 @@ namespace Twol
 
         //private int rA, rB;
 
-        public double distanceFromCurrentLine, distanceFromCurrentLineLast, distanceFromCurrentLinePassiveTool;
+        public double distanceFromCurrentLine, distanceFromCurrentLineLast, distanceFromCurrentLineTool;
         public double steerAngle;
 
         public vec2 goalPoint = new vec2();
@@ -57,13 +57,13 @@ namespace Twol
             {
                 if (FindClosestSegment(curList, isLoop, mf.pnTool.fix, out A, out B))
                 {
-                    distanceFromCurrentLinePassiveTool = FindDistanceToSegment(mf.pnTool.fix, curList[A], curList[B], out _, out _, true, false, false);
+                    distanceFromCurrentLineTool = FindDistanceToSegment(mf.pnTool.fix, curList[A], curList[B], out _, out _, true, false, false);
 
                     if (!Uturn && !mf.trks.isHeadingSameWay)
-                        distanceFromCurrentLinePassiveTool *= -1.0;
+                        distanceFromCurrentLineTool *= -1.0;
                 }
                 else
-                    distanceFromCurrentLinePassiveTool = 0;
+                    distanceFromCurrentLineTool = 0;
             }
 
             if (mf.gyd.FindClosestSegment(curList, isLoop, vec2point, out A, out B))
@@ -149,13 +149,13 @@ namespace Twol
                     ////Tool GPS
                     //if (Settings.Tool.setToolSteer.isGPSToolActive && mf.gyd.FindClosestSegment(curList, false, mf.pnTool.fix, out A, out B))
                     //{
-                    //    distanceFromCurrentLinePassiveTool = FindDistanceToSegment(mf.pnTool.fix, curList[A], curList[B], out _, out _, true, false, false);
+                    //    distanceFromCurrentLineTool = FindDistanceToSegment(mf.pnTool.fix, curList[A], curList[B], out _, out _, true, false, false);
 
                     //    if (!Uturn && !mf.trks.isHeadingSameWay)
-                    //        distanceFromCurrentLinePassiveTool *= -1.0;
+                    //        distanceFromCurrentLineTool *= -1.0;
                     //}
                     //else
-                    //    distanceFromCurrentLinePassiveTool = 0;
+                    //    distanceFromCurrentLineTool = 0;
                 }
 
                 #endregion Stanley
@@ -275,9 +275,9 @@ namespace Twol
                     //Passive Tool Steering
                     if (Settings.Tool.setToolSteer.isPassiveSteering)
                     {
-                        if (Settings.Tool.setToolSteer.isPassiveSteering && isPassiveSteeringFlag && distanceFromCurrentLinePassiveTool != 0)
+                        if (isPassiveSteeringFlag && distanceFromCurrentLineTool != 0)
                         {
-                            toolDistance = distanceFromCurrentLinePassiveTool;
+                            toolDistance = distanceFromCurrentLineTool;
 
                             if (!mf.trks.isHeadingSameWay)
                             {
@@ -386,7 +386,7 @@ namespace Twol
                     if (Settings.Tool.setToolSteer.isPassiveSteering && !isPassiveSteeringFlag && isPassiveTriggered)
                     {
                         if (Math.Abs(mf.vehicle.modeActualHeadingError) < 1.5
-                            && Math.Abs(distanceFromCurrentLine) < 0.10 && Math.Abs(distanceFromCurrentLinePassiveTool) < 0.20)
+                            && Math.Abs(distanceFromCurrentLine) < 0.10 && Math.Abs(distanceFromCurrentLineTool) < 0.20)
                             isPassiveSteeringFlag = true;
                     }
                 }
@@ -406,7 +406,7 @@ namespace Twol
                 mf.guidanceVehicleSteerAngle = steerAngle;
 
                 if (Settings.Tool.setToolSteer.isPassiveSteering || Settings.Tool.setToolSteer.isFollowCurrent)
-                    mf.guidanceToolXTE = distanceFromCurrentLinePassiveTool;
+                    mf.guidanceToolXTE = distanceFromCurrentLineTool;
             }
             else
             {
@@ -417,7 +417,7 @@ namespace Twol
                 if (Settings.Tool.setToolSteer.isPassiveSteering || Settings.Tool.setToolSteer.isFollowCurrent)
                     mf.guidanceToolXTE = double.NaN;
 
-                distanceFromCurrentLinePassiveTool = 0;
+                distanceFromCurrentLineTool = 0;
                 completeUturn = true;
             }
             if (Uturn && completeUturn)

@@ -168,7 +168,6 @@ namespace Twol
             }
         }
 
-
         private void btnSectionsTrams_Click(object sender, EventArgs e)
         {
             mode++;
@@ -190,11 +189,13 @@ namespace Twol
                 {
                     newTrk.mode = TrackMode.toolLineOuter;
                     newTrk.name = "T_Bnd " + mf.trks.gArr.Count;
+                    newTrk.isOuter = true;
                 }
                 else if (recList[i][0].heading == 20)
                 {
                     newTrk.mode = TrackMode.toolLineInner;
                     newTrk.name = "T_Fld " + mf.trks.gArr.Count;
+                    newTrk.isOuter = false;
                 }
 
                 newTrk.curvePts = new List<vec3>();
