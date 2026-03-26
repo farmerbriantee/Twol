@@ -1104,6 +1104,9 @@ namespace Twol
             if (selectedTrack != null)
                 selectedTrack.name = textBox1.Text.Trim();
 
+            selectedTrack.halfToolWidth = Settings.Tool.toolWidth * 0.5;
+            selectedTrack.isOuter = cboxIsOuterAdd.Checked;
+
             if (quick)
             {
                 isSaving = true;
@@ -1123,6 +1126,9 @@ namespace Twol
 
             if (selectedTrack != null)
                 selectedTrack.name = textBox2.Text.Trim();
+
+            selectedTrack.halfToolWidth = Settings.Tool.toolWidth * 0.5;
+            selectedTrack.isOuter = cboxIsOuterEdit.Checked;
 
             SetPanelVisible(panelMain);
 
@@ -1175,22 +1181,15 @@ namespace Twol
             UpdateTable();
         }
 
-        private void BtnAddA_Bnd_Click(object sender, EventArgs e)
-        {            
+        private void cboxIsOuterAdd_Click(object sender, EventArgs e)
+        {
+            cboxIsOuterAdd.Image = cboxIsOuterAdd.Checked ? Properties.Resources.FilterOuterLines : Properties.Resources.FilterInnerLines;
             mf.Activate();
         }
 
-        private void btnAddA_Fld_Click(object sender, EventArgs e)
+        private void cboxIsOuterEdit_Click(object sender, EventArgs e)
         {
-            mf.Activate();
-        }
-
-        private void btnEditAddAFld_Click(object sender, EventArgs e)
-        {
-            mf.Activate();
-        }
-        private void btnEditAddABnd_Click(object sender, EventArgs e)
-        {
+            cboxIsOuterEdit.Image = cboxIsOuterEdit.Checked ? Properties.Resources.FilterOuterLines : Properties.Resources.FilterInnerLines;
             mf.Activate();
         }
     }
