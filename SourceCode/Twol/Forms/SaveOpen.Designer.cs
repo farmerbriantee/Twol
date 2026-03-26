@@ -959,10 +959,10 @@ namespace Twol
                     try
                     {
                         string line;
+                        var culture = CultureInfo.InvariantCulture;
 
                         //read header $TrackLines or $TwolTracks
                         line = reader.ReadLine();
-
                         bool isNewTrackFile = (line.Trim() == "$TwolTracks");
 
                         while (!reader.EndOfStream)
@@ -972,25 +972,25 @@ namespace Twol
                             track.name = reader.ReadLine();
                             // get the average heading
                             line = reader.ReadLine();
-                            track.heading = double.Parse(line, CultureInfo.InvariantCulture);
+                            track.heading = double.Parse(line, culture);
 
                             line = reader.ReadLine();
                             string[] words = line.Split(',');
-                            vec2 vecPt = new vec2(double.Parse(words[0], CultureInfo.InvariantCulture),
-                                double.Parse(words[1], CultureInfo.InvariantCulture));
+                            vec2 vecPt = new vec2(double.Parse(words[0], culture),
+                                double.Parse(words[1], culture));
                             track.ptA = (vecPt);
 
                             line = reader.ReadLine();
                             words = line.Split(',');
-                            vecPt = new vec2(double.Parse(words[0], CultureInfo.InvariantCulture),
-                                double.Parse(words[1], CultureInfo.InvariantCulture));
+                            vecPt = new vec2(double.Parse(words[0], culture),
+                                double.Parse(words[1], culture));
                             track.ptB = (vecPt);
 
                             line = reader.ReadLine();
-                            track.nudgeDistance = double.Parse(line, CultureInfo.InvariantCulture);
+                            track.nudgeDistance = double.Parse(line, culture);
 
                             line = reader.ReadLine();
-                            track.mode = (TrackMode)int.Parse(line, CultureInfo.InvariantCulture);
+                            track.mode = (TrackMode)int.Parse(line, culture);
 
                             line = reader.ReadLine();
                             track.isVisible = bool.Parse(line);
@@ -998,7 +998,7 @@ namespace Twol
                             line = reader.ReadLine();
                             int numPoints = int.Parse(line);
 
-                            if (numPoints > 3)
+                            if (numPoints > 1)
                             {
                                 track.curvePts?.Clear();
 
@@ -1006,31 +1006,11 @@ namespace Twol
                                 {
                                     line = reader.ReadLine();
                                     words = line.Split(',');
-                                    vec3 vecPtt = new vec3(double.Parse(words[0], CultureInfo.InvariantCulture),
-                                        double.Parse(words[1], CultureInfo.InvariantCulture),
-                                        double.Parse(words[2], CultureInfo.InvariantCulture));
+                                    vec3 vecPtt = new vec3(double.Parse(words[0], culture),
+                                        double.Parse(words[1], culture),
+                                        double.Parse(words[2], culture));
                                     track.curvePts.Add(vecPtt);
                                 }
-                            }
-
-                            if (track.mode == TrackMode.ABLine && track.curvePts.Count == 0)
-                            {
-                                double designHeading = track.heading;
-
-                                double hsin = Math.Sin(designHeading);
-                                double hcos = Math.Cos(designHeading);
-
-                                //fill in the dots between A and B
-                                double len = glm.Distance(track.ptA, track.ptB);
-                                if (len < 50)
-                                {
-                                    track.ptB.easting = track.ptA.easting + (Math.Sin(designHeading) * 50);
-                                    track.ptB.northing = track.ptA.northing + (Math.Cos(designHeading) * 50);
-                                }
-                                track.curvePts.Add(new vec3(track.ptA, designHeading));
-                                track.curvePts.Add(new vec3(track.ptB, designHeading));
-
-                                track.curvePts.AddStartEndPoints(5, 300);
                             }
 
                             if (isNewTrackFile)
@@ -1039,7 +1019,7 @@ namespace Twol
                                 track.isOuter = bool.Parse(line);
 
                                 line = reader.ReadLine();
-                                track.halfToolWidth = double.Parse(line, CultureInfo.InvariantCulture);
+                                track.halfToolWidth = double.Parse(line, culture);
                             }
 
                             trks.AddTrack(track);

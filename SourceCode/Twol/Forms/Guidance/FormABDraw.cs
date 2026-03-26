@@ -137,7 +137,6 @@ namespace Twol
                 cboxIsVisible.Checked = selectedLine.isVisible;
                 cboxIsVisible.Image = selectedLine.isVisible ? Properties.Resources.TrackVisible : Properties.Resources.TracksInvisible;
 
-                cboxIsOuter.Visible = true;
                 cboxIsOuter.Checked = selectedLine.isOuter;
                 cboxIsOuter.Image = cboxIsOuter.Checked ? Properties.Resources.FilterOuterLines : Properties.Resources.FilterInnerLines;
             }
@@ -147,7 +146,6 @@ namespace Twol
                 tboxNameCurve.Enabled = false;
                 lblCurveSelected.Text = "*";
                 cboxIsVisible.Visible = false;
-                cboxIsOuter.Visible = false;
             }
         }
 
@@ -322,7 +320,7 @@ namespace Twol
                 track.halfToolWidth = 0;
 
                 //create a name
-                track.name += (Math.Round(glm.toDegrees(track.heading), 1)).ToString(CultureInfo.InvariantCulture)
+                track.name = "AB " + (Math.Round(glm.toDegrees(track.heading), 1)).ToString(CultureInfo.InvariantCulture)
                     + "\u00B0";
 
                 //write out the PolyLine Points
