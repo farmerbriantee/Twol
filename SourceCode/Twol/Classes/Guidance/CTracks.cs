@@ -8,7 +8,7 @@ using Twol.Classes;
 namespace Twol
 {
     public enum TrackMode
-    { toolLineInner = -2, toolLineOuter = -1, None = 0, ABLine = 2, 
+    { toolLineRec = -1, None = 0, ABLine = 2, 
         PolyLine = 4, Polygon = 32, waterPivot = 64 };
 
     public class CTracks
@@ -428,7 +428,7 @@ namespace Twol
 
                         if (Settings.Tool.setToolSteer.isRecordToolLine)
                         {
-                            if (gArr[i].mode == TrackMode.toolLineInner || gArr[i].mode == TrackMode.toolLineOuter)
+                            if (gArr[i].mode == TrackMode.toolLineRec)
                             {
                                 continue;
                             }
@@ -577,13 +577,11 @@ namespace Twol
             mf.trks.toolDesignPtsList.Add(new vec3(mf.toolPivotPos));
 
             //make a new tool track
-            var track = new CTrk(TrackMode.toolLineInner)
+            var track = new CTrk(TrackMode.toolLineRec)
             {
                 name = (mf.gydTool.isboundaryLine ? "T_Bnd " : "T_Fld ") + (mf.trks.gArr.Count + 1).ToString("000"),
                 isOuter = mf.gydTool.isboundaryLine
             };
-
-            if (mf.gydTool.isboundaryLine) track.mode = TrackMode.toolLineOuter;
 
             mf.trks.toolDesignPtsList.SmoothSegments();
             mf.trks.toolDesignPtsList.Reverse();

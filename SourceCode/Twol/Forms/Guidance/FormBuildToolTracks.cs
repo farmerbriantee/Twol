@@ -187,13 +187,13 @@ namespace Twol
                 if (recList[i][0].heading == 0) continue;
                 else if (recList[i][0].heading == 10)
                 {
-                    newTrk.mode = TrackMode.toolLineOuter;
+                    newTrk.mode = TrackMode.toolLineRec;
                     newTrk.name = "T_Bnd " + mf.trks.gArr.Count;
                     newTrk.isOuter = true;
                 }
                 else if (recList[i][0].heading == 20)
                 {
-                    newTrk.mode = TrackMode.toolLineInner;
+                    newTrk.mode = TrackMode.toolLineRec;
                     newTrk.name = "T_Fld " + mf.trks.gArr.Count;
                     newTrk.isOuter = false;
                 }
