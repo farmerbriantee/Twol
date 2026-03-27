@@ -420,7 +420,7 @@ namespace Twol
                 {
                     GL.LineWidth(1);
                     //GL.PointSize(4);
-                    GL.Color3(0.95f, 0.5f, 0.5f);
+                    GL.Color3(0.99f, 0.735f, 0.5f);
 
                     for (int i = 0; i < gArr.Count; i++)
                     {
@@ -433,7 +433,7 @@ namespace Twol
                                 continue;
                             }
                         }
-                        gArr[i].curvePts.DrawPolygonThirds(PrimitiveType.LineStrip);
+                        gArr[i].curvePts.DrawPolygon(PrimitiveType.LineStrip);
                     }
                 }
 
@@ -447,7 +447,7 @@ namespace Twol
                         GL.LineStipple(8, 0x0F00);
                         GL.LineWidth(Settings.User.setDisplay_lineWidth * 2);
                         GL.Color3(0.96, 0.2f, 0.2f);
-                        currentRefTrack.curvePts.DrawPolygonThirds(PrimitiveType.LineStrip);
+                        currentRefTrack.curvePts.DrawPolygon(PrimitiveType.LineStrip);
                         GL.Disable(EnableCap.LineStipple);
 
                         if (mf.font.isFontOn)

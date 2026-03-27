@@ -944,6 +944,8 @@
     <None Include="btnImages\GPSQualityTool.png" />
     <None Include="btnImages\AutoToolSteerOff.png" />
     <None Include="btnImages\AutoToolSteerOn.png" />
+    <None Include="btnImages\TrackToolInner.png" />
+    <None Include="btnImages\TrackToolOuter.png" />
     <Content Include="btnImages\ZoomOut.png" />
     <Content Include="License.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

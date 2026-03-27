@@ -50,6 +50,8 @@ namespace Twol
 
             FixLabelsCurve();
 
+            cboxIsOuter.Image = Properties.Resources.FilterOuterLines;
+
             cboxIsZoom.Checked = false;
             zoomToggle = false;
 
@@ -314,17 +316,19 @@ namespace Twol
                 //clean it up
                 designPtsList.FixReferenceTrack(false);
 
+                //add tails
                 track.heading = designPtsList.TrackAverageHeading();
 
                 track.isOuter = cboxIsOuter.Checked;
                 track.halfToolWidth = 0;
 
                 //create a name
-                track.name = "AB " + (Math.Round(glm.toDegrees(track.heading), 1)).ToString(CultureInfo.InvariantCulture)
+                track.name = "Cu " + (Math.Round(glm.toDegrees(track.heading), 1)).ToString(CultureInfo.InvariantCulture)
                     + "\u00B0";
 
                 //write out the PolyLine Points
                 track.curvePts = designPtsList;
+
 
                 //update the arrays
                 btnMakeABLine.Enabled = false;
@@ -333,7 +337,6 @@ namespace Twol
                 btnMakeCurve.Enabled = false;
 
                 start = 99999; end = 99999;
-
 
                 gTemp.Add(track);
                 selectedLine = track;
@@ -384,7 +387,7 @@ namespace Twol
 
             //fill in the dots between A and B
             double len = glm.Distance(track.ptA, track.ptB);
-            if (len < 50)
+            if (len < 25)
             {
                 track.ptB.easting = track.ptA.easting + (Math.Sin(abHead) * 50);
                 track.ptB.northing = track.ptA.northing + (Math.Cos(abHead) * 50);
@@ -393,11 +396,13 @@ namespace Twol
             designPtsList.Add(new vec3(track.ptA, abHead));
             designPtsList.Add(new vec3(track.ptB, abHead));
 
+            designPtsList.AddStartEndPoints(4, 500);
+
             track.isOuter = cboxIsOuter.Checked;
             track.halfToolWidth = 0;
 
             //create a name
-            track.name += Math.Round(glm.toDegrees(track.heading), 1).ToString(CultureInfo.InvariantCulture) + "\u00B0";
+            track.name = "AB " + (Math.Round(glm.toDegrees(track.heading), 1)).ToString(CultureInfo.InvariantCulture) + "\u00B0";
 
             //clean up gui
             btnMakeABLine.Enabled = false;
@@ -406,9 +411,6 @@ namespace Twol
             btnMakeCurve.Enabled = false;
 
             start = 99999; end = 99999;
-
-            //write out the PolyLine Points
-            designPtsList.AddStartEndPoints(2, 500);
 
             track.curvePts = designPtsList;
 
@@ -889,9 +891,12 @@ namespace Twol
 
         private void cboxIsOuter_Click(object sender, EventArgs e)
         {
-            selectedLine.isOuter = cboxIsOuter.Checked;
+            if (selectedLine != null)
+            {
+                selectedLine.isOuter = cboxIsOuter.Checked;
 
-            cboxIsOuter.Image = cboxIsOuter.Checked ? Properties.Resources.FilterOuterLines : Properties.Resources.FilterInnerLines;
+                cboxIsOuter.Image = cboxIsOuter.Checked ? Properties.Resources.FilterOuterLines : Properties.Resources.FilterInnerLines;
+            }
         }
 
         private void FormABDraw_ResizeEnd(object sender, EventArgs e)

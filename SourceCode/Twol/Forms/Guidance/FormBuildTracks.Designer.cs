@@ -32,6 +32,7 @@
             this.lblCurveExists = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panelName = new System.Windows.Forms.Panel();
+            this.cboxIsOuterAdd = new System.Windows.Forms.CheckBox();
             this.label11 = new System.Windows.Forms.Label();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnCancel_Name = new System.Windows.Forms.Button();
@@ -61,6 +62,7 @@
             this.btnBCurve = new System.Windows.Forms.Button();
             this.btnPausePlay = new System.Windows.Forms.Button();
             this.panelEditName = new System.Windows.Forms.Panel();
+            this.cboxIsOuterEdit = new System.Windows.Forms.CheckBox();
             this.label8 = new System.Windows.Forms.Label();
             this.btnSaveEditName = new System.Windows.Forms.Button();
             this.btnCancel_EditName = new System.Windows.Forms.Button();
@@ -147,8 +149,6 @@
             this.btnzAPlus2 = new System.Windows.Forms.Button();
             this.btnzABLine2 = new System.Windows.Forms.Button();
             this.btnzABCurve2 = new System.Windows.Forms.Button();
-            this.cboxIsOuterAdd = new System.Windows.Forms.CheckBox();
-            this.cboxIsOuterEdit = new System.Windows.Forms.CheckBox();
             this.panelName.SuspendLayout();
             this.panelMain.SuspendLayout();
             this.panelCurve.SuspendLayout();
@@ -202,6 +202,30 @@
             this.panelName.Name = "panelName";
             this.panelName.Size = new System.Drawing.Size(241, 310);
             this.panelName.TabIndex = 434;
+            // 
+            // cboxIsOuterAdd
+            // 
+            this.cboxIsOuterAdd.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cboxIsOuterAdd.Appearance = System.Windows.Forms.Appearance.Button;
+            this.cboxIsOuterAdd.BackColor = System.Drawing.Color.Transparent;
+            this.cboxIsOuterAdd.Checked = true;
+            this.cboxIsOuterAdd.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cboxIsOuterAdd.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.cboxIsOuterAdd.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.cboxIsOuterAdd.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.cboxIsOuterAdd.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.cboxIsOuterAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cboxIsOuterAdd.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboxIsOuterAdd.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.cboxIsOuterAdd.Image = global::Twol.Properties.Resources.FilterOuterLines;
+            this.cboxIsOuterAdd.Location = new System.Drawing.Point(71, 137);
+            this.cboxIsOuterAdd.Name = "cboxIsOuterAdd";
+            this.cboxIsOuterAdd.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.cboxIsOuterAdd.Size = new System.Drawing.Size(97, 81);
+            this.cboxIsOuterAdd.TabIndex = 567;
+            this.cboxIsOuterAdd.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.cboxIsOuterAdd.UseVisualStyleBackColor = false;
+            this.cboxIsOuterAdd.Click += new System.EventHandler(this.cboxIsOuterAdd_Click);
             // 
             // label11
             // 
@@ -654,6 +678,30 @@
             this.panelEditName.Name = "panelEditName";
             this.panelEditName.Size = new System.Drawing.Size(241, 310);
             this.panelEditName.TabIndex = 437;
+            // 
+            // cboxIsOuterEdit
+            // 
+            this.cboxIsOuterEdit.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cboxIsOuterEdit.Appearance = System.Windows.Forms.Appearance.Button;
+            this.cboxIsOuterEdit.BackColor = System.Drawing.Color.Transparent;
+            this.cboxIsOuterEdit.Checked = true;
+            this.cboxIsOuterEdit.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cboxIsOuterEdit.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.cboxIsOuterEdit.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.cboxIsOuterEdit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.cboxIsOuterEdit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.cboxIsOuterEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cboxIsOuterEdit.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboxIsOuterEdit.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.cboxIsOuterEdit.Image = global::Twol.Properties.Resources.FilterOuterLines;
+            this.cboxIsOuterEdit.Location = new System.Drawing.Point(71, 137);
+            this.cboxIsOuterEdit.Name = "cboxIsOuterEdit";
+            this.cboxIsOuterEdit.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.cboxIsOuterEdit.Size = new System.Drawing.Size(97, 81);
+            this.cboxIsOuterEdit.TabIndex = 567;
+            this.cboxIsOuterEdit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.cboxIsOuterEdit.UseVisualStyleBackColor = false;
+            this.cboxIsOuterEdit.Click += new System.EventHandler(this.cboxIsOuterEdit_Click);
             // 
             // label8
             // 
@@ -1913,54 +1961,6 @@
             this.btnzABCurve2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnzABCurve2.UseVisualStyleBackColor = false;
             this.btnzABCurve2.Click += new System.EventHandler(this.btnzABCurve_Click);
-            // 
-            // cboxIsOuterAdd
-            // 
-            this.cboxIsOuterAdd.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.cboxIsOuterAdd.Appearance = System.Windows.Forms.Appearance.Button;
-            this.cboxIsOuterAdd.BackColor = System.Drawing.Color.Transparent;
-            this.cboxIsOuterAdd.Checked = true;
-            this.cboxIsOuterAdd.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cboxIsOuterAdd.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.cboxIsOuterAdd.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.cboxIsOuterAdd.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.cboxIsOuterAdd.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.cboxIsOuterAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cboxIsOuterAdd.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboxIsOuterAdd.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.cboxIsOuterAdd.Image = global::Twol.Properties.Resources.FilterOuterLines;
-            this.cboxIsOuterAdd.Location = new System.Drawing.Point(71, 137);
-            this.cboxIsOuterAdd.Name = "cboxIsOuterAdd";
-            this.cboxIsOuterAdd.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.cboxIsOuterAdd.Size = new System.Drawing.Size(97, 81);
-            this.cboxIsOuterAdd.TabIndex = 567;
-            this.cboxIsOuterAdd.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.cboxIsOuterAdd.UseVisualStyleBackColor = false;
-            this.cboxIsOuterAdd.Click += new System.EventHandler(this.cboxIsOuterAdd_Click);
-            // 
-            // cboxIsOuterEdit
-            // 
-            this.cboxIsOuterEdit.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.cboxIsOuterEdit.Appearance = System.Windows.Forms.Appearance.Button;
-            this.cboxIsOuterEdit.BackColor = System.Drawing.Color.Transparent;
-            this.cboxIsOuterEdit.Checked = true;
-            this.cboxIsOuterEdit.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cboxIsOuterEdit.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.cboxIsOuterEdit.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.cboxIsOuterEdit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.cboxIsOuterEdit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.cboxIsOuterEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cboxIsOuterEdit.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboxIsOuterEdit.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.cboxIsOuterEdit.Image = global::Twol.Properties.Resources.FilterOuterLines;
-            this.cboxIsOuterEdit.Location = new System.Drawing.Point(71, 137);
-            this.cboxIsOuterEdit.Name = "cboxIsOuterEdit";
-            this.cboxIsOuterEdit.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.cboxIsOuterEdit.Size = new System.Drawing.Size(97, 81);
-            this.cboxIsOuterEdit.TabIndex = 567;
-            this.cboxIsOuterEdit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.cboxIsOuterEdit.UseVisualStyleBackColor = false;
-            this.cboxIsOuterEdit.Click += new System.EventHandler(this.cboxIsOuterEdit_Click);
             // 
             // FormBuildTracks
             // 

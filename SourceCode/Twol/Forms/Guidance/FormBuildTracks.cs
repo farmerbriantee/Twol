@@ -192,6 +192,10 @@ namespace Twol
 
                 if (track.mode == TrackMode.ABLine)
                     b.Image = Properties.Resources.TrackLine;
+                else if (track.mode == TrackMode.toolLineRec && track.isOuter)
+                    b.Image = Properties.Resources.TrackToolOuter;
+                else if (track.mode == TrackMode.toolLineRec && !track.isOuter)
+                    b.Image = Properties.Resources.TrackToolInner;
                 else if (track.mode == TrackMode.waterPivot)
                     b.Image = Properties.Resources.TrackPivot;
                 else
@@ -1105,6 +1109,8 @@ namespace Twol
                 selectedTrack.name = textBox1.Text.Trim();
 
             selectedTrack.halfToolWidth = Settings.Tool.toolWidth * 0.5;
+            if (!isRefRightSide) selectedTrack.halfToolWidth *= -1;
+
             selectedTrack.isOuter = cboxIsOuterAdd.Checked;
 
             if (quick)
@@ -1142,7 +1148,7 @@ namespace Twol
         {
             foreach (CTrk item in mf.trks.gArr)
             {
-                item.isVisible = item.isOuter;
+                item.isVisible = item.isOuter && item.mode > TrackMode.None;
                 UpdateTable();
             }
 
@@ -1152,7 +1158,7 @@ namespace Twol
         {
             foreach (CTrk item in mf.trks.gArr)
             {
-                item.isVisible = !item.isOuter;
+                item.isVisible = !item.isOuter && item.mode > TrackMode.None; ;
                 UpdateTable();
             }
         }
@@ -1161,7 +1167,7 @@ namespace Twol
         {
             foreach (CTrk item in mf.trks.gArr)
             {
-                item.isVisible = !item.isOuter;
+                item.isVisible = !item.isOuter && item.mode < TrackMode.None; ;
                 UpdateTable();
             }
         }
@@ -1170,7 +1176,7 @@ namespace Twol
         {
             foreach (CTrk item in mf.trks.gArr)
             {
-                item.isVisible = item.isOuter;
+                item.isVisible = item.isOuter && item.mode < TrackMode.None;
                 UpdateTable();
             }
         }

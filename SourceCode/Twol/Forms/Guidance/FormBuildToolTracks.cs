@@ -423,21 +423,21 @@ namespace Twol
 
             if (recList.Count > 0 && selectedLineIndex >= 0 && selectedLineIndex < recList.Count)
             {
-                GL.PointSize(2);
+                GL.PointSize(4);
                 for (int i = 0; i < recList.Count; i++)
                 {
                     if (recList[i][0].heading == 10)
                         GL.Color3(1.0, 0.09, 0.56);
                     else if (recList[i][0].heading == 20)
                         GL.Color3(0.39, 1.0, 0.396);
-                    else GL.Color3(0.19, 1.0, 1.0);
+                    else GL.Color3(0.2, 0.4, 0.6);
 
                     recList[i].DrawPolygon(PrimitiveType.Points);
                 }
 
                 //selected line
                 GL.Color3(1f, 0.1f, 1f);
-                GL.PointSize(8);
+                GL.PointSize(12);
                 GL.Begin(PrimitiveType.Points);
 
                 for (int i = 0; i < recList[selectedLineIndex].Count; i += 5)
