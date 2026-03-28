@@ -166,6 +166,8 @@ namespace Twol
 
             foreach (var track in mf.trks.gArr)
             {
+                if (!track.isVisible) continue;
+
                 //outer inner
                 Button a = new Button
                 {
@@ -1149,8 +1151,8 @@ namespace Twol
             foreach (CTrk item in mf.trks.gArr)
             {
                 item.isVisible = item.isOuter && item.mode > TrackMode.None;
-                UpdateTable();
             }
+            UpdateTable();
 
         }
 
@@ -1159,8 +1161,8 @@ namespace Twol
             foreach (CTrk item in mf.trks.gArr)
             {
                 item.isVisible = !item.isOuter && item.mode > TrackMode.None; ;
-                UpdateTable();
             }
+            UpdateTable();
         }
 
         private void btnHideShowFldTool_Click(object sender, EventArgs e)
@@ -1168,8 +1170,8 @@ namespace Twol
             foreach (CTrk item in mf.trks.gArr)
             {
                 item.isVisible = !item.isOuter && item.mode < TrackMode.None; ;
-                UpdateTable();
             }
+            UpdateTable();
         }
 
         private void btnHideShowBndTool_Click(object sender, EventArgs e)
@@ -1177,8 +1179,8 @@ namespace Twol
             foreach (CTrk item in mf.trks.gArr)
             {
                 item.isVisible = item.isOuter && item.mode < TrackMode.None;
-                UpdateTable();
             }
+            UpdateTable();
         }
 
         private void btnSort_Click(object sender, EventArgs e)

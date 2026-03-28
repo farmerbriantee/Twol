@@ -99,7 +99,6 @@
             this.label13 = new System.Windows.Forms.Label();
             this.btnCancel_APlus = new System.Windows.Forms.Button();
             this.btnEnter_APlus = new System.Windows.Forms.Button();
-            this.nudHeading = new Twol.NudlessNumericUpDown();
             this.btnAPlus = new System.Windows.Forms.Button();
             this.panelLatLonPlus = new System.Windows.Forms.Panel();
             this.label28 = new System.Windows.Forms.Label();
@@ -107,11 +106,8 @@
             this.label17 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
-            this.nudLatitudePlus = new Twol.NudlessNumericUpDown();
-            this.nudLongitudePlus = new Twol.NudlessNumericUpDown();
             this.btnCancel_LatLonPlus = new System.Windows.Forms.Button();
             this.btnEnter_LatLonPlus = new System.Windows.Forms.Button();
-            this.nudHeadingLatLonPlus = new Twol.NudlessNumericUpDown();
             this.panelLatLonLatLon = new System.Windows.Forms.Panel();
             this.label29 = new System.Windows.Forms.Label();
             this.btnFillLatLonLatLonB = new System.Windows.Forms.Button();
@@ -120,12 +116,8 @@
             this.label23 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
-            this.nudLatitudeB = new Twol.NudlessNumericUpDown();
-            this.nudLongitudeB = new Twol.NudlessNumericUpDown();
             this.label19 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
-            this.nudLatitudeA = new Twol.NudlessNumericUpDown();
-            this.nudLongitudeA = new Twol.NudlessNumericUpDown();
             this.btnCancelLatLonLatLon = new System.Windows.Forms.Button();
             this.btnEnter_LatLonLatLon = new System.Windows.Forms.Button();
             this.panelPivot = new System.Windows.Forms.Panel();
@@ -133,8 +125,6 @@
             this.btnFillLAtLonPivot = new System.Windows.Forms.Button();
             this.label25 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
-            this.nudLatitudePivot = new Twol.NudlessNumericUpDown();
-            this.nudLongitudePivot = new Twol.NudlessNumericUpDown();
             this.btnCancel_Pivot = new System.Windows.Forms.Button();
             this.btnEnter_Pivot = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -149,6 +139,16 @@
             this.btnzAPlus2 = new System.Windows.Forms.Button();
             this.btnzABLine2 = new System.Windows.Forms.Button();
             this.btnzABCurve2 = new System.Windows.Forms.Button();
+            this.nudLatitudeB = new Twol.NudlessNumericUpDown();
+            this.nudLongitudeB = new Twol.NudlessNumericUpDown();
+            this.nudLatitudeA = new Twol.NudlessNumericUpDown();
+            this.nudLongitudeA = new Twol.NudlessNumericUpDown();
+            this.nudLatitudePivot = new Twol.NudlessNumericUpDown();
+            this.nudLongitudePivot = new Twol.NudlessNumericUpDown();
+            this.nudLatitudePlus = new Twol.NudlessNumericUpDown();
+            this.nudLongitudePlus = new Twol.NudlessNumericUpDown();
+            this.nudHeadingLatLonPlus = new Twol.NudlessNumericUpDown();
+            this.nudHeading = new Twol.NudlessNumericUpDown();
             this.panelName.SuspendLayout();
             this.panelMain.SuspendLayout();
             this.panelCurve.SuspendLayout();
@@ -413,9 +413,9 @@
             this.btnCancelMain.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnCancelMain.Image = global::Twol.Properties.Resources.Cancel64;
             this.btnCancelMain.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnCancelMain.Location = new System.Drawing.Point(541, 258);
+            this.btnCancelMain.Location = new System.Drawing.Point(555, 258);
             this.btnCancelMain.Name = "btnCancelMain";
-            this.btnCancelMain.Size = new System.Drawing.Size(78, 57);
+            this.btnCancelMain.Size = new System.Drawing.Size(64, 57);
             this.btnCancelMain.TabIndex = 432;
             this.btnCancelMain.UseVisualStyleBackColor = false;
             this.btnCancelMain.Click += new System.EventHandler(this.btnCancelMain_Click);
@@ -441,9 +441,9 @@
             this.btnMoveUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMoveUp.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMoveUp.Image = global::Twol.Properties.Resources.UpArrow64;
-            this.btnMoveUp.Location = new System.Drawing.Point(541, 6);
+            this.btnMoveUp.Location = new System.Drawing.Point(555, 6);
             this.btnMoveUp.Name = "btnMoveUp";
-            this.btnMoveUp.Size = new System.Drawing.Size(78, 57);
+            this.btnMoveUp.Size = new System.Drawing.Size(64, 57);
             this.btnMoveUp.TabIndex = 430;
             this.btnMoveUp.UseVisualStyleBackColor = false;
             this.btnMoveUp.Click += new System.EventHandler(this.btnMoveUPGN_Click);
@@ -455,9 +455,9 @@
             this.btnMoveDn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMoveDn.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMoveDn.Image = global::Twol.Properties.Resources.DnArrow64;
-            this.btnMoveDn.Location = new System.Drawing.Point(541, 79);
+            this.btnMoveDn.Location = new System.Drawing.Point(555, 79);
             this.btnMoveDn.Name = "btnMoveDn";
-            this.btnMoveDn.Size = new System.Drawing.Size(78, 57);
+            this.btnMoveDn.Size = new System.Drawing.Size(64, 57);
             this.btnMoveDn.TabIndex = 429;
             this.btnMoveDn.UseVisualStyleBackColor = false;
             this.btnMoveDn.Click += new System.EventHandler(this.btnMoveDn_Click);
@@ -469,7 +469,7 @@
             this.flp.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.flp.Location = new System.Drawing.Point(88, 8);
             this.flp.Name = "flp";
-            this.flp.Size = new System.Drawing.Size(450, 399);
+            this.flp.Size = new System.Drawing.Size(465, 399);
             this.flp.TabIndex = 428;
             // 
             // btnSwapAB
@@ -526,9 +526,9 @@
             this.btnNewTrack.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNewTrack.Image = global::Twol.Properties.Resources.AddNew;
             this.btnNewTrack.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnNewTrack.Location = new System.Drawing.Point(541, 161);
+            this.btnNewTrack.Location = new System.Drawing.Point(555, 161);
             this.btnNewTrack.Name = "btnNewTrack";
-            this.btnNewTrack.Size = new System.Drawing.Size(78, 57);
+            this.btnNewTrack.Size = new System.Drawing.Size(64, 57);
             this.btnNewTrack.TabIndex = 150;
             this.btnNewTrack.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnNewTrack.UseVisualStyleBackColor = false;
@@ -543,10 +543,10 @@
             this.btnListUse.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold);
             this.btnListUse.Image = global::Twol.Properties.Resources.OK64;
             this.btnListUse.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnListUse.Location = new System.Drawing.Point(541, 356);
+            this.btnListUse.Location = new System.Drawing.Point(555, 356);
             this.btnListUse.Margin = new System.Windows.Forms.Padding(0);
             this.btnListUse.Name = "btnListUse";
-            this.btnListUse.Size = new System.Drawing.Size(78, 57);
+            this.btnListUse.Size = new System.Drawing.Size(64, 57);
             this.btnListUse.TabIndex = 144;
             this.btnListUse.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnListUse.UseVisualStyleBackColor = false;
@@ -1260,16 +1260,6 @@
             this.btnEnter_APlus.UseVisualStyleBackColor = false;
             this.btnEnter_APlus.Click += new System.EventHandler(this.btnEnter_APlus_Click);
             // 
-            // nudHeading
-            // 
-            this.nudHeading.DecimalPlaces = 4;
-            this.nudHeading.Location = new System.Drawing.Point(9, 146);
-            this.nudHeading.Maximum = 360D;
-            this.nudHeading.Name = "nudHeading";
-            this.nudHeading.Size = new System.Drawing.Size(221, 52);
-            this.nudHeading.TabIndex = 413;
-            this.nudHeading.ValueChanged += new System.EventHandler(this.nudHeading_ValueChanged);
-            // 
             // btnAPlus
             // 
             this.btnAPlus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -1372,26 +1362,6 @@
             this.label15.Text = "Lattitude (+- 90)";
             this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // nudLatitudePlus
-            // 
-            this.nudLatitudePlus.DecimalPlaces = 7;
-            this.nudLatitudePlus.Location = new System.Drawing.Point(90, 58);
-            this.nudLatitudePlus.Maximum = 90D;
-            this.nudLatitudePlus.Minimum = -90D;
-            this.nudLatitudePlus.Name = "nudLatitudePlus";
-            this.nudLatitudePlus.Size = new System.Drawing.Size(228, 43);
-            this.nudLatitudePlus.TabIndex = 451;
-            // 
-            // nudLongitudePlus
-            // 
-            this.nudLongitudePlus.DecimalPlaces = 7;
-            this.nudLongitudePlus.Location = new System.Drawing.Point(90, 138);
-            this.nudLongitudePlus.Maximum = 180D;
-            this.nudLongitudePlus.Minimum = -180D;
-            this.nudLongitudePlus.Name = "nudLongitudePlus";
-            this.nudLongitudePlus.Size = new System.Drawing.Size(228, 43);
-            this.nudLongitudePlus.TabIndex = 450;
-            // 
             // btnCancel_LatLonPlus
             // 
             this.btnCancel_LatLonPlus.BackColor = System.Drawing.Color.Transparent;
@@ -1427,15 +1397,6 @@
             this.btnEnter_LatLonPlus.TextAlign = System.Drawing.ContentAlignment.TopLeft;
             this.btnEnter_LatLonPlus.UseVisualStyleBackColor = false;
             this.btnEnter_LatLonPlus.Click += new System.EventHandler(this.btnEnter_LatLonPlus_Click);
-            // 
-            // nudHeadingLatLonPlus
-            // 
-            this.nudHeadingLatLonPlus.DecimalPlaces = 4;
-            this.nudHeadingLatLonPlus.Location = new System.Drawing.Point(90, 250);
-            this.nudHeadingLatLonPlus.Maximum = 360D;
-            this.nudHeadingLatLonPlus.Name = "nudHeadingLatLonPlus";
-            this.nudHeadingLatLonPlus.Size = new System.Drawing.Size(207, 46);
-            this.nudHeadingLatLonPlus.TabIndex = 413;
             // 
             // panelLatLonLatLon
             // 
@@ -1557,26 +1518,6 @@
             this.label22.Text = "Lattitude (+- 90)";
             this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // nudLatitudeB
-            // 
-            this.nudLatitudeB.DecimalPlaces = 7;
-            this.nudLatitudeB.Location = new System.Drawing.Point(81, 194);
-            this.nudLatitudeB.Maximum = 90D;
-            this.nudLatitudeB.Minimum = -90D;
-            this.nudLatitudeB.Name = "nudLatitudeB";
-            this.nudLatitudeB.Size = new System.Drawing.Size(228, 43);
-            this.nudLatitudeB.TabIndex = 455;
-            // 
-            // nudLongitudeB
-            // 
-            this.nudLongitudeB.DecimalPlaces = 7;
-            this.nudLongitudeB.Location = new System.Drawing.Point(81, 273);
-            this.nudLongitudeB.Maximum = 180D;
-            this.nudLongitudeB.Minimum = -180D;
-            this.nudLongitudeB.Name = "nudLongitudeB";
-            this.nudLongitudeB.Size = new System.Drawing.Size(228, 43);
-            this.nudLongitudeB.TabIndex = 454;
-            // 
             // label19
             // 
             this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -1602,26 +1543,6 @@
             this.label20.TabIndex = 452;
             this.label20.Text = "Lattitude (+- 90)";
             this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // nudLatitudeA
-            // 
-            this.nudLatitudeA.DecimalPlaces = 7;
-            this.nudLatitudeA.Location = new System.Drawing.Point(81, 27);
-            this.nudLatitudeA.Maximum = 90D;
-            this.nudLatitudeA.Minimum = -90D;
-            this.nudLatitudeA.Name = "nudLatitudeA";
-            this.nudLatitudeA.Size = new System.Drawing.Size(228, 43);
-            this.nudLatitudeA.TabIndex = 451;
-            // 
-            // nudLongitudeA
-            // 
-            this.nudLongitudeA.DecimalPlaces = 7;
-            this.nudLongitudeA.Location = new System.Drawing.Point(81, 107);
-            this.nudLongitudeA.Maximum = 180D;
-            this.nudLongitudeA.Minimum = -180D;
-            this.nudLongitudeA.Name = "nudLongitudeA";
-            this.nudLongitudeA.Size = new System.Drawing.Size(228, 43);
-            this.nudLongitudeA.TabIndex = 450;
             // 
             // btnCancelLatLonLatLon
             // 
@@ -1729,26 +1650,6 @@
             this.label26.TabIndex = 452;
             this.label26.Text = "Lattitude (+- 90)";
             this.label26.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // nudLatitudePivot
-            // 
-            this.nudLatitudePivot.DecimalPlaces = 7;
-            this.nudLatitudePivot.Location = new System.Drawing.Point(72, 58);
-            this.nudLatitudePivot.Maximum = 90D;
-            this.nudLatitudePivot.Minimum = -90D;
-            this.nudLatitudePivot.Name = "nudLatitudePivot";
-            this.nudLatitudePivot.Size = new System.Drawing.Size(253, 46);
-            this.nudLatitudePivot.TabIndex = 451;
-            // 
-            // nudLongitudePivot
-            // 
-            this.nudLongitudePivot.DecimalPlaces = 7;
-            this.nudLongitudePivot.Location = new System.Drawing.Point(72, 138);
-            this.nudLongitudePivot.Maximum = 180D;
-            this.nudLongitudePivot.Minimum = -180D;
-            this.nudLongitudePivot.Name = "nudLongitudePivot";
-            this.nudLongitudePivot.Size = new System.Drawing.Size(253, 46);
-            this.nudLongitudePivot.TabIndex = 450;
             // 
             // btnCancel_Pivot
             // 
@@ -1961,6 +1862,105 @@
             this.btnzABCurve2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnzABCurve2.UseVisualStyleBackColor = false;
             this.btnzABCurve2.Click += new System.EventHandler(this.btnzABCurve_Click);
+            // 
+            // nudLatitudeB
+            // 
+            this.nudLatitudeB.DecimalPlaces = 7;
+            this.nudLatitudeB.Location = new System.Drawing.Point(81, 194);
+            this.nudLatitudeB.Maximum = 90D;
+            this.nudLatitudeB.Minimum = -90D;
+            this.nudLatitudeB.Name = "nudLatitudeB";
+            this.nudLatitudeB.Size = new System.Drawing.Size(228, 43);
+            this.nudLatitudeB.TabIndex = 455;
+            // 
+            // nudLongitudeB
+            // 
+            this.nudLongitudeB.DecimalPlaces = 7;
+            this.nudLongitudeB.Location = new System.Drawing.Point(81, 273);
+            this.nudLongitudeB.Maximum = 180D;
+            this.nudLongitudeB.Minimum = -180D;
+            this.nudLongitudeB.Name = "nudLongitudeB";
+            this.nudLongitudeB.Size = new System.Drawing.Size(228, 43);
+            this.nudLongitudeB.TabIndex = 454;
+            // 
+            // nudLatitudeA
+            // 
+            this.nudLatitudeA.DecimalPlaces = 7;
+            this.nudLatitudeA.Location = new System.Drawing.Point(81, 27);
+            this.nudLatitudeA.Maximum = 90D;
+            this.nudLatitudeA.Minimum = -90D;
+            this.nudLatitudeA.Name = "nudLatitudeA";
+            this.nudLatitudeA.Size = new System.Drawing.Size(228, 43);
+            this.nudLatitudeA.TabIndex = 451;
+            // 
+            // nudLongitudeA
+            // 
+            this.nudLongitudeA.DecimalPlaces = 7;
+            this.nudLongitudeA.Location = new System.Drawing.Point(81, 107);
+            this.nudLongitudeA.Maximum = 180D;
+            this.nudLongitudeA.Minimum = -180D;
+            this.nudLongitudeA.Name = "nudLongitudeA";
+            this.nudLongitudeA.Size = new System.Drawing.Size(228, 43);
+            this.nudLongitudeA.TabIndex = 450;
+            // 
+            // nudLatitudePivot
+            // 
+            this.nudLatitudePivot.DecimalPlaces = 7;
+            this.nudLatitudePivot.Location = new System.Drawing.Point(72, 58);
+            this.nudLatitudePivot.Maximum = 90D;
+            this.nudLatitudePivot.Minimum = -90D;
+            this.nudLatitudePivot.Name = "nudLatitudePivot";
+            this.nudLatitudePivot.Size = new System.Drawing.Size(253, 46);
+            this.nudLatitudePivot.TabIndex = 451;
+            // 
+            // nudLongitudePivot
+            // 
+            this.nudLongitudePivot.DecimalPlaces = 7;
+            this.nudLongitudePivot.Location = new System.Drawing.Point(72, 138);
+            this.nudLongitudePivot.Maximum = 180D;
+            this.nudLongitudePivot.Minimum = -180D;
+            this.nudLongitudePivot.Name = "nudLongitudePivot";
+            this.nudLongitudePivot.Size = new System.Drawing.Size(253, 46);
+            this.nudLongitudePivot.TabIndex = 450;
+            // 
+            // nudLatitudePlus
+            // 
+            this.nudLatitudePlus.DecimalPlaces = 7;
+            this.nudLatitudePlus.Location = new System.Drawing.Point(90, 58);
+            this.nudLatitudePlus.Maximum = 90D;
+            this.nudLatitudePlus.Minimum = -90D;
+            this.nudLatitudePlus.Name = "nudLatitudePlus";
+            this.nudLatitudePlus.Size = new System.Drawing.Size(228, 43);
+            this.nudLatitudePlus.TabIndex = 451;
+            // 
+            // nudLongitudePlus
+            // 
+            this.nudLongitudePlus.DecimalPlaces = 7;
+            this.nudLongitudePlus.Location = new System.Drawing.Point(90, 138);
+            this.nudLongitudePlus.Maximum = 180D;
+            this.nudLongitudePlus.Minimum = -180D;
+            this.nudLongitudePlus.Name = "nudLongitudePlus";
+            this.nudLongitudePlus.Size = new System.Drawing.Size(228, 43);
+            this.nudLongitudePlus.TabIndex = 450;
+            // 
+            // nudHeadingLatLonPlus
+            // 
+            this.nudHeadingLatLonPlus.DecimalPlaces = 4;
+            this.nudHeadingLatLonPlus.Location = new System.Drawing.Point(90, 250);
+            this.nudHeadingLatLonPlus.Maximum = 360D;
+            this.nudHeadingLatLonPlus.Name = "nudHeadingLatLonPlus";
+            this.nudHeadingLatLonPlus.Size = new System.Drawing.Size(207, 46);
+            this.nudHeadingLatLonPlus.TabIndex = 413;
+            // 
+            // nudHeading
+            // 
+            this.nudHeading.DecimalPlaces = 4;
+            this.nudHeading.Location = new System.Drawing.Point(9, 146);
+            this.nudHeading.Maximum = 360D;
+            this.nudHeading.Name = "nudHeading";
+            this.nudHeading.Size = new System.Drawing.Size(221, 52);
+            this.nudHeading.TabIndex = 413;
+            this.nudHeading.ValueChanged += new System.EventHandler(this.nudHeading_ValueChanged);
             // 
             // FormBuildTracks
             // 
