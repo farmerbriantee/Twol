@@ -24,8 +24,8 @@ namespace Twol
 
         private void FormFieldData_Load(object sender, EventArgs e)
         {
-            this.BackColor = Color.AliceBlue;
-            this.TransparencyKey = Color.AliceBlue;
+            //this.BackColor = Color.AliceBlue;
+            //this.TransparencyKey = Color.AliceBlue;
 
             timer1_Tick(this, EventArgs.Empty);
         }
