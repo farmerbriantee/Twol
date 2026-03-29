@@ -48,7 +48,8 @@ namespace Twol
 
         public void Guidance(vec3 pivot, vec3 steer, bool isLoop, bool Uturn, List<vec3> curList)
         {
-            if (Uturn) isLoop = false;
+            if (Uturn) 
+                isLoop = false;
 
             bool completeUturn = !Uturn;
             var vec2point = new vec2(Settings.Vehicle.setVehicle_isStanleyUsed ? steer : pivot);
@@ -80,9 +81,9 @@ namespace Twol
                     }
 
                     mf.yt.onA += glm.Distance(curList[A], point);
-                    if (!mf.yt.isGoingStraightThrough && mf.yt.onA > mf.yt.totalUTurnLength * 0.5 || (!mf.yt.isGoingStraightThrough && mf.yt.uTurnStyle == 1 && mf.yt.onA > mf.yt.totalUTurnLength - 50))
+                    if (!mf.yt.isGoingStraightThrough && mf.yt.onA > mf.yt.totalUTurnLength * 0.75 || (!mf.yt.isGoingStraightThrough && mf.yt.uTurnStyle == 1 && mf.yt.onA > mf.yt.totalUTurnLength - 50))
                     {
-                        mf.yt.NextPath();
+                        mf.yt.NextPath(curList[curList.Count-1]);
                     }
                     //return and reset if too far away or end of the line
                     if (B >= curList.Count - 1 || (mf.yt.uTurnStyle == 1 && mf.isReverse) || distanceFromCurrentLine > 3)
