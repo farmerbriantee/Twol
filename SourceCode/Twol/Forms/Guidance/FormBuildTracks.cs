@@ -166,6 +166,8 @@ namespace Twol
 
             foreach (var track in mf.trks.gArr)
             {
+                if (!track.isVisible) continue;
+
                 //outer inner
                 Button a = new Button
                 {
@@ -192,6 +194,10 @@ namespace Twol
 
                 if (track.mode == TrackMode.ABLine)
                     b.Image = Properties.Resources.TrackLine;
+                else if (track.mode == TrackMode.toolLineRec && track.isOuter)
+                    b.Image = Properties.Resources.TrackToolOuter;
+                else if (track.mode == TrackMode.toolLineRec && !track.isOuter)
+                    b.Image = Properties.Resources.TrackToolInner;
                 else if (track.mode == TrackMode.waterPivot)
                     b.Image = Properties.Resources.TrackPivot;
                 else
@@ -1104,6 +1110,11 @@ namespace Twol
             if (selectedTrack != null)
                 selectedTrack.name = textBox1.Text.Trim();
 
+            selectedTrack.halfToolWidth = Settings.Tool.toolWidth * 0.5;
+            if (!isRefRightSide) selectedTrack.halfToolWidth *= -1;
+
+            selectedTrack.isOuter = cboxIsOuterAdd.Checked;
+
             if (quick)
             {
                 isSaving = true;
@@ -1124,6 +1135,9 @@ namespace Twol
             if (selectedTrack != null)
                 selectedTrack.name = textBox2.Text.Trim();
 
+            selectedTrack.halfToolWidth = Settings.Tool.toolWidth * 0.5;
+            selectedTrack.isOuter = cboxIsOuterEdit.Checked;
+
             SetPanelVisible(panelMain);
 
             UpdateTable();
@@ -1136,9 +1150,9 @@ namespace Twol
         {
             foreach (CTrk item in mf.trks.gArr)
             {
-                item.isVisible = item.name.Contains("A_Bnd");
-                UpdateTable();
+                item.isVisible = item.isOuter && item.mode > TrackMode.None;
             }
+            UpdateTable();
 
         }
 
@@ -1146,27 +1160,27 @@ namespace Twol
         {
             foreach (CTrk item in mf.trks.gArr)
             {
-                item.isVisible = item.name.Contains("A_Fld");
-                UpdateTable();
+                item.isVisible = !item.isOuter && item.mode > TrackMode.None; ;
             }
+            UpdateTable();
         }
 
         private void btnHideShowFldTool_Click(object sender, EventArgs e)
         {
             foreach (CTrk item in mf.trks.gArr)
             {
-                item.isVisible = item.name.Contains("T_Fld");
-                UpdateTable();
+                item.isVisible = !item.isOuter && item.mode < TrackMode.None; ;
             }
+            UpdateTable();
         }
 
         private void btnHideShowBndTool_Click(object sender, EventArgs e)
         {
             foreach (CTrk item in mf.trks.gArr)
             {
-                item.isVisible = item.name.Contains("T_Bnd");
-                UpdateTable();
+                item.isVisible = item.isOuter && item.mode < TrackMode.None;
             }
+            UpdateTable();
         }
 
         private void btnSort_Click(object sender, EventArgs e)
@@ -1175,28 +1189,16 @@ namespace Twol
             UpdateTable();
         }
 
-        private void BtnAddA_Bnd_Click(object sender, EventArgs e)
+        private void cboxIsOuterAdd_Click(object sender, EventArgs e)
         {
-            textBox1.Text = "A_Bnd " + textBox1.Text;
+            cboxIsOuterAdd.Image = cboxIsOuterAdd.Checked ? Properties.Resources.FilterOuterLines : Properties.Resources.FilterInnerLines;
             mf.Activate();
         }
 
-        private void btnAddA_Fld_Click(object sender, EventArgs e)
+        private void cboxIsOuterEdit_Click(object sender, EventArgs e)
         {
-            textBox1.Text = "A_Fld " + textBox1.Text;
+            cboxIsOuterEdit.Image = cboxIsOuterEdit.Checked ? Properties.Resources.FilterOuterLines : Properties.Resources.FilterInnerLines;
             mf.Activate();
         }
-
-        private void btnEditAddAFld_Click(object sender, EventArgs e)
-        {
-            textBox2.Text = "A_Fld " + textBox2.Text;
-            mf.Activate();
-        }
-        private void btnEditAddABnd_Click(object sender, EventArgs e)
-        {
-            textBox2.Text = "A_Bnd " + textBox2.Text;
-            mf.Activate();
-        }
-
     }
 }

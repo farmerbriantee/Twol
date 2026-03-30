@@ -54,7 +54,7 @@ namespace Twol
 
             foreach (CTrk item in mf.trks.gArr)
             {
-                if (item.mode == TrackMode.toolLineInner || item.mode == TrackMode.toolLineOuter)
+                if (item.mode == TrackMode.toolLineRec)
                 {
                     isToolTrksPresent = true;
                     break;
@@ -111,7 +111,7 @@ namespace Twol
         {
             foreach (CTrk item in mf.trks.gArr)
             {
-                item.isVisible = item.name.Contains("A_Fld");
+                item.isVisible = (!item.isOuter && item.mode > 0);
             }
 
             mf.trks.GetNextTrack();
@@ -125,7 +125,7 @@ namespace Twol
         {
             foreach (CTrk item in mf.trks.gArr)
             {
-                item.isVisible = item.name.Contains("A_Bnd") || item.mode == TrackMode.Polygon;
+                item.isVisible = item.isOuter && item.mode > 0;
             }
             mf.trks.GetNextTrack();
             mf.NotifyTrackChange();
@@ -138,7 +138,7 @@ namespace Twol
         {
             foreach (CTrk item in mf.trks.gArr)
             {
-                item.isVisible = (item.mode == TrackMode.toolLineInner);
+                item.isVisible = (item.mode == TrackMode.toolLineRec && !item.isOuter);
             }
             mf.trks.GetNextTrack();
             mf.NotifyTrackChange();
@@ -151,7 +151,7 @@ namespace Twol
         {
             foreach (CTrk item in mf.trks.gArr)
             {
-                item.isVisible = (item.mode == TrackMode.toolLineOuter);
+                item.isVisible = (item.mode == TrackMode.toolLineRec && item.isOuter);
             }
             mf.trks.GetNextTrack();
             mf.NotifyTrackChange();

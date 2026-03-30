@@ -8,7 +8,8 @@ using Twol.Classes;
 namespace Twol
 {
     public enum TrackMode
-    { toolLineInner = -2, toolLineOuter = -1, None = 0, ABLine = 2, PolyLine = 4, Polygon = 32, waterPivot = 64 };//, Heading, Circle, Spiral
+    { toolLineRec = -1, None = 0, ABLine = 2, 
+        PolyLine = 4, Polygon = 32, waterPivot = 64 };
 
     public class CTracks
     {
@@ -419,7 +420,7 @@ namespace Twol
                 {
                     GL.LineWidth(1);
                     //GL.PointSize(4);
-                    GL.Color3(0.95f, 0.5f, 0.5f);
+                    GL.Color3(0.99f, 0.735f, 0.5f);
 
                     for (int i = 0; i < gArr.Count; i++)
                     {
@@ -427,12 +428,12 @@ namespace Twol
 
                         if (Settings.Tool.setToolSteer.isRecordToolLine)
                         {
-                            if (gArr[i].mode == TrackMode.toolLineInner || gArr[i].mode == TrackMode.toolLineOuter)
+                            if (gArr[i].mode == TrackMode.toolLineRec)
                             {
                                 continue;
                             }
                         }
-                        gArr[i].curvePts.DrawPolygonThirds(PrimitiveType.LineStrip);
+                        gArr[i].curvePts.DrawPolygon(PrimitiveType.LineStrip);
                     }
                 }
 
@@ -446,7 +447,7 @@ namespace Twol
                         GL.LineStipple(8, 0x0F00);
                         GL.LineWidth(Settings.User.setDisplay_lineWidth * 2);
                         GL.Color3(0.96, 0.2f, 0.2f);
-                        currentRefTrack.curvePts.DrawPolygonThirds(PrimitiveType.LineStrip);
+                        currentRefTrack.curvePts.DrawPolygon(PrimitiveType.LineStrip);
                         GL.Disable(EnableCap.LineStipple);
 
                         if (mf.font.isFontOn)
@@ -576,12 +577,11 @@ namespace Twol
             mf.trks.toolDesignPtsList.Add(new vec3(mf.toolPivotPos));
 
             //make a new tool track
-            var track = new CTrk(TrackMode.toolLineInner)
+            var track = new CTrk(TrackMode.toolLineRec)
             {
-                name = (mf.gydTool.isboundaryLine ? "T_Bnd " : "T_Fld ") + (mf.trks.gArr.Count + 1).ToString("000")
+                name = (mf.gydTool.isboundaryLine ? "T_Bnd " : "T_Fld ") + (mf.trks.gArr.Count + 1).ToString("000"),
+                isOuter = mf.gydTool.isboundaryLine
             };
-
-            if (mf.gydTool.isboundaryLine) track.mode = TrackMode.toolLineOuter;
 
             mf.trks.toolDesignPtsList.SmoothSegments();
             mf.trks.toolDesignPtsList.Reverse();
@@ -879,6 +879,8 @@ namespace Twol
         public vec2 ptB;
         public TrackMode mode;
         public double nudgeDistance;
+        public bool isOuter;
+        public double halfToolWidth;
 
         public CTrk(TrackMode _mode = TrackMode.None)
         {
@@ -890,6 +892,8 @@ namespace Twol
             ptB = new vec2();
             mode = _mode;
             nudgeDistance = 0;
+            isOuter = true;
+            halfToolWidth = 0;
         }
 
         public CTrk(CTrk _trk)
@@ -902,6 +906,8 @@ namespace Twol
             ptB = _trk.ptB;
             mode = _trk.mode;
             nudgeDistance = _trk.nudgeDistance;
+            isOuter = _trk.isOuter;
+            halfToolWidth = _trk.halfToolWidth;
         }
 
         public static bool operator ==(CTrk a, CTrk b)

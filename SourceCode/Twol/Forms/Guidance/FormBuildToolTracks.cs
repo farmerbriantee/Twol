@@ -168,7 +168,6 @@ namespace Twol
             }
         }
 
-
         private void btnSectionsTrams_Click(object sender, EventArgs e)
         {
             mode++;
@@ -188,13 +187,15 @@ namespace Twol
                 if (recList[i][0].heading == 0) continue;
                 else if (recList[i][0].heading == 10)
                 {
-                    newTrk.mode = TrackMode.toolLineOuter;
+                    newTrk.mode = TrackMode.toolLineRec;
                     newTrk.name = "T_Bnd " + mf.trks.gArr.Count;
+                    newTrk.isOuter = true;
                 }
                 else if (recList[i][0].heading == 20)
                 {
-                    newTrk.mode = TrackMode.toolLineInner;
+                    newTrk.mode = TrackMode.toolLineRec;
                     newTrk.name = "T_Fld " + mf.trks.gArr.Count;
+                    newTrk.isOuter = false;
                 }
 
                 newTrk.curvePts = new List<vec3>();
@@ -422,21 +423,21 @@ namespace Twol
 
             if (recList.Count > 0 && selectedLineIndex >= 0 && selectedLineIndex < recList.Count)
             {
-                GL.PointSize(2);
+                GL.PointSize(4);
                 for (int i = 0; i < recList.Count; i++)
                 {
                     if (recList[i][0].heading == 10)
                         GL.Color3(1.0, 0.09, 0.56);
                     else if (recList[i][0].heading == 20)
                         GL.Color3(0.39, 1.0, 0.396);
-                    else GL.Color3(0.19, 1.0, 1.0);
+                    else GL.Color3(0.2, 0.4, 0.6);
 
                     recList[i].DrawPolygon(PrimitiveType.Points);
                 }
 
                 //selected line
                 GL.Color3(1f, 0.1f, 1f);
-                GL.PointSize(8);
+                GL.PointSize(12);
                 GL.Begin(PrimitiveType.Points);
 
                 for (int i = 0; i < recList[selectedLineIndex].Count; i += 5)

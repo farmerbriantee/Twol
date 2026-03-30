@@ -7,7 +7,7 @@ namespace Twol
     {
         public static void FixReferenceTrack(this List<vec3> points, bool isLoop)
         {
-            points.SmoothSegments(4);
+            points.SmoothSegments(2);
             points.CatmullFix(1);
             points.GenerateEquidistantPoints(2, isLoop);
             points.CalculateAverageHeadings(isLoop);

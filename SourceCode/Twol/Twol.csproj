@@ -114,7 +114,6 @@
       <HintPath>..\packages\OpenTK.GLControl.3.3.3\lib\net20\OpenTK.GLControl.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Buffers, Version=4.0.4.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -944,6 +943,8 @@
     <None Include="btnImages\GPSQualityTool.png" />
     <None Include="btnImages\AutoToolSteerOff.png" />
     <None Include="btnImages\AutoToolSteerOn.png" />
+    <None Include="btnImages\TrackToolInner.png" />
+    <None Include="btnImages\TrackToolOuter.png" />
     <Content Include="btnImages\ZoomOut.png" />
     <Content Include="License.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

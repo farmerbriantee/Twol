@@ -123,9 +123,9 @@ namespace Twol
 
                         case 2:
                             if (trks.currentRefTrack != null)
-                                lblCurrentField.Text = "Line: " + trks.currentRefTrack.name;
+                                lblCurrentField.Text = "Track: " + trks.currentRefTrack.name;
                             else
-                                lblCurrentField.Text = "Line: " + gStr.Get(gs.gsNoGuidanceLines);
+                                lblCurrentField.Text = "Track: " + gStr.Get(gs.gsNoGuidanceLines);
                             break;
 
                         case 3:
@@ -797,7 +797,7 @@ namespace Twol
                 btnContourLock.Visible = ct.isContourBtnOn;
 
                 btnAutoSteer.Enabled = trks.currentRefTrack != null || ct.isContourBtnOn;
-                btnToolSteer.Visible = Settings.Tool.setToolSteer.isFollowCurrent || Settings.Tool.setToolSteer.isFollowPivot;
+                btnToolSteer.Visible = (Settings.Tool.setToolSteer.isFollowCurrent || Settings.Tool.setToolSteer.isFollowPivot || Settings.Tool.setToolSteer.isPassiveSteering);
                 btnToolSteer.Enabled = btnToolSteer.Visible;
 
                 bool validTrk = trks.currentRefTrack != null && !ct.isContourBtnOn;

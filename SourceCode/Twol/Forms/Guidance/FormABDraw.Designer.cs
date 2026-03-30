@@ -34,7 +34,7 @@
             this.lblCurveSelected = new System.Windows.Forms.Label();
             this.tboxNameCurve = new System.Windows.Forms.TextBox();
             this.tlp1 = new System.Windows.Forms.TableLayoutPanel();
-            this.cboxFldOrBnd = new System.Windows.Forms.CheckBox();
+            this.cboxIsOuter = new System.Windows.Forms.CheckBox();
             this.btnBLength = new System.Windows.Forms.Button();
             this.btnALength = new System.Windows.Forms.Button();
             this.cboxIsZoom = new System.Windows.Forms.CheckBox();
@@ -113,7 +113,7 @@
             this.tlp1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tlp1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tlp1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tlp1.Controls.Add(this.cboxFldOrBnd, 1, 2);
+            this.tlp1.Controls.Add(this.cboxIsOuter, 1, 2);
             this.tlp1.Controls.Add(this.btnBLength, 0, 0);
             this.tlp1.Controls.Add(this.btnALength, 0, 1);
             this.tlp1.Controls.Add(this.cboxIsZoom, 0, 3);
@@ -146,28 +146,28 @@
             this.tlp1.Size = new System.Drawing.Size(390, 700);
             this.tlp1.TabIndex = 564;
             // 
-            // cboxFldOrBnd
+            // cboxIsOuter
             // 
-            this.cboxFldOrBnd.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.cboxFldOrBnd.Appearance = System.Windows.Forms.Appearance.Button;
-            this.cboxFldOrBnd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(210)))), ((int)(((byte)(210)))));
-            this.cboxFldOrBnd.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.cboxFldOrBnd.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(250)))), ((int)(((byte)(220)))));
-            this.cboxFldOrBnd.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray;
-            this.cboxFldOrBnd.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.cboxFldOrBnd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cboxFldOrBnd.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboxFldOrBnd.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.cboxFldOrBnd.Image = global::Twol.Properties.Resources.FilterOuterLines;
-            this.cboxFldOrBnd.Location = new System.Drawing.Point(146, 250);
-            this.cboxFldOrBnd.Name = "cboxFldOrBnd";
-            this.cboxFldOrBnd.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.tlp1.SetRowSpan(this.cboxFldOrBnd, 2);
-            this.cboxFldOrBnd.Size = new System.Drawing.Size(97, 81);
-            this.cboxFldOrBnd.TabIndex = 566;
-            this.cboxFldOrBnd.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.cboxFldOrBnd.UseVisualStyleBackColor = false;
-            this.cboxFldOrBnd.Click += new System.EventHandler(this.cboxFldOrBnd_Click);
+            this.cboxIsOuter.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cboxIsOuter.Appearance = System.Windows.Forms.Appearance.Button;
+            this.cboxIsOuter.BackColor = System.Drawing.Color.Transparent;
+            this.cboxIsOuter.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.cboxIsOuter.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.cboxIsOuter.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.cboxIsOuter.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.cboxIsOuter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cboxIsOuter.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboxIsOuter.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.cboxIsOuter.Image = global::Twol.Properties.Resources.Help;
+            this.cboxIsOuter.Location = new System.Drawing.Point(146, 250);
+            this.cboxIsOuter.Name = "cboxIsOuter";
+            this.cboxIsOuter.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.tlp1.SetRowSpan(this.cboxIsOuter, 2);
+            this.cboxIsOuter.Size = new System.Drawing.Size(97, 81);
+            this.cboxIsOuter.TabIndex = 566;
+            this.cboxIsOuter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.cboxIsOuter.UseVisualStyleBackColor = false;
+            this.cboxIsOuter.Click += new System.EventHandler(this.cboxIsOuter_Click);
             // 
             // btnBLength
             // 
@@ -521,6 +521,6 @@
         private System.Windows.Forms.TableLayoutPanel tlp1;
         private System.Windows.Forms.Button btnEdgeAB;
         private System.Windows.Forms.Button btnMakeAPlus;
-        private System.Windows.Forms.CheckBox cboxFldOrBnd;
+        private System.Windows.Forms.CheckBox cboxIsOuter;
     }
 }

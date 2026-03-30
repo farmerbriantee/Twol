@@ -1,6 +1,7 @@
 ﻿using OpenTK.Graphics.OpenGL;
 using System;
 using System.Collections.Generic;
+using Twol.Classes;
 
 namespace Twol
 {
@@ -709,9 +710,18 @@ namespace Twol
             }
         }
 
-        public void NextPath()
+        public void NextPath(vec3 lastUTurnPoint)
         {
             isGoingStraightThrough = true;
+
+            //tool track next track
+            if (mf.trks.currentRefTrack != null && mf.trks.currentRefTrack.mode < 0)
+            {
+                mf.trks.FindClosestRefTrack(new vec3(lastUTurnPoint));
+                mf.SetAutoSteerButton(true, "Track Changed");
+
+                //mf.trks.isTrackValid = false;
+            }
 
             mf.trks.howManyPathsAway += (isTurnLeft ^ mf.trks.isHeadingSameWay) ? rowSkipsWidth : -rowSkipsWidth;
             mf.trks.isHeadingSameWay = !mf.trks.isHeadingSameWay;
@@ -731,7 +741,7 @@ namespace Twol
             else isTurnLeft = !isTurnLeft;
         }
 
-        //Normal copmpletion of youturn
+        //Normal completion of youturn
         public void CompleteYouTurn()
         {
             ResetCreatedYouTurn();

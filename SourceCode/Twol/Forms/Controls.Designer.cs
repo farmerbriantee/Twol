@@ -1,5 +1,7 @@
 ﻿//Please, if you use this, share the improvements
 
+using Microsoft.Win32;
+using OpenTK.Input;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,10 +13,8 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using Twol.Classes;
-
 using Twol.Properties;
-using Microsoft.Win32;
-using OpenTK.Input;
+using static System.Windows.Forms.AxHost;
 
 namespace Twol
 {
@@ -486,6 +486,20 @@ namespace Twol
             {
                 btnToolSteer.Image = Properties.Resources.AutoToolSteerOff;
                 if (!gydTool.isZeroToolSteer) gydTool.isZeroToolSteer = true;
+            }
+
+            if (Settings.Tool.setToolSteer.isPassiveSteering)
+            {
+                if (isBtnToolSteerOn && !gyd.isPassiveTriggered)
+                {
+                    gyd.isPassiveTriggered = true;
+                    gyd.isPassiveSteeringFlag = false;
+                }
+                if (!isBtnToolSteerOn && gyd.isPassiveTriggered)
+                {
+                    gyd.isPassiveTriggered = false;
+                    gyd.isPassiveSteeringFlag = false;
+                }
             }
         }
 
