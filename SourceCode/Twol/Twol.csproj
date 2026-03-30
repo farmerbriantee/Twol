@@ -154,6 +154,7 @@
       <HintPath>..\References\System.Windows.Forms.MapControl.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\CBrightness.cs" />
@@ -278,6 +279,12 @@
     </Compile>
     <Compile Include="Forms\Settings\FormGraphToolXTE.Designer.cs">
       <DependentUpon>FormGraphToolXTE.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Settings\FormSettingsTree.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Settings\FormSettingsTree.Designer.cs">
+      <DependentUpon>FormSettingsTree.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Settings\FormGraphXTE.cs">
       <SubType>Form</SubType>
@@ -779,6 +786,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Settings\FormGraphToolXTE.resx">
       <DependentUpon>FormGraphToolXTE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Settings\FormSettingsTree.resx">
+      <DependentUpon>FormSettingsTree.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Settings\FormGraphXTE.resx">
       <DependentUpon>FormGraphXTE.cs</DependentUpon>

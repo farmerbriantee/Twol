@@ -161,6 +161,12 @@ namespace Twol
             form.Show(this);
         }
 
+        private void showSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new FormSettingsTree(this);
+            form.Show(this);
+        }
+
         private void externalModuleSimToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Process[] processName = Process.GetProcessesByName("Modsim");
