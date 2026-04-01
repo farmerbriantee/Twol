@@ -1132,18 +1132,23 @@ namespace Twol
             int halfWidth = workArea.Width / 2;
             int halfHeight = workArea.Height / 2;
 
+            if (this.MinimumSize.Width > halfWidth)
+                halfWidth = this.MinimumSize.Width;
+            if (this.MinimumSize.Height > halfHeight)
+                halfHeight = this.MinimumSize.Height;
+
             if (moving)
             {
                 // **Corner Snaps** - Quarter Windows
                 if (cursor.X <= workArea.Left + snapMargin && cursor.Y <= workArea.Top + snapMargin2) // Top-Left
                     snapArea = new Rectangle(workArea.Left, workArea.Top, halfWidth, halfHeight);
                 else if (cursor.X >= workArea.Right - snapMargin && cursor.Y <= workArea.Top + snapMargin2) // Top-Right
-                    snapArea = new Rectangle(workArea.Left + halfWidth, workArea.Top, halfWidth, halfHeight);
+                    snapArea = new Rectangle(workArea.Right - halfWidth, workArea.Top, halfWidth, halfHeight);
 
                 else if (cursor.X <= workArea.Left + snapMargin && cursor.Y >= workArea.Bottom - snapMargin2) // Bottom-Left
-                    snapArea = new Rectangle(workArea.Left, workArea.Top + halfHeight, halfWidth, halfHeight);
+                    snapArea = new Rectangle(workArea.Left, workArea.Bottom - halfHeight, halfWidth, halfHeight);
                 else if (cursor.X >= workArea.Right - snapMargin && cursor.Y >= workArea.Bottom - snapMargin2) // Bottom-Right
-                    snapArea = new Rectangle(workArea.Left + halfWidth, workArea.Top + halfHeight, halfWidth, halfHeight);
+                    snapArea = new Rectangle(workArea.Right - halfWidth, workArea.Bottom - halfHeight, halfWidth, halfHeight);
 
                 else if (cursor.Y <= workArea.Top + snapMargin)// Top Edge - Maximize
                     snapArea = workArea;
@@ -1151,7 +1156,7 @@ namespace Twol
                     snapArea = new Rectangle(workArea.Left, workArea.Top, halfWidth, workArea.Height);
 
                 else if (cursor.X >= workArea.Right - snapMargin)// Right Edge - Right Half
-                    snapArea = new Rectangle(workArea.Left + halfWidth, workArea.Top, halfWidth, workArea.Height);
+                    snapArea = new Rectangle(workArea.Right - halfWidth, workArea.Top, halfWidth, workArea.Height);
             }
             else
             {
