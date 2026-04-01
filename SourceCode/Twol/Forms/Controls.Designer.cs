@@ -3,6 +3,7 @@
 using Microsoft.Win32;
 using OpenTK.Input;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.Eventing.Reader;
@@ -1905,7 +1906,49 @@ namespace Twol
             else guidelinesToolStripMenuItem.Checked = false;            
         }
 
-         private void buildToolTracksToolStripMenuItem_Click(object sender, EventArgs e)
+        private void deleteEverythingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!isFieldStarted)
+            {
+                MessageBox.Show(gStr.Get(gs.gsFieldNotOpen));
+            }
+            else
+            {
+                DialogResult result2 = MessageBox.Show("Delete ToolTracks.Txt and All Temporary Tracks?", "Remove Recorded Tracks",
+                    MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
+                if (result2 == DialogResult.Yes)
+                {
+                    //save event
+                    Log.EventWriter("*****");
+                    Log.EventWriter("All recorded tracks deleted");
+                    Log.EventWriter("*****");
+
+                    tRec.recList?.Clear();
+                    tRec.ptList?.Clear();
+
+                    toolRecordSaveList?.Clear();
+
+                    try
+                    {
+                        string directory = Path.Combine(RegistrySettings.fieldsDirectory, currentFieldDirectory);
+                        if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
+                            Directory.CreateDirectory(directory);
+
+                        string filePath = Path.Combine(directory, "ToolRecording.txt");
+                        using (StreamWriter writer = new StreamWriter(filePath, false))
+                        {
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.EventWriter("Recorded Tool Tracks Reset: " + ex.ToString());
+                    }
+                }
+            }
+        }
+
+        private void buildToolTracksToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (!isJobStarted)
             {

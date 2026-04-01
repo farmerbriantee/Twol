@@ -150,7 +150,7 @@ namespace Twol
                 if (polygon.Count > 1)
                 {
                     GL.Begin(type);
-                    for (int i = 0; i < polygon.Count; i += 3)
+                    for (int i = 0; i < polygon.Count; i += 2)
                     {
                         GL.Vertex3(polygon[i].easting, polygon[i].northing,0);
                     }
