@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
@@ -942,51 +943,253 @@ namespace Twol
 
             return;
         }
+
+
+        private static readonly OverlayForm _overlay = new OverlayForm();
+        private bool _resizable = true;
+
         //for moving and sizing borderless window
         protected override void WndProc(ref Message m)
         {
             const int RESIZE_HANDLE_SIZE = 7;
 
-            switch (m.Msg)
+            if (m.Msg == 0x0014) // WM_ERASEBKGND
             {
-                case 0x0084/*NCHITTEST*/ :
-                    base.WndProc(ref m);
-                    if ((int)m.Result == 0x01/*HTCLIENT*/)
+                m.Result = IntPtr.Zero;
+                return;
+            }
+            else if (m.Msg == 0x0084)
+            {
+                base.WndProc(ref m);
+                if ((int)m.Result == 0x01)//HTCLIENT
+                {
+                    Point screenPoint = new Point(m.LParam.ToInt32());
+                    Point clientPoint = this.PointToClient(screenPoint);
+
+                    if (!_resizable || this.WindowState == FormWindowState.Maximized)
                     {
-                        Point screenPoint = new Point(m.LParam.ToInt32());
-                        Point clientPoint = this.PointToClient(screenPoint);
-                        if (clientPoint.Y <= RESIZE_HANDLE_SIZE)
+                        // Allow movement only from the top bar, disable from edges
+                        if (clientPoint.Y <= this.oglMain.Top)
                         {
-                            if (clientPoint.X <= RESIZE_HANDLE_SIZE)
-                                m.Result = (IntPtr)13/*HTTOPLEFT*/ ;
-                            else if (clientPoint.X < (Size.Width - RESIZE_HANDLE_SIZE))
-                                m.Result = (IntPtr)12/*HTTOP*/ ;
-                            else
-                                m.Result = (IntPtr)14/*HTTOPRIGHT*/ ;
-                        }
-                        else if (clientPoint.Y <= (Size.Height - RESIZE_HANDLE_SIZE))
-                        {
-                            if (clientPoint.X <= RESIZE_HANDLE_SIZE)
-                                m.Result = (IntPtr)10/*HTLEFT*/ ;
-                            else if (clientPoint.X < (Size.Width - RESIZE_HANDLE_SIZE))
-                                m.Result = (IntPtr)2/*HTCAPTION*/ ;
-                            else
-                                m.Result = (IntPtr)11/*HTRIGHT*/ ;
+                            m.Result = (IntPtr)2;//HTCAPTION
                         }
                         else
                         {
-                            if (clientPoint.X <= RESIZE_HANDLE_SIZE)
-                                m.Result = (IntPtr)16/*HTBOTTOMLEFT*/ ;
-                            else if (clientPoint.X < (Size.Width - RESIZE_HANDLE_SIZE))
-                                m.Result = (IntPtr)15/*HTBOTTOM*/ ;
-                            else
-                                m.Result = (IntPtr)17/*HTBOTTOMRIGHT*/ ;
+                            m.Result = (IntPtr)1;//HTCLIENT
                         }
+                        return;
                     }
-                    return;
+
+
+
+
+                    if (clientPoint.Y <= RESIZE_HANDLE_SIZE)
+                    {
+                        if (clientPoint.X <= RESIZE_HANDLE_SIZE)
+                            m.Result = (IntPtr)13/*HTTOPLEFT*/ ;
+                        else if (clientPoint.X < (Size.Width - RESIZE_HANDLE_SIZE))
+                            m.Result = (IntPtr)12/*HTTOP*/ ;
+                        else
+                            m.Result = (IntPtr)14/*HTTOPRIGHT*/ ;
+                    }
+                    else if (clientPoint.Y <= (Size.Height - RESIZE_HANDLE_SIZE))
+                    {
+                        if (clientPoint.X <= RESIZE_HANDLE_SIZE)
+                            m.Result = (IntPtr)10/*HTLEFT*/ ;
+                        else if (clientPoint.X < (Size.Width - RESIZE_HANDLE_SIZE))
+                            m.Result = (IntPtr)2/*HTCAPTION*/ ;
+                        else
+                            m.Result = (IntPtr)11/*HTRIGHT*/ ;
+                    }
+                    else
+                    {
+                        if (clientPoint.X <= RESIZE_HANDLE_SIZE)
+                            m.Result = (IntPtr)16/*HTBOTTOMLEFT*/ ;
+                        else if (clientPoint.X < (Size.Width - RESIZE_HANDLE_SIZE))
+                            m.Result = (IntPtr)15/*HTBOTTOM*/ ;
+                        else
+                            m.Result = (IntPtr)17/*HTBOTTOMRIGHT*/ ;
+                    }
+                }
+                return;
             }
+            else if (m.Msg == 0x0231)//WM_ENTERSIZEMOVE
+            {
+                isDragging = true;
+            }
+            else if (m.Msg == 0x0214)//WM_SIZING
+            {
+                if (isDragging)
+                {
+                    _isSnapped = false;
+                    HandleAeroPreview(false);
+                }
+            }
+            else if (m.Msg == 0x0216)//WM_MOVING
+            {
+                if (_resizable && isDragging)
+                {
+                    if (_isSnapped)
+                    {
+
+                        Point cursor = Cursor.Position;
+                        int formWidth = restoreBounds.Width;
+                        int halfWidth = formWidth / 2;
+
+                        RECT movingRect = Marshal.PtrToStructure<RECT>(m.LParam);
+                        // For example, forcibly set a fixed width/height (e.g., 800x600)
+                        int desiredWidth = restoreBounds.Size.Width;
+                        int desiredHeight = restoreBounds.Size.Height;
+
+                        if (movingRect.Right - cursor.X < halfWidth)
+                        {
+                            movingRect.Left = movingRect.Right - restoreBounds.Size.Width;
+                        }
+                        else if (cursor.X - movingRect.Left > halfWidth)
+                        {
+                            movingRect.Left = cursor.X - halfWidth;
+                        }
+                        // Preserve the current Left, Top and recalc Right, Bottom
+                        movingRect.Right = movingRect.Left + desiredWidth;
+                        movingRect.Bottom = movingRect.Top + desiredHeight;
+
+                        // Write the updated RECT back
+                        Marshal.StructureToPtr(movingRect, m.LParam, true);
+
+                        _isSnapped = false;
+                    }
+                    HandleAeroPreview(true);
+                }
+            }
+            else if (m.Msg == 0x0232)//WM_EXITSIZEMOVE
+            {
+                isDragging = false;
+
+                if (_overlay.Visible)
+                {
+                    Point cursor = Cursor.Position;
+                    Screen screen = Screen.FromPoint(cursor);
+                    if (!_isSnapped)
+                        restoreBounds = this.Bounds;
+
+                    if (previewBounds == screen.WorkingArea)
+                    {
+                        this.Bounds = restoreBounds;
+                        WindowState = FormWindowState.Maximized;
+                    }
+                    else
+                    {
+                        this.Bounds = previewBounds;  // Snap to previewed area
+                        _isSnapped = true;
+                    }
+                    _overlay.Hide();
+                }
+            }
+            else if (m.Msg == 0x0112 && (m.WParam.ToInt32() & 0xFFF0) == 0xF030)//System command && Maximize command
+            {
+                if (!_resizable)
+                {
+                    m.Result = IntPtr.Zero;
+                    return;
+                }
+            }
+
             base.WndProc(ref m);
         }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct RECT
+        {
+            public int Left;
+            public int Top;
+            public int Right;
+            public int Bottom;
+        }
+
+        private bool _isSnapped = false;
+        internal bool isDragging = false;
+        private Rectangle previewBounds;
+        private Rectangle restoreBounds;
+        private const uint SWP_NOMOVE = 0x0002;
+        private const uint SWP_NOSIZE = 0x0001;
+        private const uint SWP_NOACTIVATE = 0x0010;
+        private const uint SWP_SHOWWINDOW = 0x0040;
+        private static Padding BorderPadding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+        private static Padding MaximizedPadding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+        internal static Padding NormalPadding = new System.Windows.Forms.Padding(5, 5, 5, 5);
+
+        private void HandleAeroPreview(bool moving)
+        {
+            Point cursor = Cursor.Position;
+            Screen screen = Screen.FromPoint(cursor);
+            Rectangle workArea = screen.WorkingArea;
+
+            Rectangle snapArea = Rectangle.Empty;
+
+            int snapMargin = _overlay.Visible ? 10 : 0;  // Use 1px when no snap, 10px when snapping
+            int snapMargin2 = 10;
+
+            int halfWidth = workArea.Width / 2;
+            int halfHeight = workArea.Height / 2;
+
+            if (this.MinimumSize.Width > halfWidth)
+                halfWidth = this.MinimumSize.Width;
+            if (this.MinimumSize.Height > halfHeight)
+                halfHeight = this.MinimumSize.Height;
+
+            if (moving)
+            {
+                // **Corner Snaps** - Quarter Windows
+                if (cursor.X <= workArea.Left + snapMargin && cursor.Y <= workArea.Top + snapMargin2) // Top-Left
+                    snapArea = new Rectangle(workArea.Left, workArea.Top, halfWidth, halfHeight);
+                else if (cursor.X >= workArea.Right - snapMargin && cursor.Y <= workArea.Top + snapMargin2) // Top-Right
+                    snapArea = new Rectangle(workArea.Right - halfWidth, workArea.Top, halfWidth, halfHeight);
+
+                else if (cursor.X <= workArea.Left + snapMargin && cursor.Y >= workArea.Bottom - snapMargin2) // Bottom-Left
+                    snapArea = new Rectangle(workArea.Left, workArea.Bottom - halfHeight, halfWidth, halfHeight);
+                else if (cursor.X >= workArea.Right - snapMargin && cursor.Y >= workArea.Bottom - snapMargin2) // Bottom-Right
+                    snapArea = new Rectangle(workArea.Right - halfWidth, workArea.Bottom - halfHeight, halfWidth, halfHeight);
+
+                else if (cursor.Y <= workArea.Top + snapMargin)// Top Edge - Maximize
+                    snapArea = workArea;
+                else if (cursor.X <= workArea.Left + snapMargin)// Left Edge - Left Half
+                    snapArea = new Rectangle(workArea.Left, workArea.Top, halfWidth, workArea.Height);
+
+                else if (cursor.X >= workArea.Right - snapMargin)// Right Edge - Right Half
+                    snapArea = new Rectangle(workArea.Right - halfWidth, workArea.Top, halfWidth, workArea.Height);
+            }
+            else
+            {
+                if (cursor.Y <= workArea.Top + snapMargin2) // Top-Left
+                    snapArea = new Rectangle(this.Left, workArea.Top, this.Width, workArea.Height);
+
+                else if (cursor.Y >= workArea.Bottom - snapMargin2) // Bottom-Left
+                    snapArea = new Rectangle(this.Left, workArea.Top, this.Width, workArea.Height);
+            }
+
+
+            if (snapArea != Rectangle.Empty)
+            {
+                previewBounds = snapArea;
+
+                if (!_overlay.Visible)
+                {
+                    _overlay.Show();
+                    SetWindowPos(_overlay.Handle, this.Handle, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE | SWP_SHOWWINDOW);
+                }
+                if (snapArea != _overlay.DesktopBounds)
+                {
+                    _overlay.SetDesktopBounds(snapArea.X, snapArea.Y, snapArea.Width, snapArea.Height);
+                }
+            }
+            else if (_overlay.Visible)
+            {
+                _overlay.Hide();
+            }
+        }
+
+        [DllImport("user32.dll", SetLastError = true)]
+        private static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, uint uFlags);
 
         #region keystrokes
         //keystrokes for easy and quick startup
