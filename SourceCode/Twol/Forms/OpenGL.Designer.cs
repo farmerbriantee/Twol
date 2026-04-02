@@ -468,12 +468,20 @@ namespace Twol
 
                     if (Settings.Tool.setToolSteer.isRecordToolLine)
                     {
-                        GL.Color3(0.9, 0.7, 0.6);
-                        //GL.PointSize(4);
-                        GL.LineWidth(1);
-                        for (int i = 0; i < tRec.recList.Count; i++)
+                        if (tRec.recList != null && tRec.recList.Count > 0)
                         {
-                            tRec.recList[i].DrawPolygonThirds(PrimitiveType.LineStrip);
+                            GL.Color3(0.96, 0.4, 0.6);
+                            //GL.PointSize(4);
+                            GL.LineWidth(2);
+                            for (int i = 0; i < tRec.recList.Count - 1; i++)
+                            {
+                                tRec.recList[i].DrawPolygonHalfPoints(PrimitiveType.LineStrip);
+                            }
+
+                            GL.Color3(0.99, 0.4, 0.2);
+                            //GL.PointSize(4);
+                            GL.LineWidth(4);
+                            tRec.recList[tRec.recList.Count - 1].DrawPolygon(PrimitiveType.LineStrip);
                         }
                     }
 

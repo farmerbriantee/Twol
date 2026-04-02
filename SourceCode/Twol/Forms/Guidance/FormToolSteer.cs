@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Forms;
 using Twol.Classes;
 
@@ -19,7 +20,7 @@ namespace Twol
             InitializeComponent();
 
             this.Text = gStr.Get(gs.gsToolSteerConfiguration);
-            this.Width = 392;
+            this.Width = 967;
             this.Height = 550;
 
             label51.Text = gStr.Get(gs.gsDeadzone);
@@ -509,6 +510,63 @@ namespace Twol
         {
             Settings.Tool.setToolSteer.rollZero -= 0.1;
             lblRollZeroOffset.Text = Settings.Tool.setToolSteer.rollZero.ToString("N2");
+        }
+
+        private void btnDeleteRecordedTracks_Click(object sender, EventArgs e)
+        {
+            if (!mf.isFieldStarted)
+            {
+                mf.TimedMessageBox(2000, gStr.Get(gs.gsFieldNotOpen), "Open Field First");
+            }
+            else
+            {
+                DialogResult result2 = MessageBox.Show("Delete ToolRecording.Txt and All Temporary Tracks?", "Remove Recorded Tracks",
+                    MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
+                if (result2 == DialogResult.Yes)
+                {
+                    //save event
+                    Log.EventWriter("*****");
+                    Log.EventWriter("All recorded tracks deleted");
+                    Log.EventWriter("*****");
+
+                    mf.tRec.recList?.Clear();
+                    mf.tRec.ptList?.Clear();
+
+                    mf.toolRecordSaveList?.Clear();
+
+                    try
+                    {
+                        string directory = Path.Combine(RegistrySettings.fieldsDirectory, mf.currentFieldDirectory);
+                        if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
+                            Directory.CreateDirectory(directory);
+
+                        string filePath = Path.Combine(directory, "ToolRecording.txt");
+                        using (StreamWriter writer = new StreamWriter(filePath, false))
+                        {
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.EventWriter("Recorded Tool Tracks Reset: " + ex.ToString());
+                    }
+                }
+            }
+
+        }
+
+        private void btnBuildToolTracks_Click(object sender, EventArgs e)
+        {
+            if (!mf.isJobStarted)
+            {
+                mf.TimedMessageBox(2000, gStr.Get(gs.gsToolSteerConfiguration), gStr.Get(gs.gsEnterJobName));
+                return;
+            }
+
+            using (FormBuildToolTracks form = new FormBuildToolTracks(mf))
+            {
+                form.ShowDialog(this);
+            }
         }
 
         private void btnRollOffsetUp_Click(object sender, EventArgs e)

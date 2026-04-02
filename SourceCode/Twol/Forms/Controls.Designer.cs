@@ -3,6 +3,7 @@
 using Microsoft.Win32;
 using OpenTK.Input;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.Eventing.Reader;
@@ -1903,20 +1904,6 @@ namespace Twol
             Settings.User.isSideGuideLines = !Settings.User.isSideGuideLines;
             if (Settings.User.isSideGuideLines) guidelinesToolStripMenuItem.Checked = true;
             else guidelinesToolStripMenuItem.Checked = false;            
-        }
-
-         private void buildToolTracksToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (!isJobStarted)
-            {
-                TimedMessageBox(2000, gStr.Get(gs.gsToolSteerConfiguration), gStr.Get(gs.gsEnterJobName));
-                return;
-            }
-
-            using (FormBuildToolTracks form = new FormBuildToolTracks(this))
-            {
-                form.ShowDialog(this);           
-            }
         }
 
         private void boundaryToolToolStripMenu_Click(object sender, EventArgs e)
