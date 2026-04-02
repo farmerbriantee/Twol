@@ -475,7 +475,7 @@ namespace Twol
                             GL.LineWidth(2);
                             for (int i = 0; i < tRec.recList.Count - 1; i++)
                             {
-                                tRec.recList[i].DrawPolygonThirds(PrimitiveType.LineStrip);
+                                tRec.recList[i].DrawPolygonHalfPoints(PrimitiveType.LineStrip);
                             }
 
                             GL.Color3(0.99, 0.4, 0.2);

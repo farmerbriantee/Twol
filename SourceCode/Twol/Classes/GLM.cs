@@ -143,7 +143,7 @@ namespace Twol
             }
         }
 
-        public static void DrawPolygonThirds(this List<vec3> polygon, PrimitiveType type = PrimitiveType.LineLoop)
+        public static void DrawPolygonHalfPoints(this List<vec3> polygon, PrimitiveType type = PrimitiveType.LineLoop)
         {
             try
             {

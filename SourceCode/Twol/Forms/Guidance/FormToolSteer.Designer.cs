@@ -92,6 +92,10 @@
             this.cboxIsFollowCurrent = new System.Windows.Forms.CheckBox();
             this.cboxIsFollowPivot = new System.Windows.Forms.CheckBox();
             this.tabActive = new System.Windows.Forms.TabPage();
+            this.label21 = new System.Windows.Forms.Label();
+            this.btnBuildToolTracks = new System.Windows.Forms.Button();
+            this.label20 = new System.Windows.Forms.Label();
+            this.btnDeleteRecordedTracks = new System.Windows.Forms.Button();
             this.cboxPassesPerReference = new System.Windows.Forms.ComboBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
@@ -763,7 +767,7 @@
             this.btnExpand.FlatAppearance.BorderColor = System.Drawing.SystemColors.AppWorkspace;
             this.btnExpand.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExpand.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExpand.Image = global::Twol.Properties.Resources.ArrowRight;
+            this.btnExpand.Image = global::Twol.Properties.Resources.ArrowLeft;
             this.btnExpand.Location = new System.Drawing.Point(251, 10);
             this.btnExpand.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnExpand.Name = "btnExpand";
@@ -929,6 +933,10 @@
             // tabActive
             // 
             this.tabActive.BackColor = System.Drawing.Color.Gainsboro;
+            this.tabActive.Controls.Add(this.label21);
+            this.tabActive.Controls.Add(this.btnBuildToolTracks);
+            this.tabActive.Controls.Add(this.label20);
+            this.tabActive.Controls.Add(this.btnDeleteRecordedTracks);
             this.tabActive.Controls.Add(this.cboxPassesPerReference);
             this.tabActive.Controls.Add(this.label12);
             this.tabActive.Controls.Add(this.label14);
@@ -941,6 +949,64 @@
             this.tabActive.Size = new System.Drawing.Size(571, 448);
             this.tabActive.TabIndex = 7;
             this.tabActive.Text = "Active";
+            // 
+            // label21
+            // 
+            this.label21.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.ForeColor = System.Drawing.Color.Black;
+            this.label21.Location = new System.Drawing.Point(323, 203);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(201, 60);
+            this.label21.TabIndex = 606;
+            this.label21.Text = "Build Tool Tracks";
+            this.label21.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // btnBuildToolTracks
+            // 
+            this.btnBuildToolTracks.BackColor = System.Drawing.Color.White;
+            this.btnBuildToolTracks.BackgroundImage = global::Twol.Properties.Resources.FileExportToolTracks;
+            this.btnBuildToolTracks.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnBuildToolTracks.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnBuildToolTracks.FlatAppearance.CheckedBackColor = System.Drawing.Color.Teal;
+            this.btnBuildToolTracks.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBuildToolTracks.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBuildToolTracks.ForeColor = System.Drawing.Color.Black;
+            this.btnBuildToolTracks.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnBuildToolTracks.Location = new System.Drawing.Point(361, 270);
+            this.btnBuildToolTracks.Name = "btnBuildToolTracks";
+            this.btnBuildToolTracks.Size = new System.Drawing.Size(126, 75);
+            this.btnBuildToolTracks.TabIndex = 605;
+            this.btnBuildToolTracks.UseVisualStyleBackColor = false;
+            this.btnBuildToolTracks.Click += new System.EventHandler(this.btnBuildToolTracks_Click);
+            // 
+            // label20
+            // 
+            this.label20.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.ForeColor = System.Drawing.Color.Black;
+            this.label20.Location = new System.Drawing.Point(323, 19);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(201, 59);
+            this.label20.TabIndex = 604;
+            this.label20.Text = "Delete Recorded Tool Tracks";
+            this.label20.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // btnDeleteRecordedTracks
+            // 
+            this.btnDeleteRecordedTracks.BackColor = System.Drawing.Color.White;
+            this.btnDeleteRecordedTracks.BackgroundImage = global::Twol.Properties.Resources.ConSt_Mandatory;
+            this.btnDeleteRecordedTracks.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnDeleteRecordedTracks.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnDeleteRecordedTracks.FlatAppearance.CheckedBackColor = System.Drawing.Color.Teal;
+            this.btnDeleteRecordedTracks.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDeleteRecordedTracks.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDeleteRecordedTracks.ForeColor = System.Drawing.Color.Black;
+            this.btnDeleteRecordedTracks.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnDeleteRecordedTracks.Location = new System.Drawing.Point(361, 83);
+            this.btnDeleteRecordedTracks.Name = "btnDeleteRecordedTracks";
+            this.btnDeleteRecordedTracks.Size = new System.Drawing.Size(126, 64);
+            this.btnDeleteRecordedTracks.TabIndex = 603;
+            this.btnDeleteRecordedTracks.UseVisualStyleBackColor = false;
+            this.btnDeleteRecordedTracks.Click += new System.EventHandler(this.btnDeleteRecordedTracks_Click);
             // 
             // cboxPassesPerReference
             // 
@@ -955,7 +1021,7 @@
             "2",
             "3",
             "4"});
-            this.cboxPassesPerReference.Location = new System.Drawing.Point(87, 124);
+            this.cboxPassesPerReference.Location = new System.Drawing.Point(87, 94);
             this.cboxPassesPerReference.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.cboxPassesPerReference.MaxDropDownItems = 5;
             this.cboxPassesPerReference.Name = "cboxPassesPerReference";
@@ -1000,7 +1066,7 @@
             // 
             this.label5.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(358, 40);
+            this.label5.Location = new System.Drawing.Point(57, 322);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(158, 45);
             this.label5.TabIndex = 588;
@@ -1020,7 +1086,7 @@
             // 
             // nudNudge
             // 
-            this.nudNudge.Location = new System.Drawing.Point(366, 88);
+            this.nudNudge.Location = new System.Drawing.Point(65, 370);
             this.nudNudge.Maximum = 500D;
             this.nudNudge.Minimum = -500D;
             this.nudNudge.Mode = Twol.UnitMode.Small;
@@ -1626,5 +1692,9 @@
         private System.Windows.Forms.CheckBox cboxDirectionalValveEnable;
         private NudlessNumericUpDown nudDirectionalValveOnTime;
         private NudlessNumericUpDown nudDirectionalValveOffTime;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Button btnDeleteRecordedTracks;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Button btnBuildToolTracks;
     }
 }
