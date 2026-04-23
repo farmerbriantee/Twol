@@ -40,7 +40,7 @@ namespace Twol
 
             tboxVTG.Text = mf.pn.vtgSentence;
             tboxGGA.Text = mf.pn.ggaSentence;
-            tboxPTWOLI.Text = mf.pn.paogiSentence;
+            tboxPAOGI.Text = mf.pn.paogiSentence;
             tboxAVR.Text = mf.pn.avrSentence;
             tboxHDT.Text = mf.pn.hdtSentence;
             tboxHPD.Text = mf.pn.hpdSentence;
@@ -56,7 +56,7 @@ namespace Twol
             tboxVTG.Text = "";
             tboxHDT.Text = "";
             tboxAVR.Text = "";
-            tboxPTWOLI.Text = "";
+            tboxPAOGI.Text = "";
             tboxHPD.Text = "";
             tboxPANDA.Text = "";
             tboxKSXT.Text = "";
