@@ -237,14 +237,25 @@ namespace Twol
                 int line = mf.trks.TrackIndex(track);
                 track.isVisible = !track.isVisible;
 
-                for (int i = 0; i < mf.trks.gArr.Count; i++)
+                int bob = flp.Controls.Count / 3;
+
+                //un highlight selected item
+                for (int i = 0; i < bob; i++)
                 {
                     flp.Controls[(i) * 3 + 1].BackColor = Color.AliceBlue;
                 }
 
-                b.BackColor = track.isVisible ? System.Drawing.Color.Green : System.Drawing.Color.Red;
+                for (int i = 0; i < bob; i++)
+                {
+                    if (track.isVisible && flp.Controls[(i) * 3 + 1].Text == track.name)
+                    {
+                        //a different line was selcted and one already was
+                        selectedTrack = track;
+                        flp.Controls[(i) * 3 + 1].BackColor = Color.LightBlue;
+                    }
+                }
 
-                flp.Controls[(line) * 3 + 1].ForeColor = track.isVisible ? System.Drawing.Color.Black : System.Drawing.Color.Gray;
+                b.BackColor = track.isVisible ? System.Drawing.Color.Green : System.Drawing.Color.Red;
             }
         }
 
@@ -255,17 +266,22 @@ namespace Twol
                 int line = mf.trks.TrackIndex(track);
                 int numLines = mf.trks.gArr.Count;
 
+                int bob = flp.Controls.Count/3;
+
                 //un highlight selected item
-                for (int i = 0; i < numLines; i++)
+                for (int i = 0; i < bob; i++)
                 {
                     flp.Controls[(i) * 3 + 1].BackColor = Color.AliceBlue;
                 }
 
-                if (track.isVisible)
+                for (int i = 0; i < bob; i++)
                 {
-                    //a different line was selcted and one already was
-                    selectedTrack = track;
-                    flp.Controls[(line) * 3 + 1].BackColor = Color.LightBlue;
+                    if (track.isVisible && flp.Controls[(i) * 3 + 1].Text == track.name)
+                    {
+                        //a different line was selcted and one already was
+                        selectedTrack = track;
+                        flp.Controls[(i) * 3 + 1].BackColor = Color.LightBlue;
+                    }
                 }
             }
         }
