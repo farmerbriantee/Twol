@@ -53,7 +53,7 @@
             this.tboxGGA = new System.Windows.Forms.TextBox();
             this.tboxHDT = new System.Windows.Forms.TextBox();
             this.tboxAVR = new System.Windows.Forms.TextBox();
-            this.tboxPTWOLI = new System.Windows.Forms.TextBox();
+            this.tboxPAOGI = new System.Windows.Forms.TextBox();
             this.tboxHPD = new System.Windows.Forms.TextBox();
             this.lblAge = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
@@ -311,7 +311,7 @@
             this.tboxVTG.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tboxVTG.Name = "tboxVTG";
             this.tboxVTG.ReadOnly = true;
-            this.tboxVTG.Size = new System.Drawing.Size(249, 23);
+            this.tboxVTG.Size = new System.Drawing.Size(561, 23);
             this.tboxVTG.TabIndex = 497;
             this.tboxVTG.Text = "$GPVTG,0,T,034.4,M,1,N,1.852,K";
             // 
@@ -326,7 +326,7 @@
             this.tboxGGA.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tboxGGA.Name = "tboxGGA";
             this.tboxGGA.ReadOnly = true;
-            this.tboxGGA.Size = new System.Drawing.Size(249, 23);
+            this.tboxGGA.Size = new System.Drawing.Size(561, 23);
             this.tboxGGA.TabIndex = 498;
             this.tboxGGA.Text = "$GPGGA,055129.00,5326.1729618,N,111,09.6028200,W,4,12,0.9,300,M,46.9,M,,,";
             // 
@@ -341,7 +341,7 @@
             this.tboxHDT.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tboxHDT.Name = "tboxHDT";
             this.tboxHDT.ReadOnly = true;
-            this.tboxHDT.Size = new System.Drawing.Size(249, 23);
+            this.tboxHDT.Size = new System.Drawing.Size(561, 23);
             this.tboxHDT.TabIndex = 499;
             this.tboxHDT.Text = "$GNHDT,123.456,T * 00";
             // 
@@ -356,24 +356,24 @@
             this.tboxAVR.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tboxAVR.Name = "tboxAVR";
             this.tboxAVR.ReadOnly = true;
-            this.tboxAVR.Size = new System.Drawing.Size(249, 23);
+            this.tboxAVR.Size = new System.Drawing.Size(561, 23);
             this.tboxAVR.TabIndex = 500;
             this.tboxAVR.Text = "$PTNL,AVR,145331.50,+35.9990,Yaw,-7.8209,Tilt,-0.4305,Roll,444.232,3,1.2,17 * 03";
             // 
-            // tboxPTWOLI
+            // tboxPAOGI
             // 
-            this.tboxPTWOLI.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.tboxPAOGI.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tboxPTWOLI.BackColor = System.Drawing.SystemColors.Window;
-            this.tboxPTWOLI.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tboxPTWOLI.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tboxPTWOLI.Location = new System.Drawing.Point(35, 77);
-            this.tboxPTWOLI.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tboxPTWOLI.Name = "tboxPTWOLI";
-            this.tboxPTWOLI.ReadOnly = true;
-            this.tboxPTWOLI.Size = new System.Drawing.Size(249, 23);
-            this.tboxPTWOLI.TabIndex = 504;
-            this.tboxPTWOLI.Text = "$PTWOLI,055129.00,5326.1729618,N,111,09.6028200,W,4,12,0.9,300,M,46.9,M,,,";
+            this.tboxPAOGI.BackColor = System.Drawing.SystemColors.Window;
+            this.tboxPAOGI.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tboxPAOGI.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tboxPAOGI.Location = new System.Drawing.Point(35, 77);
+            this.tboxPAOGI.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tboxPAOGI.Name = "tboxPAOGI";
+            this.tboxPAOGI.ReadOnly = true;
+            this.tboxPAOGI.Size = new System.Drawing.Size(561, 23);
+            this.tboxPAOGI.TabIndex = 504;
+            this.tboxPAOGI.Text = "$PAOGI,055129.00,5326.1729618,N,111,09.6028200,W,4,12,0.9,300,M,46.9,M,,,";
             // 
             // tboxHPD
             // 
@@ -386,7 +386,7 @@
             this.tboxHPD.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tboxHPD.Name = "tboxHPD";
             this.tboxHPD.ReadOnly = true;
-            this.tboxHPD.Size = new System.Drawing.Size(249, 23);
+            this.tboxHPD.Size = new System.Drawing.Size(561, 23);
             this.tboxHPD.TabIndex = 510;
             this.tboxHPD.Text = "$PTNL,AVR,145331.50,+35.9990,Yaw,-7.8209,Tilt,-0.4305,Roll,444.232,3,1.2,17 * 03";
             // 
@@ -425,7 +425,7 @@
             this.tboxPANDA.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tboxPANDA.Name = "tboxPANDA";
             this.tboxPANDA.ReadOnly = true;
-            this.tboxPANDA.Size = new System.Drawing.Size(248, 23);
+            this.tboxPANDA.Size = new System.Drawing.Size(560, 23);
             this.tboxPANDA.TabIndex = 518;
             this.tboxPANDA.Text = "$PANDA,145331.50,+35.9990,Yaw,-7.8209,Tilt,-0.4305,Roll,444.232,3,1.2,17 * 03";
             // 
@@ -452,7 +452,7 @@
             this.tboxKSXT.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tboxKSXT.Name = "tboxKSXT";
             this.tboxKSXT.ReadOnly = true;
-            this.tboxKSXT.Size = new System.Drawing.Size(249, 23);
+            this.tboxKSXT.Size = new System.Drawing.Size(561, 23);
             this.tboxKSXT.TabIndex = 528;
             // 
             // label13
@@ -478,7 +478,7 @@
             this.tboxRMC.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tboxRMC.Name = "tboxRMC";
             this.tboxRMC.ReadOnly = true;
-            this.tboxRMC.Size = new System.Drawing.Size(249, 23);
+            this.tboxRMC.Size = new System.Drawing.Size(561, 23);
             this.tboxRMC.TabIndex = 530;
             this.tboxRMC.Text = "$GPRMC,123519,A,4807.038,N,01131.000,E,022.4,084.4,230394,003.1,W*6A";
             // 
@@ -576,7 +576,7 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Gainsboro;
-            this.ClientSize = new System.Drawing.Size(284, 70);
+            this.ClientSize = new System.Drawing.Size(596, 167);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.lblFix2FixHeading);
             this.Controls.Add(this.label14);
@@ -595,7 +595,7 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.lblLatitude);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.tboxPTWOLI);
+            this.Controls.Add(this.tboxPAOGI);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.tboxAVR);
             this.Controls.Add(this.lblLongitude);
@@ -659,7 +659,7 @@
         private System.Windows.Forms.TextBox tboxGGA;
         private System.Windows.Forms.TextBox tboxHDT;
         private System.Windows.Forms.TextBox tboxAVR;
-        private System.Windows.Forms.TextBox tboxPTWOLI;
+        private System.Windows.Forms.TextBox tboxPAOGI;
         private System.Windows.Forms.TextBox tboxHPD;
         private System.Windows.Forms.Label lblAge;
         private System.Windows.Forms.Label label12;

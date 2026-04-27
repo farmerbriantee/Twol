@@ -40,7 +40,7 @@ namespace Twol
 
             tboxVTG.Text = mf.pnTool.vtgSentence;
             tboxGGA.Text = mf.pnTool.ggaSentence;
-            tboxPTWOLI.Text = mf.pnTool.paogiSentence;
+            tboxPAOGI.Text = mf.pnTool.paogiSentence;
             tboxAVR.Text = mf.pnTool.avrSentence;
             tboxHDT.Text = mf.pnTool.hdtSentence;
             tboxHPD.Text = mf.pnTool.hpdSentence;
@@ -51,12 +51,12 @@ namespace Twol
 
         private void FormNMEA_ToolData_Load(object sender, EventArgs e)
         {
-            mf.pn.isGPSSentencesOn = true;
+            mf.pnTool.isGPSSentencesOn = true;
             tboxGGA.Text = "";
             tboxVTG.Text = "";
             tboxHDT.Text = "";
             tboxAVR.Text = "";
-            tboxPTWOLI.Text = "";
+            tboxPAOGI.Text = "";
             tboxHPD.Text = "";
             tboxPANDA.Text = "";
             tboxKSXT.Text = "";
