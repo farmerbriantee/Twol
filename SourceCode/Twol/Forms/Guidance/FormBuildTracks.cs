@@ -234,7 +234,6 @@ namespace Twol
         {
             if (sender is Button b && b.Tag is CTrk track)
             {
-                int line = mf.trks.TrackIndex(track);
                 track.isVisible = !track.isVisible;
 
                 int bob = flp.Controls.Count / 3;
@@ -263,9 +262,6 @@ namespace Twol
         {
             if (sender is TextBox t && t.Tag is CTrk track)
             {
-                int line = mf.trks.TrackIndex(track);
-                int numLines = mf.trks.gArr.Count;
-
                 int bob = flp.Controls.Count/3;
 
                 //un highlight selected item
