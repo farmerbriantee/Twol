@@ -388,14 +388,20 @@ namespace Twol
                         }
                         else
                         {
-                            ahrs.imuHeading = pn.imuHeading;
-                            ahrs.imuHeading *= 0.1;
+                            if (pn.imuHeading != ushort.MaxValue)
+                            {
+                                ahrs.imuHeading = pn.imuHeading;
+                                ahrs.imuHeading *= 0.1;
+                            }
 
-                            double rollK = pn.imuRoll;
-                            if (Settings.Vehicle.setIMU_invertRoll) rollK *= -0.1;
-                            else rollK *= 0.1;
-                            rollK -= Settings.Vehicle.setIMU_rollZero;
-                            ahrs.imuRoll = ahrs.imuRoll * Settings.Vehicle.setIMU_rollFilter + rollK * (1 - Settings.Vehicle.setIMU_rollFilter);
+                            if (pn.imuRoll != short.MaxValue)
+                            {
+                                double rollK = pn.imuRoll;
+                                if (Settings.Vehicle.setIMU_invertRoll) rollK *= -0.1;
+                                else rollK *= 0.1;
+                                rollK -= Settings.Vehicle.setIMU_rollZero;
+                                ahrs.imuRoll = ahrs.imuRoll * Settings.Vehicle.setIMU_rollFilter + rollK * (1 - Settings.Vehicle.setIMU_rollFilter);
+                            }
                         }
 
                         ahrs.imuPitch = pn.imuPitch;
