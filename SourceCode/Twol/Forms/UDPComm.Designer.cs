@@ -388,13 +388,13 @@ namespace Twol
                         }
                         else
                         {
-                            if (pn.imuHeading != ushort.MaxValue)
+                            if (pn.imuHeading == ushort.MaxValue)
                             {
                                 ahrs.imuHeading = pn.imuHeading;
                                 ahrs.imuHeading *= 0.1;
                             }
 
-                            if (pn.imuRoll != short.MaxValue)
+                            if (pn.imuHeading == ushort.MaxValue)
                             {
                                 double rollK = pn.imuRoll;
                                 if (Settings.Vehicle.setIMU_invertRoll) rollK *= -0.1;
