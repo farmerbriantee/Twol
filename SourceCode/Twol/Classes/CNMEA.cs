@@ -334,6 +334,10 @@ namespace Twol
                 double.TryParse(words[8], NumberStyles.Float, CultureInfo.InvariantCulture, out vtgSpeed);
 
                 byte.TryParse(words[10], NumberStyles.Float, CultureInfo.InvariantCulture, out fixQuality);
+                if (fixQuality == 3) fixQuality = 4;
+                else if (fixQuality == 2) fixQuality = 5;
+                else if (fixQuality == 1) fixQuality = 1;
+                else if (fixQuality == 0) fixQuality = 0;
 
                 int.TryParse(words[11], NumberStyles.Float, CultureInfo.InvariantCulture, out int headingQuality);
 
