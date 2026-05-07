@@ -388,25 +388,27 @@ namespace Twol
                         }
                         else
                         {
-                            if (pn.imuHeading == ushort.MaxValue)
+                            if (pn.imuHeading != ushort.MaxValue)
                             {
                                 ahrs.imuHeading = pn.imuHeading;
                                 ahrs.imuHeading *= 0.1;
                             }
 
-                            if (pn.imuHeading == ushort.MaxValue)
+                            if (pn.imuRoll != short.MaxValue)
                             {
                                 double rollK = pn.imuRoll;
                                 if (Settings.Vehicle.setIMU_invertRoll) rollK *= -0.1;
                                 else rollK *= 0.1;
                                 rollK -= Settings.Vehicle.setIMU_rollZero;
                                 ahrs.imuRoll = ahrs.imuRoll * Settings.Vehicle.setIMU_rollFilter + rollK * (1 - Settings.Vehicle.setIMU_rollFilter);
+
+                                pn.imuHeading = ushort.MaxValue;
+                                pn.imuRoll = short.MaxValue;
+
+                                ahrs.imuPitch = pn.imuPitch;
+                                ahrs.imuYawRate = pn.imuYawRate;
                             }
                         }
-
-                        ahrs.imuPitch = pn.imuPitch;
-
-                        ahrs.imuYawRate = pn.imuYawRate;
 
                         sentenceCounter = 0;
 
@@ -774,18 +776,27 @@ namespace Twol
                         }
                         else
                         {
-                            ahrsTool.imuHeading = pnTool.imuHeading;
-                            ahrsTool.imuHeading *= 0.1;
 
-                            double rollK = pnTool.imuRoll;
-                            if (Settings.Tool.setToolSteer.invertRoll) rollK *= -0.1;
-                            else rollK *= 0.1;
-                            rollK -= Settings.Tool.setToolSteer.rollZero;
-                            ahrsTool.imuRoll = rollK;
+                            if (pnTool.imuHeading != ushort.MaxValue)
+                            {
+                                ahrsTool.imuHeading = pnTool.imuHeading;
+                                ahrsTool.imuHeading *= 0.1;
+                            }
 
-                            ahrsTool.imuPitch = pnTool.imuPitch;
+                            if (pnTool.imuRoll != short.MaxValue)
+                            {
+                                double rollK = pnTool.imuRoll;
+                                if (Settings.Tool.setToolSteer.invertRoll) rollK *= -0.1;
+                                else rollK *= 0.1;
+                                rollK -= Settings.Tool.setToolSteer.rollZero;
+                                ahrsTool.imuRoll = rollK;
 
-                            ahrsTool.imuYawRate = pnTool.imuYawRate;
+                                ahrsTool.imuPitch = pnTool.imuPitch;
+                                ahrsTool.imuYawRate = pnTool.imuYawRate;
+
+                                pnTool.imuHeading = ushort.MaxValue;
+                                pnTool.imuRoll = short.MaxValue;
+                            }
                         }
 
                         //new tool start

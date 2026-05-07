@@ -1110,7 +1110,7 @@ namespace Twol
                             ahrs.imuHeading *= 0.1;
                         }
 
-                        if (pn.imuHeading != ushort.MaxValue)
+                        if (pn.imuRoll != short.MaxValue)
                         {
                             double rollK = pn.imuRoll;
                             if (Settings.Vehicle.setIMU_invertRoll) rollK *= -0.1;
@@ -1118,6 +1118,9 @@ namespace Twol
                             rollK -= Settings.Vehicle.setIMU_rollZero;
                             ahrs.imuRoll = ahrs.imuRoll * Settings.Vehicle.setIMU_rollFilter + rollK * (1 - Settings.Vehicle.setIMU_rollFilter);
                         }
+
+                        pn.imuHeading = ushort.MaxValue;
+                        pn.imuRoll = short.MaxValue;
                     }
 
                     ahrs.imuPitch = pn.imuPitch;
