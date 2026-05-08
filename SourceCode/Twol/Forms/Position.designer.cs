@@ -327,6 +327,32 @@ namespace Twol
                 }
 
                 #endregion
+
+                if (pnTool.isNMEAToSend)
+                {
+                    pnTool.isNMEAToSend = false;
+
+                    if (pnTool.isDualGPSConnected)
+                    {
+                        pnTool.ConvertWGS84ToLocal(pnTool.latitude, pnTool.longitude, out pnTool.fix.northing, out pnTool.fix.easting);
+
+                        if (Settings.Tool.setToolSteer.antennaOffset != 0)
+                        {
+                            pnTool.fix.easting += Math.Cos(glm.toRadians(pnTool.headingTrueDual)) * Settings.Tool.setToolSteer.antennaOffset;
+                            pnTool.fix.northing -= Math.Sin(glm.toRadians(pnTool.headingTrueDual)) * Settings.Tool.setToolSteer.antennaOffset;
+                        }
+
+                        if (pnTool.dualRoll != 0 && Settings.Tool.setToolSteer.antennaHeight != 0)
+                        {
+                            rollCorrectionDistance = Math.Sin(glm.toRadians((pnTool.dualRoll))) * -Settings.Tool.setToolSteer.antennaHeight;
+                            pnTool.fix.easting = (Math.Cos(-glm.toRadians(pnTool.headingTrueDual)) * rollCorrectionDistance) + pnTool.fix.easting;
+                            pnTool.fix.northing = (Math.Sin(-glm.toRadians(pnTool.headingTrueDual)) * rollCorrectionDistance) + pnTool.fix.northing;
+                        }
+
+                        pnTool.AverageTheSpeed();
+                    }
+                }
+
             }
 
             SmoothCamera();
