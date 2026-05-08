@@ -59,7 +59,7 @@ namespace Twol
 
         public void AverageTheSpeed()
         {
-            avgSpeed = (avgSpeed * 0.75) + (vtgSpeed * 0.25);
+            avgSpeed = (avgSpeed * 0.8) + (vtgSpeed * 0.2);
         }
 
         public void SetLocalMetersPerDegree(double lat, double lon)

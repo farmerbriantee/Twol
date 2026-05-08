@@ -35,7 +35,8 @@ namespace Twol
         public double pivotDistanceErrorLast, pivotDerivative;
 
         //passive tool steering
-        private double segAvg = 0, toolDistance = 0, distAvg = 0, errorIntegral = 0, errorProp = 0;
+        private double segAvg = 0, toolDistance = 0, errorProp = 0, passiveDistance = 0;
+        private int passiveCounter = 0;
 
         //passive tool steer trigger
         public bool isPassiveTriggered = false, isPassiveSteeringFlag = false;
@@ -288,7 +289,7 @@ namespace Twol
                         else
                         {
                             toolDistance = 0;
-                            errorIntegral = 0;
+                            passiveDistance = 0;
                         }
 
                         vec3 p1 = curList[A];
@@ -316,44 +317,16 @@ namespace Twol
 
                         segAvg = 0.8 * segAvg + 0.2 * segCurv;
 
-                        errorProp = toolDistance * 0.7;
-
-                        //if (Math.Abs(errorProp) > 0.25) 
-                        //    errorIntegral = 0;
-
-                        double gain = (Math.Abs(toolDistance) - 1);
-                        gain = 1.05 + gain;
-                        gain *= (0.004 + Settings.Tool.setToolSteer.passiveIntegralGain);
-
-                        if (toolDistance < 0) errorIntegral -= gain;
-                        else errorIntegral += gain;
-                        //errorIntegral += (0.01 * toolDistance);                    
-                        if (Settings.Tool.setToolSteer.passiveIntegralGain == 0) errorIntegral = 0;
-
-                        if (errorIntegral > 1) 
-                            errorIntegral = 1;
-                        if (errorIntegral < -1) 
-                            errorIntegral = -1;
-
-                        double dist = (segAvg - errorIntegral);
-                        dist -= errorProp;
-                        distAvg = 0.7 * distAvg + 0.3 * dist;
-
-                        mf.lblTest.Text = $" I: {(errorIntegral *100):F2}  P: {(errorProp * 100):F2}  D: {(distAvg * 100):F2}";
-
-                        if (dist > 2.0) dist = 2.0;
-                        if (dist < -2.0) dist = -2.0;
-
-                        //disable passive and wait till tool is close to line again
-                        if (Uturn)
+                        //passiveDistance = segAvg;
+                        if (passiveCounter++ > Settings.Tool.setToolSteer.passiveIntegralGain*10)
                         {
-                            errorIntegral = 0;
-                            dist = 0;
-                            isPassiveSteeringFlag = false;
+                            errorProp = toolDistance * -0.25;
+                            passiveDistance += errorProp;
+                            passiveCounter = 0;
                         }
 
-                        goalPoint.easting += (Math.Sin(curList[B].heading + 1.57) * dist);
-                        goalPoint.northing += (Math.Cos(curList[B].heading + 1.57) * dist);
+                        goalPoint.easting += (Math.Sin(curList[B].heading + 1.57) * passiveDistance);
+                        goalPoint.northing += (Math.Cos(curList[B].heading + 1.57) * passiveDistance);
                     }
 
                     //calc "D" the distance from pivot axle to lookahead point

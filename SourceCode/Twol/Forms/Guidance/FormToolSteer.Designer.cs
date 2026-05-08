@@ -713,7 +713,7 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(262, 24);
             this.label7.TabIndex = 565;
-            this.label7.Text = "Passive Integral Gain";
+            this.label7.Text = "Passive Adj (seconds)";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // imageList1

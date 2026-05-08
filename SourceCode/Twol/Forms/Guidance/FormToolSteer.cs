@@ -106,8 +106,8 @@ namespace Twol
             hsbarPassiveCurvature.Value = (int)(Settings.Tool.setToolSteer.curvatureGain * 10);
             lblCurvatureGain.Text = (Settings.Tool.setToolSteer.curvatureGain * 2).ToString("N1");
 
-            hsbarPassiveIntegralGain.Value = (int)(Settings.Tool.setToolSteer.passiveIntegralGain * 1000);
-            lblPassiveIntegralGain.Text = (Settings.Tool.setToolSteer.passiveIntegralGain * 1000 * 5).ToString("N0");
+            hsbarPassiveIntegralGain.Value = (int)(Settings.Tool.setToolSteer.passiveIntegralGain);
+            lblPassiveIntegralGain.Text = (Settings.Tool.setToolSteer.passiveIntegralGain).ToString("N0");
 
             nudPivotToAntenna.Value = Settings.Tool.setToolSteer.pivotToAntennaDistance;
             nudPivotToTool.Value = Settings.Tool.setToolSteer.PivotToToolDistance;
@@ -307,9 +307,9 @@ namespace Twol
 
         private void hsbarPassiveIntegralGain_Scroll(object sender, ScrollEventArgs e)
         {
-            Settings.Tool.setToolSteer.passiveIntegralGain = ((double)(e.NewValue) * 0.001);
+            Settings.Tool.setToolSteer.passiveIntegralGain = ((double)(e.NewValue));
 
-            lblPassiveIntegralGain.Text = (Settings.Tool.setToolSteer.passiveIntegralGain * 1000 * 4).ToString("N0");
+            lblPassiveIntegralGain.Text = (Settings.Tool.setToolSteer.passiveIntegralGain).ToString("N0");
         }
 
         #endregion

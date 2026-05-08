@@ -25,7 +25,7 @@ namespace Twol
                 + Math.Round(mf.toolPivotPos.northing, 2).ToString();
 
             //lblHz.Text = mf.gpsHz.ToString("N1");
-            lblIMUHeading.Text = mf.GyroInDegrees;
+            lblIMUHeading.Text = mf.pnTool.headingTrueDual.ToString("N1");
             lblFix2FixHeading.Text = mf.GPSHeading;
 
             //////other sat and GPS info
