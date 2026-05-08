@@ -35,7 +35,7 @@ namespace Twol
         public double pivotDistanceErrorLast, pivotDerivative;
 
         //passive tool steering
-        private double segAvg = 0, toolDistance = 0, distAvg = 0, errorIntegral = 0, errorProp = 0, passiveDistance = 0;
+        private double segAvg = 0, toolDistance = 0, errorProp = 0, passiveDistance = 0;
         private int passiveCounter = 0;
 
         //passive tool steer trigger
@@ -289,7 +289,6 @@ namespace Twol
                         else
                         {
                             toolDistance = 0;
-                            errorIntegral = 0;
                             passiveDistance = 0;
                         }
 

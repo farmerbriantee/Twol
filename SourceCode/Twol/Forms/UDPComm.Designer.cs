@@ -384,7 +384,6 @@ namespace Twol
                             if (Settings.Vehicle.setIMU_invertRoll) rollK *= -1;
                             rollK -= Settings.Vehicle.setIMU_rollZero;
                             ahrs.imuRoll = ahrs.imuRoll * Settings.Vehicle.setIMU_rollFilter + rollK * (1 - Settings.Vehicle.setIMU_rollFilter);
-
                         }
                         else
                         {
@@ -754,61 +753,52 @@ namespace Twol
                 else if (data[0] == 36 && (data[1] == 71 || data[1] == 80 || data[1] == 75))
                 {
                     traffic.cntrGPSOutTool += msgLen;
-                    string tmpToolSteer = Encoding.ASCII.GetString(data, 0, msgLen);
-                    pnTool.rawBuffer += tmpToolSteer;
+                    pnTool.rawBuffer += Encoding.ASCII.GetString(data, 0, msgLen);
                     pnTool.ParseNMEA(ref pnTool.rawBuffer);
 
-                    pnTool.isNMEAToSend = true;
-                    pnTool.isDualGPSConnected = true;
-
-                    if (pnTool.isNMEAToSend)
+                    if (pnTool.isDualGPSConnected)
                     {
-                        pnTool.isNMEAToSend = false;
-                        pnTool.ConvertWGS84ToLocal(pnTool.latitude, pnTool.longitude, out pnTool.fix.northing, out pnTool.fix.easting);
+                        pnTool.headingTrueDual += Settings.Tool.setToolSteer.dualHeadingOffset;
+                        if (pnTool.headingTrueDual >= 360) pnTool.headingTrueDual -= 360;
+                        else if (pnTool.headingTrueDual < 0) pnTool.headingTrueDual += 360;
 
-                        if (pnTool.isDualGPSConnected)
+                        double rollK = pnTool.dualRoll;
+                        if (Settings.Tool.setToolSteer.invertRoll) rollK *= -1;
+                        rollK -= Settings.Tool.setToolSteer.rollZero;
+                        pnTool.dualRoll = rollK;
+                    }
+                    else
+                    {
+
+                        if (pnTool.imuHeading != ushort.MaxValue)
                         {
-                            pnTool.headingTrueDual += Settings.Tool.setToolSteer.dualHeadingOffset;
-                            if (pnTool.headingTrueDual >= 360) pnTool.headingTrueDual -= 360;
-                            else if (pnTool.headingTrueDual < 0) pnTool.headingTrueDual += 360;
+                            ahrsTool.imuHeading = pnTool.imuHeading;
+                            ahrsTool.imuHeading *= 0.1;
+                        }
 
-                            double rollK = pnTool.dualRoll;
-                            if (Settings.Tool.setToolSteer.invertRoll) rollK *= -1;
+                        if (pnTool.imuRoll != short.MaxValue)
+                        {
+                            double rollK = pnTool.imuRoll;
+                            if (Settings.Tool.setToolSteer.invertRoll) rollK *= -0.1;
+                            else rollK *= 0.1;
                             rollK -= Settings.Tool.setToolSteer.rollZero;
-                            pnTool.dualRoll = rollK;
-                        }
-                        else
-                        {
+                            ahrsTool.imuRoll = rollK;
 
-                            if (pnTool.imuHeading != ushort.MaxValue)
-                            {
-                                ahrsTool.imuHeading = pnTool.imuHeading;
-                                ahrsTool.imuHeading *= 0.1;
-                            }
+                            ahrsTool.imuPitch = pnTool.imuPitch;
+                            ahrsTool.imuYawRate = pnTool.imuYawRate;
 
-                            if (pnTool.imuRoll != short.MaxValue)
-                            {
-                                double rollK = pnTool.imuRoll;
-                                if (Settings.Tool.setToolSteer.invertRoll) rollK *= -0.1;
-                                else rollK *= 0.1;
-                                rollK -= Settings.Tool.setToolSteer.rollZero;
-                                ahrsTool.imuRoll = rollK;
-
-                                ahrsTool.imuPitch = pnTool.imuPitch;
-                                ahrsTool.imuYawRate = pnTool.imuYawRate;
-
-                                pnTool.imuHeading = ushort.MaxValue;
-                                pnTool.imuRoll = short.MaxValue;
-                            }
-                        }
-
-                        //new tool start
-
-                        if (isUDPMonitorOn)
-                        {
-                            logUDPSentence.Append(DateTime.Now.ToString("ss.fff\tTool: ") + $"Lat/Lon: {pnTool.latitude}, {pnTool.longitude} Heading: {pnTool.headingTrueDual} Roll: {pnTool.dualRoll}\r\n");
+                            pnTool.imuHeading = ushort.MaxValue;
+                            pnTool.imuRoll = short.MaxValue;
                         }
                     }
+
+                    //new tool start
+
+                    if (isUDPMonitorOn)
+                    {
+                        logUDPSentence.Append(DateTime.Now.ToString("ss.fff\tTool: ") + $"Lat/Lon: {pnTool.latitude}, {pnTool.longitude} Heading: {pnTool.headingTrueDual} Roll: {pnTool.dualRoll}\r\n");
+                    }
+
                 }
             }
             catch
