@@ -215,7 +215,6 @@ namespace Twol
             this.btnGPSToolData = new System.Windows.Forms.Button();
             this.btnGPSTool = new System.Windows.Forms.Button();
             this.btnFieldStats = new System.Windows.Forms.Button();
-            this.lblTest = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStripFlag.SuspendLayout();
             this.statusStripLeft.SuspendLayout();
@@ -632,7 +631,7 @@ namespace Twol
             this.btnResetSim.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.btnResetSim.Location = new System.Drawing.Point(4, 4);
             this.btnResetSim.Name = "btnResetSim";
-            this.btnResetSim.Size = new System.Drawing.Size(54, 37);
+            this.btnResetSim.Size = new System.Drawing.Size(53, 37);
             this.btnResetSim.TabIndex = 164;
             this.btnResetSim.Text = "Reset";
             this.btnResetSim.UseVisualStyleBackColor = false;
@@ -644,7 +643,7 @@ namespace Twol
             this.btnResetSteerAngle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnResetSteerAngle.Font = new System.Drawing.Font("Tahoma", 9.75F);
             this.btnResetSteerAngle.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnResetSteerAngle.Location = new System.Drawing.Point(65, 4);
+            this.btnResetSteerAngle.Location = new System.Drawing.Point(64, 4);
             this.btnResetSteerAngle.Name = "btnResetSteerAngle";
             this.btnResetSteerAngle.Size = new System.Drawing.Size(42, 37);
             this.btnResetSteerAngle.TabIndex = 162;
@@ -668,10 +667,10 @@ namespace Twol
             this.hsbarSteerAngle.Dock = System.Windows.Forms.DockStyle.Fill;
             this.hsbarSteerAngle.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.hsbarSteerAngle.LargeChange = 20;
-            this.hsbarSteerAngle.Location = new System.Drawing.Point(130, 1);
+            this.hsbarSteerAngle.Location = new System.Drawing.Point(127, 1);
             this.hsbarSteerAngle.Maximum = 819;
             this.hsbarSteerAngle.Name = "hsbarSteerAngle";
-            this.hsbarSteerAngle.Size = new System.Drawing.Size(109, 43);
+            this.hsbarSteerAngle.Size = new System.Drawing.Size(107, 43);
             this.hsbarSteerAngle.TabIndex = 179;
             this.hsbarSteerAngle.Value = 400;
             this.hsbarSteerAngle.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hsbarSteerAngle_Scroll);
@@ -763,7 +762,7 @@ namespace Twol
             // 
             this.boundaryToolToolStripMenu.Image = global::Twol.Properties.Resources.Boundary;
             this.boundaryToolToolStripMenu.Name = "boundaryToolToolStripMenu";
-            this.boundaryToolToolStripMenu.Size = new System.Drawing.Size(370, 66);
+            this.boundaryToolToolStripMenu.Size = new System.Drawing.Size(326, 44);
             this.boundaryToolToolStripMenu.Text = "Boundary Tool";
             this.boundaryToolToolStripMenu.Click += new System.EventHandler(this.boundaryToolToolStripMenu_Click);
             // 
@@ -771,7 +770,7 @@ namespace Twol
             // 
             this.guidelinesToolStripMenuItem.Image = global::Twol.Properties.Resources.ConD_ExtraGuides;
             this.guidelinesToolStripMenuItem.Name = "guidelinesToolStripMenuItem";
-            this.guidelinesToolStripMenuItem.Size = new System.Drawing.Size(370, 66);
+            this.guidelinesToolStripMenuItem.Size = new System.Drawing.Size(326, 44);
             this.guidelinesToolStripMenuItem.Text = "Extra Guides";
             this.guidelinesToolStripMenuItem.Click += new System.EventHandler(this.guidelinesToolStripMenuItem_Click);
             // 
@@ -782,14 +781,14 @@ namespace Twol
             this.xTEChartToolStripMenuItem,
             this.toolXTEChartToolStripMenuItem});
             this.chartsToolStripMenuItem.Name = "chartsToolStripMenuItem";
-            this.chartsToolStripMenuItem.Size = new System.Drawing.Size(370, 66);
+            this.chartsToolStripMenuItem.Size = new System.Drawing.Size(326, 44);
             this.chartsToolStripMenuItem.Text = "Charts";
             // 
             // steerChartToolStripMenuItem
             // 
             this.steerChartToolStripMenuItem.Image = global::Twol.Properties.Resources.AutoSteerOn;
             this.steerChartToolStripMenuItem.Name = "steerChartToolStripMenuItem";
-            this.steerChartToolStripMenuItem.Size = new System.Drawing.Size(375, 66);
+            this.steerChartToolStripMenuItem.Size = new System.Drawing.Size(331, 44);
             this.steerChartToolStripMenuItem.Text = "Steer Chart";
             this.steerChartToolStripMenuItem.Click += new System.EventHandler(this.steerChartToolStripMenuItem_Click);
             // 
@@ -797,7 +796,7 @@ namespace Twol
             // 
             this.xTEChartToolStripMenuItem.Image = global::Twol.Properties.Resources.SnapToPivot;
             this.xTEChartToolStripMenuItem.Name = "xTEChartToolStripMenuItem";
-            this.xTEChartToolStripMenuItem.Size = new System.Drawing.Size(375, 66);
+            this.xTEChartToolStripMenuItem.Size = new System.Drawing.Size(331, 44);
             this.xTEChartToolStripMenuItem.Text = "XTE Chart";
             this.xTEChartToolStripMenuItem.Click += new System.EventHandler(this.xTEChartToolStripMenuItem_Click);
             // 
@@ -805,7 +804,7 @@ namespace Twol
             // 
             this.toolXTEChartToolStripMenuItem.Image = global::Twol.Properties.Resources.SteerZero;
             this.toolXTEChartToolStripMenuItem.Name = "toolXTEChartToolStripMenuItem";
-            this.toolXTEChartToolStripMenuItem.Size = new System.Drawing.Size(375, 66);
+            this.toolXTEChartToolStripMenuItem.Size = new System.Drawing.Size(331, 44);
             this.toolXTEChartToolStripMenuItem.Text = "Tool XTE Chart";
             this.toolXTEChartToolStripMenuItem.Click += new System.EventHandler(this.toolXTEChartToolStripMenuItem_Click);
             // 
@@ -824,7 +823,7 @@ namespace Twol
             this.panelSim.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.94559F));
             this.panelSim.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.50844F));
             this.panelSim.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.69369F));
-            this.panelSim.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 68F));
+            this.panelSim.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 73F));
             this.panelSim.Controls.Add(this.btnResetSteerAngle, 1, 0);
             this.panelSim.Controls.Add(this.btnResetSim, 0, 0);
             this.panelSim.Controls.Add(this.hsbarSteerAngle, 3, 0);
@@ -850,7 +849,7 @@ namespace Twol
             this.btnSimReverseDirection.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSimReverseDirection.Font = new System.Drawing.Font("Tahoma", 9.75F);
             this.btnSimReverseDirection.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSimReverseDirection.Location = new System.Drawing.Point(535, 5);
+            this.btnSimReverseDirection.Location = new System.Drawing.Point(532, 5);
             this.btnSimReverseDirection.Name = "btnSimReverseDirection";
             this.btnSimReverseDirection.Size = new System.Drawing.Size(48, 34);
             this.btnSimReverseDirection.TabIndex = 537;
@@ -866,7 +865,7 @@ namespace Twol
             this.btnSpeedDn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSpeedDn.Font = new System.Drawing.Font("Tahoma", 9.75F);
             this.btnSpeedDn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSpeedDn.Location = new System.Drawing.Point(462, 5);
+            this.btnSpeedDn.Location = new System.Drawing.Point(456, 5);
             this.btnSpeedDn.Name = "btnSpeedDn";
             this.btnSpeedDn.Size = new System.Drawing.Size(50, 34);
             this.btnSpeedDn.TabIndex = 538;
@@ -882,7 +881,7 @@ namespace Twol
             this.btnSimSetSpeedToZero.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSimSetSpeedToZero.Font = new System.Drawing.Font("Tahoma", 9.75F);
             this.btnSimSetSpeedToZero.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSimSetSpeedToZero.Location = new System.Drawing.Point(390, 5);
+            this.btnSimSetSpeedToZero.Location = new System.Drawing.Point(384, 5);
             this.btnSimSetSpeedToZero.Name = "btnSimSetSpeedToZero";
             this.btnSimSetSpeedToZero.Size = new System.Drawing.Size(53, 34);
             this.btnSimSetSpeedToZero.TabIndex = 453;
@@ -898,7 +897,7 @@ namespace Twol
             this.btnSpeedUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSpeedUp.Font = new System.Drawing.Font("Tahoma", 9.75F);
             this.btnSpeedUp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSpeedUp.Location = new System.Drawing.Point(323, 5);
+            this.btnSpeedUp.Location = new System.Drawing.Point(317, 5);
             this.btnSpeedUp.Name = "btnSpeedUp";
             this.btnSpeedUp.Size = new System.Drawing.Size(50, 34);
             this.btnSpeedUp.TabIndex = 539;
@@ -917,7 +916,7 @@ namespace Twol
             this.cboxEnableToolDualGPS.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboxEnableToolDualGPS.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxEnableToolDualGPS.ForeColor = System.Drawing.Color.Black;
-            this.cboxEnableToolDualGPS.Location = new System.Drawing.Point(258, 4);
+            this.cboxEnableToolDualGPS.Location = new System.Drawing.Point(253, 4);
             this.cboxEnableToolDualGPS.Name = "cboxEnableToolDualGPS";
             this.cboxEnableToolDualGPS.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.cboxEnableToolDualGPS.Size = new System.Drawing.Size(48, 37);
@@ -3259,20 +3258,6 @@ namespace Twol
             this.btnFieldStats.Visible = false;
             this.btnFieldStats.Click += new System.EventHandler(this.btnFieldStats_Click);
             // 
-            // lblTest
-            // 
-            this.lblTest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblTest.AutoSize = true;
-            this.lblTest.BackColor = System.Drawing.Color.Transparent;
-            this.lblTest.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTest.Location = new System.Drawing.Point(203, 21);
-            this.lblTest.Name = "lblTest";
-            this.lblTest.Size = new System.Drawing.Size(106, 22);
-            this.lblTest.TabIndex = 549;
-            this.lblTest.Text = "Fix       sec";
-            this.lblTest.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblTest.Visible = false;
-            // 
             // FormGPS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -3280,7 +3265,6 @@ namespace Twol
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(1176, 764);
             this.Controls.Add(this.panelNavigation);
-            this.Controls.Add(this.lblTest);
             this.Controls.Add(this.tlpNozzle);
             this.Controls.Add(this.flpTopMenu);
             this.Controls.Add(this.flp1);
@@ -3509,7 +3493,6 @@ namespace Twol
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button btnInternetConnection;
         public System.Windows.Forms.Button btnAutoTrack;
-        public System.Windows.Forms.Label lblTest;
         private System.Windows.Forms.NumericUpDown nudToolOffset;
         private System.Windows.Forms.CheckBox cboxEnableToolDualGPS;
         public System.Windows.Forms.Button btnConfiguration;

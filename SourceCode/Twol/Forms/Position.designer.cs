@@ -307,15 +307,15 @@ namespace Twol
             {
                 if (Settings.Tool.setToolSteer.antennaOffset != 0)
                 {
-                    pnTool.fix.easting += Math.Cos(fixHeading) * Settings.Tool.setToolSteer.antennaOffset;
-                    pnTool.fix.northing -= Math.Sin(fixHeading) * Settings.Tool.setToolSteer.antennaOffset;
+                    pnTool.fix.easting += Math.Cos(glm.toRadians(pnTool.headingTrueDual)) * Settings.Tool.setToolSteer.antennaOffset;
+                    pnTool.fix.northing -= Math.Sin(glm.toRadians(pnTool.headingTrueDual)) * Settings.Tool.setToolSteer.antennaOffset;
                 }
 
                 if (pnTool.dualRoll != 0 && Settings.Tool.setToolSteer.antennaHeight != 0)
                 {
                     rollCorrectionDistance = Math.Sin(glm.toRadians((pnTool.dualRoll))) * -Settings.Tool.setToolSteer.antennaHeight;
-                    pnTool.fix.easting = (Math.Cos(-fixHeading) * rollCorrectionDistance) + pnTool.fix.easting;
-                    pnTool.fix.northing = (Math.Sin(-fixHeading) * rollCorrectionDistance) + pnTool.fix.northing;
+                    pnTool.fix.easting = (Math.Cos(-glm.toRadians(pnTool.headingTrueDual)) * rollCorrectionDistance) + pnTool.fix.easting;
+                    pnTool.fix.northing = (Math.Sin(-glm.toRadians(pnTool.headingTrueDual)) * rollCorrectionDistance) + pnTool.fix.northing;
                 }
 
                 pnTool.AverageTheSpeed();

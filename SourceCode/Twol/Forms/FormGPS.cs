@@ -885,6 +885,8 @@ namespace Twol
             {
                 pn.fixOffset.easting = 0;
                 pn.fixOffset.northing = 0;
+                pnTool.fixOffset.easting = 0;
+                pnTool.fixOffset.northing = 0;
             }
 
             //turn off headland

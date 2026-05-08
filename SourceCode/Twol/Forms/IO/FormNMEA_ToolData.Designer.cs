@@ -527,11 +527,11 @@
             this.label14.BackColor = System.Drawing.Color.Transparent;
             this.label14.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label14.ForeColor = System.Drawing.Color.Black;
-            this.label14.Location = new System.Drawing.Point(177, 28);
+            this.label14.Location = new System.Drawing.Point(168, 28);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(38, 19);
+            this.label14.Size = new System.Drawing.Size(42, 19);
             this.label14.TabIndex = 538;
-            this.label14.Text = "IMU";
+            this.label14.Text = "True";
             // 
             // lblIMUHeading
             // 

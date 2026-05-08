@@ -758,6 +758,9 @@ namespace Twol
                     pnTool.rawBuffer += tmpToolSteer;
                     pnTool.ParseNMEA(ref pnTool.rawBuffer);
 
+                    pnTool.isNMEAToSend = true;
+                    pnTool.isDualGPSConnected = true;
+
                     if (pnTool.isNMEAToSend)
                     {
                         pnTool.isNMEAToSend = false;
