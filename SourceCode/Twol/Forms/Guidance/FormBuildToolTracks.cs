@@ -298,7 +298,7 @@ namespace Twol
 
         void oglSelf_MouseWheel(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            zoom += (e.Delta * 0.0005);
+            zoom -= (e.Delta * 0.0005);
             return;
         }
 
