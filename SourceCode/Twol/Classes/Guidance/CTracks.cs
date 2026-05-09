@@ -361,7 +361,7 @@ namespace Twol
                     }
 
                     if (track.mode != TrackMode.Polygon)
-                        newCurList.AddStartEndPoints(2, 1000);
+                        newCurList.AddStartEndPoints(2, 2000);
                 }
             }
             catch (Exception e)
