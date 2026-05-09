@@ -277,6 +277,12 @@ namespace Twol
                     //Passive Tool Steering
                     if (Settings.Tool.setToolSteer.isPassiveSteering)
                     {
+                        if (Uturn)
+                        {
+                            isPassiveTriggered = true;
+                            isPassiveSteeringFlag = false;
+                        }
+
                         if (isPassiveSteeringFlag && distanceFromCurrentLineTool != 0)
                         {
                             toolDistance = distanceFromCurrentLineTool;
@@ -317,10 +323,14 @@ namespace Twol
 
                         segAvg = 0.8 * segAvg + 0.2 * segCurv;
 
+                        double gain = Math.Abs(toolDistance);
+                        if (gain > 0.6) gain = 0.6;
+                        if (gain < 0.3) gain = 0.3;
+
                         //passiveDistance = segAvg;
                         if (passiveCounter++ > Settings.Tool.setToolSteer.passiveIntegralGain*10)
                         {
-                            errorProp = toolDistance * -0.25;
+                            errorProp = toolDistance * -gain;
                             passiveDistance += errorProp;
                             passiveCounter = 0;
                         }
