@@ -355,7 +355,7 @@ namespace Twol
                         {
                             newCurList.GenerateEquidistantPoints(1.8, loops);
                             newCurList.CalculateAverageHeadings(loops);
-                            newCurList.ReducePointsByAngle(0.01, 40);
+                            newCurList.ReducePointsByAngle(0.005, 40);
                         }
 
                     }
