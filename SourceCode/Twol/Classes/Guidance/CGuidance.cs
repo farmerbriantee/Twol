@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Configuration;
 
 namespace Twol
 {
@@ -325,7 +326,7 @@ namespace Twol
 
                         double gain = Math.Abs(toolDistance);
                         if (gain > 0.6) gain = 0.6;
-                        if (gain < 0.3) gain = 0.3;
+                        if (gain < 0.2) gain = 0.2;
 
                         //passiveDistance = segAvg;
                         if (passiveCounter++ > Settings.Tool.setToolSteer.passiveIntegralGain*10)
@@ -335,8 +336,14 @@ namespace Twol
                             passiveCounter = 0;
                         }
 
-                        goalPoint.easting += (Math.Sin(curList[B].heading + 1.57) * passiveDistance);
-                        goalPoint.northing += (Math.Cos(curList[B].heading + 1.57) * passiveDistance);
+                        if (passiveDistance > 1.0) passiveDistance = 1.0;
+                        if (passiveDistance < -1.0) passiveDistance = -1.0;
+
+                        if (mf.pn.avgSpeed < 2) passiveDistance = 0;
+
+                        double passiveDist = segCurv + passiveDistance;
+                        goalPoint.easting += (Math.Sin(curList[B].heading + 1.57) * passiveDist);
+                        goalPoint.northing += (Math.Cos(curList[B].heading + 1.57) * passiveDist);
                     }
 
                     //calc "D" the distance from pivot axle to lookahead point
