@@ -282,68 +282,71 @@ namespace Twol
                         {
                             isPassiveTriggered = true;
                             isPassiveSteeringFlag = false;
-                        }
-
-                        if (isPassiveSteeringFlag && distanceFromCurrentLineTool != 0)
-                        {
-                            toolDistance = distanceFromCurrentLineTool;
-
-                            if (!mf.trks.isHeadingSameWay)
-                            {
-                                toolDistance *= -1.0;
-                            }
+                            segAvg = 0;
                         }
                         else
                         {
-                            toolDistance = 0;
-                            passiveDistance = 0;
+                            if (isPassiveSteeringFlag && distanceFromCurrentLineTool != 0)
+                            {
+                                toolDistance = distanceFromCurrentLineTool;
+
+                                if (!mf.trks.isHeadingSameWay)
+                                {
+                                    toolDistance *= -1.0;
+                                }
+                            }
+                            else
+                            {
+                                toolDistance = 0;
+                                passiveDistance = 0;
+                            }
+
+                            vec3 p1 = curList[A];
+                            vec3 p2 = curList[B];
+
+                            //line crossing or too slow kill the integral
+                            //if ((distanceFromCurrentLine > 0 != distanceFromCurrentLineLast > 0) || mf.avgSpeed < 2)
+                            //{
+                            //    errorIntegral = 0;
+                            //    distanceFromCurrentLineLast = distanceFromCurrentLine;
+                            //}
+
+                            double d = glm.Distance(p1, p2);
+
+                            double theta = p2.heading - p1.heading;
+                            if (theta > Math.PI) theta -= Math.PI;
+                            else if (theta < -Math.PI) theta += Math.PI;
+
+                            if (theta > glm.PIBy2) theta -= Math.PI;
+                            else if (theta < -glm.PIBy2) theta += Math.PI;
+
+                            double segCurv = ((2 * Math.Sin(theta / 2)) / -d) * Settings.Tool.setToolSteer.curvatureGain;
+                            if (segCurv > 2.0) segCurv = 2.0;
+                            if (segCurv < -2.0) segCurv = -2.0;
+
+                            segAvg = 0.8 * segAvg + 0.2 * segCurv;
+
+                            double gain = Math.Abs(toolDistance);
+                            if (gain > 0.6) gain = 0.6;
+                            if (gain < 0.2) gain = 0.2;
+
+                            //passiveDistance = segAvg;
+                            if (passiveCounter++ > Settings.Tool.setToolSteer.passiveIntegralGain * 10)
+                            {
+                                errorProp = toolDistance * -gain;
+                                passiveDistance += errorProp;
+                                passiveCounter = 0;
+                            }
+
+                            if (passiveDistance > 1.0) passiveDistance = 1.0;
+                            if (passiveDistance < -1.0) passiveDistance = -1.0;
+
+                            if (mf.pn.avgSpeed < 2) passiveDistance = 0;
+
+                            double passiveDist = segCurv + passiveDistance;
+                            goalPoint.easting += (Math.Sin(curList[B].heading + 1.57) * passiveDist);
+                            goalPoint.northing += (Math.Cos(curList[B].heading + 1.57) * passiveDist);
                         }
-
-                        vec3 p1 = curList[A];
-                        vec3 p2 = curList[B];
-
-                        //line crossing or too slow kill the integral
-                        //if ((distanceFromCurrentLine > 0 != distanceFromCurrentLineLast > 0) || mf.avgSpeed < 2)
-                        //{
-                        //    errorIntegral = 0;
-                        //    distanceFromCurrentLineLast = distanceFromCurrentLine;
-                        //}
-
-                        double d = glm.Distance(p1, p2);
-
-                        double theta = p2.heading - p1.heading;
-                        if (theta > Math.PI) theta -= Math.PI;
-                        else if (theta < -Math.PI) theta += Math.PI;
-
-                        if (theta > glm.PIBy2) theta -= Math.PI;
-                        else if (theta < -glm.PIBy2) theta += Math.PI;
-
-                        double segCurv = ((2 * Math.Sin(theta / 2)) / -d) * Settings.Tool.setToolSteer.curvatureGain;
-                        if (segCurv > 2.0) segCurv = 2.0;
-                        if (segCurv < -2.0) segCurv = -2.0;
-
-                        segAvg = 0.8 * segAvg + 0.2 * segCurv;
-
-                        double gain = Math.Abs(toolDistance);
-                        if (gain > 0.6) gain = 0.6;
-                        if (gain < 0.2) gain = 0.2;
-
-                        //passiveDistance = segAvg;
-                        if (passiveCounter++ > Settings.Tool.setToolSteer.passiveIntegralGain*10)
-                        {
-                            errorProp = toolDistance * -gain;
-                            passiveDistance += errorProp;
-                            passiveCounter = 0;
-                        }
-
-                        if (passiveDistance > 1.0) passiveDistance = 1.0;
-                        if (passiveDistance < -1.0) passiveDistance = -1.0;
-
-                        if (mf.pn.avgSpeed < 2) passiveDistance = 0;
-
-                        double passiveDist = segCurv + passiveDistance;
-                        goalPoint.easting += (Math.Sin(curList[B].heading + 1.57) * passiveDist);
-                        goalPoint.northing += (Math.Cos(curList[B].heading + 1.57) * passiveDist);
                     }
 
                     //calc "D" the distance from pivot axle to lookahead point

@@ -286,8 +286,8 @@ namespace Twol
                             continue;
                         }
 
-                        if (Settings.User.setDisplay_isDayMode) GL.Color4((byte)patchList[i][0].easting, (byte)patchList[i][0].northing, (byte)patchList[i][0].heading, (byte)152);
-                        else GL.Color4((byte)patchList[i][0].easting, (byte)patchList[i][0].northing, (byte)patchList[i][0].heading, (byte)(152 * 0.5));
+                        if (Settings.User.setDisplay_isDayMode) GL.Color4((byte)patchSaveList[i][0].easting, (byte)patchSaveList[i][0].northing, (byte)patchSaveList[i][0].heading, (byte)152);
+                        else GL.Color4((byte)patchSaveList[i][0].easting, (byte)patchSaveList[i][0].northing, (byte)patchSaveList[i][0].heading, (byte)(152 * 0.5));
 
                         patchSaveList[i].DrawSectionPolygon(PrimitiveType.TriangleStrip);
                     }

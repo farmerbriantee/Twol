@@ -1841,10 +1841,9 @@ namespace Twol
                 if (form.ShowDialog(this) == DialogResult.OK)
                 {
                     Settings.User.colorSectionsDay = form.useThisColor;
+                    isPatchesChangingColor = true;
                 }
             }
-
-            isPatchesChangingColor = true;
         }
         private void btnYouSkipEnable_Click(object sender, EventArgs e)
         {

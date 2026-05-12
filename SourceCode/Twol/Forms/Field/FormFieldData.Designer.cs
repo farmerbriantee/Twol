@@ -56,12 +56,12 @@
             // 
             this.lblTimeRemaining.AutoSize = true;
             this.lblTimeRemaining.BackColor = System.Drawing.Color.Transparent;
-            this.lblTimeRemaining.Font = new System.Drawing.Font("MS Reference Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTimeRemaining.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTimeRemaining.ForeColor = System.Drawing.Color.Black;
-            this.lblTimeRemaining.Location = new System.Drawing.Point(6, 118);
+            this.lblTimeRemaining.Location = new System.Drawing.Point(3, 90);
             this.lblTimeRemaining.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblTimeRemaining.Name = "lblTimeRemaining";
-            this.lblTimeRemaining.Size = new System.Drawing.Size(25, 29);
+            this.lblTimeRemaining.Size = new System.Drawing.Size(17, 23);
             this.lblTimeRemaining.TabIndex = 479;
             this.lblTimeRemaining.Text = "-";
             // 
@@ -69,12 +69,12 @@
             // 
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("MS Reference Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(6, 80);
+            this.label2.Location = new System.Drawing.Point(6, 58);
             this.label2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(113, 29);
+            this.label2.Size = new System.Drawing.Size(80, 23);
             this.label2.TabIndex = 478;
             this.label2.Text = "Remain:";
             // 
@@ -82,12 +82,12 @@
             // 
             this.lblAreaRemain.AutoSize = true;
             this.lblAreaRemain.BackColor = System.Drawing.Color.Transparent;
-            this.lblAreaRemain.Font = new System.Drawing.Font("MS Reference Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAreaRemain.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAreaRemain.ForeColor = System.Drawing.Color.Black;
-            this.lblAreaRemain.Location = new System.Drawing.Point(116, 80);
+            this.lblAreaRemain.Location = new System.Drawing.Point(84, 58);
             this.lblAreaRemain.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblAreaRemain.Name = "lblAreaRemain";
-            this.lblAreaRemain.Size = new System.Drawing.Size(25, 29);
+            this.lblAreaRemain.Size = new System.Drawing.Size(18, 23);
             this.lblAreaRemain.TabIndex = 480;
             this.lblAreaRemain.Text = "-";
             // 
@@ -95,12 +95,12 @@
             // 
             this.lblWorkRate.AutoSize = true;
             this.lblWorkRate.BackColor = System.Drawing.Color.Transparent;
-            this.lblWorkRate.Font = new System.Drawing.Font("MS Reference Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWorkRate.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblWorkRate.ForeColor = System.Drawing.Color.Black;
-            this.lblWorkRate.Location = new System.Drawing.Point(6, 245);
+            this.lblWorkRate.Location = new System.Drawing.Point(2, 188);
             this.lblWorkRate.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblWorkRate.Name = "lblWorkRate";
-            this.lblWorkRate.Size = new System.Drawing.Size(25, 29);
+            this.lblWorkRate.Size = new System.Drawing.Size(17, 23);
             this.lblWorkRate.TabIndex = 482;
             this.lblWorkRate.Text = "-";
             // 
@@ -108,12 +108,12 @@
             // 
             this.lblTotalArea.AutoSize = true;
             this.lblTotalArea.BackColor = System.Drawing.Color.Transparent;
-            this.lblTotalArea.Font = new System.Drawing.Font("MS Reference Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalArea.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalArea.ForeColor = System.Drawing.Color.Black;
-            this.lblTotalArea.Location = new System.Drawing.Point(116, -2);
+            this.lblTotalArea.Location = new System.Drawing.Point(84, -2);
             this.lblTotalArea.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblTotalArea.Name = "lblTotalArea";
-            this.lblTotalArea.Size = new System.Drawing.Size(25, 29);
+            this.lblTotalArea.Size = new System.Drawing.Size(18, 23);
             this.lblTotalArea.TabIndex = 484;
             this.lblTotalArea.Text = "-";
             // 
@@ -121,12 +121,12 @@
             // 
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Font = new System.Drawing.Font("MS Reference Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(36, -2);
+            this.label4.Location = new System.Drawing.Point(28, -2);
             this.label4.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(83, 29);
+            this.label4.Size = new System.Drawing.Size(58, 23);
             this.label4.TabIndex = 483;
             this.label4.Text = "Total:";
             // 
@@ -134,12 +134,12 @@
             // 
             this.lblApplied.AutoSize = true;
             this.lblApplied.BackColor = System.Drawing.Color.Transparent;
-            this.lblApplied.Font = new System.Drawing.Font("MS Reference Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblApplied.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblApplied.ForeColor = System.Drawing.Color.Black;
-            this.lblApplied.Location = new System.Drawing.Point(116, 43);
+            this.lblApplied.Location = new System.Drawing.Point(84, 27);
             this.lblApplied.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblApplied.Name = "lblApplied";
-            this.lblApplied.Size = new System.Drawing.Size(25, 29);
+            this.lblApplied.Size = new System.Drawing.Size(18, 23);
             this.lblApplied.TabIndex = 486;
             this.lblApplied.Text = "-";
             // 
@@ -147,12 +147,12 @@
             // 
             this.label8.AutoSize = true;
             this.label8.BackColor = System.Drawing.Color.Transparent;
-            this.label8.Font = new System.Drawing.Font("MS Reference Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.Black;
-            this.label8.Location = new System.Drawing.Point(8, 43);
+            this.label8.Location = new System.Drawing.Point(7, 27);
             this.label8.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(111, 29);
+            this.label8.Size = new System.Drawing.Size(79, 23);
             this.label8.TabIndex = 485;
             this.label8.Text = "Applied:";
             // 
@@ -160,12 +160,12 @@
             // 
             this.lblRemainPercent.AutoSize = true;
             this.lblRemainPercent.BackColor = System.Drawing.Color.Transparent;
-            this.lblRemainPercent.Font = new System.Drawing.Font("MS Reference Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRemainPercent.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRemainPercent.ForeColor = System.Drawing.Color.Black;
-            this.lblRemainPercent.Location = new System.Drawing.Point(116, 118);
+            this.lblRemainPercent.Location = new System.Drawing.Point(91, 90);
             this.lblRemainPercent.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblRemainPercent.Name = "lblRemainPercent";
-            this.lblRemainPercent.Size = new System.Drawing.Size(25, 29);
+            this.lblRemainPercent.Size = new System.Drawing.Size(18, 23);
             this.lblRemainPercent.TabIndex = 487;
             this.lblRemainPercent.Text = "-";
             this.lblRemainPercent.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -174,12 +174,12 @@
             // 
             this.lblActualLessOverlap.AutoSize = true;
             this.lblActualLessOverlap.BackColor = System.Drawing.Color.Transparent;
-            this.lblActualLessOverlap.Font = new System.Drawing.Font("MS Reference Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblActualLessOverlap.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblActualLessOverlap.ForeColor = System.Drawing.Color.Black;
-            this.lblActualLessOverlap.Location = new System.Drawing.Point(116, 167);
+            this.lblActualLessOverlap.Location = new System.Drawing.Point(84, 125);
             this.lblActualLessOverlap.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblActualLessOverlap.Name = "lblActualLessOverlap";
-            this.lblActualLessOverlap.Size = new System.Drawing.Size(25, 29);
+            this.lblActualLessOverlap.Size = new System.Drawing.Size(18, 23);
             this.lblActualLessOverlap.TabIndex = 490;
             this.lblActualLessOverlap.Text = "-";
             // 
@@ -187,12 +187,12 @@
             // 
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.Color.Transparent;
-            this.label6.Font = new System.Drawing.Font("MS Reference Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.Black;
-            this.label6.Location = new System.Drawing.Point(8, 167);
+            this.label6.Location = new System.Drawing.Point(7, 125);
             this.label6.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(111, 29);
+            this.label6.Size = new System.Drawing.Size(79, 23);
             this.label6.TabIndex = 489;
             this.label6.Text = "Applied:";
             // 
@@ -200,25 +200,25 @@
             // 
             this.lblOverlapPercent.AutoSize = true;
             this.lblOverlapPercent.BackColor = System.Drawing.Color.Transparent;
-            this.lblOverlapPercent.Font = new System.Drawing.Font("MS Reference Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOverlapPercent.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblOverlapPercent.ForeColor = System.Drawing.Color.Black;
-            this.lblOverlapPercent.Location = new System.Drawing.Point(149, 245);
+            this.lblOverlapPercent.Location = new System.Drawing.Point(107, 188);
             this.lblOverlapPercent.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblOverlapPercent.Name = "lblOverlapPercent";
-            this.lblOverlapPercent.Size = new System.Drawing.Size(25, 29);
+            this.lblOverlapPercent.Size = new System.Drawing.Size(65, 23);
             this.lblOverlapPercent.TabIndex = 493;
-            this.lblOverlapPercent.Text = "-";
+            this.lblOverlapPercent.Text = "80.0%";
             // 
             // lblActualRemain
             // 
             this.lblActualRemain.AutoSize = true;
             this.lblActualRemain.BackColor = System.Drawing.Color.Transparent;
-            this.lblActualRemain.Font = new System.Drawing.Font("MS Reference Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblActualRemain.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblActualRemain.ForeColor = System.Drawing.Color.Black;
-            this.lblActualRemain.Location = new System.Drawing.Point(116, 205);
+            this.lblActualRemain.Location = new System.Drawing.Point(84, 155);
             this.lblActualRemain.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblActualRemain.Name = "lblActualRemain";
-            this.lblActualRemain.Size = new System.Drawing.Size(25, 29);
+            this.lblActualRemain.Size = new System.Drawing.Size(18, 23);
             this.lblActualRemain.TabIndex = 497;
             this.lblActualRemain.Text = "-";
             // 
@@ -226,12 +226,12 @@
             // 
             this.label12.AutoSize = true;
             this.label12.BackColor = System.Drawing.Color.Transparent;
-            this.label12.Font = new System.Drawing.Font("MS Reference Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.Color.Black;
-            this.label12.Location = new System.Drawing.Point(6, 205);
+            this.label12.Location = new System.Drawing.Point(6, 155);
             this.label12.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(113, 29);
+            this.label12.Size = new System.Drawing.Size(80, 23);
             this.label12.TabIndex = 496;
             this.label12.Text = "Remain:";
             // 
@@ -240,7 +240,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(244, 287);
+            this.ClientSize = new System.Drawing.Size(168, 221);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label8);
