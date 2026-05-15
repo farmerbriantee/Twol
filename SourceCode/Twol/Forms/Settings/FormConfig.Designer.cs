@@ -573,7 +573,7 @@
             this.btnSubMachineRelay.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
             this.btnSubMachineRelay.Size = new System.Drawing.Size(42, 64);
             this.btnSubMachineRelay.TabIndex = 3;
-            this.btnSubMachineRelay.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSubMachineRelay.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSubMachineRelay.UseVisualStyleBackColor = false;
             this.btnSubMachineRelay.Click += new System.EventHandler(this.btnSubMachineRelay_Click);
             // 
@@ -591,7 +591,7 @@
             this.btnSubMachineModule.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
             this.btnSubMachineModule.Size = new System.Drawing.Size(42, 64);
             this.btnSubMachineModule.TabIndex = 1;
-            this.btnSubMachineModule.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSubMachineModule.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSubMachineModule.UseVisualStyleBackColor = false;
             this.btnSubMachineModule.Click += new System.EventHandler(this.btnSubMachineModule_Click);
             // 
@@ -609,7 +609,7 @@
             this.btnSubRoll.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
             this.btnSubRoll.Size = new System.Drawing.Size(42, 64);
             this.btnSubRoll.TabIndex = 0;
-            this.btnSubRoll.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSubRoll.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSubRoll.UseVisualStyleBackColor = false;
             this.btnSubRoll.Click += new System.EventHandler(this.btnSubRoll_Click);
             // 
@@ -627,7 +627,7 @@
             this.btnSubHeading.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
             this.btnSubHeading.Size = new System.Drawing.Size(42, 64);
             this.btnSubHeading.TabIndex = 1;
-            this.btnSubHeading.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSubHeading.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSubHeading.UseVisualStyleBackColor = false;
             this.btnSubHeading.Click += new System.EventHandler(this.btnSubHeading_Click);
             // 
@@ -645,7 +645,7 @@
             this.btnSubSwitches.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
             this.btnSubSwitches.Size = new System.Drawing.Size(42, 64);
             this.btnSubSwitches.TabIndex = 1;
-            this.btnSubSwitches.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSubSwitches.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSubSwitches.UseVisualStyleBackColor = false;
             this.btnSubSwitches.Click += new System.EventHandler(this.btnSubSwitches_Click);
             // 
@@ -663,7 +663,7 @@
             this.btnSubToolSettings.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
             this.btnSubToolSettings.Size = new System.Drawing.Size(42, 64);
             this.btnSubToolSettings.TabIndex = 4;
-            this.btnSubToolSettings.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSubToolSettings.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSubToolSettings.UseVisualStyleBackColor = false;
             this.btnSubToolSettings.Click += new System.EventHandler(this.btnSubToolSettings_Click);
             // 
@@ -681,7 +681,7 @@
             this.btnSubSections.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
             this.btnSubSections.Size = new System.Drawing.Size(42, 64);
             this.btnSubSections.TabIndex = 0;
-            this.btnSubSections.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSubSections.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSubSections.UseVisualStyleBackColor = false;
             this.btnSubSections.Click += new System.EventHandler(this.btnSubSections_Click);
             // 
@@ -699,7 +699,7 @@
             this.btnSubToolOffset.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
             this.btnSubToolOffset.Size = new System.Drawing.Size(42, 64);
             this.btnSubToolOffset.TabIndex = 1;
-            this.btnSubToolOffset.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSubToolOffset.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSubToolOffset.UseVisualStyleBackColor = false;
             this.btnSubToolOffset.Click += new System.EventHandler(this.btnSubToolOffset_Click);
             // 
@@ -717,7 +717,7 @@
             this.btnSubPivot.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
             this.btnSubPivot.Size = new System.Drawing.Size(42, 64);
             this.btnSubPivot.TabIndex = 217;
-            this.btnSubPivot.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSubPivot.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSubPivot.UseVisualStyleBackColor = false;
             this.btnSubPivot.Click += new System.EventHandler(this.btnSubPivot_Click);
             // 
@@ -735,7 +735,7 @@
             this.btnSubHitch.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
             this.btnSubHitch.Size = new System.Drawing.Size(42, 64);
             this.btnSubHitch.TabIndex = 5;
-            this.btnSubHitch.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSubHitch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSubHitch.UseVisualStyleBackColor = false;
             this.btnSubHitch.Click += new System.EventHandler(this.btnSubHitch_Click);
             // 
@@ -754,6 +754,7 @@
             this.btnSubToolType.Size = new System.Drawing.Size(42, 64);
             this.btnSubToolType.TabIndex = 6;
             this.btnSubToolType.Text = "T";
+            this.btnSubToolType.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSubToolType.UseVisualStyleBackColor = false;
             this.btnSubToolType.Click += new System.EventHandler(this.btnSubToolType_Click);
             // 
@@ -791,7 +792,7 @@
             this.btnSubAntenna.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
             this.btnSubAntenna.Size = new System.Drawing.Size(42, 64);
             this.btnSubAntenna.TabIndex = 2;
-            this.btnSubAntenna.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSubAntenna.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSubAntenna.UseVisualStyleBackColor = false;
             this.btnSubAntenna.Click += new System.EventHandler(this.btnSubAntenna_Click);
             // 
@@ -809,7 +810,7 @@
             this.btnSubDimensions.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
             this.btnSubDimensions.Size = new System.Drawing.Size(42, 64);
             this.btnSubDimensions.TabIndex = 1;
-            this.btnSubDimensions.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSubDimensions.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSubDimensions.UseVisualStyleBackColor = false;
             this.btnSubDimensions.Click += new System.EventHandler(this.btnSubDimensions_Click);
             // 
@@ -827,7 +828,7 @@
             this.btnSubVehicleType.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
             this.btnSubVehicleType.Size = new System.Drawing.Size(42, 64);
             this.btnSubVehicleType.TabIndex = 0;
-            this.btnSubVehicleType.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSubVehicleType.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSubVehicleType.UseVisualStyleBackColor = false;
             this.btnSubVehicleType.Click += new System.EventHandler(this.btnSubVehicleType_Click);
             // 
@@ -7822,8 +7823,7 @@
             this.btnSubUTurn.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
             this.btnSubUTurn.Size = new System.Drawing.Size(42, 64);
             this.btnSubUTurn.TabIndex = 116;
-            this.btnSubUTurn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSubUTurn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSubUTurn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSubUTurn.UseVisualStyleBackColor = false;
             this.btnSubUTurn.Click += new System.EventHandler(this.btnSubUTurn_Click);
             // 
@@ -7837,7 +7837,7 @@
             this.btnArduino.ForeColor = System.Drawing.Color.Black;
             this.btnArduino.Image = global::Twol.Properties.Resources.Con_ModulesMenu;
             this.btnArduino.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnArduino.Location = new System.Drawing.Point(3, 462);
+            this.btnArduino.Location = new System.Drawing.Point(3, 360);
             this.btnArduino.Name = "btnArduino";
             this.btnArduino.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
             this.btnArduino.Size = new System.Drawing.Size(72, 96);
@@ -7857,7 +7857,7 @@
             this.btnField.ForeColor = System.Drawing.Color.Black;
             this.btnField.Image = global::Twol.Properties.Resources.Con_TramMenu;
             this.btnField.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnField.Location = new System.Drawing.Point(3, 360);
+            this.btnField.Location = new System.Drawing.Point(3, 258);
             this.btnField.Name = "btnField";
             this.btnField.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
             this.btnField.Size = new System.Drawing.Size(72, 96);
@@ -7877,7 +7877,7 @@
             this.btnUser.ForeColor = System.Drawing.Color.Black;
             this.btnUser.Image = global::Twol.Properties.Resources.ConU_User;
             this.btnUser.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnUser.Location = new System.Drawing.Point(3, 258);
+            this.btnUser.Location = new System.Drawing.Point(3, 462);
             this.btnUser.Name = "btnUser";
             this.btnUser.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
             this.btnUser.Size = new System.Drawing.Size(72, 96);
@@ -7896,14 +7896,12 @@
             this.btnSubFeatureHides.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubFeatureHides.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnSubFeatureHides.Image = global::Twol.Properties.Resources.Con_FeatureMenu;
-            this.btnSubFeatureHides.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSubFeatureHides.Location = new System.Drawing.Point(23, 3);
             this.btnSubFeatureHides.Name = "btnSubFeatureHides";
             this.btnSubFeatureHides.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
             this.btnSubFeatureHides.Size = new System.Drawing.Size(42, 64);
             this.btnSubFeatureHides.TabIndex = 4;
-            this.btnSubFeatureHides.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSubFeatureHides.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSubFeatureHides.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSubFeatureHides.UseVisualStyleBackColor = false;
             this.btnSubFeatureHides.Click += new System.EventHandler(this.btnSubFeatureHides_Click);
             // 
@@ -7913,9 +7911,9 @@
             this.flpSide.Controls.Add(this.btnBlankTop);
             this.flpSide.Controls.Add(this.btnVehicle);
             this.flpSide.Controls.Add(this.btnTool);
-            this.flpSide.Controls.Add(this.btnUser);
             this.flpSide.Controls.Add(this.btnField);
             this.flpSide.Controls.Add(this.btnArduino);
+            this.flpSide.Controls.Add(this.btnUser);
             this.flpSide.Dock = System.Windows.Forms.DockStyle.Left;
             this.flpSide.Location = new System.Drawing.Point(4, 4);
             this.flpSide.Name = "flpSide";
@@ -7984,8 +7982,7 @@
             this.btnSubTram.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
             this.btnSubTram.Size = new System.Drawing.Size(42, 64);
             this.btnSubTram.TabIndex = 458;
-            this.btnSubTram.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSubTram.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSubTram.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSubTram.UseVisualStyleBackColor = false;
             this.btnSubTram.Click += new System.EventHandler(this.btnSubTram_Click);
             // 
@@ -8003,8 +8000,7 @@
             this.btnSubDisplay.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
             this.btnSubDisplay.Size = new System.Drawing.Size(42, 64);
             this.btnSubDisplay.TabIndex = 116;
-            this.btnSubDisplay.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSubDisplay.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSubDisplay.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSubDisplay.UseVisualStyleBackColor = false;
             this.btnSubDisplay.Click += new System.EventHandler(this.btnSubDisplay_Click);
             // 
@@ -8017,14 +8013,12 @@
             this.btnSubColors.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubColors.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnSubColors.Image = global::Twol.Properties.Resources.ColourPick;
-            this.btnSubColors.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSubColors.Location = new System.Drawing.Point(885, 73);
             this.btnSubColors.Name = "btnSubColors";
             this.btnSubColors.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
             this.btnSubColors.Size = new System.Drawing.Size(42, 64);
             this.btnSubColors.TabIndex = 459;
-            this.btnSubColors.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSubColors.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSubColors.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSubColors.UseVisualStyleBackColor = false;
             this.btnSubColors.Click += new System.EventHandler(this.btnSubColors_Click);
             // 
@@ -8037,14 +8031,12 @@
             this.btnSubUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubUser.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnSubUser.Image = global::Twol.Properties.Resources.ConU_User;
-            this.btnSubUser.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSubUser.Location = new System.Drawing.Point(837, 73);
             this.btnSubUser.Name = "btnSubUser";
             this.btnSubUser.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
             this.btnSubUser.Size = new System.Drawing.Size(42, 64);
             this.btnSubUser.TabIndex = 460;
-            this.btnSubUser.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSubUser.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSubUser.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSubUser.UseVisualStyleBackColor = false;
             this.btnSubUser.Click += new System.EventHandler(this.btnSubUser_Click);
             // 

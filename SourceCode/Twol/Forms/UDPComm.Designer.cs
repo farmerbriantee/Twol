@@ -1269,6 +1269,7 @@ namespace Twol
             {
             }
 
+            
             if ((char)keyData == (hotkeys[11])) //section or zone button
             {
                 if (controlButtons.Count > 0)
@@ -1339,7 +1340,7 @@ namespace Twol
                 return true;    // indicate that you handled this keystroke
             }
 
-            if (keyData == (Keys.F11)) // Full Screen click
+                if (keyData == (Keys.F11)) // Full Screen click
             {
                 btnMaximizeMainForm.PerformClick();
                 return true;    // indicate that you handled this keystroke
@@ -1351,99 +1352,102 @@ namespace Twol
                 return true;
             }
 
-            //reset Sim
-            if (keyData == Keys.R)
+            if (timerSim.Enabled)
             {
-                btnResetSim.PerformClick();
-                return true;
-            }
-
-            //UTurn
-            if (keyData == Keys.U)
-            {
-                sim.Reverse();
-            }
-
-            //speed up
-            if (keyData == Keys.Up)
-            {
-                if (sim.stepDistance < 0.4 && sim.stepDistance > -0.36) sim.stepDistance += 0.01;
-                else
-                    sim.stepDistance += 0.04;
-                if (sim.stepDistance > 8) sim.stepDistance = 8;
-                return true;
-            }
-
-            //slow down
-            if (keyData == Keys.Down)
-            {
-                if (sim.stepDistance < 0.2 && sim.stepDistance > -0.04) sim.stepDistance -= 0.01;
-                else sim.stepDistance -= 0.04;
-                if (sim.stepDistance < -0.35) sim.stepDistance = -0.35;
-                return true;
-            }
-
-            //Stop
-            if (keyData == Keys.OemPeriod)
-            {
-                sim.stepDistance = 0;
-                return true;
-            }
-
-            //turn right
-            if (keyData == Keys.Right)
-            {
-                steerAngleScrollBar += 1.0;
-                return true;
-            }
-
-            //turn left
-            if (keyData == Keys.Left)
-            {
-                steerAngleScrollBar -= 1.0;
-                return true;
-            }
-
-            //zero steering
-            if (keyData == Keys.OemQuestion)
-            {
-                steerAngleScrollBar = 0.0;
-                return true;
-            }
-
-            if (keyData == Keys.OemOpenBrackets)
-            {
-                sim.isAccelBack = true;
-            }
-
-            if (keyData == Keys.OemCloseBrackets)
-            {
-                sim.isAccelForward = true;
-            }
-
-            if (keyData == Keys.OemQuotes)
-            {
-                sim.stepDistance = 0;
-                return true;
-            }
-
-            if (keyData == (Keys.F6)) // Fast/Normal Sim
-            {
-                if (timerSim.Enabled)
+                //reset Sim
+                if (keyData == Keys.R)
                 {
-                    if (timerSim.Interval < 50)
-                    {
-                        timerSim.Interval = 94;
-                        TimedMessageBox(2200, "Simulation Speed", "Simulation speed set to 10Hz");
-                    }
-                    else
-                    {
-                        timerSim.Interval = 45;
-                        TimedMessageBox(2200, "Simulation Speed", "Simulation speed set to 20Hz");
-                    }
+                    btnResetSim.PerformClick();
+                    return true;
                 }
 
-                return true;    // indicate that you handled this keystroke
+                //UTurn
+                if (keyData == Keys.U)
+                {
+                    sim.Reverse();
+                }
+
+                //speed up
+                if (keyData == Keys.Up)
+                {
+                    if (sim.stepDistance < 0.4 && sim.stepDistance > -0.36) sim.stepDistance += 0.01;
+                    else
+                        sim.stepDistance += 0.04;
+                    if (sim.stepDistance > 8) sim.stepDistance = 8;
+                    return true;
+                }
+
+                //slow down
+                if (keyData == Keys.Down)
+                {
+                    if (sim.stepDistance < 0.2 && sim.stepDistance > -0.04) sim.stepDistance -= 0.01;
+                    else sim.stepDistance -= 0.04;
+                    if (sim.stepDistance < -0.35) sim.stepDistance = -0.35;
+                    return true;
+                }
+
+                //Stop
+                if (keyData == Keys.OemPeriod)
+                {
+                    sim.stepDistance = 0;
+                    return true;
+                }
+
+                //turn right
+                if (keyData == Keys.Right)
+                {
+                    steerAngleScrollBar += 1.0;
+                    return true;
+                }
+
+                //turn left
+                if (keyData == Keys.Left)
+                {
+                    steerAngleScrollBar -= 1.0;
+                    return true;
+                }
+
+                //zero steering
+                if (keyData == Keys.OemQuestion)
+                {
+                    steerAngleScrollBar = 0.0;
+                    return true;
+                }
+
+                if (keyData == Keys.OemOpenBrackets)
+                {
+                    sim.isAccelBack = true;
+                }
+
+                if (keyData == Keys.OemCloseBrackets)
+                {
+                    sim.isAccelForward = true;
+                }
+
+                if (keyData == Keys.OemQuotes)
+                {
+                    sim.stepDistance = 0;
+                    return true;
+                }
+
+                if (keyData == (Keys.F6)) // Fast/Normal Sim
+                {
+                    if (timerSim.Enabled)
+                    {
+                        if (timerSim.Interval < 50)
+                        {
+                            timerSim.Interval = 94;
+                            TimedMessageBox(2200, "Simulation Speed", "Simulation speed set to 10Hz");
+                        }
+                        else
+                        {
+                            timerSim.Interval = 45;
+                            TimedMessageBox(2200, "Simulation Speed", "Simulation speed set to 20Hz");
+                        }
+                    }
+
+                    return true;    // indicate that you handled this keystroke
+                }
             }
 
             // Call the base class

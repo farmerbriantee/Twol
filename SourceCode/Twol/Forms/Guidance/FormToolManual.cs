@@ -66,5 +66,23 @@ namespace Twol
                 SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
             }
         }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.D7||keyData == Keys.NumPad7) //autosteer button on off
+            {
+                btnToolLeft.PerformLayout();
+            }
+            if (keyData == Keys.D8||keyData == Keys.NumPad8) //autosteer button on off
+            {
+                btnZero.PerformLayout();
+            }
+            if (keyData == Keys.D9||keyData == Keys.NumPad9) //autosteer button on off
+            {
+                btnToolRight.PerformLayout();
+            }
+            // Call the base class
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
     }
 }

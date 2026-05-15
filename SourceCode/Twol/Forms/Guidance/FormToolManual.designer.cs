@@ -46,9 +46,9 @@
             this.btnToolLeft.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnToolLeft.Image = global::Twol.Properties.Resources.ArrowLeft;
             this.btnToolLeft.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnToolLeft.Location = new System.Drawing.Point(47, 2);
+            this.btnToolLeft.Location = new System.Drawing.Point(54, 2);
             this.btnToolLeft.Name = "btnToolLeft";
-            this.btnToolLeft.Size = new System.Drawing.Size(74, 36);
+            this.btnToolLeft.Size = new System.Drawing.Size(74, 42);
             this.btnToolLeft.TabIndex = 543;
             this.btnToolLeft.UseVisualStyleBackColor = false;
             this.btnToolLeft.Click += new System.EventHandler(this.btnToolLeft_Click);
@@ -64,9 +64,9 @@
             this.btnZero.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnZero.Image = global::Twol.Properties.Resources.SteerZero;
             this.btnZero.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnZero.Location = new System.Drawing.Point(134, 2);
+            this.btnZero.Location = new System.Drawing.Point(144, 2);
             this.btnZero.Name = "btnZero";
-            this.btnZero.Size = new System.Drawing.Size(74, 36);
+            this.btnZero.Size = new System.Drawing.Size(74, 42);
             this.btnZero.TabIndex = 544;
             this.btnZero.UseVisualStyleBackColor = false;
             this.btnZero.Click += new System.EventHandler(this.btnZero_Click);
@@ -82,9 +82,9 @@
             this.btnToolRight.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnToolRight.Image = global::Twol.Properties.Resources.ArrowRight;
             this.btnToolRight.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnToolRight.Location = new System.Drawing.Point(221, 2);
+            this.btnToolRight.Location = new System.Drawing.Point(234, 2);
             this.btnToolRight.Name = "btnToolRight";
-            this.btnToolRight.Size = new System.Drawing.Size(74, 36);
+            this.btnToolRight.Size = new System.Drawing.Size(74, 42);
             this.btnToolRight.TabIndex = 542;
             this.btnToolRight.UseVisualStyleBackColor = false;
             this.btnToolRight.Click += new System.EventHandler(this.btnToolRight_Click);
@@ -93,7 +93,7 @@
             // 
             this.pictureBox1.BackgroundImage = global::Twol.Properties.Resources.AddNew;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox1.Location = new System.Drawing.Point(-3, 2);
+            this.pictureBox1.Location = new System.Drawing.Point(-3, 5);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(38, 36);
             this.pictureBox1.TabIndex = 545;
@@ -105,7 +105,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(301, 40);
+            this.ClientSize = new System.Drawing.Size(309, 45);
             this.ControlBox = false;
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnToolLeft);
