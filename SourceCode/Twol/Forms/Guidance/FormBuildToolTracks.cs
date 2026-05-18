@@ -430,7 +430,7 @@ namespace Twol
                         GL.Color3(1.0, 0.09, 0.56);
                     else if (recList[i][0].heading == 20)
                         GL.Color3(0.39, 1.0, 0.396);
-                    else GL.Color3(0.2, 0.4, 0.6);
+                    else GL.Color3(0.6, 0.6, 0.8);
 
                     recList[i].DrawPolygon(PrimitiveType.Points);
                 }
@@ -501,7 +501,7 @@ namespace Twol
 
         private void bntALengthShorter_Click(object sender, EventArgs e)
         {
-            if (recList.Count > 0)
+            if (recList.Count > 2)
             {
                 recList[selectedLineIndex].RemoveAt(0);
             }
@@ -529,7 +529,7 @@ namespace Twol
 
         private void btnBLengthShorter_Click(object sender, EventArgs e)
         {
-            if (recList.Count > 0)
+            if (recList.Count > 2)
             {
                 recList[selectedLineIndex].RemoveAt(recList[selectedLineIndex].Count - 1);
             }

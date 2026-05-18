@@ -360,7 +360,7 @@ namespace Twol
 
                     }
 
-                    if (track.mode != TrackMode.Polygon)
+                    if (track.mode != TrackMode.Polygon && track.mode != TrackMode.toolLineRec)
                         newCurList.AddStartEndPoints(2, 2000);
                 }
             }
