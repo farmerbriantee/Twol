@@ -278,7 +278,7 @@ namespace Twol
                     //Passive Tool Steering
                     if (Settings.Tool.setToolSteer.isPassiveSteering)
                     {
-                        if (Uturn)
+                        if (Uturn || mf.sectionOnCounter == 0)
                         {
                             isPassiveTriggered = true;
                             isPassiveSteeringFlag = false;

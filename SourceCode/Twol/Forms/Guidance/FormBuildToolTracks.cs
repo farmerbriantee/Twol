@@ -17,6 +17,7 @@ namespace Twol
 
         private Point fixPt;
 
+        public vec3 pint = new vec3(0.0, 1.0, 0.0);
         private int selectedLineIndex = 0, mode = 0;
 
         private bool isCancel = false;
@@ -24,10 +25,12 @@ namespace Twol
         private double zoom = 1, sX = 0, sY = 0;
 
         public List<CTrk> gTemp = new List<CTrk>();
-
-        public vec3 pint = new vec3(0.0, 1.0, 0.0);
-
         public double remoteHeading = 0.0;
+
+        //for second line selection to join lines together
+        public vec3 pintSecond = new vec3(0.0, 1.0, 0.0);
+        private int secondSelectedLineIndex = -1;
+        private bool isSecondEnabled = false;
 
         //list of the list of patch data individual triangles for tool recording
         public List<List<vec3>> recList = new List<List<vec3>>();
@@ -154,6 +157,7 @@ namespace Twol
                 }
             }
         }
+
         private void btnSaveToolRecordTxtFile_Click(object sender, EventArgs e)
         {
             using (var form = new FormYesNo("Save the ToolRecord.Txt File?"))
@@ -274,26 +278,23 @@ namespace Twol
             selectedLineIndex++;
             if (selectedLineIndex >= recList.Count) selectedLineIndex = 0;
             FixLabelsCurve();
-
         }
 
         //inner lines
-        private void btnMakeCurve_Click(object sender, EventArgs e)
-        {
-            vec3 temp = recList[selectedLineIndex][0];
-            temp.heading = 20;
-            recList[selectedLineIndex][0] = temp;
+        private void btnMakeInnerLine_Click(object sender, EventArgs e)
+        { 
+            if (recList.Count > 0 && selectedLineIndex >= 0 && selectedLineIndex < recList.Count && recList[selectedLineIndex].Count > 0)
+            {
+                vec3 temp = recList[selectedLineIndex][0];
+                temp.heading = 20;
+                recList[selectedLineIndex][0] = temp;
 
-            selectedLineIndex++;
-            if (selectedLineIndex >= recList.Count) selectedLineIndex = 0;
-            FixLabelsCurve();
+                selectedLineIndex++;
+                if (selectedLineIndex >= recList.Count) selectedLineIndex = 0;
+                FixLabelsCurve();
 
-            // "A_Fld Cu " : "A_Bnd Cu ";
-        }
-
-        private void btnMakeABLine_Click(object sender, EventArgs e)
-        {
-            FixLabelsCurve();
+                // "A_Fld Cu " : "A_Bnd Cu ";
+            }
         }
 
         void oglSelf_MouseWheel(object sender, System.Windows.Forms.MouseEventArgs e)
@@ -352,20 +353,84 @@ namespace Twol
                 pint.easting = plotPt.easting;
                 pint.northing = plotPt.northing;
 
-                for (int j = 0; j < recList.Count; j++)
+                if (!isSecondEnabled)
                 {
-                    for (int i = 0; i < recList[j].Count; i++)
+                    for (int j = 0; j < recList.Count; j++)
                     {
-                        double dist = ((pint.easting - recList[j][i].easting) * (pint.easting - recList[j][i].easting))
-                                        + ((pint.northing - recList[j][i].northing) * (pint.northing - recList[j][i].northing));
-                        if (dist < minDistA)
+                        for (int i = 0; i < recList[j].Count; i++)
                         {
-                            minDistA = dist;
-                            selectedLineIndex = j;
+                            double dist = ((pint.easting - recList[j][i].easting) * (pint.easting - recList[j][i].easting))
+                                            + ((pint.northing - recList[j][i].northing) * (pint.northing - recList[j][i].northing));
+                            if (dist < minDistA)
+                            {
+                                minDistA = dist;
+                                selectedLineIndex = j;
+                            }
+                        }
+                    }
+
+                    FixLabelsCurve();
+                }
+                else
+                {
+                    for (int j = 0; j < recList.Count; j++)
+                    {
+                        for (int i = 0; i < recList[j].Count; i++)
+                        {
+                            double dist = ((pint.easting - recList[j][i].easting) * (pint.easting - recList[j][i].easting))
+                                            + ((pint.northing - recList[j][i].northing) * (pint.northing - recList[j][i].northing));
+                            if (dist < minDistA)
+                            {
+                                minDistA = dist;
+                                secondSelectedLineIndex = j;
+                            }
                         }
                     }
                 }
             }
+        }
+
+        private void btnSecondSelect_Click(object sender, EventArgs e)
+        {
+            if (isSecondEnabled)
+            {
+                isSecondEnabled = false;
+                btnSecondSelect.BackColor = Color.Transparent;
+                secondSelectedLineIndex = -1;
+            }
+            else
+            {
+                isSecondEnabled = true;
+                btnSecondSelect.BackColor = Color.LightGreen;
+            }
+
+            btnOK.Focus();
+        }
+
+        private void btnJoin_Click(object sender, EventArgs e)
+        {
+            isSecondEnabled = false;
+            if (secondSelectedLineIndex <= selectedLineIndex || secondSelectedLineIndex < 0)
+            {
+                secondSelectedLineIndex = -1;
+                btnSecondSelect.BackColor = Color.Transparent;
+                mf.TimedMessageBox(4000, "Line Not Selected", "Select a second line that is after the first line in the list to join them together.");
+                return;
+            }
+            for (int i = 0; i < recList[secondSelectedLineIndex].Count; i++)
+            {
+                vec3 pt = new vec3(recList[secondSelectedLineIndex][i].easting, recList[secondSelectedLineIndex][i].northing, 0.0);
+                recList[selectedLineIndex].Add(pt);
+            }
+
+            recList.RemoveAt(secondSelectedLineIndex);
+
+            //clean up
+            secondSelectedLineIndex = -1;
+
+            btnSecondSelect.BackColor = Color.Transparent;
+
+            btnOK.Focus();
         }
 
         private void oglSelf_Paint(object sender, PaintEventArgs e)
@@ -446,6 +511,20 @@ namespace Twol
                 }
                 GL.End();
 
+                if (secondSelectedLineIndex >= 0)
+                {
+                    //selected line
+                    GL.Color3(1f, 0.61f, 1f);
+                    GL.PointSize(12);
+                    GL.Begin(PrimitiveType.Points);
+
+                    for (int i = 0; i < recList[secondSelectedLineIndex].Count; i += 5)
+                    {
+                        GL.Vertex3(recList[secondSelectedLineIndex][i].easting, recList[secondSelectedLineIndex][i].northing, 0);
+                    }
+                    GL.End();
+                }
+
                 //start of Line
                 GL.Color3(1.0f, 0.75f, 0.350f);
 
@@ -485,7 +564,7 @@ namespace Twol
 
         private void btnALength_Click(object sender, EventArgs e)
         {
-            if (recList.Count > 0)
+            if (recList.Count > 2)
             {
                 //and the beginning
                 vec3 start = new vec3(recList[selectedLineIndex][0]);
@@ -509,7 +588,7 @@ namespace Twol
 
         private void btnBLength_Click(object sender, EventArgs e)
         {
-            if (recList.Count > 0)
+            if (recList.Count > 2)
             {
                 vec3 start = new vec3(recList[selectedLineIndex][recList[selectedLineIndex].Count - 1]);
                 double heading = Math.Atan2(recList[selectedLineIndex][recList[selectedLineIndex].Count - 1].easting - recList[selectedLineIndex][recList[selectedLineIndex].Count - 2].easting, recList[selectedLineIndex][recList[selectedLineIndex].Count - 1].northing - recList[selectedLineIndex][recList[selectedLineIndex].Count - 2].northing);

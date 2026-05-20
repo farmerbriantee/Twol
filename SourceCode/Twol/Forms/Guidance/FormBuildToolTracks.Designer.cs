@@ -33,20 +33,22 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.lblCurveSelected = new System.Windows.Forms.Label();
             this.tlp1 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnSectionsTrams = new System.Windows.Forms.Button();
-            this.btnZoomReset = new System.Windows.Forms.Button();
+            this.btnJoin = new System.Windows.Forms.Button();
+            this.btnSecondSelect = new System.Windows.Forms.Button();
             this.btnSaveToolRecordTxtFile = new System.Windows.Forms.Button();
+            this.btnSectionsTrams = new System.Windows.Forms.Button();
             this.btnSelectCurveBk = new System.Windows.Forms.Button();
             this.btnSelectCurve = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
             this.btnOuterLine = new System.Windows.Forms.Button();
-            this.btnMakeCurve = new System.Windows.Forms.Button();
+            this.btnMakeInnerLine = new System.Windows.Forms.Button();
             this.bntALengthShorter = new System.Windows.Forms.Button();
             this.btnALength = new System.Windows.Forms.Button();
             this.btnBLengthShorter = new System.Windows.Forms.Button();
             this.btnBLength = new System.Windows.Forms.Button();
             this.btnDeleteCurve = new System.Windows.Forms.Button();
             this.btnSaveTracks = new System.Windows.Forms.Button();
+            this.btnZoomReset = new System.Windows.Forms.Button();
             this.tlp1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -81,7 +83,7 @@
             this.lblCurveSelected.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblCurveSelected.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCurveSelected.ForeColor = System.Drawing.Color.Black;
-            this.lblCurveSelected.Location = new System.Drawing.Point(7, 658);
+            this.lblCurveSelected.Location = new System.Drawing.Point(7, 572);
             this.lblCurveSelected.Margin = new System.Windows.Forms.Padding(0);
             this.lblCurveSelected.Name = "lblCurveSelected";
             this.lblCurveSelected.Size = new System.Drawing.Size(120, 26);
@@ -95,13 +97,15 @@
             this.tlp1.ColumnCount = 2;
             this.tlp1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlp1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlp1.Controls.Add(this.btnJoin, 1, 7);
+            this.tlp1.Controls.Add(this.btnSecondSelect, 0, 7);
             this.tlp1.Controls.Add(this.btnSaveToolRecordTxtFile, 1, 5);
             this.tlp1.Controls.Add(this.btnSectionsTrams, 0, 1);
             this.tlp1.Controls.Add(this.btnSelectCurveBk, 0, 4);
             this.tlp1.Controls.Add(this.btnSelectCurve, 1, 4);
             this.tlp1.Controls.Add(this.btnOK, 1, 6);
             this.tlp1.Controls.Add(this.btnOuterLine, 0, 2);
-            this.tlp1.Controls.Add(this.btnMakeCurve, 0, 3);
+            this.tlp1.Controls.Add(this.btnMakeInnerLine, 0, 3);
             this.tlp1.Controls.Add(this.bntALengthShorter, 1, 3);
             this.tlp1.Controls.Add(this.btnALength, 1, 2);
             this.tlp1.Controls.Add(this.btnBLengthShorter, 1, 1);
@@ -112,54 +116,57 @@
             this.tlp1.Dock = System.Windows.Forms.DockStyle.Right;
             this.tlp1.Location = new System.Drawing.Point(708, 0);
             this.tlp1.Name = "tlp1";
-            this.tlp1.RowCount = 7;
-            this.tlp1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            this.tlp1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            this.tlp1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            this.tlp1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            this.tlp1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            this.tlp1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            this.tlp1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.tlp1.RowCount = 8;
+            this.tlp1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tlp1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tlp1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tlp1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tlp1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tlp1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tlp1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tlp1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tlp1.Size = new System.Drawing.Size(268, 724);
             this.tlp1.TabIndex = 564;
             // 
-            // btnSectionsTrams
+            // btnJoin
             // 
-            this.btnSectionsTrams.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnSectionsTrams.BackColor = System.Drawing.Color.Transparent;
-            this.btnSectionsTrams.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnSectionsTrams.FlatAppearance.BorderColor = System.Drawing.SystemColors.HotTrack;
-            this.btnSectionsTrams.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnSectionsTrams.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnSectionsTrams.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSectionsTrams.Font = new System.Drawing.Font("Tahoma", 14.25F);
-            this.btnSectionsTrams.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSectionsTrams.Location = new System.Drawing.Point(12, 133);
-            this.btnSectionsTrams.Name = "btnSectionsTrams";
-            this.btnSectionsTrams.Size = new System.Drawing.Size(110, 43);
-            this.btnSectionsTrams.TabIndex = 570;
-            this.btnSectionsTrams.Text = "N-T-S-ST";
-            this.btnSectionsTrams.UseVisualStyleBackColor = false;
-            this.btnSectionsTrams.Click += new System.EventHandler(this.btnSectionsTrams_Click);
+            this.btnJoin.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnJoin.BackColor = System.Drawing.Color.Transparent;
+            this.btnJoin.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnJoin.FlatAppearance.BorderColor = System.Drawing.Color.DarkOrange;
+            this.btnJoin.FlatAppearance.BorderSize = 0;
+            this.btnJoin.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnJoin.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnJoin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnJoin.Font = new System.Drawing.Font("Tahoma", 14.25F);
+            this.btnJoin.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnJoin.Location = new System.Drawing.Point(146, 655);
+            this.btnJoin.Name = "btnJoin";
+            this.btnJoin.Size = new System.Drawing.Size(110, 43);
+            this.btnJoin.TabIndex = 574;
+            this.btnJoin.Text = "Join";
+            this.btnJoin.UseVisualStyleBackColor = false;
+            this.btnJoin.Click += new System.EventHandler(this.btnJoin_Click);
             // 
-            // btnZoomReset
+            // btnSecondSelect
             // 
-            this.btnZoomReset.BackColor = System.Drawing.Color.Transparent;
-            this.btnZoomReset.BackgroundImage = global::Twol.Properties.Resources.Pan;
-            this.btnZoomReset.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnZoomReset.FlatAppearance.BorderColor = System.Drawing.SystemColors.HotTrack;
-            this.btnZoomReset.FlatAppearance.BorderSize = 0;
-            this.btnZoomReset.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnZoomReset.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnZoomReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnZoomReset.Font = new System.Drawing.Font("Tahoma", 14.25F);
-            this.btnZoomReset.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnZoomReset.Location = new System.Drawing.Point(3, 5);
-            this.btnZoomReset.Name = "btnZoomReset";
-            this.btnZoomReset.Size = new System.Drawing.Size(41, 39);
-            this.btnZoomReset.TabIndex = 573;
-            this.btnZoomReset.UseVisualStyleBackColor = false;
-            this.btnZoomReset.Click += new System.EventHandler(this.btnZoomReset_Click);
+            this.btnSecondSelect.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnSecondSelect.BackColor = System.Drawing.Color.Transparent;
+            this.btnSecondSelect.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnSecondSelect.FlatAppearance.BorderColor = System.Drawing.Color.DarkOrange;
+            this.btnSecondSelect.FlatAppearance.BorderSize = 0;
+            this.btnSecondSelect.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnSecondSelect.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnSecondSelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSecondSelect.Font = new System.Drawing.Font("Tahoma", 14.25F);
+            this.btnSecondSelect.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnSecondSelect.Location = new System.Drawing.Point(12, 655);
+            this.btnSecondSelect.Name = "btnSecondSelect";
+            this.btnSecondSelect.Size = new System.Drawing.Size(110, 43);
+            this.btnSecondSelect.TabIndex = 573;
+            this.btnSecondSelect.Text = "Select 2nd";
+            this.btnSecondSelect.UseVisualStyleBackColor = false;
+            this.btnSecondSelect.Click += new System.EventHandler(this.btnSecondSelect_Click);
             // 
             // btnSaveToolRecordTxtFile
             // 
@@ -174,12 +181,31 @@
             this.btnSaveToolRecordTxtFile.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnSaveToolRecordTxtFile.Image = global::Twol.Properties.Resources.FileSaveRecordedTool;
             this.btnSaveToolRecordTxtFile.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSaveToolRecordTxtFile.Location = new System.Drawing.Point(146, 532);
+            this.btnSaveToolRecordTxtFile.Location = new System.Drawing.Point(146, 461);
             this.btnSaveToolRecordTxtFile.Name = "btnSaveToolRecordTxtFile";
             this.btnSaveToolRecordTxtFile.Size = new System.Drawing.Size(110, 68);
             this.btnSaveToolRecordTxtFile.TabIndex = 572;
             this.btnSaveToolRecordTxtFile.UseVisualStyleBackColor = false;
             this.btnSaveToolRecordTxtFile.Click += new System.EventHandler(this.btnSaveToolRecordTxtFile_Click);
+            // 
+            // btnSectionsTrams
+            // 
+            this.btnSectionsTrams.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnSectionsTrams.BackColor = System.Drawing.Color.Transparent;
+            this.btnSectionsTrams.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnSectionsTrams.FlatAppearance.BorderColor = System.Drawing.SystemColors.HotTrack;
+            this.btnSectionsTrams.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnSectionsTrams.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnSectionsTrams.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSectionsTrams.Font = new System.Drawing.Font("Tahoma", 14.25F);
+            this.btnSectionsTrams.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnSectionsTrams.Location = new System.Drawing.Point(12, 113);
+            this.btnSectionsTrams.Name = "btnSectionsTrams";
+            this.btnSectionsTrams.Size = new System.Drawing.Size(110, 43);
+            this.btnSectionsTrams.TabIndex = 570;
+            this.btnSectionsTrams.Text = "N-T-S-ST";
+            this.btnSectionsTrams.UseVisualStyleBackColor = false;
+            this.btnSectionsTrams.Click += new System.EventHandler(this.btnSectionsTrams_Click);
             // 
             // btnSelectCurveBk
             // 
@@ -192,7 +218,7 @@
             this.btnSelectCurveBk.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnSelectCurveBk.Image = global::Twol.Properties.Resources.ABLineCycleBk;
             this.btnSelectCurveBk.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSelectCurveBk.Location = new System.Drawing.Point(5, 429);
+            this.btnSelectCurveBk.Location = new System.Drawing.Point(5, 371);
             this.btnSelectCurveBk.Name = "btnSelectCurveBk";
             this.btnSelectCurveBk.Size = new System.Drawing.Size(123, 68);
             this.btnSelectCurveBk.TabIndex = 472;
@@ -210,7 +236,7 @@
             this.btnSelectCurve.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnSelectCurve.Image = global::Twol.Properties.Resources.ABLineCycle;
             this.btnSelectCurve.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSelectCurve.Location = new System.Drawing.Point(139, 429);
+            this.btnSelectCurve.Location = new System.Drawing.Point(139, 371);
             this.btnSelectCurve.Name = "btnSelectCurve";
             this.btnSelectCurve.Size = new System.Drawing.Size(124, 68);
             this.btnSelectCurve.TabIndex = 5;
@@ -227,7 +253,7 @@
             this.btnOK.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.btnOK.Image = global::Twol.Properties.Resources.OK64;
             this.btnOK.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnOK.Location = new System.Drawing.Point(157, 643);
+            this.btnOK.Location = new System.Drawing.Point(157, 557);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(88, 56);
             this.btnOK.TabIndex = 0;
@@ -244,31 +270,37 @@
             this.btnOuterLine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOuterLine.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnOuterLine.Image = global::Twol.Properties.Resources.FilterOuterLines;
+            this.btnOuterLine.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnOuterLine.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnOuterLine.Location = new System.Drawing.Point(18, 214);
+            this.btnOuterLine.Location = new System.Drawing.Point(18, 183);
             this.btnOuterLine.Name = "btnOuterLine";
-            this.btnOuterLine.Size = new System.Drawing.Size(98, 87);
+            this.btnOuterLine.Size = new System.Drawing.Size(98, 84);
             this.btnOuterLine.TabIndex = 569;
+            this.btnOuterLine.Text = "Boundary";
+            this.btnOuterLine.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnOuterLine.UseVisualStyleBackColor = false;
             this.btnOuterLine.Click += new System.EventHandler(this.btnOuterLine_Click);
             // 
-            // btnMakeCurve
+            // btnMakeInnerLine
             // 
-            this.btnMakeCurve.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnMakeCurve.BackColor = System.Drawing.Color.Transparent;
-            this.btnMakeCurve.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnMakeCurve.FlatAppearance.BorderColor = System.Drawing.SystemColors.HotTrack;
-            this.btnMakeCurve.FlatAppearance.BorderSize = 0;
-            this.btnMakeCurve.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMakeCurve.Font = new System.Drawing.Font("Tahoma", 14.25F);
-            this.btnMakeCurve.Image = global::Twol.Properties.Resources.FilterInnerLines;
-            this.btnMakeCurve.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnMakeCurve.Location = new System.Drawing.Point(18, 317);
-            this.btnMakeCurve.Name = "btnMakeCurve";
-            this.btnMakeCurve.Size = new System.Drawing.Size(98, 87);
-            this.btnMakeCurve.TabIndex = 2;
-            this.btnMakeCurve.UseVisualStyleBackColor = false;
-            this.btnMakeCurve.Click += new System.EventHandler(this.btnMakeCurve_Click);
+            this.btnMakeInnerLine.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnMakeInnerLine.BackColor = System.Drawing.Color.Transparent;
+            this.btnMakeInnerLine.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnMakeInnerLine.FlatAppearance.BorderColor = System.Drawing.SystemColors.HotTrack;
+            this.btnMakeInnerLine.FlatAppearance.BorderSize = 0;
+            this.btnMakeInnerLine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMakeInnerLine.Font = new System.Drawing.Font("Tahoma", 14.25F);
+            this.btnMakeInnerLine.Image = global::Twol.Properties.Resources.FilterInnerLines;
+            this.btnMakeInnerLine.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnMakeInnerLine.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnMakeInnerLine.Location = new System.Drawing.Point(18, 273);
+            this.btnMakeInnerLine.Name = "btnMakeInnerLine";
+            this.btnMakeInnerLine.Size = new System.Drawing.Size(98, 84);
+            this.btnMakeInnerLine.TabIndex = 2;
+            this.btnMakeInnerLine.Text = "Inner";
+            this.btnMakeInnerLine.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnMakeInnerLine.UseVisualStyleBackColor = false;
+            this.btnMakeInnerLine.Click += new System.EventHandler(this.btnMakeInnerLine_Click);
             // 
             // bntALengthShorter
             // 
@@ -283,7 +315,7 @@
             this.bntALengthShorter.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.bntALengthShorter.Image = global::Twol.Properties.Resources.APlusMinusA;
             this.bntALengthShorter.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.bntALengthShorter.Location = new System.Drawing.Point(146, 339);
+            this.bntALengthShorter.Location = new System.Drawing.Point(146, 293);
             this.bntALengthShorter.Name = "bntALengthShorter";
             this.bntALengthShorter.Size = new System.Drawing.Size(110, 43);
             this.bntALengthShorter.TabIndex = 568;
@@ -303,7 +335,7 @@
             this.btnALength.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnALength.Image = global::Twol.Properties.Resources.APlusPlusA;
             this.btnALength.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnALength.Location = new System.Drawing.Point(146, 236);
+            this.btnALength.Location = new System.Drawing.Point(146, 203);
             this.btnALength.Name = "btnALength";
             this.btnALength.Size = new System.Drawing.Size(110, 43);
             this.btnALength.TabIndex = 352;
@@ -323,7 +355,7 @@
             this.btnBLengthShorter.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnBLengthShorter.Image = global::Twol.Properties.Resources.APlusMinusB;
             this.btnBLengthShorter.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnBLengthShorter.Location = new System.Drawing.Point(146, 133);
+            this.btnBLengthShorter.Location = new System.Drawing.Point(146, 113);
             this.btnBLengthShorter.Name = "btnBLengthShorter";
             this.btnBLengthShorter.Size = new System.Drawing.Size(110, 43);
             this.btnBLengthShorter.TabIndex = 567;
@@ -343,7 +375,7 @@
             this.btnBLength.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnBLength.Image = global::Twol.Properties.Resources.APlusPlusB;
             this.btnBLength.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnBLength.Location = new System.Drawing.Point(146, 30);
+            this.btnBLength.Location = new System.Drawing.Point(146, 23);
             this.btnBLength.Name = "btnBLength";
             this.btnBLength.Size = new System.Drawing.Size(110, 43);
             this.btnBLength.TabIndex = 351;
@@ -380,12 +412,31 @@
             this.btnSaveTracks.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnSaveTracks.Image = global::Twol.Properties.Resources.FileExportToolTracks;
             this.btnSaveTracks.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSaveTracks.Location = new System.Drawing.Point(12, 528);
+            this.btnSaveTracks.Location = new System.Drawing.Point(12, 457);
             this.btnSaveTracks.Name = "btnSaveTracks";
             this.btnSaveTracks.Size = new System.Drawing.Size(110, 76);
             this.btnSaveTracks.TabIndex = 571;
             this.btnSaveTracks.UseVisualStyleBackColor = false;
             this.btnSaveTracks.Click += new System.EventHandler(this.btnSaveTracks_Click);
+            // 
+            // btnZoomReset
+            // 
+            this.btnZoomReset.BackColor = System.Drawing.Color.Transparent;
+            this.btnZoomReset.BackgroundImage = global::Twol.Properties.Resources.Pan;
+            this.btnZoomReset.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnZoomReset.FlatAppearance.BorderColor = System.Drawing.SystemColors.HotTrack;
+            this.btnZoomReset.FlatAppearance.BorderSize = 0;
+            this.btnZoomReset.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnZoomReset.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnZoomReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnZoomReset.Font = new System.Drawing.Font("Tahoma", 14.25F);
+            this.btnZoomReset.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnZoomReset.Location = new System.Drawing.Point(3, 5);
+            this.btnZoomReset.Name = "btnZoomReset";
+            this.btnZoomReset.Size = new System.Drawing.Size(41, 39);
+            this.btnZoomReset.TabIndex = 573;
+            this.btnZoomReset.UseVisualStyleBackColor = false;
+            this.btnZoomReset.Click += new System.EventHandler(this.btnZoomReset_Click);
             // 
             // FormBuildToolTracks
             // 
@@ -419,7 +470,7 @@
         private OpenTK.GLControl oglSelf;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button btnOK;
-        private System.Windows.Forms.Button btnMakeCurve;
+        private System.Windows.Forms.Button btnMakeInnerLine;
         private System.Windows.Forms.Button btnSelectCurve;
         private System.Windows.Forms.Button btnDeleteCurve;
         private System.Windows.Forms.Label lblCurveSelected;
@@ -434,5 +485,7 @@
         private System.Windows.Forms.Button btnSaveTracks;
         private System.Windows.Forms.Button btnSaveToolRecordTxtFile;
         private System.Windows.Forms.Button btnZoomReset;
+        private System.Windows.Forms.Button btnJoin;
+        private System.Windows.Forms.Button btnSecondSelect;
     }
 }
