@@ -1174,8 +1174,7 @@ namespace Twol
                 //All sections OFF so if on, turn off
                 else
                 {
-                    //if (tRec.isToolRecordOn && pn.avgSpeed > 1)
-                    tRec.StopToolRecordLine();
+                    if (tRec.isToolRecordOn) tRec.StopToolRecordLine();
                 }
 
                 //save the north & east as previous
