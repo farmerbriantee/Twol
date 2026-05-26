@@ -189,12 +189,12 @@
             this.label6.BackColor = System.Drawing.Color.Transparent;
             this.label6.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.Black;
-            this.label6.Location = new System.Drawing.Point(7, 125);
+            this.label6.Location = new System.Drawing.Point(18, 125);
             this.label6.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(79, 23);
+            this.label6.Size = new System.Drawing.Size(68, 23);
             this.label6.TabIndex = 489;
-            this.label6.Text = "Applied:";
+            this.label6.Text = "Actual:";
             // 
             // lblOverlapPercent
             // 
