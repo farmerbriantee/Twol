@@ -357,10 +357,9 @@ namespace Twol
                             newCurList.CalculateAverageHeadings(loops);
                             newCurList.ReducePointsByAngle(0.005, 40);
                         }
-
                     }
 
-                    if (track.mode != TrackMode.Polygon && track.mode != TrackMode.toolLineRec)
+                    if (track.mode != TrackMode.Polygon)
                         newCurList.AddStartEndPoints(2, 2000);
                 }
             }
