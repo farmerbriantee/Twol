@@ -302,7 +302,7 @@ namespace Twol
                     Buffer.BlockCopy(BitConverter.GetBytes(latitude), 0, nmeaPGN, 13, 8);
 
                     //speed converted to kmh from knots
-                    Buffer.BlockCopy(BitConverter.GetBytes(vtgSpeed), 0, nmeaPGN, 21, 8);
+                    Buffer.BlockCopy(BitConverter.GetBytes(avgSpeed), 0, nmeaPGN, 21, 8);
 
                     //elevation in meters
                     Buffer.BlockCopy(BitConverter.GetBytes(elevation), 0, nmeaPGN, 29, 8);
