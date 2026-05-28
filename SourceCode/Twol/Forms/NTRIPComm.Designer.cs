@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.Globalization;
 using System.IO.Ports;
 using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Threading;
@@ -22,11 +23,11 @@ namespace Twol
 
         //Send GGA back timer - use threaded timer to avoid UI thread dependency
         private System.Threading.Timer tmr;
-        
+
         //NTRIP metering
         private System.Threading.Timer qTmr;
-        Queue<byte> rawTrip = new Queue<byte>();
-        private static int packetSizeNTRIP = 500;        
+        ConcurrentQueue<byte> rawTrip = new ConcurrentQueue<byte>();
+        private static int packetSizeNTRIP = 500;
 
         private string GGASentence;
 
@@ -333,7 +334,7 @@ namespace Twol
             if (rawTrip.Count > 15000)
             {
                 //we are falling behind so clear out old data
-                rawTrip.Clear();
+                while (rawTrip.TryDequeue(out _)) { }
             }
 
             if (Settings.IO.setNTRIP_isOn)
@@ -378,7 +379,7 @@ namespace Twol
         {
             try
             {
-                if (rawTrip.Count == 0) return;
+                if (rawTrip.IsEmpty) return;
 
                 //how many bytes in the Queue
                 int cnt = rawTrip.Count;
@@ -391,16 +392,43 @@ namespace Twol
 
                 byte[] trip = new byte[cnt]; //500 bytes to send or remaining packet
 
-                traffic.cntrGPSInBytes += cnt;
+                //dequeue into the array - use TryDequeue to safely handle race conditions
+                int actualCount = 0;
+                for (int i = 0; i < cnt; i++)
+                {
+                    if (rawTrip.TryDequeue(out byte b))
+                    {
+                        trip[i] = b;
+                        actualCount++;
+                    }
+                    else
+                    {
+                        break; // Queue is empty, stop trying
+                    }
+                }
 
-                //dequeue into the array
-                for (int i = 0; i < cnt; i++) trip[i] = rawTrip.Dequeue();
+                // Only send if we actually got data
+                if (actualCount > 0)
+                {
+                    traffic.cntrGPSInBytes += actualCount;
 
-                //send it
-                SendNTRIP(trip);
+                    // Resize array if we got fewer bytes than expected
+                    if (actualCount < cnt)
+                    {
+                        byte[] trimmedTrip = new byte[actualCount];
+                        Array.Copy(trip, trimmedTrip, actualCount);
+                        trip = trimmedTrip;
+                    }
+
+                    //send it
+                    SendNTRIP(trip);
+                }
 
                 //Can't keep up as internet dumped a shit load so clear
-                if (rawTrip.Count > 16000) rawTrip.Clear();
+                if (rawTrip.Count > 16000)
+                {
+                    while (rawTrip.TryDequeue(out _)) { }
+                }
             }
             catch (Exception ex)
             {

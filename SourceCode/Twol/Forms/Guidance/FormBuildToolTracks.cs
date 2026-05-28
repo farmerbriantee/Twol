@@ -564,7 +564,7 @@ namespace Twol
 
         private void btnALength_Click(object sender, EventArgs e)
         {
-            if (recList.Count > 2)
+            if (recList.Count > 0)
             {
                 //and the beginning
                 vec3 start = new vec3(recList[selectedLineIndex][0]);
@@ -580,7 +580,7 @@ namespace Twol
 
         private void bntALengthShorter_Click(object sender, EventArgs e)
         {
-            if (recList.Count > 2)
+            if (recList.Count > 0)
             {
                 recList[selectedLineIndex].RemoveAt(0);
             }
@@ -588,7 +588,7 @@ namespace Twol
 
         private void btnBLength_Click(object sender, EventArgs e)
         {
-            if (recList.Count > 2)
+            if (recList.Count > 0)
             {
                 vec3 start = new vec3(recList[selectedLineIndex][recList[selectedLineIndex].Count - 1]);
                 double heading = Math.Atan2(recList[selectedLineIndex][recList[selectedLineIndex].Count - 1].easting - recList[selectedLineIndex][recList[selectedLineIndex].Count - 2].easting, recList[selectedLineIndex][recList[selectedLineIndex].Count - 1].northing - recList[selectedLineIndex][recList[selectedLineIndex].Count - 2].northing);
@@ -601,17 +601,17 @@ namespace Twol
             }
         }
 
-        private void btnZoomReset_Click(object sender, EventArgs e)
-        {
-            sX = 0; sY = 0; zoom = 1;
-        }
-
         private void btnBLengthShorter_Click(object sender, EventArgs e)
         {
-            if (recList.Count > 2)
+            if (recList.Count > 0)
             {
                 recList[selectedLineIndex].RemoveAt(recList[selectedLineIndex].Count - 1);
             }
+        }
+
+        private void btnZoomReset_Click(object sender, EventArgs e)
+        {
+            sX = 0; sY = 0; zoom = 1;
         }
 
         private void oglSelf_Resize(object sender, EventArgs e)
