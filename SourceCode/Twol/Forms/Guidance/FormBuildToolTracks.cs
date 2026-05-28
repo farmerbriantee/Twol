@@ -214,7 +214,7 @@ namespace Twol
                 newTrk.curvePts.SmoothSegments(4);
                 newTrk.curvePts.GenerateEquidistantPoints(2, false);
                 newTrk.curvePts.CalculateAverageHeadings(false);
-                newTrk.curvePts.ReducePointsByAngle(0.005, 30);
+                newTrk.curvePts.ReducePointsByAngle(0.005, 10);
 
                 newTrk.heading = newTrk.curvePts.TrackAverageHeading();
                 newTrk.name += " " + (Math.Round(glm.toDegrees(newTrk.heading), 1)).ToString(CultureInfo.InvariantCulture) + "\u00B0";
