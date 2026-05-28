@@ -569,6 +569,38 @@ namespace Twol
             }
         }
 
+        private void btnDeleteAllTracks_Click(object sender, EventArgs e)
+        {
+            if (!mf.isFieldStarted)
+            {
+                mf.TimedMessageBox(2000, gStr.Get(gs.gsFieldNotOpen), "Open Field First");
+            }
+            else
+            {
+                DialogResult result2 = MessageBox.Show("Delete ALL Tracks?", "Are You sure?",
+                    MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
+                if (result2 == DialogResult.Yes)
+                {
+                    //save event
+                    Log.EventWriter("*****");
+                    Log.EventWriter("All tracks deleted");  
+                    Log.EventWriter("*****");
+
+                    try
+                    {
+                        while (mf.trks.gArr.Count > 0)
+                            mf.trks.RemoveTrack(mf.trks.gArr[0]);
+                        mf.FileSaveTracks();
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.EventWriter("Recorded Tool Tracks Reset: " + ex.ToString());
+                    }
+                }
+            }
+        }
+
         private void btnRollOffsetUp_Click(object sender, EventArgs e)
         {
             Settings.Tool.setToolSteer.rollZero += 0.1;
