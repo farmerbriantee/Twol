@@ -39,6 +39,11 @@ namespace Twol
         private double segAvg = 0, toolDistance = 0, errorProp = 0, passiveDistance = 0;
         private int passiveCounter = 0;
 
+        //toolDifferential
+        public double toolDifferential = 0, toolDifferentialLast;
+        public int toolDifferentialRingCount = 0;
+        public double[] toolDifferentialRing = new double[5];
+
         //passive tool steer trigger
         public bool isPassiveTriggered = false, isPassiveSteeringFlag = false;
 
@@ -67,6 +72,16 @@ namespace Twol
                 }
                 else
                     distanceFromCurrentLineTool = 0;
+
+                toolDifferential = 0;
+                toolDifferentialRing[toolDifferentialRingCount++ % toolDifferentialRing.Length] = distanceFromCurrentLineTool;
+                for (int i = 0; i < toolDifferentialRing.Length; i++)
+                {
+                    toolDifferential += toolDifferentialRing[i];
+                }
+                double temp = toolDifferential - toolDifferentialLast;
+                toolDifferentialLast = toolDifferential;
+                toolDifferential = temp * 100;
             }
 
             if (mf.gyd.FindClosestSegment(curList, isLoop, vec2point, out A, out B))
@@ -300,6 +315,7 @@ namespace Twol
                                 toolDistance = 0;
                                 passiveDistance = 0;
                             }
+
 
                             vec3 p1 = curList[A];
                             vec3 p2 = curList[B];

@@ -336,6 +336,8 @@ namespace Twol
                     }
                 }
 
+                lblDiff.Text = gyd.toolDifferential.ToString("N1");
+
             } //end every 1/2 second
 
             //every 1/8 second update  ///////////////////////////   One Eighth Second ////////////////////////////
