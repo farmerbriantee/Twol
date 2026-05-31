@@ -343,5 +343,28 @@ namespace Twol
                 Settings.Tool.setNozz.unitsIdx += 2;
             }
         }
+
+        private void btnMinimze_Click(object sender, EventArgs e)
+        {
+            if (tab1.Visible)
+            {
+                tab1.Visible = false;
+                this.Height = 305;
+                this.Width = 451;
+                unoChart.Width = 446;
+                unoChart.Height = 295;
+                btnMinimze.BringToFront();
+
+            }
+            else
+            {
+                tab1.Visible = true;
+                this.Height = 629;
+                this.Width = 451;
+                unoChart.Width = 446;
+                unoChart.Height = 176;
+                btnMinimze.BringToFront();
+            }
+        }
     }
 }
