@@ -54,7 +54,7 @@ namespace Twol
             flpTop.Controls?.Add(btnSubTram);
             flpTop.Controls?.Add(btnSubUTurn);
 
-            SetTab(tabTram, 150);
+            SetTab(tabUTurn, 150);
         }
         private void btnUser_Click(object sender, EventArgs e)
         {

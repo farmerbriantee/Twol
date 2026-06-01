@@ -380,24 +380,28 @@ namespace Twol
             UpdateUturnText();
 
             nudTurnDistanceFromBoundary.Value = Settings.Vehicle.set_youTurnDistanceFromBoundary;
+            nudTurnDistanceFromHeadland.Value = Settings.Vehicle.set_youTurnDistanceFromHeadland;
 
             nudYouTurnRadius.Value = Settings.Vehicle.set_youTurnRadius;
 
-            lblFtMUTurn.Text = lblFtMTurnRadius.Text = glm.unitsFtM;
+            lblFtMUTurn.Text = lblFtMTurnRadius.Text = lblFtMUTurnHead.Text = glm.unitsFtM;
         }
 
         private void tabUTurn_Leave(object sender, EventArgs e)
         {
             if (Settings.Vehicle.set_youTurnExtensionLength != mf.yt.youTurnStartOffset ||
                 Settings.Vehicle.set_youTurnRadius != mf.yt.youTurnRadius ||
-                Settings.Vehicle.set_youTurnDistanceFromBoundary != mf.yt.uturnDistanceFromBoundary)
+                Settings.Vehicle.set_youTurnDistanceFromBoundary != mf.yt.uturnDistanceFromBoundary ||
+                Settings.Vehicle.set_youTurnDistanceFromHeadland != mf.yt.youTurnDistanceFromHeadland)
             {
                 Settings.Vehicle.set_youTurnExtensionLength = mf.yt.youTurnStartOffset;
                 Settings.Vehicle.set_youTurnRadius = mf.yt.youTurnRadius;
 
-                if (Settings.Vehicle.set_youTurnDistanceFromBoundary != mf.yt.uturnDistanceFromBoundary)
+                if (Settings.Vehicle.set_youTurnDistanceFromBoundary != mf.yt.uturnDistanceFromBoundary ||
+                    Settings.Vehicle.set_youTurnDistanceFromHeadland != mf.yt.youTurnDistanceFromHeadland)
                 {
                     Settings.Vehicle.set_youTurnDistanceFromBoundary = mf.yt.uturnDistanceFromBoundary;
+                    Settings.Vehicle.set_youTurnDistanceFromHeadland = mf.yt.youTurnDistanceFromHeadland;
                     foreach (var bnd in mf.bnd.bndList)
                         bnd.BuildTurnLine();
                 }
@@ -425,6 +429,10 @@ namespace Twol
             mf.yt.uturnDistanceFromBoundary = nudTurnDistanceFromBoundary.Value;
         }
 
+        private void nudTurnDistanceFromHeadland_ValueChanged(object sender, EventArgs e)
+        {
+            mf.yt.youTurnDistanceFromHeadland = nudTurnDistanceFromHeadland.Value;
+        }
         private void btnDistanceDn_Click(object sender, EventArgs e)
         {
             if (mf.yt.youTurnStartOffset-- < 4) mf.yt.youTurnStartOffset = 3;

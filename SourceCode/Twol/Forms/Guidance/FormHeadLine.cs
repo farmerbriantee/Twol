@@ -592,6 +592,10 @@ namespace Twol
             }
 
             mf.FileSaveHeadland();
+
+            foreach (var bnd in mf.bnd.bndList)
+                bnd.BuildTurnLine();
+
             Close();
         }
 
@@ -829,6 +833,10 @@ namespace Twol
 
             mf.FileSaveHeadland();
             mf.bnd.isHeadlandOn = false;
+
+            foreach (var bnd in mf.bnd.bndList)
+                bnd.BuildTurnLine();
+
             Close();
         }
     }

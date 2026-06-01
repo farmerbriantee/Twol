@@ -294,12 +294,14 @@ namespace Twol
             public double set_youMoveDistance = 0.25;
             public double set_youToolWidths = 2;
             public double set_youTurnDistanceFromBoundary = 2;
+            public double set_youTurnDistanceFromHeadland = 10;
             public double set_youTurnRadius = 8.1;
 
-            public int setVehicle_vehicleType = 0;
             public int set_uTurnStyle = 0;
             public int set_youSkipWidth = 1;
             public int set_youTurnExtensionLength = 4;
+
+            public int setVehicle_vehicleType = 0;
 
             public LoadResult Load()
             {

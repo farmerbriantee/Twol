@@ -32,7 +32,7 @@ namespace Twol
         public int youTurnStartOffset;
 
         //guidance values
-        public double uturnDistanceFromBoundary;
+        public double uturnDistanceFromBoundary, youTurnDistanceFromHeadland;
 
         //list of points for scaled and rotated YouTurn line, used for pattern, dubins, abcurve
         public List<vec3> ytList = new List<vec3>();
@@ -77,6 +77,7 @@ namespace Twol
         public void LoadSettings()
         {
             uturnDistanceFromBoundary = Settings.Vehicle.set_youTurnDistanceFromBoundary;
+            youTurnDistanceFromHeadland = Settings.Vehicle.set_youTurnDistanceFromHeadland;
 
             //how far before or after boundary line should turn happen
             youTurnStartOffset = Settings.Vehicle.set_youTurnExtensionLength;

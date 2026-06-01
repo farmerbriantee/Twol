@@ -41,8 +41,6 @@ namespace Twol
             isSectionControlledByHeadland = true;
         }
 
-
-
         public void AddToBoundList(CBoundaryList bound, int bndNum, bool add = true)
         {
             //build the boundary, make sure is clockwise for outer counter clockwise for inner

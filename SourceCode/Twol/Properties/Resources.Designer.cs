@@ -1782,6 +1782,16 @@ namespace Twol.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ConU_UturnDistanceHeadland {
+            get {
+                object obj = ResourceManager.GetObject("ConU_UturnDistanceHeadland", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ConU_UturnLength {
             get {
                 object obj = ResourceManager.GetObject("ConU_UturnLength", resourceCulture);

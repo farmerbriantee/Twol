@@ -254,10 +254,5 @@ namespace Twol
                 btnToolDelete.Enabled = false;
             }
         }
-
-        private void tabDisplay_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

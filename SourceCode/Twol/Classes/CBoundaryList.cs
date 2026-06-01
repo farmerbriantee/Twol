@@ -99,17 +99,22 @@ namespace Twol
 
         public void BuildTurnLine()
         {
-            //determine how wide a headland space
-            double totalHeadWidth = Settings.Vehicle.set_youTurnDistanceFromBoundary;
-
-            turnLine = fenceLine.OffsetLine(totalHeadWidth, 4, true, false);
-
-            for (int i = turnLine.Count - 1; i >= 0; i--)
+            if ( hdLine.Count == 0 || Settings.Vehicle.set_youTurnDistanceFromHeadland == 0)
             {
-                if ((idx == 0) != fenceLineEar.IsPointInPolygon(turnLine[i]))
+                turnLine = fenceLine.OffsetLine(Settings.Vehicle.set_youTurnDistanceFromBoundary, 4, true, false);
+
+                for (int i = turnLine.Count - 1; i >= 0; i--)
                 {
-                    turnLine.RemoveAt(i);
+                    if ((idx == 0) != fenceLineEar.IsPointInPolygon(turnLine[i]))
+                    {
+                        turnLine.RemoveAt(i);
+                    }
                 }
+            }
+
+            else
+            {
+                turnLine = hdLine.OffsetLine(-Settings.Vehicle.set_youTurnDistanceFromHeadland, 4, true, false);
             }
 
             //make sure headings are correct for calculated points

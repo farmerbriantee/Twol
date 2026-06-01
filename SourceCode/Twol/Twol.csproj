@@ -961,6 +961,7 @@
     <None Include="btnImages\AutoToolSteerOn.png" />
     <None Include="btnImages\TrackToolInner.png" />
     <None Include="btnImages\TrackToolOuter.png" />
+    <None Include="btnImages\Config\ConU_UturnDistanceHeadland.png" />
     <Content Include="btnImages\ZoomOut.png" />
     <Content Include="License.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

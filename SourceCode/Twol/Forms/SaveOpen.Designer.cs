@@ -379,6 +379,9 @@ namespace Twol
             oglZoom.Refresh();
 
             PanelUpdateRightAndBottom();
+
+            foreach (var bnd in bnd.bndList)
+                bnd.BuildTurnLine();
         }
 
         public void FileLoadFields()
@@ -572,7 +575,6 @@ namespace Twol
                     }
                 }
             }
-
         }
 
         public void FileLoadFlags()
