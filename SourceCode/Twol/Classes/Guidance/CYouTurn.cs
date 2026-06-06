@@ -718,7 +718,7 @@ namespace Twol
             //tool track next track
             if (mf.trks.currentRefTrack != null && mf.trks.currentRefTrack.mode < 0)
             {
-                mf.trks.FindClosestRefTrack(new vec3(lastUTurnPoint));
+                mf.trks.FindClosestRefTrackUTurn(new vec3(lastUTurnPoint));
                 mf.SetAutoSteerButton(true, "Track Changed");
 
                 //mf.trks.isTrackValid = false;

@@ -1,6 +1,7 @@
 ﻿using OpenTK.Graphics.OpenGL;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using Twol.Classes;
@@ -102,7 +103,7 @@ namespace Twol
                 return 0;
             }
 
-            int trak = -1;
+            int trak = -1, trak2 = -1;
             int cntr = 0;
 
             //Count visible
@@ -119,18 +120,104 @@ namespace Twol
             if (cntr == 0) return -1;
 
             double minDistA = double.MaxValue;
+            double minDistB = double.MaxValue;
+
             double dist;
             int A, B;
 
+            bool updated = false;
+
             for (int i = 0; i < _gListArr.Count; i++)
             {
-                //if (!isAlignedArr[i]) continue;
                 if (!gArr[i].isVisible) continue;
 
                 if (mf.gyd.FindClosestSegment(gArr[i].curvePts, false, mf.guidanceLookPos, out A, out B))
                 {
                     dist = mf.gyd.FindDistanceToSegment(mf.guidanceLookPos, gArr[i].curvePts[A], gArr[i].curvePts[B], out _, out _, false, false, false);
 
+                    if (dist < minDistA)
+                    {
+                        minDistA = dist;
+                        updated = true;
+                    }
+                }
+
+                if (updated && i != trak)
+                {
+                    trak2 = trak;
+                    trak = i;
+                    updated = false;
+                }
+            }
+
+            //dist
+            minDistA = double.MaxValue;
+            for (int i = 0; i < gArr[trak].curvePts.Count; i++)
+            {
+                dist = glm.DistanceSquared(steer, gArr[trak].curvePts[i]);
+
+                if (dist < minDistA)
+                {
+                    minDistA = dist;
+                }
+            }
+
+            for (int i = 0; i < gArr[trak2].curvePts.Count; i++)
+            {
+                dist = glm.DistanceSquared(steer, gArr[trak2].curvePts[i]);
+
+                if (dist < minDistB)
+                {
+                    minDistB = dist;
+                }
+            }
+
+            if (minDistA < (10 * minDistB))
+                currentRefTrack = _gListArr[trak];
+            else
+                currentRefTrack = _gListArr[trak2];
+
+            return trak;
+        }
+
+        public int FindClosestRefTrackUTurn(vec3 steer)
+        {
+            if (_gListArr.Count == 0) return -1;
+
+            //only 1 track
+            if (_gListArr.Count == 1)
+            {
+                currentRefTrack = _gListArr[0];
+                return 0;
+            }
+
+            int trak = -1, trak2 = -1;
+            int cntr = 0;
+
+            //Count visible
+            for (int i = 0; i < _gListArr.Count; i++)
+            {
+                if (_gListArr[i].isVisible)
+                {
+                    cntr++;
+                    trak = i;
+                }
+            }
+
+            //no visible tracks
+            if (cntr == 0) return -1;
+
+            double minDistA = double.MaxValue;
+
+            double dist;
+
+            for (int i = 0; i < _gListArr.Count; i++)
+            {
+                if (!gArr[i].isVisible) continue;
+
+                for (int j = 0; j < gArr[i].curvePts.Count; j++)
+                {
+                    dist = glm.DistanceSquared(steer, gArr[i].curvePts[j]);
                     if (dist < minDistA)
                     {
                         minDistA = dist;
